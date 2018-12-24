@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin app-component-theme($theme) {
+    // retrieve variables from theme
+    $accent: map-get($theme, accent);
+
+    .mat-list-item-content .active {
+        // retrieve particular color from variable, rg: text, base, divider, ...
+        color: mat-color($accent, '500-contrast');
+        background-color: mat-color($accent, 500);
+    }
+}
