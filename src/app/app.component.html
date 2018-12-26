@@ -2,10 +2,29 @@
 
 <mat-sidenav-container [autosize]="true">
     <mat-sidenav #startSidenavRef mode="side" position="start" opened class="mat-elevation-z8">
-        <button mat-button (click)="toggleStartSidenav()">
-            <mat-icon>menu</mat-icon>
-            <span *ngIf="startSidenavExpanded">Photo Explorer</span>
-        </button>
+        <div fxLayout="column">
+            <button mat-button>
+                <mat-icon>calendar_today</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon>people</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon>place</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon>comment</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon>star</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon>info</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon>shuffle</mat-icon>
+            </button>
+        </div>
     </mat-sidenav>
 
     <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8">
