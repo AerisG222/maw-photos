@@ -1,6 +1,6 @@
 <app-header (toggleTheme)="toggleTheme()"></app-header>
 
-<mat-sidenav-container>
+<mat-sidenav-container [autosize]="true">
     <mat-sidenav #startSidenavRef mode="side" position="start" opened class="mat-elevation-z8">
         <button mat-button (click)="toggleStartSidenav()">
             <mat-icon>menu</mat-icon>
