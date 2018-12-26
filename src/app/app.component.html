@@ -1,14 +1,14 @@
 <app-header (toggleTheme)="toggleTheme()"></app-header>
 
 <mat-sidenav-container>
-    <mat-sidenav #startSidenavRef mode="side" position="start" opened>
+    <mat-sidenav #startSidenavRef mode="side" position="start" opened class="mat-elevation-z8">
         <button mat-button (click)="toggleStartSidenav()">
             <mat-icon>menu</mat-icon>
             <span *ngIf="startSidenavExpanded">Photo Explorer</span>
         </button>
     </mat-sidenav>
 
-    <mat-sidenav #endSidenavRef mode="side" position="end" opened>
+    <mat-sidenav #endSidenavRef mode="side" position="end" opened class="mat-elevation-z8">
         <button mat-button (click)="toggleEndSidenav()">
             <mat-icon>menu</mat-icon>
             <span *ngIf="endSidenavExpanded">End sidenav content</span>
