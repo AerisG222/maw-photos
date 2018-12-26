@@ -8,6 +8,9 @@ import { DOCUMENT } from '@angular/common';
 })
 export class AppComponent {
     title = 'maw-photos';
+    startSidenavExpanded = false;
+    endSidenavExpanded = false;
+
     @HostBinding('class.maw-dark-theme') darkTheme = true;
     @HostBinding('class.maw-light-theme') lightTheme = false;
 
@@ -20,6 +23,14 @@ export class AppComponent {
         this.lightTheme = !this.lightTheme;
 
         this.updateMainBackground();
+    }
+
+    toggleStartSidenav(): void {
+        this.startSidenavExpanded = !this.startSidenavExpanded;
+    }
+
+    toggleEndSidenav(): void {
+        this.endSidenavExpanded = !this.endSidenavExpanded;
     }
 
     updateMainBackground(): void {
