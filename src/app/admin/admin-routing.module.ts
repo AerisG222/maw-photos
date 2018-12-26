@@ -4,12 +4,11 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
     { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AdminRoutingModule { }
