@@ -1,9 +1,14 @@
+import { MockServicesModule } from 'src/app/services/mock-services.module';
+import { ProdServicesModule } from 'src/app/services/prod-services.module';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false
+    production: false,
+    servicesModule: MockServicesModule  // use this for dev / testing of app functionality
+    // servicesModule: ProdServicesModule  // use this for integration testing / hitting the actual webservices
 };
 
 /*

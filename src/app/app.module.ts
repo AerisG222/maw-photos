@@ -12,6 +12,7 @@ import { SpaSigninComponent } from './spa-signin/spa-signin.component';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { EnvironmentConfig } from './models/environment-config';
 import { AuthConfig } from './models/auth-config';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { AuthConfig } from './models/auth-config';
         AppMaterialModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        environment.servicesModule,
         HttpClientModule
     ],
     providers: [

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { UserManager, User } from 'oidc-client';
-
-import { AuthConfig } from '../models/auth-config';
 import { BehaviorSubject } from 'rxjs';
 
+import { AuthConfig } from '../models/auth-config';
+import { IAuthService } from './iauth.service';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class AuthService {
+
+@Injectable()
+export class AuthService implements IAuthService {
     private _mgr: UserManager;
     private _user: User;
 

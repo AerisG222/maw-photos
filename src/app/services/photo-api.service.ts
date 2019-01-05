@@ -10,11 +10,10 @@ import { IExifDetail } from '../models/iexif-detail.model';
 import { IRating } from '../models/irating.model';
 import { IComment } from '../models/icomment.model';
 import { IYearStats } from '../models/iyear-stats.model';
+import { IPhotoApiService } from './iphoto-api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class PhotoApiService {
+@Injectable()
+export class PhotoApiService implements IPhotoApiService {
     constructor(
         private _http: HttpClient,
         private _cfg: EnvironmentConfig) {
