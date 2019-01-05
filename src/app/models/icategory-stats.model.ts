@@ -1,6 +1,5 @@
 export interface ICategoryStats {
-    year: number;
-    categoryId: number;
-    categoryName: string;
+    id: number;
+    name: string;
     photoCount: number;
 }

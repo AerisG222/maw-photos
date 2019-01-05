@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 
 import { IPhotoApiService } from './iphoto-api.service';
 import { IPhotoAndCategory } from '../models/iphoto-and-category.model';
@@ -73,6 +73,29 @@ export class MockPhotoApiService implements IPhotoApiService {
     }
 
     getPhotoStats(): Observable<IYearStats[]> {
-        throw new Error('not implemented');
+        return of(
+            [
+                { 'year': 2018,
+                  'categoryStats': [
+                      { 'id': 1, 'name': 'Test 1', 'photoCount': 10 },
+                      { 'id': 2, 'name': 'Test 2', 'photoCount': 20 },
+                      { 'id': 3, 'name': 'Test 3', 'photoCount': 30 },
+                      { 'id': 4, 'name': 'Test 4', 'photoCount': 40 },
+                      { 'id': 5, 'name': 'Test 5', 'photoCount': 50 },
+                      { 'id': 6, 'name': 'Test 6', 'photoCount': 60 }
+                  ]
+                },
+                { 'year': 2019,
+                  'categoryStats': [
+                      { 'id': 11, 'name': 'Test 11', 'photoCount': 10 },
+                      { 'id': 12, 'name': 'Test 12', 'photoCount': 20 },
+                      { 'id': 13, 'name': 'Test 13', 'photoCount': 30 },
+                      { 'id': 14, 'name': 'Test 14', 'photoCount': 40 },
+                      { 'id': 15, 'name': 'Test 15', 'photoCount': 50 },
+                      { 'id': 16, 'name': 'Test 16', 'photoCount': 60 }
+                  ]
+                }
+            ]
+        );
     }
 }
