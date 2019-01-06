@@ -1,3 +1,5 @@
-<p>
-  photo-stats works!
-</p>
+<ngx-charts-tree-map
+        [scheme]="colorScheme"
+        [results]="chartData$ | async"
+        (select)="onSelect($event)">
+</ngx-charts-tree-map>
