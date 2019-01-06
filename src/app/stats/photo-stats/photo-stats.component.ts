@@ -17,6 +17,10 @@ export class PhotoStatsComponent implements OnInit {
     colorScheme = colorSets.find(s => s.name === 'cool');
     chartData$ = new BehaviorSubject<any>(null);
 
+    countYears: number;
+    countCategories: number;
+    countPhotos: number;
+
     constructor(@Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService) {
 
     }
@@ -26,6 +30,7 @@ export class PhotoStatsComponent implements OnInit {
             .getPhotoStats()
             .subscribe(x => {
                 this._stats = x;
+                this.updateTotals();
                 this.showYearsOverview();
             });
     }
@@ -55,5 +60,17 @@ export class PhotoStatsComponent implements OnInit {
                     'value': x.photoCount
                 }))
         );
+    }
+
+    updateTotals(): void {
+        this.countYears = this._stats.length;
+
+        this.countCategories = this._stats
+            .reduce((total, yr) => yr.categoryStats.length + total, 0);
+
+        this.countPhotos = this._stats
+            .reduce((total, yr) => total + yr.categoryStats
+                .reduce((catTotal, cat) => catTotal + cat.photoCount, 0)
+                , 0);
     }
 }

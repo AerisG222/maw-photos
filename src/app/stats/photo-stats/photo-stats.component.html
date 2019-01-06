@@ -1,5 +1,14 @@
+<h1>Statistics</h1>
+
 <ngx-charts-tree-map
         [scheme]="colorScheme"
         [results]="chartData$ | async"
         (select)="onSelect($event)">
 </ngx-charts-tree-map>
+
+<h2>Overall</h2>
+Years: {{ countYears }}
+<br/>
+Categories: {{ countCategories }}
+<br/>
+Photos: {{ countPhotos }}
