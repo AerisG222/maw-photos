@@ -13,6 +13,7 @@ import { IYearStats } from 'src/app/models/iyear-stats.model';
 })
 export class PhotoStatsComponent implements OnInit {
     private _stats: IYearStats[];
+    private _isYearView = true;
 
     colorScheme = colorSets.find(s => s.name === 'cool');
     chartData$ = new BehaviorSubject<any>(null);
@@ -36,14 +37,24 @@ export class PhotoStatsComponent implements OnInit {
     }
 
     onSelect(evt): void {
-        console.log(evt);
+        if (!this._isYearView) {
+            return;
+        }
+
+        const yr = Number(evt.name);
+
+        if (yr > 0) {
+            this.showYearDetails(yr);
+        }
     }
 
     showYearsOverview(): void {
+        this._isYearView = true;
+
         this.chartData$.next(
             this._stats
                 .map(x => ({
-                    'name': x.year,
+                    'name': x.year.toString(),
                     'value': x.categoryStats
                         .map(c => c.photoCount)
                         .reduce((total, count) => count + total)
@@ -52,6 +63,8 @@ export class PhotoStatsComponent implements OnInit {
     }
 
     showYearDetails(year: number): void {
+        this._isYearView = false;
+
         this.chartData$.next(
             this._stats
                 .filter(x => x.year === year)[0].categoryStats
