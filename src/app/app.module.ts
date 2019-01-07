@@ -13,6 +13,7 @@ import { AuthInterceptor } from './services/auth-interceptor';
 import { EnvironmentConfig } from './models/environment-config';
 import { AuthConfig } from './models/auth-config';
 import { environment } from 'src/environments/environment';
+import { RandomComponent } from './random/random.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { environment } from 'src/environments/environment';
         HomeComponent,
         HeaderComponent,
         FooterComponent,
-        SpaSigninComponent
+        SpaSigninComponent,
+        RandomComponent
     ],
     imports: [
         AppMaterialModule,

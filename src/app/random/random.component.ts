@@ -3,16 +3,16 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { PHOTO_API_SERVICE, IPhotoApiService } from '../services/iphoto-api.service';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    selector: 'app-random',
+    templateUrl: './random.component.html',
+    styleUrls: ['./random.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class RandomComponent implements OnInit {
     constructor(@Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService) {
 
     }
 
     ngOnInit() {
-    }
 
+    }
 }

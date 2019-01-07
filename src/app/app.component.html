@@ -3,10 +3,10 @@
 <mat-sidenav-container [autosize]="true">
     <mat-sidenav #startSidenavRef mode="side" position="start" opened class="mat-elevation-z8">
         <div fxLayout="column">
-            <button mat-button>
-                <mat-icon>search</mat-icon>
+            <button [routerLink]="['']" mat-button>
+                <mat-icon>home</mat-icon>
             </button>
-            <button mat-button>
+            <button [routerLink]="['/random']" mat-button>
                 <mat-icon>shuffle</mat-icon>
             </button>
             <a [routerLink]="['/stats/']" mat-button>

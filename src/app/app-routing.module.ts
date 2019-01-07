@@ -4,9 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SpaSigninComponent } from './spa-signin/spa-signin.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RandomComponent } from './random/random.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuardService] },
+    { path: 'random', component: RandomComponent, canActivate: [AuthGuardService]},
     { path: 'spa-signin', component: SpaSigninComponent },
     { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuardService] },
     { path: 'stats', loadChildren: './stats/stats.module#StatsModule', canActivate: [AuthGuardService] },
