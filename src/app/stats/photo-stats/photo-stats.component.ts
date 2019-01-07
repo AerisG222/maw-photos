@@ -5,6 +5,7 @@ import { colorSets } from '@swimlane/ngx-charts/release/utils';
 
 import { PHOTO_API_SERVICE, IPhotoApiService } from 'src/app/services/iphoto-api.service';
 import { IYearStats } from 'src/app/models/iyear-stats.model';
+import { ICategoryStats } from 'src/app/models/icategory-stats.model';
 
 @Component({
     selector: 'app-photo-stats',
@@ -18,9 +19,12 @@ export class PhotoStatsComponent implements OnInit {
     colorScheme = colorSets.find(s => s.name === 'cool');
     chartData$ = new BehaviorSubject<any>(null);
 
-    countYears: number;
-    countCategories: number;
-    countPhotos: number;
+    countYearsTotal: number;
+    countCategoriesTotal: number;
+    countPhotosTotal: number;
+    countCategoriesInYear: number;
+    countPhotosInYear: number;
+    activeYear = -1;
 
     constructor(@Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService) {
 
@@ -50,6 +54,7 @@ export class PhotoStatsComponent implements OnInit {
 
     showYearsOverview(): void {
         this._isYearView = true;
+        this.activeYear = -1;
 
         this.chartData$.next(
             this._stats
@@ -64,10 +69,15 @@ export class PhotoStatsComponent implements OnInit {
 
     showYearDetails(year: number): void {
         this._isYearView = false;
+        this.activeYear = year;
+
+        const categoryStats = this._stats
+            .filter(x => x.year === year)[0].categoryStats;
+
+        this.updateYearTotals(categoryStats);
 
         this.chartData$.next(
-            this._stats
-                .filter(x => x.year === year)[0].categoryStats
+            categoryStats
                 .map(x => ({
                     'name': x.name,
                     'value': x.photoCount
@@ -76,14 +86,21 @@ export class PhotoStatsComponent implements OnInit {
     }
 
     updateTotals(): void {
-        this.countYears = this._stats.length;
+        this.countYearsTotal = this._stats.length;
 
-        this.countCategories = this._stats
+        this.countCategoriesTotal = this._stats
             .reduce((total, yr) => yr.categoryStats.length + total, 0);
 
-        this.countPhotos = this._stats
+        this.countPhotosTotal = this._stats
             .reduce((total, yr) => total + yr.categoryStats
                 .reduce((catTotal, cat) => catTotal + cat.photoCount, 0)
                 , 0);
+    }
+
+    updateYearTotals(categoryStats: ICategoryStats[]): void {
+        this.countCategoriesInYear = categoryStats.length;
+
+        this.countPhotosInYear = categoryStats
+            .reduce((total, cat) => total + cat.photoCount, 0);
     }
 }

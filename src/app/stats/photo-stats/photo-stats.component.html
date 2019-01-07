@@ -1,14 +1,36 @@
 <h1>Statistics</h1>
 
+<span *ngIf="activeYear < 0">
+    All Years
+</span>
+<span *ngIf="activeYear > 0" class="with-icon">
+    <a (click)="showYearsOverview()">All Years</a> <mat-icon>chevron_right</mat-icon> {{ activeYear }}
+</span>
+
 <ngx-charts-tree-map
         [scheme]="colorScheme"
         [results]="chartData$ | async"
         (select)="onSelect($event)">
 </ngx-charts-tree-map>
 
-<h2>Overall</h2>
-Years: {{ countYears }}
-<br/>
-Categories: {{ countCategories }}
-<br/>
-Photos: {{ countPhotos }}
+<mat-card class="stat-detail-card">
+    <mat-card-title>Overall</mat-card-title>
+    <mat-card-content>
+        Years: {{ countYearsTotal }}
+        <br/>
+        Categories: {{ countCategoriesTotal }}
+        <br/>
+        Photos: {{ countPhotosTotal }}
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="stat-detail-card" *ngIf="activeYear > 0">
+    <mat-card-title>{{ activeYear }}</mat-card-title>
+    <mat-card-content>
+        &nbsp;
+        <br />
+        Categories: {{ countCategoriesInYear }} ({{ countCategoriesInYear / countCategoriesTotal | percent }})
+        <br />
+        Photos: {{ countPhotosInYear }} ({{ countPhotosInYear / countPhotosTotal | percent }})
+    </mat-card-content>
+</mat-card>

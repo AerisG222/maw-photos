@@ -10,4 +10,14 @@
         color: mat-color($accent, '500-contrast');
         background-color: mat-color($accent, 500);
     }
+
+    a {
+        color: mat-color($accent);
+        cursor: pointer;
+    }
+
+    .with-icon {
+        display: flex;
+        align-items: center;
+    }
 }
