@@ -14,6 +14,8 @@ import { EnvironmentConfig } from './models/environment-config';
 import { AuthConfig } from './models/auth-config';
 import { environment } from 'src/environments/environment';
 import { RandomComponent } from './random/random.component';
+import { YearComponent } from './year/year.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +24,9 @@ import { RandomComponent } from './random/random.component';
         HeaderComponent,
         FooterComponent,
         SpaSigninComponent,
-        RandomComponent
+        RandomComponent,
+        YearComponent,
+        CategoryComponent
     ],
     imports: [
         AppMaterialModule,

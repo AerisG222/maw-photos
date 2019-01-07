@@ -1,0 +1,5 @@
+<h2>{{ year }}</h2>
+
+<div *ngFor="let category of categories$ | async">
+    <app-category [category]="category"></app-category>
+</div>

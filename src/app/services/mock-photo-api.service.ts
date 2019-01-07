@@ -12,20 +12,27 @@ import { IYearStats } from '../models/iyear-stats.model';
 
 @Injectable()
 export class MockPhotoApiService implements IPhotoApiService {
+    private _years: number[];
+    private _categories: ICategory[];
+
+    constructor() {
+        this.initData();
+    }
+
     getRandomPhoto(): Observable<IPhotoAndCategory> {
         throw new Error('not implemented');
     }
 
     getYears(): Observable<number[]> {
-        throw new Error('not implemented');
+        return of(this._years);
     }
 
     getCategory(categoryId: number): Observable<ICategory> {
-        throw new Error('not implemented');
+        return of(this._categories.filter(x => x.id === categoryId)[0]);
     }
 
     getCategoriesForYear(year: number): Observable<ICategory[]> {
-        throw new Error('not implemented');
+        return of(this._categories.filter(x => x.year === year));
     }
 
     getPhotosByCategory(categoryId: number): Observable<IPhoto[]> {
@@ -73,29 +80,103 @@ export class MockPhotoApiService implements IPhotoApiService {
     }
 
     getPhotoStats(): Observable<IYearStats[]> {
-        return of(
-            [
-                { 'year': 2018,
-                  'categoryStats': [
-                      { 'id': 1, 'name': 'Test 1', 'photoCount': 10 },
-                      { 'id': 2, 'name': 'Test 2', 'photoCount': 20 },
-                      { 'id': 3, 'name': 'Test 3', 'photoCount': 30 },
-                      { 'id': 4, 'name': 'Test 4', 'photoCount': 40 },
-                      { 'id': 5, 'name': 'Test 5', 'photoCount': 50 },
-                      { 'id': 6, 'name': 'Test 6', 'photoCount': 60 }
-                  ]
-                },
-                { 'year': 2019,
-                  'categoryStats': [
-                      { 'id': 11, 'name': 'Test 11', 'photoCount': 10 },
-                      { 'id': 12, 'name': 'Test 12', 'photoCount': 20 },
-                      { 'id': 13, 'name': 'Test 13', 'photoCount': 30 },
-                      { 'id': 14, 'name': 'Test 14', 'photoCount': 40 },
-                      { 'id': 15, 'name': 'Test 15', 'photoCount': 50 },
-                      { 'id': 16, 'name': 'Test 16', 'photoCount': 60 }
-                  ]
+        return of([
+            { 'year': 2018,
+                'categoryStats': [
+                    { 'id': 1, 'name': 'Test 1', 'photoCount': 10 },
+                    { 'id': 2, 'name': 'Test 2', 'photoCount': 20 },
+                    { 'id': 3, 'name': 'Test 3', 'photoCount': 30 },
+                    { 'id': 4, 'name': 'Test 4', 'photoCount': 40 },
+                    { 'id': 5, 'name': 'Test 5', 'photoCount': 50 },
+                    { 'id': 6, 'name': 'Test 6', 'photoCount': 60 }
+                ]
+            },
+            { 'year': 2019,
+                'categoryStats': [
+                    { 'id': 11, 'name': 'Test 11', 'photoCount': 10 },
+                    { 'id': 12, 'name': 'Test 12', 'photoCount': 20 },
+                    { 'id': 13, 'name': 'Test 13', 'photoCount': 30 },
+                    { 'id': 14, 'name': 'Test 14', 'photoCount': 40 },
+                    { 'id': 15, 'name': 'Test 15', 'photoCount': 50 },
+                    { 'id': 16, 'name': 'Test 16', 'photoCount': 60 }
+                ]
+            }
+        ]);
+    }
+
+    initData(): void {
+        this._years = [
+            2018,
+            2019
+        ];
+
+        this._categories = [
+            {
+                id: 1,
+                name: 'Test 1',
+                year: 2018,
+                hasGpsData: true,
+                teaserPhotoInfo: {
+                    height: 400,
+                    width: 400,
+                    path: '/images/2018/test1/a.jpg'
                 }
-            ]
-        );
+            },
+            {
+                id: 2,
+                name: 'Test 2',
+                year: 2018,
+                hasGpsData: false,
+                teaserPhotoInfo: {
+                    height: 400,
+                    width: 400,
+                    path: '/images/2018/test2/a.jpg'
+                }
+            },
+            {
+                id: 3,
+                name: 'Test 3',
+                year: 2018,
+                hasGpsData: true,
+                teaserPhotoInfo: {
+                    height: 400,
+                    width: 400,
+                    path: '/images/2018/test3/a.jpg'
+                }
+            },
+            {
+                id: 4,
+                name: 'Test 4',
+                year: 2019,
+                hasGpsData: true,
+                teaserPhotoInfo: {
+                    height: 400,
+                    width: 400,
+                    path: '/images/2018/test1/a.jpg'
+                }
+            },
+            {
+                id: 5,
+                name: 'Test 5',
+                year: 2019,
+                hasGpsData: false,
+                teaserPhotoInfo: {
+                    height: 400,
+                    width: 400,
+                    path: '/images/2018/test2/a.jpg'
+                }
+            },
+            {
+                id: 6,
+                name: 'Test 6',
+                year: 2019,
+                hasGpsData: true,
+                teaserPhotoInfo: {
+                    height: 400,
+                    width: 400,
+                    path: '/images/2018/test3/a.jpg'
+                }
+            }
+        ];
     }
 }
