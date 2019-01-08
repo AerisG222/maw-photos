@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
+import { Injectable, Inject } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { IPhotoApiService } from './iphoto-api.service';
 import { IPhotoAndCategory } from '../models/iphoto-and-category.model';
@@ -9,13 +9,14 @@ import { IExifDetail } from '../models/iexif-detail.model';
 import { IRating } from '../models/irating.model';
 import { IComment } from '../models/icomment.model';
 import { IYearStats } from '../models/iyear-stats.model';
+import { ASSET_PATH_SERVICE, IAssetPathService } from './iasset-path.service';
 
 @Injectable()
 export class MockPhotoApiService implements IPhotoApiService {
     private _years: number[];
     private _categories: ICategory[];
 
-    constructor() {
+    constructor(@Inject(ASSET_PATH_SERVICE) private _pathSvc: IAssetPathService) {
         this.initData();
     }
 
@@ -119,7 +120,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: '/images/2018/test1/a.jpg'
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1122.jpg')
                 }
             },
             {
@@ -130,7 +131,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: '/images/2018/test2/a.jpg'
+                    path: this._pathSvc.getPath('/images/2018/test2/xs/a.jpg')
                 }
             },
             {
@@ -141,7 +142,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: '/images/2018/test3/a.jpg'
+                    path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
                 }
             },
             {
@@ -152,7 +153,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: '/images/2018/test1/a.jpg'
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/a.jpg')
                 }
             },
             {
@@ -163,7 +164,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: '/images/2018/test2/a.jpg'
+                    path: this._pathSvc.getPath('/images/2018/test2/xs/a.jpg')
                 }
             },
             {
@@ -174,7 +175,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: '/images/2018/test3/a.jpg'
+                    path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
                 }
             }
         ];

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 
@@ -11,12 +11,14 @@ import { IRating } from '../models/irating.model';
 import { IComment } from '../models/icomment.model';
 import { IYearStats } from '../models/iyear-stats.model';
 import { IPhotoApiService } from './iphoto-api.service';
+import { ASSET_PATH_SERVICE, IAssetPathService } from './iasset-path.service';
 
 @Injectable()
 export class PhotoApiService implements IPhotoApiService {
     constructor(
         private _http: HttpClient,
-        private _cfg: EnvironmentConfig) {
+        private _cfg: EnvironmentConfig,
+        @Inject(ASSET_PATH_SERVICE) private _pathSvc: IAssetPathService) {
 
     }
 
