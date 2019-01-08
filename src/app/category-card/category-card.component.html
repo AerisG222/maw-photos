@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [routerLink]="['category', category.id]">
     <img [src]="category.teaserPhotoInfo.path" />
     <mat-card-content>
         {{ category.name }}

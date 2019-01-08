@@ -15,6 +15,7 @@ import { ASSET_PATH_SERVICE, IAssetPathService } from './iasset-path.service';
 export class MockPhotoApiService implements IPhotoApiService {
     private _years: number[];
     private _categories: ICategory[];
+    private _photos: IPhoto[];
 
     constructor(@Inject(ASSET_PATH_SERVICE) private _pathSvc: IAssetPathService) {
         this.initData();
@@ -37,7 +38,7 @@ export class MockPhotoApiService implements IPhotoApiService {
     }
 
     getPhotosByCategory(categoryId: number): Observable<IPhoto[]> {
-        throw new Error('not implemented');
+        return of(this._photos.filter(x => x.categoryId === categoryId));
     }
 
     getPhotosByCommentDate(newestFirst: boolean): Observable<IPhotoAndCategory[]> {
@@ -177,6 +178,99 @@ export class MockPhotoApiService implements IPhotoApiService {
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
                 }
+            }
+        ];
+
+        this._photos = [
+            {
+                id: 1,
+                categoryId: 1,
+                latitude: null,
+                longitude: null,
+                xsInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1122.jpg')
+                },
+                smInfo: null,
+                mdInfo: null,
+                lgInfo: null,
+                prtInfo: null
+            },
+            {
+                id: 2,
+                categoryId: 1,
+                latitude: null,
+                longitude: null,
+                xsInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1123.jpg')
+                },
+                smInfo: null,
+                mdInfo: null,
+                lgInfo: null,
+                prtInfo: null
+            },
+            {
+                id: 3,
+                categoryId: 1,
+                latitude: null,
+                longitude: null,
+                xsInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1124.jpg')
+                },
+                smInfo: null,
+                mdInfo: null,
+                lgInfo: null,
+                prtInfo: null
+            },
+            {
+                id: 4,
+                categoryId: 1,
+                latitude: null,
+                longitude: null,
+                xsInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1124.jpg')
+                },
+                smInfo: null,
+                mdInfo: null,
+                lgInfo: null,
+                prtInfo: null
+            },
+            {
+                id: 5,
+                categoryId: 1,
+                latitude: null,
+                longitude: null,
+                xsInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1125.jpg')
+                },
+                smInfo: null,
+                mdInfo: null,
+                lgInfo: null,
+                prtInfo: null
+            },
+            {
+                id: 6,
+                categoryId: 1,
+                latitude: null,
+                longitude: null,
+                xsInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1143.jpg')
+                },
+                smInfo: null,
+                mdInfo: null,
+                lgInfo: null,
+                prtInfo: null
             }
         ];
     }

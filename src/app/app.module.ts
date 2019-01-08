@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { RandomComponent } from './random/random.component';
 import { YearComponent } from './year/year.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
+import { CategoryComponent } from './category/category.component';
+import { PhotoListComponent } from './photo-list/photo-list.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +28,9 @@ import { CategoryCardComponent } from './category-card/category-card.component';
         SpaSigninComponent,
         RandomComponent,
         YearComponent,
-        CategoryCardComponent
+        CategoryCardComponent,
+        CategoryComponent,
+        PhotoListComponent
     ],
     imports: [
         AppMaterialModule,
