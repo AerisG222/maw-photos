@@ -15,7 +15,7 @@ import { AuthConfig } from './models/auth-config';
 import { environment } from 'src/environments/environment';
 import { RandomComponent } from './random/random.component';
 import { YearComponent } from './year/year.component';
-import { CategoryComponent } from './category/category.component';
+import { CategoryCardComponent } from './category-card/category-card.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +26,7 @@ import { CategoryComponent } from './category/category.component';
         SpaSigninComponent,
         RandomComponent,
         YearComponent,
-        CategoryComponent
+        CategoryCardComponent
     ],
     imports: [
         AppMaterialModule,
