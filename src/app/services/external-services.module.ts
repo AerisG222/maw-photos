@@ -14,4 +14,4 @@ import { PhotoApiService } from './photo-api.service';
         { provide: PHOTO_API_SERVICE, useClass: PhotoApiService }
     ]
 })
-export class ProdServicesModule { }
+export class ExternalServicesModule { }
