@@ -1,5 +1,5 @@
 <h2>{{ year }}</h2>
 
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="12px grid" fxLayoutAlign="start">
+<div class="container" fxLayout="row wrap" fxLayoutGap="12px grid" fxLayoutAlign="start">
     <app-category *ngFor="let category of categories$ | async" [category]="category"></app-category>
 </div>

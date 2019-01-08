@@ -131,7 +131,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 teaserPhotoInfo: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test2/xs/a.jpg')
+                    path: this._pathSvc.getPath('/images/2018/test2/xs/DSC_1125.jpg')
                 }
             },
             {
