@@ -1,7 +1,7 @@
 @import 'maw-palettes';
 
-$maw-light-primary: mat-palette($maw-dark-blue);
-$maw-light-accent:  mat-palette($maw-merlot, A200, A100, A400);
+$maw-light-primary: mat-palette($md-maw-red);
+$maw-light-accent:  mat-palette($md-maw-yellow, A200, A100, A400);
 $maw-light-warn:    mat-palette($mat-red);
 $maw-light-theme: mat-light-theme($maw-light-primary, $maw-light-accent, $maw-light-warn);
 
