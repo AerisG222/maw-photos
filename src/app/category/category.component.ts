@@ -5,6 +5,7 @@ import { map, flatMap } from 'rxjs/operators';
 
 import { IPhotoApiService, PHOTO_API_SERVICE } from '../services/iphoto-api.service';
 import { IPhoto } from '../models/iphoto.model';
+import { ICategory } from '../models/icategory.model';
 
 @Component({
     selector: 'app-category',
