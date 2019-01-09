@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef } from '@angular/core';
 import { _appIdRandomProviderFactory } from '@angular/core/src/application_tokens';
 import { BehaviorSubject } from 'rxjs';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
@@ -15,7 +15,9 @@ import { ICategoryStats } from 'src/app/models/icategory-stats.model';
 export class PhotoStatsComponent implements OnInit {
     private _stats: IYearStats[];
     private _isYearView = true;
+    private _setViewDimensions = false;
 
+    view: number[];
     colorScheme = colorSets.find(s => s.name === 'cool');
     chartData$ = new BehaviorSubject<any>(null);
 
@@ -26,7 +28,10 @@ export class PhotoStatsComponent implements OnInit {
     countPhotosInYear: number;
     activeYear = -1;
 
-    constructor(@Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService) {
+    constructor(
+        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,
+        private _elementRef: ElementRef
+        ) {
 
     }
 
@@ -56,6 +61,8 @@ export class PhotoStatsComponent implements OnInit {
         this._isYearView = true;
         this.activeYear = -1;
 
+        this.setDimensions();
+
         this.chartData$.next(
             this._stats
                 .map(x => ({
@@ -70,6 +77,8 @@ export class PhotoStatsComponent implements OnInit {
     showYearDetails(year: number): void {
         this._isYearView = false;
         this.activeYear = year;
+
+        this.setDimensions();
 
         const categoryStats = this._stats
             .filter(x => x.year === year)[0].categoryStats;
@@ -102,5 +111,19 @@ export class PhotoStatsComponent implements OnInit {
 
         this.countPhotosInYear = categoryStats
             .reduce((total, cat) => total + cat.photoCount, 0);
+    }
+
+    setDimensions(): void {
+        // do not force dimensions when showing the chart for the first time
+        // (allow it to take up as much space as possible)
+        if (!this._setViewDimensions) {
+            this._setViewDimensions = true;
+
+            return;
+        }
+
+        const chart = this._elementRef.nativeElement.querySelector('ngx-charts-tree-map');
+
+        this.view = [ chart.offsetWidth, chart.offsetHeight ];
     }
 }

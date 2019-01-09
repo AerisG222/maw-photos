@@ -8,9 +8,10 @@
 </span>
 
 <ngx-charts-tree-map
-        [scheme]="colorScheme"
-        [results]="chartData$ | async"
-        (select)="onSelect($event)">
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="chartData$ | async"
+    (select)="onSelect($event)">
 </ngx-charts-tree-map>
 
 <mat-card class="stat-detail-card">
