@@ -1,2 +1,8 @@
-mat-sidenav-container { min-height: 800px; }
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: none;
+    height: 100%;
+}
+
 mat-sidenav-content { padding: 0 12px; }
