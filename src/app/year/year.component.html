@@ -1,4 +1,4 @@
-<h2>{{ year }}</h2>
+<h2 >{{ year }}</h2>
 
 <div class="container" fxLayout="row wrap" fxLayoutGap="12px grid" fxLayoutAlign="start">
     <app-category-card *ngFor="let category of categories$ | async" [category]="category"></app-category-card>
