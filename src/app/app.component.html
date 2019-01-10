@@ -1,20 +1,24 @@
 <app-header (toggleTheme)="toggleTheme()" fxFlex></app-header>
 
 <mat-sidenav-container [autosize]="true" fxFlex="1 1 100%">
-    <mat-sidenav #startSidenavRef mode="side" position="start" opened class="mat-elevation-z8">
-        <div fxLayout="column">
-            <button [routerLink]="['']" mat-button>
-                <mat-icon>home</mat-icon>
-            </button>
-            <button [routerLink]="['/random']" mat-button>
-                <mat-icon>shuffle</mat-icon>
-            </button>
-            <a [routerLink]="['/stats/']" mat-button>
-                <mat-icon>bar_chart</mat-icon>
-            </a>
-            <button mat-button>
-                <mat-icon>settings</mat-icon>
-            </button>
+    <mat-sidenav #startSidenavRef mode="side" opened class="mat-elevation-z8">
+        <div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%;">
+            <div fxLayout="column">
+                <a [routerLink]="['']" mat-button>
+                    <mat-icon>home</mat-icon>
+                </a>
+                <a [routerLink]="['/random']" mat-button>
+                    <mat-icon>shuffle</mat-icon>
+                </a>
+                <a [routerLink]="['/stats/']" mat-button>
+                    <mat-icon>bar_chart</mat-icon>
+                </a>
+            </div>
+            <div>
+                <a mat-button>
+                    <mat-icon>settings</mat-icon>
+                </a>
+            </div>
         </div>
     </mat-sidenav>
 
