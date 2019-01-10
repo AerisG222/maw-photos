@@ -265,7 +265,7 @@ export class MockPhotoApiService implements IPhotoApiService {
                 xsInfo: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1143.jpg')
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1134.jpg')
                 },
                 smInfo: null,
                 mdInfo: null,
