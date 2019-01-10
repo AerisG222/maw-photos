@@ -6,11 +6,13 @@ import { SpaSigninComponent } from './spa-signin/spa-signin.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { RandomComponent } from './random/random.component';
 import { CategoryComponent } from './category/category.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuardService] },
     { path: 'category/:id', component: CategoryComponent, canActivate: [AuthGuardService] },
     { path: 'random', component: RandomComponent, canActivate: [AuthGuardService] },
+    { path: 'search', component: SearchComponent, canActivate: [AuthGuardService] },
     { path: 'spa-signin', component: SpaSigninComponent },
     { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuardService] },
     { path: 'stats', loadChildren: './stats/stats.module#StatsModule', canActivate: [AuthGuardService] },

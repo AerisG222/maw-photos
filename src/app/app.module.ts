@@ -18,6 +18,7 @@ import { YearComponent } from './year/year.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { PhotoListComponent } from './photo-list/photo-list.component';
         YearComponent,
         CategoryCardComponent,
         CategoryComponent,
-        PhotoListComponent
+        PhotoListComponent,
+        SearchComponent
     ],
     imports: [
         AppMaterialModule,
