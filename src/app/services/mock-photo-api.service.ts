@@ -192,10 +192,26 @@ export class MockPhotoApiService implements IPhotoApiService {
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1122.jpg')
                 },
-                smInfo: null,
-                mdInfo: null,
-                lgInfo: null,
-                prtInfo: null
+                smInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1122.jpg')
+                },
+                mdInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1122.jpg')
+                },
+                lgInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1122.jpg')
+                },
+                prtInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1122.jpg')
+                }
             },
             {
                 id: 2,
@@ -207,10 +223,26 @@ export class MockPhotoApiService implements IPhotoApiService {
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1123.jpg')
                 },
-                smInfo: null,
-                mdInfo: null,
-                lgInfo: null,
-                prtInfo: null
+                smInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1123.jpg')
+                },
+                mdInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1123.jpg')
+                },
+                lgInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1123.jpg')
+                },
+                prtInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1123.jpg')
+                }
             },
             {
                 id: 3,
@@ -222,10 +254,26 @@ export class MockPhotoApiService implements IPhotoApiService {
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1124.jpg')
                 },
-                smInfo: null,
-                mdInfo: null,
-                lgInfo: null,
-                prtInfo: null
+                smInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1124.jpg')
+                },
+                mdInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1124.jpg')
+                },
+                lgInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1124.jpg')
+                },
+                prtInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1124.jpg')
+                }
             },
             {
                 id: 4,
@@ -235,12 +283,28 @@ export class MockPhotoApiService implements IPhotoApiService {
                 xsInfo: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1124.jpg')
+                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1125.jpg')
                 },
-                smInfo: null,
-                mdInfo: null,
-                lgInfo: null,
-                prtInfo: null
+                smInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1125.jpg')
+                },
+                mdInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1125.jpg')
+                },
+                lgInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1125.jpg')
+                },
+                prtInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1125.jpg')
+                }
             },
             {
                 id: 5,
@@ -250,27 +314,28 @@ export class MockPhotoApiService implements IPhotoApiService {
                 xsInfo: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1125.jpg')
-                },
-                smInfo: null,
-                mdInfo: null,
-                lgInfo: null,
-                prtInfo: null
-            },
-            {
-                id: 6,
-                categoryId: 1,
-                latitude: null,
-                longitude: null,
-                xsInfo: {
-                    height: 400,
-                    width: 400,
                     path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1134.jpg')
                 },
-                smInfo: null,
-                mdInfo: null,
-                lgInfo: null,
-                prtInfo: null
+                smInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1134.jpg')
+                },
+                mdInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1134.jpg')
+                },
+                lgInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1134.jpg')
+                },
+                prtInfo: {
+                    height: 400,
+                    width: 400,
+                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1134.jpg')
+                }
             }
         ];
     }
