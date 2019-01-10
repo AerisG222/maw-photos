@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { map, flatMap, tap } from 'rxjs/operators';
 
 import { IPhotoApiService, PHOTO_API_SERVICE } from '../services/iphoto-api.service';
 import { IPhoto } from '../models/iphoto.model';
@@ -15,6 +15,7 @@ import { ICategory } from '../models/icategory.model';
 export class CategoryComponent implements OnInit {
     category$: Observable<ICategory>;
     photos$: Observable<IPhoto[]>;
+    activePhoto: IPhoto;
 
     constructor(
         private _route: ActivatedRoute,
@@ -33,7 +34,12 @@ export class CategoryComponent implements OnInit {
         this.photos$ = this._route.params
             .pipe(
                 map(p => Number(p.id)),
-                flatMap(id => this._api.getPhotosByCategory(id))
+                flatMap(id => this._api.getPhotosByCategory(id)),
+                tap(photos => this.activePhoto = photos[0])
             );
+    }
+
+    back(year: number): void {
+        console.log(year);
     }
 }
