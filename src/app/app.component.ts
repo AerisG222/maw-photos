@@ -1,5 +1,7 @@
 import { Component, HostBinding, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { MatDialog } from '@angular/material';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +16,10 @@ export class AppComponent {
     @HostBinding('class.maw-dark-theme') darkTheme = true;
     @HostBinding('class.maw-light-theme') lightTheme = false;
 
-    constructor(@Inject(DOCUMENT) private _doc) {
+    constructor(
+        public dialog: MatDialog,
+        @Inject(DOCUMENT) private _doc
+        ) {
         this.updateMainBackground();
     }
 
@@ -47,5 +52,12 @@ export class AppComponent {
             classList.remove('maw-dark-theme');
             classList.add('maw-light-theme');
         }
+    }
+
+    showAbout(): void {
+        this.dialog.open(AboutDialogComponent, {
+            width: '500px',
+            data: { version: '0.1.0' }
+        });
     }
 }

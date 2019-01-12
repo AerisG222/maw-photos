@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
     MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    MatToolbarModule,
-    MatCardModule
+    MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
@@ -17,6 +18,7 @@ import {
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
+        MatDialogModule,
         MatIconModule,
         MatMenuModule,
         MatSidenavModule,
@@ -26,6 +28,7 @@ import {
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
+        MatDialogModule,
         MatIconModule,
         MatMenuModule,
         MatSidenavModule,

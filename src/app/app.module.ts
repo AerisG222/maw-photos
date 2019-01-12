@@ -19,6 +19,7 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { SearchComponent } from './search/search.component';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { SearchComponent } from './search/search.component';
         CategoryCardComponent,
         CategoryComponent,
         PhotoListComponent,
-        SearchComponent
+        SearchComponent,
+        AboutDialogComponent
     ],
     imports: [
         AppMaterialModule,
@@ -62,6 +64,9 @@ import { SearchComponent } from './search/search.component';
             multi: true
         }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+        AboutDialogComponent
+      ],
 })
 export class AppModule { }
