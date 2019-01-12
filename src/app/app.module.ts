@@ -20,6 +20,7 @@ import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { SearchComponent } from './search/search.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { AboutDialogComponent } from './about-dialog/about-dialog.component';
         CategoryComponent,
         PhotoListComponent,
         SearchComponent,
-        AboutDialogComponent
+        AboutDialogComponent,
+        SettingsDialogComponent
     ],
     imports: [
         AppMaterialModule,
@@ -66,7 +68,8 @@ import { AboutDialogComponent } from './about-dialog/about-dialog.component';
     ],
     bootstrap: [AppComponent],
     entryComponents: [
-        AboutDialogComponent
+        AboutDialogComponent,
+        SettingsDialogComponent
       ],
 })
 export class AppModule { }

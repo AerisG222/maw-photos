@@ -2,6 +2,7 @@ import { Component, HostBinding, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
 @Component({
     selector: 'app-root',
@@ -58,6 +59,12 @@ export class AppComponent {
         this.dialog.open(AboutDialogComponent, {
             width: '500px',
             data: { version: '0.1.0' }
+        });
+    }
+
+    showSettings(): void {
+        this.dialog.open(SettingsDialogComponent, {
+            width: '800px'
         });
     }
 }
