@@ -14,7 +14,7 @@ import { EnvironmentConfig } from './models/environment-config';
 import { AuthConfig } from './models/auth-config';
 import { environment } from 'src/environments/environment';
 import { RandomComponent } from './random/random.component';
-import { YearComponent } from './year/year.component';
+import { YearListComponent } from './year-list/year-list.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
@@ -30,7 +30,7 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
         FooterComponent,
         SpaSigninComponent,
         RandomComponent,
-        YearComponent,
+        YearListComponent,
         CategoryCardComponent,
         CategoryComponent,
         PhotoListComponent,

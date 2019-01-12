@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-year',
-    templateUrl: './year.component.html',
-    styleUrls: ['./year.component.scss']
+    templateUrl: './year-list.component.html',
+    styleUrls: ['./year-list.component.scss']
 })
-export class YearComponent implements OnInit {
+export class YearListComponent implements OnInit {
     @Input() year: number;
     categories$: Observable<ICategory[]>;
 
