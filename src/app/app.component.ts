@@ -1,7 +1,7 @@
 import { Component, HostBinding, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
 @Component({
@@ -55,8 +55,8 @@ export class AppComponent {
         }
     }
 
-    showAbout(): void {
-        this.dialog.open(AboutDialogComponent, {
+    showHelp(): void {
+        this.dialog.open(HelpDialogComponent, {
             width: '500px',
             data: { version: '0.1.0' }
         });

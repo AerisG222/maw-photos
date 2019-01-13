@@ -19,24 +19,24 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { SearchComponent } from './search/search.component';
-import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
-        HeaderComponent,
-        FooterComponent,
-        SpaSigninComponent,
-        RandomComponent,
-        YearListComponent,
         CategoryCardComponent,
         CategoryComponent,
+        HeaderComponent,
+        HelpDialogComponent,
+        HomeComponent,
+        FooterComponent,
         PhotoListComponent,
+        RandomComponent,
         SearchComponent,
-        AboutDialogComponent,
-        SettingsDialogComponent
+        SettingsDialogComponent,
+        SpaSigninComponent,
+        YearListComponent
     ],
     imports: [
         AppMaterialModule,
@@ -68,8 +68,8 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
     ],
     bootstrap: [AppComponent],
     entryComponents: [
-        AboutDialogComponent,
+        HelpDialogComponent,
         SettingsDialogComponent
-      ],
+    ],
 })
 export class AppModule { }
