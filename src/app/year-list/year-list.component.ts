@@ -5,7 +5,7 @@ import { ICategory } from '../models/icategory.model';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-year',
+    selector: 'app-year-list',
     templateUrl: './year-list.component.html',
     styleUrls: ['./year-list.component.scss']
 })
