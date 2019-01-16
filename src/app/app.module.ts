@@ -1,6 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 import { AppComponent } from './app.component';
 import { AppMaterialModule } from './app-material.module';
@@ -12,7 +13,6 @@ import { SpaSigninComponent } from './spa-signin/spa-signin.component';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { EnvironmentConfig } from './models/environment-config';
 import { AuthConfig } from './models/auth-config';
-import { environment } from 'src/environments/environment';
 import { RandomComponent } from './random/random.component';
 import { YearListComponent } from './year-list/year-list.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
@@ -21,6 +21,8 @@ import { PhotoListComponent } from './photo-list/photo-list.component';
 import { SearchComponent } from './search/search.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
+import { environment } from '../environments/environment';
+import { RootStoreModule } from './root-store/root-store.module';
 
 @NgModule({
     declarations: [
@@ -43,7 +45,9 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
         AppRoutingModule,
         BrowserAnimationsModule,
         environment.servicesModule,
-        HttpClientModule
+        HttpClientModule,
+        NgxWebstorageModule.forRoot({ prefix: 'maw-photos' }),
+        RootStoreModule
     ],
     providers: [
         EnvironmentConfig,

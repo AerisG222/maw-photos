@@ -1,7 +1,17 @@
 <h1 mat-dialog-title>Settings</h1>
-<div mat-dialog-content>
-    coming soon...
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onClose()">Close</button>
-</div>
+<form [formGroup]="form">
+    <div mat-dialog-content>
+        <div>
+            <mat-form-field appearance="standard">
+                <mat-label>Theme</mat-label>
+                <mat-select formControlName="theme">
+                    <mat-option *ngFor="let theme of themes" [value]="theme.name">{{theme.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onSave()">Save</button>
+        <button mat-button (click)="onCancel()">Cancel</button>
+    </div>
+</form>

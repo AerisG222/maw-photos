@@ -5,12 +5,15 @@ import {
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatFormFieldModule,
     MatIconModule,
     MatMenuModule,
+    MatSelectModule,
     MatSidenavModule,
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [],
@@ -20,22 +23,28 @@ import {
         MatButtonModule,
         MatCardModule,
         MatDialogModule,
+        MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
+        MatSelectModule,
         MatSidenavModule,
         MatTabsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        ReactiveFormsModule
     ],
     exports: [
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
         MatDialogModule,
+        MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
+        MatSelectModule,
         MatSidenavModule,
         MatTabsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        ReactiveFormsModule
     ]
 })
 export class AppMaterialModule { }
