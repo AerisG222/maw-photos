@@ -1,14 +1,14 @@
 <h1 mat-dialog-title>Settings</h1>
 <form [formGroup]="form">
     <div mat-dialog-content>
-        <div>
-            <mat-form-field appearance="standard">
-                <mat-label>Theme</mat-label>
-                <mat-select formControlName="theme">
-                    <mat-option *ngFor="let theme of themes" [value]="theme.name">{{theme.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+        <mat-form-field appearance="standard">
+            <mat-label>Theme</mat-label>
+            <mat-select formControlName="theme">
+                <mat-option *ngFor="let theme of themes" [value]="theme.name">{{theme.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="showCategoryTitles" [color]="'primary'">Show Category Titles</mat-slide-toggle>
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="onSave()">Save</button>

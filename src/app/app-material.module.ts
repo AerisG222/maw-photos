@@ -11,7 +11,8 @@ import {
     MatSelectModule,
     MatSidenavModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSlideToggleModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatMenuModule,
         MatSelectModule,
         MatSidenavModule,
+        MatSlideToggleModule,
         MatTabsModule,
         MatToolbarModule,
         ReactiveFormsModule
@@ -42,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatMenuModule,
         MatSelectModule,
         MatSidenavModule,
+        MatSlideToggleModule,
         MatTabsModule,
         MatToolbarModule,
         ReactiveFormsModule

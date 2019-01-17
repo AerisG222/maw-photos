@@ -2,6 +2,6 @@
 
 <div class="category_holder">
     <div fxLayout="row wrap" fxLayoutGap="12px grid" fxLayoutAlign="start">
-        <app-category-card *ngFor="let category of categories$ | async" [category]="category"></app-category-card>
+        <app-category-card *ngFor="let category of categories$ | async" [category]="category" [showTitle]="(settings$ | async).showCategoryTitles"></app-category-card>
     </div>
 </div>

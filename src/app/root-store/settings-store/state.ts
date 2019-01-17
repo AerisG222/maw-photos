@@ -10,6 +10,7 @@ export const initialState: State = {
     error: null,
     isLoading: false,
     settings: {
-        theme: null
+        theme: null,
+        showCategoryTitles: true
     }
 };

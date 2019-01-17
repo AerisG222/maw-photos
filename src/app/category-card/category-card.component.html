@@ -1,6 +1,6 @@
 <mat-card [routerLink]="['category', category.id]">
     <img [src]="category.teaserPhotoInfo.path" />
-    <mat-card-content>
+    <mat-card-content *ngIf="showTitle">
         {{ category.name }}
     </mat-card-content>
 </mat-card>
