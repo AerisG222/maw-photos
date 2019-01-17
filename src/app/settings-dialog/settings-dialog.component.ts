@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Theme } from '../models/theme.model';
 import { Store } from '@ngrx/store';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../root-store';
-import { map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'app-settings-dialog',
@@ -35,12 +35,12 @@ export class SettingsDialogComponent implements OnInit {
                 SettingsStoreSelectors.selectSettings
             )
             .pipe(
-                map(settings => {
-                    this._settings = { ...settings };
-                    this.form.get('theme').setValue(settings.theme.name);
-                })
+                take(1)
             )
-            .subscribe();
+            .subscribe(settings => {
+                this._settings = { ...settings };
+                this.form.get('theme').setValue(settings.theme.name);
+            });
 
         this._store$.dispatch(
             new SettingsStoreActions.LoadRequestAction()
