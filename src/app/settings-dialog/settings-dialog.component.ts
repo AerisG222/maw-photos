@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { take } from 'rxjs/operators';
 
 import { Theme } from '../models/theme.model';
-import { Store } from '@ngrx/store';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../root-store';
-import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'app-settings-dialog',
