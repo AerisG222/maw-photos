@@ -1,5 +1,5 @@
 <mat-card [routerLink]="['category', category.id]">
-    <img [src]="category.teaserPhotoInfo.path" />
+    <img [src]="category.teaserPhotoInfo.path" [alt]="category.name" />
     <mat-card-content *ngIf="showTitle">
         {{ category.name }}
     </mat-card-content>
