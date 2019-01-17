@@ -11,6 +11,7 @@ export const initialState: State = {
     isLoading: false,
     settings: {
         theme: null,
-        showCategoryTitles: true
+        showCategoryTitles: true,
+        smallCategoryThumbnails: false
     }
 };

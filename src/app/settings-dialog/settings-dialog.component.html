@@ -9,6 +9,8 @@
         </mat-form-field>
 
         <mat-slide-toggle formControlName="showCategoryTitles" [color]="'primary'">Show Category Titles</mat-slide-toggle>
+
+        <mat-slide-toggle formControlName="smallCategoryThumbnails" [color]="'primary'" [disabled]="form.get('showCategoryTitles').value">Show Small Category Thumbnails</mat-slide-toggle>
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="onSave()">Save</button>

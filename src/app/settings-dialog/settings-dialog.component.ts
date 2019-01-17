@@ -28,7 +28,8 @@ export class SettingsDialogComponent implements OnInit {
     ngOnInit(): void {
         this.form = this._formBuilder.group({
             theme: ['', Validators.required],
-            showCategoryTitles: [true]
+            showCategoryTitles: [true],
+            smallCategoryThumbnails: [false]
         });
 
         this._store$
@@ -52,6 +53,7 @@ export class SettingsDialogComponent implements OnInit {
     onSave(): void {
         this._settings.theme = Theme.forName(this.form.get('theme').value);
         this._settings.showCategoryTitles = this.form.get('showCategoryTitles').value;
+        this._settings.smallCategoryThumbnails = this.form.get('smallCategoryThumbnails').value;
 
         this._store$.dispatch(
             new SettingsStoreActions.SaveRequestAction({ settings: this._settings })
@@ -67,5 +69,6 @@ export class SettingsDialogComponent implements OnInit {
     private updateForm(settings: ISettings): void {
         this.form.get('theme').setValue(settings.theme.name);
         this.form.get('showCategoryTitles').setValue(settings.showCategoryTitles);
+        this.form.get('smallCategoryThumbnails').setValue(settings.smallCategoryThumbnails);
     }
 }

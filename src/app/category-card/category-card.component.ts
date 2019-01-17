@@ -10,4 +10,5 @@ import { ICategory } from '../models/icategory.model';
 export class CategoryCardComponent {
     @Input() category: ICategory;
     @Input() showTitle: boolean;
+    @Input() smallThumbnails: boolean;
 }
