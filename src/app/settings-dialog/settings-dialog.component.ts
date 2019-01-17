@@ -36,7 +36,7 @@ export class SettingsDialogComponent implements OnInit {
             )
             .pipe(
                 map(settings => {
-                    this._settings = settings;
+                    this._settings = { ...settings };
                     this.form.get('theme').setValue(settings.theme.name);
                 })
             )

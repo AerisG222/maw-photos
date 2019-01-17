@@ -1,8 +1,7 @@
 import { Actions, ActionTypes } from './actions';
 import { initialState, State } from './state';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
-export function featureReducer(state = initialState, action: Actions): State {
+export function settingsReducer(state = initialState, action: Actions): State {
     switch (action.type) {
         case ActionTypes.LOAD_REQUEST:
             return {

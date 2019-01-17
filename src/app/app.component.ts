@@ -1,9 +1,8 @@
-import { Component, HostBinding, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
@@ -17,8 +16,6 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './
 })
 export class AppComponent implements OnInit, OnDestroy {
     themeSubscription: Subscription;
-
-    title = 'maw-photos';
     startSidenavExpanded = false;
     endSidenavExpanded = false;
 
@@ -32,19 +29,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.themeSubscription = this._store$
-            .select(
-                SettingsStoreSelectors.selectSettings
-            )
             .pipe(
-                map(settings => {
-                    this.setTheme(settings.theme);
-                })
+                select(SettingsStoreSelectors.selectSettings)
             )
-            .subscribe();
+            .subscribe(settings => this.setTheme(settings.theme));
 
-        this._store$.dispatch(
-            new SettingsStoreActions.LoadRequestAction()
-        );
+        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
     }
 
     ngOnDestroy(): void {
