@@ -12,7 +12,7 @@ export function settingsReducer(state = initialState, action: Actions): State {
         case ActionTypes.LOAD_SUCCESS:
             return {
                 ...state,
-                settings: action.payload.settings,
+                settings: { ...action.payload.settings },
                 error: null,
                 isLoading: false
             };
@@ -25,8 +25,7 @@ export function settingsReducer(state = initialState, action: Actions): State {
         case ActionTypes.SAVE_REQUEST:
             return {
                 ...state,
-                error: null,
-                isLoading: false
+                error: null
             };
         case ActionTypes.SAVE_FAILURE:
             return {
@@ -36,9 +35,8 @@ export function settingsReducer(state = initialState, action: Actions): State {
         case ActionTypes.SAVE_SUCCESS:
             return {
                 ...state,
-                settings: action.payload.settings,
-                error: null,
-                isLoading: false
+                settings: { ...action.payload.settings },
+                error: null
             };
         default: {
             return state;

@@ -38,7 +38,7 @@ export class SettingsDialogComponent implements OnInit {
                 take(1)
             )
             .subscribe(settings => {
-                this._settings = { ...settings };
+                this._settings = settings;
                 this.form.get('theme').setValue(settings.theme.name);
             });
 
