@@ -6,4 +6,4 @@ NgRx:
 - https://blog.angular-university.io/angular-ngrx-store-and-effects-crash-course/
 - https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc
 - https://blog.strongbrew.io/Redux-best-practices/
--
+- https://medium.com/@stodge/ngrx-common-gotchas-8f59f541e47c
