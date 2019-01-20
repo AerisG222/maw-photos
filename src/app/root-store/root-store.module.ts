@@ -6,15 +6,18 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SettingsStoreModule } from './settings-store';
 import { environment } from '../../environments/environment';
+import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
 
 @NgModule({
     declarations: [],
     imports: [
         CommonModule,
         SettingsStoreModule,
+        PhotoCategoryStoreModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        !environment.production ? StoreDevtoolsModule.instrument() : []
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        PhotoCategoryStoreModule
     ]
 })
 export class RootStoreModule { }

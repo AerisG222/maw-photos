@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 
 import { Theme } from '../models/theme.model';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../root-store';
+import { ISettings } from '../models/isettings.model';
 
 @Component({
     selector: 'app-settings-dialog',
@@ -33,10 +34,8 @@ export class SettingsDialogComponent implements OnInit {
         });
 
         this._store$
-            .select(
-                SettingsStoreSelectors.selectSettings
-            )
             .pipe(
+                select(SettingsStoreSelectors.selectSettings),
                 take(1)
             )
             .subscribe(settings => {
