@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -14,7 +15,12 @@ import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-
         CommonModule,
         SettingsStoreModule,
         PhotoCategoryStoreModule,
-        StoreModule.forRoot({}),
+        StoreRouterConnectingModule.forRoot({
+            stateKey: 'router'
+        }),
+        StoreModule.forRoot({
+            router: routerReducer
+        }),
         EffectsModule.forRoot([]),
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ]
