@@ -1,11 +1,11 @@
-import * as PhotoCategoriesStoreActions from './actions';
-import * as PhotoCategoriesStoreSelectors from './selectors';
-import * as PhotoCategoriesStoreState from './state';
+import * as PhotoCategoryStoreActions from './actions';
+import * as PhotoCategoryStoreSelectors from './selectors';
+import * as PhotoCategoryStoreState from './state';
 
-export {PhotoCategoryStoreModule} from './photo-category-store.module';
+export { PhotoCategoryStoreModule } from './photo-category-store.module';
 
 export {
-    PhotoCategoriesStoreActions,
-    PhotoCategoriesStoreSelectors,
-    PhotoCategoriesStoreState
+    PhotoCategoryStoreActions,
+    PhotoCategoryStoreSelectors,
+    PhotoCategoryStoreState
 };

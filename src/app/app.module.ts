@@ -22,7 +22,7 @@ import { SearchComponent } from './search/search.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { environment } from '../environments/environment';
-import { RootStoreModule } from './root-store/root-store.module';
+import { RootStoreModule } from './root-store';
 
 @NgModule({
     declarations: [

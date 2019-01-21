@@ -1,11 +1,11 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 
 import { SettingsStoreSelectors } from './settings-store';
-import { PhotoCategoriesStoreSelectors } from './photo-category-store';
+import { PhotoCategoryStoreSelectors } from './photo-category-store';
 
 export const selectError: MemoizedSelector<object, string> = createSelector(
     SettingsStoreSelectors.selectSettingsError,
-    PhotoCategoriesStoreSelectors.selectCategoryError,
+    PhotoCategoryStoreSelectors.selectPhotoCategoryError,
     (settingsError: string, photoCategoryError: string) => {
         return settingsError || photoCategoryError;
     }
@@ -13,8 +13,8 @@ export const selectError: MemoizedSelector<object, string> = createSelector(
 
 export const selectIsLoading: MemoizedSelector<object, boolean> = createSelector(
     SettingsStoreSelectors.selectSettingsIsLoading,
-    PhotoCategoriesStoreSelectors.selectCategoryError,
-    (settingsIsLoading: boolean, photoCategoriesAreLoading: boolean) => {
-        return settingsIsLoading || photoCategoriesAreLoading;
+    PhotoCategoryStoreSelectors.selectPhotoCategoryIsLoading,
+    (settingsIsLoading: boolean, photoCategoryIsLoading: boolean) => {
+        return settingsIsLoading || photoCategoryIsLoading;
     }
 );

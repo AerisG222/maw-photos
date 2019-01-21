@@ -5,19 +5,20 @@ import {
 } from '@ngrx/store';
 
 import { ICategory } from '../../models/icategory.model';
-import { featureAdapter, State } from './state';
+import { photoCategoryAdapter, State } from './state';
+import { PHOTO_CATEGORY_FEATURE_NAME } from './photo-category-store.module';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
 
-export const selectCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>('Category');
+export const selectPhotoCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
-export const selectAllCategories: (state: object) => ICategory[] = featureAdapter.getSelectors(selectCategoryState).selectAll;
+export const selectAllCategories: (state: object) => ICategory[] = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
 
 export const selectAllYears = () =>
-    createSelector(this.selectAllCategories, (allCategories: ICategory[]) => {
-        if (allCategories) {
-            const allYears = allCategories.map(x => x.year);
+    createSelector(selectAllCategories, (categories: ICategory[]) => {
+        if (categories) {
+            const allYears = categories.map(x => x.year);
 
             return Array.from(new Set(allYears));
         } else {
@@ -26,14 +27,13 @@ export const selectAllYears = () =>
     });
 
 export const selectCategoryById = (id: number) =>
-    createSelector(this.selectAllCategories, (allCategories: ICategory[]) => {
-        if (allCategories) {
-            return allCategories.find(c => c.id === id);
+    createSelector(selectAllCategories, (categories: ICategory[]) => {
+        if (categories) {
+            return categories.find(c => c.id === id);
         } else {
             return null;
         }
     });
 
-export const selectCategoryError: MemoizedSelector<object, any> = createSelector(selectCategoryState, getError);
-
-export const selectCategoryIsLoading: MemoizedSelector<object, boolean> = createSelector(selectCategoryState, getIsLoading);
+export const selectPhotoCategoryError: MemoizedSelector<object, any> = createSelector(selectPhotoCategoryState, getError);
+export const selectPhotoCategoryIsLoading: MemoizedSelector<object, boolean> = createSelector(selectPhotoCategoryState, getIsLoading);

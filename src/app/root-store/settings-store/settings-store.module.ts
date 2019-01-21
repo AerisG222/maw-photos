@@ -4,7 +4,8 @@ import { StoreModule } from '@ngrx/store';
 import { settingsReducer } from './reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { SettingsStoreEffects } from './effects';
-import { SETTINGS_FEATURE_NAME } from './selectors';
+
+export const SETTINGS_FEATURE_NAME = 'settings';
 
 @NgModule({
     declarations: [],

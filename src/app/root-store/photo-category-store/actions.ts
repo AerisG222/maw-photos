@@ -3,9 +3,9 @@ import { Action } from '@ngrx/store';
 import { ICategory } from 'src/app/models/icategory.model';
 
 export enum ActionTypes {
-    LOAD_REQUEST = '[Categories] Load Request',
-    LOAD_FAILURE = '[Categories] Load Failure',
-    LOAD_SUCCESS = '[Categories] Load Success'
+    LOAD_REQUEST = '[Photo Categories] Load Request',
+    LOAD_FAILURE = '[Photo Categories] Load Failure',
+    LOAD_SUCCESS = '[Photo Categories] Load Success'
 }
 
 export class LoadRequestAction implements Action {

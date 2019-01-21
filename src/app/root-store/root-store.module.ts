@@ -16,8 +16,7 @@ import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-
         PhotoCategoryStoreModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        PhotoCategoryStoreModule
+        !environment.production ? StoreDevtoolsModule.instrument() : []
     ]
 })
 export class RootStoreModule { }

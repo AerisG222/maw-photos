@@ -6,12 +6,11 @@ import {
 
 import { ISettings } from '../../models/isettings.model';
 import { State } from './state';
+import { SETTINGS_FEATURE_NAME } from './settings-store.module';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getSettings = (state: State): ISettings => state.settings;
-
-export const SETTINGS_FEATURE_NAME = 'settings';
 
 export const selectSettingsState: MemoizedSelector<object, State> = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 

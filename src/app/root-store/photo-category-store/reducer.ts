@@ -1,7 +1,7 @@
 import { Actions, ActionTypes } from './actions';
-import { featureAdapter, initialState, State } from './state';
+import { photoCategoryAdapter, initialState, State } from './state';
 
-export function categoryReducer(state = initialState, action: Actions): State {
+export function photoCategoryReducer(state = initialState, action: Actions): State {
     switch (action.type) {
         case ActionTypes.LOAD_REQUEST: {
             return {
@@ -11,7 +11,7 @@ export function categoryReducer(state = initialState, action: Actions): State {
             };
         }
         case ActionTypes.LOAD_SUCCESS: {
-            return featureAdapter.addAll(action.payload.categories, {
+            return photoCategoryAdapter.addAll(action.payload.categories, {
                 ...state,
                 isLoading: false,
                 error: null
