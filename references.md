@@ -7,3 +7,5 @@ NgRx:
 - https://medium.com/frontend-fun/angular-ngrx-a-clean-and-clear-introduction-4ed61c89c1fc
 - https://blog.strongbrew.io/Redux-best-practices/
 - https://medium.com/@stodge/ngrx-common-gotchas-8f59f541e47c
+- https://blog.angularindepth.com/ngrx-tips-tricks-69feb20a42a7
+-
