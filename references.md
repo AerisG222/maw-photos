@@ -8,4 +8,6 @@ NgRx:
 - https://blog.strongbrew.io/Redux-best-practices/
 - https://medium.com/@stodge/ngrx-common-gotchas-8f59f541e47c
 - https://blog.angularindepth.com/ngrx-tips-tricks-69feb20a42a7
+- https://blog.angular-university.io/ngrx-entity/
+- https://blog.angular-university.io/angular-ngrx-devtools/
 -
