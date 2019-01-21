@@ -11,7 +11,7 @@ export function photoCategoryReducer(state = initialState, action: Actions): Sta
             };
         }
         case ActionTypes.LOAD_SUCCESS: {
-            return photoCategoryAdapter.addAll(action.payload.categories, {
+            return photoCategoryAdapter.addMany(action.payload.categories, {
                 ...state,
                 isLoading: false,
                 error: null
