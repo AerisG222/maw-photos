@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { IAuthService } from './iauth.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
-export class MockAuthService implements IAuthService {
+export class MockAuthService implements AuthService {
     isLoggedIn(): boolean {
         return true;
     }

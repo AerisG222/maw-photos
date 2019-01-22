@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { IAssetPathService } from './iasset-path.service';
+import { AssetPathService } from './asset-path.service';
 
 @Injectable()
-export class MockAssetPathService implements IAssetPathService {
+export class MockAssetPathService implements AssetPathService {
     getPath(path: string): string {
         return `assets${path}`;
     }

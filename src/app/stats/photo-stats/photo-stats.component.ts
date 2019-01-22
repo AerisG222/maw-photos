@@ -3,7 +3,7 @@ import { _appIdRandomProviderFactory } from '@angular/core/src/application_token
 import { BehaviorSubject } from 'rxjs';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
 
-import { PHOTO_API_SERVICE, IPhotoApiService } from 'src/app/services/iphoto-api.service';
+import { PHOTO_API_SERVICE, PhotoApiService } from 'src/app/services/photo-api.service';
 import { YearStats } from 'src/app/models/year-stats.model';
 import { CategoryStats } from 'src/app/models/category-stats.model';
 
@@ -29,7 +29,7 @@ export class PhotoStatsComponent implements OnInit {
     activeYear = -1;
 
     constructor(
-        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,
+        @Inject(PHOTO_API_SERVICE) private _api: PhotoApiService,
         private _elementRef: ElementRef
         ) {
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
-import { PHOTO_API_SERVICE, IPhotoApiService } from '../services/iphoto-api.service';
+import { PHOTO_API_SERVICE, PhotoApiService } from '../services/photo-api.service';
 import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
 import { Settings } from '../models/settings.model';
@@ -18,7 +18,7 @@ export class YearListComponent implements OnInit {
     settings$: Observable<Settings>;
 
     constructor(
-        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,
+        @Inject(PHOTO_API_SERVICE) private _api: PhotoApiService,
         private _store$: Store<RootStoreState.State>
     ) {
 

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PhotoApiService } from './photo-api.service';
+import { ExternalAuthService } from './external-auth.service';
 
-describe('PhotoApiService', () => {
+describe('ExternalAuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PhotoApiService = TestBed.get(PhotoApiService);
+    const service: ExternalAuthService = TestBed.get(ExternalAuthService);
     expect(service).toBeTruthy();
   });
 });

@@ -5,12 +5,12 @@ import { Observable, of, from } from 'rxjs';
 import { startWith, switchMap, catchError, flatMap, mergeMap, map } from 'rxjs/operators';
 
 import * as photoCategoryActions from './actions';
-import { PHOTO_API_SERVICE, IPhotoApiService } from '../../services/iphoto-api.service';
+import { PHOTO_API_SERVICE, PhotoApiService } from '../../services/photo-api.service';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
     constructor(
-        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,
+        @Inject(PHOTO_API_SERVICE) private _api: PhotoApiService,
         private _actions$: Actions
     ) {
 

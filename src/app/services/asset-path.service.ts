@@ -1,15 +1,5 @@
-import { Injectable } from '@angular/core';
+export const ASSET_PATH_SERVICE = 'ASSET_PATH_SERVICE';
 
-import { IAssetPathService } from './iasset-path.service';
-import { EnvironmentConfig } from '../models/environment-config';
-
-@Injectable()
-export class AssetPathService implements IAssetPathService {
-    constructor(private _env: EnvironmentConfig) {
-
-    }
-
-    getPath(path: string): string {
-        return `${this._env.wwwUrl}${path}`;
-    }
+export interface AssetPathService {
+    getPath(path: string): string;
 }

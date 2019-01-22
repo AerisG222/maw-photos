@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { IPhotoApiService } from './iphoto-api.service';
+import { PhotoApiService } from './photo-api.service';
 import { PhotoAndCategory } from '../models/photo-and-category.model';
 import { Category } from '../models/category.model';
 import { Photo } from '../models/photo.model';
@@ -9,15 +9,15 @@ import { ExifDetail } from '../models/exif-detail.model';
 import { Rating } from '../models/rating.model';
 import { Comment } from '../models/comment.model';
 import { YearStats } from '../models/year-stats.model';
-import { ASSET_PATH_SERVICE, IAssetPathService } from './iasset-path.service';
+import { ASSET_PATH_SERVICE, AssetPathService } from './asset-path.service';
 
 @Injectable()
-export class MockPhotoApiService implements IPhotoApiService {
+export class MockPhotoApiService implements PhotoApiService {
     private _years: number[];
     private _categories: Category[];
     private _photos: Photo[];
 
-    constructor(@Inject(ASSET_PATH_SERVICE) private _pathSvc: IAssetPathService) {
+    constructor(@Inject(ASSET_PATH_SERVICE) private _pathSvc: AssetPathService) {
         this.initData();
     }
 

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, flatMap, tap } from 'rxjs/operators';
 
-import { IPhotoApiService, PHOTO_API_SERVICE } from '../services/iphoto-api.service';
+import { PhotoApiService, PHOTO_API_SERVICE } from '../services/photo-api.service';
 import { Photo } from '../models/photo.model';
 import { Category } from '../models/category.model';
 
@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit {
 
     constructor(
         private _route: ActivatedRoute,
-        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService
+        @Inject(PHOTO_API_SERVICE) private _api: PhotoApiService
         ) {
 
     }

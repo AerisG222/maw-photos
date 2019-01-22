@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { ASSET_PATH_SERVICE } from './iasset-path.service';
+import { ASSET_PATH_SERVICE } from './asset-path.service';
 import { MockAssetPathService } from './mock-asset-path.service';
-import { AUTH_SERVICE } from './iauth.service';
+import { AUTH_SERVICE } from './auth.service';
 import { MockAuthService } from './mock-auth.service';
-import { PHOTO_API_SERVICE } from './iphoto-api.service';
+import { PHOTO_API_SERVICE } from './photo-api.service';
 import { MockPhotoApiService } from './mock-photo-api.service';
 
 @NgModule({
