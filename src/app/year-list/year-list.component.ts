@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
 import { PHOTO_API_SERVICE, IPhotoApiService } from '../services/iphoto-api.service';
-import { ICategory } from '../models/icategory.model';
+import { Category } from '../models/category.model';
 import { Observable } from 'rxjs';
-import { ISettings } from '../models/isettings.model';
+import { Settings } from '../models/settings.model';
 import { Store } from '@ngrx/store';
 import { RootStoreState, SettingsStoreSelectors } from '../root-store';
 
@@ -14,8 +14,8 @@ import { RootStoreState, SettingsStoreSelectors } from '../root-store';
 })
 export class YearListComponent implements OnInit {
     @Input() year: number;
-    categories$: Observable<ICategory[]>;
-    settings$: Observable<ISettings>;
+    categories$: Observable<Category[]>;
+    settings$: Observable<Settings>;
 
     constructor(
         @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,

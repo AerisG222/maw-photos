@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ISettings } from 'src/app/models/isettings.model';
+import { Settings } from 'src/app/models/settings.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',
@@ -23,17 +23,17 @@ export class LoadFailureAction implements Action {
 
 export class LoadSuccessAction implements Action {
     readonly type = ActionTypes.LOAD_SUCCESS;
-    constructor(public payload: { settings: ISettings }) { }
+    constructor(public payload: { settings: Settings }) { }
 }
 
 export class SaveRequestAction implements Action {
     readonly type = ActionTypes.SAVE_REQUEST;
-    constructor(public payload: { settings: ISettings }) { }
+    constructor(public payload: { settings: Settings }) { }
 }
 
 export class SaveSuccessAction implements Action {
     readonly type = ActionTypes.SAVE_SUCCESS;
-    constructor(public payload: { settings: ISettings }) { }
+    constructor(public payload: { settings: Settings }) { }
 }
 
 export class SaveFailureAction implements Action {

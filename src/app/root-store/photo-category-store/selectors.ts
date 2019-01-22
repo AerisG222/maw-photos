@@ -4,7 +4,7 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { ICategory } from '../../models/icategory.model';
+import { Category } from '../../models/category.model';
 import { photoCategoryAdapter, State } from './state';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './photo-category-store.module';
 
@@ -13,10 +13,10 @@ export const getIsLoading = (state: State): boolean => state.isLoading;
 
 export const selectPhotoCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
-export const selectAllCategories: (state: object) => ICategory[] = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
+export const selectAllCategories: (state: object) => Category[] = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
 
 export const selectAllYears = () =>
-    createSelector(selectAllCategories, (categories: ICategory[]) => {
+    createSelector(selectAllCategories, (categories: Category[]) => {
         if (categories) {
             const allYears = categories.map(x => x.year);
 
@@ -27,7 +27,7 @@ export const selectAllYears = () =>
     });
 
 export const selectCategoryById = (id: number) =>
-    createSelector(selectAllCategories, (categories: ICategory[]) => {
+    createSelector(selectAllCategories, (categories: Category[]) => {
         if (categories) {
             return categories.find(c => c.id === id);
         } else {

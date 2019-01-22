@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ICategory } from 'src/app/models/icategory.model';
+import { Category } from 'src/app/models/category.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Photo Categories] Load Request',
@@ -19,7 +19,7 @@ export class LoadFailureAction implements Action {
 
 export class LoadSuccessAction implements Action {
     readonly type = ActionTypes.LOAD_SUCCESS;
-    constructor(public payload: { categories: ICategory[] }) { }
+    constructor(public payload: { categories: Category[] }) { }
 }
 
 export type Actions =

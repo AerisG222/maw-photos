@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map, flatMap, tap } from 'rxjs/operators';
 
 import { IPhotoApiService, PHOTO_API_SERVICE } from '../services/iphoto-api.service';
-import { IPhoto } from '../models/iphoto.model';
-import { ICategory } from '../models/icategory.model';
+import { Photo } from '../models/photo.model';
+import { Category } from '../models/category.model';
 
 @Component({
     selector: 'app-category',
@@ -13,9 +13,9 @@ import { ICategory } from '../models/icategory.model';
     styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-    category$: Observable<ICategory>;
-    photos$: Observable<IPhoto[]>;
-    activePhoto: IPhoto;
+    category$: Observable<Category>;
+    photos$: Observable<Photo[]>;
+    activePhoto: Photo;
 
     constructor(
         private _route: ActivatedRoute,

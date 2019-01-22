@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 
-import { ISettings } from '../models/isettings.model';
+import { Settings } from '../models/settings.model';
 import { Theme } from '../models/theme.model';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class SettingsService {
 
     }
 
-    load(): ISettings {
+    load(): Settings {
         const theme = this._localStorage.retrieve(SettingsService.KEY_THEME);
         const showCategoryTitles = this._localStorage.retrieve(SettingsService.KEY_SHOW_CATEGORY_TITLES);
         const smallCategoryThumbnails = this._localStorage.retrieve(SettingsService.KEY_SMALL_CATEGORY_THUMBNAILS);
@@ -30,7 +30,7 @@ export class SettingsService {
         };
     }
 
-    save(settings: ISettings) {
+    save(settings: Settings) {
         if (!settings) {
             return;
         }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { IPhoto } from '../models/iphoto.model';
+import { Photo } from '../models/photo.model';
 
 @Component({
     selector: 'app-photo-list',
@@ -8,5 +8,5 @@ import { IPhoto } from '../models/iphoto.model';
     styleUrls: ['./photo-list.component.scss']
 })
 export class PhotoListComponent {
-    @Input() photos: IPhoto[];
+    @Input() photos: Photo[];
 }

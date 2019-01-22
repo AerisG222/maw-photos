@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ICategory } from '../models/icategory.model';
+import { Category } from '../models/category.model';
 
 @Component({
     selector: 'app-category-card',
@@ -8,7 +8,7 @@ import { ICategory } from '../models/icategory.model';
     styleUrls: ['./category-card.component.scss']
 })
 export class CategoryCardComponent {
-    @Input() category: ICategory;
+    @Input() category: Category;
     @Input() showTitle: boolean;
     @Input() smallThumbnails: boolean;
 }

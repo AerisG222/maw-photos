@@ -2,26 +2,26 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { IPhotoApiService } from './iphoto-api.service';
-import { IPhotoAndCategory } from '../models/iphoto-and-category.model';
-import { ICategory } from '../models/icategory.model';
-import { IPhoto } from '../models/iphoto.model';
-import { IExifDetail } from '../models/iexif-detail.model';
-import { IRating } from '../models/irating.model';
-import { IComment } from '../models/icomment.model';
-import { IYearStats } from '../models/iyear-stats.model';
+import { PhotoAndCategory } from '../models/photo-and-category.model';
+import { Category } from '../models/category.model';
+import { Photo } from '../models/photo.model';
+import { ExifDetail } from '../models/exif-detail.model';
+import { Rating } from '../models/rating.model';
+import { Comment } from '../models/comment.model';
+import { YearStats } from '../models/year-stats.model';
 import { ASSET_PATH_SERVICE, IAssetPathService } from './iasset-path.service';
 
 @Injectable()
 export class MockPhotoApiService implements IPhotoApiService {
     private _years: number[];
-    private _categories: ICategory[];
-    private _photos: IPhoto[];
+    private _categories: Category[];
+    private _photos: Photo[];
 
     constructor(@Inject(ASSET_PATH_SERVICE) private _pathSvc: IAssetPathService) {
         this.initData();
     }
 
-    getRandomPhoto(): Observable<IPhotoAndCategory> {
+    getRandomPhoto(): Observable<PhotoAndCategory> {
         throw new Error('not implemented');
     }
 
@@ -29,43 +29,43 @@ export class MockPhotoApiService implements IPhotoApiService {
         return of(this._years);
     }
 
-    getCategory(categoryId: number): Observable<ICategory> {
+    getCategory(categoryId: number): Observable<Category> {
         return of(this._categories.filter(x => x.id === categoryId)[0]);
     }
 
-    getCategoriesForYear(year: number): Observable<ICategory[]> {
+    getCategoriesForYear(year: number): Observable<Category[]> {
         return of(this._categories.filter(x => x.year === year));
     }
 
-    getPhotosByCategory(categoryId: number): Observable<IPhoto[]> {
+    getPhotosByCategory(categoryId: number): Observable<Photo[]> {
         return of(this._photos.filter(x => x.categoryId === categoryId));
     }
 
-    getPhotosByCommentDate(newestFirst: boolean): Observable<IPhotoAndCategory[]> {
+    getPhotosByCommentDate(newestFirst: boolean): Observable<PhotoAndCategory[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByUserCommentDate(newestFirst: boolean): Observable<IPhotoAndCategory[]> {
+    getPhotosByUserCommentDate(newestFirst: boolean): Observable<PhotoAndCategory[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByCommentCount(greatestFirst: boolean): Observable<IPhotoAndCategory[]> {
+    getPhotosByCommentCount(greatestFirst: boolean): Observable<PhotoAndCategory[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByAverageRating(highestFirst: boolean): Observable<IPhotoAndCategory[]> {
+    getPhotosByAverageRating(highestFirst: boolean): Observable<PhotoAndCategory[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByUserRating(highestFirst: boolean): Observable<IPhotoAndCategory[]> {
+    getPhotosByUserRating(highestFirst: boolean): Observable<PhotoAndCategory[]> {
         throw new Error('not implemented');
     }
 
-    getPhotoExifData(photoId: number): Observable<IExifDetail> {
+    getPhotoExifData(photoId: number): Observable<ExifDetail> {
         throw new Error('not implemented');
     }
 
-    getPhotoRatingData(photoId: number): Observable<IRating> {
+    getPhotoRatingData(photoId: number): Observable<Rating> {
         throw new Error('not implemented');
     }
 
@@ -73,7 +73,7 @@ export class MockPhotoApiService implements IPhotoApiService {
         throw new Error('not implemented');
     }
 
-    getCommentsForPhoto(photoId: number): Observable<IComment[]> {
+    getCommentsForPhoto(photoId: number): Observable<Comment[]> {
         throw new Error('not implemented');
     }
 
@@ -81,7 +81,7 @@ export class MockPhotoApiService implements IPhotoApiService {
         throw new Error('not implemented');
     }
 
-    getPhotoStats(): Observable<IYearStats[]> {
+    getPhotoStats(): Observable<YearStats[]> {
         return of([
             { 'year': 2018,
                 'categoryStats': [

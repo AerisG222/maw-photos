@@ -1,9 +1,9 @@
-import { ISettings } from 'src/app/models/isettings.model';
+import { Settings } from 'src/app/models/settings.model';
 
 export interface State {
     error: string;
     isLoading: boolean;
-    settings: ISettings;
+    settings: Settings;
 }
 
 export const initialState: State = {

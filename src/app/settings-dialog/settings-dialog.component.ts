@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 
 import { Theme } from '../models/theme.model';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../root-store';
-import { ISettings } from '../models/isettings.model';
+import { Settings } from '../models/settings.model';
 
 @Component({
     selector: 'app-settings-dialog',
@@ -65,7 +65,7 @@ export class SettingsDialogComponent implements OnInit {
         this._dialogRef.close();
     }
 
-    private updateForm(settings: ISettings): void {
+    private updateForm(settings: Settings): void {
         this.form.get('theme').setValue(settings.theme.name);
         this.form.get('showCategoryTitles').setValue(settings.showCategoryTitles);
         this.form.get('smallCategoryThumbnails').setValue(settings.smallCategoryThumbnails);

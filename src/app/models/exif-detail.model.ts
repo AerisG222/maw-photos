@@ -1,4 +1,4 @@
-export interface IExifDetail {
+export interface ExifDetail {
     afPoint: string;
     aperture: number;
     contrast: string;
