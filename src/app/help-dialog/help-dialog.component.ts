@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { IHelpInfo } from './ihelp-info.model';
+import { HelpInfo } from './help-info.model';
 
 @Component({
     selector: 'app-help-dialog',
@@ -11,7 +11,7 @@ import { IHelpInfo } from './ihelp-info.model';
 export class HelpDialogComponent {
     constructor(
         private _dialogRef: MatDialogRef<HelpDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public info: IHelpInfo
+        @Inject(MAT_DIALOG_DATA) public info: HelpInfo
     ) {
 
     }
