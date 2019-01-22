@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
-import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, RootStoreState } from '../root-store';
+import { PhotoCategoryStoreActions, RootStoreState } from '../root-store';
+import { PHOTO_API_SERVICE, IPhotoApiService } from '../services/iphoto-api.service';
 
 @Component({
     selector: 'app-home',
@@ -13,16 +14,19 @@ export class HomeComponent implements OnInit {
     years$: Observable<number[]>;
 
     constructor(
+        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,
         private _store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
-        this.years$ = this._store$.pipe (
-            select(PhotoCategoryStoreSelectors.selectAllYears)
-        );
+        this.years$ = this._api.getYears();
 
-        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
+        // this.years$ = this._store$.pipe (
+        //     select(PhotoCategoryStoreSelectors.selectAllYears)
+        // );
+
+        // this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 }

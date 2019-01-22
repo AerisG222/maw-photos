@@ -17,7 +17,7 @@ import { metaReducers } from './state';
         SettingsStoreModule,
         PhotoCategoryStoreModule,
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-        StoreModule.forRoot({ routerReducer }, { metaReducers} ),
+        StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ]
