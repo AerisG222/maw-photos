@@ -1,10 +1,10 @@
 export class Theme {
-    static readonly THEME_DARK = new Theme('Dark', 'maw-dark-theme');
-    static readonly THEME_LIGHT = new Theme('Light', 'maw-light-theme');
+    static readonly themeDark = new Theme('Dark', 'maw-dark-theme');
+    static readonly themeLight = new Theme('Light', 'maw-light-theme');
 
-    static readonly ALL_THEMES = [
-        Theme.THEME_DARK,
-        Theme.THEME_LIGHT
+    static readonly allThemes = [
+        Theme.themeDark,
+        Theme.themeLight
     ];
 
     readonly name: string;
@@ -17,10 +17,10 @@ export class Theme {
 
     static forName(name: string): Theme {
         switch (name) {
-            case Theme.THEME_DARK.name:
-                return Theme.THEME_DARK;
-            case Theme.THEME_LIGHT.name:
-                return Theme.THEME_LIGHT;
+            case Theme.themeDark.name:
+                return Theme.themeDark;
+            case Theme.themeLight.name:
+                return Theme.themeLight;
             default:
                 console.error(`invalid theme requested: ${name}`);
         }

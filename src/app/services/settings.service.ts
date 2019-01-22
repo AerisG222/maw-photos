@@ -8,9 +8,9 @@ import { Theme } from '../models/theme.model';
     providedIn: 'root'
 })
 export class SettingsService {
-    private static readonly KEY_THEME = 'theme';
-    private static readonly KEY_SHOW_CATEGORY_TITLES = 'showCategoryTitles';
-    private static readonly KEY_SMALL_CATEGORY_THUMBNAILS = 'smallCategoryThumbnails';
+    private static readonly keyTheme = 'theme';
+    private static readonly keyShowCategoryTitles = 'showCategoryTitles';
+    private static readonly keySmallCategoryThumbnails = 'smallCategoryThumbnails';
 
     constructor(
         private _localStorage: LocalStorageService
@@ -19,12 +19,12 @@ export class SettingsService {
     }
 
     load(): Settings {
-        const theme = this._localStorage.retrieve(SettingsService.KEY_THEME);
-        const showCategoryTitles = this._localStorage.retrieve(SettingsService.KEY_SHOW_CATEGORY_TITLES);
-        const smallCategoryThumbnails = this._localStorage.retrieve(SettingsService.KEY_SMALL_CATEGORY_THUMBNAILS);
+        const theme = this._localStorage.retrieve(SettingsService.keyTheme);
+        const showCategoryTitles = this._localStorage.retrieve(SettingsService.keyShowCategoryTitles);
+        const smallCategoryThumbnails = this._localStorage.retrieve(SettingsService.keySmallCategoryThumbnails);
 
         return {
-            theme: theme !== null ? Theme.forName(theme) : Theme.THEME_DARK,
+            theme: theme !== null ? Theme.forName(theme) : Theme.themeDark,
             showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
             smallCategoryThumbnails: smallCategoryThumbnails !== null ? smallCategoryThumbnails : false
         };
@@ -35,8 +35,8 @@ export class SettingsService {
             return;
         }
 
-        this._localStorage.store(SettingsService.KEY_THEME, settings.theme.name);
-        this._localStorage.store(SettingsService.KEY_SHOW_CATEGORY_TITLES, settings.showCategoryTitles);
-        this._localStorage.store(SettingsService.KEY_SMALL_CATEGORY_THUMBNAILS, settings.smallCategoryThumbnails);
+        this._localStorage.store(SettingsService.keyTheme, settings.theme.name);
+        this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.showCategoryTitles);
+        this._localStorage.store(SettingsService.keySmallCategoryThumbnails, settings.smallCategoryThumbnails);
     }
 }

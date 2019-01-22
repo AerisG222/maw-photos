@@ -15,7 +15,7 @@ import { Settings } from '../models/settings.model';
 })
 export class SettingsDialogComponent implements OnInit {
     form: FormGroup;
-    themes = Theme.ALL_THEMES;
+    themes = Theme.allThemes;
     private _settings;
 
     constructor(

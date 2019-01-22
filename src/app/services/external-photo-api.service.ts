@@ -11,14 +11,14 @@ import { Rating } from '../models/rating.model';
 import { Comment } from '../models/comment.model';
 import { YearStats } from '../models/year-stats.model';
 import { PhotoApiService } from './photo-api.service';
-import { ASSET_PATH_SERVICE, AssetPathService } from './asset-path.service';
+import { assetPathServiceToken, AssetPathService } from './asset-path.service';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
     constructor(
         private _http: HttpClient,
         private _cfg: EnvironmentConfig,
-        @Inject(ASSET_PATH_SERVICE) private _pathSvc: AssetPathService) {
+        @Inject(assetPathServiceToken) private _pathSvc: AssetPathService) {
 
     }
 

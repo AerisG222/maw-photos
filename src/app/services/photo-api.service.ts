@@ -7,7 +7,7 @@ import { Rating } from '../models/rating.model';
 import { Comment } from '../models/comment.model';
 import { YearStats } from '../models/year-stats.model';
 
-export const PHOTO_API_SERVICE = 'PHOTO_API_SERVICE';
+export const photoApiServiceToken = 'photoApiService';
 
 export interface PhotoApiService {
     getRandomPhoto(): Observable<PhotoAndCategory>;

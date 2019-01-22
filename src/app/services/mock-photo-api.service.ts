@@ -9,7 +9,7 @@ import { ExifDetail } from '../models/exif-detail.model';
 import { Rating } from '../models/rating.model';
 import { Comment } from '../models/comment.model';
 import { YearStats } from '../models/year-stats.model';
-import { ASSET_PATH_SERVICE, AssetPathService } from './asset-path.service';
+import { assetPathServiceToken, AssetPathService } from './asset-path.service';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
@@ -17,7 +17,7 @@ export class MockPhotoApiService implements PhotoApiService {
     private _categories: Category[];
     private _photos: Photo[];
 
-    constructor(@Inject(ASSET_PATH_SERVICE) private _pathSvc: AssetPathService) {
+    constructor(@Inject(assetPathServiceToken) private _pathSvc: AssetPathService) {
         this.initData();
     }
 

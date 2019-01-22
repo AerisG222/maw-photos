@@ -69,7 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
             classList.add('mat-app-background');
         }
 
-        Theme.ALL_THEMES.forEach(x => {
+        Theme.allThemes.forEach(x => {
             classList.remove(x.klass);
         });
 

@@ -1,4 +1,4 @@
-export const AUTH_SERVICE = 'AUTH_SERVICE';
+export const authServiceToken = 'authService';
 
 export interface AuthService {
     isLoggedIn(): boolean;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { PHOTO_API_SERVICE, PhotoApiService } from '../services/photo-api.service';
+import { photoApiServiceToken, PhotoApiService } from '../services/photo-api.service';
 
 @Component({
     selector: 'app-random',
@@ -8,7 +8,7 @@ import { PHOTO_API_SERVICE, PhotoApiService } from '../services/photo-api.servic
     styleUrls: ['./random.component.scss']
 })
 export class RandomComponent implements OnInit {
-    constructor(@Inject(PHOTO_API_SERVICE) private _api: PhotoApiService) {
+    constructor(@Inject(photoApiServiceToken) private _api: PhotoApiService) {
 
     }
 
