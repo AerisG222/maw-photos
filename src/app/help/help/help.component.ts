@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { HelpInfo } from './help-info.model';
 
 @Component({
-    selector: 'app-help-dialog',
+    selector: 'app-help',
     templateUrl: './help.component.html',
     styleUrls: ['./help.component.scss']
 })

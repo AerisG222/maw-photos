@@ -10,8 +10,8 @@ import { AppMaterialModule } from '../app-material.module';
         HelpComponent
     ],
     imports: [
-        CommonModule,
         AppMaterialModule,
+        CommonModule,
         HelpRoutingModule
     ]
 })
