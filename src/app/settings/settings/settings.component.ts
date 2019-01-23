@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 
-import { Theme } from '../core/models/theme.model';
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../root-store';
-import { Settings } from '../core/models/settings.model';
+import { Theme } from '../../core/models/theme.model';
+import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../root-store';
+import { Settings } from '../../core/models/settings.model';
 
 @Component({
-    selector: 'app-settings-dialog',
-    templateUrl: './settings-dialog.component.html',
-    styleUrls: ['./settings-dialog.component.scss']
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss']
 })
-export class SettingsDialogComponent implements OnInit {
+export class SettingsComponent implements OnInit {
     form: FormGroup;
     themes = Theme.allThemes;
     private _settings;
 
     constructor(
         private _formBuilder: FormBuilder,
-        private _dialogRef: MatDialogRef<SettingsDialogComponent>,
         private _store$: Store<RootStoreState.State>
     ) {
 
@@ -44,9 +42,7 @@ export class SettingsDialogComponent implements OnInit {
                 this.updateForm(this._settings);
             });
 
-        this._store$.dispatch(
-            new SettingsStoreActions.LoadRequestAction()
-        );
+        this.loadSettings();
     }
 
     onSave(): void {
@@ -57,12 +53,16 @@ export class SettingsDialogComponent implements OnInit {
         this._store$.dispatch(
             new SettingsStoreActions.SaveRequestAction({ settings: this._settings })
         );
-
-        this._dialogRef.close();
     }
 
     onCancel(): void {
-        this._dialogRef.close();
+        this.loadSettings();
+    }
+
+    private loadSettings(): void {
+        this._store$.dispatch(
+            new SettingsStoreActions.LoadRequestAction()
+        );
     }
 
     private updateForm(settings: Settings): void {

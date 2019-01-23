@@ -14,9 +14,10 @@ const routes: Routes = [
     { path: 'random', component: RandomComponent, canActivate: [AuthGuardService] },
     { path: 'search', component: SearchComponent, canActivate: [AuthGuardService] },
     { path: 'spa-signin', component: SpaSigninComponent },
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuardService] },
-    { path: 'stats', loadChildren: './stats/stats.module#StatsModule', canActivate: [AuthGuardService] },
-    { path: 'help',  loadChildren: './help/help.module#HelpModule' },
+    { path: 'admin',    loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuardService] },
+    { path: 'stats',    loadChildren: './stats/stats.module#StatsModule', canActivate: [AuthGuardService] },
+    { path: 'help',     loadChildren: './help/help.module#HelpModule' },
+    { path: 'settings', loadChildren: './settings/settings.module#SettingsModule' },
     { path: '**', redirectTo: '' }
 ];
 

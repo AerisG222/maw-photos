@@ -15,7 +15,6 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { SearchComponent } from './search/search.component';
-import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { RootStoreModule } from './root-store';
 import { CoreModule } from './core/core.module';
 
@@ -30,7 +29,6 @@ import { CoreModule } from './core/core.module';
         PhotoListComponent,
         RandomComponent,
         SearchComponent,
-        SettingsDialogComponent,
         SpaSigninComponent,
         YearListComponent
     ],
@@ -42,9 +40,6 @@ import { CoreModule } from './core/core.module';
         NgxWebstorageModule.forRoot({ prefix: 'maw-photos' }),
         RootStoreModule
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [
-        SettingsDialogComponent
-    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

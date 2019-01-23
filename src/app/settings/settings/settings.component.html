@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Settings</h1>
+<h1>Settings</h1>
 <form [formGroup]="form">
-    <div mat-dialog-content>
+    <div>
         <mat-form-field appearance="standard">
             <mat-label>Theme</mat-label>
             <mat-select formControlName="theme">
@@ -12,7 +12,7 @@
 
         <mat-slide-toggle formControlName="smallCategoryThumbnails" [color]="'primary'" [disabled]="form.get('showCategoryTitles').value">Show Small Category Thumbnails</mat-slide-toggle>
     </div>
-    <div mat-dialog-actions>
+    <div>
         <button mat-button (click)="onSave()">Save</button>
         <button mat-button (click)="onCancel()">Cancel</button>
     </div>

@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './root-store';
 
@@ -46,12 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     toggleEndSidenav(): void {
         this.endSidenavExpanded = !this.endSidenavExpanded;
-    }
-
-    showSettings(): void {
-        this.dialog.open(SettingsDialogComponent, {
-            width: '500px'
-        });
     }
 
     private setTheme(theme: Theme): void {
