@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SpaSigninComponent } from './spa-signin/spa-signin.component';
 import { YearListComponent } from './year-list/year-list.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
@@ -25,7 +24,6 @@ import { CoreModule } from './core/core.module';
         HomeComponent,
         FooterComponent,
         PhotoListComponent,
-        SpaSigninComponent,
         YearListComponent
     ],
     imports: [
