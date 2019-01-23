@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { photoApiServiceToken, PhotoApiService } from '../core/services/photo-api.service';
+import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 
 @Component({
     selector: 'app-random',
