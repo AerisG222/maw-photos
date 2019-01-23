@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
-import { SettingsService } from '../../services/settings.service';
+import { SettingsService } from '../../core/services/settings.service';
 import * as settingsActions from './actions';
 
 @Injectable()

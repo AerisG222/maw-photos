@@ -4,9 +4,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 
-import { Theme } from '../models/theme.model';
+import { Theme } from '../core/models/theme.model';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../root-store';
-import { Settings } from '../models/settings.model';
+import { Settings } from '../core/models/settings.model';
 
 @Component({
     selector: 'app-settings-dialog',

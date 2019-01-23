@@ -1,4 +1,4 @@
-import { Settings } from 'src/app/models/settings.model';
+import { Settings } from 'src/app/core/models/settings.model';
 
 export interface State {
     error: string;

@@ -4,7 +4,7 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { Settings } from '../../models/settings.model';
+import { Settings } from '../../core/models/settings.model';
 import { State } from './state';
 import { SETTINGS_FEATURE_NAME } from './settings-store.module';
 

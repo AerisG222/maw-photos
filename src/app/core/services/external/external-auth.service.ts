@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { UserManager, User } from 'oidc-client';
 import { BehaviorSubject } from 'rxjs';
 
-import { AuthConfig } from '../models/auth-config';
-import { AuthService } from './auth.service';
+import { AuthConfig } from '../../models/auth-config';
+import { AuthService } from '../auth.service';
 
 
 @Injectable()

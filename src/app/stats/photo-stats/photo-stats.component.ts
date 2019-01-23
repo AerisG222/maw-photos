@@ -3,7 +3,7 @@ import { _appIdRandomProviderFactory } from '@angular/core/src/application_token
 import { BehaviorSubject } from 'rxjs';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
 
-import { photoApiServiceToken, PhotoApiService } from 'src/app/services/photo-api.service';
+import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 import { YearStats } from 'src/app/models/year-stats.model';
 import { CategoryStats } from 'src/app/models/category-stats.model';
 

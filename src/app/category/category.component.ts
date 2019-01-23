@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, flatMap, tap } from 'rxjs/operators';
 
-import { PhotoApiService, photoApiServiceToken } from '../services/photo-api.service';
+import { PhotoApiService, photoApiServiceToken } from '../core/services/photo-api.service';
 import { Photo } from '../models/photo.model';
 import { Category } from '../models/category.model';
 

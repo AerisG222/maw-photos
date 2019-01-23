@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
-import { Theme } from './models/theme.model';
+import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './root-store';
 
 @Component({

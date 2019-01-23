@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Settings } from 'src/app/models/settings.model';
+import { Settings } from 'src/app/core/models/settings.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',

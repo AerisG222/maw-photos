@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { PhotoCategoryStoreActions, RootStoreState } from '../root-store';
-import { photoApiServiceToken, PhotoApiService } from '../services/photo-api.service';
+import { photoApiServiceToken, PhotoApiService } from '../core/services/photo-api.service';
 
 @Component({
     selector: 'app-home',

@@ -1,15 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { PhotoApiService } from './photo-api.service';
-import { PhotoAndCategory } from '../models/photo-and-category.model';
-import { Category } from '../models/category.model';
-import { Photo } from '../models/photo.model';
-import { ExifDetail } from '../models/exif-detail.model';
-import { Rating } from '../models/rating.model';
-import { Comment } from '../models/comment.model';
-import { YearStats } from '../models/year-stats.model';
-import { assetPathServiceToken, AssetPathService } from './asset-path.service';
+import { PhotoApiService } from '../photo-api.service';
+import { PhotoAndCategory } from '../../../models/photo-and-category.model';
+import { Category } from '../../../models/category.model';
+import { Photo } from '../../../models/photo.model';
+import { ExifDetail } from '../../../models/exif-detail.model';
+import { Rating } from '../../../models/rating.model';
+import { Comment } from '../../../models/comment.model';
+import { YearStats } from '../../../models/year-stats.model';
+import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {

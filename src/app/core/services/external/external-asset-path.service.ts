@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AssetPathService } from './asset-path.service';
-import { EnvironmentConfig } from '../models/environment-config';
+import { AssetPathService } from '../asset-path.service';
+import { EnvironmentConfig } from '../../models/environment-config';
 
 @Injectable()
 export class ExternalAssetPathService implements AssetPathService {

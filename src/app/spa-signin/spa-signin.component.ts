@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import { ExternalAuthService } from '../services/external-auth.service';
-import { NavigationService } from '../services/navigation.service';
+import { AuthService, authServiceToken } from '../core/services/auth.service';
+import { NavigationService } from '../core/services/navigation.service';
 
 @Component({
     selector: 'app-spa-signin',
@@ -10,7 +10,7 @@ import { NavigationService } from '../services/navigation.service';
 })
 export class SpaSigninComponent implements OnInit {
     constructor(
-        private _authService: ExternalAuthService,
+        @Inject(authServiceToken) private _authService: AuthService,
         private _navService: NavigationService) {
 
     }
