@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './root-store';
@@ -47,13 +46,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     toggleEndSidenav(): void {
         this.endSidenavExpanded = !this.endSidenavExpanded;
-    }
-
-    showHelp(): void {
-        this.dialog.open(HelpDialogComponent, {
-            width: '500px',
-            data: { version: '0.1.0' }
-        });
     }
 
     showSettings(): void {

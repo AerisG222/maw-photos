@@ -15,7 +15,6 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { SearchComponent } from './search/search.component';
-import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { RootStoreModule } from './root-store';
 import { CoreModule } from './core/core.module';
@@ -26,7 +25,6 @@ import { CoreModule } from './core/core.module';
         CategoryCardComponent,
         CategoryComponent,
         HeaderComponent,
-        HelpDialogComponent,
         HomeComponent,
         FooterComponent,
         PhotoListComponent,
@@ -46,7 +44,6 @@ import { CoreModule } from './core/core.module';
     ],
     bootstrap: [AppComponent],
     entryComponents: [
-        HelpDialogComponent,
         SettingsDialogComponent
     ],
 })

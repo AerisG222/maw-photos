@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: 'spa-signin', component: SpaSigninComponent },
     { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuardService] },
     { path: 'stats', loadChildren: './stats/stats.module#StatsModule', canActivate: [AuthGuardService] },
+    { path: 'help',  loadChildren: './help/help.module#HelpModule' },
     { path: '**', redirectTo: '' }
 ];
 
