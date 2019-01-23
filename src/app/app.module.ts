@@ -13,7 +13,6 @@ import { YearListComponent } from './year-list/year-list.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryComponent } from './category/category.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
-import { SearchComponent } from './search/search.component';
 import { RootStoreModule } from './root-store';
 import { CoreModule } from './core/core.module';
 
@@ -26,7 +25,6 @@ import { CoreModule } from './core/core.module';
         HomeComponent,
         FooterComponent,
         PhotoListComponent,
-        SearchComponent,
         SpaSigninComponent,
         YearListComponent
     ],
