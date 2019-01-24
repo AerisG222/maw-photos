@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { RandomRoutingModule } from './random-routing.module';
 import { RandomComponent } from './random/random.component';
-import { AppMaterialModule } from '../app-material.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
         RandomComponent
     ],
     imports: [
-        AppMaterialModule,
         CommonModule,
-        RandomRoutingModule
+        RandomRoutingModule,
+        SharedModule
     ]
 })
 export class RandomModule { }

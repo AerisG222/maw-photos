@@ -4,8 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
 
 import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
-import { YearStats } from 'src/app/models/year-stats.model';
-import { CategoryStats } from 'src/app/models/category-stats.model';
+import { YearStats } from 'src/app/core/models/year-stats.model';
+import { CategoryStats } from 'src/app/core/models/category-stats.model';
 
 @Component({
     selector: 'app-photo-stats',

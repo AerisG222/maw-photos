@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
 
     constructor(
-        public dialog: MatDialog,
         private _store$: Store<RootStoreState.State>,
         @Inject(DOCUMENT) private _doc
     ) {

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
-import { photoApiServiceToken, PhotoApiService } from '../core/services/photo-api.service';
-import { Category } from '../models/category.model';
+import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
+import { Category } from '../../core/models/category.model';
 import { Observable } from 'rxjs';
-import { Settings } from '../core/models/settings.model';
+import { Settings } from '../../core/models/settings.model';
 import { Store } from '@ngrx/store';
-import { RootStoreState, SettingsStoreSelectors } from '../root-store';
+import { RootStoreState, SettingsStoreSelectors } from '../../root-store';
 
 @Component({
     selector: 'app-year-list',

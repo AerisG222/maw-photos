@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatMenuModule,
@@ -14,16 +14,22 @@ import {
     MatToolbarModule,
     MatSlideToggleModule
 } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { PhotoListComponent } from './photo-list/photo-list.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        FooterComponent,
+        HeaderComponent,
+        PhotoListComponent
+    ],
     imports: [
         CommonModule,
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
-        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
@@ -35,10 +41,10 @@ import { ReactiveFormsModule } from '@angular/forms';
         ReactiveFormsModule
     ],
     exports: [
+        // modules
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
-        MatDialogModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
@@ -47,7 +53,12 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatSlideToggleModule,
         MatTabsModule,
         MatToolbarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
+        // components
+        FooterComponent,
+        HeaderComponent,
+        PhotoListComponent
     ]
 })
-export class AppMaterialModule { }
+export class SharedModule { }

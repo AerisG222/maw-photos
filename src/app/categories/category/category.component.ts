@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, flatMap, tap } from 'rxjs/operators';
 
-import { PhotoApiService, photoApiServiceToken } from '../core/services/photo-api.service';
-import { Photo } from '../models/photo.model';
-import { Category } from '../models/category.model';
+import { PhotoApiService, photoApiServiceToken } from '../../core/services/photo-api.service';
+import { Photo } from '../../core/models/photo.model';
+import { Category } from '../../core/models/category.model';
 
 @Component({
     selector: 'app-category',

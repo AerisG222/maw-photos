@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { PhotoCategoryStoreActions, RootStoreState } from '../root-store';
-import { photoApiServiceToken, PhotoApiService } from '../core/services/photo-api.service';
+import { PhotoCategoryStoreActions, RootStoreState } from '../../root-store';
+import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 
 @Component({
     selector: 'app-home',

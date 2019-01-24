@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Photo } from '../models/photo.model';
+import { Photo } from '../../core/models/photo.model';
 
 @Component({
     selector: 'app-photo-list',

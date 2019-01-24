@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Category } from 'src/app/models/category.model';
+import { Category } from 'src/app/core/models/category.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Photo Categories] Load Request',

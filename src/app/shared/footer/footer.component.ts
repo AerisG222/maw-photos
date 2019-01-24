@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CalendarService } from '../core/services/calendar.service';
+import { CalendarService } from '../../core/services/calendar.service';
 
 @Component({
   selector: 'app-footer',
