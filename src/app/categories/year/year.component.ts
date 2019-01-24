@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 import { Category } from '../../core/models/category.model';
@@ -25,7 +26,15 @@ export class YearComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.categories$ = this._api.getCategoriesForYear(this.year);
         this.settings$ = this._store$.select(SettingsStoreSelectors.selectSettings);
+
+        this.categories$ = this._api.getCategoriesForYear(this.year)
+            .pipe(
+                map(categories => categories.sort(this.categoriesDescending))
+            );
+    }
+
+    private categoriesDescending(first: Category, second: Category) {
+        return second.id - first.id;
     }
 }
