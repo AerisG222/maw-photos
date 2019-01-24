@@ -1,12 +1,3 @@
-<span class="mat-body-strong">{{ year }}</span>
-
-<div class="category_holder">
-    <div fxLayout="row wrap" fxLayoutGap="12px grid" fxLayoutAlign="start">
-        <app-category-card
-            *ngFor="let category of categories$ | async"
-            [category]="category"
-            [showTitle]="(settings$ | async).showCategoryTitles"
-            [smallThumbnails]="!(settings$ | async).showCategoryTitles && (settings$ | async).smallCategoryThumbnails">
-        </app-category-card>
-    </div>
+<div *ngFor="let year of years$ | async">
+    <app-year [year]="year"></app-year>
 </div>

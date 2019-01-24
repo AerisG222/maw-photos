@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { YearListComponent } from './year-list.component';
 
-describe('YearComponent', () => {
+describe('YearListComponent', () => {
   let component: YearListComponent;
   let fixture: ComponentFixture<YearListComponent>;
 

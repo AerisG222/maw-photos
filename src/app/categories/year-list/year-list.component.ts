@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-
-import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
-import { Category } from '../../core/models/category.model';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Settings } from '../../core/models/settings.model';
 import { Store } from '@ngrx/store';
-import { RootStoreState, SettingsStoreSelectors } from '../../root-store';
+
+import { PhotoCategoryStoreActions, RootStoreState } from '../../root-store';
+import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 
 @Component({
     selector: 'app-year-list',
@@ -13,9 +11,7 @@ import { RootStoreState, SettingsStoreSelectors } from '../../root-store';
     styleUrls: ['./year-list.component.scss']
 })
 export class YearListComponent implements OnInit {
-    @Input() year: number;
-    categories$: Observable<Category[]>;
-    settings$: Observable<Settings>;
+    years$: Observable<number[]>;
 
     constructor(
         @Inject(photoApiServiceToken) private _api: PhotoApiService,
@@ -25,7 +21,12 @@ export class YearListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.categories$ = this._api.getCategoriesForYear(this.year);
-        this.settings$ = this._store$.select(SettingsStoreSelectors.selectSettings);
+        this.years$ = this._api.getYears();
+
+        // this.years$ = this._store$.pipe (
+        //     select(PhotoCategoryStoreSelectors.selectAllYears)
+        // );
+
+        // this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 }

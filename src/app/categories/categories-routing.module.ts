@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
+import { YearListComponent } from './year-list/year-list.component';
 
 const routes: Routes = [
-    { path: '',    component: HomeComponent },
+    { path: '',    component: YearListComponent },
     { path: 'category/:id', component: CategoryComponent },
     { path: '**',  redirectTo: '' }
 ];
