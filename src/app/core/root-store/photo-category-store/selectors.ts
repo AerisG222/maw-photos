@@ -26,6 +26,15 @@ export const selectAllYears = () =>
         }
     });
 
+export const selectCategoriesForYear = (year: number) =>
+    createSelector(selectAllCategories, (categories: Category[]) => {
+        if (categories) {
+            return categories.filter(x => x.year === year);
+        } else {
+            return null;
+        }
+    });
+
 export const selectCategoryById = (id: number) =>
     createSelector(selectAllCategories, (categories: Category[]) => {
         if (categories) {

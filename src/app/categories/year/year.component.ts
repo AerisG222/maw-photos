@@ -1,12 +1,11 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, Input } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 import { Category } from '../../core/models/category.model';
 import { Settings } from '../../core/models/settings.model';
-import { RootStoreState, SettingsStoreSelectors } from '../../core/root-store';
+import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } from '../../core/root-store';
 
 @Component({
     selector: 'app-year',
@@ -19,17 +18,20 @@ export class YearComponent implements OnInit {
     settings$: Observable<Settings>;
 
     constructor(
-        @Inject(photoApiServiceToken) private _api: PhotoApiService,
         private _store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
-        this.settings$ = this._store$.select(SettingsStoreSelectors.selectSettings);
-
-        this.categories$ = this._api.getCategoriesForYear(this.year)
+        this.settings$ = this._store$
             .pipe(
+                select(SettingsStoreSelectors.selectSettings)
+            );
+
+        this.categories$ = this._store$
+            .pipe(
+                select(PhotoCategoryStoreSelectors.selectCategoriesForYear(this.year)),
                 map(categories => categories.sort(this.categoriesDescending))
             );
     }
