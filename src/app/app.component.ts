@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { Theme } from './core/models/theme.model';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './root-store';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 
 @Component({
     selector: 'app-root',

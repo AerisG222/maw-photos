@@ -3,7 +3,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 import { PhotoCategoryStoreState } from './photo-category-store';
 import { SettingsStoreState } from './settings-store';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [storeFreeze] : [];
 

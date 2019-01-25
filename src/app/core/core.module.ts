@@ -8,6 +8,7 @@ import { EnvironmentConfig } from './models/environment-config';
 import { AuthConfig } from './models/auth-config';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { throwIfAlreadyLoaded } from './module-import.guard';
+import { RootStoreModule } from './root-store';
 
 @NgModule({
     declarations: [],
@@ -15,7 +16,8 @@ import { throwIfAlreadyLoaded } from './module-import.guard';
         CommonModule,
         HttpClientModule,
         environment.servicesModule,
-        NgxWebstorageModule.forRoot({ prefix: 'maw-photos' })
+        NgxWebstorageModule.forRoot({ prefix: 'maw-photos' }),
+        RootStoreModule
     ],
     providers: [
         EnvironmentConfig,

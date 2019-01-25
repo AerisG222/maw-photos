@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SettingsStoreModule } from './settings-store';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
 import { metaReducers } from './state';
 

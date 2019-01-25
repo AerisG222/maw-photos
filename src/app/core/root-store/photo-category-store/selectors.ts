@@ -4,7 +4,7 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { Category } from '../../core/models/category.model';
+import { Category } from '../../models/category.model';
 import { photoCategoryAdapter, State } from './state';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './photo-category-store.module';
 

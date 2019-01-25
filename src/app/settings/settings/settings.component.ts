@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 
 import { Theme } from '../../core/models/theme.model';
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../root-store';
+import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../core/root-store';
 import { Settings } from '../../core/models/settings.model';
 
 @Component({

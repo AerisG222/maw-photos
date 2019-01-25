@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 import { Category } from '../../core/models/category.model';
 import { Settings } from '../../core/models/settings.model';
-import { RootStoreState, SettingsStoreSelectors } from '../../root-store';
+import { RootStoreState, SettingsStoreSelectors } from '../../core/root-store';
 
 @Component({
     selector: 'app-year',
