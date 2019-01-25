@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SettingsStoreModule } from './settings-store';
 import { environment } from '../../../environments/environment';
 import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
+import { PhotoStoreModule } from './photo-store/photo-store.module';
 
 @NgModule({
     declarations: [],
@@ -18,7 +19,8 @@ import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        !environment.production ? StoreDevtoolsModule.instrument() : []
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        PhotoStoreModule
     ]
 })
 export class RootStoreModule { }
