@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { PhotoCategoryStoreActions, RootStoreState } from '../../core/root-store';
-import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
+import { PhotoCategoryStoreActions, RootStoreState, PhotoCategoryStoreSelectors } from '../../core/root-store';
 
 @Component({
     selector: 'app-year-list',
@@ -15,23 +14,18 @@ export class YearListComponent implements OnInit {
     years$: Observable<number[]>;
 
     constructor(
-        @Inject(photoApiServiceToken) private _api: PhotoApiService,
         private _store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
-        this.years$ = this._api.getYears()
-            .pipe(
-                map(years => years.sort(this.yearsDescending))
-            );
+        this.years$ = this._store$.pipe (
+            select(PhotoCategoryStoreSelectors.selectAllYears()),
+            map(years => years.sort(this.yearsDescending))
+        );
 
-        // this.years$ = this._store$.pipe (
-        //     select(PhotoCategoryStoreSelectors.selectAllYears)
-        // );
-
-        // this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
+        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 
     private yearsDescending(first: number, second: number) {
