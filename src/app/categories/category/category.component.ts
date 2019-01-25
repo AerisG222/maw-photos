@@ -55,8 +55,4 @@ export class CategoryComponent implements OnInit {
             take(1)
         ).subscribe();
     }
-
-    back(year: number): void {
-        console.log(year);
-    }
 }

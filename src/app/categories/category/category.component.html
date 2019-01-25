@@ -1,6 +1,6 @@
 <div fxLayout="column" style="height: 100%;">
     <div *ngIf="category$ | async as category">
-        <a (click)="back(category.year)">{{ category.year }}</a> <mat-icon>chevron_right</mat-icon> {{ category.name }}
+        <a [routerLink]="['categories']" fragment="{{category.year}}">{{ category.year }}</a> <mat-icon>chevron_right</mat-icon> {{ category.name }}
     </div>
 
     <div *ngIf="photos$ | async as photos">
