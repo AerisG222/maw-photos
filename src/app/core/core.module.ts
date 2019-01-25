@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 import { environment } from '../../environments/environment';
 import { EnvironmentConfig } from './models/environment-config';
@@ -14,6 +15,7 @@ import { throwIfAlreadyLoaded } from './module-import.guard';
         CommonModule,
         HttpClientModule,
         environment.servicesModule,
+        NgxWebstorageModule.forRoot({ prefix: 'maw-photos' })
     ],
     providers: [
         EnvironmentConfig,

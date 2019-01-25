@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxWebstorageModule } from 'ngx-webstorage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +15,6 @@ import { SharedModule } from './shared/shared.module';
         AppRoutingModule,
         BrowserAnimationsModule,
         CoreModule,
-        NgxWebstorageModule.forRoot({ prefix: 'maw-photos' }),
         RootStoreModule,
         SharedModule
     ],
