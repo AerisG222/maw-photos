@@ -1,4 +1,4 @@
-import { ExternalServicesModule } from 'src/app/services/external-services.module';
+import { ExternalServicesModule } from '../app/core/services/external/external-services.module';
 
 export const environment = {
     production: true,

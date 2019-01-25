@@ -3,9 +3,9 @@ import { _appIdRandomProviderFactory } from '@angular/core/src/application_token
 import { BehaviorSubject } from 'rxjs';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
 
-import { PHOTO_API_SERVICE, IPhotoApiService } from 'src/app/services/iphoto-api.service';
-import { IYearStats } from 'src/app/models/iyear-stats.model';
-import { ICategoryStats } from 'src/app/models/icategory-stats.model';
+import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
+import { YearStats } from 'src/app/core/models/year-stats.model';
+import { CategoryStats } from 'src/app/core/models/category-stats.model';
 
 @Component({
     selector: 'app-photo-stats',
@@ -13,7 +13,7 @@ import { ICategoryStats } from 'src/app/models/icategory-stats.model';
     styleUrls: ['./photo-stats.component.scss']
 })
 export class PhotoStatsComponent implements OnInit {
-    private _stats: IYearStats[];
+    private _stats: YearStats[];
     private _isYearView = true;
     private _setViewDimensions = false;
 
@@ -29,7 +29,7 @@ export class PhotoStatsComponent implements OnInit {
     activeYear = -1;
 
     constructor(
-        @Inject(PHOTO_API_SERVICE) private _api: IPhotoApiService,
+        @Inject(photoApiServiceToken) private _api: PhotoApiService,
         private _elementRef: ElementRef
         ) {
 
@@ -106,7 +106,7 @@ export class PhotoStatsComponent implements OnInit {
                 , 0);
     }
 
-    updateYearTotals(categoryStats: ICategoryStats[]): void {
+    updateYearTotals(categoryStats: CategoryStats[]): void {
         this.countCategoriesInYear = categoryStats.length;
 
         this.countPhotosInYear = categoryStats

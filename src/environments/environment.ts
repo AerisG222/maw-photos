@@ -1,5 +1,5 @@
-import { MockServicesModule } from 'src/app/services/mock-services.module';
-import { ExternalServicesModule } from 'src/app/services/external-services.module';
+import { MockServicesModule } from '../app/core/services/mock/mock-services.module';
+import { ExternalServicesModule } from '../app/core/services/external/external-services.module';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.

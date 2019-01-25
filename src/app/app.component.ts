@@ -1,34 +1,40 @@
-import { Component, HostBinding, Inject } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MatDialog } from '@angular/material';
-import { HelpDialogComponent } from './help-dialog/help-dialog.component';
-import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
+import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+
+import { Theme } from './core/models/theme.model';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-    title = 'maw-photos';
+export class AppComponent implements OnInit, OnDestroy {
+    themeSubscription: Subscription;
     startSidenavExpanded = false;
     endSidenavExpanded = false;
 
-    @HostBinding('class.maw-dark-theme') darkTheme = true;
-    @HostBinding('class.maw-light-theme') lightTheme = false;
-
     constructor(
-        public dialog: MatDialog,
+        private _store$: Store<RootStoreState.State>,
         @Inject(DOCUMENT) private _doc
-        ) {
-        this.updateMainBackground();
+    ) {
+
     }
 
-    toggleTheme(): void {
-        this.darkTheme = !this.darkTheme;
-        this.lightTheme = !this.lightTheme;
+    ngOnInit(): void {
+        this.themeSubscription = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSettings)
+            )
+            .subscribe(settings => this.setTheme(settings.theme));
 
-        this.updateMainBackground();
+        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+    }
+
+    ngOnDestroy(): void {
+        this.themeSubscription.unsubscribe();
     }
 
     toggleStartSidenav(): void {
@@ -39,32 +45,17 @@ export class AppComponent {
         this.endSidenavExpanded = !this.endSidenavExpanded;
     }
 
-    updateMainBackground(): void {
+    private setTheme(theme: Theme): void {
         const classList: DOMTokenList = this._doc.documentElement.classList;
 
         if (!classList.contains('mat-app-background')) {
             classList.add('mat-app-background');
         }
 
-        if (this.darkTheme) {
-            classList.remove('maw-light-theme');
-            classList.add('maw-dark-theme');
-        } else {
-            classList.remove('maw-dark-theme');
-            classList.add('maw-light-theme');
-        }
-    }
-
-    showHelp(): void {
-        this.dialog.open(HelpDialogComponent, {
-            width: '500px',
-            data: { version: '0.1.0' }
+        Theme.allThemes.forEach(x => {
+            classList.remove(x.klass);
         });
-    }
 
-    showSettings(): void {
-        this.dialog.open(SettingsDialogComponent, {
-            width: '800px'
-        });
+        classList.add(theme.klass);
     }
 }

@@ -1,4 +1,4 @@
-<app-header (toggleTheme)="toggleTheme()" fxFlex></app-header>
+<app-header fxFlex></app-header>
 
 <mat-sidenav-container [autosize]="true" fxFlex="1 1 100%">
     <mat-sidenav #startSidenavRef mode="side" opened class="mat-elevation-z8">
@@ -18,10 +18,10 @@
                 </a>
             </div>
             <div fxLayout="column">
-                <a mat-button (click)="showHelp()">
+                <a [routerLink]="['/help']" mat-button>
                     <mat-icon>help_outline</mat-icon>
                 </a>
-                <a mat-button (click)="showSettings()">
+                <a [routerLink]="['/settings']" mat-button>
                     <mat-icon>settings</mat-icon>
                 </a>
             </div>

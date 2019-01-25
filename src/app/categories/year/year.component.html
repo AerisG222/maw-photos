@@ -1,0 +1,7 @@
+<span class="mat-body-strong">{{ year }}</span>
+
+<app-category-list
+    [categories]="categories$ | async"
+    [showTitles]="(settings$ | async).showCategoryTitles"
+    [smallThumbnails]="!(settings$ | async).showCategoryTitles && (settings$ | async).smallCategoryThumbnails">
+</app-category-list>
