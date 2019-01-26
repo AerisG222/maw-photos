@@ -1,11 +1,10 @@
-import { Component, OnInit, Inject, ElementRef } from '@angular/core';
-import { _appIdRandomProviderFactory } from '@angular/core/src/application_tokens';
-import { BehaviorSubject } from 'rxjs';
-import { colorSets } from '@swimlane/ngx-charts/release/utils';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 import { YearStats } from 'src/app/core/models/year-stats.model';
-import { CategoryStats } from 'src/app/core/models/category-stats.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-photo-stats',
@@ -13,117 +12,50 @@ import { CategoryStats } from 'src/app/core/models/category-stats.model';
     styleUrls: ['./photo-stats.component.scss']
 })
 export class PhotoStatsComponent implements OnInit {
-    private _stats: YearStats[];
-    private _isYearView = true;
-    private _setViewDimensions = false;
+    chartData$: Observable<any>;
 
-    view: number[];
-    colorScheme = colorSets.find(s => s.name === 'cool');
-    chartData$ = new BehaviorSubject<any>(null);
-
-    countYearsTotal: number;
-    countCategoriesTotal: number;
-    countPhotosTotal: number;
-    countCategoriesInYear: number;
-    countPhotosInYear: number;
-    activeYear = -1;
+    yearCount: number;
+    categoryCount: number;
+    photoCount: number;
 
     constructor(
         @Inject(photoApiServiceToken) private _api: PhotoApiService,
-        private _elementRef: ElementRef
-        ) {
+        private _router: Router
+    ) {
 
     }
 
     ngOnInit() {
-        this._api
+        this.chartData$ = this._api
             .getPhotoStats()
-            .subscribe(x => {
-                this._stats = x;
-                this.updateTotals();
-                this.showYearsOverview();
-            });
+            .pipe(
+                tap(stats => this.updateTotals(stats)),
+                map(stats => stats.map(yearStat => ({
+                    'name': yearStat.year.toString(),
+                    'value': yearStat.categoryStats
+                        .map(c => c.photoCount)
+                        .reduce((total, count) => count + total)
+                })))
+            );
     }
 
     onSelect(evt): void {
-        if (!this._isYearView) {
-            return;
-        }
-
         const yr = Number(evt.name);
 
         if (yr > 0) {
-            this.showYearDetails(yr);
+            this._router.navigate(['stats', 'year', yr]);
         }
     }
 
-    showYearsOverview(): void {
-        this._isYearView = true;
-        this.activeYear = -1;
+    private updateTotals(stats: YearStats[]): void {
+        this.yearCount = stats.length;
 
-        this.setDimensions();
-
-        this.chartData$.next(
-            this._stats
-                .map(x => ({
-                    'name': x.year.toString(),
-                    'value': x.categoryStats
-                        .map(c => c.photoCount)
-                        .reduce((total, count) => count + total)
-                }))
-        );
-    }
-
-    showYearDetails(year: number): void {
-        this._isYearView = false;
-        this.activeYear = year;
-
-        this.setDimensions();
-
-        const categoryStats = this._stats
-            .filter(x => x.year === year)[0].categoryStats;
-
-        this.updateYearTotals(categoryStats);
-
-        this.chartData$.next(
-            categoryStats
-                .map(x => ({
-                    'name': x.name,
-                    'value': x.photoCount
-                }))
-        );
-    }
-
-    updateTotals(): void {
-        this.countYearsTotal = this._stats.length;
-
-        this.countCategoriesTotal = this._stats
+        this.categoryCount = stats
             .reduce((total, yr) => yr.categoryStats.length + total, 0);
 
-        this.countPhotosTotal = this._stats
+        this.photoCount = stats
             .reduce((total, yr) => total + yr.categoryStats
                 .reduce((catTotal, cat) => catTotal + cat.photoCount, 0)
                 , 0);
-    }
-
-    updateYearTotals(categoryStats: CategoryStats[]): void {
-        this.countCategoriesInYear = categoryStats.length;
-
-        this.countPhotosInYear = categoryStats
-            .reduce((total, cat) => total + cat.photoCount, 0);
-    }
-
-    setDimensions(): void {
-        // do not force dimensions when showing the chart for the first time
-        // (allow it to take up as much space as possible)
-        if (!this._setViewDimensions) {
-            this._setViewDimensions = true;
-
-            return;
-        }
-
-        const chart = this._elementRef.nativeElement.querySelector('ngx-charts-tree-map');
-
-        this.view = [ chart.offsetWidth, chart.offsetHeight ];
     }
 }

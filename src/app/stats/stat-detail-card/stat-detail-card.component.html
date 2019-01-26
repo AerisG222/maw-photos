@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-content>
+        <table>
+            <tr *ngIf="yearCount">
+                <td>Years</td>
+                <td class="stat_count">{{ yearCount }}</td>
+            </tr>
+            <tr *ngIf="categoryCount">
+                <td>Categories</td>
+                <td class="stat_count">{{ categoryCount }}</td>
+            </tr>
+            <tr *ngIf="photoCount">
+                <td>Photos</td>
+                <td class="stat_count">{{ photoCount }}</td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>

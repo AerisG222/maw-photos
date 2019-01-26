@@ -1,0 +1,11 @@
+<a routerLink="'stats'">All Years</a> <mat-icon>chevron_right</mat-icon> {{ activeYear }}
+
+<app-stat-chart
+    [chartData]="chartData$ | async">
+</app-stat-chart>
+
+<app-stat-detail-card
+    [title]="activeYear"
+    [categoryCount]="categoryCount"
+    [photoCount]="photoCount">
+</app-stat-detail-card>
