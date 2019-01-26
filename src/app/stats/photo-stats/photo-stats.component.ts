@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap, map, delay } from 'rxjs/operators';
-
-import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
-import { YearStats } from 'src/app/core/models/year-stats.model';
+import { Component, OnInit } from '@angular/core';
+import { Observable, forkJoin } from 'rxjs';
+import { tap, map, delay, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+
+import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { Category } from 'src/app/core/models/category.model';
 
 @Component({
     selector: 'app-photo-stats',
@@ -19,25 +20,47 @@ export class PhotoStatsComponent implements OnInit {
     photoCount: number;
 
     constructor(
-        @Inject(photoApiServiceToken) private _api: PhotoApiService,
+        private _store$: Store<RootStoreState.State>,
         private _router: Router
     ) {
 
     }
 
     ngOnInit() {
-        this.chartData$ = this._api
-            .getPhotoStats()
+        const years$ = this._store$
             .pipe(
                 delay(0),
-                tap(stats => this.updateTotals(stats)),
-                map(stats => stats.map(yearStat => ({
-                    'name': yearStat.year.toString(),
-                    'value': yearStat.categoryStats
-                        .map(c => c.photoCount)
-                        .reduce((total, count) => count + total)
+                select(PhotoCategoryStoreSelectors.selectAllYears()),
+                tap(years => this.updateYearCount(years)),
+                take(1)
+            );
+
+        const categories$ = this._store$
+            .pipe(
+                delay(0),
+                select(PhotoCategoryStoreSelectors.selectAllCategories),
+                tap(categories => this.updateCategoryTotals(categories)),
+                take(1)
+            );
+
+        this.chartData$ = forkJoin(
+                years$,
+                categories$
+            )
+            .pipe(
+                delay(0),
+                map(x => x[0].map(year => ({
+                    'name': year.toString(),
+                    'value': x[1]
+                        .filter(cat => cat.year === year)
+                        .reduce((total, cat) => total + cat.photoCount, 0)
                 })))
             );
+
+        years$.subscribe();
+        categories$.subscribe();
+
+        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 
     onSelect(evt): void {
@@ -48,15 +71,14 @@ export class PhotoStatsComponent implements OnInit {
         }
     }
 
-    private updateTotals(stats: YearStats[]): void {
-        this.yearCount = stats.length;
+    private updateYearCount(years: number[]): void {
+        this.yearCount = years.length;
+    }
 
-        this.categoryCount = stats
-            .reduce((total, yr) => yr.categoryStats.length + total, 0);
+    private updateCategoryTotals(categories: Category[]): void {
+        this.categoryCount = categories.length;
 
-        this.photoCount = stats
-            .reduce((total, yr) => total + yr.categoryStats
-                .reduce((catTotal, cat) => catTotal + cat.photoCount, 0)
-                , 0);
+        this.photoCount = categories
+            .reduce((total, cat) => total + cat.photoCount, 0);
     }
 }

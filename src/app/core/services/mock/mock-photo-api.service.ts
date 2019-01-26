@@ -8,7 +8,6 @@ import { Photo } from '../../models/photo.model';
 import { ExifDetail } from '../../models/exif-detail.model';
 import { Rating } from '../../models/rating.model';
 import { Comment } from '../../models/comment.model';
-import { YearStats } from '../../models/year-stats.model';
 import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 
 @Injectable()
@@ -81,31 +80,6 @@ export class MockPhotoApiService implements PhotoApiService {
         throw new Error('not implemented');
     }
 
-    getPhotoStats(): Observable<YearStats[]> {
-        return of([
-            { 'year': 2018,
-                'categoryStats': [
-                    { 'id': 1, 'name': 'Test 1', 'photoCount': 10 },
-                    { 'id': 2, 'name': 'Test 2', 'photoCount': 20 },
-                    { 'id': 3, 'name': 'Test 3', 'photoCount': 30 },
-                    { 'id': 4, 'name': 'Test 4', 'photoCount': 40 },
-                    { 'id': 5, 'name': 'Test 5', 'photoCount': 50 },
-                    { 'id': 6, 'name': 'Test 6', 'photoCount': 60 }
-                ]
-            },
-            { 'year': 2019,
-                'categoryStats': [
-                    { 'id': 11, 'name': 'Test 11', 'photoCount': 10 },
-                    { 'id': 12, 'name': 'Test 12', 'photoCount': 20 },
-                    { 'id': 13, 'name': 'Test 13', 'photoCount': 30 },
-                    { 'id': 14, 'name': 'Test 14', 'photoCount': 40 },
-                    { 'id': 15, 'name': 'Test 15', 'photoCount': 50 },
-                    { 'id': 16, 'name': 'Test 16', 'photoCount': 60 }
-                ]
-            }
-        ]);
-    }
-
     initData(): void {
         this._years = [
             2018,
@@ -122,7 +96,8 @@ export class MockPhotoApiService implements PhotoApiService {
                     height: 400,
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1122.jpg')
-                }
+                },
+                photoCount: 10
             },
             {
                 id: 2,
@@ -133,7 +108,8 @@ export class MockPhotoApiService implements PhotoApiService {
                     height: 400,
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test2/xs/DSC_1125.jpg')
-                }
+                },
+                photoCount: 20
             },
             {
                 id: 3,
@@ -144,7 +120,8 @@ export class MockPhotoApiService implements PhotoApiService {
                     height: 400,
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
-                }
+                },
+                photoCount: 30
             },
             {
                 id: 4,
@@ -155,7 +132,8 @@ export class MockPhotoApiService implements PhotoApiService {
                     height: 400,
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test1/xs/a.jpg')
-                }
+                },
+                photoCount: 40
             },
             {
                 id: 5,
@@ -166,7 +144,8 @@ export class MockPhotoApiService implements PhotoApiService {
                     height: 400,
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test2/xs/a.jpg')
-                }
+                },
+                photoCount: 50
             },
             {
                 id: 6,
@@ -177,7 +156,8 @@ export class MockPhotoApiService implements PhotoApiService {
                     height: 400,
                     width: 400,
                     path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
-                }
+                },
+                photoCount: 60
             }
         ];
 

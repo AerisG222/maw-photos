@@ -6,4 +6,5 @@ export interface Category {
     year: number;
     hasGpsData: boolean;
     teaserPhotoInfo: PhotoInfo;
+    photoCount: number;
 }

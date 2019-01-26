@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
 import { tap, map, take, delay } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
-import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
-import { CategoryStats } from 'src/app/core/models/category-stats.model';
+import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { Category } from 'src/app/core/models/category.model';
 
 @Component({
     selector: 'app-year-stats',
@@ -19,15 +20,16 @@ export class YearStatsComponent implements OnInit {
     photoCount: number;
 
     constructor(
-        @Inject(photoApiServiceToken) private _api: PhotoApiService,
-        private _route: ActivatedRoute,
+        private _store$: Store<RootStoreState.State>,
+        private _route: ActivatedRoute
     ) {
 
     }
 
     ngOnInit() {
-        const yearStats$ = this._api.getPhotoStats()
+        const categories$ = this._store$
             .pipe(
+                select(PhotoCategoryStoreSelectors.selectAllCategories),
                 take(1)
             );
 
@@ -38,26 +40,28 @@ export class YearStatsComponent implements OnInit {
             );
 
         this.chartData$ = forkJoin(
-                yearStats$,
+                categories$,
                 this.activeYear$
             )
             .pipe(
                 delay(0),
-                map(x => x[0].filter(yearStat => yearStat.year === x[1])[0]),
-                tap(yearStat => this.updateYearTotals(yearStat.categoryStats)),
-                map(yearStat => yearStat.categoryStats.map(catStat => ({
-                    'name': catStat.name,
-                    'value': catStat.photoCount
+                map(x => x[0].filter(cat => cat.year === x[1])),
+                tap(categories => this.updateYearTotals(categories)),
+                map(categories => categories.map(cat => ({
+                    'name': cat.name,
+                    'value': cat.photoCount
                 })))
             );
 
-        yearStats$.subscribe();
+        categories$.subscribe();
+
+        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 
-    updateYearTotals(categoryStats: CategoryStats[]): void {
-        this.categoryCount = categoryStats.length;
+    updateYearTotals(categories: Category[]): void {
+        this.categoryCount = categories.length;
 
-        this.photoCount = categoryStats
+        this.photoCount = categories
             .reduce((total, cat) => total + cat.photoCount, 0);
     }
 }

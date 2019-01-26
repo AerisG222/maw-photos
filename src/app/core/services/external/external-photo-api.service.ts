@@ -9,7 +9,6 @@ import { Photo } from '../../models/photo.model';
 import { ExifDetail } from '../../models/exif-detail.model';
 import { Rating } from '../../models/rating.model';
 import { Comment } from '../../models/comment.model';
-import { YearStats } from '../../models/year-stats.model';
 import { PhotoApiService } from '../photo-api.service';
 import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 
@@ -137,13 +136,6 @@ export class ExternalPhotoApiService implements PhotoApiService {
 
         return this._http
             .post(url, { photoId: photoId, comment: comment });
-    }
-
-    getPhotoStats(): Observable<YearStats[]> {
-        const url = this.getAbsoluteUrl('photos/getStats');
-
-        return this._http
-            .get<YearStats[]>(url);
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
