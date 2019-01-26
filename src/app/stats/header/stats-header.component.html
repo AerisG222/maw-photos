@@ -1,0 +1,12 @@
+<span class="mat-h1" *ngIf="!year">
+    Statistics
+</span>
+
+<a routerLink="['stats']" class="mat-h1" *ngIf="year">
+    Statistics
+</a>
+
+<span *ngIf="year" class="mat-h1">
+    <mat-icon>chevron_right</mat-icon>
+    {{year}}
+</span>

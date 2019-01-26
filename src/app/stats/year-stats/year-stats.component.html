@@ -1,4 +1,4 @@
-<a routerLink="'stats'">All Years</a> <mat-icon>chevron_right</mat-icon> {{ activeYear$ | async }}
+<app-stats-header [year]="activeYear$ | async"></app-stats-header>
 
 <app-stat-chart
     [chartData]="chartData$ | async">

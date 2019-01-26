@@ -13,7 +13,8 @@ import {
     MatSidenavModule,
     MatTabsModule,
     MatToolbarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatChipsModule
 } from '@angular/material';
 
 import { PhotoListComponent } from './photo-list/photo-list.component';
@@ -31,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
+        MatChipsModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
@@ -47,6 +49,7 @@ import { FooterComponent } from './footer/footer.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
+        MatChipsModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
