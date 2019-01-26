@@ -1,6 +1,8 @@
 <ngx-charts-tree-map
+    *ngIf="chartData"
     tooltipDisabled="true"
     [scheme]="colorScheme"
     [results]="chartData"
-    (select)="onSelect($event)">
+    (select)="onSelect($event)"
+    #treeMap>
 </ngx-charts-tree-map>

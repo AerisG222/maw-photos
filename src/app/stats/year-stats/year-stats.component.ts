@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
+import { tap, map, take, delay } from 'rxjs/operators';
 
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import { CategoryStats } from 'src/app/core/models/category-stats.model';
@@ -42,6 +42,7 @@ export class YearStatsComponent implements OnInit {
                 this.activeYear$
             )
             .pipe(
+                delay(0),
                 map(x => x[0].filter(yearStat => yearStat.year === x[1])[0]),
                 tap(yearStat => this.updateYearTotals(yearStat.categoryStats)),
                 map(yearStat => yearStat.categoryStats.map(catStat => ({

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, delay } from 'rxjs/operators';
 
 import { photoApiServiceToken, PhotoApiService } from '../../core/services/photo-api.service';
 import { YearStats } from 'src/app/core/models/year-stats.model';
@@ -29,6 +29,7 @@ export class PhotoStatsComponent implements OnInit {
         this.chartData$ = this._api
             .getPhotoStats()
             .pipe(
+                delay(0),
                 tap(stats => this.updateTotals(stats)),
                 map(stats => stats.map(yearStat => ({
                     'name': yearStat.year.toString(),
