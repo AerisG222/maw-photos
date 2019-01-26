@@ -1,11 +1,11 @@
 <app-stats-header [year]="activeYear$ | async"></app-stats-header>
 
-<app-stat-chart
-    [chartData]="chartData$ | async">
-</app-stat-chart>
-
 <app-stat-detail-card
     [title]="activeYear$ | async"
     [categoryCount]="categoryCount"
     [photoCount]="photoCount">
 </app-stat-detail-card>
+
+<app-stat-chart
+    [chartData]="chartData$ | async">
+</app-stat-chart>

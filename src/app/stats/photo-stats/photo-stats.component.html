@@ -1,10 +1,5 @@
 <app-stats-header></app-stats-header>
 
-<app-stat-chart
-    [chartData]="chartData$ | async"
-    (select)="onSelect($event)">
-</app-stat-chart>
-
 <app-stat-detail-card
     title="All Time"
     [yearCount]="yearCount"
@@ -12,3 +7,7 @@
     [photoCount]="photoCount">
 </app-stat-detail-card>
 
+<app-stat-chart
+    [chartData]="chartData$ | async"
+    (select)="onSelect($event)">
+</app-stat-chart>
