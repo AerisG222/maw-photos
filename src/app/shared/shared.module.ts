@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatMenuModule,
@@ -30,6 +31,7 @@ import { FooterComponent } from './footer/footer.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
+        MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
@@ -45,6 +47,7 @@ import { FooterComponent } from './footer/footer.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
+        MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,

@@ -1,5 +1,7 @@
 <h3>{{ year }}</h3>
 
+<mat-divider mat-color="accent"></mat-divider>
+
 <app-category-list
     [categories]="categories$ | async"
     [showTitles]="(settings$ | async).showCategoryTitles"
