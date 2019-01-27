@@ -1,0 +1,13 @@
+<div>
+    <a [routerLink]="['categories']"
+       fragment="{{category.year}}"
+       class="mat-h3">
+        {{ category.year }}
+    </a>
+
+    <mat-icon>chevron_right</mat-icon>
+
+    <span class="mat-h3">
+        {{ category.name }}
+    </span>
+</div>

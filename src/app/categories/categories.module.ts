@@ -8,6 +8,7 @@ import { YearListComponent } from './year-list/year-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { YearComponent } from './year/year.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryHeaderComponent } from './category-header/category-header.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { CategoryListComponent } from './category-list/category-list.component';
         CategoryComponent,
         YearComponent,
         YearListComponent,
-        CategoryListComponent
+        CategoryListComponent,
+        CategoryHeaderComponent
     ],
     imports: [
         CommonModule,
