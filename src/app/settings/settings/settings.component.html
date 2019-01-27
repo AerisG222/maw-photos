@@ -26,6 +26,14 @@
         </mat-card-content>
     </mat-card>
 
+    <mat-card>
+        <mat-card-title>Photo List</mat-card-title>
+        <mat-card-content>
+            <h3>Show Category Breadcrumbs</h3>
+            <mat-slide-toggle formControlName="showCategoryBreadcrumbs" [color]="'primary'"></mat-slide-toggle>
+        </mat-card-content>
+    </mat-card>
+
     <button mat-button (click)="onSave()">Save</button>
     <button mat-button (click)="onCancel()">Cancel</button>
 </form>

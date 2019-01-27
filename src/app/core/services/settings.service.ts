@@ -11,6 +11,7 @@ import { ThumbnailSize } from '../models/thumbnail-size.model';
 export class SettingsService {
     private static readonly keyTheme = 'theme';
     private static readonly keyShowCategoryTitles = 'showCategoryTitles';
+    private static readonly keyShowCategoryBreadcrumbs = 'showCategoryBreadcrumbs';
     private static readonly keyCategoryThumbnailSize = 'categoryThumbnailSize';
 
     constructor(
@@ -21,11 +22,13 @@ export class SettingsService {
 
     load(): Settings {
         const showCategoryTitles = this._localStorage.retrieve(SettingsService.keyShowCategoryTitles);
+        const showCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyShowCategoryBreadcrumbs);
 
         return {
             theme: this.getTheme(),
             categoryThumbnailSize: this.getCategoryThumbnailSize(),
             showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
+            showCategoryBreadcrumbs: showCategoryBreadcrumbs != null ? showCategoryBreadcrumbs : true
         };
     }
 
@@ -37,6 +40,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyTheme, settings.theme.name);
         this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.showCategoryTitles);
         this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryThumbnailSize.name);
+        this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.showCategoryBreadcrumbs);
     }
 
     private getTheme(): Theme {

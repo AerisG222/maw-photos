@@ -29,7 +29,8 @@ export class SettingsComponent implements OnInit {
         this.form = this._formBuilder.group({
             theme: ['', Validators.required],
             showCategoryTitles: [true],
-            categoryThumbnailSize: ['']
+            categoryThumbnailSize: [''],
+            showCategoryBreadcrumbs: [true]
         });
 
         this._store$
@@ -46,6 +47,7 @@ export class SettingsComponent implements OnInit {
         const settings = {
             theme: Theme.forName(this.form.get('theme').value),
             showCategoryTitles: this.form.get('showCategoryTitles').value,
+            showCategoryBreadcrumbs: this.form.get('showCategoryBreadcrumbs').value,
             categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value)
         };
 
@@ -67,6 +69,7 @@ export class SettingsComponent implements OnInit {
     private updateForm(settings: Settings): void {
         this.form.get('theme').setValue(settings.theme.name);
         this.form.get('showCategoryTitles').setValue(settings.showCategoryTitles);
+        this.form.get('showCategoryBreadcrumbs').setValue(settings.showCategoryBreadcrumbs);
         this.form.get('categoryThumbnailSize').setValue(settings.categoryThumbnailSize.name);
     }
 }

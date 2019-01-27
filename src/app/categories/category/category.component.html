@@ -1,7 +1,7 @@
 <div fxLayout="column" style="height: 100%;">
-    <app-category-header [category]="category$ | async"></app-category-header>
+    <app-category-header *ngIf="(settings$ | async)?.showCategoryBreadcrumbs" [category]="category$ | async"></app-category-header>
 
-    <div *ngIf="photos$ | async as photos">
+    <div *ngIf="photos$ | async as photos" [class.pad-top]="!(settings$ | async)?.showCategoryBreadcrumbs">
         <img [src]="activePhoto.mdInfo.path" />
         <app-photo-list [photos]="photos"></app-photo-list>
     </div>

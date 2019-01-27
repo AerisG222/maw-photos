@@ -6,8 +6,9 @@ import { map, flatMap, tap, take } from 'rxjs/operators';
 import { Photo } from '../../core/models/photo.model';
 import { Category } from '../../core/models/category.model';
 import { Store, select } from '@ngrx/store';
-import { RootStoreState, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { RootStoreState, PhotoCategoryStoreSelectors, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
+import { Settings } from 'src/app/core/models/settings.model';
 
 @Component({
     selector: 'app-category',
@@ -15,6 +16,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/
     styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+    settings$: Observable<Settings>;
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
     activePhoto: Photo;
@@ -27,6 +29,11 @@ export class CategoryComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.settings$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSettings)
+            );
+
         const categoryId$ = this._route.params
             .pipe(
                 map(p => Number(p.id))
@@ -49,6 +56,8 @@ export class CategoryComponent implements OnInit {
                     )),
                 tap(photos => this.activePhoto = photos[0])
             );
+
+        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
 
         categoryId$.pipe(
             map(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id }))),
