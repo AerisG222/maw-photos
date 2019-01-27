@@ -6,4 +6,5 @@ export interface Settings {
     showCategoryTitles: boolean;
     showCategoryBreadcrumbs: boolean;
     categoryThumbnailSize: ThumbnailSize;
+    photoListThumbnailSize: ThumbnailSize;
 }

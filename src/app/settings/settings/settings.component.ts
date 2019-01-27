@@ -17,6 +17,7 @@ export class SettingsComponent implements OnInit {
     form: FormGroup;
     themes = Theme.allThemes;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
+    photoListThumbnailSizes = ThumbnailSize.allSizes;
 
     constructor(
         private _formBuilder: FormBuilder,
@@ -30,7 +31,8 @@ export class SettingsComponent implements OnInit {
             theme: ['', Validators.required],
             showCategoryTitles: [true],
             categoryThumbnailSize: [''],
-            showCategoryBreadcrumbs: [true]
+            showCategoryBreadcrumbs: [true],
+            photoListThumbnailSize: ['']
         });
 
         this._store$
@@ -48,7 +50,8 @@ export class SettingsComponent implements OnInit {
             theme: Theme.forName(this.form.get('theme').value),
             showCategoryTitles: this.form.get('showCategoryTitles').value,
             showCategoryBreadcrumbs: this.form.get('showCategoryBreadcrumbs').value,
-            categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value)
+            categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value),
+            photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value)
         };
 
         this._store$.dispatch(
@@ -71,5 +74,6 @@ export class SettingsComponent implements OnInit {
         this.form.get('showCategoryTitles').setValue(settings.showCategoryTitles);
         this.form.get('showCategoryBreadcrumbs').setValue(settings.showCategoryBreadcrumbs);
         this.form.get('categoryThumbnailSize').setValue(settings.categoryThumbnailSize.name);
+        this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);
     }
 }

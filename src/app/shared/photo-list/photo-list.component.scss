@@ -1,5 +1,15 @@
 img {
     margin-right: 2px;
-    width: 80px;
-    height: 60px;
+    width: 160px;
+    height: 120px;
+
+    &.thumb-small {
+        width: 120px;
+        height: 90px;
+    }
+
+    &.thumb-very-small {
+        width: 80px;
+        height: 60px;
+    }
 }

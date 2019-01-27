@@ -13,6 +13,7 @@ export class SettingsService {
     private static readonly keyShowCategoryTitles = 'showCategoryTitles';
     private static readonly keyShowCategoryBreadcrumbs = 'showCategoryBreadcrumbs';
     private static readonly keyCategoryThumbnailSize = 'categoryThumbnailSize';
+    private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
 
     constructor(
         private _localStorage: LocalStorageService
@@ -27,6 +28,7 @@ export class SettingsService {
         return {
             theme: this.getTheme(),
             categoryThumbnailSize: this.getCategoryThumbnailSize(),
+            photoListThumbnailSize: this.getPhotoListThumbnailSize(),
             showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
             showCategoryBreadcrumbs: showCategoryBreadcrumbs != null ? showCategoryBreadcrumbs : true
         };
@@ -41,6 +43,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.showCategoryTitles);
         this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryThumbnailSize.name);
         this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.showCategoryBreadcrumbs);
+        this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
     }
 
     private getTheme(): Theme {
@@ -56,6 +59,16 @@ export class SettingsService {
     private getCategoryThumbnailSize(): ThumbnailSize {
         const sizeName = this._localStorage.retrieve(SettingsService.keyCategoryThumbnailSize);
 
+        return this.getThumbnailSize(sizeName);
+    }
+
+    private getPhotoListThumbnailSize(): ThumbnailSize {
+        const sizeName = this._localStorage.retrieve(SettingsService.keyPhotoListThumbnailSize);
+
+        return this.getThumbnailSize(sizeName);
+    }
+
+    private getThumbnailSize(sizeName: string): ThumbnailSize {
         try {
             return sizeName !== null ? ThumbnailSize.forName(sizeName) : ThumbnailSize.default;
         } catch {

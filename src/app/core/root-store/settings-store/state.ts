@@ -12,6 +12,7 @@ export const initialState: State = {
     settings: {
         theme: null,
         showCategoryTitles: true,
-        categoryThumbnailSize: null
+        categoryThumbnailSize: null,
+        photoListThumbnailSize: null
     }
 };
