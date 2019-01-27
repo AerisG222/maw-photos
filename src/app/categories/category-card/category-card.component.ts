@@ -1,6 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Category } from '../../core/models/category.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-category-card',
@@ -11,5 +12,5 @@ import { Category } from '../../core/models/category.model';
 export class CategoryCardComponent {
     @Input() category: Category;
     @Input() showTitle: boolean;
-    @Input() smallThumbnails: boolean;
+    @Input() thumbnailSize: ThumbnailSize;
 }

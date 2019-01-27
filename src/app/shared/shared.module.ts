@@ -5,16 +5,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatMenuModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
-    MatTabsModule,
-    MatToolbarModule,
     MatSlideToggleModule,
-    MatChipsModule
+    MatTabsModule,
+    MatToolbarModule
 } from '@angular/material';
 
 import { PhotoListComponent } from './photo-list/photo-list.component';
@@ -32,11 +33,12 @@ import { FooterComponent } from './footer/footer.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
-        MatChipsModule,
+        MatCheckboxModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
+        MatRadioModule,
         MatSelectModule,
         MatSidenavModule,
         MatSlideToggleModule,
@@ -49,11 +51,12 @@ import { FooterComponent } from './footer/footer.component';
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
-        MatChipsModule,
+        MatCheckboxModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
         MatMenuModule,
+        MatRadioModule,
         MatSelectModule,
         MatSidenavModule,
         MatSlideToggleModule,

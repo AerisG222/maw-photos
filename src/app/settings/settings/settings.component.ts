@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { Theme } from '../../core/models/theme.model';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../core/root-store';
 import { Settings } from '../../core/models/settings.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-settings',
@@ -15,7 +16,7 @@ import { Settings } from '../../core/models/settings.model';
 export class SettingsComponent implements OnInit {
     form: FormGroup;
     themes = Theme.allThemes;
-    private _settings;
+    categoryThumbnailSizes = ThumbnailSize.allSizes;
 
     constructor(
         private _formBuilder: FormBuilder,
@@ -28,30 +29,28 @@ export class SettingsComponent implements OnInit {
         this.form = this._formBuilder.group({
             theme: ['', Validators.required],
             showCategoryTitles: [true],
-            smallCategoryThumbnails: [false]
+            categoryThumbnailSize: ['']
         });
 
         this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                take(1)
+                tap(settings => this.updateForm(settings))
             )
-            .subscribe(settings => {
-                this._settings = settings;
-
-                this.updateForm(this._settings);
-            });
+            .subscribe();
 
         this.loadSettings();
     }
 
     onSave(): void {
-        this._settings.theme = Theme.forName(this.form.get('theme').value);
-        this._settings.showCategoryTitles = this.form.get('showCategoryTitles').value;
-        this._settings.smallCategoryThumbnails = this.form.get('smallCategoryThumbnails').value;
+        const settings = {
+            theme: Theme.forName(this.form.get('theme').value),
+            showCategoryTitles: this.form.get('showCategoryTitles').value,
+            categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value)
+        };
 
         this._store$.dispatch(
-            new SettingsStoreActions.SaveRequestAction({ settings: this._settings })
+            new SettingsStoreActions.SaveRequestAction({ settings: settings })
         );
     }
 
@@ -68,6 +67,6 @@ export class SettingsComponent implements OnInit {
     private updateForm(settings: Settings): void {
         this.form.get('theme').setValue(settings.theme.name);
         this.form.get('showCategoryTitles').setValue(settings.showCategoryTitles);
-        this.form.get('smallCategoryThumbnails').setValue(settings.smallCategoryThumbnails);
+        this.form.get('categoryThumbnailSize').setValue(settings.categoryThumbnailSize.name);
     }
 }
