@@ -13,6 +13,7 @@ export const initialState: State = {
         theme: null,
         showCategoryTitles: true,
         categoryThumbnailSize: null,
-        photoListThumbnailSize: null
+        photoListThumbnailSize: null,
+        showCategoryPhotoList: true
     }
 };

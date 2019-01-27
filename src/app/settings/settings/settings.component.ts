@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
-
-import { Theme } from '../../core/models/theme.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../core/root-store';
+import { select, Store } from '@ngrx/store';
 import { Settings } from '../../core/models/settings.model';
+import { tap } from 'rxjs/operators';
+import { Theme } from '../../core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+
 
 @Component({
     selector: 'app-settings',
@@ -32,7 +32,8 @@ export class SettingsComponent implements OnInit {
             showCategoryTitles: [true],
             categoryThumbnailSize: [''],
             showCategoryBreadcrumbs: [true],
-            photoListThumbnailSize: ['']
+            photoListThumbnailSize: [''],
+            showCategoryPhotoList: [true]
         });
 
         this._store$
@@ -51,7 +52,8 @@ export class SettingsComponent implements OnInit {
             showCategoryTitles: this.form.get('showCategoryTitles').value,
             showCategoryBreadcrumbs: this.form.get('showCategoryBreadcrumbs').value,
             categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value),
-            photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value)
+            photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
+            showCategoryPhotoList: this.form.get('showCategoryPhotoList').value
         };
 
         this._store$.dispatch(
@@ -75,5 +77,6 @@ export class SettingsComponent implements OnInit {
         this.form.get('showCategoryBreadcrumbs').setValue(settings.showCategoryBreadcrumbs);
         this.form.get('categoryThumbnailSize').setValue(settings.categoryThumbnailSize.name);
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);
+        this.form.get('showCategoryPhotoList').setValue(settings.showCategoryPhotoList);
     }
 }

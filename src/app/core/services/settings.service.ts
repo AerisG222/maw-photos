@@ -14,6 +14,7 @@ export class SettingsService {
     private static readonly keyShowCategoryBreadcrumbs = 'showCategoryBreadcrumbs';
     private static readonly keyCategoryThumbnailSize = 'categoryThumbnailSize';
     private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
+    private static readonly keyShowCategoryPhotoList = 'showCategoryPhotoList';
 
     constructor(
         private _localStorage: LocalStorageService
@@ -24,13 +25,15 @@ export class SettingsService {
     load(): Settings {
         const showCategoryTitles = this._localStorage.retrieve(SettingsService.keyShowCategoryTitles);
         const showCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyShowCategoryBreadcrumbs);
+        const showCategoryPhotoList = this._localStorage.retrieve(SettingsService.keyShowCategoryPhotoList);
 
         return {
             theme: this.getTheme(),
             categoryThumbnailSize: this.getCategoryThumbnailSize(),
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
             showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
-            showCategoryBreadcrumbs: showCategoryBreadcrumbs != null ? showCategoryBreadcrumbs : true
+            showCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
+            showCategoryPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true
         };
     }
 
@@ -44,6 +47,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryThumbnailSize.name);
         this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.showCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
+        this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.showCategoryPhotoList);
     }
 
     private getTheme(): Theme {

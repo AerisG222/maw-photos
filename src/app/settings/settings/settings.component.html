@@ -32,6 +32,9 @@
             <h3>Show Category Breadcrumbs</h3>
             <mat-slide-toggle formControlName="showCategoryBreadcrumbs" [color]="'primary'"></mat-slide-toggle>
 
+            <h3>Show Category Photo List</h3>
+            <mat-slide-toggle formControlName="showCategoryPhotoList" [color]="'primary'"></mat-slide-toggle>
+
             <h3>Photo List Thumbnail Size</h3>
             <mat-radio-group formControlName="photoListThumbnailSize">
                 <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
