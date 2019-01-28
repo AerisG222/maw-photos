@@ -1,7 +1,10 @@
 img {
+    cursor: pointer;
     margin-right: 2px;
     width: 160px;
     height: 120px;
+    border: 1px solid transparent;
+    filter: saturate(0.6);
 
     &.thumb-small {
         width: 120px;
@@ -11,5 +14,15 @@ img {
     &.thumb-very-small {
         width: 80px;
         height: 60px;
+    }
+
+    &.selected {
+        filter: saturate(1.0);
+        border: 1px solid #aaa;
+    }
+
+    &:hover {
+        filter: saturate(1.0);
+        border: 1px solid #a00;
     }
 }

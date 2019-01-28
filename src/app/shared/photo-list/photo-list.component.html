@@ -1,3 +1,7 @@
 <div>
-    <img *ngFor="let photo of photos" [src]="photo.xsInfo.path" [class]="thumbnailSize.klass" />
+    <img *ngFor="let photo of photos"
+        [src]="photo.xsInfo.path"
+        [class]="thumbnailSize.klass"
+        [class.selected]="selectedPhoto?.id === photo.id"
+        (click)="onClickPhoto(photo)" />
 </div>

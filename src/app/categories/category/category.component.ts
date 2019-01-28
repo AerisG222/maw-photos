@@ -61,7 +61,7 @@ export class CategoryComponent implements OnInit {
                     .pipe(
                         select(PhotoStoreSelectors.selectPhotosForCategory(id))
                     )),
-                tap(photos => this._store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo: photos[0] })))
+                tap(photos => this.setCurrentPhoto(photos[0]))
             );
 
         this.activePhoto$ = this._store$
@@ -75,5 +75,13 @@ export class CategoryComponent implements OnInit {
             map(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id }))),
             take(1)
         ).subscribe();
+    }
+
+    onSelectPhoto(photo: Photo): void {
+        this.setCurrentPhoto(photo);
+    }
+
+    private setCurrentPhoto(photo: Photo): void {
+        this._store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo: photo }));
     }
 }

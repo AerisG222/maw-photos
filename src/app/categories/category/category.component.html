@@ -3,6 +3,11 @@
 
     <div *ngIf="photos$ | async as photos" [class.pad-top]="!(settings$ | async)?.showCategoryBreadcrumbs">
         <img [src]="(activePhoto$ | async)?.mdInfo?.path" />
-        <app-photo-list *ngIf="(settings$ | async)?.showCategoryPhotoList" [photos]="photos" [thumbnailSize]="(settings$ | async)?.photoListThumbnailSize"></app-photo-list>
+        <app-photo-list
+            *ngIf="(settings$ | async)?.showCategoryPhotoList"
+            [photos]="photos"
+            [thumbnailSize]="(settings$ | async)?.photoListThumbnailSize"
+            (select)="onSelectPhoto($event)"
+            [selectedPhoto]="(activePhoto$ | async)"></app-photo-list>
     </div>
 </div>
