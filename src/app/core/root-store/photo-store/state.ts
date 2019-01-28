@@ -9,9 +9,11 @@ export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>({
 export interface State extends EntityState<Photo> {
     error: string;
     isLoading: boolean;
+    currentPhoto: Photo;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
     isLoading: false,
-    error: null
+    error: null,
+    currentPhoto: null
 });

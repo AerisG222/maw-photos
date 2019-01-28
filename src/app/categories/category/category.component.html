@@ -2,7 +2,7 @@
     <app-category-header *ngIf="(settings$ | async)?.showCategoryBreadcrumbs" [category]="category$ | async"></app-category-header>
 
     <div *ngIf="photos$ | async as photos" [class.pad-top]="!(settings$ | async)?.showCategoryBreadcrumbs">
-        <img [src]="activePhoto.mdInfo.path" />
+        <img [src]="(activePhoto$ | async)?.mdInfo?.path" />
         <app-photo-list *ngIf="(settings$ | async)?.showCategoryPhotoList" [photos]="photos" [thumbnailSize]="(settings$ | async)?.photoListThumbnailSize"></app-photo-list>
     </div>
 </div>

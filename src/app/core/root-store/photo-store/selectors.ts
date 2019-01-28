@@ -10,6 +10,7 @@ import { PHOTO_FEATURE_NAME } from './photo-store.module';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
+export const getCurrentPhoto = (state: State): Photo => state.currentPhoto;
 
 export const selectPhotoState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
@@ -35,3 +36,4 @@ export const selectPhotoById = (id: number) =>
 
 export const selectPhotoError: MemoizedSelector<object, any> = createSelector(selectPhotoState, getError);
 export const selectPhotoIsLoading: MemoizedSelector<object, boolean> = createSelector(selectPhotoState, getIsLoading);
+export const selectCurrentPhoto: MemoizedSelector<object, Photo> = createSelector(selectPhotoState, getCurrentPhoto);

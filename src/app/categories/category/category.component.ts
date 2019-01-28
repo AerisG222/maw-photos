@@ -6,9 +6,15 @@ import { map, flatMap, tap, take } from 'rxjs/operators';
 import { Photo } from '../../core/models/photo.model';
 import { Category } from '../../core/models/category.model';
 import { Store, select } from '@ngrx/store';
-import { RootStoreState, PhotoCategoryStoreSelectors, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
 import { Settings } from 'src/app/core/models/settings.model';
+import {
+    RootStoreState,
+    PhotoCategoryStoreSelectors,
+    SettingsStoreSelectors,
+    SettingsStoreActions,
+    PhotoCategoryStoreActions
+} from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-category',
@@ -19,7 +25,7 @@ export class CategoryComponent implements OnInit {
     settings$: Observable<Settings>;
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
-    activePhoto: Photo;
+    activePhoto$: Observable<Photo>;
 
     constructor(
         private _route: ActivatedRoute,
@@ -43,7 +49,8 @@ export class CategoryComponent implements OnInit {
             .pipe(
                 flatMap(id => this._store$
                     .pipe(
-                        select(PhotoCategoryStoreSelectors.selectCategoryById(id))
+                        select(PhotoCategoryStoreSelectors.selectCategoryById(id)),
+                        tap(category => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category: category })))
                     )
                 )
             );
@@ -54,7 +61,12 @@ export class CategoryComponent implements OnInit {
                     .pipe(
                         select(PhotoStoreSelectors.selectPhotosForCategory(id))
                     )),
-                tap(photos => this.activePhoto = photos[0])
+                tap(photos => this._store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo: photos[0] })))
+            );
+
+        this.activePhoto$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto)
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());

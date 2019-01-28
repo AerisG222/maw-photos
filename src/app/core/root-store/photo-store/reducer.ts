@@ -24,6 +24,12 @@ export function photoReducer(state = initialState, action: Actions): State {
                 error: action.payload.error
             };
         }
+        case ActionTypes.SET_CURRENT: {
+            return {
+                ...state,
+                currentPhoto: action.payload.photo
+            };
+        }
         default: {
             return state;
         }

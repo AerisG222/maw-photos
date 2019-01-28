@@ -5,7 +5,8 @@ import { Category } from 'src/app/core/models/category.model';
 export enum ActionTypes {
     LOAD_REQUEST = '[Photo Categories] Load Request',
     LOAD_FAILURE = '[Photo Categories] Load Failure',
-    LOAD_SUCCESS = '[Photo Categories] Load Success'
+    LOAD_SUCCESS = '[Photo Categories] Load Success',
+    SET_CURRENT  = '[Photo Categories] Set Current'
 }
 
 export class LoadRequestAction implements Action {
@@ -22,7 +23,13 @@ export class LoadSuccessAction implements Action {
     constructor(public payload: { categories: Category[] }) { }
 }
 
+export class SetCurrentAction implements Action {
+    readonly type = ActionTypes.SET_CURRENT;
+    constructor(public payload: { category: Category }) { }
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
-    LoadSuccessAction;
+    LoadSuccessAction |
+    SetCurrentAction;

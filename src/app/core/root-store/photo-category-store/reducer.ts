@@ -24,6 +24,12 @@ export function photoCategoryReducer(state = initialState, action: Actions): Sta
                 error: action.payload.error
             };
         }
+        case ActionTypes.SET_CURRENT: {
+            return {
+                ...state,
+                currentCategory: action.payload.category
+            };
+        }
         default: {
             return state;
         }

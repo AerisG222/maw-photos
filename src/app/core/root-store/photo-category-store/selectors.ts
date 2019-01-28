@@ -10,6 +10,7 @@ import { PHOTO_CATEGORY_FEATURE_NAME } from './photo-category-store.module';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
+export const getCurrentCategory = (state: State): Category => state.currentCategory;
 
 export const selectPhotoCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
@@ -46,3 +47,4 @@ export const selectCategoryById = (id: number) =>
 
 export const selectPhotoCategoryError: MemoizedSelector<object, any> = createSelector(selectPhotoCategoryState, getError);
 export const selectPhotoCategoryIsLoading: MemoizedSelector<object, boolean> = createSelector(selectPhotoCategoryState, getIsLoading);
+export const selectCurrentCategory: MemoizedSelector<object, Category> = createSelector(selectPhotoCategoryState, getCurrentCategory);
