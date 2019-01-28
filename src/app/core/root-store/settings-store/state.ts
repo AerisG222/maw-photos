@@ -15,6 +15,7 @@ export const initialState: State = {
         showCategoryBreadcrumbs: true,
         categoryThumbnailSize: null,
         photoListThumbnailSize: null,
-        showCategoryPhotoList: true
+        showCategoryPhotoList: true,
+        randomDisplayDurationSeconds: 3
     }
 };

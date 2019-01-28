@@ -8,4 +8,5 @@ export interface Settings {
     categoryThumbnailSize: ThumbnailSize;
     photoListThumbnailSize: ThumbnailSize;
     showCategoryPhotoList: boolean;
+    randomDisplayDurationSeconds: number;
 }

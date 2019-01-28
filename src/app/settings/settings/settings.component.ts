@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
     themes = Theme.allThemes;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
+    randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
     constructor(
         private _formBuilder: FormBuilder,
@@ -33,7 +34,8 @@ export class SettingsComponent implements OnInit {
             categoryThumbnailSize: [''],
             showCategoryBreadcrumbs: [true],
             photoListThumbnailSize: [''],
-            showCategoryPhotoList: [true]
+            showCategoryPhotoList: [true],
+            randomDuration: [3]
         });
 
         this._store$
@@ -53,7 +55,8 @@ export class SettingsComponent implements OnInit {
             showCategoryBreadcrumbs: this.form.get('showCategoryBreadcrumbs').value,
             categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value),
             photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
-            showCategoryPhotoList: this.form.get('showCategoryPhotoList').value
+            showCategoryPhotoList: this.form.get('showCategoryPhotoList').value,
+            randomDisplayDurationSeconds: this.form.get('randomDuration').value
         };
 
         this._store$.dispatch(
@@ -78,5 +81,6 @@ export class SettingsComponent implements OnInit {
         this.form.get('categoryThumbnailSize').setValue(settings.categoryThumbnailSize.name);
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);
         this.form.get('showCategoryPhotoList').setValue(settings.showCategoryPhotoList);
+        this.form.get('randomDuration').setValue(settings.randomDisplayDurationSeconds);
     }
 }

@@ -4,6 +4,7 @@
     <mat-card>
         <mat-card-title>General</mat-card-title>
         <mat-card-content>
+            <h3>Theme</h3>
             <mat-form-field appearance="standard">
                 <mat-label>Theme</mat-label>
                 <mat-select formControlName="theme">
@@ -39,6 +40,19 @@
             <mat-radio-group formControlName="photoListThumbnailSize">
                 <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
             </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-title>Random Photos</mat-card-title>
+        <mat-card-content>
+            <h3>Slideshow Display Duration (in seconds)</h3>
+            <mat-form-field appearance="standard">
+                <mat-label>Duration</mat-label>
+                <mat-select formControlName="randomDuration">
+                    <mat-option *ngFor="let duration of randomDurations" [value]="duration">{{ duration }}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </mat-card-content>
     </mat-card>
 

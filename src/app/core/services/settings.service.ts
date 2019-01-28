@@ -15,6 +15,7 @@ export class SettingsService {
     private static readonly keyCategoryThumbnailSize = 'categoryThumbnailSize';
     private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
     private static readonly keyShowCategoryPhotoList = 'showCategoryPhotoList';
+    private static readonly keyRandomDisplayDurationSeconds = 'randomDisplayDurationSeconds';
 
     constructor(
         private _localStorage: LocalStorageService
@@ -31,6 +32,7 @@ export class SettingsService {
             theme: this.getTheme(),
             categoryThumbnailSize: this.getCategoryThumbnailSize(),
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
+            randomDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
             showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
             showCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
             showCategoryPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true
@@ -48,6 +50,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.showCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
         this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.showCategoryPhotoList);
+        this._localStorage.store(SettingsService.keyRandomDisplayDurationSeconds, settings.randomDisplayDurationSeconds);
     }
 
     private getTheme(): Theme {
@@ -77,6 +80,16 @@ export class SettingsService {
             return sizeName !== null ? ThumbnailSize.forName(sizeName) : ThumbnailSize.default;
         } catch {
             return ThumbnailSize.default;
+        }
+    }
+
+    private getRandomDisplayDurationSeconds(): number {
+        const secs = this._localStorage.retrieve(SettingsService.keyRandomDisplayDurationSeconds);
+
+        try {
+            return Number(secs);
+        } catch {
+            return 3;
         }
     }
 }
