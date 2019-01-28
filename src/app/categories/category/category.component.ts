@@ -35,6 +35,8 @@ export class CategoryComponent implements OnInit {
     }
 
     ngOnInit() {
+        this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
+
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)

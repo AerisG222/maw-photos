@@ -27,4 +27,16 @@ export class PhotoStoreEffects {
                 )
         )
     );
+
+    @Effect()
+    loadRandomRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.LoadRandomRequestAction>(photoActions.ActionTypes.LOAD_RANDOM_REQUEST),
+        switchMap(action =>
+            this._api.getRandomPhoto()
+                .pipe(
+                    map(photo => new photoActions.LoadRandomSuccessAction({ photo: photo })),
+                    catchError(error => of(new photoActions.LoadRandomFailureAction({ error: error })))
+                )
+        )
+    );
 }

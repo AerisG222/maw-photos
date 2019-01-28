@@ -1,3 +1,7 @@
-<p>
-  random works!
-</p>
+<app-photo-view
+    [settings]="settings$ | async"
+    [category]="category$ | async"
+    [photos]="photos$ | async"
+    [activePhoto]="activePhoto$ | async"
+    (photoSelected)="onSelectPhoto($event)">
+</app-photo-view>
