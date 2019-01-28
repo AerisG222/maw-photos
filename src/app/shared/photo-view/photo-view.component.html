@@ -1,0 +1,13 @@
+<div fxLayout="column" style="height: 100%;">
+    <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [category]="category"></app-category-header>
+
+    <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs">
+        <img [src]="activePhoto?.mdInfo?.path" />
+        <app-photo-list
+            *ngIf="settings?.showCategoryPhotoList"
+            [photos]="photos"
+            [thumbnailSize]="settings?.photoListThumbnailSize"
+            (select)="onSelectPhoto($event)"
+            [selectedPhoto]="activePhoto"></app-photo-list>
+    </div>
+</div>

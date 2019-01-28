@@ -21,12 +21,17 @@ import {
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { PhotoViewComponent } from './photo-view/photo-view.component';
+import { CategoryHeaderComponent } from './category-header/category-header.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
+        CategoryHeaderComponent,
         FooterComponent,
         HeaderComponent,
-        PhotoListComponent
+        PhotoListComponent,
+        PhotoViewComponent
     ],
     imports: [
         CommonModule,
@@ -44,7 +49,8 @@ import { FooterComponent } from './footer/footer.component';
         MatSlideToggleModule,
         MatTabsModule,
         MatToolbarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule
     ],
     exports: [
         // modules
@@ -65,9 +71,11 @@ import { FooterComponent } from './footer/footer.component';
         ReactiveFormsModule,
 
         // components
+        CategoryHeaderComponent,
         FooterComponent,
         HeaderComponent,
-        PhotoListComponent
+        PhotoListComponent,
+        PhotoViewComponent
     ]
 })
 export class SharedModule { }

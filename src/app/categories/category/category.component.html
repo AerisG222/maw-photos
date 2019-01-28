@@ -1,13 +1,7 @@
-<div fxLayout="column" style="height: 100%;">
-    <app-category-header *ngIf="(settings$ | async)?.showCategoryBreadcrumbs" [category]="category$ | async"></app-category-header>
-
-    <div *ngIf="photos$ | async as photos" [class.pad-top]="!(settings$ | async)?.showCategoryBreadcrumbs">
-        <img [src]="(activePhoto$ | async)?.mdInfo?.path" />
-        <app-photo-list
-            *ngIf="(settings$ | async)?.showCategoryPhotoList"
-            [photos]="photos"
-            [thumbnailSize]="(settings$ | async)?.photoListThumbnailSize"
-            (select)="onSelectPhoto($event)"
-            [selectedPhoto]="(activePhoto$ | async)"></app-photo-list>
-    </div>
-</div>
+<app-photo-view
+    [settings]="settings$ | async"
+    [category]="category$ | async"
+    [photos]="photos$ | async"
+    [activePhoto]="activePhoto$ | async"
+    (photoSelected)="onSelectPhoto($event)">
+</app-photo-view>
