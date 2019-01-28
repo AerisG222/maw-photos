@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { PhotoApiService } from '../photo-api.service';
-import { PhotoAndCategory } from '../../models/photo-and-category.model';
 import { Category } from '../../models/category.model';
 import { Photo } from '../../models/photo.model';
 import { ExifDetail } from '../../models/exif-detail.model';
@@ -20,8 +19,10 @@ export class MockPhotoApiService implements PhotoApiService {
         this.initData();
     }
 
-    getRandomPhoto(): Observable<PhotoAndCategory> {
-        throw new Error('not implemented');
+    getRandomPhoto(): Observable<Photo> {
+        const rand = Math.floor(Math.random() * (this._photos.length - 1));
+
+        return of(this._photos[rand]);
     }
 
     getYears(): Observable<number[]> {
@@ -40,23 +41,23 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(this._photos.filter(x => x.categoryId === categoryId));
     }
 
-    getPhotosByCommentDate(newestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByCommentDate(newestFirst: boolean): Observable<Photo[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByUserCommentDate(newestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByUserCommentDate(newestFirst: boolean): Observable<Photo[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByCommentCount(greatestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByCommentCount(greatestFirst: boolean): Observable<Photo[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByAverageRating(highestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByAverageRating(highestFirst: boolean): Observable<Photo[]> {
         throw new Error('not implemented');
     }
 
-    getPhotosByUserRating(highestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByUserRating(highestFirst: boolean): Observable<Photo[]> {
         throw new Error('not implemented');
     }
 

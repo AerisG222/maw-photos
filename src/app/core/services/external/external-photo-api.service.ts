@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 
 import { EnvironmentConfig } from '../../models/environment-config';
-import { PhotoAndCategory } from '../../models/photo-and-category.model';
 import { Category } from '../../models/category.model';
 import { Photo } from '../../models/photo.model';
 import { ExifDetail } from '../../models/exif-detail.model';
@@ -21,11 +20,11 @@ export class ExternalPhotoApiService implements PhotoApiService {
 
     }
 
-    getRandomPhoto(): Observable<PhotoAndCategory> {
+    getRandomPhoto(): Observable<Photo> {
         const url = this.getAbsoluteUrl('photos/getRandomPhoto');
 
         return this._http
-            .get<PhotoAndCategory>(url);
+            .get<Photo>(url);
     }
 
     getYears(): Observable<number[]> {
@@ -56,39 +55,39 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<Photo[]>(url);
     }
 
-    getPhotosByCommentDate(newestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByCommentDate(newestFirst: boolean): Observable<Photo[]> {
         const url = this.getAbsoluteUrl(`photos/getPhotosAndCategoriesByCommentDate/${newestFirst}`);
 
         return this._http
-            .get<PhotoAndCategory[]>(url);
+            .get<Photo[]>(url);
     }
 
-    getPhotosByUserCommentDate(newestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByUserCommentDate(newestFirst: boolean): Observable<Photo[]> {
         const url = this.getAbsoluteUrl(`photos/getPhotosAndCategoriesByUserCommentDate/${newestFirst}`);
 
         return this._http
-            .get<PhotoAndCategory[]>(url);
+            .get<Photo[]>(url);
     }
 
-    getPhotosByCommentCount(greatestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByCommentCount(greatestFirst: boolean): Observable<Photo[]> {
         const url = this.getAbsoluteUrl(`photos/getPhotosAndCategoriesByCommentCount/${greatestFirst}`);
 
         return this._http
-            .get<PhotoAndCategory[]>(url);
+            .get<Photo[]>(url);
     }
 
-    getPhotosByAverageRating(highestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByAverageRating(highestFirst: boolean): Observable<Photo[]> {
         const url = this.getAbsoluteUrl(`photos/getPhotosAndCategoriesByAverageRating/${highestFirst}`);
 
         return this._http
-            .get<PhotoAndCategory[]>(url);
+            .get<Photo[]>(url);
     }
 
-    getPhotosByUserRating(highestFirst: boolean): Observable<PhotoAndCategory[]> {
+    getPhotosByUserRating(highestFirst: boolean): Observable<Photo[]> {
         const url = this.getAbsoluteUrl(`photos/getPhotosAndCategoriesByUserRating/${highestFirst}`);
 
         return this._http
-            .get<PhotoAndCategory[]>(url);
+            .get<Photo[]>(url);
     }
 
     getPhotoExifData(photoId: number): Observable<ExifDetail> {
