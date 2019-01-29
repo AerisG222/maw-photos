@@ -11,6 +11,8 @@ export enum ActionTypes {
     LOAD_RANDOM_REQUEST = '[Photos Load Random Request',
     LOAD_RANDOM_FAILURE = '[Photos Load Random Failure',
     LOAD_RANDOM_SUCCESS = '[Photos Load Random Success',
+    MOVE_NEXT_REQUEST = '[Photos] Move Next Request',
+    MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request'
 }
 
 export class ClearRequestAction implements Action {
@@ -51,6 +53,14 @@ export class LoadRandomSuccessAction implements Action {
     constructor(public payload: { photo: Photo }) { }
 }
 
+export class MoveNextRequestAction implements Action {
+    readonly type = ActionTypes.MOVE_NEXT_REQUEST;
+}
+
+export class MovePreviousRequestAction implements Action {
+    readonly type = ActionTypes.MOVE_PREVIOUS_REQUEST;
+}
+
 export type Actions =
     ClearRequestAction |
     LoadRandomRequestAction |
@@ -59,4 +69,6 @@ export type Actions =
     LoadRequestAction |
     LoadFailureAction |
     LoadSuccessAction |
-    SetCurrentAction;
+    SetCurrentAction |
+    MoveNextRequestAction |
+    MovePreviousRequestAction;

@@ -1,11 +1,15 @@
 import { Actions, ActionTypes } from './actions';
 import { photoAdapter, initialState, State } from './state';
+import { Photo } from '../../models/photo.model';
 
 export function photoReducer(state = initialState, action: Actions): State {
     switch (action.type) {
         case ActionTypes.CLEAR_REQUEST: {
             return photoAdapter.removeAll({
-                ...state
+                ...state,
+                firstPhoto: null,
+                lastPhoto: null,
+                currentPhoto: null
             });
         }
         case ActionTypes.LOAD_RANDOM_REQUEST: {
@@ -19,7 +23,9 @@ export function photoReducer(state = initialState, action: Actions): State {
             return photoAdapter.addOne(action.payload.photo, {
                 ...state,
                 isLoading: false,
-                error: null
+                error: null,
+                firstPhoto: state.entities[state.ids[0]],
+                lastPhoto: state.entities[state.ids[state.ids.length - 1]]
             });
         }
         case ActionTypes.LOAD_RANDOM_FAILURE: {
@@ -40,7 +46,9 @@ export function photoReducer(state = initialState, action: Actions): State {
             return photoAdapter.addAll(action.payload.photos, {
                 ...state,
                 isLoading: false,
-                error: null
+                error: null,
+                firstPhoto: state.entities[state.ids[0]],
+                lastPhoto: state.entities[state.ids[state.ids.length - 1]]
             });
         }
         case ActionTypes.LOAD_FAILURE: {
@@ -56,8 +64,44 @@ export function photoReducer(state = initialState, action: Actions): State {
                 currentPhoto: action.payload.photo
             };
         }
+        case ActionTypes.MOVE_NEXT_REQUEST: {
+            return {
+                ...state,
+                currentPhoto: nextPhoto(state)
+            };
+        }
+        case ActionTypes.MOVE_PREVIOUS_REQUEST: {
+            return {
+                ...state,
+                currentPhoto: previousPhoto(state)
+            };
+        }
         default: {
             return state;
         }
     }
+}
+
+function nextPhoto(state: State): Photo {
+    return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));
+}
+
+function previousPhoto(state: State): Photo {
+    return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, -1));
+}
+
+function getPhotoAtIndex(state: State, idx: number) {
+    // entities are keyed by id
+    return state.entities[state.ids[idx]];
+}
+
+function incrementCurrentIndexWithinBounds(state: State, direction: number): number {
+    const lastIdx = state.ids.length - 1;
+    const idx = getCurrentIndex(state) + direction;
+
+    return Math.max(0, Math.min(idx, lastIdx));
+}
+
+function getCurrentIndex(state: State): number {
+    return (<number[]> state.ids).findIndex(id => id === state.currentPhoto.id);
 }

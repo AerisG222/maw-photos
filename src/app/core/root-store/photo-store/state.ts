@@ -10,10 +10,14 @@ export interface State extends EntityState<Photo> {
     error: string;
     isLoading: boolean;
     currentPhoto: Photo;
+    firstPhoto: Photo;
+    lastPhoto: Photo;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
     isLoading: false,
     error: null,
-    currentPhoto: null
+    currentPhoto: null,
+    firstPhoto: null,
+    lastPhoto: null
 });
