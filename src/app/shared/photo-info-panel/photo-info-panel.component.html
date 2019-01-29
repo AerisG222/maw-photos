@@ -4,8 +4,12 @@
     </button>
 </div>
 
-<div *ngIf="endSidenavExpanded">
-    <div>rating</div>
+<div *ngIf="endSidenavExpanded" class="panel-contents">
+    <app-rating
+        [yourRating]="(rating$ | async)?.userRating"
+        [avgRating]="(rating$ | async)?.averageRating">
+    </app-rating>
+
     <div>comments</div>
     <div>exif</div>
     <div>histogram</div>

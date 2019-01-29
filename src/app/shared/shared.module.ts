@@ -17,6 +17,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { HeaderComponent } from './header/header.component';
@@ -25,6 +26,7 @@ import { PhotoViewComponent } from './photo-view/photo-view.component';
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { RouterModule } from '@angular/router';
 import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
     declarations: [
@@ -33,9 +35,11 @@ import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.com
         HeaderComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
-        PhotoViewComponent
+        PhotoViewComponent,
+        RatingComponent
     ],
     imports: [
+        BarRatingModule,
         CommonModule,
         FlexLayoutModule,
         MatButtonModule,
@@ -56,6 +60,7 @@ import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.com
     ],
     exports: [
         // modules
+        BarRatingModule,
         FlexLayoutModule,
         MatButtonModule,
         MatCardModule,

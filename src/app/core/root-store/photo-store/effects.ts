@@ -39,4 +39,16 @@ export class PhotoStoreEffects {
                 )
         )
     );
+
+    @Effect()
+    loadRatingRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.LoadRatingRequestAction>(photoActions.ActionTypes.LOAD_RATING_REQUEST),
+        switchMap(action =>
+            this._api.getPhotoRatingData(action.payload.id)
+                .pipe(
+                    map(rating => new photoActions.LoadRatingSuccessAction({ rating: rating})),
+                    catchError(error => of(new photoActions.LoadRatingFailureAction({ error: error })))
+                )
+        )
+    );
 }

@@ -35,6 +35,28 @@ export function photoReducer(state = initialState, action: Actions): State {
                 error: action.payload.error
             };
         }
+        case ActionTypes.LOAD_RATING_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        }
+        case ActionTypes.LOAD_RATING_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                currentPhotoRating: action.payload.rating
+            };
+        }
+        case ActionTypes.LOAD_RATING_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
+            };
+        }
         case ActionTypes.LOAD_REQUEST: {
             return {
                 ...state,

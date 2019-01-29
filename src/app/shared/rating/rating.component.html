@@ -1,0 +1,5 @@
+<h4>Your Rating</h4>
+<bar-rating [rate]="yourRating" [max]="5" (rateChange)="onRate($event)" [theme]="'default'"></bar-rating>
+
+<h4>Average Rating</h4>
+<bar-rating [rate]="avgRating" [max]="5" [readOnly]="true" [theme]="'default'"></bar-rating>

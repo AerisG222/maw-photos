@@ -66,7 +66,7 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     getPhotoRatingData(photoId: number): Observable<Rating> {
-        throw new Error('not implemented');
+        return of({ userRating: 2, averageRating: 4 });
     }
 
     ratePhoto(photoId: number, rating: number): Observable<number> {
