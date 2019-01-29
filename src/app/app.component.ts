@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Store, select } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
+import { LayoutStoreSelectors } from './core/root-store/layout-store';
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
     themeSubscription: Subscription;
     startSidenavExpanded = false;
     endSidenavExpanded = false;
+    isRightSidebarDisplayed$: Observable<boolean>;
 
     constructor(
         private _store$: Store<RootStoreState.State>,
@@ -29,6 +31,11 @@ export class AppComponent implements OnInit, OnDestroy {
                 select(SettingsStoreSelectors.selectSettings)
             )
             .subscribe(settings => this.setTheme(settings.theme));
+
+        this.isRightSidebarDisplayed$ = this._store$
+            .pipe(
+                select(LayoutStoreSelectors.selectLayoutIsRightSidebarDisplayed)
+            );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
     }

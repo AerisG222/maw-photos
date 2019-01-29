@@ -16,6 +16,7 @@ import {
     PhotoCategoryStoreActions
 } from 'src/app/core/root-store';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 
 @Component({
     selector: 'app-category',
@@ -94,6 +95,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+        this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
 
         categoryId$.pipe(
             map(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id }))),
@@ -103,6 +105,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this._hotkeysService.remove(this.hotkeys);
+        this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
     }
 
     onSelectPhoto(photo: Photo): void {

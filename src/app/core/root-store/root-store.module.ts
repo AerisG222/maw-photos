@@ -9,6 +9,7 @@ import { SettingsStoreModule } from './settings-store';
 import { environment } from '../../../environments/environment';
 import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
 import { PhotoStoreModule } from './photo-store/photo-store.module';
+import { LayoutStoreModule } from './layout-store/layout-store.module';
 
 @NgModule({
     declarations: [],
@@ -20,7 +21,8 @@ import { PhotoStoreModule } from './photo-store/photo-store.module';
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
-        PhotoStoreModule
+        PhotoStoreModule,
+        LayoutStoreModule
     ]
 })
 export class RootStoreModule { }
