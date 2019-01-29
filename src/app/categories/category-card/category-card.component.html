@@ -1,6 +1,8 @@
-<mat-card [routerLink]="['category', category.id]">
-    <img [src]="category.teaserPhotoInfo.path" [alt]="category.name" [class]="thumbnailSize.klass" [class.show_title]="showTitle" />
-    <mat-card-content *ngIf="showTitle">
-        {{ category.name }}
-    </mat-card-content>
-</mat-card>
+<a [routerLink]="['category', category.id]">
+    <mat-card>
+        <img [src]="category.teaserPhotoInfo.path" [alt]="category.name" [class]="thumbnailSize.klass" [class.show_title]="showTitle" />
+        <mat-card-content *ngIf="showTitle">
+            {{ category.name }}
+        </mat-card-content>
+    </mat-card>
+</a>
