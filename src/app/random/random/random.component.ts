@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap, flatMap } from 'rxjs/operators';
+import { tap, flatMap, take } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -26,6 +26,10 @@ export class RandomComponent implements OnInit {
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
 
+    // any to avoid ts identifying result of setInterval as Timer (from nodejs)
+    private intervalId: any = -1;
+    private currentPhotoSet = false;
+
     constructor(
         private _store$: Store<RootStoreState.State>
     ) {
@@ -37,13 +41,19 @@ export class RandomComponent implements OnInit {
 
         this.settings$ = this._store$
             .pipe(
-                select(SettingsStoreSelectors.selectSettings)
+                select(SettingsStoreSelectors.selectSettings),
+                tap(settings => this.startRandomFetch(settings.randomDisplayDurationSeconds))
             );
 
         this.photos$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectAllPhotos),
-                tap(photos => this.setCurrentPhoto(photos[0]))
+                tap(photos => {
+                    if (!this.currentPhotoSet) {
+                        this.currentPhotoSet = true;
+                        this.setCurrentPhoto(photos[0]);
+                    }
+                })
             );
 
         this.category$ = this._store$
@@ -53,17 +63,15 @@ export class RandomComponent implements OnInit {
 
         this.activePhoto$ = this._store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto)
-            );
-
-        this.activePhoto$
-            .pipe(
-                flatMap(photo => this._store$
-                    .pipe(
-                        select(PhotoCategoryStoreSelectors.selectCategoryById(photo.categoryId)),
-                        tap(category => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category: category })))
-                    )
-                )
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                tap(photo => {
+                    this._store$
+                        .pipe(
+                            select(PhotoCategoryStoreSelectors.selectCategoryById(photo.categoryId)),
+                            tap(category => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category: category }))),
+                            take(1)
+                        ).subscribe();
+                })
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
@@ -80,5 +88,16 @@ export class RandomComponent implements OnInit {
 
     private setCurrentPhoto(photo: Photo): void {
         this._store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo: photo }));
+    }
+
+    private startRandomFetch(delaySeconds: number): void {
+        if (this.intervalId !== -1) {
+            clearInterval(this.intervalId);
+            this.intervalId = -1;
+        }
+
+        this.intervalId = setInterval(() => {
+            this._store$.dispatch(new PhotoStoreActions.LoadRandomRequestAction());
+        }, delaySeconds * 1000);
     }
 }
