@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap, flatMap, take } from 'rxjs/operators';
@@ -14,13 +14,14 @@ import {
     PhotoCategoryStoreActions,
     SettingsStoreActions
 } from 'src/app/core/root-store';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 @Component({
     selector: 'app-random',
     templateUrl: './random.component.html',
     styleUrls: ['./random.component.scss']
 })
-export class RandomComponent implements OnInit {
+export class RandomComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings>;
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
@@ -29,14 +30,34 @@ export class RandomComponent implements OnInit {
     // any to avoid ts identifying result of setInterval as Timer (from nodejs)
     private intervalId: any = -1;
     private currentPhotoSet = false;
+    private hotkeys: Hotkey[] = [];
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private _store$: Store<RootStoreState.State>,
+        private _hotkeysService: HotkeysService
     ) {
 
     }
 
     ngOnInit() {
+        this.hotkeys.push(<Hotkey> this._hotkeysService
+            .add(new Hotkey(
+                'right',
+                (event: KeyboardEvent): boolean => {
+                    this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+                    return false;
+                }))
+        );
+
+        this.hotkeys.push(<Hotkey> this._hotkeysService
+            .add(new Hotkey(
+                'left',
+                (event: KeyboardEvent): boolean => {
+                    this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+                    return false;
+                }))
+        );
+
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
 
         this.settings$ = this._store$
@@ -80,6 +101,10 @@ export class RandomComponent implements OnInit {
         for (let i = 0; i < 10; i++) {
             this._store$.dispatch(new PhotoStoreActions.LoadRandomRequestAction());
         }
+    }
+
+    ngOnDestroy(): void {
+        this._hotkeysService.remove(this.hotkeys);
     }
 
     onSelectPhoto(photo: Photo): void {
