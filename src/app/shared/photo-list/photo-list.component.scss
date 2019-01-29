@@ -1,28 +1,35 @@
-img {
-    cursor: pointer;
-    margin-right: 2px;
-    width: 160px;
-    height: 120px;
-    border: 1px solid transparent;
-    filter: saturate(0.6);
+div {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
 
-    &.thumb-small {
-        width: 120px;
-        height: 90px;
-    }
+    & img {
+        flex: 0 0 auto;
+        cursor: pointer;
+        margin-right: 2px;
+        width: 160px;
+        height: 120px;
+        border: 1px solid transparent;
+        filter: saturate(0.6);
 
-    &.thumb-very-small {
-        width: 80px;
-        height: 60px;
-    }
+        &.thumb-small {
+            width: 120px;
+            height: 90px;
+        }
 
-    &.selected {
-        filter: saturate(1.0);
-        border: 1px solid #aaa;
-    }
+        &.thumb-very-small {
+            width: 80px;
+            height: 60px;
+        }
 
-    &:hover {
-        filter: saturate(1.0);
-        border: 1px solid #a00;
+        &.selected {
+            filter: saturate(1.0);
+            border: 1px solid #aaa;
+        }
+
+        &:hover {
+            filter: saturate(1.0);
+            border: 1px solid #a00;
+        }
     }
 }
