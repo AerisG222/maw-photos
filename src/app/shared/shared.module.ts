@@ -24,12 +24,14 @@ import { FooterComponent } from './footer/footer.component';
 import { PhotoViewComponent } from './photo-view/photo-view.component';
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { RouterModule } from '@angular/router';
+import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
 
 @NgModule({
     declarations: [
         CategoryHeaderComponent,
         FooterComponent,
         HeaderComponent,
+        PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent
     ],
@@ -74,6 +76,7 @@ import { RouterModule } from '@angular/router';
         CategoryHeaderComponent,
         FooterComponent,
         HeaderComponent,
+        PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent
     ]

@@ -6,6 +6,7 @@ import { Subscription, Observable } from 'rxjs';
 import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { LayoutStoreSelectors } from './core/root-store/layout-store';
+import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -14,8 +15,6 @@ import { LayoutStoreSelectors } from './core/root-store/layout-store';
 })
 export class AppComponent implements OnInit, OnDestroy {
     themeSubscription: Subscription;
-    startSidenavExpanded = false;
-    endSidenavExpanded = false;
     isRightSidebarDisplayed$: Observable<boolean>;
 
     constructor(
@@ -34,7 +33,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.isRightSidebarDisplayed$ = this._store$
             .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsRightSidebarDisplayed)
+                select(LayoutStoreSelectors.selectLayoutIsRightSidebarDisplayed),
+                delay(0)
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
@@ -42,14 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.themeSubscription.unsubscribe();
-    }
-
-    toggleStartSidenav(): void {
-        this.startSidenavExpanded = !this.startSidenavExpanded;
-    }
-
-    toggleEndSidenav(): void {
-        this.endSidenavExpanded = !this.endSidenavExpanded;
     }
 
     private setTheme(theme: Theme): void {
