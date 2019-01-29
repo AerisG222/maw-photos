@@ -9,7 +9,7 @@ const routes: Routes = [
     { path: 'categories', loadChildren: './categories/categories.module#CategoriesModule', canActivate: [AuthGuardService] },
     { path: 'help',       loadChildren: './help/help.module#HelpModule' },
     { path: 'random',     loadChildren: './random/random.module#RandomModule',             canActivate: [AuthGuardService] },
-    { path: 'search',     loadChildren: './search/search.module#SearchModule',             canActivate: [AuthGuardService] },
+//    { path: 'search',     loadChildren: './search/search.module#SearchModule',             canActivate: [AuthGuardService] },
     { path: 'settings',   loadChildren: './settings/settings.module#SettingsModule' },
     { path: 'stats',      loadChildren: './stats/stats.module#StatsModule',                canActivate: [AuthGuardService] },
     { path: '**',         redirectTo: 'categories' }
