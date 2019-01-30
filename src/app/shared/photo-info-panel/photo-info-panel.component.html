@@ -7,7 +7,8 @@
 <div *ngIf="endSidenavExpanded" class="panel-contents">
     <app-rating
         [yourRating]="(rating$ | async)?.userRating"
-        [avgRating]="(rating$ | async)?.averageRating">
+        [avgRating]="(rating$ | async)?.averageRating"
+        (rate)="onRate($event)">
     </app-rating>
 
     <div>comments</div>

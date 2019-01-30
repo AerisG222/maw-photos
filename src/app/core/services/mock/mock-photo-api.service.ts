@@ -70,7 +70,7 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     ratePhoto(photoId: number, rating: number): Observable<number> {
-        throw new Error('not implemented');
+        return of(4.5);
     }
 
     getCommentsForPhoto(photoId: number): Observable<Comment[]> {

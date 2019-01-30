@@ -98,6 +98,35 @@ export function photoReducer(state = initialState, action: Actions): State {
                 currentPhoto: previousPhoto(state)
             };
         }
+        case ActionTypes.RATE_PHOTO_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null,
+                currentPhotoRating: {
+                    ...state.currentPhotoRating,
+                    userRating: action.payload.userRating
+                }
+            };
+        }
+        case ActionTypes.RATE_PHOTO_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                currentPhotoRating: {
+                    ...state.currentPhotoRating,
+                    averageRating: Math.round(action.payload.averageRating)
+                }
+            };
+        }
+        case ActionTypes.RATE_PHOTO_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
+            };
+        }
         default: {
             return state;
         }

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { switchMap, catchError, map } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap } from 'rxjs/operators';
 
 import * as photoActions from './actions';
 import { photoApiServiceToken, PhotoApiService } from '../../services/photo-api.service';
@@ -44,10 +44,22 @@ export class PhotoStoreEffects {
     loadRatingRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoActions.LoadRatingRequestAction>(photoActions.ActionTypes.LOAD_RATING_REQUEST),
         switchMap(action =>
-            this._api.getPhotoRatingData(action.payload.id)
+            this._api.getPhotoRatingData(action.payload.photoId)
                 .pipe(
                     map(rating => new photoActions.LoadRatingSuccessAction({ rating: rating})),
                     catchError(error => of(new photoActions.LoadRatingFailureAction({ error: error })))
+                )
+        )
+    );
+
+    @Effect()
+    ratePhotoRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.RatePhotoRequestAction>(photoActions.ActionTypes.RATE_PHOTO_REQUEST),
+        concatMap(action =>
+            this._api.ratePhoto(action.payload.photoId, action.payload.userRating)
+                .pipe(
+                    map(avgRating => new photoActions.RatePhotoSuccessAction({ averageRating: avgRating })),
+                    catchError(error => of(new photoActions.RatePhotoFailureAction({ error: error })))
                 )
         )
     );

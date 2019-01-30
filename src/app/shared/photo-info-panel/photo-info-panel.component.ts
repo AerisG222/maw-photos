@@ -6,6 +6,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, tap, filter } from 'rxjs/operators';
 import { Rating } from 'src/app/core/models/rating.model';
+import { Photo } from 'src/app/core/models/photo.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -16,6 +17,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
     rating$: Observable<Rating>;
 
+    private currentPhoto: Photo;
     private destroy$ = new Subject<boolean>();
 
     constructor(
@@ -26,7 +28,8 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         const currentPhoto$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => photo !== null),
-            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ id: photo.id }))),
+            tap(photo => this.currentPhoto = photo),
+            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
             takeUntil(this.destroy$)
         );
 
@@ -43,5 +46,11 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleEndSidenav(): void {
         this.endSidenavExpanded = !this.endSidenavExpanded;
+    }
+
+    onRate(userRating: number): void {
+        if (this.currentPhoto) {
+            this._store$.dispatch(new PhotoStoreActions.RatePhotoRequestAction({ photoId: this.currentPhoto.id, userRating: userRating }));
+        }
     }
 }

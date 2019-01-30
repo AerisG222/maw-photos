@@ -9,12 +9,15 @@ export enum ActionTypes {
     LOAD_FAILURE = '[Photos] Load Failure',
     LOAD_SUCCESS = '[Photos] Load Success',
     SET_CURRENT  = '[Photos] Set Current',
-    LOAD_RANDOM_REQUEST = '[Photos Load Random Request',
-    LOAD_RANDOM_FAILURE = '[Photos Load Random Failure',
-    LOAD_RANDOM_SUCCESS = '[Photos Load Random Success',
-    LOAD_RATING_REQUEST = '[Photos Load Rating Request',
-    LOAD_RATING_FAILURE = '[Photos Load Rating Failure',
-    LOAD_RATING_SUCCESS = '[Photos Load Rating Success',
+    LOAD_RANDOM_REQUEST = '[Photos] Load Random Request',
+    LOAD_RANDOM_FAILURE = '[Photos] Load Random Failure',
+    LOAD_RANDOM_SUCCESS = '[Photos] Load Random Success',
+    LOAD_RATING_REQUEST = '[Photos] Load Rating Request',
+    LOAD_RATING_FAILURE = '[Photos] Load Rating Failure',
+    LOAD_RATING_SUCCESS = '[Photos] Load Rating Success',
+    RATE_PHOTO_REQUEST = '[Photos] Rate Photo Request',
+    RATE_PHOTO_FAILURE = '[Photos] Rate Photo Failure',
+    RATE_PHOTO_SUCCESS = '[Photos] Rate Photo Success',
     MOVE_NEXT_REQUEST = '[Photos] Move Next Request',
     MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request'
 }
@@ -57,9 +60,32 @@ export class LoadRandomSuccessAction implements Action {
     constructor(public payload: { photo: Photo }) { }
 }
 
+export class RatePhotoRequestAction implements Action {
+    readonly type = ActionTypes.RATE_PHOTO_REQUEST;
+    constructor(public payload: { photoId: number, userRating: number }) { }
+}
+
+export class RatePhotoFailureAction implements Action {
+    readonly type = ActionTypes.RATE_PHOTO_FAILURE;
+    constructor(public payload: { error: string }) { }
+}
+
+export class RatePhotoSuccessAction implements Action {
+    readonly type = ActionTypes.RATE_PHOTO_SUCCESS;
+    constructor(public payload: { averageRating: number }) { }
+}
+
+export class MoveNextRequestAction implements Action {
+    readonly type = ActionTypes.MOVE_NEXT_REQUEST;
+}
+
+export class MovePreviousRequestAction implements Action {
+    readonly type = ActionTypes.MOVE_PREVIOUS_REQUEST;
+}
+
 export class LoadRatingRequestAction implements Action {
     readonly type = ActionTypes.LOAD_RATING_REQUEST;
-    constructor(public payload: { id: number }) { }
+    constructor(public payload: { photoId: number }) { }
 }
 
 export class LoadRatingFailureAction implements Action {
@@ -70,14 +96,6 @@ export class LoadRatingFailureAction implements Action {
 export class LoadRatingSuccessAction implements Action {
     readonly type = ActionTypes.LOAD_RATING_SUCCESS;
     constructor(public payload: { rating: Rating }) { }
-}
-
-export class MoveNextRequestAction implements Action {
-    readonly type = ActionTypes.MOVE_NEXT_REQUEST;
-}
-
-export class MovePreviousRequestAction implements Action {
-    readonly type = ActionTypes.MOVE_PREVIOUS_REQUEST;
 }
 
 export type Actions =
@@ -93,4 +111,7 @@ export type Actions =
     LoadSuccessAction |
     SetCurrentAction |
     MoveNextRequestAction |
-    MovePreviousRequestAction;
+    MovePreviousRequestAction |
+    RatePhotoRequestAction |
+    RatePhotoFailureAction |
+    RatePhotoSuccessAction;
