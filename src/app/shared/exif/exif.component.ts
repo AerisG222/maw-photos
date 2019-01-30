@@ -28,8 +28,10 @@ export class ExifComponent {
 
         Object
             .keys(exif)
-            .forEach(key =>
-                this.exifData.push({ field: key, value: exif[key] })
-            );
+            .forEach(key => {
+                if (exif[key]) {
+                    this.exifData.push({ field: key, value: exif[key] });
+                }
+            });
     }
 }
