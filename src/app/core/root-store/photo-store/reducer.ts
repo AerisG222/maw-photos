@@ -12,6 +12,28 @@ export function photoReducer(state = initialState, action: Actions): State {
                 currentPhoto: null
             });
         }
+        case ActionTypes.LOAD_COMMENTS_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        }
+        case ActionTypes.LOAD_COMMENTS_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                currentPhotoComments: action.payload.comments
+            };
+        }
+        case ActionTypes.LOAD_COMMENTS_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
+            };
+        }
         case ActionTypes.LOAD_RANDOM_REQUEST: {
             return {
                 ...state,

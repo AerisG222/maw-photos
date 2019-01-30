@@ -6,7 +6,7 @@ import { Category } from '../../models/category.model';
 import { Photo } from '../../models/photo.model';
 import { ExifDetail } from '../../models/exif-detail.model';
 import { Rating } from '../../models/rating.model';
-import { Comment } from '../../models/comment.model';
+import { PhotoComment } from '../../models/photo-comment.model';
 import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 
 @Injectable()
@@ -73,12 +73,15 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(4.5);
     }
 
-    getCommentsForPhoto(photoId: number): Observable<Comment[]> {
-        throw new Error('not implemented');
+    getCommentsForPhoto(photoId: number): Observable<PhotoComment[]> {
+        return of(​[
+            { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
+            { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
+        ]);
     }
 
     addCommentForPhoto(photoId: number, comment: string): Observable<any> {
-        throw new Error('not implemented');
+        return of(true);
     }
 
     initData(): void {

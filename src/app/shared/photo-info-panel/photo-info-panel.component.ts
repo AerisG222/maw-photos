@@ -7,6 +7,7 @@ import { Subject, Observable } from 'rxjs';
 import { takeUntil, tap, filter } from 'rxjs/operators';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Photo } from 'src/app/core/models/photo.model';
+import { PhotoComment } from 'src/app/core/models/photo-comment.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -16,6 +17,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
     rating$: Observable<Rating>;
+    comments$: Observable<PhotoComment[]>;
 
     private currentPhoto: Photo;
     private destroy$ = new Subject<boolean>();
@@ -30,11 +32,16 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             filter(photo => photo !== null),
             tap(photo => this.currentPhoto = photo),
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
+            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
             takeUntil(this.destroy$)
         );
 
         this.rating$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoRating)
+        );
+
+        this.comments$ = this._store$.pipe(
+            select(PhotoStoreSelectors.selectCurrentPhotoComments)
         );
 
         currentPhoto$.subscribe();

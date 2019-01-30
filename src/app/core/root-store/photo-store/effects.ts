@@ -63,4 +63,16 @@ export class PhotoStoreEffects {
                 )
         )
     );
+
+    @Effect()
+    loadCommentsRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.LoadCommentsRequestAction>(photoActions.ActionTypes.LOAD_COMMENTS_REQUEST),
+        switchMap(action =>
+            this._api.getCommentsForPhoto(action.payload.photoId)
+                .pipe(
+                    map(comments => new photoActions.LoadCommentsSuccessAction({ comments: comments })),
+                    catchError(error => of(new photoActions.RatePhotoFailureAction({ error: error })))
+                )
+        )
+    );
 }

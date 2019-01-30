@@ -14,6 +14,7 @@ import {
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
@@ -27,6 +28,7 @@ import { CategoryHeaderComponent } from './category-header/category-header.compo
 import { RouterModule } from '@angular/router';
 import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
 import { RatingComponent } from './rating/rating.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,8 @@ import { RatingComponent } from './rating/rating.component';
         PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent,
-        RatingComponent
+        RatingComponent,
+        CommentsComponent
     ],
     imports: [
         BarRatingModule,
@@ -53,6 +56,7 @@ import { RatingComponent } from './rating/rating.component';
         MatSelectModule,
         MatSidenavModule,
         MatSlideToggleModule,
+        MatTableModule,
         MatTabsModule,
         MatToolbarModule,
         ReactiveFormsModule,
@@ -73,6 +77,7 @@ import { RatingComponent } from './rating/rating.component';
         MatSelectModule,
         MatSidenavModule,
         MatSlideToggleModule,
+        MatTableModule,
         MatTabsModule,
         MatToolbarModule,
         ReactiveFormsModule,

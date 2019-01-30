@@ -11,7 +11,10 @@
         (rate)="onRate($event)">
     </app-rating>
 
-    <div>comments</div>
+    <app-comments
+        [comments]="(comments$ | async)">
+    </app-comments>
+
     <div>exif</div>
     <div>histogram</div>
     <div>filters / effects / rotation</div>

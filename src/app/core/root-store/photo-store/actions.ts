@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Photo } from 'src/app/core/models/photo.model';
 import { Rating } from '../../models/rating.model';
+import { PhotoComment } from '../../models/photo-comment.model';
 
 export enum ActionTypes {
     CLEAR_REQUEST = '[Photos] Clear',
@@ -9,6 +10,9 @@ export enum ActionTypes {
     LOAD_FAILURE = '[Photos] Load Failure',
     LOAD_SUCCESS = '[Photos] Load Success',
     SET_CURRENT  = '[Photos] Set Current',
+    LOAD_COMMENTS_REQUEST = '[Photos] Load Comments Request',
+    LOAD_COMMENTS_FAILURE = '[Photos] Load Comments Failure',
+    LOAD_COMMENTS_SUCCESS = '[Photos] Load Comments Success',
     LOAD_RANDOM_REQUEST = '[Photos] Load Random Request',
     LOAD_RANDOM_FAILURE = '[Photos] Load Random Failure',
     LOAD_RANDOM_SUCCESS = '[Photos] Load Random Success',
@@ -98,8 +102,26 @@ export class LoadRatingSuccessAction implements Action {
     constructor(public payload: { rating: Rating }) { }
 }
 
+export class LoadCommentsRequestAction implements Action {
+    readonly type = ActionTypes.LOAD_COMMENTS_REQUEST;
+    constructor(public payload: { photoId: number }) { }
+}
+
+export class LoadCommentsFailureAction implements Action {
+    readonly type = ActionTypes.LOAD_COMMENTS_FAILURE;
+    constructor(public payload: { error: string }) { }
+}
+
+export class LoadCommentsSuccessAction implements Action {
+    readonly type = ActionTypes.LOAD_COMMENTS_SUCCESS;
+    constructor(public payload: { comments: PhotoComment[] }) { }
+}
+
 export type Actions =
     ClearRequestAction |
+    LoadCommentsRequestAction |
+    LoadCommentsFailureAction |
+    LoadCommentsSuccessAction |
     LoadRandomRequestAction |
     LoadRandomFailureAction |
     LoadRandomSuccessAction |

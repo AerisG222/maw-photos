@@ -7,7 +7,7 @@ import { Category } from '../../models/category.model';
 import { Photo } from '../../models/photo.model';
 import { ExifDetail } from '../../models/exif-detail.model';
 import { Rating } from '../../models/rating.model';
-import { Comment } from '../../models/comment.model';
+import { PhotoComment } from '../../models/photo-comment.model';
 import { PhotoApiService } from '../photo-api.service';
 import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 
@@ -111,15 +111,15 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .post<number>(url, { photoId: photoId, rating: rating });
     }
 
-    getCommentsForPhoto(photoId: number): Observable<Comment[]> {
+    getCommentsForPhoto(photoId: number): Observable<PhotoComment[]> {
         const url = this.getAbsoluteUrl(`photos/getCommentsForPhoto/${photoId}`);
 
-        return Observable.create((observer: Observer<Comment[]>) => {
+        return Observable.create((observer: Observer<PhotoComment[]>) => {
             this._http
-                .get<Comment[]>(url)
+                .get<PhotoComment[]>(url)
                 .subscribe(comments => {
                     // deal with dates
-                    const c = comments.map((x: Comment) => {
+                    const c = comments.map((x: PhotoComment) => {
                         x.entryDate = new Date(x.entryDate.toString());
                         return x;
                     });
