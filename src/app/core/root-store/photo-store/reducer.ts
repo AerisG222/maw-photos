@@ -149,6 +149,27 @@ export function photoReducer(state = initialState, action: Actions): State {
                 error: action.payload.error
             };
         }
+        case ActionTypes.ADD_COMMENT_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        }
+        case ActionTypes.ADD_COMMENT_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                error: null
+            };
+        }
+        case ActionTypes.ADD_COMMENT_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
+            };
+        }
         default: {
             return state;
         }

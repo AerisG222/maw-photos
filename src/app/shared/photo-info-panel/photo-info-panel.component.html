@@ -12,7 +12,9 @@
     </app-rating>
 
     <app-comments
-        [comments]="(comments$ | async)">
+        [comments]="(comments$ | async)"
+        (comment)="onComment($event)"
+        #comments>
     </app-comments>
 
     <div>exif</div>

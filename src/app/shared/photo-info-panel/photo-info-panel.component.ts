@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { RootStoreState } from 'src/app/core/root-store';
@@ -8,6 +8,7 @@ import { takeUntil, tap, filter } from 'rxjs/operators';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -18,6 +19,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
+    @ViewChild(CommentsComponent) comments: CommentsComponent;
 
     private currentPhoto: Photo;
     private destroy$ = new Subject<boolean>();
@@ -41,7 +43,11 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         );
 
         this.comments$ = this._store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoComments)
+            select(PhotoStoreSelectors.selectCurrentPhotoComments),
+            tap(x => {
+                if (this.comments) {
+                    this.comments.saveSucceeded();
+                }})
         );
 
         currentPhoto$.subscribe();
@@ -58,6 +64,12 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     onRate(userRating: number): void {
         if (this.currentPhoto) {
             this._store$.dispatch(new PhotoStoreActions.RatePhotoRequestAction({ photoId: this.currentPhoto.id, userRating: userRating }));
+        }
+    }
+
+    onComment(comment: string): void {
+        if (this.currentPhoto) {
+            this._store$.dispatch(new PhotoStoreActions.AddCommentRequestAction({ photoId: this.currentPhoto.id, comment: comment }));
         }
     }
 }

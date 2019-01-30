@@ -22,6 +22,9 @@ export enum ActionTypes {
     RATE_PHOTO_REQUEST = '[Photos] Rate Photo Request',
     RATE_PHOTO_FAILURE = '[Photos] Rate Photo Failure',
     RATE_PHOTO_SUCCESS = '[Photos] Rate Photo Success',
+    ADD_COMMENT_REQUEST = '[Photos] Add Comment Request',
+    ADD_COMMENT_FAILURE = '[Photos] Add Comment Failure',
+    ADD_COMMENT_SUCCESS = '[Photos] Add Comment Success',
     MOVE_NEXT_REQUEST = '[Photos] Move Next Request',
     MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request'
 }
@@ -117,6 +120,21 @@ export class LoadCommentsSuccessAction implements Action {
     constructor(public payload: { comments: PhotoComment[] }) { }
 }
 
+export class AddCommentRequestAction implements Action {
+    readonly type = ActionTypes.ADD_COMMENT_REQUEST;
+    constructor(public payload: { photoId: number, comment: string }) { }
+}
+
+export class AddCommentFailureAction implements Action {
+    readonly type = ActionTypes.ADD_COMMENT_FAILURE;
+    constructor(public payload: { error: string }) { }
+}
+
+export class AddCommentSuccessAction implements Action {
+    readonly type = ActionTypes.ADD_COMMENT_SUCCESS;
+    constructor(public payload: { photoId: number }) { }
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -136,4 +154,7 @@ export type Actions =
     MovePreviousRequestAction |
     RatePhotoRequestAction |
     RatePhotoFailureAction |
-    RatePhotoSuccessAction;
+    RatePhotoSuccessAction |
+    AddCommentRequestAction |
+    AddCommentFailureAction |
+    AddCommentSuccessAction;

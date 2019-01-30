@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { switchMap, catchError, map, concatMap } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, tap } from 'rxjs/operators';
 
 import * as photoActions from './actions';
 import { photoApiServiceToken, PhotoApiService } from '../../services/photo-api.service';
@@ -74,5 +74,23 @@ export class PhotoStoreEffects {
                     catchError(error => of(new photoActions.RatePhotoFailureAction({ error: error })))
                 )
         )
+    );
+
+    @Effect()
+    addCommentRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.AddCommentRequestAction>(photoActions.ActionTypes.ADD_COMMENT_REQUEST),
+        switchMap(action =>
+            this._api.addCommentForPhoto(action.payload.photoId, action.payload.comment)
+                .pipe(
+                    map(result => new photoActions.AddCommentSuccessAction({ photoId: action.payload.photoId })),
+                    catchError(error => of(new photoActions.AddCommentFailureAction({ error: error })))
+                )
+        )
+    );
+
+    @Effect()
+    addCommentSuccessEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.AddCommentSuccessAction>(photoActions.ActionTypes.ADD_COMMENT_SUCCESS),
+        map(action => new photoActions.LoadCommentsRequestAction({ photoId: action.payload.photoId }))
     );
 }

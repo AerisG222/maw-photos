@@ -16,3 +16,12 @@
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
 </table>
+
+<form [formGroup]="form">
+    <mat-form-field appearance="standard" class="comment-input">
+        <textarea matInput formControlName="comment" placeholder="Add Comment"></textarea>
+    </mat-form-field>
+
+    <button mat-button (click)="onComment()">Save</button>
+    <button mat-button (click)="onCancel()">Cancel</button>
+</form>
