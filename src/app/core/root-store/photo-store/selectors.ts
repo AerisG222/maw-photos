@@ -9,6 +9,7 @@ import { photoAdapter, State } from './state';
 import { PHOTO_FEATURE_NAME } from './photo-store.module';
 import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
+import { ExifDetail } from '../../models/exif-detail.model';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
@@ -17,6 +18,7 @@ export const getFirstPhoto = (state: State): Photo => state.firstPhoto;
 export const getLastPhoto = (state: State): Photo => state.lastPhoto;
 export const getCurrentPhotoRating = (state: State): Rating => state.currentPhotoRating;
 export const getCurrentPhotoComments = (state: State): PhotoComment[] => state.currentPhotoComments;
+export const getCurrentPhotoExifData = (state: State): ExifDetail => state.currentPhotoExifData;
 
 export const selectPhotoState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
@@ -48,6 +50,7 @@ export const selectLastPhoto: MemoizedSelector<object, Photo> = createSelector(s
 export const selectCurrentPhotoRating: MemoizedSelector<object, Rating> = createSelector(selectPhotoState, getCurrentPhotoRating);
 // tslint:disable-next-line:max-line-length
 export const selectCurrentPhotoComments: MemoizedSelector<object, PhotoComment[]> = createSelector(selectPhotoState, getCurrentPhotoComments);
+export const selectCurrentPhotoExifData: MemoizedSelector<object, ExifDetail> = createSelector(selectPhotoState, getCurrentPhotoExifData);
 
 export const selectIsCurrentPhotoFirst: MemoizedSelector<object, boolean> =
     createSelector(selectCurrentPhoto, selectFirstPhoto, (current, first) => {

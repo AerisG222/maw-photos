@@ -170,6 +170,28 @@ export function photoReducer(state = initialState, action: Actions): State {
                 error: action.payload.error
             };
         }
+        case ActionTypes.LOAD_EXIF_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        }
+        case ActionTypes.LOAD_EXIF_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+                currentPhotoExifData: action.payload.exif
+            };
+        }
+        case ActionTypes.LOAD_EXIF_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
+            };
+        }
         default: {
             return state;
         }

@@ -9,6 +9,7 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
 import { CommentsComponent } from '../comments/comments.component';
+import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -19,6 +20,8 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
+    exif$: Observable<ExifDetail>;
+
     @ViewChild(CommentsComponent) comments: CommentsComponent;
 
     private currentPhoto: Photo;
@@ -35,6 +38,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             tap(photo => this.currentPhoto = photo),
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
+            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
             takeUntil(this.destroy$)
         );
 
@@ -48,6 +52,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 if (this.comments) {
                     this.comments.saveSucceeded();
                 }})
+        );
+
+        this.exif$ = this._store$.pipe(
+            select(PhotoStoreSelectors.selectCurrentPhotoExifData)
         );
 
         currentPhoto$.subscribe();

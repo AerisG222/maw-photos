@@ -93,4 +93,16 @@ export class PhotoStoreEffects {
         ofType<photoActions.AddCommentSuccessAction>(photoActions.ActionTypes.ADD_COMMENT_SUCCESS),
         map(action => new photoActions.LoadCommentsRequestAction({ photoId: action.payload.photoId }))
     );
+
+    @Effect()
+    loadExifRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.LoadExifRequestAction>(photoActions.ActionTypes.LOAD_EXIF_REQUEST),
+        switchMap(action =>
+            this._api.getPhotoExifData(action.payload.photoId)
+                .pipe(
+                    map(data => new photoActions.LoadExifSuccessAction({ exif: data })),
+                    catchError(error => of(new photoActions.LoadExifFailureAction({ error: error })))
+                )
+        )
+    );
 }

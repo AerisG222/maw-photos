@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
+import { ExifDetail } from '../../models/exif-detail.model';
 
 export enum ActionTypes {
     CLEAR_REQUEST = '[Photos] Clear',
@@ -25,6 +26,9 @@ export enum ActionTypes {
     ADD_COMMENT_REQUEST = '[Photos] Add Comment Request',
     ADD_COMMENT_FAILURE = '[Photos] Add Comment Failure',
     ADD_COMMENT_SUCCESS = '[Photos] Add Comment Success',
+    LOAD_EXIF_REQUEST = '[Photos] Load Exif Request',
+    LOAD_EXIF_FAILURE = '[Photos] Load Exif Failure',
+    LOAD_EXIF_SUCCESS = '[Photos] Load Exif Success',
     MOVE_NEXT_REQUEST = '[Photos] Move Next Request',
     MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request'
 }
@@ -135,6 +139,21 @@ export class AddCommentSuccessAction implements Action {
     constructor(public payload: { photoId: number }) { }
 }
 
+export class LoadExifRequestAction implements Action {
+    readonly type = ActionTypes.LOAD_EXIF_REQUEST;
+    constructor(public payload: { photoId: number }) { }
+}
+
+export class LoadExifFailureAction implements Action {
+    readonly type = ActionTypes.LOAD_EXIF_FAILURE;
+    constructor(public payload: { error: string }) { }
+}
+
+export class LoadExifSuccessAction implements Action {
+    readonly type = ActionTypes.LOAD_EXIF_SUCCESS;
+    constructor(public payload: { exif: ExifDetail }) { }
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -157,4 +176,7 @@ export type Actions =
     RatePhotoSuccessAction |
     AddCommentRequestAction |
     AddCommentFailureAction |
-    AddCommentSuccessAction;
+    AddCommentSuccessAction |
+    LoadExifRequestAction |
+    LoadExifFailureAction |
+    LoadExifSuccessAction;

@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
 import { RatingComponent } from './rating/rating.component';
 import { CommentsComponent } from './comments/comments.component';
+import { ExifComponent } from './exif/exif.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { CommentsComponent } from './comments/comments.component';
         PhotoListComponent,
         PhotoViewComponent,
         RatingComponent,
-        CommentsComponent
+        CommentsComponent,
+        ExifComponent
     ],
     imports: [
         BarRatingModule,
