@@ -1,9 +1,10 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-rating',
     templateUrl: './rating.component.html',
-    styleUrls: ['./rating.component.scss']
+    styleUrls: ['./rating.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent {
     @Input() yourRating: number;
