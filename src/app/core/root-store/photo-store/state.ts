@@ -4,6 +4,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
 import { ExifDetail } from '../../models/exif-detail.model';
+import { PhotoEffects } from '../../models/photo-effects.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>({
     sortComparer: (a: Photo, b: Photo): number => b.id - a.id
@@ -18,6 +19,7 @@ export interface State extends EntityState<Photo> {
     currentPhotoRating: Rating;
     currentPhotoComments: PhotoComment[];
     currentPhotoExifData: ExifDetail;
+    currentPhotoEffects: PhotoEffects;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
@@ -28,5 +30,6 @@ export const initialState: State = photoAdapter.getInitialState({
     lastPhoto: null,
     currentPhotoRating: null,
     currentPhotoComments: null,
-    currentPhotoExifData: null
+    currentPhotoExifData: null,
+    currentPhotoEffects: null
 });

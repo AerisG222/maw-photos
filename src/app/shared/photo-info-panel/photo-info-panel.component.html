@@ -21,8 +21,11 @@
         [exif]="exif$ | async">
     </app-exif>
 
-    <div>histogram</div>
-    <div>filters / effects / rotation</div>
+    <app-effects
+        (rotateClockwise)="rotateClockwise()"
+        (rotateCounterClockwise)="rotateCounterClockwise()" >
+    </app-effects>
+
     <div>fullscreen</div>
     <div>downloads</div>
     <div>slideshow</div>

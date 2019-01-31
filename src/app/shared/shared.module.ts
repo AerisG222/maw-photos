@@ -31,6 +31,7 @@ import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.com
 import { RatingComponent } from './rating/rating.component';
 import { CommentsComponent } from './comments/comments.component';
 import { ExifComponent } from './exif/exif.component';
+import { EffectsComponent } from './effects/effects.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { ExifComponent } from './exif/exif.component';
         PhotoViewComponent,
         RatingComponent,
         CommentsComponent,
-        ExifComponent
+        ExifComponent,
+        EffectsComponent
     ],
     imports: [
         BarRatingModule,

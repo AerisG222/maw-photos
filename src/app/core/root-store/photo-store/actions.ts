@@ -4,6 +4,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
 import { ExifDetail } from '../../models/exif-detail.model';
+import { PhotoRotation } from '../../models/photo-rotation.model';
 
 export enum ActionTypes {
     CLEAR_REQUEST = '[Photos] Clear',
@@ -30,7 +31,10 @@ export enum ActionTypes {
     LOAD_EXIF_FAILURE = '[Photos] Load Exif Failure',
     LOAD_EXIF_SUCCESS = '[Photos] Load Exif Success',
     MOVE_NEXT_REQUEST = '[Photos] Move Next Request',
-    MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request'
+    MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request',
+    ROTATE_CLOCKWISE_REQUEST = '[Photos] Rotate Clockwise Request',
+    ROTATE_COUNTER_CLOCKWISE_REQUEST = '[Photos] Rotate Counter Clockwise Request',
+    ROTATE_SUCCESS = '[Photos] Rotate Success'
 }
 
 export class ClearRequestAction implements Action {
@@ -154,6 +158,19 @@ export class LoadExifSuccessAction implements Action {
     constructor(public payload: { exif: ExifDetail }) { }
 }
 
+export class RotateClockwiseRequestAction implements Action {
+    readonly type = ActionTypes.ROTATE_CLOCKWISE_REQUEST;
+}
+
+export class RotateCounterClockwiseRequestAction implements Action {
+    readonly type = ActionTypes.ROTATE_COUNTER_CLOCKWISE_REQUEST;
+}
+
+export class RotateSuccessAction implements Action {
+    readonly type = ActionTypes.ROTATE_SUCCESS;
+    constructor(public payload: { newRotation: PhotoRotation }) { }
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -179,4 +196,7 @@ export type Actions =
     AddCommentSuccessAction |
     LoadExifRequestAction |
     LoadExifFailureAction |
-    LoadExifSuccessAction;
+    LoadExifSuccessAction |
+    RotateClockwiseRequestAction |
+    RotateCounterClockwiseRequestAction |
+    RotateSuccessAction;

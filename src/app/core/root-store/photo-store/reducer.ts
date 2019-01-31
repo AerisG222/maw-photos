@@ -192,6 +192,21 @@ export function photoReducer(state = initialState, action: Actions): State {
                 error: action.payload.error
             };
         }
+        case ActionTypes.ROTATE_CLOCKWISE_REQUEST: {
+            return state;
+        }
+        case ActionTypes.ROTATE_COUNTER_CLOCKWISE_REQUEST: {
+            return state;
+        }
+        case ActionTypes.ROTATE_SUCCESS: {
+            return {
+                ...state,
+                currentPhotoEffects: {
+                    ...state.currentPhotoEffects,
+                    rotation: action.payload.newRotation
+                }
+            };
+        }
         default: {
             return state;
         }

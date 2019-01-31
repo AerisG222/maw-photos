@@ -1,17 +1,20 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, tap } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, withLatestFrom } from 'rxjs/operators';
 
 import * as photoActions from './actions';
 import { photoApiServiceToken, PhotoApiService } from '../../services/photo-api.service';
+import { RootStoreState } from '..';
+import { PhotoRotation } from '../../models/photo-rotation.model';
 
 @Injectable()
 export class PhotoStoreEffects {
     constructor(
+        private _actions$: Actions,
+        private _store$: Store<RootStoreState.State>,
         @Inject(photoApiServiceToken) private _api: PhotoApiService,
-        private _actions$: Actions
     ) {
 
     }
@@ -104,5 +107,37 @@ export class PhotoStoreEffects {
                     catchError(error => of(new photoActions.LoadExifFailureAction({ error: error })))
                 )
         )
+    );
+
+    @Effect()
+    rotateClockwiseEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.RotateClockwiseRequestAction>(photoActions.ActionTypes.ROTATE_CLOCKWISE_REQUEST),
+        withLatestFrom(this._store$),
+        map(x => {
+            const action = x[0];
+            const state = <any>x[1];
+            const effects = state.photos.currentPhotoEffects;
+            const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
+
+            rotation.rotateClockwise();
+
+            return new photoActions.RotateSuccessAction({ newRotation: rotation });
+        })
+    );
+
+    @Effect()
+    rotateCounterClockwiseEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.RotateCounterClockwiseRequestAction>(photoActions.ActionTypes.ROTATE_COUNTER_CLOCKWISE_REQUEST),
+        withLatestFrom(this._store$),
+        map(x => {
+            const action = x[0];
+            const state = <any>x[1];
+            const effects = state.photos.currentPhotoEffects;
+            const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
+
+            rotation.rotateCounterClockwise();
+
+            return new photoActions.RotateSuccessAction({ newRotation: rotation });
+        })
     );
 }

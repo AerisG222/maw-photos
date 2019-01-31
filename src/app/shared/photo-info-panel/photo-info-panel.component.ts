@@ -80,4 +80,16 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             this._store$.dispatch(new PhotoStoreActions.AddCommentRequestAction({ photoId: this.currentPhoto.id, comment: comment }));
         }
     }
+
+    rotateClockwise(): void {
+        if (this.currentPhoto) {
+            this._store$.dispatch(new PhotoStoreActions.RotateClockwiseRequestAction());
+        }
+    }
+
+    rotateCounterClockwise(): void {
+        if (this.currentPhoto) {
+            this._store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
+        }
+    }
 }
