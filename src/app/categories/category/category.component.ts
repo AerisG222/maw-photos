@@ -17,6 +17,7 @@ import {
 } from 'src/app/core/root-store';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
+import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 
 @Component({
     selector: 'app-category',
@@ -28,6 +29,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
+    effects$: Observable<PhotoEffects>;
 
     private hotkeys: Hotkey[] = [];
 
@@ -92,6 +94,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
         this.activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto)
+            );
+
+        this.effects$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());

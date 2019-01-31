@@ -2,7 +2,7 @@
     <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [category]="category"></app-category-header>
 
     <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs">
-        <img [src]="activePhoto?.mdInfo?.path" />
+        <img [src]="activePhoto?.mdInfo?.path" [class]="effects?.rotation?.klass" />
         <app-photo-list
             *ngIf="settings?.showCategoryPhotoList"
             [photos]="photos"

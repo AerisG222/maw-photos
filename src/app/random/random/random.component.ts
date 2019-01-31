@@ -16,6 +16,7 @@ import {
 } from 'src/app/core/root-store';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
+import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 
 @Component({
     selector: 'app-random',
@@ -27,6 +28,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
+    effects$: Observable<PhotoEffects>;
 
     // any to avoid ts identifying result of setInterval as Timer (from nodejs)
     private intervalId: any = -1;
@@ -94,6 +96,11 @@ export class RandomComponent implements OnInit, OnDestroy {
                             take(1)
                         ).subscribe();
                 })
+            );
+
+        this.effects$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());

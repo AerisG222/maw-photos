@@ -5,6 +5,7 @@ import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
 import { ExifDetail } from '../../models/exif-detail.model';
 import { PhotoEffects } from '../../models/photo-effects.model';
+import { PhotoRotation } from '../../models/photo-rotation.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>({
     sortComparer: (a: Photo, b: Photo): number => b.id - a.id
@@ -31,5 +32,5 @@ export const initialState: State = photoAdapter.getInitialState({
     currentPhotoRating: null,
     currentPhotoComments: null,
     currentPhotoExifData: null,
-    currentPhotoEffects: null
+    currentPhotoEffects: { rotation: new PhotoRotation() }
 });
