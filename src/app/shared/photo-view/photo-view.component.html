@@ -1,13 +1,16 @@
 <div fxLayout="column" style="height: 100%;">
-    <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [category]="category"></app-category-header>
+    <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [category]="category" fxFlex="0 0 auto"></app-category-header>
 
-    <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs">
+    <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxFlexAlign="center">
         <img [src]="activePhoto?.mdInfo?.path" [class]="effects?.rotation?.klass" />
-        <app-photo-list
-            *ngIf="settings?.showCategoryPhotoList"
-            [photos]="photos"
-            [thumbnailSize]="settings?.photoListThumbnailSize"
-            (select)="onSelectPhoto($event)"
-            [selectedPhoto]="activePhoto"></app-photo-list>
     </div>
+
+    <app-photo-list
+        *ngIf="photos && settings?.showCategoryPhotoList"
+        [photos]="photos"
+        [thumbnailSize]="settings?.photoListThumbnailSize"
+        (select)="onSelectPhoto($event)"
+        [selectedPhoto]="activePhoto"
+        fxFlex="0 0 auto">
+    </app-photo-list>
 </div>
