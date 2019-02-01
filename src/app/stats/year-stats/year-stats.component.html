@@ -1,13 +1,21 @@
-<app-stats-header
-    [year]="activeYear$ | async">
-</app-stats-header>
+<div fxLayout="column" style="height: 100%;">
+    <div fxFlex="0 0 auto">
+        <app-stats-header
+            [year]="activeYear$ | async">
+        </app-stats-header>
+    </div>
 
-<app-stat-detail-card
-    [title]="activeYear$ | async"
-    [categoryCount]="categoryCount"
-    [photoCount]="photoCount">
-</app-stat-detail-card>
+    <div fxFlex="0 0 auto">
+        <app-stat-detail-card
+            [title]="activeYear$ | async"
+            [categoryCount]="categoryCount"
+            [photoCount]="photoCount">
+        </app-stat-detail-card>
+    </div>
 
-<app-stat-chart
-    [chartData]="chartData$ | async">
-</app-stat-chart>
+    <div fxFlex="1 1 auto">
+        <app-stat-chart
+            [chartData]="chartData$ | async">
+        </app-stat-chart>
+    </div>
+</div>

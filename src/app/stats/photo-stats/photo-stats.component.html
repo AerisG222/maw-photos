@@ -1,13 +1,21 @@
-<app-stats-header></app-stats-header>
+<div fxLayout="column" style="height: 100%;">
+    <div fxFlex="0 0 auto">
+        <app-stats-header></app-stats-header>
+    </div>
 
-<app-stat-detail-card
-    title="All Time"
-    [yearCount]="yearCount"
-    [categoryCount]="categoryCount"
-    [photoCount]="photoCount">
-</app-stat-detail-card>
+    <div fxFlex="0 0 auto">
+        <app-stat-detail-card
+            title="All Time"
+            [yearCount]="yearCount"
+            [categoryCount]="categoryCount"
+            [photoCount]="photoCount">
+        </app-stat-detail-card>
+    </div>
 
-<app-stat-chart
-    [chartData]="chartData$ | async"
-    (select)="onSelect($event)">
-</app-stat-chart>
+    <div fxFlex="1 1 auto">
+        <app-stat-chart
+            [chartData]="chartData$ | async"
+            (select)="onSelect($event)">
+        </app-stat-chart>
+    </div>
+</div>
