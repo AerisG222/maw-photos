@@ -22,8 +22,11 @@
     </app-exif>
 
     <app-effects
+        [effects]="effects$ | async"
         (rotateClockwise)="rotateClockwise()"
-        (rotateCounterClockwise)="rotateCounterClockwise()" >
+        (rotateCounterClockwise)="rotateCounterClockwise()"
+        (resetEffects)="onResetEffects()"
+        (updateEffects)="onUpdateEffects($event)">
     </app-effects>
 
     <div>fullscreen</div>

@@ -10,6 +10,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
 import { CommentsComponent } from '../comments/comments.component';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
+import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -21,6 +22,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
     exif$: Observable<ExifDetail>;
+    effects$: Observable<PhotoEffects>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
 
@@ -58,6 +60,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             select(PhotoStoreSelectors.selectCurrentPhotoExifData)
         );
 
+        this.effects$ = this._store$.pipe(
+            select(PhotoStoreSelectors.selectCurrentPhotoEffects)
+        );
+
         currentPhoto$.subscribe();
     }
 
@@ -90,6 +96,18 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     rotateCounterClockwise(): void {
         if (this.currentPhoto) {
             this._store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
+        }
+    }
+
+    onResetEffects(): void {
+        if (this.currentPhoto) {
+            this._store$.dispatch(new PhotoStoreActions.ResetEffectsRequestAction());
+        }
+    }
+
+    onUpdateEffects(effects: PhotoEffects): void {
+        if (this.currentPhoto) {
+            this._store$.dispatch(new PhotoStoreActions.UpdateEffectsRequestAction({ effects: effects }));
         }
     }
 }

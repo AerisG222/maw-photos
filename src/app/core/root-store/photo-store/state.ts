@@ -32,5 +32,15 @@ export const initialState: State = photoAdapter.getInitialState({
     currentPhotoRating: null,
     currentPhotoComments: null,
     currentPhotoExifData: null,
-    currentPhotoEffects: { rotation: new PhotoRotation() }
+    currentPhotoEffects: {
+        rotation: new PhotoRotation(),
+        grayscale: 0,
+        sepia: 0,
+        brightness: 100,
+        saturation: 100,
+        contrast: 100,
+        invert: 0,
+        blur: 0,
+        hueRotate: 0
+    }
 });

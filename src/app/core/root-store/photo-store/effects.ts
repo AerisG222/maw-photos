@@ -8,6 +8,7 @@ import * as photoActions from './actions';
 import { photoApiServiceToken, PhotoApiService } from '../../services/photo-api.service';
 import { RootStoreState } from '..';
 import { PhotoRotation } from '../../models/photo-rotation.model';
+import { PhotoStoreState } from '.';
 
 @Injectable()
 export class PhotoStoreEffects {

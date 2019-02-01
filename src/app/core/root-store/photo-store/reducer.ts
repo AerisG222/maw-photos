@@ -1,6 +1,7 @@
 import { Actions, ActionTypes } from './actions';
 import { photoAdapter, initialState, State } from './state';
 import { Photo } from '../../models/photo.model';
+import { PhotoRotation } from '../../models/photo-rotation.model';
 
 export function photoReducer(state = initialState, action: Actions): State {
     switch (action.type) {
@@ -204,6 +205,30 @@ export function photoReducer(state = initialState, action: Actions): State {
                 currentPhotoEffects: {
                     ...state.currentPhotoEffects,
                     rotation: action.payload.newRotation
+                }
+            };
+        }
+        case ActionTypes.RESET_EFFECTS_REQUEST: {
+            return {
+                ...state,
+                currentPhotoEffects: {
+                    rotation: new PhotoRotation(),
+                    grayscale: 0,
+                    sepia: 0,
+                    brightness: 100,
+                    saturation: 100,
+                    contrast: 100,
+                    invert: 0,
+                    blur: 0,
+                    hueRotate: 0
+                }
+            };
+        }
+        case ActionTypes.UPDATE_EFFECTS_REQUEST: {
+            return {
+                ...state,
+                currentPhotoEffects: {
+                    ...action.payload.effects
                 }
             };
         }

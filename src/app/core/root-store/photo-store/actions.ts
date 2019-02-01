@@ -5,6 +5,7 @@ import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
 import { ExifDetail } from '../../models/exif-detail.model';
 import { PhotoRotation } from '../../models/photo-rotation.model';
+import { PhotoEffects } from '../../models/photo-effects.model';
 
 export enum ActionTypes {
     CLEAR_REQUEST = '[Photos] Clear',
@@ -34,7 +35,9 @@ export enum ActionTypes {
     MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request',
     ROTATE_CLOCKWISE_REQUEST = '[Photos] Rotate Clockwise Request',
     ROTATE_COUNTER_CLOCKWISE_REQUEST = '[Photos] Rotate Counter Clockwise Request',
-    ROTATE_SUCCESS = '[Photos] Rotate Success'
+    ROTATE_SUCCESS = '[Photos] Rotate Success',
+    RESET_EFFECTS_REQUEST = '[Photos] Reset Effects Request',
+    UPDATE_EFFECTS_REQUEST = '[Photos] Update Effects Request'
 }
 
 export class ClearRequestAction implements Action {
@@ -171,6 +174,15 @@ export class RotateSuccessAction implements Action {
     constructor(public payload: { newRotation: PhotoRotation }) { }
 }
 
+export class ResetEffectsRequestAction implements Action {
+    readonly type = ActionTypes.RESET_EFFECTS_REQUEST;
+}
+
+export class UpdateEffectsRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_EFFECTS_REQUEST;
+    constructor(public payload: { effects: PhotoEffects }) { }
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -199,4 +211,6 @@ export type Actions =
     LoadExifSuccessAction |
     RotateClockwiseRequestAction |
     RotateCounterClockwiseRequestAction |
-    RotateSuccessAction;
+    RotateSuccessAction |
+    ResetEffectsRequestAction |
+    UpdateEffectsRequestAction;
