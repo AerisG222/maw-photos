@@ -33,10 +33,12 @@ import { RatingComponent } from './rating/rating.component';
 import { CommentsComponent } from './comments/comments.component';
 import { ExifComponent } from './exif/exif.component';
 import { EffectsComponent } from './effects/effects.component';
+import { CategoryListMiniSettingsComponent } from './category-list-mini-settings/category-list-mini-settings.component';
 
 @NgModule({
     declarations: [
         CategoryHeaderComponent,
+        CategoryListMiniSettingsComponent,
         FooterComponent,
         HeaderComponent,
         PhotoInfoPanelComponent,
@@ -94,6 +96,7 @@ import { EffectsComponent } from './effects/effects.component';
 
         // components
         CategoryHeaderComponent,
+        CategoryListMiniSettingsComponent,
         FooterComponent,
         HeaderComponent,
         PhotoInfoPanelComponent,

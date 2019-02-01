@@ -1,0 +1,7 @@
+<button mat-button (click)="onToggleTitle()">
+    <mat-icon>title</mat-icon>
+</button>
+
+<button mat-button (click)="onToggleSize()" [disabled]="settings?.showCategoryTitles">
+    <mat-icon>photo_size_select_large</mat-icon>
+</button>

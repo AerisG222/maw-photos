@@ -35,4 +35,21 @@ export class ThumbnailSize {
 
         return null;
     }
+
+    static nextSize(name: string): ThumbnailSize {
+        switch (name) {
+            case ThumbnailSize.default.name:
+                return ThumbnailSize.small;
+            case ThumbnailSize.small.name:
+                return ThumbnailSize.verySmall;
+            case ThumbnailSize.verySmall.name:
+                return ThumbnailSize.tiny;
+            case ThumbnailSize.tiny.name:
+                return ThumbnailSize.default;
+            default:
+                console.error(`invalid thumbnail size requested: ${name}`);
+        }
+
+        return null;
+    }
 }
