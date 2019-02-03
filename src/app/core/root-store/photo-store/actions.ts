@@ -38,7 +38,9 @@ export enum ActionTypes {
     ROTATE_SUCCESS = '[Photos] Rotate Success',
     RESET_EFFECTS_REQUEST = '[Photos] Reset Effects Request',
     UPDATE_EFFECTS_REQUEST = '[Photos] Update Effects Request',
-    TOGGLE_SLIDESHOW_REQUEST = '[Photos] Toggle Slidesow'
+    TOGGLE_SLIDESHOW_REQUEST = '[Photos] Toggle Slideshow Request',
+    START_SLIDESHOW_REQUEST = '[Photos] Start Slideshow Request',
+    STOP_SLIDESHOW_REQUEST = '[Photos] Stop Slideshow Request'
 }
 
 export class ClearRequestAction implements Action {
@@ -188,6 +190,14 @@ export class ToggleSlideshowRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_SLIDESHOW_REQUEST;
 }
 
+export class StartSlideshowRequestAction implements Action {
+    readonly type = ActionTypes.START_SLIDESHOW_REQUEST;
+}
+
+export class StopSlideshowRequestAction implements Action {
+    readonly type = ActionTypes.STOP_SLIDESHOW_REQUEST;
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -219,4 +229,6 @@ export type Actions =
     RotateSuccessAction |
     ResetEffectsRequestAction |
     UpdateEffectsRequestAction |
-    ToggleSlideshowRequestAction;
+    ToggleSlideshowRequestAction |
+    StartSlideshowRequestAction |
+    StopSlideshowRequestAction;

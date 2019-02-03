@@ -17,11 +17,13 @@ import {
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { RandomControlService } from 'src/app/core/services/random-control.service';
 
 @Component({
     selector: 'app-random',
     templateUrl: './random.component.html',
-    styleUrls: ['./random.component.scss']
+    styleUrls: ['./random.component.scss'],
+    providers: [ RandomControlService ]
 })
 export class RandomComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings>;
@@ -37,12 +39,15 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     constructor(
         private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private _hotkeysService: HotkeysService,
+        private randomControlSvc: RandomControlService
     ) {
 
     }
 
     ngOnInit() {
+        this.randomControlSvc.start();
+
         this.hotkeys.push(<Hotkey> this._hotkeysService
             .add(new Hotkey(
                 'right',
@@ -113,6 +118,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.randomControlSvc.dispose();
         this._hotkeysService.remove(this.hotkeys);
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
     }

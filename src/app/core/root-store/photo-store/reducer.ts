@@ -244,6 +244,18 @@ export function photoReducer(state = initialState, action: Actions): State {
                 slideshowIsPlaying: !state.slideshowIsPlaying
             };
         }
+        case ActionTypes.START_SLIDESHOW_REQUEST: {
+            return {
+                ...state,
+                slideshowIsPlaying: true
+            };
+        }
+        case ActionTypes.STOP_SLIDESHOW_REQUEST: {
+            return {
+                ...state,
+                slideshowIsPlaying: false
+            };
+        }
         default: {
             return state;
         }

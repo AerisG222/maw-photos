@@ -18,11 +18,13 @@ import {
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { RandomControlService } from 'src/app/core/services/random-control.service';
 
 @Component({
     selector: 'app-category',
     templateUrl: './category.component.html',
-    styleUrls: ['./category.component.scss']
+    styleUrls: ['./category.component.scss'],
+    providers: [ RandomControlService ]
 })
 export class CategoryComponent implements OnInit, OnDestroy {
     destroy$ = new Subject<boolean>();
@@ -32,21 +34,21 @@ export class CategoryComponent implements OnInit, OnDestroy {
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;
 
-    private isSlideshowPlaying = false;
-    private intervalId: number = null;
-    private slideshowDuration: number;
     private hotkeys: Hotkey[] = [];
 
     constructor(
         private _route: ActivatedRoute,
         private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private _hotkeysService: HotkeysService,
+        private randomControlSvc: RandomControlService
     ) {
 
     }
 
     ngOnInit() {
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
+
+        this.randomControlSvc.start();
 
         this.hotkeys.push(<Hotkey> this._hotkeysService
             .add(new Hotkey(
@@ -66,34 +68,14 @@ export class CategoryComponent implements OnInit, OnDestroy {
                 }))
             );
 
-        this._store$
-            .pipe(
-                select(PhotoStoreSelectors.selectSlideshowIsPlaying),
-                tap(isPlaying => this.isSlideshowPlaying = isPlaying),
-                tap(isPlaying => isPlaying ? this.startSlideshow() : this.stopSlideshow()),
-                takeUntil(this.destroy$)
-            ).subscribe();
-
-        this._store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLast),
-                map(x => {
-                    if (this.isSlideshowPlaying) {
-                        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
-                    }
-                }),
-                takeUntil(this.destroy$)
-            ).subscribe();
-
-        this.settings$ = this._store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.slideshowDuration = settings.randomDisplayDurationSeconds * 1000)
-            );
-
         const categoryId$ = this._route.params
             .pipe(
                 map(p => Number(p.id))
+            );
+
+        this.settings$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSettings)
             );
 
         this.category$ = categoryId$
@@ -135,11 +117,10 @@ export class CategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.randomControlSvc.dispose();
         this._hotkeysService.remove(this.hotkeys);
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroy$.next(true);
-
-        this.stopSlideshow();
     }
 
     onSelectPhoto(photo: Photo): void {
@@ -148,18 +129,5 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
     private setCurrentPhoto(photo: Photo): void {
         this._store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo: photo }));
-    }
-
-    private startSlideshow(): void {
-        this.intervalId = window.setInterval(() => {
-            this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
-        }, this.slideshowDuration);
-    }
-
-    private stopSlideshow(): void {
-        if (this.intervalId != null) {
-            window.clearInterval(this.intervalId);
-            this.intervalId = null;
-        }
     }
 }
