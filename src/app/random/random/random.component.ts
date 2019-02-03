@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap, flatMap, take } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
 import { Photo } from 'src/app/core/models/photo.model';
