@@ -1,5 +1,9 @@
 <app-photo-list-mini-settings></app-photo-list-mini-settings>
 
+<div *ngIf="fullscreen" class="fullscreen">
+    <img [src]="activePhoto?.lgInfo?.path" />
+</div>
+
 <div fxLayout="column" style="height: 100%;">
     <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [category]="category" fxFlex="0 0 auto"></app-category-header>
 

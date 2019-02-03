@@ -33,6 +33,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;
+    isFullscreen$: Observable<boolean>;
 
     private hotkeys: Hotkey[] = [];
 
@@ -97,6 +98,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
                 tap(photos => this.setCurrentPhoto(photos[0]))
             );
 
+        this.isFullscreen$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsFullscreenView)
+            );
+
         this.activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto)
@@ -117,6 +123,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
         this.randomControlSvc.dispose();
         this._hotkeysService.remove(this.hotkeys);
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());

@@ -6,7 +6,7 @@ import { Subscription, Observable } from 'rxjs';
 import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { LayoutStoreSelectors } from './core/root-store/layout-store';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -16,6 +16,7 @@ import { delay } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnDestroy {
     themeSubscription: Subscription;
     isRightSidebarDisplayed$: Observable<boolean>;
+    hidePanels$: Observable<boolean>;
 
     constructor(
         private _store$: Store<RootStoreState.State>,
@@ -34,6 +35,13 @@ export class AppComponent implements OnInit, OnDestroy {
         this.isRightSidebarDisplayed$ = this._store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsRightSidebarDisplayed),
+                delay(0)
+            );
+
+        this.hidePanels$ = this._store$
+            .pipe(
+                select(LayoutStoreSelectors.selectLayoutIsFullscreen),
+                tap(x => console.log(`is fullscreen: ${x}`)),
                 delay(0)
             );
 

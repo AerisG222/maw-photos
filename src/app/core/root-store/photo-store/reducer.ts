@@ -256,6 +256,24 @@ export function photoReducer(state = initialState, action: Actions): State {
                 slideshowIsPlaying: false
             };
         }
+        case ActionTypes.TOGGLE_FULLSCREEN_REQUEST: {
+            return {
+                ...state,
+                isFullscreenView: !state.isFullscreenView
+            };
+        }
+        case ActionTypes.ENTER_FULLSCREEN_REQUEST: {
+            return {
+                ...state,
+                isFullscreenView: true
+            };
+        }
+        case ActionTypes.EXIT_FULLSCREEN_REQUEST: {
+            return {
+                ...state,
+                isFullscreenView: false
+            };
+        }
         default: {
             return state;
         }

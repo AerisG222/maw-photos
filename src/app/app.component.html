@@ -3,7 +3,7 @@
 -->
 
 <mat-sidenav-container [autosize]="true" fxFlex="1 1 100%">
-    <mat-sidenav disableClose #startSidenavRef mode="side" opened class="mat-elevation-z8">
+    <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="!(hidePanels$ | async)" class="mat-elevation-z8">
         <div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%;">
             <div fxLayout="column">
                 <a [routerLink]="['/categories']" routerLinkActive="active" mat-button>
@@ -32,7 +32,7 @@
         </div>
     </mat-sidenav>
 
-    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="(isRightSidebarDisplayed$ | async)">
+    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="!(hidePanels$ | async) && (isRightSidebarDisplayed$ | async)">
         <app-photo-info-panel></app-photo-info-panel>
     </mat-sidenav>
 

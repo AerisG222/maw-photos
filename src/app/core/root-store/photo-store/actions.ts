@@ -40,7 +40,10 @@ export enum ActionTypes {
     UPDATE_EFFECTS_REQUEST = '[Photos] Update Effects Request',
     TOGGLE_SLIDESHOW_REQUEST = '[Photos] Toggle Slideshow Request',
     START_SLIDESHOW_REQUEST = '[Photos] Start Slideshow Request',
-    STOP_SLIDESHOW_REQUEST = '[Photos] Stop Slideshow Request'
+    STOP_SLIDESHOW_REQUEST = '[Photos] Stop Slideshow Request',
+    TOGGLE_FULLSCREEN_REQUEST = '[Photos] Toggle Fullscreen Request',
+    ENTER_FULLSCREEN_REQUEST = '[Photos] Enter Fullscreen Request',
+    EXIT_FULLSCREEN_REQUEST = '[Photos] Exit Fullscreen Request'
 }
 
 export class ClearRequestAction implements Action {
@@ -198,6 +201,18 @@ export class StopSlideshowRequestAction implements Action {
     readonly type = ActionTypes.STOP_SLIDESHOW_REQUEST;
 }
 
+export class ToggleFullscreenRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_FULLSCREEN_REQUEST;
+}
+
+export class EnterFullscreenRequestAction implements Action {
+    readonly type = ActionTypes.ENTER_FULLSCREEN_REQUEST;
+}
+
+export class ExitFullscreenRequestAction implements Action {
+    readonly type = ActionTypes.EXIT_FULLSCREEN_REQUEST;
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -231,4 +246,7 @@ export type Actions =
     UpdateEffectsRequestAction |
     ToggleSlideshowRequestAction |
     StartSlideshowRequestAction |
-    StopSlideshowRequestAction;
+    StopSlideshowRequestAction |
+    ToggleFullscreenRequestAction |
+    EnterFullscreenRequestAction |
+    ExitFullscreenRequestAction;

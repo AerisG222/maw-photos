@@ -4,5 +4,6 @@
     [photos]="photos$ | async"
     [activePhoto]="activePhoto$ | async"
     [effects]="effects$ | async"
+    [fullscreen]="isFullscreen$ | async"
     (photoSelected)="onSelectPhoto($event)">
 </app-photo-view>

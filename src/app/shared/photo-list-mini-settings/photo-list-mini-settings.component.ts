@@ -8,6 +8,7 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'sr
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { AssetPathService, assetPathServiceToken } from 'src/app/core/services/asset-path.service';
+import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 
 @Component({
     selector: 'app-photo-list-mini-settings',
@@ -87,5 +88,10 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
 
     onToggleSlideshow(): void {
         this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+    }
+
+    onToggleFullscreen(): void {
+        this._store$.dispatch(new PhotoStoreActions.ToggleFullscreenRequestAction());
+        this._store$.dispatch(new LayoutStoreActions.ToggleFullscreenRequestAction());
     }
 }
