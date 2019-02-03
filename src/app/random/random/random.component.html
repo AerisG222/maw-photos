@@ -4,5 +4,6 @@
     [photos]="photos$ | async"
     [activePhoto]="activePhoto$ | async"
     [effects]="effects$ | async"
+    [allowCategoryDownload]="false"
     (photoSelected)="onSelectPhoto($event)">
 </app-photo-view>

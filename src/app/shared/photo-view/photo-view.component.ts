@@ -18,6 +18,7 @@ export class PhotoViewComponent {
     @Input() activePhoto: Photo;
     @Input() effects: PhotoEffects;
     @Input() fullscreen = false;
+    @Input() allowCategoryDownload: boolean;
 
     @Output() photoSelected = new EventEmitter<Photo>();
 

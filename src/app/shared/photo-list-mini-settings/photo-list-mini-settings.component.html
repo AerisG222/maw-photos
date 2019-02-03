@@ -5,7 +5,7 @@
 
     <a mat-button
         target="_blank"
-        *ngIf="categoryDownloadUrl"
+        *ngIf="allowCategoryDownload && categoryDownloadUrl"
         [href]="categoryDownloadUrl">
         <mat-icon>save_alt</mat-icon>
     </a>

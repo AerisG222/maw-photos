@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
@@ -16,6 +16,8 @@ import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
     styleUrls: ['./photo-list-mini-settings.component.scss']
 })
 export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
+    @Input() allowCategoryDownload: boolean;
+
     destroy$ = new Subject<boolean>();
     settings: Settings;
     slideshowPlaying$: Observable<boolean>;
