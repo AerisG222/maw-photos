@@ -1,0 +1,11 @@
+<button mat-button (click)="onMovePrevious()" [disabled]="isFirst$ | async">
+    <mat-icon>chevron_left</mat-icon>
+</button>
+
+<button mat-button (click)="onMoveNext()" [disabled]="isLast$ | async">
+    <mat-icon>chevron_right</mat-icon>
+</button>
+
+<button mat-button (click)="onExitFullscreen()">
+    <mat-icon>fullscreen_exit</mat-icon>
+</button>

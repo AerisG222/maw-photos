@@ -91,7 +91,7 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
     }
 
     onToggleFullscreen(): void {
-        this._store$.dispatch(new PhotoStoreActions.ToggleFullscreenRequestAction());
-        this._store$.dispatch(new LayoutStoreActions.ToggleFullscreenRequestAction());
+        this._store$.dispatch(new PhotoStoreActions.EnterFullscreenRequestAction());
+        this._store$.dispatch(new LayoutStoreActions.EnterFullscreenRequestAction());
     }
 }

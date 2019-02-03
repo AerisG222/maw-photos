@@ -1,6 +1,7 @@
 <app-photo-list-mini-settings></app-photo-list-mini-settings>
 
 <div *ngIf="fullscreen" class="fullscreen">
+    <app-photo-fullscreen-control></app-photo-fullscreen-control>
     <img [src]="activePhoto?.lgInfo?.path" />
 </div>
 

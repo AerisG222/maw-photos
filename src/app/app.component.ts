@@ -2,11 +2,11 @@ import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { Theme } from './core/models/theme.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { LayoutStoreSelectors } from './core/root-store/layout-store';
-import { delay, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -41,7 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.hidePanels$ = this._store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsFullscreen),
-                tap(x => console.log(`is fullscreen: ${x}`)),
                 delay(0)
             );
 

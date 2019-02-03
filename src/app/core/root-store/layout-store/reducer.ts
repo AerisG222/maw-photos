@@ -43,7 +43,7 @@ export function layoutReducer(state = initialState, action: Actions): State {
                     isFullscreen: true
                 }
             };
-        case ActionTypes.TOGGLE_FULLSCREEN_REQUEST:
+        case ActionTypes.EXIT_FULLSCREEN_REQUEST:
             return {
                 ...state,
                 layout: {
