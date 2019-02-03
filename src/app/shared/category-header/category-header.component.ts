@@ -9,4 +9,5 @@ import { Category } from 'src/app/core/models/category.model';
 })
 export class CategoryHeaderComponent {
     @Input() category: Category;
+    @Input() showCategoryAsLink: boolean;
 }

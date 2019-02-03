@@ -6,5 +6,6 @@
     [effects]="effects$ | async"
     [fullscreen]="isFullscreen$ | async"
     [allowCategoryDownload]="true"
+    [showCategoryAsLink]="false"
     (photoSelected)="onSelectPhoto($event)">
 </app-photo-view>
