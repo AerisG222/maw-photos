@@ -37,7 +37,8 @@ export enum ActionTypes {
     ROTATE_COUNTER_CLOCKWISE_REQUEST = '[Photos] Rotate Counter Clockwise Request',
     ROTATE_SUCCESS = '[Photos] Rotate Success',
     RESET_EFFECTS_REQUEST = '[Photos] Reset Effects Request',
-    UPDATE_EFFECTS_REQUEST = '[Photos] Update Effects Request'
+    UPDATE_EFFECTS_REQUEST = '[Photos] Update Effects Request',
+    TOGGLE_SLIDESHOW_REQUEST = '[Photos] Toggle Slidesow'
 }
 
 export class ClearRequestAction implements Action {
@@ -183,6 +184,10 @@ export class UpdateEffectsRequestAction implements Action {
     constructor(public payload: { effects: PhotoEffects }) { }
 }
 
+export class ToggleSlideshowRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_SLIDESHOW_REQUEST;
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -213,4 +218,5 @@ export type Actions =
     RotateCounterClockwiseRequestAction |
     RotateSuccessAction |
     ResetEffectsRequestAction |
-    UpdateEffectsRequestAction;
+    UpdateEffectsRequestAction |
+    ToggleSlideshowRequestAction;

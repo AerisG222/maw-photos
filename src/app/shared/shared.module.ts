@@ -34,6 +34,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { ExifComponent } from './exif/exif.component';
 import { EffectsComponent } from './effects/effects.component';
 import { CategoryListMiniSettingsComponent } from './category-list-mini-settings/category-list-mini-settings.component';
+import { PhotoListMiniSettingsComponent } from './photo-list-mini-settings/photo-list-mini-settings.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { CategoryListMiniSettingsComponent } from './category-list-mini-settings
         RatingComponent,
         CommentsComponent,
         ExifComponent,
-        EffectsComponent
+        EffectsComponent,
+        PhotoListMiniSettingsComponent
     ],
     imports: [
         BarRatingModule,
@@ -101,6 +103,7 @@ import { CategoryListMiniSettingsComponent } from './category-list-mini-settings
         HeaderComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
+        PhotoListMiniSettingsComponent,
         PhotoViewComponent
     ]
 })

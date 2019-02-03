@@ -21,6 +21,7 @@ export interface State extends EntityState<Photo> {
     currentPhotoComments: PhotoComment[];
     currentPhotoExifData: ExifDetail;
     currentPhotoEffects: PhotoEffects;
+    slideshowIsPlaying: boolean;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
@@ -42,5 +43,6 @@ export const initialState: State = photoAdapter.getInitialState({
         invert: 0,
         blur: 0,
         hueRotate: 0
-    }
+    },
+    slideshowIsPlaying: false
 });

@@ -43,13 +43,16 @@ export function photoReducer(state = initialState, action: Actions): State {
             };
         }
         case ActionTypes.LOAD_RANDOM_SUCCESS: {
-            return photoAdapter.addOne(action.payload.photo, {
+            const entities = photoAdapter.addOne(action.payload.photo, {
                 ...state,
                 isLoading: false,
-                error: null,
-                firstPhoto: state.entities[state.ids[0]],
-                lastPhoto: state.entities[state.ids[state.ids.length - 1]]
+                error: null
             });
+
+            entities.firstPhoto = entities.entities[entities.ids[0]];
+            entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
+
+            return entities;
         }
         case ActionTypes.LOAD_RANDOM_FAILURE: {
             return {
@@ -88,13 +91,16 @@ export function photoReducer(state = initialState, action: Actions): State {
             };
         }
         case ActionTypes.LOAD_SUCCESS: {
-            return photoAdapter.addAll(action.payload.photos, {
+            const entities = photoAdapter.addAll(action.payload.photos, {
                 ...state,
                 isLoading: false,
-                error: null,
-                firstPhoto: state.entities[state.ids[0]],
-                lastPhoto: state.entities[state.ids[state.ids.length - 1]]
+                error: null
             });
+
+            entities.firstPhoto = entities.entities[entities.ids[0]],
+            entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
+
+            return entities;
         }
         case ActionTypes.LOAD_FAILURE: {
             return {
@@ -230,6 +236,12 @@ export function photoReducer(state = initialState, action: Actions): State {
                 currentPhotoEffects: {
                     ...action.payload.effects
                 }
+            };
+        }
+        case ActionTypes.TOGGLE_SLIDESHOW_REQUEST: {
+            return {
+                ...state,
+                slideshowIsPlaying: !state.slideshowIsPlaying
             };
         }
         default: {
