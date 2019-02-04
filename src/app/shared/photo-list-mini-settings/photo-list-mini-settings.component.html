@@ -1,65 +1,65 @@
 <span class="category">
     <button mat-button (click)="onToggleCategoryTitle()">
-        <mat-icon>title</mat-icon>
+        <mat-icon [inline]="true">title</mat-icon>
     </button>
 
     <a mat-button
         target="_blank"
         *ngIf="allowCategoryDownload && categoryDownloadUrl"
         [href]="categoryDownloadUrl">
-        <mat-icon>save_alt</mat-icon>
+        <mat-icon [inline]="true">save_alt</mat-icon>
     </a>
 </span>
 
 <span class="photo">
     <button mat-button (click)="onRotateCounterClockwise()">
-        <mat-icon>rotate_left</mat-icon>
+        <mat-icon [inline]="true">rotate_left</mat-icon>
     </button>
 
     <button mat-button (click)="onRotateClockwise()">
-        <mat-icon>rotate_right</mat-icon>
+        <mat-icon [inline]="true">rotate_right</mat-icon>
     </button>
 
     <button mat-button (click)="onToggleSlideshow()">
-        <mat-icon *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
-        <mat-icon *ngIf="slideshowPlaying$ | async">stop</mat-icon>
+        <mat-icon [inline]="true" *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
+        <mat-icon [inline]="true" *ngIf="slideshowPlaying$ | async">stop</mat-icon>
     </button>
 
     <a mat-button
         target="_blank"
         *ngIf="smDownloadUrl"
         [href]="smDownloadUrl">
-        <mat-icon class="photo-sm">photo</mat-icon>
+        <mat-icon [inline]="true" class="icon-sm">photo</mat-icon>
     </a>
 
     <a mat-button
         target="_blank"
         *ngIf="mdDownloadUrl"
         [href]="mdDownloadUrl">
-        <mat-icon class="photo-md">photo</mat-icon>
+        <mat-icon [inline]="true" class="icon-md">photo</mat-icon>
     </a>
 
     <a mat-button
         target="_blank"
         *ngIf="lgDownloadUrl"
         [href]="lgDownloadUrl">
-        <mat-icon class="photo-lg">photo</mat-icon>
+        <mat-icon [inline]="true">photo</mat-icon>
     </a>
 
     <a mat-button
         target="_blank"
         *ngIf="prtDownloadUrl"
         [href]="prtDownloadUrl">
-        <mat-icon class="photo-lg">photo</mat-icon>
+        <mat-icon [inline]="true">photo</mat-icon>
     </a>
 
     <button mat-button (click)="onToggleFullscreen()">
-        <mat-icon>fullscreen</mat-icon>
+        <mat-icon [inline]="true">fullscreen</mat-icon>
     </button>
 </span>
 
 <span class="photo-list">
     <button mat-button (click)="onToggleSize()">
-        <mat-icon>photo_size_select_large</mat-icon>
+        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
     </button>
 </span>

@@ -1,18 +1,18 @@
 <span class="photo">
     <button mat-button (click)="onMovePrevious()" [disabled]="isFirst$ | async">
-        <mat-icon>chevron_left</mat-icon>
+        <mat-icon [inline]="true">chevron_left</mat-icon>
     </button>
 
     <button mat-button (click)="onMoveNext()" [disabled]="isLast$ | async">
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon [inline]="true">chevron_right</mat-icon>
     </button>
 
     <button mat-button (click)="onToggleSlideshow()">
-        <mat-icon *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
-        <mat-icon *ngIf="slideshowPlaying$ | async">stop</mat-icon>
+        <mat-icon [inline]="true" *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
+        <mat-icon [inline]="true" *ngIf="slideshowPlaying$ | async">stop</mat-icon>
     </button>
 
     <button mat-button (click)="onExitFullscreen()">
-        <mat-icon>fullscreen_exit</mat-icon>
+        <mat-icon [inline]="true">fullscreen_exit</mat-icon>
     </button>
 </span>
