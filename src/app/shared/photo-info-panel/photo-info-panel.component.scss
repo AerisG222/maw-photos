@@ -3,6 +3,30 @@
 }
 
 .panel-contents {
-    padding: 4px 12px;
+    padding: 4px;
     min-width: 400px;
+}
+
+.mat-button {
+    min-width: 28px;
+    line-height: 28px;
+    font-size: 16px;
+    margin-bottom: 4px;
+    padding: 0;
+}
+
+.toolbar {
+    background-color: #cc000033;
+}
+
+.widget-container {
+    padding-left: 4px;
+}
+
+.widget {
+    margin-bottom: 12px;
+}
+
+.notactive {
+    color: #666;
 }

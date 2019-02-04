@@ -5,29 +5,55 @@
 </div>
 
 <div *ngIf="endSidenavExpanded" class="panel-contents">
-    <app-rating
-        [yourRating]="(rating$ | async)?.userRating"
-        [avgRating]="(rating$ | async)?.averageRating"
-        (rate)="onRate($event)">
-    </app-rating>
+    <div fxLayout="row">
+        <div fxLayout="column" fxFlexAlign="flex-start center" class="toolbar">
+            <button mat-button [class.notactive]="!showRating" (click)="showRating = !showRating">
+                <mat-icon [inline]="true">star</mat-icon>
+            </button>
+            <button mat-button [class.notactive]="!showComments" (click)="showComments = !showComments">
+                <mat-icon [inline]="true">comment</mat-icon>
+            </button>
+            <button mat-button [class.notactive]="!showExif" (click)="showExif = !showExif">
+                <mat-icon [inline]="true">tune</mat-icon>
+            </button>
+            <button mat-button [class.notactive]="!showEffects" (click)="showEffects = !showEffects">
+                <mat-icon [inline]="true">photo_filter</mat-icon>
+            </button>
+        </div>
+        <div fxLayout="column" class="widget-container">
+            <app-rating
+                class="widget"
+                *ngIf="showRating"
+                [yourRating]="(rating$ | async)?.userRating"
+                [avgRating]="(rating$ | async)?.averageRating"
+                (rate)="onRate($event)">
+            </app-rating>
 
-    <app-comments
-        [comments]="comments$ | async"
-        (comment)="onComment($event)"
-        #comments>
-    </app-comments>
+            <app-comments
+                class="widget"
+                *ngIf="showComments"
+                [comments]="comments$ | async"
+                (comment)="onComment($event)"
+                #comments>
+            </app-comments>
 
-    <app-exif
-        [exif]="exif$ | async">
-    </app-exif>
+            <app-exif
+                class="widget"
+                *ngIf="showExif"
+                [exif]="exif$ | async">
+            </app-exif>
 
-    <app-effects
-        [effects]="effects$ | async"
-        (rotateClockwise)="rotateClockwise()"
-        (rotateCounterClockwise)="rotateCounterClockwise()"
-        (resetEffects)="onResetEffects()"
-        (updateEffects)="onUpdateEffects($event)">
-    </app-effects>
+            <app-effects
+                class="widget"
+                *ngIf="showEffects"
+                [effects]="effects$ | async"
+                (rotateClockwise)="rotateClockwise()"
+                (rotateCounterClockwise)="rotateCounterClockwise()"
+                (resetEffects)="onResetEffects()"
+                (updateEffects)="onUpdateEffects($event)">
+            </app-effects>
 
-    <div>minimap</div>
+            <div class="widget">minimap</div>
+        </div>
+    </div>
 </div>

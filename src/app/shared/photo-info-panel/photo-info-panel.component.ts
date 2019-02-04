@@ -19,6 +19,12 @@ import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
+
+    showRating = true;
+    showComments = true;
+    showExif = false;
+    showEffects = false;
+
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
     exif$: Observable<ExifDetail>;
