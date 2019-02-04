@@ -3,9 +3,21 @@
     border: solid 1px #ffffff20;
 }
 
+.category a,
+.category button,
+.photo-list a,
+.photo-list button {
+    background-color: #66000020;
+}
+
 .photo {
     border-left: solid 1px #ffffff33;
     border-right: solid 1px #ffffff33;
+
+    & a,
+    & button {
+        background-color: #cc000020;
+    }
 }
 
 .photo-sm {
