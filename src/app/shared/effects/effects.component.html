@@ -1,4 +1,10 @@
-<h4>Effects</h4>
+<div fxLayout>
+    <button mat-button (click)="onResetFilters()" fxFlex>
+        <mat-icon>clear</mat-icon> Reset
+    </button>
+</div>
+
+<mat-divider></mat-divider>
 
 <div fxLayout>
     <button mat-button (click)="onRotateCounterClockwise()" fxFlex>
@@ -10,54 +16,57 @@
     </button>
 </div>
 
-<h4>Filters</h4>
+<mat-divider></mat-divider>
 
 <div fxLayout>
-    <button mat-button (click)="onResetFilters()" fxFlex>
-        <mat-icon>clear</mat-icon> Reset
-    </button>
-</div>
-
-<div fxLayout>
-    <div fxFlex>
-        <h4>Grayscale ({{ grayscale.value }}%)</h4>
-        <mat-slider min="0" max="100" step="1" [value]="effects?.grayscale ? effects.grayscale : 0" (input)="onGrayscaleChange($event)" #grayscale></mat-slider>
-    </div>
-    <div fxFlex>
-        <h4>Sepia ({{ sepia.value }}%)</h4>
-        <mat-slider min="0" max="100" step="1" [value]="effects?.sepia ? effects.sepia : 0" (input)="onSepiaChange($event)" #sepia></mat-slider>
-    </div>
-</div>
-
-<div fxLayout>
-    <div fxFlex>
-        <h4>Brightness ({{ brightness.value }}%)</h4>
-        <mat-slider min="0" max="1000" step="1" [value]="effects?.brightness ? effects.brightness : 100" (input)="onBrightnessChange($event)" #brightness></mat-slider>
-    </div>
-    <div fxFlex>
-        <h4>Saturation ({{ saturate.value }}%)</h4>
-        <mat-slider min="0" max="1000" step="1" [value]="effects?.saturation ? effects.saturation : 100" (input)="onSaturationChange($event)" #saturate></mat-slider>
-    </div>
-</div>
-
-<div fxLayout>
-    <div fxFlex>
-        <h4>Contrast ({{ contrast.value }}%)</h4>
-        <mat-slider min="0" max="1000" step="1" [value]="effects?.contrast ? effects.contrast : 100" (input)="onContrastChange($event)" #contrast></mat-slider>
-    </div>
-    <div fxFlex>
-        <h4>Invert ({{ invert.value }}%)</h4>
-        <mat-slider min="0" max="100" step="1" [value]="effects?.invert ? effects.invert : 0" (input)="onInvertChange($event)" #invert></mat-slider>
-    </div>
-</div>
-
-<div fxLayout>
-    <div fxFlex>
-        <h4>Blur ({{ blur.value | number:'1.1-1' }}px)</h4>
-        <mat-slider min="0" max="10" step="0.1" [value]="effects?.blur ? effects.blur : 0" (input)="onBlurChange($event)" #blur></mat-slider>
-    </div>
-    <div fxFlex>
-        <h4>Hue-Rotate ({{ huerotate.value }}&deg;)</h4>
-        <mat-slider min="0" max="360" step="1" [value]="effects?.hueRotate ? effects.hueRotate : 0" (input)="onHueRotateChange($event)" #huerotate></mat-slider>
-    </div>
+    <table>
+        <tr>
+            <td>Grayscale ({{ grayscale.value }}%)</td>
+            <td>Sepia ({{ sepia.value }}%)</td>
+        </tr>
+        <tr>
+            <td>
+                <mat-slider min="0" max="100" step="1" [value]="effects?.grayscale ? effects.grayscale : 0" (input)="onGrayscaleChange($event)" #grayscale></mat-slider>
+            </td>
+            <td>
+                <mat-slider min="0" max="100" step="1" [value]="effects?.sepia ? effects.sepia : 0" (input)="onSepiaChange($event)" #sepia></mat-slider>
+            </td>
+        </tr>
+        <tr>
+            <td>Brightness ({{ brightness.value }}%)</td>
+            <td>Saturation ({{ saturate.value }}%)</td>
+        </tr>
+        <tr>
+            <td>
+                <mat-slider min="0" max="1000" step="1" [value]="effects?.brightness ? effects.brightness : 100" (input)="onBrightnessChange($event)" #brightness></mat-slider>
+            </td>
+            <td>
+                <mat-slider min="0" max="1000" step="1" [value]="effects?.saturation ? effects.saturation : 100" (input)="onSaturationChange($event)" #saturate></mat-slider>
+            </td>
+        </tr>
+        <tr>
+            <td>Contrast ({{ contrast.value }}%)</td>
+            <td>Invert ({{ invert.value }}%)</td>
+        </tr>
+        <tr>
+            <td>
+                <mat-slider min="0" max="1000" step="1" [value]="effects?.contrast ? effects.contrast : 100" (input)="onContrastChange($event)" #contrast></mat-slider>
+            </td>
+            <td>
+                <mat-slider min="0" max="100" step="1" [value]="effects?.invert ? effects.invert : 0" (input)="onInvertChange($event)" #invert></mat-slider>
+            </td>
+        </tr>
+        <tr>
+            <td>Blur ({{ blur.value | number:'1.1-1' }}px)</td>
+            <td>Hue-Rotate ({{ huerotate.value }}&deg;)</td>
+        </tr>
+        <tr>
+            <td>
+                <mat-slider min="0" max="10" step="0.1" [value]="effects?.blur ? effects.blur : 0" (input)="onBlurChange($event)" #blur></mat-slider>
+            </td>
+            <td>
+                <mat-slider min="0" max="360" step="1" [value]="effects?.hueRotate ? effects.hueRotate : 0" (input)="onHueRotateChange($event)" #huerotate></mat-slider>
+            </td>
+        </tr>
+    </table>
 </div>

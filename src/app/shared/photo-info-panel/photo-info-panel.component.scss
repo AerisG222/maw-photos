@@ -3,8 +3,8 @@
 }
 
 .panel-contents {
-    padding: 4px;
-    min-width: 400px;
+    padding: 0;
+    width: 480px;
 }
 
 .mat-button {
@@ -22,11 +22,13 @@
 .panel-heading {
     background-color: #cc000033;
     padding-left: 4px;
+    width: 100%;
 }
 
 .widget {
     margin-left: 4px;
     margin-bottom: 12px;
+    padding-right: 4px;
 }
 
 .notactive {

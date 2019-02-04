@@ -6,7 +6,7 @@
 
 <div *ngIf="endSidenavExpanded" class="panel-contents">
     <div fxLayout="row">
-        <div fxLayout="column" fxFlexAlign="flex-start center" class="toolbar">
+        <div fxLayout="column" fxFlexAlign="flex-start center" fxFlex="0 0 auto" class="toolbar">
             <button mat-button [class.notactive]="!showRating" (click)="showRating = !showRating">
                 <mat-icon [inline]="true">star</mat-icon>
             </button>
@@ -20,8 +20,8 @@
                 <mat-icon [inline]="true">photo_filter</mat-icon>
             </button>
         </div>
-        <div fxLayout="column">
-            <div *ngIf="showRating" class="panel-heading">Rating</div>
+        <div fxLayout="column" fxFlex="1 1 auto">
+            <div *ngIf="showRating" class="panel-heading" fxFlex>Rating</div>
             <app-rating
                 class="widget"
                 *ngIf="showRating"
@@ -30,8 +30,9 @@
                 (rate)="onRate($event)">
             </app-rating>
 
-            <div *ngIf="showComments" class="panel-heading">Comments</div>
+            <div *ngIf="showComments" class="panel-heading" fxFlex>Comments</div>
             <app-comments
+                fxFlex
                 class="widget"
                 *ngIf="showComments"
                 [comments]="comments$ | async"
@@ -39,14 +40,14 @@
                 #comments>
             </app-comments>
 
-            <div *ngIf="showExif" class="panel-heading">EXIF</div>
+            <div *ngIf="showExif" class="panel-heading" fxFlex>EXIF Data</div>
             <app-exif
                 class="widget"
                 *ngIf="showExif"
                 [exif]="exif$ | async">
             </app-exif>
 
-            <div *ngIf="showEffects" class="panel-heading">Effects</div>
+            <div *ngIf="showEffects" class="panel-heading" fxFlex>Effects</div>
             <app-effects
                 class="widget"
                 *ngIf="showEffects"
