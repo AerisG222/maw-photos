@@ -1,11 +1,10 @@
-<app-photo-list-mini-settings [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-mini-settings>
-
 <div *ngIf="fullscreen" class="fullscreen">
     <app-photo-fullscreen-control></app-photo-fullscreen-control>
     <img [src]="activePhoto?.lgInfo?.path" />
 </div>
 
 <div fxLayout="column" style="height: 100%;">
+    <app-photo-list-mini-settings [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-mini-settings>
     <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
 
     <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxFlexAlign="center">

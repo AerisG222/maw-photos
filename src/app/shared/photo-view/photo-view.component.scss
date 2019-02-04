@@ -22,7 +22,9 @@ img {
 
 app-photo-list-mini-settings,
 app-photo-fullscreen-control {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .fullscreen {
