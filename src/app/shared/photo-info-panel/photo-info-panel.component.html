@@ -20,7 +20,8 @@
                 <mat-icon [inline]="true">photo_filter</mat-icon>
             </button>
         </div>
-        <div fxLayout="column" class="widget-container">
+        <div fxLayout="column">
+            <div *ngIf="showRating" class="panel-heading">Rating</div>
             <app-rating
                 class="widget"
                 *ngIf="showRating"
@@ -29,6 +30,7 @@
                 (rate)="onRate($event)">
             </app-rating>
 
+            <div *ngIf="showComments" class="panel-heading">Comments</div>
             <app-comments
                 class="widget"
                 *ngIf="showComments"
@@ -37,12 +39,14 @@
                 #comments>
             </app-comments>
 
+            <div *ngIf="showExif" class="panel-heading">EXIF</div>
             <app-exif
                 class="widget"
                 *ngIf="showExif"
                 [exif]="exif$ | async">
             </app-exif>
 
+            <div *ngIf="showEffects" class="panel-heading">Effects</div>
             <app-effects
                 class="widget"
                 *ngIf="showEffects"
