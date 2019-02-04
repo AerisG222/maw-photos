@@ -6,6 +6,11 @@
     <mat-icon>chevron_right</mat-icon>
 </button>
 
+<button mat-button (click)="onToggleSlideshow()">
+    <mat-icon *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
+    <mat-icon *ngIf="slideshowPlaying$ | async">stop</mat-icon>
+</button>
+
 <button mat-button (click)="onExitFullscreen()">
     <mat-icon>fullscreen_exit</mat-icon>
 </button>

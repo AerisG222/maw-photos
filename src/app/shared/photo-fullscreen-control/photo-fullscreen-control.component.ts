@@ -14,6 +14,7 @@ import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 export class PhotoFullscreenControlComponent implements OnInit {
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
+    slideshowPlaying$: Observable<boolean>;
 
     constructor(
         private _store$: Store<RootStoreState.State>
@@ -29,6 +30,11 @@ export class PhotoFullscreenControlComponent implements OnInit {
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
             );
+
+        this.slideshowPlaying$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectSlideshowIsPlaying)
+            );
     }
 
     onMoveNext(): void {
@@ -42,5 +48,9 @@ export class PhotoFullscreenControlComponent implements OnInit {
     onExitFullscreen(): void {
         this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
         this._store$.dispatch(new PhotoStoreActions.ExitFullscreenRequestAction());
+    }
+
+    onToggleSlideshow(): void {
+        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
     }
 }
