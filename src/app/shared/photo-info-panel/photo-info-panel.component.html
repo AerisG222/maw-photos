@@ -1,25 +1,5 @@
-<div>
-    <button class="menu-button" mat-button (click)="toggleEndSidenav()">
-        <mat-icon>menu</mat-icon>
-    </button>
-</div>
-
 <div *ngIf="endSidenavExpanded" class="panel-contents">
     <div fxLayout="row">
-        <div fxLayout="column" fxFlexAlign="flex-start center" fxFlex="0 0 auto" class="toolbar">
-            <button mat-button [class.notactive]="!showRating" (click)="showRating = !showRating">
-                <mat-icon [inline]="true">star</mat-icon>
-            </button>
-            <button mat-button [class.notactive]="!showComments" (click)="showComments = !showComments">
-                <mat-icon [inline]="true">comment</mat-icon>
-            </button>
-            <button mat-button [class.notactive]="!showExif" (click)="showExif = !showExif">
-                <mat-icon [inline]="true">tune</mat-icon>
-            </button>
-            <button mat-button [class.notactive]="!showEffects" (click)="showEffects = !showEffects">
-                <mat-icon [inline]="true">photo_filter</mat-icon>
-            </button>
-        </div>
         <div fxLayout="column" fxFlex="1 1 auto">
             <div *ngIf="showRating" class="panel-heading" fxFlex>Rating</div>
             <app-rating
@@ -61,4 +41,25 @@
             <div class="widget">minimap</div>
         </div>
     </div>
+</div>
+
+<div fxLayout="column" fxFlex="0 0 auto" class="toolbar">
+    <button class="menu-button" mat-button (click)="toggleEndSidenav()">
+        <mat-icon [inline]="true">menu</mat-icon>
+    </button>
+
+    <button mat-button [class.notactive]="!showRating" (click)="showRating = !showRating">
+        <mat-icon [inline]="true">star</mat-icon>
+    </button>
+    <button mat-button [class.notactive]="!showComments" (click)="showComments = !showComments">
+        <mat-icon [inline]="true">comment</mat-icon>
+    </button>
+    <button mat-button [class.notactive]="!showExif" (click)="showExif = !showExif">
+        <mat-icon [inline]="true">tune</mat-icon>
+    </button>
+    <button mat-button [class.notactive]="!showEffects" (click)="showEffects = !showEffects">
+        <mat-icon [inline]="true">photo_filter</mat-icon>
+    </button>
+
+    <span class="toolbar_title">Details</span>
 </div>

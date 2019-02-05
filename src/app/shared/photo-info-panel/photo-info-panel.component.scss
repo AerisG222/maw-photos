@@ -17,6 +17,7 @@
 
 .toolbar {
     background-color: #cc000033;
+    height: 100vh;
 }
 
 .panel-heading {
@@ -33,4 +34,13 @@
 
 .notactive {
     color: #666;
+}
+
+.toolbar_title {
+    transform: rotate(90deg);
+    text-transform: uppercase;
+    font-weight: 700;
+    width: 14px;
+    color: #999;
+    margin: auto;
 }
