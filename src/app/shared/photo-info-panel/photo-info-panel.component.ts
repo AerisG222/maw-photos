@@ -9,8 +9,8 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
 import { CommentsComponent } from '../comments/comments.component';
-import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { ExifData } from 'src/app/core/models/exif-data.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -27,7 +27,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
-    exif$: Observable<ExifDetail>;
+    exif$: Observable<ExifData[]>;
     effects$: Observable<PhotoEffects>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;

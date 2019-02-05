@@ -24,7 +24,7 @@
             <app-exif
                 class="widget"
                 *ngIf="showExif"
-                [exif]="exif$ | async">
+                [exifData]="exif$ | async">
             </app-exif>
 
             <div *ngIf="showEffects" class="panel-heading" fxFlex>Effects</div>

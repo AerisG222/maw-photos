@@ -3,9 +3,9 @@ import { Action } from '@ngrx/store';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
-import { ExifDetail } from '../../models/exif-detail.model';
 import { PhotoRotation } from '../../models/photo-rotation.model';
 import { PhotoEffects } from '../../models/photo-effects.model';
+import { ExifData } from '../../models/exif-data.model';
 
 export enum ActionTypes {
     CLEAR_REQUEST = '[Photos] Clear',
@@ -164,7 +164,7 @@ export class LoadExifFailureAction implements Action {
 
 export class LoadExifSuccessAction implements Action {
     readonly type = ActionTypes.LOAD_EXIF_SUCCESS;
-    constructor(public payload: { exif: ExifDetail }) { }
+    constructor(public payload: { exif: ExifData[] }) { }
 }
 
 export class RotateClockwiseRequestAction implements Action {

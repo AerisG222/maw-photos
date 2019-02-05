@@ -9,11 +9,13 @@ import { photoApiServiceToken, PhotoApiService } from '../../services/photo-api.
 import { RootStoreState } from '..';
 import { PhotoRotation } from '../../models/photo-rotation.model';
 import { PhotoStoreState } from '.';
+import { ExifFormatterService } from '../../services/exif-formatter.service';
 
 @Injectable()
 export class PhotoStoreEffects {
     constructor(
         private _actions$: Actions,
+        private _exifFormatterService: ExifFormatterService,
         private _store$: Store<RootStoreState.State>,
         @Inject(photoApiServiceToken) private _api: PhotoApiService,
     ) {
@@ -104,6 +106,7 @@ export class PhotoStoreEffects {
         switchMap(action =>
             this._api.getPhotoExifData(action.payload.photoId)
                 .pipe(
+                    map(detail => this._exifFormatterService.format(detail)),
                     map(data => new photoActions.LoadExifSuccessAction({ exif: data })),
                     catchError(error => of(new photoActions.LoadExifFailureAction({ error: error })))
                 )

@@ -1,5 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { ExifDetail } from 'src/app/core/models/exif-detail.model';
+
+import { ExifData } from 'src/app/core/models/exif-data.model';
+import { ExifCategory } from 'src/app/core/models/exif-category.model';
 
 @Component({
     selector: 'app-exif',
@@ -8,30 +10,15 @@ import { ExifDetail } from 'src/app/core/models/exif-detail.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExifComponent {
-    private exifDetail: ExifDetail;
+    @Input() exifData: ExifData[];
 
-    get exif(): ExifDetail {
-        return this.exifDetail;
-    }
+    exifCategory = ExifCategory;
 
-    @Input('exif')
-    set exif(value: ExifDetail) {
-        this.exifDetail = value;
-        this.transform(value);
-    }
+    getFilteredData(category: ExifCategory): ExifData[] {
+        if (this.exifData) {
+            return this.exifData.filter(e => e.category === category);
+        }
 
-    exifData = [];
-    columnsToDisplay = ['field', 'value'];
-
-    transform(exif: ExifDetail): void {
-        this.exifData = [];
-
-        Object
-            .keys(exif)
-            .forEach(key => {
-                if (exif[key]) {
-                    this.exifData.push({ field: key, value: exif[key] });
-                }
-            });
+        return [];
     }
 }

@@ -36,6 +36,7 @@ import { EffectsComponent } from './effects/effects.component';
 import { CategoryListMiniSettingsComponent } from './category-list-mini-settings/category-list-mini-settings.component';
 import { PhotoListMiniSettingsComponent } from './photo-list-mini-settings/photo-list-mini-settings.component';
 import { PhotoFullscreenControlComponent } from './photo-fullscreen-control/photo-fullscreen-control.component';
+import { ExifTableComponent } from './exif-table/exif-table.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { PhotoFullscreenControlComponent } from './photo-fullscreen-control/phot
         ExifComponent,
         EffectsComponent,
         PhotoListMiniSettingsComponent,
-        PhotoFullscreenControlComponent
+        PhotoFullscreenControlComponent,
+        ExifTableComponent
     ],
     imports: [
         BarRatingModule,

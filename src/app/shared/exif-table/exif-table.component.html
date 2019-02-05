@@ -1,0 +1,10 @@
+<div *ngFor="let data of exifData; let idx = index; let odd = odd">
+    <div fxLayout="row" [class.odd]="odd">
+        <span fxFlex>
+            {{ data.displayName }}
+        </span>
+        <span fxFlex fxFlexAlign="end">
+            {{ data.displayValue }}
+        </span>
+    </div>
+</div>

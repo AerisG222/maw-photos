@@ -1,13 +1,11 @@
-<table mat-table [dataSource]="exifData">
-    <ng-container matColumnDef="field">
-        <th mat-header-cell *matHeaderCellDef>Field</th>
-        <td mat-cell *matCellDef="let e">{{ e.field }}</td>
-    </ng-container>
-    <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef>Value</th>
-        <td mat-cell *matCellDef="let e">{{ e.value }}</td>
-    </ng-container>
-
-    <!--<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
-    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-</table>
+<mat-tab-group>
+    <mat-tab label="EXIF">
+        <app-exif-table [exifData]="getFilteredData(exifCategory.Exif)"></app-exif-table>
+    </mat-tab>
+    <mat-tab label="Maker">
+        <app-exif-table [exifData]="getFilteredData(exifCategory.Maker)"></app-exif-table>
+    </mat-tab>
+    <mat-tab label="Composite">
+        <app-exif-table [exifData]="getFilteredData(exifCategory.Composite)"></app-exif-table>
+    </mat-tab>
+</mat-tab-group>
