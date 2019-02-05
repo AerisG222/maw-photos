@@ -49,16 +49,16 @@
         <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
     </button>
 
-    <button mat-button [class.notactive]="!endSidenavExpanded || !showRating" (click)="showRating = !showRating">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showRating" (click)="showRating = !showRating">
         <mat-icon [inline]="true">star</mat-icon>
     </button>
-    <button mat-button [class.notactive]="!endSidenavExpanded || !showComments" (click)="showComments = !showComments">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showComments" (click)="showComments = !showComments">
         <mat-icon [inline]="true">comment</mat-icon>
     </button>
-    <button mat-button [class.notactive]="!endSidenavExpanded || !showExif" (click)="showExif = !showExif">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showExif" (click)="showExif = !showExif">
         <mat-icon [inline]="true">tune</mat-icon>
     </button>
-    <button mat-button [class.notactive]="!endSidenavExpanded || !showEffects" (click)="showEffects = !showEffects">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showEffects" (click)="showEffects = !showEffects">
         <mat-icon [inline]="true">photo_filter</mat-icon>
     </button>
 
