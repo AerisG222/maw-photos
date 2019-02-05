@@ -45,7 +45,8 @@
 
 <div fxLayout="column" fxFlex="0 0 auto" class="toolbar">
     <button class="menu-button" mat-button (click)="toggleEndSidenav()">
-        <mat-icon [inline]="true">menu</mat-icon>
+        <mat-icon *ngIf="endSidenavExpanded" [inline]="true">chevron_right</mat-icon>
+        <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
     </button>
 
     <button mat-button [class.notactive]="!endSidenavExpanded || !showRating" (click)="showRating = !showRating">
