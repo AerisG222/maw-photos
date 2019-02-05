@@ -1,13 +1,15 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+
 @Component({
     selector: 'app-comments',
     templateUrl: './comments.component.html',
     styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-    @Input() comments: Comment[];
+    @Input() comments: PhotoComment[];
     @Output() comment = new EventEmitter<string>();
 
     form: FormGroup;
