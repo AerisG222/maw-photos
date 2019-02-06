@@ -6,10 +6,9 @@ import {
 
 import { Photo } from '../../models/photo.model';
 import { photoAdapter, State } from './state';
-import { PHOTO_FEATURE_NAME } from './photo-store.module';
+import { PHOTO_FEATURE_NAME } from './feature-name';
 import { Rating } from '../../models/rating.model';
 import { PhotoComment } from '../../models/photo-comment.model';
-import { ExifDetail } from '../../models/exif-detail.model';
 import { PhotoEffects } from '../../models/photo-effects.model';
 import { ExifData } from '../../models/exif-data.model';
 

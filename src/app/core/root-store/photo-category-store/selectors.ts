@@ -6,7 +6,7 @@ import {
 
 import { Category } from '../../models/category.model';
 import { photoCategoryAdapter, State } from './state';
-import { PHOTO_CATEGORY_FEATURE_NAME } from './photo-category-store.module';
+import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;

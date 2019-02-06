@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 
 import { layoutReducer } from './reducer';
-
-export const LAYOUT_FEATURE_NAME = 'layout';
+import { LAYOUT_FEATURE_NAME } from './feature-name';
 
 @NgModule({
     declarations: [],

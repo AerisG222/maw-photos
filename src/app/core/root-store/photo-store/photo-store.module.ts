@@ -5,8 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { PhotoStoreEffects } from './effects';
 import { photoReducer } from './reducer';
-
-export const PHOTO_FEATURE_NAME = 'photos';
+import { PHOTO_FEATURE_NAME } from './feature-name';
 
 @NgModule({
     declarations: [],

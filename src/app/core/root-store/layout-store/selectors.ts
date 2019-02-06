@@ -5,7 +5,7 @@ import {
 } from '@ngrx/store';
 
 import { State } from './state';
-import { LAYOUT_FEATURE_NAME } from './layout-store.module';
+import { LAYOUT_FEATURE_NAME } from './feature-name';
 import { Layout } from '../../models/layout.model';
 
 const getIsRightSidebarDisplayed = (state: State): boolean => state.layout.isRightNavDisplayed;
