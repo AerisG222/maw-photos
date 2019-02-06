@@ -97,4 +97,52 @@ export class SettingsStoreEffects {
             return new settingsActions.SaveRequestAction({ settings: x[1] });
         })
     );
+
+    @Effect()
+    updatePhotoListThumbnailSize$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.UpdatePhotoListThumbnailSizeRequestAction>(settingsActions.ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    togglePhotoListCategoryBreadcrumbs$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.TogglePhotoListCategoryBreadcrumbsRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    toggleCategoryListCategoryTitles$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.ToggleCategoryListCategoryTitlesRequestAction>(settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    updateCategoryListThumbnailSize$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.UpdateCategoryListThumbnailSizeRequestAction>(settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
 }

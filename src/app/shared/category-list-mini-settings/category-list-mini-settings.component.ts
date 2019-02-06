@@ -35,22 +35,12 @@ export class CategoryListMiniSettingsComponent implements OnInit, OnDestroy {
     }
 
     onToggleTitle(): void {
-        if (!this.settings) {
-            return;
-        }
-
-        this.settings.showCategoryTitles = !this.settings.showCategoryTitles;
-
-        this._store$.dispatch(new SettingsStoreActions.SaveRequestAction({ settings: this.settings }));
+        this._store$.dispatch(new SettingsStoreActions.ToggleCategoryListCategoryTitlesRequestAction());
     }
 
     onToggleSize(): void {
-        if (!this.settings) {
-            return;
-        }
+        const size = ThumbnailSize.nextSize(this.settings.categoryThumbnailSize.name);
 
-        this.settings.categoryThumbnailSize = ThumbnailSize.nextSize(this.settings.categoryThumbnailSize.name);
-
-        this._store$.dispatch(new SettingsStoreActions.SaveRequestAction({ settings: this.settings }));
+        this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListThumbnailSizeRequestAction({ newSize: size }));
     }
 }

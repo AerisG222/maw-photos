@@ -70,11 +70,7 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
     }
 
     onToggleCategoryTitle(): void {
-        if (this.settings) {
-            this.settings.showCategoryBreadcrumbs = !this.settings.showCategoryBreadcrumbs;
-
-            this._store$.dispatch(new SettingsStoreActions.SaveRequestAction({ settings: this.settings }));
-        }
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListCategoryBreadcrumbsRequestAction());
     }
 
     onRotateClockwise(): void {
@@ -86,13 +82,9 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
     }
 
     onToggleSize(): void {
-        if (!this.settings) {
-            return;
-        }
+        const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
 
-        this.settings.photoListThumbnailSize = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
-
-        this._store$.dispatch(new SettingsStoreActions.SaveRequestAction({ settings: this.settings }));
+        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListThumbnailSizeRequestAction({ newSize: size }));
     }
 
     onToggleSlideshow(): void {

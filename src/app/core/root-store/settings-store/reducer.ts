@@ -78,6 +78,38 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoListToolbarExpandedState: !state.settings.photoListToolbarExpandedState
                 }
             };
+        case ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoListThumbnailSize: action.payload.newSize
+                }
+            };
+        case ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    showCategoryBreadcrumbs: !state.settings.showCategoryBreadcrumbs
+                }
+            };
+        case ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    showCategoryTitles: !state.settings.showCategoryTitles
+                }
+            };
+        case ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryThumbnailSize: action.payload.newSize
+                }
+            };
         default: {
             return state;
         }
