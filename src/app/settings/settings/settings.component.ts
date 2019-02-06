@@ -40,7 +40,8 @@ export class SettingsComponent implements OnInit {
             photoInfoPanelShowRatings: [true],
             photoInfoPanelShowComments: [true],
             photoInfoPanelShowExif: [false],
-            photoInfoPanelShowEffects: [false]
+            photoInfoPanelShowEffects: [false],
+            showPhotoListToolbar: [true]
         });
 
         this._store$
@@ -66,6 +67,7 @@ export class SettingsComponent implements OnInit {
             photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
             photoInfoPanelShowExif: this.form.get('photoInfoPanelShowExif').value,
             photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value,
+            photoListToolbarExpandedState: this.form.get('showPhotoListToolbar').value
         };
 
         this._store$.dispatch(
@@ -95,5 +97,6 @@ export class SettingsComponent implements OnInit {
         this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);
         this.form.get('photoInfoPanelShowExif').setValue(settings.photoInfoPanelShowExif);
         this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
+        this.form.get('showPhotoListToolbar').setValue(settings.photoListToolbarExpandedState)
     }
 }

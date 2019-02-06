@@ -11,10 +11,12 @@ export enum ActionTypes {
     SAVE_FAILURE = '[Settings] Save Failure',
     SAVE_SUCCESS = '[Settings] Save Success',
 
-    TOGGLE_PHOTO_INFO_PANEL_RATINGS = '[Layout] Toggle Photo Info Panel Ratings',
-    TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Layout] Toggle Photo Info Panel Comments',
-    TOGGLE_PHOTO_INFO_PANEL_EXIF = '[Layout] Toggle Photo Info Panel EXIF',
-    TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Layout] Toggle Photo Info Panel Effects'
+    TOGGLE_PHOTO_INFO_PANEL_RATINGS = '[Settings] Toggle Photo Info Panel Ratings',
+    TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Settings] Toggle Photo Info Panel Comments',
+    TOGGLE_PHOTO_INFO_PANEL_EXIF = '[Settings] Toggle Photo Info Panel EXIF',
+    TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Settings] Toggle Photo Info Panel Effects',
+
+    TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate'
 }
 
 export class LoadRequestAction implements Action {
@@ -62,6 +64,10 @@ export class TogglePhotoInfoPanelEffectsRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EFFECTS;
 }
 
+export class TogglePhotoListToolbarExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE;
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
@@ -72,4 +78,5 @@ export type Actions =
     TogglePhotoInfoPanelRatingsRequestAction |
     TogglePhotoInfoPanelCommentsRequestAction |
     TogglePhotoInfoPanelExifRequestAction |
-    TogglePhotoInfoPanelEffectsRequestAction;
+    TogglePhotoInfoPanelEffectsRequestAction |
+    TogglePhotoListToolbarExpandedStateRequestAction;

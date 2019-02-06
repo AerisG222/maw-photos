@@ -22,6 +22,8 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
     private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
 
+    private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
+
     constructor(
         private _localStorage: LocalStorageService
     ) {
@@ -38,6 +40,8 @@ export class SettingsService {
         const photoInfoPanelShowExif = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
         const photoInfoPanelShowEffects = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
 
+        const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
+
         return {
             theme: this.getTheme(),
             categoryThumbnailSize: this.getCategoryThumbnailSize(),
@@ -49,7 +53,8 @@ export class SettingsService {
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
             photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
             photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
-            photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false
+            photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
+            photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true
         };
     }
 
@@ -70,6 +75,8 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
+
+        this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
     }
 
     private getTheme(): Theme {

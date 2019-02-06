@@ -18,7 +18,9 @@ import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
-    destroy$ = new Subject<boolean>();
+    private destroy$ = new Subject<boolean>();
+
+    isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
     slideshowPlaying$: Observable<boolean>;
     categoryDownloadUrl: string = null;
@@ -40,6 +42,11 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
                 tap(settings => this.settings = settings),
                 takeUntil(this.destroy$)
             ).subscribe();
+
+        this.isToolbarExpanded$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectPhotoListToolbarExpandedState)
+            );
 
         const activePhoto$ = this._store$
             .pipe(
@@ -95,5 +102,9 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
     onToggleFullscreen(): void {
         this._store$.dispatch(new PhotoStoreActions.EnterFullscreenRequestAction());
         this._store$.dispatch(new LayoutStoreActions.EnterFullscreenRequestAction());
+    }
+
+    onTogglePhotoListToolbar(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
     }
 }

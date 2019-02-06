@@ -13,4 +13,5 @@ export interface Settings {
     photoInfoPanelShowComments: boolean;
     photoInfoPanelShowExif: boolean;
     photoInfoPanelShowEffects: boolean;
+    photoListToolbarExpandedState: boolean;
 }

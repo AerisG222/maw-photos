@@ -1,4 +1,4 @@
-<span class="category">
+<span class="category" *ngIf="isToolbarExpanded$ | async">
     <button mat-button (click)="onToggleCategoryTitle()">
         <mat-icon [inline]="true">title</mat-icon>
     </button>
@@ -11,7 +11,7 @@
     </a>
 </span>
 
-<span class="photo">
+<span class="photo" *ngIf="isToolbarExpanded$ | async">
     <button mat-button (click)="onRotateCounterClockwise()">
         <mat-icon [inline]="true">rotate_left</mat-icon>
     </button>
@@ -58,8 +58,15 @@
     </button>
 </span>
 
-<span class="photo-list">
+<span class="photo-list" *ngIf="isToolbarExpanded$ | async">
     <button mat-button (click)="onToggleSize()">
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+    </button>
+</span>
+
+<span class="toolbar-control">
+    <button mat-button (click)="onTogglePhotoListToolbar()">
+        <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
+        <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
     </button>
 </span>

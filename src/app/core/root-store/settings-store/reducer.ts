@@ -70,6 +70,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoInfoPanelShowRatings: !state.settings.photoInfoPanelShowRatings
                 }
             };
+        case ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoListToolbarExpandedState: !state.settings.photoListToolbarExpandedState
+                }
+            };
         default: {
             return state;
         }

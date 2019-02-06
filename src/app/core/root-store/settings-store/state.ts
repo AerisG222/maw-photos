@@ -20,6 +20,7 @@ export const initialState: State = {
         photoInfoPanelShowRatings: true,
         photoInfoPanelShowComments: true,
         photoInfoPanelShowExif: false,
-        photoInfoPanelShowEffects: false
+        photoInfoPanelShowEffects: false,
+        photoListToolbarExpandedState: true
     }
 };

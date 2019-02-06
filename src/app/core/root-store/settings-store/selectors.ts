@@ -15,6 +15,7 @@ const getPhotoInfoPanelShowRatings = (state: State): boolean => state.settings.p
 const getPhotoInfoPanelShowComments = (state: State): boolean => state.settings.photoInfoPanelShowComments;
 const getPhotoInfoPanelShowExif = (state: State): boolean => state.settings.photoInfoPanelShowExif;
 const getPhotoInfoPanelShowEffects = (state: State): boolean => state.settings.photoInfoPanelShowEffects;
+const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
 
 export const selectSettingsState: MemoizedSelector<object, State> = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
@@ -26,3 +27,4 @@ export const selectPhotoInfoPanelShowRatings: MemoizedSelector<object, boolean> 
 export const selectPhotoInfoPanelShowComments: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoInfoPanelShowComments);
 export const selectPhotoInfoPanelShowExif: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoInfoPanelShowExif);
 export const selectPhotoInfoPanelShowEffects: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoInfoPanelShowEffects);
+export const selectPhotoListToolbarExpandedState: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
