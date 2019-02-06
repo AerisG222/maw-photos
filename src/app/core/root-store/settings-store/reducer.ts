@@ -38,6 +38,38 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: { ...action.payload.settings },
                 error: null
             };
+            case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowComments: !state.settings.photoInfoPanelShowComments
+                }
+            };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EFFECTS:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowEffects: !state.settings.photoInfoPanelShowEffects
+                }
+            };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXIF:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowExif: !state.settings.photoInfoPanelShowExif
+                }
+            };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_RATINGS:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowRatings: !state.settings.photoInfoPanelShowRatings
+                }
+            };
         default: {
             return state;
         }

@@ -1,36 +1,36 @@
 <div *ngIf="endSidenavExpanded" class="panel-contents">
     <div fxLayout="row">
         <div fxLayout="column" fxFlex="1 1 auto">
-            <div *ngIf="showRating" class="panel-heading" fxFlex>Rating</div>
+            <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex>Rating</div>
             <app-rating
                 class="widget"
-                *ngIf="showRating"
+                *ngIf="showRatings$ | async"
                 [yourRating]="(rating$ | async)?.userRating"
                 [avgRating]="(rating$ | async)?.averageRating"
                 (rate)="onRate($event)">
             </app-rating>
 
-            <div *ngIf="showComments" class="panel-heading" fxFlex>Comments</div>
+            <div *ngIf="showComments$ | async" class="panel-heading" fxFlex>Comments</div>
             <app-comments
                 fxFlex
                 class="widget"
-                *ngIf="showComments"
+                *ngIf="showComments$ | async"
                 [comments]="comments$ | async"
                 (comment)="onComment($event)"
                 #comments>
             </app-comments>
 
-            <div *ngIf="showExif" class="panel-heading" fxFlex>EXIF Data</div>
+            <div *ngIf="showExif$ | async" class="panel-heading" fxFlex>EXIF Data</div>
             <app-exif
                 class="widget"
-                *ngIf="showExif"
+                *ngIf="showExif$ | async"
                 [exifData]="exif$ | async">
             </app-exif>
 
-            <div *ngIf="showEffects" class="panel-heading" fxFlex>Effects</div>
+            <div *ngIf="showEffects$ | async" class="panel-heading" fxFlex>Effects</div>
             <app-effects
                 class="widget"
-                *ngIf="showEffects"
+                *ngIf="showEffects$ | async"
                 [effects]="effects$ | async"
                 (rotateClockwise)="rotateClockwise()"
                 (rotateCounterClockwise)="rotateCounterClockwise()"
@@ -49,16 +49,16 @@
         <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
     </button>
 
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showRating" (click)="showRating = !showRating">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showRatings$ | async)" (click)="toggleRatings()">
         <mat-icon [inline]="true">star</mat-icon>
     </button>
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showComments" (click)="showComments = !showComments">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showComments$ | async)" (click)="toggleComments()">
         <mat-icon [inline]="true">comment</mat-icon>
     </button>
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showExif" (click)="showExif = !showExif">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showExif$ | async)" (click)="toggleExif()">
         <mat-icon [inline]="true">tune</mat-icon>
     </button>
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!showEffects" (click)="showEffects = !showEffects">
+    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showEffects$ | async)" (click)="toggleEffects()">
         <mat-icon [inline]="true">photo_filter</mat-icon>
     </button>
 

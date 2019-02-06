@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../core/root-store';
 import { select, Store } from '@ngrx/store';
-import { Settings } from '../../core/models/settings.model';
 import { tap } from 'rxjs/operators';
+
+import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../core/root-store';
+import { Settings } from '../../core/models/settings.model';
 import { Theme } from '../../core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
@@ -35,7 +36,11 @@ export class SettingsComponent implements OnInit {
             showCategoryBreadcrumbs: [true],
             photoListThumbnailSize: [''],
             showCategoryPhotoList: [true],
-            randomDuration: [3]
+            randomDuration: [3],
+            photoInfoPanelShowRatings: [true],
+            photoInfoPanelShowComments: [true],
+            photoInfoPanelShowExif: [false],
+            photoInfoPanelShowEffects: [false]
         });
 
         this._store$
@@ -56,7 +61,11 @@ export class SettingsComponent implements OnInit {
             categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value),
             photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
             showCategoryPhotoList: this.form.get('showCategoryPhotoList').value,
-            randomDisplayDurationSeconds: this.form.get('randomDuration').value
+            randomDisplayDurationSeconds: this.form.get('randomDuration').value,
+            photoInfoPanelShowComments: this.form.get('photoInfoPanelShowComments').value,
+            photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
+            photoInfoPanelShowExif: this.form.get('photoInfoPanelShowExif').value,
+            photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value,
         };
 
         this._store$.dispatch(
@@ -82,5 +91,9 @@ export class SettingsComponent implements OnInit {
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);
         this.form.get('showCategoryPhotoList').setValue(settings.showCategoryPhotoList);
         this.form.get('randomDuration').setValue(settings.randomDisplayDurationSeconds);
+        this.form.get('photoInfoPanelShowComments').setValue(settings.photoInfoPanelShowComments);
+        this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);
+        this.form.get('photoInfoPanelShowExif').setValue(settings.photoInfoPanelShowExif);
+        this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
     }
 }

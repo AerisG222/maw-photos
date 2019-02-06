@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { settingsReducer } from './reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { SettingsStoreEffects } from './effects';
 
-export const SETTINGS_FEATURE_NAME = 'settings';
+import { settingsReducer } from './reducer';
+import { SettingsStoreEffects } from './effects';
+import { SETTINGS_FEATURE_NAME } from './feature-name';
 
 @NgModule({
     declarations: [],

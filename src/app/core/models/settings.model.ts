@@ -9,4 +9,8 @@ export interface Settings {
     photoListThumbnailSize: ThumbnailSize;
     showCategoryPhotoList: boolean;
     randomDisplayDurationSeconds: number;
+    photoInfoPanelShowRatings: boolean;
+    photoInfoPanelShowComments: boolean;
+    photoInfoPanelShowExif: boolean;
+    photoInfoPanelShowEffects: boolean;
 }

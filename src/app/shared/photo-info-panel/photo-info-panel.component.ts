@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
-import { RootStoreState } from 'src/app/core/root-store';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, tap, filter } from 'rxjs/operators';
@@ -20,10 +20,10 @@ import { ExifData } from 'src/app/core/models/exif-data.model';
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     endSidenavExpanded = false;
 
-    showRating = true;
-    showComments = true;
-    showExif = false;
-    showEffects = false;
+    showComments$: Observable<boolean>;
+    showEffects$: Observable<boolean>;
+    showExif$: Observable<boolean>;
+    showRatings$: Observable<boolean>;
 
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
@@ -48,6 +48,22 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
             takeUntil(this.destroy$)
+        );
+
+        this.showComments$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowComments)
+        );
+
+        this.showEffects$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowEffects)
+        );
+
+        this.showExif$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif)
+        );
+
+        this.showRatings$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings)
         );
 
         this.rating$ = this._store$.pipe(
@@ -115,5 +131,21 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         if (this.currentPhoto) {
             this._store$.dispatch(new PhotoStoreActions.UpdateEffectsRequestAction({ effects: effects }));
         }
+    }
+
+    toggleRatings(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelRatingsRequestAction());
+    }
+
+    toggleComments(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelCommentsRequestAction());
+    }
+
+    toggleExif(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExifRequestAction());
+    }
+
+    toggleEffects(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelEffectsRequestAction());
     }
 }

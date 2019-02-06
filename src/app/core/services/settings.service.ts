@@ -17,6 +17,11 @@ export class SettingsService {
     private static readonly keyShowCategoryPhotoList = 'showCategoryPhotoList';
     private static readonly keyRandomDisplayDurationSeconds = 'randomDisplayDurationSeconds';
 
+    private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
+    private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
+    private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
+    private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
+
     constructor(
         private _localStorage: LocalStorageService
     ) {
@@ -28,6 +33,11 @@ export class SettingsService {
         const showCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyShowCategoryBreadcrumbs);
         const showCategoryPhotoList = this._localStorage.retrieve(SettingsService.keyShowCategoryPhotoList);
 
+        const photoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
+        const photoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
+        const photoInfoPanelShowExif = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
+        const photoInfoPanelShowEffects = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
+
         return {
             theme: this.getTheme(),
             categoryThumbnailSize: this.getCategoryThumbnailSize(),
@@ -35,7 +45,11 @@ export class SettingsService {
             randomDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
             showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
             showCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
-            showCategoryPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true
+            showCategoryPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true,
+            photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
+            photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
+            photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
+            photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false
         };
     }
 
@@ -51,6 +65,11 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
         this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.showCategoryPhotoList);
         this._localStorage.store(SettingsService.keyRandomDisplayDurationSeconds, settings.randomDisplayDurationSeconds);
+
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
     }
 
     private getTheme(): Theme {

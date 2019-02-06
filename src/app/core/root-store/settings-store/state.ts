@@ -16,6 +16,10 @@ export const initialState: State = {
         categoryThumbnailSize: null,
         photoListThumbnailSize: null,
         showCategoryPhotoList: true,
-        randomDisplayDurationSeconds: 3
+        randomDisplayDurationSeconds: 3,
+        photoInfoPanelShowRatings: true,
+        photoInfoPanelShowComments: true,
+        photoInfoPanelShowExif: false,
+        photoInfoPanelShowEffects: false
     }
 };

@@ -43,6 +43,15 @@
                 <mat-radio-group formControlName="photoListThumbnailSize">
                     <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
+
+                <h3>Photo Info Panel Visibility</h3>
+                <mat-checkbox formControlName="photoInfoPanelShowRatings">Show Ratings Panel</mat-checkbox>
+                <br />
+                <mat-checkbox formControlName="photoInfoPanelShowComments">Show Comments Panel</mat-checkbox>
+                <br />
+                <mat-checkbox formControlName="photoInfoPanelShowExif">Show EXIF Panel</mat-checkbox>
+                <br />
+                <mat-checkbox formControlName="photoInfoPanelShowEffects">Show Effects Panel</mat-checkbox>
             </mat-card-content>
         </mat-card>
 

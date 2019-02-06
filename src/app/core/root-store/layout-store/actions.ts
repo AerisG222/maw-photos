@@ -6,7 +6,7 @@ export enum ActionTypes {
     CLOSE_RIGHT_SIDEBAR_REQUEST = '[Layout] Close Right Sidebar Request',
     TOGGLE_FULLSCREEN_REQUEST = '[Layout] Toggle Fullscreen Request',
     ENTER_FULLSCREEN_REQUEST = '[Layout] Enter Fullscreen Request',
-    EXIT_FULLSCREEN_REQUEST = '[Layout] Exit Fullscreen Request',
+    EXIT_FULLSCREEN_REQUEST = '[Layout] Exit Fullscreen Request'
 }
 
 export class ResetLayoutRequestAction implements Action {

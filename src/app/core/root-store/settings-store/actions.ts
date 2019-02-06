@@ -9,7 +9,12 @@ export enum ActionTypes {
 
     SAVE_REQUEST = '[Settings] Save Request',
     SAVE_FAILURE = '[Settings] Save Failure',
-    SAVE_SUCCESS = '[Settings] Save Success'
+    SAVE_SUCCESS = '[Settings] Save Success',
+
+    TOGGLE_PHOTO_INFO_PANEL_RATINGS = '[Layout] Toggle Photo Info Panel Ratings',
+    TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Layout] Toggle Photo Info Panel Comments',
+    TOGGLE_PHOTO_INFO_PANEL_EXIF = '[Layout] Toggle Photo Info Panel EXIF',
+    TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Layout] Toggle Photo Info Panel Effects'
 }
 
 export class LoadRequestAction implements Action {
@@ -41,10 +46,30 @@ export class SaveFailureAction implements Action {
     constructor(public payload: {error: string}) { }
 }
 
+export class TogglePhotoInfoPanelRatingsRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_RATINGS;
+}
+
+export class TogglePhotoInfoPanelCommentsRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS;
+}
+
+export class TogglePhotoInfoPanelExifRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXIF;
+}
+
+export class TogglePhotoInfoPanelEffectsRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EFFECTS;
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
     LoadSuccessAction |
     SaveRequestAction |
     SaveFailureAction |
-    SaveSuccessAction;
+    SaveSuccessAction |
+    TogglePhotoInfoPanelRatingsRequestAction |
+    TogglePhotoInfoPanelCommentsRequestAction |
+    TogglePhotoInfoPanelExifRequestAction |
+    TogglePhotoInfoPanelEffectsRequestAction;
