@@ -32,8 +32,6 @@
                 class="widget"
                 *ngIf="showEffects$ | async"
                 [effects]="effects$ | async"
-                (rotateClockwise)="rotateClockwise()"
-                (rotateCounterClockwise)="rotateCounterClockwise()"
                 (resetEffects)="onResetEffects()"
                 (updateEffects)="onUpdateEffects($event)">
             </app-effects>

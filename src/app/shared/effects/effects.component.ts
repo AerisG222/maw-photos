@@ -9,18 +9,8 @@ import { MatSliderChange } from '@angular/material';
 })
 export class EffectsComponent {
     @Input() effects: PhotoEffects;
-    @Output() rotateCounterClockwise = new EventEmitter<void>();
-    @Output() rotateClockwise = new EventEmitter<void>();
     @Output() resetEffects = new EventEmitter<void>();
     @Output() updateEffects = new EventEmitter<PhotoEffects>();
-
-    onRotateCounterClockwise(): void {
-        this.rotateCounterClockwise.emit();
-    }
-
-    onRotateClockwise(): void {
-        this.rotateClockwise.emit();
-    }
 
     onResetFilters(): void {
         this.resetEffects.emit();
