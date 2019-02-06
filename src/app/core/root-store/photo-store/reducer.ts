@@ -116,15 +116,39 @@ export function photoReducer(state = initialState, action: Actions): State {
             };
         }
         case ActionTypes.MOVE_NEXT_REQUEST: {
+            const newPhoto = nextPhoto(state);
+
+            if (newPhoto != null &&
+                state.currentPhoto != null &&
+                newPhoto.id === state.currentPhoto.id) {
+                return state;
+            }
+
             return {
                 ...state,
-                currentPhoto: nextPhoto(state)
+                currentPhoto: newPhoto,
+                currentPhotoEffects: {
+                    ...state.currentPhotoEffects,
+                    rotation: new PhotoRotation()
+                }
             };
         }
         case ActionTypes.MOVE_PREVIOUS_REQUEST: {
+            const newPhoto = previousPhoto(state);
+
+            if (newPhoto != null &&
+                state.currentPhoto != null &&
+                newPhoto.id === state.currentPhoto.id) {
+                return state;
+            }
+
             return {
                 ...state,
-                currentPhoto: previousPhoto(state)
+                currentPhoto: newPhoto,
+                currentPhotoEffects: {
+                    ...state.currentPhotoEffects,
+                    rotation: new PhotoRotation()
+                }
             };
         }
         case ActionTypes.RATE_PHOTO_REQUEST: {
