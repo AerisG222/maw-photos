@@ -24,6 +24,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showEffects$: Observable<boolean>;
     showExif$: Observable<boolean>;
     showRatings$: Observable<boolean>;
+    showMinimap$: Observable<boolean>;
 
     rating$: Observable<Rating>;
     comments$: Observable<PhotoComment[]>;
@@ -60,6 +61,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.showExif$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif)
+        );
+
+        this.showMinimap$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap)
         );
 
         this.showRatings$ = this._store$.pipe(
@@ -135,5 +140,9 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleEffects(): void {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelEffectsRequestAction());
+    }
+
+    toggleMinimap(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelMinimapRequestAction());
     }
 }

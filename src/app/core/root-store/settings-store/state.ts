@@ -21,6 +21,7 @@ export const initialState: State = {
         photoInfoPanelShowComments: true,
         photoInfoPanelShowExif: false,
         photoInfoPanelShowEffects: false,
+        photoInfoPanelShowMinimap: false,
         photoListToolbarExpandedState: true
     }
 };

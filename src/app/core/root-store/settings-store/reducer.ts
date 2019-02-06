@@ -110,6 +110,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     categoryThumbnailSize: action.payload.newSize
                 }
             };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowMinimap: !state.settings.photoInfoPanelShowMinimap
+                }
+            };
         default: {
             return state;
         }

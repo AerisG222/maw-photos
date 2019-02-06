@@ -19,6 +19,7 @@ export enum ActionTypes {
     TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Settings] Toggle Photo Info Panel Comments',
     TOGGLE_PHOTO_INFO_PANEL_EXIF = '[Settings] Toggle Photo Info Panel EXIF',
     TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Settings] Toggle Photo Info Panel Effects',
+    TOGGLE_PHOTO_INFO_PANEL_MINIMAP = '[Settings] Toggle Photo Info Panel Minimap',
 
     TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
@@ -92,6 +93,10 @@ export class UpdateCategoryListThumbnailSizeRequestAction implements Action {
     constructor(public payload: { newSize: ThumbnailSize }) { }
 }
 
+export class TogglePhotoInfoPanelMinimapRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP;
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
@@ -107,4 +112,5 @@ export type Actions =
     UpdatePhotoListThumbnailSizeRequestAction |
     TogglePhotoListCategoryBreadcrumbsRequestAction |
     ToggleCategoryListCategoryTitlesRequestAction |
-    UpdateCategoryListThumbnailSizeRequestAction;
+    UpdateCategoryListThumbnailSizeRequestAction |
+    TogglePhotoInfoPanelMinimapRequestAction;

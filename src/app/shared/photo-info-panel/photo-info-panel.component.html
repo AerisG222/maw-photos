@@ -36,7 +36,12 @@
                 (updateEffects)="onUpdateEffects($event)">
             </app-effects>
 
-            <div class="widget">minimap</div>
+            <div *ngIf="showMinimap$ | async" class="panel-heading" fxFlex>Mini-map</div>
+            <app-minimap
+                class="widget"
+                *ngIf="showMinimap$ | async"
+                [exifData]="exif$ | async">
+            </app-minimap>
         </div>
     </div>
 </div>
@@ -87,6 +92,15 @@
         [class.notactive]="!(showEffects$ | async)"
         (click)="toggleEffects()">
         <mat-icon [inline]="true">photo_filter</mat-icon>
+    </button>
+    <button
+        mat-button
+        matTooltip="Show/Hide Mini-map"
+        matTooltipPosition="before"
+        [disabled]="!endSidenavExpanded"
+        [class.notactive]="!(showMinimap$ | async)"
+        (click)="toggleMinimap()">
+        <mat-icon [inline]="true">map</mat-icon>
     </button>
 
     <span class="toolbar_title">Details</span>
