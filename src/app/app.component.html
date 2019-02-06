@@ -6,7 +6,11 @@
     <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="!(hidePanels$ | async)" class="mat-elevation-z8">
         <div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%;">
             <div fxLayout="column">
-                <a [routerLink]="['/categories']" routerLinkActive="active" mat-button>
+                <a [routerLink]="['/categories']"
+                   routerLinkActive="active"
+                   mat-button
+                   matTooltip="Browse by Category"
+                   matTooltipPosition="after">
                     <mat-icon>home</mat-icon>
                 </a>
                 <!--
@@ -14,18 +18,34 @@
                     <mat-icon>search</mat-icon>
                 </a>
                 -->
-                <a [routerLink]="['/random']" routerLinkActive="active" mat-button>
+                <a [routerLink]="['/random']"
+                   routerLinkActive="active"
+                   mat-button
+                   matTooltip="Random Photos"
+                   matTooltipPosition="after">
                     <mat-icon>shuffle</mat-icon>
                 </a>
-                <a [routerLink]="['/stats']" routerLinkActive="active" mat-button>
+                <a [routerLink]="['/stats']"
+                   routerLinkActive="active"
+                   mat-button
+                   matTooltip="Photo Statistics"
+                   matTooltipPosition="after">
                     <mat-icon>bar_chart</mat-icon>
                 </a>
             </div>
             <div fxLayout="column">
-                <a [routerLink]="['/help']" routerLinkActive="active" mat-button>
+                <a [routerLink]="['/help']"
+                   routerLinkActive="active"
+                   mat-button
+                   matTooltip="Help / About"
+                   matTooltipPosition="after">
                     <mat-icon>help_outline</mat-icon>
                 </a>
-                <a [routerLink]="['/settings']" routerLinkActive="active" mat-button>
+                <a [routerLink]="['/settings']"
+                   routerLinkActive="active"
+                   mat-button
+                   matTooltip="Settings"
+                   matTooltipPosition="after">
                     <mat-icon>settings</mat-icon>
                 </a>
             </div>

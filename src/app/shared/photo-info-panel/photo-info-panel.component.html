@@ -44,21 +44,50 @@
 </div>
 
 <div fxLayout="column" fxFlex="0 0 auto" class="toolbar">
-    <button class="menu-button" mat-button (click)="toggleEndSidenav()">
+    <button
+        class="menu-button"
+        mat-button
+        matTooltip="Show/Hide Info Panel"
+        matTooltipPosition="before"
+        (click)="toggleEndSidenav()">
         <mat-icon *ngIf="endSidenavExpanded" [inline]="true">chevron_right</mat-icon>
         <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
     </button>
 
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showRatings$ | async)" (click)="toggleRatings()">
+    <button
+        mat-button
+        matTooltip="Show/Hide Ratings"
+        matTooltipPosition="before"
+        [disabled]="!endSidenavExpanded"
+        [class.notactive]="!(showRatings$ | async)"
+        (click)="toggleRatings()">
         <mat-icon [inline]="true">star</mat-icon>
     </button>
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showComments$ | async)" (click)="toggleComments()">
+    <button
+        mat-button
+        matTooltip="Show/Hide Comments"
+        matTooltipPosition="before"
+        [disabled]="!endSidenavExpanded"
+        [class.notactive]="!(showComments$ | async)"
+        (click)="toggleComments()">
         <mat-icon [inline]="true">comment</mat-icon>
     </button>
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showExif$ | async)" (click)="toggleExif()">
+    <button
+        mat-button
+        matTooltip="Show/Hide EXIF"
+        matTooltipPosition="before"
+        [disabled]="!endSidenavExpanded"
+        [class.notactive]="!(showExif$ | async)"
+        (click)="toggleExif()">
         <mat-icon [inline]="true">tune</mat-icon>
     </button>
-    <button mat-button [disabled]="!endSidenavExpanded" [class.notactive]="!(showEffects$ | async)" (click)="toggleEffects()">
+    <button
+        mat-button
+        matTooltip="Show/Hide Effects"
+        matTooltipPosition="before"
+        [disabled]="!endSidenavExpanded"
+        [class.notactive]="!(showEffects$ | async)"
+        (click)="toggleEffects()">
         <mat-icon [inline]="true">photo_filter</mat-icon>
     </button>
 

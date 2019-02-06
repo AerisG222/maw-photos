@@ -69,7 +69,7 @@ export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
         this.destroy$.next(true);
     }
 
-    onToggleCategoryTitle(): void {
+    onToggleCategoryBreadcrumbs(): void {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoListCategoryBreadcrumbsRequestAction());
     }
 

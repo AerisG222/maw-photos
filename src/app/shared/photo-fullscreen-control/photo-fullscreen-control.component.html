@@ -1,18 +1,32 @@
 <span class="photo">
-    <button mat-button (click)="onMovePrevious()" [disabled]="isFirst$ | async">
+    <button
+        mat-button
+        matTooltip="Previous"
+        [disabled]="isFirst$ | async"
+        (click)="onMovePrevious()">
         <mat-icon [inline]="true">chevron_left</mat-icon>
     </button>
 
-    <button mat-button (click)="onMoveNext()" [disabled]="isLast$ | async">
+    <button
+        mat-button
+        matTooltip="Next"
+        [disabled]="isLast$ | async"
+        (click)="onMoveNext()">
         <mat-icon [inline]="true">chevron_right</mat-icon>
     </button>
 
-    <button mat-button (click)="onToggleSlideshow()">
+    <button
+        mat-button
+        matTooltip="Start/Stop Slideshow"
+        (click)="onToggleSlideshow()">
         <mat-icon [inline]="true" *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
         <mat-icon [inline]="true" *ngIf="slideshowPlaying$ | async">stop</mat-icon>
     </button>
 
-    <button mat-button (click)="onExitFullscreen()">
+    <button
+        mat-button
+        matTooltip="Exit Fullscreen"
+        (click)="onExitFullscreen()">
         <mat-icon [inline]="true">fullscreen_exit</mat-icon>
     </button>
 </span>

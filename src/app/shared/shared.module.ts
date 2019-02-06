@@ -18,7 +18,8 @@ import {
     MatSlideToggleModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
 } from '@angular/material';
 import { BarRatingModule } from 'ngx-bar-rating';
 
@@ -75,6 +76,7 @@ import { ExifTableComponent } from './exif-table/exif-table.component';
         MatTableModule,
         MatTabsModule,
         MatToolbarModule,
+        MatTooltipModule,
         ReactiveFormsModule,
         RouterModule
     ],
@@ -98,6 +100,7 @@ import { ExifTableComponent } from './exif-table/exif-table.component';
         MatTableModule,
         MatTabsModule,
         MatToolbarModule,
+        MatTooltipModule,
         ReactiveFormsModule,
 
         // components
