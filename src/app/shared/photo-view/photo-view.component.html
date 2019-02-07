@@ -5,14 +5,14 @@
 
 <div fxLayout="column" style="height: 100%;">
     <app-photo-list-mini-settings [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-mini-settings>
-    <app-category-header *ngIf="settings?.showCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
+    <app-category-header *ngIf="settings?.photoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
 
     <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxFlexAlign="center">
         <img [src]="activePhoto?.mdInfo?.path" [class]="effects?.rotation?.klass" [style.filter]="getEffectStyles()" />
     </div>
 
     <app-photo-list
-        *ngIf="photos && settings?.showCategoryPhotoList"
+        *ngIf="photos && settings?.photoListShowPhotoList"
         [photos]="photos"
         [thumbnailSize]="settings?.photoListThumbnailSize"
         (select)="onSelectPhoto($event)"
