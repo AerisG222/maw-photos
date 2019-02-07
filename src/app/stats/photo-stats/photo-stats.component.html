@@ -1,4 +1,4 @@
-<div fxLayout="column" style="height: 100%;">
+<div fxLayout="column">
     <div fxFlex="0 0 auto">
         <app-stats-header></app-stats-header>
     </div>
@@ -12,7 +12,7 @@
         </app-stat-detail-card>
     </div>
 
-    <div fxFlex="1 1 auto">
+    <div fxFlexFill>
         <app-stat-chart
             [chartData]="chartData$ | async"
             (select)="onSelect($event)">
