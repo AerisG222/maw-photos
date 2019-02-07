@@ -1,6 +1,6 @@
-<mat-sidenav-container [autosize]="true" fxFlex="1 1 100%">
-    <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="!(hidePanels$ | async)" class="mat-elevation-z8">
-        <div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%;">
+<mat-sidenav-container [autosize]="true" fxFlexFill fxLayout>
+    <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="!(hidePanels$ | async)" class="mat-elevation-z8" fxFlex="none">
+        <div fxLayout="column" fxLayoutAlign="space-between" fxFlex>
             <div fxLayout="column">
                 <a [routerLink]="['/categories']"
                    routerLinkActive="active"
@@ -29,6 +29,7 @@
                     <mat-icon>bar_chart</mat-icon>
                 </a>
             </div>
+
             <div fxLayout="column">
                 <a [routerLink]="['/help']"
                    routerLinkActive="active"
@@ -48,11 +49,11 @@
         </div>
     </mat-sidenav>
 
-    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="!(hidePanels$ | async) && (isRightSidebarDisplayed$ | async)">
-        <app-photo-info-panel></app-photo-info-panel>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
+    <mat-sidenav-content fxFlex>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
+
+    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="!(hidePanels$ | async) && (isRightSidebarDisplayed$ | async)" fxFlex>
+        <app-photo-info-panel></app-photo-info-panel>
+    </mat-sidenav>
 </mat-sidenav-container>

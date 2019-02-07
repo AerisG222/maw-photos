@@ -1,7 +1,7 @@
-<div *ngIf="endSidenavExpanded" class="panel-contents">
-    <div fxLayout="row">
+<div fxLayout>
+    <div *ngIf="endSidenavExpanded" class="panel-contents" fxLayout="column">
         <div fxLayout="column" fxFlex="1 1 auto">
-            <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex>Rating</div>
+            <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex="none">Rating</div>
             <app-rating
                 class="widget"
                 *ngIf="showRatings$ | async"
@@ -10,7 +10,7 @@
                 (rate)="onRate($event)">
             </app-rating>
 
-            <div *ngIf="showComments$ | async" class="panel-heading" fxFlex>Comments</div>
+            <div *ngIf="showComments$ | async" class="panel-heading" fxFlex="none">Comments</div>
             <app-comments
                 fxFlex
                 class="widget"
@@ -20,14 +20,14 @@
                 #comments>
             </app-comments>
 
-            <div *ngIf="showExif$ | async" class="panel-heading" fxFlex>EXIF Data</div>
+            <div *ngIf="showExif$ | async" class="panel-heading" fxFlex="none">EXIF Data</div>
             <app-exif
                 class="widget"
                 *ngIf="showExif$ | async"
                 [exifData]="exif$ | async">
             </app-exif>
 
-            <div *ngIf="showEffects$ | async" class="panel-heading" fxFlex>Effects</div>
+            <div *ngIf="showEffects$ | async" class="panel-heading" fxFlex="none">Effects</div>
             <app-effects
                 class="widget"
                 *ngIf="showEffects$ | async"
@@ -36,7 +36,7 @@
                 (updateEffects)="onUpdateEffects($event)">
             </app-effects>
 
-            <div *ngIf="showMinimap$ | async" class="panel-heading" fxFlex>Mini-map</div>
+            <div *ngIf="showMinimap$ | async" class="panel-heading" fxFlex="none">Mini-map</div>
             <app-minimap
                 class="widget"
                 *ngIf="showMinimap$ | async"
@@ -44,64 +44,64 @@
             </app-minimap>
         </div>
     </div>
-</div>
 
-<div fxLayout="column" fxFlex="0 0 auto" class="toolbar">
-    <button
-        class="menu-button"
-        mat-button
-        matTooltip="Show/Hide Info Panel"
-        matTooltipPosition="before"
-        (click)="toggleEndSidenav()">
-        <mat-icon *ngIf="endSidenavExpanded" [inline]="true">chevron_right</mat-icon>
-        <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
-    </button>
+    <div fxLayout="column" fxFlex="1 1 auto" class="toolbar">
+        <button
+            class="menu-button"
+            mat-button
+            matTooltip="Show/Hide Info Panel"
+            matTooltipPosition="before"
+            (click)="toggleEndSidenav()">
+            <mat-icon *ngIf="endSidenavExpanded" [inline]="true">chevron_right</mat-icon>
+            <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Show/Hide Ratings"
-        matTooltipPosition="before"
-        [disabled]="!endSidenavExpanded"
-        [class.notactive]="!(showRatings$ | async)"
-        (click)="toggleRatings()">
-        <mat-icon [inline]="true">star</mat-icon>
-    </button>
-    <button
-        mat-button
-        matTooltip="Show/Hide Comments"
-        matTooltipPosition="before"
-        [disabled]="!endSidenavExpanded"
-        [class.notactive]="!(showComments$ | async)"
-        (click)="toggleComments()">
-        <mat-icon [inline]="true">comment</mat-icon>
-    </button>
-    <button
-        mat-button
-        matTooltip="Show/Hide EXIF"
-        matTooltipPosition="before"
-        [disabled]="!endSidenavExpanded"
-        [class.notactive]="!(showExif$ | async)"
-        (click)="toggleExif()">
-        <mat-icon [inline]="true">tune</mat-icon>
-    </button>
-    <button
-        mat-button
-        matTooltip="Show/Hide Effects"
-        matTooltipPosition="before"
-        [disabled]="!endSidenavExpanded"
-        [class.notactive]="!(showEffects$ | async)"
-        (click)="toggleEffects()">
-        <mat-icon [inline]="true">photo_filter</mat-icon>
-    </button>
-    <button
-        mat-button
-        matTooltip="Show/Hide Mini-map"
-        matTooltipPosition="before"
-        [disabled]="!endSidenavExpanded"
-        [class.notactive]="!(showMinimap$ | async)"
-        (click)="toggleMinimap()">
-        <mat-icon [inline]="true">map</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Ratings"
+            matTooltipPosition="before"
+            [disabled]="!endSidenavExpanded"
+            [class.notactive]="!(showRatings$ | async)"
+            (click)="toggleRatings()">
+            <mat-icon [inline]="true">star</mat-icon>
+        </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Comments"
+            matTooltipPosition="before"
+            [disabled]="!endSidenavExpanded"
+            [class.notactive]="!(showComments$ | async)"
+            (click)="toggleComments()">
+            <mat-icon [inline]="true">comment</mat-icon>
+        </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide EXIF"
+            matTooltipPosition="before"
+            [disabled]="!endSidenavExpanded"
+            [class.notactive]="!(showExif$ | async)"
+            (click)="toggleExif()">
+            <mat-icon [inline]="true">tune</mat-icon>
+        </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Effects"
+            matTooltipPosition="before"
+            [disabled]="!endSidenavExpanded"
+            [class.notactive]="!(showEffects$ | async)"
+            (click)="toggleEffects()">
+            <mat-icon [inline]="true">photo_filter</mat-icon>
+        </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Mini-map"
+            matTooltipPosition="before"
+            [disabled]="!endSidenavExpanded"
+            [class.notactive]="!(showMinimap$ | async)"
+            (click)="toggleMinimap()">
+            <mat-icon [inline]="true">map</mat-icon>
+        </button>
 
-    <span class="toolbar_title">Details</span>
+        <span class="toolbar_title">Details</span>
+    </div>
 </div>
