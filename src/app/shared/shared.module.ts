@@ -24,7 +24,6 @@ import {
 import { BarRatingModule } from 'ngx-bar-rating';
 
 import { PhotoListComponent } from './photo-list/photo-list.component';
-import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PhotoViewComponent } from './photo-view/photo-view.component';
 import { CategoryHeaderComponent } from './category-header/category-header.component';
@@ -45,7 +44,6 @@ import { MinimapComponent } from './minimap/minimap.component';
         CategoryHeaderComponent,
         CategoryListMiniSettingsComponent,
         FooterComponent,
-        HeaderComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent,
@@ -109,7 +107,6 @@ import { MinimapComponent } from './minimap/minimap.component';
         CategoryHeaderComponent,
         CategoryListMiniSettingsComponent,
         FooterComponent,
-        HeaderComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoListMiniSettingsComponent,
