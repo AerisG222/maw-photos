@@ -30,19 +30,22 @@ export class SettingsComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this._formBuilder.group({
-            theme: ['', Validators.required],
-            showCategoryTitles: [true],
-            categoryThumbnailSize: [''],
-            showCategoryBreadcrumbs: [true],
+            appTheme: ['', Validators.required],
+
+            categoryListShowCategoryTitles: [true],
+            categoryListThumbnailSize: [''],
+
+            photoListShowCategoryBreadcrumbs: [true],
             photoListThumbnailSize: [''],
-            showCategoryPhotoList: [true],
-            randomDuration: [3],
-            photoInfoPanelShowRatings: [true],
+            photoListShowPhotoList: [true],
+            photoListSlideshowDisplayDurationSeconds: [3],
+            photoListToolbarExpandedState: [true],
+
             photoInfoPanelShowComments: [true],
-            photoInfoPanelShowExif: [false],
             photoInfoPanelShowEffects: [false],
-            showPhotoListToolbar: [true],
-            photoInfoPanelShowMinimap: [false]
+            photoInfoPanelShowExif: [false],
+            photoInfoPanelShowMinimap: [false],
+            photoInfoPanelShowRatings: [true]
         });
 
         this._store$
@@ -57,19 +60,22 @@ export class SettingsComponent implements OnInit {
 
     onSave(): void {
         const settings = {
-            theme: Theme.forName(this.form.get('theme').value),
-            showCategoryTitles: this.form.get('showCategoryTitles').value,
-            showCategoryBreadcrumbs: this.form.get('showCategoryBreadcrumbs').value,
-            categoryThumbnailSize: ThumbnailSize.forName(this.form.get('categoryThumbnailSize').value),
+            appTheme: Theme.forName(this.form.get('appTheme').value),
+
+            categoryListShowCategoryTitles: this.form.get('categoryListShowCategoryTitles').value,
+            categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
+
+            photoListShowCategoryBreadcrumbs: this.form.get('photoListShowCategoryBreadcrumbs').value,
             photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
-            showCategoryPhotoList: this.form.get('showCategoryPhotoList').value,
-            randomDisplayDurationSeconds: this.form.get('randomDuration').value,
+            photoListShowPhotoList: this.form.get('photoListShowPhotoList').value,
+            photoListSlideshowDisplayDurationSeconds: this.form.get('photoListSlideshowDisplayDurationSeconds').value,
+            photoListToolbarExpandedState: this.form.get('photoListToolbarExpandedState').value,
+
             photoInfoPanelShowComments: this.form.get('photoInfoPanelShowComments').value,
             photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
             photoInfoPanelShowExif: this.form.get('photoInfoPanelShowExif').value,
-            photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value,
-            photoListToolbarExpandedState: this.form.get('showPhotoListToolbar').value,
-            photoInfoPanelShowMinimap: this.form.get('photoInfoPanelShowMinimap').value
+            photoInfoPanelShowMinimap: this.form.get('photoInfoPanelShowMinimap').value,
+            photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value
         };
 
         this._store$.dispatch(
@@ -88,18 +94,21 @@ export class SettingsComponent implements OnInit {
     }
 
     private updateForm(settings: Settings): void {
-        this.form.get('theme').setValue(settings.theme.name);
-        this.form.get('showCategoryTitles').setValue(settings.showCategoryTitles);
-        this.form.get('showCategoryBreadcrumbs').setValue(settings.showCategoryBreadcrumbs);
-        this.form.get('categoryThumbnailSize').setValue(settings.categoryThumbnailSize.name);
+        this.form.get('appTheme').setValue(settings.appTheme.name);
+
+        this.form.get('categoryListShowCategoryTitles').setValue(settings.categoryListShowCategoryTitles);
+        this.form.get('categoryListThumbnailSize').setValue(settings.categoryListThumbnailSize.name);
+
+        this.form.get('photoListShowCategoryBreadcrumbs').setValue(settings.photoListShowCategoryBreadcrumbs);
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);
-        this.form.get('showCategoryPhotoList').setValue(settings.showCategoryPhotoList);
-        this.form.get('randomDuration').setValue(settings.randomDisplayDurationSeconds);
+        this.form.get('photoListShowPhotoList').setValue(settings.photoListShowPhotoList);
+        this.form.get('photoListSlideshowDisplayDurationSeconds').setValue(settings.photoListSlideshowDisplayDurationSeconds);
+        this.form.get('photoListToolbarExpandedState').setValue(settings.photoListToolbarExpandedState);
+
         this.form.get('photoInfoPanelShowComments').setValue(settings.photoInfoPanelShowComments);
         this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);
         this.form.get('photoInfoPanelShowExif').setValue(settings.photoInfoPanelShowExif);
-        this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
-        this.form.get('showPhotoListToolbar').setValue(settings.photoListToolbarExpandedState);
         this.form.get('photoInfoPanelShowMinimap').setValue(settings.photoInfoPanelShowMinimap);
+        this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
     }
 }

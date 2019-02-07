@@ -4,6 +4,6 @@
 
 <app-category-list
     [categories]="categories$ | async"
-    [showTitles]="(settings$ | async).showCategoryTitles"
-    [thumbnailSize]="!(settings$ | async).showCategoryTitles && (settings$ | async).categoryThumbnailSize">
+    [showTitles]="(settings$ | async).categoryListShowCategoryTitles"
+    [thumbnailSize]="!(settings$ | async).categoryListShowCategoryTitles && (settings$ | async).categoryListThumbnailSize">
 </app-category-list>

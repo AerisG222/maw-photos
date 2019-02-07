@@ -43,13 +43,13 @@ export class SettingsService {
         const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
 
         return {
-            theme: this.getTheme(),
-            categoryThumbnailSize: this.getCategoryThumbnailSize(),
+            appTheme: this.getTheme(),
+            categoryListThumbnailSize: this.getCategoryThumbnailSize(),
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
-            randomDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
-            showCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
-            showCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
-            showCategoryPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true,
+            photoListSlideshowDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
+            categoryListShowCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
+            photoListShowCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
+            photoListShowPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true,
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
             photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
             photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
@@ -64,13 +64,13 @@ export class SettingsService {
             return;
         }
 
-        this._localStorage.store(SettingsService.keyTheme, settings.theme.name);
-        this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.showCategoryTitles);
-        this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryThumbnailSize.name);
-        this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.showCategoryBreadcrumbs);
+        this._localStorage.store(SettingsService.keyTheme, settings.appTheme.name);
+        this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.categoryListShowCategoryTitles);
+        this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryListThumbnailSize.name);
+        this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
-        this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.showCategoryPhotoList);
-        this._localStorage.store(SettingsService.keyRandomDisplayDurationSeconds, settings.randomDisplayDurationSeconds);
+        this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.photoListShowPhotoList);
+        this._localStorage.store(SettingsService.keyRandomDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
 
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);

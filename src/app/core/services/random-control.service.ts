@@ -33,7 +33,7 @@ export class RandomControlService {
         this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.slideshowDuration = settings.randomDisplayDurationSeconds * 1000),
+                tap(settings => this.slideshowDuration = settings.photoListSlideshowDisplayDurationSeconds * 1000),
                 takeUntil(this.destroy$)
             ).subscribe();
     }

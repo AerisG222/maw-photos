@@ -39,7 +39,7 @@ export class CategoryListMiniSettingsComponent implements OnInit, OnDestroy {
     }
 
     onToggleSize(): void {
-        const size = ThumbnailSize.nextSize(this.settings.categoryThumbnailSize.name);
+        const size = ThumbnailSize.nextSize(this.settings.categoryListThumbnailSize.name);
 
         this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListThumbnailSizeRequestAction({ newSize: size }));
     }

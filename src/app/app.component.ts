@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             )
-            .subscribe(settings => this.setTheme(settings.theme));
+            .subscribe(settings => this.setTheme(settings.appTheme));
 
         this.isRightSidebarDisplayed$ = this._store$
             .pipe(

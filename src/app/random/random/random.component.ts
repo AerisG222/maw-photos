@@ -71,7 +71,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.startRandomFetch(settings.randomDisplayDurationSeconds))
+                tap(settings => this.startRandomFetch(settings.photoListSlideshowDisplayDurationSeconds))
             );
 
         this.photos$ = this._store$

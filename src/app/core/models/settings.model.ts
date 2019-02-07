@@ -2,17 +2,20 @@ import { Theme } from './theme.model';
 import { ThumbnailSize } from './thumbnail-size.model';
 
 export interface Settings {
-    theme: Theme;
-    showCategoryTitles: boolean;
-    showCategoryBreadcrumbs: boolean;
-    categoryThumbnailSize: ThumbnailSize;
+    appTheme: Theme;
+
+    categoryListShowCategoryTitles: boolean;
+    categoryListThumbnailSize: ThumbnailSize;
+
+    photoListShowCategoryBreadcrumbs: boolean;
     photoListThumbnailSize: ThumbnailSize;
-    showCategoryPhotoList: boolean;
-    randomDisplayDurationSeconds: number;
+    photoListShowPhotoList: boolean;
+    photoListSlideshowDisplayDurationSeconds: number;
+    photoListToolbarExpandedState: boolean;
+
     photoInfoPanelShowRatings: boolean;
     photoInfoPanelShowComments: boolean;
     photoInfoPanelShowExif: boolean;
     photoInfoPanelShowEffects: boolean;
     photoInfoPanelShowMinimap: boolean;
-    photoListToolbarExpandedState: boolean;
 }

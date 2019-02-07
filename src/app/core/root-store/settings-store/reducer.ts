@@ -91,7 +91,7 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 ...state,
                 settings: {
                     ...state.settings,
-                    showCategoryBreadcrumbs: !state.settings.showCategoryBreadcrumbs
+                    photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
                 }
             };
         case ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES:
@@ -99,7 +99,7 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 ...state,
                 settings: {
                     ...state.settings,
-                    showCategoryTitles: !state.settings.showCategoryTitles
+                    categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
                 }
             };
         case ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE:
@@ -107,7 +107,7 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 ...state,
                 settings: {
                     ...state.settings,
-                    categoryThumbnailSize: action.payload.newSize
+                    categoryListThumbnailSize: action.payload.newSize
                 }
             };
         case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP:

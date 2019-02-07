@@ -10,18 +10,21 @@ export const initialState: State = {
     error: null,
     isLoading: false,
     settings: {
-        theme: null,
-        showCategoryTitles: true,
-        showCategoryBreadcrumbs: true,
-        categoryThumbnailSize: null,
+        appTheme: null,
+
+        categoryListShowCategoryTitles: true,
+        categoryListThumbnailSize: null,
+
+        photoListShowCategoryBreadcrumbs: true,
         photoListThumbnailSize: null,
-        showCategoryPhotoList: true,
-        randomDisplayDurationSeconds: 3,
+        photoListShowPhotoList: true,
+        photoListSlideshowDisplayDurationSeconds: 3,
+        photoListToolbarExpandedState: true,
+
         photoInfoPanelShowRatings: true,
         photoInfoPanelShowComments: true,
         photoInfoPanelShowExif: false,
         photoInfoPanelShowEffects: false,
-        photoInfoPanelShowMinimap: false,
-        photoListToolbarExpandedState: true
+        photoInfoPanelShowMinimap: false
     }
 };
