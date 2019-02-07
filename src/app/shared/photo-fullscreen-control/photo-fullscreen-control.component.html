@@ -1,19 +1,7 @@
 <span class="photo">
-    <button
-        mat-button
-        matTooltip="Previous"
-        [disabled]="isFirst$ | async"
-        (click)="onMovePrevious()">
-        <mat-icon [inline]="true">chevron_left</mat-icon>
-    </button>
+    <app-move-previous-button></app-move-previous-button>
 
-    <button
-        mat-button
-        matTooltip="Next"
-        [disabled]="isLast$ | async"
-        (click)="onMoveNext()">
-        <mat-icon [inline]="true">chevron_right</mat-icon>
-    </button>
+    <app-move-next-button></app-move-next-button>
 
     <button
         mat-button

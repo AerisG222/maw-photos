@@ -1,0 +1,7 @@
+<button
+    mat-button
+    matTooltip="Previous"
+    [disabled]="isFirst$ | async"
+    (click)="onMovePrevious()">
+    <mat-icon [inline]="true">chevron_left</mat-icon>
+</button>

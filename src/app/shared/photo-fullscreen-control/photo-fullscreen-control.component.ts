@@ -12,8 +12,6 @@ import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
     styleUrls: ['./photo-fullscreen-control.component.scss']
 })
 export class PhotoFullscreenControlComponent implements OnInit {
-    isFirst$: Observable<boolean>;
-    isLast$: Observable<boolean>;
     slideshowPlaying$: Observable<boolean>;
 
     constructor(
@@ -21,28 +19,10 @@ export class PhotoFullscreenControlComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.isFirst$ = this._store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
-            );
-
-        this.isLast$ = this._store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
-            );
-
         this.slideshowPlaying$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectSlideshowIsPlaying)
             );
-    }
-
-    onMoveNext(): void {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
-    }
-
-    onMovePrevious(): void {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
     }
 
     onExitFullscreen(): void {

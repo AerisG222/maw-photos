@@ -37,6 +37,8 @@ import { PhotoListMiniSettingsComponent } from './photo-list-mini-settings/photo
 import { PhotoFullscreenControlComponent } from './photo-fullscreen-control/photo-fullscreen-control.component';
 import { ExifTableComponent } from './exif-table/exif-table.component';
 import { MinimapComponent } from './minimap/minimap.component';
+import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
+import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +54,9 @@ import { MinimapComponent } from './minimap/minimap.component';
         PhotoListMiniSettingsComponent,
         PhotoFullscreenControlComponent,
         ExifTableComponent,
-        MinimapComponent
+        MinimapComponent,
+        MoveNextButtonComponent,
+        MovePreviousButtonComponent
     ],
     imports: [
         BarRatingModule,
