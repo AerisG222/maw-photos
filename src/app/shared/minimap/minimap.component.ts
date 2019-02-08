@@ -1,7 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { ExifData } from 'src/app/core/models/exif-data.model';
-
 @Component({
     selector: 'app-minimap',
     templateUrl: './minimap.component.html',
@@ -9,5 +7,6 @@ import { ExifData } from 'src/app/core/models/exif-data.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapComponent {
-    @Input() exifData: ExifData[];
+    @Input() lat: number;
+    @Input() lng: number;
 }

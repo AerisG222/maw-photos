@@ -22,6 +22,7 @@ import {
     MatTooltipModule
 } from '@angular/material';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { AgmCoreModule } from '@agm/core';
 
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoViewComponent } from './photo-view/photo-view.component';
@@ -59,6 +60,9 @@ import { MovePreviousButtonComponent } from './move-previous-button/move-previou
         MovePreviousButtonComponent
     ],
     imports: [
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyA50h7G5fm_83lh460EnOdabUC9zU8XF7A'
+        }),
         BarRatingModule,
         CommonModule,
         FlexLayoutModule,
@@ -84,6 +88,7 @@ import { MovePreviousButtonComponent } from './move-previous-button/move-previou
     ],
     exports: [
         // modules
+        AgmCoreModule,
         BarRatingModule,
         FlexLayoutModule,
         MatButtonModule,

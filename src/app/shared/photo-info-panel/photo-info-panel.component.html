@@ -40,7 +40,8 @@
             <app-minimap
                 class="widget"
                 *ngIf="showMinimap$ | async"
-                [exifData]="exif$ | async">
+                [lat]="latitude$ | async"
+                [lng]="longitude$ | async">
             </app-minimap>
         </div>
     </div>

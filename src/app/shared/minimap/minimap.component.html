@@ -1,3 +1,8 @@
-<p>
-    minimap works!
-</p>
+<agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [fullscreenControl]="true"
+    [streetViewControl]="false"
+    [zoom]="10">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>

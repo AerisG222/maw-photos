@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil, tap, filter } from 'rxjs/operators';
+import { takeUntil, tap, filter, map } from 'rxjs/operators';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
@@ -30,6 +30,8 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     comments$: Observable<PhotoComment[]>;
     exif$: Observable<ExifData[]>;
     effects$: Observable<PhotoEffects>;
+    latitude$: Observable<number>;
+    longitude$: Observable<number>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
 
@@ -85,6 +87,24 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.exif$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoExifData)
+        );
+
+        this.latitude$ = this._store$.pipe(
+            select(PhotoStoreSelectors.selectCurrentPhotoExifData),
+            map(d => {
+                const lat = d.find(x => x.sourceField === 'gpsLatitude');
+
+                return lat == null ? null : lat.sourceValue;
+            })
+        );
+
+        this.longitude$ = this._store$.pipe(
+            select(PhotoStoreSelectors.selectCurrentPhotoExifData),
+            map(d => {
+                const lng = d.find(x => x.sourceField === 'gpsLongitude');
+
+                return lng == null ? null : lng.sourceValue;
+            })
         );
 
         this.effects$ = this._store$.pipe(
