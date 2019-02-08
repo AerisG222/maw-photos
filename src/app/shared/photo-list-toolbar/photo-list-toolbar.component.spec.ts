@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotoListMiniSettingsComponent } from './photo-list-mini-settings.component';
+import { PhotoListToolbarComponent } from './photo-list-toolbar.component';
 
 describe('PhotoListMiniSettingsComponent', () => {
-  let component: PhotoListMiniSettingsComponent;
-  let fixture: ComponentFixture<PhotoListMiniSettingsComponent>;
+  let component: PhotoListToolbarComponent;
+  let fixture: ComponentFixture<PhotoListToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotoListMiniSettingsComponent ]
+      declarations: [ PhotoListToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhotoListMiniSettingsComponent);
+    fixture = TestBed.createComponent(PhotoListToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

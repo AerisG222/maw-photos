@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotoFullscreenControlComponent } from './photo-fullscreen-control.component';
+import { PhotoListFullscreenToolbarComponent } from './photo-list-fullscreen-toolbar.component';
 
 describe('PhotoFullscreenControlComponent', () => {
-  let component: PhotoFullscreenControlComponent;
-  let fixture: ComponentFixture<PhotoFullscreenControlComponent>;
+  let component: PhotoListFullscreenToolbarComponent;
+  let fixture: ComponentFixture<PhotoListFullscreenToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotoFullscreenControlComponent ]
+      declarations: [ PhotoListFullscreenToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhotoFullscreenControlComponent);
+    fixture = TestBed.createComponent(PhotoListFullscreenToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

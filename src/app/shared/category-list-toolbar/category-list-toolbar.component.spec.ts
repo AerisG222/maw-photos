@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryListMiniSettingsComponent } from './category-list-mini-settings.component';
+import { CategoryListToolbarComponent } from './category-list-toolbar.component';
 
 describe('CategoryListMiniSettingsComponent', () => {
-  let component: CategoryListMiniSettingsComponent;
-  let fixture: ComponentFixture<CategoryListMiniSettingsComponent>;
+  let component: CategoryListToolbarComponent;
+  let fixture: ComponentFixture<CategoryListToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryListMiniSettingsComponent ]
+      declarations: [ CategoryListToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryListMiniSettingsComponent);
+    fixture = TestBed.createComponent(CategoryListToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

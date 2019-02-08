@@ -11,11 +11,11 @@ import { AssetPathService, assetPathServiceToken } from 'src/app/core/services/a
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 
 @Component({
-    selector: 'app-photo-list-mini-settings',
-    templateUrl: './photo-list-mini-settings.component.html',
-    styleUrls: ['./photo-list-mini-settings.component.scss']
+    selector: 'app-photo-list-toolbar',
+    templateUrl: './photo-list-toolbar.component.html',
+    styleUrls: ['./photo-list-toolbar.component.scss']
 })
-export class PhotoListMiniSettingsComponent implements OnInit, OnDestroy {
+export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
     private destroy$ = new Subject<boolean>();

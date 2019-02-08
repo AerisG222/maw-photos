@@ -32,9 +32,9 @@ import { RatingComponent } from './rating/rating.component';
 import { CommentsComponent } from './comments/comments.component';
 import { ExifComponent } from './exif/exif.component';
 import { EffectsComponent } from './effects/effects.component';
-import { CategoryListMiniSettingsComponent } from './category-list-mini-settings/category-list-mini-settings.component';
-import { PhotoListMiniSettingsComponent } from './photo-list-mini-settings/photo-list-mini-settings.component';
-import { PhotoFullscreenControlComponent } from './photo-fullscreen-control/photo-fullscreen-control.component';
+import { CategoryListToolbarComponent } from './category-list-toolbar/category-list-toolbar.component';
+import { PhotoListToolbarComponent } from './photo-list-toolbar/photo-list-toolbar.component';
+import { PhotoListFullscreenToolbarComponent } from './photo-list-fullscreen-toolbar/photo-list-fullscreen-toolbar.component';
 import { ExifTableComponent } from './exif-table/exif-table.component';
 import { MinimapComponent } from './minimap/minimap.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
@@ -43,7 +43,7 @@ import { MovePreviousButtonComponent } from './move-previous-button/move-previou
 @NgModule({
     declarations: [
         CategoryHeaderComponent,
-        CategoryListMiniSettingsComponent,
+        CategoryListToolbarComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent,
@@ -51,8 +51,8 @@ import { MovePreviousButtonComponent } from './move-previous-button/move-previou
         CommentsComponent,
         ExifComponent,
         EffectsComponent,
-        PhotoListMiniSettingsComponent,
-        PhotoFullscreenControlComponent,
+        PhotoListToolbarComponent,
+        PhotoListFullscreenToolbarComponent,
         ExifTableComponent,
         MinimapComponent,
         MoveNextButtonComponent,
@@ -107,10 +107,10 @@ import { MovePreviousButtonComponent } from './move-previous-button/move-previou
 
         // components
         CategoryHeaderComponent,
-        CategoryListMiniSettingsComponent,
+        CategoryListToolbarComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
-        PhotoListMiniSettingsComponent,
+        PhotoListToolbarComponent,
         PhotoViewComponent
     ]
 })

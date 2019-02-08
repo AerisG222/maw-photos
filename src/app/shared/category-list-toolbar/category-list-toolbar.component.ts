@@ -8,12 +8,12 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
-    selector: 'app-category-list-mini-settings',
-    templateUrl: './category-list-mini-settings.component.html',
-    styleUrls: ['./category-list-mini-settings.component.scss'],
+    selector: 'app-category-list-toolbar',
+    templateUrl: './category-list-toolbar.component.html',
+    styleUrls: ['./category-list-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryListMiniSettingsComponent implements OnInit, OnDestroy {
+export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject<boolean>();
     settings: Settings;
 

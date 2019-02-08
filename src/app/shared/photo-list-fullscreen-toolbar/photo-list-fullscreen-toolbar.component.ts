@@ -7,11 +7,11 @@ import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 
 @Component({
-    selector: 'app-photo-fullscreen-control',
-    templateUrl: './photo-fullscreen-control.component.html',
-    styleUrls: ['./photo-fullscreen-control.component.scss']
+    selector: 'app-photo-list-fullscreen-toolbar',
+    templateUrl: './photo-list-fullscreen-toolbar.component.html',
+    styleUrls: ['./photo-list-fullscreen-toolbar.component.scss']
 })
-export class PhotoFullscreenControlComponent implements OnInit {
+export class PhotoListFullscreenToolbarComponent implements OnInit {
     slideshowPlaying$: Observable<boolean>;
 
     constructor(
