@@ -40,6 +40,7 @@ import { ExifTableComponent } from './exif-table/exif-table.component';
 import { MinimapComponent } from './minimap/minimap.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
 import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
+import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import { MovePreviousButtonComponent } from './move-previous-button/move-previou
         ExifTableComponent,
         MinimapComponent,
         MoveNextButtonComponent,
-        MovePreviousButtonComponent
+        MovePreviousButtonComponent,
+        SlideshowButtonComponent
     ],
     imports: [
         AgmCoreModule.forRoot({

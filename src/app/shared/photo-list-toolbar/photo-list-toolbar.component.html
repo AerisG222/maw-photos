@@ -6,17 +6,32 @@
         <mat-icon [inline]="true">title</mat-icon>
     </button>
 
-    <app-move-previous-button></app-move-previous-button>
-
-    <app-move-next-button></app-move-next-button>
+    <button
+        mat-button
+        matTooltip="Toggle Photo List Thumbnail Size"
+        (click)="onToggleSize()">
+        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+    </button>
 
     <a mat-button
+        class="download"
         matTooltip="Download All Photos in Category (.zip)"
         target="_blank"
         *ngIf="allowCategoryDownload && categoryDownloadUrl"
         [href]="categoryDownloadUrl">
         <mat-icon [inline]="true">save_alt</mat-icon>
     </a>
+
+    <app-move-previous-button></app-move-previous-button>
+    <app-move-next-button></app-move-next-button>
+    <app-slideshow-button></app-slideshow-button>
+
+    <button
+        mat-button
+        matTooltip="Enter Full Screen View"
+        (click)="onToggleFullscreen()">
+        <mat-icon [inline]="true">fullscreen</mat-icon>
+    </button>
 </span>
 
 <span class="photo" *ngIf="isToolbarExpanded$ | async">
@@ -32,14 +47,6 @@
         matTooltip="Rotate Clockwise"
         (click)="onRotateClockwise()">
         <mat-icon [inline]="true">rotate_right</mat-icon>
-    </button>
-
-    <button
-        mat-button
-        matTooltip="Start/Stop Slideshow"
-        (click)="onToggleSlideshow()">
-        <mat-icon [inline]="true" *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
-        <mat-icon [inline]="true" *ngIf="slideshowPlaying$ | async">stop</mat-icon>
     </button>
 
     <a mat-button
@@ -73,22 +80,6 @@
         [href]="prtDownloadUrl">
         <mat-icon [inline]="true">photo</mat-icon>
     </a>
-
-    <button
-        mat-button
-        matTooltip="Enter Full Screen View"
-        (click)="onToggleFullscreen()">
-        <mat-icon [inline]="true">fullscreen</mat-icon>
-    </button>
-</span>
-
-<span class="photo-list" *ngIf="isToolbarExpanded$ | async">
-    <button
-        mat-button
-        matTooltip="Toggle Photo List Thumbnail Size"
-        (click)="onToggleSize()">
-        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-    </button>
 </span>
 
 <span class="toolbar-control">

@@ -22,7 +22,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
-    slideshowPlaying$: Observable<boolean>;
     categoryDownloadUrl: string = null;
 
     smDownloadUrl: string = null;
@@ -58,11 +57,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
                 tap(photo => this.prtDownloadUrl = photo.prtInfo.path),
                 takeUntil(this.destroy$)
             ).subscribe();
-
-        this.slideshowPlaying$ = this._store$
-            .pipe(
-                select(PhotoStoreSelectors.selectSlideshowIsPlaying)
-            );
     }
 
     ngOnDestroy(): void {
@@ -85,10 +79,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
 
         this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListThumbnailSizeRequestAction({ newSize: size }));
-    }
-
-    onToggleSlideshow(): void {
-        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
     }
 
     onToggleFullscreen(): void {
