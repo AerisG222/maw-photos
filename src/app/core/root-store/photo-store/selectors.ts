@@ -4,13 +4,13 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { Photo } from '../../models/photo.model';
-import { photoAdapter, State } from './state';
+import { ExifData } from 'src/app/core/models/exif-data.model';
+import { Photo } from 'src/app/core/models/photo.model';
+import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { Rating } from 'src/app/core/models/rating.model';
 import { PHOTO_FEATURE_NAME } from './feature-name';
-import { Rating } from '../../models/rating.model';
-import { PhotoComment } from '../../models/photo-comment.model';
-import { PhotoEffects } from '../../models/photo-effects.model';
-import { ExifData } from '../../models/exif-data.model';
+import { photoAdapter, State } from './state';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;

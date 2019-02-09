@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from '../../core/models/category.model';
+import { Category } from 'src/app/core/models/category.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({

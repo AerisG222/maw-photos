@@ -1,16 +1,21 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, tap, filter, map } from 'rxjs/operators';
-import { Rating } from 'src/app/core/models/rating.model';
+
+import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
-import { CommentsComponent } from '../comments/comments.component';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { ExifData } from 'src/app/core/models/exif-data.model';
+import { Rating } from 'src/app/core/models/rating.model';
+import { CommentsComponent } from '../comments/comments.component';
+import {
+    PhotoStoreActions,
+    PhotoStoreSelectors,
+    RootStoreState,
+    SettingsStoreActions,
+    SettingsStoreSelectors
+} from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photo-info-panel',

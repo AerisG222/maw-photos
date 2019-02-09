@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 
-import { layoutReducer } from './reducer';
 import { LAYOUT_FEATURE_NAME } from './feature-name';
+import { layoutReducer } from './reducer';
 
 @NgModule({
     declarations: [],

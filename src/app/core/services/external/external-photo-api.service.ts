@@ -2,12 +2,12 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 
-import { EnvironmentConfig } from '../../models/environment-config';
-import { Category } from '../../models/category.model';
-import { Photo } from '../../models/photo.model';
-import { ExifDetail } from '../../models/exif-detail.model';
-import { Rating } from '../../models/rating.model';
-import { PhotoComment } from '../../models/photo-comment.model';
+import { Category } from 'src/app/core/models/category.model';
+import { EnvironmentConfig } from 'src/app/core/models/environment-config';
+import { ExifDetail } from 'src/app/core/models/exif-detail.model';
+import { Photo } from 'src/app/core/models/photo.model';
+import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 

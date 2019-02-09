@@ -2,14 +2,19 @@ import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photo-store';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { AssetPathService, assetPathServiceToken } from 'src/app/core/services/asset-path.service';
-import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import {
+    LayoutStoreActions,
+    PhotoStoreActions,
+    PhotoStoreSelectors,
+    RootStoreState,
+    SettingsStoreActions,
+    SettingsStoreSelectors
+} from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photo-list-toolbar',

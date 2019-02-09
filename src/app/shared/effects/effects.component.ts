@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { MatSliderChange } from '@angular/material';
+
+import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 
 @Component({
     selector: 'app-effects',

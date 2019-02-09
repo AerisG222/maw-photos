@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { RootStoreState } from 'src/app/core/root-store';
-import { PhotoStoreActions } from 'src/app/core/root-store/photo-store';
-import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
+import { LayoutStoreActions, PhotoStoreActions, RootStoreState } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photo-list-fullscreen-toolbar',

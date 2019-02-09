@@ -1,7 +1,7 @@
+import { Photo } from 'src/app/core/models/photo.model';
+import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { Actions, ActionTypes } from './actions';
 import { photoAdapter, initialState, State } from './state';
-import { Photo } from '../../models/photo.model';
-import { PhotoRotation } from '../../models/photo-rotation.model';
 
 export function photoReducer(state = initialState, action: Actions): State {
     switch (action.type) {

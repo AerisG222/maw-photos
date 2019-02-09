@@ -4,10 +4,10 @@ import { Action, Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { startWith, map, withLatestFrom } from 'rxjs/operators';
 
-import { SettingsService } from '../../services/settings.service';
+import { SettingsService } from 'src/app/core/services/settings.service';
 import * as settingsActions from './actions';
-import { State } from './state';
 import * as settingsSelectors from './selectors';
+import { State } from './state';
 
 @Injectable()
 export class SettingsStoreEffects {

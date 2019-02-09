@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 
-import { Settings } from '../models/settings.model';
-import { Theme } from '../models/theme.model';
-import { ThumbnailSize } from '../models/thumbnail-size.model';
+import { Settings } from 'src/app/core/models/settings.model';
+import { Theme } from 'src/app/core/models/theme.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Injectable({
     providedIn: 'root'

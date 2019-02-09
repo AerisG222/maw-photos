@@ -5,8 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { Theme } from './core/models/theme.model';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
-import { LayoutStoreSelectors } from './core/root-store/layout-store';
+import { LayoutStoreSelectors, RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 
 @Component({
     selector: 'app-root',

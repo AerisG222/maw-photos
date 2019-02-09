@@ -1,4 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+
 import { Category } from 'src/app/core/models/category.model';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject } from 'rxjs';
-
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { Settings } from 'src/app/core/models/settings.model';
 import { takeUntil, tap } from 'rxjs/operators';
+
+import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-category-list-toolbar',

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RandomRoutingModule } from './random-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { RandomComponent } from './random/random.component';
-import { SharedModule } from '../shared/shared.module';
+import { RandomRoutingModule } from './random-routing.module';
 
 @NgModule({
     declarations: [

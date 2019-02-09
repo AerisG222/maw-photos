@@ -4,12 +4,11 @@ import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, catchError, map, concatMap, withLatestFrom } from 'rxjs/operators';
 
+import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
+import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';
+import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as photoActions from './actions';
-import { photoApiServiceToken, PhotoApiService } from '../../services/photo-api.service';
 import { RootStoreState } from '..';
-import { PhotoRotation } from '../../models/photo-rotation.model';
-import { PhotoStoreState } from '.';
-import { ExifFormatterService } from '../../services/exif-formatter.service';
 
 @Injectable()
 export class PhotoStoreEffects {

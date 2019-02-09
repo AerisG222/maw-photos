@@ -4,9 +4,9 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { Category } from '../../models/category.model';
-import { photoCategoryAdapter, State } from './state';
+import { Category } from 'src/app/core/models/category.model';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
+import { photoCategoryAdapter, State } from './state';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;

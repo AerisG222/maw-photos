@@ -4,8 +4,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { PhotoStoreEffects } from './effects';
-import { photoReducer } from './reducer';
 import { PHOTO_FEATURE_NAME } from './feature-name';
+import { photoReducer } from './reducer';
 
 @NgModule({
     declarations: [],

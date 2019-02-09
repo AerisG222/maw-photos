@@ -4,9 +4,9 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
+import { Layout } from 'src/app/core/models/layout.model';
 import { State } from './state';
 import { LAYOUT_FEATURE_NAME } from './feature-name';
-import { Layout } from '../../models/layout.model';
 
 const getIsRightSidebarDisplayed = (state: State): boolean => state.layout.isRightNavDisplayed;
 const getIsFullscreen = (state: State): boolean => state.layout.isFullscreen;

@@ -1,10 +1,10 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
-import { Settings } from 'src/app/core/models/settings.model';
 import { Category } from 'src/app/core/models/category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Settings } from 'src/app/core/models/settings.model';
 
 @Component({
     selector: 'app-photo-view',

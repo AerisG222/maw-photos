@@ -4,8 +4,8 @@ import { Observable, forkJoin } from 'rxjs';
 import { tap, map, take, delay } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
-import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 import { Category } from 'src/app/core/models/category.model';
+import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-year-stats',

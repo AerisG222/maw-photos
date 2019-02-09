@@ -3,9 +3,9 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Category } from '../../core/models/category.model';
-import { Settings } from '../../core/models/settings.model';
-import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } from '../../core/root-store';
+import { Category } from 'src/app/core/models/category.model';
+import { Settings } from 'src/app/core/models/settings.model';
+import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-year',

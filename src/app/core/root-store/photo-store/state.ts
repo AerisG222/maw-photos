@@ -1,11 +1,11 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
+import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { Rating } from '../../models/rating.model';
-import { PhotoComment } from '../../models/photo-comment.model';
-import { PhotoEffects } from '../../models/photo-effects.model';
-import { PhotoRotation } from '../../models/photo-rotation.model';
-import { ExifData } from '../../models/exif-data.model';
+import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
+import { Rating } from 'src/app/core/models/rating.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>({
     sortComparer: (a: Photo, b: Photo): number => b.id - a.id

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { photoCategoryReducer } from './reducer';
 import { PhotoCategoryStoreEffects } from './effects';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
+import { photoCategoryReducer } from './reducer';
 
 @NgModule({
     declarations: [],

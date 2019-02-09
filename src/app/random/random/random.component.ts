@@ -5,18 +5,19 @@ import { tap, take } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { Settings } from 'src/app/core/models/settings.model';
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
-import {
-    RootStoreState,
-    SettingsStoreSelectors,
-    PhotoCategoryStoreSelectors,
-    PhotoCategoryStoreActions,
-    SettingsStoreActions
-} from 'src/app/core/root-store';
-import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { Settings } from 'src/app/core/models/settings.model';
 import { RandomControlService } from 'src/app/core/services/random-control.service';
+import {
+    LayoutStoreActions,
+    PhotoStoreActions,
+    PhotoStoreSelectors,
+    PhotoCategoryStoreActions,
+    PhotoCategoryStoreSelectors,
+    RootStoreState,
+    SettingsStoreActions,
+    SettingsStoreSelectors
+} from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-random',

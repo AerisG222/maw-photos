@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { RootStoreState } from 'src/app/core/root-store';
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
+import { PhotoStoreSelectors, PhotoStoreActions, RootStoreState } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-move-next-button',

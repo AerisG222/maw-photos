@@ -5,11 +5,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { SettingsStoreModule } from './settings-store';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
+import { LayoutStoreModule } from './layout-store/layout-store.module';
 import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
 import { PhotoStoreModule } from './photo-store/photo-store.module';
-import { LayoutStoreModule } from './layout-store/layout-store.module';
+import { SettingsStoreModule } from './settings-store';
 
 @NgModule({
     declarations: [],

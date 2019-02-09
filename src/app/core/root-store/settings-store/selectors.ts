@@ -4,9 +4,9 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { Settings } from '../../models/settings.model';
-import { State } from './state';
+import { Settings } from 'src/app/core/models/settings.model';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
+import { State } from './state';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

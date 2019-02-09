@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Photo } from '../../core/models/photo.model';
+import { Photo } from 'src/app/core/models/photo.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({

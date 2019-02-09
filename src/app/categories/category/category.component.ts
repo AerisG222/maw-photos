@@ -4,20 +4,20 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { map, flatMap, tap, takeUntil } from 'rxjs/operators';
 
-import { Photo } from '../../core/models/photo.model';
-import { Category } from '../../core/models/category.model';
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photo-store';
-import { Settings } from 'src/app/core/models/settings.model';
-import {
-    RootStoreState,
-    PhotoCategoryStoreSelectors,
-    SettingsStoreSelectors,
-    SettingsStoreActions,
-    PhotoCategoryStoreActions
-} from 'src/app/core/root-store';
-import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
+import { Category } from 'src/app/core/models/category.model';
+import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { Settings } from 'src/app/core/models/settings.model';
 import { RandomControlService } from 'src/app/core/services/random-control.service';
+import {
+    LayoutStoreActions,
+    RootStoreState,
+    PhotoCategoryStoreActions,
+    PhotoCategoryStoreSelectors,
+    PhotoStoreSelectors, PhotoStoreActions,
+    SettingsStoreSelectors,
+    SettingsStoreActions
+} from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-category',

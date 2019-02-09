@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { Settings } from 'src/app/core/models/settings.model';
-import { ThumbnailSize } from '../../models/thumbnail-size.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',

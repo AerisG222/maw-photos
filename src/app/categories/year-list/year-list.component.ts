@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { PhotoCategoryStoreActions, RootStoreState, PhotoCategoryStoreSelectors } from '../../core/root-store';
+import { PhotoCategoryStoreActions, RootStoreState, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-year-list',

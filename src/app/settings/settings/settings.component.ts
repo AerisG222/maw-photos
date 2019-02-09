@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from '../../core/root-store';
-import { Settings } from '../../core/models/settings.model';
-import { Theme } from '../../core/models/theme.model';
+import { Settings } from 'src/app/core/models/settings.model';
+import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 
 @Component({

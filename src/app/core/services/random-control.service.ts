@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { RootStoreState, SettingsStoreSelectors } from '../root-store';
-import { PhotoStoreSelectors, PhotoStoreActions } from '../root-store/photo-store';
-import { map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
+
+import { PhotoStoreSelectors, PhotoStoreActions, RootStoreState, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Injectable()
 export class RandomControlService {
