@@ -100,18 +100,26 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this.latitude$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoExifData),
             map(d => {
-                const lat = d.find(x => x.sourceField === 'gpsLatitude');
+                if (d) {
+                    const lat = d.find(x => x.sourceField === 'gpsLatitude');
 
-                return lat == null ? null : lat.sourceValue;
+                    return lat == null ? null : lat.sourceValue;
+                }
+
+                return null;
             })
         );
 
         this.longitude$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoExifData),
             map(d => {
-                const lng = d.find(x => x.sourceField === 'gpsLongitude');
+                if (d) {
+                    const lng = d.find(x => x.sourceField === 'gpsLongitude');
 
-                return lng == null ? null : lng.sourceValue;
+                    return lng == null ? null : lng.sourceValue;
+                }
+
+                return null;
             })
         );
 
