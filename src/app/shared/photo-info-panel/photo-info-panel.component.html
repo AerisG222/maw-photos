@@ -53,15 +53,15 @@
             matTooltip="Show/Hide Info Panel"
             matTooltipPosition="before"
             (click)="toggleEndSidenav()">
-            <mat-icon *ngIf="endSidenavExpanded" [inline]="true">chevron_right</mat-icon>
-            <mat-icon *ngIf="!endSidenavExpanded" [inline]="true">chevron_left</mat-icon>
+            <mat-icon *ngIf="endSidenavExpanded$ | async" [inline]="true">chevron_right</mat-icon>
+            <mat-icon *ngIf="!(endSidenavExpanded$ | async)" [inline]="true">chevron_left</mat-icon>
         </button>
 
         <button
             mat-button
             matTooltip="Show/Hide Ratings"
             matTooltipPosition="before"
-            [disabled]="!endSidenavExpanded"
+            [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showRatings$ | async)"
             (click)="toggleRatings()">
             <mat-icon [inline]="true">star</mat-icon>
@@ -70,7 +70,7 @@
             mat-button
             matTooltip="Show/Hide Comments"
             matTooltipPosition="before"
-            [disabled]="!endSidenavExpanded"
+            [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showComments$ | async)"
             (click)="toggleComments()">
             <mat-icon [inline]="true">comment</mat-icon>
@@ -79,7 +79,7 @@
             mat-button
             matTooltip="Show/Hide EXIF"
             matTooltipPosition="before"
-            [disabled]="!endSidenavExpanded"
+            [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showExif$ | async)"
             (click)="toggleExif()">
             <mat-icon [inline]="true">tune</mat-icon>
@@ -88,7 +88,7 @@
             mat-button
             matTooltip="Show/Hide Effects"
             matTooltipPosition="before"
-            [disabled]="!endSidenavExpanded"
+            [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showEffects$ | async)"
             (click)="toggleEffects()">
             <mat-icon [inline]="true">photo_filter</mat-icon>
@@ -97,7 +97,7 @@
             mat-button
             matTooltip="Show/Hide Mini-map"
             matTooltipPosition="before"
-            [disabled]="!endSidenavExpanded"
+            [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showMinimap$ | async)"
             (click)="toggleMinimap()">
             <mat-icon [inline]="true">map</mat-icon>
