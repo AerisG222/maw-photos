@@ -9,13 +9,16 @@ import { ThumbnailSize } from '../models/thumbnail-size.model';
     providedIn: 'root'
 })
 export class SettingsService {
-    private static readonly keyTheme = 'theme';
-    private static readonly keyShowCategoryTitles = 'showCategoryTitles';
-    private static readonly keyShowCategoryBreadcrumbs = 'showCategoryBreadcrumbs';
-    private static readonly keyCategoryThumbnailSize = 'categoryThumbnailSize';
+    private static readonly keyAppTheme = 'appTheme';
+
+    private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
+    private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
+
+    private static readonly keyPhotoListShowCategoryBreadcrumbs = 'photoListShowCategoryBreadcrumbs';
     private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
-    private static readonly keyShowCategoryPhotoList = 'showCategoryPhotoList';
-    private static readonly keyRandomDisplayDurationSeconds = 'randomDisplayDurationSeconds';
+    private static readonly keyPhotoListShowPhotoList = 'photoListShowPhotoList';
+    private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
+    private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
 
     private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
     private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
@@ -24,8 +27,6 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
 
-    private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
-
     constructor(
         private _localStorage: LocalStorageService
     ) {
@@ -33,9 +34,11 @@ export class SettingsService {
     }
 
     load(): Settings {
-        const showCategoryTitles = this._localStorage.retrieve(SettingsService.keyShowCategoryTitles);
-        const showCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyShowCategoryBreadcrumbs);
-        const showCategoryPhotoList = this._localStorage.retrieve(SettingsService.keyShowCategoryPhotoList);
+        const categoryListShowCategoryTitles = this._localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
+
+        const photoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
+        const photoListShowPhotoList = this._localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
+        const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
 
         const photoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
         const photoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
@@ -44,18 +47,16 @@ export class SettingsService {
         const photoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
         const photoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
 
-        const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
-
         return {
             appTheme: this.getTheme(),
 
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
-            categoryListShowCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
+            categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
 
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
             photoListSlideshowDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
-            photoListShowCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
-            photoListShowPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true,
+            photoListShowCategoryBreadcrumbs: photoListShowCategoryBreadcrumbs !== null ? photoListShowCategoryBreadcrumbs : true,
+            photoListShowPhotoList: photoListShowPhotoList !== null ? photoListShowPhotoList : true,
             photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
 
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
@@ -72,15 +73,16 @@ export class SettingsService {
             return;
         }
 
-        this._localStorage.store(SettingsService.keyTheme, settings.appTheme.name);
+        this._localStorage.store(SettingsService.keyAppTheme, settings.appTheme.name);
 
-        this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.categoryListShowCategoryTitles);
-        this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryListThumbnailSize.name);
+        this._localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
+        this._localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
 
-        this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
+        this._localStorage.store(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
-        this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.photoListShowPhotoList);
-        this._localStorage.store(SettingsService.keyRandomDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
+        this._localStorage.store(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
+        // tslint:disable-next-line:max-line-length
+        this._localStorage.store(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
         this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
 
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
@@ -92,7 +94,7 @@ export class SettingsService {
     }
 
     private getTheme(): Theme {
-        const themeName = this._localStorage.retrieve(SettingsService.keyTheme);
+        const themeName = this._localStorage.retrieve(SettingsService.keyAppTheme);
 
         try {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
@@ -102,7 +104,7 @@ export class SettingsService {
     }
 
     private getCategoryThumbnailSize(): ThumbnailSize {
-        const sizeName = this._localStorage.retrieve(SettingsService.keyCategoryThumbnailSize);
+        const sizeName = this._localStorage.retrieve(SettingsService.keyCategoryListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
@@ -122,7 +124,7 @@ export class SettingsService {
     }
 
     private getRandomDisplayDurationSeconds(): number {
-        const secs = this._localStorage.retrieve(SettingsService.keyRandomDisplayDurationSeconds);
+        const secs = this._localStorage.retrieve(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
 
         try {
             return Number(secs);
