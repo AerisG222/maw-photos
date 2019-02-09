@@ -3,7 +3,7 @@
     <img [src]="activePhoto?.lgInfo?.path" />
 </div>
 
-<div fxLayout="column" style="height: 100%;">
+<div *ngIf="!fullscreen" fxLayout="column" style="height: 100%;">
     <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
     <app-category-header *ngIf="settings?.photoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
 
