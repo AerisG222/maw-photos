@@ -15,7 +15,6 @@ import {
     SettingsStoreActions,
     PhotoCategoryStoreActions
 } from 'src/app/core/root-store';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { RandomControlService } from 'src/app/core/services/random-control.service';
@@ -35,12 +34,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
     effects$: Observable<PhotoEffects>;
     isFullscreen$: Observable<boolean>;
 
-    private hotkeys: Hotkey[] = [];
-
     constructor(
         private _route: ActivatedRoute,
         private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService,
         private randomControlSvc: RandomControlService
     ) {
 
@@ -50,24 +46,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
 
         this.randomControlSvc.start();
-
-        this.hotkeys.push(<Hotkey> this._hotkeysService
-            .add(new Hotkey(
-                'right',
-                (event: KeyboardEvent): boolean => {
-                    this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
-                    return false;
-                }))
-            );
-
-        this.hotkeys.push(<Hotkey> this._hotkeysService
-            .add(new Hotkey(
-                'left',
-                (event: KeyboardEvent): boolean => {
-                    this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
-                    return false;
-                }))
-            );
 
         const categoryId$ = this._route.params
             .pipe(
@@ -125,7 +103,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
         this.randomControlSvc.dispose();
-        this._hotkeysService.remove(this.hotkeys);
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroy$.next(true);
     }

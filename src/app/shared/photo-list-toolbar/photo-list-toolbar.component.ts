@@ -9,6 +9,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { AssetPathService, assetPathServiceToken } from 'src/app/core/services/asset-path.service';
 import { LayoutStoreActions } from 'src/app/core/root-store/layout-store';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 @Component({
     selector: 'app-photo-list-toolbar',
@@ -19,6 +20,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
     private destroy$ = new Subject<boolean>();
+    private hotkeys: Hotkey[] = [];
 
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
@@ -31,10 +33,29 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject(assetPathServiceToken) private assetPathService: AssetPathService,
-        private _store$: Store<RootStoreState.State>
+        private _store$: Store<RootStoreState.State>,
+        private _hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
+        this.hotkeys.push(<Hotkey> this._hotkeysService
+            .add(new Hotkey(
+                'right',
+                (event: KeyboardEvent): boolean => {
+                    this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+                    return false;
+                }))
+            );
+
+        this.hotkeys.push(<Hotkey> this._hotkeysService
+            .add(new Hotkey(
+                'left',
+                (event: KeyboardEvent): boolean => {
+                    this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+                    return false;
+                }))
+            );
+
         const settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
@@ -60,6 +81,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this._hotkeysService.remove(this.hotkeys);
         this.destroy$.next(true);
     }
 
