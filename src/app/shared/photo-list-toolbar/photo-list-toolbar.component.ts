@@ -43,23 +43,8 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.hotkeys.push(<Hotkey> this._hotkeysService
-            .add(new Hotkey(
-                'right',
-                (event: KeyboardEvent): boolean => {
-                    this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
-                    return false;
-                }))
-            );
-
-        this.hotkeys.push(<Hotkey> this._hotkeysService
-            .add(new Hotkey(
-                'left',
-                (event: KeyboardEvent): boolean => {
-                    this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
-                    return false;
-                }))
-            );
+        this.addHotkey('right', this.onHotkeyMoveNext);
+        this.addHotkey('left', this.onHotkeyMovePrevious);
 
         const settings$ = this._store$
             .pipe(
@@ -115,5 +100,21 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     onTogglePhotoListToolbar(): void {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
+    }
+
+    private onHotkeyMoveNext(event: KeyboardEvent): boolean {
+        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+
+        return false;
+    }
+
+    private onHotkeyMovePrevious(event: KeyboardEvent): boolean {
+        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+
+        return false;
+    }
+
+    private addHotkey(key: string, callback: (event: KeyboardEvent) => boolean): void {
+        this.hotkeys.push(<Hotkey> this._hotkeysService.add(new Hotkey(key, callback)));
     }
 }
