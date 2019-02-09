@@ -20,6 +20,7 @@ export enum ActionTypes {
     TOGGLE_PHOTO_INFO_PANEL_EXIF = '[Settings] Toggle Photo Info Panel EXIF',
     TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Settings] Toggle Photo Info Panel Effects',
     TOGGLE_PHOTO_INFO_PANEL_MINIMAP = '[Settings] Toggle Photo Info Panel Minimap',
+    TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Photo Info Panel Expanded State',
 
     TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
@@ -97,6 +98,10 @@ export class TogglePhotoInfoPanelMinimapRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP;
 }
 
+export class TogglePhotoInfoPanelExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE;
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
@@ -113,4 +118,5 @@ export type Actions =
     TogglePhotoListCategoryBreadcrumbsRequestAction |
     ToggleCategoryListCategoryTitlesRequestAction |
     UpdateCategoryListThumbnailSizeRequestAction |
-    TogglePhotoInfoPanelMinimapRequestAction;
+    TogglePhotoInfoPanelMinimapRequestAction |
+    TogglePhotoInfoPanelExpandedStateRequestAction;

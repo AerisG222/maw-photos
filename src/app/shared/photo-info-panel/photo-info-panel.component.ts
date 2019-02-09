@@ -18,8 +18,7 @@ import { ExifData } from 'src/app/core/models/exif-data.model';
     styleUrls: ['./photo-info-panel.component.scss']
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
-    endSidenavExpanded = false;
-
+    endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showEffects$: Observable<boolean>;
     showExif$: Observable<boolean>;
@@ -51,6 +50,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
             tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
             takeUntil(this.destroy$)
+        );
+
+        this.endSidenavExpanded$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
         );
 
         this.showComments$ = this._store$.pipe(
@@ -119,7 +122,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     toggleEndSidenav(): void {
-        this.endSidenavExpanded = !this.endSidenavExpanded;
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExpandedStateRequestAction());
     }
 
     onRate(userRating: number): void {

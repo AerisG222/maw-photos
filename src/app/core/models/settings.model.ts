@@ -18,4 +18,5 @@ export interface Settings {
     photoInfoPanelShowExif: boolean;
     photoInfoPanelShowEffects: boolean;
     photoInfoPanelShowMinimap: boolean;
+    photoInfoPanelExpandedState: boolean;
 }

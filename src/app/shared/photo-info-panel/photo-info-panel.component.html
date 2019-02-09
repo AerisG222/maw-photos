@@ -1,5 +1,5 @@
 <div fxLayout>
-    <div *ngIf="endSidenavExpanded" class="panel-contents" fxLayout="column">
+    <div *ngIf="endSidenavExpanded$ | async" class="panel-contents" fxLayout="column">
         <div fxLayout="column" fxFlex="1 1 auto">
             <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex="none">Rating</div>
             <app-rating

@@ -118,6 +118,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoInfoPanelShowMinimap: !state.settings.photoInfoPanelShowMinimap
                 }
             };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE:
+        return {
+            ...state,
+            settings: {
+                ...state.settings,
+                photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
+            }
+        };
         default: {
             return state;
         }

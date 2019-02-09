@@ -22,6 +22,8 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
     private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
+    private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
+
     private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
 
     constructor(
@@ -40,22 +42,28 @@ export class SettingsService {
         const photoInfoPanelShowExif = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
         const photoInfoPanelShowEffects = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
         const photoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
+        const photoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
+
         const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
 
         return {
             appTheme: this.getTheme(),
+
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
+            categoryListShowCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
+
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
             photoListSlideshowDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
-            categoryListShowCategoryTitles: showCategoryTitles !== null ? showCategoryTitles : true,
             photoListShowCategoryBreadcrumbs: showCategoryBreadcrumbs !== null ? showCategoryBreadcrumbs : true,
             photoListShowPhotoList: showCategoryPhotoList !== null ? showCategoryPhotoList : true,
+            photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
+
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
             photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
             photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
             photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
-            photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
-            photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false
+            photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false,
+            photoInfoPanelExpandedState: photoInfoPanelExpandedState !== null ? photoInfoPanelExpandedState : false
         };
     }
 
@@ -65,20 +73,22 @@ export class SettingsService {
         }
 
         this._localStorage.store(SettingsService.keyTheme, settings.appTheme.name);
+
         this._localStorage.store(SettingsService.keyShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this._localStorage.store(SettingsService.keyCategoryThumbnailSize, settings.categoryListThumbnailSize.name);
+
         this._localStorage.store(SettingsService.keyShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
         this._localStorage.store(SettingsService.keyShowCategoryPhotoList, settings.photoListShowPhotoList);
         this._localStorage.store(SettingsService.keyRandomDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
+        this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
 
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
-
-        this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
     }
 
     private getTheme(): Theme {
