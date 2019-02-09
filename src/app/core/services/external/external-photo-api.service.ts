@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
 import { EnvironmentConfig } from 'src/app/core/models/environment-config';
@@ -114,20 +115,17 @@ export class ExternalPhotoApiService implements PhotoApiService {
     getCommentsForPhoto(photoId: number): Observable<PhotoComment[]> {
         const url = this.getAbsoluteUrl(`photos/getCommentsForPhoto/${photoId}`);
 
-        return Observable.create((observer: Observer<PhotoComment[]>) => {
-            this._http
-                .get<PhotoComment[]>(url)
-                .subscribe(comments => {
+        return this._http
+            .get<PhotoComment[]>(url)
+            .pipe(
+                map(comments => {
                     // deal with dates
-                    const c = comments.map((x: PhotoComment) => {
+                    return comments.map((x: PhotoComment) => {
                         x.entryDate = new Date(x.entryDate.toString());
                         return x;
                     });
-
-                    observer.next(c);
-                    observer.complete();
-                });
-        });
+                })
+            );
     }
 
     addCommentForPhoto(photoId: number, comment: string): Observable<any> {
