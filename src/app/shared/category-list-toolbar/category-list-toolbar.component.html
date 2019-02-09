@@ -1,14 +1,14 @@
 <button
     mat-button
-    matTooltip="Show/Hide Category Titles"
+    matTooltip="Show/Hide Category Titles (T)"
     (click)="onToggleTitle()">
     <mat-icon [inline]="true">title</mat-icon>
 </button>
 
 <button
     mat-button
-    matTooltip="Toggle Category Thumbnail Size"
+    matTooltip="Toggle Category Thumbnail Size (S)"
     (click)="onToggleSize()"
-    [disabled]="settings?.showCategoryTitles">
+    [disabled]="(settings$ | async)?.categoryListShowCategoryTitles">
     <mat-icon [inline]="true">photo_size_select_large</mat-icon>
 </button>

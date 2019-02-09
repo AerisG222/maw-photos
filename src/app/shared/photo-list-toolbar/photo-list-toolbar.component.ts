@@ -25,7 +25,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
     private destroy$ = new Subject<boolean>();
-    private hotkeys: Hotkey[] = [];
+    private _hotkeys: Hotkey[] = [];
 
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
@@ -43,8 +43,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.addHotkey('right', this.onHotkeyMoveNext);
-        this.addHotkey('left', this.onHotkeyMovePrevious);
+        this.configureHotkeys();
 
         const settings$ = this._store$
             .pipe(
@@ -71,7 +70,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this._hotkeysService.remove(this.hotkeys);
+        this._hotkeysService.remove(this._hotkeys);
         this.destroy$.next(true);
     }
 
@@ -102,19 +101,65 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
     }
 
-    private onHotkeyMoveNext(event: KeyboardEvent): boolean {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+    private configureHotkeys(): void {
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('f', (event: KeyboardEvent) => this.onHotkeyFullscreen(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('a', (event: KeyboardEvent) => this.onHotkeyRotateCounterClockwise(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('d', (event: KeyboardEvent) => this.onHotkeyRotateClockwise(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event))
+        ));
+    }
+
+    private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
+        this.onToggleCategoryBreadcrumbs();
 
         return false;
     }
 
-    private onHotkeyMovePrevious(event: KeyboardEvent): boolean {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+    private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
+        this.onToggleSize();
 
         return false;
     }
 
-    private addHotkey(key: string, callback: (event: KeyboardEvent) => boolean): void {
-        this.hotkeys.push(<Hotkey> this._hotkeysService.add(new Hotkey(key, callback)));
+    private onHotkeyFullscreen(evt: KeyboardEvent): boolean {
+        this.onToggleFullscreen();
+
+        return false;
+    }
+
+    private onHotkeyRotateClockwise(evt: KeyboardEvent): boolean {
+        this.onRotateClockwise();
+
+        return false;
+    }
+
+    private onHotkeyRotateCounterClockwise(evt: KeyboardEvent): boolean {
+        this.onRotateCounterClockwise();
+
+        return false;
+    }
+
+    private onHotkeyTogglePhotoListToolbar(evt: KeyboardEvent): boolean {
+        this.onTogglePhotoListToolbar();
+
+        return false;
     }
 }

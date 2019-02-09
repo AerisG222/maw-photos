@@ -1,14 +1,14 @@
 <span class="category" *ngIf="isToolbarExpanded$ | async">
     <button
         mat-button
-        matTooltip="Show/Hide Category Breadcrumbs"
+        matTooltip="Show/Hide Category Breadcrumbs (T)"
         (click)="onToggleCategoryBreadcrumbs()">
         <mat-icon [inline]="true">title</mat-icon>
     </button>
 
     <button
         mat-button
-        matTooltip="Toggle Photo List Thumbnail Size"
+        matTooltip="Toggle Photo List Thumbnail Size (S)"
         (click)="onToggleSize()">
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>
     </button>
@@ -28,7 +28,7 @@
 
     <button
         mat-button
-        matTooltip="Enter Full Screen View"
+        matTooltip="Enter Full Screen View (F)"
         (click)="onToggleFullscreen()">
         <mat-icon [inline]="true">fullscreen</mat-icon>
     </button>
@@ -37,14 +37,14 @@
 <span class="photo" *ngIf="isToolbarExpanded$ | async">
     <button
         mat-button
-        matTooltip="Rotate Counter Clockwise"
+        matTooltip="Rotate Counter Clockwise (A)"
         (click)="onRotateCounterClockwise()">
         <mat-icon [inline]="true">rotate_left</mat-icon>
     </button>
 
     <button
         mat-button
-        matTooltip="Rotate Clockwise"
+        matTooltip="Rotate Clockwise (D)"
         (click)="onRotateClockwise()">
         <mat-icon [inline]="true">rotate_right</mat-icon>
     </button>
@@ -85,7 +85,7 @@
 <span class="toolbar-control">
     <button
         mat-button
-        matTooltip="Show/Hide Toolbar"
+        matTooltip="Show/Hide Toolbar (X)"
         (click)="onTogglePhotoListToolbar()">
         <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
         <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>

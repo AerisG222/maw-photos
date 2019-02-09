@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
@@ -10,28 +11,37 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'sr
 @Component({
     selector: 'app-category-list-toolbar',
     templateUrl: './category-list-toolbar.component.html',
-    styleUrls: ['./category-list-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./category-list-toolbar.component.scss']
 })
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
-    private destroy$ = new Subject<boolean>();
+    private _hotkeys: Hotkey[] = [];
+
     settings: Settings;
+    settings$: Observable<Settings>;
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private _store$: Store<RootStoreState.State>,
+        private _hotkeysService: HotkeysService
     ) { }
 
     ngOnInit(): void {
-        const settings$ = this._store$
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event))
+        ));
+
+        this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.settings = settings),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(settings => this.settings = settings)
+            );
     }
 
     ngOnDestroy(): void {
-        this.destroy$.next(true);
+        this._hotkeysService.remove(this._hotkeys);
     }
 
     onToggleTitle(): void {
@@ -39,8 +49,22 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleSize(): void {
-        const size = ThumbnailSize.nextSize(this.settings.categoryListThumbnailSize.name);
+        if (this.settings && !this.settings.categoryListShowCategoryTitles) {
+            const size = ThumbnailSize.nextSize(this.settings.categoryListThumbnailSize.name);
 
-        this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListThumbnailSizeRequestAction({ newSize: size }));
+            this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListThumbnailSizeRequestAction({ newSize: size }));
+        }
+    }
+
+    private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
+        this.onToggleTitle();
+
+        return false;
+    }
+
+    private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
+        this.onToggleSize();
+
+        return false;
     }
 }
