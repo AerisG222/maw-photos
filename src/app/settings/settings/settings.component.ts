@@ -38,7 +38,7 @@ export class SettingsComponent implements OnInit {
             photoListShowCategoryBreadcrumbs: [true],
             photoListThumbnailSize: [''],
             photoListShowPhotoList: [true],
-            photoListSlideshowDisplayDurationSeconds: [3],
+            photoListSlideshowDisplayDurationSeconds: [2],
             photoListToolbarExpandedState: [true],
 
             photoInfoPanelShowComments: [true],

@@ -54,7 +54,7 @@ export class SettingsService {
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
 
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
-            photoListSlideshowDisplayDurationSeconds: this.getRandomDisplayDurationSeconds(),
+            photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
             photoListShowCategoryBreadcrumbs: photoListShowCategoryBreadcrumbs !== null ? photoListShowCategoryBreadcrumbs : true,
             photoListShowPhotoList: photoListShowPhotoList !== null ? photoListShowPhotoList : true,
             photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
@@ -123,13 +123,18 @@ export class SettingsService {
         }
     }
 
-    private getRandomDisplayDurationSeconds(): number {
+    private getPhotoListSlideshowDisplayDurationSeconds(): number {
+        const def = 2;
         const secs = this._localStorage.retrieve(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
 
         try {
-            return Number(secs);
+            const numSecs = Number(secs);
+
+            if (numSecs <= 0) {
+                return def;
+            }
         } catch {
-            return 3;
+            return def;
         }
     }
 }

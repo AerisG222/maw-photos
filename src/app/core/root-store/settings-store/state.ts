@@ -18,7 +18,7 @@ export const initialState: State = {
         photoListShowCategoryBreadcrumbs: true,
         photoListThumbnailSize: null,
         photoListShowPhotoList: true,
-        photoListSlideshowDisplayDurationSeconds: 3,
+        photoListSlideshowDisplayDurationSeconds: 2,
         photoListToolbarExpandedState: true,
 
         photoInfoPanelShowRatings: true,
