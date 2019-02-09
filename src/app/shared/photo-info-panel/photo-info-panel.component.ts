@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subject, Observable } from 'rxjs';
-import { takeUntil, tap, filter, map } from 'rxjs/operators';
+import { Subject, Observable, combineLatest } from 'rxjs';
+import { takeUntil, tap, filter, map, first, take } from 'rxjs/operators';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -16,6 +16,7 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
+import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -23,6 +24,8 @@ import {
     styleUrls: ['./photo-info-panel.component.scss']
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
+    private _hotkeys: Hotkey[] = [];
+
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showEffects$: Observable<boolean>;
@@ -43,10 +46,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject<boolean>();
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private _store$: Store<RootStoreState.State>,
+        private _hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
+        this.configureHotkeys();
+
         const currentPhoto$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => photo !== null),
@@ -131,6 +137,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this._hotkeysService.remove(this._hotkeys);
         this.destroy$.next(true);
     }
 
@@ -180,5 +187,90 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleMinimap(): void {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelMinimapRequestAction());
+    }
+
+    private configureHotkeys(): void {
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('r', (event: KeyboardEvent) => this.onHotkeyToggleRatings(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('c', (event: KeyboardEvent) => this.onHotkeyToggleComments(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('w', (event: KeyboardEvent) => this.onHotkeyToggleExif(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('e', (event: KeyboardEvent) => this.onHotkeyToggleEffects(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event))
+        ));
+    }
+
+    private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
+        this.toggleEndSidenav();
+
+        return false;
+    }
+
+    private onHotkeyToggleRatings(evt: KeyboardEvent): boolean {
+        this.togglePanel(this.showRatings$, () => this.toggleRatings());
+
+        return false;
+    }
+
+    private onHotkeyToggleComments(evt: KeyboardEvent): boolean {
+        this.togglePanel(this.showComments$, () => this.toggleComments());
+
+        return false;
+    }
+
+    private onHotkeyToggleExif(evt: KeyboardEvent): boolean {
+        this.togglePanel(this.showExif$, () => this.toggleExif());
+
+        return false;
+    }
+
+    private onHotkeyToggleEffects(evt: KeyboardEvent): boolean {
+        this.togglePanel(this.showEffects$, () => this.toggleEffects());
+
+        return false;
+    }
+
+    private onHotkeyToggleMinimap(evt: KeyboardEvent): boolean {
+        this.togglePanel(this.showMinimap$, () => this.toggleMinimap());
+
+        return false;
+    }
+
+    private togglePanel(showPanel$: Observable<boolean>, toggleFunc: () => void): void {
+        combineLatest(
+            this.endSidenavExpanded$,
+            showPanel$
+        ).pipe(
+            filter(x => x[0] != null && x[1] != null),
+            take(1),
+            map(x => {
+                if (!x[0]) {
+                    // show info panel if hidden
+                    this.toggleEndSidenav();
+
+                    if (!x[1]) {
+                        // if detail panel hidden, make sure we show this too
+                        toggleFunc();
+                    }
+                } else {
+                    toggleFunc();
+                }
+            })
+        ).subscribe();
     }
 }

@@ -50,7 +50,7 @@
         <button
             class="menu-button"
             mat-button
-            matTooltip="Show/Hide Info Panel"
+            matTooltip="Show/Hide Info Panel (I)"
             matTooltipPosition="before"
             (click)="toggleEndSidenav()">
             <mat-icon *ngIf="endSidenavExpanded$ | async" [inline]="true">chevron_right</mat-icon>
@@ -59,7 +59,7 @@
 
         <button
             mat-button
-            matTooltip="Show/Hide Ratings"
+            matTooltip="Show/Hide Ratings (R)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showRatings$ | async)"
@@ -68,7 +68,7 @@
         </button>
         <button
             mat-button
-            matTooltip="Show/Hide Comments"
+            matTooltip="Show/Hide Comments (C)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showComments$ | async)"
@@ -77,7 +77,7 @@
         </button>
         <button
             mat-button
-            matTooltip="Show/Hide EXIF"
+            matTooltip="Show/Hide EXIF (W)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showExif$ | async)"
@@ -86,7 +86,7 @@
         </button>
         <button
             mat-button
-            matTooltip="Show/Hide Effects"
+            matTooltip="Show/Hide Effects (E)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showEffects$ | async)"
@@ -95,7 +95,7 @@
         </button>
         <button
             mat-button
-            matTooltip="Show/Hide Mini-map"
+            matTooltip="Show/Hide Mini-map (M)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showMinimap$ | async)"
