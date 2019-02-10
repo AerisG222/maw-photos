@@ -19,6 +19,18 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('f', (evt: KeyboardEvent) => this.onHotkeyExitFullscreen(evt))
         ));
     }
@@ -32,8 +44,38 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new PhotoStoreActions.ExitFullscreenRequestAction());
     }
 
-    onHotkeyExitFullscreen(evt: KeyboardEvent): boolean {
+    onMoveNext(): void {
+        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+    }
+
+    onMovePrevious(): void {
+        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+    }
+
+    onToggleSlideshow(): void {
+        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+    }
+
+    private onHotkeyExitFullscreen(evt: KeyboardEvent): boolean {
         this.onExitFullscreen();
+
+        return false;
+    }
+
+    private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
+        this.onMoveNext();
+
+        return false;
+    }
+
+    private onHotkeyMovePrevious(evt: KeyboardEvent): boolean {
+        this.onMovePrevious();
+
+        return false;
+    }
+
+    private onHotkeyToggleSlideshow(evt: KeyboardEvent): boolean {
+        this.onToggleSlideshow();
 
         return false;
     }

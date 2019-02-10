@@ -101,7 +101,31 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
     }
 
+    onMoveNext(): void {
+        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+    }
+
+    onMovePrevious(): void {
+        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+    }
+
+    onToggleSlideshow(): void {
+        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+    }
+
     private configureHotkeys(): void {
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event))
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event))
+        ));
+
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event))
         ));
@@ -159,6 +183,24 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     private onHotkeyTogglePhotoListToolbar(evt: KeyboardEvent): boolean {
         this.onTogglePhotoListToolbar();
+
+        return false;
+    }
+
+    private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
+        this.onMoveNext();
+
+        return false;
+    }
+
+    private onHotkeyMovePrevious(evt: KeyboardEvent): boolean {
+        this.onMovePrevious();
+
+        return false;
+    }
+
+    private onHotkeyToggleSlideshow(evt: KeyboardEvent): boolean {
+        this.onToggleSlideshow();
 
         return false;
     }

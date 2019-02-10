@@ -1,9 +1,7 @@
 <span class="photo">
-    <app-move-previous-button></app-move-previous-button>
-
-    <app-move-next-button></app-move-next-button>
-
-    <app-slideshow-button></app-slideshow-button>
+    <app-move-previous-button (movePrevious)="onMovePrevious()"></app-move-previous-button>
+    <app-move-next-button (moveNext)="onMoveNext()"></app-move-next-button>
+    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-slideshow-button>
 
     <button
         mat-button
