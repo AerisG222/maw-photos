@@ -19,6 +19,7 @@ export class SettingsService {
     private static readonly keyPhotoListShowPhotoList = 'photoListShowPhotoList';
     private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
     private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
+    private static readonly keyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
 
     private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
     private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
@@ -39,6 +40,8 @@ export class SettingsService {
         const photoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
         const photoListShowPhotoList = this._localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
         const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
+        // tslint:disable-next-line:max-line-length
+        const photoListFullscreenToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListFullscreenToolbarExpandedState);
 
         const photoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
         const photoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
@@ -58,6 +61,8 @@ export class SettingsService {
             photoListShowCategoryBreadcrumbs: photoListShowCategoryBreadcrumbs !== null ? photoListShowCategoryBreadcrumbs : true,
             photoListShowPhotoList: photoListShowPhotoList !== null ? photoListShowPhotoList : true,
             photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
+            // tslint:disable-next-line:max-line-length
+            photoListFullscreenToolbarExpandedState: photoListFullscreenToolbarExpandedState !== null ? photoListFullscreenToolbarExpandedState : true,
 
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
             photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
@@ -84,6 +89,8 @@ export class SettingsService {
         // tslint:disable-next-line:max-line-length
         this._localStorage.store(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
         this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
+        // tslint:disable-next-line:max-line-length
+        this._localStorage.store(SettingsService.keyPhotoListFullscreenToolbarExpandedState, settings.photoListFullscreenToolbarExpandedState);
 
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);

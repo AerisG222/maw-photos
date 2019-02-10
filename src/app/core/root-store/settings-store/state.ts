@@ -20,6 +20,7 @@ export const initialState: State = {
         photoListShowPhotoList: true,
         photoListSlideshowDisplayDurationSeconds: 2,
         photoListToolbarExpandedState: true,
+        photoListFullscreenToolbarExpandedState: true,
 
         photoInfoPanelShowRatings: true,
         photoInfoPanelShowComments: true,

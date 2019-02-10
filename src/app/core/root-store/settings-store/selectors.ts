@@ -20,6 +20,7 @@ const getPhotoInfoPanelShowMinimap = (state: State): boolean => state.settings.p
 const getPhotoInfoPanelExpandedState = (state: State): boolean => state.settings.photoInfoPanelExpandedState;
 
 const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
+const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
 
 export const selectSettingsState: MemoizedSelector<object, State> = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
@@ -36,3 +37,4 @@ export const selectPhotoInfoPanelShowMinimap: MemoizedSelector<object, boolean> 
 export const selectPhotoInfoPanelExpandedState: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoInfoPanelExpandedState);
 
 export const selectPhotoListToolbarExpandedState: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
+export const selectPhotoListFullscreenToolbarExpandedState: MemoizedSelector<object, boolean> = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);

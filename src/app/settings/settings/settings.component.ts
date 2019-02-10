@@ -40,6 +40,7 @@ export class SettingsComponent implements OnInit {
             photoListShowPhotoList: [true],
             photoListSlideshowDisplayDurationSeconds: [2],
             photoListToolbarExpandedState: [true],
+            photoListFullscreenToolbarExpandedState: [true],
 
             photoInfoPanelShowComments: [true],
             photoInfoPanelShowEffects: [false],
@@ -71,6 +72,7 @@ export class SettingsComponent implements OnInit {
             photoListShowPhotoList: this.form.get('photoListShowPhotoList').value,
             photoListSlideshowDisplayDurationSeconds: this.form.get('photoListSlideshowDisplayDurationSeconds').value,
             photoListToolbarExpandedState: this.form.get('photoListToolbarExpandedState').value,
+            photoListFullscreenToolbarExpandedState: this.form.get('photoListFullscreenToolbarExpandedState').value,
 
             photoInfoPanelShowComments: this.form.get('photoInfoPanelShowComments').value,
             photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
@@ -106,6 +108,7 @@ export class SettingsComponent implements OnInit {
         this.form.get('photoListShowPhotoList').setValue(settings.photoListShowPhotoList);
         this.form.get('photoListSlideshowDisplayDurationSeconds').setValue(settings.photoListSlideshowDisplayDurationSeconds);
         this.form.get('photoListToolbarExpandedState').setValue(settings.photoListToolbarExpandedState);
+        this.form.get('photoListFullscreenToolbarExpandedState').setValue(settings.photoListFullscreenToolbarExpandedState);
 
         this.form.get('photoInfoPanelShowComments').setValue(settings.photoInfoPanelShowComments);
         this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);

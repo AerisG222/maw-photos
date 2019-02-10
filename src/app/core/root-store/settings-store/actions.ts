@@ -23,6 +23,7 @@ export enum ActionTypes {
     TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Photo Info Panel Expanded State',
 
     TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
+    TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Fullscreen Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
     TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Photo List Category Breadcrumbs'
 }
@@ -76,6 +77,10 @@ export class TogglePhotoListToolbarExpandedStateRequestAction implements Action 
     readonly type = ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
+export class TogglePhotoListFullscreenToolbarExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE;
+}
+
 export class UpdatePhotoListThumbnailSizeRequestAction implements Action {
     readonly type = ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE;
     constructor(public payload: { newSize: ThumbnailSize }) { }
@@ -114,6 +119,7 @@ export type Actions =
     TogglePhotoInfoPanelExifRequestAction |
     TogglePhotoInfoPanelEffectsRequestAction |
     TogglePhotoListToolbarExpandedStateRequestAction |
+    TogglePhotoListFullscreenToolbarExpandedStateRequestAction |
     UpdatePhotoListThumbnailSizeRequestAction |
     TogglePhotoListCategoryBreadcrumbsRequestAction |
     ToggleCategoryListCategoryTitlesRequestAction |

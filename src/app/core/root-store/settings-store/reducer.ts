@@ -38,7 +38,7 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: { ...action.payload.settings },
                 error: null
             };
-            case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS:
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS:
             return {
                 ...state,
                 settings: {
@@ -76,6 +76,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: {
                     ...state.settings,
                     photoListToolbarExpandedState: !state.settings.photoListToolbarExpandedState
+                }
+            };
+        case ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoListFullscreenToolbarExpandedState: !state.settings.photoListFullscreenToolbarExpandedState
                 }
             };
         case ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE:

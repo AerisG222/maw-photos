@@ -99,6 +99,18 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
+    togglePhotoListFullscreenToolbarExpandedState$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.TogglePhotoListFullscreenToolbarExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
     updatePhotoListThumbnailSize$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.UpdatePhotoListThumbnailSizeRequestAction>(settingsActions.ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE),

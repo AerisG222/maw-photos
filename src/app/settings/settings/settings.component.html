@@ -40,6 +40,9 @@
                 <h3>Show Photo List Toolbar</h3>
                 <mat-slide-toggle formControlName="photoListToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
 
+                <h3>Show Photo List Fullscreen Toolbar</h3>
+                <mat-slide-toggle formControlName="photoListFullscreenToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
+
                 <h3>Photo List Thumbnail Size</h3>
                 <mat-radio-group formControlName="photoListThumbnailSize">
                     <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
