@@ -133,6 +133,8 @@ export class SettingsService {
             if (numSecs <= 0) {
                 return def;
             }
+
+            return numSecs;
         } catch {
             return def;
         }
