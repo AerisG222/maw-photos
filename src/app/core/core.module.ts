@@ -15,7 +15,7 @@ import { RootStoreModule } from './root-store';
     declarations: [],
     imports: [
         CommonModule,
-        HotkeyModule.forRoot(),
+        HotkeyModule.forRoot({ disableCheatSheet: true }),
         HttpClientModule,
         environment.servicesModule,
         NgxWebstorageModule.forRoot({ prefix: 'maw-photos' }),

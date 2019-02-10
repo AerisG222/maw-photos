@@ -191,27 +191,27 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     private configureHotkeys(): void {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event))
+            new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event), [], 'Show / Hide Info Panel')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('r', (event: KeyboardEvent) => this.onHotkeyToggleRatings(event))
+            new Hotkey('r', (event: KeyboardEvent) => this.onHotkeyToggleRatings(event), [], 'Show / Hide Ratings Panel')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('c', (event: KeyboardEvent) => this.onHotkeyToggleComments(event))
+            new Hotkey('c', (event: KeyboardEvent) => this.onHotkeyToggleComments(event), [], 'Show / Hide Comments Panel')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('w', (event: KeyboardEvent) => this.onHotkeyToggleExif(event))
+            new Hotkey('w', (event: KeyboardEvent) => this.onHotkeyToggleExif(event), [], 'Show / Hide EXIF Panel')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('e', (event: KeyboardEvent) => this.onHotkeyToggleEffects(event))
+            new Hotkey('e', (event: KeyboardEvent) => this.onHotkeyToggleEffects(event), [], 'Show / Hide Effects Panel')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event))
+            new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
         ));
     }
 

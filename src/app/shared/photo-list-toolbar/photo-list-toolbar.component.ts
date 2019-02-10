@@ -115,39 +115,39 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     private configureHotkeys(): void {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event))
+            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event))
+            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event))
+            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event), [], 'Play / Pause Slideshow')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event))
+            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Title / Breadcrumbs')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event))
+            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Thumbnail Size')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('f', (event: KeyboardEvent) => this.onHotkeyFullscreen(event))
+            new Hotkey('f', (event: KeyboardEvent) => this.onHotkeyFullscreen(event), [], 'Enter Fullscreen')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('a', (event: KeyboardEvent) => this.onHotkeyRotateCounterClockwise(event))
+            new Hotkey('a', (event: KeyboardEvent) => this.onHotkeyRotateCounterClockwise(event), [], 'Rotate Counter Clockwise')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('d', (event: KeyboardEvent) => this.onHotkeyRotateClockwise(event))
+            new Hotkey('d', (event: KeyboardEvent) => this.onHotkeyRotateClockwise(event), [], 'Rotate Clockwise')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event))
+            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event), [], 'Show / Hide Toolbar')
         ));
     }
 

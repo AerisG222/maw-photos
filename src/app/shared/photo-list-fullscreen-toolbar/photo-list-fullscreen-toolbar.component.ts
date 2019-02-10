@@ -33,23 +33,23 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
             );
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event))
+            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event))
+            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event))
+            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event), [], 'Play / Pause Slideshow')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('f', (evt: KeyboardEvent) => this.onHotkeyExitFullscreen(evt))
+            new Hotkey('f', (evt: KeyboardEvent) => this.onHotkeyExitFullscreen(evt), [], 'Exit Fullscreen')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('x', (evt: KeyboardEvent) => this.onHotkeyToggleFullscreenToolbar(evt))
+            new Hotkey('x', (evt: KeyboardEvent) => this.onHotkeyToggleFullscreenToolbar(evt), [], 'Show / Hide Toolbar')
         ));
     }
 

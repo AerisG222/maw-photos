@@ -26,11 +26,11 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event))
+            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Category Titles')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event))
+            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Category Thumbnail Size')
         ));
 
         this.settings$ = this._store$

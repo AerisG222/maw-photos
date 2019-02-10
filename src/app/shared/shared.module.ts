@@ -20,7 +20,8 @@ import {
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
 } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
 import { BarRatingModule } from 'ngx-bar-rating';
@@ -41,6 +42,8 @@ import { PhotoListFullscreenToolbarComponent } from './photo-list-fullscreen-too
 import { PhotoViewComponent } from './photo-view/photo-view.component';
 import { RatingComponent } from './rating/rating.component';
 import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.component';
+import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
+import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +62,9 @@ import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.co
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
-        SlideshowButtonComponent
+        SlideshowButtonComponent,
+        HotkeyDialogComponent,
+        HotkeyTableComponent
     ],
     imports: [
         AgmCoreModule.forRoot({
@@ -71,6 +76,7 @@ import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.co
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
@@ -96,6 +102,7 @@ import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.co
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
@@ -119,6 +126,9 @@ import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.co
         PhotoListComponent,
         PhotoListToolbarComponent,
         PhotoViewComponent
+    ],
+    entryComponents: [
+        HotkeyDialogComponent
     ]
 })
 export class SharedModule { }
