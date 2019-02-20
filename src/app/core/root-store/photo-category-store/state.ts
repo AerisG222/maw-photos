@@ -1,15 +1,15 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 
-export const photoCategoryAdapter: EntityAdapter<Category> = createEntityAdapter<Category>({
-    sortComparer: (a: Category, b: Category): number => a.id - b.id
+export const photoCategoryAdapter: EntityAdapter<PhotoCategory> = createEntityAdapter<PhotoCategory>({
+    sortComparer: (a: PhotoCategory, b: PhotoCategory): number => a.id - b.id
 });
 
-export interface State extends EntityState<Category> {
+export interface State extends EntityState<PhotoCategory> {
     error: string;
     isLoading: boolean;
-    currentCategory: Category;
+    currentCategory: PhotoCategory;
 }
 
 export const initialState: State = photoCategoryAdapter.getInitialState({

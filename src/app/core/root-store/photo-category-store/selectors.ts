@@ -4,20 +4,20 @@ import {
     MemoizedSelector
 } from '@ngrx/store';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 
 export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
-export const getCurrentCategory = (state: State): Category => state.currentCategory;
+export const getCurrentCategory = (state: State): PhotoCategory => state.currentCategory;
 
 export const selectPhotoCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
-export const selectAllCategories: (state: object) => Category[] = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
+export const selectAllCategories: (state: object) => PhotoCategory[] = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
 
 export const selectAllYears = () =>
-    createSelector(selectAllCategories, (categories: Category[]) => {
+    createSelector(selectAllCategories, (categories: PhotoCategory[]) => {
         if (categories) {
             const allYears = categories.map(x => x.year);
 
@@ -28,7 +28,7 @@ export const selectAllYears = () =>
     });
 
 export const selectCategoriesForYear = (year: number) =>
-    createSelector(selectAllCategories, (categories: Category[]) => {
+    createSelector(selectAllCategories, (categories: PhotoCategory[]) => {
         if (categories) {
             return categories.filter(x => x.year === year);
         } else {
@@ -37,7 +37,7 @@ export const selectCategoriesForYear = (year: number) =>
     });
 
 export const selectCategoryById = (id: number) =>
-    createSelector(selectAllCategories, (categories: Category[]) => {
+    createSelector(selectAllCategories, (categories: PhotoCategory[]) => {
         if (categories) {
             return categories.find(c => c.id === id);
         } else {
@@ -47,4 +47,4 @@ export const selectCategoryById = (id: number) =>
 
 export const selectPhotoCategoryError: MemoizedSelector<object, any> = createSelector(selectPhotoCategoryState, getError);
 export const selectPhotoCategoryIsLoading: MemoizedSelector<object, boolean> = createSelector(selectPhotoCategoryState, getIsLoading);
-export const selectCurrentCategory: MemoizedSelector<object, Category> = createSelector(selectPhotoCategoryState, getCurrentCategory);
+export const selectCurrentCategory: MemoizedSelector<object, PhotoCategory> = createSelector(selectPhotoCategoryState, getCurrentCategory);

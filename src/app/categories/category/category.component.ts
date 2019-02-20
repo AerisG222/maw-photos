@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { map, flatMap, tap, takeUntil } from 'rxjs/operators';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
@@ -28,7 +28,7 @@ import {
 export class CategoryComponent implements OnInit, OnDestroy {
     destroy$ = new Subject<boolean>();
     settings$: Observable<Settings>;
-    category$: Observable<Category>;
+    category$: Observable<PhotoCategory>;
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;

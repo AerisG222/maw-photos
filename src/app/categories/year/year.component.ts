@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 
@@ -14,7 +14,7 @@ import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } f
 })
 export class YearComponent implements OnInit {
     @Input() year: number;
-    categories$: Observable<Category[]>;
+    categories$: Observable<PhotoCategory[]>;
     settings$: Observable<Settings>;
 
     constructor(
@@ -36,7 +36,7 @@ export class YearComponent implements OnInit {
             );
     }
 
-    private categoriesDescending(first: Category, second: Category) {
+    private categoriesDescending(first: PhotoCategory, second: PhotoCategory) {
         return second.id - first.id;
     }
 }

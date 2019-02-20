@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 
 @Component({
     selector: 'app-category-header',
@@ -9,6 +9,6 @@ import { Category } from 'src/app/core/models/category.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryHeaderComponent {
-    @Input() category: Category;
+    @Input() category: PhotoCategory;
     @Input() showCategoryAsLink: boolean;
 }

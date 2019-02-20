@@ -1,21 +1,19 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoComment } from 'src/app/core/models/photo-comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
-import { assetPathServiceToken, AssetPathService } from '../asset-path.service';
 import { PhotoApiService } from '../photo-api.service';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
-    private _years: number[];
-    private _categories: Category[];
+    private _categories: PhotoCategory[];
     private _photos: Photo[];
 
-    constructor(@Inject(assetPathServiceToken) private _pathSvc: AssetPathService) {
+    constructor() {
         this.initData();
     }
 
@@ -25,40 +23,28 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(this._photos[rand]);
     }
 
-    getYears(): Observable<number[]> {
-        return of(this._years);
+    getRandomPhotos(count: number): Observable<Photo[]> {
+        const photos = [];
+
+        for(let i = 0; i < count; i++) {
+            const rand = Math.floor(Math.random() * (this._photos.length - 1));
+
+            photos.push(this._photos[rand]);
+        }
+
+        return of(photos);
     }
 
-    getCategory(categoryId: number): Observable<Category> {
+    getCategory(categoryId: number): Observable<PhotoCategory> {
         return of(this._categories.filter(x => x.id === categoryId)[0]);
     }
 
-    getCategoriesForYear(year: number): Observable<Category[]> {
-        return of(this._categories.filter(x => x.year === year));
+    getCategories(): Observable<PhotoCategory[]> {
+        return of(this._categories);
     }
 
     getPhotosByCategory(categoryId: number): Observable<Photo[]> {
         return of(this._photos.filter(x => x.categoryId === categoryId));
-    }
-
-    getPhotosByCommentDate(newestFirst: boolean): Observable<Photo[]> {
-        throw new Error('not implemented');
-    }
-
-    getPhotosByUserCommentDate(newestFirst: boolean): Observable<Photo[]> {
-        throw new Error('not implemented');
-    }
-
-    getPhotosByCommentCount(greatestFirst: boolean): Observable<Photo[]> {
-        throw new Error('not implemented');
-    }
-
-    getPhotosByAverageRating(highestFirst: boolean): Observable<Photo[]> {
-        throw new Error('not implemented');
-    }
-
-    getPhotosByUserRating(highestFirst: boolean): Observable<Photo[]> {
-        throw new Error('not implemented');
     }
 
     getPhotoExifData(photoId: number): Observable<ExifDetail> {
@@ -158,83 +144,198 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     initData(): void {
-        this._years = [
-            2018,
-            2019
-        ];
-
         this._categories = [
             {
                 id: 1,
                 name: 'Test 1',
                 year: 2018,
-                hasGpsData: true,
-                teaserPhotoInfo: {
+                createDate: '2018-01-01',
+                latitude: null,
+                longitude: null,
+                photoCount: 150,
+                totalSizeXs: 10000,
+                totalSizeXsSq: 20000,
+                totalSizeSm: 30000,
+                totalSizeMd: 40000,
+                totalSizeLg: 50000,
+                totalSizePrt: 60000,
+                totalSizeSrc: 70000,
+                totalSize: 280000,
+                teaserImage: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1122.jpg')
+                    url: 'assets/images/2018/test1/xs/DSC_1122.jpg',
+                    size: 2000
                 },
-                photoCount: 10
+                teaserImageSq: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/xs/DSC_1122.jpg',
+                    size: 2000
+                },
+                self: '/photo-categories/1',
+                photosLink: '/photo-categories/1/photos',
+                downloadLink: '/photos/download-category/1'
             },
             {
                 id: 2,
                 name: 'Test 2',
                 year: 2018,
-                hasGpsData: false,
-                teaserPhotoInfo: {
+                createDate: '2018-02-01',
+                latitude: null,
+                longitude: null,
+                photoCount: 150,
+                totalSizeXs: 10000,
+                totalSizeXsSq: 20000,
+                totalSizeSm: 30000,
+                totalSizeMd: 40000,
+                totalSizeLg: 50000,
+                totalSizePrt: 60000,
+                totalSizeSrc: 70000,
+                totalSize: 280000,
+                teaserImage: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test2/xs/DSC_1125.jpg')
+                    url: 'assets/images/2018/test2/xs/DSC_1125.jpg',
+                    size: 200
                 },
-                photoCount: 20
+                teaserImageSq: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test2/xs/DSC_1125.jpg',
+                    size: 2000
+                },
+                self: '/photo-categories/2',
+                photosLink: '/photo-categories/2/photos',
+                downloadLink: '/photos/download-category/2'
             },
             {
                 id: 3,
                 name: 'Test 3',
                 year: 2018,
-                hasGpsData: true,
-                teaserPhotoInfo: {
+                createDate: '2018-03-01',
+                latitude: null,
+                longitude: null,
+                photoCount: 150,
+                totalSizeXs: 10000,
+                totalSizeXsSq: 20000,
+                totalSizeSm: 30000,
+                totalSizeMd: 40000,
+                totalSizeLg: 50000,
+                totalSizePrt: 60000,
+                totalSizeSrc: 70000,
+                totalSize: 280000,
+                teaserImage: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
+                    url: 'assets/images/2018/test3/xs/a.jpg',
+                    size: 2000
                 },
-                photoCount: 30
+                teaserImageSq: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test3/xs/a.jpg',
+                    size: 2000
+                },
+                self: '/photo-categories/3',
+                photosLink: '/photo-categories/3/photos',
+                downloadLink: '/photos/download-category/3'
             },
             {
                 id: 4,
                 name: 'Test 4',
                 year: 2019,
-                hasGpsData: true,
-                teaserPhotoInfo: {
+                createDate: '2018-04-01',
+                latitude: null,
+                longitude: null,
+                photoCount: 150,
+                totalSizeXs: 10000,
+                totalSizeXsSq: 20000,
+                totalSizeSm: 30000,
+                totalSizeMd: 40000,
+                totalSizeLg: 50000,
+                totalSizePrt: 60000,
+                totalSizeSrc: 70000,
+                totalSize: 280000,
+                teaserImage: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/a.jpg')
+                    url: 'assets/images/2018/test4/xs/a.jpg',
+                    size: 2000
                 },
-                photoCount: 40
+                teaserImageSq: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test4/xs/a.jpg',
+                    size: 2000
+                },
+                self: '/photo-categories/4',
+                photosLink: '/photo-categories/4/photos',
+                downloadLink: '/photos/download-category/4'
             },
             {
                 id: 5,
                 name: 'Test 5',
                 year: 2019,
-                hasGpsData: false,
-                teaserPhotoInfo: {
+                createDate: '2018-05-01',
+                latitude: null,
+                longitude: null,
+                photoCount: 150,
+                totalSizeXs: 10000,
+                totalSizeXsSq: 20000,
+                totalSizeSm: 30000,
+                totalSizeMd: 40000,
+                totalSizeLg: 50000,
+                totalSizePrt: 60000,
+                totalSizeSrc: 70000,
+                totalSize: 280000,
+                teaserImage: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test2/xs/a.jpg')
+                    url: 'assets/images/2018/test5/xs/a.jpg',
+                    size: 2000
                 },
-                photoCount: 50
+                teaserImageSq: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test5/xs/a.jpg',
+                    size: 2000
+                },
+                self: '/photo-categories/5',
+                photosLink: '/photo-categories/5/photos',
+                downloadLink: '/photos/download-category/5'
             },
             {
                 id: 6,
                 name: 'Test 6',
                 year: 2019,
-                hasGpsData: true,
-                teaserPhotoInfo: {
+                createDate: '2018-06-01',
+                latitude: null,
+                longitude: null,
+                photoCount: 150,
+                totalSizeXs: 10000,
+                totalSizeXsSq: 20000,
+                totalSizeSm: 30000,
+                totalSizeMd: 40000,
+                totalSizeLg: 50000,
+                totalSizePrt: 60000,
+                totalSizeSrc: 70000,
+                totalSize: 280000,
+                teaserImage: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test3/xs/a.jpg')
+                    url: 'assets/images/2018/test6/xs/a.jpg',
+                    size: 2000
                 },
-                photoCount: 60
+                teaserImageSq: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test6/xs/a.jpg',
+                    size: 2000
+                },
+                self: '/photo-categories/6',
+                photosLink: '/photo-categories/6/photos',
+                downloadLink: '/photos/download-category/6'
             }
         ];
 
@@ -242,157 +343,272 @@ export class MockPhotoApiService implements PhotoApiService {
             {
                 id: 1,
                 categoryId: 1,
+                createDate: '2018-01-01',
                 latitude: null,
                 longitude: null,
-                xsInfo: {
+                imageXs: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1122.jpg')
+                    url: 'assets/images/2018/test1/xs/DSC_1122.jpg',
+                    size: 1000
                 },
-                smInfo: {
+                imageXsSq: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1122.jpg')
+                    url: 'assets/images/2018/test1/xs_sq/DSC_1122.jpg',
+                    size: 1000
                 },
-                mdInfo: {
+                imageSm: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1122.jpg')
+                    url: 'assets/images/2018/test1/sm/DSC_1122.jpg',
+                    size: 1000
                 },
-                lgInfo: {
+                imageMd: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1122.jpg')
+                    url: 'assets/images/2018/test1/md/DSC_1122.jpg',
+                    size: 1000
                 },
-                prtInfo: {
+                imageLg: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1122.jpg')
-                }
+                    url: 'assets/images/2018/test1/lg/DSC_1122.jpg',
+                    size: 1000
+                },
+                imagePrt: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1122.jpg',
+                    size: 1000
+                },
+                imageSrc: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/src/DSC_1122.jpg',
+                    size: 1000
+                },
+                self: '/photos/1',
+                categoryLink: '/photo-categories/1',
+                commentsLink: '/photos/1/comments',
+                exifLink: '/photos/1/exif',
+                ratingLink: '/photos/1/rating'
             },
             {
                 id: 2,
                 categoryId: 1,
+                createDate: '2018-01-02',
                 latitude: null,
                 longitude: null,
-                xsInfo: {
+                imageXs: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1123.jpg')
+                    url: 'assets/images/2018/test1/xs/DSC_1123.jpg',
+                    size: 1000
                 },
-                smInfo: {
+                imageXsSq: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1123.jpg')
+                    url: 'assets/images/2018/test1/xs_sq/DSC_1123.jpg',
+                    size: 1000
                 },
-                mdInfo: {
+                imageSm: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1123.jpg')
+                    url: 'assets/images/2018/test1/sm/DSC_1123.jpg',
+                    size: 1000
                 },
-                lgInfo: {
+                imageMd: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1123.jpg')
+                    url: 'assets/images/2018/test1/md/DSC_1123.jpg',
+                    size: 1000
                 },
-                prtInfo: {
+                imageLg: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1123.jpg')
-                }
+                    url: 'assets/images/2018/test1/lg/DSC_1123.jpg',
+                    size: 1000
+                },
+                imagePrt: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1123.jpg',
+                    size: 1000
+                },
+                imageSrc: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1123.jpg',
+                    size: 1000
+                },
+                self: '/photos/2',
+                categoryLink: '/photo-categories/1',
+                commentsLink: '/photos/2/comments',
+                exifLink: '/photos/2/exif',
+                ratingLink: '/photos/2/rating'
             },
             {
                 id: 3,
                 categoryId: 1,
+                createDate: '2018-01-03',
                 latitude: null,
                 longitude: null,
-                xsInfo: {
+                imageXs: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1124.jpg')
+                    url: 'assets/images/2018/test1/xs/DSC_1124.jpg',
+                    size: 1000
                 },
-                smInfo: {
+                imageXsSq: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1124.jpg')
+                    url: 'assets/images/2018/test1/xs_sq/DSC_1124.jpg',
+                    size: 1000
                 },
-                mdInfo: {
+                imageSm: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1124.jpg')
+                    url: 'assets/images/2018/test1/sm/DSC_1124.jpg',
+                    size: 1000
                 },
-                lgInfo: {
+                imageMd: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1124.jpg')
+                    url: 'assets/images/2018/test1/md/DSC_1124.jpg',
+                    size: 1000
                 },
-                prtInfo: {
+                imageLg: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1124.jpg')
-                }
+                    url: 'assets/images/2018/test1/lg/DSC_1124.jpg',
+                    size: 1000
+                },
+                imagePrt: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1124.jpg',
+                    size: 1000
+                },
+                imageSrc: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1124.jpg',
+                    size: 1000
+                },
+                self: '/photos/3',
+                categoryLink: '/photo-categories/1',
+                commentsLink: '/photos/3/comments',
+                exifLink: '/photos/3/exif',
+                ratingLink: '/photos/3/rating'
             },
             {
                 id: 4,
                 categoryId: 1,
+                createDate: '2018-01-04',
                 latitude: null,
                 longitude: null,
-                xsInfo: {
+                imageXs: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1125.jpg')
+                    url: 'assets/images/2018/test1/xs/DSC_1125.jpg',
+                    size: 1000
                 },
-                smInfo: {
+                imageXsSq: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1125.jpg')
+                    url: 'assets/images/2018/test1/xs_sq/DSC_1125.jpg',
+                    size: 1000
                 },
-                mdInfo: {
+                imageSm: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1125.jpg')
+                    url: 'assets/images/2018/test1/sm/DSC_1125.jpg',
+                    size: 1000
                 },
-                lgInfo: {
+                imageMd: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1125.jpg')
+                    url: 'assets/images/2018/test1/md/DSC_1125.jpg',
+                    size: 1000
                 },
-                prtInfo: {
+                imageLg: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1125.jpg')
-                }
+                    url: 'assets/images/2018/test1/lg/DSC_1125.jpg',
+                    size: 1000
+                },
+                imagePrt: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1125.jpg',
+                    size: 1000
+                },
+                imageSrc: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1125.jpg',
+                    size: 1000
+                },
+                self: '/photos/4',
+                categoryLink: '/photo-categories/1',
+                commentsLink: '/photos/4/comments',
+                exifLink: '/photos/4/exif',
+                ratingLink: '/photos/4/rating'
             },
             {
                 id: 5,
                 categoryId: 1,
+                createDate: '2018-01-01',
                 latitude: null,
                 longitude: null,
-                xsInfo: {
+                imageXs: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/xs/DSC_1134.jpg')
+                    url: 'assets/images/2018/test1/xs/DSC_1134.jpg',
+                    size: 1000
                 },
-                smInfo: {
+                imageXsSq: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/sm/DSC_1134.jpg')
+                    url: 'assets/images/2018/test1/xs_sq/DSC_1134.jpg',
+                    size: 1000
                 },
-                mdInfo: {
+                imageSm: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/md/DSC_1134.jpg')
+                    url: 'assets/images/2018/test1/sm/DSC_1134.jpg',
+                    size: 1000
                 },
-                lgInfo: {
+                imageMd: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/lg/DSC_1134.jpg')
+                    url: 'assets/images/2018/test1/md/DSC_1134.jpg',
+                    size: 1000
                 },
-                prtInfo: {
+                imageLg: {
                     height: 400,
                     width: 400,
-                    path: this._pathSvc.getPath('/images/2018/test1/prt/DSC_1134.jpg')
-                }
+                    url: 'assets/images/2018/test1/lg/DSC_1134.jpg',
+                    size: 1000
+                },
+                imagePrt: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1134.jpg',
+                    size: 1000
+                },
+                imageSrc: {
+                    height: 400,
+                    width: 400,
+                    url: 'assets/images/2018/test1/prt/DSC_1134.jpg',
+                    size: 1000
+                },
+                self: '/photos/5',
+                categoryLink: '/photo-categories/1',
+                commentsLink: '/photos/5/comments',
+                exifLink: '/photos/5/exif',
+                ratingLink: '/photos/5/rating'
             }
         ];
     }

@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
@@ -13,7 +13,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 })
 export class PhotoViewComponent {
     @Input() settings: Settings;
-    @Input() category: Category;
+    @Input() category: PhotoCategory;
     @Input() photos: Photo[];
     @Input() activePhoto: Photo;
     @Input() effects: PhotoEffects;

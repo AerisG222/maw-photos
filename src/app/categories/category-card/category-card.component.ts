@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
@@ -10,7 +10,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryCardComponent {
-    @Input() category: Category;
+    @Input() category: PhotoCategory;
     @Input() showTitle: boolean;
     @Input() thumbnailSize: ThumbnailSize;
 }

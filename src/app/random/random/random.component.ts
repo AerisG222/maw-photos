@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
@@ -27,7 +27,7 @@ import {
 })
 export class RandomComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings>;
-    category$: Observable<Category>;
+    category$: Observable<PhotoCategory>;
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;

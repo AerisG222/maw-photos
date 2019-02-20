@@ -4,7 +4,7 @@ import { tap, map, delay, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 
-import { Category } from 'src/app/core/models/category.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Component({
@@ -75,7 +75,7 @@ export class PhotoStatsComponent implements OnInit {
         this.yearCount = years.length;
     }
 
-    private updateCategoryTotals(categories: Category[]): void {
+    private updateCategoryTotals(categories: PhotoCategory[]): void {
         this.categoryCount = categories.length;
 
         this.photoCount = categories

@@ -6,7 +6,6 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { AssetPathService, assetPathServiceToken } from 'src/app/core/services/asset-path.service';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
@@ -37,7 +36,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     prtDownloadUrl: string = null;
 
     constructor(
-        @Inject(assetPathServiceToken) private assetPathService: AssetPathService,
         private _store$: Store<RootStoreState.State>,
         private _hotkeysService: HotkeysService
     ) { }
@@ -60,11 +58,11 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         const activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
-                tap(photo => this.categoryDownloadUrl = this.assetPathService.getPath(`/photos/download-category/${photo.categoryId}`)),
-                tap(photo => this.smDownloadUrl = photo.smInfo.path),
-                tap(photo => this.mdDownloadUrl = photo.mdInfo.path),
-                tap(photo => this.lgDownloadUrl = photo.lgInfo.path),
-                tap(photo => this.prtDownloadUrl = photo.prtInfo.path),
+//                tap(photo => this.categoryDownloadUrl = this.assetPathService.getPath(`/photos/download-category/${photo.categoryId}`)),
+                tap(photo => this.smDownloadUrl = photo.imageSm.url),
+                tap(photo => this.mdDownloadUrl = photo.imageMd.url),
+                tap(photo => this.lgDownloadUrl = photo.imageLg.url),
+                tap(photo => this.prtDownloadUrl = photo.imagePrt.url),
                 takeUntil(this.destroy$)
             ).subscribe();
     }
