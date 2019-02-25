@@ -10,19 +10,23 @@ import { LayoutStoreModule } from './layout-store/layout-store.module';
 import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
 import { PhotoStoreModule } from './photo-store/photo-store.module';
 import { SettingsStoreModule } from './settings-store';
+import { VideoCategoryStoreModule } from './video-category-store';
+import { VideoStoreModule } from './video-store';
 
 @NgModule({
     declarations: [],
     imports: [
         CommonModule,
-        SettingsStoreModule,
+        LayoutStoreModule,
         PhotoCategoryStoreModule,
+        PhotoStoreModule,
+        SettingsStoreModule,
+        VideoCategoryStoreModule,
+        VideoStoreModule,
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        PhotoStoreModule,
-        LayoutStoreModule
+        !environment.production ? StoreDevtoolsModule.instrument() : []
     ]
 })
 export class RootStoreModule { }
