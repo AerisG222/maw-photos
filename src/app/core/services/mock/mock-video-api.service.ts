@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { VideoCategory } from '../../models/video-category.model';
 import { Video } from '../../models/video.model';
-import { PhotoComment } from '../../models/photo-comment.model';
+import { Comment } from '../../models/comment.model';
 import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
 
@@ -28,14 +28,14 @@ export class MockVideoApiService implements VideoApiService {
         return of(this._videos.filter(x => x.categoryId === categoryId));
     }
 
-    getCommentsForVideo(videoId: number): Observable<PhotoComment[]> {
+    getComments(videoId: number): Observable<Comment[]> {
         return of(​[
             { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
             { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
         ]);
     }
 
-    getVideoRatingData(videoId: number): Observable<Rating> {
+    getRating(videoId: number): Observable<Rating> {
         return of({ userRating: 2, averageRating: 4 });
     }
 
@@ -43,7 +43,7 @@ export class MockVideoApiService implements VideoApiService {
         return of(4.5);
     }
 
-    addCommentForVideo(videoId: number, comment: string): Observable<any> {
+    addComment(videoId: number, comment: string): Observable<any> {
         return of(true);
     }
 

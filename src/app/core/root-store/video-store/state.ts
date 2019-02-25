@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Video } from '../../models/video.model';
 
@@ -15,7 +15,7 @@ export interface State extends EntityState<Video> {
     firstVideo: Video;
     lastVideo: Video;
     currentVideoRating: Rating;
-    currentVideoComments: PhotoComment[];
+    currentVideoComments: Comment[];
     isFullscreenView: boolean;
 }
 

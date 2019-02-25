@@ -7,7 +7,7 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { EnvironmentConfig } from 'src/app/core/models/environment-config';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 
@@ -56,14 +56,14 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<Photo[]>(url);
     }
 
-    getPhotoExifData(photoId: number): Observable<ExifDetail> {
+    getExifData(photoId: number): Observable<ExifDetail> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/exif`);
 
         return this._http
             .get<ExifDetail>(url);
     }
 
-    getPhotoRatingData(photoId: number): Observable<Rating> {
+    getRating(photoId: number): Observable<Rating> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/rating`);
 
         return this._http
@@ -77,15 +77,15 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .patch<number>(url, { photoId: photoId, rating: rating });
     }
 
-    getCommentsForPhoto(photoId: number): Observable<PhotoComment[]> {
+    getComments(photoId: number): Observable<Comment[]> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/comments`);
 
         return this._http
-            .get<PhotoComment[]>(url)
+            .get<Comment[]>(url)
             .pipe(
                 map(comments => {
                     // deal with dates
-                    return comments.map((x: PhotoComment) => {
+                    return comments.map((x: Comment) => {
                         x.entryDate = new Date(x.entryDate.toString());
                         return x;
                     });
@@ -93,7 +93,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
             );
     }
 
-    addCommentForPhoto(photoId: number, comment: string): Observable<any> {
+    addComment(photoId: number, comment: string): Observable<any> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/comments`);
 
         return this._http

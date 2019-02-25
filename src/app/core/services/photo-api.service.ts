@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 
 export const photoApiServiceToken = 'PhotoApiService';
@@ -14,9 +14,9 @@ export interface PhotoApiService {
     getPhotosByCategory(categoryId: number): Observable<Photo[]>;
     getRandomPhoto(): Observable<Photo>;
     getRandomPhotos(count: number): Observable<Photo[]>;
-    getCommentsForPhoto(photoId: number): Observable<PhotoComment[]>;
-    getPhotoExifData(photoId: number): Observable<ExifDetail>;
-    getPhotoRatingData(photoId: number): Observable<Rating>;
+    getComments(photoId: number): Observable<Comment[]>;
+    getExifData(photoId: number): Observable<ExifDetail>;
+    getRating(photoId: number): Observable<Rating>;
     ratePhoto(photoId: number, rating: number): Observable<number>;
-    addCommentForPhoto(photoId: number, comment: string): Observable<any>;
+    addComment(photoId: number, comment: string): Observable<any>;
 }

@@ -49,7 +49,7 @@ export class PhotoStoreEffects {
     loadRatingRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoActions.LoadRatingRequestAction>(photoActions.ActionTypes.LOAD_RATING_REQUEST),
         switchMap(action =>
-            this._api.getPhotoRatingData(action.payload.photoId)
+            this._api.getRating(action.payload.photoId)
                 .pipe(
                     map(rating => new photoActions.LoadRatingSuccessAction({ rating: rating})),
                     catchError(error => of(new photoActions.LoadRatingFailureAction({ error: error })))
@@ -73,7 +73,7 @@ export class PhotoStoreEffects {
     loadCommentsRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoActions.LoadCommentsRequestAction>(photoActions.ActionTypes.LOAD_COMMENTS_REQUEST),
         switchMap(action =>
-            this._api.getCommentsForPhoto(action.payload.photoId)
+            this._api.getComments(action.payload.photoId)
                 .pipe(
                     map(comments => new photoActions.LoadCommentsSuccessAction({ comments: comments })),
                     catchError(error => of(new photoActions.RatePhotoFailureAction({ error: error })))
@@ -85,7 +85,7 @@ export class PhotoStoreEffects {
     addCommentRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoActions.AddCommentRequestAction>(photoActions.ActionTypes.ADD_COMMENT_REQUEST),
         switchMap(action =>
-            this._api.addCommentForPhoto(action.payload.photoId, action.payload.comment)
+            this._api.addComment(action.payload.photoId, action.payload.comment)
                 .pipe(
                     map(result => new photoActions.AddCommentSuccessAction({ photoId: action.payload.photoId })),
                     catchError(error => of(new photoActions.AddCommentFailureAction({ error: error })))
@@ -103,7 +103,7 @@ export class PhotoStoreEffects {
     loadExifRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoActions.LoadExifRequestAction>(photoActions.ActionTypes.LOAD_EXIF_REQUEST),
         switchMap(action =>
-            this._api.getPhotoExifData(action.payload.photoId)
+            this._api.getExifData(action.payload.photoId)
                 .pipe(
                     map(detail => this._exifFormatterService.format(detail)),
                     map(data => new photoActions.LoadExifSuccessAction({ exif: data })),

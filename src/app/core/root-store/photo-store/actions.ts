@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Photo } from 'src/app/core/models/photo.model';
 import { Rating } from 'src/app/core/models/rating.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { ExifData } from 'src/app/core/models/exif-data.model';
@@ -134,7 +134,7 @@ export class LoadCommentsFailureAction implements Action {
 
 export class LoadCommentsSuccessAction implements Action {
     readonly type = ActionTypes.LOAD_COMMENTS_SUCCESS;
-    constructor(public payload: { comments: PhotoComment[] }) { }
+    constructor(public payload: { comments: Comment[] }) { }
 }
 
 export class AddCommentRequestAction implements Action {

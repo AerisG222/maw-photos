@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 
 @Component({
     selector: 'app-comments',
@@ -9,7 +9,7 @@ import { PhotoComment } from 'src/app/core/models/photo-comment.model';
     styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-    @Input() comments: PhotoComment[];
+    @Input() comments: Comment[];
     @Output() comment = new EventEmitter<string>();
 
     form: FormGroup;

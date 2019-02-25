@@ -2,7 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { Rating } from 'src/app/core/models/rating.model';
@@ -18,7 +18,7 @@ export interface State extends EntityState<Photo> {
     firstPhoto: Photo;
     lastPhoto: Photo;
     currentPhotoRating: Rating;
-    currentPhotoComments: PhotoComment[];
+    currentPhotoComments: Comment[];
     currentPhotoExifData: ExifData[];
     currentPhotoEffects: PhotoEffects;
     slideshowIsPlaying: boolean;

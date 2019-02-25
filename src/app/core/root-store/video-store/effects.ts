@@ -33,7 +33,7 @@ export class VideoStoreEffects {
     loadRatingRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<videoActions.LoadRatingRequestAction>(videoActions.ActionTypes.LOAD_RATING_REQUEST),
         switchMap(action =>
-            this._api.getVideoRatingData(action.payload.videoId)
+            this._api.getRating(action.payload.videoId)
                 .pipe(
                     map(rating => new videoActions.LoadRatingSuccessAction({ rating: rating})),
                     catchError(error => of(new videoActions.LoadRatingFailureAction({ error: error })))
@@ -57,7 +57,7 @@ export class VideoStoreEffects {
     loadCommentsRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<videoActions.LoadCommentsRequestAction>(videoActions.ActionTypes.LOAD_COMMENTS_REQUEST),
         switchMap(action =>
-            this._api.getCommentsForVideo(action.payload.videoId)
+            this._api.getComments(action.payload.videoId)
                 .pipe(
                     map(comments => new videoActions.LoadCommentsSuccessAction({ comments: comments })),
                     catchError(error => of(new videoActions.RateVideoFailureAction({ error: error })))
@@ -69,7 +69,7 @@ export class VideoStoreEffects {
     addCommentRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<videoActions.AddCommentRequestAction>(videoActions.ActionTypes.ADD_COMMENT_REQUEST),
         switchMap(action =>
-            this._api.addCommentForVideo(action.payload.videoId, action.payload.comment)
+            this._api.addComment(action.payload.videoId, action.payload.comment)
                 .pipe(
                     map(result => new videoActions.AddCommentSuccessAction({ videoId: action.payload.videoId })),
                     catchError(error => of(new videoActions.AddCommentFailureAction({ error: error })))

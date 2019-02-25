@@ -5,7 +5,7 @@ import { takeUntil, tap, filter, map, first, take } from 'rxjs/operators';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { CommentsComponent } from '../comments/comments.component';
@@ -34,7 +34,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showMinimap$: Observable<boolean>;
 
     rating$: Observable<Rating>;
-    comments$: Observable<PhotoComment[]>;
+    comments$: Observable<Comment[]>;
     exif$: Observable<ExifData[]>;
     effects$: Observable<PhotoEffects>;
     latitude$: Observable<number>;

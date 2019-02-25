@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Video } from 'src/app/core/models/video.model';
 import { Rating } from 'src/app/core/models/rating.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 
 export enum ActionTypes {
     CLEAR_REQUEST = '[Videos] Clear',
@@ -103,7 +103,7 @@ export class LoadCommentsFailureAction implements Action {
 
 export class LoadCommentsSuccessAction implements Action {
     readonly type = ActionTypes.LOAD_COMMENTS_SUCCESS;
-    constructor(public payload: { comments: PhotoComment[] }) { }
+    constructor(public payload: { comments: Comment[] }) { }
 }
 
 export class AddCommentRequestAction implements Action {

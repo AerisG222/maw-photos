@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoComment } from 'src/app/core/models/photo-comment.model';
+import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 
@@ -47,7 +47,7 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(this._photos.filter(x => x.categoryId === categoryId));
     }
 
-    getPhotoExifData(photoId: number): Observable<ExifDetail> {
+    getExifData(photoId: number): Observable<ExifDetail> {
         return of({
             bitsPerSample: 8,
             compression: 'JPEG (old-style)',
@@ -124,7 +124,7 @@ export class MockPhotoApiService implements PhotoApiService {
         });
     }
 
-    getPhotoRatingData(photoId: number): Observable<Rating> {
+    getRating(photoId: number): Observable<Rating> {
         return of({ userRating: 2, averageRating: 4 });
     }
 
@@ -132,14 +132,14 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(4.5);
     }
 
-    getCommentsForPhoto(photoId: number): Observable<PhotoComment[]> {
+    getComments(photoId: number): Observable<Comment[]> {
         return of(​[
             { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
             { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
         ]);
     }
 
-    addCommentForPhoto(photoId: number, comment: string): Observable<any> {
+    addComment(photoId: number, comment: string): Observable<any> {
         return of(true);
     }
 
