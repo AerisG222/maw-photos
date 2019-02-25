@@ -143,7 +143,7 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(true);
     }
 
-    initData(): void {
+    private initData(): void {
         this._categories = [
             {
                 id: 1,
