@@ -1,6 +1,6 @@
 <div *ngIf="fullscreen" class="fullscreen">
     <app-photo-list-fullscreen-toolbar></app-photo-list-fullscreen-toolbar>
-    <img [src]="activePhoto?.lgInfo?.path" />
+    <img [src]="activePhoto?.imageLg?.url" />
 </div>
 
 <div *ngIf="!fullscreen" fxLayout="column" style="height: 100%;">
@@ -8,7 +8,7 @@
     <app-category-header *ngIf="settings?.photoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
 
     <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxFlexAlign="center">
-        <img [src]="activePhoto?.mdInfo?.path" [class]="effects?.rotation?.klass" [style.filter]="getEffectStyles()" />
+        <img [src]="activePhoto?.imageMd?.url" [class]="effects?.rotation?.klass" [style.filter]="getEffectStyles()" />
     </div>
 
     <app-photo-list
