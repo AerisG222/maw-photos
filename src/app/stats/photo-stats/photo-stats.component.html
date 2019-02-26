@@ -1,21 +1,24 @@
 <div fxLayout="column">
     <div fxFlex="0 0 auto">
-        <app-stats-header></app-stats-header>
+        <app-stats-header (clickYear)="onRemoveYearFilter()" title="Photo Stats" [year]="selectedYear$ | async"></app-stats-header>
     </div>
 
-    <div fxFlex="0 0 auto">
+    <div fxFlex="0 0 auto" fxLayoutGap="12px">
         <app-stat-detail-card
             title="All Time"
-            [yearCount]="yearCount"
-            [categoryCount]="categoryCount"
-            [photoCount]="photoCount">
+            [details]="totalDetails$ | async">
+        </app-stat-detail-card>
+        <app-stat-detail-card
+            *ngIf="selectedYear$ | async"
+            [title]="selectedYear$ | async"
+            [details]="yearDetails$ | async">
         </app-stat-detail-card>
     </div>
 
     <div fxFlexFill>
         <app-stat-chart
             [chartData]="chartData$ | async"
-            (select)="onSelect($event)">
+            (select)="onSelectYear($event)">
         </app-stat-chart>
     </div>
 </div>

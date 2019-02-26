@@ -1,10 +1,10 @@
 <div>
     <span class="mat-h1" *ngIf="!year">
-        Statistics
+        {{ title }}
     </span>
 
-    <a routerLink="['stats']" class="mat-h1" *ngIf="year">
-        Statistics
+    <a (click)="onBack()" class="mat-h1" *ngIf="year">
+        {{ title }}
     </a>
 
     <span *ngIf="year" class="mat-h1">

@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-stats-header',
@@ -7,5 +7,11 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatsHeaderComponent {
+    @Input() title: string;
     @Input() year: number;
+    @Output() clickYear = new EventEmitter<void>();
+
+    onBack(): void {
+        this.clickYear.emit();
+    }
 }

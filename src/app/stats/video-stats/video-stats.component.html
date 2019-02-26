@@ -1,0 +1,21 @@
+<div fxLayout="column">
+        <div fxFlex="0 0 auto">
+            <app-stats-header (back)="removeYearFilter()" title="Video Stats"></app-stats-header>
+        </div>
+
+        <div fxFlex="0 0 auto">
+            <app-stat-detail-card
+                title="All Time"
+                [details]="details">
+            </app-stat-detail-card>
+        </div>
+
+        <div fxFlexFill>
+            <!--
+            <app-stat-chart
+                [chartData]="chartData$ | async"
+                (select)="onSelect($event)">
+            </app-stat-chart>
+            -->
+        </div>
+    </div>

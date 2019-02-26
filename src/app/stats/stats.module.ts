@@ -8,15 +8,17 @@ import { PhotoStatsComponent } from './photo-stats/photo-stats.component';
 import { StatChartComponent } from './stat-chart/stat-chart.component';
 import { StatDetailCardComponent } from './stat-detail-card/stat-detail-card.component';
 import { StatsHeaderComponent } from './header/stats-header.component';
-import { YearStatsComponent } from './year-stats/year-stats.component';
+import { StatsComponent } from './stats/stats.component';
+import { VideoStatsComponent } from './video-stats/video-stats.component';
 
 @NgModule({
     declarations: [
         PhotoStatsComponent,
-        YearStatsComponent,
         StatChartComponent,
         StatDetailCardComponent,
-        StatsHeaderComponent
+        StatsHeaderComponent,
+        StatsComponent,
+        VideoStatsComponent
     ],
     imports: [
         CommonModule,

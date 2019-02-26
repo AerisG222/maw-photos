@@ -1,4 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { StatDetail } from '../models/stat-detail.model';
 
 @Component({
     selector: 'app-stat-detail-card',
@@ -8,7 +9,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 export class StatDetailCardComponent {
     @Input() title: string;
-    @Input() yearCount: number;
-    @Input() categoryCount: number;
-    @Input() photoCount: number;
+    @Input() details: StatDetail[];
 }

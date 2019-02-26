@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { tap, map, delay, take } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { StatDetail } from '../models/stat-detail.model';
 
 @Component({
     selector: 'app-photo-stats',
@@ -14,14 +14,12 @@ import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions 
 })
 export class PhotoStatsComponent implements OnInit {
     chartData$: Observable<any>;
-
-    yearCount: number;
-    categoryCount: number;
-    photoCount: number;
+    selectedYear$ = new BehaviorSubject<number>(null);
+    totalDetails$: Observable<StatDetail[]>;
+    yearDetails$: Observable<StatDetail[]>;
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _router: Router
+        private _store$: Store<RootStoreState.State>
     ) {
 
     }
@@ -29,32 +27,40 @@ export class PhotoStatsComponent implements OnInit {
     ngOnInit() {
         const years$ = this._store$
             .pipe(
-                delay(0),
-                select(PhotoCategoryStoreSelectors.selectAllYears()),
-                tap(years => this.updateYearCount(years)),
-                take(1)
+                //delay(0),
+                select(PhotoCategoryStoreSelectors.selectAllYears())
             );
 
         const categories$ = this._store$
             .pipe(
-                delay(0),
-                select(PhotoCategoryStoreSelectors.selectAllCategories),
-                tap(categories => this.updateCategoryTotals(categories)),
-                take(1)
+                //delay(0),
+                select(PhotoCategoryStoreSelectors.selectAllCategories)
             );
 
-        this.chartData$ = forkJoin(
+        this.chartData$ = combineLatest(
                 years$,
-                categories$
+                categories$,
+                this.selectedYear$
             )
             .pipe(
-                delay(0),
-                map(x => x[0].map(year => ({
-                    'name': year.toString(),
-                    'value': x[1]
-                        .filter(cat => cat.year === year)
-                        .reduce((total, cat) => total + cat.photoCount, 0)
-                })))
+                //delay(0),
+                map(x => this.prepareChartData(x[0], x[1], x[2]))
+            );
+
+        this.totalDetails$ = combineLatest(
+                years$,
+                categories$,
+            )
+            .pipe(
+                map(x => this.prepareTotalDetails(x[0], x[1]))
+            );
+
+        this.yearDetails$ = combineLatest(
+                categories$,
+                this.selectedYear$
+            )
+            .pipe(
+                map(x => this.prepareYearDetails(x[0], x[1]))
             );
 
         years$.subscribe();
@@ -63,22 +69,77 @@ export class PhotoStatsComponent implements OnInit {
         this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 
-    onSelect(evt): void {
-        const yr = Number(evt.name);
+    onSelectYear(evt): void {
+        const year = Number(evt.name);
 
-        if (yr > 0) {
-            this._router.navigate(['stats', 'year', yr]);
+        if (year > 0) {
+            this.selectedYear$.next(year);
         }
     }
 
-    private updateYearCount(years: number[]): void {
-        this.yearCount = years.length;
+    onRemoveYearFilter(evt): void {
+        this.selectedYear$.next(null);
     }
 
-    private updateCategoryTotals(categories: PhotoCategory[]): void {
-        this.categoryCount = categories.length;
+    private prepareTotalDetails(years: number[], categories: PhotoCategory[]): StatDetail[] {
+        const details: StatDetail[] = [];
 
-        this.photoCount = categories
-            .reduce((total, cat) => total + cat.photoCount, 0);
+        details.push({
+            name: 'Years',
+            value: years.length.toString()
+        });
+
+        details.push({
+            name: 'Categories',
+            value: categories.length.toString()
+        });
+
+        details.push({
+            name: 'Photos',
+            value: categories
+                .reduce((total, cat) => total + cat.photoCount, 0)
+                .toString()
+        });
+
+        return details;
+    }
+
+    private prepareYearDetails(categories: PhotoCategory[], selectedYear: number): StatDetail[] {
+        const details: StatDetail[] = [];
+
+        categories = categories.filter(x => x.year === selectedYear);
+
+        details.push({
+            name: 'Category Count',
+            value: categories.length.toString()
+        });
+
+        details.push({
+            name: 'Photo Count',
+            value: categories
+                .reduce((total, cat) => total + cat.photoCount, 0)
+                .toString()
+        });
+
+        return details;
+    }
+
+    private prepareChartData(years: number[], categories: PhotoCategory[], selectedYear: number) {
+        if (selectedYear !== null) {
+            return categories
+                .filter(cat => cat.year === selectedYear)
+                .map(cat => ({
+                    'name': cat.name,
+                    'value': cat.photoCount
+                }));
+        }
+
+        return years
+            .map(year => ({
+                'name': year.toString(),
+                'value': categories
+                    .filter(cat => cat.year === year)
+                    .reduce((total, cat) => total + cat.photoCount, 0)
+            }));
     }
 }
