@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
+import * as numeral from 'numeral';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 import { StatDetail } from '../models/stat-detail.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-photo-stats',
@@ -18,6 +19,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     aggregateBy$ = new BehaviorSubject<string>('count');
     destroy$ = new Subject<boolean>();
     chartData$: Observable<any>;
+    chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(null);
     totalDetails$: Observable<StatDetail[]>;
     yearDetails$: Observable<StatDetail[]>;
@@ -49,6 +51,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         this.form.get('aggregateBy').valueChanges
             .pipe(
                 tap(val => this.aggregateBy$.next(val)),
+                tap(val => this.chartValueFormat = val),
                 takeUntil(this.destroy$)
             )
             .subscribe();
@@ -109,17 +112,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
             value: years.length.toString()
         });
 
-        details.push({
-            name: 'Categories',
-            value: categories.length.toString()
-        });
-
-        details.push({
-            name: 'Photos',
-            value: categories
-                .reduce((total, cat) => total + cat.photoCount, 0)
-                .toString()
-        });
+        this.populateDetails(categories, details);
 
         return details;
     }
@@ -129,19 +122,29 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
         categories = categories.filter(x => x.year === selectedYear);
 
-        details.push({
-            name: 'Category Count',
-            value: categories.length.toString()
-        });
-
-        details.push({
-            name: 'Photo Count',
-            value: categories
-                .reduce((total, cat) => total + cat.photoCount, 0)
-                .toString()
-        });
+        this.populateDetails(categories, details);
 
         return details;
+    }
+
+    private populateDetails(categories: PhotoCategory[], details: StatDetail[]): void {
+        details.push({
+            name: 'Categories',
+            value: numeral(categories.length).format('0,0')
+        });
+
+        details.push({
+            name: 'Photos',
+            value: numeral(categories
+                    .reduce((total, cat) => total + cat.photoCount, 0)
+                ).format('0,0')
+        });
+
+        details.push({
+            name: 'Total Size',
+            value: numeral(categories
+                .reduce((total, cat) => total + cat.totalSize, 0)).format('0,0.00 b')
+        });
     }
 
     private prepareChartData(years: number[], categories: PhotoCategory[], selectedYear: number, aggregateBy: string) {
@@ -158,7 +161,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 .filter(cat => cat.year === selectedYear)
                 .map(cat => ({
                         'name': cat.name,
-                        'value': agg(cat)
+                        'value':agg(cat)
                     })
                 );
         }
@@ -166,7 +169,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         return years
             .map(year => ({
                 'name': year.toString(),
-                'value': categories
+                'value':  categories
                     .filter(cat => cat.year === year)
                     .reduce((total, cat) => total + agg(cat), 0)
             }));

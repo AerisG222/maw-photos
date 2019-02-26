@@ -28,6 +28,7 @@
     <div fxFlexFill>
         <app-stat-chart
             [chartData]="chartData$ | async"
+            [format]="chartValueFormat"
             (select)="onSelectYear($event)">
         </app-stat-chart>
     </div>
