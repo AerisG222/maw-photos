@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { tap, map, delay, take } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
@@ -12,7 +12,8 @@ import { StatDetail } from '../models/stat-detail.model';
     templateUrl: './photo-stats.component.html',
     styleUrls: ['./photo-stats.component.scss']
 })
-export class PhotoStatsComponent implements OnInit {
+export class PhotoStatsComponent implements OnInit, OnDestroy {
+    destroy$ = new Subject<boolean>();
     chartData$: Observable<any>;
     selectedYear$ = new BehaviorSubject<number>(null);
     totalDetails$: Observable<StatDetail[]>;
@@ -27,14 +28,14 @@ export class PhotoStatsComponent implements OnInit {
     ngOnInit() {
         const years$ = this._store$
             .pipe(
-                //delay(0),
-                select(PhotoCategoryStoreSelectors.selectAllYears())
+                select(PhotoCategoryStoreSelectors.selectAllYears()),
+                takeUntil(this.destroy$)
             );
 
         const categories$ = this._store$
             .pipe(
-                //delay(0),
-                select(PhotoCategoryStoreSelectors.selectAllCategories)
+                select(PhotoCategoryStoreSelectors.selectAllCategories),
+                takeUntil(this.destroy$)
             );
 
         this.chartData$ = combineLatest(
@@ -43,7 +44,6 @@ export class PhotoStatsComponent implements OnInit {
                 this.selectedYear$
             )
             .pipe(
-                //delay(0),
                 map(x => this.prepareChartData(x[0], x[1], x[2]))
             );
 
@@ -67,6 +67,10 @@ export class PhotoStatsComponent implements OnInit {
         categories$.subscribe();
 
         this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
     }
 
     onSelectYear(evt): void {
