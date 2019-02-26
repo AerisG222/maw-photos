@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 import { StatDetail } from '../models/stat-detail.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-photo-stats',
@@ -13,6 +14,8 @@ import { StatDetail } from '../models/stat-detail.model';
     styleUrls: ['./photo-stats.component.scss']
 })
 export class PhotoStatsComponent implements OnInit, OnDestroy {
+    form: FormGroup;
+    aggregateBy$ = new BehaviorSubject<string>('count');
     destroy$ = new Subject<boolean>();
     chartData$: Observable<any>;
     selectedYear$ = new BehaviorSubject<number>(null);
@@ -20,12 +23,17 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     yearDetails$: Observable<StatDetail[]>;
 
     constructor(
+        private _formBuilder: FormBuilder,
         private _store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
+        this.form = this._formBuilder.group({
+            aggregateBy: ['count']
+        });
+
         const years$ = this._store$
             .pipe(
                 select(PhotoCategoryStoreSelectors.selectAllYears()),
@@ -38,13 +46,21 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 takeUntil(this.destroy$)
             );
 
+        this.form.get('aggregateBy').valueChanges
+            .pipe(
+                tap(val => this.aggregateBy$.next(val)),
+                takeUntil(this.destroy$)
+            )
+            .subscribe();
+
         this.chartData$ = combineLatest(
                 years$,
                 categories$,
-                this.selectedYear$
+                this.selectedYear$,
+                this.aggregateBy$
             )
             .pipe(
-                map(x => this.prepareChartData(x[0], x[1], x[2]))
+                map(x => this.prepareChartData(x[0], x[1], x[2], x[3]))
             );
 
         this.totalDetails$ = combineLatest(
@@ -128,14 +144,23 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         return details;
     }
 
-    private prepareChartData(years: number[], categories: PhotoCategory[], selectedYear: number) {
+    private prepareChartData(years: number[], categories: PhotoCategory[], selectedYear: number, aggregateBy: string) {
+        let agg = null;
+
+        if (aggregateBy === 'count') {
+            agg = this.getPhotoCount;
+        } else {
+            agg = this.getPhotoSize;
+        }
+
         if (selectedYear !== null) {
             return categories
                 .filter(cat => cat.year === selectedYear)
                 .map(cat => ({
-                    'name': cat.name,
-                    'value': cat.photoCount
-                }));
+                        'name': cat.name,
+                        'value': agg(cat)
+                    })
+                );
         }
 
         return years
@@ -143,7 +168,15 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 'name': year.toString(),
                 'value': categories
                     .filter(cat => cat.year === year)
-                    .reduce((total, cat) => total + cat.photoCount, 0)
+                    .reduce((total, cat) => total + agg(cat), 0)
             }));
+    }
+
+    private getPhotoCount(category: PhotoCategory): number {
+        return category.photoCount;
+    }
+
+    private getPhotoSize(category: PhotoCategory): number {
+        return category.totalSize;
     }
 }

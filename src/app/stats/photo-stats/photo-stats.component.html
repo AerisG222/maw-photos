@@ -15,6 +15,16 @@
         </app-stat-detail-card>
     </div>
 
+    <div fxFlex="0 0 auto" class="aggregate-form">
+        <form [formGroup]="form">
+            Aggregate By:
+            <mat-radio-group formControlName="aggregateBy">
+                <mat-radio-button value="count">Count</mat-radio-button>
+                <mat-radio-button value="size">Size</mat-radio-button>
+            </mat-radio-group>
+        </form>
+    </div>
+
     <div fxFlexFill>
         <app-stat-chart
             [chartData]="chartData$ | async"
