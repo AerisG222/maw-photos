@@ -1,7 +1,6 @@
 import {
     createFeatureSelector,
-    createSelector,
-    MemoizedSelector
+    createSelector
 } from '@ngrx/store';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
@@ -24,49 +23,48 @@ export const getCurrentPhotoEffects = (state: State): PhotoEffects => state.curr
 export const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
 export const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 
-export const selectPhotoState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
+export const selectPhotoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
-export const selectAllPhotos: (state: object) => Photo[] = photoAdapter.getSelectors(selectPhotoState).selectAll;
+export const selectAllPhotos = photoAdapter.getSelectors(selectPhotoState).selectAll;
 
-export const selectPhotosForCategory = (categoryId: number) =>
-    createSelector(selectAllPhotos, (photos: Photo[]) => {
+export const selectPhotosForCategory =
+    createSelector(selectAllPhotos, (photos: Photo[], props: { id: number }) => {
         if (photos) {
-            return photos.filter(x => x.categoryId === categoryId);
+            return photos.filter(x => x.categoryId === props.id);
         } else {
             return null;
         }
     });
 
-export const selectPhotoById = (id: number) =>
-    createSelector(selectAllPhotos, (photos: Photo[]) => {
+export const selectPhotoById =
+    createSelector(selectAllPhotos, (photos: Photo[], props: { id: number }) => {
         if (photos) {
-            return photos.find(p => p.id === id);
+            return photos.find(p => p.id === props.id);
         } else {
             return null;
         }
     });
 
-export const selectPhotoError: MemoizedSelector<object, any> = createSelector(selectPhotoState, getError);
-export const selectPhotoIsLoading: MemoizedSelector<object, boolean> = createSelector(selectPhotoState, getIsLoading);
-export const selectCurrentPhoto: MemoizedSelector<object, Photo> = createSelector(selectPhotoState, getCurrentPhoto);
-export const selectFirstPhoto: MemoizedSelector<object, Photo> = createSelector(selectPhotoState, getFirstPhoto);
-export const selectLastPhoto: MemoizedSelector<object, Photo> = createSelector(selectPhotoState, getLastPhoto);
-export const selectCurrentPhotoRating: MemoizedSelector<object, Rating> = createSelector(selectPhotoState, getCurrentPhotoRating);
-// tslint:disable-next-line:max-line-length
-export const selectCurrentPhotoComments: MemoizedSelector<object, Comment[]> = createSelector(selectPhotoState, getCurrentPhotoComments);
-export const selectCurrentPhotoExifData: MemoizedSelector<object, ExifData[]> = createSelector(selectPhotoState, getCurrentPhotoExifData);
-export const selectCurrentPhotoEffects: MemoizedSelector<object, PhotoEffects> = createSelector(selectPhotoState, getCurrentPhotoEffects);
-export const selectSlideshowIsPlaying: MemoizedSelector<object, boolean> = createSelector(selectPhotoState, getSlideshowIsPlaying);
-export const selectIsFullscreenView: MemoizedSelector<object, boolean> = createSelector(selectPhotoState, getIsFullscreenView);
+export const selectPhotoError = createSelector(selectPhotoState, getError);
+export const selectPhotoIsLoading = createSelector(selectPhotoState, getIsLoading);
+export const selectCurrentPhoto = createSelector(selectPhotoState, getCurrentPhoto);
+export const selectFirstPhoto = createSelector(selectPhotoState, getFirstPhoto);
+export const selectLastPhoto = createSelector(selectPhotoState, getLastPhoto);
+export const selectCurrentPhotoRating = createSelector(selectPhotoState, getCurrentPhotoRating);
+export const selectCurrentPhotoComments = createSelector(selectPhotoState, getCurrentPhotoComments);
+export const selectCurrentPhotoExifData = createSelector(selectPhotoState, getCurrentPhotoExifData);
+export const selectCurrentPhotoEffects = createSelector(selectPhotoState, getCurrentPhotoEffects);
+export const selectSlideshowIsPlaying = createSelector(selectPhotoState, getSlideshowIsPlaying);
+export const selectIsFullscreenView = createSelector(selectPhotoState, getIsFullscreenView);
 
-export const selectIsCurrentPhotoFirst: MemoizedSelector<object, boolean> =
+export const selectIsCurrentPhotoFirst =
     createSelector(selectCurrentPhoto, selectFirstPhoto, (current, first) => {
         return current != null &&
             first != null &&
             current.id === first.id;
     });
 
-export const selectIsCurrentPhotoLast: MemoizedSelector<object, boolean> =
+export const selectIsCurrentPhotoLast =
     createSelector(selectCurrentPhoto, selectLastPhoto, (current, last) => {
         return current != null &&
             last != null &&

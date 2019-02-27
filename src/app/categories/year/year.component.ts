@@ -31,7 +31,7 @@ export class YearComponent implements OnInit {
 
         this.categories$ = this._store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCategoriesForYear(this.year)),
+                select(PhotoCategoryStoreSelectors.selectCategoriesForYear, { year: this.year }),
                 map(categories => categories.sort(this.categoriesDescending))
             );
     }

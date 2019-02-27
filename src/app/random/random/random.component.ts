@@ -76,7 +76,7 @@ export class RandomComponent implements OnInit, OnDestroy {
                 tap(photo => {
                     this._store$
                         .pipe(
-                            select(PhotoCategoryStoreSelectors.selectCategoryById(photo.categoryId)),
+                            select(PhotoCategoryStoreSelectors.selectCategoryById, { id: photo.categoryId }),
                             tap(category => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category: category }))),
                             take(1)
                         ).subscribe();

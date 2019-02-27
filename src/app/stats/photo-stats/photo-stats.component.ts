@@ -38,7 +38,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
         const years$ = this._store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectAllYears()),
+                select(PhotoCategoryStoreSelectors.selectAllYears),
                 takeUntil(this.destroy$)
             );
 

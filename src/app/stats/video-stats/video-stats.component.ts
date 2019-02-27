@@ -38,7 +38,7 @@ export class VideoStatsComponent implements OnInit {
 
         const years$ = this._store$
             .pipe(
-                select(VideoCategoryStoreSelectors.selectAllYears()),
+                select(VideoCategoryStoreSelectors.selectAllYears),
                 takeUntil(this.destroy$)
             );
 

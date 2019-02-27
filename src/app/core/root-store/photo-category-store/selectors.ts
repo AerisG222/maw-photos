@@ -1,7 +1,6 @@
 import {
     createFeatureSelector,
-    createSelector,
-    MemoizedSelector
+    createSelector
 } from '@ngrx/store';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
@@ -12,11 +11,11 @@ export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
 export const getCurrentCategory = (state: State): PhotoCategory => state.currentCategory;
 
-export const selectPhotoCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
+export const selectPhotoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
-export const selectAllCategories: (state: object) => PhotoCategory[] = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
+export const selectAllCategories = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
 
-export const selectAllYears = () =>
+export const selectAllYears =
     createSelector(selectAllCategories, (categories: PhotoCategory[]) => {
         if (categories) {
             const allYears = categories.map(x => x.year);
@@ -27,24 +26,24 @@ export const selectAllYears = () =>
         }
     });
 
-export const selectCategoriesForYear = (year: number) =>
-    createSelector(selectAllCategories, (categories: PhotoCategory[]) => {
+export const selectCategoriesForYear =
+    createSelector(selectAllCategories, (categories: PhotoCategory[], props: { year: number }) => {
         if (categories) {
-            return categories.filter(x => x.year === year);
+            return categories.filter(x => x.year === props.year);
         } else {
             return null;
         }
     });
 
-export const selectCategoryById = (id: number) =>
-    createSelector(selectAllCategories, (categories: PhotoCategory[]) => {
+export const selectCategoryById =
+    createSelector(selectAllCategories, (categories: PhotoCategory[], props: {id: number}) => {
         if (categories) {
-            return categories.find(c => c.id === id);
+            return categories.find(c => c.id === props.id);
         } else {
             return null;
         }
     });
 
-export const selectPhotoCategoryError: MemoizedSelector<object, any> = createSelector(selectPhotoCategoryState, getError);
-export const selectPhotoCategoryIsLoading: MemoizedSelector<object, boolean> = createSelector(selectPhotoCategoryState, getIsLoading);
-export const selectCurrentCategory: MemoizedSelector<object, PhotoCategory> = createSelector(selectPhotoCategoryState, getCurrentCategory);
+export const selectPhotoCategoryError = createSelector(selectPhotoCategoryState, getError);
+export const selectPhotoCategoryIsLoading = createSelector(selectPhotoCategoryState, getIsLoading);
+export const selectCurrentCategory = createSelector(selectPhotoCategoryState, getCurrentCategory);

@@ -1,7 +1,6 @@
 import {
     createFeatureSelector,
-    createSelector,
-    MemoizedSelector
+    createSelector
 } from '@ngrx/store';
 
 import { VideoCategory } from 'src/app/core/models/video-category.model';
@@ -12,11 +11,11 @@ export const getError = (state: State): any => state.error;
 export const getIsLoading = (state: State): boolean => state.isLoading;
 export const getCurrentCategory = (state: State): VideoCategory => state.currentCategory;
 
-export const selectVideoCategoryState: MemoizedSelector<object, State> = createFeatureSelector<State>(VIDEO_CATEGORY_FEATURE_NAME);
+export const selectVideoCategoryState = createFeatureSelector<State>(VIDEO_CATEGORY_FEATURE_NAME);
 
-export const selectAllCategories: (state: object) => VideoCategory[] = VideoCategoryAdapter.getSelectors(selectVideoCategoryState).selectAll;
+export const selectAllCategories = VideoCategoryAdapter.getSelectors(selectVideoCategoryState).selectAll;
 
-export const selectAllYears = () =>
+export const selectAllYears =
     createSelector(selectAllCategories, (categories: VideoCategory[]) => {
         if (categories) {
             const allYears = categories.map(x => x.year);
@@ -27,24 +26,24 @@ export const selectAllYears = () =>
         }
     });
 
-export const selectCategoriesForYear = (year: number) =>
-    createSelector(selectAllCategories, (categories: VideoCategory[]) => {
+export const selectCategoriesForYear =
+    createSelector(selectAllCategories, (categories: VideoCategory[], props: { year: number }) => {
         if (categories) {
-            return categories.filter(x => x.year === year);
+            return categories.filter(x => x.year === props.year);
         } else {
             return null;
         }
     });
 
-export const selectCategoryById = (id: number) =>
-    createSelector(selectAllCategories, (categories: VideoCategory[]) => {
+export const selectCategoryById =
+    createSelector(selectAllCategories, (categories: VideoCategory[], props: { id: number }) => {
         if (categories) {
-            return categories.find(c => c.id === id);
+            return categories.find(c => c.id === props.id);
         } else {
             return null;
         }
     });
 
-export const selectVideoCategoryError: MemoizedSelector<object, any> = createSelector(selectVideoCategoryState, getError);
-export const selectVideoCategoryIsLoading: MemoizedSelector<object, boolean> = createSelector(selectVideoCategoryState, getIsLoading);
-export const selectCurrentCategory: MemoizedSelector<object, VideoCategory> = createSelector(selectVideoCategoryState, getCurrentCategory);
+export const selectVideoCategoryError = createSelector(selectVideoCategoryState, getError);
+export const selectVideoCategoryIsLoading = createSelector(selectVideoCategoryState, getIsLoading);
+export const selectCurrentCategory = createSelector(selectVideoCategoryState, getCurrentCategory);

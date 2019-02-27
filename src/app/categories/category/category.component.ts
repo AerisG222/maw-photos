@@ -61,7 +61,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
             .pipe(
                 flatMap(id => this._store$
                     .pipe(
-                        select(PhotoCategoryStoreSelectors.selectCategoryById(id)),
+                        select(PhotoCategoryStoreSelectors.selectCategoryById, { id: id }),
                         tap(category => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category: category })))
                     )
                 )
@@ -71,7 +71,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
             .pipe(
                 flatMap(id => this._store$
                     .pipe(
-                        select(PhotoStoreSelectors.selectPhotosForCategory(id))
+                        select(PhotoStoreSelectors.selectPhotosForCategory, { id: id })
                     )),
                 tap(photos => this.setCurrentPhoto(photos[0]))
             );

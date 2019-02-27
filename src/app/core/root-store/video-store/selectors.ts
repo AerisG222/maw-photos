@@ -1,7 +1,6 @@
 import {
     createFeatureSelector,
-    createSelector,
-    MemoizedSelector
+    createSelector
 } from '@ngrx/store';
 
 import { Video } from 'src/app/core/models/video.model';
@@ -19,46 +18,45 @@ export const getCurrentVideoRating = (state: State): Rating => state.currentVide
 export const getCurrentVideoComments = (state: State): Comment[] => state.currentVideoComments;
 export const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 
-export const selectVideoState: MemoizedSelector<object, State> = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
+export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
 
-export const selectAllVideos: (state: object) => Video[] = videoAdapter.getSelectors(selectVideoState).selectAll;
+export const selectAllVideos = videoAdapter.getSelectors(selectVideoState).selectAll;
 
-export const selectVideosForCategory = (categoryId: number) =>
-    createSelector(selectAllVideos, (photos: Video[]) => {
+export const selectVideosForCategory =
+    createSelector(selectAllVideos, (photos: Video[], props: { id: number }) => {
         if (photos) {
-            return photos.filter(x => x.categoryId === categoryId);
+            return photos.filter(x => x.categoryId === props.id);
         } else {
             return null;
         }
     });
 
-export const selectVideoById = (id: number) =>
-    createSelector(selectAllVideos, (photos: Video[]) => {
+export const selectVideoById =
+    createSelector(selectAllVideos, (photos: Video[], props: { id: number }) => {
         if (photos) {
-            return photos.find(p => p.id === id);
+            return photos.find(p => p.id === props.id);
         } else {
             return null;
         }
     });
 
-export const selectVideoError: MemoizedSelector<object, any> = createSelector(selectVideoState, getError);
-export const selectVideoIsLoading: MemoizedSelector<object, boolean> = createSelector(selectVideoState, getIsLoading);
-export const selectCurrentVideo: MemoizedSelector<object, Video> = createSelector(selectVideoState, getCurrentVideo);
-export const selectFirstVideo: MemoizedSelector<object, Video> = createSelector(selectVideoState, getFirstVideo);
-export const selectLastVideo: MemoizedSelector<object, Video> = createSelector(selectVideoState, getLastVideo);
-export const selectCurrentVideoRating: MemoizedSelector<object, Rating> = createSelector(selectVideoState, getCurrentVideoRating);
-// tslint:disable-next-line:max-line-length
-export const selectCurrentVideoComments: MemoizedSelector<object, Comment[]> = createSelector(selectVideoState, getCurrentVideoComments);
-export const selectIsFullscreenView: MemoizedSelector<object, boolean> = createSelector(selectVideoState, getIsFullscreenView);
+export const selectVideoError = createSelector(selectVideoState, getError);
+export const selectVideoIsLoading = createSelector(selectVideoState, getIsLoading);
+export const selectCurrentVideo = createSelector(selectVideoState, getCurrentVideo);
+export const selectFirstVideo = createSelector(selectVideoState, getFirstVideo);
+export const selectLastVideo = createSelector(selectVideoState, getLastVideo);
+export const selectCurrentVideoRating = createSelector(selectVideoState, getCurrentVideoRating);
+export const selectCurrentVideoComments = createSelector(selectVideoState, getCurrentVideoComments);
+export const selectIsFullscreenView = createSelector(selectVideoState, getIsFullscreenView);
 
-export const selectIsCurrentVideoFirst: MemoizedSelector<object, boolean> =
+export const selectIsCurrentVideoFirst =
     createSelector(selectCurrentVideo, selectFirstVideo, (current, first) => {
         return current != null &&
             first != null &&
             current.id === first.id;
     });
 
-export const selectIsCurrentVideoLast: MemoizedSelector<object, boolean> =
+export const selectIsCurrentVideoLast =
     createSelector(selectCurrentVideo, selectLastVideo, (current, last) => {
         return current != null &&
             last != null &&

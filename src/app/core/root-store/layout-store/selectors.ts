@@ -1,7 +1,6 @@
 import {
     createFeatureSelector,
-    createSelector,
-    MemoizedSelector
+    createSelector
 } from '@ngrx/store';
 
 import { Layout } from 'src/app/core/models/layout.model';
@@ -12,9 +11,9 @@ const getIsRightSidebarDisplayed = (state: State): boolean => state.layout.isRig
 const getIsFullscreen = (state: State): boolean => state.layout.isFullscreen;
 const getLayout = (state: State): Layout => state.layout;
 
-export const selectLayoutState: MemoizedSelector<object, State> = createFeatureSelector<State>(LAYOUT_FEATURE_NAME);
+export const selectLayoutState = createFeatureSelector<State>(LAYOUT_FEATURE_NAME);
 
 // tslint:disable-next-line:max-line-length
-export const selectLayoutIsRightSidebarDisplayed: MemoizedSelector<object, boolean> = createSelector(selectLayoutState, getIsRightSidebarDisplayed);
-export const selectLayoutIsFullscreen: MemoizedSelector<object, boolean> = createSelector(selectLayoutState, getIsFullscreen);
-export const selectLayout: MemoizedSelector<object, Layout> = createSelector(selectLayoutState, getLayout);
+export const selectLayoutIsRightSidebarDisplayed = createSelector(selectLayoutState, getIsRightSidebarDisplayed);
+export const selectLayoutIsFullscreen = createSelector(selectLayoutState, getIsFullscreen);
+export const selectLayout = createSelector(selectLayoutState, getLayout);
