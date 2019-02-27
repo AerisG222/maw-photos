@@ -22,6 +22,9 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
             case 'size':
                 this.formatFunc = this.formatFilesize;
                 break;
+            case 'time':
+                this.formatFunc = this.formatTime;
+                break;
         }
     }
 
@@ -46,6 +49,10 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
 
     formatFilesize(val: number) {
         return numeral(val).format('0,0.00 b');
+    }
+
+    formatTime(val: number) {
+        return numeral(val).format('00:00:00');
     }
 
     private updateMargins(): void {

@@ -6,5 +6,7 @@ export * from './layout-store';
 export * from './photo-category-store';
 export * from './photo-store';
 export * from './settings-store';
+export * from './video-category-store';
+export * from './video-store';
 
 export { RootStoreState, RootStoreSelectors, RootStoreModule };

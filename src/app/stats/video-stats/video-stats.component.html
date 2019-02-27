@@ -1,21 +1,36 @@
 <div fxLayout="column">
-        <div fxFlex="0 0 auto">
-            <app-stats-header (back)="removeYearFilter()" title="Video Stats"></app-stats-header>
-        </div>
-
-        <div fxFlex="0 0 auto">
-            <app-stat-detail-card
-                title="All Time"
-                [details]="details">
-            </app-stat-detail-card>
-        </div>
-
-        <div fxFlexFill>
-            <!--
-            <app-stat-chart
-                [chartData]="chartData$ | async"
-                (select)="onSelect($event)">
-            </app-stat-chart>
-            -->
-        </div>
+    <div fxFlex="0 0 auto">
+        <app-stats-header (clickYear)="onRemoveYearFilter()" title="Video Stats" [year]="selectedYear$ | async"></app-stats-header>
     </div>
+
+    <div fxFlex="0 0 auto" fxLayoutGap="12px">
+        <app-stat-detail-card
+            title="All Time"
+            [details]="totalDetails$ | async">
+        </app-stat-detail-card>
+        <app-stat-detail-card
+            *ngIf="selectedYear$ | async"
+            [title]="selectedYear$ | async"
+            [details]="yearDetails$ | async">
+        </app-stat-detail-card>
+    </div>
+
+    <div fxFlex="0 0 auto" class="aggregate-form">
+        <form [formGroup]="form">
+            Aggregate By:
+            <mat-radio-group formControlName="aggregateBy">
+                <mat-radio-button value="count">Video Count</mat-radio-button>
+                <mat-radio-button value="size">File Size</mat-radio-button>
+                <mat-radio-button value="time">Video Duration</mat-radio-button>
+            </mat-radio-group>
+        </form>
+    </div>
+
+    <div fxFlexFill>
+        <app-stat-chart
+            [chartData]="chartData$ | async"
+            [format]="chartValueFormat"
+            (select)="onSelectYear($event)">
+        </app-stat-chart>
+    </div>
+</div>
