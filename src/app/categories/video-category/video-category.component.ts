@@ -24,6 +24,7 @@ import {
     styleUrls: ['./video-category.component.scss']
 })
 export class VideoCategoryComponent implements OnInit, OnDestroy {
+    showCategoryAsLink = false;
     destroy$ = new Subject<boolean>();
     settings$: Observable<Settings>;
     category$: Observable<VideoCategory>;
@@ -82,8 +83,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
             map(id => this._store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id }))),
             takeUntil(this.destroy$)
         ).subscribe();
-
-        this.category$.subscribe();
     }
 
     ngOnDestroy(): void {

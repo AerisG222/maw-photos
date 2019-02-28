@@ -1,5 +1,6 @@
 <div fxLayout="column" style="height: 100%;">
     <app-video-list-toolbar></app-video-list-toolbar>
+    <app-category-header *ngIf="(settings$ | async)?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)" fxFlex="0 0 auto"></app-category-header>
 
     <div *ngIf="activeVideo$ | async as video" fxFlex="1 1 auto" fxFlexAlign="center">
         <video class="center-block" autoplay="false" [ngStyle]="{height: video.videoScaled.height + 'px', width: video.videoScaled.width + 'px'}" controls>

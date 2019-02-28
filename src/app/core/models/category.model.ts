@@ -8,6 +8,7 @@ export interface Category {
     categoryRoute: string;
     id:            number;
     name:          string;
+    year:          number;
     createDate:    string;
     teaserImage:   MultimediaAsset;
     teaserImageSq: MultimediaAsset;
