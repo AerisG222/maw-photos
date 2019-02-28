@@ -21,6 +21,8 @@ const getPhotoInfoPanelExpandedState = (state: State): boolean => state.settings
 const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
 const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
 
+const getVideoListToolbarExpandedState = (state: State): boolean => state.settings.videoListToolbarExpandedState;
+
 export const selectSettingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
 export const selectSettingsError = createSelector(selectSettingsState, getError);
@@ -37,3 +39,5 @@ export const selectPhotoInfoPanelExpandedState = createSelector(selectSettingsSt
 export const selectPhotoListToolbarExpandedState = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
 // tslint:disable-next-line: max-line-length
 export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
+
+export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);

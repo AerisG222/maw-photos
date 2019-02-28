@@ -23,10 +23,7 @@ export enum ActionTypes {
     ADD_COMMENT_FAILURE = '[Videos] Add Comment Failure',
     ADD_COMMENT_SUCCESS = '[Videos] Add Comment Success',
     MOVE_NEXT_REQUEST = '[Videos] Move Next Request',
-    MOVE_PREVIOUS_REQUEST = '[Videos] Move Previous Request',
-    TOGGLE_FULLSCREEN_REQUEST = '[Videos] Toggle Fullscreen Request',
-    ENTER_FULLSCREEN_REQUEST = '[Videos] Enter Fullscreen Request',
-    EXIT_FULLSCREEN_REQUEST = '[Videos] Exit Fullscreen Request'
+    MOVE_PREVIOUS_REQUEST = '[Videos] Move Previous Request'
 }
 
 export class ClearRequestAction implements Action {
@@ -121,18 +118,6 @@ export class AddCommentSuccessAction implements Action {
     constructor(public payload: { videoId: number }) { }
 }
 
-export class ToggleFullscreenRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_FULLSCREEN_REQUEST;
-}
-
-export class EnterFullscreenRequestAction implements Action {
-    readonly type = ActionTypes.ENTER_FULLSCREEN_REQUEST;
-}
-
-export class ExitFullscreenRequestAction implements Action {
-    readonly type = ActionTypes.EXIT_FULLSCREEN_REQUEST;
-}
-
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -152,7 +137,4 @@ export type Actions =
     RateVideoSuccessAction |
     AddCommentRequestAction |
     AddCommentFailureAction |
-    AddCommentSuccessAction |
-    ToggleFullscreenRequestAction |
-    EnterFullscreenRequestAction |
-    ExitFullscreenRequestAction;
+    AddCommentSuccessAction;

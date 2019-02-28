@@ -38,6 +38,24 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: { ...action.payload.settings },
                 error: null
             };
+
+        case ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
+                }
+            };
+        case ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryListThumbnailSize: action.payload.newSize
+                }
+            };
+
         case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS:
             return {
                 ...state,
@@ -70,6 +88,23 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoInfoPanelShowRatings: !state.settings.photoInfoPanelShowRatings
                 }
             };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowMinimap: !state.settings.photoInfoPanelShowMinimap
+                }
+            };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
+                }
+            };
+
         case ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE:
             return {
                 ...state,
@@ -102,38 +137,32 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
                 }
             };
-        case ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES:
+
+        case ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE:
             return {
                 ...state,
                 settings: {
                     ...state.settings,
-                    categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
+                    videoListToolbarExpandedState: !state.settings.videoListToolbarExpandedState
                 }
             };
-        case ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE:
+        case ActionTypes.UPDATE_VIDEO_LIST_THUMBNAIL_SIZE:
             return {
                 ...state,
                 settings: {
                     ...state.settings,
-                    categoryListThumbnailSize: action.payload.newSize
+                    videoListThumbnailSize: action.payload.newSize
                 }
             };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP:
+        case ActionTypes.TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS:
             return {
                 ...state,
                 settings: {
                     ...state.settings,
-                    photoInfoPanelShowMinimap: !state.settings.photoInfoPanelShowMinimap
+                    videoListShowCategoryBreadcrumbs: !state.settings.videoListShowCategoryBreadcrumbs
                 }
             };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE:
-        return {
-            ...state,
-            settings: {
-                ...state.settings,
-                photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
-            }
-        };
+
         default: {
             return state;
         }

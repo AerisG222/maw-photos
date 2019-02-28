@@ -23,18 +23,18 @@ export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME)
 export const selectAllVideos = videoAdapter.getSelectors(selectVideoState).selectAll;
 
 export const selectVideosForCategory =
-    createSelector(selectAllVideos, (photos: Video[], props: { id: number }) => {
-        if (photos) {
-            return photos.filter(x => x.categoryId === props.id);
+    createSelector(selectAllVideos, (videos: Video[], props: { id: number }) => {
+        if (videos) {
+            return videos.filter(x => x.categoryId === props.id);
         } else {
             return null;
         }
     });
 
 export const selectVideoById =
-    createSelector(selectAllVideos, (photos: Video[], props: { id: number }) => {
-        if (photos) {
-            return photos.find(p => p.id === props.id);
+    createSelector(selectAllVideos, (videos: Video[], props: { id: number }) => {
+        if (videos) {
+            return videos.find(p => p.id === props.id);
         } else {
             return null;
         }

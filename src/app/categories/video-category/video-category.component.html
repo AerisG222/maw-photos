@@ -1,3 +1,19 @@
-<p>
-  video-category works!
-</p>
+<div fxLayout="column" style="height: 100%;">
+    <app-video-list-toolbar></app-video-list-toolbar>
+
+    <div *ngIf="activeVideo$ | async as video" fxFlex="1 1 auto" fxFlexAlign="center">
+        <video class="center-block" autoplay="false" [ngStyle]="{height: video.videoScaled.height + 'px', width: video.videoScaled.width + 'px'}" controls>
+            <source [src]="video.videoScaled.url" type="video/mp4" />
+            Your browser does not support the <code>video</code> element.
+        </video>
+    </div>
+
+    <app-video-list
+        *ngIf="(videos$ | async) && (settings$ | async)?.videoListShowVideoList"
+        [videos]="videos$ | async"
+        [thumbnailSize]="(settings$ | async)?.videoListThumbnailSize"
+        [selectedVideo]="activeVideo$ | async"
+        (select)="onSelectVideo($event)"
+        fxFlex="0 0 auto">
+    </app-video-list>
+</div>

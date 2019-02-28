@@ -19,6 +19,7 @@ export class SettingsComponent implements OnInit {
     themes = Theme.allThemes;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
+    videoListThumbnailSizes = ThumbnailSize.allSizes;
     randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
     constructor(
@@ -47,7 +48,12 @@ export class SettingsComponent implements OnInit {
             photoInfoPanelShowExif: [false],
             photoInfoPanelShowMinimap: [false],
             photoInfoPanelShowRatings: [true],
-            photoInfoPanelExpandedState: [false]
+            photoInfoPanelExpandedState: [false],
+
+            videoListShowCategoryBreadcrumbs: [true],
+            videoListThumbnailSize: [''],
+            videoListShowVideoList: [true],
+            videoListToolbarExpandedState: [true]
         });
 
         this._store$
@@ -79,7 +85,12 @@ export class SettingsComponent implements OnInit {
             photoInfoPanelShowExif: this.form.get('photoInfoPanelShowExif').value,
             photoInfoPanelShowMinimap: this.form.get('photoInfoPanelShowMinimap').value,
             photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value,
-            photoInfoPanelExpandedState: this.form.get('photoInfoPanelExpandedState').value
+            photoInfoPanelExpandedState: this.form.get('photoInfoPanelExpandedState').value,
+
+            videoListShowCategoryBreadcrumbs: this.form.get('videoListShowCategoryBreadcrumbs').value,
+            videoListThumbnailSize: ThumbnailSize.forName(this.form.get('videoListThumbnailSize').value),
+            videoListShowVideoList: this.form.get('videoListShowVideoList').value,
+            videoListToolbarExpandedState: this.form.get('videoListToolbarExpandedState').value
         };
 
         this._store$.dispatch(
@@ -116,5 +127,10 @@ export class SettingsComponent implements OnInit {
         this.form.get('photoInfoPanelShowMinimap').setValue(settings.photoInfoPanelShowMinimap);
         this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
         this.form.get('photoInfoPanelExpandedState').setValue(settings.photoInfoPanelExpandedState);
+
+        this.form.get('videoListShowCategoryBreadcrumbs').setValue(settings.videoListShowCategoryBreadcrumbs);
+        this.form.get('videoListThumbnailSize').setValue(settings.videoListThumbnailSize.name);
+        this.form.get('videoListShowVideoList').setValue(settings.videoListShowVideoList);
+        this.form.get('videoListToolbarExpandedState').setValue(settings.videoListToolbarExpandedState);
     }
 }

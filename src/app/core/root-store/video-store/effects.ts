@@ -1,12 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, catchError, map, concatMap } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as videoActions from './actions';
-import { RootStoreState } from '..';
 
 @Injectable()
 export class VideoStoreEffects {

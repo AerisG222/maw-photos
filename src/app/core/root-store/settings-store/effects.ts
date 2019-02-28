@@ -87,6 +87,30 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
+    togglePhotoInfoPanelMinimap$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.TogglePhotoInfoPanelMinimapRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    togglePhotoInfoPanelExpandedState$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.TogglePhotoInfoPanelExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
     togglePhotoListToolbarExpandedState$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.TogglePhotoListToolbarExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE),
@@ -159,9 +183,9 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
-    togglePhotoInfoPanelMinimap$: Observable<Action> = this._actions$.pipe(
+    toggleVideoListToolbarExpandedState$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
-        ofType<settingsActions.TogglePhotoInfoPanelMinimapRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP),
+        ofType<settingsActions.ToggleVideoListToolbarExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE),
         withLatestFrom(this._store$.pipe(
             select(settingsSelectors.selectSettings)
         )),
@@ -171,9 +195,21 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
-    togglePhotoInfoPanelExpandedState$: Observable<Action> = this._actions$.pipe(
+    updateVideoListThumbnailSize$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
-        ofType<settingsActions.TogglePhotoInfoPanelExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE),
+        ofType<settingsActions.UpdateVideoListThumbnailSizeRequestAction>(settingsActions.ActionTypes.UPDATE_VIDEO_LIST_THUMBNAIL_SIZE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    toggleVideoListCategoryBreadcrumbs$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.ToggleVideoListCategoryBreadcrumbsRequestAction>(settingsActions.ActionTypes.TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS),
         withLatestFrom(this._store$.pipe(
             select(settingsSelectors.selectSettings)
         )),

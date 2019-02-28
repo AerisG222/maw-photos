@@ -27,6 +27,11 @@ export const initialState: State = {
         photoInfoPanelShowExif: false,
         photoInfoPanelShowEffects: false,
         photoInfoPanelShowMinimap: false,
-        photoInfoPanelExpandedState: false
+        photoInfoPanelExpandedState: false,
+
+        videoListShowCategoryBreadcrumbs: true,
+        videoListThumbnailSize: null,
+        videoListShowVideoList: true,
+        videoListToolbarExpandedState: true
     }
 };

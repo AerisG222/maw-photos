@@ -58,7 +58,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         const activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
-//                tap(photo => this.categoryDownloadUrl = this.assetPathService.getPath(`/photos/download-category/${photo.categoryId}`)),
                 tap(photo => this.smDownloadUrl = photo.imageSm.url),
                 tap(photo => this.mdDownloadUrl = photo.imageMd.url),
                 tap(photo => this.lgDownloadUrl = photo.imageLg.url),

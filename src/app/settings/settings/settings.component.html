@@ -70,6 +70,25 @@
                 <mat-checkbox formControlName="photoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
             </mat-card-content>
         </mat-card>
+
+        <mat-card>
+            <mat-card-title>Video List</mat-card-title>
+            <mat-card-content>
+                <h3>Show Category Breadcrumbs</h3>
+                <mat-slide-toggle formControlName="videoListShowCategoryBreadcrumbs" [color]="'primary'"></mat-slide-toggle>
+
+                <h3>Show Category Video List</h3>
+                <mat-slide-toggle formControlName="videoListShowVideoList" [color]="'primary'"></mat-slide-toggle>
+
+                <h3>Show Video List Toolbar</h3>
+                <mat-slide-toggle formControlName="videoListToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
+
+                <h3>Video List Thumbnail Size</h3>
+                <mat-radio-group formControlName="videoListThumbnailSize">
+                    <mat-radio-button *ngFor="let size of videoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+            </mat-card-content>
+        </mat-card>
     </div>
 
     <button mat-button (click)="onSave()">Save</button>

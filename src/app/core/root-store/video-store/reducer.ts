@@ -166,24 +166,6 @@ export function videoReducer(state = initialState, action: Actions): State {
                 error: action.payload.error
             };
         }
-        case ActionTypes.TOGGLE_FULLSCREEN_REQUEST: {
-            return {
-                ...state,
-                isFullscreenView: !state.isFullscreenView
-            };
-        }
-        case ActionTypes.ENTER_FULLSCREEN_REQUEST: {
-            return {
-                ...state,
-                isFullscreenView: true
-            };
-        }
-        case ActionTypes.EXIT_FULLSCREEN_REQUEST: {
-            return {
-                ...state,
-                isFullscreenView: false
-            };
-        }
         default: {
             return state;
         }

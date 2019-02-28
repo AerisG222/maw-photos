@@ -25,7 +25,11 @@ export enum ActionTypes {
     TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
     TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Fullscreen Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
-    TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Photo List Category Breadcrumbs'
+    TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Photo List Category Breadcrumbs',
+
+    TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Video List Toolbar Expanded Sate',
+    UPDATE_VIDEO_LIST_THUMBNAIL_SIZE = '[Settings] Update Video List Thumbnail Size',
+    TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Video List Category Breadcrumbs'
 }
 
 export class LoadRequestAction implements Action {
@@ -73,6 +77,14 @@ export class TogglePhotoInfoPanelEffectsRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EFFECTS;
 }
 
+export class TogglePhotoInfoPanelMinimapRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP;
+}
+
+export class TogglePhotoInfoPanelExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE;
+}
+
 export class TogglePhotoListToolbarExpandedStateRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE;
 }
@@ -99,13 +111,19 @@ export class UpdateCategoryListThumbnailSizeRequestAction implements Action {
     constructor(public payload: { newSize: ThumbnailSize }) { }
 }
 
-export class TogglePhotoInfoPanelMinimapRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP;
+export class ToggleVideoListToolbarExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
-export class TogglePhotoInfoPanelExpandedStateRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE;
+export class UpdateVideoListThumbnailSizeRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_VIDEO_LIST_THUMBNAIL_SIZE;
+    constructor(public payload: { newSize: ThumbnailSize }) { }
 }
+
+export class ToggleVideoListCategoryBreadcrumbsRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS;
+}
+
 
 export type Actions =
     LoadRequestAction |
@@ -114,15 +132,22 @@ export type Actions =
     SaveRequestAction |
     SaveFailureAction |
     SaveSuccessAction |
-    TogglePhotoInfoPanelRatingsRequestAction |
-    TogglePhotoInfoPanelCommentsRequestAction |
-    TogglePhotoInfoPanelExifRequestAction |
-    TogglePhotoInfoPanelEffectsRequestAction |
-    TogglePhotoListToolbarExpandedStateRequestAction |
-    TogglePhotoListFullscreenToolbarExpandedStateRequestAction |
-    UpdatePhotoListThumbnailSizeRequestAction |
-    TogglePhotoListCategoryBreadcrumbsRequestAction |
+
     ToggleCategoryListCategoryTitlesRequestAction |
     UpdateCategoryListThumbnailSizeRequestAction |
+
+    TogglePhotoInfoPanelExpandedStateRequestAction |
+    TogglePhotoInfoPanelCommentsRequestAction |
+    TogglePhotoInfoPanelEffectsRequestAction |
+    TogglePhotoInfoPanelExifRequestAction |
     TogglePhotoInfoPanelMinimapRequestAction |
-    TogglePhotoInfoPanelExpandedStateRequestAction;
+    TogglePhotoInfoPanelRatingsRequestAction |
+
+    TogglePhotoListCategoryBreadcrumbsRequestAction |
+    TogglePhotoListFullscreenToolbarExpandedStateRequestAction |
+    TogglePhotoListToolbarExpandedStateRequestAction |
+    UpdatePhotoListThumbnailSizeRequestAction |
+
+    ToggleVideoListCategoryBreadcrumbsRequestAction |
+    ToggleVideoListToolbarExpandedStateRequestAction |
+    UpdateVideoListThumbnailSizeRequestAction;

@@ -20,4 +20,9 @@ export interface Settings {
     photoInfoPanelShowEffects: boolean;
     photoInfoPanelShowMinimap: boolean;
     photoInfoPanelExpandedState: boolean;
+
+    videoListShowCategoryBreadcrumbs: boolean;
+    videoListThumbnailSize: ThumbnailSize;
+    videoListShowVideoList: boolean;
+    videoListToolbarExpandedState: boolean;
 }
