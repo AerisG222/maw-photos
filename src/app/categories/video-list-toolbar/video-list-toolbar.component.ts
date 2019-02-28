@@ -37,7 +37,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
 
         this.isToolbarExpanded$ = this._store$
             .pipe(
-                select(SettingsStoreSelectors.selectPhotoListToolbarExpandedState)
+                select(SettingsStoreSelectors.selectVideoListToolbarExpandedState)
             );
     }
 
@@ -70,7 +70,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event), [], 'Show / Hide Toolbar')
+            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleVideoListToolbar(event), [], 'Show / Hide Toolbar')
         ));
     }
 
@@ -80,7 +80,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         return false;
     }
 
-    private onHotkeyTogglePhotoListToolbar(evt: KeyboardEvent): boolean {
+    private onHotkeyToggleVideoListToolbar(evt: KeyboardEvent): boolean {
         this.onToggleVideoListToolbar();
 
         return false;
