@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Settings } from 'src/app/core/models/settings.model';
-import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { RootStoreState, SettingsStoreSelectors, RootStoreSelectors } from 'src/app/core/root-store';
+import { Category } from 'src/app/core/models/category.model';
 
 @Component({
     selector: 'app-year',
@@ -14,7 +13,7 @@ import { RootStoreState, SettingsStoreSelectors, PhotoCategoryStoreSelectors } f
 })
 export class YearComponent implements OnInit {
     @Input() year: number;
-    categories$: Observable<PhotoCategory[]>;
+    categories$: Observable<Category[]>;
     settings$: Observable<Settings>;
 
     constructor(
@@ -31,12 +30,7 @@ export class YearComponent implements OnInit {
 
         this.categories$ = this._store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCategoriesForYear, { year: this.year }),
-                map(categories => categories.sort(this.categoriesDescending))
+                select(RootStoreSelectors.selectCombinedCategoriesForYear, { year: this.year })
             );
-    }
-
-    private categoriesDescending(first: PhotoCategory, second: PhotoCategory) {
-        return second.id - first.id;
     }
 }

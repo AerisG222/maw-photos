@@ -59,6 +59,7 @@ export const selectCombinedCategoriesForYear = createSelector(
 function combine(photoCategories: PhotoCategory[], videoCategories: VideoCategory[]): Category[] {
     const pcats: Category[] = photoCategories.map(c => ({
         type: CategoryType.photo,
+        categoryRoute: 'photos',
         id: c.id,
         name: c.name,
         createDate: c.createDate,
@@ -69,6 +70,7 @@ function combine(photoCategories: PhotoCategory[], videoCategories: VideoCategor
 
     const vcats: Category[] = videoCategories.map(c => ({
         type: CategoryType.video,
+        categoryRoute: 'videos',
         id: c.id,
         name: c.name,
         createDate: c.createDate,

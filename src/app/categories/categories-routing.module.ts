@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CategoryComponent } from './category/category.component';
+import { PhotoCategoryComponent } from './photo-category/photo-category.component';
 import { YearListComponent } from './year-list/year-list.component';
+import { VideoCategoryComponent } from './video-category/video-category.component';
 
 const routes: Routes = [
     { path: '',    component: YearListComponent },
-    { path: 'category/:id', component: CategoryComponent },
+    { path: 'photos/:id', component: PhotoCategoryComponent },
+    { path: 'videos/:id', component: VideoCategoryComponent },
     { path: '**',  redirectTo: '' }
 ];
 

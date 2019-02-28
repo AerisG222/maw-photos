@@ -5,6 +5,7 @@ import { VideoCategory } from './video-category.model';
 
 export interface Category {
     type:          CategoryType;
+    categoryRoute: string;
     id:            number;
     name:          string;
     createDate:    string;

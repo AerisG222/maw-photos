@@ -1,4 +1,4 @@
-<a [routerLink]="['category', category.id]">
+<a [routerLink]="[category.categoryRoute, category.id]">
     <mat-card>
         <img [src]="category.teaserImageSq.url" [alt]="category.name" [class]="thumbnailSize.klass" [class.show_title]="showTitle" />
         <mat-card-content *ngIf="showTitle">

@@ -20,12 +20,12 @@ import {
 } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-category',
-    templateUrl: './category.component.html',
-    styleUrls: ['./category.component.scss'],
+    selector: 'app-photo-category',
+    templateUrl: './photo-category.component.html',
+    styleUrls: ['./photo-category.component.scss'],
     providers: [ RandomControlService ]
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class PhotoCategoryComponent implements OnInit, OnDestroy {
     destroy$ = new Subject<boolean>();
     settings$: Observable<Settings>;
     category$: Observable<PhotoCategory>;

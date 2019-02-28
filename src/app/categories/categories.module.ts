@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CategoriesRoutingModule } from './categories-routing.module';
-import { CategoryComponent } from './category/category.component';
+import { PhotoCategoryComponent } from './photo-category/photo-category.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { YearComponent } from './year/year.component';
 import { YearListComponent } from './year-list/year-list.component';
+import { VideoCategoryComponent } from './video-category/video-category.component';
 
 @NgModule({
     declarations: [
         CategoryCardComponent,
-        CategoryComponent,
+        PhotoCategoryComponent,
         CategoryListComponent,
         YearComponent,
-        YearListComponent
+        YearListComponent,
+        VideoCategoryComponent
     ],
     imports: [
         CommonModule,
