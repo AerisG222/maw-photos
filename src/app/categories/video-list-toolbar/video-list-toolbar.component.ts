@@ -55,9 +55,9 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleSize(): void {
-        const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
+        const size = ThumbnailSize.nextSize(this.settings.videoListThumbnailSize.name);
 
-        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListThumbnailSizeRequestAction({ newSize: size }));
+        this._store$.dispatch(new SettingsStoreActions.UpdateVideoListThumbnailSizeRequestAction({ newSize: size }));
     }
 
     private configureHotkeys(): void {
