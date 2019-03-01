@@ -138,14 +138,14 @@ export class MockVideoApiService implements VideoApiService {
                     size: 1000
                 },
                 videoFull: {
-                    height: 400,
-                    width: 400,
+                    height: 600,
+                    width: 600,
                     url: '/assets/movies/2018/test1/md/DSC_1122.jpg',
                     size: 1000
                 },
                 videoRaw: {
-                    height: 400,
-                    width: 400,
+                    height: 600,
+                    width: 600,
                     url: '/assets/movies/2018/test1/lg/DSC_1122.jpg',
                     size: 1000
                 },
@@ -180,14 +180,14 @@ export class MockVideoApiService implements VideoApiService {
                     size: 1000
                 },
                 videoFull: {
-                    height: 400,
-                    width: 400,
+                    height: 600,
+                    width: 600,
                     url: '/assets/movies/2018/test1/md/DSC_1123.jpg',
                     size: 1000
                 },
                 videoRaw: {
-                    height: 400,
-                    width: 400,
+                    height: 600,
+                    width: 600,
                     url: '/assets/movies/2018/test1/lg/DSC_1123.jpg',
                     size: 1000
                 },

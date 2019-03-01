@@ -4,6 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Settings } from 'src/app/core/models/settings.model';
 import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { VideoSize } from '../models/video-size.model';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +33,7 @@ export class SettingsService {
     private static readonly keyVideoListThumbnailSize = 'videoListThumbnailSize';
     private static readonly keyVideoListShowVideoList = 'videoListShowVideoList';
     private static readonly keyVideoListToolbarExpandedState = 'videoListToolbarExpandedState';
+    private static readonly keyVideoListVideoSize = 'videoListVideoSize';
 
     constructor(
         private _localStorage: LocalStorageService
@@ -83,7 +85,8 @@ export class SettingsService {
             videoListShowCategoryBreadcrumbs: videoListShowCategoryBreadcrumbs !== null ? videoListShowCategoryBreadcrumbs : true,
             videoListThumbnailSize: this.getVideoListThumbnailSize(),
             videoListShowVideoList: videoListShowVideoList !== null ? videoListShowVideoList : true,
-            videoListToolbarExpandedState: videoListToolbarExpandedState != null ? videoListToolbarExpandedState : true
+            videoListToolbarExpandedState: videoListToolbarExpandedState != null ? videoListToolbarExpandedState : true,
+            videoListVideoSize: this.getVideoListVideoSize()
         };
     }
 
@@ -117,6 +120,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
         this._localStorage.store(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
         this._localStorage.store(SettingsService.keyVideoListToolbarExpandedState, settings.videoListToolbarExpandedState);
+        this._localStorage.store(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
     }
 
     private getTheme(): Theme {
@@ -145,6 +149,16 @@ export class SettingsService {
         const sizeName = this._localStorage.retrieve(SettingsService.keyVideoListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
+    }
+
+    private getVideoListVideoSize(): VideoSize {
+        const sizeName = this._localStorage.retrieve(SettingsService.keyVideoListVideoSize);
+
+        try {
+            return sizeName !== null ? VideoSize.forName(sizeName) : VideoSize.large;
+        } catch {
+            return VideoSize.large;
+        }
     }
 
     private getThumbnailSize(sizeName: string): ThumbnailSize {

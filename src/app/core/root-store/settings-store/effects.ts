@@ -217,4 +217,16 @@ export class SettingsStoreEffects {
             return new settingsActions.SaveRequestAction({ settings: x[1] });
         })
     );
+
+    @Effect()
+    updateVideoListVideoSize$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.UpdateVideoListVideoSizeRequestAction>(settingsActions.ActionTypes.UPDATE_VIDEO_LIST_VIDEO_SIZE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
 }

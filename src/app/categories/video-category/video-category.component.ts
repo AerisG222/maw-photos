@@ -17,6 +17,7 @@ import {
     VideoStoreActions,
     VideoStoreSelectors
 } from 'src/app/core/root-store';
+import { VideoSize } from 'src/app/core/models/video-size.model';
 
 @Component({
     selector: 'app-video-category',
@@ -24,6 +25,7 @@ import {
     styleUrls: ['./video-category.component.scss']
 })
 export class VideoCategoryComponent implements OnInit, OnDestroy {
+    videoSize = VideoSize;
     showCategoryAsLink = false;
     destroy$ = new Subject<boolean>();
     settings$: Observable<Settings>;

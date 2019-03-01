@@ -6,6 +6,7 @@ import {
 import { Settings } from 'src/app/core/models/settings.model';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
 import { State } from './state';
+import { VideoSize } from '../../models/video-size.model';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
@@ -22,6 +23,7 @@ const getPhotoListToolbarExpandedState = (state: State): boolean => state.settin
 const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
 
 const getVideoListToolbarExpandedState = (state: State): boolean => state.settings.videoListToolbarExpandedState;
+const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoListVideoSize;
 
 export const selectSettingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
@@ -41,3 +43,4 @@ export const selectPhotoListToolbarExpandedState = createSelector(selectSettings
 export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
 
 export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);
+export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);

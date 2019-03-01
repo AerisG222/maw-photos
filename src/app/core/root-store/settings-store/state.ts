@@ -32,6 +32,7 @@ export const initialState: State = {
         videoListShowCategoryBreadcrumbs: true,
         videoListThumbnailSize: null,
         videoListShowVideoList: true,
-        videoListToolbarExpandedState: true
+        videoListToolbarExpandedState: true,
+        videoListVideoSize: null
     }
 };

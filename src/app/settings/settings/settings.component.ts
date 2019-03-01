@@ -7,6 +7,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { VideoSize } from 'src/app/core/models/video-size.model';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class SettingsComponent implements OnInit {
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
+    videoSizes = VideoSize.allSizes;
     randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
     constructor(
@@ -53,7 +55,8 @@ export class SettingsComponent implements OnInit {
             videoListShowCategoryBreadcrumbs: [true],
             videoListThumbnailSize: [''],
             videoListShowVideoList: [true],
-            videoListToolbarExpandedState: [true]
+            videoListToolbarExpandedState: [true],
+            videoListVideoSize: [VideoSize.large.name]
         });
 
         this._store$
@@ -90,7 +93,8 @@ export class SettingsComponent implements OnInit {
             videoListShowCategoryBreadcrumbs: this.form.get('videoListShowCategoryBreadcrumbs').value,
             videoListThumbnailSize: ThumbnailSize.forName(this.form.get('videoListThumbnailSize').value),
             videoListShowVideoList: this.form.get('videoListShowVideoList').value,
-            videoListToolbarExpandedState: this.form.get('videoListToolbarExpandedState').value
+            videoListToolbarExpandedState: this.form.get('videoListToolbarExpandedState').value,
+            videoListVideoSize: VideoSize.forName(this.form.get('videoListVideoSize').value)
         };
 
         this._store$.dispatch(
@@ -132,5 +136,6 @@ export class SettingsComponent implements OnInit {
         this.form.get('videoListThumbnailSize').setValue(settings.videoListThumbnailSize.name);
         this.form.get('videoListShowVideoList').setValue(settings.videoListShowVideoList);
         this.form.get('videoListToolbarExpandedState').setValue(settings.videoListToolbarExpandedState);
+        this.form.get('videoListVideoSize').setValue(settings.videoListVideoSize.name);
     }
 }

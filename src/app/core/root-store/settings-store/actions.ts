@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { VideoSize } from '../../models/video-size.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',
@@ -29,7 +30,8 @@ export enum ActionTypes {
 
     TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Video List Toolbar Expanded Sate',
     UPDATE_VIDEO_LIST_THUMBNAIL_SIZE = '[Settings] Update Video List Thumbnail Size',
-    TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Video List Category Breadcrumbs'
+    TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Video List Category Breadcrumbs',
+    UPDATE_VIDEO_LIST_VIDEO_SIZE = '[Settings] Update Video List Video Size'
 }
 
 export class LoadRequestAction implements Action {
@@ -124,6 +126,10 @@ export class ToggleVideoListCategoryBreadcrumbsRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS;
 }
 
+export class UpdateVideoListVideoSizeRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_VIDEO_LIST_VIDEO_SIZE;
+    constructor(public payload: { newSize: VideoSize }) { }
+}
 
 export type Actions =
     LoadRequestAction |
@@ -150,4 +156,5 @@ export type Actions =
 
     ToggleVideoListCategoryBreadcrumbsRequestAction |
     ToggleVideoListToolbarExpandedStateRequestAction |
-    UpdateVideoListThumbnailSizeRequestAction;
+    UpdateVideoListThumbnailSizeRequestAction |
+    UpdateVideoListVideoSizeRequestAction;

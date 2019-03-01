@@ -7,6 +7,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { Settings } from 'src/app/core/models/settings.model';
+import { VideoSize } from 'src/app/core/models/video-size.model';
 
 @Component({
     selector: 'app-video-list-toolbar',
@@ -54,10 +55,16 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.ToggleVideoListToolbarExpandedStateRequestAction());
     }
 
-    onToggleSize(): void {
+    onToggleThumbnailSize(): void {
         const size = ThumbnailSize.nextSize(this.settings.videoListThumbnailSize.name);
 
         this._store$.dispatch(new SettingsStoreActions.UpdateVideoListThumbnailSizeRequestAction({ newSize: size }));
+    }
+
+    onToggleVideoSize(): void {
+        const size = VideoSize.nextSize(this.settings.videoListVideoSize.name);
+
+        this._store$.dispatch(new SettingsStoreActions.UpdateVideoListVideoSizeRequestAction({ newSize: size }));
     }
 
     private configureHotkeys(): void {
@@ -66,7 +73,11 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Thumbnail Size')
+            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleThumbnailSize(event), [], 'Toggle Thumbnail Size')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('v', (event: KeyboardEvent) => this.onHotkeyToggleVideoSize(event), [], 'Toggle Video Size')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
@@ -86,8 +97,14 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         return false;
     }
 
-    private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
-        this.onToggleSize();
+    private onHotkeyToggleThumbnailSize(evt: KeyboardEvent): boolean {
+        this.onToggleThumbnailSize();
+
+        return false;
+    }
+
+    private onHotkeyToggleVideoSize(evt: KeyboardEvent): boolean {
+        this.onToggleVideoSize();
 
         return false;
     }

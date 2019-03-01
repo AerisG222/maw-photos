@@ -1,5 +1,6 @@
 import { Theme } from './theme.model';
 import { ThumbnailSize } from './thumbnail-size.model';
+import { VideoSize } from './video-size.model';
 
 export interface Settings {
     appTheme: Theme;
@@ -25,4 +26,5 @@ export interface Settings {
     videoListThumbnailSize: ThumbnailSize;
     videoListShowVideoList: boolean;
     videoListToolbarExpandedState: boolean;
+    videoListVideoSize: VideoSize;
 }

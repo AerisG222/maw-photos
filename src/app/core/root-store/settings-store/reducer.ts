@@ -162,7 +162,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     videoListShowCategoryBreadcrumbs: !state.settings.videoListShowCategoryBreadcrumbs
                 }
             };
-
+        case ActionTypes.UPDATE_VIDEO_LIST_VIDEO_SIZE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoListVideoSize: action.payload.newSize
+                }
+            };
         default: {
             return state;
         }

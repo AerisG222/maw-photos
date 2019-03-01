@@ -83,6 +83,11 @@
                 <h3>Show Video List Toolbar</h3>
                 <mat-slide-toggle formControlName="videoListToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
 
+                <h3>Video Size</h3>
+                <mat-radio-group formControlName="videoListVideoSize">
+                    <mat-radio-button *ngFor="let size of videoSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+
                 <h3>Video List Thumbnail Size</h3>
                 <mat-radio-group formControlName="videoListThumbnailSize">
                     <mat-radio-button *ngFor="let size of videoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
