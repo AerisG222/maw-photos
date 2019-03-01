@@ -21,7 +21,7 @@
     </button>
 </span>
 
-<span class="video">
+<span class="video" *ngIf="isToolbarExpanded$ | async">
     <button
         mat-button
         matTooltip="Toggle video size (V)"
