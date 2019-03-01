@@ -23,11 +23,13 @@ export enum ActionTypes {
     TOGGLE_PHOTO_INFO_PANEL_MINIMAP = '[Settings] Toggle Photo Info Panel Minimap',
     TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Photo Info Panel Expanded State',
 
+    TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST = '[Settings] Toggle Photo List Show Photo List',
     TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
     TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Fullscreen Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
     TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Photo List Category Breadcrumbs',
 
+    TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST = '[Settings] Toggle Video List Show Video List',
     TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Video List Toolbar Expanded Sate',
     UPDATE_VIDEO_LIST_THUMBNAIL_SIZE = '[Settings] Update Video List Thumbnail Size',
     TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Video List Category Breadcrumbs',
@@ -95,6 +97,10 @@ export class TogglePhotoListFullscreenToolbarExpandedStateRequestAction implemen
     readonly type = ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE;
 }
 
+export class TogglePhotoListShowPhotoListRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST;
+}
+
 export class UpdatePhotoListThumbnailSizeRequestAction implements Action {
     readonly type = ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE;
     constructor(public payload: { newSize: ThumbnailSize }) { }
@@ -111,6 +117,10 @@ export class ToggleCategoryListCategoryTitlesRequestAction implements Action {
 export class UpdateCategoryListThumbnailSizeRequestAction implements Action {
     readonly type = ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE;
     constructor(public payload: { newSize: ThumbnailSize }) { }
+}
+
+export class ToggleVideoListShowVideoListRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST;
 }
 
 export class ToggleVideoListToolbarExpandedStateRequestAction implements Action {
@@ -151,10 +161,12 @@ export type Actions =
 
     TogglePhotoListCategoryBreadcrumbsRequestAction |
     TogglePhotoListFullscreenToolbarExpandedStateRequestAction |
+    TogglePhotoListShowPhotoListRequestAction |
     TogglePhotoListToolbarExpandedStateRequestAction |
     UpdatePhotoListThumbnailSizeRequestAction |
 
     ToggleVideoListCategoryBreadcrumbsRequestAction |
+    ToggleVideoListShowVideoListRequestAction |
     ToggleVideoListToolbarExpandedStateRequestAction |
     UpdateVideoListThumbnailSizeRequestAction |
     UpdateVideoListVideoSizeRequestAction;

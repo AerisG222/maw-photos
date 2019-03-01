@@ -8,6 +8,13 @@
 
     <button
         mat-button
+        matTooltip="Show/Hide Photo List (L)"
+        (click)="onTogglePhotoList()">
+        <mat-icon [inline]="true">visibility</mat-icon>
+    </button>
+
+    <button
+        mat-button
         matTooltip="Toggle Photo List Thumbnail Size (S)"
         (click)="onToggleSize()">
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>

@@ -105,6 +105,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 }
             };
 
+        case ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoListShowPhotoList: !state.settings.photoListShowPhotoList
+                }
+            };
         case ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE:
             return {
                 ...state,
@@ -138,6 +146,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 }
             };
 
+        case ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoListShowVideoList: !state.settings.videoListShowVideoList
+                }
+            };
         case ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE:
             return {
                 ...state,

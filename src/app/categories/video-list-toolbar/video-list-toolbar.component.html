@@ -8,6 +8,13 @@
 
     <button
         mat-button
+        matTooltip="Show/Hide Video List (L)"
+        (click)="onToggleShowVideoList()">
+        <mat-icon [inline]="true">visibility</mat-icon>
+    </button>
+
+    <button
+        mat-button
         matTooltip="Toggle Video List Thumbnail Size (S)"
         (click)="onToggleThumbnailSize()">
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>

@@ -135,6 +135,18 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
+    togglePhotoListShowPhotoList$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.TogglePhotoListShowPhotoListRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
     updatePhotoListThumbnailSize$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.UpdatePhotoListThumbnailSizeRequestAction>(settingsActions.ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE),
@@ -174,6 +186,18 @@ export class SettingsStoreEffects {
     updateCategoryListThumbnailSize$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.UpdateCategoryListThumbnailSizeRequestAction>(settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    toggleVideoListShowVideoList$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.ToggleVideoListShowVideoListRequestAction>(settingsActions.ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST),
         withLatestFrom(this._store$.pipe(
             select(settingsSelectors.selectSettings)
         )),

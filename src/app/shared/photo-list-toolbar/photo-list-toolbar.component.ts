@@ -83,6 +83,10 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
     }
 
+    onTogglePhotoList(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListShowPhotoListRequestAction());
+    }
+
     onToggleSize(): void {
         const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
 
@@ -128,6 +132,10 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('l', (event: KeyboardEvent) => this.onHotkeyTogglePhotoList(event), [], 'Toggle Photo List')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Thumbnail Size')
         ));
 
@@ -150,6 +158,12 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
         this.onToggleCategoryBreadcrumbs();
+
+        return false;
+    }
+
+    private onHotkeyTogglePhotoList(evt: KeyboardEvent): boolean {
+        this.onTogglePhotoList();
 
         return false;
     }

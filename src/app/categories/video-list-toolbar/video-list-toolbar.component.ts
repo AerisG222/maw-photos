@@ -61,6 +61,10 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.UpdateVideoListThumbnailSizeRequestAction({ newSize: size }));
     }
 
+    onToggleShowVideoList(): void {
+        this._store$.dispatch(new SettingsStoreActions.ToggleVideoListShowVideoListRequestAction());
+    }
+
     onToggleVideoSize(): void {
         const size = VideoSize.nextSize(this.settings.videoListVideoSize.name);
 
@@ -70,6 +74,10 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private configureHotkeys(): void {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Title / Breadcrumbs')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('l', (event: KeyboardEvent) => this.onHotkeyToggleShowVideoList(event), [], 'Show/Hide Video List')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
@@ -93,6 +101,12 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
 
     private onHotkeyToggleVideoListToolbar(evt: KeyboardEvent): boolean {
         this.onToggleVideoListToolbar();
+
+        return false;
+    }
+
+    private onHotkeyToggleShowVideoList(evt: KeyboardEvent): boolean {
+        this.onToggleShowVideoList();
 
         return false;
     }

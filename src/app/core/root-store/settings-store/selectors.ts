@@ -19,9 +19,11 @@ const getPhotoInfoPanelShowEffects = (state: State): boolean => state.settings.p
 const getPhotoInfoPanelShowMinimap = (state: State): boolean => state.settings.photoInfoPanelShowMinimap;
 const getPhotoInfoPanelExpandedState = (state: State): boolean => state.settings.photoInfoPanelExpandedState;
 
+const getPhotoListShowPhotoList = (state: State): boolean => state.settings.photoListShowPhotoList;
 const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
 const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
 
+const getVideoListShowVideoList = (state: State): boolean => state.settings.videoListShowVideoList;
 const getVideoListToolbarExpandedState = (state: State): boolean => state.settings.videoListToolbarExpandedState;
 const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoListVideoSize;
 
@@ -38,9 +40,11 @@ export const selectPhotoInfoPanelShowEffects = createSelector(selectSettingsStat
 export const selectPhotoInfoPanelShowMinimap = createSelector(selectSettingsState, getPhotoInfoPanelShowMinimap);
 export const selectPhotoInfoPanelExpandedState = createSelector(selectSettingsState, getPhotoInfoPanelExpandedState);
 
+export const selectPhotoListShowPhotoList = createSelector(selectSettingsState, getPhotoListShowPhotoList);
 export const selectPhotoListToolbarExpandedState = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
 // tslint:disable-next-line: max-line-length
 export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
 
+export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
 export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);
 export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);
