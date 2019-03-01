@@ -35,7 +35,7 @@ import { ExifTableComponent } from './exif-table/exif-table.component';
 import { MinimapComponent } from './minimap/minimap.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
 import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
-import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
+import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoListToolbarComponent } from './photo-list-toolbar/photo-list-toolbar.component';
 import { PhotoListFullscreenToolbarComponent } from './photo-list-fullscreen-toolbar/photo-list-fullscreen-toolbar.component';
@@ -49,7 +49,7 @@ import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
     declarations: [
         CategoryHeaderComponent,
         CategoryListToolbarComponent,
-        PhotoInfoPanelComponent,
+        InfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent,
         RatingComponent,
@@ -122,7 +122,7 @@ import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
         // components
         CategoryHeaderComponent,
         CategoryListToolbarComponent,
-        PhotoInfoPanelComponent,
+        InfoPanelComponent,
         PhotoListComponent,
         PhotoListToolbarComponent,
         PhotoViewComponent

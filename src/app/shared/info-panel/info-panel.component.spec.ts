@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotoInfoPanelComponent } from './photo-info-panel.component';
+import { InfoPanelComponent } from './info-panel.component';
 
-describe('PhotoInfoPanelComponent', () => {
-  let component: PhotoInfoPanelComponent;
-  let fixture: ComponentFixture<PhotoInfoPanelComponent>;
+describe('InfoPanelComponent', () => {
+  let component: InfoPanelComponent;
+  let fixture: ComponentFixture<InfoPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotoInfoPanelComponent ]
+      declarations: [ InfoPanelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhotoInfoPanelComponent);
+    fixture = TestBed.createComponent(InfoPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

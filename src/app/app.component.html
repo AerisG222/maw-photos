@@ -54,6 +54,6 @@
     </mat-sidenav-content>
 
     <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="!(hidePanels$ | async) && (isRightSidebarDisplayed$ | async)" fxFlex>
-        <app-photo-info-panel *ngIf="!(hidePanels$ | async)"></app-photo-info-panel>
+        <app-info-panel *ngIf="!(hidePanels$ | async)"></app-info-panel>
     </mat-sidenav>
 </mat-sidenav-container>

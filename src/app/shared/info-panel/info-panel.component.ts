@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable, combineLatest } from 'rxjs';
-import { takeUntil, tap, filter, map, first, take } from 'rxjs/operators';
+import { takeUntil, tap, filter, map, take } from 'rxjs/operators';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -19,11 +19,11 @@ import {
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 @Component({
-    selector: 'app-photo-info-panel',
-    templateUrl: './photo-info-panel.component.html',
-    styleUrls: ['./photo-info-panel.component.scss']
+    selector: 'app-info-panel',
+    templateUrl: './info-panel.component.html',
+    styleUrls: ['./info-panel.component.scss']
 })
-export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
+export class InfoPanelComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
 
     endSidenavExpanded$: Observable<boolean>;
