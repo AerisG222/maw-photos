@@ -90,6 +90,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroy$.next(true);
+        this.setCurrentVideo(null);
     }
 
     onSelectVideo(video: Video): void {

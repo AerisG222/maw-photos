@@ -105,6 +105,7 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
         this.randomControlSvc.dispose();
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroy$.next(true);
+        this.setCurrentPhoto(null);
     }
 
     onSelectPhoto(photo: Photo): void {

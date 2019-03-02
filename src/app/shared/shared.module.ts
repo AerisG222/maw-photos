@@ -35,7 +35,7 @@ import { ExifTableComponent } from './exif-table/exif-table.component';
 import { MinimapComponent } from './minimap/minimap.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
 import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
-import { InfoPanelComponent } from './info-panel/info-panel.component';
+import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoListToolbarComponent } from './photo-list-toolbar/photo-list-toolbar.component';
 import { PhotoListFullscreenToolbarComponent } from './photo-list-fullscreen-toolbar/photo-list-fullscreen-toolbar.component';
@@ -44,12 +44,14 @@ import { RatingComponent } from './rating/rating.component';
 import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.component';
 import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
+import { InfoPanelComponent } from './info-panel/info-panel.component';
+import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
 
 @NgModule({
     declarations: [
         CategoryHeaderComponent,
         CategoryListToolbarComponent,
-        InfoPanelComponent,
+        PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoViewComponent,
         RatingComponent,
@@ -64,7 +66,9 @@ import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
         MovePreviousButtonComponent,
         SlideshowButtonComponent,
         HotkeyDialogComponent,
-        HotkeyTableComponent
+        HotkeyTableComponent,
+        InfoPanelComponent,
+        VideoInfoPanelComponent
     ],
     imports: [
         AgmCoreModule.forRoot({
@@ -123,9 +127,11 @@ import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
         CategoryHeaderComponent,
         CategoryListToolbarComponent,
         InfoPanelComponent,
+        PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoListToolbarComponent,
-        PhotoViewComponent
+        PhotoViewComponent,
+        VideoInfoPanelComponent
     ],
     entryComponents: [
         HotkeyDialogComponent
