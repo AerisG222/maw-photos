@@ -100,6 +100,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.randomControlSvc.dispose();
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
+        this.setCurrentPhoto(null);
     }
 
     onSelectPhoto(photo: Photo): void {
