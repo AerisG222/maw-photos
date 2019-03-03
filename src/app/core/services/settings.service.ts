@@ -35,6 +35,11 @@ export class SettingsService {
     private static readonly keyVideoListToolbarExpandedState = 'videoListToolbarExpandedState';
     private static readonly keyVideoListVideoSize = 'videoListVideoSize';
 
+    private static readonly keyVideoInfoPanelShowRatings = 'videoInfoPanelShowRatings';
+    private static readonly keyVideoInfoPanelShowComments = 'videoInfoPanelShowComments';
+    private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
+    private static readonly keyVideoInfoPanelExpandedState = 'videoInfoPanelExpandedState';
+
     constructor(
         private _localStorage: LocalStorageService
     ) {
@@ -61,6 +66,11 @@ export class SettingsService {
         const videoListShowVideoList = this._localStorage.retrieve(SettingsService.keyVideoListShowVideoList);
         const videoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyVideoListToolbarExpandedState);
 
+        const videoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowRatings);
+        const videoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
+        const videoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowMinimap);
+        const videoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelExpandedState);
+
         return {
             appTheme: this.getTheme(),
 
@@ -86,7 +96,12 @@ export class SettingsService {
             videoListThumbnailSize: this.getVideoListThumbnailSize(),
             videoListShowVideoList: videoListShowVideoList !== null ? videoListShowVideoList : true,
             videoListToolbarExpandedState: videoListToolbarExpandedState != null ? videoListToolbarExpandedState : true,
-            videoListVideoSize: this.getVideoListVideoSize()
+            videoListVideoSize: this.getVideoListVideoSize(),
+
+            videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
+            videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
+            videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
+            videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false
         };
     }
 
@@ -121,6 +136,11 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
         this._localStorage.store(SettingsService.keyVideoListToolbarExpandedState, settings.videoListToolbarExpandedState);
         this._localStorage.store(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
+
+        this._localStorage.store(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
+        this._localStorage.store(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
+        this._localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
+        this._localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
     }
 
     private getTheme(): Theme {

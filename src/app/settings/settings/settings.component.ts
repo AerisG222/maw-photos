@@ -56,7 +56,12 @@ export class SettingsComponent implements OnInit {
             videoListThumbnailSize: [''],
             videoListShowVideoList: [true],
             videoListToolbarExpandedState: [true],
-            videoListVideoSize: [VideoSize.large.name]
+            videoListVideoSize: [VideoSize.large.name],
+
+            videoInfoPanelShowComments: [true],
+            videoInfoPanelShowMinimap: [false],
+            videoInfoPanelShowRatings: [true],
+            videoInfoPanelExpandedState: [false]
         });
 
         this._store$
@@ -94,7 +99,12 @@ export class SettingsComponent implements OnInit {
             videoListThumbnailSize: ThumbnailSize.forName(this.form.get('videoListThumbnailSize').value),
             videoListShowVideoList: this.form.get('videoListShowVideoList').value,
             videoListToolbarExpandedState: this.form.get('videoListToolbarExpandedState').value,
-            videoListVideoSize: VideoSize.forName(this.form.get('videoListVideoSize').value)
+            videoListVideoSize: VideoSize.forName(this.form.get('videoListVideoSize').value),
+
+            videoInfoPanelShowComments: this.form.get('videoInfoPanelShowComments').value,
+            videoInfoPanelShowMinimap: this.form.get('videoInfoPanelShowMinimap').value,
+            videoInfoPanelShowRatings: this.form.get('videoInfoPanelShowRatings').value,
+            videoInfoPanelExpandedState: this.form.get('videoInfoPanelExpandedState').value
         };
 
         this._store$.dispatch(
@@ -137,5 +147,10 @@ export class SettingsComponent implements OnInit {
         this.form.get('videoListShowVideoList').setValue(settings.videoListShowVideoList);
         this.form.get('videoListToolbarExpandedState').setValue(settings.videoListToolbarExpandedState);
         this.form.get('videoListVideoSize').setValue(settings.videoListVideoSize.name);
+
+        this.form.get('videoInfoPanelShowComments').setValue(settings.videoInfoPanelShowComments);
+        this.form.get('videoInfoPanelShowMinimap').setValue(settings.videoInfoPanelShowMinimap);
+        this.form.get('videoInfoPanelShowRatings').setValue(settings.videoInfoPanelShowRatings);
+        this.form.get('videoInfoPanelExpandedState').setValue(settings.videoInfoPanelExpandedState);
     }
 }

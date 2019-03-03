@@ -27,6 +27,11 @@ const getVideoListShowVideoList = (state: State): boolean => state.settings.vide
 const getVideoListToolbarExpandedState = (state: State): boolean => state.settings.videoListToolbarExpandedState;
 const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoListVideoSize;
 
+const getVideoInfoPanelShowRatings = (state: State): boolean => state.settings.videoInfoPanelShowRatings;
+const getVideoInfoPanelShowComments = (state: State): boolean => state.settings.videoInfoPanelShowComments;
+const getVideoInfoPanelShowMinimap = (state: State): boolean => state.settings.videoInfoPanelShowMinimap;
+const getVideoInfoPanelExpandedState = (state: State): boolean => state.settings.videoInfoPanelExpandedState;
+
 export const selectSettingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
 export const selectSettingsError = createSelector(selectSettingsState, getError);
@@ -48,3 +53,8 @@ export const selectPhotoListFullscreenToolbarExpandedState = createSelector(sele
 export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
 export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);
 export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);
+
+export const selectVideoInfoPanelShowRatings = createSelector(selectSettingsState, getVideoInfoPanelShowRatings);
+export const selectVideoInfoPanelShowComments = createSelector(selectSettingsState, getVideoInfoPanelShowComments);
+export const selectVideoInfoPanelShowMinimap = createSelector(selectSettingsState, getVideoInfoPanelShowMinimap);
+export const selectVideoInfoPanelExpandedState = createSelector(selectSettingsState, getVideoInfoPanelExpandedState);

@@ -33,7 +33,12 @@ export enum ActionTypes {
     TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Video List Toolbar Expanded Sate',
     UPDATE_VIDEO_LIST_THUMBNAIL_SIZE = '[Settings] Update Video List Thumbnail Size',
     TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Video List Category Breadcrumbs',
-    UPDATE_VIDEO_LIST_VIDEO_SIZE = '[Settings] Update Video List Video Size'
+    UPDATE_VIDEO_LIST_VIDEO_SIZE = '[Settings] Update Video List Video Size',
+
+    TOGGLE_VIDEO_INFO_PANEL_RATINGS = '[Settings] Toggle Video Info Panel Ratings',
+    TOGGLE_VIDEO_INFO_PANEL_COMMENTS = '[Settings] Toggle Video Info Panel Comments',
+    TOGGLE_VIDEO_INFO_PANEL_MINIMAP = '[Settings] Toggle Video Info Panel Minimap',
+    TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Video Info Panel Expanded State',
 }
 
 export class LoadRequestAction implements Action {
@@ -141,6 +146,22 @@ export class UpdateVideoListVideoSizeRequestAction implements Action {
     constructor(public payload: { newSize: VideoSize }) { }
 }
 
+export class ToggleVideoInfoPanelRatingsRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_INFO_PANEL_RATINGS;
+}
+
+export class ToggleVideoInfoPanelCommentsRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_INFO_PANEL_COMMENTS;
+}
+
+export class ToggleVideoInfoPanelMinimapRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_INFO_PANEL_MINIMAP;
+}
+
+export class ToggleVideoInfoPanelExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE;
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
@@ -169,4 +190,9 @@ export type Actions =
     ToggleVideoListShowVideoListRequestAction |
     ToggleVideoListToolbarExpandedStateRequestAction |
     UpdateVideoListThumbnailSizeRequestAction |
-    UpdateVideoListVideoSizeRequestAction;
+    UpdateVideoListVideoSizeRequestAction |
+
+    ToggleVideoInfoPanelRatingsRequestAction |
+    ToggleVideoInfoPanelCommentsRequestAction |
+    ToggleVideoInfoPanelMinimapRequestAction |
+    ToggleVideoInfoPanelExpandedStateRequestAction;

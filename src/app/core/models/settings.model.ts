@@ -27,4 +27,9 @@ export interface Settings {
     videoListShowVideoList: boolean;
     videoListToolbarExpandedState: boolean;
     videoListVideoSize: VideoSize;
+
+    videoInfoPanelShowRatings: boolean;
+    videoInfoPanelShowComments: boolean;
+    videoInfoPanelShowMinimap: boolean;
+    videoInfoPanelExpandedState: boolean;
 }

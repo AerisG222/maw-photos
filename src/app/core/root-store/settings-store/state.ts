@@ -33,6 +33,11 @@ export const initialState: State = {
         videoListThumbnailSize: null,
         videoListShowVideoList: true,
         videoListToolbarExpandedState: true,
-        videoListVideoSize: null
+        videoListVideoSize: null,
+
+        videoInfoPanelShowRatings: true,
+        videoInfoPanelShowComments: true,
+        videoInfoPanelShowMinimap: false,
+        videoInfoPanelExpandedState: false
     }
 };

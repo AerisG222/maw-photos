@@ -92,6 +92,15 @@
                 <mat-radio-group formControlName="videoListThumbnailSize">
                     <mat-radio-button *ngFor="let size of videoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
+
+                <h3>Video Info Panel Visibility</h3>
+                <mat-checkbox formControlName="videoInfoPanelExpandedState">Show Info Panel</mat-checkbox>
+                <br />
+                <mat-checkbox formControlName="videoInfoPanelShowRatings">Show Ratings Panel</mat-checkbox>
+                <br />
+                <mat-checkbox formControlName="videoInfoPanelShowComments">Show Comments Panel</mat-checkbox>
+                <br />
+                <mat-checkbox formControlName="videoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
             </mat-card-content>
         </mat-card>
     </div>

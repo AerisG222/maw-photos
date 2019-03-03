@@ -186,6 +186,40 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     videoListVideoSize: action.payload.newSize
                 }
             };
+
+        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_COMMENTS:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoInfoPanelShowComments: !state.settings.videoInfoPanelShowComments
+                }
+            };
+        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_RATINGS:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoInfoPanelShowRatings: !state.settings.videoInfoPanelShowRatings
+                }
+            };
+        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_MINIMAP:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoInfoPanelShowMinimap: !state.settings.videoInfoPanelShowMinimap
+                }
+            };
+        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoInfoPanelExpandedState: !state.settings.videoInfoPanelExpandedState
+                }
+            };
+
         default: {
             return state;
         }
