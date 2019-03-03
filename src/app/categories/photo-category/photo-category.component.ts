@@ -8,7 +8,6 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
-import { RandomControlService } from 'src/app/core/services/random-control.service';
 import {
     LayoutStoreActions,
     RootStoreState,
@@ -22,8 +21,7 @@ import {
 @Component({
     selector: 'app-photo-category',
     templateUrl: './photo-category.component.html',
-    styleUrls: ['./photo-category.component.scss'],
-    providers: [ RandomControlService ]
+    styleUrls: ['./photo-category.component.scss']
 })
 export class PhotoCategoryComponent implements OnInit, OnDestroy {
     destroy$ = new Subject<boolean>();
@@ -36,16 +34,13 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     constructor(
         private _route: ActivatedRoute,
-        private _store$: Store<RootStoreState.State>,
-        private randomControlSvc: RandomControlService
+        private _store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
-
-        this.randomControlSvc.start();
 
         const categoryId$ = this._route.params
             .pipe(
@@ -102,7 +97,6 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
-        this.randomControlSvc.dispose();
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroy$.next(true);
         this.setCurrentPhoto(null);
