@@ -6,7 +6,7 @@ import { map, takeUntil, tap } from 'rxjs/operators';
 import { PhotoStoreSelectors, PhotoStoreActions, RootStoreState, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Injectable()
-export class RandomControlService {
+export class SlideshowControlService {
     private destroy$ = new Subject<boolean>();
     private intervalId: number = null;
     private slideshowDuration: number;

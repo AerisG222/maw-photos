@@ -7,7 +7,7 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
-import { RandomControlService } from 'src/app/core/services/random-control.service';
+import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
@@ -23,7 +23,7 @@ import {
     selector: 'app-random',
     templateUrl: './random.component.html',
     styleUrls: ['./random.component.scss'],
-    providers: [ RandomControlService ]
+    providers: [ SlideshowControlService ]
 })
 export class RandomComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings>;
@@ -38,7 +38,7 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     constructor(
         private _store$: Store<RootStoreState.State>,
-        private randomControlSvc: RandomControlService
+        private randomControlSvc: SlideshowControlService
     ) {
 
     }
