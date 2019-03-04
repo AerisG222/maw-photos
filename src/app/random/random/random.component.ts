@@ -43,8 +43,6 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.slideshowControlSvc.start();
-
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
 
         this.settings$ = this._store$
@@ -93,7 +91,6 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.slideshowControlSvc.dispose();
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.setCurrentPhoto(null);
     }

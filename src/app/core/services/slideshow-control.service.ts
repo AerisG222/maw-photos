@@ -1,63 +1,59 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { interval, combineLatest, Subject, Observable } from 'rxjs';
+import { tap, filter, takeUntil } from 'rxjs/operators';
 
 import { PhotoStoreSelectors, PhotoStoreActions, RootStoreState, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { Settings } from '../models/settings.model';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class SlideshowControlService {
-    private destroy$ = new Subject<boolean>();
-    private intervalId: number = null;
-    private slideshowDuration: number;
+    private killSlideshow$ = new Subject<boolean>();
+    private isPlaying$: Observable<boolean>;
+    private settings$: Observable<Settings>;
 
     constructor(
         private _store$: Store<RootStoreState.State>
-    ) { }
-
-    start() {
+    ) {
         this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast),
-                map(x => this.stopSlideshow()),
-                takeUntil(this.destroy$)
+                tap(x => this._store$.dispatch(new PhotoStoreActions.StopSlideshowRequestAction()))
             ).subscribe();
 
-        this._store$
+        this.isPlaying$ = this._store$
             .pipe(
-                select(PhotoStoreSelectors.selectSlideshowIsPlaying),
-                tap(isPlaying => isPlaying ? this.startSlideshow() : this.stopSlideshow()),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                select(PhotoStoreSelectors.selectSlideshowIsPlaying)
+            );
 
-        this._store$
+        this.settings$ = this._store$
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.slideshowDuration = settings.photoListSlideshowDisplayDurationSeconds * 1000),
-                takeUntil(this.destroy$)
+                select(SettingsStoreSelectors.selectSettings)
+            );
+
+        this.isPlaying$
+            .pipe(
+                filter(isPlaying => !isPlaying),
+                tap(x => this.killSlideshow$.next(true))
             ).subscribe();
+
+        combineLatest(
+            this.isPlaying$,
+            this.settings$
+        ).pipe(
+            filter(x => x[0]),
+            tap(x => this.startSlideshow(x[1].photoListSlideshowDisplayDurationSeconds * 1000))
+        ).subscribe();
     }
 
-    dispose() {
-        this.destroy$.next(true);
-
-        this.stopSlideshow();
-    }
-
-    private startSlideshow(): void {
-        this.intervalId = window.setInterval(() => {
-            this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
-        }, this.slideshowDuration);
-    }
-
-    private stopSlideshow(): void {
-        this._store$.dispatch(new PhotoStoreActions.StopSlideshowRequestAction());
-
-        if (this.intervalId != null) {
-            window.clearInterval(this.intervalId);
-            this.intervalId = null;
-        }
+    private startSlideshow(duration: number): void {
+        interval(duration)
+            .pipe(
+                tap(x => this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction())),
+                takeUntil(this.killSlideshow$)
+            ).subscribe();
     }
 }
