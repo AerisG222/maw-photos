@@ -22,8 +22,7 @@ import {
 @Component({
     selector: 'app-random',
     templateUrl: './random.component.html',
-    styleUrls: ['./random.component.scss'],
-    providers: [ SlideshowControlService ]
+    styleUrls: ['./random.component.scss']
 })
 export class RandomComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings>;
@@ -38,13 +37,13 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     constructor(
         private _store$: Store<RootStoreState.State>,
-        private randomControlSvc: SlideshowControlService
+        private slideshowControlSvc: SlideshowControlService
     ) {
 
     }
 
     ngOnInit() {
-        this.randomControlSvc.start();
+        this.slideshowControlSvc.start();
 
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
 
@@ -98,7 +97,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.randomControlSvc.dispose();
+        this.slideshowControlSvc.dispose();
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.setCurrentPhoto(null);
     }

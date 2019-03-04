@@ -8,6 +8,7 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
+import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 import {
     LayoutStoreActions,
     RootStoreState,
@@ -34,12 +35,14 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     constructor(
         private _route: ActivatedRoute,
+        private slideshowControlSvc: SlideshowControlService,
         private _store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
+        this.slideshowControlSvc.start();
         this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
 
         const categoryId$ = this._route.params
@@ -96,6 +99,7 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.slideshowControlSvc.dispose();
         this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroy$.next(true);
