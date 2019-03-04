@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { tap, take } from 'rxjs/operators';
+import { Observable, Subject, interval } from 'rxjs';
+import { tap, take, takeUntil } from 'rxjs/operators';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -25,14 +25,13 @@ import {
     styleUrls: ['./random.component.scss']
 })
 export class RandomComponent implements OnInit, OnDestroy {
+    killFetch$ = new Subject<boolean>();
     settings$: Observable<Settings>;
     category$: Observable<PhotoCategory>;
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;
 
-    // any to avoid ts identifying result of setInterval as Timer (from nodejs)
-    private intervalId: any = -1;
     private currentPhotoSet = false;
 
     constructor(
@@ -48,7 +47,8 @@ export class RandomComponent implements OnInit, OnDestroy {
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.startRandomFetch(settings.photoListSlideshowDisplayDurationSeconds))
+                tap(x => this.killFetch$.next(true)),
+                tap(settings => this.startRandomFetch(settings.photoListSlideshowDisplayDurationSeconds * 1000))
             );
 
         this.photos$ = this._store$
@@ -91,6 +91,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.killFetch$.next(true);
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.setCurrentPhoto(null);
     }
@@ -103,14 +104,11 @@ export class RandomComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo: photo }));
     }
 
-    private startRandomFetch(delaySeconds: number): void {
-        if (this.intervalId !== -1) {
-            clearInterval(this.intervalId);
-            this.intervalId = -1;
-        }
-
-        this.intervalId = setInterval(() => {
-            this._store$.dispatch(new PhotoStoreActions.LoadRandomRequestAction());
-        }, delaySeconds * 1000);
+    private startRandomFetch(delay: number): void {
+        interval(delay)
+            .pipe(
+                tap(x => this._store$.dispatch(new PhotoStoreActions.LoadRandomRequestAction())),
+                takeUntil(this.killFetch$)
+            ).subscribe();
     }
 }
