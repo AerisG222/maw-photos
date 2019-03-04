@@ -43,7 +43,7 @@ export function photoReducer(state = initialState, action: Actions): State {
             };
         }
         case ActionTypes.LOAD_RANDOM_SUCCESS: {
-            const entities = photoAdapter.addOne(action.payload.photo, {
+            const entities = photoAdapter.upsertOne(action.payload.photo, {
                 ...state,
                 isLoading: false,
                 error: null
@@ -55,6 +55,34 @@ export function photoReducer(state = initialState, action: Actions): State {
             return entities;
         }
         case ActionTypes.LOAD_RANDOM_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
+            };
+        }
+        case ActionTypes.LOAD_MULTIPLE_RANDOM_REQUEST: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null
+            };
+        }
+        case ActionTypes.LOAD_MULTIPLE_RANDOM_SUCCESS: {
+            const uniquePhotos = action.payload.photos.filter((s1, pos, arr) => arr.findIndex((s2) => s2.id === s1.id) === pos);
+
+            const entities = photoAdapter.addMany(uniquePhotos, {
+                ...state,
+                isLoading: false,
+                error: null
+            });
+
+            entities.firstPhoto = entities.entities[entities.ids[0]];
+            entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
+
+            return entities;
+        }
+        case ActionTypes.LOAD_MULTIPLE_RANDOM_FAILURE: {
             return {
                 ...state,
                 isLoading: false,

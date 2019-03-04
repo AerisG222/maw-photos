@@ -89,11 +89,7 @@ export class RandomComponent implements OnInit, OnDestroy {
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
         this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
-
-        // start by loading 10 images
-        for (let i = 0; i < 10; i++) {
-            this._store$.dispatch(new PhotoStoreActions.LoadRandomRequestAction());
-        }
+        this._store$.dispatch(new PhotoStoreActions.LoadMultipleRandomRequestAction({ count: 10 }));
     }
 
     ngOnDestroy(): void {

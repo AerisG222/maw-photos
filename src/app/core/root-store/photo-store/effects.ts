@@ -46,6 +46,18 @@ export class PhotoStoreEffects {
     );
 
     @Effect()
+    loadMultipleRandomRequestEffect$: Observable<Action> = this._actions$.pipe(
+        ofType<photoActions.LoadMultipleRandomRequestAction>(photoActions.ActionTypes.LOAD_MULTIPLE_RANDOM_REQUEST),
+        switchMap(action =>
+            this._api.getRandomPhotos(action.payload.count)
+                .pipe(
+                    map(photos => new photoActions.LoadMultipleRandomSuccessAction({ photos: photos })),
+                    catchError(error => of(new photoActions.LoadMultipleRandomFailureAction({ error: error })))
+                )
+        )
+    );
+
+    @Effect()
     loadRatingRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoActions.LoadRatingRequestAction>(photoActions.ActionTypes.LOAD_RATING_REQUEST),
         switchMap(action =>

@@ -16,6 +16,9 @@ export enum ActionTypes {
     LOAD_COMMENTS_REQUEST = '[Photos] Load Comments Request',
     LOAD_COMMENTS_FAILURE = '[Photos] Load Comments Failure',
     LOAD_COMMENTS_SUCCESS = '[Photos] Load Comments Success',
+    LOAD_MULTIPLE_RANDOM_REQUEST = '[Photos] Load Multiple Random Request',
+    LOAD_MULTIPLE_RANDOM_FAILURE = '[Photos] Load Multiple Random Failure',
+    LOAD_MULTIPLE_RANDOM_SUCCESS = '[Photos] Load Multiple Random Success',
     LOAD_RANDOM_REQUEST = '[Photos] Load Random Request',
     LOAD_RANDOM_FAILURE = '[Photos] Load Random Failure',
     LOAD_RANDOM_SUCCESS = '[Photos] Load Random Success',
@@ -68,6 +71,21 @@ export class LoadSuccessAction implements Action {
 export class SetCurrentAction implements Action {
     readonly type = ActionTypes.SET_CURRENT;
     constructor(public payload: { photo: Photo }) { }
+}
+
+export class LoadMultipleRandomRequestAction implements Action {
+    readonly type = ActionTypes.LOAD_MULTIPLE_RANDOM_REQUEST;
+    constructor(public payload: { count: number }) { }
+}
+
+export class LoadMultipleRandomFailureAction implements Action {
+    readonly type = ActionTypes.LOAD_MULTIPLE_RANDOM_FAILURE;
+    constructor(public payload: { error: string }) { }
+}
+
+export class LoadMultipleRandomSuccessAction implements Action {
+    readonly type = ActionTypes.LOAD_MULTIPLE_RANDOM_SUCCESS;
+    constructor(public payload: { photos: Photo[] }) { }
 }
 
 export class LoadRandomRequestAction implements Action {
@@ -218,6 +236,9 @@ export type Actions =
     LoadCommentsRequestAction |
     LoadCommentsFailureAction |
     LoadCommentsSuccessAction |
+    LoadMultipleRandomRequestAction |
+    LoadMultipleRandomFailureAction |
+    LoadMultipleRandomSuccessAction |
     LoadRandomRequestAction |
     LoadRandomFailureAction |
     LoadRandomSuccessAction |
