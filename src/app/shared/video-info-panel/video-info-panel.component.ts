@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subject } from 'rxjs';
 import { filter, take, map, tap, takeUntil } from 'rxjs/operators';
@@ -35,6 +36,10 @@ export class VideoInfoPanelComponent implements OnInit {
     longitude$: Observable<number>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
+    @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
+    @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
+    @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
+    @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
 
     private currentVideo: Video;
     private destroy$ = new Subject<boolean>();
@@ -165,24 +170,28 @@ export class VideoInfoPanelComponent implements OnInit {
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleInfoPanelButton);
         this.toggleEndSidenav();
 
         return false;
     }
 
     private onHotkeyToggleRatings(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleRatingsButton);
         this.togglePanel(this.showRatings$, () => this.toggleRatings());
 
         return false;
     }
 
     private onHotkeyToggleComments(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleCommentsButton);
         this.togglePanel(this.showComments$, () => this.toggleComments());
 
         return false;
     }
 
     private onHotkeyToggleMinimap(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleMinimapButton);
         this.togglePanel(this.showMinimap$, () => this.toggleMinimap());
 
         return false;
@@ -209,5 +218,11 @@ export class VideoInfoPanelComponent implements OnInit {
                 }
             })
         ).subscribe();
+    }
+
+    private triggerButtonRipple(button: MatButton) {
+        if (button && !button.disabled) {
+            button.ripple.launch({ centered: true });
+        }
     }
 }

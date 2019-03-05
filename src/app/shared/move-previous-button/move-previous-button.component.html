@@ -2,6 +2,7 @@
     mat-button
     matTooltip="Previous (&larr;)"
     [disabled]="isFirst$ | async"
-    (click)="onMovePrevious()">
+    (click)="onMovePrevious()"
+    #prevButton>
     <mat-icon [inline]="true">chevron_left</mat-icon>
 </button>

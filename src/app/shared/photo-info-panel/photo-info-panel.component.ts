@@ -17,6 +17,7 @@ import {
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
+import { MatButton } from '@angular/material';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -41,6 +42,12 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     longitude$: Observable<number>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
+    @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
+    @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
+    @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
+    @ViewChild('toggleExifButton') toggleExifButton: MatButton;
+    @ViewChild('toggleEffectsButton') toggleEffectsButton: MatButton;
+    @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
 
     private currentPhoto: Photo;
     private destroy$ = new Subject<boolean>();
@@ -216,36 +223,42 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleInfoPanelButton);
         this.toggleEndSidenav();
 
         return false;
     }
 
     private onHotkeyToggleRatings(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleRatingsButton);
         this.togglePanel(this.showRatings$, () => this.toggleRatings());
 
         return false;
     }
 
     private onHotkeyToggleComments(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleCommentsButton);
         this.togglePanel(this.showComments$, () => this.toggleComments());
 
         return false;
     }
 
     private onHotkeyToggleExif(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleExifButton);
         this.togglePanel(this.showExif$, () => this.toggleExif());
 
         return false;
     }
 
     private onHotkeyToggleEffects(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleEffectsButton);
         this.togglePanel(this.showEffects$, () => this.toggleEffects());
 
         return false;
     }
 
     private onHotkeyToggleMinimap(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleMinimapButton);
         this.togglePanel(this.showMinimap$, () => this.toggleMinimap());
 
         return false;
@@ -272,5 +285,11 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 }
             })
         ).subscribe();
+    }
+
+    private triggerButtonRipple(button: MatButton) {
+        if (button && !button.disabled) {
+            button.ripple.launch({ centered: true });
+        }
     }
 }

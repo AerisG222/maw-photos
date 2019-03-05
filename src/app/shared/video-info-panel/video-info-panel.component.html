@@ -36,7 +36,8 @@
             mat-button
             matTooltip="Show/Hide Info Panel (I)"
             matTooltipPosition="before"
-            (click)="toggleEndSidenav()">
+            (click)="toggleEndSidenav()"
+            #toggleInfoPanelButton>
             <mat-icon *ngIf="endSidenavExpanded$ | async" [inline]="true">chevron_right</mat-icon>
             <mat-icon *ngIf="!(endSidenavExpanded$ | async)" [inline]="true">chevron_left</mat-icon>
         </button>
@@ -47,7 +48,8 @@
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showRatings$ | async)"
-            (click)="toggleRatings()">
+            (click)="toggleRatings()"
+            #toggleRatingsButton>
             <mat-icon [inline]="true">star</mat-icon>
         </button>
         <button
@@ -56,7 +58,8 @@
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showComments$ | async)"
-            (click)="toggleComments()">
+            (click)="toggleComments()"
+            #toggleCommentsButton>
             <mat-icon [inline]="true">comment</mat-icon>
         </button>
         <button
@@ -65,7 +68,8 @@
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
             [class.notactive]="!(showMinimap$ | async)"
-            (click)="toggleMinimap()">
+            (click)="toggleMinimap()"
+            #toggleMinimapButton>
             <mat-icon [inline]="true">map</mat-icon>
         </button>
 

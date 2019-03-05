@@ -2,21 +2,24 @@
     <button
         mat-button
         matTooltip="Show/Hide Category Breadcrumbs (T)"
-        (click)="onToggleCategoryBreadcrumbs()">
+        (click)="onToggleCategoryBreadcrumbs()"
+        #toggleBreadcrumbsButton>
         <mat-icon [inline]="true">title</mat-icon>
     </button>
 
     <button
         mat-button
         matTooltip="Show/Hide Photo List (L)"
-        (click)="onTogglePhotoList()">
+        (click)="onTogglePhotoList()"
+        #togglePhotoListButton>
         <mat-icon [inline]="true">visibility</mat-icon>
     </button>
 
     <button
         mat-button
         matTooltip="Toggle Photo List Thumbnail Size (S)"
-        (click)="onToggleSize()">
+        (click)="onToggleSize()"
+        #toggleThumbnailSizeButton>
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>
     </button>
 
@@ -29,14 +32,15 @@
         <mat-icon [inline]="true">save_alt</mat-icon>
     </a>
 
-    <app-move-previous-button (movePrevious)="onMovePrevious()"></app-move-previous-button>
-    <app-move-next-button (moveNext)="onMoveNext()"></app-move-next-button>
-    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-slideshow-button>
+    <app-move-previous-button (movePrevious)="onMovePrevious()" #movePreviousButton></app-move-previous-button>
+    <app-move-next-button (moveNext)="onMoveNext()" #moveNextButton></app-move-next-button>
+    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
 
     <button
         mat-button
         matTooltip="Enter Full Screen View (F)"
-        (click)="onToggleFullscreen()">
+        (click)="onToggleFullscreen()"
+        #fullscreenButton>
         <mat-icon [inline]="true">fullscreen</mat-icon>
     </button>
 </span>
@@ -45,14 +49,16 @@
     <button
         mat-button
         matTooltip="Rotate Counter Clockwise (A)"
-        (click)="onRotateCounterClockwise()">
+        (click)="onRotateCounterClockwise()"
+        #rotateCounterClockwiseButton>
         <mat-icon [inline]="true">rotate_left</mat-icon>
     </button>
 
     <button
         mat-button
         matTooltip="Rotate Clockwise (D)"
-        (click)="onRotateClockwise()">
+        (click)="onRotateClockwise()"
+        #rotateClockwiseButton>
         <mat-icon [inline]="true">rotate_right</mat-icon>
     </button>
 
@@ -93,7 +99,8 @@
     <button
         mat-button
         matTooltip="Show/Hide Toolbar (X)"
-        (click)="onTogglePhotoListToolbar()">
+        (click)="onTogglePhotoListToolbar()"
+        #toggleToolbarButton>
         <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
         <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
     </button>

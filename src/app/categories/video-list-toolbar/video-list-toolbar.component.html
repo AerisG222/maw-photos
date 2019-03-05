@@ -2,21 +2,24 @@
     <button
         mat-button
         matTooltip="Show/Hide Category Breadcrumbs (T)"
-        (click)="onToggleCategoryBreadcrumbs()">
+        (click)="onToggleCategoryBreadcrumbs()"
+        #toggleBreadcrumbsButton>
         <mat-icon [inline]="true">title</mat-icon>
     </button>
 
     <button
         mat-button
         matTooltip="Show/Hide Video List (L)"
-        (click)="onToggleShowVideoList()">
+        (click)="onToggleShowVideoList()"
+        #toggleVideoListButton>
         <mat-icon [inline]="true">visibility</mat-icon>
     </button>
 
     <button
         mat-button
         matTooltip="Toggle Video List Thumbnail Size (S)"
-        (click)="onToggleThumbnailSize()">
+        (click)="onToggleThumbnailSize()"
+        #toggleThumbnailSizeButton>
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>
     </button>
 </span>
@@ -25,7 +28,8 @@
     <button
         mat-button
         matTooltip="Toggle video size (V)"
-        (click)="onToggleVideoSize()">
+        (click)="onToggleVideoSize()"
+        #toggleVideoSizeButton>
         <mat-icon [inline]="true">switch_video</mat-icon>
     </button>
 </span>
@@ -34,7 +38,8 @@
     <button
         mat-button
         matTooltip="Show/Hide Toolbar (X)"
-        (click)="onToggleVideoListToolbar()">
+        (click)="onToggleVideoListToolbar()"
+        #toggleToolbarButton>
         <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
         <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
     </button>

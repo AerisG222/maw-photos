@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
@@ -17,6 +18,12 @@ import { VideoSize } from 'src/app/core/models/video-size.model';
 export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject<boolean>();
     private _hotkeys: Hotkey[] = [];
+
+    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
+    @ViewChild('toggleVideoListButton') toggleVideoListButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
+    @ViewChild('toggleVideoSizeButton') toggleVideoSizeButton: MatButton;
+    @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
 
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
@@ -94,32 +101,43 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleBreadcrumbsButton);
         this.onToggleCategoryBreadcrumbs();
 
         return false;
     }
 
     private onHotkeyToggleVideoListToolbar(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleToolbarButton);
         this.onToggleVideoListToolbar();
 
         return false;
     }
 
     private onHotkeyToggleShowVideoList(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleVideoListButton);
         this.onToggleShowVideoList();
 
         return false;
     }
 
     private onHotkeyToggleThumbnailSize(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleThumbnailSizeButton);
         this.onToggleThumbnailSize();
 
         return false;
     }
 
     private onHotkeyToggleVideoSize(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleVideoSizeButton);
         this.onToggleVideoSize();
 
         return false;
+    }
+
+    private triggerButtonRipple(button: MatButton) {
+        if (button && !button.disabled) {
+            button.ripple.launch({ centered: true });
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
@@ -14,6 +14,11 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
+import { MatButton } from '@angular/material';
+import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
+import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
+import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.component';
+import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
 @Component({
     selector: 'app-photo-list-toolbar',
@@ -22,6 +27,17 @@ import {
 })
 export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
+
+    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
+    @ViewChild('togglePhotoListButton') togglePhotoListButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
+    @ViewChild('fullscreenButton') fullscreenButton: MatButton;
+    @ViewChild('rotateCounterClockwiseButton') rotateCounterClockwiseButton: MatButton;
+    @ViewChild('rotateClockwiseButton') rotateClockwiseButton: MatButton;
+    @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
+    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
 
     private destroy$ = new Subject<boolean>();
     private _hotkeys: Hotkey[] = [];
@@ -157,62 +173,84 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleBreadcrumbsButton);
         this.onToggleCategoryBreadcrumbs();
 
         return false;
     }
 
     private onHotkeyTogglePhotoList(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.togglePhotoListButton);
         this.onTogglePhotoList();
 
         return false;
     }
 
     private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleThumbnailSizeButton);
         this.onToggleSize();
 
         return false;
     }
 
     private onHotkeyFullscreen(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.fullscreenButton);
         this.onToggleFullscreen();
 
         return false;
     }
 
     private onHotkeyRotateClockwise(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.rotateClockwiseButton);
         this.onRotateClockwise();
 
         return false;
     }
 
     private onHotkeyRotateCounterClockwise(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.rotateCounterClockwiseButton);
         this.onRotateCounterClockwise();
 
         return false;
     }
 
     private onHotkeyTogglePhotoListToolbar(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleToolbarButton);
         this.onTogglePhotoListToolbar();
 
         return false;
     }
 
     private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
+        this.triggerComponentRipple(this.moveNextButton);
         this.onMoveNext();
 
         return false;
     }
 
     private onHotkeyMovePrevious(evt: KeyboardEvent): boolean {
+        this.triggerComponentRipple(this.movePreviousButton);
         this.onMovePrevious();
 
         return false;
     }
 
     private onHotkeyToggleSlideshow(evt: KeyboardEvent): boolean {
+        this.triggerComponentRipple(this.toggleSlideshowButton);
         this.onToggleSlideshow();
 
         return false;
+    }
+
+    private triggerButtonRipple(button: MatButton) {
+        if (button && !button.disabled) {
+            button.ripple.launch({ centered: true });
+        }
+    }
+
+    private triggerComponentRipple(component: CanRipple) {
+        if (component) {
+            component.triggerRipple();
+        }
     }
 }

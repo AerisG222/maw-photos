@@ -1,7 +1,8 @@
 <button
     mat-button
     matTooltip="Start/Stop Slideshow (P)"
-    (click)="onToggleSlideshow()">
+    (click)="onToggleSlideshow()"
+    #slideshowButton>
     <mat-icon [inline]="true" *ngIf="!(slideshowPlaying$ | async)">play_arrow</mat-icon>
     <mat-icon [inline]="true" *ngIf="slideshowPlaying$ | async">stop</mat-icon>
 </button>

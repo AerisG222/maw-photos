@@ -1,12 +1,13 @@
 <span class="photo" *ngIf="isToolbarExpanded$ | async">
-    <app-move-previous-button (movePrevious)="onMovePrevious()"></app-move-previous-button>
-    <app-move-next-button (moveNext)="onMoveNext()"></app-move-next-button>
-    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-slideshow-button>
+    <app-move-previous-button (movePrevious)="onMovePrevious()" #movePreviousButton></app-move-previous-button>
+    <app-move-next-button (moveNext)="onMoveNext()" #moveNextButton></app-move-next-button>
+    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
 
     <button
         mat-button
         matTooltip="Exit Fullscreen (F)"
-        (click)="onExitFullscreen()">
+        (click)="onExitFullscreen()"
+        #exitFullscreenButton>
         <mat-icon [inline]="true">fullscreen_exit</mat-icon>
     </button>
 </span>
@@ -15,7 +16,8 @@
     <button
         mat-button
         matTooltip="Show/Hide Toolbar (X)"
-        (click)="onToggleFullscreenToolbar()">
+        (click)="onToggleFullscreenToolbar()"
+        #toggleToolbarButton>
         <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
         <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
     </button>

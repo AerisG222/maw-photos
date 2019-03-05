@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { MatButton } from '@angular/material';
 
 @Component({
     selector: 'app-category-list-toolbar',
@@ -15,6 +16,9 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'sr
 })
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
+
+    @ViewChild('toggleTitlesButton') toggleTitlesButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
 
     settings: Settings;
     settings$: Observable<Settings>;
@@ -57,14 +61,22 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleTitlesButton);
         this.onToggleTitle();
 
         return false;
     }
 
     private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleThumbnailSizeButton);
         this.onToggleSize();
 
         return false;
+    }
+
+    private triggerButtonRipple(button: MatButton) {
+        if (button && !button.disabled) {
+            button.ripple.launch({ centered: true });
+        }
     }
 }
