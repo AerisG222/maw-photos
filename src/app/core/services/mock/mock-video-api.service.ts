@@ -116,8 +116,8 @@ export class MockVideoApiService implements VideoApiService {
                 id: 1,
                 categoryId: 1,
                 createDate: '2018-01-01',
-                latitude: null,
-                longitude: null,
+                latitude: 34.060385,
+                longitude: -118.297796,
                 duration: 123,
                 thumbnail: {
                     height: 400,
@@ -158,8 +158,8 @@ export class MockVideoApiService implements VideoApiService {
                 id: 2,
                 categoryId: 1,
                 createDate: '2018-01-02',
-                latitude: null,
-                longitude: null,
+                latitude: 42.363393,
+                longitude: -71.057865,
                 duration: 123,
                 thumbnail: {
                     height: 400,

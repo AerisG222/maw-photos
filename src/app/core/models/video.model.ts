@@ -4,8 +4,8 @@ export interface Video {
     id:           number;
     categoryId:   number;
     createDate:   string;
-    latitude:     null;
-    longitude:    null;
+    latitude:     number;
+    longitude:    number;
     duration:     number;
     thumbnailSq:  MultimediaAsset;
     thumbnail:    MultimediaAsset;

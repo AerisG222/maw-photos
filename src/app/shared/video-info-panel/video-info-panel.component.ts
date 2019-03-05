@@ -88,33 +88,31 @@ export class VideoInfoPanelComponent implements OnInit {
                     this.comments.saveSucceeded();
                 }})
         );
-/*
-        this.latitude$ = this._store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideoExifData),
-            map(d => {
-                if (d) {
-                    const lat = d.find(x => x.sourceField === 'gpsLatitude');
 
-                    return lat == null ? null : lat.sourceValue;
-                }
+        this.latitude$ = currentVideo$
+            .pipe(
+                map(video => {
+                    if (video) {
+                        return video.latitude == null ? null : video.latitude;
+                    }
 
-                return null;
-            })
-        );
+                    return null;
+                }),
+                takeUntil(this.destroy$)
+            );
 
-        this.longitude$ = this._store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentVideoExifData),
-            map(d => {
-                if (d) {
-                    const lng = d.find(x => x.sourceField === 'gpsLongitude');
+        this.longitude$ = currentVideo$
+            .pipe(
+                map(video => {
+                    if (video) {
+                        return video.longitude == null ? null : video.longitude;
+                    }
 
-                    return lng == null ? null : lng.sourceValue;
-                }
+                    return null;
+                }),
+                takeUntil(this.destroy$)
+            );
 
-                return null;
-            })
-        );
-*/
         currentVideo$.subscribe();
     }
 
