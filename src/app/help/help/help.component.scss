@@ -3,6 +3,7 @@ mat-icon {
 }
 
 h3 {
+    margin-top: 12px;
     margin-bottom: 4px;
 }
 
@@ -33,4 +34,18 @@ mat-tab-group {
     font-size: 32px;
     margin-top: 12px;
     margin-bottom: 12px;
+}
+
+.android_text {
+    margin-top: 12px;
+}
+
+.android_link {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.android_icon {
+    font-size: 56px;
 }
