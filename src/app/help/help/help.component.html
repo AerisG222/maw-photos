@@ -12,58 +12,60 @@
         v0.1.0
     </div>
 
-    <mat-tab-group fxFlex="1 1 auto">
-        <mat-tab label="Help">
-            <h3><mat-icon>home</mat-icon> - Category View</h3>
-            <p>
-                Browse photos and videos by year and category.
-            </p>
+    <div fxFill fxLayout="row" fxLayoutAlign="center center">
+        <mat-tab-group fxFlex fxFlex.md="70" fxFlex.gt-md="50">
+            <mat-tab label="Help">
+                <h3><mat-icon>home</mat-icon> - Category View</h3>
+                <p>
+                    Browse photos and videos by year and category.
+                </p>
 
-            <h3><mat-icon>shuffle</mat-icon> - Random</h3>
-            <p>
-                Play though an unending list of random photos.
-            </p>
+                <h3><mat-icon>shuffle</mat-icon> - Random</h3>
+                <p>
+                    Play though an unending list of random photos.
+                </p>
 
-            <h3><mat-icon>bar_chart</mat-icon> - Statistics</h3>
-            <p>
-                View statistics for all photos and videos.
-            </p>
+                <h3><mat-icon>bar_chart</mat-icon> - Statistics</h3>
+                <p>
+                    View statistics for all photos and videos.
+                </p>
 
-            <h3><mat-icon>help_outline</mat-icon> - Help</h3>
-            <p>
-                This help screen.  Also view release notes.
-            </p>
+                <h3><mat-icon>help_outline</mat-icon> - Help</h3>
+                <p>
+                    This help screen.  Also view release notes.
+                </p>
 
-            <h3><mat-icon>settings</mat-icon> - Settings</h3>
-            <p>
-                Adjust all settings from one screen to optimize your experience.
-                Many of these settings are also available throughout the application, primarily in context sensitive toolbars,
-                often with support for keyboard control.
-            </p>
-        </mat-tab>
-        <mat-tab label="Release Notes">
-            <h3>v0.1.0</h3>
-            <p>
-                Initial Release
-            </p>
+                <h3><mat-icon>settings</mat-icon> - Settings</h3>
+                <p>
+                    Adjust all settings from one screen to optimize your experience.
+                    Many of these settings are also available throughout the application, primarily in context sensitive toolbars,
+                    often with support for keyboard control.
+                </p>
+            </mat-tab>
+            <mat-tab label="Release Notes">
+                <h3>v0.1.0</h3>
+                <p>
+                    Initial Release
+                </p>
 
-            <ul>
-                <li>Total rewrite (again) of the Photos application</li>
-                <li>Integrates videos and statistics into single application</li>
-                <li>Rating, commenting, and viewing map location for videos is now possible</li>
-                <li>Improved interface and implementation</li>
-            </ul>
-        </mat-tab>
-        <mat-tab label="Android">
-            <p class="android_text">
-                If you have an Android device, consider installing the MaW Photos app for a native and streamlined
-                experience on your device!  Click the icon below to go to the app in Google Play:
-            </p>
-            <p class="android_link">
-                <a href="https://play.google.com/store/apps/details?id=us.mikeandwan.pictures" target="_blank">
-                    <mat-icon inline="true" class="android_icon">android</mat-icon>
-                </a>
-            </p>
-        </mat-tab>
-    </mat-tab-group>
+                <ul>
+                    <li>Total rewrite (again) of the Photos application</li>
+                    <li>Integrates videos and statistics into single application</li>
+                    <li>Rating, commenting, and viewing map location for videos is now possible</li>
+                    <li>Improved interface and implementation</li>
+                </ul>
+            </mat-tab>
+            <mat-tab label="Android">
+                <p class="android_text">
+                    If you have an Android device, consider installing the MaW Photos app for a native and streamlined
+                    experience on your device!  Click the icon below to go to the app in Google Play:
+                </p>
+                <p class="android_link">
+                    <a href="https://play.google.com/store/apps/details?id=us.mikeandwan.pictures" target="_blank">
+                        <mat-icon inline="true" class="android_icon">android</mat-icon>
+                    </a>
+                </p>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>
