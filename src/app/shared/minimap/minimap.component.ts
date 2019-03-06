@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-minimap',
@@ -9,4 +9,11 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class MinimapComponent {
     @Input() lat: number;
     @Input() lng: number;
+    @Input() zoom = 10;
+
+    @Output() zoomChange = new EventEmitter<number>();
+
+    onZoomChange(evt:  number) {
+        this.zoomChange.emit(evt);
+    }
 }

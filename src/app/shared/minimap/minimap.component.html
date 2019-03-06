@@ -3,6 +3,7 @@
     [longitude]="lng"
     [fullscreenControl]="true"
     [streetViewControl]="false"
-    [zoom]="10">
+    [zoom]="zoom"
+    (zoomChange)="onZoomChange($event)">
     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map>

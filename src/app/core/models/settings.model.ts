@@ -21,6 +21,7 @@ export interface Settings {
     photoInfoPanelShowEffects: boolean;
     photoInfoPanelShowMinimap: boolean;
     photoInfoPanelExpandedState: boolean;
+    photoInfoPanelMinimapZoom: number;
 
     videoListShowCategoryBreadcrumbs: boolean;
     videoListThumbnailSize: ThumbnailSize;
@@ -32,4 +33,5 @@ export interface Settings {
     videoInfoPanelShowComments: boolean;
     videoInfoPanelShowMinimap: boolean;
     videoInfoPanelExpandedState: boolean;
+    videoInfoPanelMinimapZoom: number;
 }

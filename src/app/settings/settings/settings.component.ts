@@ -8,6 +8,7 @@ import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { VideoSize } from 'src/app/core/models/video-size.model';
+import { MinimapZoom } from 'src/app/core/models/minimap-zoom.model';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class SettingsComponent implements OnInit {
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
+    photoZoomLevels = MinimapZoom.allSizes;
+    videoZoomLevels = MinimapZoom.allSizes;
     videoSizes = VideoSize.allSizes;
     randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
@@ -51,6 +54,7 @@ export class SettingsComponent implements OnInit {
             photoInfoPanelShowMinimap: [false],
             photoInfoPanelShowRatings: [true],
             photoInfoPanelExpandedState: [false],
+            photoInfoPanelMinimapZoom: [10],
 
             videoListShowCategoryBreadcrumbs: [true],
             videoListThumbnailSize: [''],
@@ -61,7 +65,8 @@ export class SettingsComponent implements OnInit {
             videoInfoPanelShowComments: [true],
             videoInfoPanelShowMinimap: [false],
             videoInfoPanelShowRatings: [true],
-            videoInfoPanelExpandedState: [false]
+            videoInfoPanelExpandedState: [false],
+            videoInfoPanelMinimapZoom: [10]
         });
 
         this._store$
@@ -94,6 +99,7 @@ export class SettingsComponent implements OnInit {
             photoInfoPanelShowMinimap: this.form.get('photoInfoPanelShowMinimap').value,
             photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value,
             photoInfoPanelExpandedState: this.form.get('photoInfoPanelExpandedState').value,
+            photoInfoPanelMinimapZoom: this.form.get('photoInfoPanelMinimapZoom').value,
 
             videoListShowCategoryBreadcrumbs: this.form.get('videoListShowCategoryBreadcrumbs').value,
             videoListThumbnailSize: ThumbnailSize.forName(this.form.get('videoListThumbnailSize').value),
@@ -104,7 +110,8 @@ export class SettingsComponent implements OnInit {
             videoInfoPanelShowComments: this.form.get('videoInfoPanelShowComments').value,
             videoInfoPanelShowMinimap: this.form.get('videoInfoPanelShowMinimap').value,
             videoInfoPanelShowRatings: this.form.get('videoInfoPanelShowRatings').value,
-            videoInfoPanelExpandedState: this.form.get('videoInfoPanelExpandedState').value
+            videoInfoPanelExpandedState: this.form.get('videoInfoPanelExpandedState').value,
+            videoInfoPanelMinimapZoom: this.form.get('videoInfoPanelMinimapZoom').value,
         };
 
         this._store$.dispatch(
@@ -141,6 +148,7 @@ export class SettingsComponent implements OnInit {
         this.form.get('photoInfoPanelShowMinimap').setValue(settings.photoInfoPanelShowMinimap);
         this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
         this.form.get('photoInfoPanelExpandedState').setValue(settings.photoInfoPanelExpandedState);
+        this.form.get('photoInfoPanelMinimapZoom').setValue(settings.photoInfoPanelMinimapZoom);
 
         this.form.get('videoListShowCategoryBreadcrumbs').setValue(settings.videoListShowCategoryBreadcrumbs);
         this.form.get('videoListThumbnailSize').setValue(settings.videoListThumbnailSize.name);
@@ -152,5 +160,6 @@ export class SettingsComponent implements OnInit {
         this.form.get('videoInfoPanelShowMinimap').setValue(settings.videoInfoPanelShowMinimap);
         this.form.get('videoInfoPanelShowRatings').setValue(settings.videoInfoPanelShowRatings);
         this.form.get('videoInfoPanelExpandedState').setValue(settings.videoInfoPanelExpandedState);
+        this.form.get('videoInfoPanelMinimapZoom').setValue(settings.videoInfoPanelMinimapZoom);
     }
 }

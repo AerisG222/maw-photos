@@ -104,6 +104,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
                 }
             };
+        case ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelMinimapZoom: action.payload.zoom
+                }
+            };
 
         case ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST:
             return {
@@ -217,6 +225,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: {
                     ...state.settings,
                     videoInfoPanelExpandedState: !state.settings.videoInfoPanelExpandedState
+                }
+            };
+        case ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoInfoPanelMinimapZoom: action.payload.zoom
                 }
             };
 

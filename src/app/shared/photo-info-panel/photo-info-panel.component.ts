@@ -40,6 +40,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     effects$: Observable<PhotoEffects>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
+    minimapZoom$: Observable<number>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
     @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
@@ -88,6 +89,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.showMinimap$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap)
+        );
+
+        this.minimapZoom$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
         );
 
         this.showRatings$ = this._store$.pipe(
@@ -192,6 +197,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleMinimap(): void {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelMinimapRequestAction());
+    }
+
+    onZoomChange(zoom: number): void {
+        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapZoomRequestAction({ zoom: zoom }));
     }
 
     private configureHotkeys(): void {

@@ -22,6 +22,7 @@ export enum ActionTypes {
     TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Settings] Toggle Photo Info Panel Effects',
     TOGGLE_PHOTO_INFO_PANEL_MINIMAP = '[Settings] Toggle Photo Info Panel Minimap',
     TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Photo Info Panel Expanded State',
+    UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM = '[Settings] Update Photo Info Panel Minimap Zoom',
 
     TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST = '[Settings] Toggle Photo List Show Photo List',
     TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
@@ -39,6 +40,7 @@ export enum ActionTypes {
     TOGGLE_VIDEO_INFO_PANEL_COMMENTS = '[Settings] Toggle Video Info Panel Comments',
     TOGGLE_VIDEO_INFO_PANEL_MINIMAP = '[Settings] Toggle Video Info Panel Minimap',
     TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Video Info Panel Expanded State',
+    UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM = '[Settings] Update Video Info Panel Minimap Zoom'
 }
 
 export class LoadRequestAction implements Action {
@@ -92,6 +94,11 @@ export class TogglePhotoInfoPanelMinimapRequestAction implements Action {
 
 export class TogglePhotoInfoPanelExpandedStateRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE;
+}
+
+export class UpdatePhotoInfoPanelMinimapZoomRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM;
+    constructor(public payload: { zoom: number }) {}
 }
 
 export class TogglePhotoListToolbarExpandedStateRequestAction implements Action {
@@ -162,6 +169,11 @@ export class ToggleVideoInfoPanelExpandedStateRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE;
 }
 
+export class UpdateVideoInfoPanelMinimapZoomRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM;
+    constructor(public payload: { zoom: number }) {}
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
@@ -179,6 +191,7 @@ export type Actions =
     TogglePhotoInfoPanelExifRequestAction |
     TogglePhotoInfoPanelMinimapRequestAction |
     TogglePhotoInfoPanelRatingsRequestAction |
+    UpdatePhotoInfoPanelMinimapZoomRequestAction |
 
     TogglePhotoListCategoryBreadcrumbsRequestAction |
     TogglePhotoListFullscreenToolbarExpandedStateRequestAction |
@@ -195,4 +208,5 @@ export type Actions =
     ToggleVideoInfoPanelRatingsRequestAction |
     ToggleVideoInfoPanelCommentsRequestAction |
     ToggleVideoInfoPanelMinimapRequestAction |
-    ToggleVideoInfoPanelExpandedStateRequestAction;
+    ToggleVideoInfoPanelExpandedStateRequestAction |
+    UpdateVideoInfoPanelMinimapZoomRequestAction;

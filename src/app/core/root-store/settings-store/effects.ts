@@ -111,6 +111,18 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
+    updatePhotoInfoPanelMinimapZoom$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.UpdatePhotoInfoPanelMinimapZoomRequestAction>(settingsActions.ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
     togglePhotoListToolbarExpandedState$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.TogglePhotoListToolbarExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE),
@@ -292,6 +304,18 @@ export class SettingsStoreEffects {
     toggleVideoInfoPanelExpandedState$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.ToggleVideoInfoPanelExpandedStateRequestAction>(settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
+    updateVideoInfoPanelMinimapZoom$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.UpdateVideoInfoPanelMinimapZoomRequestAction>(settingsActions.ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM),
         withLatestFrom(this._store$.pipe(
             select(settingsSelectors.selectSettings)
         )),

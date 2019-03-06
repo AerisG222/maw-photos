@@ -28,6 +28,7 @@ export const initialState: State = {
         photoInfoPanelShowEffects: false,
         photoInfoPanelShowMinimap: false,
         photoInfoPanelExpandedState: false,
+        photoInfoPanelMinimapZoom: 10,
 
         videoListShowCategoryBreadcrumbs: true,
         videoListThumbnailSize: null,
@@ -38,6 +39,7 @@ export const initialState: State = {
         videoInfoPanelShowRatings: true,
         videoInfoPanelShowComments: true,
         videoInfoPanelShowMinimap: false,
-        videoInfoPanelExpandedState: false
+        videoInfoPanelExpandedState: false,
+        videoInfoPanelMinimapZoom: 10
     }
 };

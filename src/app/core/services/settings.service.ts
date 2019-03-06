@@ -28,6 +28,7 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
+    private static readonly keyPhotoInfoPanelMinimapZoom = 'photoInfoPanelMinimapZoom';
 
     private static readonly keyVideoListShowCategoryBreadcrumbs = 'videoListShowCategoryBreadcrumbs';
     private static readonly keyVideoListThumbnailSize = 'videoListThumbnailSize';
@@ -39,6 +40,7 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelShowComments = 'videoInfoPanelShowComments';
     private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
     private static readonly keyVideoInfoPanelExpandedState = 'videoInfoPanelExpandedState';
+    private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
     constructor(
         private _localStorage: LocalStorageService
@@ -61,6 +63,7 @@ export class SettingsService {
         const photoInfoPanelShowEffects = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
         const photoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
         const photoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
+        const photoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapZoom);
 
         const videoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyVideoListShowCategoryBreadcrumbs);
         const videoListShowVideoList = this._localStorage.retrieve(SettingsService.keyVideoListShowVideoList);
@@ -70,6 +73,7 @@ export class SettingsService {
         const videoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
         const videoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowMinimap);
         const videoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelExpandedState);
+        const videoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapZoom);
 
         return {
             appTheme: this.getTheme(),
@@ -91,6 +95,7 @@ export class SettingsService {
             photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
             photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false,
             photoInfoPanelExpandedState: photoInfoPanelExpandedState !== null ? photoInfoPanelExpandedState : false,
+            photoInfoPanelMinimapZoom: photoInfoPanelMinimapZoom !== null ? photoInfoPanelMinimapZoom : 10,
 
             videoListShowCategoryBreadcrumbs: videoListShowCategoryBreadcrumbs !== null ? videoListShowCategoryBreadcrumbs : true,
             videoListThumbnailSize: this.getVideoListThumbnailSize(),
@@ -101,7 +106,8 @@ export class SettingsService {
             videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
             videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
             videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
-            videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false
+            videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false,
+            videoInfoPanelMinimapZoom: videoInfoPanelMinimapZoom !== null ? videoInfoPanelMinimapZoom : 10
         };
     }
 
@@ -130,6 +136,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
         this._localStorage.store(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
@@ -141,6 +148,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
+        this._localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
     }
 
     private getTheme(): Theme {

@@ -25,7 +25,8 @@
                 class="widget"
                 *ngIf="showMinimap$ | async"
                 [lat]="latitude$ | async"
-                [lng]="longitude$ | async">
+                [lng]="longitude$ | async"
+                (zoomChange)="onZoomChange($event)">
             </app-minimap>
         </div>
     </div>

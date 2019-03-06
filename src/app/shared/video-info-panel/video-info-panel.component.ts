@@ -149,6 +149,10 @@ export class VideoInfoPanelComponent implements OnInit {
         this._store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelMinimapRequestAction());
     }
 
+    onZoomChange(zoom: number): void {
+        this._store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapZoomRequestAction({ zoom: zoom }));
+    }
+
     private configureHotkeys(): void {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event), [], 'Show / Hide Info Panel')
