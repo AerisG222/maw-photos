@@ -1,4 +1,4 @@
-import { MultimediaAsset } from './multimedia-asset.model';
+import { PhotoMultimediaAsset } from './photo-multimedia-asset';
 
 export interface Photo {
     id:           number;
@@ -6,13 +6,13 @@ export interface Photo {
     createDate:   string;
     latitude:     number;
     longitude:    number;
-    imageXsSq:    MultimediaAsset;
-    imageXs:      MultimediaAsset;
-    imageSm:      MultimediaAsset;
-    imageMd:      MultimediaAsset;
-    imageLg:      MultimediaAsset;
-    imagePrt:     MultimediaAsset;
-    imageSrc:     MultimediaAsset;
+    imageXsSq:    PhotoMultimediaAsset;
+    imageXs:      PhotoMultimediaAsset;
+    imageSm:      PhotoMultimediaAsset;
+    imageMd:      PhotoMultimediaAsset;
+    imageLg:      PhotoMultimediaAsset;
+    imagePrt:     PhotoMultimediaAsset;
+    imageSrc:     PhotoMultimediaAsset;
     self:         string;
     categoryLink: string;
     commentsLink: string;

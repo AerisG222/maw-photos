@@ -349,44 +349,51 @@ export class MockPhotoApiService implements PhotoApiService {
                 imageXs: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs/DSC_1122.jpg'
                 },
                 imageXsSq: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs_sq/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs_sq/DSC_1122.jpg'
                 },
                 imageSm: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/sm/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/sm/DSC_1122.jpg'
                 },
                 imageMd: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/md/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/md/DSC_1122.jpg'
                 },
                 imageLg: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/lg/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/lg/DSC_1122.jpg'
                 },
                 imagePrt: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1122.jpg'
                 },
                 imageSrc: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/src/DSC_1122.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/src/DSC_1122.jpg'
                 },
                 self: '/photos/1',
                 categoryLink: '/photo-categories/1',
@@ -403,44 +410,51 @@ export class MockPhotoApiService implements PhotoApiService {
                 imageXs: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs/DSC_1123.jpg'
                 },
                 imageXsSq: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs_sq/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs_sq/DSC_1123.jpg'
                 },
                 imageSm: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/sm/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/sm/DSC_1123.jpg'
                 },
                 imageMd: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/md/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/md/DSC_1123.jpg'
                 },
                 imageLg: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/lg/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/lg/DSC_1123.jpg'
                 },
                 imagePrt: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1123.jpg'
                 },
                 imageSrc: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1123.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1123.jpg'
                 },
                 self: '/photos/2',
                 categoryLink: '/photo-categories/1',
@@ -457,44 +471,51 @@ export class MockPhotoApiService implements PhotoApiService {
                 imageXs: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs/DSC_1124.jpg'
                 },
                 imageXsSq: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs_sq/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs_sq/DSC_1124.jpg'
                 },
                 imageSm: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/sm/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/sm/DSC_1124.jpg'
                 },
                 imageMd: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/md/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/md/DSC_1124.jpg'
                 },
                 imageLg: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/lg/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/lg/DSC_1124.jpg'
                 },
                 imagePrt: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1124.jpg'
                 },
                 imageSrc: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1124.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1124.jpg'
                 },
                 self: '/photos/3',
                 categoryLink: '/photo-categories/1',
@@ -511,44 +532,51 @@ export class MockPhotoApiService implements PhotoApiService {
                 imageXs: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs/DSC_1125.jpg'
                 },
                 imageXsSq: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs_sq/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs_sq/DSC_1125.jpg'
                 },
                 imageSm: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/sm/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/sm/DSC_1125.jpg'
                 },
                 imageMd: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/md/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/md/DSC_1125.jpg'
                 },
                 imageLg: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/lg/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/lg/DSC_1125.jpg'
                 },
                 imagePrt: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1125.jpg'
                 },
                 imageSrc: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1125.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1125.jpg'
                 },
                 self: '/photos/4',
                 categoryLink: '/photo-categories/1',
@@ -565,44 +593,51 @@ export class MockPhotoApiService implements PhotoApiService {
                 imageXs: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs/DSC_1134.jpg'
                 },
                 imageXsSq: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/xs_sq/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/xs_sq/DSC_1134.jpg'
                 },
                 imageSm: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/sm/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/sm/DSC_1134.jpg'
                 },
                 imageMd: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/md/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/md/DSC_1134.jpg'
                 },
                 imageLg: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/lg/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/lg/DSC_1134.jpg'
                 },
                 imagePrt: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1134.jpg'
                 },
                 imageSrc: {
                     height: 400,
                     width: 400,
+                    size: 1000,
                     url: '/assets/images/2018/test1/prt/DSC_1134.jpg',
-                    size: 1000
+                    downloadUrl: '/assets/images/2018/test1/prt/DSC_1134.jpg'
                 },
                 self: '/photos/5',
                 categoryLink: '/photo-categories/1',

@@ -86,10 +86,10 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         const activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
-                tap(photo => this.smDownloadUrl = photo.imageSm.url),
-                tap(photo => this.mdDownloadUrl = photo.imageMd.url),
-                tap(photo => this.lgDownloadUrl = photo.imageLg.url),
-                tap(photo => this.prtDownloadUrl = photo.imagePrt.url),
+                tap(photo => this.smDownloadUrl = photo.imageSm.downloadUrl),
+                tap(photo => this.mdDownloadUrl = photo.imageMd.downloadUrl),
+                tap(photo => this.lgDownloadUrl = photo.imageLg.downloadUrl),
+                tap(photo => this.prtDownloadUrl = photo.imagePrt.downloadUrl),
                 takeUntil(this.destroy$)
             ).subscribe();
     }

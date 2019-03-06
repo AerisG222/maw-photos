@@ -26,7 +26,6 @@
     <a mat-button
         class="download"
         matTooltip="Download All Photos in Category (.zip)"
-        target="_blank"
         *ngIf="allowCategoryDownload && categoryDownloadUrl"
         [href]="categoryDownloadUrl">
         <mat-icon [inline]="true">save_alt</mat-icon>
@@ -64,7 +63,6 @@
 
     <a mat-button
         matTooltip="Low Res Download"
-        target="_blank"
         *ngIf="smDownloadUrl"
         [href]="smDownloadUrl">
         <mat-icon [inline]="true" class="icon-sm">photo</mat-icon>
@@ -72,7 +70,6 @@
 
     <a mat-button
         matTooltip="Medium Res Download"
-        target="_blank"
         *ngIf="mdDownloadUrl"
         [href]="mdDownloadUrl">
         <mat-icon [inline]="true" class="icon-md">photo</mat-icon>
@@ -80,7 +77,6 @@
 
     <a mat-button
         matTooltip="High Res Download"
-        target="_blank"
         *ngIf="lgDownloadUrl"
         [href]="lgDownloadUrl">
         <mat-icon [inline]="true">photo</mat-icon>
@@ -88,7 +84,6 @@
 
     <a mat-button
         matTooltip="High Res Download (untouched)"
-        target="_blank"
         *ngIf="prtDownloadUrl"
         [href]="prtDownloadUrl">
         <mat-icon [inline]="true">photo</mat-icon>
