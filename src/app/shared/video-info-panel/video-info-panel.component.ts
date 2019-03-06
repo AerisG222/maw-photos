@@ -52,14 +52,20 @@ export class VideoInfoPanelComponent implements OnInit {
     ngOnInit() {
         this.configureHotkeys();
 
-        const currentVideo$ = this._store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideo),
-            filter(video => video !== null),
-            tap(video => this.currentVideo = video),
-            tap(video => this._store$.dispatch(new VideoStoreActions.LoadRatingRequestAction({ videoId: video.id }))),
-            tap(video => this._store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id }))),
-            takeUntil(this.destroy$)
-        );
+        const currentVideo$ = this._store$
+            .pipe(
+                select(VideoStoreSelectors.selectCurrentVideo),
+                filter(video => video !== null),
+                takeUntil(this.destroy$)
+            );
+
+        currentVideo$
+            .pipe(
+                tap(video => this.currentVideo = video),
+                tap(video => this._store$.dispatch(new VideoStoreActions.LoadRatingRequestAction({ videoId: video.id }))),
+                tap(video => this._store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id }))),
+                takeUntil(this.destroy$)
+            ).subscribe();
 
         this.endSidenavExpanded$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)

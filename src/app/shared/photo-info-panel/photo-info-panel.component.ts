@@ -64,12 +64,17 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         const currentPhoto$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => photo !== null),
-            tap(photo => this.currentPhoto = photo),
-            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
-            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
-            tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
             takeUntil(this.destroy$)
         );
+
+        currentPhoto$
+            .pipe(
+                tap(photo => this.currentPhoto = photo),
+                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
+                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
+                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
+                takeUntil(this.destroy$)
+            ).subscribe();
 
         this.endSidenavExpanded$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
