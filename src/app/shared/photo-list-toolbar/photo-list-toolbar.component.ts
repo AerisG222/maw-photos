@@ -42,6 +42,8 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject<boolean>();
     private _hotkeys: Hotkey[] = [];
 
+    isFirst$: Observable<boolean>;
+    isLast$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
     categoryDownloadUrl: string = null;
@@ -69,6 +71,16 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.isToolbarExpanded$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectPhotoListToolbarExpandedState)
+            );
+
+        this.isFirst$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+            );
+
+        this.isLast$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
             );
 
         const activePhoto$ = this._store$

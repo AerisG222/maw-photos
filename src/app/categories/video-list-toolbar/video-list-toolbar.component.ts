@@ -5,10 +5,19 @@ import { Subject, Observable } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import { VideoSize } from 'src/app/core/models/video-size.model';
+import { MovePreviousButtonComponent } from 'src/app/shared/move-previous-button/move-previous-button.component';
+import { MoveNextButtonComponent } from 'src/app/shared/move-next-button/move-next-button.component';
+import {
+    RootStoreState,
+    SettingsStoreActions,
+    SettingsStoreSelectors,
+    VideoStoreActions,
+    VideoStoreSelectors
+} from 'src/app/core/root-store';
+import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
 @Component({
     selector: 'app-video-list-toolbar',
@@ -24,7 +33,11 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
     @ViewChild('toggleVideoSizeButton') toggleVideoSizeButton: MatButton;
     @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
+    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
 
+    isFirst$: Observable<boolean>;
+    isLast$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
 
@@ -42,6 +55,16 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
                 tap(settings => this.settings = settings),
                 takeUntil(this.destroy$)
             ).subscribe();
+
+        this.isFirst$ = this._store$
+            .pipe(
+                select(VideoStoreSelectors.selectIsCurrentVideoFirst)
+            );
+
+        this.isLast$ = this._store$
+            .pipe(
+                select(VideoStoreSelectors.selectIsCurrentVideoLast)
+            );
 
         this.isToolbarExpanded$ = this._store$
             .pipe(
@@ -78,7 +101,23 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.UpdateVideoListVideoSizeRequestAction({ newSize: size }));
     }
 
+    onMovePrevious(): void {
+        this._store$.dispatch(new VideoStoreActions.MovePreviousRequestAction());
+    }
+
+    onMoveNext(): void {
+        this._store$.dispatch(new VideoStoreActions.MoveNextRequestAction());
+    }
+
     private configureHotkeys(): void {
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
+        ));
+
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Title / Breadcrumbs')
         ));
@@ -98,6 +137,20 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleVideoListToolbar(event), [], 'Show / Hide Toolbar')
         ));
+    }
+
+    private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
+        this.triggerComponentRipple(this.moveNextButton);
+        this.onMoveNext();
+
+        return false;
+    }
+
+    private onHotkeyMovePrevious(evt: KeyboardEvent): boolean {
+        this.triggerComponentRipple(this.movePreviousButton);
+        this.onMovePrevious();
+
+        return false;
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
@@ -138,6 +191,12 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private triggerButtonRipple(button: MatButton) {
         if (button && !button.disabled) {
             button.ripple.launch({ centered: true });
+        }
+    }
+
+    private triggerComponentRipple(component: CanRipple) {
+        if (component) {
+            component.triggerRipple();
         }
     }
 }

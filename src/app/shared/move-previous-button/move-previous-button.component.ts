@@ -1,8 +1,5 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Component, EventEmitter, Output, ViewChild, Input } from '@angular/core';
 
-import { PhotoStoreSelectors, RootStoreState } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
@@ -11,23 +8,11 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
     templateUrl: './move-previous-button.component.html',
     styleUrls: ['./move-previous-button.component.scss']
 })
-export class MovePreviousButtonComponent implements OnInit, CanRipple {
+export class MovePreviousButtonComponent implements CanRipple {
+    @Input() atStartOfList = true;
     @Output() movePrevious = new EventEmitter<void>();
 
     @ViewChild('prevButton') prevButton: MatButton;
-
-    isFirst$: Observable<boolean>;
-
-    constructor(
-        private _store$: Store<RootStoreState.State>
-    ) { }
-
-    ngOnInit() {
-        this.isFirst$ = this._store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
-            );
-    }
 
     onMovePrevious(): void {
         this.movePrevious.emit();

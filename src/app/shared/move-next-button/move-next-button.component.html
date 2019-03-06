@@ -1,7 +1,7 @@
 <button
     mat-button
     matTooltip="Next (&rarr;)"
-    [disabled]="isLast$ | async"
+    [disabled]="atEndOfList"
     (click)="onMoveNext()"
     #nextButton>
     <mat-icon [inline]="true">chevron_right</mat-icon>

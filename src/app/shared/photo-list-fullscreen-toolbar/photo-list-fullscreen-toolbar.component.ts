@@ -8,7 +8,8 @@ import {
     PhotoStoreActions,
     RootStoreState,
     SettingsStoreSelectors,
-    SettingsStoreActions
+    SettingsStoreActions,
+    PhotoStoreSelectors
 } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
@@ -22,6 +23,8 @@ import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.c
     styleUrls: ['./photo-list-fullscreen-toolbar.component.scss']
 })
 export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
+    isFirst$: Observable<boolean>;
+    isLast$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
 
     @ViewChild('exitFullscreenButton') exitFullscreenButton: MatButton;
@@ -38,6 +41,16 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+        this.isFirst$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+            );
+
+        this.isLast$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
+            );
+
         this.isToolbarExpanded$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectPhotoListFullscreenToolbarExpandedState)

@@ -1,6 +1,6 @@
 <span class="photo" *ngIf="isToolbarExpanded$ | async">
-    <app-move-previous-button (movePrevious)="onMovePrevious()" #movePreviousButton></app-move-previous-button>
-    <app-move-next-button (moveNext)="onMoveNext()" #moveNextButton></app-move-next-button>
+    <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+    <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
     <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
 
     <button

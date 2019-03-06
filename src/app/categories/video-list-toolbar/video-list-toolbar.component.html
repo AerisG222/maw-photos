@@ -22,6 +22,9 @@
         #toggleThumbnailSizeButton>
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>
     </button>
+
+    <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+    <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
 </span>
 
 <span class="video" *ngIf="isToolbarExpanded$ | async">
