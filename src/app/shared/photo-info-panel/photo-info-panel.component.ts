@@ -110,31 +110,29 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             select(PhotoStoreSelectors.selectCurrentPhotoExifData)
         );
 
-        this.latitude$ = this._store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoExifData),
-            map(d => {
-                if (d) {
-                    const lat = d.find(x => x.sourceField === 'gpsLatitude');
+        this.latitude$ = currentPhoto$
+            .pipe(
+                map(photo => {
+                    if (photo) {
+                        return photo.latitude == null ? null : photo.latitude;
+                    }
 
-                    return lat == null ? null : lat.sourceValue;
-                }
+                    return null;
+                }),
+                takeUntil(this.destroy$)
+            );
 
-                return null;
-            })
-        );
+        this.longitude$ = currentPhoto$
+            .pipe(
+                map(photo => {
+                    if (photo) {
+                        return photo.longitude == null ? null : photo.longitude;
+                    }
 
-        this.longitude$ = this._store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoExifData),
-            map(d => {
-                if (d) {
-                    const lng = d.find(x => x.sourceField === 'gpsLongitude');
-
-                    return lng == null ? null : lng.sourceValue;
-                }
-
-                return null;
-            })
-        );
+                    return null;
+                }),
+                takeUntil(this.destroy$)
+            );
 
         this.effects$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoEffects)
