@@ -2,7 +2,7 @@
     <app-video-list-toolbar></app-video-list-toolbar>
     <app-category-header *ngIf="(settings$ | async)?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)" fxFlex="0 0 auto"></app-category-header>
 
-    <div *ngIf="activeVideo$ | async as video" fxFlex="1 1 auto" fxFlexAlign="center">
+    <div *ngIf="activeVideo$ | async as video" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
         <video
             *ngIf="(settings$ | async)?.videoListVideoSize.name === videoSize.small.name; else large"
             class="center-block"
