@@ -33,6 +33,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showExif$: Observable<boolean>;
     showRatings$: Observable<boolean>;
     showMinimap$: Observable<boolean>;
+    showHistogram$: Observable<boolean>;
 
     rating$: Observable<Rating>;
     comments$: Observable<Comment[]>;
@@ -49,6 +50,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleExifButton') toggleExifButton: MatButton;
     @ViewChild('toggleEffectsButton') toggleEffectsButton: MatButton;
     @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
+    @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
 
     currentPhoto: Photo;
     private destroy$ = new Subject<boolean>();
@@ -90,6 +92,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.showExif$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif)
+        );
+
+        this.showHistogram$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowHistogram)
         );
 
         this.showMinimap$ = this._store$.pipe(
@@ -196,6 +202,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExifRequestAction());
     }
 
+    toggleHistogram(): void {
+        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelHistogramRequestAction());
+    }
+
     toggleEffects(): void {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelEffectsRequestAction());
     }
@@ -223,6 +233,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('w', (event: KeyboardEvent) => this.onHotkeyToggleExif(event), [], 'Show / Hide EXIF Panel')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('h', (event: KeyboardEvent) => this.onHotkeyToggleHistogram(event), [], 'Show / Hide Histogram Panel')
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
@@ -258,6 +272,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private onHotkeyToggleExif(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleExifButton);
         this.togglePanel(this.showExif$, () => this.toggleExif());
+
+        return false;
+    }
+
+    private onHotkeyToggleHistogram(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleHistogramButton);
+        this.togglePanel(this.showHistogram$, () => this.toggleHistogram());
 
         return false;
     }

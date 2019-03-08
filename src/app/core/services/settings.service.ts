@@ -26,6 +26,7 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
     private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
     private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
+    private static readonly keyPhotoInfoPanelShowHistogram = 'photoInfoPanelShowHistogram';
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
     private static readonly keyPhotoInfoPanelMinimapZoom = 'photoInfoPanelMinimapZoom';
@@ -61,6 +62,7 @@ export class SettingsService {
         const photoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
         const photoInfoPanelShowExif = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
         const photoInfoPanelShowEffects = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
+        const photoInfoPanelShowHistogram = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowHistogram);
         const photoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
         const photoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
         const photoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapZoom);
@@ -93,6 +95,7 @@ export class SettingsService {
             photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
             photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
             photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
+            photoInfoPanelShowHistogram: photoInfoPanelShowHistogram !== null ? photoInfoPanelShowHistogram : false,
             photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false,
             photoInfoPanelExpandedState: photoInfoPanelExpandedState !== null ? photoInfoPanelExpandedState : false,
             photoInfoPanelMinimapZoom: photoInfoPanelMinimapZoom !== null ? photoInfoPanelMinimapZoom : 10,
@@ -133,6 +136,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);

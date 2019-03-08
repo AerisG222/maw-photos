@@ -20,6 +20,7 @@ export enum ActionTypes {
     TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Settings] Toggle Photo Info Panel Comments',
     TOGGLE_PHOTO_INFO_PANEL_EXIF = '[Settings] Toggle Photo Info Panel EXIF',
     TOGGLE_PHOTO_INFO_PANEL_EFFECTS = '[Settings] Toggle Photo Info Panel Effects',
+    TOGGLE_PHOTO_INFO_PANEL_HISTOGRAM = '[Settings] Toggle Photo Info Panel Histogram',
     TOGGLE_PHOTO_INFO_PANEL_MINIMAP = '[Settings] Toggle Photo Info Panel Minimap',
     TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE = '[Settings] Toggle Photo Info Panel Expanded State',
     UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM = '[Settings] Update Photo Info Panel Minimap Zoom',
@@ -86,6 +87,10 @@ export class TogglePhotoInfoPanelExifRequestAction implements Action {
 
 export class TogglePhotoInfoPanelEffectsRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EFFECTS;
+}
+
+export class TogglePhotoInfoPanelHistogramRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_PHOTO_INFO_PANEL_HISTOGRAM;
 }
 
 export class TogglePhotoInfoPanelMinimapRequestAction implements Action {
@@ -189,6 +194,7 @@ export type Actions =
     TogglePhotoInfoPanelCommentsRequestAction |
     TogglePhotoInfoPanelEffectsRequestAction |
     TogglePhotoInfoPanelExifRequestAction |
+    TogglePhotoInfoPanelHistogramRequestAction |
     TogglePhotoInfoPanelMinimapRequestAction |
     TogglePhotoInfoPanelRatingsRequestAction |
     UpdatePhotoInfoPanelMinimapZoomRequestAction |

@@ -80,6 +80,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoInfoPanelShowExif: !state.settings.photoInfoPanelShowExif
                 }
             };
+        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_HISTOGRAM:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelShowHistogram: !state.settings.photoInfoPanelShowHistogram
+                }
+            };
         case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_RATINGS:
             return {
                 ...state,

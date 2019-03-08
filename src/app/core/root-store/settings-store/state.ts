@@ -26,6 +26,7 @@ export const initialState: State = {
         photoInfoPanelShowComments: true,
         photoInfoPanelShowExif: false,
         photoInfoPanelShowEffects: false,
+        photoInfoPanelShowHistogram: false,
         photoInfoPanelShowMinimap: false,
         photoInfoPanelExpandedState: false,
         photoInfoPanelMinimapZoom: 10,

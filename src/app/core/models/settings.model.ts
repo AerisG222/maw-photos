@@ -19,6 +19,7 @@ export interface Settings {
     photoInfoPanelShowComments: boolean;
     photoInfoPanelShowExif: boolean;
     photoInfoPanelShowEffects: boolean;
+    photoInfoPanelShowHistogram: boolean;
     photoInfoPanelShowMinimap: boolean;
     photoInfoPanelExpandedState: boolean;
     photoInfoPanelMinimapZoom: number;

@@ -36,9 +36,10 @@
                 (updateEffects)="onUpdateEffects($event)">
             </app-effects>
 
-            <div class="panel-heading" fxFlex="none">Histogram</div>
+            <div *ngIf="showHistogram$ | async" class="panel-heading" fxFlex="none">Histogram</div>
             <app-histogram
                 class="widget"
+                *ngIf="showHistogram$ | async"
                 [photo]="currentPhoto">
             </app-histogram>
 
@@ -95,6 +96,16 @@
             (click)="toggleExif()"
             #toggleExifButton>
             <mat-icon [inline]="true">tune</mat-icon>
+        </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Histogram (H)"
+            matTooltipPosition="before"
+            [disabled]="!(endSidenavExpanded$ | async)"
+            [class.notactive]="!(showHistogram$ | async)"
+            (click)="toggleHistogram()"
+            #toggleHistogramButton>
+            <mat-icon [inline]="true">color_lens</mat-icon>
         </button>
         <button
             mat-button
