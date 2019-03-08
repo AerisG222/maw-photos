@@ -1,1 +1,16 @@
-<canvas class="histogram" width="492px" height="200px" #canvas></canvas>
+<div class="histogram_form">
+    <form [formGroup]="form">
+        <div>
+            <mat-radio-group formControlName="channel" fxLayout fxLayoutGap="12px">
+                <mat-radio-button value="rgb">RGB</mat-radio-button>
+                <mat-radio-button value="r">R</mat-radio-button>
+                <mat-radio-button value="g">G</mat-radio-button>
+                <mat-radio-button value="b">B</mat-radio-button>
+                <mat-radio-button value="lum">Luminance</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </form>
+</div>
+<div>
+    <canvas class="histogram" width="492px" height="200px" #canvas></canvas>
+</div>
