@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy, Inject } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, Inject } from '@angular/core';
 import { Photo } from 'src/app/core/models/photo.model';
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -7,7 +7,7 @@ import { DOCUMENT } from '@angular/platform-browser';
     templateUrl: './histogram.component.html',
     styleUrls: ['./histogram.component.scss']
 })
-export class HistogramComponent implements OnDestroy, AfterViewInit {
+export class HistogramComponent implements AfterViewInit {
     imageUrl: string;
 
     @ViewChild('img') img: ElementRef;
@@ -32,11 +32,7 @@ export class HistogramComponent implements OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.imgEl.addEventListener('load', this.onImageLoad);
-    }
-
-    ngOnDestroy(): void {
-        this.imgEl.removeEventListener('load', this.onImageLoad);
+        this.imgEl.addEventListener('load', (evt) => this.onImageLoad(evt));
     }
 
     private onImageLoad(evt) {
