@@ -88,11 +88,11 @@ export class HistogramComponent implements OnDestroy, AfterViewInit {
             }
 
             if (g[i] > maxCount) {
-                maxCount = r[i];
+                maxCount = g[i];
             }
 
             if (b[i] > maxCount) {
-                maxCount = r[i];
+                maxCount = b[i];
             }
         }
 
