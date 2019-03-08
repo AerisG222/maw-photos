@@ -36,6 +36,12 @@
                 (updateEffects)="onUpdateEffects($event)">
             </app-effects>
 
+            <div class="panel-heading" fxFlex="none">Histogram</div>
+            <app-histogram
+                class="widget"
+                [photo]="currentPhoto">
+            </app-histogram>
+
             <div *ngIf="showMinimap$ | async" class="panel-heading" fxFlex="none">Mini-map</div>
             <app-minimap
                 class="widget"

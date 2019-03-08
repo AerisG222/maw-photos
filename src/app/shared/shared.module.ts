@@ -46,6 +46,7 @@ import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
+import { HistogramComponent } from './histogram/histogram.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.com
         PhotoViewComponent,
         RatingComponent,
         SlideshowButtonComponent,
-        VideoInfoPanelComponent
+        VideoInfoPanelComponent,
+        HistogramComponent
     ],
     imports: [
         AgmCoreModule.forRoot({

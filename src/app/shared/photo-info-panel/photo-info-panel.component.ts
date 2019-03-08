@@ -50,7 +50,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleEffectsButton') toggleEffectsButton: MatButton;
     @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
 
-    private currentPhoto: Photo;
+    currentPhoto: Photo;
     private destroy$ = new Subject<boolean>();
 
     constructor(
