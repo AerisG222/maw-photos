@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, Inject } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Photo } from 'src/app/core/models/photo.model';
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -7,20 +7,15 @@ import { DOCUMENT } from '@angular/platform-browser';
     templateUrl: './histogram.component.html',
     styleUrls: ['./histogram.component.scss']
 })
-export class HistogramComponent implements AfterViewInit {
-    imageUrl: string;
+export class HistogramComponent {
+    img: HTMLImageElement;
 
-    @ViewChild('img') img: ElementRef;
     @ViewChild('canvas') canvas: ElementRef;
 
     @Input() set photo(value: Photo) {
-        if (value !== null && value.imageMd !== null) {
-            this.imageUrl = value.imageMd.url;
+        if (this.img && value !== null && value.imageMd !== null) {
+            this.img.src = value.imageMd.url;
         }
-    }
-
-    get imgEl(): HTMLImageElement {
-        return <HTMLImageElement>this.img.nativeElement;
     }
 
     get canvasEl(): HTMLCanvasElement {
@@ -28,11 +23,8 @@ export class HistogramComponent implements AfterViewInit {
     }
 
     constructor(@Inject(DOCUMENT) private doc) {
-
-    }
-
-    ngAfterViewInit() {
-        this.imgEl.addEventListener('load', (evt) => this.onImageLoad(evt));
+        this.img = <HTMLImageElement>doc.createElement('img');
+        this.img.addEventListener('load', (evt) => this.onImageLoad(evt));
     }
 
     private onImageLoad(evt) {
@@ -45,12 +37,12 @@ export class HistogramComponent implements AfterViewInit {
     private getImageData() {
         const tempCanvas = this.doc.createElement('canvas');
 
-        tempCanvas.width = this.imgEl.width;
-        tempCanvas.height = this.imgEl.height;
+        tempCanvas.width = this.img.width;
+        tempCanvas.height = this.img.height;
 
         const ctx = <CanvasRenderingContext2D>tempCanvas.getContext('2d');
 
-        ctx.drawImage(this.imgEl, 0, 0);
+        ctx.drawImage(this.img, 0, 0);
 
         return ctx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data;
     }
