@@ -38,7 +38,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
     @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
     @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
-    @ViewChild('mapviewButton') mapviewButton: MatButton;
+    @ViewChild('mapViewButton') mapViewButton: MatButton;
 
     private destroy$ = new Subject<boolean>();
     private _hotkeys: Hotkey[] = [];
@@ -228,7 +228,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     private onHotkeyMapView(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.mapviewButton);
+        this.triggerButtonRipple(this.mapViewButton);
         this.onToggleMapView();
 
         return false;
