@@ -48,6 +48,7 @@ import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
 import { HistogramComponent } from './histogram/histogram.component';
 import { MapViewComponent } from './map-view/map-view.component';
+import { PhotoListMapToolbarComponent } from './photo-list-map-toolbar/photo-list-map-toolbar.component';
 
 @NgModule({
     declarations: [
@@ -72,7 +73,8 @@ import { MapViewComponent } from './map-view/map-view.component';
         SlideshowButtonComponent,
         VideoInfoPanelComponent,
         HistogramComponent,
-        MapViewComponent
+        MapViewComponent,
+        PhotoListMapToolbarComponent
     ],
     imports: [
         AgmCoreModule.forRoot({

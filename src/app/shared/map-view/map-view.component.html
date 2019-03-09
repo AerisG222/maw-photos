@@ -2,7 +2,7 @@
     *ngIf="images"
     [latitude]="images[0].latitude"
     [longitude]="images[0].longitude"
-    [fullscreenControl]="true"
+    [fullscreenControl]="false"
     [streetViewControl]="false"
     [zoom]="zoom"
     (zoomChange)="onZoomChange($event)">
