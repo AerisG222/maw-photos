@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 import { MapImage } from 'src/app/core/models/map-image';
+import { Photo } from 'src/app/core/models/photo.model';
 
 @Component({
     selector: 'app-map-view',
@@ -7,6 +9,7 @@ import { MapImage } from 'src/app/core/models/map-image';
     styleUrls: ['./map-view.component.scss']
 })
 export class MapViewComponent {
+    @Input() activePhoto: Photo;
     @Input() images: MapImage[];
     @Input() zoom = 10;
 

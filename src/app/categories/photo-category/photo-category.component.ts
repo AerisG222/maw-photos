@@ -80,11 +80,11 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
             .pipe(
                 select(PhotoStoreSelectors.selectPhotosWithGpsCoordinates),
                 map(photos => photos.map(x => ({
+                    id: x.id,
                     imageUrl: x.imageXsSq.url,
                     latitude: x.latitude,
                     longitude: x.longitude
-                }))),
-                tap(x => console.log(x))
+                })))
             );
 
         this.isFullscreen$ = this._store$

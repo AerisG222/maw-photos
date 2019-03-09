@@ -10,7 +10,7 @@
         *ngFor="let image of images"
         [latitude]="image.latitude"
         [longitude]="image.longitude">
-        <agm-info-window [disableAutoPan]="true">
+        <agm-info-window [disableAutoPan]="true" [isOpen]="image.id === activePhoto.id">
             <img [src]="image.imageUrl" />
         </agm-info-window>
     </agm-marker>
