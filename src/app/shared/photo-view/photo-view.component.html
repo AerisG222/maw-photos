@@ -7,7 +7,14 @@
     <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
     <app-category-header *ngIf="settings?.photoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
 
-    <div *ngIf="photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="mapView" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+        <app-map-view
+            [images]="mapImages"
+            [zoom]="zoom"
+            (zoomChange)="onZoomChange($event)"></app-map-view>
+    </div>
+
+    <div *ngIf="!mapView && photos" [class.pad-top]="!settings?.showCategoryBreadcrumbs" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
         <img [src]="activePhoto?.imageMd?.url" [class]="effects?.rotation?.klass" [style.filter]="getEffectStyles()" />
     </div>
 

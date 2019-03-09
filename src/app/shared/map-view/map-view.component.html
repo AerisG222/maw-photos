@@ -1,0 +1,17 @@
+<agm-map
+    *ngIf="images"
+    [latitude]="images[0].latitude"
+    [longitude]="images[0].longitude"
+    [fullscreenControl]="true"
+    [streetViewControl]="false"
+    [zoom]="zoom"
+    (zoomChange)="onZoomChange($event)">
+    <agm-marker
+        *ngFor="let image of images"
+        [latitude]="image.latitude"
+        [longitude]="image.longitude">
+        <agm-info-window [disableAutoPan]="true">
+            <img [src]="image.imageUrl" />
+        </agm-info-window>
+    </agm-marker>
+</agm-map>

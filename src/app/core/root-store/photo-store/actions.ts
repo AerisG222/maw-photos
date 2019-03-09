@@ -46,7 +46,10 @@ export enum ActionTypes {
     STOP_SLIDESHOW_REQUEST = '[Photos] Stop Slideshow Request',
     TOGGLE_FULLSCREEN_REQUEST = '[Photos] Toggle Fullscreen Request',
     ENTER_FULLSCREEN_REQUEST = '[Photos] Enter Fullscreen Request',
-    EXIT_FULLSCREEN_REQUEST = '[Photos] Exit Fullscreen Request'
+    EXIT_FULLSCREEN_REQUEST = '[Photos] Exit Fullscreen Request',
+    ENTER_MAPVIEW_REQUEST = '[Photos] Enter Map View Request',
+    EXIT_MAPVIEW_REQUEST = '[Photos] Exit Map View Request',
+    TOGGLE_MAPVIEW_REQUEST = '[Photos] Toggle Map View Request'
 }
 
 export class ClearRequestAction implements Action {
@@ -231,6 +234,18 @@ export class ExitFullscreenRequestAction implements Action {
     readonly type = ActionTypes.EXIT_FULLSCREEN_REQUEST;
 }
 
+export class EnterMapViewRequestAction implements Action {
+    readonly type = ActionTypes.ENTER_MAPVIEW_REQUEST;
+}
+
+export class ExitMapViewRequestAction implements Action {
+    readonly type = ActionTypes.EXIT_MAPVIEW_REQUEST;
+}
+
+export class ToggleMapViewRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_MAPVIEW_REQUEST;
+}
+
 export type Actions =
     ClearRequestAction |
     LoadCommentsRequestAction |
@@ -270,4 +285,7 @@ export type Actions =
     StopSlideshowRequestAction |
     ToggleFullscreenRequestAction |
     EnterFullscreenRequestAction |
-    ExitFullscreenRequestAction;
+    ExitFullscreenRequestAction |
+    EnterMapViewRequestAction |
+    ExitMapViewRequestAction |
+    ToggleMapViewRequestAction;

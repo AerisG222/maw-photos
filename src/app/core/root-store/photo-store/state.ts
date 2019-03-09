@@ -23,6 +23,7 @@ export interface State extends EntityState<Photo> {
     currentPhotoEffects: PhotoEffects;
     slideshowIsPlaying: boolean;
     isFullscreenView: boolean;
+    isMapView: boolean;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
@@ -46,5 +47,6 @@ export const initialState: State = photoAdapter.getInitialState({
         hueRotate: 0
     },
     slideshowIsPlaying: false,
-    isFullscreenView: false
+    isFullscreenView: false,
+    isMapView: false
 });

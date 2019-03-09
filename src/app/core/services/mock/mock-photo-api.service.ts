@@ -405,8 +405,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 2,
                 categoryId: 1,
                 createDate: '2018-01-02',
-                latitude: 43,
-                longitude: -72,
+                latitude: 43.1,
+                longitude: -72.1,
                 imageXs: {
                     height: 400,
                     width: 400,

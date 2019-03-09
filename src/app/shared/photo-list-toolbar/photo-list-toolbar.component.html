@@ -42,6 +42,15 @@
         #fullscreenButton>
         <mat-icon [inline]="true">fullscreen</mat-icon>
     </button>
+
+    <button
+        *ngIf="enableMapView$ | async"
+        mat-button
+        matTooltip="Enter Map View (Z)"
+        (click)="onToggleMapView()"
+        #mapViewButton>
+        <mat-icon [inline]="true">map</mat-icon>
+    </button>
 </span>
 
 <span class="photo" *ngIf="isToolbarExpanded$ | async">

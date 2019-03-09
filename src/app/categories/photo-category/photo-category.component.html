@@ -5,7 +5,9 @@
     [activePhoto]="activePhoto$ | async"
     [effects]="effects$ | async"
     [fullscreen]="isFullscreen$ | async"
+    [mapView]="isMapView$ | async"
     [allowCategoryDownload]="true"
     [showCategoryAsLink]="false"
+    [mapImages]="mapImages$ | async"
     (photoSelected)="onSelectPhoto($event)">
 </app-photo-view>

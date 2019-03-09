@@ -326,6 +326,24 @@ export function photoReducer(state = initialState, action: Actions): State {
                 isFullscreenView: false
             };
         }
+        case ActionTypes.ENTER_MAPVIEW_REQUEST: {
+            return {
+                ...state,
+                isMapView: true
+            };
+        }
+        case ActionTypes.EXIT_MAPVIEW_REQUEST: {
+            return {
+                ...state,
+                isMapView: false
+            };
+        }
+        case ActionTypes.TOGGLE_MAPVIEW_REQUEST: {
+            return {
+                ...state,
+                isMapView: !state.isMapView
+            };
+        }
         default: {
             return state;
         }

@@ -38,6 +38,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
     @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
     @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
+    @ViewChild('mapviewButton') mapviewButton: MatButton;
 
     private destroy$ = new Subject<boolean>();
     private _hotkeys: Hotkey[] = [];
@@ -45,6 +46,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
+    enableMapView$: Observable<boolean>;
     settings: Settings;
     categoryDownloadUrl: string = null;
 
@@ -67,6 +69,11 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
                 tap(settings => this.settings = settings),
                 takeUntil(this.destroy$)
             ).subscribe();
+
+        this.enableMapView$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectHasPhotosWithGpsCoordinates)
+            );
 
         this.isToolbarExpanded$ = this._store$
             .pipe(
@@ -130,6 +137,10 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
     }
 
+    onToggleMapView(): void {
+        this._store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
+    }
+
     onMoveNext(): void {
         this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
     }
@@ -172,6 +183,10 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('a', (event: KeyboardEvent) => this.onHotkeyRotateCounterClockwise(event), [], 'Rotate Counter Clockwise')
         ));
 
@@ -208,6 +223,13 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyFullscreen(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.fullscreenButton);
         this.onToggleFullscreen();
+
+        return false;
+    }
+
+    private onHotkeyMapView(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.mapviewButton);
+        this.onToggleMapView();
 
         return false;
     }

@@ -5,6 +5,7 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
+import { MapImage } from 'src/app/core/models/map-image';
 
 @Component({
     selector: 'app-photo-view',
@@ -17,11 +18,15 @@ export class PhotoViewComponent {
     @Input() photos: Photo[];
     @Input() activePhoto: Photo;
     @Input() effects: PhotoEffects;
+    @Input() mapView = false;
     @Input() fullscreen = false;
     @Input() allowCategoryDownload: boolean;
     @Input() showCategoryAsLink: boolean;
+    @Input() mapImages: MapImage[];
 
     @Output() photoSelected = new EventEmitter<Photo>();
+
+    zoom = 10;
 
     constructor(
         private sanitizer: DomSanitizer
@@ -66,5 +71,9 @@ export class PhotoViewComponent {
         }
 
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+    }
+
+    onZoomChange(evt: number): void {
+
     }
 }

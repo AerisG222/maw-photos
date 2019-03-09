@@ -47,6 +47,7 @@ import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
 import { HistogramComponent } from './histogram/histogram.component';
+import { MapViewComponent } from './map-view/map-view.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +71,8 @@ import { HistogramComponent } from './histogram/histogram.component';
         RatingComponent,
         SlideshowButtonComponent,
         VideoInfoPanelComponent,
-        HistogramComponent
+        HistogramComponent,
+        MapViewComponent
     ],
     imports: [
         AgmCoreModule.forRoot({
@@ -132,9 +134,11 @@ import { HistogramComponent } from './histogram/histogram.component';
         EffectsComponent,
         ExifComponent,
         ExifTableComponent,
+        HistogramComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
         InfoPanelComponent,
+        MapViewComponent,
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,

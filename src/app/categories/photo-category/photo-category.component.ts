@@ -18,6 +18,7 @@ import {
     SettingsStoreSelectors,
     SettingsStoreActions
 } from 'src/app/core/root-store';
+import { MapImage } from 'src/app/core/models/map-image';
 
 @Component({
     selector: 'app-photo-category',
@@ -32,6 +33,8 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;
     isFullscreen$: Observable<boolean>;
+    isMapView$: Observable<boolean>;
+    mapImages$: Observable<MapImage[]>;
 
     constructor(
         private _route: ActivatedRoute,
@@ -73,9 +76,25 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
                 tap(photos => this.setCurrentPhoto(photos[0]))
             );
 
+        this.mapImages$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectPhotosWithGpsCoordinates),
+                map(photos => photos.map(x => ({
+                    imageUrl: x.imageXsSq.url,
+                    latitude: x.latitude,
+                    longitude: x.longitude
+                }))),
+                tap(x => console.log(x))
+            );
+
         this.isFullscreen$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsFullscreenView)
+            );
+
+        this.isMapView$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsMapView)
             );
 
         this.activePhoto$ = this._store$
