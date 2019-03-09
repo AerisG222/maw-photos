@@ -24,6 +24,7 @@ const getPhotoInfoPanelMinimapZoom = (state: State): number => state.settings.ph
 const getPhotoListShowPhotoList = (state: State): boolean => state.settings.photoListShowPhotoList;
 const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
 const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
+const getPhotoListMapViewZoom = (state: State): number => state.settings.photoListMapViewZoom;
 
 const getVideoListShowVideoList = (state: State): boolean => state.settings.videoListShowVideoList;
 const getVideoListToolbarExpandedState = (state: State): boolean => state.settings.videoListToolbarExpandedState;
@@ -54,6 +55,7 @@ export const selectPhotoListShowPhotoList = createSelector(selectSettingsState, 
 export const selectPhotoListToolbarExpandedState = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
 // tslint:disable-next-line: max-line-length
 export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
+export const selectPhotoListMapViewZoom = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
 
 export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
 export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);

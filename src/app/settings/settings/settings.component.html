@@ -48,6 +48,14 @@
                     <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
 
+                <h3>Map View Zoom Level</h3>
+                <mat-form-field appearance="standard">
+                    <mat-label>Zoom</mat-label>
+                    <mat-select formControlName="photoListMapViewZoom">
+                        <mat-option *ngFor="let zoom of mapViewZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
                 <h3>Slideshow Display Duration (in seconds)</h3>
                 <mat-form-field appearance="standard">
                     <mat-label>Duration</mat-label>

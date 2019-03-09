@@ -14,6 +14,7 @@ export interface Settings {
     photoListSlideshowDisplayDurationSeconds: number;
     photoListToolbarExpandedState: boolean;
     photoListFullscreenToolbarExpandedState: boolean;
+    photoListMapViewZoom: number;
 
     photoInfoPanelShowRatings: boolean;
     photoInfoPanelShowComments: boolean;

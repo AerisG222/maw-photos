@@ -22,6 +22,7 @@ export class SettingsComponent implements OnInit {
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
+    mapViewZoomLevels = MinimapZoom.allSizes;
     photoZoomLevels = MinimapZoom.allSizes;
     videoZoomLevels = MinimapZoom.allSizes;
     videoSizes = VideoSize.allSizes;
@@ -47,6 +48,7 @@ export class SettingsComponent implements OnInit {
             photoListSlideshowDisplayDurationSeconds: [2],
             photoListToolbarExpandedState: [true],
             photoListFullscreenToolbarExpandedState: [true],
+            photoListMapViewZoom: [10],
 
             photoInfoPanelShowComments: [true],
             photoInfoPanelShowEffects: [false],
@@ -93,6 +95,7 @@ export class SettingsComponent implements OnInit {
             photoListSlideshowDisplayDurationSeconds: this.form.get('photoListSlideshowDisplayDurationSeconds').value,
             photoListToolbarExpandedState: this.form.get('photoListToolbarExpandedState').value,
             photoListFullscreenToolbarExpandedState: this.form.get('photoListFullscreenToolbarExpandedState').value,
+            photoListMapViewZoom: this.form.get('photoListMapViewZoom').value,
 
             photoInfoPanelShowComments: this.form.get('photoInfoPanelShowComments').value,
             photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
@@ -143,6 +146,7 @@ export class SettingsComponent implements OnInit {
         this.form.get('photoListSlideshowDisplayDurationSeconds').setValue(settings.photoListSlideshowDisplayDurationSeconds);
         this.form.get('photoListToolbarExpandedState').setValue(settings.photoListToolbarExpandedState);
         this.form.get('photoListFullscreenToolbarExpandedState').setValue(settings.photoListFullscreenToolbarExpandedState);
+        this.form.get('photoListMapViewZoom').setValue(settings.photoListMapViewZoom);
 
         this.form.get('photoInfoPanelShowComments').setValue(settings.photoInfoPanelShowComments);
         this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);

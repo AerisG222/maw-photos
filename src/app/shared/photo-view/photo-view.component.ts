@@ -6,6 +6,8 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import { MapImage } from 'src/app/core/models/map-image';
+import { RootStoreState, SettingsStoreActions } from 'src/app/core/root-store';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-photo-view',
@@ -26,9 +28,8 @@ export class PhotoViewComponent {
 
     @Output() photoSelected = new EventEmitter<Photo>();
 
-    zoom = 10;
-
     constructor(
+        private _store$: Store<RootStoreState.State>,
         private sanitizer: DomSanitizer
     ) {
 
@@ -73,7 +74,7 @@ export class PhotoViewComponent {
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
     }
 
-    onZoomChange(evt: number): void {
-
+    onZoomChange(zoom: number): void {
+        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewZoomRequestAction({ zoom: zoom }));
     }
 }

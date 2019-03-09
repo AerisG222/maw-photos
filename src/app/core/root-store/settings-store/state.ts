@@ -21,6 +21,7 @@ export const initialState: State = {
         photoListSlideshowDisplayDurationSeconds: 2,
         photoListToolbarExpandedState: true,
         photoListFullscreenToolbarExpandedState: true,
+        photoListMapViewZoom: 10,
 
         photoInfoPanelShowRatings: true,
         photoInfoPanelShowComments: true,

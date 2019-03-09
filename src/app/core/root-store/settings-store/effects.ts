@@ -195,6 +195,18 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
+    updatePhotoListMapViewZoom$: Observable<Action> = this._actions$.pipe(
+        // tslint:disable-next-line:max-line-length
+        ofType<settingsActions.UpdatePhotoListMapViewZoomRequestAction>(settingsActions.ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM),
+        withLatestFrom(this._store$.pipe(
+            select(settingsSelectors.selectSettings)
+        )),
+        map(x => {
+            return new settingsActions.SaveRequestAction({ settings: x[1] });
+        })
+    );
+
+    @Effect()
     toggleCategoryListCategoryTitles$: Observable<Action> = this._actions$.pipe(
         // tslint:disable-next-line:max-line-length
         ofType<settingsActions.ToggleCategoryListCategoryTitlesRequestAction>(settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES),

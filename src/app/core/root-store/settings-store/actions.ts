@@ -30,6 +30,7 @@ export enum ActionTypes {
     TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Fullscreen Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
     TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Photo List Category Breadcrumbs',
+    UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM = '[Settings] Update Photo List Map View Zoom',
 
     TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST = '[Settings] Toggle Video List Show Video List',
     TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Video List Toolbar Expanded Sate',
@@ -127,6 +128,11 @@ export class TogglePhotoListCategoryBreadcrumbsRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS;
 }
 
+export class UpdatePhotoListMapViewZoomRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM;
+    constructor(public payload: { zoom: number }) { }
+}
+
 export class ToggleCategoryListCategoryTitlesRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES;
 }
@@ -204,6 +210,7 @@ export type Actions =
     TogglePhotoListShowPhotoListRequestAction |
     TogglePhotoListToolbarExpandedStateRequestAction |
     UpdatePhotoListThumbnailSizeRequestAction |
+    UpdatePhotoListMapViewZoomRequestAction |
 
     ToggleVideoListCategoryBreadcrumbsRequestAction |
     ToggleVideoListShowVideoListRequestAction |

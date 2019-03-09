@@ -161,6 +161,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
                 }
             };
+        case ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoListMapViewZoom: action.payload.zoom
+                }
+            };
 
         case ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST:
             return {

@@ -21,6 +21,7 @@ export class SettingsService {
     private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
     private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
     private static readonly keyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
+    private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
 
     private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
     private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
@@ -57,6 +58,7 @@ export class SettingsService {
         const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
         // tslint:disable-next-line:max-line-length
         const photoListFullscreenToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListFullscreenToolbarExpandedState);
+        const photoListMapViewZoom = this._localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom);
 
         const photoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
         const photoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
@@ -90,6 +92,7 @@ export class SettingsService {
             photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
             // tslint:disable-next-line:max-line-length
             photoListFullscreenToolbarExpandedState: photoListFullscreenToolbarExpandedState !== null ? photoListFullscreenToolbarExpandedState : true,
+            photoListMapViewZoom: photoListMapViewZoom != null ? photoListMapViewZoom : 10,
 
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
             photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
@@ -132,6 +135,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
         // tslint:disable-next-line:max-line-length
         this._localStorage.store(SettingsService.keyPhotoListFullscreenToolbarExpandedState, settings.photoListFullscreenToolbarExpandedState);
+        this._localStorage.store(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
