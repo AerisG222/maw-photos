@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { RootStoreState, PhotoStoreActions } from 'src/app/core/root-store';
+import { RootStoreState, PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
 import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
 import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
@@ -18,6 +19,9 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
     @ViewChild('mapviewButton') mapviewButton: MatButton;
 
+    isFirst$: Observable<boolean>;
+    isLast$: Observable<boolean>;
+
     private _hotkeys: Hotkey[] = [];
 
     constructor(
@@ -27,6 +31,16 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.configureHotkeys();
+
+        this.isFirst$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+            );
+
+        this.isLast$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
+            );
     }
 
     ngOnDestroy(): void {
