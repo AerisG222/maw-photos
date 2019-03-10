@@ -1,5 +1,6 @@
 export class Theme {
     static readonly themeDark = new Theme('Dark', 'maw-dark-theme');
+    static readonly themeDeepBlue = new Theme('Deep Blue', 'maw-deep-blue-theme');
     static readonly themeLight = new Theme('Light', 'maw-light-theme');
     static readonly themeMulledWine = new Theme('Mulled Wine', 'maw-mulled-wine-theme');
     static readonly themeOcean = new Theme('Ocean', 'maw-ocean-theme');
@@ -7,6 +8,7 @@ export class Theme {
 
     static readonly allThemes = [
         Theme.themeDark,
+        Theme.themeDeepBlue,
         Theme.themeLight,
         Theme.themeMulledWine,
         Theme.themeOcean,
@@ -25,6 +27,8 @@ export class Theme {
         switch (name) {
             case Theme.themeDark.name:
                 return Theme.themeDark;
+            case Theme.themeDeepBlue.name:
+                return Theme.themeDeepBlue;
             case Theme.themeLight.name:
                 return Theme.themeLight;
             case Theme.themeMulledWine.name:

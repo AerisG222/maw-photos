@@ -9,6 +9,7 @@
 @include mat-core();
 
 @import 'themes/dark-theme';
+@import 'themes/deep-blue-theme';
 @import 'themes/light-theme';
 @import 'themes/mulled-wine-theme';
 @import 'themes/ocean-theme';
@@ -26,6 +27,11 @@
 .maw-dark-theme {
     @include angular-material-theme($maw-dark-theme);
     @include custom-components-theme($maw-dark-theme);
+}
+
+.maw-deep-blue-theme {
+    @include angular-material-theme($maw-deep-blue-theme);
+    @include custom-components-theme($maw-deep-blue-theme);
 }
 
 .maw-light-theme {
