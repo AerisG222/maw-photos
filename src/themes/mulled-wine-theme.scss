@@ -244,8 +244,8 @@ $mat-mulled-wine-theme-foreground: (
     );
   }
 
-$maw-mulled-wine-primary: mat-palette($mat-pink, A200, A100, A400);
-$maw-mulled-wine-accent:  mat-palette($mat-pink, A200, A100, A400);
+$maw-mulled-wine-primary: mat-palette($md-venus, A400, A200, A700);
+$maw-mulled-wine-accent:  mat-palette($md-venus, A400, A200, A700);
 $maw-mulled-wine-warn:    mat-palette($mat-red);
 $maw-mulled-wine-theme:   mat-mulled-wine-theme($maw-mulled-wine-primary, $maw-mulled-wine-accent, $maw-mulled-wine-warn);
 
