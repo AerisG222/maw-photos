@@ -10,6 +10,9 @@
 
 @import 'themes/dark-theme';
 @import 'themes/light-theme';
+@import 'themes/mulled-wine-theme';
+@import 'themes/ocean-theme';
+@import 'themes/pale-night-theme';
 
 // https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
 @import 'app/app.component.theme';
@@ -22,16 +25,28 @@
 
 .maw-dark-theme {
     @include angular-material-theme($maw-dark-theme);
-
     @include custom-components-theme($maw-dark-theme);
 }
 
 .maw-light-theme {
     @include angular-material-theme($maw-light-theme);
-
     @include custom-components-theme($maw-light-theme);
 }
 
+.maw-mulled-wine-theme {
+    @include angular-material-theme($maw-mulled-wine-theme);
+    @include custom-components-theme($maw-mulled-wine-theme);
+}
+
+.maw-ocean-theme {
+    @include angular-material-theme($maw-ocean-theme);
+    @include custom-components-theme($maw-ocean-theme);
+}
+
+.maw-pale-night-theme {
+    @include angular-material-theme($maw-pale-night-theme);
+    @include custom-components-theme($maw-pale-night-theme);
+}
 
 /* You can add global styles to this file, and also import other style files */
 

@@ -19,7 +19,7 @@
             <mat-card-title>Category List</mat-card-title>
             <mat-card-content>
                 <h3>Show Category Titles</h3>
-                <mat-slide-toggle formControlName="categoryListShowCategoryTitles" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="categoryListShowCategoryTitles"></mat-slide-toggle>
 
                 <h3>Thumbnail Size (w/o title)</h3>
                 <mat-radio-group formControlName="categoryListThumbnailSize">
@@ -32,16 +32,16 @@
             <mat-card-title>Photo List</mat-card-title>
             <mat-card-content>
                 <h3>Show Category Breadcrumbs</h3>
-                <mat-slide-toggle formControlName="photoListShowCategoryBreadcrumbs" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="photoListShowCategoryBreadcrumbs"></mat-slide-toggle>
 
                 <h3>Show Category Photo List</h3>
-                <mat-slide-toggle formControlName="photoListShowPhotoList" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="photoListShowPhotoList"></mat-slide-toggle>
 
                 <h3>Show Photo List Toolbar</h3>
-                <mat-slide-toggle formControlName="photoListToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="photoListToolbarExpandedState"></mat-slide-toggle>
 
                 <h3>Show Photo List Fullscreen Toolbar</h3>
-                <mat-slide-toggle formControlName="photoListFullscreenToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="photoListFullscreenToolbarExpandedState"></mat-slide-toggle>
 
                 <h3>Photo List Thumbnail Size</h3>
                 <mat-radio-group formControlName="photoListThumbnailSize">
@@ -93,13 +93,13 @@
             <mat-card-title>Video List</mat-card-title>
             <mat-card-content>
                 <h3>Show Category Breadcrumbs</h3>
-                <mat-slide-toggle formControlName="videoListShowCategoryBreadcrumbs" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="videoListShowCategoryBreadcrumbs"></mat-slide-toggle>
 
                 <h3>Show Category Video List</h3>
-                <mat-slide-toggle formControlName="videoListShowVideoList" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="videoListShowVideoList"></mat-slide-toggle>
 
                 <h3>Show Video List Toolbar</h3>
-                <mat-slide-toggle formControlName="videoListToolbarExpandedState" [color]="'primary'"></mat-slide-toggle>
+                <mat-slide-toggle formControlName="videoListToolbarExpandedState"></mat-slide-toggle>
 
                 <h3>Video Size</h3>
                 <mat-radio-group formControlName="videoListVideoSize">
@@ -131,6 +131,6 @@
         </mat-card>
     </div>
 
-    <button mat-button (click)="onSave()">Save</button>
-    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onSave()" color="primary">Save</button>
+    <button mat-button (click)="onCancel()" color="accent">Cancel</button>
 </form>

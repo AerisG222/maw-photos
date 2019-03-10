@@ -8,16 +8,15 @@
     .mat-list-item-content .active {
         // retrieve particular color from variable, rg: text, base, divider, ...
         color: mat-color($accent, '500-contrast');
-        background-color: mat-color($accent, 500);
+        background-color: mat-color($accent, 900);
     }
 
     a {
         color: mat-color($accent);
         cursor: pointer;
-    }
 
-    .with-icon {
-        display: flex;
-        align-items: center;
+        &.active {
+            background-color: mat-color($accent, 900);
+        }
     }
 }
