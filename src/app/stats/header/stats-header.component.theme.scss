@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin app-stats-header-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-stats-header {
+        & a {
+            color: mat-color($accent, A200);
+        }
+    }
+}

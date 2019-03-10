@@ -18,10 +18,50 @@
 // https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
 @import 'app/app.component.theme';
 
+@import 'app/categories/category-card/category-card.component.theme';
+@import 'app/categories/video-list/video-list.component.theme';
+@import 'app/categories/video-list-toolbar/video-list-toolbar.component.theme';
+
+@import 'app/shared/category-list-toolbar/category-list-toolbar.component.theme';
+@import 'app/shared/comments/comments.component.theme.scss';
+@import 'app/shared/exif-table/exif-table.component.theme';
+@import 'app/shared/move-next-button/move-next-button.component.theme';
+@import 'app/shared/move-previous-button/move-previous-button.component.theme';
+@import 'app/shared/photo-info-panel/photo-info-panel.component.theme';
+@import 'app/shared/photo-list/photo-list.component.theme';
+@import 'app/shared/photo-list-fullscreen-toolbar/photo-list-fullscreen-toolbar.component.theme';
+@import 'app/shared/photo-list-map-toolbar/photo-list-map-toolbar.component.theme';
+@import 'app/shared/photo-list-toolbar/photo-list-toolbar.component.theme';
+@import 'app/shared/photo-view/photo-view.component.theme.scss';
+@import 'app/shared/slideshow-button/slideshow-button.component.theme';
+@import 'app/shared/video-info-panel/video-info-panel.component.theme';
+
+@import 'app/stats/header/stats-header.component.theme';
+
 
 // you only have to add additional componenets here (instead of in every theme class)
 @mixin custom-components-theme($theme) {
     @include app-component-theme($theme);
+
+    @include app-category-card-component-theme($theme);
+    @include app-video-list-component-theme($theme);
+    @include app-video-list-toolbar-component-theme($theme);
+
+    @include app-category-list-toolbar-component-theme($theme);
+    @include app-comments-component-theme($theme);
+    @include app-exif-table-component-theme($theme);
+    @include app-move-next-button-component-theme($theme);
+    @include app-move-previous-button-component-theme($theme);
+    @include app-photo-info-panel-component-theme($theme);
+    @include app-photo-list-component-theme($theme);
+    @include app-photo-list-fullscreen-toolbar-component-theme($theme);
+    @include app-photo-list-map-toolbar-component-theme($theme);
+    @include app-photo-list-toolbar-component-theme($theme);
+    @include app-photo-view-component-theme($theme);
+    @include app-slideshow-button-component-theme($theme);
+    @include app-video-info-panel-component-theme($theme);
+
+    @include app-stats-header-component-theme($theme);
 }
 
 .maw-dark-theme {

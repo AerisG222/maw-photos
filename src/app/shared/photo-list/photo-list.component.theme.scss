@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+
+@mixin app-photo-list-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-photo-list {
+        div {
+            & img {
+                &.selected {
+                    border: 1px solid mat-color($accent, 600);
+                }
+
+                &:hover {
+                    border: 1px solid mat-color($accent, 300);
+                }
+            }
+        }
+    }
+}

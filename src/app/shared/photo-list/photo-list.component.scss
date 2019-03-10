@@ -29,12 +29,10 @@ div {
 
         &.selected {
             filter: saturate(1.0);
-            border: 1px solid #aaa;
         }
 
         &:hover {
             filter: saturate(1.0);
-            border: 1px solid #a00;
         }
     }
 }

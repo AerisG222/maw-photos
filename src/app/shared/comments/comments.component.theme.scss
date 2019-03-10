@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin app-comments-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-comments {
+        & .comment-head {
+            background-color: rgba(mat-color($accent, 200), .3);
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin app-photo-view-component-theme($theme) {
+    $background: map-get($theme, background);
+
+    app-photo-view {
+        & .fullscreen {
+            background-color: mat-color($background, 900);
+        }
+    }
+}

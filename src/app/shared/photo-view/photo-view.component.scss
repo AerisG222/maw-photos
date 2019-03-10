@@ -36,7 +36,6 @@ app-photo-list-fullscreen-toolbar {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: #303030;
     display: table-cell;
     z-index: 1200; /* static nav in bootstrap has zindex of 1000, make sure this is greater */
 

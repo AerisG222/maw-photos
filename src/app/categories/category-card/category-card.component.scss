@@ -1,9 +1,10 @@
 mat-card {
     padding: 0;
+    border: 1px solid transparent;
     cursor: pointer;
 
     & img {
-        margin-bottom: -6px !important;
+        margin-bottom: -5px !important;
         border-radius: 4px;
         width: 160px;
         height: 120px;
@@ -35,8 +36,6 @@ mat-card {
     }
 
     &:hover {
-        box-shadow: 1px 1px 1px 1px rgba(225, 50, 50, 0.2) !important;
-
         & img {
             filter: saturate(1.0);
         }
