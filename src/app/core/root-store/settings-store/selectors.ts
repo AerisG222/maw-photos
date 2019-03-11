@@ -55,7 +55,7 @@ export const selectPhotoListShowPhotoList = createSelector(selectSettingsState, 
 export const selectPhotoListToolbarExpandedState = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
 // tslint:disable-next-line: max-line-length
 export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
-export const selectPhotoListMapViewZoom = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
+export const selectPhotoListMapViewZoom = createSelector(selectSettingsState, getPhotoListMapViewZoom);
 
 export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
 export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);
