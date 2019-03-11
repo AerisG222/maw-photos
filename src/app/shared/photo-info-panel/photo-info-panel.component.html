@@ -73,7 +73,7 @@
             matTooltip="Show/Hide Ratings (R)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showRatings$ | async)"
+            [class.active]="showRatings$ | async"
             (click)="toggleRatings()"
             #toggleRatingsButton>
             <mat-icon [inline]="true">star</mat-icon>
@@ -83,7 +83,7 @@
             matTooltip="Show/Hide Comments (C)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showComments$ | async)"
+            [class.active]="showComments$ | async"
             (click)="toggleComments()"
             #toggleCommentsButton>
             <mat-icon [inline]="true">comment</mat-icon>
@@ -93,7 +93,7 @@
             matTooltip="Show/Hide EXIF (W)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showExif$ | async)"
+            [class.active]="showExif$ | async"
             (click)="toggleExif()"
             #toggleExifButton>
             <mat-icon [inline]="true">tune</mat-icon>
@@ -103,7 +103,7 @@
             matTooltip="Show/Hide Histogram (H)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showHistogram$ | async)"
+            [class.active]="showHistogram$ | async"
             (click)="toggleHistogram()"
             #toggleHistogramButton>
             <mat-icon [inline]="true">color_lens</mat-icon>
@@ -113,7 +113,7 @@
             matTooltip="Show/Hide Effects (E)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showEffects$ | async)"
+            [class.active]="showEffects$ | async"
             (click)="toggleEffects()"
             #toggleEffectsButton>
             <mat-icon [inline]="true">photo_filter</mat-icon>
@@ -123,7 +123,7 @@
             matTooltip="Show/Hide Mini-map (M)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showMinimap$ | async)"
+            [class.active]="showMinimap$ | async"
             (click)="toggleMinimap()"
             #toggleMinimapButton>
             <mat-icon [inline]="true">map</mat-icon>

@@ -50,7 +50,7 @@
             matTooltip="Show/Hide Ratings (R)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showRatings$ | async)"
+            [class.active]="showRatings$ | async"
             (click)="toggleRatings()"
             #toggleRatingsButton>
             <mat-icon [inline]="true">star</mat-icon>
@@ -60,7 +60,7 @@
             matTooltip="Show/Hide Comments (C)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showComments$ | async)"
+            [class.active]="showComments$ | async"
             (click)="toggleComments()"
             #toggleCommentsButton>
             <mat-icon [inline]="true">comment</mat-icon>
@@ -70,7 +70,7 @@
             matTooltip="Show/Hide Mini-map (M)"
             matTooltipPosition="before"
             [disabled]="!(endSidenavExpanded$ | async)"
-            [class.notactive]="!(showMinimap$ | async)"
+            [class.active]="showMinimap$ | async"
             (click)="toggleMinimap()"
             #toggleMinimapButton>
             <mat-icon [inline]="true">map</mat-icon>

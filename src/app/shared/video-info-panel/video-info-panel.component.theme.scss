@@ -12,12 +12,23 @@
             background-color: rgba(mat-color($accent, 900), .3);
         }
 
-        & .notactive {
+        & .toolbar_title {
             color: mat-color($accent, A200);
         }
 
-        & .toolbar_title {
-            color: mat-color($accent, A200);
+        button {
+            color: mat-color($accent);
+            cursor: pointer;
+
+            &:enabled.active {
+                background-color: mat-color($accent, 900);
+                color: mat-color($accent, 200);
+            }
+
+            &:enabled:hover {
+                background-color: mat-color($accent, 700);
+                color: mat-color($accent, 100);
+            }
         }
     }
 }
