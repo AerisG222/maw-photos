@@ -9,7 +9,7 @@
             background-color: rgba(mat-color($accent, 900), .3);
             border: solid 1px rgba(mat-color($accent, 200), .3);
 
-            & button:hover {
+            & button:enabled:hover {
                 background-color: rgba(mat-color($accent, 700), .3);
                 color: mat-color($accent, 100);
             }

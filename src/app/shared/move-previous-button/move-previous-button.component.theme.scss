@@ -4,7 +4,7 @@
     $accent: map-get($theme, accent);
 
     app-move-previous-button {
-        & button:hover {
+        & button:enabled:hover {
             background-color: rgba(mat-color($accent, 700), .3);
             color: mat-color($accent, 100);
         }
