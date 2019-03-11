@@ -7,10 +7,13 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
 import { State } from './state';
 import { VideoSize } from '../../models/video-size.model';
+import { Theme } from '../../models/theme.model';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getSettings = (state: State): Settings => state.settings;
+
+const getAppTheme = (state: State): Theme => state.settings.appTheme;
 
 const getPhotoInfoPanelShowRatings = (state: State): boolean => state.settings.photoInfoPanelShowRatings;
 const getPhotoInfoPanelShowComments = (state: State): boolean => state.settings.photoInfoPanelShowComments;
@@ -41,6 +44,8 @@ export const selectSettingsState = createFeatureSelector<State>(SETTINGS_FEATURE
 export const selectSettingsError = createSelector(selectSettingsState, getError);
 export const selectSettingsIsLoading = createSelector(selectSettingsState, getIsLoading);
 export const selectSettings = createSelector(selectSettingsState, getSettings);
+
+export const selectAppTheme = createSelector(selectSettingsState, getAppTheme);
 
 export const selectPhotoInfoPanelShowRatings = createSelector(selectSettingsState, getPhotoInfoPanelShowRatings);
 export const selectPhotoInfoPanelShowComments = createSelector(selectSettingsState, getPhotoInfoPanelShowComments);

@@ -1,7 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MapTypeStyle } from '@agm/core';
 
 import { MapImage } from 'src/app/core/models/map-image';
 import { Photo } from 'src/app/core/models/photo.model';
+import { GoogleMapThemes } from 'src/app/core/models/google-map-themes';
 
 @Component({
     selector: 'app-map-view',
@@ -12,10 +14,19 @@ export class MapViewComponent {
     @Input() activePhoto: Photo;
     @Input() images: MapImage[];
     @Input() zoom = 10;
+    @Input() useDarkTheme = false;
 
     @Output() zoomChange = new EventEmitter<number>();
 
     onZoomChange(evt:  number) {
         this.zoomChange.emit(evt);
+    }
+
+    getMapTheme(): MapTypeStyle[] {
+        if (this.useDarkTheme) {
+            return GoogleMapThemes.THEME_DARK;
+        } else {
+            return GoogleMapThemes.THEME_LIGHT;
+        }
     }
 }

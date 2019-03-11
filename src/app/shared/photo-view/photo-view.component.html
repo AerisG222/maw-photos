@@ -10,6 +10,7 @@
         <app-map-view
             [activePhoto]="activePhoto"
             [images]="mapImages"
+            [useDarkTheme]="settings?.appTheme?.isDark"
             [zoom]="settings?.photoListMapViewZoom"
             (zoomChange)="onZoomChange($event)"></app-map-view>
     </div>

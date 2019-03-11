@@ -4,6 +4,7 @@
     [longitude]="images[0].longitude"
     [fullscreenControl]="false"
     [streetViewControl]="false"
+    [styles]="getMapTheme()"
     [zoom]="zoom"
     (zoomChange)="onZoomChange($event)">
     <agm-marker

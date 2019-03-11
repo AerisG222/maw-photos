@@ -29,11 +29,13 @@ export class VideoInfoPanelComponent implements OnInit {
     showComments$: Observable<boolean>;
     showRatings$: Observable<boolean>;
     showMinimap$: Observable<boolean>;
+    minimapUseDarkTheme$: Observable<boolean>;
 
     rating$: Observable<Rating>;
     comments$: Observable<Comment[]>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
+    minimapZoom$: Observable<number>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
     @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
@@ -77,6 +79,15 @@ export class VideoInfoPanelComponent implements OnInit {
 
         this.showMinimap$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelShowMinimap)
+        );
+
+        this.minimapUseDarkTheme$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectAppTheme),
+            map(theme => theme.isDark)
+        );
+
+        this.minimapZoom$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom)
         );
 
         this.showRatings$ = this._store$.pipe(

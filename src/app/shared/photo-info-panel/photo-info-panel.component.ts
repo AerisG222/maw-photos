@@ -42,6 +42,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     latitude$: Observable<number>;
     longitude$: Observable<number>;
     minimapZoom$: Observable<number>;
+    minimapUseDarkTheme$: Observable<boolean>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
     @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
@@ -104,6 +105,11 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.minimapZoom$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
+        );
+
+        this.minimapUseDarkTheme$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectAppTheme),
+            map(theme => theme.isDark)
         );
 
         this.showRatings$ = this._store$.pipe(

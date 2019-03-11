@@ -26,6 +26,8 @@
                 *ngIf="showMinimap$ | async"
                 [lat]="latitude$ | async"
                 [lng]="longitude$ | async"
+                [useDarkTheme]="minimapUseDarkTheme$ | async"
+                [zoom]="minimapZoom$ | async"
                 (zoomChange)="onZoomChange($event)">
             </app-minimap>
         </div>

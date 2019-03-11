@@ -1,10 +1,10 @@
 export class Theme {
-    static readonly themeDark = new Theme('Dark', 'maw-dark-theme');
-    static readonly themeDeepBlue = new Theme('Deep Blue', 'maw-deep-blue-theme');
-    static readonly themeLight = new Theme('Light', 'maw-light-theme');
-    static readonly themeMulledWine = new Theme('Mulled Wine', 'maw-mulled-wine-theme');
-    static readonly themeOcean = new Theme('Ocean', 'maw-ocean-theme');
-    static readonly themePaleNight = new Theme('Pale Night', 'maw-pale-night-theme');
+    static readonly themeDark = new Theme('Dark', 'maw-dark-theme', true);
+    static readonly themeDeepBlue = new Theme('Deep Blue', 'maw-deep-blue-theme', true);
+    static readonly themeLight = new Theme('Light', 'maw-light-theme', false);
+    static readonly themeMulledWine = new Theme('Mulled Wine', 'maw-mulled-wine-theme', true);
+    static readonly themeOcean = new Theme('Ocean', 'maw-ocean-theme', true);
+    static readonly themePaleNight = new Theme('Pale Night', 'maw-pale-night-theme', true);
 
     static readonly allThemes = [
         Theme.themeDark,
@@ -17,10 +17,12 @@ export class Theme {
 
     readonly name: string;
     readonly klass: string;
+    readonly isDark: boolean;
 
-    constructor(name: string, klass: string) {
+    constructor(name: string, klass: string, isDark: boolean) {
         this.name = name;
         this.klass = klass;
+        this.isDark = isDark;
     }
 
     static forName(name: string): Theme {
