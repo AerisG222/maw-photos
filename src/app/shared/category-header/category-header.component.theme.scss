@@ -3,9 +3,10 @@
 @mixin app-category-header-component-theme($theme) {
     $accent: map-get($theme, accent);
 
-    app-category-list-toolbar {
-        & a {
+    app-category-header {
+        & a:hover {
             color: mat-color($accent, A200);
+            background-color: transparent;
         }
     }
 }

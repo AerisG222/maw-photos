@@ -22,6 +22,7 @@
 @import 'app/categories/video-list/video-list.component.theme';
 @import 'app/categories/video-list-toolbar/video-list-toolbar.component.theme';
 
+@import 'app/shared/category-header/category-header.component.theme';
 @import 'app/shared/category-list-toolbar/category-list-toolbar.component.theme';
 @import 'app/shared/comments/comments.component.theme.scss';
 @import 'app/shared/exif-table/exif-table.component.theme';
@@ -55,6 +56,7 @@
     @include app-video-list-component-theme($theme);
     @include app-video-list-toolbar-component-theme($theme);
 
+    @include app-category-header-component-theme($theme);
     @include app-category-list-toolbar-component-theme($theme);
     @include app-comments-component-theme($theme);
     @include app-exif-table-component-theme($theme);
