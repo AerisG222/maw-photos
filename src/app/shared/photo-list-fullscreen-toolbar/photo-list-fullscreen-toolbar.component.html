@@ -1,24 +1,26 @@
-<span class="photo" *ngIf="isToolbarExpanded$ | async">
-    <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-    <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
+<div fxLayout="row">
+    <div class="photo" *ngIf="isToolbarExpanded$ | async">
+        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
+        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
 
-    <button
-        mat-button
-        matTooltip="Exit Fullscreen (F)"
-        (click)="onExitFullscreen()"
-        #exitFullscreenButton>
-        <mat-icon [inline]="true">fullscreen_exit</mat-icon>
-    </button>
-</span>
+        <button
+            mat-button
+            matTooltip="Exit Fullscreen (F)"
+            (click)="onExitFullscreen()"
+            #exitFullscreenButton>
+            <mat-icon [inline]="true">fullscreen_exit</mat-icon>
+        </button>
+    </div>
 
-<span class="toolbar-control">
-    <button
-        mat-button
-        matTooltip="Show/Hide Toolbar (X)"
-        (click)="onToggleFullscreenToolbar()"
-        #toggleToolbarButton>
-        <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-        <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
-    </button>
-</span>
+    <div class="toolbar-control">
+        <button
+            mat-button
+            matTooltip="Show/Hide Toolbar (X)"
+            (click)="onToggleFullscreenToolbar()"
+            #toggleToolbarButton>
+            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
+            <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
+        </button>
+    </div>
+</div>

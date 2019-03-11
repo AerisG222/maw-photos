@@ -4,8 +4,9 @@
     $accent: map-get($theme, accent);
 
     app-slideshow-button {
-        & button {
-            background-color: rgba(mat-color($accent, 900), .3) !important;
+        & button:hover {
+            background-color: rgba(mat-color($accent, 700), .3);
+            color: mat-color($accent, 100);
         }
     }
 }

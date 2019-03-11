@@ -1,49 +1,51 @@
-<span class="category" *ngIf="isToolbarExpanded$ | async">
-    <button
-        mat-button
-        matTooltip="Show/Hide Category Breadcrumbs (T)"
-        (click)="onToggleCategoryBreadcrumbs()"
-        #toggleBreadcrumbsButton>
-        <mat-icon [inline]="true">title</mat-icon>
-    </button>
+<div fxLayout="row">
+    <div class="category" *ngIf="isToolbarExpanded$ | async">
+        <button
+            mat-button
+            matTooltip="Show/Hide Category Breadcrumbs (T)"
+            (click)="onToggleCategoryBreadcrumbs()"
+            #toggleBreadcrumbsButton>
+            <mat-icon [inline]="true">title</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Show/Hide Video List (L)"
-        (click)="onToggleShowVideoList()"
-        #toggleVideoListButton>
-        <mat-icon [inline]="true">visibility</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Video List (L)"
+            (click)="onToggleShowVideoList()"
+            #toggleVideoListButton>
+            <mat-icon [inline]="true">visibility</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Toggle Video List Thumbnail Size (S)"
-        (click)="onToggleThumbnailSize()"
-        #toggleThumbnailSizeButton>
-        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Toggle Video List Thumbnail Size (S)"
+            (click)="onToggleThumbnailSize()"
+            #toggleThumbnailSizeButton>
+            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+        </button>
 
-    <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-    <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-</span>
+        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
+    </div>
 
-<span class="video" *ngIf="isToolbarExpanded$ | async">
-    <button
-        mat-button
-        matTooltip="Toggle video size (V)"
-        (click)="onToggleVideoSize()"
-        #toggleVideoSizeButton>
-        <mat-icon [inline]="true">switch_video</mat-icon>
-    </button>
-</span>
+    <div class="video" *ngIf="isToolbarExpanded$ | async">
+        <button
+            mat-button
+            matTooltip="Toggle video size (V)"
+            (click)="onToggleVideoSize()"
+            #toggleVideoSizeButton>
+            <mat-icon [inline]="true">switch_video</mat-icon>
+        </button>
+    </div>
 
-<span class="toolbar-control">
-    <button
-        mat-button
-        matTooltip="Show/Hide Toolbar (X)"
-        (click)="onToggleVideoListToolbar()"
-        #toggleToolbarButton>
-        <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-        <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
-    </button>
-</span>
+    <div class="toolbar-control">
+        <button
+            mat-button
+            matTooltip="Show/Hide Toolbar (X)"
+            (click)="onToggleVideoListToolbar()"
+            #toggleToolbarButton>
+            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
+            <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
+        </button>
+    </div>
+</div>

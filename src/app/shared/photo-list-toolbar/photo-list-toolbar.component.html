@@ -1,111 +1,113 @@
-<span class="category" *ngIf="isToolbarExpanded$ | async">
-    <button
-        mat-button
-        matTooltip="Show/Hide Category Breadcrumbs (T)"
-        (click)="onToggleCategoryBreadcrumbs()"
-        #toggleBreadcrumbsButton>
-        <mat-icon [inline]="true">title</mat-icon>
-    </button>
+<div fxLayout="row">
+    <div class="category" *ngIf="isToolbarExpanded$ | async">
+        <button
+            mat-button
+            matTooltip="Show/Hide Category Breadcrumbs (T)"
+            (click)="onToggleCategoryBreadcrumbs()"
+            #toggleBreadcrumbsButton>
+            <mat-icon [inline]="true">title</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Show/Hide Photo List (L)"
-        (click)="onTogglePhotoList()"
-        #togglePhotoListButton>
-        <mat-icon [inline]="true">visibility</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Photo List (L)"
+            (click)="onTogglePhotoList()"
+            #togglePhotoListButton>
+            <mat-icon [inline]="true">visibility</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Toggle Photo List Thumbnail Size (S)"
-        (click)="onToggleSize()"
-        #toggleThumbnailSizeButton>
-        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Toggle Photo List Thumbnail Size (S)"
+            (click)="onToggleSize()"
+            #toggleThumbnailSizeButton>
+            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+        </button>
 
-    <a mat-button
-        class="download"
-        matTooltip="Download All Photos in Category (.zip)"
-        *ngIf="allowCategoryDownload && categoryDownloadUrl"
-        [href]="categoryDownloadUrl">
-        <mat-icon [inline]="true">save_alt</mat-icon>
-    </a>
+        <a mat-button
+            class="download"
+            matTooltip="Download All Photos in Category (.zip)"
+            *ngIf="allowCategoryDownload && categoryDownloadUrl"
+            [href]="categoryDownloadUrl">
+            <mat-icon [inline]="true">save_alt</mat-icon>
+        </a>
 
-    <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-    <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-    <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
+        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
+        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
 
-    <button
-        mat-button
-        matTooltip="Enter Full Screen View (F)"
-        (click)="onToggleFullscreen()"
-        #fullscreenButton>
-        <mat-icon [inline]="true">fullscreen</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Enter Full Screen View (F)"
+            (click)="onToggleFullscreen()"
+            #fullscreenButton>
+            <mat-icon [inline]="true">fullscreen</mat-icon>
+        </button>
 
-    <button
-        *ngIf="enableMapView$ | async"
-        mat-button
-        matTooltip="Enter Map View (Z)"
-        (click)="onToggleMapView()"
-        #mapViewButton>
-        <mat-icon [inline]="true">map</mat-icon>
-    </button>
-</span>
+        <button
+            *ngIf="enableMapView$ | async"
+            mat-button
+            matTooltip="Enter Map View (Z)"
+            (click)="onToggleMapView()"
+            #mapViewButton>
+            <mat-icon [inline]="true">map</mat-icon>
+        </button>
+    </div>
 
-<span class="photo" *ngIf="isToolbarExpanded$ | async">
-    <button
-        mat-button
-        matTooltip="Rotate Counter Clockwise (A)"
-        (click)="onRotateCounterClockwise()"
-        #rotateCounterClockwiseButton>
-        <mat-icon [inline]="true">rotate_left</mat-icon>
-    </button>
+    <div class="photo" *ngIf="isToolbarExpanded$ | async">
+        <button
+            mat-button
+            matTooltip="Rotate Counter Clockwise (A)"
+            (click)="onRotateCounterClockwise()"
+            #rotateCounterClockwiseButton>
+            <mat-icon [inline]="true">rotate_left</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Rotate Clockwise (D)"
-        (click)="onRotateClockwise()"
-        #rotateClockwiseButton>
-        <mat-icon [inline]="true">rotate_right</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Rotate Clockwise (D)"
+            (click)="onRotateClockwise()"
+            #rotateClockwiseButton>
+            <mat-icon [inline]="true">rotate_right</mat-icon>
+        </button>
 
-    <a mat-button
-        matTooltip="Low Res Download"
-        *ngIf="smDownloadUrl"
-        [href]="smDownloadUrl">
-        <mat-icon [inline]="true" class="icon-sm">photo</mat-icon>
-    </a>
+        <a mat-button
+            matTooltip="Low Res Download"
+            *ngIf="smDownloadUrl"
+            [href]="smDownloadUrl">
+            <mat-icon [inline]="true" class="icon-sm">photo</mat-icon>
+        </a>
 
-    <a mat-button
-        matTooltip="Medium Res Download"
-        *ngIf="mdDownloadUrl"
-        [href]="mdDownloadUrl">
-        <mat-icon [inline]="true" class="icon-md">photo</mat-icon>
-    </a>
+        <a mat-button
+            matTooltip="Medium Res Download"
+            *ngIf="mdDownloadUrl"
+            [href]="mdDownloadUrl">
+            <mat-icon [inline]="true" class="icon-md">photo</mat-icon>
+        </a>
 
-    <a mat-button
-        matTooltip="High Res Download"
-        *ngIf="lgDownloadUrl"
-        [href]="lgDownloadUrl">
-        <mat-icon [inline]="true">photo</mat-icon>
-    </a>
+        <a mat-button
+            matTooltip="High Res Download"
+            *ngIf="lgDownloadUrl"
+            [href]="lgDownloadUrl">
+            <mat-icon [inline]="true">photo</mat-icon>
+        </a>
 
-    <a mat-button
-        matTooltip="High Res Download (untouched)"
-        *ngIf="prtDownloadUrl"
-        [href]="prtDownloadUrl">
-        <mat-icon [inline]="true">photo</mat-icon>
-    </a>
-</span>
+        <a mat-button
+            matTooltip="High Res Download (untouched)"
+            *ngIf="prtDownloadUrl"
+            [href]="prtDownloadUrl">
+            <mat-icon [inline]="true">photo</mat-icon>
+        </a>
+    </div>
 
-<span class="toolbar-control">
-    <button
-        mat-button
-        matTooltip="Show/Hide Toolbar (X)"
-        (click)="onTogglePhotoListToolbar()"
-        #toggleToolbarButton>
-        <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-        <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
-    </button>
-</span>
+    <div class="toolbar-control">
+        <button
+            mat-button
+            matTooltip="Show/Hide Toolbar (X)"
+            (click)="onTogglePhotoListToolbar()"
+            #toggleToolbarButton>
+            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
+            <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
+        </button>
+    </div>
+</div>

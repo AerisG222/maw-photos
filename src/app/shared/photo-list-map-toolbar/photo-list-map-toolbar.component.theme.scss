@@ -4,21 +4,14 @@
     $accent: map-get($theme, accent);
 
     app-photo-list-map-toolbar {
-        background-color: rgba(mat-color($accent, 500), .2);
-        border: solid 1px rgba(mat-color($accent, 500), .4);
+        & div.nav-toolbar,
+        & div.exit-toolbar {
+            background-color: rgba(mat-color($accent, 900), .3);
+            border: solid 1px rgba(mat-color($accent, 200), .3);
 
-        & .category a,
-        & .category button {
-            background-color: rgba(mat-color($accent, 500), .4);
-        }
-
-        & .photo {
-            border-left: solid 1px rgba(mat-color($accent, 500), .3);
-            border-right: solid 1px rgba(mat-color($accent, 500), .3);
-
-            & a,
-            & button {
-                background-color: rgba(mat-color($accent, 500), .2);
+            & button:hover {
+                background-color: rgba(mat-color($accent, 700), .3);
+                color: mat-color($accent, 100);
             }
         }
     }
