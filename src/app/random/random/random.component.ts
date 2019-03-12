@@ -31,6 +31,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;
+    isFullscreen$: Observable<boolean>;
 
     private currentPhotoSet = false;
 
@@ -85,6 +86,11 @@ export class RandomComponent implements OnInit, OnDestroy {
                 select(PhotoStoreSelectors.selectCurrentPhotoEffects)
             );
 
+        this.isFullscreen$ = this._store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsFullscreenView)
+            );
+
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
         this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
         this._store$.dispatch(new PhotoStoreActions.LoadMultipleRandomRequestAction({ count: 10 }));
@@ -92,6 +98,7 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.killFetch$.next(true);
+        this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.setCurrentPhoto(null);
     }

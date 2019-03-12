@@ -4,6 +4,7 @@
     [photos]="photos$ | async"
     [activePhoto]="activePhoto$ | async"
     [effects]="effects$ | async"
+    [fullscreen]="isFullscreen$ | async"
     [allowCategoryDownload]="false"
     [showCategoryAsLink]="true"
     (photoSelected)="onSelectPhoto($event)">
