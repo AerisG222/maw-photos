@@ -6,6 +6,7 @@ export enum ActionTypes {
     LOAD_REQUEST = '[Video Categories] Load Request',
     LOAD_FAILURE = '[Video Categories] Load Failure',
     LOAD_SUCCESS = '[Video Categories] Load Success',
+
     SET_CURRENT  = '[Video Categories] Set Current'
 }
 
@@ -32,4 +33,5 @@ export type Actions =
     LoadRequestAction |
     LoadFailureAction |
     LoadSuccessAction |
+
     SetCurrentAction;

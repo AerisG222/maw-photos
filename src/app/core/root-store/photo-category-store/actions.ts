@@ -6,6 +6,7 @@ export enum ActionTypes {
     LOAD_REQUEST = '[Photo Categories] Load Request',
     LOAD_FAILURE = '[Photo Categories] Load Failure',
     LOAD_SUCCESS = '[Photo Categories] Load Success',
+
     SET_CURRENT  = '[Photo Categories] Set Current'
 }
 
@@ -32,4 +33,5 @@ export type Actions =
     LoadRequestAction |
     LoadFailureAction |
     LoadSuccessAction |
+
     SetCurrentAction;
