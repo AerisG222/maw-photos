@@ -1,19 +1,19 @@
-<div>
+<div *ngIf="category">
     <a [routerLink]="['/categories']"
-       fragment="{{category?.year}}"
+       fragment="{{category.year}}"
        class="mat-h3">
-        {{ category?.year }}
+        {{ category.year }}
     </a>
 
     <mat-icon>chevron_right</mat-icon>
 
     <span *ngIf="!showCategoryAsLink" class="mat-h3">
-        {{ category?.name }}
+        {{ category.name }}
     </span>
 
     <a *ngIf="showCategoryAsLink"
-       [routerLink]="['/categories/photos', category?.id]"
+       [routerLink]="['/categories', 'photos', category.id]"
        class="mat-h3">
-        {{ category?.name }}
+        {{ category.name }}
     </a>
 </div>
