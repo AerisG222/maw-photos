@@ -1,17 +1,20 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Store, select, Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { startWith, switchMap, catchError, map } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operators';
 
 import * as photoCategoryActions from './actions';
+import * as photoCategorySelectors from './selectors';
+import { State } from './state';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
     constructor(
         @Inject(photoApiServiceToken) private _api: PhotoApiService,
-        private _actions$: Actions
+        private _actions$: Actions,
+        private _store$: Store<State>
     ) {
 
     }
@@ -19,13 +22,16 @@ export class PhotoCategoryStoreEffects {
     @Effect()
     loadRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<photoCategoryActions.LoadRequestAction>(photoCategoryActions.ActionTypes.LOAD_REQUEST),
-        startWith(new photoCategoryActions.LoadRequestAction()),
-        switchMap(action =>
-            this._api.getCategories()
+        withLatestFrom(this._store$.pipe(
+            select(photoCategorySelectors.selectAllCategories)
+        )),
+        filter(([action, categories]) => categories.length === 0),
+        switchMap(action => {
+            return this._api.getCategories()
                 .pipe(
                     map(cat => new photoCategoryActions.LoadSuccessAction({ categories: cat })),
                     catchError(error => of(new photoCategoryActions.LoadFailureAction({ error })))
-                )
-        )
+                );
+        })
     );
 }
