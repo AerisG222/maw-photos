@@ -11,19 +11,19 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
 
-export const getError = (state: State): any => state.error;
-export const getIsLoading = (state: State): boolean => state.isLoading;
-export const getCurrentPhoto = (state: State): Photo => state.currentPhoto;
-export const getFirstPhoto = (state: State): Photo => state.firstPhoto;
-export const getLastPhoto = (state: State): Photo => state.lastPhoto;
-export const getCurrentPhotoRating = (state: State): Rating => state.currentPhotoRating;
-export const getCurrentPhotoComments = (state: State): Comment[] => state.currentPhotoComments;
-export const getCurrentPhotoExifData = (state: State): ExifData[] => state.currentPhotoExifData;
-export const getCurrentPhotoEffects = (state: State): PhotoEffects => state.currentPhotoEffects;
-export const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
-export const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
-export const getIsMapView = (state: State): boolean => state.isMapView;
-export const getHasGpsCoordinates = (photos: Photo[]): boolean => photos !== null && photos.length > 0;
+const getError = (state: State): any => state.error;
+const getIsLoading = (state: State): boolean => state.isLoading;
+const getCurrentPhoto = (state: State): Photo => state.currentPhoto;
+const getFirstPhoto = (state: State): Photo => state.firstPhoto;
+const getLastPhoto = (state: State): Photo => state.lastPhoto;
+const getCurrentPhotoRating = (state: State): Rating => state.currentPhotoRating;
+const getCurrentPhotoComments = (state: State): Comment[] => state.currentPhotoComments;
+const getCurrentPhotoExifData = (state: State): ExifData[] => state.currentPhotoExifData;
+const getCurrentPhotoEffects = (state: State): PhotoEffects => state.currentPhotoEffects;
+const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
+const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
+const getIsMapView = (state: State): boolean => state.isMapView;
+const getHasGpsCoordinates = (photos: Photo[]): boolean => photos !== null && photos.length > 0;
 
 export const selectPhotoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 

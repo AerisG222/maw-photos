@@ -7,9 +7,9 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 
-export const getError = (state: State): any => state.error;
-export const getIsLoading = (state: State): boolean => state.isLoading;
-export const getCurrentCategory = (state: State): PhotoCategory => state.currentCategory;
+const getError = (state: State): any => state.error;
+const getIsLoading = (state: State): boolean => state.isLoading;
+const getCurrentCategory = (state: State): PhotoCategory => state.currentCategory;
 
 export const selectPhotoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 

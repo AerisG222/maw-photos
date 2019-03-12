@@ -7,9 +7,9 @@ import { VideoCategory } from 'src/app/core/models/video-category.model';
 import { VIDEO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { VideoCategoryAdapter, State } from './state';
 
-export const getError = (state: State): any => state.error;
-export const getIsLoading = (state: State): boolean => state.isLoading;
-export const getCurrentCategory = (state: State): VideoCategory => state.currentCategory;
+const getError = (state: State): any => state.error;
+const getIsLoading = (state: State): boolean => state.isLoading;
+const getCurrentCategory = (state: State): VideoCategory => state.currentCategory;
 
 export const selectVideoCategoryState = createFeatureSelector<State>(VIDEO_CATEGORY_FEATURE_NAME);
 

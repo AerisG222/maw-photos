@@ -9,14 +9,14 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
 
-export const getError = (state: State): any => state.error;
-export const getIsLoading = (state: State): boolean => state.isLoading;
-export const getCurrentVideo = (state: State): Video => state.currentVideo;
-export const getFirstVideo = (state: State): Video => state.firstVideo;
-export const getLastVideo = (state: State): Video => state.lastVideo;
-export const getCurrentVideoRating = (state: State): Rating => state.currentVideoRating;
-export const getCurrentVideoComments = (state: State): Comment[] => state.currentVideoComments;
-export const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
+const getError = (state: State): any => state.error;
+const getIsLoading = (state: State): boolean => state.isLoading;
+const getCurrentVideo = (state: State): Video => state.currentVideo;
+const getFirstVideo = (state: State): Video => state.firstVideo;
+const getLastVideo = (state: State): Video => state.lastVideo;
+const getCurrentVideoRating = (state: State): Rating => state.currentVideoRating;
+const getCurrentVideoComments = (state: State): Comment[] => state.currentVideoComments;
+const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
 
