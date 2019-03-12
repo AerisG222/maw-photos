@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { startWith, map, withLatestFrom, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { startWith, map, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from 'src/app/core/services/settings.service';
 import * as settingsActions from './actions';
@@ -33,10 +33,13 @@ export class SettingsStoreEffects {
     saveRequestEffect$: Observable<Action> = this._actions$.pipe(
         ofType<settingsActions.SaveRequestAction>(settingsActions.ActionTypes.SAVE_REQUEST),
         map(action => {
-            this._settingsService.save(action.payload.settings);
-            return new settingsActions.SaveSuccessAction(action.payload);
-        }),
-        catchError(err => of(new settingsActions.SaveFailureAction(err)))
+            try {
+                this._settingsService.save(action.payload.settings);
+                return new settingsActions.SaveSuccessAction(action.payload);
+            } catch (err) {
+                return new settingsActions.SaveFailureAction(err);
+            }
+        })
     );
 
     @Effect()
