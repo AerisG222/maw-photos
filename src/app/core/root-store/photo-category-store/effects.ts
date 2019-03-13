@@ -29,7 +29,7 @@ export class PhotoCategoryStoreEffects {
         switchMap(action => {
             return this._api.getCategories()
                 .pipe(
-                    map(cat => new photoCategoryActions.LoadSuccessAction({ categories: cat })),
+                    map(cat => new photoCategoryActions.LoadSuccessAction({ categories: cat.items })),
                     catchError(error => of(new photoCategoryActions.LoadFailureAction({ error })))
                 );
         })

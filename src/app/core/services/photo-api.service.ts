@@ -5,16 +5,17 @@ import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
+import { ApiCollection } from '../models/api-collection.model';
 
 export const photoApiServiceToken = 'PhotoApiService';
 
 export interface PhotoApiService {
-    getCategories(): Observable<PhotoCategory[]>;
+    getCategories(): Observable<ApiCollection<PhotoCategory>>;
     getCategory(categoryId: number): Observable<PhotoCategory>;
-    getPhotosByCategory(categoryId: number): Observable<Photo[]>;
+    getPhotosByCategory(categoryId: number): Observable<ApiCollection<Photo>>;
     getRandomPhoto(): Observable<Photo>;
-    getRandomPhotos(count: number): Observable<Photo[]>;
-    getComments(photoId: number): Observable<Comment[]>;
+    getRandomPhotos(count: number): Observable<ApiCollection<Photo>>;
+    getComments(photoId: number): Observable<ApiCollection<Comment>>;
     getExifData(photoId: number): Observable<ExifDetail>;
     getRating(photoId: number): Observable<Rating>;
     ratePhoto(photoId: number, rating: number): Observable<number>;

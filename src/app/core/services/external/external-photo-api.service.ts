@@ -10,6 +10,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
+import { ApiCollection } from '../../models/api-collection.model';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
@@ -27,11 +28,11 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<Photo>(url);
     }
 
-    getRandomPhotos(count: number): Observable<Photo[]> {
+    getRandomPhotos(count: number): Observable<ApiCollection<Photo>> {
         const url = this.getAbsoluteUrl(`photos/random/${count}`);
 
         return this._http
-            .get<Photo[]>(url);
+            .get<ApiCollection<Photo>>(url);
     }
 
 
@@ -42,18 +43,18 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<PhotoCategory>(url);
     }
 
-    getCategories(): Observable<PhotoCategory[]> {
+    getCategories(): Observable<ApiCollection<PhotoCategory>> {
         const url = this.getAbsoluteUrl('photo-categories');
 
         return this._http
-            .get<PhotoCategory[]>(url);
+            .get<ApiCollection<PhotoCategory>>(url);
     }
 
-    getPhotosByCategory(categoryId: number): Observable<Photo[]> {
+    getPhotosByCategory(categoryId: number): Observable<ApiCollection<Photo>> {
         const url = this.getAbsoluteUrl(`photo-categories/${categoryId}/photos`);
 
         return this._http
-            .get<Photo[]>(url);
+            .get<ApiCollection<Photo>>(url);
     }
 
     getExifData(photoId: number): Observable<ExifDetail> {
@@ -77,18 +78,22 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .patch<number>(url, { photoId: photoId, rating: rating });
     }
 
-    getComments(photoId: number): Observable<Comment[]> {
+    getComments(photoId: number): Observable<ApiCollection<Comment>> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/comments`);
 
         return this._http
-            .get<Comment[]>(url)
+            .get<ApiCollection<Comment>>(url)
             .pipe(
                 map(comments => {
                     // deal with dates
-                    return comments.map((x: Comment) => {
-                        x.entryDate = new Date(x.entryDate.toString());
-                        return x;
-                    });
+                    return {
+                        count: comments.count,
+                        items: comments.items
+                            .map((x: Comment) => {
+                                x.entryDate = new Date(x.entryDate.toString());
+                                return x;
+                            })
+                        };
                 })
             );
     }

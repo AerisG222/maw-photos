@@ -7,6 +7,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
+import { ApiCollection } from '../../models/api-collection.model';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
@@ -23,7 +24,7 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(this._photos[rand]);
     }
 
-    getRandomPhotos(count: number): Observable<Photo[]> {
+    getRandomPhotos(count: number): Observable<ApiCollection<Photo>> {
         const photos = [];
 
         for(let i = 0; i < count; i++) {
@@ -32,19 +33,31 @@ export class MockPhotoApiService implements PhotoApiService {
             photos.push(this._photos[rand]);
         }
 
-        return of(photos);
+        return of({
+            count: photos.length,
+            items: photos
+        });
     }
 
     getCategory(categoryId: number): Observable<PhotoCategory> {
         return of(this._categories.filter(x => x.id === categoryId)[0]);
     }
 
-    getCategories(): Observable<PhotoCategory[]> {
-        return of(this._categories);
+    getCategories(): Observable<ApiCollection<PhotoCategory>> {
+        return of({
+            count: this._categories.length,
+            items: this._categories
+        });
     }
 
-    getPhotosByCategory(categoryId: number): Observable<Photo[]> {
-        return of(this._photos.filter(x => x.categoryId === categoryId));
+    getPhotosByCategory(categoryId: number): Observable<ApiCollection<Photo>> {
+        const photos = this._photos
+            .filter(x => x.categoryId === categoryId);
+
+        return of({
+            count: photos.length,
+            items: photos
+        });
     }
 
     getExifData(photoId: number): Observable<ExifDetail> {
@@ -132,11 +145,14 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(4.5);
     }
 
-    getComments(photoId: number): Observable<Comment[]> {
-        return of(​[
-            { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
-            { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
-        ]);
+    getComments(photoId: number): Observable<ApiCollection<Comment>> {
+        return of(​{
+            count: 2,
+            items: [
+                { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
+                { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
+            ]
+        });
     }
 
     addComment(photoId: number, comment: string): Observable<any> {

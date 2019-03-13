@@ -6,6 +6,7 @@ import { Video } from '../../models/video.model';
 import { Comment } from '../../models/comment.model';
 import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
+import { ApiCollection } from '../../models/api-collection.model';
 
 @Injectable()
 export class MockVideoApiService implements VideoApiService {
@@ -16,23 +17,35 @@ export class MockVideoApiService implements VideoApiService {
         this.initData();
      }
 
-    getCategories(): Observable<VideoCategory[]> {
-        return of(this._categories);
+    getCategories(): Observable<ApiCollection<VideoCategory>> {
+        return of({
+            count: this._categories.length,
+            items: this._categories
+        });
     }
 
     getCategory(categoryId: number): Observable<VideoCategory> {
         return of(this._categories.filter(x => x.id === categoryId)[0]);
     }
 
-    getVideosByCategory(categoryId: number): Observable<Video[]> {
-        return of(this._videos.filter(x => x.categoryId === categoryId));
+    getVideosByCategory(categoryId: number): Observable<ApiCollection<Video>> {
+        const videos = this._videos
+            .filter(x => x.categoryId === categoryId);
+
+        return of({
+            count: videos.length,
+            items: videos
+        });
     }
 
-    getComments(videoId: number): Observable<Comment[]> {
-        return of(​[
-            { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
-            { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
-        ]);
+    getComments(videoId: number): Observable<ApiCollection<Comment>> {
+        return of(​{
+            count: 2,
+            items: [
+                { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
+                { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
+            ]
+        });
     }
 
     getRating(videoId: number): Observable<Rating> {

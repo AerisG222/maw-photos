@@ -9,6 +9,7 @@ import { Comment } from '../../models/comment.model';
 import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
 import { EnvironmentConfig } from '../../models/environment-config.model';
+import { ApiCollection } from '../../models/api-collection.model';
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
@@ -17,11 +18,11 @@ export class ExternalVideoApiService implements VideoApiService {
         private _cfg: EnvironmentConfig
     ) { }
 
-    getCategories(): Observable<VideoCategory[]> {
+    getCategories(): Observable<ApiCollection<VideoCategory>> {
         const url = this.getAbsoluteUrl(`video-categories`);
 
         return this._http
-            .get<VideoCategory[]>(url);
+            .get<ApiCollection<VideoCategory>>(url);
     }
 
     getCategory(categoryId: number): Observable<VideoCategory> {
@@ -31,25 +32,29 @@ export class ExternalVideoApiService implements VideoApiService {
             .get<VideoCategory>(url);
     }
 
-    getVideosByCategory(categoryId: number): Observable<Video[]> {
+    getVideosByCategory(categoryId: number): Observable<ApiCollection<Video>> {
         const url = this.getAbsoluteUrl(`video-categories/${categoryId}/videos`);
 
         return this._http
-            .get<Video[]>(url);
+            .get<ApiCollection<Video>>(url);
     }
 
-    getComments(videoId: number): Observable<Comment[]> {
+    getComments(videoId: number): Observable<ApiCollection<Comment>> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/comments`);
 
         return this._http
-            .get<Comment[]>(url)
+            .get<ApiCollection<Comment>>(url)
             .pipe(
                 map(comments => {
                     // deal with dates
-                    return comments.map((x: Comment) => {
-                        x.entryDate = new Date(x.entryDate.toString());
-                        return x;
-                    });
+                    return {
+                        count: comments.count,
+                        items: comments.items
+                            .map((x: Comment) => {
+                                x.entryDate = new Date(x.entryDate.toString());
+                                return x;
+                            })
+                        };
                 })
             );
     }

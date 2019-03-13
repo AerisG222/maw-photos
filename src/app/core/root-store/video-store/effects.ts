@@ -22,7 +22,7 @@ export class VideoStoreEffects {
         switchMap(action =>
             this._api.getVideosByCategory(action.payload.categoryId)
                 .pipe(
-                    map(videos => new videoActions.LoadSuccessAction({ videos: videos })),
+                    map(videos => new videoActions.LoadSuccessAction({ videos: videos.items })),
                     catchError(error => of(new videoActions.LoadFailureAction({ error })))
                 )
         )
@@ -58,7 +58,7 @@ export class VideoStoreEffects {
         switchMap(action =>
             this._api.getComments(action.payload.videoId)
                 .pipe(
-                    map(comments => new videoActions.LoadCommentsSuccessAction({ comments: comments })),
+                    map(comments => new videoActions.LoadCommentsSuccessAction({ comments: comments.items })),
                     catchError(error => of(new videoActions.RateVideoFailureAction({ error: error })))
                 )
         )

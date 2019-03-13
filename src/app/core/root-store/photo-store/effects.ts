@@ -27,7 +27,7 @@ export class PhotoStoreEffects {
         switchMap(action =>
             this._api.getPhotosByCategory(action.payload.categoryId)
                 .pipe(
-                    map(photos => new photoActions.LoadSuccessAction({ photos: photos })),
+                    map(photos => new photoActions.LoadSuccessAction({ photos: photos.items })),
                     catchError(error => of(new photoActions.LoadFailureAction({ error })))
                 )
         )
@@ -51,7 +51,7 @@ export class PhotoStoreEffects {
         switchMap(action =>
             this._api.getRandomPhotos(action.payload.count)
                 .pipe(
-                    map(photos => new photoActions.LoadMultipleRandomSuccessAction({ photos: photos })),
+                    map(photos => new photoActions.LoadMultipleRandomSuccessAction({ photos: photos.items })),
                     catchError(error => of(new photoActions.LoadMultipleRandomFailureAction({ error: error })))
                 )
         )
@@ -87,7 +87,7 @@ export class PhotoStoreEffects {
         switchMap(action =>
             this._api.getComments(action.payload.photoId)
                 .pipe(
-                    map(comments => new photoActions.LoadCommentsSuccessAction({ comments: comments })),
+                    map(comments => new photoActions.LoadCommentsSuccessAction({ comments: comments.items })),
                     catchError(error => of(new photoActions.RatePhotoFailureAction({ error: error })))
                 )
         )

@@ -29,7 +29,7 @@ export class VideoCategoryStoreEffects {
         switchMap(action =>
             this._api.getCategories()
                 .pipe(
-                    map(cat => new videoCategoryActions.LoadSuccessAction({ categories: cat })),
+                    map(cat => new videoCategoryActions.LoadSuccessAction({ categories: cat.items })),
                     catchError(error => of(new videoCategoryActions.LoadFailureAction({ error })))
                 )
         )
