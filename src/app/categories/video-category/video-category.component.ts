@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
-import { map, flatMap, tap, takeUntil, take } from 'rxjs/operators';
+import { map, flatMap, tap, takeUntil, take, filter } from 'rxjs/operators';
 
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 import { Video } from 'src/app/core/models/video.model';
@@ -75,7 +75,8 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
         this.activeVideo$ = this._store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo)
+                select(VideoStoreSelectors.selectCurrentVideo),
+                filter(x => !!x)
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { tap, takeUntil, filter } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
@@ -93,6 +93,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         const activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(x => !!x),
                 tap(photo => this.smDownloadUrl = photo.imageSm.downloadUrl),
                 tap(photo => this.mdDownloadUrl = photo.imageMd.downloadUrl),
                 tap(photo => this.lgDownloadUrl = photo.imageLg.downloadUrl),

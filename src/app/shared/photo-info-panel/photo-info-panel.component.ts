@@ -66,7 +66,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         const currentPhoto$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
-            filter(photo => photo !== null),
+            filter(photo => !!photo),
             takeUntil(this.destroy$)
         );
 

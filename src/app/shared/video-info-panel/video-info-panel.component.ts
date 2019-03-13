@@ -57,7 +57,7 @@ export class VideoInfoPanelComponent implements OnInit {
         const currentVideo$ = this._store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
-                filter(video => video !== null),
+                filter(video => !!video),
                 takeUntil(this.destroy$)
             );
 

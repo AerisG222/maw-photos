@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, interval } from 'rxjs';
-import { tap, take, takeUntil } from 'rxjs/operators';
+import { tap, take, takeUntil, filter } from 'rxjs/operators';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -71,6 +71,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         this.activePhoto$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(x => !!x),
                 tap(photo => {
                     this._store$
                         .pipe(

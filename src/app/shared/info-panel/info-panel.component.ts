@@ -22,7 +22,7 @@ export class InfoPanelComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
-            filter(photo => photo !== null),
+            filter(photo => !!photo),
             tap(x => this.showVideoInfoPanel = false),
             tap(x => this.showPhotoInfoPanel = true),
             takeUntil(this.destroy$)
@@ -30,7 +30,7 @@ export class InfoPanelComponent implements OnInit, OnDestroy {
 
         this._store$.pipe(
             select(VideoStoreSelectors.selectCurrentVideo),
-            filter(video => video !== null),
+            filter(video => !!video),
             tap(x => this.showPhotoInfoPanel = false),
             tap(x => this.showVideoInfoPanel = true),
             takeUntil(this.destroy$)

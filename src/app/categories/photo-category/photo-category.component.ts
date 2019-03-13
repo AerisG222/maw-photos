@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { map, flatMap, tap, takeUntil } from 'rxjs/operators';
+import { map, flatMap, tap, takeUntil, filter } from 'rxjs/operators';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -99,12 +99,14 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
         this.activePhoto$ = this._store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto)
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(x => !!x)
             );
 
         this.effects$ = this._store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                filter(x => !!x)
             );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
