@@ -3,7 +3,7 @@ import { PhotoMultimediaAsset } from './photo-multimedia-asset.model';
 export interface Photo {
     id:           number;
     categoryId:   number;
-    createDate:   string;
+    createDate:   Date;
     latitude:     number;
     longitude:    number;
     imageXsSq:    PhotoMultimediaAsset;

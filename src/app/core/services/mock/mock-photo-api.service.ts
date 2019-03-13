@@ -8,13 +8,16 @@ import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
+import { DateService } from '../date.service';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
     private _categories: PhotoCategory[];
     private _photos: Photo[];
 
-    constructor() {
+    constructor(
+        private _dateSvc: DateService
+    ) {
         this.initData();
     }
 
@@ -165,7 +168,7 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 1,
                 name: 'Test 1',
                 year: 2018,
-                createDate: '2018-01-01',
+                createDate: new Date('2018-01-01'),
                 latitude: 43,
                 longitude: -72,
                 photoCount: 150,
@@ -197,7 +200,7 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 2,
                 name: 'Test 2',
                 year: 2018,
-                createDate: '2018-02-01',
+                createDate: new Date('2018-02-01'),
                 latitude: null,
                 longitude: null,
                 photoCount: 150,
@@ -229,7 +232,7 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 3,
                 name: 'Test 3',
                 year: 2018,
-                createDate: '2018-03-01',
+                createDate: new Date('2018-03-01'),
                 latitude: null,
                 longitude: null,
                 photoCount: 150,
@@ -261,7 +264,7 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 4,
                 name: 'Test 4',
                 year: 2019,
-                createDate: '2018-04-01',
+                createDate: new Date('2018-04-01'),
                 latitude: null,
                 longitude: null,
                 photoCount: 150,
@@ -293,7 +296,7 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 5,
                 name: 'Test 5',
                 year: 2019,
-                createDate: '2018-05-01',
+                createDate: new Date('2018-05-01'),
                 latitude: null,
                 longitude: null,
                 photoCount: 150,
@@ -325,7 +328,7 @@ export class MockPhotoApiService implements PhotoApiService {
                 id: 6,
                 name: 'Test 6',
                 year: 2019,
-                createDate: '2018-06-01',
+                createDate: new Date('2018-06-01'),
                 latitude: null,
                 longitude: null,
                 photoCount: 150,
@@ -359,7 +362,7 @@ export class MockPhotoApiService implements PhotoApiService {
             {
                 id: 1,
                 categoryId: 1,
-                createDate: '2018-01-01',
+                createDate: new Date('2018-01-01'),
                 latitude: 43,
                 longitude: -72,
                 imageXs: {
@@ -420,7 +423,7 @@ export class MockPhotoApiService implements PhotoApiService {
             {
                 id: 2,
                 categoryId: 1,
-                createDate: '2018-01-02',
+                createDate: new Date('2018-01-02'),
                 latitude: 43.1,
                 longitude: -72.1,
                 imageXs: {
@@ -481,7 +484,7 @@ export class MockPhotoApiService implements PhotoApiService {
             {
                 id: 3,
                 categoryId: 1,
-                createDate: '2018-01-03',
+                createDate: new Date('2018-01-03'),
                 latitude: 43,
                 longitude: -72,
                 imageXs: {
@@ -542,7 +545,7 @@ export class MockPhotoApiService implements PhotoApiService {
             {
                 id: 4,
                 categoryId: 1,
-                createDate: '2018-01-04',
+                createDate: new Date('2018-01-04'),
                 latitude: null,
                 longitude: null,
                 imageXs: {
@@ -603,7 +606,7 @@ export class MockPhotoApiService implements PhotoApiService {
             {
                 id: 5,
                 categoryId: 1,
-                createDate: '2018-01-01',
+                createDate: new Date('2018-01-01'),
                 latitude: null,
                 longitude: null,
                 imageXs: {

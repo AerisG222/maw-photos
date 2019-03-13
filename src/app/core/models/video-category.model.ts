@@ -4,7 +4,7 @@ export interface VideoCategory {
     id:                   number;
     name:                 string;
     year:                 number;
-    createDate:           string;
+    createDate:           Date;
     latitude:             null;
     longitude:            null;
     videoCount:           number;

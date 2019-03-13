@@ -9,7 +9,7 @@ export interface Category {
     id:            number;
     name:          string;
     year:          number;
-    createDate:    string;
+    createDate:    Date;
     teaserImage:   MultimediaAsset;
     teaserImageSq: MultimediaAsset;
     actual:        PhotoCategory | VideoCategory;

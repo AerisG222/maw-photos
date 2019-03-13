@@ -3,7 +3,7 @@ import { MultimediaAsset } from './multimedia-asset.model';
 export interface Video {
     id:           number;
     categoryId:   number;
-    createDate:   string;
+    createDate:   Date;
     latitude:     number;
     longitude:    number;
     duration:     number;

@@ -4,7 +4,7 @@ export interface PhotoCategory {
     id:            number;
     name:          string;
     year:          number;
-    createDate:    string;
+    createDate:    Date;
     latitude:      number;
     longitude:     number;
     photoCount:    number;

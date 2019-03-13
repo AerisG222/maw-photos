@@ -7,13 +7,16 @@ import { Comment } from '../../models/comment.model';
 import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
+import { DateService } from '../date.service';
 
 @Injectable()
 export class MockVideoApiService implements VideoApiService {
     private _categories: VideoCategory[];
     private _videos: Video[];
 
-    constructor() {
+    constructor(
+        private _dateSvc: DateService
+    ) {
         this.initData();
      }
 
@@ -66,7 +69,7 @@ export class MockVideoApiService implements VideoApiService {
                 id: 1,
                 name: 'Test 1',
                 year: 2018,
-                createDate: '2018-01-01',
+                createDate: new Date('2018-01-01'),
                 latitude: null,
                 longitude: null,
                 videoCount: 150,
@@ -96,7 +99,7 @@ export class MockVideoApiService implements VideoApiService {
                 id: 1,
                 name: 'Test 2',
                 year: 2018,
-                createDate: '2018-02-01',
+                createDate: new Date('2018-02-01'),
                 latitude: null,
                 longitude: null,
                 videoCount: 150,
@@ -128,7 +131,7 @@ export class MockVideoApiService implements VideoApiService {
             {
                 id: 1,
                 categoryId: 1,
-                createDate: '2018-01-01',
+                createDate: new Date('2018-01-01'),
                 latitude: 34.060385,
                 longitude: -118.297796,
                 duration: 123,
@@ -170,7 +173,7 @@ export class MockVideoApiService implements VideoApiService {
             {
                 id: 2,
                 categoryId: 1,
-                createDate: '2018-01-02',
+                createDate: new Date('2018-01-02'),
                 latitude: 42.363393,
                 longitude: -71.057865,
                 duration: 123,

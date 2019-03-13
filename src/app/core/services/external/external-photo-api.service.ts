@@ -11,12 +11,14 @@ import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
+import { DateService } from '../date.service';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
     constructor(
         private _http: HttpClient,
-        private _cfg: EnvironmentConfig
+        private _cfg: EnvironmentConfig,
+        private _dateSvc: DateService
     ) {
 
     }
@@ -25,14 +27,20 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl('photos/random');
 
         return this._http
-            .get<Photo>(url);
+            .get<Photo>(url)
+            .pipe(
+                map(p => this.cleanupPhoto(p))
+            );
     }
 
     getRandomPhotos(count: number): Observable<ApiCollection<Photo>> {
         const url = this.getAbsoluteUrl(`photos/random/${count}`);
 
         return this._http
-            .get<ApiCollection<Photo>>(url);
+            .get<ApiCollection<Photo>>(url)
+            .pipe(
+                map(p => this.cleanupPhotos(p))
+            );
     }
 
 
@@ -40,21 +48,30 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl(`photo-categories/${categoryId}`);
 
         return this._http
-            .get<PhotoCategory>(url);
+            .get<PhotoCategory>(url)
+            .pipe(
+                map(p => this.cleanupPhotoCategory(p))
+            );
     }
 
     getCategories(): Observable<ApiCollection<PhotoCategory>> {
         const url = this.getAbsoluteUrl('photo-categories');
 
         return this._http
-            .get<ApiCollection<PhotoCategory>>(url);
+            .get<ApiCollection<PhotoCategory>>(url)
+            .pipe(
+                map(p => this.cleanupPhotoCategories(p))
+            );
     }
 
     getPhotosByCategory(categoryId: number): Observable<ApiCollection<Photo>> {
         const url = this.getAbsoluteUrl(`photo-categories/${categoryId}/photos`);
 
         return this._http
-            .get<ApiCollection<Photo>>(url);
+            .get<ApiCollection<Photo>>(url)
+            .pipe(
+                map(p => this.cleanupPhotos(p))
+            );
     }
 
     getExifData(photoId: number): Observable<ExifDetail> {
@@ -84,17 +101,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
         return this._http
             .get<ApiCollection<Comment>>(url)
             .pipe(
-                map(comments => {
-                    // deal with dates
-                    return {
-                        count: comments.count,
-                        items: comments.items
-                            .map((x: Comment) => {
-                                x.entryDate = new Date(x.entryDate.toString());
-                                return x;
-                            })
-                        };
-                })
+                map(comments => this.cleanupComments(comments))
             );
     }
 
@@ -107,5 +114,44 @@ export class ExternalPhotoApiService implements PhotoApiService {
 
     private getAbsoluteUrl(relativeUrl: string) {
         return `${this._cfg.apiUrl}/${relativeUrl}`;
+    }
+
+    private cleanupPhotoCategories(categories: ApiCollection<PhotoCategory>): ApiCollection<PhotoCategory> {
+        return {
+            count: categories.count,
+            items: categories.items.map(c => this.cleanupPhotoCategory(c))
+        };
+    }
+
+    private cleanupPhotoCategory(category: PhotoCategory): PhotoCategory {
+        category.createDate = this._dateSvc.safeParse(category.createDate);
+
+        return category;
+    }
+
+    private cleanupPhotos(photos: ApiCollection<Photo>): ApiCollection<Photo> {
+        return {
+            count: photos.count,
+            items: photos.items.map(p => this.cleanupPhoto(p))
+        };
+    }
+
+    private cleanupPhoto(photo: Photo): Photo {
+        photo.createDate = this._dateSvc.safeParse(photo.createDate);
+
+        return photo;
+    }
+
+    private cleanupComments(comments: ApiCollection<Comment>): ApiCollection<Comment> {
+        return {
+            count: comments.count,
+            items: comments.items.map(c => this.cleanupComment(c))
+        };
+    }
+
+    private cleanupComment(comment: Comment): Comment {
+        comment.entryDate = this._dateSvc.safeParse(comment.entryDate);
+
+        return comment;
     }
 }
