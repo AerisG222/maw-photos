@@ -8,7 +8,7 @@ export class AuthConfig {
         public loadUserInfo = true,
         public automaticSilentRenew = true,
         public filterProtocolClaims = true,
-        public response_type = 'id_token token',
+        public response_type = 'code',
         public scope = 'openid profile maw_api role') {
 
     }
