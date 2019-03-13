@@ -30,8 +30,8 @@ import { RootStoreModule } from './root-store';
                     env.authUrl,
                     'maw-photos',
                     env.wwwUrl,
-                    `${env.wwwUrl}/spa-signin`,
-                    `${env.wwwUrl}/spa-silent-signin`
+                    `${env.wwwUrl}/auth`,
+                    `${env.wwwUrl}/auth-silent`
                 );
             },
             deps: [EnvironmentConfig]
