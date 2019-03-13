@@ -1,4 +1,4 @@
-import { PhotoMultimediaAsset } from './photo-multimedia-asset';
+import { PhotoMultimediaAsset } from './photo-multimedia-asset.model';
 
 export interface Photo {
     id:           number;

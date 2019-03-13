@@ -18,7 +18,7 @@ import {
     SettingsStoreSelectors,
     SettingsStoreActions
 } from 'src/app/core/root-store';
-import { MapImage } from 'src/app/core/models/map-image';
+import { MapImage } from 'src/app/core/models/map-image.model';
 
 @Component({
     selector: 'app-photo-category',

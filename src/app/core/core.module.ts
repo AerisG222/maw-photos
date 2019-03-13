@@ -5,8 +5,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HotkeyModule } from 'angular2-hotkeys';
 
 import { environment } from 'src/environments/environment';
-import { AuthConfig } from './models/auth-config';
-import { EnvironmentConfig } from './models/environment-config';
+import { AuthConfig } from './models/auth-config.model';
+import { EnvironmentConfig } from './models/environment-config.model';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { throwIfAlreadyLoaded } from './module-import.guard';
 import { RootStoreModule } from './root-store';

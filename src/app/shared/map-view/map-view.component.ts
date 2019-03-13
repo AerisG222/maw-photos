@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MapTypeStyle } from '@agm/core';
 
-import { MapImage } from 'src/app/core/models/map-image';
+import { MapImage } from 'src/app/core/models/map-image.model';
 import { Photo } from 'src/app/core/models/photo.model';
-import { GoogleMapThemes } from 'src/app/core/models/google-map-themes';
+import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
 
 @Component({
     selector: 'app-map-view',

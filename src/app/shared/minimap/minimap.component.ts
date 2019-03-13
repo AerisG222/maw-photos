@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { GoogleMapThemes } from 'src/app/core/models/google-map-themes';
+import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
 import { MapTypeStyle } from '@agm/core';
 
 @Component({

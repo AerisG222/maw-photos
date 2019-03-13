@@ -5,7 +5,7 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
-import { MapImage } from 'src/app/core/models/map-image';
+import { MapImage } from 'src/app/core/models/map-image.model';
 import { RootStoreState, SettingsStoreActions } from 'src/app/core/root-store';
 import { Store } from '@ngrx/store';
 

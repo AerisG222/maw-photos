@@ -8,7 +8,7 @@ import { Video } from '../../models/video.model';
 import { Comment } from '../../models/comment.model';
 import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
-import { EnvironmentConfig } from '../../models/environment-config';
+import { EnvironmentConfig } from '../../models/environment-config.model';
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
