@@ -29,9 +29,9 @@ import { RootStoreModule } from './root-store';
                 return new AuthConfig(
                     env.authUrl,
                     'maw-photos',
-                    env.wwwUrl,
-                    `${env.wwwUrl}/auth`,
-                    `${env.wwwUrl}/auth-silent`
+                    env.photosUrl,
+                    `${env.photosUrl}/auth`,
+                    `${env.photosUrl}/auth-silent`
                 );
             },
             deps: [EnvironmentConfig]
