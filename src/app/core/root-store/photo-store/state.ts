@@ -7,9 +7,7 @@ import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { Rating } from 'src/app/core/models/rating.model';
 
-export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>({
-    sortComparer: (a: Photo, b: Photo): number => b.id - a.id
-});
+export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
 export interface State extends EntityState<Photo> {
     error: string;
