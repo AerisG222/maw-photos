@@ -100,7 +100,7 @@ export class VideoStatsComponent implements OnInit {
         }
     }
 
-    onRemoveYearFilter(evt): void {
+    onRemoveYearFilter(): void {
         this.selectedYear$.next(null);
     }
 

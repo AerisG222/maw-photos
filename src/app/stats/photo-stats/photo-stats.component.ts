@@ -100,7 +100,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         }
     }
 
-    onRemoveYearFilter(evt): void {
+    onRemoveYearFilter(): void {
         this.selectedYear$.next(null);
     }
 
