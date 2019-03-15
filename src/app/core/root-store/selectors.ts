@@ -30,9 +30,13 @@ export const selectCombinedYears = createSelector(
     PhotoCategoryStoreSelectors.selectAllYears,
     VideoCategoryStoreSelectors.selectAllYears,
     (photoYears: number[], videoYears: number[]) => {
-        return Array
-            .from(new Set([...photoYears, ...videoYears]))
-            .sort(sortNumbersDescending);
+        if (photoYears.length > 0 && videoYears.length > 0) {
+            return Array
+                .from(new Set([...photoYears, ...videoYears]))
+                .sort(sortNumbersDescending);
+        }
+
+        return [];
     }
 );
 
@@ -40,19 +44,26 @@ export const selectCombinedCategories = createSelector(
     PhotoCategoryStoreSelectors.selectAllCategories,
     VideoCategoryStoreSelectors.selectAllCategories,
     (photoCategories: PhotoCategory[], videoCategories: VideoCategory[]) => {
-        return combine(photoCategories, videoCategories);
+        if (photoCategories.length > 0 && videoCategories.length > 0) {
+            return combine(photoCategories, videoCategories);
+        }
+
+        return [];
     }
 );
-
 
 export const selectCombinedCategoriesForYear = createSelector(
     PhotoCategoryStoreSelectors.selectAllCategories,
     VideoCategoryStoreSelectors.selectAllCategories,
     (photoCategories: PhotoCategory[], videoCategories: VideoCategory[], props: { year: number }) => {
-        return combine(
-            photoCategories.filter(p => p.year === props.year),
-            videoCategories.filter(p => p.year === props.year)
-        );
+        if (photoCategories.length > 0 && videoCategories.length > 0) {
+            return combine(
+                photoCategories.filter(p => p.year === props.year),
+                videoCategories.filter(p => p.year === props.year)
+            );
+        }
+
+        return [];
     }
 );
 
