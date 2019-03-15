@@ -67,12 +67,9 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
                 )
             );
 
-        this.photos$ = categoryId$
+        this.photos$ = this._store$
             .pipe(
-                flatMap(id => this._store$
-                    .pipe(
-                        select(PhotoStoreSelectors.selectPhotosForCategory, { id: id })
-                    )),
+                select(PhotoStoreSelectors.selectAllPhotos),
                 tap(photos => this.setCurrentPhoto(photos[0]))
             );
 
