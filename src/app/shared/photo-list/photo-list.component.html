@@ -1,7 +1,10 @@
 <div>
-    <img *ngFor="let photo of photos"
+    <img
+        *ngFor="let photo of photos"
+        #itemRef
         [src]="photo.imageXsSq.url"
         [ngClass]="thumbnailSize.klass"
         [class.selected]="selectedPhoto?.id === photo.id"
+        [class.scrolled]="scrollIntoView(photo.id, itemRef)"
         (click)="onClickPhoto(photo)" />
 </div>
