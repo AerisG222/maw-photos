@@ -120,11 +120,7 @@ export function videoReducer(state = initialState, action: Actions): State {
             return {
                 ...state,
                 isLoading: true,
-                error: null,
-                currentVideoRating: {
-                    ...state.currentVideoRating,
-                    userRating: action.payload.userRating
-                }
+                error: null
             };
         }
         case ActionTypes.RATE_VIDEO_SUCCESS: {
@@ -133,8 +129,8 @@ export function videoReducer(state = initialState, action: Actions): State {
                 isLoading: false,
                 error: null,
                 currentVideoRating: {
-                    ...state.currentVideoRating,
-                    averageRating: Math.round(action.payload.averageRating)
+                    userRating: action.payload.rating.userRating,
+                    averageRating: Math.round(action.payload.rating.averageRating)
                 }
             };
         }

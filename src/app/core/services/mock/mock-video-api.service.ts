@@ -55,8 +55,8 @@ export class MockVideoApiService implements VideoApiService {
         return of({ userRating: 2, averageRating: 4 });
     }
 
-    rateVideo(videoId: number, rating: number): Observable<number> {
-        return of(4.5);
+    rateVideo(videoId: number, rating: number): Observable<Rating> {
+        return of({ userRating: 3, averageRating: 4.5 });
     }
 
     addComment(videoId: number, comment: string): Observable<any> {

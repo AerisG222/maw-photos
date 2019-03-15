@@ -88,11 +88,11 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<Rating>(url);
     }
 
-    ratePhoto(photoId: number, rating: number): Observable<number> {
+    ratePhoto(photoId: number, rating: number): Observable<Rating> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/rating`);
 
         return this._http
-            .patch<number>(url, { photoId: photoId, rating: rating });
+            .patch<Rating>(url, { photoId: photoId, rating: rating });
     }
 
     getComments(photoId: number): Observable<ApiCollection<Comment>> {

@@ -189,7 +189,7 @@ export class RatePhotoFailureAction implements Action {
 
 export class RatePhotoSuccessAction implements Action {
     readonly type = ActionTypes.RATE_PHOTO_SUCCESS;
-    constructor(public payload: { averageRating: number }) { }
+    constructor(public payload: { rating: Rating }) { }
 }
 
 export class MoveNextRequestAction implements Action {

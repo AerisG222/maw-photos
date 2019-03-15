@@ -14,6 +14,6 @@ export interface VideoApiService {
     getVideosByCategory(categoryId: number): Observable<ApiCollection<Video>>;
     getComments(videoId: number): Observable<ApiCollection<Comment>>;
     getRating(videoId: number): Observable<Rating>;
-    rateVideo(videoId: number, rating: number): Observable<number>;
+    rateVideo(videoId: number, rating: number): Observable<Rating>;
     addComment(videoId: number, comment: string): Observable<any>;
 }

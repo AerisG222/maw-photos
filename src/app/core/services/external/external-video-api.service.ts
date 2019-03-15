@@ -67,11 +67,11 @@ export class ExternalVideoApiService implements VideoApiService {
             .get<Rating>(url);
     }
 
-    rateVideo(videoId: number, rating: number): Observable<number> {
+    rateVideo(videoId: number, rating: number): Observable<Rating> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/rating`);
 
         return this._http
-            .patch<number>(url, { videoId: videoId, rating: rating });
+            .patch<Rating>(url, { videoId: videoId, rating: rating });
     }
 
     addComment(videoId: number, comment: string): Observable<any> {

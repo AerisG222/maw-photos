@@ -18,6 +18,6 @@ export interface PhotoApiService {
     getComments(photoId: number): Observable<ApiCollection<Comment>>;
     getExifData(photoId: number): Observable<ExifDetail>;
     getRating(photoId: number): Observable<Rating>;
-    ratePhoto(photoId: number, rating: number): Observable<number>;
+    ratePhoto(photoId: number, rating: number): Observable<Rating>;
     addComment(photoId: number, comment: string): Observable<any>;
 }

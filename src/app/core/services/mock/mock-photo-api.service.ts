@@ -144,8 +144,8 @@ export class MockPhotoApiService implements PhotoApiService {
         return of({ userRating: 2, averageRating: 4 });
     }
 
-    ratePhoto(photoId: number, rating: number): Observable<number> {
-        return of(4.5);
+    ratePhoto(photoId: number, rating: number): Observable<Rating> {
+        return of({ userRating: 3, averageRating: 4.5 });
     }
 
     getComments(photoId: number): Observable<ApiCollection<Comment>> {

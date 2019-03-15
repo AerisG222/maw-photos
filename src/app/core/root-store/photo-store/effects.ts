@@ -75,7 +75,7 @@ export class PhotoStoreEffects {
         concatMap(action =>
             this._api.ratePhoto(action.payload.photoId, action.payload.userRating)
                 .pipe(
-                    map(avgRating => new photoActions.RatePhotoSuccessAction({ averageRating: avgRating })),
+                    map(rating => new photoActions.RatePhotoSuccessAction({ rating: rating })),
                     catchError(error => of(new photoActions.RatePhotoFailureAction({ error: error })))
                 )
         )

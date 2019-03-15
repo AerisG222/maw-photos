@@ -219,11 +219,7 @@ export function photoReducer(state = initialState, action: Actions): State {
             return {
                 ...state,
                 isLoading: true,
-                error: null,
-                currentPhotoRating: {
-                    ...state.currentPhotoRating,
-                    userRating: action.payload.userRating
-                }
+                error: null
             };
         }
         case ActionTypes.RATE_PHOTO_SUCCESS: {
@@ -232,8 +228,8 @@ export function photoReducer(state = initialState, action: Actions): State {
                 isLoading: false,
                 error: null,
                 currentPhotoRating: {
-                    ...state.currentPhotoRating,
-                    averageRating: Math.round(action.payload.averageRating)
+                    userRating: action.payload.rating.userRating,
+                    averageRating: Math.round(action.payload.rating.averageRating)
                 }
             };
         }

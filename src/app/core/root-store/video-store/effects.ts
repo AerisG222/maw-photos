@@ -46,7 +46,7 @@ export class VideoStoreEffects {
         concatMap(action =>
             this._api.rateVideo(action.payload.videoId, action.payload.userRating)
                 .pipe(
-                    map(avgRating => new videoActions.RateVideoSuccessAction({ averageRating: avgRating })),
+                    map(rating => new videoActions.RateVideoSuccessAction({ rating: rating })),
                     catchError(error => of(new videoActions.RateVideoFailureAction({ error: error })))
                 )
         )
