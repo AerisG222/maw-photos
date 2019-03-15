@@ -83,3 +83,35 @@ export const selectIsCurrentPhotoLast =
             last != null &&
             current.id === last.id;
     });
+
+export const selectFirstPhotoWithGpsCoordinates =
+    createSelector(selectPhotosWithGpsCoordinates, (photos) => {
+        if (photos == null) {
+            return null;
+        }
+
+        return photos[0];
+    });
+
+export const selectLastPhotoWithGpsCoordinates =
+    createSelector(selectPhotosWithGpsCoordinates, (photos) => {
+        if (photos == null) {
+            return null;
+        }
+
+        return photos[photos.length - 1];
+    });
+
+export const selectIsCurrentPhotoFirstWithGpsCoordinates =
+    createSelector(selectCurrentPhoto, selectFirstPhotoWithGpsCoordinates, (current, first) => {
+        return current != null &&
+            first != null &&
+            current.id === first.id;
+    });
+
+export const selectIsCurrentPhotoLastWithGpsCoordinates =
+    createSelector(selectCurrentPhoto, selectLastPhotoWithGpsCoordinates, (current, last) => {
+        return current != null &&
+            last != null &&
+            current.id === last.id;
+    });

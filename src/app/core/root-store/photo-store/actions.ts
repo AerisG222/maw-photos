@@ -43,7 +43,9 @@ export enum ActionTypes {
     RATE_PHOTO_SUCCESS = '[Photos] Rate Photo Success',
 
     MOVE_NEXT_REQUEST = '[Photos] Move Next Request',
+    MOVE_NEXT_WITH_GPS_REQUEST = '[Photos] Move Next With GPS Request',
     MOVE_PREVIOUS_REQUEST = '[Photos] Move Previous Request',
+    MOVE_PREVIOUS_WITH_GPS_REQUEST = '[Photos] Move Previous With GPS Request',
 
     ROTATE_CLOCKWISE_REQUEST = '[Photos] Rotate Clockwise Request',
     ROTATE_COUNTER_CLOCKWISE_REQUEST = '[Photos] Rotate Counter Clockwise Request',
@@ -194,8 +196,16 @@ export class MoveNextRequestAction implements Action {
     readonly type = ActionTypes.MOVE_NEXT_REQUEST;
 }
 
+export class MoveNextWithGpsRequestAction implements Action {
+    readonly type = ActionTypes.MOVE_NEXT_WITH_GPS_REQUEST;
+}
+
 export class MovePreviousRequestAction implements Action {
     readonly type = ActionTypes.MOVE_PREVIOUS_REQUEST;
+}
+
+export class MovePreviousWithGpsRequestAction implements Action {
+    readonly type = ActionTypes.MOVE_PREVIOUS_WITH_GPS_REQUEST;
 }
 
 export class RotateClockwiseRequestAction implements Action {
@@ -297,7 +307,9 @@ export type Actions =
     RatePhotoSuccessAction |
 
     MoveNextRequestAction |
+    MoveNextWithGpsRequestAction |
     MovePreviousRequestAction |
+    MovePreviousWithGpsRequestAction |
 
     RotateClockwiseRequestAction |
     RotateCounterClockwiseRequestAction |

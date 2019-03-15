@@ -161,8 +161,44 @@ export function photoReducer(state = initialState, action: Actions): State {
                 }
             };
         }
+        case ActionTypes.MOVE_NEXT_WITH_GPS_REQUEST: {
+            const newPhoto = nextPhotoWithGps(state);
+
+            if (newPhoto != null &&
+                state.currentPhoto != null &&
+                newPhoto.id === state.currentPhoto.id) {
+                return state;
+            }
+
+            return {
+                ...state,
+                currentPhoto: newPhoto,
+                currentPhotoEffects: {
+                    ...state.currentPhotoEffects,
+                    rotation: new PhotoRotation()
+                }
+            };
+        }
         case ActionTypes.MOVE_PREVIOUS_REQUEST: {
             const newPhoto = previousPhoto(state);
+
+            if (newPhoto != null &&
+                state.currentPhoto != null &&
+                newPhoto.id === state.currentPhoto.id) {
+                return state;
+            }
+
+            return {
+                ...state,
+                currentPhoto: newPhoto,
+                currentPhotoEffects: {
+                    ...state.currentPhotoEffects,
+                    rotation: new PhotoRotation()
+                }
+            };
+        }
+        case ActionTypes.MOVE_PREVIOUS_WITH_GPS_REQUEST: {
+            const newPhoto = previousPhotoWithGps(state);
 
             if (newPhoto != null &&
                 state.currentPhoto != null &&
@@ -354,8 +390,16 @@ function nextPhoto(state: State): Photo {
     return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));
 }
 
+function nextPhotoWithGps(state: State): Photo {
+    return getPhotoAtIndex(state, incrementCurrentIndexWithinGpsBounds(state, 1));
+}
+
 function previousPhoto(state: State): Photo {
     return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, -1));
+}
+
+function previousPhotoWithGps(state: State): Photo {
+    return getPhotoAtIndex(state, incrementCurrentIndexWithinGpsBounds(state, -1));
 }
 
 function getPhotoAtIndex(state: State, idx: number) {
@@ -368,6 +412,21 @@ function incrementCurrentIndexWithinBounds(state: State, direction: number): num
     const idx = getCurrentIndex(state) + direction;
 
     return Math.max(0, Math.min(idx, lastIdx));
+}
+
+function incrementCurrentIndexWithinGpsBounds(state: State, direction: number): number {
+    const idx = getCurrentIndex(state);
+    let newIdx = idx;
+
+    for (newIdx = idx + direction; newIdx >= 0 && newIdx < state.ids.length; newIdx + direction) {
+        const photo = getPhotoAtIndex(state, newIdx);
+
+        if (!!photo && photo.latitude != null) {
+            return newIdx;
+        }
+    }
+
+    return idx;
 }
 
 function getCurrentIndex(state: State): number {

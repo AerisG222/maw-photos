@@ -34,12 +34,12 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
 
         this.isFirst$ = this._store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+                select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates)
             );
 
         this.isLast$ = this._store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
+                select(PhotoStoreSelectors.selectIsCurrentPhotoLastWithGpsCoordinates)
             );
     }
 
@@ -52,11 +52,11 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     }
 
     onMoveNext(): void {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this._store$.dispatch(new PhotoStoreActions.MoveNextWithGpsRequestAction());
     }
 
     onMovePrevious(): void {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this._store$.dispatch(new PhotoStoreActions.MovePreviousWithGpsRequestAction());
     }
 
     private configureHotkeys(): void {
