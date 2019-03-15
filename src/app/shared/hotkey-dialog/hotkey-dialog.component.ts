@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
     selector: 'app-hotkey-dialog',
     templateUrl: './hotkey-dialog.component.html',
-    styleUrls: ['./hotkey-dialog.component.scss']
+    styleUrls: ['./hotkey-dialog.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HotkeyDialogComponent implements OnInit {
     firstHotkeys: Hotkey[];

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MatSliderChange } from '@angular/material';
 
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
@@ -6,7 +6,8 @@ import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 @Component({
     selector: 'app-effects',
     templateUrl: './effects.component.html',
-    styleUrls: ['./effects.component.scss']
+    styleUrls: ['./effects.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EffectsComponent {
     @Input() effects: PhotoEffects;

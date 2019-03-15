@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
@@ -12,7 +12,8 @@ import { Store } from '@ngrx/store';
 @Component({
     selector: 'app-photo-view',
     templateUrl: './photo-view.component.html',
-    styleUrls: ['./photo-view.component.scss']
+    styleUrls: ['./photo-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoViewComponent {
     @Input() settings: Settings;

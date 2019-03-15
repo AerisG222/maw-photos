@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Comment } from 'src/app/core/models/comment.model';
@@ -6,7 +6,8 @@ import { Comment } from 'src/app/core/models/comment.model';
 @Component({
     selector: 'app-comments',
     templateUrl: './comments.component.html',
-    styleUrls: ['./comments.component.scss']
+    styleUrls: ['./comments.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentsComponent implements OnInit {
     @Input() comments: Comment[];

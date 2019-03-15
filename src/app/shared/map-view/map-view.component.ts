@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MapTypeStyle } from '@agm/core';
 
 import { MapImage } from 'src/app/core/models/map-image.model';
@@ -8,7 +8,8 @@ import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
 @Component({
     selector: 'app-map-view',
     templateUrl: './map-view.component.html',
-    styleUrls: ['./map-view.component.scss']
+    styleUrls: ['./map-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapViewComponent {
     @Input() activePhoto: Photo;

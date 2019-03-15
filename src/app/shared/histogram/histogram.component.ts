@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Photo } from 'src/app/core/models/photo.model';
 import { DOCUMENT } from '@angular/platform-browser';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -9,7 +9,8 @@ import { Histogram } from './histogram';
 @Component({
     selector: 'app-histogram',
     templateUrl: './histogram.component.html',
-    styleUrls: ['./histogram.component.scss']
+    styleUrls: ['./histogram.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HistogramComponent implements OnInit, OnDestroy {
     form: FormGroup;
