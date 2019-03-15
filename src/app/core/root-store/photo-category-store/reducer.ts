@@ -30,6 +30,12 @@ export function photoCategoryReducer(state = initialState, action: Actions): Sta
                 currentCategory: action.payload.category
             };
         }
+        case ActionTypes.SET_CURRENT_BY_ID: {
+            return {
+                ...state,
+                currentCategory: state.entities[action.payload.categoryId]
+            };
+        }
         default: {
             return state;
         }

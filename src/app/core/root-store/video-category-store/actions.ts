@@ -7,7 +7,8 @@ export enum ActionTypes {
     LOAD_FAILURE = '[Video Categories] Load Failure',
     LOAD_SUCCESS = '[Video Categories] Load Success',
 
-    SET_CURRENT  = '[Video Categories] Set Current'
+    SET_CURRENT  = '[Video Categories] Set Current',
+    SET_CURRENT_BY_ID  = '[Video Categories] Set Current By Id'
 }
 
 export class LoadRequestAction implements Action {
@@ -29,9 +30,15 @@ export class SetCurrentAction implements Action {
     constructor(public payload: { category: VideoCategory }) { }
 }
 
+export class SetCurrentByIdAction implements Action {
+    readonly type = ActionTypes.SET_CURRENT_BY_ID;
+    constructor(public payload: { categoryId: number }) { }
+}
+
 export type Actions =
     LoadRequestAction |
     LoadFailureAction |
     LoadSuccessAction |
 
-    SetCurrentAction;
+    SetCurrentAction |
+    SetCurrentByIdAction;

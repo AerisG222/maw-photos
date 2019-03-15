@@ -39,38 +39,20 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this._store$.dispatch(new VideoStoreActions.ClearRequestAction());
-
-        const categoryId$ = this._route.params
-            .pipe(
-                map(p => Number(p.id))
-            );
-
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             );
 
-        this.category$ = categoryId$
+        this.category$ = this._store$
             .pipe(
-                flatMap(id => this._store$
-                    .pipe(
-                        select(VideoCategoryStoreSelectors.selectCategoryById, { id: id }),
-                        tap(category => this._store$.dispatch(new VideoCategoryStoreActions.SetCurrentAction({ category: category }))),
-                    )
-                ),
-                take(1)
+                select(VideoCategoryStoreSelectors.selectCurrentCategory),
             );
 
-        this.videos$ = this.category$
+        this.videos$ = this._store$
             .pipe(
-                flatMap(category => this._store$
-                    .pipe(
-                        select(VideoStoreSelectors.selectVideosForCategory, { id: category.id }),
-                        tap(videos => this.setCurrentVideo(videos[0]))
-                    )
-                ),
-                take(1)
+                select(VideoStoreSelectors.selectAllVideos),
+                tap(videos => this.setCurrentVideo(videos[0]))
             );
 
         this.activeVideo$ = this._store$
@@ -79,13 +61,17 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
                 filter(x => !!x)
             );
 
+        this._store$.dispatch(new VideoStoreActions.ClearRequestAction());
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
         this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
 
-        categoryId$.pipe(
-            map(id => this._store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id }))),
-            takeUntil(this.destroy$)
-        ).subscribe();
+        this._route.params
+            .pipe(
+                map(p => Number(p.id)),
+                tap(id => this._store$.dispatch(new VideoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
+                tap(id => this._store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id }))),
+                takeUntil(this.destroy$)
+            ).subscribe();
     }
 
     ngOnDestroy(): void {

@@ -45,26 +45,14 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
-
-        const categoryId$ = this._route.params
-            .pipe(
-                map(p => Number(p.id))
-            );
-
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             );
 
-        this.category$ = categoryId$
+        this.category$ = this._store$
             .pipe(
-                flatMap(id => this._store$
-                    .pipe(
-                        select(PhotoCategoryStoreSelectors.selectCategoryById, { id: id }),
-                        tap(category => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category: category })))
-                    )
-                )
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
             );
 
         this.photos$ = this._store$
@@ -106,13 +94,17 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
                 filter(x => !!x)
             );
 
+        this._store$.dispatch(new PhotoStoreActions.ClearRequestAction());
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
         this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
 
-        categoryId$.pipe(
-            map(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id }))),
-            takeUntil(this.destroy$)
-        ).subscribe();
+        this._route.params
+            .pipe(
+                map(p => Number(p.id)),
+                tap(id => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
+                tap(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id }))),
+                takeUntil(this.destroy$)
+            ).subscribe();
     }
 
     ngOnDestroy(): void {
