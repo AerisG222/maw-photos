@@ -4,24 +4,14 @@
 
     <div *ngIf="activeVideo$ | async as video" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
         <video
-            *ngIf="(settings$ | async)?.videoListVideoSize.name === videoSize.small.name; else large"
+            #videoRef
             class="center-block"
             autoplay="false"
-            [ngStyle]="{height: video.videoScaled.height + 'px', width: video.videoScaled.width + 'px'}"
+            [ngStyle]="getVideoDimensions(video)"
             controls>
-            <source [src]="video.videoScaled.url" type="video/mp4" />
+            <source [src]="getVideoUrl(video)" type="video/mp4" />
             Your browser does not support the <code>video</code> element.
         </video>
-        <ng-template #large>
-            <video
-                class="center-block"
-                autoplay="false"
-                [ngStyle]="{height: video.videoFull.height + 'px', width: video.videoFull.width + 'px'}"
-                controls>
-                <source [src]="video.videoFull.url" type="video/mp4" />
-                Your browser does not support the <code>video</code> element.
-            </video>
-        </ng-template>
     </div>
 
     <app-video-list
