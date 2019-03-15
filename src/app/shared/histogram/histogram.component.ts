@@ -35,6 +35,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
         @Inject(DOCUMENT) private doc
     ) {
         this.img = <HTMLImageElement>doc.createElement('img');
+        this.img.crossOrigin = 'Anonymous';
         this.img.addEventListener('load', (evt) => this.onImageLoad());
     }
 
