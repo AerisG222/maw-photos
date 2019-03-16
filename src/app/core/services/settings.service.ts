@@ -10,6 +10,8 @@ import { VideoSize } from '../models/video-size.model';
     providedIn: 'root'
 })
 export class SettingsService {
+    private static readonly keyAuthRedirectUrl = 'authRedirectUrl';
+
     private static readonly keyAppTheme = 'appTheme';
 
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
@@ -157,6 +159,18 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
         this._localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
+    }
+
+    clearAuthRedirectUrl(): void {
+        this._localStorage.clear(SettingsService.keyAuthRedirectUrl);
+    }
+
+    setAuthRedirectUrl(url: string): void {
+        this._localStorage.store(SettingsService.keyAuthRedirectUrl, url);
+    }
+
+    getAuthRedirectUrl(): string {
+        return <string>this._localStorage.retrieve(SettingsService.keyAuthRedirectUrl);
     }
 
     private getTheme(): Theme {
