@@ -84,8 +84,6 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
         years$.subscribe();
         categories$.subscribe();
-
-        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
     }
 
     ngOnDestroy(): void {

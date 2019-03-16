@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
-import { map, flatMap, tap, takeUntil, take, filter } from 'rxjs/operators';
+import { map, tap, takeUntil, filter } from 'rxjs/operators';
 
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 import { Video } from 'src/app/core/models/video.model';

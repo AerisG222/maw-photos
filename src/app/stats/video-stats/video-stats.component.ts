@@ -84,8 +84,6 @@ export class VideoStatsComponent implements OnInit {
 
         years$.subscribe();
         categories$.subscribe();
-
-        this._store$.dispatch(new VideoCategoryStoreActions.LoadRequestAction());
     }
 
     ngOnDestroy(): void {

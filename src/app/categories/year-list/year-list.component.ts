@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import { PhotoCategoryStoreActions, RootStoreState, PhotoCategoryStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSelectors, RootStoreSelectors } from 'src/app/core/root-store';
+import { RootStoreState, RootStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-year-list',
@@ -21,8 +20,5 @@ export class YearListComponent implements OnInit {
 
     ngOnInit() {
         this.years$ = this._store$.pipe(select(RootStoreSelectors.selectCombinedYears));
-
-        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
-        this._store$.dispatch(new VideoCategoryStoreActions.LoadRequestAction());
     }
 }
