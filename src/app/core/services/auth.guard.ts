@@ -5,9 +5,9 @@ import { AuthService, authServiceToken } from './auth.service';
 import { SettingsService } from './settings.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuard implements CanActivate {
     constructor(
         private _settingsSvc: SettingsService,
         @Inject(authServiceToken) private _authService: AuthService
