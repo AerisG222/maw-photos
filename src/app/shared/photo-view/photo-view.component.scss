@@ -21,6 +21,13 @@ img {
     }
 }
 
+@supports (-moz-appearance:none) {
+    img {
+        /* mimic the object-fit:contain that chrome is doing */
+        max-height: calc(100vh - 150px);
+    }
+}
+
 app-photo-list-toolbar,
 app-photo-list-map-toolbar,
 app-photo-list-fullscreen-toolbar {

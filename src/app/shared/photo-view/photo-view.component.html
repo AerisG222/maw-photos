@@ -3,7 +3,7 @@
     <img [src]="activePhoto?.imageLg?.url" />
 </div>
 
-<div *ngIf="mapView" fxLayout="column" style="height: 100%;">
+<div *ngIf="mapView" fxLayout="column" style="height: 100vh;">
     <app-photo-list-map-toolbar></app-photo-list-map-toolbar>
 
     <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
@@ -16,19 +16,22 @@
     </div>
 </div>
 
-<div *ngIf="!fullscreen && !mapView" fxLayout="column" style="height: 100%;">
+<div *ngIf="!fullscreen && !mapView" fxLayout="column" style="height: 100vh;">
     <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
-    <app-category-header *ngIf="settings?.photoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="category" fxFlex="0 0 auto"></app-category-header>
+    <app-category-header
+        *ngIf="settings?.photoListShowCategoryBreadcrumbs"
+        [showCategoryAsLink]="showCategoryAsLink"
+        [category]="category"
+        fxFlex="0 0 auto"
+        #header>
+    </app-category-header>
 
-    <img
-        *ngIf="photos"
-        fxFlex="1 1 auto"
-        fxLayout="row"
-        fxLayoutAlign="center center"
-        [src]="activePhoto?.imageMd?.url"
-        [class.pad-top]="!settings?.showCategoryBreadcrumbs"
-        [class]="effects?.rotation?.klass"
-        [style.filter]="getEffectStyles()" />
+    <div *ngIf="photos" fxFlex="1 1 auto" fxLayout="column" fxLayoutAlign="center center">
+        <img
+            [src]="activePhoto?.imageMd?.url"
+            [class]="effects?.rotation?.klass"
+            [style.filter]="getEffectStyles()" />
+    </div>
 
     <app-photo-list
         *ngIf="photos && settings?.photoListShowPhotoList"
@@ -36,6 +39,7 @@
         [thumbnailSize]="settings?.photoListThumbnailSize"
         (select)="onSelectPhoto($event)"
         [selectedPhoto]="activePhoto"
-        fxFlex="0 0 auto">
+        fxFlex="0 0 auto"
+        #photoList>
     </app-photo-list>
 </div>
