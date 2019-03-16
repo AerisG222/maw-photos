@@ -31,7 +31,7 @@ import { RootStoreModule } from './root-store';
                     'maw-photos',
                     env.photosUrl,
                     `${env.photosUrl}/auth`,
-                    `${env.photosUrl}/auth-silent`
+                    `${env.photosUrl}/auth/silent`
                 );
             },
             deps: [EnvironmentConfig]

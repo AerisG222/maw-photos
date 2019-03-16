@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { UserManager, User } from 'oidc-client';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
+import { tap, map, take } from 'rxjs/operators';
 
 import { AuthConfig } from 'src/app/core/models/auth-config.model';
 import { AuthService } from '../auth.service';
-
+import { resolve } from 'q';
 
 @Injectable()
 export class ExternalAuthService implements AuthService {
@@ -44,6 +45,18 @@ export class ExternalAuthService implements AuthService {
     completeAuthentication(): Promise<void> {
         return this._mgr.signinRedirectCallback().then(user => {
             this.updateUser(user);
+        });
+    }
+
+    startSilentRenew(): Promise<void> {
+        return this._mgr.signinSilent().then(user => {
+            this.updateUser(user);
+        });
+    }
+
+    completeSilentRenew(): void {
+        this._mgr.signinSilentCallback().catch(error => {
+            console.error(error);
         });
     }
 

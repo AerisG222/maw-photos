@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
@@ -21,6 +22,14 @@ export class MockAuthService implements AuthService {
     }
 
     completeAuthentication(): Promise<void> {
+        throw new Error('not implemented');
+    }
+
+    startSilentRenew(): Promise<void> {
+        throw new Error('not implemented');
+    }
+
+    completeSilentRenew(): void {
         throw new Error('not implemented');
     }
 }

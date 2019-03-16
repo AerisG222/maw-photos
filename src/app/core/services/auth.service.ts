@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 export const authServiceToken = 'AuthService';
 
 export interface AuthService {
@@ -6,4 +8,6 @@ export interface AuthService {
     getAuthorizationHeaderValue(): string;
     startAuthentication(): Promise<void>;
     completeAuthentication(): Promise<void>;
+    startSilentRenew(): Promise<void>;
+    completeSilentRenew(): void;
 }
