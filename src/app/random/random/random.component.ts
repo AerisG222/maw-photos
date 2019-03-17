@@ -55,6 +55,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         this.photos$ = this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectAllPhotos),
+                filter(photos => !!photos && photos.length > 0),
                 tap(photos => {
                     if (!this.currentPhotoSet) {
                         this.currentPhotoSet = true;
