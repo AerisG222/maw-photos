@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { tap, takeUntil, filter } from 'rxjs/operators';
@@ -6,19 +7,20 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
+import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
+import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.component';
+import { CanRipple } from 'src/app/core/models/can-ripple.model';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
     PhotoStoreSelectors,
     RootStoreState,
     SettingsStoreActions,
-    SettingsStoreSelectors
+    SettingsStoreSelectors,
+    PhotoCategoryStoreSelectors
 } from 'src/app/core/root-store';
-import { MatButton } from '@angular/material';
-import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
-import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
-import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.component';
-import { CanRipple } from 'src/app/core/models/can-ripple.model';
+import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 
 @Component({
     selector: 'app-photo-list-toolbar',
@@ -47,8 +49,8 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     isLast$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
     enableMapView$: Observable<boolean>;
+    category$: Observable<PhotoCategory>;
     settings: Settings;
-    categoryDownloadUrl: string = null;
 
     smDownloadUrl: string = null;
     mdDownloadUrl: string = null;
@@ -69,6 +71,11 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
                 tap(settings => this.settings = settings),
                 takeUntil(this.destroy$)
             ).subscribe();
+
+        this.category$ = this._store$
+            .pipe(
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
+            );
 
         this.enableMapView$ = this._store$
             .pipe(

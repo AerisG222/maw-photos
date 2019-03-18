@@ -27,8 +27,8 @@
         <a mat-button
             class="download"
             matTooltip="Download All Photos in Category (.zip)"
-            *ngIf="allowCategoryDownload && categoryDownloadUrl"
-            [href]="categoryDownloadUrl">
+            *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
+            [href]="(category$ | async)?.downloadLink">
             <mat-icon [inline]="true">save_alt</mat-icon>
         </a>
 
