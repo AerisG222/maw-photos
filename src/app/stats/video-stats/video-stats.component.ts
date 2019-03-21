@@ -6,7 +6,7 @@ import { takeUntil, tap, map } from 'rxjs/operators';
 import * as numeral from 'numeral';
 
 import { StatDetail } from '../models/stat-detail.model';
-import { RootStoreState, VideoCategoryStoreSelectors, VideoCategoryStoreActions } from 'src/app/core/root-store';
+import { RootStoreState, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 
 @Component({
