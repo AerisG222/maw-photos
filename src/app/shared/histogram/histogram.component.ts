@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ElementRef, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Photo } from 'src/app/core/models/photo.model';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';

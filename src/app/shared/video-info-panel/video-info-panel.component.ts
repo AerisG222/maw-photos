@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subject } from 'rxjs';
@@ -22,7 +22,7 @@ import {
     templateUrl: './video-info-panel.component.html',
     styleUrls: ['./video-info-panel.component.scss']
 })
-export class VideoInfoPanelComponent implements OnInit {
+export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
 
     endSidenavExpanded$: Observable<boolean>;

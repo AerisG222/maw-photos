@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { BehaviorSubject, Subject, Observable, combineLatest } from 'rxjs';
@@ -14,7 +14,7 @@ import { VideoCategory } from 'src/app/core/models/video-category.model';
     templateUrl: './video-stats.component.html',
     styleUrls: ['./video-stats.component.scss']
 })
-export class VideoStatsComponent implements OnInit {
+export class VideoStatsComponent implements OnInit, OnDestroy {
     form: FormGroup;
     aggregateBy$ = new BehaviorSubject<string>('count');
     destroy$ = new Subject<boolean>();
@@ -115,7 +115,7 @@ export class VideoStatsComponent implements OnInit {
         return details;
     }
 
-    private prepareYearDetails(categories:VideoCategory[], selectedYear: number): StatDetail[] {
+    private prepareYearDetails(categories: VideoCategory[], selectedYear: number): StatDetail[] {
         const details: StatDetail[] = [];
 
         categories = categories.filter(x => x.year === selectedYear);
@@ -154,7 +154,7 @@ export class VideoStatsComponent implements OnInit {
     private prepareChartData(years: number[], categories: VideoCategory[], selectedYear: number, aggregateBy: string) {
         let agg = null;
 
-        switch(aggregateBy) {
+        switch (aggregateBy) {
             case 'count':
                 agg = this.getVideoCount;
                 break;
@@ -171,7 +171,7 @@ export class VideoStatsComponent implements OnInit {
                 .filter(cat => cat.year === selectedYear)
                 .map(cat => ({
                         'name': cat.name,
-                        'value':agg(cat)
+                        'value': agg(cat)
                     })
                 );
         }

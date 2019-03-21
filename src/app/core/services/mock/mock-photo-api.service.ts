@@ -30,7 +30,7 @@ export class MockPhotoApiService implements PhotoApiService {
     getRandomPhotos(count: number): Observable<ApiCollection<Photo>> {
         const photos = [];
 
-        for(let i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             const rand = Math.floor(Math.random() * (this._photos.length - 1));
 
             photos.push(this._photos[rand]);

@@ -10,8 +10,7 @@ import { RootStoreState, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors 
 @Injectable({
     providedIn: 'root'
 })
-export class PhotoCategoriesResolverService implements Resolve<PhotoCategory[]>{
-
+export class PhotoCategoriesResolverService implements Resolve<PhotoCategory[]> {
     constructor(
         private _store$: Store<RootStoreState.State>
     ) { }

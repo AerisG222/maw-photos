@@ -159,7 +159,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 .filter(cat => cat.year === selectedYear)
                 .map(cat => ({
                         'name': cat.name,
-                        'value':agg(cat)
+                        'value': agg(cat)
                     })
                 );
         }
