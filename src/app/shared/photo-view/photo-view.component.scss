@@ -24,7 +24,7 @@ img {
 @supports (-moz-appearance:none) {
     img {
         /* mimic the object-fit:contain that chrome is doing */
-        max-height: calc(100vh - 150px);
+        max-height: calc(100vh - 162px);
     }
 }
 
