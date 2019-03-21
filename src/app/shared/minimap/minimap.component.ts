@@ -11,13 +11,19 @@ import { MapTypeStyle } from '@agm/core';
 export class MinimapComponent {
     @Input() lat: number;
     @Input() lng: number;
+    @Input() mapTypeId: 'roadmap';
     @Input() zoom = 10;
     @Input() useDarkTheme = false;
 
+    @Output() mapTypeChange = new EventEmitter<number>();
     @Output() zoomChange = new EventEmitter<number>();
 
     onZoomChange(evt:  number) {
         this.zoomChange.emit(evt);
+    }
+
+    onMapTypeChange(evt: number) {
+        this.mapTypeChange.emit(evt);
     }
 
     getMapTheme(): MapTypeStyle[] {

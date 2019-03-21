@@ -3,9 +3,11 @@
     [latitude]="images[0].latitude"
     [longitude]="images[0].longitude"
     [fullscreenControl]="false"
-    [streetViewControl]="false"
+    [mapTypeControl]="true"
+    [mapTypeId]="mapTypeId"
     [styles]="getMapTheme()"
     [zoom]="zoom"
+    (mapTypeIdChange)="onMapTypeChange($event)"
     (zoomChange)="onZoomChange($event)">
     <agm-marker
         *ngFor="let image of images"

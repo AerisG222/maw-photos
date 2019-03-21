@@ -2,9 +2,12 @@
     [latitude]="lat"
     [longitude]="lng"
     [fullscreenControl]="true"
+    [mapTypeControl]="true"
+    [mapTypeId]="mapTypeId"
     [streetViewControl]="false"
     [styles]="getMapTheme()"
     [zoom]="zoom"
+    (mapTypeIdChange)="onMapTypeChange($event)"
     (zoomChange)="onZoomChange($event)">
     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map>

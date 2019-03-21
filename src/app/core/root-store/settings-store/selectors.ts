@@ -22,11 +22,13 @@ const getPhotoInfoPanelShowEffects = (state: State): boolean => state.settings.p
 const getPhotoInfoPanelShowHistogram = (state: State): boolean => state.settings.photoInfoPanelShowHistogram;
 const getPhotoInfoPanelShowMinimap = (state: State): boolean => state.settings.photoInfoPanelShowMinimap;
 const getPhotoInfoPanelExpandedState = (state: State): boolean => state.settings.photoInfoPanelExpandedState;
+const getPhotoInfoPanelMinimapMapTypeId = (state: State): string => state.settings.photoInfoPanelMinimapMapTypeId;
 const getPhotoInfoPanelMinimapZoom = (state: State): number => state.settings.photoInfoPanelMinimapZoom;
 
 const getPhotoListShowPhotoList = (state: State): boolean => state.settings.photoListShowPhotoList;
 const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
 const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
+const getPhotoListMapViewMapTypeId = (state: State): string => state.settings.photoListMapViewMapTypeId;
 const getPhotoListMapViewZoom = (state: State): number => state.settings.photoListMapViewZoom;
 
 const getVideoListShowVideoList = (state: State): boolean => state.settings.videoListShowVideoList;
@@ -37,6 +39,7 @@ const getVideoInfoPanelShowRatings = (state: State): boolean => state.settings.v
 const getVideoInfoPanelShowComments = (state: State): boolean => state.settings.videoInfoPanelShowComments;
 const getVideoInfoPanelShowMinimap = (state: State): boolean => state.settings.videoInfoPanelShowMinimap;
 const getVideoInfoPanelExpandedState = (state: State): boolean => state.settings.videoInfoPanelExpandedState;
+const getVideoInfoPanelMinimapMapTypeId = (state: State): string => state.settings.videoInfoPanelMinimapMapTypeId;
 const getVideoInfoPanelMinimapZoom = (state: State): number => state.settings.videoInfoPanelMinimapZoom;
 
 export const selectSettingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
@@ -54,12 +57,14 @@ export const selectPhotoInfoPanelShowEffects = createSelector(selectSettingsStat
 export const selectPhotoInfoPanelShowHistogram = createSelector(selectSettingsState, getPhotoInfoPanelShowHistogram);
 export const selectPhotoInfoPanelShowMinimap = createSelector(selectSettingsState, getPhotoInfoPanelShowMinimap);
 export const selectPhotoInfoPanelExpandedState = createSelector(selectSettingsState, getPhotoInfoPanelExpandedState);
+export const selectPhotoInfoPanelMinimapMapTypeId = createSelector(selectSettingsState, getPhotoInfoPanelMinimapMapTypeId);
 export const selectPhotoInfoPanelMinimapZoom = createSelector(selectSettingsState, getPhotoInfoPanelMinimapZoom);
 
 export const selectPhotoListShowPhotoList = createSelector(selectSettingsState, getPhotoListShowPhotoList);
 export const selectPhotoListToolbarExpandedState = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
 // tslint:disable-next-line: max-line-length
 export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
+export const selectPhotoListMapViewMapTypeId = createSelector(selectSettingsState, getPhotoListMapViewMapTypeId);
 export const selectPhotoListMapViewZoom = createSelector(selectSettingsState, getPhotoListMapViewZoom);
 
 export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
@@ -70,4 +75,5 @@ export const selectVideoInfoPanelShowRatings = createSelector(selectSettingsStat
 export const selectVideoInfoPanelShowComments = createSelector(selectSettingsState, getVideoInfoPanelShowComments);
 export const selectVideoInfoPanelShowMinimap = createSelector(selectSettingsState, getVideoInfoPanelShowMinimap);
 export const selectVideoInfoPanelExpandedState = createSelector(selectSettingsState, getVideoInfoPanelExpandedState);
+export const selectVideoInfoPanelMinimapMapTypeId = createSelector(selectSettingsState, getVideoInfoPanelMinimapMapTypeId);
 export const selectVideoInfoPanelMinimapZoom = createSelector(selectSettingsState, getVideoInfoPanelMinimapZoom);

@@ -112,6 +112,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
                 }
             };
+        case ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_MAP_TYPE_ID:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoInfoPanelMinimapMapTypeId: action.payload.mapTypeId
+                }
+            };
         case ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM:
             return {
                 ...state,
@@ -159,6 +167,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: {
                     ...state.settings,
                     photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
+                }
+            };
+        case ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_MAP_TYPE_ID:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    photoListMapViewMapTypeId: action.payload.mapTypeId
                 }
             };
         case ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM:
@@ -241,6 +257,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: {
                     ...state.settings,
                     videoInfoPanelExpandedState: !state.settings.videoInfoPanelExpandedState
+                }
+            };
+        case ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_MAP_TYPE_ID:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videoInfoPanelMinimapMapTypeId: action.payload.mapTypeId
                 }
             };
         case ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM:

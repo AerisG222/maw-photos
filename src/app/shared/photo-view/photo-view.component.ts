@@ -75,6 +75,10 @@ export class PhotoViewComponent {
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
     }
 
+    onMapTypeIdChange(mapTypeId: string): void {
+        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewMapTypeIdRequestAction({ mapTypeId: mapTypeId }));
+    }
+
     onZoomChange(zoom: number): void {
         this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewZoomRequestAction({ zoom: zoom }));
     }

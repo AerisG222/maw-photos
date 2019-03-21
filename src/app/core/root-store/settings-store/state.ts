@@ -21,6 +21,7 @@ export const initialState: State = {
         photoListSlideshowDisplayDurationSeconds: 2,
         photoListToolbarExpandedState: true,
         photoListFullscreenToolbarExpandedState: true,
+        photoListMapViewMapTypeId: 'roadmap',
         photoListMapViewZoom: 10,
 
         photoInfoPanelShowRatings: true,
@@ -30,6 +31,7 @@ export const initialState: State = {
         photoInfoPanelShowHistogram: false,
         photoInfoPanelShowMinimap: false,
         photoInfoPanelExpandedState: false,
+        photoInfoPanelMinimapMapTypeId: 'roadmap',
         photoInfoPanelMinimapZoom: 10,
 
         videoListShowCategoryBreadcrumbs: true,
@@ -42,6 +44,7 @@ export const initialState: State = {
         videoInfoPanelShowComments: true,
         videoInfoPanelShowMinimap: false,
         videoInfoPanelExpandedState: false,
+        videoInfoPanelMinimapMapTypeId: 'roadmap',
         videoInfoPanelMinimapZoom: 10
     }
 };

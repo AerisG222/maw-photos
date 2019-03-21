@@ -54,11 +54,13 @@ export class SettingsStoreEffects {
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE,
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_HISTOGRAM,
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP,
+            settingsActions.ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_MAP_TYPE_ID,
             settingsActions.ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM,
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_RATINGS,
 
             settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS,
             settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE,
+            settingsActions.ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_MAP_TYPE_ID,
             settingsActions.ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM,
             settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST,
             settingsActions.ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE,
@@ -73,6 +75,7 @@ export class SettingsStoreEffects {
             settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_COMMENTS,
             settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE,
             settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_MINIMAP,
+            settingsActions.ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_MAP_TYPE_ID,
             settingsActions.ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM,
             settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_RATINGS
         ),

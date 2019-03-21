@@ -35,6 +35,7 @@ export class VideoInfoPanelComponent implements OnInit {
     comments$: Observable<Comment[]>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
+    minimapMapTypeId$: Observable<string>;
     minimapZoom$: Observable<number>;
 
     @ViewChild(CommentsComponent) comments: CommentsComponent;
@@ -84,6 +85,10 @@ export class VideoInfoPanelComponent implements OnInit {
         this.minimapUseDarkTheme$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectAppTheme),
             map(theme => theme.isDark)
+        );
+
+        this.minimapMapTypeId$ = this._store$.pipe(
+            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId)
         );
 
         this.minimapZoom$ = this._store$.pipe(
@@ -164,6 +169,10 @@ export class VideoInfoPanelComponent implements OnInit {
 
     toggleMinimap(): void {
         this._store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelMinimapRequestAction());
+    }
+
+    onMapTypeIdChange(mapTypeId: string): void {
+        this._store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId: mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {

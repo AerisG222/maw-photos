@@ -23,6 +23,7 @@ export class SettingsService {
     private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
     private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
     private static readonly keyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
+    private static readonly keyPhotoListMapViewMapTypeId = 'photoListMapViewMapTypeId';
     private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
 
     private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
@@ -32,6 +33,7 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowHistogram = 'photoInfoPanelShowHistogram';
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
+    private static readonly keyPhotoInfoPanelMinimapMapTypeId = 'photoInfoPanelMinimapMapTypeId';
     private static readonly keyPhotoInfoPanelMinimapZoom = 'photoInfoPanelMinimapZoom';
 
     private static readonly keyVideoListShowCategoryBreadcrumbs = 'videoListShowCategoryBreadcrumbs';
@@ -44,6 +46,7 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelShowComments = 'videoInfoPanelShowComments';
     private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
     private static readonly keyVideoInfoPanelExpandedState = 'videoInfoPanelExpandedState';
+    private static readonly keyVideoInfoPanelMinimapMapTypeId = 'videoInfoPanelMinimapMapTypeId';
     private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
     constructor(
@@ -60,6 +63,7 @@ export class SettingsService {
         const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
         // tslint:disable-next-line:max-line-length
         const photoListFullscreenToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListFullscreenToolbarExpandedState);
+        const photoListMapViewMapTypeId = this._localStorage.retrieve(SettingsService.keyPhotoListMapViewMapTypeId);
         const photoListMapViewZoom = this._localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom);
 
         const photoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
@@ -69,6 +73,7 @@ export class SettingsService {
         const photoInfoPanelShowHistogram = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowHistogram);
         const photoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
         const photoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
+        const photoInfoPanelMinimapMapTypeId = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
         const photoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapZoom);
 
         const videoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyVideoListShowCategoryBreadcrumbs);
@@ -79,6 +84,7 @@ export class SettingsService {
         const videoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
         const videoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowMinimap);
         const videoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelExpandedState);
+        const videoInfoPanelMinimapMapTypeId = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
         const videoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapZoom);
 
         return {
@@ -94,6 +100,7 @@ export class SettingsService {
             photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
             // tslint:disable-next-line:max-line-length
             photoListFullscreenToolbarExpandedState: photoListFullscreenToolbarExpandedState !== null ? photoListFullscreenToolbarExpandedState : true,
+            photoListMapViewMapTypeId: photoListMapViewMapTypeId != null ? photoListMapViewMapTypeId : 'roadmap',
             photoListMapViewZoom: photoListMapViewZoom != null ? photoListMapViewZoom : 10,
 
             photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
@@ -103,6 +110,7 @@ export class SettingsService {
             photoInfoPanelShowHistogram: photoInfoPanelShowHistogram !== null ? photoInfoPanelShowHistogram : false,
             photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false,
             photoInfoPanelExpandedState: photoInfoPanelExpandedState !== null ? photoInfoPanelExpandedState : false,
+            photoInfoPanelMinimapMapTypeId: photoInfoPanelMinimapMapTypeId != null ? photoInfoPanelMinimapMapTypeId : 'roadmap',
             photoInfoPanelMinimapZoom: photoInfoPanelMinimapZoom !== null ? photoInfoPanelMinimapZoom : 10,
 
             videoListShowCategoryBreadcrumbs: videoListShowCategoryBreadcrumbs !== null ? videoListShowCategoryBreadcrumbs : true,
@@ -115,6 +123,7 @@ export class SettingsService {
             videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
             videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
             videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false,
+            videoInfoPanelMinimapMapTypeId: videoInfoPanelMinimapMapTypeId !== null ? videoInfoPanelMinimapMapTypeId : 'roadmap',
             videoInfoPanelMinimapZoom: videoInfoPanelMinimapZoom !== null ? videoInfoPanelMinimapZoom : 10
         };
     }
@@ -137,6 +146,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
         // tslint:disable-next-line:max-line-length
         this._localStorage.store(SettingsService.keyPhotoListFullscreenToolbarExpandedState, settings.photoListFullscreenToolbarExpandedState);
+        this._localStorage.store(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
         this._localStorage.store(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
@@ -146,6 +156,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
+        this._localStorage.store(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
         this._localStorage.store(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
         this._localStorage.store(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
@@ -158,6 +169,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
         this._localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
+        this._localStorage.store(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
         this._localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
     }
 

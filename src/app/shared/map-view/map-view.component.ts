@@ -14,13 +14,19 @@ import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
 export class MapViewComponent {
     @Input() activePhoto: Photo;
     @Input() images: MapImage[];
+    @Input() mapTypeId: 'roadmap';
     @Input() zoom = 10;
     @Input() useDarkTheme = false;
 
+    @Output() mapTypeChange = new EventEmitter<number>();
     @Output() zoomChange = new EventEmitter<number>();
 
     onZoomChange(evt:  number) {
         this.zoomChange.emit(evt);
+    }
+
+    onMapTypeChange(evt: number) {
+        this.mapTypeChange.emit(evt);
     }
 
     getMapTheme(): MapTypeStyle[] {

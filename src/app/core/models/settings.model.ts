@@ -14,6 +14,7 @@ export interface Settings {
     photoListSlideshowDisplayDurationSeconds: number;
     photoListToolbarExpandedState: boolean;
     photoListFullscreenToolbarExpandedState: boolean;
+    photoListMapViewMapTypeId: string;
     photoListMapViewZoom: number;
 
     photoInfoPanelShowRatings: boolean;
@@ -24,6 +25,7 @@ export interface Settings {
     photoInfoPanelShowMinimap: boolean;
     photoInfoPanelExpandedState: boolean;
     photoInfoPanelMinimapZoom: number;
+    photoInfoPanelMinimapMapTypeId: string;
 
     videoListShowCategoryBreadcrumbs: boolean;
     videoListThumbnailSize: ThumbnailSize;
@@ -35,5 +37,6 @@ export interface Settings {
     videoInfoPanelShowComments: boolean;
     videoInfoPanelShowMinimap: boolean;
     videoInfoPanelExpandedState: boolean;
+    videoInfoPanelMinimapMapTypeId: string;
     videoInfoPanelMinimapZoom: number;
 }
