@@ -49,32 +49,42 @@ import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.com
 import { HistogramComponent } from './histogram/histogram.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { PhotoListMapToolbarComponent } from './photo-list-map-toolbar/photo-list-map-toolbar.component';
+import { CategoriesLinkComponent } from './categories-link/categories-link.component';
+import { RandomLinkComponent } from './random-link/random-link.component';
+import { StatsLinkComponent } from './stats-link/stats-link.component';
+import { HelpLinkComponent } from './help-link/help-link.component';
+import { SettingsLinkComponent } from './settings-link/settings-link.component';
 
 @NgModule({
     declarations: [
         CategoryHeaderComponent,
+        CategoriesLinkComponent,
         CategoryListToolbarComponent,
         CommentsComponent,
         EffectsComponent,
         ExifComponent,
         ExifTableComponent,
+        HelpLinkComponent,
+        HistogramComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
         InfoPanelComponent,
+        MapViewComponent,
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
-        PhotoListToolbarComponent,
         PhotoListFullscreenToolbarComponent,
+        PhotoListMapToolbarComponent,
+        PhotoListToolbarComponent,
         PhotoViewComponent,
+        RandomLinkComponent,
         RatingComponent,
+        SettingsLinkComponent,
         SlideshowButtonComponent,
+        StatsLinkComponent,
         VideoInfoPanelComponent,
-        HistogramComponent,
-        MapViewComponent,
-        PhotoListMapToolbarComponent
     ],
     imports: [
         AgmCoreModule.forRoot({
@@ -131,11 +141,13 @@ import { PhotoListMapToolbarComponent } from './photo-list-map-toolbar/photo-lis
 
         // components
         CategoryHeaderComponent,
+        CategoriesLinkComponent,
         CategoryListToolbarComponent,
         CommentsComponent,
         EffectsComponent,
         ExifComponent,
         ExifTableComponent,
+        HelpLinkComponent,
         HistogramComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
@@ -146,12 +158,16 @@ import { PhotoListMapToolbarComponent } from './photo-list-map-toolbar/photo-lis
         MovePreviousButtonComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
-        PhotoListToolbarComponent,
         PhotoListFullscreenToolbarComponent,
+        PhotoListMapToolbarComponent,
+        PhotoListToolbarComponent,
         PhotoViewComponent,
+        RandomLinkComponent,
         RatingComponent,
+        SettingsLinkComponent,
         SlideshowButtonComponent,
-        VideoInfoPanelComponent
+        StatsLinkComponent,
+        VideoInfoPanelComponent,
     ],
     entryComponents: [
         HotkeyDialogComponent

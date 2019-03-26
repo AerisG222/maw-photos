@@ -1,0 +1,16 @@
+<div>
+    <mat-toolbar fxLayout="row">
+        <app-categories-link tooltipPosition="below"></app-categories-link>
+        <app-random-link tooltipPosition="below"></app-random-link>
+        <app-stats-link tooltipPosition="below"></app-stats-link>
+
+        <span fxFlex="grow"></span>
+
+        <app-help-link tooltipPosition="below"></app-help-link>
+        <app-settings-link tooltipPosition="below"></app-settings-link>
+    </mat-toolbar>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
