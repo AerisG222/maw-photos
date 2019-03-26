@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -11,6 +11,8 @@ import { RootStoreState, LayoutStoreSelectors } from 'src/app/core/root-store';
     styleUrls: ['./desktop-view.component.scss']
 })
 export class DesktopViewComponent implements OnInit {
+    @Input() routerTemplate: TemplateRef<any>;
+
     isRightSidebarDisplayed$: Observable<boolean>;
     hidePanels$: Observable<boolean>;
 

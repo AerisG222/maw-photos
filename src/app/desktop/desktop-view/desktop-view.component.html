@@ -15,7 +15,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content fxFlex>
-        <router-outlet></router-outlet>
+        <ng-container *ngTemplateOutlet="routerTemplate"></ng-container>
     </mat-sidenav-content>
 
     <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="!(hidePanels$ | async) && (isRightSidebarDisplayed$ | async)" fxFlex>
