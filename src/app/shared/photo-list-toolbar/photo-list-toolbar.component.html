@@ -1,5 +1,5 @@
-<div fxLayout="row">
-    <div class="category" *ngIf="isToolbarExpanded$ | async">
+<div [class.mobile_toolbar]="isMobileView$ | async" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="end end" fxLayoutGap.lt-md="4px">
+    <div class="category" *ngIf="isToolbarExpanded$ | async" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
         <button
             mat-button
             matTooltip="Show/Hide Category Breadcrumbs (T)"
@@ -54,7 +54,7 @@
         </button>
     </div>
 
-    <div class="photo" *ngIf="isToolbarExpanded$ | async">
+    <div class="photo" *ngIf="isToolbarExpanded$ | async" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
         <button
             mat-button
             matTooltip="Rotate Counter Clockwise (A)"
@@ -100,7 +100,7 @@
         </a>
     </div>
 
-    <div class="toolbar-control">
+    <div class="toolbar-control" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
         <button
             mat-button
             matTooltip="Show/Hide Toolbar (X)"

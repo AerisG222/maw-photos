@@ -15,7 +15,8 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoStoreActions,
-    VideoStoreSelectors
+    VideoStoreSelectors,
+    LayoutStoreSelectors
 } from 'src/app/core/root-store';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
@@ -38,6 +39,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
+    isMobileView$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
 
@@ -64,6 +66,11 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         this.isLast$ = this._store$
             .pipe(
                 select(VideoStoreSelectors.selectIsCurrentVideoLast)
+            );
+
+        this.isMobileView$ = this._store$
+            .pipe(
+                select(LayoutStoreSelectors.selectLayoutIsMobileView)
             );
 
         this.isToolbarExpanded$ = this._store$

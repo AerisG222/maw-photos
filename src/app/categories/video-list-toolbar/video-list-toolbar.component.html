@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div [class.mobile_toolbar]="isMobileView$ | async" fxLayout="row">
     <div class="category" *ngIf="isToolbarExpanded$ | async">
         <button
             mat-button
