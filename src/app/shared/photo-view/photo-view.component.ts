@@ -6,7 +6,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import { MapImage } from 'src/app/core/models/map-image.model';
-import { RootStoreState, SettingsStoreActions } from 'src/app/core/root-store';
+import { RootStoreState, SettingsStoreActions, PhotoStoreActions } from 'src/app/core/root-store';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -81,5 +81,13 @@ export class PhotoViewComponent {
 
     onZoomChange(zoom: number): void {
         this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewZoomRequestAction({ zoom: zoom }));
+    }
+
+    onSwipeLeft(evt): void {
+        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+    }
+
+    onSwipeRight(evt): void {
+        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
     }
 }

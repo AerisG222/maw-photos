@@ -32,7 +32,9 @@
         <img
             [src]="activePhoto?.imageMd?.url"
             [class]="effects?.rotation?.klass"
-            [style.filter]="getEffectStyles()" />
+            [style.filter]="getEffectStyles()"
+            (swipeleft)="onSwipeLeft($event)"
+            (swiperight)="onSwipeRight($event)" />
     </div>
 
     <app-photo-list
