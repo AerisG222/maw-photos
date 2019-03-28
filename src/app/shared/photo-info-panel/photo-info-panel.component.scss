@@ -4,20 +4,40 @@
 
 .panel-contents {
     padding: 0;
-    width: 500px;
 }
 
 .mat-button {
     min-width: 28px;
     line-height: 28px;
     font-size: 16px;
-    margin-bottom: 4px;
     padding: 0;
 }
 
-.toolbar {
-    min-height: 100vh;
+.vertical {
+    & .toolbar {
+        min-height: 100vh;
+    }
+
+    & .panel-contents {
+        width: 500px;
+    }
+
+    & .mat-button {
+        margin-bottom: 4px;
+    }
 }
+
+.horizontal {
+    & .toolbar {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    & .panel-contents {
+        width: 100%;
+    }
+}
+
 
 .panel-heading {
     padding-left: 4px;
