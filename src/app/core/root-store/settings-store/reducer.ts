@@ -47,6 +47,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
                 }
             };
+        case ActionTypes.TOGGLE_CATEGORY_LIST_YEAR_FILTER:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryListYearFilterEnabled: !state.settings.categoryListYearFilterEnabled
+                }
+            };
         case ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER:
             return {
                 ...state,

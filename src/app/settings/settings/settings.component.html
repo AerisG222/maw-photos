@@ -18,6 +18,9 @@
         <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
             <mat-card-title>Category List</mat-card-title>
             <mat-card-content>
+                <h3>Enable Year Filter</h3>
+                <mat-slide-toggle formControlName="categoryListYearFilterEnabled"></mat-slide-toggle>
+
                 <h3>Category Filter</h3>
                 <mat-select formControlName="categoryListCategoryFilter">
                     <mat-option *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-option>

@@ -11,6 +11,7 @@ export interface Settings {
     categoryListCategoryMargin: CategoryMargin;
     categoryListShowCategoryTitles: boolean;
     categoryListThumbnailSize: ThumbnailSize;
+    categoryListYearFilterEnabled: boolean;
 
     photoListShowCategoryBreadcrumbs: boolean;
     photoListThumbnailSize: ThumbnailSize;

@@ -21,7 +21,8 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule
 } from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
 import { BarRatingModule } from 'ngx-bar-rating';
@@ -96,6 +97,7 @@ import { SettingsLinkComponent } from './settings-link/settings-link.component';
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatChipsModule,
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
@@ -122,6 +124,7 @@ import { SettingsLinkComponent } from './settings-link/settings-link.component';
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
+        MatChipsModule,
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,

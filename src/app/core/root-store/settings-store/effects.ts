@@ -46,6 +46,7 @@ export class SettingsStoreEffects {
     propertyChangeTriggersSaveEffect$: Observable<Action> = this._actions$.pipe(
         ofType(
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES,
+            settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_YEAR_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE,

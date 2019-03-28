@@ -1,5 +1,11 @@
 <app-category-list-toolbar></app-category-list-toolbar>
 
+<div [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="center center">
+    <mat-chip-list>
+        <mat-chip *ngFor="let year of years$ | async">{{ year }}</mat-chip>
+    </mat-chip-list>
+</div>
+
 <div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
     <app-year [year]="year"></app-year>
 </div>

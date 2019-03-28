@@ -1,6 +1,14 @@
 <div class="category">
     <button
         mat-button
+        matTooltip="Toggle Year Filter (F)"
+        (click)="onToggleYearFilter()"
+        #toggleYearFilterButton>
+        <mat-icon [inline]="true">calendar_today</mat-icon>
+    </button>
+
+    <button
+        mat-button
         matTooltip="Toggle Category Filter (F)"
         (click)="onToggleFilter()"
         #toggleFilterButton>

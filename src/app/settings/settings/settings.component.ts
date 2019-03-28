@@ -51,6 +51,7 @@ export class SettingsComponent implements OnInit {
             categoryListCategoryMargin: [CategoryMargin.compact.name],
             categoryListShowCategoryTitles: [true],
             categoryListThumbnailSize: [''],
+            categoryListYearFilterEnabled: [true],
 
             photoListShowCategoryBreadcrumbs: [true],
             photoListThumbnailSize: [''],
@@ -103,6 +104,7 @@ export class SettingsComponent implements OnInit {
             categoryListCategoryMargin: CategoryMargin.forName(this.form.get('categoryListCategoryMargin').value),
             categoryListShowCategoryTitles: this.form.get('categoryListShowCategoryTitles').value,
             categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
+            categoryListYearFilterEnabled: this.form.get('categoryListYearFilterEnabled').value,
 
             photoListShowCategoryBreadcrumbs: this.form.get('photoListShowCategoryBreadcrumbs').value,
             photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
@@ -159,6 +161,7 @@ export class SettingsComponent implements OnInit {
         this.form.get('categoryListCategoryMargin').setValue(settings.categoryListCategoryMargin.name);
         this.form.get('categoryListShowCategoryTitles').setValue(settings.categoryListShowCategoryTitles);
         this.form.get('categoryListThumbnailSize').setValue(settings.categoryListThumbnailSize.name);
+        this.form.get('categoryListYearFilterEnabled').setValue(settings.categoryListYearFilterEnabled);
 
         this.form.get('photoListShowCategoryBreadcrumbs').setValue(settings.photoListShowCategoryBreadcrumbs);
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);

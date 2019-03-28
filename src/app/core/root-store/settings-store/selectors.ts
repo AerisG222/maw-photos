@@ -22,6 +22,7 @@ const getCategoryListCategoryFilter = (state: State): CategoryFilter => state.se
 const getCategoryListCategoryMargin = (state: State): CategoryMargin => state.settings.categoryListCategoryMargin;
 const getCategoryListShowCategoryTitles = (state: State): boolean => state.settings.categoryListShowCategoryTitles;
 const getCategoryListThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize;
+const getCategoryListYearFilterEnabled = (state: State): boolean => state.settings.categoryListYearFilterEnabled;
 
 const getPhotoInfoPanelShowRatings = (state: State): boolean => state.settings.photoInfoPanelShowRatings;
 const getPhotoInfoPanelShowComments = (state: State): boolean => state.settings.photoInfoPanelShowComments;
@@ -62,6 +63,7 @@ export const selectCategoryListCategoryFilter = createSelector(selectSettingsSta
 export const selectCategoryListCategoryMargin = createSelector(selectSettingsState, getCategoryListCategoryMargin);
 export const selectCategoryListShowCategoryTitles = createSelector(selectSettingsState, getCategoryListShowCategoryTitles);
 export const selectCategoryListThumbnailSize = createSelector(selectSettingsState, getCategoryListThumbnailSize);
+export const selectCategoryListYearFilterEnabled = createSelector(selectSettingsState, getCategoryListYearFilterEnabled);
 
 export const selectPhotoInfoPanelShowRatings = createSelector(selectSettingsState, getPhotoInfoPanelShowRatings);
 export const selectPhotoInfoPanelShowComments = createSelector(selectSettingsState, getPhotoInfoPanelShowComments);
