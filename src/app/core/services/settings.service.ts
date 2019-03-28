@@ -5,6 +5,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../models/video-size.model';
+import { CategoryMargin } from '../models/category-margin.model';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,7 @@ export class SettingsService {
 
     private static readonly keyAppTheme = 'appTheme';
 
+    private static readonly keyCategoryListCategoryMargin = 'categoryListCategoryMargin';
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
 
@@ -90,6 +92,7 @@ export class SettingsService {
         return {
             appTheme: this.getTheme(),
 
+            categoryListCategoryMargin: this.getCategoryListCategoryMargin(),
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
 
@@ -135,6 +138,7 @@ export class SettingsService {
 
         this._localStorage.store(SettingsService.keyAppTheme, settings.appTheme.name);
 
+        this._localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
         this._localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this._localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
 
@@ -192,6 +196,16 @@ export class SettingsService {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
         } catch {
             return Theme.themeDark;
+        }
+    }
+
+    private getCategoryListCategoryMargin(): CategoryMargin {
+        const name = this._localStorage.retrieve(SettingsService.keyCategoryListCategoryMargin);
+
+        try {
+            return name !== null ? CategoryMargin.forName(name) : CategoryMargin.compact;
+        } catch {
+            return CategoryMargin.compact;
         }
     }
 

@@ -8,6 +8,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material';
+import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 
 @Component({
     selector: 'app-category-list-toolbar',
@@ -19,6 +20,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
     @ViewChild('toggleTitlesButton') toggleTitlesButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
+    @ViewChild('toggleMarginsButton') toggleMarginsButton: MatButton;
 
     settings: Settings;
     settings$: Observable<Settings>;
@@ -35,6 +37,10 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Category Thumbnail Size')
+        ));
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMargins(event), [], 'Toggle Category Margins')
         ));
 
         this.settings$ = this._store$
@@ -60,6 +66,14 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         }
     }
 
+    onToggleMargins(): void {
+        if (this.settings) {
+            const newMargin = CategoryMargin.nextSize(this.settings.categoryListCategoryMargin.name);
+
+            this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListCategoryMarginRequestAction({ newMargin: newMargin }));
+        }
+    }
+
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleTitlesButton);
         this.onToggleTitle();
@@ -70,6 +84,13 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleThumbnailSizeButton);
         this.onToggleSize();
+
+        return false;
+    }
+
+    private onHotkeyToggleMargins(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleMarginsButton);
+        this.onToggleMargins();
 
         return false;
     }

@@ -10,6 +10,7 @@ import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'sr
 import { VideoSize } from 'src/app/core/models/video-size.model';
 import { MinimapZoom } from 'src/app/core/models/minimap-zoom.model';
 import { MapTypeId } from 'src/app/core/models/map-type-id.model';
+import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { MapTypeId } from 'src/app/core/models/map-type-id.model';
 export class SettingsComponent implements OnInit {
     form: FormGroup;
     themes = Theme.allThemes;
+    categoryMargins = CategoryMargin.allCategoryMargins;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
@@ -43,6 +45,7 @@ export class SettingsComponent implements OnInit {
         this.form = this._formBuilder.group({
             appTheme: ['', Validators.required],
 
+            categoryListCategoryMargin: [CategoryMargin.compact.name],
             categoryListShowCategoryTitles: [true],
             categoryListThumbnailSize: [''],
 
@@ -93,6 +96,7 @@ export class SettingsComponent implements OnInit {
         const settings = {
             appTheme: Theme.forName(this.form.get('appTheme').value),
 
+            categoryListCategoryMargin: CategoryMargin.forName(this.form.get('categoryListCategoryMargin').value),
             categoryListShowCategoryTitles: this.form.get('categoryListShowCategoryTitles').value,
             categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
 
@@ -147,6 +151,7 @@ export class SettingsComponent implements OnInit {
     private updateForm(settings: Settings): void {
         this.form.get('appTheme').setValue(settings.appTheme.name);
 
+        this.form.get('categoryListCategoryMargin').setValue(settings.categoryListCategoryMargin.name);
         this.form.get('categoryListShowCategoryTitles').setValue(settings.categoryListShowCategoryTitles);
         this.form.get('categoryListThumbnailSize').setValue(settings.categoryListThumbnailSize.name);
 

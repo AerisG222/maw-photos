@@ -25,6 +25,11 @@
                 <mat-radio-group formControlName="categoryListThumbnailSize">
                     <mat-radio-button *ngFor="let size of categoryThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
+
+                <h3>Margins</h3>
+                <mat-select formControlName="categoryListCategoryMargin">
+                    <mat-option *ngFor="let margin of categoryMargins" [value]="margin.name">{{ margin.name }}</mat-option>
+                </mat-select>
             </mat-card-content>
         </mat-card>
 

@@ -1,5 +1,5 @@
 <app-category-list-toolbar></app-category-list-toolbar>
 
-<div *ngFor="let year of years$ | async">
+<div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
     <app-year [year]="year"></app-year>
 </div>

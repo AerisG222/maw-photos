@@ -46,6 +46,7 @@ export class SettingsStoreEffects {
     propertyChangeTriggersSaveEffect$: Observable<Action> = this._actions$.pipe(
         ofType(
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES,
+            settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE,
 
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS,

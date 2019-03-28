@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { RootStoreState, RootStoreSelectors } from 'src/app/core/root-store';
+import { CategoryMargin } from 'src/app/core/models/category-margin.model';
+import {
+    RootStoreState,
+    RootStoreSelectors,
+    SettingsStoreSelectors,
+    SettingsStoreActions
+} from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-year-list',
@@ -11,6 +17,7 @@ import { RootStoreState, RootStoreSelectors } from 'src/app/core/root-store';
 })
 export class YearListComponent implements OnInit {
     years$: Observable<number[]>;
+    margin$: Observable<CategoryMargin>;
 
     constructor(
         private _store$: Store<RootStoreState.State>
@@ -19,6 +26,16 @@ export class YearListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.years$ = this._store$.pipe(select(RootStoreSelectors.selectCombinedYears));
+        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+
+        this.years$ = this._store$
+            .pipe(
+                select(RootStoreSelectors.selectCombinedYears)
+            );
+
+        this.margin$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListCategoryMargin)
+            );
     }
 }

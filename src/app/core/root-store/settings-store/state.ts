@@ -1,4 +1,5 @@
 import { Settings } from 'src/app/core/models/settings.model';
+import { CategoryMargin } from '../../models/category-margin.model';
 
 export interface State {
     error: string;
@@ -12,6 +13,7 @@ export const initialState: State = {
     settings: {
         appTheme: null,
 
+        categoryListCategoryMargin: CategoryMargin.compact,
         categoryListShowCategoryTitles: true,
         categoryListThumbnailSize: null,
 

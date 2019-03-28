@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../../models/video-size.model';
+import { CategoryMargin } from '../../models/category-margin.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',
@@ -14,6 +15,7 @@ export enum ActionTypes {
     SAVE_SUCCESS = '[Settings] Save Success',
 
     TOGGLE_CATEGORY_LIST_CATEGORY_TITLES = '[Settings] Toggle Category List Category Titles',
+    UPDATE_CATEGORY_LIST_CATEGORY_MARGIN = '[Settings] Update Category List Category Margin',
     UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE = '[Settings] Update Category List Thumbnail Size',
 
     TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Settings] Toggle Photo Info Panel Comments',
@@ -79,6 +81,11 @@ export class SaveFailureAction implements Action {
 
 export class ToggleCategoryListCategoryTitlesRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES;
+}
+
+export class UpdateCategoryListCategoryMarginRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN;
+    constructor(public payload: { newMargin: CategoryMargin }) { }
 }
 
 export class UpdateCategoryListThumbnailSizeRequestAction implements Action {
@@ -213,6 +220,7 @@ export type Actions =
     SaveSuccessAction |
 
     ToggleCategoryListCategoryTitlesRequestAction |
+    UpdateCategoryListCategoryMarginRequestAction |
     UpdateCategoryListThumbnailSizeRequestAction |
 
     TogglePhotoInfoPanelCommentsRequestAction |
