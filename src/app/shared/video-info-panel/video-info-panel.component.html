@@ -1,5 +1,5 @@
-<div fxLayout>
-    <div *ngIf="endSidenavExpanded$ | async" class="panel-contents" fxLayout="column">
+<div fxLayout fxLayout.lt-md="column" [ngClass.gt-sm]="{ 'vertical': true }" [ngClass.lt-md]="{ 'horizontal': true }">
+    <div *ngIf="endSidenavExpanded$ | async" class="panel-contents" fxLayout="column" fxLayout.lt-md="row" fxFlexOrder.lt-md="2">
         <div fxLayout="column" fxFlex="1 1 auto">
             <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex="none">Rating</div>
             <app-rating
@@ -35,13 +35,14 @@
         </div>
     </div>
 
-    <div fxLayout="column" fxFlex="1 1 auto" class="toolbar">
+    <div fxLayout="column" fxLayout.lt-md="row" fxFlex="1 1 auto" fxFlexOrder.lt-md="1" class="toolbar">
         <button
             class="menu-button"
             mat-button
             matTooltip="Show/Hide Info Panel (I)"
             matTooltipPosition="before"
             (click)="toggleEndSidenav()"
+            fxHide.lt-md="1"
             #toggleInfoPanelButton>
             <mat-icon *ngIf="endSidenavExpanded$ | async" [inline]="true">chevron_right</mat-icon>
             <mat-icon *ngIf="!(endSidenavExpanded$ | async)" [inline]="true">chevron_left</mat-icon>
@@ -78,6 +79,6 @@
             <mat-icon [inline]="true">map</mat-icon>
         </button>
 
-        <span class="toolbar_title">Details</span>
+        <span class="toolbar_title" fxHide.lt-md="1">Details</span>
     </div>
 </div>
