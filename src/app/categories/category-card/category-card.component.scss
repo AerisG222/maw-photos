@@ -45,6 +45,7 @@ mat-card {
     & mat-card-content {
         text-align: center;
         padding: 4px 4px 4px;
+        max-width: 156px;
     }
 
     &:hover {
