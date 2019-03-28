@@ -10,6 +10,7 @@ import { VideoSize } from '../../models/video-size.model';
 import { Theme } from '../../models/theme.model';
 import { CategoryMargin } from '../../models/category-margin.model';
 import { ThumbnailSize } from '../../models/thumbnail-size.model';
+import { CategoryFilter } from '../../models/category-filter.model';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
@@ -17,6 +18,7 @@ const getSettings = (state: State): Settings => state.settings;
 
 const getAppTheme = (state: State): Theme => state.settings.appTheme;
 
+const getCategoryListCategoryFilter = (state: State): CategoryFilter => state.settings.categoryListCategoryFilter;
 const getCategoryListCategoryMargin = (state: State): CategoryMargin => state.settings.categoryListCategoryMargin;
 const getCategoryListShowCategoryTitles = (state: State): boolean => state.settings.categoryListShowCategoryTitles;
 const getCategoryListThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize;
@@ -56,6 +58,7 @@ export const selectSettings = createSelector(selectSettingsState, getSettings);
 
 export const selectAppTheme = createSelector(selectSettingsState, getAppTheme);
 
+export const selectCategoryListCategoryFilter = createSelector(selectSettingsState, getCategoryListCategoryFilter);
 export const selectCategoryListCategoryMargin = createSelector(selectSettingsState, getCategoryListCategoryMargin);
 export const selectCategoryListShowCategoryTitles = createSelector(selectSettingsState, getCategoryListShowCategoryTitles);
 export const selectCategoryListThumbnailSize = createSelector(selectSettingsState, getCategoryListThumbnailSize);

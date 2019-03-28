@@ -2,10 +2,12 @@ import { Theme } from './theme.model';
 import { ThumbnailSize } from './thumbnail-size.model';
 import { VideoSize } from './video-size.model';
 import { CategoryMargin } from './category-margin.model';
+import { CategoryFilter } from './category-filter.model';
 
 export interface Settings {
     appTheme: Theme;
 
+    categoryListCategoryFilter: CategoryFilter;
     categoryListCategoryMargin: CategoryMargin;
     categoryListShowCategoryTitles: boolean;
     categoryListThumbnailSize: ThumbnailSize;

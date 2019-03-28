@@ -4,6 +4,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../../models/video-size.model';
 import { CategoryMargin } from '../../models/category-margin.model';
+import { CategoryFilter } from '../../models/category-filter.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',
@@ -15,6 +16,7 @@ export enum ActionTypes {
     SAVE_SUCCESS = '[Settings] Save Success',
 
     TOGGLE_CATEGORY_LIST_CATEGORY_TITLES = '[Settings] Toggle Category List Category Titles',
+    UPDATE_CATEGORY_LIST_CATEGORY_FILTER = '[Settings] Update Category List Category Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_MARGIN = '[Settings] Update Category List Category Margin',
     UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE = '[Settings] Update Category List Thumbnail Size',
 
@@ -81,6 +83,11 @@ export class SaveFailureAction implements Action {
 
 export class ToggleCategoryListCategoryTitlesRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES;
+}
+
+export class UpdateCategoryListCategoryFilterRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER;
+    constructor(public payload: { newFilter: CategoryFilter }) { }
 }
 
 export class UpdateCategoryListCategoryMarginRequestAction implements Action {
@@ -220,6 +227,7 @@ export type Actions =
     SaveSuccessAction |
 
     ToggleCategoryListCategoryTitlesRequestAction |
+    UpdateCategoryListCategoryFilterRequestAction |
     UpdateCategoryListCategoryMarginRequestAction |
     UpdateCategoryListThumbnailSizeRequestAction |
 

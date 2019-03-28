@@ -18,6 +18,11 @@
         <mat-card>
             <mat-card-title>Category List</mat-card-title>
             <mat-card-content>
+                <h3>Category Filter</h3>
+                <mat-select formControlName="categoryListCategoryFilter">
+                    <mat-option *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-option>
+                </mat-select>
+
                 <h3>Show Category Titles</h3>
                 <mat-slide-toggle formControlName="categoryListShowCategoryTitles"></mat-slide-toggle>
 

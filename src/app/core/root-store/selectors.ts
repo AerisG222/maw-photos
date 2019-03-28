@@ -7,6 +7,7 @@ import { Category } from '../models/category.model';
 import { PhotoCategory } from '../models/photo-category.model';
 import { VideoCategory } from '../models/video-category.model';
 import { CategoryType } from '../models/category-type.model';
+import { photoCategoryToCategory, videoCategoryToCategory } from '../models/category-map-functions';
 
 export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
@@ -68,29 +69,8 @@ export const selectCombinedCategoriesForYear = createSelector(
 );
 
 function combine(photoCategories: PhotoCategory[], videoCategories: VideoCategory[]): Category[] {
-    const pcats: Category[] = photoCategories.map(c => ({
-        type: CategoryType.photo,
-        categoryRoute: 'photos',
-        id: c.id,
-        name: c.name,
-        year: c.year,
-        createDate: c.createDate,
-        teaserImage: c.teaserImage,
-        teaserImageSq: c.teaserImageSq,
-        actual: c
-    }));
-
-    const vcats: Category[] = videoCategories.map(c => ({
-        type: CategoryType.video,
-        categoryRoute: 'videos',
-        id: c.id,
-        name: c.name,
-        year: c.year,
-        createDate: c.createDate,
-        teaserImage: c.teaserImage,
-        teaserImageSq: c.teaserImageSq,
-        actual: c
-    }));
+    const pcats: Category[] = photoCategories.map(c => photoCategoryToCategory(c));
+    const vcats: Category[] = videoCategories.map(c => videoCategoryToCategory(c));
 
     return [...pcats, ...vcats].sort(categoriesDescending);
 }

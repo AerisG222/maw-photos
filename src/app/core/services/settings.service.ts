@@ -6,6 +6,7 @@ import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../models/video-size.model';
 import { CategoryMargin } from '../models/category-margin.model';
+import { CategoryFilter } from '../models/category-filter.model';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ export class SettingsService {
 
     private static readonly keyAppTheme = 'appTheme';
 
+    private static readonly keyCategoryListCategoryFilter = 'categoryListCategoryFilter';
     private static readonly keyCategoryListCategoryMargin = 'categoryListCategoryMargin';
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
@@ -92,6 +94,7 @@ export class SettingsService {
         return {
             appTheme: this.getTheme(),
 
+            categoryListCategoryFilter: this.getCategoryListCategoryFilter(),
             categoryListCategoryMargin: this.getCategoryListCategoryMargin(),
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
@@ -138,6 +141,7 @@ export class SettingsService {
 
         this._localStorage.store(SettingsService.keyAppTheme, settings.appTheme.name);
 
+        this._localStorage.store(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
         this._localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
         this._localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this._localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
@@ -196,6 +200,16 @@ export class SettingsService {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
         } catch {
             return Theme.themeDark;
+        }
+    }
+
+    private getCategoryListCategoryFilter(): CategoryFilter {
+        const name = this._localStorage.retrieve(SettingsService.keyCategoryListCategoryFilter);
+
+        try {
+            return name !== null ? CategoryFilter.forName(name) : CategoryFilter.all;
+        } catch {
+            return CategoryFilter.all;
         }
     }
 

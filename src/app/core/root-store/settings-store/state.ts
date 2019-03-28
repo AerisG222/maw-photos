@@ -1,5 +1,6 @@
 import { Settings } from 'src/app/core/models/settings.model';
 import { CategoryMargin } from '../../models/category-margin.model';
+import { CategoryFilter } from '../../models/category-filter.model';
 
 export interface State {
     error: string;
@@ -13,6 +14,7 @@ export const initialState: State = {
     settings: {
         appTheme: null,
 
+        categoryListCategoryFilter: CategoryFilter.all,
         categoryListCategoryMargin: CategoryMargin.compact,
         categoryListShowCategoryTitles: true,
         categoryListThumbnailSize: null,

@@ -7,8 +7,12 @@ import {
     RootStoreState,
     RootStoreSelectors,
     SettingsStoreSelectors,
-    SettingsStoreActions
+    SettingsStoreActions,
+    PhotoCategoryStoreSelectors,
+    VideoCategoryStoreSelectors
 } from 'src/app/core/root-store';
+import { CategoryFilter } from 'src/app/core/models/category-filter.model';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-year-list',
@@ -30,7 +34,17 @@ export class YearListComponent implements OnInit {
 
         this.years$ = this._store$
             .pipe(
-                select(RootStoreSelectors.selectCombinedYears)
+                select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
+                switchMap(f => {
+                    switch (f) {
+                        case CategoryFilter.photos:
+                            return this._store$.pipe( select(PhotoCategoryStoreSelectors.selectAllYears) );
+                        case CategoryFilter.videos:
+                            return this._store$.pipe( select(VideoCategoryStoreSelectors.selectAllYears) );
+                        default:
+                            return this._store$.pipe( select(RootStoreSelectors.selectCombinedYears) );
+                    }
+                })
             );
 
         this.margin$ = this._store$

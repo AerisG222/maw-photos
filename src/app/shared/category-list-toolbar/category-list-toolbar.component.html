@@ -1,6 +1,14 @@
 <div class="category">
     <button
         mat-button
+        matTooltip="Toggle Category Filter (F)"
+        (click)="onToggleFilter()"
+        #toggleFilterButton>
+        <mat-icon [inline]="true">filter_list</mat-icon>
+    </button>
+
+    <button
+        mat-button
         matTooltip="Show/Hide Category Titles (T)"
         (click)="onToggleTitle()"
         #toggleTitlesButton>
