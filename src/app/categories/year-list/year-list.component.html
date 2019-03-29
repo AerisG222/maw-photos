@@ -1,11 +1,13 @@
 <app-category-list-toolbar></app-category-list-toolbar>
 
-<div [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="center center">
-    <mat-chip-list>
-        <mat-chip *ngFor="let year of years$ | async">{{ year }}</mat-chip>
-    </mat-chip-list>
-</div>
+<ng-container *ngIf="yearFilterEnabled$ | async">
+    <div [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="center center">
+        <mat-chip-list>
+            <mat-chip class="year-chip" *ngFor="let year of allYears$ | async" [class.active]="year === (activeYear$ | async)" (click)="onSelectYear(year)">{{ year }}</mat-chip>
+        </mat-chip-list>
+    </div>
+</ng-container>
 
 <div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
-    <app-year [year]="year"></app-year>
+    <app-year [year]="year" [showYear]="!(yearFilterEnabled$ | async)"></app-year>
 </div>

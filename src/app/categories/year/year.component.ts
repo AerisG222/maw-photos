@@ -21,6 +21,7 @@ import { photoCategoryToCategory, videoCategoryToCategory } from 'src/app/core/m
     styleUrls: ['./year.component.scss']
 })
 export class YearComponent implements OnInit {
+    @Input() showYear = true;
     @Input() year: number;
     categories$: Observable<Category[]>;
     settings$: Observable<Settings>;
