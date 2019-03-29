@@ -2,5 +2,6 @@ import { ExternalServicesModule } from 'src/app/core/services/external/external-
 
 export const environment = {
     production: true,
+    version: require('../../package.json').version,
     servicesModule: ExternalServicesModule
 };
