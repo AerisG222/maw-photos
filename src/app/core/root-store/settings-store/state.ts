@@ -18,6 +18,7 @@ export const initialState: State = {
         categoryListCategoryMargin: CategoryMargin.compact,
         categoryListShowCategoryTitles: true,
         categoryListThumbnailSize: null,
+        categoryListToolbarExpandedState: true,
         categoryListYearFilterEnabled: true,
 
         photoListShowCategoryBreadcrumbs: true,

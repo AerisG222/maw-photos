@@ -1,13 +1,15 @@
-<app-category-list-toolbar></app-category-list-toolbar>
+<div>
+    <app-category-list-toolbar [ngClass.lt-md]="{ 'top_pad': true}"></app-category-list-toolbar>
 
-<ng-container *ngIf="yearFilterEnabled$ | async">
-    <div [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="center center">
-        <mat-chip-list>
-            <mat-chip class="year-chip" *ngFor="let year of allYears$ | async" [class.active]="year === (activeYear$ | async)" (click)="onSelectYear(year)">{{ year }}</mat-chip>
-        </mat-chip-list>
+    <ng-container *ngIf="yearFilterEnabled$ | async">
+        <div [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="center center">
+            <mat-chip-list>
+                <mat-chip class="year-chip" *ngFor="let year of allYears$ | async" [class.active]="year === (activeYear$ | async)" (click)="onSelectYear(year)">{{ year }}</mat-chip>
+            </mat-chip-list>
+        </div>
+    </ng-container>
+
+    <div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
+        <app-year [year]="year" [showYear]="!(yearFilterEnabled$ | async)"></app-year>
     </div>
-</ng-container>
-
-<div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
-    <app-year [year]="year" [showYear]="!(yearFilterEnabled$ | async)"></app-year>
 </div>

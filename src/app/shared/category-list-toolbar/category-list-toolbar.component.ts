@@ -6,7 +6,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions, LayoutStoreSelectors } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
@@ -24,9 +24,11 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleMarginsButton') toggleMarginsButton: MatButton;
     @ViewChild('toggleFilterButton') toggleFilterButton: MatButton;
     @ViewChild('toggleYearFilterButton') toggleYearFilterButton: MatButton;
+    @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
 
     settings: Settings;
     settings$: Observable<Settings>;
+    isToolbarExpanded$: Observable<boolean>;
 
     constructor(
         private _store$: Store<RootStoreState.State>,
@@ -54,10 +56,19 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMargins(event), [], 'Toggle Category Margins')
         ));
 
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleToolbar(event), [], 'Show/Hide Toolbar')
+        ));
+
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
+            );
+
+        this.isToolbarExpanded$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListToolbarExpandedState)
             );
     }
 
@@ -97,6 +108,10 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         }
     }
 
+    onToggleCategoryListToolbar(): void {
+        this._store$.dispatch(new SettingsStoreActions.ToggleCategoryListToolbarExpandedStateRequestAction());
+    }
+
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleTitlesButton);
         this.onToggleTitle();
@@ -128,6 +143,13 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleMargins(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleMarginsButton);
         this.onToggleMargins();
+
+        return false;
+    }
+
+    private onHotkeyToggleToolbar(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleToolbarButton);
+        this.onToggleCategoryListToolbar();
 
         return false;
     }

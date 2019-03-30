@@ -21,7 +21,6 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
-    isMobileView$: Observable<boolean>;
 
     private _hotkeys: Hotkey[] = [];
 
@@ -32,11 +31,6 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.configureHotkeys();
-
-        this.isMobileView$ = this._store$
-            .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsMobileView)
-            );
 
         this.isFirst$ = this._store$
             .pipe(

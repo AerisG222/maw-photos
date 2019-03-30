@@ -52,7 +52,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     enableMapView$: Observable<boolean>;
     category$: Observable<PhotoCategory>;
     settings: Settings;
-    isMobileView$: Observable<boolean>;
 
     smDownloadUrl: string = null;
     mdDownloadUrl: string = null;
@@ -73,11 +72,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
                 tap(settings => this.settings = settings),
                 takeUntil(this.destroy$)
             ).subscribe();
-
-        this.isMobileView$ = this._store$
-            .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsMobileView)
-            );
 
         this.category$ = this._store$
             .pipe(

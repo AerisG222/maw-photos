@@ -20,6 +20,7 @@ export class SettingsService {
     private static readonly keyCategoryListCategoryMargin = 'categoryListCategoryMargin';
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
+    private static readonly keyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
     private static readonly keyCategoryListYearFilterEnabled = 'categoryListYearFilterEnabled';
 
     private static readonly keyPhotoListShowCategoryBreadcrumbs = 'photoListShowCategoryBreadcrumbs';
@@ -62,6 +63,7 @@ export class SettingsService {
 
     load(): Settings {
         const categoryListShowCategoryTitles = this._localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
+        const categoryListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyCategoryListToolbarExpandedState);
         const categoryListYearFilterEnabled = this._localStorage.retrieve(SettingsService.keyCategoryListYearFilterEnabled);
 
         const photoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
@@ -100,6 +102,7 @@ export class SettingsService {
             categoryListCategoryMargin: this.getCategoryListCategoryMargin(),
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
+            categoryListToolbarExpandedState: categoryListToolbarExpandedState !== null ? categoryListToolbarExpandedState : true,
             categoryListYearFilterEnabled: categoryListYearFilterEnabled !== null ? categoryListYearFilterEnabled : true,
 
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
@@ -148,6 +151,7 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
         this._localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this._localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
+        this._localStorage.store(SettingsService.keyCategoryListToolbarExpandedState, settings.categoryListToolbarExpandedState);
         this._localStorage.store(SettingsService.keyCategoryListYearFilterEnabled, settings.categoryListYearFilterEnabled);
 
         this._localStorage.store(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);

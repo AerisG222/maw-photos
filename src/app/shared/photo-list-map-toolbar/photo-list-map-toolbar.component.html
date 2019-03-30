@@ -1,4 +1,4 @@
-<div [class.mobile_toolbar]="isMobileView$ | async" fxLayout="row">
+<div fxLayout="row">
     <div class="nav-toolbar">
         <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
         <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>

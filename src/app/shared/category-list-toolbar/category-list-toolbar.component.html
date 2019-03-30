@@ -1,42 +1,55 @@
-<div class="category">
-    <button
-        mat-button
-        matTooltip="Toggle Year Filter (F)"
-        (click)="onToggleYearFilter()"
-        #toggleYearFilterButton>
-        <mat-icon [inline]="true">calendar_today</mat-icon>
-    </button>
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="end end" fxLayoutGap.lt-md="4px">
+    <div class="category" *ngIf="isToolbarExpanded$ | async" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
+        <button
+            mat-button
+            matTooltip="Toggle Year Filter (F)"
+            (click)="onToggleYearFilter()"
+            #toggleYearFilterButton>
+            <mat-icon [inline]="true">calendar_today</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Toggle Category Filter (F)"
-        (click)="onToggleFilter()"
-        #toggleFilterButton>
-        <mat-icon [inline]="true">filter_list</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Toggle Category Filter (F)"
+            (click)="onToggleFilter()"
+            #toggleFilterButton>
+            <mat-icon [inline]="true">filter_list</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Show/Hide Category Titles (T)"
-        (click)="onToggleTitle()"
-        #toggleTitlesButton>
-        <mat-icon [inline]="true">title</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Category Titles (T)"
+            (click)="onToggleTitle()"
+            #toggleTitlesButton>
+            <mat-icon [inline]="true">title</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Toggle Category Thumbnail Size (S)"
-        (click)="onToggleSize()"
-        [disabled]="(settings$ | async)?.categoryListShowCategoryTitles"
-        #toggleThumbnailSizeButton>
-        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Toggle Category Thumbnail Size (S)"
+            (click)="onToggleSize()"
+            [disabled]="(settings$ | async)?.categoryListShowCategoryTitles"
+            #toggleThumbnailSizeButton>
+            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+        </button>
 
-    <button
-        mat-button
-        matTooltip="Toggle Category Margins (M)"
-        (click)="onToggleMargins()"
-        #toggleMarginsButton>
-        <mat-icon [inline]="true">format_indent_increase</mat-icon>
-    </button>
+        <button
+            mat-button
+            matTooltip="Toggle Category Margins (M)"
+            (click)="onToggleMargins()"
+            #toggleMarginsButton>
+            <mat-icon [inline]="true">format_indent_increase</mat-icon>
+        </button>
+    </div>
+
+    <div class="toolbar-control" [ngClass.lt-md]="{ mobile: true }" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
+        <button
+            mat-button
+            matTooltip="Show/Hide Toolbar (X)"
+            (click)="onToggleCategoryListToolbar()"
+            #toggleToolbarButton>
+            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
+            <mat-icon *ngIf="!(isToolbarExpanded$ | async)" [inline]="true">more_horiz</mat-icon>
+        </button>
+    </div>
 </div>

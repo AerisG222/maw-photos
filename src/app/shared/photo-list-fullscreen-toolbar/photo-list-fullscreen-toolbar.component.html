@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    <div class="toolbar-control">
+    <div class="toolbar-control" [ngClass.lt-md]="{ mobile: true }">
         <button
             mat-button
             matTooltip="Show/Hide Toolbar (X)"

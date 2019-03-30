@@ -16,6 +16,7 @@ export enum ActionTypes {
     SAVE_SUCCESS = '[Settings] Save Success',
 
     TOGGLE_CATEGORY_LIST_CATEGORY_TITLES = '[Settings] Toggle Category List Category Titles',
+    TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Category List Toolbar Expanded State',
     TOGGLE_CATEGORY_LIST_YEAR_FILTER = '[Settings] Toggle Category List Year Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_FILTER = '[Settings] Update Category List Category Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_MARGIN = '[Settings] Update Category List Category Margin',
@@ -84,6 +85,10 @@ export class SaveFailureAction implements Action {
 
 export class ToggleCategoryListCategoryTitlesRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES;
+}
+
+export class ToggleCategoryListToolbarExpandedStateRequestAction implements Action {
+    readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
 export class ToggleCategoryListYearFilterRequestAction implements Action {
@@ -232,6 +237,7 @@ export type Actions =
     SaveSuccessAction |
 
     ToggleCategoryListCategoryTitlesRequestAction |
+    ToggleCategoryListToolbarExpandedStateRequestAction |
     ToggleCategoryListYearFilterRequestAction |
     UpdateCategoryListCategoryFilterRequestAction |
     UpdateCategoryListCategoryMarginRequestAction |

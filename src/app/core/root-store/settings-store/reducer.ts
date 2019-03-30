@@ -47,6 +47,14 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
                 }
             };
+        case ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryListToolbarExpandedState: !state.settings.categoryListToolbarExpandedState
+                }
+            };
         case ActionTypes.TOGGLE_CATEGORY_LIST_YEAR_FILTER:
             return {
                 ...state,
