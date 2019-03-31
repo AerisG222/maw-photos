@@ -1,5 +1,5 @@
 <div fxLayout fxLayout.lt-md="column" [ngClass.gt-sm]="{ 'vertical': true }" [ngClass.lt-md]="{ 'horizontal': true }">
-    <div *ngIf="endSidenavExpanded$ | async" class="panel-contents" fxLayout="column" fxLayout.lt-md="row" fxFlexOrder.lt-md="2">
+    <div *ngIf="enableButtons$ | async" class="panel-contents" fxLayout="column" fxLayout.lt-md="row" fxFlexOrder.lt-md="2">
         <div fxLayout="column" fxFlex="1 1 auto">
             <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex="none">Rating</div>
             <app-rating
@@ -75,7 +75,7 @@
             mat-button
             matTooltip="Show/Hide Ratings (R)"
             matTooltipPosition="before"
-            [disabled]="!(endSidenavExpanded$ | async)"
+            [disabled]="!(enableButtons$ | async)"
             [class.active]="showRatings$ | async"
             (click)="toggleRatings()"
             #toggleRatingsButton>
@@ -85,7 +85,7 @@
             mat-button
             matTooltip="Show/Hide Comments (C)"
             matTooltipPosition="before"
-            [disabled]="!(endSidenavExpanded$ | async)"
+            [disabled]="!(enableButtons$ | async)"
             [class.active]="showComments$ | async"
             (click)="toggleComments()"
             #toggleCommentsButton>
@@ -95,7 +95,7 @@
             mat-button
             matTooltip="Show/Hide EXIF (W)"
             matTooltipPosition="before"
-            [disabled]="!(endSidenavExpanded$ | async)"
+            [disabled]="!(enableButtons$ | async)"
             [class.active]="showExif$ | async"
             (click)="toggleExif()"
             #toggleExifButton>
@@ -105,7 +105,7 @@
             mat-button
             matTooltip="Show/Hide Histogram (H)"
             matTooltipPosition="before"
-            [disabled]="!(endSidenavExpanded$ | async)"
+            [disabled]="!(enableButtons$ | async)"
             [class.active]="showHistogram$ | async"
             (click)="toggleHistogram()"
             #toggleHistogramButton>
@@ -115,7 +115,7 @@
             mat-button
             matTooltip="Show/Hide Effects (E)"
             matTooltipPosition="before"
-            [disabled]="!(endSidenavExpanded$ | async)"
+            [disabled]="!(enableButtons$ | async)"
             [class.active]="showEffects$ | async"
             (click)="toggleEffects()"
             #toggleEffectsButton>
@@ -125,7 +125,7 @@
             mat-button
             matTooltip="Show/Hide Mini-map (M)"
             matTooltipPosition="before"
-            [disabled]="!(endSidenavExpanded$ | async)"
+            [disabled]="!(enableButtons$ | async)"
             [class.active]="showMinimap$ | async"
             (click)="toggleMinimap()"
             #toggleMinimapButton>

@@ -14,7 +14,8 @@ import {
     PhotoStoreSelectors,
     RootStoreState,
     SettingsStoreActions,
-    SettingsStoreSelectors
+    SettingsStoreSelectors,
+    LayoutStoreSelectors
 } from 'src/app/core/root-store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { MatButton } from '@angular/material';
@@ -34,6 +35,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showRatings$: Observable<boolean>;
     showMinimap$: Observable<boolean>;
     showHistogram$: Observable<boolean>;
+    enableButtons$: Observable<boolean>;
 
     rating$: Observable<Rating>;
     comments$: Observable<Comment[]>;
@@ -79,6 +81,20 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
                 takeUntil(this.destroy$)
             ).subscribe();
+
+        this.enableButtons$ = combineLatest(
+            this._store$.pipe( select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState) ),
+            this._store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
+        ).pipe(
+            map(x => ({ isExpanded: x[0], isMobile: x[1]})),
+            map(x => {
+                if (x.isMobile  || x.isExpanded) {
+                    return true;
+                }
+
+                return false;
+            })
+        );
 
         this.endSidenavExpanded$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)

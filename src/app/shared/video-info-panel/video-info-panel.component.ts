@@ -15,6 +15,7 @@ import {
     SettingsStoreSelectors,
     VideoStoreSelectors,
     VideoStoreActions,
+    LayoutStoreSelectors,
 } from 'src/app/core/root-store';
 
 @Component({
@@ -30,6 +31,7 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     showRatings$: Observable<boolean>;
     showMinimap$: Observable<boolean>;
     minimapUseDarkTheme$: Observable<boolean>;
+    enableButtons$: Observable<boolean>;
 
     rating$: Observable<Rating>;
     comments$: Observable<Comment[]>;
@@ -69,6 +71,20 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
                 tap(video => this._store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id }))),
                 takeUntil(this.destroy$)
             ).subscribe();
+
+        this.enableButtons$ = combineLatest(
+                this._store$.pipe( select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState) ),
+                this._store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
+            ).pipe(
+                map(x => ({ isExpanded: x[0], isMobile: x[1]})),
+                map(x => {
+                    if (x.isMobile  || x.isExpanded) {
+                        return true;
+                    }
+
+                    return false;
+                })
+            );
 
         this.endSidenavExpanded$ = this._store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
