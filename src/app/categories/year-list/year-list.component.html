@@ -2,11 +2,14 @@
     <app-category-list-toolbar [ngClass.lt-md]="{ 'top_pad': true}"></app-category-list-toolbar>
 
     <ng-container *ngIf="yearFilterEnabled$ | async">
-        <div [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="center center">
-            <mat-chip-list>
-                <mat-chip class="year-chip" *ngFor="let year of allYears$ | async" [class.active]="year === (activeYear$ | async)" (click)="onSelectYear(year)">{{ year }}</mat-chip>
-            </mat-chip-list>
-        </div>
+        <form [formGroup]="form" [ngClass]="(margin$ | async).klass">
+            <mat-form-field appearance="standard">
+                <mat-label>Year</mat-label>
+                <mat-select formControlName="yearSelect" (selectionChange)="onSelectYear($event)">
+                    <mat-option *ngFor="let year of allYears$ | async" [value]="year">{{ year }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
     </ng-container>
 
     <div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">

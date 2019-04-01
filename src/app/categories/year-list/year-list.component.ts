@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { switchMap, tap, map, filter, take } from 'rxjs/operators';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 
+import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import {
     RootStoreState,
@@ -12,8 +15,7 @@ import {
     PhotoCategoryStoreSelectors,
     VideoCategoryStoreSelectors
 } from 'src/app/core/root-store';
-import { CategoryFilter } from 'src/app/core/models/category-filter.model';
-import { ActivatedRoute } from '@angular/router';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
     selector: 'app-year-list',
@@ -21,6 +23,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./year-list.component.scss']
 })
 export class YearListComponent implements OnInit {
+    form: FormGroup;
     activeYear$ = new BehaviorSubject<number>(0);
     yearFilterEnabled$: Observable<boolean>;
     allYears$: Observable<number[]>;
@@ -28,6 +31,7 @@ export class YearListComponent implements OnInit {
     margin$: Observable<CategoryMargin>;
 
     constructor(
+        private _formBuilder: FormBuilder,
         private _store$: Store<RootStoreState.State>,
         private _activatedRoute: ActivatedRoute
     ) {
@@ -37,6 +41,10 @@ export class YearListComponent implements OnInit {
     ngOnInit() {
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
 
+        this.form = this._formBuilder.group({
+            yearSelect: [''],
+        });
+
         this._activatedRoute.fragment
             .pipe(
                 filter(f => !!f),
@@ -44,7 +52,8 @@ export class YearListComponent implements OnInit {
                     const year = parseInt(y, 10);
 
                     if (!isNaN(year)) {
-                        this.activeYear$.next(year);
+                        this.onSelectYear(new MatSelectChange(null, year));
+                        this.updateYearSelection(year);
                     }
                 }),
                 take(1)
@@ -83,7 +92,8 @@ export class YearListComponent implements OnInit {
                 map(years => years.sort((a, b) => b - a)),
                 tap(years => {
                     if (!years.includes(this.activeYear$.value)) {
-                        this.activeYear$.next(years[0]);
+                        this.onSelectYear(new MatSelectChange(null, years[0]));
+                        this.updateYearSelection(years[0]);
                     }
                 })
             );
@@ -111,7 +121,11 @@ export class YearListComponent implements OnInit {
             );
     }
 
-    onSelectYear(year: number): void {
-        this.activeYear$.next(year);
+    onSelectYear(change: MatSelectChange): void {
+        this.activeYear$.next(change.value);
+    }
+
+    updateYearSelection(year: number): void {
+        this.form.get('yearSelect').setValue(year);
     }
 }

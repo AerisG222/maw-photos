@@ -1,6 +1,6 @@
 <h3 *ngIf="showYear">{{ year }}</h3>
 
-<mat-divider mat-color="accent" [class.add-top-margin]="!showYear"></mat-divider>
+<mat-divider mat-color="accent"></mat-divider>
 
 <app-category-list
     [categories]="categories$ | async"

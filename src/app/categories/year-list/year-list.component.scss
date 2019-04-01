@@ -9,19 +9,6 @@ app-category-list-toolbar {
     }
 }
 
-mat-chip-list {
-    margin-top: 4px;
-
-    & mat-chip {
-        cursor: pointer;
-
-        &.mat-standard-chip {
-            min-height: 24px;
-            padding: 2px 8px;
-        }
-    }
-}
-
 .category-margin-ten {
     margin-left: 10%;
     margin-right: 10%;
