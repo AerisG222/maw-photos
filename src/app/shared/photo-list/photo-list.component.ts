@@ -21,7 +21,12 @@ export class PhotoListComponent {
 
     scrollIntoView(photoId: number, elementRef: HTMLElement) {
         if (!!this.selectedPhoto && this.selectedPhoto.id === photoId) {
-            elementRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+            const parent = elementRef.parentElement;
+            const parentMiddle = parent.clientWidth / 2;
+            const imgWidth = elementRef.clientWidth / 2;
+            const newLeft = Math.max(0, elementRef.offsetLeft + imgWidth - parentMiddle);
+
+            parent.scrollTo({ top: 0, left: newLeft, behavior: 'smooth' });
         }
 
         return '';
