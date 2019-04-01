@@ -29,6 +29,8 @@ export class YearListComponent implements OnInit {
     allYears$: Observable<number[]>;
     years$: Observable<number[]>;
     margin$: Observable<CategoryMargin>;
+    showCamera$: Observable<boolean>;
+    showVideoCamera$: Observable<boolean>;
 
     constructor(
         private _formBuilder: FormBuilder,
@@ -58,6 +60,18 @@ export class YearListComponent implements OnInit {
                 }),
                 take(1)
             ).subscribe();
+
+        this.showCamera$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
+                map(f => f.name === CategoryFilter.photos.name || f.name === CategoryFilter.all.name)
+            );
+
+        this.showVideoCamera$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
+                map(f => f.name === CategoryFilter.videos.name || f.name === CategoryFilter.all.name)
+            );
 
         this.yearFilterEnabled$ = this._store$
             .pipe(
@@ -127,5 +141,13 @@ export class YearListComponent implements OnInit {
 
     updateYearSelection(year: number): void {
         this.form.get('yearSelect').setValue(year);
+    }
+
+    showCamera(): boolean {
+
+    }
+
+    showVideoCamera(): boolean {
+
     }
 }

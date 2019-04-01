@@ -2,13 +2,15 @@
     <app-category-list-toolbar [ngClass.lt-md]="{ 'top_pad': true}"></app-category-list-toolbar>
 
     <ng-container *ngIf="yearFilterEnabled$ | async">
-        <form [formGroup]="form" [ngClass]="(margin$ | async).klass">
+        <form [formGroup]="form" [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="start center">
             <mat-form-field appearance="standard">
                 <mat-label>Year</mat-label>
                 <mat-select formControlName="yearSelect" (selectionChange)="onSelectYear($event)">
                     <mat-option *ngFor="let year of allYears$ | async" [value]="year">{{ year }}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <mat-icon inline="true" *ngIf="showCamera$ | async">camera_alt</mat-icon>
+            <mat-icon inline="true" *ngIf="showVideoCamera$ | async">videocam</mat-icon>
         </form>
     </ng-container>
 
