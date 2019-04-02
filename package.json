@@ -1,6 +1,6 @@
 {
   "name": "maw-photos",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --public-host photosdev.mikeandwan.us",

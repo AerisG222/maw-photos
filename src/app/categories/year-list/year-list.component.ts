@@ -142,12 +142,4 @@ export class YearListComponent implements OnInit {
     updateYearSelection(year: number): void {
         this.form.get('yearSelect').setValue(year);
     }
-
-    showCamera(): boolean {
-
-    }
-
-    showVideoCamera(): boolean {
-
-    }
 }
