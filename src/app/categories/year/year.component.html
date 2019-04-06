@@ -6,8 +6,8 @@
     [categories]="categories$ | async">
 </app-category-list2>
 
-<app-category-list
+<app-category-grid
     [categories]="categories$ | async"
     [showTitles]="(settings$ | async).categoryListShowCategoryTitles"
     [thumbnailSize]="!(settings$ | async).categoryListShowCategoryTitles && (settings$ | async).categoryListThumbnailSize">
-</app-category-list>
+</app-category-grid>

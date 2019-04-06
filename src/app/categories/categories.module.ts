@@ -5,7 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { PhotoCategoryComponent } from './photo-category/photo-category.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
-import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { YearComponent } from './year/year.component';
 import { YearListComponent } from './year-list/year-list.component';
 import { VideoCategoryComponent } from './video-category/video-category.component';
@@ -17,7 +17,7 @@ import { CategoryList2Component } from './category-list2/category-list2.componen
     declarations: [
         CategoryCardComponent,
         PhotoCategoryComponent,
-        CategoryListComponent,
+        CategoryGridComponent,
         YearComponent,
         YearListComponent,
         VideoCategoryComponent,
