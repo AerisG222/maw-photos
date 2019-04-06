@@ -14,6 +14,7 @@ import {
     VideoCategoryStoreSelectors
 } from 'src/app/core/root-store';
 import { photoCategoryToCategory, videoCategoryToCategory } from 'src/app/core/models/category-map-functions';
+import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 
 @Component({
     selector: 'app-year',
@@ -23,8 +24,11 @@ import { photoCategoryToCategory, videoCategoryToCategory } from 'src/app/core/m
 export class YearComponent implements OnInit {
     @Input() showYear = true;
     @Input() year: number;
+
     categories$: Observable<Category[]>;
     settings$: Observable<Settings>;
+    showListView$: Observable<boolean>;
+    showGridView$: Observable<boolean>;
 
     constructor(
         private _store$: Store<RootStoreState.State>
@@ -33,6 +37,18 @@ export class YearComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.showListView$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                map(type => type.name === CategoryListType.list.name)
+            );
+
+        this.showGridView$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                map(type => type.name === CategoryListType.grid.name)
+            );
+
         this.settings$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)

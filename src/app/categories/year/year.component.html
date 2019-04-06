@@ -3,10 +3,12 @@
 <mat-divider mat-color="accent"></mat-divider>
 
 <app-category-list
+    *ngIf="showListView$ | async"
     [categories]="categories$ | async">
 </app-category-list>
 
 <app-category-grid
+    *ngIf="showGridView$ | async"
     [categories]="categories$ | async"
     [showTitles]="(settings$ | async).categoryListShowCategoryTitles"
     [thumbnailSize]="!(settings$ | async).categoryListShowCategoryTitles && (settings$ | async).categoryListThumbnailSize">
