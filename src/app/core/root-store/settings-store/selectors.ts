@@ -11,6 +11,7 @@ import { Theme } from '../../models/theme.model';
 import { CategoryMargin } from '../../models/category-margin.model';
 import { ThumbnailSize } from '../../models/thumbnail-size.model';
 import { CategoryFilter } from '../../models/category-filter.model';
+import { CategoryListType } from '../../models/category-list-type.model';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
@@ -24,6 +25,8 @@ const getCategoryListShowCategoryTitles = (state: State): boolean => state.setti
 const getCategoryListThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize;
 const getCategoryListToolbarExpandedState = (state: State): boolean => state.settings.categoryListToolbarExpandedState;
 const getCategoryListYearFilterEnabled = (state: State): boolean => state.settings.categoryListYearFilterEnabled;
+const getCategoryListListType = (state: State): CategoryListType => state.settings.categoryListListType;
+const getCategoryListListViewThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListListViewThumbnailSize;
 
 const getPhotoInfoPanelShowRatings = (state: State): boolean => state.settings.photoInfoPanelShowRatings;
 const getPhotoInfoPanelShowComments = (state: State): boolean => state.settings.photoInfoPanelShowComments;
@@ -66,6 +69,8 @@ export const selectCategoryListShowCategoryTitles = createSelector(selectSetting
 export const selectCategoryListThumbnailSize = createSelector(selectSettingsState, getCategoryListThumbnailSize);
 export const selectCategoryListToolbarExpandedState = createSelector(selectSettingsState, getCategoryListToolbarExpandedState);
 export const selectCategoryListYearFilterEnabled = createSelector(selectSettingsState, getCategoryListYearFilterEnabled);
+export const selectCategoryListListType = createSelector(selectSettingsState, getCategoryListListType);
+export const selectCategoryListListViewThumbnailSize = createSelector(selectSettingsState, getCategoryListListViewThumbnailSize);
 
 export const selectPhotoInfoPanelShowRatings = createSelector(selectSettingsState, getPhotoInfoPanelShowRatings);
 export const selectPhotoInfoPanelShowComments = createSelector(selectSettingsState, getPhotoInfoPanelShowComments);

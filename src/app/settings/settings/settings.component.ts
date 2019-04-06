@@ -12,6 +12,7 @@ import { MinimapZoom } from 'src/app/core/models/minimap-zoom.model';
 import { MapTypeId } from 'src/app/core/models/map-type-id.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
+import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class SettingsComponent implements OnInit {
     categoryFilters = CategoryFilter.allCategoryFilters;
     categoryMargins = CategoryMargin.allCategoryMargins;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
+    categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
+    categoryListTypes = CategoryListType.allTypes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
     mapViewMapTypeIds = MapTypeId.allTypeIds;
@@ -53,6 +56,8 @@ export class SettingsComponent implements OnInit {
             categoryListThumbnailSize: [''],
             categoryListToolbarExpandedState: [true],
             categoryListYearFilterEnabled: [true],
+            categoryListListType: [CategoryListType.grid.name],
+            categoryListListViewThumbnailSize: [''],
 
             photoListShowCategoryBreadcrumbs: [true],
             photoListThumbnailSize: [''],
@@ -107,6 +112,8 @@ export class SettingsComponent implements OnInit {
             categoryListToolbarExpandedState: this.form.get('categoryListToolbarExpandedState').value,
             categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
             categoryListYearFilterEnabled: this.form.get('categoryListYearFilterEnabled').value,
+            categoryListListType: CategoryListType.forName(this.form.get('categoryListListType').value),
+            categoryListListViewThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListListViewThumbnailSize').value),
 
             photoListShowCategoryBreadcrumbs: this.form.get('photoListShowCategoryBreadcrumbs').value,
             photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
@@ -165,6 +172,8 @@ export class SettingsComponent implements OnInit {
         this.form.get('categoryListThumbnailSize').setValue(settings.categoryListThumbnailSize.name);
         this.form.get('categoryListToolbarExpandedState').setValue(settings.categoryListToolbarExpandedState);
         this.form.get('categoryListYearFilterEnabled').setValue(settings.categoryListYearFilterEnabled);
+        this.form.get('categoryListListType').setValue(settings.categoryListListType.name);
+        this.form.get('categoryListListViewThumbnailSize').setValue(settings.categoryListListViewThumbnailSize.name);
 
         this.form.get('photoListShowCategoryBreadcrumbs').setValue(settings.photoListShowCategoryBreadcrumbs);
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);

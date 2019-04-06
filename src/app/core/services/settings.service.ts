@@ -7,6 +7,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../models/video-size.model';
 import { CategoryMargin } from '../models/category-margin.model';
 import { CategoryFilter } from '../models/category-filter.model';
+import { CategoryListType } from '../models/category-list-type.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,8 @@ export class SettingsService {
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
     private static readonly keyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
     private static readonly keyCategoryListYearFilterEnabled = 'categoryListYearFilterEnabled';
+    private static readonly keyCategoryListListType = 'categoryListListType';
+    private static readonly keyCategoryListListViewThumbnailSize = 'categoryListListViewThumbnailSize';
 
     private static readonly keyPhotoListShowCategoryBreadcrumbs = 'photoListShowCategoryBreadcrumbs';
     private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
@@ -104,6 +107,8 @@ export class SettingsService {
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
             categoryListToolbarExpandedState: categoryListToolbarExpandedState !== null ? categoryListToolbarExpandedState : true,
             categoryListYearFilterEnabled: categoryListYearFilterEnabled !== null ? categoryListYearFilterEnabled : true,
+            categoryListListType: this.getCategoryListListType(),
+            categoryListListViewThumbnailSize: this.getCategoryListListViewThumbnailSize(),
 
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
             photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
@@ -153,6 +158,8 @@ export class SettingsService {
         this._localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
         this._localStorage.store(SettingsService.keyCategoryListToolbarExpandedState, settings.categoryListToolbarExpandedState);
         this._localStorage.store(SettingsService.keyCategoryListYearFilterEnabled, settings.categoryListYearFilterEnabled);
+        this._localStorage.store(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
+        this._localStorage.store(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
 
         this._localStorage.store(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
         this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
@@ -209,6 +216,22 @@ export class SettingsService {
         } catch {
             return Theme.themeDark;
         }
+    }
+
+    private getCategoryListListType(): CategoryListType {
+        const name = this._localStorage.retrieve(SettingsService.keyCategoryListListType);
+
+        try {
+            return name !== null ? CategoryListType.forName(name) : CategoryListType.grid;
+        } catch {
+            return CategoryListType.grid;
+        }
+    }
+
+    private getCategoryListListViewThumbnailSize(): ThumbnailSize {
+        const sizeName = this._localStorage.retrieve(SettingsService.keyCategoryListListViewThumbnailSize);
+
+        return this.getThumbnailSize(sizeName);
     }
 
     private getCategoryListCategoryFilter(): CategoryFilter {

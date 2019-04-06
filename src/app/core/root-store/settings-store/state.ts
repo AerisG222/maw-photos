@@ -1,6 +1,7 @@
 import { Settings } from 'src/app/core/models/settings.model';
 import { CategoryMargin } from '../../models/category-margin.model';
 import { CategoryFilter } from '../../models/category-filter.model';
+import { CategoryListType } from '../../models/category-list-type.model';
 
 export interface State {
     error: string;
@@ -20,6 +21,8 @@ export const initialState: State = {
         categoryListThumbnailSize: null,
         categoryListToolbarExpandedState: true,
         categoryListYearFilterEnabled: true,
+        categoryListListType: CategoryListType.grid,
+        categoryListListViewThumbnailSize: null,
 
         photoListShowCategoryBreadcrumbs: true,
         photoListThumbnailSize: null,

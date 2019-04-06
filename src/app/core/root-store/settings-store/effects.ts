@@ -50,6 +50,8 @@ export class SettingsStoreEffects {
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_YEAR_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN,
+            settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_LIST_TYPE,
+            settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_LIST_VIEW_THUMBNAIL_SIZE,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE,
 
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS,

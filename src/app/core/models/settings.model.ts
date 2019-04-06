@@ -3,6 +3,7 @@ import { ThumbnailSize } from './thumbnail-size.model';
 import { VideoSize } from './video-size.model';
 import { CategoryMargin } from './category-margin.model';
 import { CategoryFilter } from './category-filter.model';
+import { CategoryListType } from './category-list-type.model';
 
 export interface Settings {
     appTheme: Theme;
@@ -13,6 +14,8 @@ export interface Settings {
     categoryListThumbnailSize: ThumbnailSize;
     categoryListToolbarExpandedState: boolean;
     categoryListYearFilterEnabled: boolean;
+    categoryListListType: CategoryListType;
+    categoryListListViewThumbnailSize: ThumbnailSize;
 
     photoListShowCategoryBreadcrumbs: boolean;
     photoListThumbnailSize: ThumbnailSize;

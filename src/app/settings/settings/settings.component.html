@@ -25,22 +25,32 @@
                 <mat-slide-toggle formControlName="categoryListYearFilterEnabled"></mat-slide-toggle>
 
                 <h3>Category Filter</h3>
-                <mat-select formControlName="categoryListCategoryFilter">
-                    <mat-option *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-option>
-                </mat-select>
-
-                <h3>Show Category Titles</h3>
-                <mat-slide-toggle formControlName="categoryListShowCategoryTitles"></mat-slide-toggle>
-
-                <h3>Thumbnail Size (w/o title)</h3>
-                <mat-radio-group formControlName="categoryListThumbnailSize">
-                    <mat-radio-button *ngFor="let size of categoryThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                <mat-radio-group formControlName="categoryListCategoryFilter">
+                    <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-radio-button>
                 </mat-radio-group>
 
                 <h3>Margins</h3>
-                <mat-select formControlName="categoryListCategoryMargin">
-                    <mat-option *ngFor="let margin of categoryMargins" [value]="margin.name">{{ margin.name }}</mat-option>
-                </mat-select>
+                <mat-radio-group formControlName="categoryListCategoryMargin">
+                    <mat-radio-button *ngFor="let margin of categoryMargins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Category Display Type</h3>
+                <mat-radio-group formControlName="categoryListListType">
+                    <mat-radio-button *ngFor="let type of categoryListTypes" [value]="type.name">{{ type.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Thumbnail Size (list view)</h3>
+                <mat-radio-group formControlName="categoryListListViewThumbnailSize">
+                    <mat-radio-button *ngFor="let size of categoryListListViewThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Show Category Titles (grid view)</h3>
+                <mat-slide-toggle formControlName="categoryListShowCategoryTitles"></mat-slide-toggle>
+
+                <h3>Thumbnail Size (grid view; w/o title)</h3>
+                <mat-radio-group formControlName="categoryListThumbnailSize">
+                    <mat-radio-button *ngFor="let size of categoryThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
             </mat-card-content>
         </mat-card>
 
@@ -65,12 +75,9 @@
                 </mat-radio-group>
 
                 <h3>Map View Map Type</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Map Type</mat-label>
-                    <mat-select formControlName="photoListMapViewMapTypeId">
-                        <mat-option *ngFor="let type of mapViewMapTypeIds" [value]="type.value">{{ type.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <mat-radio-group formControlName="photoListMapViewMapTypeId">
+                    <mat-radio-button  *ngFor="let type of mapViewMapTypeIds" [value]="type.value">{{ type.value }}</mat-radio-button>
+                </mat-radio-group>
 
                 <h3>Map View Zoom Level</h3>
                 <mat-form-field appearance="standard">
@@ -104,12 +111,9 @@
                 <mat-checkbox formControlName="photoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
 
                 <h3>Minimap Map Type</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Map Type</mat-label>
-                    <mat-select formControlName="photoInfoPanelMinimapMapTypeId">
-                        <mat-option *ngFor="let type of photoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <mat-radio-group formControlName="photoInfoPanelMinimapMapTypeId">
+                    <mat-radio-button  *ngFor="let type of photoMinimapMapTypeIds" [value]="type.value">{{ type.value }}</mat-radio-button>
+                </mat-radio-group>
 
                 <h3>Minimap Zoom Level</h3>
                 <mat-form-field appearance="standard">
@@ -153,12 +157,9 @@
                 <mat-checkbox formControlName="videoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
 
                 <h3>Minimap Map Type</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Map Type</mat-label>
-                    <mat-select formControlName="videoInfoPanelMinimapMapTypeId">
-                        <mat-option *ngFor="let type of videoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <mat-radio-group formControlName="videoInfoPanelMinimapMapTypeId">
+                    <mat-radio-button  *ngFor="let type of videoMinimapMapTypeIds" [value]="type.value">{{ type.value }}</mat-radio-button>
+                </mat-radio-group>
 
                 <h3>Minimap Zoom Level</h3>
                 <mat-form-field appearance="standard">

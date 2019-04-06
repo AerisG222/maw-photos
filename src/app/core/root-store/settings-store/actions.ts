@@ -5,6 +5,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../../models/video-size.model';
 import { CategoryMargin } from '../../models/category-margin.model';
 import { CategoryFilter } from '../../models/category-filter.model';
+import { CategoryListType } from '../../models/category-list-type.model';
 
 export enum ActionTypes {
     LOAD_REQUEST = '[Settings] Load Request',
@@ -20,6 +21,8 @@ export enum ActionTypes {
     TOGGLE_CATEGORY_LIST_YEAR_FILTER = '[Settings] Toggle Category List Year Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_FILTER = '[Settings] Update Category List Category Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_MARGIN = '[Settings] Update Category List Category Margin',
+    UPDATE_CATEGORY_LIST_LIST_TYPE = '[Settings] Update Category List List Type',
+    UPDATE_CATEGORY_LIST_LIST_VIEW_THUMBNAIL_SIZE = '[Settings] Update Category List List View Thumbnail Size',
     UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE = '[Settings] Update Category List Thumbnail Size',
 
     TOGGLE_PHOTO_INFO_PANEL_COMMENTS = '[Settings] Toggle Photo Info Panel Comments',
@@ -103,6 +106,16 @@ export class UpdateCategoryListCategoryFilterRequestAction implements Action {
 export class UpdateCategoryListCategoryMarginRequestAction implements Action {
     readonly type = ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN;
     constructor(public payload: { newMargin: CategoryMargin }) { }
+}
+
+export class UpdateCategoryListListTypeRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_CATEGORY_LIST_LIST_TYPE;
+    constructor(public payload: { newType: CategoryListType }) { }
+}
+
+export class UpdateCategoryListListViewThumbnailSizeRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_CATEGORY_LIST_LIST_VIEW_THUMBNAIL_SIZE;
+    constructor(public payload: { newSize: ThumbnailSize }) { }
 }
 
 export class UpdateCategoryListThumbnailSizeRequestAction implements Action {
@@ -241,7 +254,9 @@ export type Actions =
     ToggleCategoryListYearFilterRequestAction |
     UpdateCategoryListCategoryFilterRequestAction |
     UpdateCategoryListCategoryMarginRequestAction |
+    UpdateCategoryListListTypeRequestAction |
     UpdateCategoryListThumbnailSizeRequestAction |
+    UpdateCategoryListListViewThumbnailSizeRequestAction |
 
     TogglePhotoInfoPanelCommentsRequestAction |
     TogglePhotoInfoPanelEffectsRequestAction |

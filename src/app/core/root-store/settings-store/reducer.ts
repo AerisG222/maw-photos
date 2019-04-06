@@ -79,6 +79,22 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     categoryListCategoryMargin: action.payload.newMargin
                 }
             };
+        case ActionTypes.UPDATE_CATEGORY_LIST_LIST_TYPE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryListListType: action.payload.newType
+                }
+            };
+        case ActionTypes.UPDATE_CATEGORY_LIST_LIST_VIEW_THUMBNAIL_SIZE:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    categoryListListViewThumbnailSize: action.payload.newSize
+                }
+            };
         case ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE:
             return {
                 ...state,
