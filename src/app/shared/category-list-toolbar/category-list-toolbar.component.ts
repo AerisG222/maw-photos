@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { tap, map, takeUntil } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
@@ -10,6 +10,7 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions, LayoutSto
 import { MatButton } from '@angular/material';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
+import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 
 @Component({
     selector: 'app-category-list-toolbar',
@@ -18,6 +19,7 @@ import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 })
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
+    private destroy$ = new Subject<boolean>();
 
     @ViewChild('toggleTitlesButton') toggleTitlesButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
@@ -25,10 +27,14 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleFilterButton') toggleFilterButton: MatButton;
     @ViewChild('toggleYearFilterButton') toggleYearFilterButton: MatButton;
     @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
+    @ViewChild('toggleListTypeButton') toggleListTypeButton: MatButton;
+    @ViewChild('toggleListThumbnailSizeButton') toggleListThumbnailSizeButton: MatButton
 
     settings: Settings;
-    settings$: Observable<Settings>;
     isToolbarExpanded$: Observable<boolean>;
+    isListView$: Observable<boolean>;
+    isGridView$: Observable<boolean>;
+    showCategoryTitles$: Observable<boolean>;
 
     constructor(
         private _store$: Store<RootStoreState.State>,
@@ -36,6 +42,32 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+        this.isListView$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                map(type => type.name === CategoryListType.list.name)
+            );
+
+        this.isGridView$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                map(type => type.name === CategoryListType.grid.name)
+            );
+
+        this.showCategoryTitles$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles)
+            );
+
+        this.isToolbarExpanded$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListToolbarExpandedState)
+            );
+
+        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+            new Hotkey('g', (event: KeyboardEvent) => this.onHotkeyToggleListType(event), [], 'Toggle Grid/List View')
+        ));
+
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('y', (event: KeyboardEvent) => this.onHotkeyToggleYearFilter(event), [], 'Toggle Year Filter')
         ));
@@ -49,10 +81,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Category Thumbnail Size')
-        ));
-
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMargins(event), [], 'Toggle Category Margins')
         ));
 
@@ -60,24 +88,57 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
             new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleToolbar(event), [], 'Show/Hide Toolbar')
         ));
 
-        this.settings$ = this._store$
+        this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                tap(type => {
+                    switch(type) {
+                        case CategoryListType.grid:
+                            this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+                                new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Grid ?Thumbnail Size')
+                            ));
+                            break;
+                        case CategoryListType.list:
+                            this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+                                new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleListThumbnailSize(event), [], 'Toggle List Thumbnail Size')
+                            ));
+                            break;
+                    }
+                }),
+                takeUntil(this.destroy$)
+            ).subscribe();
+
+        this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.settings = settings)
-            );
-
-        this.isToolbarExpanded$ = this._store$
-            .pipe(
-                select(SettingsStoreSelectors.selectCategoryListToolbarExpandedState)
-            );
+                tap(settings => this.settings = settings),
+                takeUntil(this.destroy$)
+            ).subscribe();
     }
 
     ngOnDestroy(): void {
         this._hotkeysService.remove(this._hotkeys);
+        this.destroy$.next(true);
+    }
+
+    onToggleListType(): void {
+        if (this.settings) {
+            const type = CategoryListType.nextType(this.settings.categoryListListType.name);
+
+            this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListListTypeRequestAction({ newType: type }));
+        }
     }
 
     onToggleTitle(): void {
         this._store$.dispatch(new SettingsStoreActions.ToggleCategoryListCategoryTitlesRequestAction());
+    }
+
+    onToggleListThumbnailSize(): void {
+        if (this.settings) {
+            const size = ThumbnailSize.nextSize(this.settings.categoryListListViewThumbnailSize.name);
+
+            this._store$.dispatch(new SettingsStoreActions.UpdateCategoryListListViewThumbnailSizeRequestAction({ newSize: size }));
+        }
     }
 
     onToggleSize(): void {
@@ -119,6 +180,13 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         return false;
     }
 
+    private onHotkeyToggleListThumbnailSize(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleListThumbnailSizeButton);
+        this.onToggleListThumbnailSize();
+
+        return false;
+    }
+
     private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleThumbnailSizeButton);
         this.onToggleSize();
@@ -150,6 +218,13 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleToolbar(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleToolbarButton);
         this.onToggleCategoryListToolbar();
+
+        return false;
+    }
+
+    private onHotkeyToggleListType(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleListTypeButton);
+        this.onToggleListType();
 
         return false;
     }

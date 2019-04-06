@@ -20,7 +20,20 @@ export class CategoryListType {
             case CategoryListType.list.name:
                 return CategoryListType.list;
             default:
-                console.error(`invalid category filter requested: ${name}`);
+                console.error(`invalid category list type requested: ${name}`);
+        }
+
+        return null;
+    }
+
+    static nextType(name: string): CategoryListType {
+        switch (name) {
+            case CategoryListType.grid.name:
+                return CategoryListType.list;
+            case CategoryListType.list.name:
+                return CategoryListType.grid;
+            default:
+                console.error(`invalid category list type requested: ${name}`);
         }
 
         return null;

@@ -2,6 +2,14 @@
     <div class="category" *ngIf="isToolbarExpanded$ | async" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
         <button
             mat-button
+            matTooltip="Toggle Grid / List View (G)"
+            (click)="onToggleListType()"
+            #toggleListTypeButton>
+            <mat-icon [inline]="true">apps</mat-icon>
+        </button>
+
+        <button
+            mat-button
             matTooltip="Toggle Year Filter (F)"
             (click)="onToggleYearFilter()"
             #toggleYearFilterButton>
@@ -25,11 +33,21 @@
         </button>
 
         <button
+            *ngIf="isGridView$ | async"
             mat-button
-            matTooltip="Toggle Category Thumbnail Size (S)"
+            matTooltip="Toggle Grid Thumbnail Size (S)"
             (click)="onToggleSize()"
-            [disabled]="(settings$ | async)?.categoryListShowCategoryTitles"
+            [disabled]="(showCategoryTitles$ | async)"
             #toggleThumbnailSizeButton>
+            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+        </button>
+
+        <button
+            *ngIf="isListView$ | async"
+            mat-button
+            matTooltip="Toggle List Thumbnail Size (S)"
+            (click)="onToggleListThumbnailSize()"
+            #toggleListThumbnailSizeButton>
             <mat-icon [inline]="true">photo_size_select_large</mat-icon>
         </button>
 
