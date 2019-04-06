@@ -9,6 +9,10 @@
                     <mat-option *ngFor="let year of allYears$ | async" [value]="year">{{ year }}</mat-option>
                 </mat-select>
             </mat-form-field>
+
+            <span style="margin-left: auto;">
+                Current Filter:
+            </span>
             <mat-icon inline="true" *ngIf="showCamera$ | async">camera_alt</mat-icon>
             <mat-icon inline="true" *ngIf="showVideoCamera$ | async">videocam</mat-icon>
         </form>
