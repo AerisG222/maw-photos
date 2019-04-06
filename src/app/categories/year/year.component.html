@@ -2,6 +2,10 @@
 
 <mat-divider mat-color="accent"></mat-divider>
 
+<app-category-list2
+    [categories]="categories$ | async">
+</app-category-list2>
+
 <app-category-list
     [categories]="categories$ | async"
     [showTitles]="(settings$ | async).categoryListShowCategoryTitles"

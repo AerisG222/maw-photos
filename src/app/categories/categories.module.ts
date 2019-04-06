@@ -11,6 +11,7 @@ import { YearListComponent } from './year-list/year-list.component';
 import { VideoCategoryComponent } from './video-category/video-category.component';
 import { VideoListToolbarComponent } from './video-list-toolbar/video-list-toolbar.component';
 import { VideoListComponent } from './video-list/video-list.component';
+import { CategoryList2Component } from './category-list2/category-list2.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { VideoListComponent } from './video-list/video-list.component';
         YearListComponent,
         VideoCategoryComponent,
         VideoListToolbarComponent,
-        VideoListComponent
+        VideoListComponent,
+        CategoryList2Component
     ],
     imports: [
         CommonModule,
