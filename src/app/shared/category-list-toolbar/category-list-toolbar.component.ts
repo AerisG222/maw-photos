@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { tap, map, takeUntil } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { Settings } from 'src/app/core/models/settings.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions, LayoutStoreSelectors } from 'src/app/core/root-store';
-import { MatButton } from '@angular/material';
-import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
+import { CategoryMargin } from 'src/app/core/models/category-margin.model';
+import { Settings } from 'src/app/core/models/settings.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-category-list-toolbar',
