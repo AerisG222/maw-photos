@@ -22,12 +22,12 @@ export class CategoryListComponent {
     ) { }
 
     selectCategory(category: Category) {
-        if(!!category) {
+        if (!!category) {
             const args = [];
 
             args.push('/categories');
 
-            switch(category.type) {
+            switch (category.type) {
                 case CategoryType.photo:
                     args.push('photos');
                     break;
@@ -35,7 +35,7 @@ export class CategoryListComponent {
                     args.push('videos');
                     break;
                 default:
-                    throw new Error("Invalid category type");
+                    throw new Error('Invalid category type');
             }
 
             args.push(category.id);

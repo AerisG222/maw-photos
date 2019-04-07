@@ -28,7 +28,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleYearFilterButton') toggleYearFilterButton: MatButton;
     @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
     @ViewChild('toggleListTypeButton') toggleListTypeButton: MatButton;
-    @ViewChild('toggleListThumbnailSizeButton') toggleListThumbnailSizeButton: MatButton
+    @ViewChild('toggleListThumbnailSizeButton') toggleListThumbnailSizeButton: MatButton;
 
     settings: Settings;
     isToolbarExpanded$: Observable<boolean>;
@@ -92,15 +92,17 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 tap(type => {
-                    switch(type) {
+                    switch (type) {
                         case CategoryListType.grid:
                             this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-                                new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Grid ?Thumbnail Size')
+                                new Hotkey('s', (event: KeyboardEvent) =>
+                                    this.onHotkeyToggleSize(event), [], 'Toggle Grid Thumbnail Size')
                             ));
                             break;
                         case CategoryListType.list:
                             this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-                                new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleListThumbnailSize(event), [], 'Toggle List Thumbnail Size')
+                                new Hotkey('s', (event: KeyboardEvent) =>
+                                    this.onHotkeyToggleListThumbnailSize(event), [], 'Toggle List Thumbnail Size')
                             ));
                             break;
                     }
