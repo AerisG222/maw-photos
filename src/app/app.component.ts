@@ -81,7 +81,6 @@ export class AppComponent implements OnInit, OnDestroy {
         dialogRef
             .afterClosed()
             .subscribe(x => {
-                console.log('a');
                 this._hotkeyHelper.unpauseAll();
             });
 
