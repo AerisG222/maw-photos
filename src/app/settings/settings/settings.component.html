@@ -76,7 +76,7 @@
 
                 <h3>Map View Map Type</h3>
                 <mat-radio-group formControlName="photoListMapViewMapTypeId">
-                    <mat-radio-button  *ngFor="let type of mapViewMapTypeIds" [value]="type.value">{{ type.value }}</mat-radio-button>
+                    <mat-radio-button  *ngFor="let type of mapViewMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
                 </mat-radio-group>
 
                 <h3>Map View Zoom Level</h3>
@@ -112,7 +112,7 @@
 
                 <h3>Minimap Map Type</h3>
                 <mat-radio-group formControlName="photoInfoPanelMinimapMapTypeId">
-                    <mat-radio-button  *ngFor="let type of photoMinimapMapTypeIds" [value]="type.value">{{ type.value }}</mat-radio-button>
+                    <mat-radio-button  *ngFor="let type of photoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
                 </mat-radio-group>
 
                 <h3>Minimap Zoom Level</h3>
@@ -158,7 +158,7 @@
 
                 <h3>Minimap Map Type</h3>
                 <mat-radio-group formControlName="videoInfoPanelMinimapMapTypeId">
-                    <mat-radio-button  *ngFor="let type of videoMinimapMapTypeIds" [value]="type.value">{{ type.value }}</mat-radio-button>
+                    <mat-radio-button  *ngFor="let type of videoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
                 </mat-radio-group>
 
                 <h3>Minimap Zoom Level</h3>
