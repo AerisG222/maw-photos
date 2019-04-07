@@ -77,10 +77,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         ));
 
         this._hotkeys.push(<Hotkey> this._hotkeysService.add(
-            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Category Titles')
-        ));
-
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMargins(event), [], 'Toggle Category Margins')
         ));
 
@@ -93,19 +89,26 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 tap(type => {
                     this.removeThumbnailSizeHotkey();
+                    this.removeShowTitleHotkey();
 
                     switch (type) {
                         case CategoryListType.grid:
                             this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+                                new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Category Titles')
+                            ));
+
+                            this._hotkeys.push(<Hotkey> this._hotkeysService.add(
                                 new Hotkey('s', (event: KeyboardEvent) =>
                                     this.onHotkeyToggleSize(event), [], 'Toggle Grid Thumbnail Size')
                             ));
+
                             break;
                         case CategoryListType.list:
                             this._hotkeys.push(<Hotkey> this._hotkeysService.add(
                                 new Hotkey('s', (event: KeyboardEvent) =>
                                     this.onHotkeyToggleListThumbnailSize(event), [], 'Toggle List Thumbnail Size')
                             ));
+
                             break;
                     }
                 }),
@@ -178,10 +181,18 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     }
 
     private removeThumbnailSizeHotkey(): void {
+        this.removeHotKey('s');
+    }
+
+    private removeShowTitleHotkey(): void {
+        this.removeHotKey('t');
+    }
+
+    private removeHotKey(combo: string): void {
         for(let i = this._hotkeys.length - 1; i >= 0; i--) {
             const hotkey = this._hotkeys[i];
 
-            if (hotkey.combo.length === 1 && hotkey.combo[0] === 's') {
+            if (hotkey.combo.length === 1 && hotkey.combo[0] === combo) {
                 this._hotkeysService.remove(hotkey);
                 this._hotkeys.splice(i, 1);
             }

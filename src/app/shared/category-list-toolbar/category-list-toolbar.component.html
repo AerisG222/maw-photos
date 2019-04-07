@@ -25,6 +25,7 @@
         </button>
 
         <button
+            *ngIf="isGridView$ | async"
             mat-button
             matTooltip="Show/Hide Category Titles (T)"
             (click)="onToggleTitle()"
