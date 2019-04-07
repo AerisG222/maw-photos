@@ -22,6 +22,7 @@
 
 @import 'app/categories//year-list/year-list.component.theme';
 @import 'app/categories/category-card/category-card.component.theme';
+@import 'app/categories/category-list/category-list.component.theme';
 @import 'app/categories/video-list/video-list.component.theme';
 @import 'app/categories/video-list-toolbar/video-list-toolbar.component.theme';
 
@@ -58,6 +59,7 @@
     @include app-help-component-theme($theme);
 
     @include app-category-card-component-theme($theme);
+    @include app-category-list-component-theme($theme);
     @include app-video-list-component-theme($theme);
     @include app-video-list-toolbar-component-theme($theme);
     @include app-year-list-component-theme($theme);

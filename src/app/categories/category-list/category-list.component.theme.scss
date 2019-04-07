@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin app-category-list-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    tr {
+        &:hover {
+            background-color: mat-color($accent, 900);
+        }
+    }
+}

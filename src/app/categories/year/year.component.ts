@@ -15,6 +15,7 @@ import {
 } from 'src/app/core/root-store';
 import { photoCategoryToCategory, videoCategoryToCategory } from 'src/app/core/models/category-map-functions';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-year',
@@ -29,6 +30,7 @@ export class YearComponent implements OnInit {
     settings$: Observable<Settings>;
     showListView$: Observable<boolean>;
     showGridView$: Observable<boolean>;
+    listThumbnailSize$: Observable<ThumbnailSize>;
 
     constructor(
         private _store$: Store<RootStoreState.State>
@@ -37,6 +39,11 @@ export class YearComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.listThumbnailSize$ = this._store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListViewThumbnailSize)
+            );
+
         this.showListView$ = this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
