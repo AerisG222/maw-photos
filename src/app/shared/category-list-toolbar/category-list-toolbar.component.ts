@@ -92,6 +92,8 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 tap(type => {
+                    this.removeThumbnailSizeHotkey();
+
                     switch (type) {
                         case CategoryListType.grid:
                             this._hotkeys.push(<Hotkey> this._hotkeysService.add(
@@ -173,6 +175,17 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
     onToggleCategoryListToolbar(): void {
         this._store$.dispatch(new SettingsStoreActions.ToggleCategoryListToolbarExpandedStateRequestAction());
+    }
+
+    private removeThumbnailSizeHotkey(): void {
+        for(let i = this._hotkeys.length - 1; i >= 0; i--) {
+            const hotkey = this._hotkeys[i];
+
+            if (hotkey.combo.length === 1 && hotkey.combo[0] === 's') {
+                this._hotkeysService.remove(hotkey);
+                this._hotkeys.splice(i, 1);
+            }
+        }
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
