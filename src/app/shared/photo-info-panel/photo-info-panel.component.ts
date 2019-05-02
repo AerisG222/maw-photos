@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subject, Observable, combineLatest } from 'rxjs';
-import { takeUntil, tap, filter, map, take } from 'rxjs/operators';
+import { Observable, combineLatest, Subscription } from 'rxjs';
+import { tap, filter, map, take } from 'rxjs/operators';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -27,6 +27,7 @@ import { MatButton } from '@angular/material';
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
+    private destroySub = new Subscription();
 
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
@@ -57,7 +58,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
 
     currentPhoto: Photo;
-    private destroy$ = new Subject<boolean>();
 
     constructor(
         private _store$: Store<RootStoreState.State>,
@@ -69,18 +69,17 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         const currentPhoto$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
-            filter(photo => !!photo),
-            takeUntil(this.destroy$)
+            filter(photo => !!photo)
         );
 
-        currentPhoto$
+        this.destroySub.add(currentPhoto$
             .pipe(
                 tap(photo => this.currentPhoto = photo),
                 tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
                 tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
-                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id }))),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id })))
+            ).subscribe()
+        );
 
         this.enableButtons$ = combineLatest(
             this._store$.pipe( select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState) ),
@@ -161,8 +160,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                     }
 
                     return null;
-                }),
-                takeUntil(this.destroy$)
+                })
             );
 
         this.longitude$ = currentPhoto$
@@ -173,20 +171,19 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                     }
 
                     return null;
-                }),
-                takeUntil(this.destroy$)
+                })
             );
 
         this.effects$ = this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoEffects)
         );
 
-        currentPhoto$.subscribe();
+        this.destroySub.add(currentPhoto$.subscribe());
     }
 
     ngOnDestroy() {
         this._hotkeysService.remove(this._hotkeys);
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     toggleEndSidenav(): void {

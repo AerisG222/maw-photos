@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { switchMap, tap, map, filter, take } from 'rxjs/operators';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { switchMap, tap, map, filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
@@ -22,7 +22,9 @@ import { MatSelectChange } from '@angular/material';
     templateUrl: './year-list.component.html',
     styleUrls: ['./year-list.component.scss']
 })
-export class YearListComponent implements OnInit {
+export class YearListComponent implements OnInit, OnDestroy {
+    private destroySub = new Subscription();
+
     form: FormGroup;
     activeYear$ = new BehaviorSubject<number>(0);
     yearFilterEnabled$: Observable<boolean>;
@@ -47,7 +49,7 @@ export class YearListComponent implements OnInit {
             yearSelect: [''],
         });
 
-        this._activatedRoute.fragment
+        this.destroySub.add(this._activatedRoute.fragment
             .pipe(
                 filter(f => !!f),
                 tap(y => {
@@ -57,9 +59,9 @@ export class YearListComponent implements OnInit {
                         this.onSelectYear(new MatSelectChange(null, year));
                         this.updateYearSelection(year);
                     }
-                }),
-                take(1)
-            ).subscribe();
+                })
+            ).subscribe()
+        );
 
         this.showCamera$ = this._store$
             .pipe(
@@ -133,6 +135,10 @@ export class YearListComponent implements OnInit {
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListCategoryMargin)
             );
+    }
+
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
     }
 
     onSelectYear(change: MatSelectChange): void {

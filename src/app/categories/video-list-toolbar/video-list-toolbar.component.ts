@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
-import { Subject, Observable } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
@@ -26,7 +26,7 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
     styleUrls: ['./video-list-toolbar.component.scss']
 })
 export class VideoListToolbarComponent implements OnInit, OnDestroy {
-    private destroy$ = new Subject<boolean>();
+    private destroySub = new Subscription();
     private _hotkeys: Hotkey[] = [];
 
     @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
@@ -51,12 +51,12 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.configureHotkeys();
 
-        const settings$ = this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.settings = settings),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(settings => this.settings = settings)
+            ).subscribe()
+        );
 
         this.isFirst$ = this._store$
             .pipe(
@@ -81,7 +81,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this._hotkeysService.remove(this._hotkeys);
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     onToggleCategoryBreadcrumbs(): void {

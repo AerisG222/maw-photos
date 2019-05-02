@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { MapTypeId } from 'src/app/core/models/map-type-id.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -20,7 +21,9 @@ import { CategoryListType } from 'src/app/core/models/category-list-type.model';
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
+    private destroySub = new Subscription();
+
     form: FormGroup;
     themes = Theme.allThemes;
     categoryFilters = CategoryFilter.allCategoryFilters;
@@ -92,14 +95,19 @@ export class SettingsComponent implements OnInit {
             videoInfoPanelMinimapZoom: [10]
         });
 
-        this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.updateForm(settings))
             )
-            .subscribe();
+            .subscribe()
+        );
 
         this.loadSettings();
+    }
+
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
     }
 
     onSave(): void {

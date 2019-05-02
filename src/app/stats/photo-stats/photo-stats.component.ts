@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
-import { RootStoreState, PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { RootStoreState, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { StatDetail } from '../models/stat-detail.model';
 
 @Component({
@@ -15,9 +15,10 @@ import { StatDetail } from '../models/stat-detail.model';
     styleUrls: ['./photo-stats.component.scss']
 })
 export class PhotoStatsComponent implements OnInit, OnDestroy {
+    private destroySub = new Subscription();
+
     form: FormGroup;
     aggregateBy$ = new BehaviorSubject<string>('count');
-    destroy$ = new Subject<boolean>();
     chartData$: Observable<any>;
     chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(null);
@@ -38,23 +39,21 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
         const years$ = this._store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectAllYears),
-                takeUntil(this.destroy$)
+                select(PhotoCategoryStoreSelectors.selectAllYears)
             );
 
         const categories$ = this._store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectAllCategories),
-                takeUntil(this.destroy$)
+                select(PhotoCategoryStoreSelectors.selectAllCategories)
             );
 
-        this.form.get('aggregateBy').valueChanges
+        this.destroySub.add(this.form.get('aggregateBy').valueChanges
             .pipe(
                 tap(val => this.aggregateBy$.next(val)),
-                tap(val => this.chartValueFormat = val),
-                takeUntil(this.destroy$)
+                tap(val => this.chartValueFormat = val)
             )
-            .subscribe();
+            .subscribe()
+        );
 
         this.chartData$ = combineLatest(
                 years$,
@@ -82,12 +81,12 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 map(x => this.prepareYearDetails(x[0], x[1]))
             );
 
-        years$.subscribe();
-        categories$.subscribe();
+        this.destroySub.add(years$.subscribe());
+        this.destroySub.add(categories$.subscribe());
     }
 
     ngOnDestroy(): void {
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     onSelectYear(evt): void {

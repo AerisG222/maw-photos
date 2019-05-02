@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Theme } from './core/models/theme.model';
@@ -17,7 +16,8 @@ import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.comp
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-    themeSubscription: Subscription;
+    private destroySub = new Subscription();
+
     isMobileView$: Observable<boolean>;
 
     constructor(
@@ -41,20 +41,19 @@ export class AppComponent implements OnInit, OnDestroy {
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );
 
-        this.themeSubscription = this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             )
-            .subscribe(settings => this.setTheme(settings.appTheme));
-
-
+            .subscribe(settings => this.setTheme(settings.appTheme))
+        );
 
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
     }
 
     ngOnDestroy(): void {
         this._hotkeysService.reset();
-        this.themeSubscription.unsubscribe();
+        this.destroySub.unsubscribe();
     }
 
     private setTheme(theme: Theme): void {
@@ -78,11 +77,12 @@ export class AppComponent implements OnInit, OnDestroy {
             width: '800px'
         });
 
-        dialogRef
+        this.destroySub.add(dialogRef
             .afterClosed()
             .subscribe(x => {
                 this._hotkeyHelper.unpauseAll();
-            });
+            })
+        );
 
         return false;
     }

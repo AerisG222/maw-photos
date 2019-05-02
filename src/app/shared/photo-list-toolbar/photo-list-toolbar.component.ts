@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
-import { Subject, Observable } from 'rxjs';
-import { tap, takeUntil, filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { tap, filter } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
@@ -18,8 +18,7 @@ import {
     RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors,
-    PhotoCategoryStoreSelectors,
-    LayoutStoreSelectors
+    PhotoCategoryStoreSelectors
 } from 'src/app/core/root-store';
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 
@@ -43,7 +42,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
     @ViewChild('mapViewButton') mapViewButton: MatButton;
 
-    private destroy$ = new Subject<boolean>();
+    private destroySub = new Subscription();
     private _hotkeys: Hotkey[] = [];
 
     isFirst$: Observable<boolean>;
@@ -66,12 +65,12 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.configureHotkeys();
 
-        const settings$ = this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.settings = settings),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(settings => this.settings = settings)
+            ).subscribe()
+        );
 
         this.category$ = this._store$
             .pipe(
@@ -98,21 +97,21 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
             );
 
-        const activePhoto$ = this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(x => !!x),
                 tap(photo => this.smDownloadUrl = photo.imageSm.downloadUrl),
                 tap(photo => this.mdDownloadUrl = photo.imageMd.downloadUrl),
                 tap(photo => this.lgDownloadUrl = photo.imageLg.downloadUrl),
-                tap(photo => this.prtDownloadUrl = photo.imagePrt.downloadUrl),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(photo => this.prtDownloadUrl = photo.imagePrt.downloadUrl)
+            ).subscribe()
+        );
     }
 
     ngOnDestroy(): void {
         this._hotkeysService.remove(this._hotkeys);
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     onToggleCategoryBreadcrumbs(): void {

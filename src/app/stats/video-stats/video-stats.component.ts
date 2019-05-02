@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { BehaviorSubject, Subject, Observable, combineLatest } from 'rxjs';
-import { takeUntil, tap, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, Subscription } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import * as numeral from 'numeral';
 
 import { StatDetail } from '../models/stat-detail.model';
@@ -15,9 +15,10 @@ import { VideoCategory } from 'src/app/core/models/video-category.model';
     styleUrls: ['./video-stats.component.scss']
 })
 export class VideoStatsComponent implements OnInit, OnDestroy {
+    private destroySub = new Subscription();
+
     form: FormGroup;
     aggregateBy$ = new BehaviorSubject<string>('count');
-    destroy$ = new Subject<boolean>();
     chartData$: Observable<any>;
     chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(null);
@@ -38,23 +39,21 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
 
         const years$ = this._store$
             .pipe(
-                select(VideoCategoryStoreSelectors.selectAllYears),
-                takeUntil(this.destroy$)
+                select(VideoCategoryStoreSelectors.selectAllYears)
             );
 
         const categories$ = this._store$
             .pipe(
-                select(VideoCategoryStoreSelectors.selectAllCategories),
-                takeUntil(this.destroy$)
+                select(VideoCategoryStoreSelectors.selectAllCategories)
             );
 
-        this.form.get('aggregateBy').valueChanges
+        this.destroySub.add(this.form.get('aggregateBy').valueChanges
             .pipe(
                 tap(val => this.aggregateBy$.next(val)),
-                tap(val => this.chartValueFormat = val),
-                takeUntil(this.destroy$)
+                tap(val => this.chartValueFormat = val)
             )
-            .subscribe();
+            .subscribe()
+        );
 
         this.chartData$ = combineLatest(
                 years$,
@@ -82,12 +81,12 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
                 map(x => this.prepareYearDetails(x[0], x[1]))
             );
 
-        years$.subscribe();
-        categories$.subscribe();
+        this.destroySub.add(years$.subscribe());
+        this.destroySub.add(categories$.subscribe());
     }
 
     ngOnDestroy(): void {
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     onSelectYear(evt): void {

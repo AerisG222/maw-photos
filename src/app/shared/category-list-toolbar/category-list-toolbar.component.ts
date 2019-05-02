@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { tap, map, takeUntil } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
@@ -19,7 +19,7 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'sr
 })
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
-    private destroy$ = new Subject<boolean>();
+    private destroySub = new Subscription();
 
     @ViewChild('toggleTitlesButton') toggleTitlesButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
@@ -84,7 +84,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
             new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleToolbar(event), [], 'Show/Hide Toolbar')
         ));
 
-        this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 tap(type => {
@@ -111,21 +111,21 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
                             break;
                     }
-                }),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                })
+            ).subscribe()
+        );
 
-        this._store$
+        this.destroySub.add(this._store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.settings = settings),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(settings => this.settings = settings)
+            ).subscribe()
+        );
     }
 
     ngOnDestroy(): void {
         this._hotkeysService.remove(this._hotkeys);
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     onToggleListType(): void {

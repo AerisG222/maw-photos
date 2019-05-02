@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { RootStoreState, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
@@ -11,7 +11,8 @@ import { tap, takeUntil, filter } from 'rxjs/operators';
     styleUrls: ['./info-panel.component.scss']
 })
 export class InfoPanelComponent implements OnInit, OnDestroy {
-    destroy$ = new Subject<boolean>();
+    private destroySub = new Subscription();
+
     showPhotoInfoPanel = false;
     showVideoInfoPanel = false;
 
@@ -20,24 +21,22 @@ export class InfoPanelComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this._store$.pipe(
+        this.destroySub.add(this._store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => !!photo),
             tap(x => this.showVideoInfoPanel = false),
-            tap(x => this.showPhotoInfoPanel = true),
-            takeUntil(this.destroy$)
-        ).subscribe();
+            tap(x => this.showPhotoInfoPanel = true)
+        ).subscribe());
 
-        this._store$.pipe(
+        this.destroySub.add(this._store$.pipe(
             select(VideoStoreSelectors.selectCurrentVideo),
             filter(video => !!video),
             tap(x => this.showPhotoInfoPanel = false),
-            tap(x => this.showVideoInfoPanel = true),
-            takeUntil(this.destroy$)
-        ).subscribe();
+            tap(x => this.showVideoInfoPanel = true)
+        ).subscribe());
     }
 
     ngOnDestroy() {
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 }

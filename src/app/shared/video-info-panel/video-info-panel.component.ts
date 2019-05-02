@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest, Subject } from 'rxjs';
-import { filter, take, map, tap, takeUntil } from 'rxjs/operators';
+import { Observable, combineLatest, Subscription } from 'rxjs';
+import { filter, take, map, tap } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Comment } from 'src/app/core/models/comment.model';
@@ -25,6 +25,8 @@ import {
 })
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private _hotkeys: Hotkey[] = [];
+    private currentVideo: Video;
+    private destroySub = new Subscription();
 
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
@@ -46,9 +48,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
     @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
 
-    private currentVideo: Video;
-    private destroy$ = new Subject<boolean>();
-
     constructor(
         private _store$: Store<RootStoreState.State>,
         private _hotkeysService: HotkeysService
@@ -60,17 +59,16 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         const currentVideo$ = this._store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
-                filter(video => !!video),
-                takeUntil(this.destroy$)
+                filter(video => !!video)
             );
 
-        currentVideo$
+        this.destroySub.add(currentVideo$
             .pipe(
                 tap(video => this.currentVideo = video),
                 tap(video => this._store$.dispatch(new VideoStoreActions.LoadRatingRequestAction({ videoId: video.id }))),
-                tap(video => this._store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id }))),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(video => this._store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id })))
+            ).subscribe()
+        );
 
         this.enableButtons$ = combineLatest(
                 this._store$.pipe( select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState) ),
@@ -135,8 +133,7 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
                     }
 
                     return null;
-                }),
-                takeUntil(this.destroy$)
+                })
             );
 
         this.longitude$ = currentVideo$
@@ -147,16 +144,15 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
                     }
 
                     return null;
-                }),
-                takeUntil(this.destroy$)
+                })
             );
 
-        currentVideo$.subscribe();
+        this.destroySub.add(currentVideo$.subscribe());
     }
 
     ngOnDestroy() {
         this._hotkeysService.remove(this._hotkeys);
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     toggleEndSidenav(): void {

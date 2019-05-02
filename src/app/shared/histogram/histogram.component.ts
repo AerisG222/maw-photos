@@ -2,8 +2,8 @@ import { Component, Input, ViewChild, ElementRef, Inject, OnInit, OnDestroy, Cha
 import { Photo } from 'src/app/core/models/photo.model';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Histogram } from './histogram';
 
 @Component({
@@ -13,10 +13,11 @@ import { Histogram } from './histogram';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HistogramComponent implements OnInit, OnDestroy {
+    private destroySub = new Subscription();
+
     form: FormGroup;
     img: HTMLImageElement;
     channel = 'rgb';
-    destroy$ = new Subject<boolean>();
 
     @ViewChild('canvas') canvas: ElementRef;
 
@@ -46,17 +47,17 @@ export class HistogramComponent implements OnInit, OnDestroy {
 
         // TODO: leverage rxjs to manage dom load event and form state...
 
-        this.form.get('channel').valueChanges
+        this.destroySub.add(this.form.get('channel').valueChanges
             .pipe(
                 tap(val => this.channel = val),
-                tap(val => this.onImageLoad()),
-                takeUntil(this.destroy$)
+                tap(val => this.onImageLoad())
             )
-            .subscribe();
+            .subscribe()
+        );
     }
 
     ngOnDestroy() {
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
     }
 
     private onImageLoad() {

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { map, tap, takeUntil, filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap, filter } from 'rxjs/operators';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -26,7 +26,8 @@ import { MapImage } from 'src/app/core/models/map-image.model';
     styleUrls: ['./photo-category.component.scss']
 })
 export class PhotoCategoryComponent implements OnInit, OnDestroy {
-    destroy$ = new Subject<boolean>();
+    private destroySub = new Subscription();
+
     settings$: Observable<Settings>;
     category$: Observable<PhotoCategory>;
     photos$: Observable<Photo[]>;
@@ -98,19 +99,19 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
         this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
 
-        this._route.params
+        this.destroySub.add(this._route.params
             .pipe(
                 map(p => Number(p.id)),
                 tap(id => this._store$.dispatch(new PhotoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
-                tap(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id }))),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(id => this._store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id })))
+            ).subscribe()
+        );
     }
 
     ngOnDestroy(): void {
         this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
         this.setCurrentPhoto(null);
     }
 

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Subject, Observable } from 'rxjs';
-import { map, tap, takeUntil, filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap, filter } from 'rxjs/operators';
 
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 import { Video } from 'src/app/core/models/video.model';
@@ -25,9 +25,10 @@ import { VideoSize } from 'src/app/core/models/video-size.model';
     styleUrls: ['./video-category.component.scss']
 })
 export class VideoCategoryComponent implements OnInit, OnDestroy {
+    private destroySub = new Subscription();
+
     videoSize = VideoSize;
     showCategoryAsLink = false;
-    destroy$ = new Subject<boolean>();
     settings$: Observable<Settings>;
     category$: Observable<VideoCategory>;
     videos$: Observable<Video[]>;
@@ -71,18 +72,18 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
         this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
 
-        this._route.params
+        this.destroySub.add(this._route.params
             .pipe(
                 map(p => Number(p.id)),
                 tap(id => this._store$.dispatch(new VideoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
-                tap(id => this._store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id }))),
-                takeUntil(this.destroy$)
-            ).subscribe();
+                tap(id => this._store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id })))
+            ).subscribe()
+        );
     }
 
     ngOnDestroy(): void {
         this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
-        this.destroy$.next(true);
+        this.destroySub.unsubscribe();
         this.setCurrentVideo(null);
     }
 
