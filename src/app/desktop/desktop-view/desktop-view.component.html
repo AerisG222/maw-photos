@@ -1,5 +1,5 @@
 <mat-sidenav-container [autosize]="true" fxFlexFill fxLayout>
-    <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="!(hidePanels$ | async)" class="mat-elevation-z8" fxFlex="none">
+    <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="(hidePanels$ | async) === (false | null | undefined)" class="mat-elevation-z8" fxFlex="none">
         <div fxLayout="column" fxLayoutAlign="space-between" fxFlex>
             <div fxLayout="column">
                 <app-categories-link></app-categories-link>
@@ -18,7 +18,7 @@
         <ng-container *ngTemplateOutlet="routerTemplate"></ng-container>
     </mat-sidenav-content>
 
-    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="!(hidePanels$ | async) && (isRightSidebarDisplayed$ | async)" fxFlex>
-        <app-info-panel *ngIf="!(hidePanels$ | async)"></app-info-panel>
+    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="((hidePanels$ | async) === (false | null | undefined)) && (isRightSidebarDisplayed$ | async)" fxFlex>
+        <app-info-panel *ngIf="(hidePanels$ | async) === (false | null | undefined)"></app-info-panel>
     </mat-sidenav>
 </mat-sidenav-container>

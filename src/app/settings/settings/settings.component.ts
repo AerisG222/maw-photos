@@ -43,14 +43,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
     randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
     constructor(
-        private _formBuilder: FormBuilder,
-        private _store$: Store<RootStoreState.State>
+        private formBuilder: FormBuilder,
+        private store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit(): void {
-        this.form = this._formBuilder.group({
+        this.form = this.formBuilder.group({
             appTheme: ['', Validators.required],
 
             categoryListCategoryFilter: [CategoryFilter.all.name],
@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoInfoPanelMinimapZoom: [10]
         });
 
-        this.destroySub.add(this._store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.updateForm(settings))
@@ -156,8 +156,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoInfoPanelMinimapZoom: this.form.get('videoInfoPanelMinimapZoom').value,
         };
 
-        this._store$.dispatch(
-            new SettingsStoreActions.SaveRequestAction({ settings: settings })
+        this.store$.dispatch(
+            new SettingsStoreActions.SaveRequestAction({ settings })
         );
     }
 
@@ -166,7 +166,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     private loadSettings(): void {
-        this._store$.dispatch(
+        this.store$.dispatch(
             new SettingsStoreActions.LoadRequestAction()
         );
     }

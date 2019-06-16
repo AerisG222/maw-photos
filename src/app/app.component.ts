@@ -21,43 +21,43 @@ export class AppComponent implements OnInit, OnDestroy {
     isMobileView$: Observable<boolean>;
 
     constructor(
-        private _hotkeysService: HotkeysService,
-        private _hotkeyHelper: HotkeyHelperService,
-        private _dialog: MatDialog,
-        private _store$: Store<RootStoreState.State>,
-        @Inject(DOCUMENT) private _doc
+        private hotkeysService: HotkeysService,
+        private hotkeyHelper: HotkeyHelperService,
+        private dialog: MatDialog,
+        private store$: Store<RootStoreState.State>,
+        @Inject(DOCUMENT) private doc
     ) {
 
     }
 
     ngOnInit(): void {
-        this._store$.dispatch(new LayoutStoreActions.InitializeRequestAction());
+        this.store$.dispatch(new LayoutStoreActions.InitializeRequestAction());
 
-        this.isMobileView$ = this._store$.pipe(
+        this.isMobileView$ = this.store$.pipe(
             select(LayoutStoreSelectors.selectLayoutIsMobileView)
         );
 
-        this._hotkeysService.add(
+        this.hotkeysService.add(
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );
 
-        this.destroySub.add(this._store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             )
             .subscribe(settings => this.setTheme(settings.appTheme))
         );
 
-        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
     }
 
     ngOnDestroy(): void {
-        this._hotkeysService.reset();
+        this.hotkeysService.reset();
         this.destroySub.unsubscribe();
     }
 
     private setTheme(theme: Theme): void {
-        const classList: DOMTokenList = this._doc.documentElement.classList;
+        const classList: DOMTokenList = this.doc.documentElement.classList;
 
         if (!classList.contains('mat-app-background')) {
             classList.add('mat-app-background');
@@ -71,16 +71,16 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private onHotkeyHelp(evt: KeyboardEvent): boolean {
-        this._hotkeyHelper.pauseAll();
+        this.hotkeyHelper.pauseAll();
 
-        const dialogRef = this._dialog.open(HotkeyDialogComponent, {
+        const dialogRef = this.dialog.open(HotkeyDialogComponent, {
             width: '800px'
         });
 
         this.destroySub.add(dialogRef
             .afterClosed()
             .subscribe(x => {
-                this._hotkeyHelper.unpauseAll();
+                this.hotkeyHelper.unpauseAll();
             })
         );
 

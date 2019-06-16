@@ -11,8 +11,8 @@ import * as numeral from 'numeral';
 })
 export class StatChartComponent implements AfterViewInit, OnChanges {
     @Input() chartData;
-    @Output() select = new EventEmitter();
-    @ViewChild(TreeMapComponent) treeMap: TreeMapComponent;
+    @Output() cellSelected = new EventEmitter();
+    @ViewChild(TreeMapComponent, {static: false}) treeMap: TreeMapComponent;
 
     @Input() set format(value: string) {
         switch (value) {
@@ -40,7 +40,7 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
     }
 
     onSelect(evt) {
-        this.select.emit(evt);
+        this.cellSelected.emit(evt);
     }
 
     formatPlainNumber(val: number) {

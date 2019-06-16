@@ -15,15 +15,15 @@ import { DateService } from '../date.service';
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
     constructor(
-        private _http: HttpClient,
-        private _cfg: EnvironmentConfig,
-        private _dateSvc: DateService
+        private http: HttpClient,
+        private cfg: EnvironmentConfig,
+        private dateSvc: DateService
     ) { }
 
     getCategories(): Observable<ApiCollection<VideoCategory>> {
         const url = this.getAbsoluteUrl(`video-categories`);
 
-        return this._http
+        return this.http
             .get<ApiCollection<VideoCategory>>(url)
             .pipe(
                 map(c => this.cleanupVideoCategories(c))
@@ -33,7 +33,7 @@ export class ExternalVideoApiService implements VideoApiService {
     getCategory(categoryId: number): Observable<VideoCategory> {
         const url = this.getAbsoluteUrl(`video-categories/${categoryId}`);
 
-        return this._http
+        return this.http
             .get<VideoCategory>(url)
             .pipe(
                 map(c => this.cleanupVideoCategory(c))
@@ -43,7 +43,7 @@ export class ExternalVideoApiService implements VideoApiService {
     getVideosByCategory(categoryId: number): Observable<ApiCollection<Video>> {
         const url = this.getAbsoluteUrl(`video-categories/${categoryId}/videos`);
 
-        return this._http
+        return this.http
             .get<ApiCollection<Video>>(url)
             .pipe(
                 map(v => this.cleanupVideos(v))
@@ -53,7 +53,7 @@ export class ExternalVideoApiService implements VideoApiService {
     getComments(videoId: number): Observable<ApiCollection<Comment>> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/comments`);
 
-        return this._http
+        return this.http
             .get<ApiCollection<Comment>>(url)
             .pipe(
                 map(c => this.cleanupComments(c))
@@ -63,26 +63,26 @@ export class ExternalVideoApiService implements VideoApiService {
     getRating(videoId: number): Observable<Rating> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/rating`);
 
-        return this._http
+        return this.http
             .get<Rating>(url);
     }
 
     rateVideo(videoId: number, rating: number): Observable<Rating> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/rating`);
 
-        return this._http
-            .patch<Rating>(url, { videoId: videoId, rating: rating });
+        return this.http
+            .patch<Rating>(url, { videoId, rating });
     }
 
     addComment(videoId: number, comment: string): Observable<any> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/comments`);
 
-        return this._http
-            .post(url, { videoId: videoId, comment: comment });
+        return this.http
+            .post(url, { videoId, comment });
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
-        return `${this._cfg.apiUrl}/${relativeUrl}`;
+        return `${this.cfg.apiUrl}/${relativeUrl}`;
     }
 
     private cleanupVideoCategories(categories: ApiCollection<VideoCategory>): ApiCollection<VideoCategory> {
@@ -93,7 +93,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private cleanupVideoCategory(category: VideoCategory): VideoCategory {
-        category.createDate = this._dateSvc.safeParse(category.createDate);
+        category.createDate = this.dateSvc.safeParse(category.createDate);
 
         return category;
     }
@@ -106,7 +106,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private cleanupVideo(video: Video): Video {
-        video.createDate = this._dateSvc.safeParse(video.createDate);
+        video.createDate = this.dateSvc.safeParse(video.createDate);
 
         return video;
     }
@@ -119,7 +119,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private cleanupComment(comment: Comment): Comment {
-        comment.entryDate = this._dateSvc.safeParse(comment.entryDate);
+        comment.entryDate = this.dateSvc.safeParse(comment.entryDate);
 
         return comment;
     }

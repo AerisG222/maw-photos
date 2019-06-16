@@ -24,7 +24,7 @@ import {
     styleUrls: ['./video-info-panel.component.scss']
 })
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
-    private _hotkeys: Hotkey[] = [];
+    private hotkeys: Hotkey[] = [];
     private currentVideo: Video;
     private destroySub = new Subscription();
 
@@ -42,21 +42,21 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     minimapMapTypeId$: Observable<string>;
     minimapZoom$: Observable<number>;
 
-    @ViewChild(CommentsComponent) comments: CommentsComponent;
-    @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
-    @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
-    @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
-    @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
+    @ViewChild(CommentsComponent, {static: false}) comments: CommentsComponent;
+    @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
+    @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
+    @ViewChild('toggleCommentsButton', {static: false}) toggleCommentsButton: MatButton;
+    @ViewChild('toggleMinimapButton', {static: false}) toggleMinimapButton: MatButton;
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private store$: Store<RootStoreState.State>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
         this.configureHotkeys();
 
-        const currentVideo$ = this._store$
+        const currentVideo$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video)
@@ -65,15 +65,15 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         this.destroySub.add(currentVideo$
             .pipe(
                 tap(video => this.currentVideo = video),
-                tap(video => this._store$.dispatch(new VideoStoreActions.LoadRatingRequestAction({ videoId: video.id }))),
-                tap(video => this._store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id })))
+                tap(video => this.store$.dispatch(new VideoStoreActions.LoadRatingRequestAction({ videoId: video.id }))),
+                tap(video => this.store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id })))
             ).subscribe()
         );
 
-        this.enableButtons$ = combineLatest(
-                this._store$.pipe( select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState) ),
-                this._store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
-            ).pipe(
+        this.enableButtons$ = combineLatest([
+                this.store$.pipe( select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState) ),
+                this.store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
+            ]).pipe(
                 map(x => ({ isExpanded: x[0], isMobile: x[1]})),
                 map(x => {
                     if (x.isMobile  || x.isExpanded) {
@@ -84,40 +84,40 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
                 })
             );
 
-        this.endSidenavExpanded$ = this._store$.pipe(
+        this.endSidenavExpanded$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
         );
 
-        this.showComments$ = this._store$.pipe(
+        this.showComments$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelShowComments)
         );
 
-        this.showMinimap$ = this._store$.pipe(
+        this.showMinimap$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelShowMinimap)
         );
 
-        this.minimapUseDarkTheme$ = this._store$.pipe(
+        this.minimapUseDarkTheme$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectAppTheme),
             map(theme => theme.isDark)
         );
 
-        this.minimapMapTypeId$ = this._store$.pipe(
+        this.minimapMapTypeId$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId)
         );
 
-        this.minimapZoom$ = this._store$.pipe(
+        this.minimapZoom$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom)
         );
 
-        this.showRatings$ = this._store$.pipe(
+        this.showRatings$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelShowRatings)
         );
 
-        this.rating$ = this._store$.pipe(
+        this.rating$ = this.store$.pipe(
             select(VideoStoreSelectors.selectCurrentVideoRating)
         );
 
-        this.comments$ = this._store$.pipe(
+        this.comments$ = this.store$.pipe(
             select(VideoStoreSelectors.selectCurrentVideoComments),
             tap(x => {
                 if (this.comments) {
@@ -151,62 +151,62 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this._hotkeysService.remove(this._hotkeys);
+        this.hotkeysService.remove(this.hotkeys);
         this.destroySub.unsubscribe();
     }
 
     toggleEndSidenav(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelExpandedStateRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelExpandedStateRequestAction());
     }
 
     onRate(userRating: number): void {
         if (this.currentVideo) {
-            this._store$.dispatch(new VideoStoreActions.RateVideoRequestAction({ videoId: this.currentVideo.id, userRating: userRating }));
+            this.store$.dispatch(new VideoStoreActions.RateVideoRequestAction({ videoId: this.currentVideo.id, userRating }));
         }
     }
 
     onComment(comment: string): void {
         if (this.currentVideo) {
-            this._store$.dispatch(new VideoStoreActions.AddCommentRequestAction({ videoId: this.currentVideo.id, comment: comment }));
+            this.store$.dispatch(new VideoStoreActions.AddCommentRequestAction({ videoId: this.currentVideo.id, comment }));
         }
     }
 
     toggleRatings(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelRatingsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelRatingsRequestAction());
     }
 
     toggleComments(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelCommentsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelCommentsRequestAction());
     }
 
     toggleMinimap(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelMinimapRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelMinimapRequestAction());
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this._store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId: mapTypeId }));
+        this.store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this._store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapZoomRequestAction({ zoom: zoom }));
+        this.store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapZoomRequestAction({ zoom }));
     }
 
     private configureHotkeys(): void {
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event), [], 'Show / Hide Info Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('r', (event: KeyboardEvent) => this.onHotkeyToggleRatings(event), [], 'Show / Hide Ratings Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('c', (event: KeyboardEvent) => this.onHotkeyToggleComments(event), [], 'Show / Hide Comments Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
-        ));
+        ) as Hotkey);
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
@@ -238,10 +238,10 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     private togglePanel(showPanel$: Observable<boolean>, toggleFunc: () => void): void {
-        combineLatest(
+        combineLatest([
             this.endSidenavExpanded$,
             showPanel$
-        ).pipe(
+        ]).pipe(
             filter(x => x[0] != null && x[1] != null),
             take(1),
             map(x => {

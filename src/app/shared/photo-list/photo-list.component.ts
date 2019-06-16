@@ -13,10 +13,10 @@ export class PhotoListComponent {
     @Input() photos: Photo[];
     @Input() selectedPhoto: Photo;
     @Input() thumbnailSize: ThumbnailSize;
-    @Output() select = new EventEmitter<Photo>();
+    @Output() photoSelected = new EventEmitter<Photo>();
 
     onClickPhoto(photo: Photo): void {
-        this.select.emit(photo);
+        this.photoSelected.emit(photo);
     }
 
     scrollIntoView(photoId: number, elementRef: HTMLElement) {

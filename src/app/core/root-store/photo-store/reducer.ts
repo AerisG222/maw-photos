@@ -426,5 +426,5 @@ function incrementCurrentIndexWithinGpsBounds(state: State, direction: number): 
 }
 
 function getCurrentIndex(state: State): number {
-    return (<number[]> state.ids).findIndex(id => id === state.currentPhoto.id);
+    return (state.ids as number[]).findIndex(id => id === state.currentPhoto.id);
 }

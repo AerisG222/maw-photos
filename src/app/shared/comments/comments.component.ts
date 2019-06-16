@@ -17,19 +17,19 @@ export class CommentsComponent implements OnInit {
     columnsToDisplay = ['entryDate', 'username', 'commentText'];
 
     constructor(
-        private _formBuilder: FormBuilder
+        private formBuilder: FormBuilder
     ) {
 
     }
 
     ngOnInit(): void {
-        this.form = this._formBuilder.group({
+        this.form = this.formBuilder.group({
             comment: ['', Validators.required]
         });
     }
 
     onComment(): void {
-        const comment = <string>this.form.get('comment').value;
+        const comment = this.form.get('comment').value as string;
 
         if (comment) {
             this.comment.emit(comment);

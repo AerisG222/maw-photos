@@ -14,16 +14,16 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
 export class SlideshowButtonComponent implements OnInit, CanRipple {
     @Output() toggleSlideshow = new EventEmitter<void>();
 
-    @ViewChild('slideshowButton') slideshowButton: MatButton;
+    @ViewChild('slideshowButton', {static: false}) slideshowButton: MatButton;
 
     slideshowPlaying$: Observable<boolean>;
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>
     ) { }
 
     ngOnInit() {
-        this.slideshowPlaying$ = this._store$
+        this.slideshowPlaying$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectSlideshowIsPlaying)
             );

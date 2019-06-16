@@ -189,5 +189,5 @@ function incrementCurrentIndexWithinBounds(state: State, direction: number): num
 }
 
 function getCurrentIndex(state: State): number {
-    return (<number[]> state.ids).findIndex(id => id === state.currentVideo.id);
+    return (state.ids as number[]).findIndex(id => id === state.currentVideo.id);
 }

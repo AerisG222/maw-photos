@@ -17,17 +17,17 @@ export class DesktopViewComponent implements OnInit {
     hidePanels$: Observable<boolean>;
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>
     ) { }
 
     ngOnInit() {
-        this.isRightSidebarDisplayed$ = this._store$
+        this.isRightSidebarDisplayed$ = this.store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsRightSidebarDisplayed),
                 delay(0)
             );
 
-        this.hidePanels$ = this._store$
+        this.hidePanels$ = this.store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsFullscreen),
                 delay(0)

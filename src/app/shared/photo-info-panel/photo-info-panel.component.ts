@@ -26,7 +26,7 @@ import { MatButton } from '@angular/material/button';
     styleUrls: ['./photo-info-panel.component.scss']
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
-    private _hotkeys: Hotkey[] = [];
+    private hotkeys: Hotkey[] = [];
     private destroySub = new Subscription();
 
     endSidenavExpanded$: Observable<boolean>;
@@ -48,26 +48,26 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     minimapZoom$: Observable<number>;
     minimapUseDarkTheme$: Observable<boolean>;
 
-    @ViewChild(CommentsComponent) comments: CommentsComponent;
-    @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
-    @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
-    @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
-    @ViewChild('toggleExifButton') toggleExifButton: MatButton;
-    @ViewChild('toggleEffectsButton') toggleEffectsButton: MatButton;
-    @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
-    @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
+    @ViewChild(CommentsComponent, {static: false}) comments: CommentsComponent;
+    @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
+    @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
+    @ViewChild('toggleCommentsButton', {static: false}) toggleCommentsButton: MatButton;
+    @ViewChild('toggleExifButton', {static: false}) toggleExifButton: MatButton;
+    @ViewChild('toggleEffectsButton', {static: false}) toggleEffectsButton: MatButton;
+    @ViewChild('toggleMinimapButton', {static: false}) toggleMinimapButton: MatButton;
+    @ViewChild('toggleHistogramButton', {static: false}) toggleHistogramButton: MatButton;
 
     currentPhoto: Photo;
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private store$: Store<RootStoreState.State>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
         this.configureHotkeys();
 
-        const currentPhoto$ = this._store$.pipe(
+        const currentPhoto$ = this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => !!photo)
         );
@@ -75,16 +75,16 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this.destroySub.add(currentPhoto$
             .pipe(
                 tap(photo => this.currentPhoto = photo),
-                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
-                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
-                tap(photo => this._store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id })))
+                tap(photo => this.store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
+                tap(photo => this.store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
+                tap(photo => this.store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id })))
             ).subscribe()
         );
 
-        this.enableButtons$ = combineLatest(
-            this._store$.pipe( select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState) ),
-            this._store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
-        ).pipe(
+        this.enableButtons$ = combineLatest([
+            this.store$.pipe( select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState) ),
+            this.store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
+        ]).pipe(
             map(x => ({ isExpanded: x[0], isMobile: x[1]})),
             map(x => {
                 if (x.isMobile  || x.isExpanded) {
@@ -95,52 +95,52 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             })
         );
 
-        this.endSidenavExpanded$ = this._store$.pipe(
+        this.endSidenavExpanded$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
         );
 
-        this.showComments$ = this._store$.pipe(
+        this.showComments$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowComments)
         );
 
-        this.showEffects$ = this._store$.pipe(
+        this.showEffects$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowEffects)
         );
 
-        this.showExif$ = this._store$.pipe(
+        this.showExif$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif)
         );
 
-        this.showHistogram$ = this._store$.pipe(
+        this.showHistogram$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowHistogram)
         );
 
-        this.showMinimap$ = this._store$.pipe(
+        this.showMinimap$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap)
         );
 
-        this.minimapMapTypeId$ = this._store$.pipe(
+        this.minimapMapTypeId$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapMapTypeId)
         );
 
-        this.minimapZoom$ = this._store$.pipe(
+        this.minimapZoom$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
         );
 
-        this.minimapUseDarkTheme$ = this._store$.pipe(
+        this.minimapUseDarkTheme$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectAppTheme),
             map(theme => theme.isDark)
         );
 
-        this.showRatings$ = this._store$.pipe(
+        this.showRatings$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings)
         );
 
-        this.rating$ = this._store$.pipe(
+        this.rating$ = this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoRating)
         );
 
-        this.comments$ = this._store$.pipe(
+        this.comments$ = this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoComments),
             tap(x => {
                 if (this.comments) {
@@ -148,7 +148,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 }})
         );
 
-        this.exif$ = this._store$.pipe(
+        this.exif$ = this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoExifData)
         );
 
@@ -174,7 +174,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 })
             );
 
-        this.effects$ = this._store$.pipe(
+        this.effects$ = this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhotoEffects)
         );
 
@@ -182,98 +182,98 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this._hotkeysService.remove(this._hotkeys);
+        this.hotkeysService.remove(this.hotkeys);
         this.destroySub.unsubscribe();
     }
 
     toggleEndSidenav(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExpandedStateRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExpandedStateRequestAction());
     }
 
     onRate(userRating: number): void {
         if (this.currentPhoto) {
-            this._store$.dispatch(new PhotoStoreActions.RatePhotoRequestAction({ photoId: this.currentPhoto.id, userRating: userRating }));
+            this.store$.dispatch(new PhotoStoreActions.RatePhotoRequestAction({ photoId: this.currentPhoto.id, userRating }));
         }
     }
 
     onComment(comment: string): void {
         if (this.currentPhoto) {
-            this._store$.dispatch(new PhotoStoreActions.AddCommentRequestAction({ photoId: this.currentPhoto.id, comment: comment }));
+            this.store$.dispatch(new PhotoStoreActions.AddCommentRequestAction({ photoId: this.currentPhoto.id, comment }));
         }
     }
 
     onResetEffects(): void {
         if (this.currentPhoto) {
-            this._store$.dispatch(new PhotoStoreActions.ResetEffectsRequestAction());
+            this.store$.dispatch(new PhotoStoreActions.ResetEffectsRequestAction());
         }
     }
 
     onUpdateEffects(effects: PhotoEffects): void {
         if (this.currentPhoto) {
-            this._store$.dispatch(new PhotoStoreActions.UpdateEffectsRequestAction({ effects: effects }));
+            this.store$.dispatch(new PhotoStoreActions.UpdateEffectsRequestAction({ effects }));
         }
     }
 
     toggleRatings(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelRatingsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelRatingsRequestAction());
     }
 
     toggleComments(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelCommentsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelCommentsRequestAction());
     }
 
     toggleExif(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExifRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExifRequestAction());
     }
 
     toggleHistogram(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelHistogramRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelHistogramRequestAction());
     }
 
     toggleEffects(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelEffectsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelEffectsRequestAction());
     }
 
     toggleMinimap(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelMinimapRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelMinimapRequestAction());
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId: mapTypeId }));
+        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapZoomRequestAction({ zoom: zoom }));
+        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapZoomRequestAction({ zoom }));
     }
 
     private configureHotkeys(): void {
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event), [], 'Show / Hide Info Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('r', (event: KeyboardEvent) => this.onHotkeyToggleRatings(event), [], 'Show / Hide Ratings Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('c', (event: KeyboardEvent) => this.onHotkeyToggleComments(event), [], 'Show / Hide Comments Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('w', (event: KeyboardEvent) => this.onHotkeyToggleExif(event), [], 'Show / Hide EXIF Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('h', (event: KeyboardEvent) => this.onHotkeyToggleHistogram(event), [], 'Show / Hide Histogram Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('e', (event: KeyboardEvent) => this.onHotkeyToggleEffects(event), [], 'Show / Hide Effects Panel')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
-        ));
+        ) as Hotkey);
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
@@ -326,10 +326,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     private togglePanel(showPanel$: Observable<boolean>, toggleFunc: () => void): void {
-        combineLatest(
+        combineLatest([
             this.endSidenavExpanded$,
             showPanel$
-        ).pipe(
+        ]).pipe(
             filter(x => x[0] != null && x[1] != null),
             take(1),
             map(x => {

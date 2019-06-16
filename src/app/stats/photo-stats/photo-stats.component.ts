@@ -26,23 +26,23 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     yearDetails$: Observable<StatDetail[]>;
 
     constructor(
-        private _formBuilder: FormBuilder,
-        private _store$: Store<RootStoreState.State>
+        private formBuilder: FormBuilder,
+        private store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
-        this.form = this._formBuilder.group({
+        this.form = this.formBuilder.group({
             aggregateBy: ['count']
         });
 
-        const years$ = this._store$
+        const years$ = this.store$
             .pipe(
                 select(PhotoCategoryStoreSelectors.selectAllYears)
             );
 
-        const categories$ = this._store$
+        const categories$ = this.store$
             .pipe(
                 select(PhotoCategoryStoreSelectors.selectAllCategories)
             );
@@ -55,28 +55,28 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
             .subscribe()
         );
 
-        this.chartData$ = combineLatest(
+        this.chartData$ = combineLatest([
                 years$,
                 categories$,
                 this.selectedYear$,
                 this.aggregateBy$
-            )
+            ])
             .pipe(
                 map(x => this.prepareChartData(x[0], x[1], x[2], x[3]))
             );
 
-        this.totalDetails$ = combineLatest(
+        this.totalDetails$ = combineLatest([
                 years$,
                 categories$,
-            )
+            ])
             .pipe(
                 map(x => this.prepareTotalDetails(x[0], x[1]))
             );
 
-        this.yearDetails$ = combineLatest(
+        this.yearDetails$ = combineLatest([
                 categories$,
                 this.selectedYear$
-            )
+            ])
             .pipe(
                 map(x => this.prepareYearDetails(x[0], x[1]))
             );
@@ -157,16 +157,16 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
             return categories
                 .filter(cat => cat.year === selectedYear)
                 .map(cat => ({
-                        'name': cat.name,
-                        'value': agg(cat)
+                        name: cat.name,
+                        value: agg(cat)
                     })
                 );
         }
 
         return years
             .map(year => ({
-                'name': year.toString(),
-                'value':  categories
+                name: year.toString(),
+                value:  categories
                     .filter(cat => cat.year === year)
                     .reduce((total, cat) => total + agg(cat), 0)
             }));

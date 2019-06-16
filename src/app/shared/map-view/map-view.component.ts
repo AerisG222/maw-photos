@@ -21,7 +21,7 @@ export class MapViewComponent {
     @Output() mapTypeChange = new EventEmitter<number>();
     @Output() zoomChange = new EventEmitter<number>();
 
-    onZoomChange(evt:  number) {
+    onZoomChange(evt: number) {
         this.zoomChange.emit(evt);
     }
 

@@ -13,7 +13,7 @@ export class MovePreviousButtonComponent implements CanRipple {
     @Input() atStartOfList = true;
     @Output() movePrevious = new EventEmitter<void>();
 
-    @ViewChild('prevButton') prevButton: MatButton;
+    @ViewChild('prevButton', {static: false}) prevButton: MatButton;
 
     onMovePrevious(): void {
         this.movePrevious.emit();

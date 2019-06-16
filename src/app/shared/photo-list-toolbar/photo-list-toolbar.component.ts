@@ -30,20 +30,20 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
-    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
-    @ViewChild('togglePhotoListButton') togglePhotoListButton: MatButton;
-    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
-    @ViewChild('fullscreenButton') fullscreenButton: MatButton;
-    @ViewChild('rotateCounterClockwiseButton') rotateCounterClockwiseButton: MatButton;
-    @ViewChild('rotateClockwiseButton') rotateClockwiseButton: MatButton;
-    @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
-    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
-    @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
-    @ViewChild('mapViewButton') mapViewButton: MatButton;
+    @ViewChild('toggleBreadcrumbsButton', {static: false}) toggleBreadcrumbsButton: MatButton;
+    @ViewChild('togglePhotoListButton', {static: false}) togglePhotoListButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
+    @ViewChild('fullscreenButton', {static: false}) fullscreenButton: MatButton;
+    @ViewChild('rotateCounterClockwiseButton', {static: false}) rotateCounterClockwiseButton: MatButton;
+    @ViewChild('rotateClockwiseButton', {static: false}) rotateClockwiseButton: MatButton;
+    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
+    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleSlideshowButton', {static: false}) toggleSlideshowButton: SlideshowButtonComponent;
+    @ViewChild('mapViewButton', {static: false}) mapViewButton: MatButton;
 
     private destroySub = new Subscription();
-    private _hotkeys: Hotkey[] = [];
+    private hotkeys: Hotkey[] = [];
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
@@ -58,46 +58,46 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     prtDownloadUrl: string = null;
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private store$: Store<RootStoreState.State>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
         this.configureHotkeys();
 
-        this.destroySub.add(this._store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
-        this.category$ = this._store$
+        this.category$ = this.store$
             .pipe(
                 select(PhotoCategoryStoreSelectors.selectCurrentCategory)
             );
 
-        this.enableMapView$ = this._store$
+        this.enableMapView$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectHasPhotosWithGpsCoordinates)
             );
 
-        this.isToolbarExpanded$ = this._store$
+        this.isToolbarExpanded$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectPhotoListToolbarExpandedState)
             );
 
-        this.isFirst$ = this._store$
+        this.isFirst$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
             );
 
-        this.isLast$ = this._store$
+        this.isLast$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
             );
 
-        this.destroySub.add(this._store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(x => !!x),
@@ -110,101 +110,101 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this._hotkeysService.remove(this._hotkeys);
+        this.hotkeysService.remove(this.hotkeys);
         this.destroySub.unsubscribe();
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListCategoryBreadcrumbsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListCategoryBreadcrumbsRequestAction());
     }
 
     onRotateClockwise(): void {
-        this._store$.dispatch(new PhotoStoreActions.RotateClockwiseRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.RotateClockwiseRequestAction());
     }
 
     onRotateCounterClockwise(): void {
-        this._store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
     }
 
     onTogglePhotoList(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListShowPhotoListRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListShowPhotoListRequestAction());
     }
 
     onToggleSize(): void {
         const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
 
-        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListThumbnailSizeRequestAction({ newSize: size }));
+        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoListThumbnailSizeRequestAction({ newSize: size }));
     }
 
     onToggleFullscreen(): void {
-        this._store$.dispatch(new PhotoStoreActions.EnterFullscreenRequestAction());
-        this._store$.dispatch(new LayoutStoreActions.EnterFullscreenRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.EnterFullscreenRequestAction());
+        this.store$.dispatch(new LayoutStoreActions.EnterFullscreenRequestAction());
     }
 
     onTogglePhotoListToolbar(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
     }
 
     onToggleMapView(): void {
-        this._store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
     }
 
     onMoveNext(): void {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
     }
 
     onMovePrevious(): void {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
     }
 
     onToggleSlideshow(): void {
-        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
     }
 
     private configureHotkeys(): void {
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event), [], 'Play / Pause Slideshow')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Title / Breadcrumbs')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('l', (event: KeyboardEvent) => this.onHotkeyTogglePhotoList(event), [], 'Toggle Photo List')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Thumbnail Size')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('f', (event: KeyboardEvent) => this.onHotkeyFullscreen(event), [], 'Enter Fullscreen')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('a', (event: KeyboardEvent) => this.onHotkeyRotateCounterClockwise(event), [], 'Rotate Counter Clockwise')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('d', (event: KeyboardEvent) => this.onHotkeyRotateClockwise(event), [], 'Rotate Clockwise')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event), [], 'Show / Hide Toolbar')
-        ));
+        ) as Hotkey);
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {

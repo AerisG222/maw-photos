@@ -4,13 +4,13 @@ import { PhotoCategory } from './photo-category.model';
 import { VideoCategory } from './video-category.model';
 
 export interface Category {
-    type:          CategoryType;
+    type: CategoryType;
     categoryRoute: string;
-    id:            number;
-    name:          string;
-    year:          number;
-    createDate:    Date;
-    teaserImage:   MultimediaAsset;
+    id: number;
+    name: string;
+    year: number;
+    createDate: Date;
+    teaserImage: MultimediaAsset;
     teaserImageSq: MultimediaAsset;
-    actual:        PhotoCategory | VideoCategory;
+    actual: PhotoCategory | VideoCategory;
 }

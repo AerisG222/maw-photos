@@ -12,22 +12,22 @@ import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/pho
 @Injectable()
 export class PhotoCategoryStoreEffects {
     constructor(
-        @Inject(photoApiServiceToken) private _api: PhotoApiService,
-        private _actions$: Actions,
-        private _store$: Store<State>
+        @Inject(photoApiServiceToken) private api: PhotoApiService,
+        private actions$: Actions,
+        private store$: Store<State>
     ) {
 
     }
 
     @Effect()
-    loadRequestEffect$: Observable<Action> = this._actions$.pipe(
+    loadRequestEffect$: Observable<Action> = this.actions$.pipe(
         ofType<photoCategoryActions.LoadRequestAction>(photoCategoryActions.ActionTypes.LOAD_REQUEST),
-        withLatestFrom(this._store$.pipe(
+        withLatestFrom(this.store$.pipe(
             select(photoCategorySelectors.selectAllCategories)
         )),
         filter(([action, categories]) => categories.length === 0),
         switchMap(action => {
-            return this._api.getCategories()
+            return this.api.getCategories()
                 .pipe(
                     map(cat => new photoCategoryActions.LoadSuccessAction({ categories: cat.items })),
                     catchError(error => of(new photoCategoryActions.LoadFailureAction({ error })))

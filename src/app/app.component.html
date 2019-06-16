@@ -1,5 +1,5 @@
 <app-mobile-view *ngIf="isMobileView$ | async" [routerTemplate]="template"></app-mobile-view>
-<app-desktop-view *ngIf="!(isMobileView$ | async)" [routerTemplate]="template"></app-desktop-view>
+<app-desktop-view *ngIf="(isMobileView$ | async) === (false | null | undefined)" [routerTemplate]="template"></app-desktop-view>
 
 <ng-template #template>
     <router-outlet></router-outlet>

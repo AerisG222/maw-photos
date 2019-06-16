@@ -35,21 +35,21 @@ export class YearListComponent implements OnInit, OnDestroy {
     showVideoCamera$: Observable<boolean>;
 
     constructor(
-        private _formBuilder: FormBuilder,
-        private _store$: Store<RootStoreState.State>,
-        private _activatedRoute: ActivatedRoute
+        private formBuilder: FormBuilder,
+        private store$: Store<RootStoreState.State>,
+        private activatedRoute: ActivatedRoute
     ) {
 
     }
 
     ngOnInit() {
-        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
 
-        this.form = this._formBuilder.group({
+        this.form = this.formBuilder.group({
             yearSelect: [''],
         });
 
-        this.destroySub.add(this._activatedRoute.fragment
+        this.destroySub.add(this.activatedRoute.fragment
             .pipe(
                 filter(f => !!f),
                 tap(y => {
@@ -63,33 +63,33 @@ export class YearListComponent implements OnInit, OnDestroy {
             ).subscribe()
         );
 
-        this.showCamera$ = this._store$
+        this.showCamera$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
                 map(f => f.name === CategoryFilter.photos.name || f.name === CategoryFilter.all.name)
             );
 
-        this.showVideoCamera$ = this._store$
+        this.showVideoCamera$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
                 map(f => f.name === CategoryFilter.videos.name || f.name === CategoryFilter.all.name)
             );
 
-        this.yearFilterEnabled$ = this._store$
+        this.yearFilterEnabled$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListYearFilterEnabled)
             );
 
-        const filters$ = combineLatest(
-            this._store$
+        const filters$ = combineLatest([
+            this.store$
                 .pipe(
                     select(SettingsStoreSelectors.selectCategoryListCategoryFilter)
                 ),
-            this._store$
+            this.store$
                 .pipe(
                     select(SettingsStoreSelectors.selectCategoryListYearFilterEnabled)
                 )
-        ).pipe(
+        ]).pipe(
             map(x => ({ categoryFilter: x[0], yearFilterEnabled: x[1] }))
         );
 
@@ -98,11 +98,11 @@ export class YearListComponent implements OnInit, OnDestroy {
                 switchMap(f => {
                     switch (f.categoryFilter) {
                         case CategoryFilter.photos:
-                            return this._store$.pipe( select(PhotoCategoryStoreSelectors.selectAllYears) );
+                            return this.store$.pipe( select(PhotoCategoryStoreSelectors.selectAllYears) );
                         case CategoryFilter.videos:
-                            return this._store$.pipe( select(VideoCategoryStoreSelectors.selectAllYears) );
+                            return this.store$.pipe( select(VideoCategoryStoreSelectors.selectAllYears) );
                         default:
-                            return this._store$.pipe( select(RootStoreSelectors.selectCombinedYears) );
+                            return this.store$.pipe( select(RootStoreSelectors.selectCombinedYears) );
                     }
                 }),
                 map(years => years.sort((a, b) => b - a)),
@@ -114,11 +114,11 @@ export class YearListComponent implements OnInit, OnDestroy {
                 })
             );
 
-        this.years$ = combineLatest(
+        this.years$ = combineLatest([
             filters$,
             this.allYears$,
             this.activeYear$
-        ).pipe(
+        ]).pipe(
             map(x => ({ filters: x[0], allYears: x[1], activeYear: x[2] })),
             map(data => {
                 if (data.filters.yearFilterEnabled) {
@@ -131,7 +131,7 @@ export class YearListComponent implements OnInit, OnDestroy {
             })
         );
 
-        this.margin$ = this._store$
+        this.margin$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListCategoryMargin)
             );

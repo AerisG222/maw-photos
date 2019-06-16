@@ -17,18 +17,18 @@ export class InfoPanelComponent implements OnInit, OnDestroy {
     showVideoInfoPanel = false;
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
+        private store$: Store<RootStoreState.State>,
     ) { }
 
     ngOnInit() {
-        this.destroySub.add(this._store$.pipe(
+        this.destroySub.add(this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => !!photo),
             tap(x => this.showVideoInfoPanel = false),
             tap(x => this.showPhotoInfoPanel = true)
         ).subscribe());
 
-        this.destroySub.add(this._store$.pipe(
+        this.destroySub.add(this.store$.pipe(
             select(VideoStoreSelectors.selectCurrentVideo),
             filter(video => !!video),
             tap(x => this.showPhotoInfoPanel = false),

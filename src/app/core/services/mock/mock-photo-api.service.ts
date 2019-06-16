@@ -12,28 +12,28 @@ import { DateService } from '../date.service';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
-    private _categories: PhotoCategory[];
-    private _photos: Photo[];
+    private categories: PhotoCategory[];
+    private photos: Photo[];
 
     constructor(
-        private _dateSvc: DateService
+        private dateSvc: DateService
     ) {
         this.initData();
     }
 
     getRandomPhoto(): Observable<Photo> {
-        const rand = Math.floor(Math.random() * (this._photos.length - 1));
+        const rand = Math.floor(Math.random() * (this.photos.length - 1));
 
-        return of(this._photos[rand]);
+        return of(this.photos[rand]);
     }
 
     getRandomPhotos(count: number): Observable<ApiCollection<Photo>> {
         const photos = [];
 
         for (let i = 0; i < count; i++) {
-            const rand = Math.floor(Math.random() * (this._photos.length - 1));
+            const rand = Math.floor(Math.random() * (this.photos.length - 1));
 
-            photos.push(this._photos[rand]);
+            photos.push(this.photos[rand]);
         }
 
         return of({
@@ -43,18 +43,18 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     getCategory(categoryId: number): Observable<PhotoCategory> {
-        return of(this._categories.filter(x => x.id === categoryId)[0]);
+        return of(this.categories.filter(x => x.id === categoryId)[0]);
     }
 
     getCategories(): Observable<ApiCollection<PhotoCategory>> {
         return of({
-            count: this._categories.length,
-            items: this._categories
+            count: this.categories.length,
+            items: this.categories
         });
     }
 
     getPhotosByCategory(categoryId: number): Observable<ApiCollection<Photo>> {
-        const photos = this._photos
+        const photos = this.photos
             .filter(x => x.categoryId === categoryId);
 
         return of({
@@ -163,7 +163,7 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     private initData(): void {
-        this._categories = [
+        this.categories = [
             {
                 id: 1,
                 name: 'Test 1',
@@ -358,7 +358,7 @@ export class MockPhotoApiService implements PhotoApiService {
             }
         ];
 
-        this._photos = [
+        this.photos = [
             {
                 id: 1,
                 categoryId: 1,

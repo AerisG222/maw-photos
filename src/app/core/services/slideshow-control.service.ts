@@ -16,20 +16,20 @@ export class SlideshowControlService {
     private settings$: Observable<Settings>;
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>
     ) {
-        this._store$
+        this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast),
-                tap(x => this._store$.dispatch(new PhotoStoreActions.StopSlideshowRequestAction()))
+                tap(x => this.store$.dispatch(new PhotoStoreActions.StopSlideshowRequestAction()))
             ).subscribe();
 
-        this.isPlaying$ = this._store$
+        this.isPlaying$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectSlideshowIsPlaying)
             );
 
-        this.settings$ = this._store$
+        this.settings$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             );
@@ -40,10 +40,10 @@ export class SlideshowControlService {
                 tap(x => this.killSlideshow$.next(true))
             ).subscribe();
 
-        combineLatest(
+        combineLatest([
             this.isPlaying$,
             this.settings$
-        ).pipe(
+        ]).pipe(
             filter(x => x[0]),
             tap(x => this.startSlideshow(x[1].photoListSlideshowDisplayDurationSeconds * 1000))
         ).subscribe();
@@ -52,7 +52,7 @@ export class SlideshowControlService {
     private startSlideshow(duration: number): void {
         interval(duration)
             .pipe(
-                tap(x => this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction())),
+                tap(x => this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction())),
                 takeUntil(this.killSlideshow$)
             ).subscribe();
     }

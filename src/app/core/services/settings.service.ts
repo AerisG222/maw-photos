@@ -59,44 +59,44 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
     constructor(
-        private _localStorage: LocalStorageService
+        private localStorage: LocalStorageService
     ) {
 
     }
 
     load(): Settings {
-        const categoryListShowCategoryTitles = this._localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
-        const categoryListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyCategoryListToolbarExpandedState);
-        const categoryListYearFilterEnabled = this._localStorage.retrieve(SettingsService.keyCategoryListYearFilterEnabled);
+        const categoryListShowCategoryTitles = this.localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
+        const categoryListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyCategoryListToolbarExpandedState);
+        const categoryListYearFilterEnabled = this.localStorage.retrieve(SettingsService.keyCategoryListYearFilterEnabled);
 
-        const photoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
-        const photoListShowPhotoList = this._localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
-        const photoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
+        const photoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
+        const photoListShowPhotoList = this.localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
+        const photoListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
         // tslint:disable-next-line:max-line-length
-        const photoListFullscreenToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoListFullscreenToolbarExpandedState);
-        const photoListMapViewMapTypeId = this._localStorage.retrieve(SettingsService.keyPhotoListMapViewMapTypeId);
-        const photoListMapViewZoom = this._localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom);
+        const photoListFullscreenToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyPhotoListFullscreenToolbarExpandedState);
+        const photoListMapViewMapTypeId = this.localStorage.retrieve(SettingsService.keyPhotoListMapViewMapTypeId);
+        const photoListMapViewZoom = this.localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom);
 
-        const photoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
-        const photoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
-        const photoInfoPanelShowExif = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
-        const photoInfoPanelShowEffects = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
-        const photoInfoPanelShowHistogram = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowHistogram);
-        const photoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
-        const photoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
-        const photoInfoPanelMinimapMapTypeId = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
-        const photoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapZoom);
+        const photoInfoPanelShowRatings = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
+        const photoInfoPanelShowComments = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
+        const photoInfoPanelShowExif = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
+        const photoInfoPanelShowEffects = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
+        const photoInfoPanelShowHistogram = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowHistogram);
+        const photoInfoPanelShowMinimap = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
+        const photoInfoPanelExpandedState = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
+        const photoInfoPanelMinimapMapTypeId = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
+        const photoInfoPanelMinimapZoom = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapZoom);
 
-        const videoListShowCategoryBreadcrumbs = this._localStorage.retrieve(SettingsService.keyVideoListShowCategoryBreadcrumbs);
-        const videoListShowVideoList = this._localStorage.retrieve(SettingsService.keyVideoListShowVideoList);
-        const videoListToolbarExpandedState = this._localStorage.retrieve(SettingsService.keyVideoListToolbarExpandedState);
+        const videoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyVideoListShowCategoryBreadcrumbs);
+        const videoListShowVideoList = this.localStorage.retrieve(SettingsService.keyVideoListShowVideoList);
+        const videoListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyVideoListToolbarExpandedState);
 
-        const videoInfoPanelShowRatings = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowRatings);
-        const videoInfoPanelShowComments = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
-        const videoInfoPanelShowMinimap = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelShowMinimap);
-        const videoInfoPanelExpandedState = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelExpandedState);
-        const videoInfoPanelMinimapMapTypeId = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
-        const videoInfoPanelMinimapZoom = this._localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapZoom);
+        const videoInfoPanelShowRatings = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowRatings);
+        const videoInfoPanelShowComments = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
+        const videoInfoPanelShowMinimap = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowMinimap);
+        const videoInfoPanelExpandedState = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelExpandedState);
+        const videoInfoPanelMinimapMapTypeId = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
+        const videoInfoPanelMinimapZoom = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapZoom);
 
         return {
             appTheme: this.getTheme(),
@@ -150,66 +150,66 @@ export class SettingsService {
             return;
         }
 
-        this._localStorage.store(SettingsService.keyAppTheme, settings.appTheme.name);
+        this.localStorage.store(SettingsService.keyAppTheme, settings.appTheme.name);
 
-        this._localStorage.store(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
-        this._localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
-        this._localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
-        this._localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
-        this._localStorage.store(SettingsService.keyCategoryListToolbarExpandedState, settings.categoryListToolbarExpandedState);
-        this._localStorage.store(SettingsService.keyCategoryListYearFilterEnabled, settings.categoryListYearFilterEnabled);
-        this._localStorage.store(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
-        this._localStorage.store(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
+        this.localStorage.store(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
+        this.localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
+        this.localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
+        this.localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
+        this.localStorage.store(SettingsService.keyCategoryListToolbarExpandedState, settings.categoryListToolbarExpandedState);
+        this.localStorage.store(SettingsService.keyCategoryListYearFilterEnabled, settings.categoryListYearFilterEnabled);
+        this.localStorage.store(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
+        this.localStorage.store(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
 
-        this._localStorage.store(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
-        this._localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
-        this._localStorage.store(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
+        this.localStorage.store(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
+        this.localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
+        this.localStorage.store(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
         // tslint:disable-next-line:max-line-length
-        this._localStorage.store(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
-        this._localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
+        this.localStorage.store(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
+        this.localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
         // tslint:disable-next-line:max-line-length
-        this._localStorage.store(SettingsService.keyPhotoListFullscreenToolbarExpandedState, settings.photoListFullscreenToolbarExpandedState);
-        this._localStorage.store(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
-        this._localStorage.store(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
+        this.localStorage.store(SettingsService.keyPhotoListFullscreenToolbarExpandedState, settings.photoListFullscreenToolbarExpandedState);
+        this.localStorage.store(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
+        this.localStorage.store(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
-        this._localStorage.store(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
+        this.localStorage.store(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
-        this._localStorage.store(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
-        this._localStorage.store(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
-        this._localStorage.store(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
-        this._localStorage.store(SettingsService.keyVideoListToolbarExpandedState, settings.videoListToolbarExpandedState);
-        this._localStorage.store(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
+        this.localStorage.store(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
+        this.localStorage.store(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
+        this.localStorage.store(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
+        this.localStorage.store(SettingsService.keyVideoListToolbarExpandedState, settings.videoListToolbarExpandedState);
+        this.localStorage.store(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
 
-        this._localStorage.store(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
-        this._localStorage.store(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
-        this._localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
-        this._localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
-        this._localStorage.store(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
-        this._localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
+        this.localStorage.store(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
+        this.localStorage.store(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
+        this.localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
+        this.localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
+        this.localStorage.store(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
+        this.localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
     }
 
     clearAuthRedirectUrl(): void {
-        this._localStorage.clear(SettingsService.keyAuthRedirectUrl);
+        this.localStorage.clear(SettingsService.keyAuthRedirectUrl);
     }
 
     setAuthRedirectUrl(url: string): void {
-        this._localStorage.store(SettingsService.keyAuthRedirectUrl, url);
+        this.localStorage.store(SettingsService.keyAuthRedirectUrl, url);
     }
 
     getAuthRedirectUrl(): string {
-        return <string>this._localStorage.retrieve(SettingsService.keyAuthRedirectUrl);
+        return this.localStorage.retrieve(SettingsService.keyAuthRedirectUrl) as string;
     }
 
     private getTheme(): Theme {
-        const themeName = this._localStorage.retrieve(SettingsService.keyAppTheme);
+        const themeName = this.localStorage.retrieve(SettingsService.keyAppTheme);
 
         try {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
@@ -219,7 +219,7 @@ export class SettingsService {
     }
 
     private getCategoryListListType(): CategoryListType {
-        const name = this._localStorage.retrieve(SettingsService.keyCategoryListListType);
+        const name = this.localStorage.retrieve(SettingsService.keyCategoryListListType);
 
         try {
             return name !== null ? CategoryListType.forName(name) : CategoryListType.grid;
@@ -229,13 +229,13 @@ export class SettingsService {
     }
 
     private getCategoryListListViewThumbnailSize(): ThumbnailSize {
-        const sizeName = this._localStorage.retrieve(SettingsService.keyCategoryListListViewThumbnailSize);
+        const sizeName = this.localStorage.retrieve(SettingsService.keyCategoryListListViewThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getCategoryListCategoryFilter(): CategoryFilter {
-        const name = this._localStorage.retrieve(SettingsService.keyCategoryListCategoryFilter);
+        const name = this.localStorage.retrieve(SettingsService.keyCategoryListCategoryFilter);
 
         try {
             return name !== null ? CategoryFilter.forName(name) : CategoryFilter.all;
@@ -245,7 +245,7 @@ export class SettingsService {
     }
 
     private getCategoryListCategoryMargin(): CategoryMargin {
-        const name = this._localStorage.retrieve(SettingsService.keyCategoryListCategoryMargin);
+        const name = this.localStorage.retrieve(SettingsService.keyCategoryListCategoryMargin);
 
         try {
             return name !== null ? CategoryMargin.forName(name) : CategoryMargin.compact;
@@ -255,25 +255,25 @@ export class SettingsService {
     }
 
     private getCategoryThumbnailSize(): ThumbnailSize {
-        const sizeName = this._localStorage.retrieve(SettingsService.keyCategoryListThumbnailSize);
+        const sizeName = this.localStorage.retrieve(SettingsService.keyCategoryListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getPhotoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this._localStorage.retrieve(SettingsService.keyPhotoListThumbnailSize);
+        const sizeName = this.localStorage.retrieve(SettingsService.keyPhotoListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getVideoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this._localStorage.retrieve(SettingsService.keyVideoListThumbnailSize);
+        const sizeName = this.localStorage.retrieve(SettingsService.keyVideoListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getVideoListVideoSize(): VideoSize {
-        const sizeName = this._localStorage.retrieve(SettingsService.keyVideoListVideoSize);
+        const sizeName = this.localStorage.retrieve(SettingsService.keyVideoListVideoSize);
 
         try {
             return sizeName !== null ? VideoSize.forName(sizeName) : VideoSize.large;
@@ -292,7 +292,7 @@ export class SettingsService {
 
     private getPhotoListSlideshowDisplayDurationSeconds(): number {
         const def = 2;
-        const secs = this._localStorage.retrieve(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
+        const secs = this.localStorage.retrieve(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
 
         try {
             const numSecs = Number(secs);

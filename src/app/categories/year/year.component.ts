@@ -33,51 +33,51 @@ export class YearComponent implements OnInit {
     listThumbnailSize$: Observable<ThumbnailSize>;
 
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>
     ) {
 
     }
 
     ngOnInit() {
-        this.listThumbnailSize$ = this._store$
+        this.listThumbnailSize$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListViewThumbnailSize)
             );
 
-        this.showListView$ = this._store$
+        this.showListView$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 map(type => type.name === CategoryListType.list.name)
             );
 
-        this.showGridView$ = this._store$
+        this.showGridView$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 map(type => type.name === CategoryListType.grid.name)
             );
 
-        this.settings$ = this._store$
+        this.settings$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)
             );
 
-        this.categories$ = this._store$
+        this.categories$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
                 switchMap(f => {
                     switch (f) {
                         case CategoryFilter.photos:
-                            return this._store$.pipe(
+                            return this.store$.pipe(
                                 select(PhotoCategoryStoreSelectors.selectCategoriesForYear, { year: this.year }),
                                 map(photoCategories => photoCategories.map(c => photoCategoryToCategory(c)))
                             );
                         case CategoryFilter.videos:
-                            return this._store$.pipe(
+                            return this.store$.pipe(
                                 select(VideoCategoryStoreSelectors.selectCategoriesForYear, { year: this.year }),
                                 map(videoCategories => videoCategories.map(c => videoCategoryToCategory(c)))
                             );
                         default:
-                            return this._store$.pipe(
+                            return this.store$.pipe(
                                 select(RootStoreSelectors.selectCombinedCategoriesForYear, { year: this.year })
                             );
                     }

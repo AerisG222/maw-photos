@@ -11,24 +11,24 @@ import { SettingsService } from 'src/app/core/services/settings.service';
 })
 export class SpaSigninComponent implements OnInit {
     constructor(
-        private _router: Router,
-        private _settingsSvc: SettingsService,
-        @Inject(authServiceToken) private _authService: AuthService
+        private router: Router,
+        private settingsSvc: SettingsService,
+        @Inject(authServiceToken) private authService: AuthService
     ) {
 
     }
 
     ngOnInit() {
-        this._authService
+        this.authService
             .completeAuthentication()
             .then(x => {
-                const destUrl = this._settingsSvc.getAuthRedirectUrl();
+                const destUrl = this.settingsSvc.getAuthRedirectUrl();
 
                 if (destUrl != null) {
-                    this._settingsSvc.clearAuthRedirectUrl();
-                    this._router.navigate([ destUrl ]);
+                    this.settingsSvc.clearAuthRedirectUrl();
+                    this.router.navigate([ destUrl ]);
                 } else {
-                    this._router.navigate([ '/' ]);
+                    this.router.navigate([ '/' ]);
                 }
             })
             .catch(x => console.log(`Error authenticating: ${x}`));

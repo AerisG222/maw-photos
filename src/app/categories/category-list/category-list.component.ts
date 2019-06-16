@@ -18,7 +18,7 @@ export class CategoryListComponent {
     columnsToDisplay = [ 'icon', 'thumbnail', 'title' ];
 
     constructor(
-        private _router: Router
+        private router: Router
     ) { }
 
     selectCategory(category: Category) {
@@ -40,7 +40,7 @@ export class CategoryListComponent {
 
             args.push(category.id);
 
-            this._router.navigate(args);
+            this.router.navigate(args);
         }
     }
 }

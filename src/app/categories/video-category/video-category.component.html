@@ -19,7 +19,7 @@
         [videos]="videos$ | async"
         [thumbnailSize]="(settings$ | async)?.videoListThumbnailSize"
         [selectedVideo]="activeVideo$ | async"
-        (select)="onSelectVideo($event)"
+        (videoSelected)="onSelectVideo($event)"
         fxFlex="0 0 auto">
     </app-video-list>
 </div>

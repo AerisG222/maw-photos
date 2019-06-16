@@ -13,9 +13,9 @@ export class VideoListComponent {
     @Input() videos: Video[];
     @Input() selectedVideo: Video;
     @Input() thumbnailSize: ThumbnailSize;
-    @Output() select = new EventEmitter<Video>();
+    @Output() videoSelected = new EventEmitter<Video>();
 
     onClickVideo(video: Video): void {
-        this.select.emit(video);
+        this.videoSelected.emit(video);
     }
 }

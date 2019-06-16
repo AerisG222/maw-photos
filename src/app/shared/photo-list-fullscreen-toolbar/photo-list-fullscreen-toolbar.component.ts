@@ -27,79 +27,79 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     isLast$: Observable<boolean>;
     isToolbarExpanded$: Observable<boolean>;
 
-    @ViewChild('exitFullscreenButton') exitFullscreenButton: MatButton;
-    @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
-    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
-    @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
+    @ViewChild('exitFullscreenButton', {static: false}) exitFullscreenButton: MatButton;
+    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
+    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleSlideshowButton', {static: false}) toggleSlideshowButton: SlideshowButtonComponent;
 
-    private _hotkeys: Hotkey[] = [];
+    private hotkeys: Hotkey[] = [];
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private store$: Store<RootStoreState.State>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit(): void {
-        this.isFirst$ = this._store$
+        this.isFirst$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
             );
 
-        this.isLast$ = this._store$
+        this.isLast$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
             );
 
-        this.isToolbarExpanded$ = this._store$
+        this.isToolbarExpanded$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectPhotoListFullscreenToolbarExpandedState)
             );
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event), [], 'Play / Pause Slideshow')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('f', (evt: KeyboardEvent) => this.onHotkeyExitFullscreen(evt), [], 'Exit Fullscreen')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('x', (evt: KeyboardEvent) => this.onHotkeyToggleFullscreenToolbar(evt), [], 'Show / Hide Toolbar')
-        ));
+        ) as Hotkey);
     }
 
     ngOnDestroy(): void {
-        this._hotkeysService.remove(this._hotkeys);
+        this.hotkeysService.remove(this.hotkeys);
     }
 
     onExitFullscreen(): void {
-        this._store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
-        this._store$.dispatch(new PhotoStoreActions.ExitFullscreenRequestAction());
+        this.store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.ExitFullscreenRequestAction());
     }
 
     onMoveNext(): void {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
     }
 
     onMovePrevious(): void {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
     }
 
     onToggleSlideshow(): void {
-        this._store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
     }
 
     onToggleFullscreenToolbar(): void {
-        this._store$.dispatch(new SettingsStoreActions.TogglePhotoListFullscreenToolbarExpandedStateRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListFullscreenToolbarExpandedStateRequestAction());
     }
 
     private onHotkeyExitFullscreen(evt: KeyboardEvent): boolean {

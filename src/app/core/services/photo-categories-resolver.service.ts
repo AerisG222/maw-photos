@@ -12,13 +12,13 @@ import { RootStoreState, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors 
 })
 export class PhotoCategoriesResolverService implements Resolve<PhotoCategory[]> {
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PhotoCategory[]> | Observable<never> {
-        this._store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
+        this.store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
 
-        return this._store$.pipe(
+        return this.store$.pipe(
             select(PhotoCategoryStoreSelectors.selectAllCategories),
             filter(cats => !!cats && cats.length > 0),
             take(1),

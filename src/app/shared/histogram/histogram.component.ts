@@ -19,7 +19,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
     img: HTMLImageElement;
     channel = 'rgb';
 
-    @ViewChild('canvas') canvas: ElementRef;
+    @ViewChild('canvas', {static: false}) canvas: ElementRef;
 
     @Input() set photo(value: Photo) {
         if (this.img && value !== null && value.imageMd !== null) {
@@ -28,20 +28,20 @@ export class HistogramComponent implements OnInit, OnDestroy {
     }
 
     get canvasEl(): HTMLCanvasElement {
-        return <HTMLCanvasElement>this.canvas.nativeElement;
+        return this.canvas.nativeElement as HTMLCanvasElement;
     }
 
     constructor(
-        private _formBuilder: FormBuilder,
+        private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc
     ) {
-        this.img = <HTMLImageElement>doc.createElement('img');
+        this.img = doc.createElement('img') as HTMLImageElement;
         this.img.crossOrigin = 'Anonymous';
         this.img.addEventListener('load', (evt) => this.onImageLoad());
     }
 
     ngOnInit() {
-        this.form = this._formBuilder.group({
+        this.form = this.formBuilder.group({
             channel: ['rgb']
         });
 
@@ -75,7 +75,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
         tempCanvas.width = this.img.width;
         tempCanvas.height = this.img.height;
 
-        const ctx = <CanvasRenderingContext2D>tempCanvas.getContext('2d');
+        const ctx = tempCanvas.getContext('2d') as CanvasRenderingContext2D;
 
         ctx.drawImage(this.img, 0, 0);
 
@@ -107,12 +107,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
             lum[this.getLuma(data[i + 0], data[i + 1], data[i + 2])]++;
         }
 
-        return {
-            r: r,
-            g: g,
-            b: b,
-            lum: lum
-        };
+        return { r, g, b, lum };
     }
 
     private getLuma(r: number, g: number, b: number): number {

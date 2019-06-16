@@ -27,15 +27,15 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
 })
 export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
-    private _hotkeys: Hotkey[] = [];
+    private hotkeys: Hotkey[] = [];
 
-    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
-    @ViewChild('toggleVideoListButton') toggleVideoListButton: MatButton;
-    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
-    @ViewChild('toggleVideoSizeButton') toggleVideoSizeButton: MatButton;
-    @ViewChild('toggleToolbarButton') toggleToolbarButton: MatButton;
-    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleBreadcrumbsButton', {static: false}) toggleBreadcrumbsButton: MatButton;
+    @ViewChild('toggleVideoListButton', {static: false}) toggleVideoListButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
+    @ViewChild('toggleVideoSizeButton', {static: false}) toggleVideoSizeButton: MatButton;
+    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
+    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
@@ -44,106 +44,106 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     settings: Settings;
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private store$: Store<RootStoreState.State>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
         this.configureHotkeys();
 
-        this.destroySub.add(this._store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
-        this.isFirst$ = this._store$
+        this.isFirst$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectIsCurrentVideoFirst)
             );
 
-        this.isLast$ = this._store$
+        this.isLast$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectIsCurrentVideoLast)
             );
 
-        this.isMobileView$ = this._store$
+        this.isMobileView$ = this.store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsMobileView)
             );
 
-        this.isToolbarExpanded$ = this._store$
+        this.isToolbarExpanded$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectVideoListToolbarExpandedState)
             );
     }
 
     ngOnDestroy(): void {
-        this._hotkeysService.remove(this._hotkeys);
+        this.hotkeysService.remove(this.hotkeys);
         this.destroySub.unsubscribe();
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoListCategoryBreadcrumbsRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoListCategoryBreadcrumbsRequestAction());
     }
 
     onToggleVideoListToolbar(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoListToolbarExpandedStateRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoListToolbarExpandedStateRequestAction());
     }
 
     onToggleThumbnailSize(): void {
         const size = ThumbnailSize.nextSize(this.settings.videoListThumbnailSize.name);
 
-        this._store$.dispatch(new SettingsStoreActions.UpdateVideoListThumbnailSizeRequestAction({ newSize: size }));
+        this.store$.dispatch(new SettingsStoreActions.UpdateVideoListThumbnailSizeRequestAction({ newSize: size }));
     }
 
     onToggleShowVideoList(): void {
-        this._store$.dispatch(new SettingsStoreActions.ToggleVideoListShowVideoListRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.ToggleVideoListShowVideoListRequestAction());
     }
 
     onToggleVideoSize(): void {
         const size = VideoSize.nextSize(this.settings.videoListVideoSize.name);
 
-        this._store$.dispatch(new SettingsStoreActions.UpdateVideoListVideoSizeRequestAction({ newSize: size }));
+        this.store$.dispatch(new SettingsStoreActions.UpdateVideoListVideoSizeRequestAction({ newSize: size }));
     }
 
     onMovePrevious(): void {
-        this._store$.dispatch(new VideoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(new VideoStoreActions.MovePreviousRequestAction());
     }
 
     onMoveNext(): void {
-        this._store$.dispatch(new VideoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(new VideoStoreActions.MoveNextRequestAction());
     }
 
     private configureHotkeys(): void {
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Title / Breadcrumbs')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('l', (event: KeyboardEvent) => this.onHotkeyToggleShowVideoList(event), [], 'Show/Hide Video List')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleThumbnailSize(event), [], 'Toggle Thumbnail Size')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('v', (event: KeyboardEvent) => this.onHotkeyToggleVideoSize(event), [], 'Toggle Video Size')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleVideoListToolbar(event), [], 'Show / Hide Toolbar')
-        ));
+        ) as Hotkey);
     }
 
     private onHotkeyMoveNext(evt: KeyboardEvent): boolean {

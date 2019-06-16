@@ -12,13 +12,13 @@ import { VideoCategory } from '../models/video-category.model';
 })
 export class VideoCategoriesResolverService implements Resolve<VideoCategory[]> {
     constructor(
-        private _store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VideoCategory[]> | Observable<never> {
-        this._store$.dispatch(new VideoCategoryStoreActions.LoadRequestAction());
+        this.store$.dispatch(new VideoCategoryStoreActions.LoadRequestAction());
 
-        return this._store$.pipe(
+        return this.store$.pipe(
             select(VideoCategoryStoreSelectors.selectAllCategories),
             filter(cats => !!cats && cats.length > 0),
             take(1),

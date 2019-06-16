@@ -13,18 +13,18 @@ export class HotkeyDialogComponent implements OnInit {
     secondHotkeys: Hotkey[];
 
     constructor(
-        private _dialogRef: MatDialogRef<HotkeyDialogComponent>,
-        private _hotkeysService: HotkeysService
+        private dialogRef: MatDialogRef<HotkeyDialogComponent>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
-        const keys = [...this._hotkeysService.hotkeys, ...this._hotkeysService.pausedHotkeys];
+        const keys = [...this.hotkeysService.hotkeys, ...this.hotkeysService.pausedHotkeys];
 
         this.updateDisplay(keys);
     }
 
     onClose() {
-        this._dialogRef.close();
+        this.dialogRef.close();
     }
 
     updateDisplay(keys: Hotkey[]): void {

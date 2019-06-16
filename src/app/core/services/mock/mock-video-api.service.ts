@@ -11,28 +11,28 @@ import { DateService } from '../date.service';
 
 @Injectable()
 export class MockVideoApiService implements VideoApiService {
-    private _categories: VideoCategory[];
-    private _videos: Video[];
+    private categories: VideoCategory[];
+    private videos: Video[];
 
     constructor(
-        private _dateSvc: DateService
+        private dateSvc: DateService
     ) {
         this.initData();
      }
 
     getCategories(): Observable<ApiCollection<VideoCategory>> {
         return of({
-            count: this._categories.length,
-            items: this._categories
+            count: this.categories.length,
+            items: this.categories
         });
     }
 
     getCategory(categoryId: number): Observable<VideoCategory> {
-        return of(this._categories.filter(x => x.id === categoryId)[0]);
+        return of(this.categories.filter(x => x.id === categoryId)[0]);
     }
 
     getVideosByCategory(categoryId: number): Observable<ApiCollection<Video>> {
-        const videos = this._videos
+        const videos = this.videos
             .filter(x => x.categoryId === categoryId);
 
         return of({
@@ -64,7 +64,7 @@ export class MockVideoApiService implements VideoApiService {
     }
 
     private initData(): void {
-        this._categories = [
+        this.categories = [
             {
                 id: 1,
                 name: 'Test 1',
@@ -127,7 +127,7 @@ export class MockVideoApiService implements VideoApiService {
             }
         ];
 
-        this._videos = [
+        this.videos = [
             {
                 id: 1,
                 categoryId: 1,

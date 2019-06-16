@@ -7,7 +7,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "dev_watch": "ng build --extract-css --vendor-chunk=false --watch",
+    "dev_build": "ng build --extract-css --vendor-chunk=false --stats-json && ng lint",
+    "prod_build": "ng build --aot --vendor-chunk=false --prod --stats-json",
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -31,14 +35,13 @@
     "@swimlane/ngx-charts": "^12.0.1",
     "@types/numeral": "0.0.25",
     "angular2-hotkeys": "^2.1.4",
-    "core-js": "^2.6.3",
     "hammerjs": "^2.0.8",
     "ngx-bar-rating": "^1.1.0",
     "ngx-webstorage": "^4.0.1",
     "numeral": "^2.0.6",
-    "oidc-client": "^1.7.0",
+    "oidc-client": "^1.8.0",
     "rxjs": "^6.5.2",
-    "tslib": "^1.9.0",
+    "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -47,20 +50,21 @@
     "@angular/compiler-cli": "^8.0.1",
     "@angular/language-service": "^8.0.1",
     "@ngrx/schematics": "^8.0.1",
-    "@types/jasmine": "^2.8.16",
+    "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
+    "@types/node": "^12.0.8",
     "codelyzer": "^5.0.1",
-    "jasmine-core": "~2.99.1",
+    "jasmine-core": "^3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.1",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
-    "karma-jasmine": "~1.1.2",
-    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-jasmine": "^2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "^5.4.2",
     "ts-node": "~7.0.0",
-    "tslint": "~5.11.0",
-    "typescript": "^3.4.5"
+    "tslint": "^5.17.0",
+    "typescript": "~3.4.5",
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }

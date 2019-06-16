@@ -34,55 +34,55 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     videos$: Observable<Video[]>;
     activeVideo$: Observable<Video>;
 
-    @ViewChild('videoRef') videoRef: ElementRef;
+    @ViewChild('videoRef', {static: false}) videoRef: ElementRef;
 
     private settings: Settings;
 
     constructor(
-        private _route: ActivatedRoute,
-        private _store$: Store<RootStoreState.State>
+        private route: ActivatedRoute,
+        private store$: Store<RootStoreState.State>
     ) { }
 
     ngOnInit() {
-        this.settings$ = this._store$
+        this.settings$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             );
 
-        this.category$ = this._store$
+        this.category$ = this.store$
             .pipe(
                 select(VideoCategoryStoreSelectors.selectCurrentCategory),
             );
 
-        this.videos$ = this._store$
+        this.videos$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectAllVideos),
                 tap(videos => this.setCurrentVideo(videos[0]))
             );
 
-        this.activeVideo$ = this._store$
+        this.activeVideo$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(x => !!x),
                 tap(x => this.triggerVideoRefresh())
             );
 
-        this._store$.dispatch(new VideoStoreActions.ClearRequestAction());
-        this._store$.dispatch(new SettingsStoreActions.LoadRequestAction());
-        this._store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
+        this.store$.dispatch(new VideoStoreActions.ClearRequestAction());
+        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+        this.store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
 
-        this.destroySub.add(this._route.params
+        this.destroySub.add(this.route.params
             .pipe(
                 map(p => Number(p.id)),
-                tap(id => this._store$.dispatch(new VideoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
-                tap(id => this._store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id })))
+                tap(id => this.store$.dispatch(new VideoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
+                tap(id => this.store$.dispatch(new VideoStoreActions.LoadRequestAction({ categoryId: id })))
             ).subscribe()
         );
     }
 
     ngOnDestroy(): void {
-        this._store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
+        this.store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
         this.destroySub.unsubscribe();
         this.setCurrentVideo(null);
     }
@@ -117,6 +117,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     }
 
     private setCurrentVideo(video: Video): void {
-        this._store$.dispatch(new VideoStoreActions.SetCurrentAction({ video: video }));
+        this.store$.dispatch(new VideoStoreActions.SetCurrentAction({ video }));
     }
 }

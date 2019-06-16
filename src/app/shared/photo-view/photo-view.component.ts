@@ -30,7 +30,7 @@ export class PhotoViewComponent {
     @Output() photoSelected = new EventEmitter<Photo>();
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
+        private store$: Store<RootStoreState.State>,
         private sanitizer: DomSanitizer
     ) {
 
@@ -76,18 +76,18 @@ export class PhotoViewComponent {
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewMapTypeIdRequestAction({ mapTypeId: mapTypeId }));
+        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewMapTypeIdRequestAction({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this._store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewZoomRequestAction({ zoom: zoom }));
+        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewZoomRequestAction({ zoom }));
     }
 
     onSwipeLeft(evt): void {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
     }
 
     onSwipeRight(evt): void {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
     }
 }

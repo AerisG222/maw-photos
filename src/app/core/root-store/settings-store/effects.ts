@@ -12,29 +12,29 @@ import { State } from './state';
 @Injectable()
 export class SettingsStoreEffects {
     constructor(
-        private _settingsService: SettingsService,
-        private _actions$: Actions,
-        private _store$: Store<State>
+        private settingsService: SettingsService,
+        private actions$: Actions,
+        private store$: Store<State>
     ) {
 
     }
 
     @Effect()
-    loadRequestEffect$: Observable<Action> = this._actions$.pipe(
+    loadRequestEffect$: Observable<Action> = this.actions$.pipe(
         ofType<settingsActions.LoadRequestAction>(settingsActions.ActionTypes.LOAD_REQUEST),
         startWith(new settingsActions.LoadRequestAction()),
         map(x => {
-            const settings = this._settingsService.load();
+            const settings = this.settingsService.load();
             return new settingsActions.LoadSuccessAction({ settings });
         })
     );
 
     @Effect()
-    saveRequestEffect$: Observable<Action> = this._actions$.pipe(
+    saveRequestEffect$: Observable<Action> = this.actions$.pipe(
         ofType<settingsActions.SaveRequestAction>(settingsActions.ActionTypes.SAVE_REQUEST),
         map(action => {
             try {
-                this._settingsService.save(action.payload.settings);
+                this.settingsService.save(action.payload.settings);
                 return new settingsActions.SaveSuccessAction(action.payload);
             } catch (err) {
                 return new settingsActions.SaveFailureAction(err);
@@ -43,7 +43,7 @@ export class SettingsStoreEffects {
     );
 
     @Effect()
-    propertyChangeTriggersSaveEffect$: Observable<Action> = this._actions$.pipe(
+    propertyChangeTriggersSaveEffect$: Observable<Action> = this.actions$.pipe(
         ofType(
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES,
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE,
@@ -85,7 +85,7 @@ export class SettingsStoreEffects {
             settingsActions.ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM,
             settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_RATINGS
         ),
-        withLatestFrom(this._store$.pipe(
+        withLatestFrom(this.store$.pipe(
             select(settingsSelectors.selectSettings)
         )),
         map(x => {

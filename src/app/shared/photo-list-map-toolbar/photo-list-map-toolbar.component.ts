@@ -15,62 +15,62 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
     styleUrls: ['./photo-list-map-toolbar.component.scss']
 })
 export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
-    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
-    @ViewChild('mapviewButton') mapviewButton: MatButton;
+    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
+    @ViewChild('mapviewButton', {static: false}) mapviewButton: MatButton;
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
 
-    private _hotkeys: Hotkey[] = [];
+    private hotkeys: Hotkey[] = [];
 
     constructor(
-        private _store$: Store<RootStoreState.State>,
-        private _hotkeysService: HotkeysService
+        private store$: Store<RootStoreState.State>,
+        private hotkeysService: HotkeysService
     ) { }
 
     ngOnInit() {
         this.configureHotkeys();
 
-        this.isFirst$ = this._store$
+        this.isFirst$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates)
             );
 
-        this.isLast$ = this._store$
+        this.isLast$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLastWithGpsCoordinates)
             );
     }
 
     ngOnDestroy(): void {
-        this._hotkeysService.remove(this._hotkeys);
+        this.hotkeysService.remove(this.hotkeys);
     }
 
     onToggleMapView(): void {
-        this._store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
     }
 
     onMoveNext(): void {
-        this._store$.dispatch(new PhotoStoreActions.MoveNextWithGpsRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MoveNextWithGpsRequestAction());
     }
 
     onMovePrevious(): void {
-        this._store$.dispatch(new PhotoStoreActions.MovePreviousWithGpsRequestAction());
+        this.store$.dispatch(new PhotoStoreActions.MovePreviousWithGpsRequestAction());
     }
 
     private configureHotkeys(): void {
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
-        ));
+        ) as Hotkey);
 
-        this._hotkeys.push(<Hotkey> this._hotkeysService.add(
+        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
-        ));
+        ) as Hotkey);
     }
 
     private onHotkeyMapView(evt: KeyboardEvent): boolean {

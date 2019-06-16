@@ -9,31 +9,31 @@ import { SettingsService } from './settings.service';
 })
 export class AuthGuard implements CanActivate {
     constructor(
-        private _settingsSvc: SettingsService,
-        @Inject(authServiceToken) private _authService: AuthService
+        private settingsSvc: SettingsService,
+        @Inject(authServiceToken) private authService: AuthService
     ) {
 
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
-        if (this._authService.isLoggedIn()) {
+        if (this.authService.isLoggedIn()) {
             return true;
         }
 
-        this._settingsSvc.setAuthRedirectUrl(state.url);
+        this.settingsSvc.setAuthRedirectUrl(state.url);
 
         return new Promise((resolve) => {
-            this._authService.startSilentRenew()
+            this.authService.startSilentRenew()
                 .then(() => {
-                    if (this._authService.isLoggedIn()) {
+                    if (this.authService.isLoggedIn()) {
                         resolve(true);
                     } else {
-                        this._authService.startAuthentication();
+                        this.authService.startAuthentication();
                         resolve(false);
                     }
                 })
                 .catch(() => {
-                    this._authService.startAuthentication();
+                    this.authService.startAuthentication();
                     resolve(false);
                 });
         });

@@ -12,22 +12,22 @@ import { State } from './state';
 @Injectable()
 export class VideoCategoryStoreEffects {
     constructor(
-        @Inject(videoApiServiceToken) private _api: VideoApiService,
-        private _actions$: Actions,
-        private _store$: Store<State>
+        @Inject(videoApiServiceToken) private api: VideoApiService,
+        private actions$: Actions,
+        private store$: Store<State>
     ) {
 
     }
 
     @Effect()
-    loadRequestEffect$: Observable<Action> = this._actions$.pipe(
+    loadRequestEffect$: Observable<Action> = this.actions$.pipe(
         ofType<videoCategoryActions.LoadRequestAction>(videoCategoryActions.ActionTypes.LOAD_REQUEST),
-        withLatestFrom(this._store$.pipe(
+        withLatestFrom(this.store$.pipe(
             select(videoCategorySelectors.selectAllCategories)
         )),
         filter(([action, categories]) => categories.length === 0),
         switchMap(action =>
-            this._api.getCategories()
+            this.api.getCategories()
                 .pipe(
                     map(cat => new videoCategoryActions.LoadSuccessAction({ categories: cat.items })),
                     catchError(error => of(new videoCategoryActions.LoadFailureAction({ error })))
