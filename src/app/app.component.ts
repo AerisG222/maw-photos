@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';

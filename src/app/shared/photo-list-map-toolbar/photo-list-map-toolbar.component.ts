@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatButton } from '@angular/material';
+import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';

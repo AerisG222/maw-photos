@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { MatButton } from '@angular/material';
+import { MatButton } from '@angular/material/button';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
 @Component({

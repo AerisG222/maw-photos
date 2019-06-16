@@ -18,7 +18,7 @@ import {
     LayoutStoreSelectors
 } from 'src/app/core/root-store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import { MatButton } from '@angular/material';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-photo-info-panel',

@@ -11,7 +11,7 @@ import {
     SettingsStoreActions,
     PhotoStoreSelectors
 } from 'src/app/core/root-store';
-import { MatButton } from '@angular/material';
+import { MatButton } from '@angular/material/button';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
 import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';

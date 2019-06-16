@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { PhotoStoreSelectors, RootStoreState } from 'src/app/core/root-store';
-import { MatButton } from '@angular/material';
+import { MatButton } from '@angular/material/button';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
 @Component({

@@ -15,7 +15,7 @@ import {
     PhotoCategoryStoreSelectors,
     VideoCategoryStoreSelectors
 } from 'src/app/core/root-store';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-year-list',
