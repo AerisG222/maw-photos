@@ -45,7 +45,7 @@
             (click)="onToggleVideoListToolbar()"
             #toggleToolbarButton>
             <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-            <mat-icon *ngIf="(isToolbarExpanded$ | async) === (false | null | undefined)" [inline]="true">more_horiz</mat-icon>
+            <mat-icon *ngIf="(isToolbarExpanded$ | async) === (false || null || undefined)" [inline]="true">more_horiz</mat-icon>
         </button>
     </div>
 </div>

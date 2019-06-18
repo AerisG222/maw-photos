@@ -45,14 +45,14 @@
             fxHide.lt-md="1"
             #toggleInfoPanelButton>
             <mat-icon *ngIf="endSidenavExpanded$ | async" [inline]="true">chevron_right</mat-icon>
-            <mat-icon *ngIf="(endSidenavExpanded$ | async) === (false | null | undefined)" [inline]="true">chevron_left</mat-icon>
+            <mat-icon *ngIf="(endSidenavExpanded$ | async) === (false || null || undefined)" [inline]="true">chevron_left</mat-icon>
         </button>
 
         <button
             mat-button
             matTooltip="Show/Hide Ratings (R)"
             matTooltipPosition="before"
-            [disabled]="(enableButtons$ | async) === (false | null | undefined)"
+            [disabled]="(enableButtons$ | async) === (false || null || undefined)"
             [class.active]="showRatings$ | async"
             (click)="toggleRatings()"
             #toggleRatingsButton>
@@ -62,7 +62,7 @@
             mat-button
             matTooltip="Show/Hide Comments (C)"
             matTooltipPosition="before"
-            [disabled]="(enableButtons$ | async) === (false | null | undefined)"
+            [disabled]="(enableButtons$ | async) === (false || null || undefined)"
             [class.active]="showComments$ | async"
             (click)="toggleComments()"
             #toggleCommentsButton>
@@ -72,7 +72,7 @@
             mat-button
             matTooltip="Show/Hide Mini-map (M)"
             matTooltipPosition="before"
-            [disabled]="(enableButtons$ | async) === (false | null | undefined)"
+            [disabled]="(enableButtons$ | async) === (false || null || undefined)"
             [class.active]="showMinimap$ | async"
             (click)="toggleMinimap()"
             #toggleMinimapButton>
