@@ -19,6 +19,6 @@
     </ng-container>
 
     <div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
-        <app-year [year]="year" [showYear]="(yearFilterEnabled$ | async) === (false || null || undefined)"></app-year>
+        <app-year [year]="year" [showYear]="(yearFilterEnabled$ | async) === false"></app-year>
     </div>
 </div>

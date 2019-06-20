@@ -12,6 +12,6 @@
 
     <div class="container">
         <ng-container *ngTemplateOutlet="routerTemplate"></ng-container>
-        <app-info-panel *ngIf="((hidePanels$ | async) === (false || null || undefined)) && (isRightSidebarDisplayed$ | async)"></app-info-panel>
+        <app-info-panel *ngIf="((hidePanels$ | async) === false) && (isRightSidebarDisplayed$ | async)"></app-info-panel>
     </div>
 </div>
