@@ -5,8 +5,6 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HotkeyModule } from 'angular2-hotkeys';
 
 import { environment } from 'src/environments/environment';
-import { AuthConfig } from './models/auth-config.model';
-import { EnvironmentConfig } from './models/environment-config.model';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { throwIfAlreadyLoaded } from './module-import.guard';
 import { RootStoreModule } from './root-store';
@@ -22,20 +20,6 @@ import { RootStoreModule } from './root-store';
         RootStoreModule
     ],
     providers: [
-        EnvironmentConfig,
-        {
-            provide: AuthConfig,
-            useFactory: (env: EnvironmentConfig) => {
-                return new AuthConfig(
-                    env.authUrl,
-                    'maw-photos',
-                    env.photosUrl,
-                    `${env.photosUrl}/auth`,
-                    `${env.photosUrl}/auth/silent`
-                );
-            },
-            deps: [EnvironmentConfig]
-        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

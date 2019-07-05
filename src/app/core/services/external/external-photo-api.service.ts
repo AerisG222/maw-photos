@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
-import { EnvironmentConfig } from 'src/app/core/models/environment-config.model';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
@@ -12,12 +11,12 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
+import { config } from '../../../../environments/config';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
     constructor(
         private http: HttpClient,
-        private cfg: EnvironmentConfig,
         private dateSvc: DateService
     ) {
 
@@ -113,7 +112,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
-        return `${this.cfg.apiUrl}/${relativeUrl}`;
+        return `${config.apiUrl}/${relativeUrl}`;
     }
 
     private cleanupPhotoCategories(categories: ApiCollection<PhotoCategory>): ApiCollection<PhotoCategory> {

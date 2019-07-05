@@ -4,7 +4,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgOidcClientModule } from 'ng-oidc-client';
+import { Log } from 'oidc-client';
 
+import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { LayoutStoreModule } from './layout-store/layout-store.module';
 import { PhotoCategoryStoreModule } from './photo-category-store/photo-category-store.module';
@@ -26,6 +29,25 @@ import { VideoStoreModule } from './video-store';
         StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
+        NgOidcClientModule.forRoot({
+            oidc_config: {
+                client_id: 'maw-photos',
+                response_type: 'code',
+                scope: 'openid profile maw_api role',
+                authority: config.authUrl,
+                redirect_uri: `${config.photosUrl}/callback.html`,
+                post_logout_redirect_uri: `${config.photosUrl}/signout-callback.html`,
+                silent_redirect_uri: `${config.photosUrl}/renew-callback.html`,
+                automaticSilentRenew: true,
+                filterProtocolClaims: true,
+                loadUserInfo: true,
+                popupWindowFeatures: 'location=no,toolbar=no,width=600,height=600,left=100,top=100'
+            },
+            log: {
+                logger: console,
+                level: environment.production ? Log.NONE : Log.INFO
+            }
+        }),
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ]
 })

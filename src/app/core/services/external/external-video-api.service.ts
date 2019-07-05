@@ -8,15 +8,14 @@ import { Video } from '../../models/video.model';
 import { Comment } from '../../models/comment.model';
 import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
-import { EnvironmentConfig } from '../../models/environment-config.model';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
+import { config } from '../../../../environments/config';
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
     constructor(
         private http: HttpClient,
-        private cfg: EnvironmentConfig,
         private dateSvc: DateService
     ) { }
 
@@ -82,7 +81,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
-        return `${this.cfg.apiUrl}/${relativeUrl}`;
+        return `${config.apiUrl}/${relativeUrl}`;
     }
 
     private cleanupVideoCategories(categories: ApiCollection<VideoCategory>): ApiCollection<VideoCategory> {

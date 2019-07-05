@@ -1,21 +1,40 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from './core/services/auth.guard';
+import { authGuardToken } from './core/services/auth.guard';
 
 const routes: Routes = [
-//    { path: 'admin',      loadChildren: './admin/admin.module#AdminModule',                canActivate: [AuthGuard] },
-    { path: 'auth',       loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-    // tslint:disable-next-line:max-line-length
-    { path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule), canActivate: [AuthGuard] },
-    { path: 'help',       loadChildren: () => import('./help/help.module').then(m => m.HelpModule) },
-    // tslint:disable-next-line:max-line-length
-    { path: 'random',     loadChildren: () => import('./random/random.module').then(m => m.RandomModule),             canActivate: [AuthGuard] },
-//    { path: 'search',     loadChildren: './search/search.module#SearchModule',             canActivate: [AuthGuardService] },
-    { path: 'settings',   loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
-    // tslint:disable-next-line:max-line-length
-    { path: 'stats',      loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule),                canActivate: [AuthGuard] },
-    { path: '**',         redirectTo: 'categories' }
+    {
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    },
+    {
+        path: 'categories',
+        loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
+        canActivate: [authGuardToken]
+    },
+    {
+        path: 'help',
+        loadChildren: () => import('./help/help.module').then(m => m.HelpModule)
+    },
+    {
+        path: 'random',
+        loadChildren: () => import('./random/random.module').then(m => m.RandomModule),
+        canActivate: [authGuardToken]
+    },
+    {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+    },
+    {
+        path: 'stats',
+        loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule),
+        canActivate: [authGuardToken]
+    },
+    {
+        path: '**',
+        redirectTo: 'categories'
+    }
 ];
 
 @NgModule({
