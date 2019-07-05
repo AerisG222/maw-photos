@@ -43,7 +43,7 @@ export class VideoStoreEffects {
     @Effect()
     rateVideoRequestEffect$: Observable<Action> = this.actions$.pipe(
         ofType<videoActions.RateVideoRequestAction>(videoActions.ActionTypes.RATE_VIDEO_REQUEST),
-        concatMap(action =>
+        switchMap(action =>
             this.api.rateVideo(action.payload.videoId, action.payload.userRating)
                 .pipe(
                     map(rating => new videoActions.RateVideoSuccessAction({ rating })),

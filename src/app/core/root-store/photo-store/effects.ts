@@ -72,7 +72,7 @@ export class PhotoStoreEffects {
     @Effect()
     ratePhotoRequestEffect$: Observable<Action> = this.actions$.pipe(
         ofType<photoActions.RatePhotoRequestAction>(photoActions.ActionTypes.RATE_PHOTO_REQUEST),
-        concatMap(action =>
+        switchMap(action =>
             this.api.ratePhoto(action.payload.photoId, action.payload.userRating)
                 .pipe(
                     map(rating => new photoActions.RatePhotoSuccessAction({ rating })),
