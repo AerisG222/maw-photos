@@ -41,7 +41,7 @@
         *ngIf="photos && settings?.photoListShowPhotoList"
         [photos]="photos"
         [thumbnailSize]="settings?.photoListThumbnailSize"
-        (select)="onSelectPhoto($event)"
+        (photoSelected)="onSelectPhoto($event)"
         [selectedPhoto]="activePhoto"
         fxFlex="0 0 auto"
         #photoList>
