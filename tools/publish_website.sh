@@ -2,7 +2,7 @@
 SSH_REMOTE_HOST=www.mikeandwan.us
 SSH_USERNAME=mmorano
 PROJECT_ROOT=/home/mmorano/git/maw-photos
-DIST_ROOT="${PROJECT_ROOT}/dist/maw-photos"
+DIST_ROOT="${PROJECT_ROOT}/dist"
 TOOLS_ROOT="${PROJECT_ROOT}/tools"
 WD=$( pwd )
 
@@ -35,12 +35,12 @@ echo 'Would you like to deploy to production? [y/n]'
 read DO_DEPLOY
 
 if [ "${DO_DEPLOY}" = "y" ]; then
-    rsync -ah "${DIST_ROOT}" "${SSH_USERNAME}"@"${SSH_REMOTE_HOST}":~/
+    rsync -ah "${DIST_ROOT}" "${SSH_USERNAME}"@"${SSH_REMOTE_HOST}":~/maw-photos
 
     ssh -t "${SSH_USERNAME}"@"${SSH_REMOTE_HOST}" '
         echo "These commands will be run on: $( uname -n )"
 
-        sudo mv maw-photos /srv/www/_photos_staging
+        sudo mv maw-photos/dist /srv/www/_photos_staging
 
         sudo chown -R root:root /srv/www/_photos_staging
         sudo restorecon -R /srv/www/_photos_staging
