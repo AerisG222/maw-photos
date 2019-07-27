@@ -19,7 +19,6 @@ import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.comp
 })
 export class AppComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
-    identity$: Observable<User>;
 
     isMobileView$: Observable<boolean>;
 
@@ -31,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private oidcFacade: OidcFacade,
         @Inject(DOCUMENT) private doc
     ) {
-            this.identity$ = this.oidcFacade.identity$;
+
     }
 
     ngOnInit(): void {
