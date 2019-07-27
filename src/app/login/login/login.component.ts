@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OidcFacade } from 'ng-oidc-client';
-import { filter, tap, take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login',
