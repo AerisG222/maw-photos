@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { User } from 'oidc-client';
+import { OidcFacade } from 'ng-oidc-client';
 
 import { Theme } from './core/models/theme.model';
 import { LayoutStoreSelectors, RootStoreState, SettingsStoreSelectors, SettingsStoreActions, LayoutStoreActions } from './core/root-store';
@@ -17,6 +19,7 @@ import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.comp
 })
 export class AppComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
+    identity$: Observable<User>;
 
     isMobileView$: Observable<boolean>;
 
@@ -25,12 +28,15 @@ export class AppComponent implements OnInit, OnDestroy {
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
         private store$: Store<RootStoreState.State>,
+        private oidcFacade: OidcFacade,
         @Inject(DOCUMENT) private doc
     ) {
-
+            this.identity$ = this.oidcFacade.identity$;
     }
 
     ngOnInit(): void {
+        this.oidcFacade.getOidcUser();
+
         this.store$.dispatch(new LayoutStoreActions.InitializeRequestAction());
 
         this.isMobileView$ = this.store$.pipe(
