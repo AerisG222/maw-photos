@@ -28,7 +28,7 @@
         #header>
     </app-category-header>
 
-    <div *ngIf="photos" fxFlex="1 1 auto" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="photos" fxFlex="1 1 auto" fxLayout="column" fxLayoutAlign="center center" style="overflow: hidden;">
         <img
             [src]="activePhoto?.imageMd?.url"
             [class]="effects?.rotation?.klass"
