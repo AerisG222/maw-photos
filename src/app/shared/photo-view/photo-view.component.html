@@ -34,7 +34,8 @@
             [class]="effects?.rotation?.klass"
             [style.filter]="getEffectStyles()"
             (swipeleft)="onSwipeLeft($event)"
-            (swiperight)="onSwipeRight($event)" />
+            (swiperight)="onSwipeRight($event)"
+            loading="eager" />
     </div>
 
     <app-photo-list

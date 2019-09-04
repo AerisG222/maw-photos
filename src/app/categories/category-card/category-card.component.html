@@ -4,7 +4,7 @@
     [matTooltipDisabled]="showTitle">
     <mat-card>
         <mat-icon inline="true" *ngIf="category.type == categoryTypes.video">videocam</mat-icon>
-        <img [src]="category.teaserImageSq.url" [alt]="category.name" [class]="thumbnailSize.klass" [class.show_title]="showTitle" />
+        <img [src]="category.teaserImageSq.url" [alt]="category.name" [class]="thumbnailSize.klass" [class.show_title]="showTitle" loading="lazy" />
         <mat-card-content *ngIf="showTitle">
             {{ category.name }}
         </mat-card-content>
