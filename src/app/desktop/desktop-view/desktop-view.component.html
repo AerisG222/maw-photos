@@ -1,24 +1,28 @@
-<mat-sidenav-container [autosize]="true" fxFlexFill fxLayout>
-    <mat-sidenav disableClose #startSidenavRef mode="side" [opened]="(hidePanels$ | async) === false" class="mat-elevation-z8" fxFlex="none">
-        <div fxLayout="column" fxLayoutAlign="space-between" fxFlex>
-            <div fxLayout="column">
+<div class="desktop-grid">
+    <div [ngClass]="{ 'mat-elevation-z8': (hidePanels$ | async) === false }">
+        <div *ngIf="(hidePanels$ | async) === false" class="panel-grid">
+            <div class="panel-item-grid">
                 <app-categories-link></app-categories-link>
                 <app-random-link></app-random-link>
                 <app-stats-link></app-stats-link>
             </div>
 
-            <div fxLayout="column">
+            <div></div>
+
+            <div class="panel-item-grid">
                 <app-help-link></app-help-link>
                 <app-settings-link></app-settings-link>
             </div>
         </div>
-    </mat-sidenav>
+    </div>
 
-    <mat-sidenav-content fxFlex>
+    <main>
         <ng-container *ngTemplateOutlet="routerTemplate"></ng-container>
-    </mat-sidenav-content>
+    </main>
 
-    <mat-sidenav #endSidenavRef mode="side" position="end" class="mat-elevation-z8" [opened]="((hidePanels$ | async) === false) && (isRightSidebarDisplayed$ | async)" fxFlex>
-        <app-info-panel *ngIf="(hidePanels$ | async) === false"></app-info-panel>
-    </mat-sidenav>
-</mat-sidenav-container>
+    <div [ngClass]="{ 'mat-elevation-z8': (showRightSidebar$ | async) }">
+        <div *ngIf="(showRightSidebar$ | async)">
+            <app-info-panel *ngIf="(hidePanels$ | async) === false"></app-info-panel>
+        </div>
+    </div>
+</div>

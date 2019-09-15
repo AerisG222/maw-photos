@@ -13,7 +13,7 @@ import { RootStoreState, LayoutStoreSelectors } from 'src/app/core/root-store';
 export class DesktopViewComponent implements OnInit {
     @Input() routerTemplate: TemplateRef<any>;
 
-    isRightSidebarDisplayed$: Observable<boolean>;
+    showRightSidebar$: Observable<boolean>;
     hidePanels$: Observable<boolean>;
 
     constructor(
@@ -21,9 +21,9 @@ export class DesktopViewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.isRightSidebarDisplayed$ = this.store$
+        this.showRightSidebar$ = this.store$
             .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsRightSidebarDisplayed),
+                select(LayoutStoreSelectors.selectShowRightSidebar),
                 delay(0)
             );
 

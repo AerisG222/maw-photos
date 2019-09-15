@@ -19,3 +19,8 @@ export const selectLayoutIsRightSidebarDisplayed = createSelector(selectLayoutSt
 export const selectLayoutIsFullscreen = createSelector(selectLayoutState, getIsFullscreen);
 export const selectLayoutIsMobileView = createSelector(selectLayoutState, getIsMobileView);
 export const selectLayout = createSelector(selectLayoutState, getLayout);
+export const selectShowRightSidebar = createSelector(
+    selectLayoutIsRightSidebarDisplayed,
+    selectLayoutIsFullscreen,
+    (isRightSidebarDisplayed, isFullscreen) => isRightSidebarDisplayed && !isFullscreen
+);
