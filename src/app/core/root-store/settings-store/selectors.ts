@@ -24,7 +24,7 @@ const getCategoryListCategoryMargin = (state: State): CategoryMargin => state.se
 const getCategoryListShowCategoryTitles = (state: State): boolean => state.settings.categoryListShowCategoryTitles;
 const getCategoryListThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize;
 const getCategoryListToolbarExpandedState = (state: State): boolean => state.settings.categoryListToolbarExpandedState;
-const getCategoryListYearFilterEnabled = (state: State): boolean => state.settings.categoryListYearFilterEnabled;
+const getCategoryListYearFilter = (state: State): string | number => state.settings.categoryListYearFilter;
 const getCategoryListListType = (state: State): CategoryListType => state.settings.categoryListListType;
 const getCategoryListListViewThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListListViewThumbnailSize;
 
@@ -68,7 +68,7 @@ export const selectCategoryListCategoryMargin = createSelector(selectSettingsSta
 export const selectCategoryListShowCategoryTitles = createSelector(selectSettingsState, getCategoryListShowCategoryTitles);
 export const selectCategoryListThumbnailSize = createSelector(selectSettingsState, getCategoryListThumbnailSize);
 export const selectCategoryListToolbarExpandedState = createSelector(selectSettingsState, getCategoryListToolbarExpandedState);
-export const selectCategoryListYearFilterEnabled = createSelector(selectSettingsState, getCategoryListYearFilterEnabled);
+export const selectCategoryListYearFilter = createSelector(selectSettingsState, getCategoryListYearFilter);
 export const selectCategoryListListType = createSelector(selectSettingsState, getCategoryListListType);
 export const selectCategoryListListViewThumbnailSize = createSelector(selectSettingsState, getCategoryListListViewThumbnailSize);
 

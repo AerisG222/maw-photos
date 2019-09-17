@@ -13,7 +13,7 @@ export interface Settings {
     categoryListShowCategoryTitles: boolean;
     categoryListThumbnailSize: ThumbnailSize;
     categoryListToolbarExpandedState: boolean;
-    categoryListYearFilterEnabled: boolean;
+    categoryListYearFilter: string | number;
     categoryListListType: CategoryListType;
     categoryListListViewThumbnailSize: ThumbnailSize;
 

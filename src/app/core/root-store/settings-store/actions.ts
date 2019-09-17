@@ -18,7 +18,7 @@ export enum ActionTypes {
 
     TOGGLE_CATEGORY_LIST_CATEGORY_TITLES = '[Settings] Toggle Category List Category Titles',
     TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Category List Toolbar Expanded State',
-    TOGGLE_CATEGORY_LIST_YEAR_FILTER = '[Settings] Toggle Category List Year Filter',
+    UPDATE_CATEGORY_LIST_YEAR_FILTER = '[Settings] Update Category List Year Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_FILTER = '[Settings] Update Category List Category Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_MARGIN = '[Settings] Update Category List Category Margin',
     UPDATE_CATEGORY_LIST_LIST_TYPE = '[Settings] Update Category List List Type',
@@ -94,8 +94,9 @@ export class ToggleCategoryListToolbarExpandedStateRequestAction implements Acti
     readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
-export class ToggleCategoryListYearFilterRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_YEAR_FILTER;
+export class UpdateCategoryListYearFilterRequestAction implements Action {
+    readonly type = ActionTypes.UPDATE_CATEGORY_LIST_YEAR_FILTER;
+    constructor(public payload: { yearFilter: string | number }) { }
 }
 
 export class UpdateCategoryListCategoryFilterRequestAction implements Action {
@@ -251,7 +252,7 @@ export type Actions =
 
     ToggleCategoryListCategoryTitlesRequestAction |
     ToggleCategoryListToolbarExpandedStateRequestAction |
-    ToggleCategoryListYearFilterRequestAction |
+    UpdateCategoryListYearFilterRequestAction |
     UpdateCategoryListCategoryFilterRequestAction |
     UpdateCategoryListCategoryMarginRequestAction |
     UpdateCategoryListListTypeRequestAction |

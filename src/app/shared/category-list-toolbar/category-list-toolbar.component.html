@@ -9,22 +9,6 @@
         </button>
 
         <button
-            mat-button
-            matTooltip="Toggle Year Filter (F)"
-            (click)="onToggleYearFilter()"
-            #toggleYearFilterButton>
-            <mat-icon [inline]="true">calendar_today</mat-icon>
-        </button>
-
-        <button
-            mat-button
-            matTooltip="Toggle Category Filter (F)"
-            (click)="onToggleFilter()"
-            #toggleFilterButton>
-            <mat-icon [inline]="true">filter_list</mat-icon>
-        </button>
-
-        <button
             *ngIf="isGridView$ | async"
             mat-button
             matTooltip="Show/Hide Category Titles (T)"

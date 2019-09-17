@@ -22,7 +22,7 @@ export class SettingsService {
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
     private static readonly keyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
-    private static readonly keyCategoryListYearFilterEnabled = 'categoryListYearFilterEnabled';
+    private static readonly keyCategoryListYearFilter = 'categoryListYearFilter';
     private static readonly keyCategoryListListType = 'categoryListListType';
     private static readonly keyCategoryListListViewThumbnailSize = 'categoryListListViewThumbnailSize';
 
@@ -58,6 +58,8 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelMinimapMapTypeId = 'videoInfoPanelMinimapMapTypeId';
     private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
+    private static readonly removedKeyCategoryListYearFilter = 'categoryListYearFilterEnabled';
+
     constructor(
         private localStorage: LocalStorageService
     ) {
@@ -67,7 +69,7 @@ export class SettingsService {
     load(): Settings {
         const categoryListShowCategoryTitles = this.localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
         const categoryListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyCategoryListToolbarExpandedState);
-        const categoryListYearFilterEnabled = this.localStorage.retrieve(SettingsService.keyCategoryListYearFilterEnabled);
+        const categoryListYearFilter = this.localStorage.retrieve(SettingsService.keyCategoryListYearFilter) as string | number;
 
         const photoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
         const photoListShowPhotoList = this.localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
@@ -106,7 +108,7 @@ export class SettingsService {
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
             categoryListToolbarExpandedState: categoryListToolbarExpandedState !== null ? categoryListToolbarExpandedState : true,
-            categoryListYearFilterEnabled: categoryListYearFilterEnabled !== null ? categoryListYearFilterEnabled : true,
+            categoryListYearFilter: categoryListYearFilter !== null ? categoryListYearFilter : 'all',
             categoryListListType: this.getCategoryListListType(),
             categoryListListViewThumbnailSize: this.getCategoryListListViewThumbnailSize(),
 
@@ -157,7 +159,7 @@ export class SettingsService {
         this.localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this.localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
         this.localStorage.store(SettingsService.keyCategoryListToolbarExpandedState, settings.categoryListToolbarExpandedState);
-        this.localStorage.store(SettingsService.keyCategoryListYearFilterEnabled, settings.categoryListYearFilterEnabled);
+        this.localStorage.store(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter);
         this.localStorage.store(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
         this.localStorage.store(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
 
@@ -194,6 +196,12 @@ export class SettingsService {
         this.localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
         this.localStorage.store(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
         this.localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
+
+        this.killRemovedSettings();
+    }
+
+    killRemovedSettings(): void {
+        this.localStorage.clear(SettingsService.removedKeyCategoryListYearFilter);
     }
 
     clearAuthRedirectUrl(): void {

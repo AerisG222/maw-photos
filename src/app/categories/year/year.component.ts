@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { Category } from 'src/app/core/models/category.model';
-import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 import {
     PhotoCategoryStoreSelectors,
     RootStoreState,
@@ -23,7 +22,6 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
     styleUrls: ['./year.component.scss']
 })
 export class YearComponent implements OnInit {
-    @Input() showYear = true;
     @Input() year: number;
 
     categories$: Observable<Category[]>;
@@ -63,25 +61,7 @@ export class YearComponent implements OnInit {
 
         this.categories$ = this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
-                switchMap(f => {
-                    switch (f) {
-                        case CategoryFilter.photos:
-                            return this.store$.pipe(
-                                select(PhotoCategoryStoreSelectors.selectCategoriesForYear, { year: this.year }),
-                                map(photoCategories => photoCategories.map(c => photoCategoryToCategory(c)))
-                            );
-                        case CategoryFilter.videos:
-                            return this.store$.pipe(
-                                select(VideoCategoryStoreSelectors.selectCategoriesForYear, { year: this.year }),
-                                map(videoCategories => videoCategories.map(c => videoCategoryToCategory(c)))
-                            );
-                        default:
-                            return this.store$.pipe(
-                                select(RootStoreSelectors.selectCombinedCategoriesForYear, { year: this.year })
-                            );
-                    }
-                })
+                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year })
             );
     }
 }

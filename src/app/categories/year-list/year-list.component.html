@@ -1,24 +1,16 @@
-<div>
-    <app-category-list-toolbar [ngClass.lt-md]="{ 'top_pad': true}"></app-category-list-toolbar>
+<div class="main-grid">
+    <div class="mat-elevation-z8">
+        <h2>Settings</h2>
+        <app-category-list-toolbar></app-category-list-toolbar>
+    </div>
 
-    <ng-container *ngIf="yearFilterEnabled$ | async">
-        <form [formGroup]="form" [ngClass]="(margin$ | async).klass" fxLayout fxLayoutAlign="start center">
-            <mat-form-field appearance="standard">
-                <mat-label>Year</mat-label>
-                <mat-select formControlName="yearSelect" (selectionChange)="onSelectYear($event)">
-                    <mat-option *ngFor="let year of allYears$ | async" [value]="year">{{ year }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <span style="margin-left: auto;">
-                Current Filter:
-            </span>
-            <mat-icon inline="true" *ngIf="showCamera$ | async">camera_alt</mat-icon>
-            <mat-icon inline="true" *ngIf="showVideoCamera$ | async">videocam</mat-icon>
-        </form>
-    </ng-container>
-
-    <div *ngFor="let year of years$ | async" [ngClass]="(margin$ | async).klass">
-        <app-year [year]="year" [showYear]="(yearFilterEnabled$ | async) === false"></app-year>
+    <div [ngClass]="(margin$ | async).klass">
+        <div class="filter-grid">
+            <app-category-year-filter></app-category-year-filter>
+            <app-category-type-filter></app-category-type-filter>
+        </div>
+        <div *ngFor="let year of years$ | async">
+            <app-year [year]="year"></app-year>
+        </div>
     </div>
 </div>

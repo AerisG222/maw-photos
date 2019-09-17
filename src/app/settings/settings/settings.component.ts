@@ -42,6 +42,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     videoSizes = VideoSize.allSizes;
     randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
+    // settings w/o ui
+    private categoryListYearFilter: string | number;
+
     constructor(
         private formBuilder: FormBuilder,
         private store$: Store<RootStoreState.State>
@@ -58,7 +61,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             categoryListShowCategoryTitles: [true],
             categoryListThumbnailSize: [''],
             categoryListToolbarExpandedState: [true],
-            categoryListYearFilterEnabled: [true],
             categoryListListType: [CategoryListType.grid.name],
             categoryListListViewThumbnailSize: [''],
 
@@ -98,7 +100,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.updateForm(settings))
+                tap(s => this.updateForm(s)),
+                tap(s => this.categoryListYearFilter = s.categoryListYearFilter)
             )
             .subscribe()
         );
@@ -119,7 +122,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             categoryListShowCategoryTitles: this.form.get('categoryListShowCategoryTitles').value,
             categoryListToolbarExpandedState: this.form.get('categoryListToolbarExpandedState').value,
             categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
-            categoryListYearFilterEnabled: this.form.get('categoryListYearFilterEnabled').value,
+            categoryListYearFilter: this.categoryListYearFilter,
             categoryListListType: CategoryListType.forName(this.form.get('categoryListListType').value),
             categoryListListViewThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListListViewThumbnailSize').value),
 
@@ -179,7 +182,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('categoryListShowCategoryTitles').setValue(settings.categoryListShowCategoryTitles);
         this.form.get('categoryListThumbnailSize').setValue(settings.categoryListThumbnailSize.name);
         this.form.get('categoryListToolbarExpandedState').setValue(settings.categoryListToolbarExpandedState);
-        this.form.get('categoryListYearFilterEnabled').setValue(settings.categoryListYearFilterEnabled);
         this.form.get('categoryListListType').setValue(settings.categoryListListType.name);
         this.form.get('categoryListListViewThumbnailSize').setValue(settings.categoryListListViewThumbnailSize.name);
 

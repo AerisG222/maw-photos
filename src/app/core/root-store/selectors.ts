@@ -6,8 +6,9 @@ import { VideoCategoryStoreSelectors } from './video-category-store';
 import { Category } from '../models/category.model';
 import { PhotoCategory } from '../models/photo-category.model';
 import { VideoCategory } from '../models/video-category.model';
-import { CategoryType } from '../models/category-type.model';
 import { photoCategoryToCategory, videoCategoryToCategory } from '../models/category-map-functions';
+import { CategoryFilter } from '../models/category-filter.model';
+import { CategoryType } from '../models/category-type.model';
 
 export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
@@ -27,21 +28,7 @@ export const selectIsLoading = createSelector(
     }
 );
 
-export const selectCombinedYears = createSelector(
-    PhotoCategoryStoreSelectors.selectAllYears,
-    VideoCategoryStoreSelectors.selectAllYears,
-    (photoYears: number[], videoYears: number[]) => {
-        if (photoYears.length > 0 && videoYears.length > 0) {
-            return Array
-                .from(new Set([...photoYears, ...videoYears]))
-                .sort(sortNumbersDescending);
-        }
-
-        return [];
-    }
-);
-
-export const selectCombinedCategories = createSelector(
+export const selectAllCategories = createSelector(
     PhotoCategoryStoreSelectors.selectAllCategories,
     VideoCategoryStoreSelectors.selectAllCategories,
     (photoCategories: PhotoCategory[], videoCategories: VideoCategory[]) => {
@@ -53,19 +40,65 @@ export const selectCombinedCategories = createSelector(
     }
 );
 
-export const selectCombinedCategoriesForYear = createSelector(
-    PhotoCategoryStoreSelectors.selectAllCategories,
-    VideoCategoryStoreSelectors.selectAllCategories,
-    (photoCategories: PhotoCategory[], videoCategories: VideoCategory[], props: { year: number }) => {
-        if (photoCategories.length > 0 && videoCategories.length > 0) {
-            return combine(
-                photoCategories.filter(p => p.year === props.year),
-                videoCategories.filter(p => p.year === props.year)
-            );
+export const selectAllYears = createSelector(
+    selectAllCategories,
+    (categories: Category[]) => Array
+        .from(new Set([...categories.map(c => c.year)]))
+        .sort(sortNumbersDescending)
+);
+
+export const selectAllCategoriesForYear = createSelector(
+    selectAllCategories,
+    (categories: Category[], props: { year: number }) => categories
+        .filter(c => c.year === props.year)
+);
+
+export const selectAllFilteredCategories = createSelector(
+    selectAllCategories,
+    SettingsStoreSelectors.selectCategoryListCategoryFilter,
+    (allCategories, categoryTypeFilter) => {
+        let cats: Category[];
+
+        switch (categoryTypeFilter) {
+            case CategoryFilter.all:
+                cats = allCategories;
+                break;
+            case CategoryFilter.photos:
+                cats = allCategories.filter(c => c.type === CategoryType.photo);
+                break;
+            case CategoryFilter.videos:
+                cats = allCategories.filter(c => c.type === CategoryType.video);
+                break;
+            default:
+                throw new Error('Unknown Filter Type!');
         }
 
-        return [];
+        return cats.sort(categoriesDescending);
     }
+);
+
+export const selectAllFilteredCategoryYears = createSelector(
+    selectAllFilteredCategories,
+    SettingsStoreSelectors.selectCategoryListYearFilter,
+    (cats, yearFilter) => {
+        if (yearFilter !== 'all') {
+            const result = [];
+            result.push(yearFilter);
+
+            return result;
+        }
+
+        return Array.from(
+            new Set(
+                cats.map(c => c.year)
+            )
+        );
+    }
+);
+
+export const selectAllFilteredCategoriesForYear = createSelector(
+    selectAllFilteredCategories,
+    (categories, props: { year: number }) => categories.filter(c => c.year === props.year)
 );
 
 function combine(photoCategories: PhotoCategory[], videoCategories: VideoCategory[]): Category[] {

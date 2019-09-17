@@ -1,7 +1,7 @@
 export class CategoryFilter {
-    static readonly all = new CategoryFilter('All');
-    static readonly photos = new CategoryFilter('Photos');
-    static readonly videos = new CategoryFilter('Videos');
+    static readonly all = new CategoryFilter('all', 'Photos and Videos');
+    static readonly photos = new CategoryFilter('photo', 'Photos');
+    static readonly videos = new CategoryFilter('video', 'Videos');
 
     static readonly allCategoryFilters = [
         CategoryFilter.all,
@@ -10,8 +10,10 @@ export class CategoryFilter {
     ];
 
     readonly name: string;
+    readonly value: string;
 
-    constructor(name: string) {
+    constructor(value: string, name: string) {
+        this.value = value;
         this.name = name;
     }
 
@@ -25,6 +27,21 @@ export class CategoryFilter {
                 return CategoryFilter.videos;
             default:
                 console.error(`invalid category filter requested: ${name}`);
+        }
+
+        return null;
+    }
+
+    static forValue(value: string): CategoryFilter {
+        switch (value) {
+            case CategoryFilter.all.value:
+                return CategoryFilter.all;
+            case CategoryFilter.photos.value:
+                return CategoryFilter.photos;
+            case CategoryFilter.videos.value:
+                return CategoryFilter.videos;
+            default:
+                console.error(`invalid category filter requested: ${value}`);
         }
 
         return null;

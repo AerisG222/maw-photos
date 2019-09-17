@@ -24,8 +24,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleTitlesButton', {static: false}) toggleTitlesButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
     @ViewChild('toggleMarginsButton', {static: false}) toggleMarginsButton: MatButton;
-    @ViewChild('toggleFilterButton', {static: false}) toggleFilterButton: MatButton;
-    @ViewChild('toggleYearFilterButton', {static: false}) toggleYearFilterButton: MatButton;
     @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
     @ViewChild('toggleListTypeButton', {static: false}) toggleListTypeButton: MatButton;
     @ViewChild('toggleListThumbnailSizeButton', {static: false}) toggleListThumbnailSizeButton: MatButton;
@@ -66,14 +64,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('g', (event: KeyboardEvent) => this.onHotkeyToggleListType(event), [], 'Toggle Grid/List View')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('y', (event: KeyboardEvent) => this.onHotkeyToggleYearFilter(event), [], 'Toggle Year Filter')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('f', (event: KeyboardEvent) => this.onHotkeyToggleFilter(event), [], 'Toggle Category Filter')
         ) as Hotkey);
 
         this.hotkeys.push(this.hotkeysService.add(
@@ -156,10 +146,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         }
     }
 
-    onToggleYearFilter(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleCategoryListYearFilterRequestAction());
-    }
-
     onToggleFilter(): void {
         if (this.settings) {
             const newFilter = CategoryFilter.nextFilter(this.settings.categoryListCategoryFilter.name);
@@ -216,20 +202,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleThumbnailSizeButton);
         this.onToggleSize();
-
-        return false;
-    }
-
-    private onHotkeyToggleYearFilter(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleYearFilterButton);
-        this.onToggleYearFilter();
-
-        return false;
-    }
-
-    private onHotkeyToggleFilter(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleFilterButton);
-        this.onToggleFilter();
 
         return false;
     }

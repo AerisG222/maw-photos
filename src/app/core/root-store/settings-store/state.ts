@@ -20,7 +20,7 @@ export const initialState: State = {
         categoryListShowCategoryTitles: true,
         categoryListThumbnailSize: null,
         categoryListToolbarExpandedState: true,
-        categoryListYearFilterEnabled: true,
+        categoryListYearFilter: 'all',
         categoryListListType: CategoryListType.grid,
         categoryListListViewThumbnailSize: null,
 

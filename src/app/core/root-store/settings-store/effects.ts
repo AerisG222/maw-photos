@@ -47,7 +47,7 @@ export class SettingsStoreEffects {
         ofType(
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES,
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE,
-            settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_YEAR_FILTER,
+            settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_YEAR_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_LIST_TYPE,

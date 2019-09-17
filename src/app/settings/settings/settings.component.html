@@ -21,9 +21,6 @@
                 <h3>Show Category List Toolbar</h3>
                 <mat-slide-toggle formControlName="categoryListToolbarExpandedState"></mat-slide-toggle>
 
-                <h3>Enable Year Filter</h3>
-                <mat-slide-toggle formControlName="categoryListYearFilterEnabled"></mat-slide-toggle>
-
                 <h3>Category Filter</h3>
                 <mat-radio-group formControlName="categoryListCategoryFilter">
                     <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-radio-button>
