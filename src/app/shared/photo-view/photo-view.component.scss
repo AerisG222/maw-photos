@@ -28,6 +28,21 @@ img {
     }
 }
 
+.photo-grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 100%;
+    height: 100vh;
+}
+
+.main-photo-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: max-content auto max-content;
+    height: 100vh;
+}
+
+/*
 app-photo-list-toolbar,
 app-photo-list-map-toolbar,
 app-photo-list-fullscreen-toolbar {
@@ -40,6 +55,7 @@ app-photo-list-fullscreen-toolbar {
         top: 60px;
     }
 }
+*/
 
 .fullscreen {
     position: fixed;

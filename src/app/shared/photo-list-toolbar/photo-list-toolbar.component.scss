@@ -1,7 +1,7 @@
-.category,
-.photo,
-.toolbar-control.mobile {
-    margin-right: 6px;
+.category-grid {
+    display: grid;
+    grid-template-columns: min-content;
+    grid-template-rows: repeat(auto-fit, 1fr);
 }
 
 .mat-button {

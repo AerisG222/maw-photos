@@ -18,17 +18,21 @@
     </div>
 </div>
 
-<div *ngIf="!fullscreen && !mapView" fxLayout="column" style="height: 100vh;">
-    <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload" [ngClass.lt-md]="{ mobile: true }"></app-photo-list-toolbar>
-    <app-category-header
-        *ngIf="settings?.photoListShowCategoryBreadcrumbs"
-        [showCategoryAsLink]="showCategoryAsLink"
-        [category]="category"
-        fxFlex="0 0 auto"
-        #header>
-    </app-category-header>
+<div *ngIf="!fullscreen && !mapView" class="photo-grid">
+    <div class="mat-elevation-z8">
+        <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload" [ngClass.lt-md]="{ mobile: true }"></app-photo-list-toolbar>
+    </div>
 
-    <div *ngIf="photos" fxFlex="1 1 auto" fxLayout="column" fxLayoutAlign="center center" style="overflow: hidden;">
+    <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">
+        <div>
+            <app-category-header
+                *ngIf="settings?.photoListShowCategoryBreadcrumbs"
+                [showCategoryAsLink]="showCategoryAsLink"
+                [category]="category"
+                #header>
+            </app-category-header>
+        </div>
+
         <img
             [src]="activePhoto?.imageMd?.url"
             [class]="effects?.rotation?.klass"
@@ -36,15 +40,14 @@
             (swipeleft)="onSwipeLeft($event)"
             (swiperight)="onSwipeRight($event)"
             loading="eager" />
-    </div>
 
-    <app-photo-list
-        *ngIf="photos && settings?.photoListShowPhotoList"
-        [photos]="photos"
-        [thumbnailSize]="settings?.photoListThumbnailSize"
-        (photoSelected)="onSelectPhoto($event)"
-        [selectedPhoto]="activePhoto"
-        fxFlex="0 0 auto"
-        #photoList>
-    </app-photo-list>
+        <app-photo-list
+            *ngIf="photos && settings?.photoListShowPhotoList"
+            [photos]="photos"
+            [thumbnailSize]="settings?.photoListThumbnailSize"
+            (photoSelected)="onSelectPhoto($event)"
+            [selectedPhoto]="activePhoto"
+            #photoList>
+        </app-photo-list>
+    </div>
 </div>
