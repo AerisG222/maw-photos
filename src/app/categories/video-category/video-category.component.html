@@ -1,25 +1,31 @@
-<div fxLayout="column" style="height: 100%;">
-    <app-video-list-toolbar [ngClass.lt-md]="{ mobile: true }"></app-video-list-toolbar>
-    <app-category-header *ngIf="(settings$ | async)?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)" fxFlex="0 0 auto"></app-category-header>
-
-    <div *ngIf="activeVideo$ | async as video" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
-        <video
-            #videoRef
-            class="center-block"
-            autoplay="false"
-            [ngStyle]="getVideoDimensions(video)"
-            controls>
-            <source [src]="getVideoUrl(video)" type="video/mp4" />
-            Your browser does not support the <code>video</code> element.
-        </video>
+<div class="video-grid">
+    <div class="mat-elevation-z8">
+        <app-video-list-toolbar [ngClass.lt-md]="{ mobile: true }"></app-video-list-toolbar>
     </div>
 
-    <app-video-list
-        *ngIf="(videos$ | async) && (settings$ | async)?.videoListShowVideoList"
-        [videos]="videos$ | async"
-        [thumbnailSize]="(settings$ | async)?.videoListThumbnailSize"
-        [selectedVideo]="activeVideo$ | async"
-        (videoSelected)="onSelectVideo($event)"
-        fxFlex="0 0 auto">
-    </app-video-list>
+    <div class="main-photo-grid">
+        <div>
+            <app-category-header *ngIf="(settings$ | async)?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
+        </div>
+
+        <div *ngIf="activeVideo$ | async as video" class="video-container">
+            <video
+                #videoRef
+                class="center-block"
+                autoplay="false"
+                [ngStyle]="getVideoDimensions(video)"
+                controls>
+                <source [src]="getVideoUrl(video)" type="video/mp4" />
+                Your browser does not support the <code>video</code> element.
+            </video>
+        </div>
+
+        <app-video-list
+            *ngIf="(videos$ | async) && (settings$ | async)?.videoListShowVideoList"
+            [videos]="videos$ | async"
+            [thumbnailSize]="(settings$ | async)?.videoListThumbnailSize"
+            [selectedVideo]="activeVideo$ | async"
+            (videoSelected)="onSelectVideo($event)">
+        </app-video-list>
+    </div>
 </div>

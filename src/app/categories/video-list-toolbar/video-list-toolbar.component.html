@@ -1,8 +1,9 @@
-<div [class.mobile_toolbar]="isMobileView$ | async" fxLayout="row">
-    <div class="category" *ngIf="isToolbarExpanded$ | async">
+<div class="category-grid">
+    <div class="category category-grid">
         <button
             mat-button
             matTooltip="Show/Hide Category Breadcrumbs (T)"
+            matTooltipPosition="after"
             (click)="onToggleCategoryBreadcrumbs()"
             #toggleBreadcrumbsButton>
             <mat-icon [inline]="true">title</mat-icon>
@@ -11,6 +12,7 @@
         <button
             mat-button
             matTooltip="Show/Hide Video List (L)"
+            matTooltipPosition="after"
             (click)="onToggleShowVideoList()"
             #toggleVideoListButton>
             <mat-icon [inline]="true">visibility</mat-icon>
@@ -19,6 +21,7 @@
         <button
             mat-button
             matTooltip="Toggle Video List Thumbnail Size (S)"
+            matTooltipPosition="after"
             (click)="onToggleThumbnailSize()"
             #toggleThumbnailSizeButton>
             <mat-icon [inline]="true">photo_size_select_large</mat-icon>
@@ -28,24 +31,14 @@
         <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
     </div>
 
-    <div class="video" *ngIf="isToolbarExpanded$ | async">
+    <div class="video category-grid">
         <button
             mat-button
             matTooltip="Toggle video size (V)"
+            matTooltipPosition="after"
             (click)="onToggleVideoSize()"
             #toggleVideoSizeButton>
             <mat-icon [inline]="true">switch_video</mat-icon>
-        </button>
-    </div>
-
-    <div class="toolbar-control">
-        <button
-            mat-button
-            matTooltip="Show/Hide Toolbar (X)"
-            (click)="onToggleVideoListToolbar()"
-            #toggleToolbarButton>
-            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-            <mat-icon *ngIf="(isToolbarExpanded$ | async) === false" [inline]="true">more_horiz</mat-icon>
         </button>
     </div>
 </div>
