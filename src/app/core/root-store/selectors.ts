@@ -60,6 +60,7 @@ export const selectAllFilteredCategories = createSelector(
         let cats: Category[];
 
         switch (categoryTypeFilter) {
+            case null:
             case CategoryFilter.all:
                 cats = allCategories;
                 break;
