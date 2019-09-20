@@ -1,58 +1,49 @@
-<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="end end" fxLayoutGap.lt-md="4px">
-    <div class="category" *ngIf="isToolbarExpanded$ | async" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
-        <button
-            mat-button
-            matTooltip="Toggle Grid / List View (G)"
-            (click)="onToggleListType()"
-            #toggleListTypeButton>
-            <mat-icon [inline]="true">apps</mat-icon>
-        </button>
+<div class="category-grid">
+    <button
+        mat-button
+        matTooltip="Toggle Grid / List View (G)"
+        matTooltipPosition="after"
+        (click)="onToggleListType()"
+        #toggleListTypeButton>
+        <mat-icon [inline]="true">apps</mat-icon>
+    </button>
 
-        <button
-            *ngIf="isGridView$ | async"
-            mat-button
-            matTooltip="Show/Hide Category Titles (T)"
-            (click)="onToggleTitle()"
-            #toggleTitlesButton>
-            <mat-icon [inline]="true">title</mat-icon>
-        </button>
+    <button
+        [disabled]="(isGridView$ | async) === false"
+        mat-button
+        matTooltip="Show/Hide Category Titles (T)"
+        matTooltipPosition="after"
+        (click)="onToggleTitle()"
+        #toggleTitlesButton>
+        <mat-icon [inline]="true">title</mat-icon>
+    </button>
 
-        <button
-            *ngIf="isGridView$ | async"
-            mat-button
-            matTooltip="Toggle Grid Thumbnail Size (S)"
-            (click)="onToggleSize()"
-            [disabled]="(showCategoryTitles$ | async)"
-            #toggleThumbnailSizeButton>
-            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-        </button>
+    <button
+        mat-button
+        matTooltip="Toggle Grid Thumbnail Size (S)"
+        matTooltipPosition="after"
+        (click)="onToggleSize()"
+        [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
+        #toggleThumbnailSizeButton>
+        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+    </button>
 
-        <button
-            *ngIf="isListView$ | async"
-            mat-button
-            matTooltip="Toggle List Thumbnail Size (S)"
-            (click)="onToggleListThumbnailSize()"
-            #toggleListThumbnailSizeButton>
-            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-        </button>
+    <button
+        [disabled]="(isListView$ | async) === false"
+        mat-button
+        matTooltip="Toggle List Thumbnail Size (S)"
+        matTooltipPosition="after"
+        (click)="onToggleListThumbnailSize()"
+        #toggleListThumbnailSizeButton>
+        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+    </button>
 
-        <button
-            mat-button
-            matTooltip="Toggle Category Margins (M)"
-            (click)="onToggleMargins()"
-            #toggleMarginsButton>
-            <mat-icon [inline]="true">format_indent_increase</mat-icon>
-        </button>
-    </div>
-
-    <div class="toolbar-control" [ngClass.lt-md]="{ mobile: true }" fxLayoutAlign.lt-md="end center" fxLayout.lt-md="row">
-        <button
-            mat-button
-            matTooltip="Show/Hide Toolbar (X)"
-            (click)="onToggleCategoryListToolbar()"
-            #toggleToolbarButton>
-            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-            <mat-icon *ngIf="(isToolbarExpanded$ | async) === false" [inline]="true">more_horiz</mat-icon>
-        </button>
-    </div>
+    <button
+        mat-button
+        matTooltip="Toggle Category Margins (M)"
+        matTooltipPosition="after"
+        (click)="onToggleMargins()"
+        #toggleMarginsButton>
+        <mat-icon [inline]="true">format_indent_increase</mat-icon>
+    </button>
 </div>
