@@ -24,7 +24,7 @@
     </div>
 
     <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">
-        <div>
+        <div class="category-header">
             <app-category-header
                 *ngIf="settings?.photoListShowCategoryBreadcrumbs"
                 [showCategoryAsLink]="showCategoryAsLink"

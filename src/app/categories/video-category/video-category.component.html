@@ -4,7 +4,7 @@
     </div>
 
     <div class="main-photo-grid">
-        <div>
+        <div class="category-header">
             <app-category-header *ngIf="(settings$ | async)?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
         </div>
 

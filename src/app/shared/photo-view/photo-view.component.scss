@@ -42,20 +42,9 @@ img {
     height: 100vh;
 }
 
-/*
-app-photo-list-toolbar,
-app-photo-list-map-toolbar,
-app-photo-list-fullscreen-toolbar {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    z-index: 1000;
-
-    &.mobile {
-        top: 60px;
-    }
+.category-header {
+    text-align: center;
 }
-*/
 
 .fullscreen {
     position: fixed;
