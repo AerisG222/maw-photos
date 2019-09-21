@@ -23,7 +23,7 @@ export class RotateCounterClockwiseButtonComponent implements OnInit {
     ngOnInit() {
         this.configureHotkeys();
     }
-r
+
     onRotateCounterClockwise(): void {
         this.store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
     }
