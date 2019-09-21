@@ -6,10 +6,12 @@
     <img [src]="activePhoto?.imageLg?.url" [class]="effects?.rotation?.klass" />
 </div>
 
-<div *ngIf="mapView" fxLayout="column" style="height: 100vh;">
-    <app-photo-list-map-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-map-toolbar>
+<div *ngIf="mapView" class="map-grid">
+    <div class="mat-elevation-z8">
+        <app-photo-list-map-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-map-toolbar>
+    </div>
 
-    <div fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+    <div>
         <app-map-view
             [activePhoto]="activePhoto"
             [images]="mapImages"

@@ -52,3 +52,10 @@ img {
     grid-template-rows: 100%;
     height: 100vh;
 }
+
+.map-grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 100%;
+    height: 100vh;
+}

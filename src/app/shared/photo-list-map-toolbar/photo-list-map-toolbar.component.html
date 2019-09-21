@@ -1,9 +1,12 @@
-<div fxLayout="row">
-    <div class="nav-toolbar">
+<div class="toolbar">
+    <div class="toolbar">
         <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
         <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
     </div>
-    <div class="exit-toolbar">
+
+    <mat-divider></mat-divider>
+
+    <div class="toolbar">
         <button
             mat-button
             matTooltip="Exit Map View (Z)"
