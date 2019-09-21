@@ -1,26 +1,19 @@
-<div fxLayout="row">
-    <div class="photo" *ngIf="isToolbarExpanded$ | async">
+<div class="toolbar">
+    <div class="toolbar">
+        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
         <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
         <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
+    </div>
 
+    <mat-divider></mat-divider>
+
+    <div class="toolbar">
         <button
             mat-button
             matTooltip="Exit Fullscreen (F)"
             (click)="onExitFullscreen()"
             #exitFullscreenButton>
             <mat-icon [inline]="true">fullscreen_exit</mat-icon>
-        </button>
-    </div>
-
-    <div class="toolbar-control" [ngClass.lt-md]="{ mobile: true }">
-        <button
-            mat-button
-            matTooltip="Show/Hide Toolbar (X)"
-            (click)="onToggleFullscreenToolbar()"
-            #toggleToolbarButton>
-            <mat-icon *ngIf="isToolbarExpanded$ | async" [inline]="true">close</mat-icon>
-            <mat-icon *ngIf="(isToolbarExpanded$ | async) === false" [inline]="true">more_horiz</mat-icon>
         </button>
     </div>
 </div>

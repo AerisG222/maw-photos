@@ -1,5 +1,8 @@
-<div *ngIf="fullscreen" class="fullscreen">
-    <app-photo-list-fullscreen-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-fullscreen-toolbar>
+<div *ngIf="fullscreen" class="fullscreen-grid">
+    <div class="mat-elevation-z8">
+        <app-photo-list-fullscreen-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-fullscreen-toolbar>
+    </div>
+
     <img [src]="activePhoto?.imageLg?.url" />
 </div>
 
