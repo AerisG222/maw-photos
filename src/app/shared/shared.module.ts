@@ -53,6 +53,8 @@ import { RandomLinkComponent } from './random-link/random-link.component';
 import { StatsLinkComponent } from './stats-link/stats-link.component';
 import { HelpLinkComponent } from './help-link/help-link.component';
 import { SettingsLinkComponent } from './settings-link/settings-link.component';
+import { RotateCounterClockwiseButtonComponent } from './rotate-counter-clockwise-button/rotate-counter-clockwise-button.component';
+import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate-clockwise-button.component';
 
 @NgModule({
     declarations: [
@@ -84,6 +86,8 @@ import { SettingsLinkComponent } from './settings-link/settings-link.component';
         SlideshowButtonComponent,
         StatsLinkComponent,
         VideoInfoPanelComponent,
+        RotateCounterClockwiseButtonComponent,
+        RotateClockwiseButtonComponent,
     ],
     imports: [
         AgmCoreModule.forRoot({

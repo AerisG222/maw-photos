@@ -34,8 +34,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('togglePhotoListButton', {static: false}) togglePhotoListButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
     @ViewChild('fullscreenButton', {static: false}) fullscreenButton: MatButton;
-    @ViewChild('rotateCounterClockwiseButton', {static: false}) rotateCounterClockwiseButton: MatButton;
-    @ViewChild('rotateClockwiseButton', {static: false}) rotateClockwiseButton: MatButton;
     @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
     @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
     @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
@@ -118,14 +116,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.store$.dispatch(new SettingsStoreActions.TogglePhotoListCategoryBreadcrumbsRequestAction());
     }
 
-    onRotateClockwise(): void {
-        this.store$.dispatch(new PhotoStoreActions.RotateClockwiseRequestAction());
-    }
-
-    onRotateCounterClockwise(): void {
-        this.store$.dispatch(new PhotoStoreActions.RotateCounterClockwiseRequestAction());
-    }
-
     onTogglePhotoList(): void {
         this.store$.dispatch(new SettingsStoreActions.TogglePhotoListShowPhotoListRequestAction());
     }
@@ -195,14 +185,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         ) as Hotkey);
 
         this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('a', (event: KeyboardEvent) => this.onHotkeyRotateCounterClockwise(event), [], 'Rotate Counter Clockwise')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('d', (event: KeyboardEvent) => this.onHotkeyRotateClockwise(event), [], 'Rotate Clockwise')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event), [], 'Show / Hide Toolbar')
         ) as Hotkey);
     }
@@ -238,20 +220,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyMapView(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.mapViewButton);
         this.onToggleMapView();
-
-        return false;
-    }
-
-    private onHotkeyRotateClockwise(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.rotateClockwiseButton);
-        this.onRotateClockwise();
-
-        return false;
-    }
-
-    private onHotkeyRotateCounterClockwise(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.rotateCounterClockwiseButton);
-        this.onRotateCounterClockwise();
 
         return false;
     }

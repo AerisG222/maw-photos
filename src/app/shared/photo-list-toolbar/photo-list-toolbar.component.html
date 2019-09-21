@@ -40,23 +40,8 @@
     <mat-divider></mat-divider>
 
     <div class="toolbar">
-        <button
-            mat-button
-            matTooltip="Rotate Counter Clockwise (A)"
-            matTooltipPosition="after"
-            (click)="onRotateCounterClockwise()"
-            #rotateCounterClockwiseButton>
-            <mat-icon [inline]="true">rotate_left</mat-icon>
-        </button>
-
-        <button
-            mat-button
-            matTooltip="Rotate Clockwise (D)"
-            matTooltipPosition="after"
-            (click)="onRotateClockwise()"
-            #rotateClockwiseButton>
-            <mat-icon [inline]="true">rotate_right</mat-icon>
-        </button>
+        <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
+        <app-rotate-clockwise-button></app-rotate-clockwise-button>
 
         <a mat-button
             matTooltip="Low Res Download"

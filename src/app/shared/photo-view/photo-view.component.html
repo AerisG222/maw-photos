@@ -3,7 +3,7 @@
         <app-photo-list-fullscreen-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-fullscreen-toolbar>
     </div>
 
-    <img [src]="activePhoto?.imageLg?.url" />
+    <img [src]="activePhoto?.imageLg?.url" [class]="effects?.rotation?.klass" />
 </div>
 
 <div *ngIf="mapView" fxLayout="column" style="height: 100vh;">
