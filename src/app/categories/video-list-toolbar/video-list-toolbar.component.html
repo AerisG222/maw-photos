@@ -1,5 +1,25 @@
 <div class="category-grid">
     <div class="category-grid">
+        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="category-grid">
+            <button
+                mat-button
+                matTooltip="Toggle video size (V)"
+                matTooltipPosition="after"
+                (click)="onToggleVideoSize()"
+                #toggleVideoSizeButton>
+                <mat-icon [inline]="true">switch_video</mat-icon>
+            </button>
+        </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="category-grid">
         <button
             mat-button
             matTooltip="Show/Hide Category Breadcrumbs (T)"
@@ -25,20 +45,6 @@
             (click)="onToggleThumbnailSize()"
             #toggleThumbnailSizeButton>
             <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-        </button>
-
-        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-    </div>
-
-    <div class="category-grid">
-        <button
-            mat-button
-            matTooltip="Toggle video size (V)"
-            matTooltipPosition="after"
-            (click)="onToggleVideoSize()"
-            #toggleVideoSizeButton>
-            <mat-icon [inline]="true">switch_video</mat-icon>
         </button>
     </div>
 </div>
