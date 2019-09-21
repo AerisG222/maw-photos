@@ -1,23 +1,7 @@
-.category-grid {
-    display: grid;
-    grid-template-columns: min-content;
-    grid-template-rows: repeat(auto-fit, 1fr);
-}
-
-.mat-button {
-    min-width: 36px;
-    line-height: 28px;
-    font-size: 18px;
-}
-
 .icon-sm {
     font-size: 10px;
 }
 
 .icon-md {
     font-size: 14px;
-}
-
-mat-divider {
-    margin: 16px 8px;
 }

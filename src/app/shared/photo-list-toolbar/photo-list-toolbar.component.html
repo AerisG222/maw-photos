@@ -1,5 +1,5 @@
-<div class="category-grid">
-   <div class="category-grid">
+<div class="toolbar">
+   <div class="toolbar">
         <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
         <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
         <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
@@ -7,7 +7,7 @@
 
     <mat-divider></mat-divider>
 
-    <div class="category-grid">
+    <div class="toolbar">
         <button
             mat-button
             matTooltip="Enter Full Screen View (F)"
@@ -39,7 +39,7 @@
 
     <mat-divider></mat-divider>
 
-    <div class="category-grid">
+    <div class="toolbar">
         <button
             mat-button
             matTooltip="Rotate Counter Clockwise (A)"
@@ -93,7 +93,7 @@
 
     <mat-divider></mat-divider>
 
-    <div class="category-grid">
+    <div class="toolbar">
         <button
             mat-button
             matTooltip="Show/Hide Category Breadcrumbs (T)"

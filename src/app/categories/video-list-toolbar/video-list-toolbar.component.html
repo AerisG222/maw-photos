@@ -1,12 +1,12 @@
-<div class="category-grid">
-    <div class="category-grid">
+<div class="toolbar">
+    <div class="toolbar">
         <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
         <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
     </div>
 
     <mat-divider></mat-divider>
 
-    <div class="category-grid">
+    <div class="toolbar">
             <button
                 mat-button
                 matTooltip="Toggle video size (V)"
@@ -19,7 +19,7 @@
 
     <mat-divider></mat-divider>
 
-    <div class="category-grid">
+    <div class="toolbar">
         <button
             mat-button
             matTooltip="Show/Hide Category Breadcrumbs (T)"
