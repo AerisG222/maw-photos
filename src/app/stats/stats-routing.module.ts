@@ -6,8 +6,11 @@ import { PhotoCategoriesResolverService } from '../core/services/photo-categorie
 import { VideoCategoriesResolverService } from '../core/services/video-categories-resolver.service';
 
 const routes: Routes = [
-    { path: '', component: StatsComponent, resolve: { PhotoCategoriesResolverService, VideoCategoriesResolverService }},
-    { path: '**', redirectTo: '' }
+    // tslint:disable-next-line: max-line-length
+    { path: 'combined', component: StatsComponent, data: { view: 'combined' }, resolve: { PhotoCategoriesResolverService, VideoCategoriesResolverService }},
+    { path: 'photos',   component: StatsComponent, data: { view: 'photos' },   resolve: { PhotoCategoriesResolverService }},
+    { path: 'videos',   component: StatsComponent, data: { view: 'videos' },   resolve: { VideoCategoriesResolverService }},
+    { path: '**', redirectTo: 'photos' }
 ];
 
 @NgModule({

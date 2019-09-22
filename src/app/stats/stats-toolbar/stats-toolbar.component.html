@@ -1,33 +1,27 @@
 <div class="toolbar">
     <div class="toolbar">
-        <button
+        <a [routerLink]="['/stats/photos']"
+            routerLinkActive="active"
             mat-button
             matTooltip="Photo Stats (P)"
-            matTooltipPosition="after"
-            class="toolbar-button"
-            (click)="onSelectPhoto()"
-            #toggleVideoSizeButton>
+            matTooltipPosition="after">
             <mat-icon [inline]="true">camera_alt</mat-icon>
-        </button>
+        </a>
 
-        <button
+        <a [routerLink]="['/stats/videos']"
+            routerLinkActive="active"
             mat-button
             matTooltip="Video Stats (V)"
-            matTooltipPosition="after"
-            class="toolbar-button"
-            (click)="onSelectVideo()"
-            #toggleVideoSizeButton>
+            matTooltipPosition="after">
             <mat-icon [inline]="true">videocam</mat-icon>
-        </button>
+        </a>
 
-        <button
+        <a [routerLink]="['/stats/combined']"
+            routerLinkActive="active"
             mat-button
             matTooltip="Combined Stats (C)"
-            matTooltipPosition="after"
-            class="toolbar-button"
-            (click)="onSelectCombined()"
-            #toggleVideoSizeButton>
+            matTooltipPosition="after">
             <mat-icon [inline]="true">functions</mat-icon>
-        </button>
+        </a>
     </div>
 </div>
