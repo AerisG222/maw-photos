@@ -10,6 +10,7 @@ import { StatDetailCardComponent } from './stat-detail-card/stat-detail-card.com
 import { StatsHeaderComponent } from './header/stats-header.component';
 import { StatsComponent } from './stats/stats.component';
 import { VideoStatsComponent } from './video-stats/video-stats.component';
+import { StatsToolbarComponent } from './stats-toolbar/stats-toolbar.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { VideoStatsComponent } from './video-stats/video-stats.component';
         StatDetailCardComponent,
         StatsHeaderComponent,
         StatsComponent,
-        VideoStatsComponent
+        VideoStatsComponent,
+        StatsToolbarComponent
     ],
     imports: [
         CommonModule,

@@ -1,0 +1,23 @@
+<div class="toolbar">
+    <div class="toolbar">
+        <button
+            mat-button
+            matTooltip="Photo Stats (P)"
+            matTooltipPosition="after"
+            class="toolbar-button"
+            (click)="onSelectPhoto()"
+            #toggleVideoSizeButton>
+            <mat-icon [inline]="true">camera_alt</mat-icon>
+        </button>
+
+        <button
+            mat-button
+            matTooltip="Video Stats (V)"
+            matTooltipPosition="after"
+            class="toolbar-button"
+            (click)="onSelectVideo()"
+            #toggleVideoSizeButton>
+            <mat-icon [inline]="true">videocam</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,4 +1,10 @@
-<div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap fxLayoutGap="12px">
-    <app-photo-stats fxFlex></app-photo-stats>
-    <app-video-stats fxFlex></app-video-stats>
+<div class="stats-grid">
+    <div class="mat-elevation-z8">
+        <app-stats-toolbar (selectView)="view = $event"></app-stats-toolbar>
+    </div>
+
+    <div class="stat-container">
+        <app-photo-stats *ngIf="view === 'photos'"></app-photo-stats>
+        <app-video-stats *ngIf="view === 'videos'"></app-video-stats>
+    </div>
 </div>

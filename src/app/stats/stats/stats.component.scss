@@ -1,4 +1,10 @@
-app-photo-stats,
-app-video-stats {
-    margin-bottom: 12px;
+.stats-grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 100%;
+    height: 100%;
+}
+
+.stat-container {
+    margin: 0 12px;
 }
