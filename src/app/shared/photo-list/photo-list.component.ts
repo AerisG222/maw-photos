@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { Photo } from 'src/app/core/models/photo.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';

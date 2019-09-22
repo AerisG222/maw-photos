@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';

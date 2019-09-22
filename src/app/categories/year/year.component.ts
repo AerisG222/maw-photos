@@ -6,13 +6,10 @@ import { map } from 'rxjs/operators';
 import { Settings } from 'src/app/core/models/settings.model';
 import { Category } from 'src/app/core/models/category.model';
 import {
-    PhotoCategoryStoreSelectors,
     RootStoreState,
     RootStoreSelectors,
-    SettingsStoreSelectors,
-    VideoCategoryStoreSelectors
+    SettingsStoreSelectors
 } from 'src/app/core/root-store';
-import { photoCategoryToCategory, videoCategoryToCategory } from 'src/app/core/models/category-map-functions';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 

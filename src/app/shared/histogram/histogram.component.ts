@@ -90,7 +90,6 @@ export class HistogramComponent implements OnInit, OnDestroy {
         const g = [];
         const b = [];
         const lum = [];
-        const step = 4;
 
         for (let i = 0; i < 256; i++) {
             r[i] = 0;
@@ -167,8 +166,6 @@ export class HistogramComponent implements OnInit, OnDestroy {
     }
 
     private drawHistogramChannel(ctx, color, maxCount, vals) {
-        const ctxStyle = 'strokeStyle';
-
         ctx.fillStyle = color;
 
         ctx.beginPath();

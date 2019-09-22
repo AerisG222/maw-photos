@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
-import { User } from 'oidc-client';
 import { OidcFacade } from 'ng-oidc-client';
 
 import { Theme } from './core/models/theme.model';

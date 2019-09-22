@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { RootStoreState, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
-import { tap, takeUntil, filter } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-info-panel',

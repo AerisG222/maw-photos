@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map, filter, tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import {
