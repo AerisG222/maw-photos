@@ -3,6 +3,7 @@
         mat-button
         matTooltip="Toggle Grid / List View (G)"
         matTooltipPosition="after"
+        class="toolbar-button"
         (click)="onToggleListType()"
         #toggleListTypeButton>
         <mat-icon *ngIf="isListView$ | async" [inline]="true">apps</mat-icon>
@@ -17,6 +18,7 @@
         mat-button
         matTooltip="Show/Hide Category Titles (T)"
         matTooltipPosition="after"
+        class="toolbar-button"
         (click)="onToggleTitle()"
         #toggleTitlesButton>
         <mat-icon [inline]="true">title</mat-icon>
@@ -27,6 +29,7 @@
         mat-button
         matTooltip="Toggle Grid Thumbnail Size (S)"
         matTooltipPosition="after"
+        class="toolbar-button"
         (click)="onToggleSize()"
         [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
         #toggleThumbnailSizeButton>
@@ -38,6 +41,7 @@
         mat-button
         matTooltip="Toggle List Thumbnail Size (S)"
         matTooltipPosition="after"
+        class="toolbar-button"
         (click)="onToggleListThumbnailSize()"
         #toggleListThumbnailSizeButton>
         <mat-icon [inline]="true">photo_size_select_large</mat-icon>
@@ -47,6 +51,7 @@
         mat-button
         matTooltip="Toggle Category Margins (M)"
         matTooltipPosition="after"
+        class="toolbar-button"
         (click)="onToggleMargins()"
         #toggleMarginsButton>
         <mat-icon [inline]="true">format_indent_increase</mat-icon>

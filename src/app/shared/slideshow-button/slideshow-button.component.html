@@ -2,6 +2,7 @@
     mat-button
     matTooltip="Start/Stop Slideshow (P)"
     matTooltipPosition="after"
+    class="toolbar-button"
     (click)="onToggleSlideshow()"
     #slideshowButton>
     <mat-icon [inline]="true" *ngIf="(slideshowPlaying$ | async) === false">play_arrow</mat-icon>
