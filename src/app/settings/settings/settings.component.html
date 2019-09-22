@@ -1,174 +1,176 @@
-<h1>Settings</h1>
+<div class="settings-container">
+    <h1>Settings</h1>
 
-<form [formGroup]="form">
-    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="12px">
-        <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
-            <mat-card-title>General</mat-card-title>
-            <mat-card-content>
-                <h3>Theme</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Theme</mat-label>
-                    <mat-select formControlName="appTheme">
-                        <mat-option *ngFor="let theme of themes" [value]="theme.name">{{ theme.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </mat-card-content>
-        </mat-card>
+    <form [formGroup]="form">
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="12px">
+            <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
+                <mat-card-title>General</mat-card-title>
+                <mat-card-content>
+                    <h3>Theme</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Theme</mat-label>
+                        <mat-select formControlName="appTheme">
+                            <mat-option *ngFor="let theme of themes" [value]="theme.name">{{ theme.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
 
-        <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
-            <mat-card-title>Category List</mat-card-title>
-            <mat-card-content>
-                <h3>Show Category List Toolbar</h3>
-                <mat-slide-toggle formControlName="categoryListToolbarExpandedState"></mat-slide-toggle>
+            <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
+                <mat-card-title>Category List</mat-card-title>
+                <mat-card-content>
+                    <h3>Show Category List Toolbar</h3>
+                    <mat-slide-toggle formControlName="categoryListToolbarExpandedState"></mat-slide-toggle>
 
-                <h3>Category Filter</h3>
-                <mat-radio-group formControlName="categoryListCategoryFilter">
-                    <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Category Filter</h3>
+                    <mat-radio-group formControlName="categoryListCategoryFilter">
+                        <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Margins</h3>
-                <mat-radio-group formControlName="categoryListCategoryMargin">
-                    <mat-radio-button *ngFor="let margin of categoryMargins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Margins</h3>
+                    <mat-radio-group formControlName="categoryListCategoryMargin">
+                        <mat-radio-button *ngFor="let margin of categoryMargins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Category Display Type</h3>
-                <mat-radio-group formControlName="categoryListListType">
-                    <mat-radio-button *ngFor="let type of categoryListTypes" [value]="type.name">{{ type.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Category Display Type</h3>
+                    <mat-radio-group formControlName="categoryListListType">
+                        <mat-radio-button *ngFor="let type of categoryListTypes" [value]="type.name">{{ type.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Thumbnail Size (list view)</h3>
-                <mat-radio-group formControlName="categoryListListViewThumbnailSize">
-                    <mat-radio-button *ngFor="let size of categoryListListViewThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Thumbnail Size (list view)</h3>
+                    <mat-radio-group formControlName="categoryListListViewThumbnailSize">
+                        <mat-radio-button *ngFor="let size of categoryListListViewThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Show Category Titles (grid view)</h3>
-                <mat-slide-toggle formControlName="categoryListShowCategoryTitles"></mat-slide-toggle>
+                    <h3>Show Category Titles (grid view)</h3>
+                    <mat-slide-toggle formControlName="categoryListShowCategoryTitles"></mat-slide-toggle>
 
-                <h3>Thumbnail Size (grid view; w/o title)</h3>
-                <mat-radio-group formControlName="categoryListThumbnailSize">
-                    <mat-radio-button *ngFor="let size of categoryThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
-                </mat-radio-group>
-            </mat-card-content>
-        </mat-card>
+                    <h3>Thumbnail Size (grid view; w/o title)</h3>
+                    <mat-radio-group formControlName="categoryListThumbnailSize">
+                        <mat-radio-button *ngFor="let size of categoryThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+            </mat-card>
 
-        <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
-            <mat-card-title>Photo List</mat-card-title>
-            <mat-card-content>
-                <h3>Show Category Breadcrumbs</h3>
-                <mat-slide-toggle formControlName="photoListShowCategoryBreadcrumbs"></mat-slide-toggle>
+            <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
+                <mat-card-title>Photo List</mat-card-title>
+                <mat-card-content>
+                    <h3>Show Category Breadcrumbs</h3>
+                    <mat-slide-toggle formControlName="photoListShowCategoryBreadcrumbs"></mat-slide-toggle>
 
-                <h3>Show Category Photo List</h3>
-                <mat-slide-toggle formControlName="photoListShowPhotoList"></mat-slide-toggle>
+                    <h3>Show Category Photo List</h3>
+                    <mat-slide-toggle formControlName="photoListShowPhotoList"></mat-slide-toggle>
 
-                <h3>Show Photo List Toolbar</h3>
-                <mat-slide-toggle formControlName="photoListToolbarExpandedState"></mat-slide-toggle>
+                    <h3>Show Photo List Toolbar</h3>
+                    <mat-slide-toggle formControlName="photoListToolbarExpandedState"></mat-slide-toggle>
 
-                <h3>Show Photo List Fullscreen Toolbar</h3>
-                <mat-slide-toggle formControlName="photoListFullscreenToolbarExpandedState"></mat-slide-toggle>
+                    <h3>Show Photo List Fullscreen Toolbar</h3>
+                    <mat-slide-toggle formControlName="photoListFullscreenToolbarExpandedState"></mat-slide-toggle>
 
-                <h3>Photo List Thumbnail Size</h3>
-                <mat-radio-group formControlName="photoListThumbnailSize">
-                    <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Photo List Thumbnail Size</h3>
+                    <mat-radio-group formControlName="photoListThumbnailSize">
+                        <mat-radio-button *ngFor="let size of photoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Map View Map Type</h3>
-                <mat-radio-group formControlName="photoListMapViewMapTypeId">
-                    <mat-radio-button  *ngFor="let type of mapViewMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Map View Map Type</h3>
+                    <mat-radio-group formControlName="photoListMapViewMapTypeId">
+                        <mat-radio-button  *ngFor="let type of mapViewMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Map View Zoom Level</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Zoom</mat-label>
-                    <mat-select formControlName="photoListMapViewZoom">
-                        <mat-option *ngFor="let zoom of mapViewZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <h3>Map View Zoom Level</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Zoom</mat-label>
+                        <mat-select formControlName="photoListMapViewZoom">
+                            <mat-option *ngFor="let zoom of mapViewZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <h3>Slideshow Display Duration (in seconds)</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Duration</mat-label>
-                    <mat-select formControlName="photoListSlideshowDisplayDurationSeconds">
-                        <mat-option *ngFor="let duration of randomDurations" [value]="duration">{{ duration }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <h3>Slideshow Display Duration (in seconds)</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Duration</mat-label>
+                        <mat-select formControlName="photoListSlideshowDisplayDurationSeconds">
+                            <mat-option *ngFor="let duration of randomDurations" [value]="duration">{{ duration }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <h3>Photo Info Panel Visibility</h3>
-                <mat-checkbox formControlName="photoInfoPanelExpandedState">Show Info Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="photoInfoPanelShowRatings">Show Ratings Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="photoInfoPanelShowComments">Show Comments Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="photoInfoPanelShowExif">Show EXIF Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="photoInfoPanelShowHistogram">Show Histogram Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="photoInfoPanelShowEffects">Show Effects Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="photoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
+                    <h3>Photo Info Panel Visibility</h3>
+                    <mat-checkbox formControlName="photoInfoPanelExpandedState">Show Info Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="photoInfoPanelShowRatings">Show Ratings Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="photoInfoPanelShowComments">Show Comments Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="photoInfoPanelShowExif">Show EXIF Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="photoInfoPanelShowHistogram">Show Histogram Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="photoInfoPanelShowEffects">Show Effects Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="photoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
 
-                <h3>Minimap Map Type</h3>
-                <mat-radio-group formControlName="photoInfoPanelMinimapMapTypeId">
-                    <mat-radio-button  *ngFor="let type of photoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Minimap Map Type</h3>
+                    <mat-radio-group formControlName="photoInfoPanelMinimapMapTypeId">
+                        <mat-radio-button  *ngFor="let type of photoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Minimap Zoom Level</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Zoom</mat-label>
-                    <mat-select formControlName="photoInfoPanelMinimapZoom">
-                        <mat-option *ngFor="let zoom of photoZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </mat-card-content>
-        </mat-card>
+                    <h3>Minimap Zoom Level</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Zoom</mat-label>
+                        <mat-select formControlName="photoInfoPanelMinimapZoom">
+                            <mat-option *ngFor="let zoom of photoZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
 
-        <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
-            <mat-card-title>Video List</mat-card-title>
-            <mat-card-content>
-                <h3>Show Category Breadcrumbs</h3>
-                <mat-slide-toggle formControlName="videoListShowCategoryBreadcrumbs"></mat-slide-toggle>
+            <mat-card fxFlex.lt-md="0 1 calc(50% - 12px)">
+                <mat-card-title>Video List</mat-card-title>
+                <mat-card-content>
+                    <h3>Show Category Breadcrumbs</h3>
+                    <mat-slide-toggle formControlName="videoListShowCategoryBreadcrumbs"></mat-slide-toggle>
 
-                <h3>Show Category Video List</h3>
-                <mat-slide-toggle formControlName="videoListShowVideoList"></mat-slide-toggle>
+                    <h3>Show Category Video List</h3>
+                    <mat-slide-toggle formControlName="videoListShowVideoList"></mat-slide-toggle>
 
-                <h3>Show Video List Toolbar</h3>
-                <mat-slide-toggle formControlName="videoListToolbarExpandedState"></mat-slide-toggle>
+                    <h3>Show Video List Toolbar</h3>
+                    <mat-slide-toggle formControlName="videoListToolbarExpandedState"></mat-slide-toggle>
 
-                <h3>Video Size</h3>
-                <mat-radio-group formControlName="videoListVideoSize">
-                    <mat-radio-button *ngFor="let size of videoSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Video Size</h3>
+                    <mat-radio-group formControlName="videoListVideoSize">
+                        <mat-radio-button *ngFor="let size of videoSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Video List Thumbnail Size</h3>
-                <mat-radio-group formControlName="videoListThumbnailSize">
-                    <mat-radio-button *ngFor="let size of videoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Video List Thumbnail Size</h3>
+                    <mat-radio-group formControlName="videoListThumbnailSize">
+                        <mat-radio-button *ngFor="let size of videoListThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Video Info Panel Visibility</h3>
-                <mat-checkbox formControlName="videoInfoPanelExpandedState">Show Info Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="videoInfoPanelShowRatings">Show Ratings Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="videoInfoPanelShowComments">Show Comments Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="videoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
+                    <h3>Video Info Panel Visibility</h3>
+                    <mat-checkbox formControlName="videoInfoPanelExpandedState">Show Info Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="videoInfoPanelShowRatings">Show Ratings Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="videoInfoPanelShowComments">Show Comments Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="videoInfoPanelShowMinimap">Show Mini-map Panel</mat-checkbox>
 
-                <h3>Minimap Map Type</h3>
-                <mat-radio-group formControlName="videoInfoPanelMinimapMapTypeId">
-                    <mat-radio-button  *ngFor="let type of videoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Minimap Map Type</h3>
+                    <mat-radio-group formControlName="videoInfoPanelMinimapMapTypeId">
+                        <mat-radio-button  *ngFor="let type of videoMinimapMapTypeIds" [value]="type.value">{{ type.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Minimap Zoom Level</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Zoom</mat-label>
-                    <mat-select formControlName="videoInfoPanelMinimapZoom">
-                        <mat-option *ngFor="let zoom of videoZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </mat-card-content>
-        </mat-card>
-    </div>
+                    <h3>Minimap Zoom Level</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Zoom</mat-label>
+                        <mat-select formControlName="videoInfoPanelMinimapZoom">
+                            <mat-option *ngFor="let zoom of videoZoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
+        </div>
 
-    <button mat-button (click)="onSave()" color="primary">Save</button>
-    <button mat-button (click)="onCancel()" color="accent">Cancel</button>
-</form>
+        <button mat-button (click)="onSave()" color="primary">Save</button>
+        <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+    </form>
+</div>
