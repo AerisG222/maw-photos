@@ -11,16 +11,14 @@
         <app-photo-list-map-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-map-toolbar>
     </div>
 
-    <div>
-        <app-map-view
-            [activePhoto]="activePhoto"
-            [images]="mapImages"
-            [mapTypeId]="settings?.photoListMapViewMapTypeId"
-            [useDarkTheme]="settings?.appTheme?.isDark"
-            (mapTypeChange)="onMapTypeIdChange($event)"
-            [zoom]="settings?.photoListMapViewZoom"
-            (zoomChange)="onZoomChange($event)"></app-map-view>
-    </div>
+    <app-map-view
+        [activePhoto]="activePhoto"
+        [images]="mapImages"
+        [mapTypeId]="settings?.photoListMapViewMapTypeId"
+        [useDarkTheme]="settings?.appTheme?.isDark"
+        (mapTypeChange)="onMapTypeIdChange($event)"
+        [zoom]="settings?.photoListMapViewZoom"
+        (zoomChange)="onZoomChange($event)"></app-map-view>
 </div>
 
 <div *ngIf="!fullscreen && !mapView" class="photo-grid">
