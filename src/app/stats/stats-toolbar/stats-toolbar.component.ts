@@ -15,4 +15,8 @@ export class StatsToolbarComponent {
     onSelectVideo() {
         this.selectView.emit('videos');
     }
+
+    onSelectCombined() {
+        this.selectView.emit('combined');
+    }
 }

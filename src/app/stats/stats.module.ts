@@ -11,6 +11,7 @@ import { StatsHeaderComponent } from './header/stats-header.component';
 import { StatsComponent } from './stats/stats.component';
 import { VideoStatsComponent } from './video-stats/video-stats.component';
 import { StatsToolbarComponent } from './stats-toolbar/stats-toolbar.component';
+import { CombinedStatsComponent } from './combined-stats/combined-stats.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { StatsToolbarComponent } from './stats-toolbar/stats-toolbar.component';
         StatsHeaderComponent,
         StatsComponent,
         VideoStatsComponent,
-        StatsToolbarComponent
+        StatsToolbarComponent,
+        CombinedStatsComponent
     ],
     imports: [
         CommonModule,
