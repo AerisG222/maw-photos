@@ -1,1 +1,39 @@
-<p>combined-stats works!</p>
+<div fxLayout="column">
+    <div fxFlex="0 0 auto">
+        <app-stats-header (clickYear)="onRemoveYearFilter()" title="Combined Stats" [year]="selectedYear$ | async"></app-stats-header>
+    </div>
+
+    <div fxFlex="0 0 auto" fxLayoutGap="12px">
+        <app-stat-detail-card
+            title="All Time"
+            [details]="totalDetails$ | async">
+        </app-stat-detail-card>
+        <app-stat-detail-card
+            *ngIf="selectedYear$ | async"
+            [title]="selectedYear$ | async"
+            [details]="yearDetails$ | async">
+        </app-stat-detail-card>
+    </div>
+
+    <div fxFlex="0 0 auto" class="aggregate-form">
+        <form [formGroup]="form">
+            <div>
+                Aggregate By:
+            </div>
+            <div>
+                <mat-radio-group formControlName="aggregateBy" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="6px" fxLayoutGap.gt-sm="12px">
+                    <mat-radio-button value="count">Item Count</mat-radio-button>
+                    <mat-radio-button value="size">File Size</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </form>
+    </div>
+
+    <div fxFlexFill>
+        <app-stat-chart
+            [chartData]="chartData$ | async"
+            [format]="chartValueFormat"
+            (cellSelected)="onSelectYear($event)">
+        </app-stat-chart>
+    </div>
+</div>
