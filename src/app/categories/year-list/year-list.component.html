@@ -8,8 +8,10 @@
             <app-category-year-filter></app-category-year-filter>
             <app-category-type-filter></app-category-type-filter>
         </div>
-        <div *ngFor="let year of years$ | async">
-            <app-year [year]="year"></app-year>
-        </div>
+        <ng-scrollbar appearance="standard">
+            <div *ngFor="let year of years$ | async">
+                <app-year [year]="year"></app-year>
+            </div>
+        </ng-scrollbar>
     </div>
 </div>
