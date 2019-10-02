@@ -1,7 +1,7 @@
 .desktop-grid {
     display: grid;
     grid-template-rows: 100vh;
-    grid-template-columns: max-content auto minmax(24px, max-content);
+    grid-template-columns: max-content auto max-content;
 }
 
 .panel-grid {
