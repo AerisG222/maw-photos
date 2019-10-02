@@ -1,52 +1,54 @@
-<div fxLayout fxLayout.lt-md="column" [ngClass.gt-sm]="{ 'vertical': true }" [ngClass.lt-md]="{ 'horizontal': true }">
-    <div *ngIf="enableButtons$ | async" class="panel-contents" fxLayout="column" fxLayout.lt-md="row" fxFlexOrder.lt-md="2">
-        <div fxLayout="column" fxFlex="1 1 auto">
-            <div *ngIf="showRatings$ | async" class="panel-heading" fxFlex="none">Rating</div>
-            <app-rating
-                class="widget"
-                *ngIf="showRatings$ | async"
-                [yourRating]="(rating$ | async)?.userRating"
-                [avgRating]="(rating$ | async)?.averageRating"
-                (rate)="onRate($event)">
-            </app-rating>
+<div class="info-panel">
+    <div>
+        <perfect-scrollbar [config]="{ suppressScrollX: true }">
+            <div *ngIf="enableButtons$ | async" class="info-panel-grid">
+                <div *ngIf="showRatings$ | async" class="panel-heading">Rating</div>
+                <app-rating
+                    class="widget"
+                    *ngIf="showRatings$ | async"
+                    [yourRating]="(rating$ | async)?.userRating"
+                    [avgRating]="(rating$ | async)?.averageRating"
+                    (rate)="onRate($event)">
+                </app-rating>
 
-            <div *ngIf="showComments$ | async" class="panel-heading" fxFlex="none">Comments</div>
-            <app-comments
-                fxFlex
-                class="widget"
-                *ngIf="showComments$ | async"
-                [comments]="comments$ | async"
-                (comment)="onComment($event)"
-                #comments>
-            </app-comments>
+                <div *ngIf="showComments$ | async" class="panel-heading">Comments</div>
+                <app-comments
+                    class="widget"
+                    *ngIf="showComments$ | async"
+                    [comments]="comments$ | async"
+                    (comment)="onComment($event)"
+                    #comments>
+                </app-comments>
 
-            <div *ngIf="showMinimap$ | async" class="panel-heading" fxFlex="none">Mini-map</div>
-            <app-minimap
-                class="widget"
-                *ngIf="showMinimap$ | async"
-                [lat]="latitude$ | async"
-                [lng]="longitude$ | async"
-                [mapTypeId]="minimapMapTypeId$ | async"
-                [useDarkTheme]="minimapUseDarkTheme$ | async"
-                [zoom]="minimapZoom$ | async"
-                (mapTypeChange)="onMapTypeIdChange($event)"
-                (zoomChange)="onZoomChange($event)">
-            </app-minimap>
-        </div>
+                <div *ngIf="showMinimap$ | async" class="panel-heading">Mini-map</div>
+                <app-minimap
+                    class="widget"
+                    *ngIf="showMinimap$ | async"
+                    [lat]="latitude$ | async"
+                    [lng]="longitude$ | async"
+                    [mapTypeId]="minimapMapTypeId$ | async"
+                    [useDarkTheme]="minimapUseDarkTheme$ | async"
+                    [zoom]="minimapZoom$ | async"
+                    (mapTypeChange)="onMapTypeIdChange($event)"
+                    (zoomChange)="onZoomChange($event)">
+                </app-minimap>
+            </div>
+        </perfect-scrollbar>
     </div>
 
-    <div fxLayout="column" fxLayout.lt-md="row" fxFlex="1 1 auto" fxFlexOrder.lt-md="1" class="toolbar">
+    <div class="toolbar-grid">
         <button
             class="menu-button"
             mat-button
             matTooltip="Show/Hide Info Panel (I)"
             matTooltipPosition="before"
             (click)="toggleEndSidenav()"
-            fxHide.lt-md="1"
             #toggleInfoPanelButton>
             <mat-icon *ngIf="endSidenavExpanded$ | async" [inline]="true">chevron_right</mat-icon>
             <mat-icon *ngIf="(endSidenavExpanded$ | async) === false" [inline]="true">chevron_left</mat-icon>
         </button>
+
+        <mat-divider></mat-divider>
 
         <button
             mat-button
@@ -78,7 +80,5 @@
             #toggleMinimapButton>
             <mat-icon [inline]="true">map</mat-icon>
         </button>
-
-        <span class="toolbar_title" fxHide.lt-md="1">Details</span>
     </div>
 </div>
