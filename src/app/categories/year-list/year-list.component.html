@@ -1,17 +1,17 @@
 <div class="main-grid">
-    <div class="mat-elevation-z8">
+    <perfect-scrollbar class="mat-elevation-z8">
         <app-category-list-toolbar></app-category-list-toolbar>
-    </div>
+    </perfect-scrollbar>
 
     <div [ngClass]="(margin$ | async).klass">
         <div class="filter-grid">
             <app-category-year-filter></app-category-year-filter>
             <app-category-type-filter></app-category-type-filter>
         </div>
-        <ng-scrollbar appearance="standard">
+        <perfect-scrollbar>
             <div *ngFor="let year of years$ | async">
                 <app-year [year]="year"></app-year>
             </div>
-        </ng-scrollbar>
+        </perfect-scrollbar>
     </div>
 </div>

@@ -22,9 +22,9 @@
 </div>
 
 <div *ngIf="!fullscreen && !mapView" class="photo-grid">
-    <div class="mat-elevation-z8">
+    <perfect-scrollbar class="mat-elevation-z8">
         <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload" [ngClass.lt-md]="{ mobile: true }"></app-photo-list-toolbar>
-    </div>
+    </perfect-scrollbar>
 
     <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">
         <div class="category-header">
@@ -44,13 +44,15 @@
             (swiperight)="onSwipeRight($event)"
             loading="eager" />
 
-        <app-photo-list
-            *ngIf="photos && settings?.photoListShowPhotoList"
-            [photos]="photos"
-            [thumbnailSize]="settings?.photoListThumbnailSize"
-            (photoSelected)="onSelectPhoto($event)"
-            [selectedPhoto]="activePhoto"
-            #photoList>
-        </app-photo-list>
+        <perfect-scrollbar>
+            <app-photo-list
+                *ngIf="photos && settings?.photoListShowPhotoList"
+                [photos]="photos"
+                [thumbnailSize]="settings?.photoListThumbnailSize"
+                (photoSelected)="onSelectPhoto($event)"
+                [selectedPhoto]="activePhoto"
+                #photoList>
+            </app-photo-list>
+        </perfect-scrollbar>
     </div>
 </div>

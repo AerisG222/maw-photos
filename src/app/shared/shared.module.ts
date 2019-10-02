@@ -24,7 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AgmCoreModule } from '@agm/core';
 import { BarRatingModule } from 'ngx-bar-rating';
-import { NgScrollbarModule } from 'ngx-scrollbar';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { CategoryListToolbarComponent } from './category-list-toolbar/category-list-toolbar.component';
@@ -116,7 +116,7 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        NgScrollbarModule,
+        PerfectScrollbarModule,
         ReactiveFormsModule,
         RouterModule
     ],
@@ -144,7 +144,7 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        NgScrollbarModule,
+        PerfectScrollbarModule,
         ReactiveFormsModule,
 
         // components
