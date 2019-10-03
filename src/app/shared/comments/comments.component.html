@@ -1,9 +1,9 @@
 <div *ngFor="let comment of comments" class="comment-container">
-    <div fxLayout="row" class="comment-head">
-        <span fxFlex>
+    <div class="comment-head">
+        <span>
             {{ comment.username }}
         </span>
-        <span fxFlex fxFlexAlign="end">
+        <span>
             {{ comment.entryDate | date : 'MM/dd/yyyy' }}
         </span>
     </div>

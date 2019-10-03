@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -96,7 +95,6 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         }),
         BarRatingModule,
         CommonModule,
-        FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
@@ -124,7 +122,6 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         // modules
         AgmCoreModule,
         BarRatingModule,
-        FlexLayoutModule,
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,

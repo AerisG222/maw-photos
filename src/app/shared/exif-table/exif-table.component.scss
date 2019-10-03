@@ -1,0 +1,6 @@
+.item-grid {
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+    grid-template-rows: repeat(auto-fit, 1fr);
+    padding: 0 8px;
+}

@@ -81,18 +81,8 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             ).subscribe()
         );
 
-        this.enableButtons$ = combineLatest([
-            this.store$.pipe( select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState) ),
-            this.store$.pipe( select(LayoutStoreSelectors.selectLayoutIsMobileView) )
-        ]).pipe(
-            map(x => ({ isExpanded: x[0], isMobile: x[1]})),
-            map(x => {
-                if (x.isMobile  || x.isExpanded) {
-                    return true;
-                }
-
-                return false;
-            })
+        this.enableButtons$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
         );
 
         this.endSidenavExpanded$ = this.store$.pipe(

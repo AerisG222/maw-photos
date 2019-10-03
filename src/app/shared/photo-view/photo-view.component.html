@@ -1,6 +1,6 @@
 <div *ngIf="fullscreen" class="fullscreen-grid">
     <div class="mat-elevation-z8">
-        <app-photo-list-fullscreen-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-fullscreen-toolbar>
+        <app-photo-list-fullscreen-toolbar></app-photo-list-fullscreen-toolbar>
     </div>
 
     <img [src]="activePhoto?.imageLg?.url" [class]="effects?.rotation?.klass" />
@@ -8,7 +8,7 @@
 
 <div *ngIf="mapView" class="map-grid">
     <div class="mat-elevation-z8">
-        <app-photo-list-map-toolbar [ngClass.lt-md]="{ mobile: true }"></app-photo-list-map-toolbar>
+        <app-photo-list-map-toolbar></app-photo-list-map-toolbar>
     </div>
 
     <app-map-view
@@ -23,7 +23,7 @@
 
 <div *ngIf="!fullscreen && !mapView" class="photo-grid">
     <perfect-scrollbar class="mat-elevation-z8">
-        <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload" [ngClass.lt-md]="{ mobile: true }"></app-photo-list-toolbar>
+        <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
     </perfect-scrollbar>
 
     <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">

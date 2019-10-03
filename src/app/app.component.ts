@@ -7,7 +7,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { OidcFacade } from 'ng-oidc-client';
 
 import { Theme } from './core/models/theme.model';
-import { LayoutStoreSelectors, RootStoreState, SettingsStoreSelectors, SettingsStoreActions, LayoutStoreActions } from './core/root-store';
+import { LayoutStoreSelectors, RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
 
@@ -19,7 +19,8 @@ import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.comp
 export class AppComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
-    isMobileView$: Observable<boolean>;
+    showRightSidebar$: Observable<boolean>;
+    hidePanels$: Observable<boolean>;
 
     constructor(
         private hotkeysService: HotkeysService,
@@ -35,11 +36,15 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.oidcFacade.getOidcUser();
 
-        this.store$.dispatch(new LayoutStoreActions.InitializeRequestAction());
+        this.showRightSidebar$ = this.store$
+            .pipe(
+                select(LayoutStoreSelectors.selectShowRightSidebar)
+            );
 
-        this.isMobileView$ = this.store$.pipe(
-            select(LayoutStoreSelectors.selectLayoutIsMobileView)
-        );
+        this.hidePanels$ = this.store$
+            .pipe(
+                select(LayoutStoreSelectors.selectLayoutIsFullscreen)
+            );
 
         this.hotkeysService.add(
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
