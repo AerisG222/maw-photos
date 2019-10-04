@@ -11,10 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
@@ -104,10 +102,8 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         MatIconModule,
         MatInputModule,
         MatListModule,
-        MatMenuModule,
         MatRadioModule,
         MatSelectModule,
-        MatSidenavModule,
         MatSliderModule,
         MatSlideToggleModule,
         MatTableModule,
@@ -131,10 +127,8 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         MatIconModule,
         MatInputModule,
         MatListModule,
-        MatMenuModule,
         MatRadioModule,
         MatSelectModule,
-        MatSidenavModule,
         MatSliderModule,
         MatSlideToggleModule,
         MatTableModule,
