@@ -1,7 +1,7 @@
 <div class="help-grid">
     <div></div>
 
-    <div>
+    <div class="content-grid">
         <div class="logo">
             <img src="/android-chrome-192x192.png" />
         </div>
@@ -15,7 +15,7 @@
             v{{ version }}
         </div>
 
-        <div>
+        <perfect-scrollbar>
             <mat-tab-group>
                 <mat-tab label="Help">
                     <h3><mat-icon>home</mat-icon> - Category View</h3>
@@ -52,7 +52,6 @@
                     </p>
                 </mat-tab>
                 <mat-tab label="Release Notes">
-                    <div>
                     <h3><span class="version">v0.5.3</span> - 08/31/2019</h3>
                     <p>
                         Fix image sizing issue on Chrome
@@ -176,7 +175,6 @@
                         <li>Rating, commenting, and viewing map location for videos is now possible</li>
                         <li>Improved interface and implementation</li>
                     </ul>
-                </div>
                 </mat-tab>
                 <mat-tab label="Android">
                     <p class="android_text">
@@ -190,7 +188,7 @@
                     </p>
                 </mat-tab>
             </mat-tab-group>
-        </div>
+        </perfect-scrollbar>
     </div>
 
     <div></div>
