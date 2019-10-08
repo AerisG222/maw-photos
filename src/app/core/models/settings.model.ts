@@ -12,7 +12,6 @@ export interface Settings {
     categoryListCategoryMargin: CategoryMargin;
     categoryListShowCategoryTitles: boolean;
     categoryListThumbnailSize: ThumbnailSize;
-    categoryListToolbarExpandedState: boolean;
     categoryListYearFilter: string | number;
     categoryListListType: CategoryListType;
     categoryListListViewThumbnailSize: ThumbnailSize;
@@ -21,8 +20,6 @@ export interface Settings {
     photoListThumbnailSize: ThumbnailSize;
     photoListShowPhotoList: boolean;
     photoListSlideshowDisplayDurationSeconds: number;
-    photoListToolbarExpandedState: boolean;
-    photoListFullscreenToolbarExpandedState: boolean;
     photoListMapViewMapTypeId: string;
     photoListMapViewZoom: number;
 
@@ -39,7 +36,6 @@ export interface Settings {
     videoListShowCategoryBreadcrumbs: boolean;
     videoListThumbnailSize: ThumbnailSize;
     videoListShowVideoList: boolean;
-    videoListToolbarExpandedState: boolean;
     videoListVideoSize: VideoSize;
 
     videoInfoPanelShowRatings: boolean;

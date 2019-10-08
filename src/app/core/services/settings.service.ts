@@ -21,7 +21,6 @@ export class SettingsService {
     private static readonly keyCategoryListCategoryMargin = 'categoryListCategoryMargin';
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
-    private static readonly keyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
     private static readonly keyCategoryListYearFilter = 'categoryListYearFilter';
     private static readonly keyCategoryListListType = 'categoryListListType';
     private static readonly keyCategoryListListViewThumbnailSize = 'categoryListListViewThumbnailSize';
@@ -30,8 +29,6 @@ export class SettingsService {
     private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
     private static readonly keyPhotoListShowPhotoList = 'photoListShowPhotoList';
     private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
-    private static readonly keyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
-    private static readonly keyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
     private static readonly keyPhotoListMapViewMapTypeId = 'photoListMapViewMapTypeId';
     private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
 
@@ -48,7 +45,6 @@ export class SettingsService {
     private static readonly keyVideoListShowCategoryBreadcrumbs = 'videoListShowCategoryBreadcrumbs';
     private static readonly keyVideoListThumbnailSize = 'videoListThumbnailSize';
     private static readonly keyVideoListShowVideoList = 'videoListShowVideoList';
-    private static readonly keyVideoListToolbarExpandedState = 'videoListToolbarExpandedState';
     private static readonly keyVideoListVideoSize = 'videoListVideoSize';
 
     private static readonly keyVideoInfoPanelShowRatings = 'videoInfoPanelShowRatings';
@@ -59,6 +55,10 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
     private static readonly removedKeyCategoryListYearFilter = 'categoryListYearFilterEnabled';
+    private static readonly removedKeyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
+    private static readonly removedKeyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
+    private static readonly removedKeyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
+    private static readonly removedKeyVideoListToolbarExpandedState = 'videoListToolbarExpandedState';
 
     constructor(
         private localStorage: LocalStorageService
@@ -68,14 +68,10 @@ export class SettingsService {
 
     load(): Settings {
         const categoryListShowCategoryTitles = this.localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
-        const categoryListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyCategoryListToolbarExpandedState);
         const categoryListYearFilter = this.localStorage.retrieve(SettingsService.keyCategoryListYearFilter) as string | number;
 
         const photoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
         const photoListShowPhotoList = this.localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
-        const photoListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyPhotoListToolbarExpandedState);
-        // tslint:disable-next-line:max-line-length
-        const photoListFullscreenToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyPhotoListFullscreenToolbarExpandedState);
         const photoListMapViewMapTypeId = this.localStorage.retrieve(SettingsService.keyPhotoListMapViewMapTypeId);
         const photoListMapViewZoom = this.localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom);
 
@@ -91,7 +87,6 @@ export class SettingsService {
 
         const videoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyVideoListShowCategoryBreadcrumbs);
         const videoListShowVideoList = this.localStorage.retrieve(SettingsService.keyVideoListShowVideoList);
-        const videoListToolbarExpandedState = this.localStorage.retrieve(SettingsService.keyVideoListToolbarExpandedState);
 
         const videoInfoPanelShowRatings = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowRatings);
         const videoInfoPanelShowComments = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
@@ -107,7 +102,6 @@ export class SettingsService {
             categoryListCategoryMargin: this.getCategoryListCategoryMargin(),
             categoryListThumbnailSize: this.getCategoryThumbnailSize(),
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
-            categoryListToolbarExpandedState: categoryListToolbarExpandedState !== null ? categoryListToolbarExpandedState : true,
             categoryListYearFilter: categoryListYearFilter !== null ? categoryListYearFilter : 'all',
             categoryListListType: this.getCategoryListListType(),
             categoryListListViewThumbnailSize: this.getCategoryListListViewThumbnailSize(),
@@ -116,9 +110,6 @@ export class SettingsService {
             photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
             photoListShowCategoryBreadcrumbs: photoListShowCategoryBreadcrumbs !== null ? photoListShowCategoryBreadcrumbs : true,
             photoListShowPhotoList: photoListShowPhotoList !== null ? photoListShowPhotoList : true,
-            photoListToolbarExpandedState: photoListToolbarExpandedState !== null ? photoListToolbarExpandedState : true,
-            // tslint:disable-next-line:max-line-length
-            photoListFullscreenToolbarExpandedState: photoListFullscreenToolbarExpandedState !== null ? photoListFullscreenToolbarExpandedState : true,
             photoListMapViewMapTypeId: photoListMapViewMapTypeId != null ? photoListMapViewMapTypeId : 'roadmap',
             photoListMapViewZoom: photoListMapViewZoom != null ? photoListMapViewZoom : 10,
 
@@ -135,7 +126,6 @@ export class SettingsService {
             videoListShowCategoryBreadcrumbs: videoListShowCategoryBreadcrumbs !== null ? videoListShowCategoryBreadcrumbs : true,
             videoListThumbnailSize: this.getVideoListThumbnailSize(),
             videoListShowVideoList: videoListShowVideoList !== null ? videoListShowVideoList : true,
-            videoListToolbarExpandedState: videoListToolbarExpandedState != null ? videoListToolbarExpandedState : true,
             videoListVideoSize: this.getVideoListVideoSize(),
 
             videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
@@ -158,7 +148,6 @@ export class SettingsService {
         this.localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
         this.localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this.localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
-        this.localStorage.store(SettingsService.keyCategoryListToolbarExpandedState, settings.categoryListToolbarExpandedState);
         this.localStorage.store(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter);
         this.localStorage.store(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
         this.localStorage.store(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
@@ -168,9 +157,6 @@ export class SettingsService {
         this.localStorage.store(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
         // tslint:disable-next-line:max-line-length
         this.localStorage.store(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
-        this.localStorage.store(SettingsService.keyPhotoListToolbarExpandedState, settings.photoListToolbarExpandedState);
-        // tslint:disable-next-line:max-line-length
-        this.localStorage.store(SettingsService.keyPhotoListFullscreenToolbarExpandedState, settings.photoListFullscreenToolbarExpandedState);
         this.localStorage.store(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
         this.localStorage.store(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
@@ -187,7 +173,6 @@ export class SettingsService {
         this.localStorage.store(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
         this.localStorage.store(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
         this.localStorage.store(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
-        this.localStorage.store(SettingsService.keyVideoListToolbarExpandedState, settings.videoListToolbarExpandedState);
         this.localStorage.store(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
 
         this.localStorage.store(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
@@ -202,6 +187,10 @@ export class SettingsService {
 
     killRemovedSettings(): void {
         this.localStorage.clear(SettingsService.removedKeyCategoryListYearFilter);
+        this.localStorage.clear(SettingsService.removedKeyCategoryListToolbarExpandedState);
+        this.localStorage.clear(SettingsService.removedKeyPhotoListToolbarExpandedState);
+        this.localStorage.clear(SettingsService.removedKeyPhotoListFullscreenToolbarExpandedState);
+        this.localStorage.clear(SettingsService.removedKeyVideoListToolbarExpandedState);
     }
 
     clearAuthRedirectUrl(): void {

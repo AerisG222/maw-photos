@@ -23,7 +23,6 @@ const getCategoryListCategoryFilter = (state: State): CategoryFilter => state.se
 const getCategoryListCategoryMargin = (state: State): CategoryMargin => state.settings.categoryListCategoryMargin;
 const getCategoryListShowCategoryTitles = (state: State): boolean => state.settings.categoryListShowCategoryTitles;
 const getCategoryListThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize;
-const getCategoryListToolbarExpandedState = (state: State): boolean => state.settings.categoryListToolbarExpandedState;
 const getCategoryListYearFilter = (state: State): string | number => state.settings.categoryListYearFilter;
 const getCategoryListListType = (state: State): CategoryListType => state.settings.categoryListListType;
 const getCategoryListListViewThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListListViewThumbnailSize;
@@ -39,13 +38,10 @@ const getPhotoInfoPanelMinimapMapTypeId = (state: State): string => state.settin
 const getPhotoInfoPanelMinimapZoom = (state: State): number => state.settings.photoInfoPanelMinimapZoom;
 
 const getPhotoListShowPhotoList = (state: State): boolean => state.settings.photoListShowPhotoList;
-const getPhotoListToolbarExpandedState = (state: State): boolean => state.settings.photoListToolbarExpandedState;
-const getPhotoListFullscreenToolbarExpandedState = (state: State): boolean => state.settings.photoListFullscreenToolbarExpandedState;
 const getPhotoListMapViewMapTypeId = (state: State): string => state.settings.photoListMapViewMapTypeId;
 const getPhotoListMapViewZoom = (state: State): number => state.settings.photoListMapViewZoom;
 
 const getVideoListShowVideoList = (state: State): boolean => state.settings.videoListShowVideoList;
-const getVideoListToolbarExpandedState = (state: State): boolean => state.settings.videoListToolbarExpandedState;
 const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoListVideoSize;
 
 const getVideoInfoPanelShowRatings = (state: State): boolean => state.settings.videoInfoPanelShowRatings;
@@ -67,7 +63,6 @@ export const selectCategoryListCategoryFilter = createSelector(selectSettingsSta
 export const selectCategoryListCategoryMargin = createSelector(selectSettingsState, getCategoryListCategoryMargin);
 export const selectCategoryListShowCategoryTitles = createSelector(selectSettingsState, getCategoryListShowCategoryTitles);
 export const selectCategoryListThumbnailSize = createSelector(selectSettingsState, getCategoryListThumbnailSize);
-export const selectCategoryListToolbarExpandedState = createSelector(selectSettingsState, getCategoryListToolbarExpandedState);
 export const selectCategoryListYearFilter = createSelector(selectSettingsState, getCategoryListYearFilter);
 export const selectCategoryListListType = createSelector(selectSettingsState, getCategoryListListType);
 export const selectCategoryListListViewThumbnailSize = createSelector(selectSettingsState, getCategoryListListViewThumbnailSize);
@@ -83,14 +78,11 @@ export const selectPhotoInfoPanelMinimapMapTypeId = createSelector(selectSetting
 export const selectPhotoInfoPanelMinimapZoom = createSelector(selectSettingsState, getPhotoInfoPanelMinimapZoom);
 
 export const selectPhotoListShowPhotoList = createSelector(selectSettingsState, getPhotoListShowPhotoList);
-export const selectPhotoListToolbarExpandedState = createSelector(selectSettingsState, getPhotoListToolbarExpandedState);
 // tslint:disable-next-line: max-line-length
-export const selectPhotoListFullscreenToolbarExpandedState = createSelector(selectSettingsState, getPhotoListFullscreenToolbarExpandedState);
 export const selectPhotoListMapViewMapTypeId = createSelector(selectSettingsState, getPhotoListMapViewMapTypeId);
 export const selectPhotoListMapViewZoom = createSelector(selectSettingsState, getPhotoListMapViewZoom);
 
 export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
-export const selectVideoListToolbarExpandedState = createSelector(selectSettingsState, getVideoListToolbarExpandedState);
 export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);
 
 export const selectVideoInfoPanelShowRatings = createSelector(selectSettingsState, getVideoInfoPanelShowRatings);

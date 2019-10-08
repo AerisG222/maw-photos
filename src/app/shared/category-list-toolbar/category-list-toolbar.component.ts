@@ -24,12 +24,10 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleTitlesButton', {static: false}) toggleTitlesButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
     @ViewChild('toggleMarginsButton', {static: false}) toggleMarginsButton: MatButton;
-    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
     @ViewChild('toggleListTypeButton', {static: false}) toggleListTypeButton: MatButton;
     @ViewChild('toggleListThumbnailSizeButton', {static: false}) toggleListThumbnailSizeButton: MatButton;
 
     settings: Settings;
-    isToolbarExpanded$: Observable<boolean>;
     isListView$: Observable<boolean>;
     isGridView$: Observable<boolean>;
     showCategoryTitles$: Observable<boolean>;
@@ -57,21 +55,12 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
                 select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles)
             );
 
-        this.isToolbarExpanded$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectCategoryListToolbarExpandedState)
-            );
-
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('g', (event: KeyboardEvent) => this.onHotkeyToggleListType(event), [], 'Toggle Grid/List View')
         ) as Hotkey);
 
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMargins(event), [], 'Toggle Category Margins')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleToolbar(event), [], 'Show/Hide Toolbar')
         ) as Hotkey);
 
         this.destroySub.add(this.store$
@@ -162,10 +151,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         }
     }
 
-    onToggleCategoryListToolbar(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleCategoryListToolbarExpandedStateRequestAction());
-    }
-
     private removeThumbnailSizeHotkey(): void {
         this.removeHotKey('s');
     }
@@ -209,13 +194,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleMargins(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleMarginsButton);
         this.onToggleMargins();
-
-        return false;
-    }
-
-    private onHotkeyToggleToolbar(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleToolbarButton);
-        this.onToggleCategoryListToolbar();
 
         return false;
     }

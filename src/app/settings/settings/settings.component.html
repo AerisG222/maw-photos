@@ -20,9 +20,6 @@
                 <mat-card>
                     <mat-card-title>Category List</mat-card-title>
                     <mat-card-content>
-                        <h3>Show Category List Toolbar</h3>
-                        <mat-slide-toggle formControlName="categoryListToolbarExpandedState"></mat-slide-toggle>
-
                         <h3>Category Filter</h3>
                         <mat-radio-group formControlName="categoryListCategoryFilter">
                             <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-radio-button>
@@ -61,12 +58,6 @@
 
                         <h3>Show Category Photo List</h3>
                         <mat-slide-toggle formControlName="photoListShowPhotoList"></mat-slide-toggle>
-
-                        <h3>Show Photo List Toolbar</h3>
-                        <mat-slide-toggle formControlName="photoListToolbarExpandedState"></mat-slide-toggle>
-
-                        <h3>Show Photo List Fullscreen Toolbar</h3>
-                        <mat-slide-toggle formControlName="photoListFullscreenToolbarExpandedState"></mat-slide-toggle>
 
                         <h3>Photo List Thumbnail Size</h3>
                         <mat-radio-group formControlName="photoListThumbnailSize">
@@ -132,9 +123,6 @@
 
                         <h3>Show Category Video List</h3>
                         <mat-slide-toggle formControlName="videoListShowVideoList"></mat-slide-toggle>
-
-                        <h3>Show Video List Toolbar</h3>
-                        <mat-slide-toggle formControlName="videoListToolbarExpandedState"></mat-slide-toggle>
 
                         <h3>Video Size</h3>
                         <mat-radio-group formControlName="videoListVideoSize">

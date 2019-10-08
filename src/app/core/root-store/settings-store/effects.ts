@@ -46,7 +46,6 @@ export class SettingsStoreEffects {
     propertyChangeTriggersSaveEffect$: Observable<Action> = this.actions$.pipe(
         ofType(
             settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES,
-            settingsActions.ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_YEAR_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER,
             settingsActions.ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN,
@@ -65,17 +64,14 @@ export class SettingsStoreEffects {
             settingsActions.ActionTypes.TOGGLE_PHOTO_INFO_PANEL_RATINGS,
 
             settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS,
-            settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE,
             settingsActions.ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_MAP_TYPE_ID,
             settingsActions.ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM,
             settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST,
             settingsActions.ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE,
-            settingsActions.ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE,
 
             settingsActions.ActionTypes.TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS,
             settingsActions.ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST,
             settingsActions.ActionTypes.UPDATE_VIDEO_LIST_THUMBNAIL_SIZE,
-            settingsActions.ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE,
             settingsActions.ActionTypes.UPDATE_VIDEO_LIST_VIDEO_SIZE,
 
             settingsActions.ActionTypes.TOGGLE_VIDEO_INFO_PANEL_COMMENTS,

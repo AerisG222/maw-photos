@@ -17,7 +17,6 @@ export enum ActionTypes {
     SAVE_SUCCESS = '[Settings] Save Success',
 
     TOGGLE_CATEGORY_LIST_CATEGORY_TITLES = '[Settings] Toggle Category List Category Titles',
-    TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Category List Toolbar Expanded State',
     UPDATE_CATEGORY_LIST_YEAR_FILTER = '[Settings] Update Category List Year Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_FILTER = '[Settings] Update Category List Category Filter',
     UPDATE_CATEGORY_LIST_CATEGORY_MARGIN = '[Settings] Update Category List Category Margin',
@@ -36,16 +35,13 @@ export enum ActionTypes {
     UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM = '[Settings] Update Photo Info Panel Minimap Zoom',
 
     TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Photo List Category Breadcrumbs',
-    TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Fullscreen Toolbar Expanded Sate',
     TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST = '[Settings] Toggle Photo List Show Photo List',
-    TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Photo List Toolbar Expanded Sate',
     UPDATE_PHOTO_LIST_MAP_VIEW_MAP_TYPE_ID = '[Settings] Update Photo List Map View Map Type Id',
     UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM = '[Settings] Update Photo List Map View Zoom',
     UPDATE_PHOTO_LIST_THUMBNAIL_SIZE = '[Settings] Update Photo List Thumbnail Size',
 
     TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS = '[Settings] Toggle Video List Category Breadcrumbs',
     TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST = '[Settings] Toggle Video List Show Video List',
-    TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE = '[Settings] Toggle Video List Toolbar Expanded Sate',
     UPDATE_VIDEO_LIST_THUMBNAIL_SIZE = '[Settings] Update Video List Thumbnail Size',
     UPDATE_VIDEO_LIST_VIDEO_SIZE = '[Settings] Update Video List Video Size',
 
@@ -88,10 +84,6 @@ export class SaveFailureAction implements Action {
 
 export class ToggleCategoryListCategoryTitlesRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES;
-}
-
-export class ToggleCategoryListToolbarExpandedStateRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
 export class UpdateCategoryListYearFilterRequestAction implements Action {
@@ -166,16 +158,8 @@ export class TogglePhotoListCategoryBreadcrumbsRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS;
 }
 
-export class TogglePhotoListFullscreenToolbarExpandedStateRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE;
-}
-
 export class TogglePhotoListShowPhotoListRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST;
-}
-
-export class TogglePhotoListToolbarExpandedStateRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
 export class UpdatePhotoListMapViewMapTypeIdRequestAction implements Action {
@@ -199,10 +183,6 @@ export class ToggleVideoListCategoryBreadcrumbsRequestAction implements Action {
 
 export class ToggleVideoListShowVideoListRequestAction implements Action {
     readonly type = ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST;
-}
-
-export class ToggleVideoListToolbarExpandedStateRequestAction implements Action {
-    readonly type = ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE;
 }
 
 export class UpdateVideoListThumbnailSizeRequestAction implements Action {
@@ -251,7 +231,6 @@ export type Actions =
     SaveSuccessAction |
 
     ToggleCategoryListCategoryTitlesRequestAction |
-    ToggleCategoryListToolbarExpandedStateRequestAction |
     UpdateCategoryListYearFilterRequestAction |
     UpdateCategoryListCategoryFilterRequestAction |
     UpdateCategoryListCategoryMarginRequestAction |
@@ -270,17 +249,14 @@ export type Actions =
     TogglePhotoInfoPanelRatingsRequestAction |
 
     TogglePhotoListCategoryBreadcrumbsRequestAction |
-    TogglePhotoListFullscreenToolbarExpandedStateRequestAction |
     UpdatePhotoListMapViewMapTypeIdRequestAction |
     UpdatePhotoListMapViewZoomRequestAction |
     TogglePhotoListShowPhotoListRequestAction |
     UpdatePhotoListThumbnailSizeRequestAction |
-    TogglePhotoListToolbarExpandedStateRequestAction |
 
     ToggleVideoListCategoryBreadcrumbsRequestAction |
     ToggleVideoListShowVideoListRequestAction |
     UpdateVideoListThumbnailSizeRequestAction |
-    ToggleVideoListToolbarExpandedStateRequestAction |
     UpdateVideoListVideoSizeRequestAction |
 
     ToggleVideoInfoPanelCommentsRequestAction |

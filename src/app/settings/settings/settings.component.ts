@@ -60,7 +60,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             categoryListCategoryMargin: [CategoryMargin.compact.name],
             categoryListShowCategoryTitles: [true],
             categoryListThumbnailSize: [''],
-            categoryListToolbarExpandedState: [true],
             categoryListListType: [CategoryListType.grid.name],
             categoryListListViewThumbnailSize: [''],
 
@@ -68,8 +67,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListThumbnailSize: [''],
             photoListShowPhotoList: [true],
             photoListSlideshowDisplayDurationSeconds: [2],
-            photoListToolbarExpandedState: [true],
-            photoListFullscreenToolbarExpandedState: [true],
             photoListMapViewMapTypeId: [MapTypeId.ROADMAP.value],
             photoListMapViewZoom: [10],
 
@@ -86,7 +83,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoListShowCategoryBreadcrumbs: [true],
             videoListThumbnailSize: [''],
             videoListShowVideoList: [true],
-            videoListToolbarExpandedState: [true],
             videoListVideoSize: [VideoSize.large.name],
 
             videoInfoPanelShowComments: [true],
@@ -120,7 +116,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             categoryListCategoryFilter: CategoryFilter.forName(this.form.get('categoryListCategoryFilter').value),
             categoryListCategoryMargin: CategoryMargin.forName(this.form.get('categoryListCategoryMargin').value),
             categoryListShowCategoryTitles: this.form.get('categoryListShowCategoryTitles').value,
-            categoryListToolbarExpandedState: this.form.get('categoryListToolbarExpandedState').value,
             categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
             categoryListYearFilter: this.categoryListYearFilter,
             categoryListListType: CategoryListType.forName(this.form.get('categoryListListType').value),
@@ -130,8 +125,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListThumbnailSize: ThumbnailSize.forName(this.form.get('photoListThumbnailSize').value),
             photoListShowPhotoList: this.form.get('photoListShowPhotoList').value,
             photoListSlideshowDisplayDurationSeconds: this.form.get('photoListSlideshowDisplayDurationSeconds').value,
-            photoListToolbarExpandedState: this.form.get('photoListToolbarExpandedState').value,
-            photoListFullscreenToolbarExpandedState: this.form.get('photoListFullscreenToolbarExpandedState').value,
             photoListMapViewMapTypeId: this.form.get('photoListMapViewMapTypeId').value,
             photoListMapViewZoom: this.form.get('photoListMapViewZoom').value,
 
@@ -148,7 +141,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoListShowCategoryBreadcrumbs: this.form.get('videoListShowCategoryBreadcrumbs').value,
             videoListThumbnailSize: ThumbnailSize.forName(this.form.get('videoListThumbnailSize').value),
             videoListShowVideoList: this.form.get('videoListShowVideoList').value,
-            videoListToolbarExpandedState: this.form.get('videoListToolbarExpandedState').value,
             videoListVideoSize: VideoSize.forName(this.form.get('videoListVideoSize').value),
 
             videoInfoPanelShowComments: this.form.get('videoInfoPanelShowComments').value,
@@ -181,7 +173,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('categoryListCategoryMargin').setValue(settings.categoryListCategoryMargin.name);
         this.form.get('categoryListShowCategoryTitles').setValue(settings.categoryListShowCategoryTitles);
         this.form.get('categoryListThumbnailSize').setValue(settings.categoryListThumbnailSize.name);
-        this.form.get('categoryListToolbarExpandedState').setValue(settings.categoryListToolbarExpandedState);
         this.form.get('categoryListListType').setValue(settings.categoryListListType.name);
         this.form.get('categoryListListViewThumbnailSize').setValue(settings.categoryListListViewThumbnailSize.name);
 
@@ -189,8 +180,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoListThumbnailSize').setValue(settings.photoListThumbnailSize.name);
         this.form.get('photoListShowPhotoList').setValue(settings.photoListShowPhotoList);
         this.form.get('photoListSlideshowDisplayDurationSeconds').setValue(settings.photoListSlideshowDisplayDurationSeconds);
-        this.form.get('photoListToolbarExpandedState').setValue(settings.photoListToolbarExpandedState);
-        this.form.get('photoListFullscreenToolbarExpandedState').setValue(settings.photoListFullscreenToolbarExpandedState);
         this.form.get('photoListMapViewMapTypeId').setValue(settings.photoListMapViewMapTypeId);
         this.form.get('photoListMapViewZoom').setValue(settings.photoListMapViewZoom);
 
@@ -207,7 +196,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('videoListShowCategoryBreadcrumbs').setValue(settings.videoListShowCategoryBreadcrumbs);
         this.form.get('videoListThumbnailSize').setValue(settings.videoListThumbnailSize.name);
         this.form.get('videoListShowVideoList').setValue(settings.videoListShowVideoList);
-        this.form.get('videoListToolbarExpandedState').setValue(settings.videoListToolbarExpandedState);
         this.form.get('videoListVideoSize').setValue(settings.videoListVideoSize.name);
 
         this.form.get('videoInfoPanelShowComments').setValue(settings.videoInfoPanelShowComments);

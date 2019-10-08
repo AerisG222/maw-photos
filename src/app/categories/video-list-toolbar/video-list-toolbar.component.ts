@@ -15,8 +15,7 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoStoreActions,
-    VideoStoreSelectors,
-    LayoutStoreSelectors
+    VideoStoreSelectors
 } from 'src/app/core/root-store';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
@@ -33,13 +32,11 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('toggleVideoListButton', {static: false}) toggleVideoListButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
     @ViewChild('toggleVideoSizeButton', {static: false}) toggleVideoSizeButton: MatButton;
-    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
     @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
     @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
-    isToolbarExpanded$: Observable<boolean>;
     settings: Settings;
 
     constructor(
@@ -66,11 +63,6 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
             .pipe(
                 select(VideoStoreSelectors.selectIsCurrentVideoLast)
             );
-
-        this.isToolbarExpanded$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectVideoListToolbarExpandedState)
-            );
     }
 
     ngOnDestroy(): void {
@@ -80,10 +72,6 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
 
     onToggleCategoryBreadcrumbs(): void {
         this.store$.dispatch(new SettingsStoreActions.ToggleVideoListCategoryBreadcrumbsRequestAction());
-    }
-
-    onToggleVideoListToolbar(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoListToolbarExpandedStateRequestAction());
     }
 
     onToggleThumbnailSize(): void {
@@ -134,10 +122,6 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('v', (event: KeyboardEvent) => this.onHotkeyToggleVideoSize(event), [], 'Toggle Video Size')
         ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyToggleVideoListToolbar(event), [], 'Show / Hide Toolbar')
-        ) as Hotkey);
     }
 
     private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
@@ -157,13 +141,6 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleBreadcrumbsButton);
         this.onToggleCategoryBreadcrumbs();
-
-        return false;
-    }
-
-    private onHotkeyToggleVideoListToolbar(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleToolbarButton);
-        this.onToggleVideoListToolbar();
 
         return false;
     }

@@ -34,7 +34,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('togglePhotoListButton', {static: false}) togglePhotoListButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
     @ViewChild('fullscreenButton', {static: false}) fullscreenButton: MatButton;
-    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
     @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
     @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
     @ViewChild('toggleSlideshowButton', {static: false}) toggleSlideshowButton: SlideshowButtonComponent;
@@ -45,7 +44,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
-    isToolbarExpanded$: Observable<boolean>;
     enableMapView$: Observable<boolean>;
     category$: Observable<PhotoCategory>;
     settings: Settings;
@@ -78,11 +76,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.enableMapView$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectHasPhotosWithGpsCoordinates)
-            );
-
-        this.isToolbarExpanded$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectPhotoListToolbarExpandedState)
             );
 
         this.isFirst$ = this.store$
@@ -129,10 +122,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     onToggleFullscreen(): void {
         this.store$.dispatch(new PhotoStoreActions.EnterFullscreenRequestAction());
         this.store$.dispatch(new LayoutStoreActions.EnterFullscreenRequestAction());
-    }
-
-    onTogglePhotoListToolbar(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListToolbarExpandedStateRequestAction());
     }
 
     onToggleMapView(): void {
@@ -183,10 +172,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
         ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('x', (event: KeyboardEvent) => this.onHotkeyTogglePhotoListToolbar(event), [], 'Show / Hide Toolbar')
-        ) as Hotkey);
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
@@ -220,13 +205,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyMapView(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.mapViewButton);
         this.onToggleMapView();
-
-        return false;
-    }
-
-    private onHotkeyTogglePhotoListToolbar(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleToolbarButton);
-        this.onTogglePhotoListToolbar();
 
         return false;
     }

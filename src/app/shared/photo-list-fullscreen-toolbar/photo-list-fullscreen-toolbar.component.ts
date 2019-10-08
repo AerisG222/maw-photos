@@ -7,8 +7,6 @@ import {
     LayoutStoreActions,
     PhotoStoreActions,
     RootStoreState,
-    SettingsStoreSelectors,
-    SettingsStoreActions,
     PhotoStoreSelectors
 } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material/button';
@@ -25,10 +23,8 @@ import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.c
 export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
-    isToolbarExpanded$: Observable<boolean>;
 
     @ViewChild('exitFullscreenButton', {static: false}) exitFullscreenButton: MatButton;
-    @ViewChild('toggleToolbarButton', {static: false}) toggleToolbarButton: MatButton;
     @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
     @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
     @ViewChild('toggleSlideshowButton', {static: false}) toggleSlideshowButton: SlideshowButtonComponent;
@@ -51,11 +47,6 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
             );
 
-        this.isToolbarExpanded$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectPhotoListFullscreenToolbarExpandedState)
-            );
-
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
         ) as Hotkey);
@@ -70,10 +61,6 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
 
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('f', (evt: KeyboardEvent) => this.onHotkeyExitFullscreen(evt), [], 'Exit Fullscreen')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('x', (evt: KeyboardEvent) => this.onHotkeyToggleFullscreenToolbar(evt), [], 'Show / Hide Toolbar')
         ) as Hotkey);
     }
 
@@ -96,10 +83,6 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
 
     onToggleSlideshow(): void {
         this.store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
-    }
-
-    onToggleFullscreenToolbar(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListFullscreenToolbarExpandedStateRequestAction());
     }
 
     private onHotkeyExitFullscreen(evt: KeyboardEvent): boolean {
@@ -126,13 +109,6 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyToggleSlideshow(evt: KeyboardEvent): boolean {
         this.triggerComponentRipple(this.toggleSlideshowButton);
         this.onToggleSlideshow();
-
-        return false;
-    }
-
-    private onHotkeyToggleFullscreenToolbar(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleToolbarButton);
-        this.onToggleFullscreenToolbar();
 
         return false;
     }

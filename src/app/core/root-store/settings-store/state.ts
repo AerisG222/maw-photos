@@ -19,7 +19,6 @@ export const initialState: State = {
         categoryListCategoryMargin: CategoryMargin.compact,
         categoryListShowCategoryTitles: true,
         categoryListThumbnailSize: null,
-        categoryListToolbarExpandedState: true,
         categoryListYearFilter: 'all',
         categoryListListType: CategoryListType.grid,
         categoryListListViewThumbnailSize: null,
@@ -28,8 +27,6 @@ export const initialState: State = {
         photoListThumbnailSize: null,
         photoListShowPhotoList: true,
         photoListSlideshowDisplayDurationSeconds: 2,
-        photoListToolbarExpandedState: true,
-        photoListFullscreenToolbarExpandedState: true,
         photoListMapViewMapTypeId: 'roadmap',
         photoListMapViewZoom: 10,
 
@@ -46,7 +43,6 @@ export const initialState: State = {
         videoListShowCategoryBreadcrumbs: true,
         videoListThumbnailSize: null,
         videoListShowVideoList: true,
-        videoListToolbarExpandedState: true,
         videoListVideoSize: null,
 
         videoInfoPanelShowRatings: true,

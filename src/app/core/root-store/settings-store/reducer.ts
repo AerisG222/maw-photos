@@ -47,14 +47,6 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
                 }
             };
-        case ActionTypes.TOGGLE_CATEGORY_LIST_TOOLBAR_EXPANDED_STATE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListToolbarExpandedState: !state.settings.categoryListToolbarExpandedState
-                }
-            };
         case ActionTypes.UPDATE_CATEGORY_LIST_YEAR_FILTER:
             return {
                 ...state,
@@ -185,22 +177,6 @@ export function settingsReducer(state = initialState, action: Actions): State {
                     photoListShowPhotoList: !state.settings.photoListShowPhotoList
                 }
             };
-        case ActionTypes.TOGGLE_PHOTO_LIST_TOOLBAR_EXPANDED_STATE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListToolbarExpandedState: !state.settings.photoListToolbarExpandedState
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_LIST_FULLSCREEN_TOOLBAR_EXPANDED_STATE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListFullscreenToolbarExpandedState: !state.settings.photoListFullscreenToolbarExpandedState
-                }
-            };
         case ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE:
             return {
                 ...state,
@@ -240,14 +216,6 @@ export function settingsReducer(state = initialState, action: Actions): State {
                 settings: {
                     ...state.settings,
                     videoListShowVideoList: !state.settings.videoListShowVideoList
-                }
-            };
-        case ActionTypes.TOGGLE_VIDEO_LIST_TOOLBAR_EXPANDED_STATE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoListToolbarExpandedState: !state.settings.videoListToolbarExpandedState
                 }
             };
         case ActionTypes.UPDATE_VIDEO_LIST_THUMBNAIL_SIZE:
