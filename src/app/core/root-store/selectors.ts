@@ -102,6 +102,12 @@ export const selectAllFilteredCategoriesForYear = createSelector(
     (categories, props: { year: number }) => categories.filter(c => c.year === props.year)
 );
 
+export const selectInitialYearFilterSelection = createSelector(
+    selectAllYears,
+    SettingsStoreSelectors.selectCategoryListYearFilter,
+    (years, filter) => !!filter ? filter : years[0]
+);
+
 function combine(photoCategories: PhotoCategory[], videoCategories: VideoCategory[]): Category[] {
     const pcats: Category[] = photoCategories.map(c => photoCategoryToCategory(c));
     const vcats: Category[] = videoCategories.map(c => videoCategoryToCategory(c));
