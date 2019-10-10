@@ -10,6 +10,7 @@ import { Theme } from './core/models/theme.model';
 import { LayoutStoreSelectors, RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
+import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -38,12 +39,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.showRightSidebar$ = this.store$
             .pipe(
-                select(LayoutStoreSelectors.selectShowRightSidebar)
+                select(LayoutStoreSelectors.selectShowRightSidebar),
+                delay(0)
             );
 
         this.hidePanels$ = this.store$
             .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsFullscreen)
+                select(LayoutStoreSelectors.selectLayoutIsFullscreen),
+                delay(0)
             );
 
         this.hotkeysService.add(
