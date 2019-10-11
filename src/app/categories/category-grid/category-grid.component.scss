@@ -3,7 +3,13 @@
 }
 
 .category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 162px);
-    grid-column-gap: 8px;
+    display: flex;
+    flex-flow: row wrap;
+    place-content: stretch center;
+    align-items: stretch;
+    padding: 4px;
+}
+
+app-category-card {
+    margin: 4px;
 }
