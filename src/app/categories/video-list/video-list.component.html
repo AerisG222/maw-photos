@@ -2,6 +2,8 @@
     <img *ngFor="let video of videos"
         [src]="video.thumbnailSq.url"
         [ngClass]="thumbnailSize.klass"
+        [style.width.px]="imgWidth"
+        [style.height.px]="imgHeight"
         [class.selected]="selectedVideo?.id === video.id"
         (click)="onClickVideo(video)"
         loading="lazy" />
