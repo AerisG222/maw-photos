@@ -1,54 +1,56 @@
 <div class="toolbar">
-    <div class="toolbar">
-        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-    </div>
-
-    <mat-divider></mat-divider>
-
-    <div class="toolbar">
-            <button
-                mat-button
-                matTooltip="Toggle video size (V)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleVideoSize()"
-                #toggleVideoSizeButton>
-                <mat-icon [inline]="true">switch_video</mat-icon>
-            </button>
+    <div>
+        <div class="toolbar-group">
+            <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+            <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
         </div>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <div class="toolbar">
-        <button
-            mat-button
-            matTooltip="Show/Hide Category Breadcrumbs (T)"
-            matTooltipPosition="after"
-            class="toolbar-button"
-            (click)="onToggleCategoryBreadcrumbs()"
-            #toggleBreadcrumbsButton>
-            <mat-icon [inline]="true">title</mat-icon>
-        </button>
+        <div class="toolbar-group">
+                <button
+                    mat-button
+                    matTooltip="Toggle video size (V)"
+                    matTooltipPosition="after"
+                    class="toolbar-button"
+                    (click)="onToggleVideoSize()"
+                    #toggleVideoSizeButton>
+                    <mat-icon [inline]="true">switch_video</mat-icon>
+                </button>
+            </div>
 
-        <button
-            mat-button
-            matTooltip="Show/Hide Video List (L)"
-            matTooltipPosition="after"
-            class="toolbar-button"
-            (click)="onToggleShowVideoList()"
-            #toggleVideoListButton>
-            <mat-icon [inline]="true">visibility</mat-icon>
-        </button>
+        <mat-divider></mat-divider>
 
-        <button
-            mat-button
-            matTooltip="Toggle Video List Thumbnail Size (S)"
-            matTooltipPosition="after"
-            class="toolbar-button"
-            (click)="onToggleThumbnailSize()"
-            #toggleThumbnailSizeButton>
-            <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-        </button>
+        <div class="toolbar-group">
+            <button
+                mat-button
+                matTooltip="Show/Hide Category Breadcrumbs (T)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleCategoryBreadcrumbs()"
+                #toggleBreadcrumbsButton>
+                <mat-icon [inline]="true">title</mat-icon>
+            </button>
+
+            <button
+                mat-button
+                matTooltip="Show/Hide Video List (L)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleShowVideoList()"
+                #toggleVideoListButton>
+                <mat-icon [inline]="true">visibility</mat-icon>
+            </button>
+
+            <button
+                mat-button
+                matTooltip="Toggle Video List Thumbnail Size (S)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleThumbnailSize()"
+                #toggleThumbnailSizeButton>
+                <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

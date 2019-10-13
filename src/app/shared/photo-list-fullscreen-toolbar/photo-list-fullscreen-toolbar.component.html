@@ -1,27 +1,29 @@
 <div class="toolbar">
-    <div class="toolbar">
-        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
-        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-    </div>
+    <div>
+        <div class="toolbar-group">
+            <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
+            <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
+            <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
+        </div>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <div class="toolbar">
-        <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
-        <app-rotate-clockwise-button></app-rotate-clockwise-button>
-    </div>
+        <div class="toolbar-group">
+            <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
+            <app-rotate-clockwise-button></app-rotate-clockwise-button>
+        </div>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <div class="toolbar">
-        <button
-            mat-button
-            matTooltip="Exit Fullscreen (F)"
-            class="toolbar-button"
-            (click)="onExitFullscreen()"
-            #exitFullscreenButton>
-            <mat-icon [inline]="true">fullscreen_exit</mat-icon>
-        </button>
+        <div class="toolbar-group">
+            <button
+                mat-button
+                matTooltip="Exit Fullscreen (F)"
+                class="toolbar-button"
+                (click)="onExitFullscreen()"
+                #exitFullscreenButton>
+                <mat-icon [inline]="true">fullscreen_exit</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

@@ -201,4 +201,22 @@ html, body {
     }
 }
 
+@media (max-width: 800px) {
+    html, body {
+        height: 100%;
+    }
 
+    .toolbar {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content;
+
+        & .toolbar-group {
+            display: inline;
+        }
+
+        & mat-divider {
+            display: inline;
+            margin: 0;
+        }
+    }
+}

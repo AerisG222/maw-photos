@@ -32,3 +32,10 @@ form mat-icon {
     grid-column-gap: 24px;
     justify-content: center;
 }
+
+@media (max-width: 800px) {
+    .main-grid {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content auto;
+    }
+}

@@ -1,27 +1,29 @@
 <div class="toolbar">
-    <div class="toolbar">
-        <a [routerLink]="['/stats/photos']"
-            routerLinkActive="active"
-            mat-button
-            matTooltip="Photo Stats (P)"
-            matTooltipPosition="after">
-            <mat-icon [inline]="true">camera_alt</mat-icon>
-        </a>
+    <div>
+        <div class="toolbar-group">
+            <a [routerLink]="['/stats/photos']"
+                routerLinkActive="active"
+                mat-button
+                matTooltip="Photo Stats (P)"
+                matTooltipPosition="after">
+                <mat-icon [inline]="true">camera_alt</mat-icon>
+            </a>
 
-        <a [routerLink]="['/stats/videos']"
-            routerLinkActive="active"
-            mat-button
-            matTooltip="Video Stats (V)"
-            matTooltipPosition="after">
-            <mat-icon [inline]="true">videocam</mat-icon>
-        </a>
+            <a [routerLink]="['/stats/videos']"
+                routerLinkActive="active"
+                mat-button
+                matTooltip="Video Stats (V)"
+                matTooltipPosition="after">
+                <mat-icon [inline]="true">videocam</mat-icon>
+            </a>
 
-        <a [routerLink]="['/stats/combined']"
-            routerLinkActive="active"
-            mat-button
-            matTooltip="Combined Stats (C)"
-            matTooltipPosition="after">
-            <mat-icon [inline]="true">functions</mat-icon>
-        </a>
+            <a [routerLink]="['/stats/combined']"
+                routerLinkActive="active"
+                mat-button
+                matTooltip="Combined Stats (C)"
+                matTooltipPosition="after">
+                <mat-icon [inline]="true">functions</mat-icon>
+            </a>
+        </div>
     </div>
 </div>

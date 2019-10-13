@@ -1,28 +1,9 @@
-<div class="desktop-grid">
-    <div [ngClass]="{ 'mat-elevation-z8': (hidePanels$ | async) === false }">
-        <div *ngIf="(hidePanels$ | async) === false" class="panel-grid">
-            <div class="panel-item-grid">
-                <app-categories-link></app-categories-link>
-                <app-random-link></app-random-link>
-                <app-stats-link></app-stats-link>
-            </div>
-
-            <div></div>
-
-            <div class="panel-item-grid">
-                <app-help-link></app-help-link>
-                <app-settings-link></app-settings-link>
-            </div>
-        </div>
-    </div>
+<div class="app-grid">
+    <app-primary-nav></app-primary-nav>
 
     <main>
         <router-outlet></router-outlet>
     </main>
 
-    <div [ngClass]="{ 'mat-elevation-z8': (showRightSidebar$ | async) }">
-        <div *ngIf="(showRightSidebar$ | async)">
-            <app-info-panel *ngIf="(hidePanels$ | async) === false"></app-info-panel>
-        </div>
-    </div>
+    <app-sidebar></app-sidebar>
 </div>

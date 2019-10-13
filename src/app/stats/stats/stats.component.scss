@@ -8,3 +8,10 @@
 .stat-container {
     margin: 0 12px;
 }
+
+@media (max-width: 800px) {
+    .stats-grid {
+        grid-template-rows: max-content auto;
+        grid-template-columns: 100%;
+    }
+}

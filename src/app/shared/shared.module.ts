@@ -53,6 +53,8 @@ import { HelpLinkComponent } from './help-link/help-link.component';
 import { SettingsLinkComponent } from './settings-link/settings-link.component';
 import { RotateCounterClockwiseButtonComponent } from './rotate-counter-clockwise-button/rotate-counter-clockwise-button.component';
 import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate-clockwise-button.component';
+import { PrimaryNavComponent } from './primary-nav/primary-nav.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
     declarations: [
@@ -78,14 +80,16 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
         PhotoViewComponent,
+        PrimaryNavComponent,
         RandomLinkComponent,
         RatingComponent,
+        RotateCounterClockwiseButtonComponent,
+        RotateClockwiseButtonComponent,
         SettingsLinkComponent,
+        SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
         VideoInfoPanelComponent,
-        RotateCounterClockwiseButtonComponent,
-        RotateClockwiseButtonComponent,
     ],
     imports: [
         AgmCoreModule.forRoot({
@@ -161,9 +165,11 @@ import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
         PhotoViewComponent,
+        PrimaryNavComponent,
         RandomLinkComponent,
         RatingComponent,
         SettingsLinkComponent,
+        SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
         VideoInfoPanelComponent,

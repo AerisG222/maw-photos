@@ -2,15 +2,14 @@ import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { OidcFacade } from 'ng-oidc-client';
 
 import { Theme } from './core/models/theme.model';
-import { LayoutStoreSelectors, RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
+import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
-import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -19,9 +18,6 @@ import { delay } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
-
-    showRightSidebar$: Observable<boolean>;
-    hidePanels$: Observable<boolean>;
 
     constructor(
         private hotkeysService: HotkeysService,
@@ -36,18 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.oidcFacade.getOidcUser();
-
-        this.showRightSidebar$ = this.store$
-            .pipe(
-                select(LayoutStoreSelectors.selectShowRightSidebar),
-                delay(0)
-            );
-
-        this.hidePanels$ = this.store$
-            .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsFullscreen),
-                delay(0)
-            );
 
         this.hotkeysService.add(
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')

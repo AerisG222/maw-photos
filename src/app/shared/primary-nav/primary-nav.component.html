@@ -1,0 +1,16 @@
+<div [ngClass]="{ 'container': true, 'mat-elevation-z8': (hideNav$ | async) === false }">
+    <div *ngIf="(hideNav$ | async) === false" class="panel-grid">
+        <div class="panel-item-grid">
+            <app-categories-link></app-categories-link>
+            <app-random-link></app-random-link>
+            <app-stats-link></app-stats-link>
+        </div>
+
+        <div></div>
+
+        <div class="panel-item-grid">
+            <app-help-link></app-help-link>
+            <app-settings-link></app-settings-link>
+        </div>
+    </div>
+</div>
