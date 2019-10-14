@@ -32,7 +32,7 @@ function getUserStore() {
         VideoStoreModule,
         StoreRouterConnectingModule.forRoot({
             stateKey: 'router',
-            //serializer: MinimalRouterStateSerializer  - needed if we enable ngrx serializability checks
+            // serializer: MinimalRouterStateSerializer  - needed if we enable ngrx serializability checks
         }),
         StoreModule.forRoot({}, {
             runtimeChecks: {
