@@ -48,15 +48,15 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleMapView(): void {
-        this.store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
+        this.store$.dispatch(PhotoStoreActions.toggleMapViewRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(new PhotoStoreActions.MoveNextWithGpsRequestAction());
+        this.store$.dispatch(PhotoStoreActions.moveNextWithGpsRequest());
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(new PhotoStoreActions.MovePreviousWithGpsRequestAction());
+        this.store$.dispatch(PhotoStoreActions.movePreviousWithGpsRequest());
     }
 
     private configureHotkeys(): void {

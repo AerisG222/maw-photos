@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
-import * as photoActions from './actions';
+import * as PhotoActions from './actions';
 import { RootStoreState } from '..';
 
 @Injectable()
@@ -21,138 +21,149 @@ export class PhotoStoreEffects {
 
     }
 
-    @Effect()
-    loadRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.LoadRequestAction>(photoActions.ActionTypes.LOAD_REQUEST),
-        switchMap(action =>
-            this.api.getPhotosByCategory(action.payload.categoryId)
-                .pipe(
-                    map(photos => new photoActions.LoadSuccessAction({ photos: photos.items })),
-                    catchError(error => of(new photoActions.LoadFailureAction({ error })))
-                )
+    loadRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadRequest),
+            switchMap(action =>
+                this.api.getPhotosByCategory(action.categoryId)
+                    .pipe(
+                        map(photos => PhotoActions.loadSuccess({ photos: photos.items })),
+                        catchError(error => of(PhotoActions.loadFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    loadRandomRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.LoadRandomRequestAction>(photoActions.ActionTypes.LOAD_RANDOM_REQUEST),
-        switchMap(action =>
-            this.api.getRandomPhoto()
-                .pipe(
-                    map(photo => new photoActions.LoadRandomSuccessAction({ photo })),
-                    catchError(error => of(new photoActions.LoadRandomFailureAction({ error })))
-                )
+    loadRandomRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadRandomRequest),
+            switchMap(action =>
+                this.api.getRandomPhoto()
+                    .pipe(
+                        map(photo => PhotoActions.loadRandomSuccess({ photo })),
+                        catchError(error => of(PhotoActions.loadRandomFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    loadMultipleRandomRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.LoadMultipleRandomRequestAction>(photoActions.ActionTypes.LOAD_MULTIPLE_RANDOM_REQUEST),
-        switchMap(action =>
-            this.api.getRandomPhotos(action.payload.count)
-                .pipe(
-                    map(photos => new photoActions.LoadMultipleRandomSuccessAction({ photos: photos.items })),
-                    catchError(error => of(new photoActions.LoadMultipleRandomFailureAction({ error })))
-                )
+    loadMultipleRandomRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadMultipleRandomRequest),
+            switchMap(action =>
+                this.api.getRandomPhotos(action.count)
+                    .pipe(
+                        map(photos => PhotoActions.loadMultipleRandomSuccess({ photos: photos.items })),
+                        catchError(error => of(PhotoActions.loadMultipleRandomFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    loadRatingRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.LoadRatingRequestAction>(photoActions.ActionTypes.LOAD_RATING_REQUEST),
-        switchMap(action =>
-            this.api.getRating(action.payload.photoId)
-                .pipe(
-                    map(rating => new photoActions.LoadRatingSuccessAction({ rating })),
-                    catchError(error => of(new photoActions.LoadRatingFailureAction({ error })))
-                )
+    loadRatingRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadRatingRequest),
+            switchMap(action =>
+                this.api.getRating(action.photoId)
+                    .pipe(
+                        map(rating => PhotoActions.loadRatingSuccess({ rating })),
+                        catchError(error => of(PhotoActions.loadRatingFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    ratePhotoRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.RatePhotoRequestAction>(photoActions.ActionTypes.RATE_PHOTO_REQUEST),
-        switchMap(action =>
-            this.api.ratePhoto(action.payload.photoId, action.payload.userRating)
-                .pipe(
-                    map(rating => new photoActions.RatePhotoSuccessAction({ rating })),
-                    catchError(error => of(new photoActions.RatePhotoFailureAction({ error })))
-                )
+    ratePhotoRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.ratePhotoRequest),
+            switchMap(action =>
+                this.api.ratePhoto(action.photoId, action.userRating)
+                    .pipe(
+                        map(rating => PhotoActions.ratePhotoSuccess({ rating })),
+                        catchError(error => of(PhotoActions.ratePhotoFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    loadCommentsRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.LoadCommentsRequestAction>(photoActions.ActionTypes.LOAD_COMMENTS_REQUEST),
-        switchMap(action =>
-            this.api.getComments(action.payload.photoId)
-                .pipe(
-                    map(comments => new photoActions.LoadCommentsSuccessAction({ comments: comments.items })),
-                    catchError(error => of(new photoActions.RatePhotoFailureAction({ error })))
-                )
+    loadCommentsRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadCommentsRequest),
+            switchMap(action =>
+                this.api.getComments(action.photoId)
+                    .pipe(
+                        map(comments => PhotoActions.loadCommentsSuccess({ comments: comments.items })),
+                        catchError(error => of(PhotoActions.ratePhotoFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    addCommentRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.AddCommentRequestAction>(photoActions.ActionTypes.ADD_COMMENT_REQUEST),
-        switchMap(action =>
-            this.api.addComment(action.payload.photoId, action.payload.comment)
-                .pipe(
-                    map(result => new photoActions.AddCommentSuccessAction({ photoId: action.payload.photoId })),
-                    catchError(error => of(new photoActions.AddCommentFailureAction({ error })))
-                )
+    addCommentRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.addCommentRequest),
+            switchMap(action =>
+                this.api.addComment(action.photoId, action.comment)
+                    .pipe(
+                        map(result => PhotoActions.addCommentSuccess({ photoId: action.photoId })),
+                        catchError(error => of(PhotoActions.addCommentFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    addCommentSuccessEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.AddCommentSuccessAction>(photoActions.ActionTypes.ADD_COMMENT_SUCCESS),
-        map(action => new photoActions.LoadCommentsRequestAction({ photoId: action.payload.photoId }))
-    );
-
-    @Effect()
-    loadExifRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.LoadExifRequestAction>(photoActions.ActionTypes.LOAD_EXIF_REQUEST),
-        switchMap(action =>
-            this.api.getExifData(action.payload.photoId)
-                .pipe(
-                    map(detail => this.exifFormatterService.format(detail)),
-                    map(data => new photoActions.LoadExifSuccessAction({ exif: data })),
-                    catchError(error => of(new photoActions.LoadExifFailureAction({ error })))
-                )
+    addCommentSuccessEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.addCommentSuccess),
+            map(action => PhotoActions.loadCommentsRequest({ photoId: action.photoId }))
         )
     );
 
-    @Effect()
-    rotateClockwiseEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.RotateClockwiseRequestAction>(photoActions.ActionTypes.ROTATE_CLOCKWISE_REQUEST),
-        withLatestFrom(this.store$),
-        map(x => {
-            const action = x[0];
-            const state = x[1] as any;
-            const effects = state.photos.currentPhotoEffects;
-            const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
-
-            rotation.rotateClockwise();
-
-            return new photoActions.RotateSuccessAction({ newRotation: rotation });
-        })
+    loadExifRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadExifRequest),
+            switchMap(action =>
+                this.api.getExifData(action.photoId)
+                    .pipe(
+                        map(detail => this.exifFormatterService.format(detail)),
+                        map(data => PhotoActions.loadExifSuccess({ exif: data })),
+                        catchError(error => of(PhotoActions.loadExifFailure({ error })))
+                    )
+            )
+        )
     );
 
-    @Effect()
-    rotateCounterClockwiseEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<photoActions.RotateCounterClockwiseRequestAction>(photoActions.ActionTypes.ROTATE_COUNTER_CLOCKWISE_REQUEST),
-        withLatestFrom(this.store$),
-        map(x => {
-            const action = x[0];
-            const state = x[1] as any;
-            const effects = state.photos.currentPhotoEffects;
-            const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
+    rotateClockwiseEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.rotateClockwiseRequest),
+            withLatestFrom(this.store$),
+            map(x => {
+                const action = x[0];
+                const state = x[1] as any;
+                const effects = state.photos.currentPhotoEffects;
+                const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
 
-            rotation.rotateCounterClockwise();
+                rotation.rotateClockwise();
 
-            return new photoActions.RotateSuccessAction({ newRotation: rotation });
-        })
+                return PhotoActions.rotateSuccess({ newRotation: rotation });
+            })
+        )
+    );
+
+    rotateCounterClockwiseEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.rotateCounterClockwiseRequest),
+            withLatestFrom(this.store$),
+            map(x => {
+                const action = x[0];
+                const state = x[1] as any;
+                const effects = state.photos.currentPhotoEffects;
+                const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
+
+                rotation.rotateCounterClockwise();
+
+                return PhotoActions.rotateSuccess({ newRotation: rotation });
+            })
+        )
     );
 }

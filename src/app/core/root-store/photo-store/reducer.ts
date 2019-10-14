@@ -1,386 +1,316 @@
+import { createReducer, on } from '@ngrx/store';
+
+import * as PhotoActions from './actions';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
-import { Actions, ActionTypes } from './actions';
 import { photoAdapter, initialState, State } from './state';
 
-export function photoReducer(state = initialState, action: Actions): State {
-    switch (action.type) {
-        case ActionTypes.CLEAR_REQUEST: {
-            return photoAdapter.removeAll({
-                ...state,
-                firstPhoto: null,
-                lastPhoto: null,
-                currentPhoto: null
-            });
-        }
-        case ActionTypes.LOAD_COMMENTS_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_COMMENTS_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentPhotoComments: action.payload.comments
-            };
-        }
-        case ActionTypes.LOAD_COMMENTS_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_RANDOM_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_RANDOM_SUCCESS: {
-            const entities = photoAdapter.upsertOne(action.payload.photo, {
-                ...state,
-                isLoading: false,
-                error: null
-            });
+export const photoReducer = createReducer(
+    initialState,
+    on(PhotoActions.clearRequest, state => (
+        photoAdapter.removeAll({
+            ...state,
+            firstPhoto: null,
+            lastPhoto: null,
+            currentPhoto: null
+        })
+    )),
+    on(PhotoActions.loadRequest, (state, { categoryId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadSuccess, (state, { photos }) => {
+        const entities = photoAdapter.addAll(photos, {
+            ...state,
+            isLoading: false,
+            error: null
+        });
 
-            entities.firstPhoto = entities.entities[entities.ids[0]];
-            entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
+        entities.firstPhoto = entities.entities[entities.ids[0]],
+        entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
 
-            return entities;
-        }
-        case ActionTypes.LOAD_RANDOM_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_MULTIPLE_RANDOM_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_MULTIPLE_RANDOM_SUCCESS: {
-            const uniquePhotos = action.payload.photos.filter((s1, pos, arr) => arr.findIndex((s2) => s2.id === s1.id) === pos);
+        return entities;
+    }),
+    on(PhotoActions.loadFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.loadCommentsRequest, (state, { photoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadCommentsSuccess, (state, { comments }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoComments: comments
+    })),
+    on(PhotoActions.loadCommentsFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.loadRandomRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadRandomSuccess, (state, { photo }) => {
+        const entities = photoAdapter.upsertOne(photo, {
+            ...state,
+            isLoading: false,
+            error: null
+        });
 
-            const entities = photoAdapter.addMany(uniquePhotos, {
-                ...state,
-                isLoading: false,
-                error: null
-            });
+        entities.firstPhoto = entities.entities[entities.ids[0]];
+        entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
 
-            entities.firstPhoto = entities.entities[entities.ids[0]];
-            entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
+        return entities;
+    }),
+    on(PhotoActions.loadRandomFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.loadMultipleRandomRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadMultipleRandomSuccess, (state, { photos }) => {
+        const uniquePhotos = photos.filter((s1, pos, arr) => arr.findIndex((s2) => s2.id === s1.id) === pos);
 
-            return entities;
-        }
-        case ActionTypes.LOAD_MULTIPLE_RANDOM_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_RATING_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_RATING_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentPhotoRating: action.payload.rating
-            };
-        }
-        case ActionTypes.LOAD_RATING_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_SUCCESS: {
-            const entities = photoAdapter.addAll(action.payload.photos, {
-                ...state,
-                isLoading: false,
-                error: null
-            });
+        const entities = photoAdapter.addMany(uniquePhotos, {
+            ...state,
+            isLoading: false,
+            error: null
+        });
 
-            entities.firstPhoto = entities.entities[entities.ids[0]],
-            entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
+        entities.firstPhoto = entities.entities[entities.ids[0]];
+        entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
 
-            return entities;
-        }
-        case ActionTypes.LOAD_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.SET_CURRENT: {
-            return {
-                ...state,
-                currentPhoto: action.payload.photo
-            };
-        }
-        case ActionTypes.MOVE_NEXT_REQUEST: {
-            const newPhoto = nextPhoto(state);
+        return entities;
+    }),
+    on(PhotoActions.loadMultipleRandomFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.loadRatingRequest, (state, { photoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadRatingSuccess, (state, { rating }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoRating: rating
+    })),
+    on(PhotoActions.loadRatingFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.setCurrent, (state, { photo }) => ({
+        ...state,
+        currentPhoto: photo
+    })),
+    on(PhotoActions.moveNextRequest, state => {
+        const newPhoto = nextPhoto(state);
 
-            if (newPhoto != null &&
-                state.currentPhoto != null &&
-                newPhoto.id === state.currentPhoto.id) {
-                return state;
-            }
-
-            return {
-                ...state,
-                currentPhoto: newPhoto,
-                currentPhotoEffects: {
-                    ...state.currentPhotoEffects,
-                    rotation: new PhotoRotation()
-                }
-            };
-        }
-        case ActionTypes.MOVE_NEXT_WITH_GPS_REQUEST: {
-            const newPhoto = nextPhotoWithGps(state);
-
-            if (newPhoto != null &&
-                state.currentPhoto != null &&
-                newPhoto.id === state.currentPhoto.id) {
-                return state;
-            }
-
-            return {
-                ...state,
-                currentPhoto: newPhoto,
-                currentPhotoEffects: {
-                    ...state.currentPhotoEffects,
-                    rotation: new PhotoRotation()
-                }
-            };
-        }
-        case ActionTypes.MOVE_PREVIOUS_REQUEST: {
-            const newPhoto = previousPhoto(state);
-
-            if (newPhoto != null &&
-                state.currentPhoto != null &&
-                newPhoto.id === state.currentPhoto.id) {
-                return state;
-            }
-
-            return {
-                ...state,
-                currentPhoto: newPhoto,
-                currentPhotoEffects: {
-                    ...state.currentPhotoEffects,
-                    rotation: new PhotoRotation()
-                }
-            };
-        }
-        case ActionTypes.MOVE_PREVIOUS_WITH_GPS_REQUEST: {
-            const newPhoto = previousPhotoWithGps(state);
-
-            if (newPhoto != null &&
-                state.currentPhoto != null &&
-                newPhoto.id === state.currentPhoto.id) {
-                return state;
-            }
-
-            return {
-                ...state,
-                currentPhoto: newPhoto,
-                currentPhotoEffects: {
-                    ...state.currentPhotoEffects,
-                    rotation: new PhotoRotation()
-                }
-            };
-        }
-        case ActionTypes.RATE_PHOTO_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.RATE_PHOTO_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentPhotoRating: {
-                    userRating: action.payload.rating.userRating,
-                    averageRating: Math.round(action.payload.rating.averageRating)
-                }
-            };
-        }
-        case ActionTypes.RATE_PHOTO_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.ADD_COMMENT_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.ADD_COMMENT_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null
-            };
-        }
-        case ActionTypes.ADD_COMMENT_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_EXIF_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_EXIF_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentPhotoExifData: action.payload.exif
-            };
-        }
-        case ActionTypes.LOAD_EXIF_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.ROTATE_CLOCKWISE_REQUEST: {
+        if (newPhoto != null &&
+            state.currentPhoto != null &&
+            newPhoto.id === state.currentPhoto.id) {
             return state;
         }
-        case ActionTypes.ROTATE_COUNTER_CLOCKWISE_REQUEST: {
+
+        return {
+            ...state,
+            currentPhoto: newPhoto,
+            currentPhotoEffects: {
+                ...state.currentPhotoEffects,
+                rotation: new PhotoRotation()
+            }
+        };
+    }),
+    on(PhotoActions.moveNextWithGpsRequest, state => {
+        const newPhoto = nextPhotoWithGps(state);
+
+        if (newPhoto != null &&
+            state.currentPhoto != null &&
+            newPhoto.id === state.currentPhoto.id) {
             return state;
         }
-        case ActionTypes.ROTATE_SUCCESS: {
-            return {
-                ...state,
-                currentPhotoEffects: {
-                    ...state.currentPhotoEffects,
-                    rotation: action.payload.newRotation
-                }
-            };
-        }
-        case ActionTypes.RESET_EFFECTS_REQUEST: {
-            return {
-                ...state,
-                currentPhotoEffects: {
-                    rotation: new PhotoRotation(),
-                    grayscale: 0,
-                    sepia: 0,
-                    brightness: 100,
-                    saturation: 100,
-                    contrast: 100,
-                    invert: 0,
-                    blur: 0,
-                    hueRotate: 0
-                }
-            };
-        }
-        case ActionTypes.UPDATE_EFFECTS_REQUEST: {
-            return {
-                ...state,
-                currentPhotoEffects: {
-                    ...action.payload.effects
-                }
-            };
-        }
-        case ActionTypes.TOGGLE_SLIDESHOW_REQUEST: {
-            return {
-                ...state,
-                slideshowIsPlaying: !state.slideshowIsPlaying
-            };
-        }
-        case ActionTypes.START_SLIDESHOW_REQUEST: {
-            return {
-                ...state,
-                slideshowIsPlaying: true
-            };
-        }
-        case ActionTypes.STOP_SLIDESHOW_REQUEST: {
-            return {
-                ...state,
-                slideshowIsPlaying: false
-            };
-        }
-        case ActionTypes.TOGGLE_FULLSCREEN_REQUEST: {
-            return {
-                ...state,
-                isFullscreenView: !state.isFullscreenView
-            };
-        }
-        case ActionTypes.ENTER_FULLSCREEN_REQUEST: {
-            return {
-                ...state,
-                isFullscreenView: true
-            };
-        }
-        case ActionTypes.EXIT_FULLSCREEN_REQUEST: {
-            return {
-                ...state,
-                isFullscreenView: false
-            };
-        }
-        case ActionTypes.ENTER_MAPVIEW_REQUEST: {
-            return {
-                ...state,
-                isMapView: true
-            };
-        }
-        case ActionTypes.EXIT_MAPVIEW_REQUEST: {
-            return {
-                ...state,
-                isMapView: false
-            };
-        }
-        case ActionTypes.TOGGLE_MAPVIEW_REQUEST: {
-            return {
-                ...state,
-                isMapView: !state.isMapView
-            };
-        }
-        default: {
+
+        return {
+            ...state,
+            currentPhoto: newPhoto,
+            currentPhotoEffects: {
+                ...state.currentPhotoEffects,
+                rotation: new PhotoRotation()
+            }
+        };
+    }),
+    on(PhotoActions.movePreviousRequest, state => {
+        const newPhoto = previousPhoto(state);
+
+        if (newPhoto != null &&
+            state.currentPhoto != null &&
+            newPhoto.id === state.currentPhoto.id) {
             return state;
         }
-    }
-}
+
+        return {
+            ...state,
+            currentPhoto: newPhoto,
+            currentPhotoEffects: {
+                ...state.currentPhotoEffects,
+                rotation: new PhotoRotation()
+            }
+        };
+    }),
+    on(PhotoActions.movePreviousWithGpsRequest, state => {
+        const newPhoto = previousPhotoWithGps(state);
+
+        if (newPhoto != null &&
+            state.currentPhoto != null &&
+            newPhoto.id === state.currentPhoto.id) {
+            return state;
+        }
+
+        return {
+            ...state,
+            currentPhoto: newPhoto,
+            currentPhotoEffects: {
+                ...state.currentPhotoEffects,
+                rotation: new PhotoRotation()
+            }
+        };
+    }),
+    on(PhotoActions.ratePhotoRequest, (state, { photoId, userRating }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.ratePhotoSuccess, (state, { rating }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoRating: {
+            userRating: rating.userRating,
+            averageRating: Math.round(rating.averageRating)
+        }
+    })),
+    on(PhotoActions.ratePhotoFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.addCommentRequest, (state, { photoId, comment }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.addCommentSuccess, (state, { photoId }) => ({
+        ...state,
+        isLoading: false,
+        error: null
+    })),
+    on(PhotoActions.addCommentFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.loadExifRequest, (state, { photoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadExifSuccess, (state, { exif }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoExifData: exif
+    })),
+    on(PhotoActions.loadExifFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.rotateClockwiseRequest, state =>
+        state
+    ),
+    on(PhotoActions.rotateCounterClockwiseRequest, state =>
+        state
+    ),
+    on(PhotoActions.rotateSuccess, (state, { newRotation }) => ({
+        ...state,
+        currentPhotoEffects: {
+            ...state.currentPhotoEffects,
+            rotation: newRotation
+        }
+    })),
+    on(PhotoActions.resetEffectsRequest, state => ({
+        ...state,
+        currentPhotoEffects: {
+            rotation: new PhotoRotation(),
+            grayscale: 0,
+            sepia: 0,
+            brightness: 100,
+            saturation: 100,
+            contrast: 100,
+            invert: 0,
+            blur: 0,
+            hueRotate: 0
+        }
+    })),
+    on(PhotoActions.updateEffectsRequest, (state, { effects }) => ({
+        ...state,
+        currentPhotoEffects: {
+            ...effects
+        }
+    })),
+    on(PhotoActions.toggleSlideshowRequest, state => ({
+        ...state,
+        slideshowIsPlaying: !state.slideshowIsPlaying
+    })),
+    on(PhotoActions.startSlideshowRequest, state => ({
+        ...state,
+        slideshowIsPlaying: true
+    })),
+    on(PhotoActions.stopSlideshowRequest, state => ({
+        ...state,
+        slideshowIsPlaying: false
+    })),
+    on(PhotoActions.toggleFullscreenRequest, state => ({
+        ...state,
+        isFullscreenView: !state.isFullscreenView
+    })),
+    on(PhotoActions.enterFullscreenRequest, state => ({
+        ...state,
+        isFullscreenView: true
+    })),
+    on(PhotoActions.exitFullscreenRequest, state => ({
+        ...state,
+        isFullscreenView: false
+    })),
+    on(PhotoActions.enterMapViewRequest, state => ({
+        ...state,
+        isMapView: true
+    })),
+    on(PhotoActions.exitMapViewRequest, state => ({
+        ...state,
+        isMapView: false
+    })),
+    on(PhotoActions.toggleMapViewRequest, state => ({
+        ...state,
+        isMapView: !state.isMapView
+    }))
+);
 
 function nextPhoto(state: State): Photo {
     return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));

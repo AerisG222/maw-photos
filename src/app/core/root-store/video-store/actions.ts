@@ -1,154 +1,97 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Video } from 'src/app/core/models/video.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Comment } from 'src/app/core/models/comment.model';
 
-export enum ActionTypes {
-    CLEAR_REQUEST = '[Videos] Clear',
+export const clearRequest = createAction(
+    '[Videos] Clear'
+);
 
-    LOAD_REQUEST = '[Videos] Load Request',
-    LOAD_FAILURE = '[Videos] Load Failure',
-    LOAD_SUCCESS = '[Videos] Load Success',
+export const loadRequest = createAction(
+    '[Videos] Load Request',
+    props<{ categoryId: number }>()
+);
 
-    LOAD_COMMENTS_REQUEST = '[Videos] Load Comments Request',
-    LOAD_COMMENTS_FAILURE = '[Videos] Load Comments Failure',
-    LOAD_COMMENTS_SUCCESS = '[Videos] Load Comments Success',
+export const loadFailure = createAction(
+    '[Videos] Load Failure',
+    props<{ error: string }>()
+);
 
-    LOAD_RATING_REQUEST = '[Videos] Load Rating Request',
-    LOAD_RATING_FAILURE = '[Videos] Load Rating Failure',
-    LOAD_RATING_SUCCESS = '[Videos] Load Rating Success',
+export const loadSuccess = createAction(
+    '[Videos] Load Success',
+    props<{ videos: Video[] }>()
+);
 
-    ADD_COMMENT_REQUEST = '[Videos] Add Comment Request',
-    ADD_COMMENT_FAILURE = '[Videos] Add Comment Failure',
-    ADD_COMMENT_SUCCESS = '[Videos] Add Comment Success',
+export const loadCommentsRequest = createAction(
+    '[Videos] Load Comments Request',
+    props<{ videoId: number }>()
+);
 
-    RATE_VIDEO_REQUEST = '[Videos] Rate Video Request',
-    RATE_VIDEO_FAILURE = '[Videos] Rate Video Failure',
-    RATE_VIDEO_SUCCESS = '[Videos] Rate Video Success',
+export const loadCommentsFailure = createAction(
+    '[Videos] Load Comments Failure',
+    props<{ error: string }>()
+);
 
-    MOVE_NEXT_REQUEST = '[Videos] Move Next Request',
-    MOVE_PREVIOUS_REQUEST = '[Videos] Move Previous Request',
+export const loadCommentsSuccess = createAction(
+    '[Videos] Load Comments Success',
+    props<{ comments: Comment[] }>()
+);
 
-    SET_CURRENT  = '[Videos] Set Current'
-}
+export const loadRatingRequest = createAction(
+    '[Videos] Load Rating Request',
+    props<{ videoId: number }>()
+);
 
-export class ClearRequestAction implements Action {
-    readonly type = ActionTypes.CLEAR_REQUEST;
-}
+export const loadRatingFailure = createAction(
+    '[Videos] Load Rating Failure',
+    props<{ error: string }>()
+);
 
-export class LoadRequestAction implements Action {
-    readonly type = ActionTypes.LOAD_REQUEST;
-    constructor(public payload: { categoryId: number }) {}
-}
+export const loadRatingSuccess = createAction(
+    '[Videos] Load Rating Success',
+    props<{ rating: Rating }>()
+);
 
-export class LoadFailureAction implements Action {
-    readonly type = ActionTypes.LOAD_FAILURE;
-    constructor(public payload: { error: string }) { }
-}
+export const addCommentRequest = createAction(
+    '[Videos] Add Comment Request',
+    props<{ videoId: number, comment: string }>()
+);
 
-export class LoadSuccessAction implements Action {
-    readonly type = ActionTypes.LOAD_SUCCESS;
-    constructor(public payload: { videos: Video[] }) { }
-}
+export const addCommentFailure = createAction(
+    '[Videos] Add Comment Failure',
+    props<{ error: string }>()
+);
 
-export class LoadCommentsRequestAction implements Action {
-    readonly type = ActionTypes.LOAD_COMMENTS_REQUEST;
-    constructor(public payload: { videoId: number }) { }
-}
+export const addCommentSuccess = createAction(
+    '[Videos] Add Comment Success',
+    props<{ videoId: number }>()
+);
 
-export class LoadCommentsFailureAction implements Action {
-    readonly type = ActionTypes.LOAD_COMMENTS_FAILURE;
-    constructor(public payload: { error: string }) { }
-}
+export const rateVideoRequest = createAction(
+    '[Videos] Rate Video Request',
+    props<{ videoId: number, userRating: number }>()
+);
 
-export class LoadCommentsSuccessAction implements Action {
-    readonly type = ActionTypes.LOAD_COMMENTS_SUCCESS;
-    constructor(public payload: { comments: Comment[] }) { }
-}
+export const rateVideoFailure = createAction(
+    '[Videos] Rate Video Failure',
+    props<{ error: string }>()
+);
 
-export class LoadRatingRequestAction implements Action {
-    readonly type = ActionTypes.LOAD_RATING_REQUEST;
-    constructor(public payload: { videoId: number }) { }
-}
+export const rateVideoSuccess = createAction(
+    '[Videos] Rate Video Success',
+    props<{ rating: Rating }>()
+);
 
-export class LoadRatingFailureAction implements Action {
-    readonly type = ActionTypes.LOAD_RATING_FAILURE;
-    constructor(public payload: { error: string }) { }
-}
+export const moveNextRequest = createAction(
+    '[Videos] Move Next Request'
+);
 
-export class LoadRatingSuccessAction implements Action {
-    readonly type = ActionTypes.LOAD_RATING_SUCCESS;
-    constructor(public payload: { rating: Rating }) { }
-}
+export const movePreviousRequest = createAction(
+    '[Videos] Move Previous Request'
+);
 
-export class AddCommentRequestAction implements Action {
-    readonly type = ActionTypes.ADD_COMMENT_REQUEST;
-    constructor(public payload: { videoId: number, comment: string }) { }
-}
-
-export class AddCommentFailureAction implements Action {
-    readonly type = ActionTypes.ADD_COMMENT_FAILURE;
-    constructor(public payload: { error: string }) { }
-}
-
-export class AddCommentSuccessAction implements Action {
-    readonly type = ActionTypes.ADD_COMMENT_SUCCESS;
-    constructor(public payload: { videoId: number }) { }
-}
-
-export class RateVideoRequestAction implements Action {
-    readonly type = ActionTypes.RATE_VIDEO_REQUEST;
-    constructor(public payload: { videoId: number, userRating: number }) { }
-}
-
-export class RateVideoFailureAction implements Action {
-    readonly type = ActionTypes.RATE_VIDEO_FAILURE;
-    constructor(public payload: { error: string }) { }
-}
-
-export class RateVideoSuccessAction implements Action {
-    readonly type = ActionTypes.RATE_VIDEO_SUCCESS;
-    constructor(public payload: { rating: Rating }) { }
-}
-
-export class MoveNextRequestAction implements Action {
-    readonly type = ActionTypes.MOVE_NEXT_REQUEST;
-}
-
-export class MovePreviousRequestAction implements Action {
-    readonly type = ActionTypes.MOVE_PREVIOUS_REQUEST;
-}
-
-export class SetCurrentAction implements Action {
-    readonly type = ActionTypes.SET_CURRENT;
-    constructor(public payload: { video: Video }) { }
-}
-
-export type Actions =
-    ClearRequestAction |
-
-    LoadRequestAction |
-    LoadFailureAction |
-    LoadSuccessAction |
-
-    LoadCommentsRequestAction |
-    LoadCommentsFailureAction |
-    LoadCommentsSuccessAction |
-
-    LoadRatingRequestAction |
-    LoadRatingFailureAction |
-    LoadRatingSuccessAction |
-
-    AddCommentRequestAction |
-    AddCommentFailureAction |
-    AddCommentSuccessAction |
-
-    RateVideoRequestAction |
-    RateVideoFailureAction |
-    RateVideoSuccessAction |
-
-    MoveNextRequestAction |
-    MovePreviousRequestAction |
-
-    SetCurrentAction;
+export const setCurrent = createAction(
+    '[Videos] Set Current',
+    props<{ video: Video }>()
+);

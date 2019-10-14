@@ -44,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
             .subscribe(settings => this.setTheme(settings.appTheme))
         );
 
-        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+        this.store$.dispatch(SettingsStoreActions.loadRequest());
     }
 
     ngOnDestroy(): void {

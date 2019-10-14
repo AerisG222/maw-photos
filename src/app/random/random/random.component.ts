@@ -43,7 +43,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.store$.dispatch(new PhotoStoreActions.ClearRequestAction());
+        this.store$.dispatch(PhotoStoreActions.clearRequest());
 
         this.settings$ = this.store$
             .pipe(
@@ -77,7 +77,7 @@ export class RandomComponent implements OnInit, OnDestroy {
                     this.store$
                         .pipe(
                             select(PhotoCategoryStoreSelectors.selectCategoryById, { id: photo.categoryId }),
-                            tap(category => this.store$.dispatch(new PhotoCategoryStoreActions.SetCurrentAction({ category }))),
+                            tap(category => this.store$.dispatch(PhotoCategoryStoreActions.setCurrent({ category }))),
                             take(1)
                         ).subscribe();
                 })
@@ -93,15 +93,15 @@ export class RandomComponent implements OnInit, OnDestroy {
                 select(PhotoStoreSelectors.selectIsFullscreenView)
             );
 
-        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
-        this.store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
-        this.store$.dispatch(new PhotoStoreActions.LoadMultipleRandomRequestAction({ count: 10 }));
+        this.store$.dispatch(SettingsStoreActions.loadRequest());
+        this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
+        this.store$.dispatch(PhotoStoreActions.loadMultipleRandomRequest({ count: 10 }));
     }
 
     ngOnDestroy(): void {
         this.killFetch$.next(true);
-        this.store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
-        this.store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
+        this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
+        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
         this.setCurrentPhoto(null);
     }
 
@@ -110,13 +110,13 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     private setCurrentPhoto(photo: Photo): void {
-        this.store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo }));
+        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo }));
     }
 
     private startRandomFetch(delay: number): void {
         interval(delay)
             .pipe(
-                tap(x => this.store$.dispatch(new PhotoStoreActions.LoadRandomRequestAction())),
+                tap(x => this.store$.dispatch(PhotoStoreActions.loadRandomRequest())),
                 takeUntil(this.killFetch$)
             ).subscribe();
     }

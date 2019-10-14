@@ -42,6 +42,6 @@ export class CategoryYearFilterComponent implements OnInit {
     }
 
     onSelectYear(change: MatSelectChange): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListYearFilterRequestAction({ yearFilter: change.value }));
+        this.store$.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: change.value }));
     }
 }

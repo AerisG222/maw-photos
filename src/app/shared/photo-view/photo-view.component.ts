@@ -76,18 +76,18 @@ export class PhotoViewComponent {
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewMapTypeIdRequestAction({ mapTypeId }));
+        this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoListMapViewZoomRequestAction({ zoom }));
+        this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewZoomRequest({ zoom }));
     }
 
     onSwipeLeft(evt): void {
-        this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onSwipeRight(evt): void {
-        this.store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 }

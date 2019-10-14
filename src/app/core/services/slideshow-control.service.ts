@@ -21,7 +21,7 @@ export class SlideshowControlService {
         this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLast),
-                tap(x => this.store$.dispatch(new PhotoStoreActions.StopSlideshowRequestAction()))
+                tap(x => this.store$.dispatch(PhotoStoreActions.stopSlideshowRequest()))
             ).subscribe();
 
         this.isPlaying$ = this.store$
@@ -52,7 +52,7 @@ export class SlideshowControlService {
     private startSlideshow(duration: number): void {
         interval(duration)
             .pipe(
-                tap(x => this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction())),
+                tap(x => this.store$.dispatch(PhotoStoreActions.moveNextRequest())),
                 takeUntil(this.killSlideshow$)
             ).subscribe();
     }

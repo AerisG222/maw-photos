@@ -106,38 +106,38 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListCategoryBreadcrumbsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoListCategoryBreadcrumbsRequest());
     }
 
     onTogglePhotoList(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoListShowPhotoListRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoListShowPhotoListRequest());
     }
 
     onToggleSize(): void {
         const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
 
-        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoListThumbnailSizeRequestAction({ newSize: size }));
+        this.store$.dispatch(SettingsStoreActions.updatePhotoListThumbnailSizeRequest({ newSize: size }));
     }
 
     onToggleFullscreen(): void {
-        this.store$.dispatch(new PhotoStoreActions.EnterFullscreenRequestAction());
-        this.store$.dispatch(new LayoutStoreActions.EnterFullscreenRequestAction());
+        this.store$.dispatch(PhotoStoreActions.enterFullscreenRequest());
+        this.store$.dispatch(LayoutStoreActions.enterFullscreenRequest());
     }
 
     onToggleMapView(): void {
-        this.store$.dispatch(new PhotoStoreActions.ToggleMapViewRequestAction());
+        this.store$.dispatch(PhotoStoreActions.toggleMapViewRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onToggleSlideshow(): void {
-        this.store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+        this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 
     private configureHotkeys(): void {

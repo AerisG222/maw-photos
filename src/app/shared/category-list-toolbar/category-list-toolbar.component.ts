@@ -111,19 +111,19 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const type = CategoryListType.nextType(this.settings.categoryListListType.name);
 
-            this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListListTypeRequestAction({ newType: type }));
+            this.store$.dispatch(SettingsStoreActions.updateCategoryListListTypeRequest({ newType: type }));
         }
     }
 
     onToggleTitle(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleCategoryListCategoryTitlesRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleCategoryListCategoryTitlesRequest());
     }
 
     onToggleListThumbnailSize(): void {
         if (this.settings) {
             const size = ThumbnailSize.nextSize(this.settings.categoryListListViewThumbnailSize.name);
 
-            this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListListViewThumbnailSizeRequestAction({ newSize: size }));
+            this.store$.dispatch(SettingsStoreActions.updateCategoryListListViewThumbnailSizeRequest({ newSize: size }));
         }
     }
 
@@ -131,7 +131,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings && !this.settings.categoryListShowCategoryTitles) {
             const size = ThumbnailSize.nextSize(this.settings.categoryListThumbnailSize.name);
 
-            this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListThumbnailSizeRequestAction({ newSize: size }));
+            this.store$.dispatch(SettingsStoreActions.updateCategoryListThumbnailSizeRequest({ newSize: size }));
         }
     }
 
@@ -139,7 +139,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const newFilter = CategoryFilter.nextFilter(this.settings.categoryListCategoryFilter.name);
 
-            this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListCategoryFilterRequestAction({ newFilter }));
+            this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter }));
         }
     }
 
@@ -147,7 +147,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const newMargin = CategoryMargin.nextSize(this.settings.categoryListCategoryMargin.name);
 
-            this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListCategoryMarginRequestAction({ newMargin }));
+            this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryMarginRequest({ newMargin }));
         }
     }
 

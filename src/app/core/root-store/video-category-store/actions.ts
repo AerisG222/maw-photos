@@ -1,44 +1,27 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 
-export enum ActionTypes {
-    LOAD_REQUEST = '[Video Categories] Load Request',
-    LOAD_FAILURE = '[Video Categories] Load Failure',
-    LOAD_SUCCESS = '[Video Categories] Load Success',
+export const loadRequest = createAction(
+    '[Video Categories] Load Request'
+);
 
-    SET_CURRENT  = '[Video Categories] Set Current',
-    SET_CURRENT_BY_ID  = '[Video Categories] Set Current By Id'
-}
+export const loadFailure = createAction(
+    '[Video Categories] Load Failure',
+    props<{ error: string }>()
+);
 
-export class LoadRequestAction implements Action {
-    readonly type = ActionTypes.LOAD_REQUEST;
-}
+export const loadSuccess = createAction(
+    '[Video Categories] Load Success',
+    props<{ categories: VideoCategory[] }>()
+);
 
-export class LoadFailureAction implements Action {
-    readonly type = ActionTypes.LOAD_FAILURE;
-    constructor(public payload: { error: string }) { }
-}
+export const setCurrent = createAction(
+    '[Video Categories] Set Current',
+    props<{ category: VideoCategory }>()
+);
 
-export class LoadSuccessAction implements Action {
-    readonly type = ActionTypes.LOAD_SUCCESS;
-    constructor(public payload: { categories: VideoCategory[] }) { }
-}
-
-export class SetCurrentAction implements Action {
-    readonly type = ActionTypes.SET_CURRENT;
-    constructor(public payload: { category: VideoCategory }) { }
-}
-
-export class SetCurrentByIdAction implements Action {
-    readonly type = ActionTypes.SET_CURRENT_BY_ID;
-    constructor(public payload: { categoryId: number }) { }
-}
-
-export type Actions =
-    LoadRequestAction |
-    LoadFailureAction |
-    LoadSuccessAction |
-
-    SetCurrentAction |
-    SetCurrentByIdAction;
+export const setCurrentById = createAction(
+    '[Video Categories] Set Current By Id',
+    props<{ categoryId: number }>()
+);

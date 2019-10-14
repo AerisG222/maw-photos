@@ -69,20 +69,20 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     }
 
     onExitFullscreen(): void {
-        this.store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
-        this.store$.dispatch(new PhotoStoreActions.ExitFullscreenRequestAction());
+        this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
+        this.store$.dispatch(PhotoStoreActions.exitFullscreenRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(new PhotoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(new PhotoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onToggleSlideshow(): void {
-        this.store$.dispatch(new PhotoStoreActions.ToggleSlideshowRequestAction());
+        this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 
     private onHotkeyExitFullscreen(evt: KeyboardEvent): boolean {

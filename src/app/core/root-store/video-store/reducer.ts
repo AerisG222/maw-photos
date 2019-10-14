@@ -1,172 +1,140 @@
+import { createReducer, on } from '@ngrx/store';
+
 import { Video } from 'src/app/core/models/video.model';
-import { Actions, ActionTypes } from './actions';
 import { videoAdapter, initialState, State } from './state';
+import * as VideoActions from './actions';
 
-export function videoReducer(state = initialState, action: Actions): State {
-    switch (action.type) {
-        case ActionTypes.CLEAR_REQUEST: {
-            return videoAdapter.removeAll({
-                ...state,
-                firstVideo: null,
-                lastVideo: null,
-                currentVideo: null
-            });
-        }
-        case ActionTypes.LOAD_COMMENTS_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_COMMENTS_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentVideoComments: action.payload.comments
-            };
-        }
-        case ActionTypes.LOAD_COMMENTS_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_RATING_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_RATING_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentVideoRating: action.payload.rating
-            };
-        }
-        case ActionTypes.LOAD_RATING_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.LOAD_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.LOAD_SUCCESS: {
-            const entities = videoAdapter.addAll(action.payload.videos, {
-                ...state,
-                isLoading: false,
-                error: null
-            });
+export const videoReducer = createReducer(
+    initialState,
+    on(VideoActions.clearRequest, state =>
+        videoAdapter.removeAll({
+            ...state,
+            firstVideo: null,
+            lastVideo: null,
+            currentVideo: null
+        })
+    ),
+    on(VideoActions.loadCommentsRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.loadCommentsSuccess, (state, { comments }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentVideoComments: comments
+    })),
+    on(VideoActions.loadCommentsFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(VideoActions.loadRatingRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.loadRatingSuccess, (state, { rating }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentVideoRating: rating
+    })),
+    on(VideoActions.loadRatingFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(VideoActions.loadRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.loadSuccess, (state, { videos }) => {
+        const entities = videoAdapter.addAll(videos, {
+            ...state,
+            isLoading: false,
+            error: null
+        });
 
-            entities.firstVideo = entities.entities[entities.ids[0]],
-            entities.lastVideo = entities.entities[entities.ids[entities.ids.length - 1]];
+        entities.firstVideo = entities.entities[entities.ids[0]],
+        entities.lastVideo = entities.entities[entities.ids[entities.ids.length - 1]];
 
-            return entities;
-        }
-        case ActionTypes.LOAD_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.SET_CURRENT: {
-            return {
-                ...state,
-                currentVideo: action.payload.video
-            };
-        }
-        case ActionTypes.MOVE_NEXT_REQUEST: {
-            const newVideo = nextVideo(state);
+        return entities;
+    }),
+    on(VideoActions.loadFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(VideoActions.setCurrent, (state, { video }) => ({
+        ...state,
+        currentVideo: video
+    })),
+    on(VideoActions.moveNextRequest, state => {
+        const newVideo = nextVideo(state);
 
-            if (newVideo != null &&
-                state.currentVideo != null &&
-                newVideo.id === state.currentVideo.id) {
-                return state;
-            }
-
-            return {
-                ...state,
-                currentVideo: newVideo
-            };
-        }
-        case ActionTypes.MOVE_PREVIOUS_REQUEST: {
-            const newVideo = previousVideo(state);
-
-            if (newVideo != null &&
-                state.currentVideo != null &&
-                newVideo.id === state.currentVideo.id) {
-                return state;
-            }
-
-            return {
-                ...state,
-                currentVideo: newVideo
-            };
-        }
-        case ActionTypes.RATE_VIDEO_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.RATE_VIDEO_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null,
-                currentVideoRating: {
-                    userRating: action.payload.rating.userRating,
-                    averageRating: Math.round(action.payload.rating.averageRating)
-                }
-            };
-        }
-        case ActionTypes.RATE_VIDEO_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        case ActionTypes.ADD_COMMENT_REQUEST: {
-            return {
-                ...state,
-                isLoading: true,
-                error: null
-            };
-        }
-        case ActionTypes.ADD_COMMENT_SUCCESS: {
-            return {
-                ...state,
-                isLoading: false,
-                error: null
-            };
-        }
-        case ActionTypes.ADD_COMMENT_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
-            };
-        }
-        default: {
+        if (newVideo != null &&
+            state.currentVideo != null &&
+            newVideo.id === state.currentVideo.id) {
             return state;
         }
-    }
-}
+
+        return {
+            ...state,
+            currentVideo: newVideo
+        };
+    }),
+    on(VideoActions.movePreviousRequest, state => {
+        const newVideo = previousVideo(state);
+
+        if (newVideo != null &&
+            state.currentVideo != null &&
+            newVideo.id === state.currentVideo.id) {
+            return state;
+        }
+
+        return {
+            ...state,
+            currentVideo: newVideo
+        };
+    }),
+    on(VideoActions.rateVideoRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.rateVideoSuccess, (state, { rating }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentVideoRating: {
+            userRating: rating.userRating,
+            averageRating: Math.round(rating.averageRating)
+        }
+    })),
+    on(VideoActions.rateVideoFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(VideoActions.addCommentRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.addCommentSuccess, state => ({
+        ...state,
+        isLoading: false,
+        error: null
+    })),
+    on(VideoActions.addCommentFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    }))
+);
 
 function nextVideo(state: State): Video {
     return getVideoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));

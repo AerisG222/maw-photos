@@ -31,7 +31,7 @@ export class YearListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
+        this.store$.dispatch(SettingsStoreActions.loadRequest());
 
         this.destroySub.add(this.activatedRoute.fragment
             .pipe(
@@ -40,7 +40,7 @@ export class YearListComponent implements OnInit, OnDestroy {
                     const year = parseInt(y, 10);
 
                     if (!isNaN(year)) {
-                        this.store$.dispatch(new SettingsStoreActions.UpdateCategoryListYearFilterRequestAction({ yearFilter: year }));
+                        this.store$.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: year }));
                     }
                 })
             ).subscribe()

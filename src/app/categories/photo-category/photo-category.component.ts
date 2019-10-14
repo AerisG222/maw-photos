@@ -95,22 +95,22 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
                 filter(x => !!x)
             );
 
-        this.store$.dispatch(new PhotoStoreActions.ClearRequestAction());
-        this.store$.dispatch(new SettingsStoreActions.LoadRequestAction());
-        this.store$.dispatch(new LayoutStoreActions.OpenRightSidebarRequestAction());
+        this.store$.dispatch(PhotoStoreActions.clearRequest());
+        this.store$.dispatch(SettingsStoreActions.loadRequest());
+        this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
 
         this.destroySub.add(this.route.params
             .pipe(
                 map(p => Number(p.id)),
-                tap(id => this.store$.dispatch(new PhotoCategoryStoreActions.SetCurrentByIdAction({ categoryId: id }))),
-                tap(id => this.store$.dispatch(new PhotoStoreActions.LoadRequestAction({ categoryId: id })))
+                tap(id => this.store$.dispatch(PhotoCategoryStoreActions.setCurrentById({ categoryId: id }))),
+                tap(id => this.store$.dispatch(PhotoStoreActions.loadRequest({ categoryId: id })))
             ).subscribe()
         );
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(new LayoutStoreActions.ExitFullscreenRequestAction());
-        this.store$.dispatch(new LayoutStoreActions.CloseRightSidebarRequestAction());
+        this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
+        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
         this.destroySub.unsubscribe();
         this.setCurrentPhoto(null);
     }
@@ -120,6 +120,6 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     }
 
     private setCurrentPhoto(photo: Photo): void {
-        this.store$.dispatch(new PhotoStoreActions.SetCurrentAction({ photo }));
+        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo }));
     }
 }

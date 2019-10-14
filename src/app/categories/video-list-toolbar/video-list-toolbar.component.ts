@@ -71,31 +71,31 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoListCategoryBreadcrumbsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleVideoListCategoryBreadcrumbsRequest());
     }
 
     onToggleThumbnailSize(): void {
         const size = ThumbnailSize.nextSize(this.settings.videoListThumbnailSize.name);
 
-        this.store$.dispatch(new SettingsStoreActions.UpdateVideoListThumbnailSizeRequestAction({ newSize: size }));
+        this.store$.dispatch(SettingsStoreActions.updateVideoListThumbnailSizeRequest({ newSize: size }));
     }
 
     onToggleShowVideoList(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoListShowVideoListRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleVideoListShowVideoListRequest());
     }
 
     onToggleVideoSize(): void {
         const size = VideoSize.nextSize(this.settings.videoListVideoSize.name);
 
-        this.store$.dispatch(new SettingsStoreActions.UpdateVideoListVideoSizeRequestAction({ newSize: size }));
+        this.store$.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(new VideoStoreActions.MovePreviousRequestAction());
+        this.store$.dispatch(VideoStoreActions.movePreviousRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(new VideoStoreActions.MoveNextRequestAction());
+        this.store$.dispatch(VideoStoreActions.moveNextRequest());
     }
 
     private configureHotkeys(): void {

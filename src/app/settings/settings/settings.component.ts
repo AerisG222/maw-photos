@@ -152,7 +152,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         };
 
         this.store$.dispatch(
-            new SettingsStoreActions.SaveRequestAction({ settings })
+            SettingsStoreActions.saveRequest({ settings })
         );
     }
 
@@ -162,7 +162,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     private loadSettings(): void {
         this.store$.dispatch(
-            new SettingsStoreActions.LoadRequestAction()
+            SettingsStoreActions.loadRequest()
         );
     }
 

@@ -1,10 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
+import { of } from 'rxjs';
 import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operators';
 
-import * as videoCategoryActions from './actions';
+import * as VideoCategoryActions from './actions';
 import * as videoCategorySelectors from './selectors';
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import { State } from './state';
@@ -19,19 +19,20 @@ export class VideoCategoryStoreEffects {
 
     }
 
-    @Effect()
-    loadRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoCategoryActions.LoadRequestAction>(videoCategoryActions.ActionTypes.LOAD_REQUEST),
-        withLatestFrom(this.store$.pipe(
-            select(videoCategorySelectors.selectAllCategories)
-        )),
-        filter(([action, categories]) => categories.length === 0),
-        switchMap(action =>
-            this.api.getCategories()
-                .pipe(
-                    map(cat => new videoCategoryActions.LoadSuccessAction({ categories: cat.items })),
-                    catchError(error => of(new videoCategoryActions.LoadFailureAction({ error })))
-                )
+    loadRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoCategoryActions.loadRequest),
+            withLatestFrom(this.store$.pipe(
+                select(videoCategorySelectors.selectAllCategories)
+            )),
+            filter(([action, categories]) => categories.length === 0),
+            switchMap(action =>
+                this.api.getCategories()
+                    .pipe(
+                        map(cat => VideoCategoryActions.loadSuccess({ categories: cat.items })),
+                        catchError(error => of(VideoCategoryActions.loadFailure({ error })))
+                    )
+            )
         )
     );
 }

@@ -16,7 +16,7 @@ export class PhotoCategoriesResolverService implements Resolve<PhotoCategory[]> 
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PhotoCategory[]> | Observable<never> {
-        this.store$.dispatch(new PhotoCategoryStoreActions.LoadRequestAction());
+        this.store$.dispatch(PhotoCategoryStoreActions.loadRequest());
 
         return this.store$.pipe(
             select(PhotoCategoryStoreSelectors.selectAllCategories),

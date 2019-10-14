@@ -75,9 +75,9 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this.destroySub.add(currentPhoto$
             .pipe(
                 tap(photo => this.currentPhoto = photo),
-                tap(photo => this.store$.dispatch(new PhotoStoreActions.LoadRatingRequestAction({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(new PhotoStoreActions.LoadCommentsRequestAction({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(new PhotoStoreActions.LoadExifRequestAction({ photoId: photo.id })))
+                tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id }))),
+                tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
+                tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id })))
             ).subscribe()
         );
 
@@ -177,63 +177,63 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     toggleEndSidenav(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExpandedStateRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());
     }
 
     onRate(userRating: number): void {
         if (this.currentPhoto) {
-            this.store$.dispatch(new PhotoStoreActions.RatePhotoRequestAction({ photoId: this.currentPhoto.id, userRating }));
+            this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.currentPhoto.id, userRating }));
         }
     }
 
     onComment(comment: string): void {
         if (this.currentPhoto) {
-            this.store$.dispatch(new PhotoStoreActions.AddCommentRequestAction({ photoId: this.currentPhoto.id, comment }));
+            this.store$.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.currentPhoto.id, comment }));
         }
     }
 
     onResetEffects(): void {
         if (this.currentPhoto) {
-            this.store$.dispatch(new PhotoStoreActions.ResetEffectsRequestAction());
+            this.store$.dispatch(PhotoStoreActions.resetEffectsRequest());
         }
     }
 
     onUpdateEffects(effects: PhotoEffects): void {
         if (this.currentPhoto) {
-            this.store$.dispatch(new PhotoStoreActions.UpdateEffectsRequestAction({ effects }));
+            this.store$.dispatch(PhotoStoreActions.updateEffectsRequest({ effects }));
         }
     }
 
     toggleRatings(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelRatingsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelRatingsRequest());
     }
 
     toggleComments(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelCommentsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelCommentsRequest());
     }
 
     toggleExif(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelExifRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelExifRequest());
     }
 
     toggleHistogram(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelHistogramRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelHistogramRequest());
     }
 
     toggleEffects(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelEffectsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelEffectsRequest());
     }
 
     toggleMinimap(): void {
-        this.store$.dispatch(new SettingsStoreActions.TogglePhotoInfoPanelMinimapRequestAction());
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelMinimapRequest());
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId }));
+        this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdatePhotoInfoPanelMinimapZoomRequestAction({ zoom }));
+        this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
     }
 
     private configureHotkeys(): void {

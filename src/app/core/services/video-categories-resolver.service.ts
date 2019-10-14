@@ -16,7 +16,7 @@ export class VideoCategoriesResolverService implements Resolve<VideoCategory[]> 
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VideoCategory[]> | Observable<never> {
-        this.store$.dispatch(new VideoCategoryStoreActions.LoadRequestAction());
+        this.store$.dispatch(VideoCategoryStoreActions.loadRequest());
 
         return this.store$.pipe(
             select(VideoCategoryStoreSelectors.selectAllCategories),

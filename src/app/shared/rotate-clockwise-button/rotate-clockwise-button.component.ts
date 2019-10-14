@@ -25,7 +25,7 @@ export class RotateClockwiseButtonComponent implements OnInit {
     }
 
     onRotateClockwise(): void {
-        this.store$.dispatch(new PhotoStoreActions.RotateClockwiseRequestAction());
+        this.store$.dispatch(PhotoStoreActions.rotateClockwiseRequest());
     }
 
     private configureHotkeys(): void {

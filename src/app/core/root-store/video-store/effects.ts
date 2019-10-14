@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { of } from 'rxjs';
 import { switchMap, catchError, map } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
-import * as videoActions from './actions';
+import * as VideoStoreActions from './actions';
 
 @Injectable()
 export class VideoStoreEffects {
@@ -16,69 +15,75 @@ export class VideoStoreEffects {
 
     }
 
-    @Effect()
-    loadRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoActions.LoadRequestAction>(videoActions.ActionTypes.LOAD_REQUEST),
-        switchMap(action =>
-            this.api.getVideosByCategory(action.payload.categoryId)
-                .pipe(
-                    map(videos => new videoActions.LoadSuccessAction({ videos: videos.items })),
-                    catchError(error => of(new videoActions.LoadFailureAction({ error })))
-                )
+    loadRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoStoreActions.loadRequest),
+            switchMap(action =>
+                this.api.getVideosByCategory(action.categoryId)
+                    .pipe(
+                        map(videos => VideoStoreActions.loadSuccess({ videos: videos.items })),
+                        catchError(error => of(VideoStoreActions.loadFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    loadRatingRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoActions.LoadRatingRequestAction>(videoActions.ActionTypes.LOAD_RATING_REQUEST),
-        switchMap(action =>
-            this.api.getRating(action.payload.videoId)
-                .pipe(
-                    map(rating => new videoActions.LoadRatingSuccessAction({ rating })),
-                    catchError(error => of(new videoActions.LoadRatingFailureAction({ error })))
-                )
+    loadRatingRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoStoreActions.loadRatingRequest),
+            switchMap(action =>
+                this.api.getRating(action.videoId)
+                    .pipe(
+                        map(rating => VideoStoreActions.loadRatingSuccess({ rating })),
+                        catchError(error => of(VideoStoreActions.loadRatingFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    rateVideoRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoActions.RateVideoRequestAction>(videoActions.ActionTypes.RATE_VIDEO_REQUEST),
-        switchMap(action =>
-            this.api.rateVideo(action.payload.videoId, action.payload.userRating)
-                .pipe(
-                    map(rating => new videoActions.RateVideoSuccessAction({ rating })),
-                    catchError(error => of(new videoActions.RateVideoFailureAction({ error })))
-                )
+    rateVideoRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoStoreActions.rateVideoRequest),
+            switchMap(action =>
+                this.api.rateVideo(action.videoId, action.userRating)
+                    .pipe(
+                        map(rating => VideoStoreActions.rateVideoSuccess({ rating })),
+                        catchError(error => of(VideoStoreActions.rateVideoFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    loadCommentsRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoActions.LoadCommentsRequestAction>(videoActions.ActionTypes.LOAD_COMMENTS_REQUEST),
-        switchMap(action =>
-            this.api.getComments(action.payload.videoId)
-                .pipe(
-                    map(comments => new videoActions.LoadCommentsSuccessAction({ comments: comments.items })),
-                    catchError(error => of(new videoActions.RateVideoFailureAction({ error })))
-                )
+    loadCommentsRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoStoreActions.loadCommentsRequest),
+            switchMap(action =>
+                this.api.getComments(action.videoId)
+                    .pipe(
+                        map(comments => VideoStoreActions.loadCommentsSuccess({ comments: comments.items })),
+                        catchError(error => of(VideoStoreActions.rateVideoFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    addCommentRequestEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoActions.AddCommentRequestAction>(videoActions.ActionTypes.ADD_COMMENT_REQUEST),
-        switchMap(action =>
-            this.api.addComment(action.payload.videoId, action.payload.comment)
-                .pipe(
-                    map(result => new videoActions.AddCommentSuccessAction({ videoId: action.payload.videoId })),
-                    catchError(error => of(new videoActions.AddCommentFailureAction({ error })))
-                )
+    addCommentRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoStoreActions.addCommentRequest),
+            switchMap(action =>
+                this.api.addComment(action.videoId, action.comment)
+                    .pipe(
+                        map(result => VideoStoreActions.addCommentSuccess({ videoId: action.videoId })),
+                        catchError(error => of(VideoStoreActions.addCommentFailure({ error })))
+                    )
+            )
         )
     );
 
-    @Effect()
-    addCommentSuccessEffect$: Observable<Action> = this.actions$.pipe(
-        ofType<videoActions.AddCommentSuccessAction>(videoActions.ActionTypes.ADD_COMMENT_SUCCESS),
-        map(action => new videoActions.LoadCommentsRequestAction({ videoId: action.payload.videoId }))
+    addCommentSuccessEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoStoreActions.addCommentSuccess),
+            map(action => VideoStoreActions.loadCommentsRequest({ videoId: action.videoId }))
+        )
     );
 }

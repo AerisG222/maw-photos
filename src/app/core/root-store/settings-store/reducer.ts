@@ -1,299 +1,254 @@
-import { Actions, ActionTypes } from './actions';
-import { initialState, State } from './state';
+import { createReducer, on } from '@ngrx/store';
 
-export function settingsReducer(state = initialState, action: Actions): State {
-    switch (action.type) {
-        case ActionTypes.LOAD_REQUEST:
-            return {
-                ...state,
-                error: null,
-                isLoading: true
-            };
-        case ActionTypes.LOAD_SUCCESS:
-            return {
-                ...state,
-                settings: { ...action.payload.settings },
-                error: null,
-                isLoading: false
-            };
-        case ActionTypes.LOAD_FAILURE:
-            return {
-                ...state,
-                error: action.payload.error,
-                isLoading: false
-            };
-        case ActionTypes.SAVE_REQUEST:
-            return {
-                ...state,
-                error: null
-            };
-        case ActionTypes.SAVE_FAILURE:
-            return {
-                ...state,
-                error: action.payload.error
-            };
-        case ActionTypes.SAVE_SUCCESS:
-            return {
-                ...state,
-                settings: { ...action.payload.settings },
-                error: null
-            };
+import { initialState } from './state';
+import * as SettingsActions from './actions';
 
-        case ActionTypes.TOGGLE_CATEGORY_LIST_CATEGORY_TITLES:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
-                }
-            };
-        case ActionTypes.UPDATE_CATEGORY_LIST_YEAR_FILTER:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListYearFilter: action.payload.yearFilter
-                }
-            };
-        case ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_FILTER:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListCategoryFilter: action.payload.newFilter
-                }
-            };
-        case ActionTypes.UPDATE_CATEGORY_LIST_CATEGORY_MARGIN:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListCategoryMargin: action.payload.newMargin
-                }
-            };
-        case ActionTypes.UPDATE_CATEGORY_LIST_LIST_TYPE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListListType: action.payload.newType
-                }
-            };
-        case ActionTypes.UPDATE_CATEGORY_LIST_LIST_VIEW_THUMBNAIL_SIZE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListListViewThumbnailSize: action.payload.newSize
-                }
-            };
-        case ActionTypes.UPDATE_CATEGORY_LIST_THUMBNAIL_SIZE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    categoryListThumbnailSize: action.payload.newSize
-                }
-            };
-
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_COMMENTS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelShowComments: !state.settings.photoInfoPanelShowComments
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EFFECTS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelShowEffects: !state.settings.photoInfoPanelShowEffects
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXIF:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelShowExif: !state.settings.photoInfoPanelShowExif
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_HISTOGRAM:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelShowHistogram: !state.settings.photoInfoPanelShowHistogram
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_RATINGS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelShowRatings: !state.settings.photoInfoPanelShowRatings
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_MINIMAP:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelShowMinimap: !state.settings.photoInfoPanelShowMinimap
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_INFO_PANEL_EXPANDED_STATE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
-                }
-            };
-        case ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_MAP_TYPE_ID:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelMinimapMapTypeId: action.payload.mapTypeId
-                }
-            };
-        case ActionTypes.UPDATE_PHOTO_INFO_PANEL_MINIMAP_ZOOM:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoInfoPanelMinimapZoom: action.payload.zoom
-                }
-            };
-
-        case ActionTypes.TOGGLE_PHOTO_LIST_SHOW_PHOTO_LIST:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListShowPhotoList: !state.settings.photoListShowPhotoList
-                }
-            };
-        case ActionTypes.UPDATE_PHOTO_LIST_THUMBNAIL_SIZE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListThumbnailSize: action.payload.newSize
-                }
-            };
-        case ActionTypes.TOGGLE_PHOTO_LIST_CATEGORY_BREADCRUMBS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
-                }
-            };
-        case ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_MAP_TYPE_ID:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListMapViewMapTypeId: action.payload.mapTypeId
-                }
-            };
-        case ActionTypes.UPDATE_PHOTO_LIST_MAP_VIEW_ZOOM:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    photoListMapViewZoom: action.payload.zoom
-                }
-            };
-
-        case ActionTypes.TOGGLE_VIDEO_LIST_SHOW_VIDEO_LIST:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoListShowVideoList: !state.settings.videoListShowVideoList
-                }
-            };
-        case ActionTypes.UPDATE_VIDEO_LIST_THUMBNAIL_SIZE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoListThumbnailSize: action.payload.newSize
-                }
-            };
-        case ActionTypes.TOGGLE_VIDEO_LIST_CATEGORY_BREADCRUMBS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoListShowCategoryBreadcrumbs: !state.settings.videoListShowCategoryBreadcrumbs
-                }
-            };
-        case ActionTypes.UPDATE_VIDEO_LIST_VIDEO_SIZE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoListVideoSize: action.payload.newSize
-                }
-            };
-
-        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_COMMENTS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoInfoPanelShowComments: !state.settings.videoInfoPanelShowComments
-                }
-            };
-        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_RATINGS:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoInfoPanelShowRatings: !state.settings.videoInfoPanelShowRatings
-                }
-            };
-        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_MINIMAP:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoInfoPanelShowMinimap: !state.settings.videoInfoPanelShowMinimap
-                }
-            };
-        case ActionTypes.TOGGLE_VIDEO_INFO_PANEL_EXPANDED_STATE:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoInfoPanelExpandedState: !state.settings.videoInfoPanelExpandedState
-                }
-            };
-        case ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_MAP_TYPE_ID:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoInfoPanelMinimapMapTypeId: action.payload.mapTypeId
-                }
-            };
-        case ActionTypes.UPDATE_VIDEO_INFO_PANEL_MINIMAP_ZOOM:
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    videoInfoPanelMinimapZoom: action.payload.zoom
-                }
-            };
-
-        default: {
-            return state;
+export const settingsReducer = createReducer(
+    initialState,
+    on(SettingsActions.loadRequest, state => ({
+        ...state,
+        error: null,
+        isLoading: true
+    })),
+    on(SettingsActions.loadSuccess, (state, { settings }) => ({
+        ...state,
+        settings: { ...settings },
+        error: null,
+        isLoading: false
+    })),
+    on(SettingsActions.loadFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(SettingsActions.saveRequest, state => ({
+        ...state,
+        error: null
+    })),
+    on(SettingsActions.saveFailure, (state, { error }) => ({
+        ...state,
+        error
+    })),
+    on(SettingsActions.saveSuccess, (state, { settings }) => ({
+        ...state,
+        settings: { ...settings },
+        error: null
+    })),
+    on(SettingsActions.toggleCategoryListCategoryTitlesRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
         }
-    }
-}
+    })),
+    on(SettingsActions.updateCategoryListYearFilterRequest, (state, { yearFilter }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListYearFilter: yearFilter
+        }
+    })),
+    on(SettingsActions.updateCategoryListCategoryFilterRequest, (state, { newFilter }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListCategoryFilter: newFilter
+        }
+    })),
+    on(SettingsActions.updateCategoryListCategoryMarginRequest, (state, { newMargin }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListCategoryMargin: newMargin
+        }
+    })),
+    on(SettingsActions.updateCategoryListListTypeRequest, (state, { newType }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListListType: newType
+        }
+    })),
+    on(SettingsActions.updateCategoryListListViewThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListListViewThumbnailSize: newSize
+        }
+    })),
+    on(SettingsActions.updateCategoryListThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListThumbnailSize: newSize
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelCommentsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowComments: !state.settings.photoInfoPanelShowComments
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelEffectsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowEffects: !state.settings.photoInfoPanelShowEffects
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelExifRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowExif: !state.settings.photoInfoPanelShowExif
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelHistogramRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowHistogram: !state.settings.photoInfoPanelShowHistogram
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelRatingsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowRatings: !state.settings.photoInfoPanelShowRatings
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelMinimapRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowMinimap: !state.settings.photoInfoPanelShowMinimap
+        }
+    })),
+    on(SettingsActions.togglePhotoInfoPanelExpandedStateRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
+        }
+    })),
+    on(SettingsActions.updatePhotoInfoPanelMinimapMapTypeIdRequest, (state, { mapTypeId }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelMinimapMapTypeId: mapTypeId
+        }
+    })),
+    on(SettingsActions.updatePhotoInfoPanelMinimapZoomRequest, (state, { zoom }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelMinimapZoom: zoom
+        }
+    })),
+    on(SettingsActions.togglePhotoListShowPhotoListRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoListShowPhotoList: !state.settings.photoListShowPhotoList
+        }
+    })),
+    on(SettingsActions.updatePhotoListThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoListThumbnailSize: newSize
+        }
+    })),
+    on(SettingsActions.togglePhotoListCategoryBreadcrumbsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
+        }
+    })),
+    on(SettingsActions.updatePhotoListMapViewMapTypeIdRequest, (state, { mapTypeId }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoListMapViewMapTypeId: mapTypeId
+        }
+    })),
+    on(SettingsActions.updatePhotoListMapViewZoomRequest, (state, { zoom }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoListMapViewZoom: zoom
+        }
+    })),
+    on(SettingsActions.toggleVideoListShowVideoListRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoListShowVideoList: !state.settings.videoListShowVideoList
+        }
+    })),
+    on(SettingsActions.updateVideoListThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoListThumbnailSize: newSize
+        }
+    })),
+    on(SettingsActions.toggleVideoListCategoryBreadcrumbsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoListShowCategoryBreadcrumbs: !state.settings.videoListShowCategoryBreadcrumbs
+        }
+    })),
+    on(SettingsActions.updateVideoListVideoSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoListVideoSize: newSize
+        }
+    })),
+    on(SettingsActions.toggleVideoInfoPanelCommentsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelShowComments: !state.settings.videoInfoPanelShowComments
+        }
+    })),
+    on(SettingsActions.toggleVideoInfoPanelRatingsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelShowRatings: !state.settings.videoInfoPanelShowRatings
+        }
+    })),
+    on(SettingsActions.toggleVideoInfoPanelMinimapRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelShowMinimap: !state.settings.videoInfoPanelShowMinimap
+        }
+    })),
+    on(SettingsActions.toggleVideoInfoPanelExpandedStateRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelExpandedState: !state.settings.videoInfoPanelExpandedState
+        }
+    })),
+    on(SettingsActions.updateVideoInfoPanelMinimapMapTypeIdRequest, (state, { mapTypeId }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelMinimapMapTypeId: mapTypeId
+        }
+    })),
+    on(SettingsActions.updateVideoInfoPanelMinimapZoomRequest, (state, { zoom }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelMinimapZoom: zoom
+        }
+    }))
+);

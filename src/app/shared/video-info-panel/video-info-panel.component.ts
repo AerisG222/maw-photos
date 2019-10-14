@@ -65,8 +65,8 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         this.destroySub.add(currentVideo$
             .pipe(
                 tap(video => this.currentVideo = video),
-                tap(video => this.store$.dispatch(new VideoStoreActions.LoadRatingRequestAction({ videoId: video.id }))),
-                tap(video => this.store$.dispatch(new VideoStoreActions.LoadCommentsRequestAction({ videoId: video.id })))
+                tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id }))),
+                tap(video => this.store$.dispatch(VideoStoreActions.loadCommentsRequest({ videoId: video.id })))
             ).subscribe()
         );
 
@@ -146,39 +146,39 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     }
 
     toggleEndSidenav(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelExpandedStateRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelExpandedStateRequest());
     }
 
     onRate(userRating: number): void {
         if (this.currentVideo) {
-            this.store$.dispatch(new VideoStoreActions.RateVideoRequestAction({ videoId: this.currentVideo.id, userRating }));
+            this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.currentVideo.id, userRating }));
         }
     }
 
     onComment(comment: string): void {
         if (this.currentVideo) {
-            this.store$.dispatch(new VideoStoreActions.AddCommentRequestAction({ videoId: this.currentVideo.id, comment }));
+            this.store$.dispatch(VideoStoreActions.addCommentRequest({ videoId: this.currentVideo.id, comment }));
         }
     }
 
     toggleRatings(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelRatingsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelRatingsRequest());
     }
 
     toggleComments(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelCommentsRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelCommentsRequest());
     }
 
     toggleMinimap(): void {
-        this.store$.dispatch(new SettingsStoreActions.ToggleVideoInfoPanelMinimapRequestAction());
+        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapMapTypeIdRequestAction({ mapTypeId }));
+        this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this.store$.dispatch(new SettingsStoreActions.UpdateVideoInfoPanelMinimapZoomRequestAction({ zoom }));
+        this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
     }
 
     private configureHotkeys(): void {
