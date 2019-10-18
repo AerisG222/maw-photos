@@ -141,7 +141,7 @@ export class PhotoStoreEffects {
                 const action = x[0];
                 const state = x[1] as any;
                 const effects = state.photos.currentPhotoEffects;
-                const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
+                const rotation = effects && effects.rotation ? new PhotoRotation(effects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateClockwise();
 
@@ -158,7 +158,7 @@ export class PhotoStoreEffects {
                 const action = x[0];
                 const state = x[1] as any;
                 const effects = state.photos.currentPhotoEffects;
-                const rotation = effects && effects.rotation ? effects.rotation : new PhotoRotation();
+                const rotation = effects && effects.rotation ? new PhotoRotation(effects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateCounterClockwise();
 
