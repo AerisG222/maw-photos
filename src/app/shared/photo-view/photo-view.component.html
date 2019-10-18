@@ -22,37 +22,39 @@
 </div>
 
 <div *ngIf="!fullscreen && !mapView" class="photo-grid">
-    <perfect-scrollbar class="mat-elevation-z8">
+    <div class="mat-elevation-z8">
         <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
-    </perfect-scrollbar>
+    </div>
 
-    <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">
-        <div class="category-header">
-            <app-category-header
-                *ngIf="settings?.photoListShowCategoryBreadcrumbs"
-                [showCategoryAsLink]="showCategoryAsLink"
-                [category]="category"
-                #header>
-            </app-category-header>
+    <div class="content-scroll-pane">
+        <div class="content-scroll-pane-content">
+            <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">
+                <div class="category-header">
+                    <app-category-header
+                        *ngIf="settings?.photoListShowCategoryBreadcrumbs"
+                        [showCategoryAsLink]="showCategoryAsLink"
+                        [category]="category"
+                        #header>
+                    </app-category-header>
+                </div>
+
+                <img
+                    [src]="activePhoto?.imageMd?.url"
+                    [class]="effects?.rotation?.klass"
+                    [style.filter]="getEffectStyles()"
+                    (swipeleft)="onSwipeLeft($event)"
+                    (swiperight)="onSwipeRight($event)"
+                    loading="eager" />
+
+                <app-photo-list
+                    *ngIf="photos && settings?.photoListShowPhotoList"
+                    [photos]="photos"
+                    [thumbnailSize]="settings?.photoListThumbnailSize"
+                    (photoSelected)="onSelectPhoto($event)"
+                    [selectedPhoto]="activePhoto"
+                    #photoList>
+                </app-photo-list>
+            </div>
         </div>
-
-        <img
-            [src]="activePhoto?.imageMd?.url"
-            [class]="effects?.rotation?.klass"
-            [style.filter]="getEffectStyles()"
-            (swipeleft)="onSwipeLeft($event)"
-            (swiperight)="onSwipeRight($event)"
-            loading="eager" />
-
-        <perfect-scrollbar>
-            <app-photo-list
-                *ngIf="photos && settings?.photoListShowPhotoList"
-                [photos]="photos"
-                [thumbnailSize]="settings?.photoListThumbnailSize"
-                (photoSelected)="onSelectPhoto($event)"
-                [selectedPhoto]="activePhoto"
-                #photoList>
-            </app-photo-list>
-        </perfect-scrollbar>
     </div>
 </div>

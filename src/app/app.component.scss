@@ -6,7 +6,7 @@
 
 @media (max-width: 800px) {
     .app-grid {
-        grid-template-rows: max-content auto max-content;
+        grid-template-rows: max-content auto 0;
         grid-template-columns: 100%;
     }
 }

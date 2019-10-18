@@ -1,6 +1,6 @@
 <div class="info-panel">
-    <div>
-        <perfect-scrollbar [config]="{ suppressScrollX: true }">
+    <div class="content-scroll-pane">
+        <div class="content-scroll-pane-content">
             <div *ngIf="enableButtons$ | async" class="info-panel-grid">
                 <div *ngIf="showRatings$ | async" class="panel-heading">Rating</div>
                 <app-rating
@@ -33,7 +33,7 @@
                     (zoomChange)="onZoomChange($event)">
                 </app-minimap>
             </div>
-        </perfect-scrollbar>
+        </div>i
     </div>
 
     <div class="toolbar-grid">

@@ -75,4 +75,8 @@ img {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;
     }
+
+    .main-photo-grid {
+        height: calc(100vh - 36px - 29px - 20px);  /* 15 px to give room for the scrollbar */
+    }
 }

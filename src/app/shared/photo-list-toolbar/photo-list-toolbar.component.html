@@ -13,7 +13,7 @@
                 mat-button
                 matTooltip="Enter Full Screen View (F)"
                 matTooltipPosition="after"
-                class="toolbar-button"
+                class="toolbar-button hide-on-mobile"
                 (click)="onToggleFullscreen()"
                 #fullscreenButton>
                 <mat-icon [inline]="true">fullscreen</mat-icon>
@@ -24,7 +24,7 @@
                 mat-button
                 matTooltip="Enter Map View (Z)"
                 matTooltipPosition="after"
-                class="toolbar-button"
+                class="toolbar-button hide-on-mobile"
                 (click)="onToggleMapView()"
                 #mapViewButton>
                 <mat-icon [inline]="true">map</mat-icon>
@@ -33,7 +33,7 @@
             <a mat-button
                 matTooltip="Download All Photos in Category (.zip)"
                 matTooltipPosition="after"
-                class="toolbar-button"
+                class="toolbar-button hide-on-mobile"
                 *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
                 [href]="(category$ | async)?.downloadLink">
                 <mat-icon [inline]="true">save_alt</mat-icon>
@@ -49,7 +49,7 @@
             <a mat-button
                 matTooltip="Low Res Download"
                 matTooltipPosition="after"
-                class="toolbar-button"
+                class="toolbar-button hide-on-mobile"
                 *ngIf="smDownloadUrl"
                 [href]="smDownloadUrl">
                 <mat-icon [inline]="true" class="icon-sm">photo</mat-icon>
@@ -67,7 +67,7 @@
             <a mat-button
                 matTooltip="High Res Download"
                 matTooltipPosition="after"
-                class="toolbar-button"
+                class="toolbar-button hide-on-mobile"
                 *ngIf="lgDownloadUrl"
                 [href]="lgDownloadUrl">
                 <mat-icon [inline]="true">photo</mat-icon>
@@ -90,7 +90,7 @@
                 mat-button
                 matTooltip="Show/Hide Category Breadcrumbs (T)"
                 matTooltipPosition="after"
-                class="toolbar-button"
+                class="toolbar-button hide-on-mobile"
                 (click)="onToggleCategoryBreadcrumbs()"
                 #toggleBreadcrumbsButton>
                 <mat-icon [inline]="true">title</mat-icon>

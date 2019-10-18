@@ -21,7 +21,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AgmCoreModule } from '@agm/core';
 import { BarRatingModule } from 'ngx-bar-rating';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { CategoryListToolbarComponent } from './category-list-toolbar/category-list-toolbar.component';
@@ -114,7 +113,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        PerfectScrollbarModule,
         ReactiveFormsModule,
         RouterModule
     ],
@@ -139,7 +137,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        PerfectScrollbarModule,
         ReactiveFormsModule,
 
         // components

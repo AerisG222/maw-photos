@@ -201,9 +201,20 @@ html, body {
     }
 }
 
+.content-scroll-pane,
+.content-scroll-pane-no-inner-toolbar {
+    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+.content-scroll-pane-content {
+    margin-bottom: 12px;
+}
+
 @media (max-width: 800px) {
-    html, body {
-        height: 100%;
+    .hide-on-mobile {
+        display: none !important;
     }
 
     .toolbar {
@@ -218,5 +229,17 @@ html, body {
             display: inline;
             margin: 0;
         }
+    }
+
+    .content-scroll-pane {
+        /* 36px = height of primary nav */
+        /* 29px = height of inner toolbar */
+        height: calc(100vh - 36px - 29px);
+        min-height: calc(100vh - 36px - 29px);
+    }
+
+    .content-scroll-pane-no-inner-toolbar {
+        height: calc(100vh - 36px);
+        min-height: calc(100vh - 36px);
     }
 }
