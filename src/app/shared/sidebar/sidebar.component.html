@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'mat-elevation-z8': (showSidebar$ | async) }">
+<div [ngClass]="{ 'mat-elevation-z4': (showSidebar$ | async) }">
     <div *ngIf="(showSidebar$ | async)">
         <app-info-panel *ngIf="(hidePanel$ | async) === false"></app-info-panel>
     </div>

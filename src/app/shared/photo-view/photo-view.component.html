@@ -1,5 +1,5 @@
 <div *ngIf="fullscreen" class="fullscreen-grid">
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z4">
         <app-photo-list-fullscreen-toolbar></app-photo-list-fullscreen-toolbar>
     </div>
 
@@ -7,7 +7,7 @@
 </div>
 
 <div *ngIf="mapView" class="map-grid">
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z4">
         <app-photo-list-map-toolbar></app-photo-list-map-toolbar>
     </div>
 
@@ -22,7 +22,7 @@
 </div>
 
 <div *ngIf="!fullscreen && !mapView" class="photo-grid">
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z4">
         <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
     </div>
 

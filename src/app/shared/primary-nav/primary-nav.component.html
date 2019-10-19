@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'container': true, 'mat-elevation-z8': (hideNav$ | async) === false }">
+<div [ngClass]="{ 'container': true, 'mat-elevation-z4': (hideNav$ | async) === false }">
     <div *ngIf="(hideNav$ | async) === false" class="panel-grid">
         <div class="panel-item-grid">
             <app-categories-link></app-categories-link>
