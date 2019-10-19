@@ -124,6 +124,10 @@ html, body {
     grid-template-columns: min-content;
     grid-template-rows: repeat(auto-fit, 1fr);
 
+    & .toolbar-group {
+        text-align: center;
+    }
+
     & .mat-button {
         min-width: 36px;
         line-height: 28px;
