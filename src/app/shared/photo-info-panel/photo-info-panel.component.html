@@ -1,59 +1,61 @@
 <div class="info-panel">
-    <div class="content-scroll-pane">
-        <div *ngIf="enableButtons$ | async" class="info-panel-grid content-scroll-pane-content">
-            <div *ngIf="showRatings$ | async" class="panel-heading">Rating</div>
-            <app-rating
-                class="widget"
-                *ngIf="showRatings$ | async"
-                [yourRating]="(rating$ | async)?.userRating"
-                [avgRating]="(rating$ | async)?.averageRating"
-                (rate)="onRate($event)">
-            </app-rating>
+    <div *ngIf="enableButtons$ | async" class="content-scroll-pane">
+        <div class="content-scroll-pane-content">
+            <div class="info-panel-grid">
+                <div *ngIf="showRatings$ | async" class="panel-heading">Rating</div>
+                <app-rating
+                    class="widget"
+                    *ngIf="showRatings$ | async"
+                    [yourRating]="(rating$ | async)?.userRating"
+                    [avgRating]="(rating$ | async)?.averageRating"
+                    (rate)="onRate($event)">
+                </app-rating>
 
-            <div *ngIf="showComments$ | async" class="panel-heading">Comments</div>
-            <app-comments
-                class="widget"
-                *ngIf="showComments$ | async"
-                [comments]="comments$ | async"
-                (comment)="onComment($event)"
-                #comments>
-            </app-comments>
+                <div *ngIf="showComments$ | async" class="panel-heading">Comments</div>
+                <app-comments
+                    class="widget"
+                    *ngIf="showComments$ | async"
+                    [comments]="comments$ | async"
+                    (comment)="onComment($event)"
+                    #comments>
+                </app-comments>
 
-            <div *ngIf="showExif$ | async" class="panel-heading">EXIF Data</div>
-            <app-exif
-                class="widget"
-                *ngIf="showExif$ | async"
-                [exifData]="exif$ | async">
-            </app-exif>
+                <div *ngIf="showExif$ | async" class="panel-heading">EXIF Data</div>
+                <app-exif
+                    class="widget"
+                    *ngIf="showExif$ | async"
+                    [exifData]="exif$ | async">
+                </app-exif>
 
-            <div *ngIf="showEffects$ | async" class="panel-heading">Effects</div>
-            <app-effects
-                class="widget"
-                *ngIf="showEffects$ | async"
-                [effects]="effects$ | async"
-                (resetEffects)="onResetEffects()"
-                (updateEffects)="onUpdateEffects($event)">
-            </app-effects>
+                <div *ngIf="showEffects$ | async" class="panel-heading">Effects</div>
+                <app-effects
+                    class="widget"
+                    *ngIf="showEffects$ | async"
+                    [effects]="effects$ | async"
+                    (resetEffects)="onResetEffects()"
+                    (updateEffects)="onUpdateEffects($event)">
+                </app-effects>
 
-            <div *ngIf="showHistogram$ | async" class="panel-heading">Histogram</div>
-            <app-histogram
-                class="widget"
-                *ngIf="showHistogram$ | async"
-                [photo]="currentPhoto">
-            </app-histogram>
+                <div *ngIf="showHistogram$ | async" class="panel-heading">Histogram</div>
+                <app-histogram
+                    class="widget"
+                    *ngIf="showHistogram$ | async"
+                    [photo]="currentPhoto">
+                </app-histogram>
 
-            <div *ngIf="showMinimap$ | async" class="panel-heading">Mini-map</div>
-            <app-minimap
-                class="widget"
-                *ngIf="showMinimap$ | async"
-                [lat]="latitude$ | async"
-                [lng]="longitude$ | async"
-                [mapTypeId]="minimapMapTypeId$ | async"
-                [useDarkTheme]="minimapUseDarkTheme$ | async"
-                [zoom]="minimapZoom$ | async"
-                (mapTypeChange)="onMapTypeIdChange($event)"
-                (zoomChange)="onZoomChange($event)">
-            </app-minimap>
+                <div *ngIf="showMinimap$ | async" class="panel-heading">Mini-map</div>
+                <app-minimap
+                    class="widget"
+                    *ngIf="showMinimap$ | async"
+                    [lat]="latitude$ | async"
+                    [lng]="longitude$ | async"
+                    [mapTypeId]="minimapMapTypeId$ | async"
+                    [useDarkTheme]="minimapUseDarkTheme$ | async"
+                    [zoom]="minimapZoom$ | async"
+                    (mapTypeChange)="onMapTypeIdChange($event)"
+                    (zoomChange)="onZoomChange($event)">
+                </app-minimap>
+            </div>
         </div>
     </div>
 

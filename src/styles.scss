@@ -179,7 +179,7 @@ html, body {
     & .info-panel-grid {
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: repeat(auto-fit, 1fr);
+        grid-template-rows: repeat(50, max-content);
         height: 100%;
 
         width: 504px;
