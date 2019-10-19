@@ -234,16 +234,12 @@ html, body {
     .content-scroll-pane {
         /* 36px = height of primary nav */
         /* 29px = height of inner toolbar */
-        height: calc(100vh - 36px - 29px);
-        min-height: calc(100vh - 36px - 29px);
+        height: calc(100vh - 36px - 29.25px);
+        min-height: calc(100vh - 36px - 29.25px);
     }
 
     .content-scroll-pane-no-inner-toolbar {
         height: calc(100vh - 36px);
         min-height: calc(100vh - 36px);
-    }
-
-    .content-scroll-pane-content {
-        margin-bottom: 12px;
     }
 }
