@@ -5,11 +5,13 @@
     height: 100vh;
 }
 
-.main-photo-grid {
+.main-video-grid {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: max-content auto max-content;
+    align-items: center;
     height: 100vh;
+    padding: 0 4px;
 }
 
 .video-container {
@@ -30,5 +32,9 @@ video {
     .video-grid {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;
+    }
+
+    .main-video-grid {
+        padding: 0;
     }
 }

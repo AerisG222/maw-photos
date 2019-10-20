@@ -41,6 +41,7 @@ img {
     grid-template-columns: 100%;
     grid-template-rows: max-content auto max-content;
     height: 100vh;
+    padding: 0 4px;
 }
 
 .category-header {
@@ -79,5 +80,6 @@ img {
 
     .main-photo-grid {
         height: calc(100vh - 36px - 29.25px);  /* 15 px to give room for the scrollbar */
+        padding: 0;
     }
 }
