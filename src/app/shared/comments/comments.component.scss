@@ -5,6 +5,9 @@
 
 .comment-head {
     padding: 2px 8px;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: max-content auto max-content;
 }
 
 .comment {

@@ -2,7 +2,6 @@
     <div *ngIf="enableButtons$ | async" class="content-scroll-pane mat-elevation-z4">
         <div class="content-scroll-pane-content">
             <div class="info-panel-grid">
-                <div *ngIf="showRatings$ | async" class="panel-heading">Rating</div>
                 <app-rating
                     class="widget"
                     *ngIf="showRatings$ | async"
@@ -11,7 +10,6 @@
                     (rate)="onRate($event)">
                 </app-rating>
 
-                <div *ngIf="showComments$ | async" class="panel-heading">Comments</div>
                 <app-comments
                     class="widget"
                     *ngIf="showComments$ | async"
@@ -20,14 +18,12 @@
                     #comments>
                 </app-comments>
 
-                <div *ngIf="showExif$ | async" class="panel-heading">EXIF Data</div>
                 <app-exif
                     class="widget"
                     *ngIf="showExif$ | async"
                     [exifData]="exif$ | async">
                 </app-exif>
 
-                <div *ngIf="showEffects$ | async" class="panel-heading">Effects</div>
                 <app-effects
                     class="widget"
                     *ngIf="showEffects$ | async"
@@ -36,14 +32,12 @@
                     (updateEffects)="onUpdateEffects($event)">
                 </app-effects>
 
-                <div *ngIf="showHistogram$ | async" class="panel-heading">Histogram</div>
                 <app-histogram
                     class="widget"
                     *ngIf="showHistogram$ | async"
                     [photo]="currentPhoto">
                 </app-histogram>
 
-                <div *ngIf="showMinimap$ | async" class="panel-heading">Mini-map</div>
                 <app-minimap
                     class="widget"
                     *ngIf="showMinimap$ | async"
@@ -105,16 +99,6 @@
         </button>
         <button
             mat-button
-            matTooltip="Show/Hide Histogram (H)"
-            matTooltipPosition="before"
-            [disabled]="(enableButtons$ | async) === false"
-            [class.active]="showHistogram$ | async"
-            (click)="toggleHistogram()"
-            #toggleHistogramButton>
-            <mat-icon [inline]="true">color_lens</mat-icon>
-        </button>
-        <button
-            mat-button
             matTooltip="Show/Hide Effects (E)"
             matTooltipPosition="before"
             [disabled]="(enableButtons$ | async) === false"
@@ -122,6 +106,16 @@
             (click)="toggleEffects()"
             #toggleEffectsButton>
             <mat-icon [inline]="true">photo_filter</mat-icon>
+        </button>
+        <button
+            mat-button
+            matTooltip="Show/Hide Histogram (H)"
+            matTooltipPosition="before"
+            [disabled]="(enableButtons$ | async) === false"
+            [class.active]="showHistogram$ | async"
+            (click)="toggleHistogram()"
+            #toggleHistogramButton>
+            <mat-icon [inline]="true">color_lens</mat-icon>
         </button>
         <button
             mat-button

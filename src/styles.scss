@@ -171,9 +171,26 @@ html, body {
     grid-template-rows: 100%;
     height: 100vh;
 
+    app-comments,
+    app-effects,
+    app-exif,
+    app-histogram,
+    app-minimap,
+    app-rating {
+        margin: 0 4px 8px 4px;
+    }
+
+    mat-card {
+        padding: 8px;
+    }
+
     & .panel-heading {
         padding-left: 4px;
         width: 100%;
+    }
+
+    & mat-card-title {
+        font-size: 16px;
     }
 
     & mat-divider {
@@ -186,7 +203,7 @@ html, body {
         grid-template-rows: repeat(50, max-content);
         height: 100%;
 
-        width: 504px;
+        width: 524px;
     }
 
     & .toolbar-grid {

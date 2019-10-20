@@ -1,11 +1,18 @@
-<mat-tab-group dynamicHeight="true">
-    <mat-tab label="EXIF">
-        <app-exif-table [exifData]="getFilteredData(exifCategory.Exif)"></app-exif-table>
-    </mat-tab>
-    <mat-tab label="Maker">
-        <app-exif-table [exifData]="getFilteredData(exifCategory.Maker)"></app-exif-table>
-    </mat-tab>
-    <mat-tab label="Composite">
-        <app-exif-table [exifData]="getFilteredData(exifCategory.Composite)"></app-exif-table>
-    </mat-tab>
-</mat-tab-group>
+<mat-card>
+    <mat-card-title>
+        EXIF Data
+    </mat-card-title>
+    <mat-card-content>
+        <mat-tab-group dynamicHeight="true">
+            <mat-tab label="EXIF">
+                <app-exif-table [exifData]="getFilteredData(exifCategory.Exif)"></app-exif-table>
+            </mat-tab>
+            <mat-tab label="Maker">
+                <app-exif-table [exifData]="getFilteredData(exifCategory.Maker)"></app-exif-table>
+            </mat-tab>
+            <mat-tab label="Composite">
+                <app-exif-table [exifData]="getFilteredData(exifCategory.Composite)"></app-exif-table>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

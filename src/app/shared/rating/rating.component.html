@@ -1,14 +1,19 @@
-<table>
-    <tr>
-        <td>Your Rating</td>
-        <td>
-            <bar-rating [rate]="yourRating" [max]="5" (rateChange)="onRate($event)"></bar-rating>
-        </td>
-    </tr>
-    <tr>
-        <td>Average Rating</td>
-        <td>
-            <bar-rating [rate]="avgRating" [max]="5" [readOnly]="true"></bar-rating>
-        </td>
-    </tr>
-</table>
+<mat-card>
+    <mat-card-title>Rating</mat-card-title>
+    <mat-card-content>
+        <table>
+            <tr>
+                <td>Your Rating</td>
+                <td>
+                    <bar-rating [rate]="yourRating" [max]="5" (rateChange)="onRate($event)"></bar-rating>
+                </td>
+            </tr>
+            <tr>
+                <td>Average Rating</td>
+                <td>
+                    <bar-rating [rate]="avgRating" [max]="5" [readOnly]="true"></bar-rating>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>
