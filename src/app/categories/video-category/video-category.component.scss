@@ -35,6 +35,7 @@ video {
     }
 
     .main-video-grid {
+        height: calc(100vh - 36px - 29.25px);  /* 15 px to give room for the scrollbar */
         padding: 0;
     }
 }
