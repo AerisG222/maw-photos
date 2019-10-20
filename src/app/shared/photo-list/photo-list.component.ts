@@ -10,7 +10,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListComponent {
-    _thumbnailSize: ThumbnailSize;
+    photoThumbnailSize: ThumbnailSize;
     imgWidth: number;
     imgHeight: number;
 
@@ -19,14 +19,14 @@ export class PhotoListComponent {
     @Output() photoSelected = new EventEmitter<Photo>();
 
     get thumbnailSize() {
-        return this._thumbnailSize;
+        return this.photoThumbnailSize;
     }
 
     @Input()
     set thumbnailSize(size: ThumbnailSize) {
-        this._thumbnailSize = size;
+        this.photoThumbnailSize = size;
 
-        switch(size) {
+        switch (size) {
             case ThumbnailSize.verySmall:
                 this.imgWidth = 80;
                 this.imgHeight = 60;

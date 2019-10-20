@@ -10,7 +10,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoListComponent {
-    _thumbnailSize: ThumbnailSize;
+    videoThumbnailSize: ThumbnailSize;
     imgWidth: number;
     imgHeight: number;
 
@@ -19,14 +19,14 @@ export class VideoListComponent {
     @Output() videoSelected = new EventEmitter<Video>();
 
     get thumbnailSize() {
-        return this._thumbnailSize;
+        return this.videoThumbnailSize;
     }
 
     @Input()
     set thumbnailSize(size: ThumbnailSize) {
-        this._thumbnailSize = size;
+        this.videoThumbnailSize = size;
 
-        switch(size) {
+        switch (size) {
             case ThumbnailSize.verySmall:
                 this.imgWidth = 80;
                 this.imgHeight = 60;
