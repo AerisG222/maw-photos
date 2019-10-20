@@ -224,6 +224,10 @@ html, body {
             padding: 0;
         }
     }
+
+    & .content-scroll-pane {
+        overflow-x: hidden !important;
+    }
 }
 
 .content-scroll-pane,
