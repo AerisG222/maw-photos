@@ -25,6 +25,7 @@ h3 {
 mat-card {
     min-width: 300px;
     margin-right: 12px;
+    margin-bottom: 12px;
 }
 
 .button-group {
@@ -34,10 +35,6 @@ mat-card {
 @media (max-width: 800px) {
     .card-grid {
         display: block;
-    }
-
-    mat-card {
-        margin-bottom: 12px;
     }
 
     .button-group {
