@@ -16,7 +16,7 @@ import { SettingsStoreModule } from './settings-store';
 import { VideoCategoryStoreModule } from './video-category-store';
 import { VideoStoreModule } from './video-store';
 
-function getUserStore() {
+export function getUserStore() {
     return new WebStorageStateStore({ store: window.sessionStorage });
 }
 

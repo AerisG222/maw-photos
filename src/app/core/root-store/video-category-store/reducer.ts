@@ -1,9 +1,9 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
-import { VideoCategoryAdapter, initialState } from './state';
+import { VideoCategoryAdapter, initialState, State } from './state';
 import * as VideoCategoryActions from './actions';
 
-export const videoCategoryReducer = createReducer(
+const reducer = createReducer(
     initialState,
     on(VideoCategoryActions.loadRequest, state => ({
         ...state,
@@ -31,3 +31,7 @@ export const videoCategoryReducer = createReducer(
         currentCategory: state.entities[categoryId]
     }))
 );
+
+export function videoCategoryReducer(state: State | undefined, action: Action) {
+    return reducer(state, action);
+}

@@ -1,9 +1,9 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
 import * as PhotoCategoryActions from './actions';
-import { photoCategoryAdapter, initialState } from './state';
+import { photoCategoryAdapter, initialState, State } from './state';
 
-export const photoCategoryReducer = createReducer(
+const reducer = createReducer(
     initialState,
     on(PhotoCategoryActions.loadRequest, state => ({
         ...state,
@@ -31,3 +31,7 @@ export const photoCategoryReducer = createReducer(
         currentCategory: state.entities[categoryId]
     }))
 );
+
+export function photoCategoryReducer(state: State | undefined, action: Action) {
+    return reducer(state, action);
+}

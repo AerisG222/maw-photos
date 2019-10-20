@@ -1,11 +1,11 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
 import * as PhotoActions from './actions';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { photoAdapter, initialState, State } from './state';
 
-export const photoReducer = createReducer(
+const reducer = createReducer(
     initialState,
     on(PhotoActions.clearRequest, state => (
         photoAdapter.removeAll({
@@ -311,6 +311,10 @@ export const photoReducer = createReducer(
         isMapView: !state.isMapView
     }))
 );
+
+export function photoReducer(state: State | undefined, action: Action) {
+    return reducer(state, action);
+}
 
 function nextPhoto(state: State): Photo {
     return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));

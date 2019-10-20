@@ -1,10 +1,10 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
 import { Video } from 'src/app/core/models/video.model';
 import { videoAdapter, initialState, State } from './state';
 import * as VideoActions from './actions';
 
-export const videoReducer = createReducer(
+const reducer = createReducer(
     initialState,
     on(VideoActions.clearRequest, state =>
         videoAdapter.removeAll({
@@ -135,6 +135,10 @@ export const videoReducer = createReducer(
         error
     }))
 );
+
+export function videoReducer(state: State | undefined, action: Action) {
+    return reducer(state, action);
+}
 
 function nextVideo(state: State): Video {
     return getVideoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));

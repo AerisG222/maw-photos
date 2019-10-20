@@ -1,9 +1,9 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
-import { initialState } from './state';
+import { initialState, State } from './state';
 import * as SettingsActions from './actions';
 
-export const settingsReducer = createReducer(
+const reducer = createReducer(
     initialState,
     on(SettingsActions.loadRequest, state => ({
         ...state,
@@ -252,3 +252,7 @@ export const settingsReducer = createReducer(
         }
     }))
 );
+
+export function settingsReducer(state: State | undefined, action: Action) {
+    return reducer(state, action);
+}
