@@ -19,46 +19,38 @@ export class EffectsComponent {
     }
 
     onGrayscaleChange(evt: MatSliderChange): void {
-        this.effects.grayscale = evt.value;
-        this.update();
+        this.update({...this.effects, grayscale: evt.value });
     }
 
     onSepiaChange(evt: MatSliderChange): void {
-        this.effects.sepia = evt.value;
-        this.update();
+        this.update({...this.effects, sepia: evt.value });
     }
 
     onBrightnessChange(evt: MatSliderChange): void {
-        this.effects.brightness = evt.value;
-        this.update();
+        this.update({...this.effects, brightness: evt.value });
     }
 
     onSaturationChange(evt: MatSliderChange): void {
-        this.effects.saturation = evt.value;
-        this.update();
+        this.update({...this.effects, saturation: evt.value });
     }
 
     onContrastChange(evt: MatSliderChange): void {
-        this.effects.contrast = evt.value;
-        this.update();
+        this.update({...this.effects, contrast: evt.value });
     }
 
     onInvertChange(evt: MatSliderChange): void {
-        this.effects.invert = evt.value;
-        this.update();
+        this.update({...this.effects, invert: evt.value });
     }
 
     onBlurChange(evt: MatSliderChange): void {
-        this.effects.blur = evt.value;
-        this.update();
+        this.update({...this.effects, blur: evt.value });
     }
 
     onHueRotateChange(evt: MatSliderChange): void {
-        this.effects.hueRotate = evt.value;
-        this.update();
+        this.update({...this.effects, hueRotate: evt.value });
     }
 
-    private update(): void {
-        this.updateEffects.emit(this.effects);
+    private update(newEffects): void {
+        this.updateEffects.emit(newEffects);
     }
 }
