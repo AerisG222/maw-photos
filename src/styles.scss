@@ -191,6 +191,10 @@ html, body {
 
     & mat-card-title {
         font-size: 16px;
+
+        & mat-icon {
+            margin-right: 8px;
+        }
     }
 
     & mat-divider {
