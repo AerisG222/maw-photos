@@ -33,6 +33,10 @@ form mat-icon {
     justify-content: center;
 }
 
+.content-scroll-pane {
+    margin: 0 4px;
+}
+
 @media (max-width: 800px) {
     .main-grid {
         grid-template-columns: 100%;
