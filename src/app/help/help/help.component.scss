@@ -2,11 +2,11 @@
     display: grid;
     grid-template-columns: 1fr 6fr 1fr;
     grid-template-rows: 100%;
-    height: 100vh;
+    height: 100vh
 }
 
 .pad {
-    padding: 16px;
+    padding-top: 16px;
 }
 
 .content-grid {
@@ -31,6 +31,7 @@ mat-tab-group {
 }
 
 .logo {
+    margin-top: 16px;
     text-align: center;
 
     & img {
