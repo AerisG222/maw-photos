@@ -31,6 +31,7 @@
 @import 'app/shared/photo-info-panel/photo-info-panel.component.theme';
 @import 'app/shared/photo-list/photo-list.component.theme';
 @import 'app/shared/photo-view/photo-view.component.theme.scss';
+@import 'app/shared/primary-nav/primary-nav.component.theme.scss';
 @import 'app/shared/video-info-panel/video-info-panel.component.theme';
 
 @import 'app/stats/header/stats-header.component.theme';
@@ -41,6 +42,14 @@
 
     mat-tooltip-component .mat-tooltip {
         background-color: mat-color($accent, 900) !important;
+    }
+}
+
+@mixin toolbar-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    .toolbar {
+        background-color: rgba(mat-color($accent, 700), .1);
     }
 }
 
@@ -64,6 +73,7 @@
     @include app-video-list-component-theme($theme);
     @include app-year-list-component-theme($theme);
 
+    @include toolbar-theme($theme);
     @include toolbar-button-theme($theme);
     @include app-category-header-component-theme($theme);
     @include app-comments-component-theme($theme);
@@ -71,6 +81,7 @@
     @include app-photo-info-panel-component-theme($theme);
     @include app-photo-list-component-theme($theme);
     @include app-photo-view-component-theme($theme);
+    @include app-primary-nav-component-theme($theme);
     @include app-video-info-panel-component-theme($theme);
 
     @include app-stats-header-component-theme($theme);
@@ -123,6 +134,7 @@ html, body {
     display: grid;
     grid-template-columns: min-content;
     grid-template-rows: repeat(auto-fit, 1fr);
+    height: 100%;
 
     & .toolbar-group {
         text-align: center;
@@ -177,7 +189,7 @@ html, body {
     app-histogram,
     app-minimap,
     app-rating {
-        margin: 0 4px 8px 4px;
+        margin: 8px 4px 0 4px;
     }
 
     mat-card {

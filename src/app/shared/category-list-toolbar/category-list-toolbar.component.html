@@ -1,59 +1,63 @@
-<div class="category-grid">
-    <button
-        mat-button
-        matTooltip="Toggle Grid / List View (G)"
-        matTooltipPosition="after"
-        class="toolbar-button"
-        (click)="onToggleListType()"
-        #toggleListTypeButton>
-        <mat-icon *ngIf="isListView$ | async" [inline]="true">apps</mat-icon>
-        <mat-icon *ngIf="isGridView$ | async" [inline]="true">list</mat-icon>
-    </button>
+<div class="toolbar">
+    <div>
+        <div class="toolbar-group">
+            <button
+                mat-button
+                matTooltip="Toggle Grid / List View (G)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleListType()"
+                #toggleListTypeButton>
+                <mat-icon *ngIf="isListView$ | async" [inline]="true">apps</mat-icon>
+                <mat-icon *ngIf="isGridView$ | async" [inline]="true">list</mat-icon>
+            </button>
 
-    <mat-divider></mat-divider>
+            <mat-divider></mat-divider>
 
-    <button
-        *ngIf="isGridView$ | async"
-        [disabled]="(isGridView$ | async) === false"
-        mat-button
-        matTooltip="Show/Hide Category Titles (T)"
-        matTooltipPosition="after"
-        class="toolbar-button"
-        (click)="onToggleTitle()"
-        #toggleTitlesButton>
-        <mat-icon [inline]="true">title</mat-icon>
-    </button>
+            <button
+                *ngIf="isGridView$ | async"
+                [disabled]="(isGridView$ | async) === false"
+                mat-button
+                matTooltip="Show/Hide Category Titles (T)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleTitle()"
+                #toggleTitlesButton>
+                <mat-icon [inline]="true">title</mat-icon>
+            </button>
 
-    <button
-        *ngIf="isGridView$ | async"
-        mat-button
-        matTooltip="Toggle Grid Thumbnail Size (S)"
-        matTooltipPosition="after"
-        class="toolbar-button"
-        (click)="onToggleSize()"
-        [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
-        #toggleThumbnailSizeButton>
-        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-    </button>
+            <button
+                *ngIf="isGridView$ | async"
+                mat-button
+                matTooltip="Toggle Grid Thumbnail Size (S)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleSize()"
+                [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
+                #toggleThumbnailSizeButton>
+                <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+            </button>
 
-    <button
-        *ngIf="isListView$ | async"
-        mat-button
-        matTooltip="Toggle List Thumbnail Size (S)"
-        matTooltipPosition="after"
-        class="toolbar-button"
-        (click)="onToggleListThumbnailSize()"
-        #toggleListThumbnailSizeButton>
-        <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-    </button>
+            <button
+                *ngIf="isListView$ | async"
+                mat-button
+                matTooltip="Toggle List Thumbnail Size (S)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleListThumbnailSize()"
+                #toggleListThumbnailSizeButton>
+                <mat-icon [inline]="true">photo_size_select_large</mat-icon>
+            </button>
 
-    <button
-        mat-button
-        matTooltip="Toggle Category Margins (M)"
-        matTooltipPosition="after"
-        class="toolbar-button"
-        (click)="onToggleMargins()"
-        #toggleMarginsButton>
-        <mat-icon [inline]="true">format_indent_increase</mat-icon>
-    </button>
+            <button
+                mat-button
+                matTooltip="Toggle Category Margins (M)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleMargins()"
+                #toggleMarginsButton>
+                <mat-icon [inline]="true">format_indent_increase</mat-icon>
+            </button>
+        </div>
+    </div>
 </div>
