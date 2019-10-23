@@ -1,4 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Hotkey, HotkeysService } from 'angular2-hotkeys';
+import { MatButton } from '@angular/material/button';
+import { style, transition, animate, trigger } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subscription } from 'rxjs';
 import { tap, filter, map, take } from 'rxjs/operators';
@@ -14,16 +17,24 @@ import {
     PhotoStoreSelectors,
     RootStoreState,
     SettingsStoreActions,
-    SettingsStoreSelectors,
-    LayoutStoreSelectors
+    SettingsStoreSelectors
 } from 'src/app/core/root-store';
-import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-photo-info-panel',
     templateUrl: './photo-info-panel.component.html',
-    styleUrls: ['./photo-info-panel.component.scss']
+    styleUrls: ['./photo-info-panel.component.scss'],
+    animations: [
+        trigger('flyInOut', [
+            transition(':enter', [
+                style({ width: 0 }),
+                animate('200ms ease-out', style({ width: 525 }))
+            ]),
+            transition(':leave', [
+                animate('200ms ease-out', style({ width: 0 }))
+            ])
+        ])
+    ]
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];

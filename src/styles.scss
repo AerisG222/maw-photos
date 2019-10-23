@@ -182,6 +182,7 @@ html, body {
     grid-template-columns: max-content max-content;
     grid-template-rows: 100%;
     height: 100vh;
+    justify-items: right;
 
     app-comments,
     app-effects,
@@ -215,11 +216,9 @@ html, body {
 
     & .info-panel-grid {
         display: grid;
-        grid-template-columns: 100%;
+        grid-template-columns: 525px;
         grid-template-rows: repeat(50, max-content);
         height: 100%;
-
-        width: 524px;
     }
 
     & .toolbar-grid {
