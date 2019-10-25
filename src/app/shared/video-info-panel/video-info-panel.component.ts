@@ -4,7 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subscription } from 'rxjs';
 import { filter, take, map, tap } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { transition, useAnimation, trigger } from '@angular/animations';
 
+import { sidebarShow, sidebarHide } from '../animations';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { CommentsComponent } from '../comments/comments.component';
@@ -14,14 +16,24 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoStoreSelectors,
-    VideoStoreActions,
-    LayoutStoreSelectors,
+    VideoStoreActions
 } from 'src/app/core/root-store';
+
 
 @Component({
     selector: 'app-video-info-panel',
     templateUrl: './video-info-panel.component.html',
-    styleUrls: ['./video-info-panel.component.scss']
+    styleUrls: ['./video-info-panel.component.scss'],
+    animations: [
+        trigger('sidebarFlyInOut', [
+            transition(':enter', [
+                useAnimation(sidebarShow)
+            ]),
+            transition(':leave', [
+                useAnimation(sidebarHide)
+            ])
+        ])
+    ]
 })
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];

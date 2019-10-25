@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { MatButton } from '@angular/material/button';
-import { style, transition, animate, trigger } from '@angular/animations';
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subscription } from 'rxjs';
 import { tap, filter, map, take } from 'rxjs/operators';
 
+import { sidebarShow, sidebarHide } from '../animations';
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
@@ -20,18 +21,18 @@ import {
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
 
+
 @Component({
     selector: 'app-photo-info-panel',
     templateUrl: './photo-info-panel.component.html',
     styleUrls: ['./photo-info-panel.component.scss'],
     animations: [
-        trigger('flyInOut', [
+        trigger('sidebarFlyInOut', [
             transition(':enter', [
-                style({ width: 0 }),
-                animate('200ms ease-out', style({ width: 525 }))
+                useAnimation(sidebarShow)
             ]),
             transition(':leave', [
-                animate('200ms ease-out', style({ width: 0 }))
+                useAnimation(sidebarHide)
             ])
         ])
     ]
