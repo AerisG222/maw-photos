@@ -26,3 +26,12 @@ export const sidebarInfoPanelHide = animation([
         opacity: 0
     }))
 ]);
+
+export const toolbarShow = animation([
+    style({
+        opacity: 0
+    }),
+    animate('300ms ease-out', style({
+        opacity: 1
+    }))
+]);

@@ -1,6 +1,8 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import { toolbarShow } from '../animations';
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
@@ -13,6 +15,13 @@ import { Store } from '@ngrx/store';
     selector: 'app-photo-view',
     templateUrl: './photo-view.component.html',
     styleUrls: ['./photo-view.component.scss'],
+    animations: [
+        trigger('toolbarFadeIn', [
+            transition('* => *', [
+                useAnimation(toolbarShow)
+            ])
+        ])
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoViewComponent {
