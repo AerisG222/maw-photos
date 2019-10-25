@@ -8,3 +8,21 @@ export const sidebarShow = animation([
 export const sidebarHide = animation([
     animate('200ms ease-out', style({ width: 0 }))
 ]);
+
+export const sidebarInfoPanelShow = animation([
+    style({
+        'max-height': 0,
+        opacity: 0
+    }),
+    animate('500ms ease-out', style({
+        'max-height': 650, /* bigger than largest panel */
+        opacity: 1
+    }))
+]);
+
+export const sidebarInfoPanelHide = animation([
+    animate('200ms ease-out', style({
+        height: 0,
+        opacity: 0
+    }))
+]);

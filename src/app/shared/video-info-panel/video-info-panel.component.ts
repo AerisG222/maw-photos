@@ -6,7 +6,7 @@ import { filter, take, map, tap } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
-import { sidebarShow, sidebarHide } from '../animations';
+import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { CommentsComponent } from '../comments/comments.component';
@@ -31,6 +31,14 @@ import {
             ]),
             transition(':leave', [
                 useAnimation(sidebarHide)
+            ])
+        ]),
+        trigger('toggleInfoPanel', [
+            transition(':enter', [
+                useAnimation(sidebarInfoPanelShow)
+            ]),
+            transition(':leave', [
+                useAnimation(sidebarInfoPanelHide)
             ])
         ])
     ]

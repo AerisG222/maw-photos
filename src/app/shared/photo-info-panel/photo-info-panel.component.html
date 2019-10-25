@@ -7,7 +7,8 @@
                     *ngIf="showRatings$ | async"
                     [yourRating]="(rating$ | async)?.userRating"
                     [avgRating]="(rating$ | async)?.averageRating"
-                    (rate)="onRate($event)">
+                    (rate)="onRate($event)"
+                    @toggleInfoPanel>
                 </app-rating>
 
                 <app-comments
@@ -15,13 +16,15 @@
                     *ngIf="showComments$ | async"
                     [comments]="comments$ | async"
                     (comment)="onComment($event)"
-                    #comments>
+                    #comments
+                    @toggleInfoPanel>
                 </app-comments>
 
                 <app-exif
                     class="widget"
                     *ngIf="showExif$ | async"
-                    [exifData]="exif$ | async">
+                    [exifData]="exif$ | async"
+                    @toggleInfoPanel>
                 </app-exif>
 
                 <app-effects
@@ -29,13 +32,15 @@
                     *ngIf="showEffects$ | async"
                     [effects]="effects$ | async"
                     (resetEffects)="onResetEffects()"
-                    (updateEffects)="onUpdateEffects($event)">
+                    (updateEffects)="onUpdateEffects($event)"
+                    @toggleInfoPanel>
                 </app-effects>
 
                 <app-histogram
                     class="widget"
                     *ngIf="showHistogram$ | async"
-                    [photo]="currentPhoto">
+                    [photo]="currentPhoto"
+                    @toggleInfoPanel>
                 </app-histogram>
 
                 <app-minimap
@@ -47,7 +52,8 @@
                     [useDarkTheme]="minimapUseDarkTheme$ | async"
                     [zoom]="minimapZoom$ | async"
                     (mapTypeChange)="onMapTypeIdChange($event)"
-                    (zoomChange)="onZoomChange($event)">
+                    (zoomChange)="onZoomChange($event)"
+                    @toggleInfoPanel>
                 </app-minimap>
             </div>
         </div>

@@ -7,7 +7,8 @@
                     *ngIf="showRatings$ | async"
                     [yourRating]="(rating$ | async)?.userRating"
                     [avgRating]="(rating$ | async)?.averageRating"
-                    (rate)="onRate($event)">
+                    (rate)="onRate($event)"
+                    @toggleInfoPanel>
                 </app-rating>
 
                 <app-comments
@@ -15,7 +16,8 @@
                     *ngIf="showComments$ | async"
                     [comments]="comments$ | async"
                     (comment)="onComment($event)"
-                    #comments>
+                    #comments
+                    @toggleInfoPanel>
                 </app-comments>
 
                 <app-minimap
@@ -27,7 +29,8 @@
                     [useDarkTheme]="minimapUseDarkTheme$ | async"
                     [zoom]="minimapZoom$ | async"
                     (mapTypeChange)="onMapTypeIdChange($event)"
-                    (zoomChange)="onZoomChange($event)">
+                    (zoomChange)="onZoomChange($event)"
+                    @toggleInfoPanel>
                 </app-minimap>
             </div>
         </div>

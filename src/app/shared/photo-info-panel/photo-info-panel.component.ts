@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subscription } from 'rxjs';
 import { tap, filter, map, take } from 'rxjs/operators';
 
-import { sidebarShow, sidebarHide } from '../animations';
+import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
@@ -33,6 +33,14 @@ import {
             ]),
             transition(':leave', [
                 useAnimation(sidebarHide)
+            ])
+        ]),
+        trigger('toggleInfoPanel', [
+            transition(':enter', [
+                useAnimation(sidebarInfoPanelShow)
+            ]),
+            transition(':leave', [
+                useAnimation(sidebarInfoPanelHide)
             ])
         ])
     ]
