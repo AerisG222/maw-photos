@@ -5,6 +5,8 @@ import { MapImage } from 'src/app/core/models/map-image.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
 
+// TODO: evaluate moving to @angular/google-maps once available
+
 @Component({
     selector: 'app-map-view',
     templateUrl: './map-view.component.html',

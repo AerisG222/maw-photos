@@ -11,6 +11,9 @@ import { MapImage } from 'src/app/core/models/map-image.model';
 import { RootStoreState, SettingsStoreActions, PhotoStoreActions } from 'src/app/core/root-store';
 import { Store } from '@ngrx/store';
 
+// TODO: split out the different views into their own components
+// TODO: look at updating source images to higher quality jpgs
+
 @Component({
     selector: 'app-photo-view',
     templateUrl: './photo-view.component.html',

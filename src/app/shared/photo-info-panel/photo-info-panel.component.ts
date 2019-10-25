@@ -21,6 +21,7 @@ import {
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
 
+// TODO: push the data fetch and api calls into their respective components
 
 @Component({
     selector: 'app-photo-info-panel',
