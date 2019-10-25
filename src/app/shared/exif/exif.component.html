@@ -5,13 +5,13 @@
     <mat-card-content>
         <mat-tab-group dynamicHeight="true">
             <mat-tab label="EXIF">
-                <app-exif-table [exifData]="getFilteredData(exifCategory.Exif)"></app-exif-table>
+                <app-exif-table [exifData]="exifData"></app-exif-table>
             </mat-tab>
             <mat-tab label="Maker">
-                <app-exif-table [exifData]="getFilteredData(exifCategory.Maker)"></app-exif-table>
+                <app-exif-table [exifData]="makerData"></app-exif-table>
             </mat-tab>
             <mat-tab label="Composite">
-                <app-exif-table [exifData]="getFilteredData(exifCategory.Composite)"></app-exif-table>
+                <app-exif-table [exifData]="compositeData"></app-exif-table>
             </mat-tab>
         </mat-tab-group>
     </mat-card-content>

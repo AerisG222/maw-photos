@@ -7,7 +7,6 @@ import { Observable, combineLatest, Subscription } from 'rxjs';
 import { tap, filter, map, take } from 'rxjs/operators';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
-import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
@@ -61,7 +60,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     rating$: Observable<Rating>;
     comments$: Observable<Comment[]>;
-    exif$: Observable<ExifData[]>;
     effects$: Observable<PhotoEffects>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
@@ -97,8 +95,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             .pipe(
                 tap(photo => this.currentPhoto = photo),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id })))
+                tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id })))
             ).subscribe()
         );
 
@@ -157,10 +154,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 if (this.comments) {
                     this.comments.saveSucceeded();
                 }})
-        );
-
-        this.exif$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoExifData)
         );
 
         this.latitude$ = currentPhoto$
