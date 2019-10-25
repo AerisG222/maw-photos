@@ -4,16 +4,12 @@
     $accent: map-get($theme, accent);
 
     app-video-info-panel {
-        & .toolbar {
-            background-color: rgba(mat-color($accent, 900), .3);
+        & .toolbar-grid {
+            background-color: rgba(mat-color($accent, 700), .2);
         }
 
-        & .panel-heading {
-            background-color: rgba(mat-color($accent, 900), .3);
-        }
-
-        & .toolbar_title {
-            color: mat-color($accent, A200);
+        & .content-scroll-pane {
+            background-color: rgba(mat-color($accent, 700), .1);
         }
 
         button {
