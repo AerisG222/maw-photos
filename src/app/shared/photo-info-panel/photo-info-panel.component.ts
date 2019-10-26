@@ -4,13 +4,13 @@ import { MatButton } from '@angular/material/button';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subscription } from 'rxjs';
-import { tap, filter, map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { Rating } from 'src/app/core/models/rating.model';
 import { CommentMode } from '../comments/comment-mode.model';
+import { RatingMode } from '../rating/rating-mode.model';
 import {
     PhotoStoreActions,
     PhotoStoreSelectors,
@@ -49,6 +49,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     commentMode = CommentMode;
+    ratingMode = RatingMode;
 
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
@@ -59,7 +60,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showHistogram$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
-    rating$: Observable<Rating>;
     effects$: Observable<PhotoEffects>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
@@ -88,13 +88,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         const currentPhoto$ = this.store$.pipe(
             select(PhotoStoreSelectors.selectCurrentPhoto),
             filter(photo => !!photo)
-        );
-
-        this.destroySub.add(currentPhoto$
-            .pipe(
-                tap(photo => this.currentPhoto = photo),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
-            ).subscribe()
         );
 
         this.enableButtons$ = this.store$.pipe(
@@ -142,10 +135,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings)
         );
 
-        this.rating$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoRating)
-        );
-
         this.latitude$ = currentPhoto$
             .pipe(
                 map(photo => {
@@ -182,12 +171,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleEndSidenav(): void {
         this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());
-    }
-
-    onRate(userRating: number): void {
-        if (this.currentPhoto) {
-            this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.currentPhoto.id, userRating }));
-        }
     }
 
     onResetEffects(): void {

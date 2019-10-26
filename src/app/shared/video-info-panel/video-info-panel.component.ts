@@ -2,22 +2,20 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest, Subscription } from 'rxjs';
-import { filter, take, map, tap } from 'rxjs/operators';
+import { filter, take, map } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
-import { Rating } from 'src/app/core/models/rating.model';
 import { Video } from 'src/app/core/models/video.model';
 import { CommentMode } from '../comments/comment-mode.model';
+import { RatingMode } from '../rating/rating-mode.model';
 import {
     RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors,
-    VideoStoreSelectors,
-    VideoStoreActions
+    VideoStoreSelectors
 } from 'src/app/core/root-store';
-
 
 @Component({
     selector: 'app-video-info-panel',
@@ -44,10 +42,10 @@ import {
 })
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
-    private currentVideo: Video;
     private destroySub = new Subscription();
 
     commentMode: CommentMode;
+    ratingMode = RatingMode;
 
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
@@ -56,7 +54,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     minimapUseDarkTheme$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
-    rating$: Observable<Rating>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
     minimapMapTypeId$: Observable<string>;
@@ -80,13 +77,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video)
             );
-
-        this.destroySub.add(currentVideo$
-            .pipe(
-                tap(video => this.currentVideo = video),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
-            ).subscribe()
-        );
 
         this.enableButtons$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
@@ -121,10 +111,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
             select(SettingsStoreSelectors.selectVideoInfoPanelShowRatings)
         );
 
-        this.rating$ = this.store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideoRating)
-        );
-
         this.latitude$ = currentVideo$
             .pipe(
                 map(video => {
@@ -157,12 +143,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleEndSidenav(): void {
         this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelExpandedStateRequest());
-    }
-
-    onRate(userRating: number): void {
-        if (this.currentVideo) {
-            this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.currentVideo.id, userRating }));
-        }
     }
 
     toggleRatings(): void {

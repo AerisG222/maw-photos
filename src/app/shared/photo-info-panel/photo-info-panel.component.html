@@ -5,9 +5,7 @@
                 <app-rating
                     class="widget"
                     *ngIf="showRatings$ | async"
-                    [yourRating]="(rating$ | async)?.userRating"
-                    [avgRating]="(rating$ | async)?.averageRating"
-                    (rate)="onRate($event)"
+                    [mode]="ratingMode.Photos"
                     @toggleInfoPanel>
                 </app-rating>
 

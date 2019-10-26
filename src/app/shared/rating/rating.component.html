@@ -7,13 +7,13 @@
             <tr>
                 <td>Your Rating</td>
                 <td>
-                    <bar-rating [rate]="yourRating" [max]="5" (rateChange)="onRate($event)"></bar-rating>
+                    <bar-rating [rate]="(rating$ | async)?.userRating" [max]="5" (rateChange)="onRate($event)"></bar-rating>
                 </td>
             </tr>
             <tr>
                 <td>Average Rating</td>
                 <td>
-                    <bar-rating [rate]="avgRating" [max]="5" [readOnly]="true"></bar-rating>
+                    <bar-rating [rate]="(rating$ | async)?.averageRating" [max]="5" [readOnly]="true"></bar-rating>
                 </td>
             </tr>
         </table>
