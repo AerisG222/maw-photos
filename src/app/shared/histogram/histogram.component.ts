@@ -1,10 +1,12 @@
-import { Component, Input, ViewChild, ElementRef, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Photo } from 'src/app/core/models/photo.model';
+import { Component, ViewChild, ElementRef, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
+
 import { Histogram } from './histogram';
+import { RootStoreState, PhotoStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-histogram',
@@ -21,17 +23,12 @@ export class HistogramComponent implements OnInit, OnDestroy {
 
     @ViewChild('canvas', {static: false}) canvas: ElementRef;
 
-    @Input() set photo(value: Photo) {
-        if (this.img && value !== null && value.imageMd !== null) {
-            this.img.src = value.imageMd.url;
-        }
-    }
-
     get canvasEl(): HTMLCanvasElement {
         return this.canvas.nativeElement as HTMLCanvasElement;
     }
 
     constructor(
+        private store$: Store<RootStoreState.State>,
         private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc
     ) {
@@ -41,6 +38,18 @@ export class HistogramComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.destroySub.add(this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(photo => !!photo),
+                tap(photo => {
+                    if (this.img && photo !== null && photo.imageMd !== null) {
+                        this.img.src = photo.imageMd.url;
+                    }
+                })
+            ).subscribe()
+        );
+
         this.form = this.formBuilder.group({
             channel: ['rgb']
         });
