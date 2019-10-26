@@ -14,9 +14,7 @@
                 <app-comments
                     class="widget"
                     *ngIf="showComments$ | async"
-                    [comments]="comments$ | async"
-                    (comment)="onComment($event)"
-                    #comments
+                    [mode]="commentMode.Photos"
                     @toggleInfoPanel>
                 </app-comments>
 

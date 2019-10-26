@@ -7,10 +7,9 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
-import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
-import { CommentsComponent } from '../comments/comments.component';
 import { Video } from 'src/app/core/models/video.model';
+import { CommentMode } from '../comments/comment-mode.model';
 import {
     RootStoreState,
     SettingsStoreActions,
@@ -48,6 +47,8 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private currentVideo: Video;
     private destroySub = new Subscription();
 
+    commentMode: CommentMode;
+
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showRatings$: Observable<boolean>;
@@ -56,13 +57,11 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     enableButtons$: Observable<boolean>;
 
     rating$: Observable<Rating>;
-    comments$: Observable<Comment[]>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
     minimapMapTypeId$: Observable<string>;
     minimapZoom$: Observable<number>;
 
-    @ViewChild(CommentsComponent, {static: false}) comments: CommentsComponent;
     @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
     @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
     @ViewChild('toggleCommentsButton', {static: false}) toggleCommentsButton: MatButton;
@@ -85,8 +84,7 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         this.destroySub.add(currentVideo$
             .pipe(
                 tap(video => this.currentVideo = video),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id }))),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadCommentsRequest({ videoId: video.id })))
+                tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
             ).subscribe()
         );
 
@@ -127,14 +125,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
             select(VideoStoreSelectors.selectCurrentVideoRating)
         );
 
-        this.comments$ = this.store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideoComments),
-            tap(x => {
-                if (this.comments) {
-                    this.comments.saveSucceeded();
-                }})
-        );
-
         this.latitude$ = currentVideo$
             .pipe(
                 map(video => {
@@ -172,12 +162,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     onRate(userRating: number): void {
         if (this.currentVideo) {
             this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.currentVideo.id, userRating }));
-        }
-    }
-
-    onComment(comment: string): void {
-        if (this.currentVideo) {
-            this.store$.dispatch(VideoStoreActions.addCommentRequest({ videoId: this.currentVideo.id, comment }));
         }
     }
 

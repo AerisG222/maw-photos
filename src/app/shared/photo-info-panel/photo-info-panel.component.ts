@@ -8,10 +8,9 @@ import { tap, filter, map, take } from 'rxjs/operators';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { Photo } from 'src/app/core/models/photo.model';
-import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Rating } from 'src/app/core/models/rating.model';
-import { CommentsComponent } from '../comments/comments.component';
+import { CommentMode } from '../comments/comment-mode.model';
 import {
     PhotoStoreActions,
     PhotoStoreSelectors,
@@ -49,6 +48,8 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
     private destroySub = new Subscription();
 
+    commentMode = CommentMode;
+
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showEffects$: Observable<boolean>;
@@ -59,7 +60,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     enableButtons$: Observable<boolean>;
 
     rating$: Observable<Rating>;
-    comments$: Observable<Comment[]>;
     effects$: Observable<PhotoEffects>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
@@ -67,7 +67,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     minimapZoom$: Observable<number>;
     minimapUseDarkTheme$: Observable<boolean>;
 
-    @ViewChild(CommentsComponent, {static: false}) comments: CommentsComponent;
     @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
     @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
     @ViewChild('toggleCommentsButton', {static: false}) toggleCommentsButton: MatButton;
@@ -94,8 +93,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this.destroySub.add(currentPhoto$
             .pipe(
                 tap(photo => this.currentPhoto = photo),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id })))
+                tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
             ).subscribe()
         );
 
@@ -148,14 +146,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             select(PhotoStoreSelectors.selectCurrentPhotoRating)
         );
 
-        this.comments$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoComments),
-            tap(x => {
-                if (this.comments) {
-                    this.comments.saveSucceeded();
-                }})
-        );
-
         this.latitude$ = currentPhoto$
             .pipe(
                 map(photo => {
@@ -197,12 +187,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     onRate(userRating: number): void {
         if (this.currentPhoto) {
             this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.currentPhoto.id, userRating }));
-        }
-    }
-
-    onComment(comment: string): void {
-        if (this.currentPhoto) {
-            this.store$.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.currentPhoto.id, comment }));
         }
     }
 

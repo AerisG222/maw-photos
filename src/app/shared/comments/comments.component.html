@@ -3,7 +3,7 @@
         <mat-icon [inline]="true">comment</mat-icon> Comments
     </mat-card-title>
     <mat-card-content>
-        <div *ngFor="let comment of comments" class="comment-container">
+        <div *ngFor="let comment of (comments$ | async)" class="comment-container">
             <div class="comment-head">
                 <div>
                     {{ comment.username }}
