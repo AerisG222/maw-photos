@@ -7,7 +7,6 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
-import { Video } from 'src/app/core/models/video.model';
 import { CommentMode } from '../comments/comment-mode.model';
 import { RatingMode } from '../rating/rating-mode.model';
 import {
