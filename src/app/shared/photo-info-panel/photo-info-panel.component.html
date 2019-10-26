@@ -25,9 +25,6 @@
                 <app-effects
                     class="widget"
                     *ngIf="showEffects$ | async"
-                    [effects]="effects$ | async"
-                    (resetEffects)="onResetEffects()"
-                    (updateEffects)="onUpdateEffects($event)"
                     @toggleInfoPanel>
                 </app-effects>
 

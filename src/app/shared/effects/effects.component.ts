@@ -1,21 +1,38 @@
-import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
+import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { RootStoreState, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-effects',
     templateUrl: './effects.component.html',
-    styleUrls: ['./effects.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./effects.component.scss']
 })
-export class EffectsComponent {
-    @Input() effects: PhotoEffects;
-    @Output() resetEffects = new EventEmitter<void>();
-    @Output() updateEffects = new EventEmitter<PhotoEffects>();
+export class EffectsComponent implements OnInit, OnDestroy {
+    destroySub = new Subscription();
+    effects: PhotoEffects;
 
-    onResetFilters(): void {
-        this.resetEffects.emit();
+    constructor(
+        private store$: Store<RootStoreState.State>
+    ) {
+
+    }
+
+    ngOnInit(): void {
+        this.destroySub.add(this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                tap(effects => this.effects = effects)
+            ).subscribe()
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
     }
 
     onGrayscaleChange(evt: MatSliderChange): void {
@@ -50,7 +67,11 @@ export class EffectsComponent {
         this.update({...this.effects, hueRotate: evt.value });
     }
 
-    private update(newEffects): void {
-        this.updateEffects.emit(newEffects);
+    onResetEffects(): void {
+        this.store$.dispatch(PhotoStoreActions.resetEffectsRequest());
+    }
+
+    private update(effects: PhotoEffects): void {
+        this.store$.dispatch(PhotoStoreActions.updateEffectsRequest({ effects }));
     }
 }

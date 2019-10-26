@@ -7,12 +7,9 @@ import { Observable, combineLatest, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
-import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { CommentMode } from '../comments/comment-mode.model';
 import { RatingMode } from '../rating/rating-mode.model';
 import {
-    PhotoStoreActions,
     PhotoStoreSelectors,
     RootStoreState,
     SettingsStoreActions,
@@ -60,7 +57,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showHistogram$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
-    effects$: Observable<PhotoEffects>;
     latitude$: Observable<number>;
     longitude$: Observable<number>;
     minimapMapTypeId$: Observable<string>;
@@ -74,8 +70,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleEffectsButton', {static: false}) toggleEffectsButton: MatButton;
     @ViewChild('toggleMinimapButton', {static: false}) toggleMinimapButton: MatButton;
     @ViewChild('toggleHistogramButton', {static: false}) toggleHistogramButton: MatButton;
-
-    currentPhoto: Photo;
 
     constructor(
         private store$: Store<RootStoreState.State>,
@@ -157,10 +151,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
                 })
             );
 
-        this.effects$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoEffects)
-        );
-
         this.destroySub.add(currentPhoto$.subscribe());
     }
 
@@ -171,18 +161,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleEndSidenav(): void {
         this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());
-    }
-
-    onResetEffects(): void {
-        if (this.currentPhoto) {
-            this.store$.dispatch(PhotoStoreActions.resetEffectsRequest());
-        }
-    }
-
-    onUpdateEffects(effects: PhotoEffects): void {
-        if (this.currentPhoto) {
-            this.store$.dispatch(PhotoStoreActions.updateEffectsRequest({ effects }));
-        }
     }
 
     toggleRatings(): void {
