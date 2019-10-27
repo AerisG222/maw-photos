@@ -3,14 +3,13 @@ import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { MatButton } from '@angular/material/button';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest, Subscription } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { CommentMode } from '../comments/comment-mode.model';
 import { RatingMode } from '../rating/rating-mode.model';
 import {
-    PhotoStoreSelectors,
     RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors
@@ -43,7 +42,6 @@ import {
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
-    private destroySub = new Subscription();
 
     commentMode = CommentMode;
     ratingMode = RatingMode;
@@ -56,12 +54,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showMinimap$: Observable<boolean>;
     showHistogram$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
-
-    latitude$: Observable<number>;
-    longitude$: Observable<number>;
-    minimapMapTypeId$: Observable<string>;
-    minimapZoom$: Observable<number>;
-    minimapUseDarkTheme$: Observable<boolean>;
 
     @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
     @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
@@ -78,11 +70,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.configureHotkeys();
-
-        const currentPhoto$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhoto),
-            filter(photo => !!photo)
-        );
 
         this.enableButtons$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
@@ -112,51 +99,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap)
         );
 
-        this.minimapMapTypeId$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapMapTypeId)
-        );
-
-        this.minimapZoom$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
-        );
-
-        this.minimapUseDarkTheme$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectAppTheme),
-            map(theme => theme.isDark)
-        );
-
         this.showRatings$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings)
         );
-
-        this.latitude$ = currentPhoto$
-            .pipe(
-                map(photo => {
-                    if (photo) {
-                        return photo.latitude == null ? null : photo.latitude;
-                    }
-
-                    return null;
-                })
-            );
-
-        this.longitude$ = currentPhoto$
-            .pipe(
-                map(photo => {
-                    if (photo) {
-                        return photo.longitude == null ? null : photo.longitude;
-                    }
-
-                    return null;
-                })
-            );
-
-        this.destroySub.add(currentPhoto$.subscribe());
     }
 
     ngOnDestroy() {
         this.hotkeysService.remove(this.hotkeys);
-        this.destroySub.unsubscribe();
     }
 
     toggleEndSidenav(): void {
