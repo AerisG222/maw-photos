@@ -1,11 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input } from '@angular/core';
 import { MapTypeStyle } from '@agm/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
-import { RootStoreState, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { RootStoreState, SettingsStoreSelectors, PhotoStoreSelectors, SettingsStoreActions, VideoStoreSelectors } from 'src/app/core/root-store';
+import { MinimapMode } from './minimap-mode.model';
 
 @Component({
     selector: 'app-minimap',
@@ -14,20 +15,13 @@ import { RootStoreState, SettingsStoreSelectors } from 'src/app/core/root-store'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapComponent implements OnInit {
+    @Input() mode: MinimapMode;
+
     latitude$: Observable<number>;
     longitude$: Observable<number>;
     minimapMapTypeId$: Observable<string>;
     minimapZoom$: Observable<number>;
-    minimapUseDarkTheme$: Observable<boolean>;
-
-    @Input() lat: number;
-    @Input() lng: number;
-    @Input() mapTypeId: 'roadmap';
-    @Input() zoom = 10;
-    @Input() useDarkTheme = false;
-
-    @Output() mapTypeChange = new EventEmitter<number>();
-    @Output() zoomChange = new EventEmitter<number>();
+    minimapTheme$: Observable<MapTypeStyle[]>;
 
     constructor(
         private store$: Store<RootStoreState.State>
@@ -36,6 +30,30 @@ export class MinimapComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.minimapTheme$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectAppTheme),
+            map(theme => theme.isDark ? GoogleMapThemes.THEME_DARK : GoogleMapThemes.THEME_LIGHT)
+        );
+
+        switch (this.mode) {
+            case MinimapMode.Photos:
+                this.initPhotosMinimap();
+                break;
+            case MinimapMode.Videos:
+                this.initVideosMinimap();
+                break;
+            default:
+                throw new Error('invalid minimap mode!');
+        }
+    }
+
+    initPhotosMinimap(): void {
+        const currentPhoto$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(photo => !!photo)
+        );
+
         this.latitude$ = currentPhoto$
             .pipe(
                 map(photo => {
@@ -65,26 +83,63 @@ export class MinimapComponent implements OnInit {
         this.minimapZoom$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
         );
+    }
 
-        this.minimapUseDarkTheme$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectAppTheme),
-            map(theme => theme.isDark)
+    initVideosMinimap(): void {
+        const currentVideo$ = this.store$
+            .pipe(
+                select(VideoStoreSelectors.selectCurrentVideo),
+                filter(video => !!video)
+            );
+
+        this.latitude$ = currentVideo$
+            .pipe(
+                map(video => {
+                    if (video) {
+                        return video.latitude == null ? null : video.latitude;
+                    }
+
+                    return null;
+                })
+            );
+
+        this.longitude$ = currentVideo$
+            .pipe(
+                map(video => {
+                    if (video) {
+                        return video.longitude == null ? null : video.longitude;
+                    }
+
+                    return null;
+                })
+            );
+
+        this.minimapMapTypeId$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId)
+        );
+
+        this.minimapZoom$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom)
         );
     }
 
-    onZoomChange(evt: number) {
-        this.zoomChange.emit(evt);
+    onMapTypeChange(mapTypeId: string): void {
+        if (this.mode === MinimapMode.Photos) {
+            this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+        }
+
+        if (this.mode === MinimapMode.Videos) {
+            this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+        }
     }
 
-    onMapTypeChange(evt: number) {
-        this.mapTypeChange.emit(evt);
-    }
+    onZoomChange(zoom: number): void {
+        if (this.mode === MinimapMode.Photos) {
+            this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
+        }
 
-    getMapTheme(): MapTypeStyle[] {
-        if (this.useDarkTheme) {
-            return GoogleMapThemes.THEME_DARK;
-        } else {
-            return GoogleMapThemes.THEME_LIGHT;
+        if (this.mode === MinimapMode.Videos) {
+            this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
         }
     }
 }

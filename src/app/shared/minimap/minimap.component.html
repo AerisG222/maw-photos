@@ -5,17 +5,17 @@
     <mat-card-content>
         <agm-map
             controlSize="24"
-            [latitude]="lat"
-            [longitude]="lng"
+            [latitude]="latitude$ | async"
+            [longitude]="longitude$ | async"
             [fullscreenControl]="true"
             [mapTypeControl]="true"
-            [mapTypeId]="mapTypeId"
+            [mapTypeId]="minimapMapTypeId$ | async"
             [streetViewControl]="false"
-            [styles]="getMapTheme()"
-            [zoom]="zoom"
+            [styles]="minimapTheme$ | async"
+            [zoom]="minimapZoom$ | async"
             (mapTypeIdChange)="onMapTypeChange($event)"
             (zoomChange)="onZoomChange($event)">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            <agm-marker [latitude]="latitude$ | async" [longitude]="longitude$ | async"></agm-marker>
         </agm-map>
     </mat-card-content>
 </mat-card>

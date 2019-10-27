@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest, Subscription } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { filter, take, map } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { transition, useAnimation, trigger } from '@angular/animations';
@@ -12,9 +12,9 @@ import { RatingMode } from '../rating/rating-mode.model';
 import {
     RootStoreState,
     SettingsStoreActions,
-    SettingsStoreSelectors,
-    VideoStoreSelectors
+    SettingsStoreSelectors
 } from 'src/app/core/root-store';
+import { MinimapMode } from '../minimap/minimap-mode.model';
 
 @Component({
     selector: 'app-video-info-panel',
@@ -41,9 +41,9 @@ import {
 })
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
-    private destroySub = new Subscription();
 
     commentMode: CommentMode;
+    minimapMode: MinimapMode;
     ratingMode = RatingMode;
 
     endSidenavExpanded$: Observable<boolean>;
@@ -52,11 +52,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     showMinimap$: Observable<boolean>;
     minimapUseDarkTheme$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
-
-    latitude$: Observable<number>;
-    longitude$: Observable<number>;
-    minimapMapTypeId$: Observable<string>;
-    minimapZoom$: Observable<number>;
 
     @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
     @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
@@ -70,12 +65,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.configureHotkeys();
-
-        const currentVideo$ = this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
-                filter(video => !!video)
-            );
 
         this.enableButtons$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
@@ -93,51 +82,13 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
             select(SettingsStoreSelectors.selectVideoInfoPanelShowMinimap)
         );
 
-        this.minimapUseDarkTheme$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectAppTheme),
-            map(theme => theme.isDark)
-        );
-
-        this.minimapMapTypeId$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId)
-        );
-
-        this.minimapZoom$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom)
-        );
-
         this.showRatings$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelShowRatings)
         );
-
-        this.latitude$ = currentVideo$
-            .pipe(
-                map(video => {
-                    if (video) {
-                        return video.latitude == null ? null : video.latitude;
-                    }
-
-                    return null;
-                })
-            );
-
-        this.longitude$ = currentVideo$
-            .pipe(
-                map(video => {
-                    if (video) {
-                        return video.longitude == null ? null : video.longitude;
-                    }
-
-                    return null;
-                })
-            );
-
-        this.destroySub.add(currentVideo$.subscribe());
     }
 
     ngOnDestroy() {
         this.hotkeysService.remove(this.hotkeys);
-        this.destroySub.unsubscribe();
     }
 
     toggleEndSidenav(): void {
@@ -154,14 +105,6 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleMinimap(): void {
         this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
-    }
-
-    onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
-    }
-
-    onZoomChange(zoom: number): void {
-        this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
     }
 
     private configureHotkeys(): void {

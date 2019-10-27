@@ -14,6 +14,7 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
+import { MinimapMode } from '../minimap/minimap-mode.model';
 
 // TODO: push the data fetch and api calls into their respective components
 
@@ -44,6 +45,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
 
     commentMode = CommentMode;
+    minimapMode = MinimapMode;
     ratingMode = RatingMode;
 
     endSidenavExpanded$: Observable<boolean>;
@@ -134,14 +136,6 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleMinimap(): void {
         this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelMinimapRequest());
-    }
-
-    onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
-    }
-
-    onZoomChange(zoom: number): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
     }
 
     private configureHotkeys(): void {
