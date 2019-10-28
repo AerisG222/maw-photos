@@ -16,8 +16,6 @@ import {
 } from 'src/app/core/root-store';
 import { MinimapMode } from '../minimap/minimap-mode.model';
 
-// TODO: push the data fetch and api calls into their respective components
-
 @Component({
     selector: 'app-photo-info-panel',
     templateUrl: './photo-info-panel.component.html',
