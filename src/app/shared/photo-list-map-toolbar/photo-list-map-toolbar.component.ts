@@ -9,6 +9,8 @@ import { MovePreviousButtonComponent } from '../move-previous-button/move-previo
 import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
+// TODO: do not allow moving past end of map list with arrow keys
+
 @Component({
     selector: 'app-photo-list-map-toolbar',
     templateUrl: './photo-list-map-toolbar.component.html',
