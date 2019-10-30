@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription, BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
@@ -15,7 +15,8 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 @Component({
   selector: 'app-combined-stats',
   templateUrl: './combined-stats.component.html',
-  styleUrls: ['./combined-stats.component.scss']
+  styleUrls: ['./combined-stats.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CombinedStatsComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
