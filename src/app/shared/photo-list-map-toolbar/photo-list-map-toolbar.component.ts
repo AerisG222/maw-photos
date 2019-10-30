@@ -8,6 +8,7 @@ import { RootStoreState, PhotoStoreActions, PhotoStoreSelectors } from 'src/app/
 import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
 import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
+import { tap } from 'rxjs/operators';
 
 // TODO: do not allow moving past end of map list with arrow keys
 
@@ -25,6 +26,8 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     isLast$: Observable<boolean>;
 
     private hotkeys: Hotkey[] = [];
+    private isFirst: boolean;
+    private isLast: boolean;
 
     constructor(
         private store$: Store<RootStoreState.State>,
@@ -36,12 +39,14 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
 
         this.isFirst$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates)
+                select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates),
+                tap(isFirst => this.isFirst = isFirst)
             );
 
         this.isLast$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLastWithGpsCoordinates)
+                select(PhotoStoreSelectors.selectIsCurrentPhotoLastWithGpsCoordinates),
+                tap(isLast => this.isLast = isLast)
             );
     }
 
@@ -54,11 +59,15 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(PhotoStoreActions.moveNextWithGpsRequest());
+        if (!this.isLast) {
+            this.store$.dispatch(PhotoStoreActions.moveNextWithGpsRequest());
+        }
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(PhotoStoreActions.movePreviousWithGpsRequest());
+        if (!this.isFirst) {
+            this.store$.dispatch(PhotoStoreActions.movePreviousWithGpsRequest());
+        }
     }
 
     private configureHotkeys(): void {
