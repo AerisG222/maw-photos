@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
-import { RootStoreState, SettingsStoreActions } from 'src/app/core/root-store';
+import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { MatSelectChange } from '@angular/material/select';
+import { tap, first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-category-type-filter',
@@ -22,7 +23,13 @@ export class CategoryTypeFilterComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
+                tap(filter => this.categoryTypeControl.setValue(filter.value)),
+                first()
+            )
+            .subscribe();
     }
 
     onSelectCategoryType(change: MatSelectChange): void {
