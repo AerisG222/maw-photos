@@ -1,6 +1,6 @@
 <div>
     <img
-        *ngFor="let photo of photos"
+        *ngFor="let photo of photos; trackBy: trackByPhoto"
         #itemRef
         [src]="photo.imageXsSq.url"
         [ngClass]="thumbnailSize.klass"
