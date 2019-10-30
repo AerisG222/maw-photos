@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -15,7 +15,8 @@ import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'sr
 @Component({
     selector: 'app-category-list-toolbar',
     templateUrl: './category-list-toolbar.component.html',
-    styleUrls: ['./category-list-toolbar.component.scss']
+    styleUrls: ['./category-list-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];

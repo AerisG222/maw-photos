@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
@@ -10,7 +10,8 @@ import { RootStoreState, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/
 @Component({
     selector: 'app-exif',
     templateUrl: './exif.component.html',
-    styleUrls: ['./exif.component.scss']
+    styleUrls: ['./exif.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExifComponent implements OnInit, OnDestroy {
     destroySub = new Subscription();

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
@@ -37,7 +37,8 @@ import { MinimapMode } from '../minimap/minimap-mode.model';
                 useAnimation(sidebarInfoPanelHide)
             ])
         ])
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];

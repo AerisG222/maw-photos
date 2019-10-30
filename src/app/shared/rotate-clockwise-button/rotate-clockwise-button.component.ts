@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
@@ -8,7 +8,8 @@ import { RootStoreState, PhotoStoreActions } from 'src/app/core/root-store';
 @Component({
   selector: 'app-rotate-clockwise-button',
   templateUrl: './rotate-clockwise-button.component.html',
-  styleUrls: ['./rotate-clockwise-button.component.scss']
+  styleUrls: ['./rotate-clockwise-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RotateClockwiseButtonComponent implements OnInit {
     private hotkeys: Hotkey[] = [];

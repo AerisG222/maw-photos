@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -15,7 +15,8 @@ import { tap } from 'rxjs/operators';
 @Component({
     selector: 'app-photo-list-map-toolbar',
     templateUrl: './photo-list-map-toolbar.component.html',
-    styleUrls: ['./photo-list-map-toolbar.component.scss']
+    styleUrls: ['./photo-list-map-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;

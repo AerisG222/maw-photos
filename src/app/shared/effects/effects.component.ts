@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,8 @@ import { RootStoreState, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/
 @Component({
     selector: 'app-effects',
     templateUrl: './effects.component.html',
-    styleUrls: ['./effects.component.scss']
+    styleUrls: ['./effects.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EffectsComponent implements OnInit, OnDestroy {
     destroySub = new Subscription();

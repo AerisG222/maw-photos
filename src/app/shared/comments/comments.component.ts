@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
@@ -11,7 +11,8 @@ import { filter, tap } from 'rxjs/operators';
 @Component({
     selector: 'app-comments',
     templateUrl: './comments.component.html',
-    styleUrls: ['./comments.component.scss']
+    styleUrls: ['./comments.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentsComponent implements OnInit, OnDestroy {
     @Input() mode: CommentMode;

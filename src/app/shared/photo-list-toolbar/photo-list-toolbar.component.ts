@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -25,7 +25,8 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 @Component({
     selector: 'app-photo-list-toolbar',
     templateUrl: './photo-list-toolbar.component.html',
-    styleUrls: ['./photo-list-toolbar.component.scss']
+    styleUrls: ['./photo-list-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;

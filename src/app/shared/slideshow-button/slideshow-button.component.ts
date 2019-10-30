@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
@@ -9,7 +9,8 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
 @Component({
     selector: 'app-slideshow-button',
     templateUrl: './slideshow-button.component.html',
-    styleUrls: ['./slideshow-button.component.scss']
+    styleUrls: ['./slideshow-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SlideshowButtonComponent implements OnInit, CanRipple {
     @Output() toggleSlideshow = new EventEmitter<void>();

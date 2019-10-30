@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
@@ -8,7 +8,8 @@ import { tap, filter } from 'rxjs/operators';
 @Component({
     selector: 'app-info-panel',
     templateUrl: './info-panel.component.html',
-    styleUrls: ['./info-panel.component.scss']
+    styleUrls: ['./info-panel.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoPanelComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();

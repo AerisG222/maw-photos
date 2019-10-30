@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-stats-link',
   templateUrl: './stats-link.component.html',
-  styleUrls: ['./stats-link.component.scss']
+  styleUrls: ['./stats-link.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatsLinkComponent {
     @Input() tooltipPosition = 'after';

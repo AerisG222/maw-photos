@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
@@ -10,7 +10,8 @@ import { filter, tap } from 'rxjs/operators';
 @Component({
     selector: 'app-rating',
     templateUrl: './rating.component.html',
-    styleUrls: ['./rating.component.scss']
+    styleUrls: ['./rating.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent implements OnInit, OnDestroy {
     @Input() mode: RatingMode;

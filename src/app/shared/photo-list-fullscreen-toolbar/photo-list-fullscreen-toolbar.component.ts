@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
@@ -18,7 +18,8 @@ import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.c
 @Component({
     selector: 'app-photo-list-fullscreen-toolbar',
     templateUrl: './photo-list-fullscreen-toolbar.component.html',
-    styleUrls: ['./photo-list-fullscreen-toolbar.component.scss']
+    styleUrls: ['./photo-list-fullscreen-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     isFirst$: Observable<boolean>;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -22,7 +22,8 @@ import {
 @Component({
     selector: 'app-video-list-toolbar',
     templateUrl: './video-list-toolbar.component.html',
-    styleUrls: ['./video-list-toolbar.component.scss']
+    styleUrls: ['./video-list-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();

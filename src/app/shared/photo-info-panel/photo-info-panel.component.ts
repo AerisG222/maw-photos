@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { MatButton } from '@angular/material/button';
 import { transition, trigger, useAnimation } from '@angular/animations';
@@ -37,7 +37,8 @@ import { MinimapMode } from '../minimap/minimap-mode.model';
                 useAnimation(sidebarInfoPanelHide)
             ])
         ])
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { delay } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { RootStoreState, LayoutStoreSelectors } from 'src/app/core/root-store';
 @Component({
     selector: 'app-primary-nav',
     templateUrl: './primary-nav.component.html',
-    styleUrls: ['./primary-nav.component.scss']
+    styleUrls: ['./primary-nav.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PrimaryNavComponent implements OnInit {
     hideNav$: Observable<boolean>;
