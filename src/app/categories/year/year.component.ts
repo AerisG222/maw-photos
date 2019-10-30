@@ -1,22 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { Category } from 'src/app/core/models/category.model';
+import { CategoryListType } from 'src/app/core/models/category-list-type.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import {
     RootStoreState,
     RootStoreSelectors,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
-import { CategoryListType } from 'src/app/core/models/category-list-type.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-year',
     templateUrl: './year.component.html',
-    styleUrls: ['./year.component.scss']
+    styleUrls: ['./year.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YearComponent implements OnInit {
     @Input() year: number;
