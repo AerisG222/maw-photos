@@ -1,0 +1,19 @@
+<div class="map-grid">
+    <div class="mat-elevation-z4" @toolbarFadeIn>
+        <app-photo-list-map-toolbar></app-photo-list-map-toolbar>
+    </div>
+
+    <ng-container *ngIf="{
+        settings: settings$ | async
+    } as data">
+        <app-map-view
+            [activePhoto]="activePhoto$ | async"
+            [images]="mapImages$ | async"
+            [mapTypeId]="data.settings?.photoListMapViewMapTypeId"
+            [useDarkTheme]="data.settings?.appTheme?.isDark"
+            (mapTypeChange)="onMapTypeIdChange($event)"
+            [zoom]="data.settings?.photoListMapViewZoom"
+            (zoomChange)="onZoomChange($event)">
+        </app-map-view>
+    </ng-container>
+</div>

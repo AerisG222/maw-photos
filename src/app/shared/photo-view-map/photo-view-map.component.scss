@@ -1,0 +1,13 @@
+.map-grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 100%;
+    height: 100vh;
+}
+
+@media (max-width: 800px) {
+    .map-grid {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content auto;
+    }
+}

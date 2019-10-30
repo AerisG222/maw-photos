@@ -54,6 +54,8 @@ import { RotateCounterClockwiseButtonComponent } from './rotate-counter-clockwis
 import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate-clockwise-button.component';
 import { PrimaryNavComponent } from './primary-nav/primary-nav.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { PhotoViewFullscreenComponent } from './photo-view-fullscreen/photo-view-fullscreen.component';
+import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component';
 
 @NgModule({
     declarations: [
@@ -79,6 +81,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
         PhotoViewComponent,
+        PhotoViewFullscreenComponent,
+        PhotoViewMapComponent,
         PrimaryNavComponent,
         RandomLinkComponent,
         RatingComponent,
@@ -88,7 +92,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
-        VideoInfoPanelComponent,
+        VideoInfoPanelComponent
     ],
     imports: [
         AgmCoreModule.forRoot({
@@ -162,6 +166,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
         PhotoViewComponent,
+        PhotoViewFullscreenComponent,
+        PhotoViewMapComponent,
         PrimaryNavComponent,
         RandomLinkComponent,
         RatingComponent,

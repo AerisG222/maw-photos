@@ -1,17 +1,25 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, tap, take } from 'rxjs/operators';
 
 import { toolbarShow } from '../animations';
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
-import { MapImage } from 'src/app/core/models/map-image.model';
-import { RootStoreState, SettingsStoreActions, PhotoStoreActions } from 'src/app/core/root-store';
-import { Store } from '@ngrx/store';
+import {
+    RootStoreState,
+    PhotoStoreActions,
+    PhotoStoreSelectors,
+    SettingsStoreSelectors,
+    PhotoCategoryStoreSelectors
+} from 'src/app/core/root-store';
+import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
+import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 
-// TODO: split out the different views into their own components
 // TODO: look at updating source images to higher quality jpgs
 
 @Component({
@@ -27,72 +35,66 @@ import { Store } from '@ngrx/store';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PhotoViewComponent {
-    @Input() settings: Settings;
-    @Input() category: PhotoCategory;
-    @Input() photos: Photo[];
-    @Input() activePhoto: Photo;
-    @Input() effects: PhotoEffects;
-    @Input() mapView = false;
-    @Input() fullscreen = false;
+export class PhotoViewComponent implements OnInit {
     @Input() allowCategoryDownload: boolean;
     @Input() showCategoryAsLink: boolean;
-    @Input() mapImages: MapImage[];
 
-    @Output() photoSelected = new EventEmitter<Photo>();
+    settings$: Observable<Settings>;
+    category$: Observable<PhotoCategory>;
+    photos$: Observable<Photo[]>;
+    activePhoto$: Observable<Photo>;
+    effects$: Observable<PhotoEffects>;
 
     constructor(
         private store$: Store<RootStoreState.State>,
+        private slideshowControlSvc: SlideshowControlService,  // do not remove, needed so service is created before use
+        private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer
     ) {
 
     }
 
-    onSelectPhoto(photo: Photo): void {
-        this.photoSelected.emit(photo);
+    ngOnInit(): void {
+        this.settings$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSettings)
+            );
+
+        this.category$ = this.store$
+            .pipe(
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
+            );
+
+        this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectAllPhotos),
+                filter(photos => !!photos && photos.length > 0),
+                tap(photos => this.setCurrentPhoto(photos[0])),
+                take(1)
+            ).subscribe();
+
+        this.photos$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectAllPhotos)
+            );
+
+        this.activePhoto$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(x => !!x)
+            );
+
+        this.effects$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                filter(x => !!x)
+            );
     }
 
-    getEffectStyles() {
-        const style: string[] = [];
-
-        if (this.effects.grayscale > 0) {
-            style.push('grayscale(' + this.effects.grayscale + '%)');
-        }
-        if (this.effects.sepia > 0) {
-            style.push('sepia(' + this.effects.sepia + '%)');
-        }
-        if (this.effects.blur > 0) {
-            style.push('blur(' + this.effects.blur + 'px)');
-        }
-        if (this.effects.saturation !== 100) {
-            style.push('saturate(' + this.effects.saturation + '%)');
-        }
-        if (this.effects.brightness !== 100) {
-            style.push('brightness(' + this.effects.brightness + '%)');
-        }
-        if (this.effects.contrast !== 100) {
-            style.push('contrast(' + this.effects.contrast + '%)');
-        }
-        if (this.effects.hueRotate > 0) {
-            style.push('hue-rotate(' + this.effects.hueRotate + 'deg)');
-        }
-        if (this.effects.invert > 0) {
-            style.push('invert(' + this.effects.invert + '%)');
-        }
-
-        if (style.length === 0) {
-            return '';
-        }
+    getEffectStyles(effects: PhotoEffects) {
+        const style = this.effectStyleBuilder.build(effects);
 
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
-    }
-
-    onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
-    }
-
-    onZoomChange(zoom: number): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewZoomRequest({ zoom }));
     }
 
     onSwipeLeft(evt): void {
@@ -101,5 +103,13 @@ export class PhotoViewComponent {
 
     onSwipeRight(evt): void {
         this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+    }
+
+    onSelectPhoto(photo: Photo): void {
+        this.setCurrentPhoto(photo);
+    }
+
+    private setCurrentPhoto(photo: Photo): void {
+        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo }));
     }
 }

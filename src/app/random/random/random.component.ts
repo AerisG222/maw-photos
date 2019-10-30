@@ -1,13 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject, interval } from 'rxjs';
+import { Subject, interval, Subscription } from 'rxjs';
 import { tap, take, takeUntil, filter } from 'rxjs/operators';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
-import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { Settings } from 'src/app/core/models/settings.model';
-import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
@@ -22,22 +17,15 @@ import {
 @Component({
     selector: 'app-random',
     templateUrl: './random.component.html',
-    styleUrls: ['./random.component.scss']
+    styleUrls: ['./random.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RandomComponent implements OnInit, OnDestroy {
-    killFetch$ = new Subject<boolean>();
-    settings$: Observable<Settings>;
-    category$: Observable<PhotoCategory>;
-    photos$: Observable<Photo[]>;
-    activePhoto$: Observable<Photo>;
-    effects$: Observable<PhotoEffects>;
-    isFullscreen$: Observable<boolean>;
-
-    private currentPhotoSet = false;
+    private killFetch = new Subject<boolean>();
+    private destroySub = new Subscription();
 
     constructor(
-        private store$: Store<RootStoreState.State>,
-        private slideshowControlSvc: SlideshowControlService
+        private store$: Store<RootStoreState.State>
     ) {
 
     }
@@ -45,31 +33,15 @@ export class RandomComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.store$.dispatch(PhotoStoreActions.clearRequest());
 
-        this.settings$ = this.store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
-                tap(x => this.killFetch$.next(true)),
+                tap(x => this.killFetch.next(true)),
                 tap(settings => this.startRandomFetch(settings.photoListSlideshowDisplayDurationSeconds * 1000))
-            );
+            ).subscribe()
+        );
 
-        this.photos$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectAllPhotos),
-                filter(photos => !!photos && photos.length > 0),
-                tap(photos => {
-                    if (!this.currentPhotoSet) {
-                        this.currentPhotoSet = true;
-                        this.setCurrentPhoto(photos[0]);
-                    }
-                })
-            );
-
-        this.category$ = this.store$
-            .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
-            );
-
-        this.activePhoto$ = this.store$
+        this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(x => !!x),
@@ -81,17 +53,8 @@ export class RandomComponent implements OnInit, OnDestroy {
                             take(1)
                         ).subscribe();
                 })
-            );
-
-        this.effects$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
-            );
-
-        this.isFullscreen$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsFullscreenView)
-            );
+            ).subscribe()
+        );
 
         this.store$.dispatch(SettingsStoreActions.loadRequest());
         this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
@@ -99,25 +62,17 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.killFetch$.next(true);
-        this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
+        this.killFetch.next(true);
         this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
-        this.setCurrentPhoto(null);
-    }
-
-    onSelectPhoto(photo: Photo): void {
-        this.setCurrentPhoto(photo);
-    }
-
-    private setCurrentPhoto(photo: Photo): void {
-        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo }));
+        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo: null }));
+        this.destroySub.unsubscribe();
     }
 
     private startRandomFetch(delay: number): void {
         interval(delay)
             .pipe(
                 tap(x => this.store$.dispatch(PhotoStoreActions.loadRandomRequest())),
-                takeUntil(this.killFetch$)
+                takeUntil(this.killFetch)
             ).subscribe();
     }
 }

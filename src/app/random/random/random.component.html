@@ -1,11 +1,13 @@
-<app-photo-view
-    [settings]="settings$ | async"
-    [category]="category$ | async"
-    [photos]="photos$ | async"
-    [activePhoto]="activePhoto$ | async"
-    [effects]="effects$ | async"
-    [fullscreen]="isFullscreen$ | async"
-    [allowCategoryDownload]="false"
-    [showCategoryAsLink]="true"
-    (photoSelected)="onSelectPhoto($event)">
-</app-photo-view>
+<ng-container *ngIf="{
+    isFullscreen: isFullscreen$ | async
+} as data">
+    <app-photo-view
+        *ngIf="!data.isFullscreen"
+        allowCategoryDownload="false"
+        showCategoryAsLink="true">
+    </app-photo-view>
+
+    <app-photo-view-fullscreen
+        *ngIf="data.isFullscreen">
+    </app-photo-view-fullscreen>
+</ng-container>

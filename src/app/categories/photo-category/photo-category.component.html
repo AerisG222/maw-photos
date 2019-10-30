@@ -1,13 +1,18 @@
-<app-photo-view
-    [settings]="settings$ | async"
-    [category]="category$ | async"
-    [photos]="photos$ | async"
-    [activePhoto]="activePhoto$ | async"
-    [effects]="effects$ | async"
-    [fullscreen]="isFullscreen$ | async"
-    [mapView]="isMapView$ | async"
-    [allowCategoryDownload]="true"
-    [showCategoryAsLink]="false"
-    [mapImages]="mapImages$ | async"
-    (photoSelected)="onSelectPhoto($event)">
-</app-photo-view>
+<ng-container *ngIf="{
+    isFullscreen: isFullscreen$ | async,
+    isMapView: isMapView$ | async
+} as data">
+    <app-photo-view
+        *ngIf="!data.isFullscreen && !data.isMapView"
+        allowCategoryDownload="true"
+        [showCategoryAsLink]="false">
+    </app-photo-view>
+
+    <app-photo-view-fullscreen
+        *ngIf="data.isFullscreen">
+    </app-photo-view-fullscreen>
+
+    <app-photo-view-map
+        *ngIf="data.isMapView">
+    </app-photo-view-map>
+</ng-container>

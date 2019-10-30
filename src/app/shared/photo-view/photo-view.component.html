@@ -1,60 +1,44 @@
-<div *ngIf="fullscreen" class="fullscreen-grid">
-    <div class="mat-elevation-z4" @toolbarFadeIn>
-        <app-photo-list-fullscreen-toolbar></app-photo-list-fullscreen-toolbar>
-    </div>
-
-    <img [src]="activePhoto?.imageLg?.url" [class]="effects?.rotation?.klass" />
-</div>
-
-<div *ngIf="mapView" class="map-grid">
-    <div class="mat-elevation-z4" @toolbarFadeIn>
-        <app-photo-list-map-toolbar></app-photo-list-map-toolbar>
-    </div>
-
-    <app-map-view
-        [activePhoto]="activePhoto"
-        [images]="mapImages"
-        [mapTypeId]="settings?.photoListMapViewMapTypeId"
-        [useDarkTheme]="settings?.appTheme?.isDark"
-        (mapTypeChange)="onMapTypeIdChange($event)"
-        [zoom]="settings?.photoListMapViewZoom"
-        (zoomChange)="onZoomChange($event)"></app-map-view>
-</div>
-
-<div *ngIf="!fullscreen && !mapView" class="photo-grid">
+<div class="photo-grid">
     <div class="mat-elevation-z4" @toolbarFadeIn>
         <app-photo-list-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photo-list-toolbar>
     </div>
 
-    <div class="content-scroll-pane">
-        <div class="content-scroll-pane-content">
-            <div *ngIf="photos" class="main-photo-grid" style="overflow: hidden;">
-                <div class="category-header">
-                    <app-category-header
-                        *ngIf="settings?.photoListShowCategoryBreadcrumbs"
-                        [showCategoryAsLink]="showCategoryAsLink"
-                        [category]="category"
-                        #header>
-                    </app-category-header>
+    <ng-container *ngIf="{
+        photos: photos$ | async,
+        settings: settings$ | async,
+        effects: effects$ | async,
+        activePhoto: activePhoto$ | async
+    } as data">
+        <div class="content-scroll-pane">
+            <div class="content-scroll-pane-content">
+                <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
+                    <div class="category-header">
+                        <app-category-header
+                            *ngIf="data.settings?.photoListShowCategoryBreadcrumbs"
+                            [showCategoryAsLink]="showCategoryAsLink"
+                            [category]="category$ | async"
+                            #header>
+                        </app-category-header>
+                    </div>
+
+                    <img
+                        [src]="data.activePhoto?.imageMd?.url"
+                        [class]="data.effects?.rotation?.klass"
+                        [style.filter]="getEffectStyles(data.effects)"
+                        (swipeleft)="onSwipeLeft($event)"
+                        (swiperight)="onSwipeRight($event)"
+                        loading="eager" />
+
+                    <app-photo-list
+                        *ngIf="data.photos && data.settings?.photoListShowPhotoList"
+                        [photos]="data.photos"
+                        [thumbnailSize]="data.settings?.photoListThumbnailSize"
+                        (photoSelected)="onSelectPhoto($event)"
+                        [selectedPhoto]="data.activePhoto"
+                        #photoList>
+                    </app-photo-list>
                 </div>
-
-                <img
-                    [src]="activePhoto?.imageMd?.url"
-                    [class]="effects?.rotation?.klass"
-                    [style.filter]="getEffectStyles()"
-                    (swipeleft)="onSwipeLeft($event)"
-                    (swiperight)="onSwipeRight($event)"
-                    loading="eager" />
-
-                <app-photo-list
-                    *ngIf="photos && settings?.photoListShowPhotoList"
-                    [photos]="photos"
-                    [thumbnailSize]="settings?.photoListThumbnailSize"
-                    (photoSelected)="onSelectPhoto($event)"
-                    [selectedPhoto]="activePhoto"
-                    #photoList>
-                </app-photo-list>
             </div>
         </div>
-    </div>
+    </ng-container>
 </div>
