@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subject, interval, Subscription } from 'rxjs';
+import { Subject, interval, Subscription, Observable } from 'rxjs';
 import { tap, take, takeUntil, filter } from 'rxjs/operators';
 
 import {
@@ -24,6 +24,8 @@ export class RandomComponent implements OnInit, OnDestroy {
     private killFetch = new Subject<boolean>();
     private destroySub = new Subscription();
 
+    isFullscreen$: Observable<boolean>;
+
     constructor(
         private store$: Store<RootStoreState.State>
     ) {
@@ -32,6 +34,11 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.store$.dispatch(PhotoStoreActions.clearRequest());
+
+        this.isFullscreen$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsFullscreenView)
+            );
 
         this.destroySub.add(this.store$
             .pipe(
