@@ -10,6 +10,7 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { VideoSize } from 'src/app/core/models/video-size.model';
 import { MovePreviousButtonComponent } from 'src/app/shared/move-previous-button/move-previous-button.component';
 import { MoveNextButtonComponent } from 'src/app/shared/move-next-button/move-next-button.component';
+import { CanRipple } from 'src/app/core/models/can-ripple.model';
 import {
     RootStoreState,
     SettingsStoreActions,
@@ -17,7 +18,6 @@ import {
     VideoStoreActions,
     VideoStoreSelectors
 } from 'src/app/core/root-store';
-import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
 @Component({
     selector: 'app-video-list-toolbar',
