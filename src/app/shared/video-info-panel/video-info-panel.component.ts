@@ -43,8 +43,8 @@ import { MinimapMode } from '../minimap/minimap-mode.model';
 export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
 
-    commentMode: CommentMode;
-    minimapMode: MinimapMode;
+    commentMode = CommentMode;
+    minimapMode = MinimapMode;
     ratingMode = RatingMode;
 
     endSidenavExpanded$: Observable<boolean>;
