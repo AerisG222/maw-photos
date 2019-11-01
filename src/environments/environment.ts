@@ -8,8 +8,8 @@ import { ExternalServicesModule } from 'src/app/core/services/external/external-
 export const environment = {
     production: false,
     version: require('../../package.json').version,
-    servicesModule: MockServicesModule  // use this for dev / testing of app functionality
-    // servicesModule: ExternalServicesModule  // use this for integration testing / hitting the actual webservices
+    // servicesModule: MockServicesModule  // use this for dev / testing of app functionality
+    servicesModule: ExternalServicesModule  // use this for integration testing / hitting the actual webservices
 };
 
 /*
