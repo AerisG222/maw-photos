@@ -14,8 +14,6 @@ export class ExternalAuthGuard implements AuthGuard {
         return this.oidcFacade.identity$.pipe(
             take(1),
             switchMap(user => {
-                console.log('Auth Guard - Checking if user exists', user);
-                console.log('Auth Guard - Checking if user is expired:', user && user.expired);
                 if (user && !user.expired) {
                     return of(true);
                 } else {
