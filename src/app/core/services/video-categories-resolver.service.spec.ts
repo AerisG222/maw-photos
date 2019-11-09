@@ -6,7 +6,7 @@ describe('VideoCategoriesResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: VideoCategoriesResolverService = TestBed.get(VideoCategoriesResolverService);
+    const service: VideoCategoriesResolverService = TestBed.inject(VideoCategoriesResolverService);
     expect(service).toBeTruthy();
   });
 });

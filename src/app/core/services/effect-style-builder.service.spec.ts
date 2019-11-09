@@ -6,7 +6,7 @@ describe('EffectStyleBuilderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EffectStyleBuilderService = TestBed.get(EffectStyleBuilderService);
+    const service: EffectStyleBuilderService = TestBed.inject(EffectStyleBuilderService);
     expect(service).toBeTruthy();
   });
 });

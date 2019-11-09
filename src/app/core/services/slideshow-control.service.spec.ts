@@ -6,7 +6,7 @@ describe('SlideshowControlService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SlideshowControlService = TestBed.get(SlideshowControlService);
+    const service: SlideshowControlService = TestBed.inject(SlideshowControlService);
     expect(service).toBeTruthy();
   });
 });

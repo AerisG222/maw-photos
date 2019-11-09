@@ -6,7 +6,7 @@ describe('MockVideoApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MockVideoApiService = TestBed.get(MockVideoApiService);
+    const service: MockVideoApiService = TestBed.inject(MockVideoApiService);
     expect(service).toBeTruthy();
   });
 });

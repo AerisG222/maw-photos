@@ -6,7 +6,7 @@ describe('ExternalVideoApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ExternalVideoApiService = TestBed.get(ExternalVideoApiService);
+    const service: ExternalVideoApiService = TestBed.inject(ExternalVideoApiService);
     expect(service).toBeTruthy();
   });
 });

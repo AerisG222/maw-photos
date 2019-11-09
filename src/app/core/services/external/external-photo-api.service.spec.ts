@@ -6,7 +6,7 @@ describe('ExternalPhotoApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ExternalPhotoApiService = TestBed.get(ExternalPhotoApiService);
+    const service: ExternalPhotoApiService = TestBed.inject(ExternalPhotoApiService);
     expect(service).toBeTruthy();
   });
 });

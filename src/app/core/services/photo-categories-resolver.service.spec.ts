@@ -6,7 +6,7 @@ describe('PhotoCategoriesResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PhotoCategoriesResolverService = TestBed.get(PhotoCategoriesResolverService);
+    const service: PhotoCategoriesResolverService = TestBed.inject(PhotoCategoriesResolverService);
     expect(service).toBeTruthy();
   });
 });

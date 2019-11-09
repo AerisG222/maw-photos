@@ -6,7 +6,7 @@ describe('AuthGuard', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ExternalAuthGuard = TestBed.get(ExternalAuthGuard);
+    const service: ExternalAuthGuard = TestBed.inject(ExternalAuthGuard);
     expect(service).toBeTruthy();
   });
 });

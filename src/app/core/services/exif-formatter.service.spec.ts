@@ -6,7 +6,7 @@ describe('ExifFormatterService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ExifFormatterService = TestBed.get(ExifFormatterService);
+    const service: ExifFormatterService = TestBed.inject(ExifFormatterService);
     expect(service).toBeTruthy();
   });
 });

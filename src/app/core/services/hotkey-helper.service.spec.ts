@@ -6,7 +6,7 @@ describe('HotkeyHelperService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HotkeyHelperService = TestBed.get(HotkeyHelperService);
+    const service: HotkeyHelperService = TestBed.inject(HotkeyHelperService);
     expect(service).toBeTruthy();
   });
 });

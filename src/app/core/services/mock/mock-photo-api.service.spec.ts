@@ -6,7 +6,7 @@ describe('MockPhotoApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MockPhotoApiService = TestBed.get(MockPhotoApiService);
+    const service: MockPhotoApiService = TestBed.inject(MockPhotoApiService);
     expect(service).toBeTruthy();
   });
 });
