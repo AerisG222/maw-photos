@@ -54,10 +54,10 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     minimapUseDarkTheme$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
-    @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
-    @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
-    @ViewChild('toggleCommentsButton', {static: false}) toggleCommentsButton: MatButton;
-    @ViewChild('toggleMinimapButton', {static: false}) toggleMinimapButton: MatButton;
+    @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
+    @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
+    @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
+    @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
 
     constructor(
         private store$: Store<RootStoreState.State>,

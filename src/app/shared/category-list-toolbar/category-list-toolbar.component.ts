@@ -22,11 +22,11 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
     private destroySub = new Subscription();
 
-    @ViewChild('toggleTitlesButton', {static: false}) toggleTitlesButton: MatButton;
-    @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
-    @ViewChild('toggleMarginsButton', {static: false}) toggleMarginsButton: MatButton;
-    @ViewChild('toggleListTypeButton', {static: false}) toggleListTypeButton: MatButton;
-    @ViewChild('toggleListThumbnailSizeButton', {static: false}) toggleListThumbnailSizeButton: MatButton;
+    @ViewChild('toggleTitlesButton') toggleTitlesButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
+    @ViewChild('toggleMarginsButton') toggleMarginsButton: MatButton;
+    @ViewChild('toggleListTypeButton') toggleListTypeButton: MatButton;
+    @ViewChild('toggleListThumbnailSizeButton') toggleListThumbnailSizeButton: MatButton;
 
     settings: Settings;
     isListView$: Observable<boolean>;

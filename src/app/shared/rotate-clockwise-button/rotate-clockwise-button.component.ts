@@ -14,7 +14,7 @@ import { RootStoreState, PhotoStoreActions } from 'src/app/core/root-store';
 export class RotateClockwiseButtonComponent implements OnInit {
     private hotkeys: Hotkey[] = [];
 
-    @ViewChild('rotateClockwiseButton', {static: false}) rotateClockwiseButton: MatButton;
+    @ViewChild('rotateClockwiseButton') rotateClockwiseButton: MatButton;
 
     constructor(
         private store$: Store<RootStoreState.State>,

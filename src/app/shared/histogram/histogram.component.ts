@@ -21,7 +21,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
     img: HTMLImageElement;
     channel = 'rgb';
 
-    @ViewChild('canvas', {static: false}) canvas: ElementRef;
+    @ViewChild('canvas') canvas: ElementRef;
 
     get canvasEl(): HTMLCanvasElement {
         return this.canvas.nativeElement as HTMLCanvasElement;

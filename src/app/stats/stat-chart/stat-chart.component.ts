@@ -12,7 +12,7 @@ import * as numeral from 'numeral';
 export class StatChartComponent implements AfterViewInit, OnChanges {
     @Input() chartData;
     @Output() cellSelected = new EventEmitter();
-    @ViewChild(TreeMapComponent, {static: false}) treeMap: TreeMapComponent;
+    @ViewChild(TreeMapComponent) treeMap: TreeMapComponent;
 
     @Input() set format(value: string) {
         switch (value) {

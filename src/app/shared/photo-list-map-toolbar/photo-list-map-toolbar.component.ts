@@ -19,9 +19,9 @@ import { tap } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
-    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
-    @ViewChild('mapviewButton', {static: false}) mapviewButton: MatButton;
+    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
+    @ViewChild('mapviewButton') mapviewButton: MatButton;
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;

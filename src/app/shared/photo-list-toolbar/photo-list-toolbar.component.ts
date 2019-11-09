@@ -31,14 +31,14 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
-    @ViewChild('toggleBreadcrumbsButton', {static: false}) toggleBreadcrumbsButton: MatButton;
-    @ViewChild('togglePhotoListButton', {static: false}) togglePhotoListButton: MatButton;
-    @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
-    @ViewChild('fullscreenButton', {static: false}) fullscreenButton: MatButton;
-    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
-    @ViewChild('toggleSlideshowButton', {static: false}) toggleSlideshowButton: SlideshowButtonComponent;
-    @ViewChild('mapViewButton', {static: false}) mapViewButton: MatButton;
+    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
+    @ViewChild('togglePhotoListButton') togglePhotoListButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
+    @ViewChild('fullscreenButton') fullscreenButton: MatButton;
+    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
+    @ViewChild('mapViewButton') mapViewButton: MatButton;
 
     private destroySub = new Subscription();
     private hotkeys: Hotkey[] = [];

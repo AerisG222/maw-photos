@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, MinimalRouterStateSerializer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, MinimalRouterStateSerializer, RouterState } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgOidcClientModule } from 'ng-oidc-client';
@@ -32,7 +32,7 @@ export function getUserStore() {
         VideoStoreModule,
         StoreRouterConnectingModule.forRoot({
             stateKey: 'router',
-            // serializer: MinimalRouterStateSerializer  - needed if we enable ngrx serializability checks
+            routerState: RouterState.Minimal
         }),
         StoreModule.forRoot({}, {
             runtimeChecks: {

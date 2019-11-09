@@ -43,7 +43,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     videos$: Observable<Video[]>;
     activeVideo$: Observable<Video>;
 
-    @ViewChild('videoRef', {static: false}) videoRef: ElementRef;
+    @ViewChild('videoRef') videoRef: ElementRef;
 
     private settings: Settings;
 

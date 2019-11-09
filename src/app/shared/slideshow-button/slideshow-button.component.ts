@@ -15,7 +15,7 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
 export class SlideshowButtonComponent implements OnInit, CanRipple {
     @Output() toggleSlideshow = new EventEmitter<void>();
 
-    @ViewChild('slideshowButton', {static: false}) slideshowButton: MatButton;
+    @ViewChild('slideshowButton') slideshowButton: MatButton;
 
     slideshowPlaying$: Observable<boolean>;
 

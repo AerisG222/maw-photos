@@ -25,10 +25,10 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
 
-    @ViewChild('exitFullscreenButton', {static: false}) exitFullscreenButton: MatButton;
-    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
-    @ViewChild('toggleSlideshowButton', {static: false}) toggleSlideshowButton: SlideshowButtonComponent;
+    @ViewChild('exitFullscreenButton') exitFullscreenButton: MatButton;
+    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
 
     private hotkeys: Hotkey[] = [];
 

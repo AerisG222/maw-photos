@@ -56,13 +56,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showHistogram$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
-    @ViewChild('toggleInfoPanelButton', {static: false}) toggleInfoPanelButton: MatButton;
-    @ViewChild('toggleRatingsButton', {static: false}) toggleRatingsButton: MatButton;
-    @ViewChild('toggleCommentsButton', {static: false}) toggleCommentsButton: MatButton;
-    @ViewChild('toggleExifButton', {static: false}) toggleExifButton: MatButton;
-    @ViewChild('toggleEffectsButton', {static: false}) toggleEffectsButton: MatButton;
-    @ViewChild('toggleMinimapButton', {static: false}) toggleMinimapButton: MatButton;
-    @ViewChild('toggleHistogramButton', {static: false}) toggleHistogramButton: MatButton;
+    @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
+    @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
+    @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
+    @ViewChild('toggleExifButton') toggleExifButton: MatButton;
+    @ViewChild('toggleEffectsButton') toggleEffectsButton: MatButton;
+    @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
+    @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
 
     constructor(
         private store$: Store<RootStoreState.State>,

@@ -29,12 +29,12 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
     private hotkeys: Hotkey[] = [];
 
-    @ViewChild('toggleBreadcrumbsButton', {static: false}) toggleBreadcrumbsButton: MatButton;
-    @ViewChild('toggleVideoListButton', {static: false}) toggleVideoListButton: MatButton;
-    @ViewChild('toggleThumbnailSizeButton', {static: false}) toggleThumbnailSizeButton: MatButton;
-    @ViewChild('toggleVideoSizeButton', {static: false}) toggleVideoSizeButton: MatButton;
-    @ViewChild('movePreviousButton', {static: false}) movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton', {static: false}) moveNextButton: MoveNextButtonComponent;
+    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
+    @ViewChild('toggleVideoListButton') toggleVideoListButton: MatButton;
+    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
+    @ViewChild('toggleVideoSizeButton') toggleVideoSizeButton: MatButton;
+    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
+    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
 
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
