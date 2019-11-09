@@ -1,7 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HotkeyModule } from 'angular2-hotkeys';
 
 import { environment } from 'src/environments/environment';
@@ -16,7 +15,6 @@ import { RootStoreModule } from './root-store';
         HotkeyModule.forRoot({ disableCheatSheet: true }),
         HttpClientModule,
         environment.servicesModule,
-        NgxWebstorageModule.forRoot({ prefix: 'maw-photos' }),
         RootStoreModule
     ],
     providers: [

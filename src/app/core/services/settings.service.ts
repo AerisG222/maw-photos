@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { Theme } from 'src/app/core/models/theme.model';
@@ -8,6 +7,7 @@ import { VideoSize } from '../models/video-size.model';
 import { CategoryMargin } from '../models/category-margin.model';
 import { CategoryFilter } from '../models/category-filter.model';
 import { CategoryListType } from '../models/category-list-type.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -68,7 +68,7 @@ export class SettingsService {
 
     load(): Settings {
         const categoryListShowCategoryTitles = this.localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
-        const categoryListYearFilter = this.localStorage.retrieve(SettingsService.keyCategoryListYearFilter) as string | number;
+        const categoryListYearFilter = this.getStringOrNumber(this.localStorage.retrieve(SettingsService.keyCategoryListYearFilter));
 
         const photoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
         const photoListShowPhotoList = this.localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
@@ -302,5 +302,9 @@ export class SettingsService {
         } catch {
             return def;
         }
+    }
+
+    private getStringOrNumber(value: string): string | number {
+        return /^\d+$/.test(value) ? parseInt(value, 10) : value;
     }
 }
