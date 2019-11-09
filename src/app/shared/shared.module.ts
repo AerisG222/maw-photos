@@ -176,9 +176,6 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         SlideshowButtonComponent,
         StatsLinkComponent,
         VideoInfoPanelComponent,
-    ],
-    entryComponents: [
-        HotkeyDialogComponent
     ]
 })
 export class SharedModule { }
