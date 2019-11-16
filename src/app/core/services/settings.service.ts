@@ -67,33 +67,33 @@ export class SettingsService {
     }
 
     load(): Settings {
-        const categoryListShowCategoryTitles = this.localStorage.retrieve(SettingsService.keyCategoryListShowCategoryTitles);
-        const categoryListYearFilter = this.getStringOrNumber(this.localStorage.retrieve(SettingsService.keyCategoryListYearFilter));
+        const categoryListShowCategoryTitles = this.getBoolean(SettingsService.keyCategoryListShowCategoryTitles);
+        const categoryListYearFilter = this.getStringOrNumber(SettingsService.keyCategoryListYearFilter);
 
-        const photoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
-        const photoListShowPhotoList = this.localStorage.retrieve(SettingsService.keyPhotoListShowPhotoList);
-        const photoListMapViewMapTypeId = this.localStorage.retrieve(SettingsService.keyPhotoListMapViewMapTypeId);
-        const photoListMapViewZoom = this.localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom);
+        const photoListShowCategoryBreadcrumbs = this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
+        const photoListShowPhotoList = this.getBoolean(SettingsService.keyPhotoListShowPhotoList);
+        const photoListMapViewMapTypeId = this.getValue(SettingsService.keyPhotoListMapViewMapTypeId);
+        const photoListMapViewZoom = this.getNumber(this.localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom));
 
-        const photoInfoPanelShowRatings = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowRatings);
-        const photoInfoPanelShowComments = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowComments);
-        const photoInfoPanelShowExif = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowExif);
-        const photoInfoPanelShowEffects = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowEffects);
-        const photoInfoPanelShowHistogram = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowHistogram);
-        const photoInfoPanelShowMinimap = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelShowMinimap);
-        const photoInfoPanelExpandedState = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelExpandedState);
-        const photoInfoPanelMinimapMapTypeId = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
-        const photoInfoPanelMinimapZoom = this.localStorage.retrieve(SettingsService.keyPhotoInfoPanelMinimapZoom);
+        const photoInfoPanelShowRatings = this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings);
+        const photoInfoPanelShowComments = this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments);
+        const photoInfoPanelShowExif = this.getBoolean(SettingsService.keyPhotoInfoPanelShowExif);
+        const photoInfoPanelShowEffects = this.getBoolean(SettingsService.keyPhotoInfoPanelShowEffects);
+        const photoInfoPanelShowHistogram = this.getBoolean(SettingsService.keyPhotoInfoPanelShowHistogram);
+        const photoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap);
+        const photoInfoPanelExpandedState = this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState);
+        const photoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
+        const photoInfoPanelMinimapZoom = this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom);
 
-        const videoListShowCategoryBreadcrumbs = this.localStorage.retrieve(SettingsService.keyVideoListShowCategoryBreadcrumbs);
-        const videoListShowVideoList = this.localStorage.retrieve(SettingsService.keyVideoListShowVideoList);
+        const videoListShowCategoryBreadcrumbs = this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs);
+        const videoListShowVideoList = this.getBoolean(SettingsService.keyVideoListShowVideoList);
 
-        const videoInfoPanelShowRatings = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowRatings);
-        const videoInfoPanelShowComments = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowComments);
-        const videoInfoPanelShowMinimap = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelShowMinimap);
-        const videoInfoPanelExpandedState = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelExpandedState);
-        const videoInfoPanelMinimapMapTypeId = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
-        const videoInfoPanelMinimapZoom = this.localStorage.retrieve(SettingsService.keyVideoInfoPanelMinimapZoom);
+        const videoInfoPanelShowRatings = this.getBoolean(SettingsService.keyVideoInfoPanelShowRatings);
+        const videoInfoPanelShowComments = this.getBoolean(SettingsService.keyVideoInfoPanelShowComments);
+        const videoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap);
+        const videoInfoPanelExpandedState = this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState);
+        const videoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
+        const videoInfoPanelMinimapZoom = this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom);
 
         return {
             appTheme: this.getTheme(),
@@ -142,71 +142,70 @@ export class SettingsService {
             return;
         }
 
-        this.localStorage.store(SettingsService.keyAppTheme, settings.appTheme.name);
+        this.setValue(SettingsService.keyAppTheme, settings.appTheme.name);
 
-        this.localStorage.store(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
-        this.localStorage.store(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
-        this.localStorage.store(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
-        this.localStorage.store(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
-        this.localStorage.store(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter);
-        this.localStorage.store(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
-        this.localStorage.store(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
+        this.setValue(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
+        this.setValue(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
+        this.setValue(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
+        this.setValue(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
+        this.setValue(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter);
+        this.setValue(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
+        this.setValue(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
 
-        this.localStorage.store(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
-        this.localStorage.store(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
-        this.localStorage.store(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
-        // tslint:disable-next-line:max-line-length
-        this.localStorage.store(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
-        this.localStorage.store(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
-        this.localStorage.store(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
+        this.setValue(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
+        this.setValue(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
+        this.setValue(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
+        this.setValue(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
+        this.setValue(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
+        this.setValue(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
-        this.localStorage.store(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
+        this.setValue(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
+        this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
+        this.setValue(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
-        this.localStorage.store(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
-        this.localStorage.store(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
-        this.localStorage.store(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
-        this.localStorage.store(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
+        this.setValue(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
+        this.setValue(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
+        this.setValue(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
+        this.setValue(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
 
-        this.localStorage.store(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
-        this.localStorage.store(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
-        this.localStorage.store(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
-        this.localStorage.store(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
-        this.localStorage.store(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
-        this.localStorage.store(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
+        this.setValue(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
+        this.setValue(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
+        this.setValue(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
+        this.setValue(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
+        this.setValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
+        this.setValue(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
 
         this.killRemovedSettings();
     }
 
     killRemovedSettings(): void {
-        this.localStorage.clear(SettingsService.removedKeyCategoryListYearFilter);
-        this.localStorage.clear(SettingsService.removedKeyCategoryListToolbarExpandedState);
-        this.localStorage.clear(SettingsService.removedKeyPhotoListToolbarExpandedState);
-        this.localStorage.clear(SettingsService.removedKeyPhotoListFullscreenToolbarExpandedState);
-        this.localStorage.clear(SettingsService.removedKeyVideoListToolbarExpandedState);
+        this.clearValue(SettingsService.removedKeyCategoryListYearFilter);
+        this.clearValue(SettingsService.removedKeyCategoryListToolbarExpandedState);
+        this.clearValue(SettingsService.removedKeyPhotoListToolbarExpandedState);
+        this.clearValue(SettingsService.removedKeyPhotoListFullscreenToolbarExpandedState);
+        this.clearValue(SettingsService.removedKeyVideoListToolbarExpandedState);
     }
 
     clearAuthRedirectUrl(): void {
-        this.localStorage.clear(SettingsService.keyAuthRedirectUrl);
+        this.clearValue(SettingsService.keyAuthRedirectUrl);
     }
 
     setAuthRedirectUrl(url: string): void {
-        this.localStorage.store(SettingsService.keyAuthRedirectUrl, url);
+        this.setValue(SettingsService.keyAuthRedirectUrl, url);
     }
 
     getAuthRedirectUrl(): string {
-        return this.localStorage.retrieve(SettingsService.keyAuthRedirectUrl) as string;
+        return this.getValue(SettingsService.keyAuthRedirectUrl);
     }
 
     private getTheme(): Theme {
-        const themeName = this.localStorage.retrieve(SettingsService.keyAppTheme);
+        const themeName = this.getValue(SettingsService.keyAppTheme);
 
         try {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
@@ -216,7 +215,7 @@ export class SettingsService {
     }
 
     private getCategoryListListType(): CategoryListType {
-        const name = this.localStorage.retrieve(SettingsService.keyCategoryListListType);
+        const name = this.getValue(SettingsService.keyCategoryListListType);
 
         try {
             return name !== null ? CategoryListType.forName(name) : CategoryListType.grid;
@@ -226,13 +225,13 @@ export class SettingsService {
     }
 
     private getCategoryListListViewThumbnailSize(): ThumbnailSize {
-        const sizeName = this.localStorage.retrieve(SettingsService.keyCategoryListListViewThumbnailSize);
+        const sizeName = this.getValue(SettingsService.keyCategoryListListViewThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getCategoryListCategoryFilter(): CategoryFilter {
-        const name = this.localStorage.retrieve(SettingsService.keyCategoryListCategoryFilter);
+        const name = this.getValue(SettingsService.keyCategoryListCategoryFilter);
 
         try {
             return name !== null ? CategoryFilter.forName(name) : CategoryFilter.all;
@@ -242,7 +241,7 @@ export class SettingsService {
     }
 
     private getCategoryListCategoryMargin(): CategoryMargin {
-        const name = this.localStorage.retrieve(SettingsService.keyCategoryListCategoryMargin);
+        const name = this.getValue(SettingsService.keyCategoryListCategoryMargin);
 
         try {
             return name !== null ? CategoryMargin.forName(name) : CategoryMargin.compact;
@@ -252,25 +251,25 @@ export class SettingsService {
     }
 
     private getCategoryThumbnailSize(): ThumbnailSize {
-        const sizeName = this.localStorage.retrieve(SettingsService.keyCategoryListThumbnailSize);
+        const sizeName = this.getValue(SettingsService.keyCategoryListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getPhotoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this.localStorage.retrieve(SettingsService.keyPhotoListThumbnailSize);
+        const sizeName = this.getValue(SettingsService.keyPhotoListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getVideoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this.localStorage.retrieve(SettingsService.keyVideoListThumbnailSize);
+        const sizeName = this.getValue(SettingsService.keyVideoListThumbnailSize);
 
         return this.getThumbnailSize(sizeName);
     }
 
     private getVideoListVideoSize(): VideoSize {
-        const sizeName = this.localStorage.retrieve(SettingsService.keyVideoListVideoSize);
+        const sizeName = this.getValue(SettingsService.keyVideoListVideoSize);
 
         try {
             return sizeName !== null ? VideoSize.forName(sizeName) : VideoSize.large;
@@ -289,22 +288,42 @@ export class SettingsService {
 
     private getPhotoListSlideshowDisplayDurationSeconds(): number {
         const def = 2;
-        const secs = this.localStorage.retrieve(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
+        const secs = this.getNumber(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
 
-        try {
-            const numSecs = Number(secs);
-
-            if (numSecs <= 0) {
-                return def;
-            }
-
-            return numSecs;
-        } catch {
-            return def;
+        if (!!secs) {
+            return secs;
         }
+
+        return def;
     }
 
-    private getStringOrNumber(value: string): string | number {
+    private getStringOrNumber(key: string): string | number {
+        const value = this.getValue(key);
+
         return /^\d+$/.test(value) ? parseInt(value, 10) : value;
+    }
+
+    private getNumber(key: string): number {
+        const value = this.getValue(key);
+
+        return /^\d+$/.test(value) ? parseInt(value, 10) : null;
+    }
+
+    private getBoolean(key: string): boolean {
+        const value = this.getValue(key);
+
+        return /^true$/i.test(value);
+    }
+
+    private getValue(key: string): string {
+        return this.localStorage.retrieve(key) as string;
+    }
+
+    private setValue(key: string, value: any) {
+        this.localStorage.store(key, value);
+    }
+
+    private clearValue(key: string) {
+        this.localStorage.clear(key);
     }
 }
