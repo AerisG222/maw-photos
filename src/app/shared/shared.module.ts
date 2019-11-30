@@ -20,7 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AgmCoreModule } from '@agm/core';
-import { BarRatingModule } from 'ngx-bar-rating';
+import { NgxStarsModule } from 'ngx-stars';
 
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { CategoryListToolbarComponent } from './category-list-toolbar/category-list-toolbar.component';
@@ -98,7 +98,6 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyA50h7G5fm_83lh460EnOdabUC9zU8XF7A'
         }),
-        BarRatingModule,
         CommonModule,
         MatButtonModule,
         MatCardModule,
@@ -117,13 +116,13 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
+        NgxStarsModule,
         ReactiveFormsModule,
         RouterModule
     ],
     exports: [
         // modules
         AgmCoreModule,
-        BarRatingModule,
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
@@ -141,6 +140,7 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
+        NgxStarsModule,
         ReactiveFormsModule,
 
         // components
@@ -175,7 +175,7 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
-        VideoInfoPanelComponent,
+        VideoInfoPanelComponent
     ]
 })
 export class SharedModule { }
