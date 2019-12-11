@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnDestroy, ChangeDetectionStrategy, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+import { NgxStarsComponent } from 'ngx-stars';
 
 import { Rating } from 'src/app/core/models/rating.model';
 import { RatingMode } from './rating-mode.model';
 import { RootStoreState, PhotoStoreActions, VideoStoreActions, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
-import { filter, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-rating',
@@ -13,20 +14,23 @@ import { filter, tap } from 'rxjs/operators';
     styleUrls: ['./rating.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent implements OnInit, OnDestroy {
+export class RatingComponent implements AfterViewInit, OnDestroy {
     @Input() mode: RatingMode;
+
+    @ViewChild('userRating') userRatingComponent: NgxStarsComponent;
+    @ViewChild('averageRating') averageRatingComponent: NgxStarsComponent;
 
     private currentId = -1;
     private destroySub = new Subscription();
-    rating$: Observable<Rating>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<RootStoreState.State>,
+        private changeDetectorRef: ChangeDetectorRef
     ) {
 
     }
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         switch (this.mode) {
             case RatingMode.Photos:
                 this.initPhotoRating();
@@ -44,8 +48,12 @@ export class RatingComponent implements OnInit, OnDestroy {
     }
 
     initPhotoRating(): void {
-        this.rating$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoRating)
+        this.destroySub.add(this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoRating),
+                filter(rating => !!rating),
+                tap(rating => this.updateRating(rating))
+            ).subscribe()
         );
 
         this.destroySub.add(this.store$
@@ -59,8 +67,12 @@ export class RatingComponent implements OnInit, OnDestroy {
     }
 
     initVideoRating(): void {
-        this.rating$ = this.store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideoRating)
+        this.destroySub.add(this.store$
+            .pipe(
+                select(VideoStoreSelectors.selectCurrentVideoRating),
+                filter(rating => !!rating),
+                tap(rating => this.updateRating(rating))
+            ).subscribe()
         );
 
         this.destroySub.add(this.store$
@@ -85,5 +97,12 @@ export class RatingComponent implements OnInit, OnDestroy {
         if (this.mode === RatingMode.Videos) {
             this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.currentId, userRating }));
         }
+    }
+
+    private updateRating(rating: Rating) {
+        this.userRatingComponent.setRating(rating.userRating);
+        this.averageRatingComponent.setRating(rating.averageRating);
+
+        this.changeDetectorRef.detectChanges();
     }
 }
