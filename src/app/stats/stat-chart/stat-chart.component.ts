@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { colorSets } from '@swimlane/ngx-charts/release/utils';
-import { TreeMapComponent } from '@swimlane/ngx-charts';
+import { colorSets, TreeMapComponent } from '@swimlane/ngx-charts';
 import * as numeral from 'numeral';
 
 @Component({
