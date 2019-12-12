@@ -3,29 +3,35 @@
         <app-video-list-toolbar></app-video-list-toolbar>
     </div>
 
-    <div class="main-video-grid">
-        <div class="category-header">
-            <app-category-header *ngIf="(settings$ | async)?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
-        </div>
+    <ng-container *ngIf="{
+        videos: videos$ | async,
+        settings: settings$ | async,
+        activeVideo: activeVideo$ | async
+    } as data">
+        <div class="main-video-grid">
+            <div class="category-header">
+                <app-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
+            </div>
 
-        <div *ngIf="activeVideo$ | async as video" class="video-container">
-            <video
-                #videoRef
-                class="center-block"
-                autoplay="false"
-                [ngStyle]="getVideoDimensions(video)"
-                controls>
-                <source [src]="getVideoUrl(video)" type="video/mp4" />
-                Your browser does not support the <code>video</code> element.
-            </video>
-        </div>
+            <div *ngIf="data.activeVideo" class="video-container">
+                <video
+                    #videoRef
+                    class="center-block"
+                    autoplay="false"
+                    [ngStyle]="getVideoDimensions(data.activeVideo)"
+                    controls>
+                    <source [src]="getVideoUrl(data.activeVideo)" type="video/mp4" />
+                    Your browser does not support the <code>video</code> element.
+                </video>
+            </div>
 
-        <app-video-list
-            *ngIf="(videos$ | async) && (settings$ | async)?.videoListShowVideoList"
-            [videos]="videos$ | async"
-            [thumbnailSize]="(settings$ | async)?.videoListThumbnailSize"
-            [selectedVideo]="activeVideo$ | async"
-            (videoSelected)="onSelectVideo($event)">
-        </app-video-list>
-    </div>
+            <app-video-list
+                *ngIf="data.videos && data.settings?.videoListShowVideoList"
+                [videos]="data.videos"
+                [thumbnailSize]="data.settings?.videoListThumbnailSize"
+                [selectedVideo]="data.activeVideo"
+                (videoSelected)="onSelectVideo($event)">
+            </app-video-list>
+        </div>
+    </ng-container>
 </div>
