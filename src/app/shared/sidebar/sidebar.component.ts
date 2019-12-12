@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { RootStoreState, LayoutStoreSelectors } from 'src/app/core/root-store';
-import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-sidebar',
@@ -24,14 +23,12 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.showSidebar$ = this.store$
             .pipe(
-                select(LayoutStoreSelectors.selectShowRightSidebar),
-                delay(0)
+                select(LayoutStoreSelectors.selectShowRightSidebar)
             );
 
         this.hidePanel$ = this.store$
             .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsFullscreen),
-                delay(0)
+                select(LayoutStoreSelectors.selectLayoutIsFullscreen)
             );
     }
 }

@@ -1,2 +1,2 @@
-<app-photo-info-panel *ngIf="showPhotoInfoPanel"></app-photo-info-panel>
-<app-video-info-panel *ngIf="showVideoInfoPanel"></app-video-info-panel>
+<app-photo-info-panel *ngIf="showPhotoInfoPanel$ | async"></app-photo-info-panel>
+<app-video-info-panel *ngIf="showVideoInfoPanel$ | async"></app-video-info-panel>

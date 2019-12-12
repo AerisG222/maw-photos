@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { RootStoreState, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
-import { tap, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-info-panel',
@@ -11,33 +11,25 @@ import { tap, filter } from 'rxjs/operators';
     styleUrls: ['./info-panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InfoPanelComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
-    showPhotoInfoPanel = false;
-    showVideoInfoPanel = false;
+export class InfoPanelComponent implements OnInit {
+    showPhotoInfoPanel$: Observable<boolean>;
+    showVideoInfoPanel$: Observable<boolean>;
 
     constructor(
         private store$: Store<RootStoreState.State>,
     ) { }
 
     ngOnInit() {
-        this.destroySub.add(this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhoto),
-            filter(photo => !!photo),
-            tap(x => this.showVideoInfoPanel = false),
-            tap(x => this.showPhotoInfoPanel = true)
-        ).subscribe());
+        this.showPhotoInfoPanel$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                map(photo => !!photo)
+            );
 
-        this.destroySub.add(this.store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideo),
-            filter(video => !!video),
-            tap(x => this.showPhotoInfoPanel = false),
-            tap(x => this.showVideoInfoPanel = true)
-        ).subscribe());
-    }
-
-    ngOnDestroy() {
-        this.destroySub.unsubscribe();
+        this.showVideoInfoPanel$ = this.store$
+            .pipe(
+                select(VideoStoreSelectors.selectCurrentVideo),
+                map(video => !!video)
+            );
     }
 }
