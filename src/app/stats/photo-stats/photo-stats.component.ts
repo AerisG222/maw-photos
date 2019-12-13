@@ -19,7 +19,6 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     form: FormGroup;
-    aggregateBy$ = new BehaviorSubject<string>('count');
     chartData$: Observable<any>;
     chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(null);

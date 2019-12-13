@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription, BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { Subscription, BehaviorSubject, Observable, combineLatest, concat, of } from 'rxjs';
+import { tap, map, delay } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
@@ -22,7 +22,6 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     form: FormGroup;
-    aggregateBy$ = new BehaviorSubject<string>('count');
     chartData$: Observable<any>;
     chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(null);
@@ -51,21 +50,20 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
                 select(RootStoreSelectors.selectAllCategories)
             );
 
-        this.destroySub.add(this.form.get('aggregateBy').valueChanges
-            .pipe(
-                tap(val => this.aggregateBy$.next(val)),
-                tap(val => this.chartValueFormat = val)
-            )
-            .subscribe()
-        );
+        const aggregateBy$ = concat(
+                of('count'),
+                this.form.get('aggregateBy').valueChanges as Observable<string>
+            );
 
         this.chartData$ = combineLatest([
                 years$,
                 categories$,
                 this.selectedYear$,
-                this.aggregateBy$
+                aggregateBy$
             ])
             .pipe(
+                tap(x => this.chartValueFormat = x[3]),
+                delay(2),
                 map(x => this.prepareChartData(x[0], x[1], x[2], x[3]))
             );
 
@@ -85,6 +83,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
                 map(x => this.prepareYearDetails(x[0], x[1]))
             );
 
+        this.destroySub.add(aggregateBy$.subscribe());
         this.destroySub.add(years$.subscribe());
         this.destroySub.add(categories$.subscribe());
     }
