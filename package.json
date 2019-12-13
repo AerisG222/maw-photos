@@ -10,9 +10,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev_watch": "ng build --extract-css --vendor-chunk=false --watch",
-    "dev_build": "ng build --extract-css --vendor-chunk=false --stats-json && ng lint",
-    "prod_build": "ng build --aot --vendor-chunk=false --prod --stats-json",
-    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
+    "dev_build": "ng build --extract-css --vendor-chunk=false --statsJson && ng lint",
+    "prod_build": "ng build --aot --vendor-chunk=false --prod --statsJson",
+    "bundle-report": "webpack-bundle-analyzer dist/stats-es2015.json"
   },
   "private": true,
   "dependencies": {
