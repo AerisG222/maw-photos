@@ -6,23 +6,23 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StatsRoutingModule } from './stats-routing.module';
 import { PhotoStatsComponent } from './photo-stats/photo-stats.component';
 import { StatChartComponent } from './stat-chart/stat-chart.component';
-import { StatDetailCardComponent } from './stat-detail-card/stat-detail-card.component';
 import { StatsHeaderComponent } from './header/stats-header.component';
 import { StatsComponent } from './stats/stats.component';
 import { VideoStatsComponent } from './video-stats/video-stats.component';
 import { StatsToolbarComponent } from './stats-toolbar/stats-toolbar.component';
 import { CombinedStatsComponent } from './combined-stats/combined-stats.component';
+import { StatCardComponent } from './stat-card/stat-card.component';
 
 @NgModule({
     declarations: [
         PhotoStatsComponent,
         StatChartComponent,
-        StatDetailCardComponent,
         StatsHeaderComponent,
         StatsComponent,
         VideoStatsComponent,
         StatsToolbarComponent,
-        CombinedStatsComponent
+        CombinedStatsComponent,
+        StatCardComponent
     ],
     imports: [
         CommonModule,

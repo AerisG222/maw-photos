@@ -175,13 +175,6 @@ img {
     height: 100%;
 }
 
-.stat-card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, max-content);
-    grid-template-rows: 100%;
-    grid-column-gap: 12px;
-}
-
 .stat-form-grid {
     margin-top: 8px;
     display: grid;

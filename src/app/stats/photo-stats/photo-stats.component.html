@@ -4,15 +4,8 @@
     </div>
 
     <div class="stat-card-grid">
-        <app-stat-detail-card
-            title="All Time"
-            [details]="totalDetails$ | async">
-        </app-stat-detail-card>
-        <app-stat-detail-card
-            *ngIf="selectedYear$ | async"
-            [title]="selectedYear$ | async"
-            [details]="yearDetails$ | async">
-        </app-stat-detail-card>
+        <app-stat-card *ngIf="!(selectedYear$ | async)" [detail]="totalDetails$ | async"></app-stat-card>
+        <app-stat-card *ngIf="selectedYear$ | async" [detail]="yearDetails$ | async"></app-stat-card>
     </div>
 
     <form [formGroup]="form" class="stat-form-grid">
