@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, BehaviorSubject, combineLatest, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, Subscription, of, concat } from 'rxjs';
+import { map, tap, delay } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
@@ -48,21 +48,20 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 select(PhotoCategoryStoreSelectors.selectAllCategories)
             );
 
-        this.destroySub.add(this.form.get('aggregateBy').valueChanges
-            .pipe(
-                tap(val => this.aggregateBy$.next(val)),
-                tap(val => this.chartValueFormat = val)
-            )
-            .subscribe()
-        );
+        const aggregateBy$ = concat(
+                of('count'),
+                this.form.get('aggregateBy').valueChanges as Observable<string>
+            );
 
         this.chartData$ = combineLatest([
                 years$,
                 categories$,
                 this.selectedYear$,
-                this.aggregateBy$
+                aggregateBy$
             ])
             .pipe(
+                tap(x => this.chartValueFormat = x[3]),
+                delay(2),
                 map(x => this.prepareChartData(x[0], x[1], x[2], x[3]))
             );
 
@@ -82,6 +81,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 map(x => this.prepareYearDetails(x[0], x[1]))
             );
 
+        this.destroySub.add(aggregateBy$.subscribe());
         this.destroySub.add(years$.subscribe());
         this.destroySub.add(categories$.subscribe());
     }
