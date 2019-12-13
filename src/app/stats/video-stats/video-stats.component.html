@@ -4,7 +4,7 @@
     </div>
 
     <div class="stat-card-grid">
-        <app-stat-card *ngIf="!(selectedYear$ | async)" [detail]="totalDetails$ | async"></app-stat-card>
+        <app-stat-card *ngIf="(selectedYear$ | async) === null" [detail]="totalDetails$ | async"></app-stat-card>
         <app-stat-card *ngIf="selectedYear$ | async" [detail]="yearDetails$ | async"></app-stat-card>
     </div>
 
