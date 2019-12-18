@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
 import { StatDetail } from '../models/stat-detail.model';
-import { RootStoreState, RootStoreSelectors } from 'src/app/core/root-store';
+import { RootStoreSelectors } from 'src/app/core/root-store';
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 import { Category } from 'src/app/core/models/category.model';
 import { CategoryType } from 'src/app/core/models/category-type.model';
@@ -30,7 +30,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

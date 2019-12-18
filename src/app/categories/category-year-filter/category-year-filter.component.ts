@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { first, tap } from 'rxjs/operators';
 
-import { RootStoreState, RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,7 +21,7 @@ export class CategoryYearFilterComponent implements OnInit {
     selectedYear$: Observable<number|string>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

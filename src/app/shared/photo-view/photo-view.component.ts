@@ -11,7 +11,6 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import {
-    RootStoreState,
     PhotoStoreActions,
     PhotoStoreSelectors,
     SettingsStoreSelectors,
@@ -46,7 +45,7 @@ export class PhotoViewComponent implements OnInit {
     effects$: Observable<PhotoEffects>;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private slideshowControlSvc: SlideshowControlService,  // do not remove, needed so service is created before use
         private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer

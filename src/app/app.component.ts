@@ -7,7 +7,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { OidcFacade } from 'ng-oidc-client';
 
 import { Theme } from './core/models/theme.model';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
 
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private hotkeysService: HotkeysService,
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private oidcFacade: OidcFacade,
         @Inject(DOCUMENT) private doc
     ) {

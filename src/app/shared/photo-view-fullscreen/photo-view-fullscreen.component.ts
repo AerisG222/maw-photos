@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { toolbarShow } from '../animations';
-import { LayoutStoreActions, RootStoreState, PhotoStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 
@@ -27,7 +27,7 @@ export class PhotoViewFullscreenComponent implements OnInit, OnDestroy {
     effects$: Observable<PhotoEffects>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) { }
 
     ngOnInit() {

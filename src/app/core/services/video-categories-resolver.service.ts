@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, EMPTY } from 'rxjs';
 import { filter, catchError, take } from 'rxjs/operators';
 
-import { RootStoreState, VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '../root-store';
+import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '../root-store';
 import { VideoCategory } from '../models/video-category.model';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { VideoCategory } from '../models/video-category.model';
 })
 export class VideoCategoriesResolverService implements Resolve<VideoCategory[]> {
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VideoCategory[]> | Observable<never> {

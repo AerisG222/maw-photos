@@ -9,7 +9,6 @@ import { MapImage } from 'src/app/core/models/map-image.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import {
-    RootStoreState,
     PhotoStoreSelectors,
     SettingsStoreActions,
     SettingsStoreSelectors
@@ -34,7 +33,7 @@ export class PhotoViewMapComponent implements OnInit {
     settings$: Observable<Settings>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) { }
 
     ngOnInit() {

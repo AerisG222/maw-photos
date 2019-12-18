@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { delay } from 'rxjs/operators';
 
-import { RootStoreState, LayoutStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-primary-nav',
@@ -15,7 +15,7 @@ export class PrimaryNavComponent implements OnInit {
     hideNav$: Observable<boolean>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

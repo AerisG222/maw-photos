@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { RootStoreState, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-effects',
@@ -18,7 +18,7 @@ export class EffectsComponent implements OnInit, OnDestroy {
     effects: PhotoEffects;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

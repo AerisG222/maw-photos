@@ -10,7 +10,6 @@ import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } 
 import { CommentMode } from '../comments/comment-mode.model';
 import { RatingMode } from '../rating/rating-mode.model';
 import {
-    RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
@@ -65,7 +64,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

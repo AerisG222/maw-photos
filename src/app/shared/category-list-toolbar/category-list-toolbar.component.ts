@@ -10,7 +10,7 @@ import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { RootStoreState, SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-category-list-toolbar',
@@ -34,7 +34,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     showCategoryTitles$: Observable<boolean>;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

@@ -6,7 +6,7 @@ import { NgxStarsComponent } from 'ngx-stars';
 
 import { Rating } from 'src/app/core/models/rating.model';
 import { RatingMode } from './rating-mode.model';
-import { RootStoreState, PhotoStoreActions, VideoStoreActions, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreActions, VideoStoreActions, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-rating',
@@ -24,7 +24,7 @@ export class RatingComponent implements AfterViewInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private changeDetectorRef: ChangeDetectorRef
     ) {
 

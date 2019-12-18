@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 
 import { CategoryFilter } from 'src/app/core/models/category-filter.model';
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { MatSelectChange } from '@angular/material/select';
 import { tap, first } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class CategoryTypeFilterComponent implements OnInit {
     categoryTypeControl = new FormControl('all');
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

@@ -6,7 +6,6 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
-    RootStoreState,
     PhotoStoreSelectors
 } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material/button';
@@ -33,7 +32,7 @@ export class PhotoListFullscreenToolbarComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

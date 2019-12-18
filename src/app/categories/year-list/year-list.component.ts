@@ -8,7 +8,6 @@ import { filter, tap } from 'rxjs/operators';
 import { toolbarShow } from 'src/app/shared/animations';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import {
-    RootStoreState,
     SettingsStoreSelectors,
     SettingsStoreActions,
     RootStoreSelectors
@@ -34,7 +33,7 @@ export class YearListComponent implements OnInit, OnDestroy {
     years$: Observable<number[]>;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private activatedRoute: ActivatedRoute
     ) {
 

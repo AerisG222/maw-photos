@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { RootStoreState, PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
 import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
 import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
@@ -31,7 +31,7 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     private isLast: boolean;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

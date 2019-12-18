@@ -5,7 +5,7 @@ import { filter, tap } from 'rxjs/operators';
 
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { ExifCategory } from 'src/app/core/models/exif-category.model';
-import { RootStoreState, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-exif',
@@ -20,7 +20,7 @@ export class ExifComponent implements OnInit, OnDestroy {
     compositeData: ExifData[] = [];
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

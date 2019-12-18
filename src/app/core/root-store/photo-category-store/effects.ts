@@ -6,7 +6,6 @@ import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operato
 
 import * as PhotoCategoryActions from './actions';
 import * as PhotoCategorySelectors from './selectors';
-import { State } from './state';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class PhotoCategoryStoreEffects {
     constructor(
         @Inject(photoApiServiceToken) private api: PhotoApiService,
         private actions$: Actions,
-        private store$: Store<State>
+        private store$: Store<{}>
     ) {
 
     }

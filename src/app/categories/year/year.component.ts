@@ -8,7 +8,6 @@ import { Category } from 'src/app/core/models/category.model';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import {
-    RootStoreState,
     RootStoreSelectors,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
@@ -29,7 +28,7 @@ export class YearComponent implements OnInit {
     listThumbnailSize$: Observable<ThumbnailSize>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

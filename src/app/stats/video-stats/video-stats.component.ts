@@ -6,7 +6,7 @@ import { tap, map, delay } from 'rxjs/operators';
 import * as numeral from 'numeral';
 
 import { StatDetail } from '../models/stat-detail.model';
-import { RootStoreState, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { VideoCategory } from 'src/app/core/models/video-category.model';
 
 @Component({
@@ -26,7 +26,7 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

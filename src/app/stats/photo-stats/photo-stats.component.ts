@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
-import { RootStoreState, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { StatDetail } from '../models/stat-detail.model';
 
 @Component({
@@ -27,7 +27,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectionStra
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { PhotoStoreSelectors, RootStoreState } from 'src/app/core/root-store';
+import { PhotoStoreSelectors } from 'src/app/core/root-store';
 import { MatButton } from '@angular/material/button';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
@@ -20,7 +20,7 @@ export class SlideshowButtonComponent implements OnInit, CanRipple {
     slideshowPlaying$: Observable<boolean>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) { }
 
     ngOnInit() {

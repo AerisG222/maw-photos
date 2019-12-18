@@ -3,7 +3,7 @@ import { MatButton } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
-import { RootStoreState, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreActions } from 'src/app/core/root-store';
 
 @Component({
   selector: 'app-rotate-clockwise-button',
@@ -17,7 +17,7 @@ export class RotateClockwiseButtonComponent implements OnInit {
     @ViewChild('rotateClockwiseButton') rotateClockwiseButton: MatButton;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

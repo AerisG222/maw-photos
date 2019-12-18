@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
-import { RootStoreState, SettingsStoreSelectors, PhotoStoreSelectors, SettingsStoreActions, VideoStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, PhotoStoreSelectors, SettingsStoreActions, VideoStoreSelectors } from 'src/app/core/root-store';
 import { MinimapMode } from './minimap-mode.model';
 
 @Component({
@@ -24,7 +24,7 @@ export class MinimapComponent implements OnInit {
     minimapTheme$: Observable<MapTypeStyle[]>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

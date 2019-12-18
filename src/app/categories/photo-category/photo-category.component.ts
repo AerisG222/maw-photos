@@ -6,7 +6,6 @@ import { map, tap } from 'rxjs/operators';
 
 import {
     LayoutStoreActions,
-    RootStoreState,
     PhotoCategoryStoreActions,
     PhotoStoreSelectors, PhotoStoreActions,
     SettingsStoreActions
@@ -26,7 +25,7 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

@@ -7,14 +7,13 @@ import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operato
 import * as VideoCategoryActions from './actions';
 import * as videoCategorySelectors from './selectors';
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
-import { State } from './state';
 
 @Injectable()
 export class VideoCategoryStoreEffects {
     constructor(
         @Inject(videoApiServiceToken) private api: VideoApiService,
         private actions$: Actions,
-        private store$: Store<State>
+        private store$: Store<{}>
     ) {
 
     }

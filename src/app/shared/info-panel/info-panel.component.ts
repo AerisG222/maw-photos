@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { RootStoreState, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-info-panel',
@@ -16,7 +16,7 @@ export class InfoPanelComponent implements OnInit {
     showVideoInfoPanel$: Observable<boolean>;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
     ) { }
 
     ngOnInit() {

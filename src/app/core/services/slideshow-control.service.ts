@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { interval, combineLatest, Subject, Observable } from 'rxjs';
 import { tap, filter, takeUntil } from 'rxjs/operators';
 
-import { PhotoStoreSelectors, PhotoStoreActions, RootStoreState, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { Settings } from '../models/settings.model';
 
 
@@ -16,7 +16,7 @@ export class SlideshowControlService {
     private settings$: Observable<Settings>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
         this.store$
             .pipe(

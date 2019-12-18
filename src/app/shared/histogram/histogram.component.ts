@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
 
 import { Histogram } from './histogram';
-import { RootStoreState, PhotoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-histogram',
@@ -28,7 +28,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
     }
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc
     ) {

@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import { Settings } from 'src/app/core/models/settings.model';
 import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { RootStoreState, SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { VideoSize } from 'src/app/core/models/video-size.model';
 import { MinimapZoom } from 'src/app/core/models/minimap-zoom.model';
 import { MapTypeId } from 'src/app/core/models/map-type-id.model';
@@ -48,7 +48,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

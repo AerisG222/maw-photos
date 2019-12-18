@@ -15,7 +15,6 @@ import {
     LayoutStoreActions,
     PhotoStoreActions,
     PhotoStoreSelectors,
-    RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors
@@ -55,7 +54,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     prtDownloadUrl: string = null;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

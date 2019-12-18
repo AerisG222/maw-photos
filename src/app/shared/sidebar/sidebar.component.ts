@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { RootStoreState, LayoutStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-sidebar',
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
     showSidebar$: Observable<boolean>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

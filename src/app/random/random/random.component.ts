@@ -9,7 +9,6 @@ import {
     PhotoStoreSelectors,
     PhotoCategoryStoreActions,
     PhotoCategoryStoreSelectors,
-    RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
@@ -27,7 +26,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     isFullscreen$: Observable<boolean>;
 
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) {
 
     }

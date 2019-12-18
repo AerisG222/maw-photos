@@ -6,14 +6,13 @@ import { startWith, map, withLatestFrom } from 'rxjs/operators';
 import { SettingsService } from 'src/app/core/services/settings.service';
 import * as SettingsActions from './actions';
 import * as settingsSelectors from './selectors';
-import { State } from './state';
 
 @Injectable()
 export class SettingsStoreEffects {
     constructor(
         private settingsService: SettingsService,
         private actions$: Actions,
-        private store$: Store<State>
+        private store$: Store<{}>
     ) {
 
     }

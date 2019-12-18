@@ -12,7 +12,6 @@ import { MovePreviousButtonComponent } from 'src/app/shared/move-previous-button
 import { MoveNextButtonComponent } from 'src/app/shared/move-next-button/move-next-button.component';
 import { CanRipple } from 'src/app/core/models/can-ripple.model';
 import {
-    RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoStoreActions,
@@ -41,7 +40,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     settings: Settings;
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private hotkeysService: HotkeysService
     ) { }
 

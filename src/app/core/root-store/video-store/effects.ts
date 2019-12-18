@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, catchError, map } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as VideoStoreActions from './actions';
@@ -70,7 +70,7 @@ export class VideoStoreEffects {
     addCommentRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(VideoStoreActions.addCommentRequest),
-            switchMap(action =>
+            concatMap(action =>
                 this.api.addComment(action.videoId, action.comment)
                     .pipe(
                         map(result => VideoStoreActions.addCommentSuccess({ videoId: action.videoId })),

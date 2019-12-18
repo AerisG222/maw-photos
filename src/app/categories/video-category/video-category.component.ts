@@ -12,7 +12,6 @@ import { Video } from 'src/app/core/models/video.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import {
     LayoutStoreActions,
-    RootStoreState,
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoCategoryStoreActions,
@@ -49,7 +48,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) { }
 
     ngOnInit() {

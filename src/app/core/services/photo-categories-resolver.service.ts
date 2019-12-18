@@ -5,14 +5,14 @@ import { Observable, EMPTY } from 'rxjs';
 import { filter, catchError, take } from 'rxjs/operators';
 
 import { PhotoCategory } from '../models/photo-category.model';
-import { RootStoreState, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '../root-store';
+import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '../root-store';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PhotoCategoriesResolverService implements Resolve<PhotoCategory[]> {
     constructor(
-        private store$: Store<RootStoreState.State>
+        private store$: Store<{}>
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PhotoCategory[]> | Observable<never> {

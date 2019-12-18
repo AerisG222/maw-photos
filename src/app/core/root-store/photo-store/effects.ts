@@ -2,20 +2,19 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';
-import { RootStoreState } from '..';
 
 @Injectable()
 export class PhotoStoreEffects {
     constructor(
         private actions$: Actions,
         private exifFormatterService: ExifFormatterService,
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         @Inject(photoApiServiceToken) private api: PhotoApiService,
     ) {
 
@@ -102,7 +101,7 @@ export class PhotoStoreEffects {
     addCommentRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.addCommentRequest),
-            switchMap(action =>
+            concatMap(action =>
                 this.api.addComment(action.photoId, action.comment)
                     .pipe(
                         map(result => PhotoActions.addCommentSuccess({ photoId: action.photoId })),

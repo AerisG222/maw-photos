@@ -5,7 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 
 import { CommentMode } from './comment-mode.model';
 import { Comment } from 'src/app/core/models/comment.model';
-import { RootStoreState, PhotoStoreSelectors, PhotoStoreActions, VideoStoreSelectors, VideoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions, VideoStoreSelectors, VideoStoreActions } from 'src/app/core/root-store';
 import { filter, tap } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +24,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     columnsToDisplay = ['entryDate', 'username', 'commentText'];
 
     constructor(
-        private store$: Store<RootStoreState.State>,
+        private store$: Store<{}>,
         private formBuilder: FormBuilder
     ) {
 
