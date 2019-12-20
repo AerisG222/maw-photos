@@ -1,4 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-categories-link',
@@ -7,5 +8,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesLinkComponent {
-    @Input() tooltipPosition = 'after';
+    @Input() tooltipPosition: TooltipPosition = 'after';
 }

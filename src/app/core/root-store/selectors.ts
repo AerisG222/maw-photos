@@ -4,9 +4,6 @@ import { SettingsStoreSelectors } from './settings-store';
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
 import { Category } from '../models/category.model';
-import { PhotoCategory } from '../models/photo-category.model';
-import { VideoCategory } from '../models/video-category.model';
-import { photoCategoryToCategory, videoCategoryToCategory } from '../models/category-map-functions';
 import { CategoryFilter } from '../models/category-filter.model';
 import { CategoryType } from '../models/category-type.model';
 
@@ -29,11 +26,11 @@ export const selectIsLoading = createSelector(
 );
 
 export const selectAllCategories = createSelector(
-    PhotoCategoryStoreSelectors.selectAllCategories,
-    VideoCategoryStoreSelectors.selectAllCategories,
-    (photoCategories: PhotoCategory[], videoCategories: VideoCategory[]) => {
+    PhotoCategoryStoreSelectors.selectAllCategoriesAsCategory,
+    VideoCategoryStoreSelectors.selectAllCategoriesAsCategory,
+    (photoCategories: Category[], videoCategories: Category[]) => {
         if (photoCategories.length > 0 && videoCategories.length > 0) {
-            return combine(photoCategories, videoCategories);
+            return [...photoCategories, ...videoCategories].sort(categoriesDescending);
         }
 
         return [];
@@ -107,13 +104,6 @@ export const selectInitialYearFilterSelection = createSelector(
     SettingsStoreSelectors.selectCategoryListYearFilter,
     (years, filter) => !!filter ? filter : years[0]
 );
-
-function combine(photoCategories: PhotoCategory[], videoCategories: VideoCategory[]): Category[] {
-    const pcats: Category[] = photoCategories.map(c => photoCategoryToCategory(c));
-    const vcats: Category[] = videoCategories.map(c => videoCategoryToCategory(c));
-
-    return [...pcats, ...vcats].sort(categoriesDescending);
-}
 
 function sortNumbersDescending(first: number, second: number): number {
     return second - first;

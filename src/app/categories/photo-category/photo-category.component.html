@@ -4,7 +4,7 @@
 } as data">
     <app-photo-view
         *ngIf="!data.isFullscreen && !data.isMapView"
-        allowCategoryDownload="true"
+        [allowCategoryDownload]="true"
         [showCategoryAsLink]="false">
     </app-photo-view>
 

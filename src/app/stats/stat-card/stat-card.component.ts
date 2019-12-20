@@ -9,7 +9,7 @@ import { StatDetail } from '../models/stat-detail.model';
   styleUrls: ['./stat-card.component.scss']
 })
 export class StatCardComponent implements AfterViewInit {
-    @Input() detail: StatDetail;
+    @Input() detail: StatDetail[];
     @ViewChild(NumberCardComponent) cards: NumberCardComponent;
 
     colorScheme = colorSets.find(s => s.name === 'cool');

@@ -4,7 +4,7 @@
     </mat-card-title>
     <mat-card-content>
         <agm-map
-            controlSize="24"
+            [controlSize]="24"
             [latitude]="latitude$ | async"
             [longitude]="longitude$ | async"
             [fullscreenControl]="true"

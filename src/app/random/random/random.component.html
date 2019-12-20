@@ -3,8 +3,8 @@
 } as data">
     <app-photo-view
         *ngIf="!data.isFullscreen"
-        allowCategoryDownload="false"
-        showCategoryAsLink="true">
+        [allowCategoryDownload]="false"
+        [showCategoryAsLink]="true">
     </app-photo-view>
 
     <app-photo-view-fullscreen

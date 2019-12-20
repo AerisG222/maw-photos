@@ -60,7 +60,7 @@ export class PhotoViewMapComponent implements OnInit {
             );
     }
 
-    onMapTypeIdChange(mapTypeId: string): void {
+    onMapTypeIdChange(mapTypeId): void {
         this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
     }
 

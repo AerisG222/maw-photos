@@ -7,9 +7,9 @@ import { map, tap, filter } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
 import { VideoSize } from 'src/app/core/models/video-size.model';
-import { VideoCategory } from 'src/app/core/models/video-category.model';
 import { Video } from 'src/app/core/models/video.model';
 import { Settings } from 'src/app/core/models/settings.model';
+import { Category } from 'src/app/core/models/category.model';
 import {
     LayoutStoreActions,
     SettingsStoreActions,
@@ -38,7 +38,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     videoSize = VideoSize;
     showCategoryAsLink = false;
     settings$: Observable<Settings>;
-    category$: Observable<VideoCategory>;
+    category$: Observable<Category>;
     videos$: Observable<Video[]>;
     activeVideo$: Observable<Video>;
 
@@ -60,7 +60,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
         this.category$ = this.store$
             .pipe(
-                select(VideoCategoryStoreSelectors.selectCurrentCategory),
+                select(VideoCategoryStoreSelectors.selectCurrentCategoryAsCategory),
             );
 
         this.videos$ = this.store$

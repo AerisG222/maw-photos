@@ -6,18 +6,18 @@ import { Observable } from 'rxjs';
 import { filter, tap, take } from 'rxjs/operators';
 
 import { toolbarShow } from '../animations';
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Settings } from 'src/app/core/models/settings.model';
+import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
+import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
+import { Category } from 'src/app/core/models/category.model';
 import {
     PhotoStoreActions,
     PhotoStoreSelectors,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors
 } from 'src/app/core/root-store';
-import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
-import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 
 // TODO: look at updating source images to higher quality jpgs
 
@@ -39,7 +39,7 @@ export class PhotoViewComponent implements OnInit {
     @Input() showCategoryAsLink: boolean;
 
     settings$: Observable<Settings>;
-    category$: Observable<PhotoCategory>;
+    category$: Observable<Category>;
     photos$: Observable<Photo[]>;
     activePhoto$: Observable<Photo>;
     effects$: Observable<PhotoEffects>;
@@ -61,7 +61,7 @@ export class PhotoViewComponent implements OnInit {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
+                select(PhotoCategoryStoreSelectors.selectCurrentCategoryAsCategory)
             );
 
         this.store$
