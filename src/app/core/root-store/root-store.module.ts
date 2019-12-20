@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, MinimalRouterStateSerializer, RouterState } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgOidcClientModule } from 'ng-oidc-client';
-import { Log, WebStorageStateStore } from 'oidc-client';
+import { Log } from 'oidc-client';
 
 import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
@@ -15,10 +15,6 @@ import { PhotoStoreModule } from './photo-store/photo-store.module';
 import { SettingsStoreModule } from './settings-store';
 import { VideoCategoryStoreModule } from './video-category-store';
 import { VideoStoreModule } from './video-store';
-
-export function getUserStore() {
-    return new WebStorageStateStore({ store: window.sessionStorage });
-}
 
 @NgModule({
     declarations: [],
@@ -55,8 +51,7 @@ export function getUserStore() {
                 automaticSilentRenew: true,
                 filterProtocolClaims: true,
                 loadUserInfo: true,
-                popupWindowFeatures: 'location=no,toolbar=no,width=600,height=600,left=100,top=100',
-                userStore: getUserStore
+                popupWindowFeatures: 'location=no,toolbar=no,width=600,height=600,left=100,top=100'
             },
             // log: {
             //     logger: console,
