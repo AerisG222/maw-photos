@@ -124,8 +124,6 @@ export class MinimapComponent implements OnInit {
     }
 
     onMapTypeChange(mapTypeId): void {
-        const x = mapTypeId as string;
-
         if (this.mode === MinimapMode.Photos) {
             this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
         }
