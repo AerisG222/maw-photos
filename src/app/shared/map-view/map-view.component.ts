@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 
 import { MapImage } from 'src/app/core/models/map-image.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -33,6 +33,10 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         this.updateMapOptions();
     }
 
+    constructor(private changeDetectorRef: ChangeDetectorRef) {
+
+    }
+
     ngOnChanges(changes: SimpleChanges): void {
         this.updateMapOptions();
         this.updateActivePhoto();
@@ -45,13 +49,17 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         }
 
         this.updateActivePhoto();
+
+        this.changeDetectorRef.detectChanges();
     }
 
     onZoomChange() {
-        const zoom = this.map.getZoom();
+        if (this.map) {
+            const zoom = this.map.getZoom();
 
-        if (!!zoom) {
-            this.zoomChange.emit(zoom);
+            if (!!zoom) {
+                this.zoomChange.emit(zoom);
+            }
         }
     }
 
