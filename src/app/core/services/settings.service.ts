@@ -73,7 +73,7 @@ export class SettingsService {
         const photoListShowCategoryBreadcrumbs = this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
         const photoListShowPhotoList = this.getBoolean(SettingsService.keyPhotoListShowPhotoList);
         const photoListMapViewMapTypeId = this.getValue(SettingsService.keyPhotoListMapViewMapTypeId);
-        const photoListMapViewZoom = this.getNumber(this.localStorage.retrieve(SettingsService.keyPhotoListMapViewZoom));
+        const photoListMapViewZoom = this.getNumber(SettingsService.keyPhotoListMapViewZoom);
 
         const photoInfoPanelShowRatings = this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings);
         const photoInfoPanelShowComments = this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments);
