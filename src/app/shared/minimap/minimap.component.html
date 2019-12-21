@@ -3,19 +3,14 @@
         <mat-icon [inline]="true">map</mat-icon> Mini-Map
     </mat-card-title>
     <mat-card-content>
-        <agm-map
-            [controlSize]="24"
-            [latitude]="latitude$ | async"
-            [longitude]="longitude$ | async"
-            [fullscreenControl]="true"
-            [mapTypeControl]="true"
-            [mapTypeId]="minimapMapTypeId$ | async"
-            [streetViewControl]="false"
-            [styles]="minimapTheme$ | async"
+        <google-map
+            [options]="options$ | async"
+            [center]="position$ | async"
             [zoom]="minimapZoom$ | async"
-            (mapTypeIdChange)="onMapTypeChange($event)"
-            (zoomChange)="onZoomChange($event)">
-            <agm-marker [latitude]="latitude$ | async" [longitude]="longitude$ | async"></agm-marker>
-        </agm-map>
+            (maptypeidChanged)="onMapTypeChange()"
+            (zoomChanged)="onZoomChange()"
+            #map>
+            <map-marker [position]="position$ | async"></map-marker>
+        </google-map>
     </mat-card-content>
 </mat-card>

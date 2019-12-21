@@ -1,10 +1,8 @@
-import { MapTypeStyle } from '@agm/core';
-
 export class GoogleMapThemes {
-    static readonly THEME_LIGHT: MapTypeStyle[] = [];
+    static readonly THEME_LIGHT: google.maps.MapTypeStyle[] = [];
 
     // https://developers.google.com/maps/documentation/javascript/examples/style-array
-    static readonly THEME_DARK: MapTypeStyle[] = [
+    static readonly THEME_DARK: google.maps.MapTypeStyle[] = [
         {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
         {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
         {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},

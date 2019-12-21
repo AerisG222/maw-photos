@@ -1,12 +1,12 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input } from '@angular/core';
-import { MapTypeStyle } from '@agm/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
 import { SettingsStoreSelectors, PhotoStoreSelectors, SettingsStoreActions, VideoStoreSelectors } from 'src/app/core/root-store';
 import { MinimapMode } from './minimap-mode.model';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
     selector: 'app-minimap',
@@ -14,14 +14,16 @@ import { MinimapMode } from './minimap-mode.model';
     styleUrls: ['./minimap.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MinimapComponent implements OnInit {
+export class MinimapComponent implements OnInit, AfterViewInit {
     @Input() mode: MinimapMode;
 
-    latitude$: Observable<number>;
-    longitude$: Observable<number>;
+    @ViewChild(GoogleMap) map: GoogleMap;
+
+    position$: Observable<google.maps.LatLng>;
+    options$: Observable<google.maps.MapOptions>;
     minimapMapTypeId$: Observable<string>;
     minimapZoom$: Observable<number>;
-    minimapTheme$: Observable<MapTypeStyle[]>;
+    minimapTheme$: Observable<google.maps.MapTypeStyle[]>;
 
     constructor(
         private store$: Store<{}>
@@ -45,6 +47,29 @@ export class MinimapComponent implements OnInit {
             default:
                 throw new Error('invalid minimap mode!');
         }
+
+        this.options$ = combineLatest([
+            this.minimapMapTypeId$,
+            this.minimapTheme$,
+            this.minimapZoom$
+        ]).pipe(
+            map(x => ({
+                controlSize: 24,
+                fullscreenControl: true,
+                mapTypeControl: true,
+                streetViewControl: false,
+                mapTypeId: x[0],
+                styles: x[1],
+                zoom: x[2]
+            }))
+        );
+    }
+
+    // TODO: remove after https://github.com/angular/components/issues/18026 is fixed
+    ngAfterViewInit(): void {
+        if (!!this.map) {
+            this.map._googleMap.addListener('zoom_changed', () => this.onZoomChange());
+        }
     }
 
     initPhotosMinimap(): void {
@@ -54,22 +79,11 @@ export class MinimapComponent implements OnInit {
                 filter(photo => !!photo)
         );
 
-        this.latitude$ = currentPhoto$
+        this.position$ = currentPhoto$
             .pipe(
                 map(photo => {
-                    if (photo) {
-                        return photo.latitude == null ? null : photo.latitude;
-                    }
-
-                    return null;
-                })
-            );
-
-        this.longitude$ = currentPhoto$
-            .pipe(
-                map(photo => {
-                    if (photo) {
-                        return photo.longitude == null ? null : photo.longitude;
+                    if (!!photo && !!photo.latitude && photo.longitude) {
+                        return new google.maps.LatLng(photo.latitude, photo.longitude);
                     }
 
                     return null;
@@ -92,22 +106,11 @@ export class MinimapComponent implements OnInit {
                 filter(video => !!video)
             );
 
-        this.latitude$ = currentVideo$
+        this.position$ = currentVideo$
             .pipe(
                 map(video => {
-                    if (video) {
-                        return video.latitude == null ? null : video.latitude;
-                    }
-
-                    return null;
-                })
-            );
-
-        this.longitude$ = currentVideo$
-            .pipe(
-                map(video => {
-                    if (video) {
-                        return video.longitude == null ? null : video.longitude;
+                    if (!!video && !!video.latitude && video.longitude) {
+                        return new google.maps.LatLng(video.latitude, video.longitude);
                     }
 
                     return null;
@@ -123,23 +126,35 @@ export class MinimapComponent implements OnInit {
         );
     }
 
-    onMapTypeChange(mapTypeId): void {
-        if (this.mode === MinimapMode.Photos) {
-            this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
-        }
+    onMapTypeChange(): void {
+        if (!!this.map) {
+            const mapTypeId = this.map.getMapTypeId();
 
-        if (this.mode === MinimapMode.Videos) {
-            this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+            if(!!mapTypeId) {
+                if (this.mode === MinimapMode.Photos) {
+                    this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+                }
+
+                if (this.mode === MinimapMode.Videos) {
+                    this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+                }
+            }
         }
     }
 
-    onZoomChange(zoom: number): void {
-        if (this.mode === MinimapMode.Photos) {
-            this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
-        }
+    onZoomChange(): void {
+        if (!!this.map) {
+            const zoom = this.map.getZoom();
 
-        if (this.mode === MinimapMode.Videos) {
-            this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
+            if (!!zoom) {
+                if (this.mode === MinimapMode.Photos) {
+                    this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
+                }
+
+                if (this.mode === MinimapMode.Videos) {
+                    this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
+                }
+            }
         }
     }
 }

@@ -1,21 +1,19 @@
-<agm-map
+<google-map
     *ngIf="images"
-    [controlSize]="24"
-    [latitude]="images[0].latitude"
-    [longitude]="images[0].longitude"
-    [fullscreenControl]="false"
-    [mapTypeControl]="true"
-    [mapTypeId]="mapTypeId"
-    [styles]="getMapTheme()"
+    [height]="'100%'"
+    [width]="'100%'"
+    [options]="options"
     [zoom]="zoom"
-    (mapTypeIdChange)="onMapTypeChange($event)"
-    (zoomChange)="onZoomChange($event)">
-    <agm-marker
+    (maptypeidChanged)="onMapTypeChange()"
+    (zoomChanged)="onZoomChange()"
+    #map>
+    <map-marker
         *ngFor="let image of images"
-        [latitude]="image.latitude"
-        [longitude]="image.longitude">
-        <agm-info-window [disableAutoPan]="true" [isOpen]="image.id === activePhoto.id">
-            <img [src]="image.imageUrl" />
-        </agm-info-window>
-    </agm-marker>
-</agm-map>
+        [options]="getMarkerOptions(marker, image)"
+        (mapClick)="openInfoWindow(marker, image)"
+        #marker>
+    </map-marker>
+    <map-info-window #infoWindow>
+        <img class="info-window-image" [src]="activeImageUrl" />
+    </map-info-window>
+</google-map>

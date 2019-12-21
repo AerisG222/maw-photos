@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,7 +20,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AgmCoreModule } from '@agm/core';
 import { NgxStarsModule } from 'ngx-stars';
 
 import { CategoryHeaderComponent } from './category-header/category-header.component';
@@ -95,10 +95,8 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         VideoInfoPanelComponent
     ],
     imports: [
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyA50h7G5fm_83lh460EnOdabUC9zU8XF7A'
-        }),
         CommonModule,
+        GoogleMapsModule,
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
@@ -122,7 +120,7 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
     ],
     exports: [
         // modules
-        AgmCoreModule,
+        GoogleMapsModule,
         MatButtonModule,
         MatCardModule,
         MatCheckboxModule,
