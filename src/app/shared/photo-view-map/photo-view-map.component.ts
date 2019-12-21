@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,7 +11,8 @@ import { Settings } from 'src/app/core/models/settings.model';
 import {
     PhotoStoreSelectors,
     SettingsStoreActions,
-    SettingsStoreSelectors
+    SettingsStoreSelectors,
+    PhotoStoreActions
 } from 'src/app/core/root-store';
 
 @Component({
@@ -27,7 +28,7 @@ import {
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PhotoViewMapComponent implements OnInit {
+export class PhotoViewMapComponent implements OnInit, OnDestroy {
     activePhoto$: Observable<Photo>;
     mapImages$: Observable<MapImage[]>;
     settings$: Observable<Settings>;
@@ -58,6 +59,10 @@ export class PhotoViewMapComponent implements OnInit {
                     longitude: x.longitude
                 })))
             );
+    }
+
+    ngOnDestroy(): void {
+        this.store$.dispatch(PhotoStoreActions.exitMapViewRequest());
     }
 
     onMapTypeIdChange(mapTypeId): void {
