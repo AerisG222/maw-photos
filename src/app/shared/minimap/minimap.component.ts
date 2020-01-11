@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { GoogleMap } from '@angular/google-maps';
     styleUrls: ['./minimap.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MinimapComponent implements OnInit, AfterViewInit {
+export class MinimapComponent implements OnInit {
     @Input() mode: MinimapMode;
 
     @ViewChild(GoogleMap) map: GoogleMap;
@@ -63,13 +63,6 @@ export class MinimapComponent implements OnInit, AfterViewInit {
                 zoom: x[2]
             }))
         );
-    }
-
-    // TODO: remove after https://github.com/angular/components/issues/18026 is fixed
-    ngAfterViewInit(): void {
-        if (!!this.map) {
-            this.map._googleMap.addListener('zoom_changed', () => this.onZoomChange());
-        }
     }
 
     initPhotosMinimap(): void {

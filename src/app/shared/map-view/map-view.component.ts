@@ -1,4 +1,16 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit, ViewChild, AfterViewInit, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ChangeDetectionStrategy,
+    OnInit,
+    ViewChild,
+    AfterViewInit,
+    OnChanges,
+    SimpleChanges,
+    ChangeDetectorRef
+} from '@angular/core';
 
 import { MapImage } from 'src/app/core/models/map-image.model';
 import { Photo } from 'src/app/core/models/photo.model';
@@ -42,12 +54,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         this.updateActivePhoto();
     }
 
-    // TODO: update after https://github.com/angular/components/issues/18026 is fixed
     ngAfterViewInit(): void {
-        if (!!this.map) {
-            this.map._googleMap.addListener('zoom_changed', () => this.onZoomChange());
-        }
-
         this.updateActivePhoto();
 
         this.changeDetectorRef.detectChanges();
