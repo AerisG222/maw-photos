@@ -56,6 +56,7 @@ import { PrimaryNavComponent } from './primary-nav/primary-nav.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PhotoViewFullscreenComponent } from './photo-view-fullscreen/photo-view-fullscreen.component';
 import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component';
+import { SearchLinkComponent } from './search-link/search-link.component';
 
 @NgModule({
     declarations: [
@@ -92,7 +93,8 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
-        VideoInfoPanelComponent
+        VideoInfoPanelComponent,
+        SearchLinkComponent
     ],
     imports: [
         CommonModule,
@@ -169,6 +171,7 @@ import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component
         PrimaryNavComponent,
         RandomLinkComponent,
         RatingComponent,
+        SearchLinkComponent,
         SettingsLinkComponent,
         SidebarComponent,
         SlideshowButtonComponent,
