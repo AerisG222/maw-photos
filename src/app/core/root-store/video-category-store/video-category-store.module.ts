@@ -13,9 +13,6 @@ import { videoCategoryReducer } from './reducer';
         CommonModule,
         StoreModule.forFeature(VIDEO_CATEGORY_FEATURE_NAME, videoCategoryReducer),
         EffectsModule.forFeature([VideoCategoryStoreEffects])
-    ],
-    providers: [
-        VideoCategoryStoreEffects
     ]
 })
 export class VideoCategoryStoreModule { }

@@ -13,9 +13,6 @@ import { photoCategoryReducer } from './reducer';
         CommonModule,
         StoreModule.forFeature(PHOTO_CATEGORY_FEATURE_NAME, photoCategoryReducer),
         EffectsModule.forFeature([PhotoCategoryStoreEffects])
-    ],
-    providers: [
-        PhotoCategoryStoreEffects
     ]
 })
 export class PhotoCategoryStoreModule { }

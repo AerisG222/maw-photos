@@ -13,9 +13,6 @@ import { videoReducer } from './reducer';
         CommonModule,
         StoreModule.forFeature(VIDEO_FEATURE_NAME, videoReducer),
         EffectsModule.forFeature([VideoStoreEffects])
-    ],
-    providers: [
-        VideoStoreEffects
     ]
 })
 export class VideoStoreModule { }
