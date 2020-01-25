@@ -6,12 +6,15 @@ import { ExternalVideoApiService } from './external-video-api.service';
 import { videoApiServiceToken } from '../video-api.service';
 import { ExternalAuthGuard } from './external-auth.guard';
 import { authGuardToken } from '../auth.guard';
+import { searchApiServiceToken } from '../search-api.service';
+import { ExternalSearchApiService } from './external-search-api.service';
 
 @NgModule({
     providers: [
         { provide: authGuardToken, useClass: ExternalAuthGuard },
         { provide: photoApiServiceToken, useClass: ExternalPhotoApiService },
-        { provide: videoApiServiceToken, useClass: ExternalVideoApiService }
+        { provide: videoApiServiceToken, useClass: ExternalVideoApiService },
+        { provide: searchApiServiceToken, useClass: ExternalSearchApiService }
     ]
 })
 export class ExternalServicesModule { }
