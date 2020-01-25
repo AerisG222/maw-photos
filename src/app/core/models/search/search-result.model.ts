@@ -1,7 +1,5 @@
-import { MultimediaCategory } from './multimedia-category.model';
-
-export interface SearchResult {
-    results: MultimediaCategory[];
+export interface SearchResult<T> {
+    results: T[];
     totalFound: number;
     startIndex: number;
 }
