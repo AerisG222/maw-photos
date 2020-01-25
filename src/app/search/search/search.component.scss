@@ -1,0 +1,29 @@
+.main-grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 100%;
+    height: 100vh;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: max-content;
+    grid-column-gap: 24px;
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 60vw;
+}
+
+@media (max-width: 800px) {
+    .main-grid {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content auto;
+    }
+
+    mat-form-field {
+        width: 80vw;
+    }
+}

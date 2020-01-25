@@ -1,1 +1,22 @@
-<p>search works!</p>
+<div class="main-grid">
+    <div class="mat-elevation-z4" @toolbarFadeIn>
+        <app-search-toolbar></app-search-toolbar>
+    </div>
+
+    <div class="content-scroll-pane">
+        <div class="content-scroll-pane-content">
+            <div class="filter-grid">
+                <form [formGroup]="form">
+                    <mat-form-field appearance="standard">
+                        <mat-label>Search Terms</mat-label>
+                        <input type="search" matInput formControlName="query" (keyup.enter)="onSearch()" />
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <div>
+                results...
+            </div>
+        </div>
+    </div>
+</div>

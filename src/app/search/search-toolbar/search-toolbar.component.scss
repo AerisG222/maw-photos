@@ -1,0 +1,23 @@
+.category-grid {
+    grid-template-columns: min-content;
+    grid-template-rows: repeat(auto-fit, 1fr);
+}
+
+.category,
+.toolbar-control.mobile {
+    margin-right: 6px;
+}
+
+.mat-button {
+    min-width: 36px;
+    line-height: 28px;
+    font-size: 18px;
+    display: block;
+}
+
+@media (max-width: 800px) {
+    .mat-button,
+    mat-divider {
+        display: inline;
+    }
+}
