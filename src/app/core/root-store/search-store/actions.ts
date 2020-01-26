@@ -8,7 +8,7 @@ export const clearRequest = createAction(
 );
 
 export const queryRequest = createAction(
-    '[Search] Query Reqeust',
+    '[Search] Query Request',
     props<{ query: string }>()
 );
 
@@ -19,5 +19,20 @@ export const queryFailure = createAction(
 
 export const querySuccess = createAction(
     '[Search] Query Success',
+    props<{ result: SearchResult<MultimediaCategory> }>()
+);
+
+export const queryNextPageRequest = createAction(
+    '[Search] Query Next Page Request',
+    props<{ start: number }>()
+);
+
+export const queryNextPageFailure = createAction(
+    '[Search] Query Next Page Failure',
+    props<{ error: string }>()
+);
+
+export const queryNextPageSuccess = createAction(
+    '[Search] Query Next Page Success',
     props<{ result: SearchResult<MultimediaCategory> }>()
 );

@@ -1,15 +1,23 @@
 
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+
 import { MultimediaCategory } from '../../models/search/multimedia-category.model';
 import { SearchResult } from '../../models/search/search-result.model';
 
-export interface State {
+export const searchAdapter: EntityAdapter<MultimediaCategory> = createEntityAdapter<MultimediaCategory>({
+    sortComparer: (a: MultimediaCategory, b: MultimediaCategory): number => b.solrId.localeCompare(a.solrId)
+});
+
+export interface State extends EntityState<MultimediaCategory> {
     error: string;
     isLoading: boolean;
-    searchResult: SearchResult<MultimediaCategory>;
+    query: string;
+    currentResult: SearchResult<MultimediaCategory>;
 }
 
-export const initialState: State = {
+export const initialState: State = searchAdapter.getInitialState({
     isLoading: false,
     error: null,
-    searchResult: null
-};
+    query: null,
+    currentResult: null
+});

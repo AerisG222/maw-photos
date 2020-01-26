@@ -7,4 +7,5 @@ export const searchApiServiceToken = 'SearchApiService';
 
 export interface SearchApiService {
     search(query: string): Observable<SearchResult<MultimediaCategory>>;
+    searchNextPage(start: number): Observable<SearchResult<MultimediaCategory>>;
 }

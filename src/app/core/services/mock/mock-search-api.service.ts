@@ -12,4 +12,8 @@ export class MockSearchApiService implements SearchApiService {
     search(query: string): Observable<SearchResult<MultimediaCategory>> {
         throw new Error('Method not implemented.');
     }
+
+    searchNextPage(start: number): Observable<SearchResult<MultimediaCategory>> {
+        throw new Error('Method not implemented.');
+    }
 }
