@@ -16,14 +16,14 @@ const reducer = createReducer(
         ...state,
         isLoading: true,
         error: null,
-        query
     })),
-    on(SearchActions.querySuccess, (state, { result }) =>
-        searchAdapter.addAll(result.results, {
+    on(SearchActions.querySuccess, (state, { query, result }) =>
+    searchAdapter.addAll(result.results, {
             ...state,
             isLoading: false,
             error: null,
-            currentResult: result
+            currentResult: result,
+            query
         })
     ),
     on(SearchActions.queryFailure, (state, { error }) => ({

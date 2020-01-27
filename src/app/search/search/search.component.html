@@ -15,7 +15,9 @@
             </div>
 
             <div>
-                results...
+                <div *ngFor="let c of categories$ | async">
+                    {{ c.name }}
+                </div>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ export const queryFailure = createAction(
 
 export const querySuccess = createAction(
     '[Search] Query Success',
-    props<{ result: SearchResult<MultimediaCategory> }>()
+    props<{ query: string, result: SearchResult<MultimediaCategory> }>()
 );
 
 export const queryNextPageRequest = createAction(

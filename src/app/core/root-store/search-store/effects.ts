@@ -22,7 +22,7 @@ export class SearchStoreEffects {
         this.actions$.pipe(
             ofType(SearchStoreActions.queryRequest),
             withLatestFrom(this.store$.pipe(
-                select(searchSelectors.selectQuery)
+                select(searchSelectors.selectSearchQuery)
             )),
             map(x => ({
                 action: x[0],
@@ -32,7 +32,7 @@ export class SearchStoreEffects {
             switchMap(ctx =>
                 this.api.search(ctx.action.query)
                     .pipe(
-                        map(result => SearchStoreActions.querySuccess({ result })),
+                        map(result => SearchStoreActions.querySuccess({ query: ctx.action.query, result })),
                         catchError(error => of(SearchStoreActions.queryFailure({ error })))
                     )
             )

@@ -14,7 +14,7 @@ export const selectSearchState = createFeatureSelector<State>(SEARCH_FEATURE_NAM
 
 export const selectSearchError = createSelector(selectSearchState, getError);
 export const selectSearchIsLoading = createSelector(selectSearchState, getIsLoading);
-export const selectQuery = createSelector(selectSearchState, getQuery);
-export const selectCurrentResult = createSelector(selectSearchState, getCurrentResult);
+export const selectSearchQuery = createSelector(selectSearchState, getQuery);
+export const selectSearchCurrentResult = createSelector(selectSearchState, getCurrentResult);
 
-export const selectAllResults = searchAdapter.getSelectors(selectSearchState).selectAll;
+export const selectSearchAllResults = searchAdapter.getSelectors(selectSearchState).selectAll;
