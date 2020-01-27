@@ -4,6 +4,7 @@ import { Category } from 'src/app/core/models/category.model';
 import { CategoryType } from 'src/app/core/models/category-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { Router } from '@angular/router';
+import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 
 @Component({
     selector: 'app-category-list',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListComponent {
-    @Input() categories: Category[];
+    @Input() categories: CategoryTeaser[];
     @Input() thumbnailSize: ThumbnailSize;
 
     categoryTypes = CategoryType;

@@ -96,7 +96,7 @@ export const selectAllFilteredCategoryYears = createSelector(
 
 export const selectAllFilteredCategoriesForYear = createSelector(
     selectAllFilteredCategories,
-    (categories, props: { year: number }) => categories.filter(c => c.year === props.year)
+    (categories: Category[], props: { year: number }) => categories.filter(c => c.year === props.year)
 );
 
 export const selectInitialYearFilterSelection = createSelector(

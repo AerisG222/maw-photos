@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Settings } from 'src/app/core/models/settings.model';
-import { Category } from 'src/app/core/models/category.model';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 import {
     RootStoreSelectors,
     SettingsStoreSelectors
@@ -21,7 +21,7 @@ import {
 export class YearComponent implements OnInit {
     @Input() year: number;
 
-    categories$: Observable<Category[]>;
+    categories$: Observable<CategoryTeaser[]>;
     settings$: Observable<Settings>;
     showListView$: Observable<boolean>;
     showGridView$: Observable<boolean>;
@@ -58,7 +58,15 @@ export class YearComponent implements OnInit {
 
         this.categories$ = this.store$
             .pipe(
-                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year })
+                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year }),
+                map(cats => cats.map(cat => ({
+                    route: cat.categoryRoute,
+                    id: cat.id,
+                    year: cat.year,
+                    name: cat.name,
+                    teaserImageSqUrl: cat.teaserImageSq.url,
+                    type: cat.type
+                })))
             );
     }
 }

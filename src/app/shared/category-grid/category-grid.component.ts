@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from 'src/app/core/models/category.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 
 @Component({
     selector: 'app-category-grid',
@@ -10,7 +10,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryGridComponent {
-    @Input() categories: Category[];
+    @Input() categories: CategoryTeaser[];
     @Input() showTitles: boolean;
     @Input() thumbnailSize: ThumbnailSize;
 }
