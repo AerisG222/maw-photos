@@ -57,9 +57,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { PhotoViewFullscreenComponent } from './photo-view-fullscreen/photo-view-fullscreen.component';
 import { PhotoViewMapComponent } from './photo-view-map/photo-view-map.component';
 import { SearchLinkComponent } from './search-link/search-link.component';
+import { CategoryCardComponent } from './category-card/category-card.component';
+import { CategoryGridComponent } from './category-grid/category-grid.component';
+import { CategoryListComponent } from './category-list/category-list.component';
 
 @NgModule({
     declarations: [
+        CategoryCardComponent,
+        CategoryGridComponent,
+        CategoryListComponent,
         CategoryHeaderComponent,
         CategoriesLinkComponent,
         CategoryListToolbarComponent,
@@ -144,6 +150,9 @@ import { SearchLinkComponent } from './search-link/search-link.component';
         ReactiveFormsModule,
 
         // components
+        CategoryCardComponent,
+        CategoryGridComponent,
+        CategoryListComponent,
         CategoryHeaderComponent,
         CategoriesLinkComponent,
         CategoryListToolbarComponent,

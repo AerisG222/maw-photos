@@ -24,11 +24,11 @@ $custom-typography: mat-typography-config(
 
 @import 'app/help/help/help.component.theme';
 
-@import 'app/categories//year-list/year-list.component.theme';
-@import 'app/categories/category-card/category-card.component.theme';
-@import 'app/categories/category-list/category-list.component.theme';
+@import 'app/categories/year-list/year-list.component.theme';
 @import 'app/categories/video-list/video-list.component.theme';
 
+@import 'app/shared/category-card/category-card.component.theme';
+@import 'app/shared/category-list/category-list.component.theme';
 @import 'app/shared/category-header/category-header.component.theme';
 @import 'app/shared/comments/comments.component.theme.scss';
 @import 'app/shared/exif-table/exif-table.component.theme';
