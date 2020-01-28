@@ -149,7 +149,7 @@ export class SettingsService {
             searchThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
             searchShowCategoryTitles: searchShowCategoryTitles !== null ? searchShowCategoryTitles : true,
             searchShowCategoryYears: searchShowCategoryYears !== null ? searchShowCategoryYears : true,
-            searchListType: this.getCategoryListType(SettingsService.keyCategoryListListType),
+            searchListType: this.getCategoryListType(SettingsService.keySearchListType),
             searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
         };
     }
