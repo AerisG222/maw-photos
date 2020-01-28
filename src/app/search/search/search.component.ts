@@ -1,15 +1,18 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
 import { queryRequest } from 'src/app/core/root-store/search-store/actions';
 import { SearchResult } from 'src/app/core/models/search/search-result.model';
 import { MultimediaCategory } from 'src/app/core/models/search/multimedia-category.model';
-import { Observable } from 'rxjs';
 import { selectSearchAllResults, selectSearchCurrentResult } from 'src/app/core/root-store/search-store/selectors';
-import { tap } from 'rxjs/operators';
+import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
+import { CategoryType } from 'src/app/core/models/category-type.model';
+import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-search',
@@ -26,7 +29,9 @@ import { tap } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
     form: FormGroup;
     currentResult$: Observable<SearchResult<MultimediaCategory>>;
-    categories$: Observable<MultimediaCategory[]>;
+    categories$: Observable<CategoryTeaser[]>;
+
+    listThumbnailSize = ThumbnailSize.small;
 
     constructor(
         private store$: Store<{}>,
@@ -40,11 +45,22 @@ export class SearchComponent implements OnInit {
             query: ['', Validators.required]
         });
 
-        this.currentResult$ = this.store$.select(selectSearchCurrentResult);
-        this.categories$ = this.store$
-            .select(selectSearchAllResults)
+        this.currentResult$ = this.store$
             .pipe(
-                tap(r => console.table(r))
+                select(selectSearchCurrentResult)
+            );
+
+        this.categories$ = this.store$
+            .pipe(
+                select(selectSearchAllResults),
+                map(cats => cats.map(cat => ({
+                    route: `${ cat.multimediaType }s`,
+                    id: cat.id,
+                    year: cat.year,
+                    name: cat.name,
+                    teaserImageSqUrl: cat.teaserPhotoSqPath,
+                    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
+                })))
             );
     }
 

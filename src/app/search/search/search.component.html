@@ -14,11 +14,22 @@
                 </form>
             </div>
 
-            <div>
-                <div *ngFor="let c of categories$ | async">
-                    {{ c.name }}
-                </div>
-            </div>
+            <mat-divider mat-color="accent"></mat-divider>
+
+            <!-- *ngIf="showListView$ | async" -->
+            <app-category-list
+                [categories]="categories$ | async"
+                [thumbnailSize]="listThumbnailSize">
+            </app-category-list>
+
+            <!-- *ngIf="showGridView$ | async" -->
+            <!-- [showTitles]="(settings$ | async).categoryListShowCategoryTitles"
+            [thumbnailSize]="!(settings$ | async).categoryListShowCategoryTitles && (settings$ | async).categoryListThumbnailSize"> -->
+            <app-category-grid
+                [categories]="categories$ | async"
+                [thumbnailSize]="listThumbnailSize">
+            </app-category-grid>
+
         </div>
     </div>
 </div>
