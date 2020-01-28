@@ -1,12 +1,12 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
-import { queryRequest } from 'src/app/core/root-store/search-store/actions';
+import { queryRequest, clearRequest } from 'src/app/core/root-store/search-store/actions';
 import { SearchResult } from 'src/app/core/models/search/search-result.model';
 import { MultimediaCategory } from 'src/app/core/models/search/multimedia-category.model';
 import { selectSearchAllResults, selectSearchCurrentResult } from 'src/app/core/root-store/search-store/selectors';
@@ -30,7 +30,7 @@ import { CategoryMargin } from 'src/app/core/models/category-margin.model';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
     form: FormGroup;
     currentResult$: Observable<SearchResult<MultimediaCategory>>;
     categories$: Observable<CategoryTeaser[]>;
@@ -115,6 +115,10 @@ export class SearchComponent implements OnInit {
                     type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
                 })))
             );
+    }
+
+    ngOnDestroy() {
+        this.store$.dispatch(clearRequest());
     }
 
     onSearch() {
