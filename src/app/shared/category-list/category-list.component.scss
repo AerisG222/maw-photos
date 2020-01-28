@@ -28,6 +28,10 @@ tr {
         }
     }
 
+    & td.mat-column-year {
+        width: 60px;
+    }
+
     & img {
         margin: 4px;
         vertical-align: middle;

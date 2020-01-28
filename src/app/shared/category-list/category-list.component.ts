@@ -13,11 +13,22 @@ import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListComponent {
+    private readonly colsNoYear = [ 'icon', 'thumbnail', 'title' ];
+    private readonly colsWithYear = [ 'icon', 'thumbnail', 'year', 'title' ];
+
     @Input() categories: CategoryTeaser[];
     @Input() thumbnailSize: ThumbnailSize;
 
+    @Input() set showYears(showYear: boolean) {
+        if (showYear) {
+            this.columnsToDisplay = this.colsWithYear;
+        } else {
+            this.columnsToDisplay = this.colsNoYear;
+        }
+    }
+
     categoryTypes = CategoryType;
-    columnsToDisplay = [ 'icon', 'thumbnail', 'title' ];
+    columnsToDisplay = this.colsNoYear;
 
     constructor(
         private router: Router
