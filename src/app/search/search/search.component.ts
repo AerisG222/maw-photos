@@ -1,5 +1,5 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -26,7 +26,8 @@ import { CategoryListType } from 'src/app/core/models/category-list-type.model';
                 useAnimation(toolbarShow)
             ])
         ])
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
     form: FormGroup;
@@ -53,13 +54,13 @@ export class SearchComponent implements OnInit {
 
         this.showListView$ = this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
+                select(SettingsStoreSelectors.selectSearchListType),
                 map(type => type.name === CategoryListType.list.name)
             );
 
         this.showGridView$ = this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
+                select(SettingsStoreSelectors.selectSearchListType),
                 map(type => type.name === CategoryListType.grid.name)
             );
 
