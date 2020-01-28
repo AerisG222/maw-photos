@@ -15,6 +15,7 @@ import { CategoryType } from 'src/app/core/models/category-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
+import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 
 @Component({
     selector: 'app-search',
@@ -39,6 +40,7 @@ export class SearchComponent implements OnInit {
     gridShowYears$: Observable<boolean>;
     listThumbnailSize$: Observable<ThumbnailSize>;
     gridThumbnailSize$: Observable<ThumbnailSize>;
+    margin$: Observable<CategoryMargin>;
 
     constructor(
         private store$: Store<{}>,
@@ -51,6 +53,11 @@ export class SearchComponent implements OnInit {
         this.form = this.formBuilder.group({
             query: ['', Validators.required]
         });
+
+        this.margin$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSearchCategoryMargin)
+            );
 
         this.showListView$ = this.store$
             .pipe(

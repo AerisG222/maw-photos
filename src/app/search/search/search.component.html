@@ -4,7 +4,7 @@
     </div>
 
     <div class="content-scroll-pane">
-        <div class="content-scroll-pane-content">
+        <div class="content-scroll-pane-content" [ngClass]="(margin$ | async).klass">
             <div class="filter-grid">
                 <form [formGroup]="form">
                     <mat-form-field appearance="standard">
