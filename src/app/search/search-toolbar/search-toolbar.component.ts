@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { CategoryFilter } from 'src/app/core/models/category-filter.model';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
 import { Settings } from 'src/app/core/models/settings.model';
@@ -22,6 +21,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     private hotkeys: Hotkey[] = [];
     private destroySub = new Subscription();
 
+    @ViewChild('toggleYearsButton') toggleYearsButton: MatButton;
     @ViewChild('toggleTitlesButton') toggleTitlesButton: MatButton;
     @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
     @ViewChild('toggleMarginsButton') toggleMarginsButton: MatButton;
@@ -41,19 +41,19 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.isListView$ = this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
+                select(SettingsStoreSelectors.selectSearchListType),
                 map(type => type.name === CategoryListType.list.name)
             );
 
         this.isGridView$ = this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
+                select(SettingsStoreSelectors.selectSearchListType),
                 map(type => type.name === CategoryListType.grid.name)
             );
 
         this.showCategoryTitles$ = this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles)
+                select(SettingsStoreSelectors.selectSearchShowCategoryTitles)
             );
 
         this.hotkeys.push(this.hotkeysService.add(
@@ -66,13 +66,18 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
 
         this.destroySub.add(this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
+                select(SettingsStoreSelectors.selectSearchListType),
                 tap(type => {
                     this.removeThumbnailSizeHotkey();
                     this.removeShowTitleHotkey();
+                    this.removeShowYearHotkey();
 
                     switch (type) {
                         case CategoryListType.grid:
+                            this.hotkeys.push(this.hotkeysService.add(
+                                new Hotkey('y', (event: KeyboardEvent) => this.onHotkeyToggleYear(event), [], 'Toggle Category Years')
+                            ) as Hotkey);
+
                             this.hotkeys.push(this.hotkeysService.add(
                                 new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Category Titles')
                             ) as Hotkey);
@@ -110,45 +115,41 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
 
     onToggleListType(): void {
         if (this.settings) {
-            const type = CategoryListType.nextType(this.settings.categoryListListType.name);
+            const type = CategoryListType.nextType(this.settings.searchListType.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListListTypeRequest({ newType: type }));
+            this.store$.dispatch(SettingsStoreActions.updateSearchListTypeRequest({ newType: type }));
         }
     }
 
+    onToggleYear(): void {
+        this.store$.dispatch(SettingsStoreActions.toggleSearchCategoryYearsRequest());
+    }
+
     onToggleTitle(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleCategoryListCategoryTitlesRequest());
+        this.store$.dispatch(SettingsStoreActions.toggleSearchCategoryTitlesRequest());
     }
 
     onToggleListThumbnailSize(): void {
         if (this.settings) {
-            const size = ThumbnailSize.nextSize(this.settings.categoryListListViewThumbnailSize.name);
+            const size = ThumbnailSize.nextSize(this.settings.searchListViewThumbnailSize.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListListViewThumbnailSizeRequest({ newSize: size }));
+            this.store$.dispatch(SettingsStoreActions.updateSearchListViewThumbnailSizeRequest({ newSize: size }));
         }
     }
 
     onToggleSize(): void {
-        if (this.settings && !this.settings.categoryListShowCategoryTitles) {
-            const size = ThumbnailSize.nextSize(this.settings.categoryListThumbnailSize.name);
+        if (this.settings && !this.settings.searchShowCategoryTitles) {
+            const size = ThumbnailSize.nextSize(this.settings.searchThumbnailSize.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListThumbnailSizeRequest({ newSize: size }));
-        }
-    }
-
-    onToggleFilter(): void {
-        if (this.settings) {
-            const newFilter = CategoryFilter.nextFilter(this.settings.categoryListCategoryFilter.name);
-
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter }));
+            this.store$.dispatch(SettingsStoreActions.updateSearchThumbnailSizeRequest({ newSize: size }));
         }
     }
 
     onToggleMargins(): void {
         if (this.settings) {
-            const newMargin = CategoryMargin.nextSize(this.settings.categoryListCategoryMargin.name);
+            const newMargin = CategoryMargin.nextSize(this.settings.searchCategoryMargin.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryMarginRequest({ newMargin }));
+            this.store$.dispatch(SettingsStoreActions.updateSearchCategoryMarginRequest({ newMargin }));
         }
     }
 
@@ -160,6 +161,10 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
         this.removeHotKey('t');
     }
 
+    private removeShowYearHotkey(): void {
+        this.removeHotKey('y');
+    }
+
     private removeHotKey(combo: string): void {
         for (let i = this.hotkeys.length - 1; i >= 0; i--) {
             const hotkey = this.hotkeys[i];
@@ -169,6 +174,13 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
                 this.hotkeys.splice(i, 1);
             }
         }
+    }
+
+    private onHotkeyToggleYear(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleYearsButton);
+        this.onToggleYear();
+
+        return false;
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {

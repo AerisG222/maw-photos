@@ -18,6 +18,18 @@
                 *ngIf="isGridView$ | async"
                 [disabled]="(isGridView$ | async) === false"
                 mat-button
+                matTooltip="Show/Hide Category Years (Y)"
+                matTooltipPosition="after"
+                class="toolbar-button"
+                (click)="onToggleYear()"
+                #toggleYearsButton>
+                <mat-icon [inline]="true">title</mat-icon>
+            </button>
+
+            <button
+                *ngIf="isGridView$ | async"
+                [disabled]="(isGridView$ | async) === false"
+                mat-button
                 matTooltip="Show/Hide Category Titles (T)"
                 matTooltipPosition="after"
                 class="toolbar-button"
