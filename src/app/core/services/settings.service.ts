@@ -103,7 +103,7 @@ export class SettingsService {
         const videoInfoPanelMinimapZoom = this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom);
 
         const searchShowCategoryTitles = this.getBoolean(SettingsService.keySearchShowCategoryTitles);
-        const searchShowCategoryYears = this.getBoolean(SettingsService.keySearchShowCategoryTitles);
+        const searchShowCategoryYears = this.getBoolean(SettingsService.keySearchShowCategoryYears);
 
         return {
             appTheme: this.getTheme(),
@@ -200,7 +200,7 @@ export class SettingsService {
 
         this.setValue(SettingsService.keySearchCategoryMargin, settings.searchCategoryMargin.name);
         this.setValue(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
-        this.setValue(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
+        this.setValue(SettingsService.keySearchShowCategoryYears, settings.searchShowCategoryYears);
         this.setValue(SettingsService.keySearchThumbnailSize, settings.searchThumbnailSize.name);
         this.setValue(SettingsService.keySearchListType, settings.searchListType.name);
         this.setValue(SettingsService.keySearchListViewThumbnailSize, settings.searchListViewThumbnailSize.name);
