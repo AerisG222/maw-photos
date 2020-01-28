@@ -79,7 +79,14 @@ export class SettingsStoreEffects {
                 SettingsActions.toggleVideoInfoPanelMinimapRequest,
                 SettingsActions.toggleVideoInfoPanelRatingsRequest,
                 SettingsActions.updateVideoInfoPanelMinimapMapTypeIdRequest,
-                SettingsActions.updateVideoInfoPanelMinimapZoomRequest
+                SettingsActions.updateVideoInfoPanelMinimapZoomRequest,
+
+                SettingsActions.toggleSearchCategoryTitlesRequest,
+                SettingsActions.toggleSearchCategoryYearsRequest,
+                SettingsActions.updateSearchCategoryMarginRequest,
+                SettingsActions.updateSearchListTypeRequest,
+                SettingsActions.updateSearchListViewThumbnailSizeRequest,
+                SettingsActions.updateSearchThumbnailSizeRequest,
             ),
             withLatestFrom(this.store$.pipe(
                 select(settingsSelectors.selectSettings)

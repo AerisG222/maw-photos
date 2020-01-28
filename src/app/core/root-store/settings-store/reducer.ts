@@ -250,6 +250,48 @@ const reducer = createReducer(
             ...state.settings,
             videoInfoPanelMinimapZoom: zoom
         }
+    })),
+    on(SettingsActions.toggleSearchCategoryTitlesRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            searchShowCategoryTitles: !state.settings.searchShowCategoryTitles
+        }
+    })),
+    on(SettingsActions.toggleSearchCategoryYearsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            searchShowCategoryYears: !state.settings.searchShowCategoryYears
+        }
+    })),
+    on(SettingsActions.updateSearchCategoryMarginRequest, (state, { newMargin }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            searchCategoryMargin: newMargin
+        }
+    })),
+    on(SettingsActions.updateSearchListTypeRequest, (state, { newType }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            searchListType: newType
+        }
+    })),
+    on(SettingsActions.updateSearchListViewThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            searchListViewThumbnailSize: newSize
+        }
+    })),
+    on(SettingsActions.updateSearchThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            searchThumbnailSize: newSize
+        }
     }))
 );
 

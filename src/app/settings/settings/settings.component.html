@@ -157,6 +157,37 @@
                         </mat-form-field>
                     </mat-card-content>
                 </mat-card>
+
+                <mat-card>
+                    <mat-card-title>Search</mat-card-title>
+                    <mat-card-content>
+                        <h3>Margins</h3>
+                        <mat-radio-group formControlName="searchCategoryMargin">
+                            <mat-radio-button *ngFor="let margin of categoryMargins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                        </mat-radio-group>
+
+                        <h3>Search Result Display Type</h3>
+                        <mat-radio-group formControlName="searchListType">
+                            <mat-radio-button *ngFor="let type of categoryListTypes" [value]="type.name">{{ type.name }}</mat-radio-button>
+                        </mat-radio-group>
+
+                        <h3>Thumbnail Size (list view)</h3>
+                        <mat-radio-group formControlName="searchListViewThumbnailSize">
+                            <mat-radio-button *ngFor="let size of categoryListListViewThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                        </mat-radio-group>
+
+                        <h3>Show Category Titles (grid view)</h3>
+                        <mat-slide-toggle formControlName="searchShowCategoryTitles"></mat-slide-toggle>
+
+                        <h3>Show Category Years (grid view)</h3>
+                        <mat-slide-toggle formControlName="searchShowCategoryYears"></mat-slide-toggle>
+
+                        <h3>Thumbnail Size (grid view; w/o title)</h3>
+                        <mat-radio-group formControlName="categoryListThumbnailSize">
+                            <mat-radio-button *ngFor="let size of categoryThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-card-content>
+                </mat-card>
             </div>
 
             <div class="button-group">

@@ -51,6 +51,13 @@ const getVideoInfoPanelExpandedState = (state: State): boolean => state.settings
 const getVideoInfoPanelMinimapMapTypeId = (state: State): string => state.settings.videoInfoPanelMinimapMapTypeId;
 const getVideoInfoPanelMinimapZoom = (state: State): number => state.settings.videoInfoPanelMinimapZoom;
 
+const getSearchCategoryMargin = (state: State): CategoryMargin => state.settings.searchCategoryMargin;
+const getSearchShowCategoryTitles = (state: State): boolean => state.settings.searchShowCategoryTitles;
+const getSearchShowCategoryYears = (state: State): boolean => state.settings.searchShowCategoryYears;
+const getSearchThumbnailSize = (state: State): ThumbnailSize => state.settings.searchThumbnailSize;
+const getSearchListType = (state: State): CategoryListType => state.settings.searchListType;
+const getSearchListViewThumbnailSize = (state: State): ThumbnailSize => state.settings.searchListViewThumbnailSize;
+
 export const selectSettingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
 export const selectSettingsError = createSelector(selectSettingsState, getError);
@@ -91,3 +98,10 @@ export const selectVideoInfoPanelShowMinimap = createSelector(selectSettingsStat
 export const selectVideoInfoPanelExpandedState = createSelector(selectSettingsState, getVideoInfoPanelExpandedState);
 export const selectVideoInfoPanelMinimapMapTypeId = createSelector(selectSettingsState, getVideoInfoPanelMinimapMapTypeId);
 export const selectVideoInfoPanelMinimapZoom = createSelector(selectSettingsState, getVideoInfoPanelMinimapZoom);
+
+export const selectSearchCategoryMargin = createSelector(selectSettingsState, getSearchCategoryMargin);
+export const selectSearchShowCategoryTitles = createSelector(selectSettingsState, getSearchShowCategoryTitles);
+export const selectSearchShowCategoryYears = createSelector(selectSettingsState, getSearchShowCategoryYears);
+export const selectSearchThumbnailSize = createSelector(selectSettingsState, getSearchThumbnailSize);
+export const selectSearchListType = createSelector(selectSettingsState, getSearchListType);
+export const selectSearchListViewThumbnailSize = createSelector(selectSettingsState, getSearchListViewThumbnailSize);

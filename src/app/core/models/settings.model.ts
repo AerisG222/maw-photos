@@ -44,4 +44,11 @@ export interface Settings {
     videoInfoPanelExpandedState: boolean;
     videoInfoPanelMinimapMapTypeId: string;
     videoInfoPanelMinimapZoom: number;
+
+    searchCategoryMargin: CategoryMargin;
+    searchShowCategoryTitles: boolean;
+    searchShowCategoryYears: boolean;
+    searchThumbnailSize: ThumbnailSize;
+    searchListType: CategoryListType;
+    searchListViewThumbnailSize: ThumbnailSize;
 }

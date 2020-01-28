@@ -54,6 +54,13 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelMinimapMapTypeId = 'videoInfoPanelMinimapMapTypeId';
     private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
+    private static readonly keySearchCategoryMargin = 'searchCategoryMargin';
+    private static readonly keySearchThumbnailSize = 'searchThumbnailSize';
+    private static readonly keySearchShowCategoryTitles = 'searchShowCategoryTitles';
+    private static readonly keySearchShowCategoryYears = 'searchShowCategoryYears';
+    private static readonly keySearchListType = 'searchListType';
+    private static readonly keySearchListViewThumbnailSize = 'searchListViewThumbnailSize';
+
     private static readonly removedKeyCategoryListYearFilter = 'categoryListYearFilterEnabled';
     private static readonly removedKeyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
     private static readonly removedKeyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
@@ -95,16 +102,19 @@ export class SettingsService {
         const videoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
         const videoInfoPanelMinimapZoom = this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom);
 
+        const searchShowCategoryTitles = this.getBoolean(SettingsService.keySearchShowCategoryTitles);
+        const searchShowCategoryYears = this.getBoolean(SettingsService.keySearchShowCategoryTitles);
+
         return {
             appTheme: this.getTheme(),
 
             categoryListCategoryFilter: this.getCategoryListCategoryFilter(),
-            categoryListCategoryMargin: this.getCategoryListCategoryMargin(),
-            categoryListThumbnailSize: this.getCategoryThumbnailSize(),
+            categoryListCategoryMargin: this.getCategoryMargin(SettingsService.keyCategoryListCategoryMargin),
+            categoryListThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
             categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
             categoryListYearFilter: categoryListYearFilter !== null ? categoryListYearFilter : 'all',
-            categoryListListType: this.getCategoryListListType(),
-            categoryListListViewThumbnailSize: this.getCategoryListListViewThumbnailSize(),
+            categoryListListType: this.getCategoryListType(SettingsService.keyCategoryListListType),
+            categoryListListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListListViewThumbnailSize),
 
             photoListThumbnailSize: this.getPhotoListThumbnailSize(),
             photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
@@ -133,7 +143,14 @@ export class SettingsService {
             videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
             videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false,
             videoInfoPanelMinimapMapTypeId: videoInfoPanelMinimapMapTypeId !== null ? videoInfoPanelMinimapMapTypeId : 'roadmap',
-            videoInfoPanelMinimapZoom: videoInfoPanelMinimapZoom !== null ? videoInfoPanelMinimapZoom : 10
+            videoInfoPanelMinimapZoom: videoInfoPanelMinimapZoom !== null ? videoInfoPanelMinimapZoom : 10,
+
+            searchCategoryMargin: this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
+            searchThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
+            searchShowCategoryTitles: searchShowCategoryTitles !== null ? searchShowCategoryTitles : true,
+            searchShowCategoryYears: searchShowCategoryYears !== null ? searchShowCategoryYears : true,
+            searchListType: this.getCategoryListType(SettingsService.keyCategoryListListType),
+            searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
         };
     }
 
@@ -181,6 +198,13 @@ export class SettingsService {
         this.setValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
         this.setValue(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
 
+        this.setValue(SettingsService.keySearchCategoryMargin, settings.searchCategoryMargin.name);
+        this.setValue(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
+        this.setValue(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
+        this.setValue(SettingsService.keySearchThumbnailSize, settings.searchThumbnailSize.name);
+        this.setValue(SettingsService.keySearchListType, settings.searchListType.name);
+        this.setValue(SettingsService.keySearchListViewThumbnailSize, settings.searchListViewThumbnailSize.name);
+
         this.killRemovedSettings();
     }
 
@@ -214,20 +238,14 @@ export class SettingsService {
         }
     }
 
-    private getCategoryListListType(): CategoryListType {
-        const name = this.getValue(SettingsService.keyCategoryListListType);
+    private getCategoryListType(key: string): CategoryListType {
+        const name = this.getValue(key);
 
         try {
             return name !== null ? CategoryListType.forName(name) : CategoryListType.grid;
         } catch {
             return CategoryListType.grid;
         }
-    }
-
-    private getCategoryListListViewThumbnailSize(): ThumbnailSize {
-        const sizeName = this.getValue(SettingsService.keyCategoryListListViewThumbnailSize);
-
-        return this.getThumbnailSize(sizeName);
     }
 
     private getCategoryListCategoryFilter(): CategoryFilter {
@@ -240,8 +258,8 @@ export class SettingsService {
         }
     }
 
-    private getCategoryListCategoryMargin(): CategoryMargin {
-        const name = this.getValue(SettingsService.keyCategoryListCategoryMargin);
+    private getCategoryMargin(key: string): CategoryMargin {
+        const name = this.getValue(key);
 
         try {
             return name !== null ? CategoryMargin.forName(name) : CategoryMargin.compact;
@@ -250,8 +268,8 @@ export class SettingsService {
         }
     }
 
-    private getCategoryThumbnailSize(): ThumbnailSize {
-        const sizeName = this.getValue(SettingsService.keyCategoryListThumbnailSize);
+    private getCategoryThumbnailSize(key: string): ThumbnailSize {
+        const sizeName = this.getValue(key);
 
         return this.getThumbnailSize(sizeName);
     }

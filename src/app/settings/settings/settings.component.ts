@@ -91,7 +91,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoInfoPanelShowRatings: [true],
             videoInfoPanelExpandedState: [false],
             videoInfoPanelMinimapMapTypeId: [MapTypeId.ROADMAP.value],
-            videoInfoPanelMinimapZoom: [10]
+            videoInfoPanelMinimapZoom: [10],
+
+            searchCategoryMargin: [CategoryMargin.compact.name],
+            searchShowCategoryTitles: [true],
+            searchShowCategoryYears: [true],
+            searchThumbnailSize: [''],
+            searchListType: [CategoryListType.grid.name],
+            searchListViewThumbnailSize: ['']
         });
 
         this.destroySub.add(this.store$
@@ -150,6 +157,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoInfoPanelExpandedState: this.form.get('videoInfoPanelExpandedState').value,
             videoInfoPanelMinimapMapTypeId: this.form.get('videoInfoPanelMinimapMapTypeId').value,
             videoInfoPanelMinimapZoom: this.form.get('videoInfoPanelMinimapZoom').value,
+
+            searchCategoryMargin: CategoryMargin.forName(this.form.get('searchCategoryMargin').value),
+            searchShowCategoryTitles: this.form.get('searchShowCategoryTitles').value,
+            searchShowCategoryYears: this.form.get('searchShowCategoryYears').value,
+            searchThumbnailSize: ThumbnailSize.forName(this.form.get('searchThumbnailSize').value),
+            searchListType: CategoryListType.forName(this.form.get('searchListType').value),
+            searchListViewThumbnailSize: ThumbnailSize.forName(this.form.get('searchListViewThumbnailSize').value),
         };
 
         this.store$.dispatch(
@@ -205,5 +219,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('videoInfoPanelExpandedState').setValue(settings.videoInfoPanelExpandedState);
         this.form.get('videoInfoPanelMinimapMapTypeId').setValue(settings.videoInfoPanelMinimapMapTypeId);
         this.form.get('videoInfoPanelMinimapZoom').setValue(settings.videoInfoPanelMinimapZoom);
+
+        this.form.get('searchCategoryMargin').setValue(settings.searchCategoryMargin.name);
+        this.form.get('searchShowCategoryTitles').setValue(settings.searchShowCategoryTitles);
+        this.form.get('searchShowCategoryYears').setValue(settings.searchShowCategoryYears);
+        this.form.get('searchThumbnailSize').setValue(settings.searchThumbnailSize.name);
+        this.form.get('searchListType').setValue(settings.searchListType.name);
+        this.form.get('searchListViewThumbnailSize').setValue(settings.searchListViewThumbnailSize.name);
     }
 }

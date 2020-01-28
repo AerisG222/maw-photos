@@ -2,6 +2,8 @@ import { Settings } from 'src/app/core/models/settings.model';
 import { CategoryMargin } from '../../models/category-margin.model';
 import { CategoryFilter } from '../../models/category-filter.model';
 import { CategoryListType } from '../../models/category-list-type.model';
+import { ThumbnailSize } from '../../models/thumbnail-size.model';
+import { VideoSize } from '../../models/video-size.model';
 
 export interface State {
     error: string;
@@ -18,13 +20,13 @@ export const initialState: State = {
         categoryListCategoryFilter: CategoryFilter.all,
         categoryListCategoryMargin: CategoryMargin.compact,
         categoryListShowCategoryTitles: true,
-        categoryListThumbnailSize: null,
+        categoryListThumbnailSize: ThumbnailSize.default,
         categoryListYearFilter: 'all',
         categoryListListType: CategoryListType.grid,
-        categoryListListViewThumbnailSize: null,
+        categoryListListViewThumbnailSize: ThumbnailSize.default,
 
         photoListShowCategoryBreadcrumbs: true,
-        photoListThumbnailSize: null,
+        photoListThumbnailSize: ThumbnailSize.default,
         photoListShowPhotoList: true,
         photoListSlideshowDisplayDurationSeconds: 2,
         photoListMapViewMapTypeId: 'roadmap',
@@ -41,15 +43,22 @@ export const initialState: State = {
         photoInfoPanelMinimapZoom: 10,
 
         videoListShowCategoryBreadcrumbs: true,
-        videoListThumbnailSize: null,
+        videoListThumbnailSize: ThumbnailSize.default,
         videoListShowVideoList: true,
-        videoListVideoSize: null,
+        videoListVideoSize: VideoSize.small,
 
         videoInfoPanelShowRatings: true,
         videoInfoPanelShowComments: true,
         videoInfoPanelShowMinimap: false,
         videoInfoPanelExpandedState: false,
         videoInfoPanelMinimapMapTypeId: 'roadmap',
-        videoInfoPanelMinimapZoom: 10
+        videoInfoPanelMinimapZoom: 10,
+
+        searchCategoryMargin: CategoryMargin.compact,
+        searchShowCategoryTitles: true,
+        searchShowCategoryYears: true,
+        searchThumbnailSize: ThumbnailSize.default,
+        searchListType: CategoryListType.grid,
+        searchListViewThumbnailSize: ThumbnailSize.default
     }
 };

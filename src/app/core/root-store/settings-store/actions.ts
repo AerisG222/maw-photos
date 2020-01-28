@@ -174,3 +174,31 @@ export const updateVideoInfoPanelMinimapZoomRequest = createAction(
     '[Settings] Update Video Info Panel Minimap Zoom',
     props<{ zoom: number }>()
 );
+
+export const toggleSearchCategoryTitlesRequest = createAction(
+    '[Settings] Toggle Search Category Titles'
+);
+
+export const toggleSearchCategoryYearsRequest = createAction(
+    '[Settings] Toggle Search Category Years'
+);
+
+export const updateSearchCategoryMarginRequest = createAction(
+    '[Settings] Update Search Category Margin',
+    props<{ newMargin: CategoryMargin }>()
+);
+
+export const updateSearchListTypeRequest = createAction(
+    '[Settings] Update Search List Type',
+    props<{ newType: CategoryListType }>()
+);
+
+export const updateSearchListViewThumbnailSizeRequest = createAction(
+    '[Settings] Update Search List View Thumbnail Size',
+    props<{ newSize: ThumbnailSize }>()
+);
+
+export const updateSearchThumbnailSizeRequest = createAction(
+    '[Settings] Update Search Thumbnail Size',
+    props<{ newSize: ThumbnailSize }>()
+);
