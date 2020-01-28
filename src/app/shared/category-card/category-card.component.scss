@@ -15,7 +15,13 @@ mat-card {
         filter: saturate(0.4);
 
         &.show_title {
-            border-radius: 4px 4px 0 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &.show_year {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
 
         &.thumb-small {
