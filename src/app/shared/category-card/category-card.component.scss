@@ -42,7 +42,9 @@ mat-card {
         font-size: 20px;
     }
 
-    & mat-card-content {
+    & mat-card-content,
+    & mat-card-header {
+        display: block;
         text-align: center;
         padding: 4px 4px 4px;
         max-width: 152px;
