@@ -3,6 +3,9 @@
     [matTooltip]="category.name"
     [matTooltipDisabled]="showTitle">
     <mat-card>
+        <mat-card-header *ngIf="showYear">
+            {{ category.year }}
+        </mat-card-header>
         <mat-icon inline="true" *ngIf="category.type == categoryTypes.video">videocam</mat-icon>
         <img [src]="category.teaserImageSqUrl" [alt]="category.name" [class]="thumbnailSize.klass" [class.show_title]="showTitle" loading="lazy" />
         <mat-card-content *ngIf="showTitle">

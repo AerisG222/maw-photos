@@ -13,6 +13,8 @@ import { selectSearchAllResults, selectSearchCurrentResult } from 'src/app/core/
 import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 import { CategoryType } from 'src/app/core/models/category-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { SettingsStoreSelectors } from 'src/app/core/root-store';
+import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 
 @Component({
     selector: 'app-search',
@@ -30,8 +32,12 @@ export class SearchComponent implements OnInit {
     form: FormGroup;
     currentResult$: Observable<SearchResult<MultimediaCategory>>;
     categories$: Observable<CategoryTeaser[]>;
-
-    listThumbnailSize = ThumbnailSize.small;
+    showListView$: Observable<boolean>;
+    showGridView$: Observable<boolean>;
+    gridShowTitles$: Observable<boolean>;
+    gridShowYears$: Observable<boolean>;
+    listThumbnailSize$: Observable<ThumbnailSize>;
+    gridThumbnailSize$: Observable<ThumbnailSize>;
 
     constructor(
         private store$: Store<{}>,
@@ -44,6 +50,45 @@ export class SearchComponent implements OnInit {
         this.form = this.formBuilder.group({
             query: ['', Validators.required]
         });
+
+        this.showListView$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                map(type => type.name === CategoryListType.list.name)
+            );
+
+        this.showGridView$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListListType),
+                map(type => type.name === CategoryListType.grid.name)
+            );
+
+        this.listThumbnailSize$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSearchListViewThumbnailSize)
+            );
+
+        this.gridThumbnailSize$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSettings),
+                map(settings => {
+                    if (!settings.searchShowCategoryTitles) {
+                        return settings.searchThumbnailSize;
+                    }
+
+                    return ThumbnailSize.default;
+                })
+            );
+
+        this.gridShowTitles$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSearchShowCategoryTitles)
+            );
+
+        this.gridShowYears$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSearchShowCategoryYears)
+            );
 
         this.currentResult$ = this.store$
             .pipe(

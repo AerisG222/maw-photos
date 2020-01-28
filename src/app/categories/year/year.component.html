@@ -12,5 +12,6 @@
     *ngIf="showGridView$ | async"
     [categories]="categories$ | async"
     [showTitles]="(settings$ | async).categoryListShowCategoryTitles"
+    [showYears]="false"
     [thumbnailSize]="!(settings$ | async).categoryListShowCategoryTitles && (settings$ | async).categoryListThumbnailSize">
 </app-category-grid>

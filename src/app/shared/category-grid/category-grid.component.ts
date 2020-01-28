@@ -12,5 +12,6 @@ import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 export class CategoryGridComponent {
     @Input() categories: CategoryTeaser[];
     @Input() showTitles: boolean;
+    @Input() showYears: boolean;
     @Input() thumbnailSize: ThumbnailSize;
 }

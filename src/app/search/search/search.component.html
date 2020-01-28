@@ -16,18 +16,18 @@
 
             <mat-divider mat-color="accent"></mat-divider>
 
-            <!-- *ngIf="showListView$ | async" -->
             <app-category-list
+                *ngIf="showListView$ | async"
                 [categories]="categories$ | async"
-                [thumbnailSize]="listThumbnailSize">
+                [thumbnailSize]="listThumbnailSize$ | async">
             </app-category-list>
 
-            <!-- *ngIf="showGridView$ | async" -->
-            <!-- [showTitles]="(settings$ | async).categoryListShowCategoryTitles"
-            [thumbnailSize]="!(settings$ | async).categoryListShowCategoryTitles && (settings$ | async).categoryListThumbnailSize"> -->
             <app-category-grid
-                [categories]="categories$ | async"
-                [thumbnailSize]="listThumbnailSize">
+                *ngIf="showGridView$ | async"
+                [showTitles]="gridShowTitles$ | async"
+                [showYears]="gridShowYears$ | async"
+                [thumbnailSize]="gridThumbnailSize$ | async"
+                [categories]="categories$ | async">
             </app-category-grid>
 
         </div>
