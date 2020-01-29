@@ -24,6 +24,10 @@
                 [categories]="categories$ | async">
             </app-category-grid>
 
+            <app-search-more
+                *ngIf="hasMoreResults$ | async">
+            </app-search-more
+            >
         </div>
     </div>
 </div>

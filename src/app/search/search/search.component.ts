@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { toolbarShow } from 'src/app/shared/animations';
 import { SearchResult } from 'src/app/core/models/search/search-result.model';
 import { MultimediaCategory } from 'src/app/core/models/search/multimedia-category.model';
-import { selectSearchAllResults, selectSearchCurrentResult } from 'src/app/core/root-store/search-store/selectors';
+import { selectSearchAllResults, selectSearchCurrentResult, selectSearchHasMoreResults } from 'src/app/core/root-store/search-store/selectors';
 import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 import { CategoryType } from 'src/app/core/models/category-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
@@ -39,6 +39,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     listThumbnailSize$: Observable<ThumbnailSize>;
     gridThumbnailSize$: Observable<ThumbnailSize>;
     margin$: Observable<CategoryMargin>;
+    hasMoreResults$: Observable<boolean>;
 
     constructor(
         private store$: Store<{}>
@@ -100,6 +101,11 @@ export class SearchComponent implements OnInit, OnDestroy {
                     teaserImageSqUrl: cat.teaserPhotoSqPath,
                     type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
                 })))
+            );
+
+        this.hasMoreResults$ = this.store$
+            .pipe(
+                select(selectSearchHasMoreResults)
             );
     }
 

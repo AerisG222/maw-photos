@@ -6,13 +6,15 @@ import { SearchComponent } from './search/search.component';
 import { SharedModule } from '../shared/shared.module';
 import { SearchToolbarComponent } from './search-toolbar/search-toolbar.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { SearchMoreComponent } from './search-more/search-more.component';
 
 
 @NgModule({
     declarations: [
         SearchComponent,
         SearchToolbarComponent,
-        SearchFormComponent
+        SearchFormComponent,
+        SearchMoreComponent
     ],
     imports: [
         CommonModule,
