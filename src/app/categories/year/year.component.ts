@@ -39,18 +39,10 @@ export class YearComponent implements OnInit {
                 select(SettingsStoreSelectors.selectCategoryListListViewThumbnailSize)
             );
 
-        this.gridThumbnailSize$ = combineLatest([
-            this.store$.select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles),
-            this.store$.select(SettingsStoreSelectors.selectCategoryListThumbnailSize),
-        ]).pipe(
-            map(x => {
-                if (x[0]) {
-                    return ThumbnailSize.default;
-                } else {
-                    return x[1];
-                }
-            })
-        );
+        this.gridThumbnailSize$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListThumbnailSize)
+            );
 
         this.gridShowTitles$ = this.store$
             .pipe(

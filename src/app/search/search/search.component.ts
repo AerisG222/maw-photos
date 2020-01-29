@@ -2,7 +2,7 @@ import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
@@ -76,17 +76,19 @@ export class SearchComponent implements OnInit, OnDestroy {
                 select(SettingsStoreSelectors.selectSearchListViewThumbnailSize)
             );
 
-        this.gridThumbnailSize$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings),
-                map(settings => {
-                    if (!settings.searchShowCategoryTitles) {
-                        return settings.searchThumbnailSize;
-                    }
-
+        this.gridThumbnailSize$ = combineLatest([
+            this.store$.select(SettingsStoreSelectors.selectSearchShowCategoryTitles),
+            this.store$.select(SettingsStoreSelectors.selectSearchShowCategoryYears),
+            this.store$.select(SettingsStoreSelectors.selectSearchThumbnailSize),
+        ]).pipe(
+            map(x => {
+                if (x[0] || x[1]) {
                     return ThumbnailSize.default;
-                })
-            );
+                } else {
+                    return x[2];
+                }
+            })
+        );
 
         this.gridShowTitles$ = this.store$
             .pipe(
