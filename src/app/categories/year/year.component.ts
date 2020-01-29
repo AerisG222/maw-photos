@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Settings } from 'src/app/core/models/settings.model';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
@@ -22,10 +21,11 @@ export class YearComponent implements OnInit {
     @Input() year: number;
 
     categories$: Observable<CategoryTeaser[]>;
-    settings$: Observable<Settings>;
     showListView$: Observable<boolean>;
     showGridView$: Observable<boolean>;
     listThumbnailSize$: Observable<ThumbnailSize>;
+    gridThumbnailSize$: Observable<ThumbnailSize>;
+    gridShowTitles$: Observable<boolean>;
 
     constructor(
         private store$: Store<{}>
@@ -39,6 +39,24 @@ export class YearComponent implements OnInit {
                 select(SettingsStoreSelectors.selectCategoryListListViewThumbnailSize)
             );
 
+        this.gridThumbnailSize$ = combineLatest([
+            this.store$.select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles),
+            this.store$.select(SettingsStoreSelectors.selectCategoryListThumbnailSize),
+        ]).pipe(
+            map(x => {
+                if (x[0]) {
+                    return ThumbnailSize.default;
+                } else {
+                    return x[1];
+                }
+            })
+        );
+
+        this.gridShowTitles$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles)
+            );
+
         this.showListView$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
@@ -49,11 +67,6 @@ export class YearComponent implements OnInit {
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListType),
                 map(type => type.name === CategoryListType.grid.name)
-            );
-
-        this.settings$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings)
             );
 
         this.categories$ = this.store$
