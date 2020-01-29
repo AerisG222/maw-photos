@@ -32,6 +32,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     isListView$: Observable<boolean>;
     isGridView$: Observable<boolean>;
     showCategoryTitles$: Observable<boolean>;
+    showCategoryYears$: Observable<boolean>;
 
     constructor(
         private store$: Store<{}>,
@@ -54,6 +55,11 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
         this.showCategoryTitles$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSearchShowCategoryTitles)
+            );
+
+        this.showCategoryYears$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSearchShowCategoryYears)
             );
 
         this.hotkeys.push(this.hotkeysService.add(
@@ -138,7 +144,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleSize(): void {
-        if (this.settings && !this.settings.searchShowCategoryTitles) {
+        if (this.settings && !this.settings.searchShowCategoryTitles && !this.settings.searchShowCategoryYears) {
             const size = ThumbnailSize.nextSize(this.settings.searchThumbnailSize.name);
 
             this.store$.dispatch(SettingsStoreActions.updateSearchThumbnailSizeRequest({ newSize: size }));

@@ -45,7 +45,7 @@
                 matTooltipPosition="after"
                 class="toolbar-button"
                 (click)="onToggleSize()"
-                [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
+                [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async) || (showCategoryYears$ | async)"
                 #toggleThumbnailSizeButton>
                 <mat-icon [inline]="true">photo_size_select_large</mat-icon>
             </button>
