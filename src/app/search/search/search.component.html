@@ -5,14 +5,7 @@
 
     <div class="content-scroll-pane">
         <div class="content-scroll-pane-content" [ngClass]="(margin$ | async).klass">
-            <div class="filter-grid">
-                <form [formGroup]="form">
-                    <mat-form-field appearance="standard">
-                        <mat-label>Search Terms</mat-label>
-                        <input type="search" matInput formControlName="query" (keyup.enter)="onSearch()" />
-                    </mat-form-field>
-                </form>
-            </div>
+            <app-search-form></app-search-form>
 
             <mat-divider mat-color="accent"></mat-divider>
 

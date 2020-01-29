@@ -1,0 +1,11 @@
+.filter-grid {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: max-content;
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 640px;
+    max-width:80vw;
+}

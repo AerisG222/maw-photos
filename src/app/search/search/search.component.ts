@@ -1,12 +1,10 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
-import { queryRequest, clearRequest } from 'src/app/core/root-store/search-store/actions';
 import { SearchResult } from 'src/app/core/models/search/search-result.model';
 import { MultimediaCategory } from 'src/app/core/models/search/multimedia-category.model';
 import { selectSearchAllResults, selectSearchCurrentResult } from 'src/app/core/root-store/search-store/selectors';
@@ -16,6 +14,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
+import { clearRequest } from 'src/app/core/root-store/photo-store/actions';
 
 @Component({
     selector: 'app-search',
@@ -31,7 +30,6 @@ import { CategoryMargin } from 'src/app/core/models/category-margin.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
-    form: FormGroup;
     currentResult$: Observable<SearchResult<MultimediaCategory>>;
     categories$: Observable<CategoryTeaser[]>;
     showListView$: Observable<boolean>;
@@ -43,17 +41,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     margin$: Observable<CategoryMargin>;
 
     constructor(
-        private store$: Store<{}>,
-        private formBuilder: FormBuilder
+        private store$: Store<{}>
     ) {
 
     }
 
     ngOnInit() {
-        this.form = this.formBuilder.group({
-            query: ['', Validators.required]
-        });
-
         this.margin$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSearchCategoryMargin)
@@ -112,11 +105,5 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.store$.dispatch(clearRequest());
-    }
-
-    onSearch() {
-        const searchTerm = this.form.get('query').value;
-
-        this.store$.dispatch(queryRequest({ query: searchTerm }));
     }
 }
