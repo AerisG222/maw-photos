@@ -29,6 +29,8 @@ export class SearchFormComponent implements OnInit {
     onSearch() {
         const searchTerm = this.form.get('query').value;
 
-        this.store$.dispatch(queryRequest({ query: searchTerm }));
+        if (!!searchTerm) {
+            this.store$.dispatch(queryRequest({ query: searchTerm }));
+        }
     }
 }

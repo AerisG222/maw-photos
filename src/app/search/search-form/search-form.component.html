@@ -4,5 +4,6 @@
             <mat-label>Search Terms</mat-label>
             <input type="search" matInput formControlName="query" (keyup.enter)="onSearch()" />
         </mat-form-field>
+        <button mat-button (click)="onSearch()" color="primary"><mat-icon>search</mat-icon> Search</button>
     </form>
 </div>
