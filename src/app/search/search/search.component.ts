@@ -76,19 +76,10 @@ export class SearchComponent implements OnInit, OnDestroy {
                 select(SettingsStoreSelectors.selectSearchListViewThumbnailSize)
             );
 
-        this.gridThumbnailSize$ = combineLatest([
-            this.store$.select(SettingsStoreSelectors.selectSearchShowCategoryTitles),
-            this.store$.select(SettingsStoreSelectors.selectSearchShowCategoryYears),
-            this.store$.select(SettingsStoreSelectors.selectSearchThumbnailSize),
-        ]).pipe(
-            map(x => {
-                if (x[0] || x[1]) {
-                    return ThumbnailSize.default;
-                } else {
-                    return x[2];
-                }
-            })
-        );
+        this.gridThumbnailSize$ = this.store$
+            .pipe(
+                select(SettingsStoreSelectors.selectSearchThumbnailSize)
+            );
 
         this.gridShowTitles$ = this.store$
             .pipe(
