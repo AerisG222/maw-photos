@@ -17,7 +17,7 @@ const hasMoreResults = (state: State): boolean => {
     }
 
     return false;
-}
+};
 
 export const selectSearchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);
 
