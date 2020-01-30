@@ -14,7 +14,7 @@ import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
-import { clearRequest } from 'src/app/core/root-store/photo-store/actions';
+import { clearRequest } from 'src/app/core/root-store/search-store/actions';
 
 @Component({
     selector: 'app-search',
