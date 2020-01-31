@@ -13,3 +13,16 @@ mat-form-field {
 button {
     margin-left: 8px;
 }
+
+/* the next 2 rules are to hide some of the ugly chrome autocomplete styling */
+/* https://webagility.com/posts/the-ultimate-list-of-hacks-for-chromes-forced-yellow-background-on-autocompleted-inputs */
+input {
+    background-color: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition-delay: 99999s;
+}
