@@ -26,3 +26,14 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-transition-delay: 99999s;
 }
+
+@media (max-width: 800px) {
+    .filter-grid {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content max-content;
+    }
+
+    button {
+        margin: -1em 0 0.5em 0;
+    }
+}
