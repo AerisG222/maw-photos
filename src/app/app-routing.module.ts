@@ -24,7 +24,8 @@ const routes: Routes = [
     },
     {
         path: 'search',
-        loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
+        loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
+        canActivate: [authGuardToken]
     },
     {
         path: 'settings',
