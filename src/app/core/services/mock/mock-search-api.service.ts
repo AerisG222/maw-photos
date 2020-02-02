@@ -44,7 +44,8 @@ export class MockSearchApiService implements SearchApiService {
                         teaserPhotoPath: c.teaserImage.url,
                         teaserPhotoSqHeight: c.teaserImageSq.height,
                         teaserPhotoSqWidth: c.teaserImageSq.width,
-                        teaserPhotoSqPath: c.teaserImageSq.url
+                        teaserPhotoSqPath: c.teaserImageSq.url,
+                        score: 1
                     }))
                 );
 
@@ -67,7 +68,8 @@ export class MockSearchApiService implements SearchApiService {
                         teaserPhotoPath: c.teaserImage.url,
                         teaserPhotoSqHeight: c.teaserImageSq.height,
                         teaserPhotoSqWidth: c.teaserImageSq.width,
-                        teaserPhotoSqPath: c.teaserImageSq.url
+                        teaserPhotoSqPath: c.teaserImageSq.url,
+                        score: 1
                     }))
                 );
 

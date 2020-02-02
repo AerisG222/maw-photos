@@ -10,4 +10,5 @@ export interface MultimediaCategory {
     teaserPhotoSqHeight: number;
     teaserPhotoSqWidth: number;
     teaserPhotoSqPath: string;
+    score: number;
 }
