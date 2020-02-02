@@ -30,7 +30,7 @@ export class SearchFormComponent implements OnInit {
         const searchTerm = this.form.get('query').value;
 
         if (!!searchTerm) {
-            this.store$.dispatch(queryRequest({ query: searchTerm }));
+            this.store$.dispatch(queryRequest({ query: searchTerm, start: 0 }));
         }
     }
 }

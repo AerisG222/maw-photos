@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-import { queryNextPageRequest } from 'src/app/core/root-store/search-store/actions';
-import { selectSearchCurrentResult } from 'src/app/core/root-store/search-store/selectors';
+import { queryRequest } from 'src/app/core/root-store/search-store/actions';
+import { selectSearchCurrentResult, selectSearchQuery } from 'src/app/core/root-store/search-store/selectors';
 
 @Component({
     selector: 'app-search-more',
@@ -15,6 +15,7 @@ import { selectSearchCurrentResult } from 'src/app/core/root-store/search-store/
 export class SearchMoreComponent implements OnInit, OnDestroy {
     private readonly destroySub = new Subscription();
     private nextIndex = -1;
+    private query: string;
 
     constructor(
         private store$: Store<{}>,
@@ -25,9 +26,15 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.destroySub.add(this.store$
             .pipe(
+                select(selectSearchQuery),
+                tap(q => this.query = q)
+            ).subscribe()
+        );
+
+        this.destroySub.add(this.store$
+            .pipe(
                 select(selectSearchCurrentResult),
-                map(result => result.startIndex + result.results.length),
-                tap(idx => this.nextIndex = idx)
+                tap(result => this.nextIndex = result.startIndex + result.results.length)
             ).subscribe()
         );
     }
@@ -38,7 +45,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
 
     onSearchMore() {
         if (this.nextIndex > 0) {
-            this.store$.dispatch(queryNextPageRequest({ start: this.nextIndex }));
+            this.store$.dispatch(queryRequest({ query: this.query, start: this.nextIndex }));
         }
     }
 }

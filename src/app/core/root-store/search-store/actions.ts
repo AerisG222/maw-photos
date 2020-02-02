@@ -9,7 +9,7 @@ export const clearRequest = createAction(
 
 export const queryRequest = createAction(
     '[Search] Query Request',
-    props<{ query: string }>()
+    props<{ query: string, start: number }>()
 );
 
 export const queryFailure = createAction(
@@ -22,17 +22,17 @@ export const querySuccess = createAction(
     props<{ query: string, result: SearchResult<MultimediaCategory> }>()
 );
 
-export const queryNextPageRequest = createAction(
-    '[Search] Query Next Page Request',
-    props<{ start: number }>()
+export const queryMoreRequest = createAction(
+    '[Search] Query More Request',
+    props<{ query: string, start: number }>()
 );
 
-export const queryNextPageFailure = createAction(
-    '[Search] Query Next Page Failure',
+export const queryMoreFailure = createAction(
+    '[Search] Query More Failure',
     props<{ error: string }>()
 );
 
-export const queryNextPageSuccess = createAction(
-    '[Search] Query Next Page Success',
-    props<{ result: SearchResult<MultimediaCategory> }>()
+export const queryMoreSuccess = createAction(
+    '[Search] Query More Success',
+    props<{ query: string, result: SearchResult<MultimediaCategory> }>()
 );

@@ -12,7 +12,7 @@ const reducer = createReducer(
             currentResult: null
         })
     )),
-    on(SearchActions.queryRequest, (state, { query }) => ({
+    on(SearchActions.queryRequest, (state, { query, start }) => ({
         ...state,
         isLoading: true,
         error: null,
@@ -31,20 +31,21 @@ const reducer = createReducer(
         isLoading: false,
         error
     })),
-    on(SearchActions.queryNextPageRequest, state => ({
+    on(SearchActions.queryMoreRequest, (state, { query, start }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: null,
     })),
-    on(SearchActions.queryNextPageSuccess, (state, { result }) =>
+    on(SearchActions.queryMoreSuccess, (state, { query, result }) =>
         searchAdapter.addMany(result.results, {
-            ...state,
-            isLoading: false,
-            error: null,
-            currentResult: result
-        })
+                ...state,
+                isLoading: false,
+                error: null,
+                currentResult: result,
+                query
+            })
     ),
-    on(SearchActions.queryNextPageFailure, (state, { error }) => ({
+    on(SearchActions.queryMoreFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
         error

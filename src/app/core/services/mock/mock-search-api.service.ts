@@ -17,23 +17,15 @@ export class MockSearchApiService implements SearchApiService {
 
     }
 
-    search(query: string): Observable<SearchResult<MultimediaCategory>> {
+    search(query: string, start: number): Observable<SearchResult<MultimediaCategory>> {
         return this.getAll().pipe(
             map(c => ({
-                totalFound: 20,
+                totalFound: 40,
                 startIndex: 0,
                 results: c
             })));
     }
 
-    searchNextPage(start: number): Observable<SearchResult<MultimediaCategory>> {
-        return this.search('abc').pipe(
-            map(r => ({
-                ...r,
-                startIndex: start
-            }))
-        );
-    }
 
     private getAll() {
         const photoCategories = this.photoApi.getCategories().pipe(
