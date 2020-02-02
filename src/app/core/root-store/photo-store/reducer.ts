@@ -119,6 +119,10 @@ const reducer = createReducer(
         ...state,
         currentPhoto: photo
     })),
+    on(PhotoActions.setCurrentById, (state, { id }) => ({
+        ...state,
+        currentPhoto: state.entities[id]
+    })),
     on(PhotoActions.moveNextRequest, state => {
         const newPhoto = nextPhoto(state);
 

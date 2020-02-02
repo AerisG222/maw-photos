@@ -40,6 +40,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
 
     @Output() mapTypeChange = new EventEmitter<string>();
     @Output() zoomChange = new EventEmitter<number>();
+    @Output() selectPhoto = new EventEmitter<number>();
 
     ngOnInit() {
         this.updateMapOptions();
@@ -115,6 +116,12 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         if (!!markerInfo) {
             this.openInfoWindow(markerInfo.marker, markerInfo.image);
         }
+    }
+
+    selectActivePhoto(marker: MapMarker, image: MapImage) {
+        this.selectPhoto.emit(image.id);
+
+        this.openInfoWindow(marker, image);
     }
 
     openInfoWindow(marker: MapMarker, image: MapImage) {

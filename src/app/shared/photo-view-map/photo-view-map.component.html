@@ -13,7 +13,8 @@
             [useDarkTheme]="data.settings?.appTheme?.isDark"
             (mapTypeChange)="onMapTypeIdChange($event)"
             [zoom]="data.settings?.photoListMapViewZoom"
-            (zoomChange)="onZoomChange($event)">
+            (zoomChange)="onZoomChange($event)"
+            (selectPhoto)="onSelectPhoto($event)">
         </app-map-view>
     </ng-container>
 </div>

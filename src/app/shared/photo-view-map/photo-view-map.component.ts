@@ -72,4 +72,8 @@ export class PhotoViewMapComponent implements OnInit, OnDestroy {
     onZoomChange(zoom: number): void {
         this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewZoomRequest({ zoom }));
     }
+
+    onSelectPhoto(photoId: number): void {
+        this.store$.dispatch(PhotoStoreActions.setCurrentById({ id: photoId }));
+    }
 }

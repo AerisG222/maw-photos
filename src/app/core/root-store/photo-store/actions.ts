@@ -208,3 +208,8 @@ export const setCurrent = createAction(
     '[Photos] Set Current',
     props<{ photo: Photo }>()
 );
+
+export const setCurrentById = createAction(
+    '[Photos] Set Current By Id',
+    props<{ id: number }>()
+);
