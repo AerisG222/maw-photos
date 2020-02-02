@@ -7,4 +7,5 @@ export interface CategoryTeaser {
     name: string;
     teaserImageSqUrl: string;
     type: CategoryType;
+    trackBy: string;
 }

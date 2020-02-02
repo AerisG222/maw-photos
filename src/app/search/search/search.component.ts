@@ -99,7 +99,8 @@ export class SearchComponent implements OnInit, OnDestroy {
                     year: cat.year,
                     name: cat.name,
                     teaserImageSqUrl: cat.teaserPhotoSqPath,
-                    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
+                    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video,
+                    trackBy: `${ cat.multimediaType }_${ cat.id }`
                 })))
             );
 

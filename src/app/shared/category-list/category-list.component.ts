@@ -56,4 +56,8 @@ export class CategoryListComponent {
             this.router.navigate(args);
         }
     }
+
+    categoryTrackByFn(index: number, teaser: CategoryTeaser) {
+        return teaser.trackBy;
+    }
 }

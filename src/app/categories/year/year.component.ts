@@ -70,7 +70,8 @@ export class YearComponent implements OnInit {
                     year: cat.year,
                     name: cat.name,
                     teaserImageSqUrl: cat.teaserImageSq.url,
-                    type: cat.type
+                    type: cat.type,
+                    trackBy: `${ cat.type }_${ cat.id }`
                 })))
             );
     }
