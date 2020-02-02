@@ -5,7 +5,7 @@ import { MultimediaCategory } from '../../models/search/multimedia-category.mode
 import { SearchResult } from '../../models/search/search-result.model';
 
 export const searchAdapter: EntityAdapter<MultimediaCategory> = createEntityAdapter<MultimediaCategory>({
-    sortComparer: (a: MultimediaCategory, b: MultimediaCategory): number => b.solrId.localeCompare(a.solrId)
+    sortComparer: (a: MultimediaCategory, b: MultimediaCategory): number => b.score - a.score
 });
 
 export interface State extends EntityState<MultimediaCategory> {
