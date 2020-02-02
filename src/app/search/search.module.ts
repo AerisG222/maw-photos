@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SearchToolbarComponent } from './search-toolbar/search-toolbar.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchMoreComponent } from './search-more/search-more.component';
+import { ResultCountComponent } from './result-count/result-count.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SearchMoreComponent } from './search-more/search-more.component';
         SearchComponent,
         SearchToolbarComponent,
         SearchFormComponent,
-        SearchMoreComponent
+        SearchMoreComponent,
+        ResultCountComponent
     ],
     imports: [
         CommonModule,

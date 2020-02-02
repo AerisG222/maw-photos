@@ -2,7 +2,7 @@ import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
 import { SearchResult } from 'src/app/core/models/search/search-result.model';
@@ -40,6 +40,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     gridThumbnailSize$: Observable<ThumbnailSize>;
     margin$: Observable<CategoryMargin>;
     hasMoreResults$: Observable<boolean>;
+    totalResults$: Observable<number>;
+    shownResults$: Observable<number>;
 
     constructor(
         private store$: Store<{}>
@@ -107,6 +109,18 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.hasMoreResults$ = this.store$
             .pipe(
                 select(selectSearchHasMoreResults)
+            );
+
+        this.totalResults$ = this.store$
+            .pipe(
+                select(selectSearchCurrentResult),
+                map(c => (!!c) ? c.totalFound : 0)
+            );
+
+        this.shownResults$ = this.store$
+            .pipe(
+                select(selectSearchCurrentResult),
+                map(c => (!!c) ? c.startIndex + c.results.length : 0)
             );
     }
 

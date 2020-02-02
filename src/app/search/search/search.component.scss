@@ -20,6 +20,12 @@
     margin-right: 30%;
 }
 
+app-result-count {
+    display: block;
+    text-align: right;
+    margin: 12px 0;
+}
+
 @media (max-width: 800px) {
     .main-grid {
         grid-template-columns: 100%;
