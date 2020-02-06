@@ -75,6 +75,20 @@ $custom-typography: mat-typography-config(
     }
 }
 
+@mixin sidebar-button-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    button.sidebar-button {
+        cursor: pointer;
+    }
+
+    button.sidebar-button:enabled:hover,
+    button.sidebar-button:enabled.active {
+        background-color: rgba(mat-color($accent, 700), .42);
+        color: mat-color($accent, 100);
+    }
+}
+
 // you only have to add additional componenets here (instead of in every theme class)
 @mixin custom-components-theme($theme) {
     @include app-component-theme($theme);
@@ -89,6 +103,7 @@ $custom-typography: mat-typography-config(
     @include toolbar-theme($theme);
     @include toolbar-button-theme($theme);
     @include primary-nav-button-theme($theme);
+    @include sidebar-button-theme($theme);
     @include app-category-header-component-theme($theme);
     @include app-comments-component-theme($theme);
     @include app-exif-table-component-theme($theme);
@@ -191,6 +206,10 @@ app-primary-nav {
     & mat-divider {
         margin: 16px 8px;
     }
+}
+
+.sidebar-button {
+    border-radius: 0 !important;
 }
 
 .stats-layout-grid {
