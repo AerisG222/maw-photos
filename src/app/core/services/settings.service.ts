@@ -316,7 +316,7 @@ export class SettingsService {
     }
 
     private getStringOrNumber(key: string): string | number {
-        const value = this.getValue(key);
+        const value = this.getValue(key).toLowerCase();
 
         return /^\d+$/.test(value) ? parseInt(value, 10) : value;
     }
@@ -334,7 +334,9 @@ export class SettingsService {
     }
 
     private getValue(key: string): string {
-        return this.localStorage.retrieve(key) as string;
+        const val = this.localStorage.retrieve(key) as string;
+
+        return val.replace('\'', '').replace('"', '');
     }
 
     private setValue(key: string, value: any) {
