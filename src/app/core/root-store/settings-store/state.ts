@@ -4,6 +4,7 @@ import { CategoryFilter } from '../../models/category-filter.model';
 import { CategoryListType } from '../../models/category-list-type.model';
 import { ThumbnailSize } from '../../models/thumbnail-size.model';
 import { VideoSize } from '../../models/video-size.model';
+import { Theme } from '../../models/theme.model';
 
 export interface State {
     error: string;
@@ -15,7 +16,7 @@ export const initialState: State = {
     error: null,
     isLoading: false,
     settings: {
-        appTheme: null,
+        appTheme: Theme.themeDark,
 
         categoryListCategoryFilter: CategoryFilter.all,
         categoryListCategoryMargin: CategoryMargin.compact,
