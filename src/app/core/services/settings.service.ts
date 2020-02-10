@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Settings } from 'src/app/core/models/settings.model';
+import { Settings, DEFAULT_SETTINGS } from 'src/app/core/models/settings.model';
 import { Theme } from 'src/app/core/models/theme.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { VideoSize } from '../models/video-size.model';
@@ -8,7 +8,6 @@ import { CategoryMargin } from '../models/category-margin.model';
 import { CategoryFilter } from '../models/category-filter.model';
 import { CategoryListType } from '../models/category-list-type.model';
 import { LocalStorageService } from './local-storage.service';
-import { SettingsStoreState } from '../root-store';
 
 @Injectable({
     providedIn: 'root'
@@ -155,7 +154,7 @@ export class SettingsService {
                 searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
             };
         } catch(e) {
-            return SettingsStoreState.initialState.settings;
+            return DEFAULT_SETTINGS;
         }
     }
 

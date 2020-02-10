@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
-import { startWith, map, withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from 'src/app/core/services/settings.service';
 import * as SettingsActions from './actions';
@@ -20,8 +20,7 @@ export class SettingsStoreEffects {
     loadRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(SettingsActions.loadRequest),
-            startWith(SettingsActions.loadRequest()),
-            map(x => {
+            map(action => {
                 const settings = this.settingsService.load();
                 return SettingsActions.loadSuccess({ settings });
             })
