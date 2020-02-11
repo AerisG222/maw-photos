@@ -9,6 +9,8 @@
 
             <mat-divider mat-color="accent"></mat-divider>
 
+            <p class="no-results" *ngIf="showNoResults$ | async">No results found</p>
+
             <app-category-list
                 *ngIf="showListView$ | async"
                 [categories]="categories$ | async"

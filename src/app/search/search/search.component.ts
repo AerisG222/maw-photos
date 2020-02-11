@@ -1,7 +1,7 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
@@ -42,6 +42,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     hasMoreResults$: Observable<boolean>;
     totalResults$: Observable<number>;
     shownResults$: Observable<number>;
+    showNoResults$: Observable<boolean>;
 
     constructor(
         private store$: Store<{}>
@@ -121,6 +122,12 @@ export class SearchComponent implements OnInit, OnDestroy {
             .pipe(
                 select(selectSearchCurrentResult),
                 map(c => (!!c) ? c.startIndex + c.results.length : 0)
+            );
+
+        this.showNoResults$ = this.store$
+            .pipe(
+                select(selectSearchCurrentResult),
+                map(c => (!!c) ? c.totalFound === 0 : false)
             );
     }
 

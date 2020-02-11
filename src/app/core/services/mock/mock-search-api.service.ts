@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { SearchApiService } from '../search-api.service';
@@ -10,6 +10,8 @@ import { videoApiServiceToken, VideoApiService } from '../video-api.service';
 
 @Injectable()
 export class MockSearchApiService implements SearchApiService {
+    private returnNoResults = false;
+
     constructor(
         @Inject(photoApiServiceToken) private photoApi: PhotoApiService,
         @Inject(videoApiServiceToken) private videoApi: VideoApiService
@@ -18,12 +20,26 @@ export class MockSearchApiService implements SearchApiService {
     }
 
     search(query: string, start: number): Observable<SearchResult<MultimediaCategory>> {
-        return this.getAll().pipe(
-            map(c => ({
-                totalFound: 40,
+        let result = null;
+
+        if(this.returnNoResults) {
+            result = of({
+                totalFound: 0,
                 startIndex: 0,
-                results: c
-            })));
+                results: []
+            });
+        } else {
+            result = this.getAll().pipe(
+                map(c => ({
+                    totalFound: 40,
+                    startIndex: 0,
+                    results: c
+                })));
+        }
+
+        this.returnNoResults = !this.returnNoResults;
+
+        return result;
     }
 
 
