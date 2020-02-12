@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { MetadataEditorMode } from './metadata-editor-mode.model';
+import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-metadata-editor',
@@ -11,6 +15,8 @@ import { MetadataEditorMode } from './metadata-editor-mode.model';
 })
 export class MetadataEditorComponent implements OnInit {
     form: FormGroup;
+    sourceGpsData$: Observable<GpsCoordinate>;
+    overrideGpsData$: Observable<GpsCoordinate>;
 
     @Input() mode: MetadataEditorMode;
 
@@ -39,11 +45,29 @@ export class MetadataEditorComponent implements OnInit {
     }
 
     initPhotoEditor(): void {
+        this.sourceGpsData$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                map(photo => ({
+                    lat: photo.latitude,
+                    lng: photo.longitude
+                }))
+            );
 
+        this.overrideGpsData$ = null;
     }
 
     initVideoEditor(): void {
+        this.sourceGpsData$ = this.store$
+            .pipe(
+                select(VideoStoreSelectors.selectCurrentVideo),
+                map(video => ({
+                    lat: video.latitude,
+                    lng: video.longitude
+                }))
+            );
 
+        this.overrideGpsData$ = null;
     }
 
     onSave(): void {

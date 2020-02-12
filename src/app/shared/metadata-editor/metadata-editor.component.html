@@ -3,6 +3,11 @@
         <mat-icon [inline]="true">edit</mat-icon> Metadata Editor
     </mat-card-title>
     <mat-card-content>
+        Source Latitude: {{ (sourceGpsData$ | async).lat }}
+        <br/>
+        Source Longitude: {{ (sourceGpsData$ | async).lng }}
+        <br/>
+
         <form [formGroup]="form">
             <mat-form-field appearance="standard" class="comment-input">
                 <textarea matInput formControlName="comment" placeholder="Add Comment" rows="3"></textarea>
