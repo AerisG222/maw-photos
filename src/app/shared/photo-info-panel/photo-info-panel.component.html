@@ -40,6 +40,13 @@
                     [mode]="minimapMode.Photos"
                     @toggleInfoPanel>
                 </app-minimap>
+
+                <app-metadata-editor
+                    class="widget"
+                    *ngIf="showMetadataEditor$ | async"
+                    [mode]="metadataEditorMode.Photos"
+                    @toggleInfoPanel>
+                </app-metadata-editor>
             </div>
         </div>
     </div>
@@ -123,6 +130,17 @@
             (click)="toggleMinimap()"
             #toggleMinimapButton>
             <mat-icon [inline]="true">map</mat-icon>
+        </button>
+        <button
+            class="sidebar-button"
+            mat-button
+            matTooltip="Show/Hide Metadata Editor (Z)"
+            matTooltipPosition="before"
+            [disabled]="(enableButtons$ | async) === false"
+            [class.active]="showMetadataEditor$ | async"
+            (click)="toggleMetadataEditor()"
+            #toggleMetadataEditorButton>
+            <mat-icon [inline]="true">edit</mat-icon>
         </button>
     </div>
 </div>

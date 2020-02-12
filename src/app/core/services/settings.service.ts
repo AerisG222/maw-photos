@@ -37,6 +37,7 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
     private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
     private static readonly keyPhotoInfoPanelShowHistogram = 'photoInfoPanelShowHistogram';
+    private static readonly keyPhotoInfoPanelShowMetadataEditor = 'photoInfoPanelShowMetadataEditor';
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
     private static readonly keyPhotoInfoPanelMinimapMapTypeId = 'photoInfoPanelMinimapMapTypeId';
@@ -49,6 +50,7 @@ export class SettingsService {
 
     private static readonly keyVideoInfoPanelShowRatings = 'videoInfoPanelShowRatings';
     private static readonly keyVideoInfoPanelShowComments = 'videoInfoPanelShowComments';
+    private static readonly keyVideoInfoPanelShowMetadataEditor = 'videoInfoPanelShowMetadataEditor';
     private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
     private static readonly keyVideoInfoPanelExpandedState = 'videoInfoPanelExpandedState';
     private static readonly keyVideoInfoPanelMinimapMapTypeId = 'videoInfoPanelMinimapMapTypeId';
@@ -88,6 +90,7 @@ export class SettingsService {
             const photoInfoPanelShowExif = this.getBoolean(SettingsService.keyPhotoInfoPanelShowExif);
             const photoInfoPanelShowEffects = this.getBoolean(SettingsService.keyPhotoInfoPanelShowEffects);
             const photoInfoPanelShowHistogram = this.getBoolean(SettingsService.keyPhotoInfoPanelShowHistogram);
+            const photoInfoPanelShowMetadataEditor = this.getBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor);
             const photoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap);
             const photoInfoPanelExpandedState = this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState);
             const photoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
@@ -98,6 +101,7 @@ export class SettingsService {
 
             const videoInfoPanelShowRatings = this.getBoolean(SettingsService.keyVideoInfoPanelShowRatings);
             const videoInfoPanelShowComments = this.getBoolean(SettingsService.keyVideoInfoPanelShowComments);
+            const videoInfoPanelShowMetadataEditor = this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor);
             const videoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap);
             const videoInfoPanelExpandedState = this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState);
             const videoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
@@ -129,6 +133,7 @@ export class SettingsService {
                 photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
                 photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
                 photoInfoPanelShowHistogram: photoInfoPanelShowHistogram !== null ? photoInfoPanelShowHistogram : false,
+                photoInfoPanelShowMetadataEditor: photoInfoPanelShowMetadataEditor !== null ? photoInfoPanelShowMetadataEditor : false,
                 photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false,
                 photoInfoPanelExpandedState: photoInfoPanelExpandedState !== null ? photoInfoPanelExpandedState : false,
                 photoInfoPanelMinimapMapTypeId: photoInfoPanelMinimapMapTypeId != null ? photoInfoPanelMinimapMapTypeId : 'roadmap',
@@ -141,6 +146,7 @@ export class SettingsService {
 
                 videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
                 videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
+                videoInfoPanelShowMetadataEditor: videoInfoPanelShowMetadataEditor !== null ? videoInfoPanelShowMetadataEditor : false,
                 videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
                 videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false,
                 videoInfoPanelMinimapMapTypeId: videoInfoPanelMinimapMapTypeId !== null ? videoInfoPanelMinimapMapTypeId : 'roadmap',
@@ -185,6 +191,7 @@ export class SettingsService {
         this.setValue(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
         this.setValue(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
         this.setValue(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
+        this.setValue(SettingsService.keyPhotoInfoPanelShowMetadataEditor, settings.photoInfoPanelShowMetadataEditor);
         this.setValue(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
         this.setValue(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
         this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
@@ -197,6 +204,7 @@ export class SettingsService {
 
         this.setValue(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
         this.setValue(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
+        this.setValue(SettingsService.keyVideoInfoPanelShowMetadataEditor, settings.videoInfoPanelShowMetadataEditor);
         this.setValue(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
         this.setValue(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
         this.setValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);

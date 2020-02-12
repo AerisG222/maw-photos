@@ -90,6 +90,10 @@ export const togglePhotoInfoPanelHistogramRequest = createAction(
     '[Settings] Toggle Photo Info Panel Histogram'
 );
 
+export const togglePhotoInfoPanelMetadataEditorRequest = createAction(
+    '[Settings] Toggle Photo Info Panel Metadata Editor'
+);
+
 export const togglePhotoInfoPanelMinimapRequest = createAction(
     '[Settings] Toggle Photo Info Panel Minimap'
 );
@@ -155,6 +159,10 @@ export const toggleVideoInfoPanelCommentsRequest = createAction(
 
 export const toggleVideoInfoPanelExpandedStateRequest = createAction(
     '[Settings] Toggle Video Info Panel Expanded State'
+);
+
+export const toggleVideoInfoPanelMetadataEditorRequest = createAction(
+    '[Settings] Toggle Video Info Panel Metadata Editor'
 );
 
 export const toggleVideoInfoPanelMinimapRequest = createAction(

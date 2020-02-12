@@ -57,6 +57,7 @@ export class SettingsStoreEffects {
                 SettingsActions.togglePhotoInfoPanelExifRequest,
                 SettingsActions.togglePhotoInfoPanelExpandedStateRequest,
                 SettingsActions.togglePhotoInfoPanelHistogramRequest,
+                SettingsActions.togglePhotoInfoPanelMetadataEditorRequest,
                 SettingsActions.togglePhotoInfoPanelMinimapRequest,
                 SettingsActions.togglePhotoInfoPanelRatingsRequest,
                 SettingsActions.updatePhotoInfoPanelMinimapMapTypeIdRequest,
@@ -75,6 +76,7 @@ export class SettingsStoreEffects {
 
                 SettingsActions.toggleVideoInfoPanelCommentsRequest,
                 SettingsActions.toggleVideoInfoPanelExpandedStateRequest,
+                SettingsActions.toggleVideoInfoPanelMetadataEditorRequest,
                 SettingsActions.toggleVideoInfoPanelMinimapRequest,
                 SettingsActions.toggleVideoInfoPanelRatingsRequest,
                 SettingsActions.updateVideoInfoPanelMinimapMapTypeIdRequest,

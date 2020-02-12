@@ -118,6 +118,13 @@ const reducer = createReducer(
             photoInfoPanelShowRatings: !state.settings.photoInfoPanelShowRatings
         }
     })),
+    on(SettingsActions.togglePhotoInfoPanelMetadataEditorRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowMetadataEditor: !state.settings.photoInfoPanelShowMetadataEditor
+        }
+    })),
     on(SettingsActions.togglePhotoInfoPanelMinimapRequest, state => ({
         ...state,
         settings: {
@@ -221,6 +228,13 @@ const reducer = createReducer(
         settings: {
             ...state.settings,
             videoInfoPanelShowRatings: !state.settings.videoInfoPanelShowRatings
+        }
+    })),
+    on(SettingsActions.toggleVideoInfoPanelMetadataEditorRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelShowMetadataEditor: !state.settings.videoInfoPanelShowMetadataEditor
         }
     })),
     on(SettingsActions.toggleVideoInfoPanelMinimapRequest, state => ({

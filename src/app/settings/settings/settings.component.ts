@@ -75,6 +75,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoInfoPanelShowEffects: [false],
             photoInfoPanelShowExif: [false],
             photoInfoPanelShowHistogram: [false],
+            photoInfoPanelShowMetadataEditor: [false],
             photoInfoPanelShowMinimap: [false],
             photoInfoPanelShowRatings: [true],
             photoInfoPanelExpandedState: [false],
@@ -87,6 +88,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoListVideoSize: [VideoSize.large.name],
 
             videoInfoPanelShowComments: [true],
+            videoInfoPanelShowMetadataEditor: [false],
             videoInfoPanelShowMinimap: [false],
             videoInfoPanelShowRatings: [true],
             videoInfoPanelExpandedState: [false],
@@ -140,6 +142,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
             photoInfoPanelShowExif: this.form.get('photoInfoPanelShowExif').value,
             photoInfoPanelShowHistogram: this.form.get('photoInfoPanelShowHistogram').value,
+            photoInfoPanelShowMetadataEditor: this.form.get('photoInfoPanelShowMetadataEditor').value,
             photoInfoPanelShowMinimap: this.form.get('photoInfoPanelShowMinimap').value,
             photoInfoPanelShowRatings: this.form.get('photoInfoPanelShowRatings').value,
             photoInfoPanelExpandedState: this.form.get('photoInfoPanelExpandedState').value,
@@ -152,6 +155,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoListVideoSize: VideoSize.forName(this.form.get('videoListVideoSize').value),
 
             videoInfoPanelShowComments: this.form.get('videoInfoPanelShowComments').value,
+            videoInfoPanelShowMetadataEditor: this.form.get('videoInfoPanelShowMetadataEditor').value,
             videoInfoPanelShowMinimap: this.form.get('videoInfoPanelShowMinimap').value,
             videoInfoPanelShowRatings: this.form.get('videoInfoPanelShowRatings').value,
             videoInfoPanelExpandedState: this.form.get('videoInfoPanelExpandedState').value,
@@ -202,6 +206,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);
         this.form.get('photoInfoPanelShowExif').setValue(settings.photoInfoPanelShowExif);
         this.form.get('photoInfoPanelShowHistogram').setValue(settings.photoInfoPanelShowHistogram);
+        this.form.get('photoInfoPanelShowMetadataEditor').setValue(settings.photoInfoPanelShowMetadataEditor);
         this.form.get('photoInfoPanelShowMinimap').setValue(settings.photoInfoPanelShowMinimap);
         this.form.get('photoInfoPanelShowRatings').setValue(settings.photoInfoPanelShowRatings);
         this.form.get('photoInfoPanelExpandedState').setValue(settings.photoInfoPanelExpandedState);
@@ -214,6 +219,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('videoListVideoSize').setValue(settings.videoListVideoSize.name);
 
         this.form.get('videoInfoPanelShowComments').setValue(settings.videoInfoPanelShowComments);
+        this.form.get('videoInfoPanelShowMetadataEditor').setValue(settings.videoInfoPanelShowMetadataEditor);
         this.form.get('videoInfoPanelShowMinimap').setValue(settings.videoInfoPanelShowMinimap);
         this.form.get('videoInfoPanelShowRatings').setValue(settings.videoInfoPanelShowRatings);
         this.form.get('videoInfoPanelExpandedState').setValue(settings.videoInfoPanelExpandedState);

@@ -14,6 +14,7 @@ import {
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
 import { MinimapMode } from '../minimap/minimap-mode.model';
+import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -45,6 +46,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     commentMode = CommentMode;
     minimapMode = MinimapMode;
     ratingMode = RatingMode;
+    metadataEditorMode = MetadataEditorMode;
 
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
@@ -53,6 +55,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showRatings$: Observable<boolean>;
     showMinimap$: Observable<boolean>;
     showHistogram$: Observable<boolean>;
+    showMetadataEditor$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
     @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
@@ -62,6 +65,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleEffectsButton') toggleEffectsButton: MatButton;
     @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
     @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
+    @ViewChild('toggleMetadataEditorButton') toggleMetadataEditorButton: MatButton;
 
     constructor(
         private store$: Store<{}>,
@@ -81,6 +85,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.showComments$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowComments)
+        );
+
+        this.showMetadataEditor$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowMetadataEditor)
         );
 
         this.showEffects$ = this.store$.pipe(
@@ -118,6 +126,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleComments(): void {
         this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelCommentsRequest());
+    }
+
+    toggleMetadataEditor(): void {
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelMetadataEditorRequest());
     }
 
     toggleExif(): void {
@@ -164,6 +176,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
         ) as Hotkey);
+
+        this.hotkeys.push(this.hotkeysService.add(
+            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
+        ) as Hotkey);
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
@@ -183,6 +199,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private onHotkeyToggleComments(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleCommentsButton);
         this.togglePanel(this.showComments$, () => this.toggleComments());
+
+        return false;
+    }
+
+    private onHotkeyToggleMetadataEditor(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleMetadataEditorButton);
+        this.togglePanel(this.showMetadataEditor$, () => this.toggleMetadataEditor());
 
         return false;
     }

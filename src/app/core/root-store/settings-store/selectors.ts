@@ -32,6 +32,7 @@ const getPhotoInfoPanelShowComments = (state: State): boolean => state.settings.
 const getPhotoInfoPanelShowExif = (state: State): boolean => state.settings.photoInfoPanelShowExif;
 const getPhotoInfoPanelShowEffects = (state: State): boolean => state.settings.photoInfoPanelShowEffects;
 const getPhotoInfoPanelShowHistogram = (state: State): boolean => state.settings.photoInfoPanelShowHistogram;
+const getPhotoInfoPanelShowMetadataEditor = (state: State): boolean => state.settings.photoInfoPanelShowMetadataEditor;
 const getPhotoInfoPanelShowMinimap = (state: State): boolean => state.settings.photoInfoPanelShowMinimap;
 const getPhotoInfoPanelExpandedState = (state: State): boolean => state.settings.photoInfoPanelExpandedState;
 const getPhotoInfoPanelMinimapMapTypeId = (state: State): string => state.settings.photoInfoPanelMinimapMapTypeId;
@@ -46,6 +47,7 @@ const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoL
 
 const getVideoInfoPanelShowRatings = (state: State): boolean => state.settings.videoInfoPanelShowRatings;
 const getVideoInfoPanelShowComments = (state: State): boolean => state.settings.videoInfoPanelShowComments;
+const getVideoInfoPanelShowMetadataEditor = (state: State): boolean => state.settings.videoInfoPanelShowMetadataEditor;
 const getVideoInfoPanelShowMinimap = (state: State): boolean => state.settings.videoInfoPanelShowMinimap;
 const getVideoInfoPanelExpandedState = (state: State): boolean => state.settings.videoInfoPanelExpandedState;
 const getVideoInfoPanelMinimapMapTypeId = (state: State): string => state.settings.videoInfoPanelMinimapMapTypeId;
@@ -79,6 +81,7 @@ export const selectPhotoInfoPanelShowComments = createSelector(selectSettingsSta
 export const selectPhotoInfoPanelShowExif = createSelector(selectSettingsState, getPhotoInfoPanelShowExif);
 export const selectPhotoInfoPanelShowEffects = createSelector(selectSettingsState, getPhotoInfoPanelShowEffects);
 export const selectPhotoInfoPanelShowHistogram = createSelector(selectSettingsState, getPhotoInfoPanelShowHistogram);
+export const selectPhotoInfoPanelShowMetadataEditor = createSelector(selectSettingsState, getPhotoInfoPanelShowMetadataEditor);
 export const selectPhotoInfoPanelShowMinimap = createSelector(selectSettingsState, getPhotoInfoPanelShowMinimap);
 export const selectPhotoInfoPanelExpandedState = createSelector(selectSettingsState, getPhotoInfoPanelExpandedState);
 export const selectPhotoInfoPanelMinimapMapTypeId = createSelector(selectSettingsState, getPhotoInfoPanelMinimapMapTypeId);
@@ -96,6 +99,7 @@ export const selectVideoInfoPanelShowRatings = createSelector(selectSettingsStat
 export const selectVideoInfoPanelShowComments = createSelector(selectSettingsState, getVideoInfoPanelShowComments);
 export const selectVideoInfoPanelShowMinimap = createSelector(selectSettingsState, getVideoInfoPanelShowMinimap);
 export const selectVideoInfoPanelExpandedState = createSelector(selectSettingsState, getVideoInfoPanelExpandedState);
+export const selectVideoInfoPanelShowMetadataEditor = createSelector(selectSettingsState, getVideoInfoPanelShowMetadataEditor);
 export const selectVideoInfoPanelMinimapMapTypeId = createSelector(selectSettingsState, getVideoInfoPanelMinimapMapTypeId);
 export const selectVideoInfoPanelMinimapZoom = createSelector(selectSettingsState, getVideoInfoPanelMinimapZoom);
 

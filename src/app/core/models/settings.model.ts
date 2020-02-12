@@ -27,6 +27,7 @@ export interface Settings {
     photoInfoPanelShowComments: boolean;
     photoInfoPanelShowExif: boolean;
     photoInfoPanelShowEffects: boolean;
+    photoInfoPanelShowMetadataEditor: boolean;
     photoInfoPanelShowHistogram: boolean;
     photoInfoPanelShowMinimap: boolean;
     photoInfoPanelExpandedState: boolean;
@@ -40,6 +41,7 @@ export interface Settings {
 
     videoInfoPanelShowRatings: boolean;
     videoInfoPanelShowComments: boolean;
+    videoInfoPanelShowMetadataEditor: boolean;
     videoInfoPanelShowMinimap: boolean;
     videoInfoPanelExpandedState: boolean;
     videoInfoPanelMinimapMapTypeId: string;
@@ -76,6 +78,7 @@ export const DEFAULT_SETTINGS = ({
     photoInfoPanelShowExif: false,
     photoInfoPanelShowEffects: false,
     photoInfoPanelShowHistogram: false,
+    photoInfoPanelShowMetadataEditor: false,
     photoInfoPanelShowMinimap: false,
     photoInfoPanelExpandedState: false,
     photoInfoPanelMinimapMapTypeId: 'roadmap',
@@ -88,6 +91,7 @@ export const DEFAULT_SETTINGS = ({
 
     videoInfoPanelShowRatings: true,
     videoInfoPanelShowComments: true,
+    videoInfoPanelShowMetadataEditor: false,
     videoInfoPanelShowMinimap: false,
     videoInfoPanelExpandedState: false,
     videoInfoPanelMinimapMapTypeId: 'roadmap',

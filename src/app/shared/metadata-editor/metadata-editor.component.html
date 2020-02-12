@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-title>
+        <mat-icon [inline]="true">edit</mat-icon> Metadata Editor
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form">
+            <mat-form-field appearance="standard" class="comment-input">
+                <textarea matInput formControlName="comment" placeholder="Add Comment" rows="3"></textarea>
+            </mat-form-field>
+
+            <button mat-button (click)="onSave()" color="primary">Save</button>
+            <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+        </form>
+    </mat-card-content>
+</mat-card>

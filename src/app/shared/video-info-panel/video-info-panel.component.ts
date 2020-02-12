@@ -8,12 +8,10 @@ import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { CommentMode } from '../comments/comment-mode.model';
-import { RatingMode } from '../rating/rating-mode.model';
-import {
-    SettingsStoreActions,
-    SettingsStoreSelectors
-} from 'src/app/core/root-store';
+import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.model';
 import { MinimapMode } from '../minimap/minimap-mode.model';
+import { RatingMode } from '../rating/rating-mode.model';
+import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-video-info-panel',
@@ -45,18 +43,21 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     commentMode = CommentMode;
     minimapMode = MinimapMode;
     ratingMode = RatingMode;
+    metadataEditorMode = MetadataEditorMode;
 
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showRatings$: Observable<boolean>;
     showMinimap$: Observable<boolean>;
     minimapUseDarkTheme$: Observable<boolean>;
+    showMetadataEditor$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
     @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
     @ViewChild('toggleRatingsButton') toggleRatingsButton: MatButton;
     @ViewChild('toggleCommentsButton') toggleCommentsButton: MatButton;
     @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
+    @ViewChild('toggleMetadataEditorButton') toggleMetadataEditorButton: MatButton;
 
     constructor(
         private store$: Store<{}>,
@@ -76,6 +77,10 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.showComments$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelShowComments)
+        );
+
+        this.showMetadataEditor$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectVideoInfoPanelShowMetadataEditor)
         );
 
         this.showMinimap$ = this.store$.pipe(
@@ -103,6 +108,10 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelCommentsRequest());
     }
 
+    toggleMetadataEditor(): void {
+        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMetadataEditorRequest());
+    }
+
     toggleMinimap(): void {
         this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
     }
@@ -123,6 +132,10 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
         ) as Hotkey);
+
+        this.hotkeys.push(this.hotkeysService.add(
+            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
+        ) as Hotkey);
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {
@@ -142,6 +155,13 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     private onHotkeyToggleComments(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleCommentsButton);
         this.togglePanel(this.showComments$, () => this.toggleComments());
+
+        return false;
+    }
+
+    private onHotkeyToggleMetadataEditor(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleMetadataEditorButton);
+        this.togglePanel(this.showMetadataEditor$, () => this.toggleMetadataEditor());
 
         return false;
     }

@@ -60,6 +60,7 @@ import { SearchLinkComponent } from './search-link/search-link.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
 
 @NgModule({
     declarations: [
@@ -100,7 +101,8 @@ import { CategoryListComponent } from './category-list/category-list.component';
         SlideshowButtonComponent,
         StatsLinkComponent,
         VideoInfoPanelComponent,
-        SearchLinkComponent
+        SearchLinkComponent,
+        MetadataEditorComponent
     ],
     imports: [
         CommonModule,
@@ -166,6 +168,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
         HotkeyTableComponent,
         InfoPanelComponent,
         MapViewComponent,
+        MetadataEditorComponent,
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
