@@ -3,15 +3,33 @@
         <mat-icon [inline]="true">edit</mat-icon> Metadata Editor
     </mat-card-title>
     <mat-card-content>
-        Source Latitude: {{ (sourceGpsData$ | async).lat }}
-        <br/>
-        Source Longitude: {{ (sourceGpsData$ | async).lng }}
-        <br/>
-
         <form [formGroup]="form">
-            <mat-form-field appearance="standard" class="comment-input">
-                <textarea matInput formControlName="comment" placeholder="Add Comment" rows="3"></textarea>
-            </mat-form-field>
+            <div class="row-grid">
+                <div class="header">Latitude</div>
+
+                <mat-form-field>
+                    <mat-label>Original</mat-label>
+                    <input disabled matInput [value]="(sourceGpsData$ | async).lat">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Override</mat-label>
+                    <input matInput value="">
+                </mat-form-field>
+            </div>
+            <div class="row-grid">
+                <div class="header">Longitude</div>
+
+                <mat-form-field>
+                    <mat-label>Original</mat-label>
+                    <input disabled matInput [value]="(sourceGpsData$ | async).lng">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Override</mat-label>
+                    <input matInput value="">
+                </mat-form-field>
+            </div>
 
             <button mat-button (click)="onSave()" color="primary">Save</button>
             <button mat-button (click)="onCancel()" color="accent">Cancel</button>
