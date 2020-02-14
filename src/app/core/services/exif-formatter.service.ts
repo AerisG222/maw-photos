@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ExifCategory } from 'src/app/core/models/exif-category.model';
 import { ExifData } from 'src/app/core/models/exif-data.model';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
+import { ExifContainer } from '../models/exif-container';
 
 @Injectable({
     providedIn: 'root'
@@ -115,38 +116,47 @@ export class ExifFormatterService {
         }
     }
 
-    format(detail: ExifDetail): ExifData[] {
-        const exifData = [];
+    format(detail: ExifDetail): ExifContainer {
+        const container = new ExifContainer();
 
         Object
             .keys(detail)
             .forEach(key => {
-                if (detail[key]) {
-                    exifData.push(this.getExifData(key, detail[key]));
+                const val = detail[key];
+
+                if (val) {
+                    const cfg = ExifFormatterService.formatMap[key];
+
+                    if(!!cfg) {
+                        switch(cfg.category) {
+                            case ExifCategory.Exif:
+                                container.exif.push(this.getExifData(key, val, cfg));
+                                break;
+                            case ExifCategory.Maker:
+                                container.maker.push(this.getExifData(key, val, cfg));
+                                break;
+                            case ExifCategory.Composite:
+                                container.composite.push(this.getExifData(key, val, cfg));
+                                break;
+                        }
+                    }
                 }
             });
 
-        return exifData;
+        return container;
     }
 
-    private getExifData(key: string, value: any): ExifData {
+    private getExifData(key: string, value: any, cfg: any): ExifData {
         const exif = {} as ExifData;
 
         exif.sourceField = key;
         exif.sourceValue = value;
         exif.displayValue = value;  // use provided value by default
+        exif.category = cfg.category;
+        exif.displayName = cfg.displayName;
 
-        const fmt = ExifFormatterService.formatMap[key];
-
-        if (fmt) {
-            exif.category = fmt.category;
-            exif.displayName = fmt.displayName;
-
-            if (fmt.formatFunc) {
-                exif.displayValue = fmt.formatFunc(value);
-            }
-        } else {
-            // console.log(`unknown exif: ${key}`);
+        if (cfg.formatFunc) {
+            exif.displayValue = cfg.formatFunc(value);
         }
 
         return exif;

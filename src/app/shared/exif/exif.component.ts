@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
-import { filter, tap, map } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
-import { ExifData } from 'src/app/core/models/exif-data.model';
-import { ExifCategory } from 'src/app/core/models/exif-category.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { ExifContainer } from 'src/app/core/models/exif-container';
 
 @Component({
     selector: 'app-exif',
@@ -15,9 +14,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store'
 })
 export class ExifComponent implements OnInit, OnDestroy {
     destroySub = new Subscription();
-    exifData$: Observable<ExifData[]>;
-    makerData$: Observable<ExifData[]>;
-    compositeData$: Observable<ExifData[]>;
+    exifContainer$: Observable<ExifContainer>;
 
     constructor(
         private store$: Store<{}>
@@ -26,23 +23,12 @@ export class ExifComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.exifData$ = this.store$
+        this.exifContainer$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoExifData),
-                map(data => this.getFilteredData(data, ExifCategory.Exif))
+                filter(exif => !!exif),
             );
 
-        this.makerData$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoExifData),
-                map(data => this.getFilteredData(data, ExifCategory.Maker))
-            );
-
-        this.makerData$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoExifData),
-                map(data => this.getFilteredData(data, ExifCategory.Composite))
-            );
 
         this.destroySub.add(this.store$
             .pipe(
@@ -55,13 +41,5 @@ export class ExifComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.destroySub.unsubscribe();
-    }
-
-    getFilteredData(data: ExifData[], category: ExifCategory): ExifData[] {
-        if (!!data) {
-            return data.filter(e => e.category === category);
-        }
-
-        return [];
     }
 }

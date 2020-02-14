@@ -5,7 +5,7 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { ExifData } from 'src/app/core/models/exif-data.model';
+import { ExifContainer } from '../../models/exif-container';
 
 export const clearRequest = createAction(
     '[Photos] Clear'
@@ -53,7 +53,7 @@ export const loadExifFailure = createAction(
 
 export const loadExifSuccess = createAction(
     '[Photos] Load Exif Success',
-    props<{ exif: ExifData[] }>()
+    props<{ exif: ExifContainer }>()
 );
 
 export const loadMultipleRandomRequest = createAction(

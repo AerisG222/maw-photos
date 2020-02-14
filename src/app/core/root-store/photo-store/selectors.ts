@@ -3,13 +3,13 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { ExifData } from 'src/app/core/models/exif-data.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
+import { ExifContainer } from '../../models/exif-container';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
@@ -18,7 +18,7 @@ const getFirstPhoto = (state: State): Photo => state.firstPhoto;
 const getLastPhoto = (state: State): Photo => state.lastPhoto;
 const getCurrentPhotoRating = (state: State): Rating => state.currentPhotoRating;
 const getCurrentPhotoComments = (state: State): Comment[] => state.currentPhotoComments;
-const getCurrentPhotoExifData = (state: State): ExifData[] => state.currentPhotoExifData;
+const getCurrentPhotoExifData = (state: State): ExifContainer => state.currentPhotoExifData;
 const getCurrentPhotoEffects = (state: State): PhotoEffects => state.currentPhotoEffects;
 const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
 const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
