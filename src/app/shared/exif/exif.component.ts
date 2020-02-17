@@ -29,7 +29,6 @@ export class ExifComponent implements OnInit, OnDestroy {
                 filter(exif => !!exif),
             );
 
-
         this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),

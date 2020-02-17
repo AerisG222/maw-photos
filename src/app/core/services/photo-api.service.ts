@@ -6,6 +6,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { ApiCollection } from '../models/api-collection.model';
+import { GpsCoordinate } from '../models/gps-coordinate.model';
 
 export const photoApiServiceToken = 'PhotoApiService';
 
@@ -20,4 +21,7 @@ export interface PhotoApiService {
     getRating(photoId: number): Observable<Rating>;
     ratePhoto(photoId: number, rating: number): Observable<Rating>;
     addComment(photoId: number, comment: string): Observable<any>;
+
+    getGpsCoordinateOverride(photoId: number): Observable<GpsCoordinate>;
+    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<any>;
 }

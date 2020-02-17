@@ -8,6 +8,7 @@ import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 @Injectable()
 export class MockVideoApiService implements VideoApiService {
@@ -60,6 +61,18 @@ export class MockVideoApiService implements VideoApiService {
     }
 
     addComment(videoId: number, comment: string): Observable<any> {
+        return of(true);
+    }
+
+    getSourceGpsCoordinate(videoId: number): Observable<GpsCoordinate> {
+        return of({ lat: 43.11111, lng: -72.22222 });
+    }
+
+    getGpsCoordinateOverride(videoId: number): Observable<GpsCoordinate> {
+        return of({ lat: 43.12345, lng: -72.67890 });
+    }
+
+    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate) {
         return of(true);
     }
 

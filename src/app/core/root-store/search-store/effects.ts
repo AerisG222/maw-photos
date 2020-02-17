@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { of, combineLatest } from 'rxjs';
 import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operators';
 
-import * as SearchStoreActions from './actions';
+import * as SearchActions from './actions';
 import * as searchSelectors from './selectors';
 import { searchApiServiceToken, SearchApiService } from '../../services/search-api.service';
 
@@ -20,7 +20,7 @@ export class SearchStoreEffects {
 
     queryRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(SearchStoreActions.queryRequest),
+            ofType(SearchActions.queryRequest),
             withLatestFrom(
                 this.store$.pipe(select(searchSelectors.selectSearchQuery))
             ),
@@ -32,8 +32,8 @@ export class SearchStoreEffects {
             switchMap(ctx =>
                 this.api.search(ctx.action.query, ctx.action.start)
                     .pipe(
-                        map(result => SearchStoreActions.querySuccess({ query: ctx.action.query, result })),
-                        catchError(error => of(SearchStoreActions.queryFailure({ error })))
+                        map(result => SearchActions.querySuccess({ query: ctx.action.query, result })),
+                        catchError(error => of(SearchActions.queryFailure({ error })))
                     )
             )
         );
@@ -46,7 +46,7 @@ export class SearchStoreEffects {
         ]);
 
         return this.actions$.pipe(
-            ofType(SearchStoreActions.queryRequest),
+            ofType(SearchActions.queryRequest),
             withLatestFrom(currentQueryInfo),
             map(x => ({
                 action: x[0],
@@ -57,8 +57,8 @@ export class SearchStoreEffects {
             switchMap(ctx =>
                 this.api.search(ctx.action.query, ctx.action.start)
                     .pipe(
-                        map(result => SearchStoreActions.queryMoreSuccess({ query: ctx.action.query, result })),
-                        catchError(error => of(SearchStoreActions.queryMoreFailure({ error })))
+                        map(result => SearchActions.queryMoreSuccess({ query: ctx.action.query, result })),
+                        catchError(error => of(SearchActions.queryMoreFailure({ error })))
                     )
             )
         );

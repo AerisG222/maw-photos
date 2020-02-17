@@ -133,7 +133,55 @@ const reducer = createReducer(
         ...state,
         isLoading: false,
         error
-    }))
+    })),
+    on(VideoActions.loadSourceGpsCoordinateRequest, (state, { videoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.loadSourceGpsCoordinateSuccess, (state, { gpsCoordinates }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoSourceGps: gpsCoordinates
+    })),
+    on(VideoActions.loadSourceGpsCoordinateFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(VideoActions.loadGpsCoordinateOverrideRequest, (state, { videoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.loadGpsCoordinateOverrideSuccess, (state, { gpsCoordinates }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoGpsOverride: gpsCoordinates
+    })),
+    on(VideoActions.loadGpsCoordinateOverrideFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(VideoActions.setGpsCoordinateOverrideRequest, (state, { videoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { latLng }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoGpsOverride: latLng
+    })),
+    on(VideoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
 );
 
 export function videoReducer(state: State | undefined, action: Action) {

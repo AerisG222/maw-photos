@@ -12,6 +12,7 @@ import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
 import { config } from '../../../../environments/config';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
@@ -109,6 +110,20 @@ export class ExternalPhotoApiService implements PhotoApiService {
 
         return this.http
             .post(url, { photoId, comment });
+    }
+
+    getGpsCoordinateOverride(photoId: number): Observable<GpsCoordinate> {
+        const url = this.getAbsoluteUrl(`photos/${photoId}/gps-override`);
+
+        return this.http
+            .get<GpsCoordinate>(url);
+    }
+
+    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate) {
+        const url = this.getAbsoluteUrl(`photos/${photoId}/gps-override`);
+
+        return this.http
+            .post(url, { photoId, latLng });
     }
 
     private getAbsoluteUrl(relativeUrl: string) {

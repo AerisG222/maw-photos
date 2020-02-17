@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { switchMap, catchError, map, concatMap } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
-import * as VideoStoreActions from './actions';
+import * as VideoActions from './actions';
 
 @Injectable()
 export class VideoStoreEffects {
@@ -17,12 +17,12 @@ export class VideoStoreEffects {
 
     loadRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoStoreActions.loadRequest),
+            ofType(VideoActions.loadRequest),
             switchMap(action =>
                 this.api.getVideosByCategory(action.categoryId)
                     .pipe(
-                        map(videos => VideoStoreActions.loadSuccess({ videos: videos.items })),
-                        catchError(error => of(VideoStoreActions.loadFailure({ error })))
+                        map(videos => VideoActions.loadSuccess({ videos: videos.items })),
+                        catchError(error => of(VideoActions.loadFailure({ error })))
                     )
             )
         )
@@ -30,12 +30,12 @@ export class VideoStoreEffects {
 
     loadRatingRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoStoreActions.loadRatingRequest),
+            ofType(VideoActions.loadRatingRequest),
             switchMap(action =>
                 this.api.getRating(action.videoId)
                     .pipe(
-                        map(rating => VideoStoreActions.loadRatingSuccess({ rating })),
-                        catchError(error => of(VideoStoreActions.loadRatingFailure({ error })))
+                        map(rating => VideoActions.loadRatingSuccess({ rating })),
+                        catchError(error => of(VideoActions.loadRatingFailure({ error })))
                     )
             )
         )
@@ -43,12 +43,12 @@ export class VideoStoreEffects {
 
     rateVideoRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoStoreActions.rateVideoRequest),
+            ofType(VideoActions.rateVideoRequest),
             switchMap(action =>
                 this.api.rateVideo(action.videoId, action.userRating)
                     .pipe(
-                        map(rating => VideoStoreActions.rateVideoSuccess({ rating })),
-                        catchError(error => of(VideoStoreActions.rateVideoFailure({ error })))
+                        map(rating => VideoActions.rateVideoSuccess({ rating })),
+                        catchError(error => of(VideoActions.rateVideoFailure({ error })))
                     )
             )
         )
@@ -56,12 +56,12 @@ export class VideoStoreEffects {
 
     loadCommentsRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoStoreActions.loadCommentsRequest),
+            ofType(VideoActions.loadCommentsRequest),
             switchMap(action =>
                 this.api.getComments(action.videoId)
                     .pipe(
-                        map(comments => VideoStoreActions.loadCommentsSuccess({ comments: comments.items })),
-                        catchError(error => of(VideoStoreActions.rateVideoFailure({ error })))
+                        map(comments => VideoActions.loadCommentsSuccess({ comments: comments.items })),
+                        catchError(error => of(VideoActions.rateVideoFailure({ error })))
                     )
             )
         )
@@ -69,12 +69,12 @@ export class VideoStoreEffects {
 
     addCommentRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoStoreActions.addCommentRequest),
+            ofType(VideoActions.addCommentRequest),
             concatMap(action =>
                 this.api.addComment(action.videoId, action.comment)
                     .pipe(
-                        map(result => VideoStoreActions.addCommentSuccess({ videoId: action.videoId })),
-                        catchError(error => of(VideoStoreActions.addCommentFailure({ error })))
+                        map(result => VideoActions.addCommentSuccess({ videoId: action.videoId })),
+                        catchError(error => of(VideoActions.addCommentFailure({ error })))
                     )
             )
         )
@@ -82,8 +82,47 @@ export class VideoStoreEffects {
 
     addCommentSuccessEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoStoreActions.addCommentSuccess),
-            map(action => VideoStoreActions.loadCommentsRequest({ videoId: action.videoId }))
+            ofType(VideoActions.addCommentSuccess),
+            map(action => VideoActions.loadCommentsRequest({ videoId: action.videoId }))
+        )
+    );
+
+    loadSourceGpsRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoActions.loadSourceGpsCoordinateRequest),
+            switchMap(action =>
+                this.api.getSourceGpsCoordinate(action.videoId)
+                    .pipe(
+                        map(gps => VideoActions.loadSourceGpsCoordinateSuccess({ gpsCoordinates: gps })),
+                        catchError(error => of(VideoActions.loadSourceGpsCoordinateFailure({ error })))
+                    )
+            )
+        )
+    );
+
+    loadGpsOverrideRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoActions.loadGpsCoordinateOverrideRequest),
+            switchMap(action =>
+                this.api.getGpsCoordinateOverride(action.videoId)
+                    .pipe(
+                        map(gps => VideoActions.loadGpsCoordinateOverrideSuccess({ gpsCoordinates: gps })),
+                        catchError(error => of(VideoActions.loadGpsCoordinateOverrideFailure({ error })))
+                    )
+            )
+        )
+    );
+
+    setGpsOverrideRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoActions.setGpsCoordinateOverrideRequest),
+            concatMap(action =>
+                this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
+                    .pipe(
+                        map(gps => VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, latLng: action.latLng })),
+                        catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
+                    )
+            )
         )
     );
 }

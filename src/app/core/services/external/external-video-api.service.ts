@@ -11,6 +11,7 @@ import { VideoApiService } from '../video-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
 import { config } from '../../../../environments/config';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
@@ -78,6 +79,27 @@ export class ExternalVideoApiService implements VideoApiService {
 
         return this.http
             .post(url, { videoId, comment });
+    }
+
+    getSourceGpsCoordinate(videoId: number): Observable<GpsCoordinate> {
+        const url = this.getAbsoluteUrl(`videos/${videoId}/source-gps`);
+
+        return this.http
+            .get<GpsCoordinate>(url);
+    }
+
+    getGpsCoordinateOverride(videoId: number): Observable<GpsCoordinate> {
+        const url = this.getAbsoluteUrl(`videos/${videoId}/gps-override`);
+
+        return this.http
+            .get<GpsCoordinate>(url);
+    }
+
+    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate) {
+        const url = this.getAbsoluteUrl(`videos/${videoId}/gps-override`);
+
+        return this.http
+            .post(url, { videoId, latLng });
     }
 
     private getAbsoluteUrl(relativeUrl: string) {

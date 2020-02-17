@@ -132,6 +132,32 @@ export class PhotoStoreEffects {
         )
     );
 
+    loadGpsOverrideRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.loadGpsCoordinateOverrideRequest),
+            switchMap(action =>
+                this.api.getGpsCoordinateOverride(action.photoId)
+                    .pipe(
+                        map(gps => PhotoActions.loadGpsCoordinateOverrideSuccess({ gpsCoordinates: gps })),
+                        catchError(error => of(PhotoActions.loadGpsCoordinateOverrideFailure({ error })))
+                    )
+            )
+        )
+    );
+
+    setGpsOverrideRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.setGpsCoordinateOverrideRequest),
+            concatMap(action =>
+                this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
+                    .pipe(
+                        map(gps => PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, latLng: action.latLng })),
+                        catchError(error => of(PhotoActions.setGpsCoordinateOverrideFailure({ error })))
+                    )
+            )
+        )
+    );
+
     rotateClockwiseEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),

@@ -6,6 +6,7 @@ import { Comment } from 'src/app/core/models/comment.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { ExifContainer } from '../../models/exif-container';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 export const clearRequest = createAction(
     '[Photos] Clear'
@@ -212,4 +213,34 @@ export const setCurrent = createAction(
 export const setCurrentById = createAction(
     '[Photos] Set Current By Id',
     props<{ id: number }>()
+);
+
+export const loadGpsCoordinateOverrideRequest = createAction(
+    '[Photos] Load GPS Coordinate Override Request',
+    props<{ photoId: number }>()
+);
+
+export const loadGpsCoordinateOverrideFailure = createAction(
+    '[Photos] Load GPS Coordinate Override Failure',
+    props<{ error: string }>()
+);
+
+export const loadGpsCoordinateOverrideSuccess = createAction(
+    '[Photos] Load GPS Coordinate Override Success',
+    props<{ gpsCoordinates: GpsCoordinate }>()
+);
+
+export const setGpsCoordinateOverrideRequest = createAction(
+    '[Photos] Set GPS Coordinate Override Request',
+    props<{ photoId: number, latLng: GpsCoordinate }>()
+);
+
+export const setGpsCoordinateOverrideFailure = createAction(
+    '[Photos] Set GPS Coordinate Override Failure',
+    props<{ error: string }>()
+);
+
+export const setGpsCoordinateOverrideSuccess = createAction(
+    '[Photos] Set GPS Coordinate Override Success',
+    props<{ photoId: number, latLng: GpsCoordinate }>()
 );

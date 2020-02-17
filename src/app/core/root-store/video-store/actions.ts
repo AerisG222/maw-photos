@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { Video } from 'src/app/core/models/video.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Comment } from 'src/app/core/models/comment.model';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 export const clearRequest = createAction(
     '[Videos] Clear'
@@ -94,4 +95,49 @@ export const movePreviousRequest = createAction(
 export const setCurrent = createAction(
     '[Videos] Set Current',
     props<{ video: Video }>()
+);
+
+export const loadSourceGpsCoordinateRequest = createAction(
+    '[Videos] Load Source GPS Coordinate Request',
+    props<{ videoId: number }>()
+);
+
+export const loadSourceGpsCoordinateFailure = createAction(
+    '[Videos] Load Source GPS Coordinate Failure',
+    props<{ error: string }>()
+);
+
+export const loadSourceGpsCoordinateSuccess = createAction(
+    '[Videos] Load Source GPS Coordinate Success',
+    props<{ gpsCoordinates: GpsCoordinate }>()
+);
+
+export const loadGpsCoordinateOverrideRequest = createAction(
+    '[Videos] Load GPS Coordinate Override Request',
+    props<{ videoId: number }>()
+);
+
+export const loadGpsCoordinateOverrideFailure = createAction(
+    '[Videos] Load GPS Coordinate Override Failure',
+    props<{ error: string }>()
+);
+
+export const loadGpsCoordinateOverrideSuccess = createAction(
+    '[Videos] Load GPS Coordinate Override Success',
+    props<{ gpsCoordinates: GpsCoordinate }>()
+);
+
+export const setGpsCoordinateOverrideRequest = createAction(
+    '[Videos] Set GPS Coordinate Override Request',
+    props<{ videoId: number, latLng: GpsCoordinate }>()
+);
+
+export const setGpsCoordinateOverrideFailure = createAction(
+    '[Videos] Set GPS Coordinate Override Failure',
+    props<{ error: string }>()
+);
+
+export const setGpsCoordinateOverrideSuccess = createAction(
+    '[Videos] Set GPS Coordinate Override Success',
+    props<{ videoId: number, latLng: GpsCoordinate }>()
 );

@@ -8,8 +8,8 @@
                 <div class="header">Latitude</div>
 
                 <mat-form-field>
-                    <mat-label>Original</mat-label>
-                    <input disabled matInput [value]="(sourceGpsData$ | async).lat">
+                    <mat-label>Source</mat-label>
+                    <input disabled matInput [value]="(sourceGpsData$ | async)?.lat">
                 </mat-form-field>
 
                 <mat-form-field>
@@ -21,8 +21,8 @@
                 <div class="header">Longitude</div>
 
                 <mat-form-field>
-                    <mat-label>Original</mat-label>
-                    <input disabled matInput [value]="(sourceGpsData$ | async).lng">
+                    <mat-label>Source</mat-label>
+                    <input disabled matInput [value]="(sourceGpsData$ | async)?.lng">
                 </mat-form-field>
 
                 <mat-form-field>

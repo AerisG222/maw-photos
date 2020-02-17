@@ -245,6 +245,38 @@ const reducer = createReducer(
         isLoading: false,
         error
     })),
+    on(PhotoActions.loadGpsCoordinateOverrideRequest, (state, { photoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.loadGpsCoordinateOverrideSuccess, (state, { gpsCoordinates }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoGpsOverride: gpsCoordinates
+    })),
+    on(PhotoActions.loadGpsCoordinateOverrideFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
+    on(PhotoActions.setGpsCoordinateOverrideRequest, (state, { photoId }) => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { latLng }) => ({
+        ...state,
+        isLoading: false,
+        error: null,
+        currentPhotoGpsOverride: latLng
+    })),
+    on(PhotoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
+    })),
     on(PhotoActions.rotateClockwiseRequest, state =>
         state
     ),

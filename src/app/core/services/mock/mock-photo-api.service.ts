@@ -9,6 +9,7 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
@@ -159,6 +160,14 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     addComment(photoId: number, comment: string): Observable<any> {
+        return of(true);
+    }
+
+    getGpsCoordinateOverride(photoId: number): Observable<GpsCoordinate> {
+        return of({ lat: 43.12345, lng: -72.67890 });
+    }
+
+    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate) {
         return of(true);
     }
 
