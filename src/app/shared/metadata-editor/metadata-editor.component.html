@@ -14,7 +14,7 @@
 
                 <mat-form-field>
                     <mat-label>Override</mat-label>
-                    <input matInput value="">
+                    <input matInput formControlName="latitudeOverride" (paste)="onPaste($event)">
                 </mat-form-field>
             </div>
             <div class="row-grid">
@@ -27,7 +27,7 @@
 
                 <mat-form-field>
                     <mat-label>Override</mat-label>
-                    <input matInput value="">
+                    <input matInput matInput formControlName="longitudeOverride" (paste)="onPaste($event)">
                 </mat-form-field>
             </div>
 

@@ -40,7 +40,8 @@ export class MetadataEditorComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
-            comment: ['', Validators.required]
+            latitudeOverride: ['', Validators.required],
+            longitudeOverride: ['', Validators.required]
         });
     }
 
@@ -70,11 +71,50 @@ export class MetadataEditorComponent implements OnInit {
         this.overrideGpsData$ = null;
     }
 
+    onPaste(evt: ClipboardEvent): void {
+        const clipboardData = evt.clipboardData; // || window.clipboardData
+        const pastedText = clipboardData.getData('text');
+
+        if(!!pastedText) {
+            const latLng = this.getLatLng(pastedText);
+
+            if(!!latLng) {
+                evt.preventDefault();
+
+                this.form.get('latitudeOverride').setValue(latLng.lat);
+                this.form.get('longitudeOverride').setValue(latLng.lng);
+            }
+        }
+    }
+
     onSave(): void {
 
     }
 
     onCancel(): void {
 
+    }
+
+    private getLatLng(val: string): GpsCoordinate {
+        const parts = val.trim()
+            .replace('[', '').replace(']', '')
+            .replace('(', '').replace(')', '')
+            .split(',');
+
+        if(parts.length !== 2) {
+            return null;
+        }
+
+        const lat = Number(parts[0]);
+        const lng = Number(parts[1]);
+
+        if(isNaN(lat) || isNaN(lng)) {
+            return null;
+        }
+
+        return {
+            lat,
+            lng
+        };
     }
 }
