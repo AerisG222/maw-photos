@@ -99,7 +99,7 @@ export class ExternalVideoApiService implements VideoApiService {
         const url = this.getAbsoluteUrl(`videos/${videoId}/gps-override`);
 
         return this.http
-            .post(url, { videoId, latLng });
+            .patch(url, { videoId, latLng });
     }
 
     private getAbsoluteUrl(relativeUrl: string) {

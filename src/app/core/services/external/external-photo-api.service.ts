@@ -123,7 +123,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl(`photos/${photoId}/gps-override`);
 
         return this.http
-            .post(url, { photoId, latLng });
+            .patch(url, { photoId, latLng });
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
