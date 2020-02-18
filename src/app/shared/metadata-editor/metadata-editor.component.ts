@@ -119,8 +119,8 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     }
 
     private updateOverrideData(gps: GpsCoordinate): void {
-        this.form.get('latitudeOverride').setValue(gps?.lat);
-        this.form.get('longitudeOverride').setValue(gps?.lng);
+        this.form.get('latitudeOverride').setValue(gps?.latitude);
+        this.form.get('longitudeOverride').setValue(gps?.longitude);
     }
 
     private getLatLng(val: string): GpsCoordinate {
@@ -141,8 +141,8 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         }
 
         return {
-            lat,
-            lng
+            latitude: lat,
+            longitude: lng
         };
     }
 }

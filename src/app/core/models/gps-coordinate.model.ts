@@ -1,4 +1,4 @@
 export interface GpsCoordinate {
-    lat: number;
-    lng: number;
+    latitude: number;
+    longitude: number;
 }

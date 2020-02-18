@@ -65,11 +65,11 @@ export class MockVideoApiService implements VideoApiService {
     }
 
     getSourceGpsCoordinate(videoId: number): Observable<GpsCoordinate> {
-        return of({ lat: 43.11111, lng: -72.22222 });
+        return of({ latitude: 43.11111, longitude: -72.22222 });
     }
 
     getGpsCoordinateOverride(videoId: number): Observable<GpsCoordinate> {
-        return of({ lat: 43.12345, lng: -72.67890 });
+        return of({ latitude: 43.12345, longitude: -72.67890 });
     }
 
     setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate) {

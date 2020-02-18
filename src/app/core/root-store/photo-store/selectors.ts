@@ -127,8 +127,8 @@ export const selectCurrentPhotoSourceGpsCoordinates =
 
             if(!!lat && !!lng) {
                 return {
-                    lat: lat.sourceValue,
-                    lng: lng.sourceValue
+                    latitude: lat.sourceValue,
+                    longitude: lng.sourceValue
                 };
             }
         }

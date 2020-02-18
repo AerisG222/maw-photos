@@ -164,7 +164,7 @@ export class MockPhotoApiService implements PhotoApiService {
     }
 
     getGpsCoordinateOverride(photoId: number): Observable<GpsCoordinate> {
-        return of({ lat: 43.12345, lng: -72.67890 });
+        return of({ latitude: 43.12345, longitude: -72.67890 });
     }
 
     setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate) {
