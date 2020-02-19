@@ -53,7 +53,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         this.sourceGpsData$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
-                map(gpsDetail => gpsDetail.source)
+                map(gpsDetail => gpsDetail?.source)
             );
 
         this.destroySub.add(this.store$
@@ -68,7 +68,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
-                tap(gpsDetail => this.updateOverrideData(gpsDetail.override))
+                tap(gpsDetail => this.updateOverrideData(gpsDetail?.override))
             ).subscribe()
         );
     }
@@ -77,7 +77,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         this.sourceGpsData$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
-                map(gps => gps.source)
+                map(gps => gps?.source)
             );
 
         this.destroySub.add(this.store$
@@ -91,7 +91,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         this.destroySub.add(this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
-                tap(gpsDetail => this.updateOverrideData(gpsDetail.override))
+                tap(gpsDetail => this.updateOverrideData(gpsDetail?.override))
             ).subscribe()
         );
     }
