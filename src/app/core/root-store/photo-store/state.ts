@@ -6,7 +6,7 @@ import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { ExifContainer } from '../../models/exif-container';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
+import { GpsDetail } from '../../models/gps-detail.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
@@ -20,7 +20,7 @@ export interface State extends EntityState<Photo> {
     currentPhotoComments: Comment[];
     currentPhotoExifData: ExifContainer;
     currentPhotoEffects: PhotoEffects;
-    currentPhotoGpsOverride: GpsCoordinate;
+    currentPhotoGpsDetail: GpsDetail;
     slideshowIsPlaying: boolean;
     isFullscreenView: boolean;
     isMapView: boolean;
@@ -46,7 +46,7 @@ export const initialState: State = photoAdapter.getInitialState({
         blur: 0,
         hueRotate: 0
     },
-    currentPhotoGpsOverride: null,
+    currentPhotoGpsDetail: null,
     slideshowIsPlaying: false,
     isFullscreenView: false,
     isMapView: false

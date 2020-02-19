@@ -9,6 +9,7 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
 import { GpsCoordinate } from '../../models/gps-coordinate.model';
+import { GpsDetail } from '../../models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
@@ -17,8 +18,7 @@ const getFirstVideo = (state: State): Video => state.firstVideo;
 const getLastVideo = (state: State): Video => state.lastVideo;
 const getCurrentVideoRating = (state: State): Rating => state.currentVideoRating;
 const getCurrentVideoComments = (state: State): Comment[] => state.currentVideoComments;
-const getCurrentVideoGpsOverride = (state: State): GpsCoordinate => state.currentVideoGpsOverride;
-const getCurrentVideoSourceGps = (state: State): GpsCoordinate => state.currentVideoSourceGps;
+const getCurrentVideoGpsDetail = (state: State): GpsDetail => state.currentVideoGpsDetail;
 const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
@@ -50,8 +50,7 @@ export const selectFirstVideo = createSelector(selectVideoState, getFirstVideo);
 export const selectLastVideo = createSelector(selectVideoState, getLastVideo);
 export const selectCurrentVideoRating = createSelector(selectVideoState, getCurrentVideoRating);
 export const selectCurrentVideoComments = createSelector(selectVideoState, getCurrentVideoComments);
-export const selectCurrentVideoGpsOverride = createSelector(selectVideoState, getCurrentVideoGpsOverride);
-export const selectCurrentVideoSourceGps = createSelector(selectVideoState, getCurrentVideoSourceGps);
+export const selectCurrentVideoGpsDetail = createSelector(selectVideoState, getCurrentVideoGpsDetail);
 export const selectIsFullscreenView = createSelector(selectVideoState, getIsFullscreenView);
 
 export const selectIsCurrentVideoFirst =

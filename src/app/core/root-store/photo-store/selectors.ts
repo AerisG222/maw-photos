@@ -10,7 +10,7 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
 import { ExifContainer } from '../../models/exif-container';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
+import { GpsDetail } from '../../models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
@@ -21,7 +21,7 @@ const getCurrentPhotoRating = (state: State): Rating => state.currentPhotoRating
 const getCurrentPhotoComments = (state: State): Comment[] => state.currentPhotoComments;
 const getCurrentPhotoExifData = (state: State): ExifContainer => state.currentPhotoExifData;
 const getCurrentPhotoEffects = (state: State): PhotoEffects => state.currentPhotoEffects;
-const getCurrentPhotoGpsOverride = (state: State): GpsCoordinate => state.currentPhotoGpsOverride;
+const getCurrentPhotoGpsDetail = (state: State): GpsDetail => state.currentPhotoGpsDetail;
 const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
 const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 const getIsMapView = (state: State): boolean => state.isMapView;
@@ -67,7 +67,7 @@ export const selectCurrentPhotoRating = createSelector(selectPhotoState, getCurr
 export const selectCurrentPhotoComments = createSelector(selectPhotoState, getCurrentPhotoComments);
 export const selectCurrentPhotoExifData = createSelector(selectPhotoState, getCurrentPhotoExifData);
 export const selectCurrentPhotoEffects = createSelector(selectPhotoState, getCurrentPhotoEffects);
-export const selectCurrentPhotoGpsOverride = createSelector(selectPhotoState, getCurrentPhotoGpsOverride);
+export const selectCurrentPhotoGpsDetail = createSelector(selectPhotoState, getCurrentPhotoGpsDetail);
 export const selectSlideshowIsPlaying = createSelector(selectPhotoState, getSlideshowIsPlaying);
 export const selectIsFullscreenView = createSelector(selectPhotoState, getIsFullscreenView);
 export const selectIsMapView = createSelector(selectPhotoState, getIsMapView);
@@ -117,21 +117,4 @@ export const selectIsCurrentPhotoLastWithGpsCoordinates =
         return current != null &&
             last != null &&
             current.id === last.id;
-    });
-
-export const selectCurrentPhotoSourceGpsCoordinates =
-    createSelector(selectCurrentPhotoExifData, container => {
-        if(!!container) {
-            const lat = container.exif.find(e => e.sourceField === 'gpsLatitude');
-            const lng = container.exif.find(e => e.sourceField === 'gpsLongitude');
-
-            if(!!lat && !!lng) {
-                return {
-                    latitude: lat.sourceValue,
-                    longitude: lng.sourceValue
-                };
-            }
-        }
-
-        return null;
     });

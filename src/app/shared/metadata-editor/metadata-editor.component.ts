@@ -2,7 +2,7 @@ import { Component, Input, OnInit, AfterViewInit, ChangeDetectionStrategy } from
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, tap, map } from 'rxjs/operators';
 
 import { MetadataEditorMode } from './metadata-editor-mode.model';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
@@ -52,7 +52,8 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     initPhotoEditor(): void {
         this.sourceGpsData$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoSourceGpsCoordinates)
+                select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
+                map(gpsDetail => gpsDetail.source)
             );
 
         this.destroySub.add(this.store$
@@ -60,14 +61,14 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(photo => !!photo),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsCoordinateOverrideRequest({ photoId: photo.id })))
+                tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
             ).subscribe()
         );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoGpsOverride),
-                tap(gps => this.updateOverrideData(gps))
+                select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
+                tap(gpsDetail => this.updateOverrideData(gpsDetail.override))
             ).subscribe()
         );
     }
@@ -75,22 +76,22 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     initVideoEditor(): void {
         this.sourceGpsData$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoSourceGps)
+                select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
+                map(gps => gps.source)
             );
 
         this.destroySub.add(this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadSourceGpsCoordinateRequest({ videoId: video.id }))),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadGpsCoordinateOverrideRequest({ videoId: video.id })))
+                tap(video => this.store$.dispatch(VideoStoreActions.loadGpsDetailRequest({ videoId: video.id })))
             ).subscribe()
         );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoGpsOverride),
-                tap(gps => this.updateOverrideData(gps))
+                select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
+                tap(gpsDetail => this.updateOverrideData(gpsDetail.override))
             ).subscribe()
         );
     }

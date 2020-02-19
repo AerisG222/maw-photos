@@ -87,27 +87,14 @@ export class VideoStoreEffects {
         )
     );
 
-    loadSourceGpsRequestEffect$ = createEffect(() =>
+    loadGpsDetailRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VideoActions.loadSourceGpsCoordinateRequest),
+            ofType(VideoActions.loadGpsDetailRequest),
             switchMap(action =>
-                this.api.getSourceGpsCoordinate(action.videoId)
+                this.api.getGpsDetail(action.videoId)
                     .pipe(
-                        map(gps => VideoActions.loadSourceGpsCoordinateSuccess({ gpsCoordinates: gps })),
-                        catchError(error => of(VideoActions.loadSourceGpsCoordinateFailure({ error })))
-                    )
-            )
-        )
-    );
-
-    loadGpsOverrideRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(VideoActions.loadGpsCoordinateOverrideRequest),
-            switchMap(action =>
-                this.api.getGpsCoordinateOverride(action.videoId)
-                    .pipe(
-                        map(gps => VideoActions.loadGpsCoordinateOverrideSuccess({ gpsCoordinates: gps })),
-                        catchError(error => of(VideoActions.loadGpsCoordinateOverrideFailure({ error })))
+                        map(gpsDetail => VideoActions.loadGpsDetailSuccess({ gpsDetail })),
+                        catchError(error => of(VideoActions.loadGpsDetailFailure({ error })))
                     )
             )
         )
@@ -119,7 +106,7 @@ export class VideoStoreEffects {
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
                     .pipe(
-                        map(gps => VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, latLng: action.latLng })),
+                        map(gpsDetail => VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail })),
                         catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )

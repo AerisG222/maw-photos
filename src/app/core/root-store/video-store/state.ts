@@ -3,7 +3,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Video } from '../../models/video.model';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
+import { GpsDetail } from '../../models/gps-detail.model';
 
 export const videoAdapter: EntityAdapter<Video> = createEntityAdapter<Video>({
     sortComparer: (a: Video, b: Video): number => b.id - a.id
@@ -17,8 +17,7 @@ export interface State extends EntityState<Video> {
     lastVideo: Video;
     currentVideoRating: Rating;
     currentVideoComments: Comment[];
-    currentVideoSourceGps: GpsCoordinate;
-    currentVideoGpsOverride: GpsCoordinate;
+    currentVideoGpsDetail: GpsDetail;
     isFullscreenView: boolean;
 }
 
@@ -30,7 +29,6 @@ export const initialState: State = videoAdapter.getInitialState({
     lastVideo: null,
     currentVideoRating: null,
     currentVideoComments: null,
-    currentVideoSourceGps: null,
-    currentVideoGpsOverride: null,
+    currentVideoGpsDetail: null,
     isFullscreenView: false
 });

@@ -4,6 +4,7 @@ import { Video } from 'src/app/core/models/video.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { Comment } from 'src/app/core/models/comment.model';
 import { GpsCoordinate } from '../../models/gps-coordinate.model';
+import { GpsDetail } from '../../models/gps-detail.model';
 
 export const clearRequest = createAction(
     '[Videos] Clear'
@@ -97,34 +98,19 @@ export const setCurrent = createAction(
     props<{ video: Video }>()
 );
 
-export const loadSourceGpsCoordinateRequest = createAction(
-    '[Videos] Load Source GPS Coordinate Request',
+export const loadGpsDetailRequest = createAction(
+    '[Videos] Load GPS Detail Request',
     props<{ videoId: number }>()
 );
 
-export const loadSourceGpsCoordinateFailure = createAction(
-    '[Videos] Load Source GPS Coordinate Failure',
+export const loadGpsDetailFailure = createAction(
+    '[Videos] Load GPS Detail Failure',
     props<{ error: string }>()
 );
 
-export const loadSourceGpsCoordinateSuccess = createAction(
-    '[Videos] Load Source GPS Coordinate Success',
-    props<{ gpsCoordinates: GpsCoordinate }>()
-);
-
-export const loadGpsCoordinateOverrideRequest = createAction(
-    '[Videos] Load GPS Coordinate Override Request',
-    props<{ videoId: number }>()
-);
-
-export const loadGpsCoordinateOverrideFailure = createAction(
-    '[Videos] Load GPS Coordinate Override Failure',
-    props<{ error: string }>()
-);
-
-export const loadGpsCoordinateOverrideSuccess = createAction(
-    '[Videos] Load GPS Coordinate Override Success',
-    props<{ gpsCoordinates: GpsCoordinate }>()
+export const loadGpsDetailSuccess = createAction(
+    '[Videos] Load GPS Detail Success',
+    props<{ gpsDetail: GpsDetail }>()
 );
 
 export const setGpsCoordinateOverrideRequest = createAction(
@@ -139,5 +125,5 @@ export const setGpsCoordinateOverrideFailure = createAction(
 
 export const setGpsCoordinateOverrideSuccess = createAction(
     '[Videos] Set GPS Coordinate Override Success',
-    props<{ videoId: number, latLng: GpsCoordinate }>()
+    props<{ videoId: number, gpsDetail: GpsDetail }>()
 );

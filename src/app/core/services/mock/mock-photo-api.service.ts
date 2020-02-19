@@ -10,6 +10,7 @@ import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
 import { GpsCoordinate } from '../../models/gps-coordinate.model';
+import { GpsDetail } from '../../models/gps-detail.model';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
@@ -163,12 +164,15 @@ export class MockPhotoApiService implements PhotoApiService {
         return of(true);
     }
 
-    getGpsCoordinateOverride(photoId: number): Observable<GpsCoordinate> {
-        return of({ latitude: 43.12345, longitude: -72.67890 });
+    getGpsDetail(videoId: number): Observable<GpsDetail> {
+        return of({
+            source: { latitude: 43.12345, longitude: -72.67890 },
+            override: { latitude: 43.11111, longitude: -72.55555 }
+        });
     }
 
     setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate) {
-        return of(true);
+        return this.getGpsDetail(photoId);
     }
 
     private initData(): void {

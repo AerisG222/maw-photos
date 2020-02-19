@@ -245,18 +245,18 @@ const reducer = createReducer(
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadGpsCoordinateOverrideRequest, (state, { photoId }) => ({
+    on(PhotoActions.loadGpsDetailRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadGpsCoordinateOverrideSuccess, (state, { gpsCoordinates }) => ({
+    on(PhotoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoGpsOverride: gpsCoordinates
+        currentPhotoGpsDetail: gpsDetail
     })),
-    on(PhotoActions.loadGpsCoordinateOverrideFailure, (state, { error }) => ({
+    on(PhotoActions.loadGpsDetailFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
         error
@@ -266,11 +266,11 @@ const reducer = createReducer(
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { latLng }) => ({
+    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoGpsOverride: latLng
+        currentPhotoGpsDetail: gpsDetail
     })),
     on(PhotoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
         ...state,

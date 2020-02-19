@@ -6,6 +6,7 @@ import { Comment } from 'src/app/core/models/comment.model';
 import { Rating } from 'src/app/core/models/rating.model';
 import { ApiCollection } from '../models/api-collection.model';
 import { GpsCoordinate } from '../models/gps-coordinate.model';
+import { GpsDetail } from '../models/gps-detail.model';
 
 export const videoApiServiceToken = 'VideoApiService';
 
@@ -18,7 +19,6 @@ export interface VideoApiService {
     rateVideo(videoId: number, rating: number): Observable<Rating>;
     addComment(videoId: number, comment: string): Observable<any>;
 
-    getSourceGpsCoordinate(photoId: number): Observable<GpsCoordinate>;
-    getGpsCoordinateOverride(photoId: number): Observable<GpsCoordinate>;
-    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<any>;
+    getGpsDetail(photoId: number): Observable<GpsDetail>;
+    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<GpsDetail>;
 }

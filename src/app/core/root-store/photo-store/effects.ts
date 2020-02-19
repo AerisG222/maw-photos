@@ -132,14 +132,14 @@ export class PhotoStoreEffects {
         )
     );
 
-    loadGpsOverrideRequestEffect$ = createEffect(() =>
+    loadGpsDetailRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(PhotoActions.loadGpsCoordinateOverrideRequest),
+            ofType(PhotoActions.loadGpsDetailRequest),
             switchMap(action =>
-                this.api.getGpsCoordinateOverride(action.photoId)
+                this.api.getGpsDetail(action.photoId)
                     .pipe(
-                        map(gps => PhotoActions.loadGpsCoordinateOverrideSuccess({ gpsCoordinates: gps })),
-                        catchError(error => of(PhotoActions.loadGpsCoordinateOverrideFailure({ error })))
+                        map(gpsDetail => PhotoActions.loadGpsDetailSuccess({ gpsDetail })),
+                        catchError(error => of(PhotoActions.loadGpsDetailFailure({ error })))
                     )
             )
         )
@@ -151,7 +151,7 @@ export class PhotoStoreEffects {
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
                     .pipe(
-                        map(gps => PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, latLng: action.latLng })),
+                        map(gpsDetail => PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, gpsDetail })),
                         catchError(error => of(PhotoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )

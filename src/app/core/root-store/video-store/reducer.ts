@@ -134,34 +134,18 @@ const reducer = createReducer(
         isLoading: false,
         error
     })),
-    on(VideoActions.loadSourceGpsCoordinateRequest, (state, { videoId }) => ({
+    on(VideoActions.loadGpsDetailRequest, (state, { videoId }) => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.loadSourceGpsCoordinateSuccess, (state, { gpsCoordinates }) => ({
+    on(VideoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoSourceGps: gpsCoordinates
+        currentPhotoGpsDetail: gpsDetail
     })),
-    on(VideoActions.loadSourceGpsCoordinateFailure, (state, { error }) => ({
-        ...state,
-        isLoading: false,
-        error
-    })),
-    on(VideoActions.loadGpsCoordinateOverrideRequest, (state, { videoId }) => ({
-        ...state,
-        isLoading: true,
-        error: null
-    })),
-    on(VideoActions.loadGpsCoordinateOverrideSuccess, (state, { gpsCoordinates }) => ({
-        ...state,
-        isLoading: false,
-        error: null,
-        currentPhotoGpsOverride: gpsCoordinates
-    })),
-    on(VideoActions.loadGpsCoordinateOverrideFailure, (state, { error }) => ({
+    on(VideoActions.loadGpsDetailFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
         error
@@ -171,11 +155,11 @@ const reducer = createReducer(
         isLoading: true,
         error: null
     })),
-    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { latLng }) => ({
+    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoGpsOverride: latLng
+        currentPhotoGpsDetail: gpsDetail
     })),
     on(VideoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
         ...state,
