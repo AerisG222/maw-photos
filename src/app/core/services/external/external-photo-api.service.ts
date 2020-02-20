@@ -120,11 +120,11 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<GpsDetail>(url);
     }
 
-    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate) {
-        const url = this.getAbsoluteUrl(`photos/${photoId}/gps-override`);
+    setGpsCoordinateOverride(photoId: number, gps: GpsCoordinate) {
+        const url = this.getAbsoluteUrl(`photos/${photoId}/gps`);
 
         return this.http
-            .patch<GpsDetail>(url, { photoId, latLng });
+            .patch<GpsDetail>(url, gps);
     }
 
     private getAbsoluteUrl(relativeUrl: string) {

@@ -143,7 +143,7 @@ const reducer = createReducer(
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoGpsDetail: gpsDetail
+        currentVideoGpsDetail: gpsDetail
     })),
     on(VideoActions.loadGpsDetailFailure, (state, { error }) => ({
         ...state,
@@ -159,7 +159,7 @@ const reducer = createReducer(
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoGpsDetail: gpsDetail
+        currentVideoGpsDetail: gpsDetail
     })),
     on(VideoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
         ...state,

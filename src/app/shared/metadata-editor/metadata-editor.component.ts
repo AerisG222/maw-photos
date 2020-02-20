@@ -16,6 +16,7 @@ import { PhotoStoreSelectors, VideoStoreSelectors, PhotoStoreActions, VideoStore
 })
 export class MetadataEditorComponent implements OnInit, AfterViewInit {
     private destroySub = new Subscription();
+    private id: number;
 
     form: FormGroup;
     sourceGpsData$: Observable<GpsCoordinate>;
@@ -60,6 +61,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(photo => !!photo),
+                tap(photo => this.id = photo.id),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
             ).subscribe()
@@ -84,6 +86,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video),
+                tap(video => this.id = video.id),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadGpsDetailRequest({ videoId: video.id })))
             ).subscribe()
         );
@@ -112,7 +115,29 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     }
 
     onSave(): void {
+        if(!this.form.valid) {
+            return;
+        }
 
+        const latitude = Number(this.form.get('latitudeOverride').value);
+        const longitude = Number(this.form.get('longitudeOverride').value);
+
+        if(isNaN(latitude) || isNaN(longitude)) {
+            return;
+        }
+
+        const latLng = { latitude, longitude};
+
+        switch (this.mode) {
+            case MetadataEditorMode.Photos:
+                this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.id, latLng }));
+                break;
+            case MetadataEditorMode.Videos:
+                this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideRequest({ videoId: this.id, latLng }));
+                break;
+            default:
+                throw new Error('invalid metadata editor mode!');
+        }
     }
 
     onCancel(): void {

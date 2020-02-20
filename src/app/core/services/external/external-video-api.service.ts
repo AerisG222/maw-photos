@@ -89,11 +89,11 @@ export class ExternalVideoApiService implements VideoApiService {
             .get<GpsDetail>(url);
     }
 
-    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate) {
+    setGpsCoordinateOverride(videoId: number, gps: GpsCoordinate) {
         const url = this.getAbsoluteUrl(`videos/${videoId}/gps`);
 
         return this.http
-            .patch<GpsDetail>(url, { videoId, latLng });
+            .patch<GpsDetail>(url, gps);
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
