@@ -15,4 +15,8 @@ export class CategoryTeaserChooserComponent implements OnInit {
 
     ngOnInit(): void {
     }
+
+    onSetTeaser(): void {
+
+    }
 }
