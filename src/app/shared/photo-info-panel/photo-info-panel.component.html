@@ -43,7 +43,7 @@
 
                 <app-metadata-editor
                     class="widget"
-                    *ngIf="showMetadataEditor$ | async"
+                    *ngIf="(isAdmin$ | async) && (showMetadataEditor$ | async)"
                     [mode]="metadataEditorMode.Photos"
                     @toggleInfoPanel>
                 </app-metadata-editor>
@@ -132,6 +132,7 @@
             <mat-icon [inline]="true">map</mat-icon>
         </button>
         <button
+            *ngIf="isAdmin$ | async"
             class="sidebar-button"
             mat-button
             matTooltip="Show/Hide Metadata Editor (Z)"

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectionStrategy } from
 import { MatButton } from '@angular/material/button';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { filter, take, map } from 'rxjs/operators';
+import { filter, take, map, tap } from 'rxjs/operators';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
@@ -11,7 +11,7 @@ import { CommentMode } from '../comments/comment-mode.model';
 import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.model';
 import { MinimapMode } from '../minimap/minimap-mode.model';
 import { RatingMode } from '../rating/rating-mode.model';
-import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-video-info-panel',
@@ -45,6 +45,7 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     ratingMode = RatingMode;
     metadataEditorMode = MetadataEditorMode;
 
+    isAdmin$: Observable<boolean>;
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showRatings$: Observable<boolean>;
@@ -65,7 +66,13 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.configureHotkeys();
+        this.isAdmin$ = this.store$.pipe(
+            select(AuthStoreSelectors.selectIsAdmin),
+            tap(isAdmin => {
+                this.hotkeysService.remove(this.hotkeys);
+                this.configureHotkeys(isAdmin);
+            })
+        );
 
         this.enableButtons$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
@@ -116,7 +123,7 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
         this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
     }
 
-    private configureHotkeys(): void {
+    private configureHotkeys(isAdmin: boolean): void {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event), [], 'Show / Hide Info Panel')
         ) as Hotkey);
@@ -133,9 +140,11 @@ export class VideoInfoPanelComponent implements OnInit, OnDestroy {
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
         ) as Hotkey);
 
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
-        ) as Hotkey);
+        if(isAdmin) {
+            this.hotkeys.push(this.hotkeysService.add(
+                new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
+            ) as Hotkey);
+        }
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {

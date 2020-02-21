@@ -4,14 +4,15 @@ import { MatButton } from '@angular/material/button';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 
 import { sidebarShow, sidebarHide, sidebarInfoPanelShow, sidebarInfoPanelHide } from '../animations';
 import { CommentMode } from '../comments/comment-mode.model';
 import { RatingMode } from '../rating/rating-mode.model';
 import {
     SettingsStoreActions,
-    SettingsStoreSelectors
+    SettingsStoreSelectors,
+    AuthStoreSelectors
 } from 'src/app/core/root-store';
 import { MinimapMode } from '../minimap/minimap-mode.model';
 import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.model';
@@ -48,6 +49,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     ratingMode = RatingMode;
     metadataEditorMode = MetadataEditorMode;
 
+    isAdmin$: Observable<boolean>;
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
     showEffects$: Observable<boolean>;
@@ -73,7 +75,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.configureHotkeys();
+        this.isAdmin$ = this.store$.pipe(
+            select(AuthStoreSelectors.selectIsAdmin),
+            tap(isAdmin => {
+                this.hotkeysService.remove(this.hotkeys);
+                this.configureHotkeys(isAdmin)
+            })
+        );
 
         this.enableButtons$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
@@ -148,7 +156,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
         this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelMinimapRequest());
     }
 
-    private configureHotkeys(): void {
+    private configureHotkeys(isAdmin: boolean): void {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('i', (event: KeyboardEvent) => this.onHotkeyToggleEndSidenav(event), [], 'Show / Hide Info Panel')
         ) as Hotkey);
@@ -177,9 +185,11 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             new Hotkey('m', (event: KeyboardEvent) => this.onHotkeyToggleMinimap(event), [], 'Show / Hide Minimap')
         ) as Hotkey);
 
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
-        ) as Hotkey);
+        if(isAdmin) {
+            this.hotkeys.push(this.hotkeysService.add(
+                new Hotkey('g', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
+            ) as Hotkey);
+        }
     }
 
     private onHotkeyToggleEndSidenav(evt: KeyboardEvent): boolean {

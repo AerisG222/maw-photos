@@ -16,11 +16,13 @@ import { SettingsStoreModule } from './settings-store';
 import { VideoCategoryStoreModule } from './video-category-store';
 import { VideoStoreModule } from './video-store';
 import { SearchStoreModule } from './search-store';
+import { AuthStoreModule } from './auth-store';
 
 @NgModule({
     declarations: [],
     imports: [
         CommonModule,
+        AuthStoreModule,
         LayoutStoreModule,
         PhotoCategoryStoreModule,
         PhotoStoreModule,
