@@ -71,6 +71,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListMapViewMapTypeId: [MapTypeId.ROADMAP.value],
             photoListMapViewZoom: [10],
 
+            photoInfoPanelShowCategoryTeaserChooser: [false],
             photoInfoPanelShowComments: [true],
             photoInfoPanelShowEffects: [false],
             photoInfoPanelShowExif: [false],
@@ -87,6 +88,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoListShowVideoList: [true],
             videoListVideoSize: [VideoSize.large.name],
 
+            videoInfoPanelShowCategoryTeaserChooser: [false],
             videoInfoPanelShowComments: [true],
             videoInfoPanelShowMetadataEditor: [false],
             videoInfoPanelShowMinimap: [false],
@@ -138,6 +140,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListMapViewMapTypeId: this.form.get('photoListMapViewMapTypeId').value,
             photoListMapViewZoom: this.form.get('photoListMapViewZoom').value,
 
+            photoInfoPanelShowCategoryTeaserChooser: this.form.get('photoInfoPanelShowCategoryTeaserChooser').value,
             photoInfoPanelShowComments: this.form.get('photoInfoPanelShowComments').value,
             photoInfoPanelShowEffects: this.form.get('photoInfoPanelShowEffects').value,
             photoInfoPanelShowExif: this.form.get('photoInfoPanelShowExif').value,
@@ -154,6 +157,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoListShowVideoList: this.form.get('videoListShowVideoList').value,
             videoListVideoSize: VideoSize.forName(this.form.get('videoListVideoSize').value),
 
+            videoInfoPanelShowCategoryTeaserChooser: this.form.get('videoInfoPanelShowCategoryTeaserChooser').value,
             videoInfoPanelShowComments: this.form.get('videoInfoPanelShowComments').value,
             videoInfoPanelShowMetadataEditor: this.form.get('videoInfoPanelShowMetadataEditor').value,
             videoInfoPanelShowMinimap: this.form.get('videoInfoPanelShowMinimap').value,
@@ -202,6 +206,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoListMapViewMapTypeId').setValue(settings.photoListMapViewMapTypeId);
         this.form.get('photoListMapViewZoom').setValue(settings.photoListMapViewZoom);
 
+        this.form.get('photoInfoPanelShowCategoryTeaserChooser').setValue(settings.photoInfoPanelShowCategoryTeaserChooser);
         this.form.get('photoInfoPanelShowComments').setValue(settings.photoInfoPanelShowComments);
         this.form.get('photoInfoPanelShowEffects').setValue(settings.photoInfoPanelShowEffects);
         this.form.get('photoInfoPanelShowExif').setValue(settings.photoInfoPanelShowExif);
@@ -218,6 +223,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('videoListShowVideoList').setValue(settings.videoListShowVideoList);
         this.form.get('videoListVideoSize').setValue(settings.videoListVideoSize.name);
 
+        this.form.get('videoInfoPanelShowCategoryTeaserChooser').setValue(settings.videoInfoPanelShowCategoryTeaserChooser);
         this.form.get('videoInfoPanelShowComments').setValue(settings.videoInfoPanelShowComments);
         this.form.get('videoInfoPanelShowMetadataEditor').setValue(settings.videoInfoPanelShowMetadataEditor);
         this.form.get('videoInfoPanelShowMinimap').setValue(settings.videoInfoPanelShowMinimap);

@@ -83,6 +83,13 @@ const reducer = createReducer(
             categoryListThumbnailSize: newSize
         }
     })),
+    on(SettingsActions.togglePhotoInfoPanelCategoryTeaserChooserRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoInfoPanelShowCategoryTeaserChooser: !state.settings.photoInfoPanelShowCategoryTeaserChooser
+        }
+    })),
     on(SettingsActions.togglePhotoInfoPanelCommentsRequest, state => ({
         ...state,
         settings: {
@@ -214,6 +221,13 @@ const reducer = createReducer(
         settings: {
             ...state.settings,
             videoListVideoSize: newSize
+        }
+    })),
+    on(SettingsActions.toggleVideoInfoPanelCategoryTeaserChooserRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            videoInfoPanelShowCategoryTeaserChooser: !state.settings.videoInfoPanelShowCategoryTeaserChooser
         }
     })),
     on(SettingsActions.toggleVideoInfoPanelCommentsRequest, state => ({

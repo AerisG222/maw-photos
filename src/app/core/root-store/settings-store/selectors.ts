@@ -28,6 +28,7 @@ const getCategoryListListType = (state: State): CategoryListType => state.settin
 const getCategoryListListViewThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListListViewThumbnailSize;
 
 const getPhotoInfoPanelShowRatings = (state: State): boolean => state.settings.photoInfoPanelShowRatings;
+const getPhotoInfoPanelShowCategoryTeaserChooser = (state: State): boolean => state.settings.photoInfoPanelShowCategoryTeaserChooser;
 const getPhotoInfoPanelShowComments = (state: State): boolean => state.settings.photoInfoPanelShowComments;
 const getPhotoInfoPanelShowExif = (state: State): boolean => state.settings.photoInfoPanelShowExif;
 const getPhotoInfoPanelShowEffects = (state: State): boolean => state.settings.photoInfoPanelShowEffects;
@@ -46,6 +47,7 @@ const getVideoListShowVideoList = (state: State): boolean => state.settings.vide
 const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoListVideoSize;
 
 const getVideoInfoPanelShowRatings = (state: State): boolean => state.settings.videoInfoPanelShowRatings;
+const getVideoInfoPanelShowCategoryTeaserChooser = (state: State): boolean => state.settings.videoInfoPanelShowCategoryTeaserChooser;
 const getVideoInfoPanelShowComments = (state: State): boolean => state.settings.videoInfoPanelShowComments;
 const getVideoInfoPanelShowMetadataEditor = (state: State): boolean => state.settings.videoInfoPanelShowMetadataEditor;
 const getVideoInfoPanelShowMinimap = (state: State): boolean => state.settings.videoInfoPanelShowMinimap;
@@ -77,6 +79,7 @@ export const selectCategoryListListType = createSelector(selectSettingsState, ge
 export const selectCategoryListListViewThumbnailSize = createSelector(selectSettingsState, getCategoryListListViewThumbnailSize);
 
 export const selectPhotoInfoPanelShowRatings = createSelector(selectSettingsState, getPhotoInfoPanelShowRatings);
+export const selectPhotoInfoPanelShowCategoryTeaserChooser = createSelector(selectSettingsState, getPhotoInfoPanelShowCategoryTeaserChooser);
 export const selectPhotoInfoPanelShowComments = createSelector(selectSettingsState, getPhotoInfoPanelShowComments);
 export const selectPhotoInfoPanelShowExif = createSelector(selectSettingsState, getPhotoInfoPanelShowExif);
 export const selectPhotoInfoPanelShowEffects = createSelector(selectSettingsState, getPhotoInfoPanelShowEffects);
@@ -96,6 +99,7 @@ export const selectVideoListShowVideoList = createSelector(selectSettingsState, 
 export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);
 
 export const selectVideoInfoPanelShowRatings = createSelector(selectSettingsState, getVideoInfoPanelShowRatings);
+export const selectVideoInfoPanelShowCategoryTeaserChooser = createSelector(selectSettingsState, getVideoInfoPanelShowCategoryTeaserChooser);
 export const selectVideoInfoPanelShowComments = createSelector(selectSettingsState, getVideoInfoPanelShowComments);
 export const selectVideoInfoPanelShowMinimap = createSelector(selectSettingsState, getVideoInfoPanelShowMinimap);
 export const selectVideoInfoPanelExpandedState = createSelector(selectSettingsState, getVideoInfoPanelExpandedState);

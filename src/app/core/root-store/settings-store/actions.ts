@@ -70,6 +70,10 @@ export const updateCategoryListThumbnailSizeRequest = createAction(
     props<{ newSize: ThumbnailSize }>()
 );
 
+export const togglePhotoInfoPanelCategoryTeaserChooserRequest = createAction(
+    '[Settings] Toggle Photo Info Panel Category Teaser Chooser'
+);
+
 export const togglePhotoInfoPanelCommentsRequest = createAction(
     '[Settings] Toggle Photo Info Panel Comments'
 );
@@ -151,6 +155,10 @@ export const updateVideoListThumbnailSizeRequest = createAction(
 export const updateVideoListVideoSizeRequest = createAction(
     '[Settings] Update Video List Video Size',
     props<{ newSize: VideoSize }>()
+);
+
+export const toggleVideoInfoPanelCategoryTeaserChooserRequest = createAction(
+    '[Settings] Toggle Video Info Panel Category Teaser Chooser'
 );
 
 export const toggleVideoInfoPanelCommentsRequest = createAction(

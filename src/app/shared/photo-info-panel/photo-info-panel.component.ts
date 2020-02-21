@@ -16,6 +16,7 @@ import {
 } from 'src/app/core/root-store';
 import { MinimapMode } from '../minimap/minimap-mode.model';
 import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.model';
+import { CategoryTeaserChooserMode } from '../category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
     selector: 'app-photo-info-panel',
@@ -48,6 +49,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     minimapMode = MinimapMode;
     ratingMode = RatingMode;
     metadataEditorMode = MetadataEditorMode;
+    categoryTeaserChooserMode = CategoryTeaserChooserMode;
 
     isAdmin$: Observable<boolean>;
     endSidenavExpanded$: Observable<boolean>;
@@ -58,6 +60,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     showMinimap$: Observable<boolean>;
     showHistogram$: Observable<boolean>;
     showMetadataEditor$: Observable<boolean>;
+    showCategoryTeaserChooser$: Observable<boolean>;
     enableButtons$: Observable<boolean>;
 
     @ViewChild('toggleInfoPanelButton') toggleInfoPanelButton: MatButton;
@@ -68,6 +71,7 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     @ViewChild('toggleMinimapButton') toggleMinimapButton: MatButton;
     @ViewChild('toggleHistogramButton') toggleHistogramButton: MatButton;
     @ViewChild('toggleMetadataEditorButton') toggleMetadataEditorButton: MatButton;
+    @ViewChild('toggleCategoryTeaserChooserButton') toggleCategoryTeaserChooserButton: MatButton;
 
     constructor(
         private store$: Store<{}>,
@@ -97,6 +101,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
         this.showMetadataEditor$ = this.store$.pipe(
             select(SettingsStoreSelectors.selectPhotoInfoPanelShowMetadataEditor)
+        );
+
+        this.showCategoryTeaserChooser$ = this.store$.pipe(
+            select(SettingsStoreSelectors.selectPhotoInfoPanelShowCategoryTeaserChooser)
         );
 
         this.showEffects$ = this.store$.pipe(
@@ -130,6 +138,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
 
     toggleRatings(): void {
         this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelRatingsRequest());
+    }
+
+    toggleCategoryTeaserChooser(): void {
+        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelCategoryTeaserChooserRequest());
     }
 
     toggleComments(): void {
@@ -189,6 +201,10 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
             this.hotkeys.push(this.hotkeysService.add(
                 new Hotkey('g', (event: KeyboardEvent) => this.onHotkeyToggleMetadataEditor(event), [], 'Show / Hide Metadata Editor')
             ) as Hotkey);
+
+            this.hotkeys.push(this.hotkeysService.add(
+                new Hotkey('k', (event: KeyboardEvent) => this.onHotkeyToggleCategoryTeaserChooser(event), [], 'Show / Hide Category Teaser Chooser')
+            ) as Hotkey);
         }
     }
 
@@ -202,6 +218,13 @@ export class PhotoInfoPanelComponent implements OnInit, OnDestroy {
     private onHotkeyToggleRatings(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.toggleRatingsButton);
         this.togglePanel(this.showRatings$, () => this.toggleRatings());
+
+        return false;
+    }
+
+    private onHotkeyToggleCategoryTeaserChooser(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.toggleCategoryTeaserChooserButton);
+        this.togglePanel(this.showCategoryTeaserChooser$, () => this.toggleCategoryTeaserChooser());
 
         return false;
     }

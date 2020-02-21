@@ -23,12 +23,21 @@
                     @toggleInfoPanel>
                 </app-minimap>
 
-                <app-metadata-editor
-                    class="widget"
-                    *ngIf="(isAdmin$ | async) && (showMetadataEditor$ | async)"
-                    [mode]="metadataEditorMode.Videos"
-                    @toggleInfoPanel>
-                </app-metadata-editor>
+                <ng-container *ngIf="isAdmin$ | async">
+                    <app-metadata-editor
+                        class="widget"
+                        *ngIf="showMetadataEditor$ | async"
+                        [mode]="metadataEditorMode.Videos"
+                        @toggleInfoPanel>
+                    </app-metadata-editor>
+
+                    <app-category-teaser-chooser
+                        class="widget"
+                        *ngIf="showCategoryTeaserChooser$ | async"
+                        [mode]="categoryTeaserChooserMode.Videos"
+                        @toggleInfoPanel>
+                    </app-category-teaser-chooser>
+                </ng-container>
             </div>
         </div>
     </div>
@@ -80,17 +89,29 @@
             #toggleMinimapButton>
             <mat-icon [inline]="true">map</mat-icon>
         </button>
-        <button
-            *ngIf="isAdmin$ | async"
-            class="sidebar-button"
-            mat-button
-            matTooltip="Show/Hide Metadata Editor (Z)"
-            matTooltipPosition="before"
-            [disabled]="(enableButtons$ | async) === false"
-            [class.active]="showMetadataEditor$ | async"
-            (click)="toggleMetadataEditor()"
-            #toggleMetadataEditorButton>
-            <mat-icon [inline]="true">edit</mat-icon>
-        </button>
+        <ng-container *ngIf="isAdmin$ | async">
+            <button
+                class="sidebar-button"
+                mat-button
+                matTooltip="Show/Hide Metadata Editor (Z)"
+                matTooltipPosition="before"
+                [disabled]="(enableButtons$ | async) === false"
+                [class.active]="showMetadataEditor$ | async"
+                (click)="toggleMetadataEditor()"
+                #toggleMetadataEditorButton>
+                <mat-icon [inline]="true">edit</mat-icon>
+            </button>
+            <button
+                class="sidebar-button"
+                mat-button
+                matTooltip="Show/Hide Category Teaser Chooser (K)"
+                matTooltipPosition="before"
+                [disabled]="(enableButtons$ | async) === false"
+                [class.active]="showCategoryTeaserChooser$ | async"
+                (click)="toggleCategoryTeaserChooser()"
+                #toggleCategoryTeaserChooserButton>
+                <mat-icon [inline]="true">edit</mat-icon>
+            </button>
+        </ng-container>
     </div>
 </div>

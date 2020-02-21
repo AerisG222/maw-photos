@@ -52,6 +52,7 @@ export class SettingsStoreEffects {
                 SettingsActions.updateCategoryListListViewThumbnailSizeRequest,
                 SettingsActions.updateCategoryListThumbnailSizeRequest,
 
+                SettingsActions.togglePhotoInfoPanelCategoryTeaserChooserRequest,
                 SettingsActions.togglePhotoInfoPanelCommentsRequest,
                 SettingsActions.togglePhotoInfoPanelEffectsRequest,
                 SettingsActions.togglePhotoInfoPanelExifRequest,
@@ -74,6 +75,7 @@ export class SettingsStoreEffects {
                 SettingsActions.updateVideoListThumbnailSizeRequest,
                 SettingsActions.updateVideoListVideoSizeRequest,
 
+                SettingsActions.toggleVideoInfoPanelCategoryTeaserChooserRequest,
                 SettingsActions.toggleVideoInfoPanelCommentsRequest,
                 SettingsActions.toggleVideoInfoPanelExpandedStateRequest,
                 SettingsActions.toggleVideoInfoPanelMetadataEditorRequest,

@@ -24,6 +24,7 @@ export interface Settings {
     photoListMapViewZoom: number;
 
     photoInfoPanelShowRatings: boolean;
+    photoInfoPanelShowCategoryTeaserChooser: boolean;
     photoInfoPanelShowComments: boolean;
     photoInfoPanelShowExif: boolean;
     photoInfoPanelShowEffects: boolean;
@@ -40,6 +41,7 @@ export interface Settings {
     videoListVideoSize: VideoSize;
 
     videoInfoPanelShowRatings: boolean;
+    videoInfoPanelShowCategoryTeaserChooser: boolean;
     videoInfoPanelShowComments: boolean;
     videoInfoPanelShowMetadataEditor: boolean;
     videoInfoPanelShowMinimap: boolean;
@@ -74,6 +76,7 @@ export const DEFAULT_SETTINGS = ({
     photoListMapViewZoom: 10,
 
     photoInfoPanelShowRatings: true,
+    photoInfoPanelShowCategoryTeaserChooser: false,
     photoInfoPanelShowComments: true,
     photoInfoPanelShowExif: false,
     photoInfoPanelShowEffects: false,
@@ -90,6 +93,7 @@ export const DEFAULT_SETTINGS = ({
     videoListVideoSize: VideoSize.small,
 
     videoInfoPanelShowRatings: true,
+    videoInfoPanelShowCategoryTeaserChooser: false,
     videoInfoPanelShowComments: true,
     videoInfoPanelShowMetadataEditor: false,
     videoInfoPanelShowMinimap: false,

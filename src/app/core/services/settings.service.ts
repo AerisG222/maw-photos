@@ -33,6 +33,7 @@ export class SettingsService {
     private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
 
     private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
+    private static readonly keyPhotoInfoPanelShowCategoryTeaserChooser = 'photoInfoPanelShowCategoryTeaserChooser';
     private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
     private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
     private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
@@ -49,6 +50,7 @@ export class SettingsService {
     private static readonly keyVideoListVideoSize = 'videoListVideoSize';
 
     private static readonly keyVideoInfoPanelShowRatings = 'videoInfoPanelShowRatings';
+    private static readonly keyVideoInfoPanelShowCategoryTeaserChooser = 'videoInfoPanelShowCategoryTeaserChooser';
     private static readonly keyVideoInfoPanelShowComments = 'videoInfoPanelShowComments';
     private static readonly keyVideoInfoPanelShowMetadataEditor = 'videoInfoPanelShowMetadataEditor';
     private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
@@ -86,6 +88,7 @@ export class SettingsService {
             const photoListMapViewZoom = this.getNumber(SettingsService.keyPhotoListMapViewZoom);
 
             const photoInfoPanelShowRatings = this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings);
+            const photoInfoPanelShowCategoryTeaserChooser = this.getBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser);
             const photoInfoPanelShowComments = this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments);
             const photoInfoPanelShowExif = this.getBoolean(SettingsService.keyPhotoInfoPanelShowExif);
             const photoInfoPanelShowEffects = this.getBoolean(SettingsService.keyPhotoInfoPanelShowEffects);
@@ -100,6 +103,7 @@ export class SettingsService {
             const videoListShowVideoList = this.getBoolean(SettingsService.keyVideoListShowVideoList);
 
             const videoInfoPanelShowRatings = this.getBoolean(SettingsService.keyVideoInfoPanelShowRatings);
+            const videoInfoPanelShowCategoryTeaserChooser = this.getBoolean(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser);
             const videoInfoPanelShowComments = this.getBoolean(SettingsService.keyVideoInfoPanelShowComments);
             const videoInfoPanelShowMetadataEditor = this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor);
             const videoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap);
@@ -129,6 +133,7 @@ export class SettingsService {
                 photoListMapViewZoom: photoListMapViewZoom != null ? photoListMapViewZoom : 10,
 
                 photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
+                photoInfoPanelShowCategoryTeaserChooser: photoInfoPanelShowCategoryTeaserChooser !== null ? photoInfoPanelShowCategoryTeaserChooser : false,
                 photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
                 photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
                 photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
@@ -145,6 +150,7 @@ export class SettingsService {
                 videoListVideoSize: this.getVideoListVideoSize(),
 
                 videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
+                videoInfoPanelShowCategoryTeaserChooser: videoInfoPanelShowCategoryTeaserChooser !== null ? videoInfoPanelShowCategoryTeaserChooser : false,
                 videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
                 videoInfoPanelShowMetadataEditor: videoInfoPanelShowMetadataEditor !== null ? videoInfoPanelShowMetadataEditor : false,
                 videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
@@ -186,6 +192,7 @@ export class SettingsService {
         this.setValue(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
         this.setValue(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
+        this.setValue(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser, settings.photoInfoPanelShowCategoryTeaserChooser);
         this.setValue(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
         this.setValue(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
         this.setValue(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
@@ -203,6 +210,7 @@ export class SettingsService {
         this.setValue(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
 
         this.setValue(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
+        this.setValue(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser, settings.videoInfoPanelShowCategoryTeaserChooser);
         this.setValue(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
         this.setValue(SettingsService.keyVideoInfoPanelShowMetadataEditor, settings.videoInfoPanelShowMetadataEditor);
         this.setValue(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);

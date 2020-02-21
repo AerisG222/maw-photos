@@ -61,6 +61,7 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
+import { CategoryTeaserChooserComponent } from './category-teaser-chooser/category-teaser-chooser.component';
 
 @NgModule({
     declarations: [
@@ -102,7 +103,8 @@ import { MetadataEditorComponent } from './metadata-editor/metadata-editor.compo
         StatsLinkComponent,
         VideoInfoPanelComponent,
         SearchLinkComponent,
-        MetadataEditorComponent
+        MetadataEditorComponent,
+        CategoryTeaserChooserComponent
     ],
     imports: [
         CommonModule,
