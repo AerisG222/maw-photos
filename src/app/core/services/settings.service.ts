@@ -133,6 +133,7 @@ export class SettingsService {
                 photoListMapViewZoom: photoListMapViewZoom != null ? photoListMapViewZoom : 10,
 
                 photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
+                // tslint:disable-next-line: max-line-length
                 photoInfoPanelShowCategoryTeaserChooser: photoInfoPanelShowCategoryTeaserChooser !== null ? photoInfoPanelShowCategoryTeaserChooser : false,
                 photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
                 photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
@@ -150,6 +151,7 @@ export class SettingsService {
                 videoListVideoSize: this.getVideoListVideoSize(),
 
                 videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
+                // tslint:disable-next-line: max-line-length
                 videoInfoPanelShowCategoryTeaserChooser: videoInfoPanelShowCategoryTeaserChooser !== null ? videoInfoPanelShowCategoryTeaserChooser : false,
                 videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
                 videoInfoPanelShowMetadataEditor: videoInfoPanelShowMetadataEditor !== null ? videoInfoPanelShowMetadataEditor : false,

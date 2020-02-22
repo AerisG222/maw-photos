@@ -76,6 +76,10 @@ export class MockVideoApiService implements VideoApiService {
         return this.getGpsDetail(videoId);
     }
 
+    setTeaser(categoryId: number, videoId: number): Observable<VideoCategory> {
+        return this.getCategory(1);
+    }
+
     private initData(): void {
         this.categories = [
             {

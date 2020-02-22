@@ -175,6 +175,10 @@ export class MockPhotoApiService implements PhotoApiService {
         return this.getGpsDetail(photoId);
     }
 
+    setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory> {
+        return this.getCategory(1);
+    }
+
     private initData(): void {
         this.categories = [
             {

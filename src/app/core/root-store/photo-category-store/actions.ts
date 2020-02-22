@@ -25,3 +25,18 @@ export const setCurrentById = createAction(
     '[Photo Categories] Set Current By Id',
     props<{ categoryId: number }>()
 );
+
+export const setTeaserRequest = createAction(
+    '[Photo Categories] Set Teaser Request',
+    props<{ categoryId: number, photoId: number }>()
+);
+
+export const setTeaserFailure = createAction(
+    '[Photo Categories] Set Teaser Failure',
+    props<{ error: string }>()
+);
+
+export const setTeaserSuccess = createAction(
+    '[Photo Categories] Set Teaser Success',
+    props<{ category: PhotoCategory }>()
+);

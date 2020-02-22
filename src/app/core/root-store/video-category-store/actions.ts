@@ -25,3 +25,18 @@ export const setCurrentById = createAction(
     '[Video Categories] Set Current By Id',
     props<{ categoryId: number }>()
 );
+
+export const setTeaserRequest = createAction(
+    '[Video Categories] Set Teaser Request',
+    props<{ categoryId: number, videoId: number }>()
+);
+
+export const setTeaserFailure = createAction(
+    '[Video Categories] Set Teaser Failure',
+    props<{ error: string }>()
+);
+
+export const setTeaserSuccess = createAction(
+    '[Video Categories] Set Teaser Success',
+    props<{ category: VideoCategory }>()
+);

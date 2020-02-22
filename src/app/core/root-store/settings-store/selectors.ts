@@ -79,6 +79,7 @@ export const selectCategoryListListType = createSelector(selectSettingsState, ge
 export const selectCategoryListListViewThumbnailSize = createSelector(selectSettingsState, getCategoryListListViewThumbnailSize);
 
 export const selectPhotoInfoPanelShowRatings = createSelector(selectSettingsState, getPhotoInfoPanelShowRatings);
+// tslint:disable-next-line: max-line-length
 export const selectPhotoInfoPanelShowCategoryTeaserChooser = createSelector(selectSettingsState, getPhotoInfoPanelShowCategoryTeaserChooser);
 export const selectPhotoInfoPanelShowComments = createSelector(selectSettingsState, getPhotoInfoPanelShowComments);
 export const selectPhotoInfoPanelShowExif = createSelector(selectSettingsState, getPhotoInfoPanelShowExif);
@@ -99,6 +100,7 @@ export const selectVideoListShowVideoList = createSelector(selectSettingsState, 
 export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);
 
 export const selectVideoInfoPanelShowRatings = createSelector(selectSettingsState, getVideoInfoPanelShowRatings);
+// tslint:disable-next-line: max-line-length
 export const selectVideoInfoPanelShowCategoryTeaserChooser = createSelector(selectSettingsState, getVideoInfoPanelShowCategoryTeaserChooser);
 export const selectVideoInfoPanelShowComments = createSelector(selectSettingsState, getVideoInfoPanelShowComments);
 export const selectVideoInfoPanelShowMinimap = createSelector(selectSettingsState, getVideoInfoPanelShowMinimap);

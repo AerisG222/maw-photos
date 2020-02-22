@@ -1,8 +1,13 @@
 <mat-card>
     <mat-card-title>
-        <mat-icon [inline]="true">edit</mat-icon> Category Teaser Chooser
+        <mat-icon [inline]="true">image_search</mat-icon> Category Teaser Chooser
     </mat-card-title>
     <mat-card-content>
-        <button mat-button (click)="onSetTeaser()" color="primary">Use current photo as teaser</button>
+        <p>Current Teaser:</p>
+        <div class="teaser-img">
+            <img [src]="currentTeaserUrl$ | async" />
+        </div>
+
+        <button mat-button (click)="onSetTeaser()" color="primary">Replace teaser with current photo</button>
     </mat-card-content>
 </mat-card>

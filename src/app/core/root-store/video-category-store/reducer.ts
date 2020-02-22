@@ -2,6 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import { VideoCategoryAdapter, initialState, State } from './state';
 import * as VideoCategoryActions from './actions';
+import { VideoCategory } from '../../models/video-category.model';
 
 const reducer = createReducer(
     initialState,
@@ -29,6 +30,23 @@ const reducer = createReducer(
     on(VideoCategoryActions.setCurrentById, (state, { categoryId }) => ({
         ...state,
         currentCategory: state.entities[categoryId]
+    })),
+    on(VideoCategoryActions.setTeaserRequest, state => ({
+        ...state,
+        isLoading: true,
+        error: null
+    })),
+    on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
+        VideoCategoryAdapter.upsertOne(category, {
+            ...state,
+            isLoading: false,
+            error: null
+        })
+    )),
+    on(VideoCategoryActions.setTeaserFailure, (state, { error }) => ({
+        ...state,
+        isLoading: false,
+        error
     }))
 );
 

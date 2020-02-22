@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, filter, concatMap } from 'rxjs/operators';
 
 import * as VideoCategoryActions from './actions';
 import * as videoCategorySelectors from './selectors';
@@ -30,6 +30,19 @@ export class VideoCategoryStoreEffects {
                     .pipe(
                         map(cat => VideoCategoryActions.loadSuccess({ categories: cat.items })),
                         catchError(error => of(VideoCategoryActions.loadFailure({ error })))
+                    )
+            )
+        )
+    );
+
+    setTeaserEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoCategoryActions.setTeaserRequest),
+            concatMap(action =>
+                this.api.setTeaser(action.categoryId, action.videoId)
+                    .pipe(
+                        map(category => VideoCategoryActions.setTeaserSuccess({ category })),
+                        catchError(error => of(VideoCategoryActions.setTeaserFailure({ error })))
                     )
             )
         )

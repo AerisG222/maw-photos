@@ -96,6 +96,16 @@ export class ExternalVideoApiService implements VideoApiService {
             .patch<GpsDetail>(url, gps);
     }
 
+    setTeaser(categoryId: number, videoId: number): Observable<VideoCategory> {
+        const url = this.getAbsoluteUrl(`video-categories/${categoryId}/teaser`);
+
+        return this.http
+            .patch<VideoCategory>(url, { videoId })
+            .pipe(
+                map(v => this.cleanupVideoCategory(v))
+            );
+    }
+
     private getAbsoluteUrl(relativeUrl: string) {
         return `${config.apiUrl}/${relativeUrl}`;
     }

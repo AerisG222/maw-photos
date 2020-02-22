@@ -127,6 +127,16 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .patch<GpsDetail>(url, gps);
     }
 
+    setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory> {
+        const url = this.getAbsoluteUrl(`photo-categories/${categoryId}/teaser`);
+
+        return this.http
+            .patch<PhotoCategory>(url, { photoId })
+            .pipe(
+                map(p => this.cleanupPhotoCategory(p))
+            );
+    }
+
     private getAbsoluteUrl(relativeUrl: string) {
         return `${config.apiUrl}/${relativeUrl}`;
     }

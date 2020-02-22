@@ -18,7 +18,7 @@ export interface VideoApiService {
     getRating(videoId: number): Observable<Rating>;
     rateVideo(videoId: number, rating: number): Observable<Rating>;
     addComment(videoId: number, comment: string): Observable<any>;
-
-    getGpsDetail(photoId: number): Observable<GpsDetail>;
-    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<GpsDetail>;
+    setTeaser(categoryId: number, videoId: number): Observable<VideoCategory>;
+    getGpsDetail(videoId: number): Observable<GpsDetail>;
+    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate): Observable<GpsDetail>;
 }
