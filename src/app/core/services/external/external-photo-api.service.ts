@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 import { ExifDetail } from 'src/app/core/models/exif-detail.model';
@@ -14,6 +14,8 @@ import { DateService } from '../date.service';
 import { config } from '../../../../environments/config';
 import { GpsCoordinate } from '../../models/gps-coordinate.model';
 import { GpsDetail } from '../../models/gps-detail.model';
+
+// TODO: remove first()  [https://github.com/angular/angular/issues/20755]
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
@@ -110,7 +112,10 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl(`photos/${photoId}/comments`);
 
         return this.http
-            .post(url, { photoId, comment });
+            .post(url, { photoId, comment })
+            .pipe(
+                first()
+            );
     }
 
     getGpsDetail(photoId: number): Observable<GpsDetail> {
@@ -124,7 +129,10 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl(`photos/${photoId}/gps`);
 
         return this.http
-            .patch<GpsDetail>(url, gps);
+            .patch<GpsDetail>(url, gps)
+            .pipe(
+                first()
+            );
     }
 
     setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory> {
@@ -133,6 +141,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
         return this.http
             .patch<PhotoCategory>(url, { photoId })
             .pipe(
+                first(),
                 map(p => this.cleanupPhotoCategory(p))
             );
     }
