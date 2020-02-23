@@ -2,7 +2,6 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import { VideoCategoryAdapter, initialState, State } from './state';
 import * as VideoCategoryActions from './actions';
-import { VideoCategory } from '../../models/video-category.model';
 
 const reducer = createReducer(
     initialState,
