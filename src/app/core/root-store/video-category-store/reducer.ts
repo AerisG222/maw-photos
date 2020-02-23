@@ -38,6 +38,7 @@ const reducer = createReducer(
     on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
         VideoCategoryAdapter.upsertOne(category, {
             ...state,
+            currentCategory: category,
             isLoading: false,
             error: null
         })
