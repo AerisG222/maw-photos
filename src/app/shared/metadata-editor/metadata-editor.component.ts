@@ -115,18 +115,11 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     }
 
     onSave(): void {
-        if(!this.form.valid) {
+        const latLng = this.getOverrideFromForm();
+
+        if(latLng == null) {
             return;
         }
-
-        const latitude = Number(this.form.get('latitudeOverride').value);
-        const longitude = Number(this.form.get('longitudeOverride').value);
-
-        if(isNaN(latitude) || isNaN(longitude)) {
-            return;
-        }
-
-        const latLng = { latitude, longitude};
 
         switch (this.mode) {
             case MetadataEditorMode.Photos:
@@ -140,8 +133,42 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         }
     }
 
+    onSaveAndMoveNext(): void {
+        const latLng = this.getOverrideFromForm();
+
+        if(latLng == null) {
+            return;
+        }
+
+        switch (this.mode) {
+            case MetadataEditorMode.Photos:
+                this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.id, latLng }));
+                break;
+            case MetadataEditorMode.Videos:
+                this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ videoId: this.id, latLng }));
+                break;
+            default:
+                throw new Error('invalid metadata editor mode!');
+        }
+    }
+
     onCancel(): void {
         this.updateOverrideData(null);
+    }
+
+    private getOverrideFromForm(): GpsCoordinate {
+        if(!this.form.valid) {
+            return null;
+        }
+
+        const latitude = Number(this.form.get('latitudeOverride').value);
+        const longitude = Number(this.form.get('longitudeOverride').value);
+
+        if(isNaN(latitude) || isNaN(longitude)) {
+            return null;
+        }
+
+        return { latitude, longitude};
     }
 
     private updateOverrideData(gps: GpsCoordinate): void {

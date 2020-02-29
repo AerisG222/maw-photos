@@ -112,4 +112,21 @@ export class VideoStoreEffects {
             )
         )
     );
+
+    setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoActions.setGpsCoordinateOverrideAndMoveNextRequest),
+            concatMap(action =>
+                this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
+                    .pipe(
+                        // tslint:disable-next-line: ngrx-no-multiple-actions-in-effects
+                        switchMap(gpsDetail => [
+                            VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail }),
+                            VideoActions.moveNextRequest()
+                        ]),
+                        catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
+                    )
+            )
+        )
+    );
 }

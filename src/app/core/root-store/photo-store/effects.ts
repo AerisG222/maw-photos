@@ -158,6 +158,23 @@ export class PhotoStoreEffects {
         )
     );
 
+    setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.setGpsCoordinateOverrideAndMoveNextRequest),
+            concatMap(action =>
+                this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
+                    .pipe(
+                        // tslint:disable-next-line: ngrx-no-multiple-actions-in-effects
+                        switchMap(gpsDetail => [
+                            PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, gpsDetail }),
+                            PhotoActions.moveNextRequest()
+                        ]),
+                        catchError(error => of(PhotoActions.setGpsCoordinateOverrideFailure({ error })))
+                    )
+            )
+        )
+    );
+
     rotateClockwiseEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),

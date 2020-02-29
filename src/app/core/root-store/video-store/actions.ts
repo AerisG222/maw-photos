@@ -127,3 +127,8 @@ export const setGpsCoordinateOverrideSuccess = createAction(
     '[Videos] Set GPS Coordinate Override Success',
     props<{ videoId: number, gpsDetail: GpsDetail }>()
 );
+
+export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
+    '[Videos] Set GPS Coordinate Override and Move Next Request',
+    props<{ videoId: number, latLng: GpsCoordinate }>()
+);

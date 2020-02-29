@@ -245,3 +245,8 @@ export const setGpsCoordinateOverrideSuccess = createAction(
     '[Photos] Set GPS Coordinate Override Success',
     props<{ photoId: number, gpsDetail: GpsDetail }>()
 );
+
+export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
+    '[Photos] Set GPS Coordinate Override and Move Next Request',
+    props<{ photoId: number, latLng: GpsCoordinate }>()
+);

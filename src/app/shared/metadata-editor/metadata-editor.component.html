@@ -31,8 +31,11 @@
                 </mat-form-field>
             </div>
 
-            <button mat-button (click)="onSave()" color="primary">Save</button>
-            <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+            <div class="buttons">
+                <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+                <button mat-button (click)="onSave()" color="primary">Save</button>
+                <button mat-button (click)="onSaveAndMoveNext()" color="primary" class="right">Save and Move Next</button>
+            </div>
         </form>
     </mat-card-content>
 </mat-card>
