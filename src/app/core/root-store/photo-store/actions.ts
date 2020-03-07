@@ -250,3 +250,15 @@ export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
     '[Photos] Set GPS Coordinate Override and Move Next Request',
     props<{ photoId: number, latLng: GpsCoordinate }>()
 );
+
+export const enterBulkEditViewRequest = createAction(
+    '[Photos] Enter Bulk Edit View Request'
+);
+
+export const exitBulkEditViewRequest = createAction(
+    '[Photos] Exit Bulk Edit View Request'
+);
+
+export const toggleBulkEditViewRequest = createAction(
+    '[Photos] Toggle Bulk Edit View Request'
+);

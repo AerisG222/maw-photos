@@ -22,6 +22,7 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     isFullscreen$: Observable<boolean>;
     isMapView$: Observable<boolean>;
+    isBulkEditView$: Observable<boolean>;
 
     constructor(
         private route: ActivatedRoute,
@@ -39,6 +40,11 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
         this.isMapView$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsMapView)
+            );
+
+        this.isBulkEditView$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectIsBulkEditView)
             );
 
         this.store$.dispatch(PhotoStoreActions.clearRequest());

@@ -30,6 +30,17 @@
                 <mat-icon [inline]="true">map</mat-icon>
             </button>
 
+            <button
+                *ngIf="isAdmin$ | async"
+                mat-button
+                matTooltip="Enter Bulk Edit Mode (B)"
+                matTooltipPosition="after"
+                class="toolbar-button hide-on-mobile"
+                (click)="onToggleBulkEditView()"
+                #bulkEditViewButton>
+                <mat-icon [inline]="true">collections</mat-icon>
+            </button>
+
             <a mat-button
                 matTooltip="Download All Photos in Category (.zip)"
                 matTooltipPosition="after"

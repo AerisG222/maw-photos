@@ -24,6 +24,7 @@ export interface State extends EntityState<Photo> {
     slideshowIsPlaying: boolean;
     isFullscreenView: boolean;
     isMapView: boolean;
+    isBulkEditView: boolean;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
@@ -49,5 +50,6 @@ export const initialState: State = photoAdapter.getInitialState({
     currentPhotoGpsDetail: null,
     slideshowIsPlaying: false,
     isFullscreenView: false,
-    isMapView: false
+    isMapView: false,
+    isBulkEditView: false
 });

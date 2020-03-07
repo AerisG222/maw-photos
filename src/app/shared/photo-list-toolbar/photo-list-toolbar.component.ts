@@ -17,7 +17,8 @@ import {
     PhotoStoreSelectors,
     SettingsStoreActions,
     SettingsStoreSelectors,
-    PhotoCategoryStoreSelectors
+    PhotoCategoryStoreSelectors,
+    AuthStoreSelectors
 } from 'src/app/core/root-store';
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 
@@ -38,10 +39,12 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
     @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
     @ViewChild('mapViewButton') mapViewButton: MatButton;
+    @ViewChild('bulkEditViewButton') bulkEditViewButton: MatButton;
 
     private destroySub = new Subscription();
     private hotkeys: Hotkey[] = [];
 
+    isAdmin$: Observable<boolean>;
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
     enableMapView$: Observable<boolean>;
@@ -59,7 +62,13 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.configureHotkeys();
+        this.isAdmin$ = this.store$.pipe(
+            select(AuthStoreSelectors.selectIsAdmin),
+            tap(isAdmin => {
+                this.hotkeysService.remove(this.hotkeys);
+                this.configureHotkeys(isAdmin)
+            })
+        );
 
         this.destroySub.add(this.store$
             .pipe(
@@ -128,6 +137,11 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.store$.dispatch(PhotoStoreActions.toggleMapViewRequest());
     }
 
+    onToggleBulkEditView(): void {
+        this.store$.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
+        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
+    }
+
     onMoveNext(): void {
         this.store$.dispatch(PhotoStoreActions.moveNextRequest());
     }
@@ -140,7 +154,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 
-    private configureHotkeys(): void {
+    private configureHotkeys(isAdmin: boolean): void {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
         ) as Hotkey);
@@ -172,6 +186,12 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
         this.hotkeys.push(this.hotkeysService.add(
             new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
         ) as Hotkey);
+
+        if(isAdmin) {
+            this.hotkeys.push(this.hotkeysService.add(
+                new Hotkey('b', (event: KeyboardEvent) => this.onHotkeyBulkEditView(event), [], 'Enter Bulk Edit Mode')
+            ) as Hotkey);
+        }
     }
 
     private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
@@ -205,6 +225,13 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     private onHotkeyMapView(evt: KeyboardEvent): boolean {
         this.triggerButtonRipple(this.mapViewButton);
         this.onToggleMapView();
+
+        return false;
+    }
+
+    private onHotkeyBulkEditView(evt: KeyboardEvent): boolean {
+        this.triggerButtonRipple(this.bulkEditViewButton);
+        this.onToggleBulkEditView();
 
         return false;
     }

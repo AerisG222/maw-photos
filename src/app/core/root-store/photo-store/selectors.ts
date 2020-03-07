@@ -25,6 +25,7 @@ const getCurrentPhotoGpsDetail = (state: State): GpsDetail => state.currentPhoto
 const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
 const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 const getIsMapView = (state: State): boolean => state.isMapView;
+const getIsBulkEditView = (state: State): boolean => state.isBulkEditView;
 const getHasGpsCoordinates = (photos: Photo[]): boolean => photos !== null && photos.length > 0;
 
 export const selectPhotoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
@@ -71,6 +72,7 @@ export const selectCurrentPhotoGpsDetail = createSelector(selectPhotoState, getC
 export const selectSlideshowIsPlaying = createSelector(selectPhotoState, getSlideshowIsPlaying);
 export const selectIsFullscreenView = createSelector(selectPhotoState, getIsFullscreenView);
 export const selectIsMapView = createSelector(selectPhotoState, getIsMapView);
+export const selectIsBulkEditView = createSelector(selectPhotoState, getIsBulkEditView);
 export const selectHasPhotosWithGpsCoordinates = createSelector(selectPhotosWithGpsCoordinates, getHasGpsCoordinates);
 
 export const selectIsCurrentPhotoFirst =

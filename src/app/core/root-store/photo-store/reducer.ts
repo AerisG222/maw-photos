@@ -345,6 +345,18 @@ const reducer = createReducer(
     on(PhotoActions.toggleMapViewRequest, state => ({
         ...state,
         isMapView: !state.isMapView
+    })),
+    on(PhotoActions.enterBulkEditViewRequest, state => ({
+        ...state,
+        isBulkEditView: true
+    })),
+    on(PhotoActions.exitBulkEditViewRequest, state => ({
+        ...state,
+        isBulkEditView: false
+    })),
+    on(PhotoActions.toggleBulkEditViewRequest, state => ({
+        ...state,
+        isBulkEditView: !state.isBulkEditView
     }))
 );
 

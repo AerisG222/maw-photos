@@ -62,6 +62,8 @@ import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
 import { CategoryTeaserChooserComponent } from './category-teaser-chooser/category-teaser-chooser.component';
+import { PhotoViewBulkEditComponent } from './photo-view-bulk-edit/photo-view-bulk-edit.component';
+import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolbar/photo-list-bulk-edit-toolbar.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +73,7 @@ import { CategoryTeaserChooserComponent } from './category-teaser-chooser/catego
         CategoryHeaderComponent,
         CategoriesLinkComponent,
         CategoryListToolbarComponent,
+        CategoryTeaserChooserComponent,
         CommentsComponent,
         EffectsComponent,
         ExifComponent,
@@ -81,14 +84,17 @@ import { CategoryTeaserChooserComponent } from './category-teaser-chooser/catego
         HotkeyTableComponent,
         InfoPanelComponent,
         MapViewComponent,
+        MetadataEditorComponent,
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
         PhotoInfoPanelComponent,
+        PhotoListBulkEditToolbarComponent,
         PhotoListComponent,
         PhotoListFullscreenToolbarComponent,
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
+        PhotoViewBulkEditComponent,
         PhotoViewComponent,
         PhotoViewFullscreenComponent,
         PhotoViewMapComponent,
@@ -97,14 +103,12 @@ import { CategoryTeaserChooserComponent } from './category-teaser-chooser/catego
         RatingComponent,
         RotateCounterClockwiseButtonComponent,
         RotateClockwiseButtonComponent,
+        SearchLinkComponent,
         SettingsLinkComponent,
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
-        VideoInfoPanelComponent,
-        SearchLinkComponent,
-        MetadataEditorComponent,
-        CategoryTeaserChooserComponent
+        VideoInfoPanelComponent
     ],
     imports: [
         CommonModule,
@@ -176,9 +180,11 @@ import { CategoryTeaserChooserComponent } from './category-teaser-chooser/catego
         MovePreviousButtonComponent,
         PhotoInfoPanelComponent,
         PhotoListComponent,
+        PhotoListBulkEditToolbarComponent,
         PhotoListFullscreenToolbarComponent,
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
+        PhotoViewBulkEditComponent,
         PhotoViewComponent,
         PhotoViewFullscreenComponent,
         PhotoViewMapComponent,
