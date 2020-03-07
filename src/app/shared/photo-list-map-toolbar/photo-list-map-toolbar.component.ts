@@ -81,7 +81,7 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
         ) as Hotkey);
 
         this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
+            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Exit Map View')
         ) as Hotkey);
     }
 
