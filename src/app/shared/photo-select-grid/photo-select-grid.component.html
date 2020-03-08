@@ -2,7 +2,7 @@
     <div *ngFor="let photo of photos; trackBy: trackByPhoto">
         <mat-card>
             <mat-card-title>
-                <mat-checkbox (change)="onToggle($event, photo)"></mat-checkbox>
+                <mat-checkbox [checked]="isSelected(photo)" (change)="onToggle($event, photo)"></mat-checkbox>
             </mat-card-title>
             <mat-card-content>
                 <img [src]="photo.imageXsSq.url" class="thumbnail" />

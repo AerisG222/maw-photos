@@ -8,6 +8,8 @@ import { LayoutStoreActions, PhotoCategoryStoreSelectors, PhotoStoreSelectors } 
 import { Photo } from 'src/app/core/models/photo.model';
 import { sidebarInfoPanelShow, sidebarInfoPanelHide, toolbarShow } from '../animations';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { combineLatest, BehaviorSubject } from 'rxjs';
+import { tap, first, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-photo-view-bulk-edit',
@@ -32,6 +34,8 @@ import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
 export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
+    showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
+    selectedPhotos: Photo[] = [];
 
     constructor(
         private store$: Store<{}>
@@ -45,10 +49,22 @@ export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
                 select(PhotoCategoryStoreSelectors.selectCurrentCategoryAsCategory)
             );
 
-        this.photos$ = this.store$
+        this.photos$ = combineLatest([
+                this.store$
+                    .pipe(
+                        select(PhotoStoreSelectors.selectAllPhotos)
+                    ),
+                this.showPhotosWithGpsData$
+            ])
             .pipe(
-                select(PhotoStoreSelectors.selectAllPhotos)
-            );
+                map(parts => {
+                    if(parts[1]) {
+                        return parts[0]
+                    } else {
+                        return parts[0].filter(p => p.latitude == null || p.longitude == null);
+                    }
+                })
+            )
     }
 
     ngOnDestroy(): void {
@@ -56,11 +72,24 @@ export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
     }
 
     onShowPhotosWithGpsData(doShow: boolean): void {
-        console.log(`show photos with gps data: ${ doShow }`);
+        this.showPhotosWithGpsData$.next(doShow);
+
+        // LAZY: let's just remove any selection when we change this setting to make sure
+        // a user does not actually save a change for something that is not visible
+        this.onSelectAll(false);
     }
 
     onSelectAll(doSelectAll: boolean): void {
-        console.log(`select all: ${ doSelectAll }`);
+        this.selectedPhotos.splice(0);
+
+        if(doSelectAll) {
+            combineLatest([
+                this.photos$
+            ]).pipe(
+                first(),
+                tap(photos => this.selectedPhotos.push(...photos[0]))
+            ).subscribe();
+        }
     }
 
     onSaveGps(gps: GpsCoordinate): void {
@@ -68,10 +97,22 @@ export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
     }
 
     onPhotoSelected(photo: Photo): void {
-        console.log(`photo selected: ${photo.id}`);
+        const index = this.getSelectedIndex(photo);
+
+        if(index < 0) {
+            this.selectedPhotos.push(photo);
+        }
     }
 
     onPhotoDeselected(photo: Photo): void {
-        console.log(`photo deselected: ${photo.id}`);
+        const index = this.getSelectedIndex(photo);
+
+        if(index >= 0) {
+            this.selectedPhotos.splice(index, 1);
+        }
+    }
+
+    private getSelectedIndex(photo: Photo): number {
+        return this.selectedPhotos.findIndex(p => p.id === photo.id);
     }
 }

@@ -10,6 +10,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 })
 export class PhotoSelectGridComponent {
     @Input() photos: Photo[];
+    @Input() selectedPhotos: Photo[];
+    @Input() showPhotosWithGpsData = true;
     @Output() photoSelected = new EventEmitter<Photo>();
     @Output() photoDeselected = new EventEmitter<Photo>();
 
@@ -23,5 +25,13 @@ export class PhotoSelectGridComponent {
         } else {
             this.photoDeselected.next(photo);
         }
+    }
+
+    isSelected(photo: Photo): boolean {
+        return this.getSelectedIndex(photo) >= 0;
+    }
+
+    private getSelectedIndex(photo: Photo): number {
+        return this.selectedPhotos.findIndex(p => p.id === photo.id);
     }
 }
