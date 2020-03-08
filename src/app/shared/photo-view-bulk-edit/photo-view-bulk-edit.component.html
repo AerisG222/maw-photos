@@ -3,5 +3,36 @@
         <app-photo-list-bulk-edit-toolbar></app-photo-list-bulk-edit-toolbar>
     </div>
 
-    <p>photo-view-bulk-edit works!</p>
+    <div class="list-grid">
+        <div class="filter-panel">
+            <div class="category-header">
+                <app-category-header
+                    [category]="category$ | async">
+                </app-category-header>
+            </div>
+
+            <div>
+                <mat-checkbox>Hide photos with GPS data</mat-checkbox>
+            </div>
+            <div>
+                <button mat-button (click)="onToggleSelectAll()" color="primary">{{ toggleSelectButtonText }}</button>
+            </div>
+        </div>
+
+        <div class="content-scroll-pane">
+            <div class="content-scroll-pane-content">
+                <div *ngIf="photos$ | async" class="main-photo-grid" style="overflow: hidden;">
+                    <div *ngFor="let photo of photos$ | async; trackBy: trackByPhoto">
+                        <mat-checkbox></mat-checkbox>
+                        <br/>
+                        <img [src]="photo.imageXsSq.url" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit-panel">
+        edit
+    </div>
 </div>
