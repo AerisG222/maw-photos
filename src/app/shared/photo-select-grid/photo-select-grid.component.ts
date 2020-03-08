@@ -11,7 +11,6 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 export class PhotoSelectGridComponent {
     @Input() photos: Photo[];
     @Input() selectedPhotos: Photo[];
-    @Input() showPhotosWithGpsData = true;
     @Output() photoSelected = new EventEmitter<Photo>();
     @Output() photoDeselected = new EventEmitter<Photo>();
 

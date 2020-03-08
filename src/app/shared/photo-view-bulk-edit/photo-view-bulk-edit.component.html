@@ -17,7 +17,6 @@
                 <app-photo-select-grid
                     [photos]="photos$ | async"
                     [selectedPhotos]="selectedPhotos"
-                    [showPhotosWithGpsData]="showPhotosWithGpsData"
                     (photoSelected)="onPhotoSelected($event)"
                     (photoDeselected)="onPhotoDeselected($event)">
                 </app-photo-select-grid>
