@@ -4,10 +4,15 @@
             <mat-icon [inline]="true">filter_list</mat-icon> Filter/Selection Tools
         </mat-card-title>
         <mat-card-content>
-            <div>
+            <div class="gps-toggle">
                 <mat-checkbox (change)="onToggleHidePhotosWithGpsData($event)">Hide Photos with GPS Data</mat-checkbox>
-                <br/>
-                <mat-checkbox (change)="onToggleSelectAll($event)">Select All Photos</mat-checkbox>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="select-buttons">
+                <button mat-button color="primary" (click)="onToggleSelectAll(true)">Select All</button>
+                <button mat-button color="primary" (click)="onToggleSelectAll(false)">Deselect All</button>
             </div>
         </mat-card-content>
     </mat-card>
@@ -31,7 +36,7 @@
                     </mat-form-field>
                 </div>
 
-                <div class="buttons">
+                <div>
                     <button mat-button (click)="onCancelGps()" color="accent">Cancel</button>
                     <button mat-button (click)="onSaveGps()" color="primary">Save</button>
                 </div>

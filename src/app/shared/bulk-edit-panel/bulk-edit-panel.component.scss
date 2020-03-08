@@ -5,3 +5,15 @@ input {
 mat-card-content {
     margin-left: 16px;
 }
+
+.gps-toggle {
+    margin-bottom: 8px;
+}
+
+.select-buttons {
+    margin-top: 8px;
+
+    & button {
+        margin-right: 8px;
+    }
+}

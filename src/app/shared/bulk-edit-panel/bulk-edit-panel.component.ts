@@ -31,8 +31,8 @@ export class BulkEditPanelComponent implements OnInit {
         });
     }
 
-    onToggleSelectAll(evt: MatCheckboxChange): void {
-        this.selectAllPhotos.emit(evt.checked);
+    onToggleSelectAll(evt: boolean): void {
+        this.selectAllPhotos.emit(evt);
     }
 
     onToggleHidePhotosWithGpsData(evt: MatCheckboxChange): void {
