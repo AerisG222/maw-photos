@@ -7,6 +7,7 @@ import { filter, tap, map } from 'rxjs/operators';
 import { MetadataEditorMode } from './metadata-editor-mode.model';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
 import { PhotoStoreSelectors, VideoStoreSelectors, PhotoStoreActions, VideoStoreActions } from 'src/app/core/root-store';
+import { GpsService } from 'src/app/core/services/gps.service';
 
 @Component({
     selector: 'app-metadata-editor',
@@ -25,7 +26,8 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
 
     constructor(
         private store$: Store<{}>,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private gps: GpsService
     ) {
 
     }
@@ -104,7 +106,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         const pastedText = clipboardData.getData('text');
 
         if(!!pastedText) {
-            const latLng = this.getLatLng(pastedText);
+            const latLng = this.gps.parse(pastedText);
 
             if(!!latLng) {
                 evt.preventDefault();
@@ -174,28 +176,5 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     private updateOverrideData(gps: GpsCoordinate): void {
         this.form.get('latitudeOverride').setValue(gps?.latitude);
         this.form.get('longitudeOverride').setValue(gps?.longitude);
-    }
-
-    private getLatLng(val: string): GpsCoordinate {
-        const parts = val.trim()
-            .replace('[', '').replace(']', '')
-            .replace('(', '').replace(')', '')
-            .split(',');
-
-        if(parts.length !== 2) {
-            return null;
-        }
-
-        const lat = Number(parts[0]);
-        const lng = Number(parts[1]);
-
-        if(isNaN(lat) || isNaN(lng)) {
-            return null;
-        }
-
-        return {
-            latitude: lat,
-            longitude: lng
-        };
     }
 }
