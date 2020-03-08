@@ -1,0 +1,26 @@
+.photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 8px;
+
+    & img {
+        flex: 0 0 auto;
+        cursor: pointer;
+        margin-right: 2px;
+        border: 1px solid transparent;
+    }
+}
+
+.thumbnail {
+    width: 160px;
+    height: 120px;
+}
+
+mat-card {
+    padding: 0;
+}
+
+mat-card-title {
+    text-align: center;
+}

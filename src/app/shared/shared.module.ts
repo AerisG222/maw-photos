@@ -64,6 +64,8 @@ import { MetadataEditorComponent } from './metadata-editor/metadata-editor.compo
 import { CategoryTeaserChooserComponent } from './category-teaser-chooser/category-teaser-chooser.component';
 import { PhotoViewBulkEditComponent } from './photo-view-bulk-edit/photo-view-bulk-edit.component';
 import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolbar/photo-list-bulk-edit-toolbar.component';
+import { PhotoSelectGridComponent } from './photo-select-grid/photo-select-grid.component';
+import { BulkEditPanelComponent } from './bulk-edit-panel/bulk-edit-panel.component';
 
 @NgModule({
     declarations: [
@@ -108,7 +110,9 @@ import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolba
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
-        VideoInfoPanelComponent
+        VideoInfoPanelComponent,
+        PhotoSelectGridComponent,
+        BulkEditPanelComponent
     ],
     imports: [
         CommonModule,
@@ -158,6 +162,7 @@ import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolba
         ReactiveFormsModule,
 
         // components
+        BulkEditPanelComponent,
         CategoryCardComponent,
         CategoryGridComponent,
         CategoryListComponent,
@@ -184,6 +189,7 @@ import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolba
         PhotoListFullscreenToolbarComponent,
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
+        PhotoSelectGridComponent,
         PhotoViewBulkEditComponent,
         PhotoViewComponent,
         PhotoViewFullscreenComponent,

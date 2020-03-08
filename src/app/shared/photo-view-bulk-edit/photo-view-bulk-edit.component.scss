@@ -1,11 +1,11 @@
-.bulk-edit-grid {
+.main-grid {
     display: grid;
     grid-template-columns: max-content auto max-content;
     grid-template-rows: 100%;
     height: 100vh;
 }
 
-.list-grid {
+.content-grid {
     margin: 4px 36px 0 36px;
     display: grid;
     grid-template-columns: 100%;
@@ -13,27 +13,16 @@
     height: 100%;
 }
 
-.filter-panel {
+.category-header {
     text-align: center;
 }
 
-.main-photo-grid {
-    display: flex;
-
-    & img {
-        flex: 0 0 auto;
-        cursor: pointer;
-        margin-right: 2px;
-        border: 1px solid transparent;
-    }
-}
-
-input {
-    width: 100%;
+mat-divider {
+    margin-bottom: 12px;
 }
 
 @media (max-width: 800px) {
-    .bulk-edit-grid {
+    .main-grid {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto max-content;
     }
