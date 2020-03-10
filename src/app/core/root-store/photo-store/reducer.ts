@@ -5,6 +5,7 @@ import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { photoAdapter, initialState, State } from './state';
 
+// TODO: set gps detail in photo itself
 const reducer = createReducer(
     initialState,
     on(PhotoActions.clearRequest, state => (
@@ -267,13 +268,28 @@ const reducer = createReducer(
         error: null,
         pendingActionCount: state.pendingActionCount + 1,
     })),
-    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { gpsDetail }) => ({
-        ...state,
-        isLoading: false,
-        error: null,
-        currentPhotoGpsDetail: gpsDetail,
-        pendingActionCount: state.pendingActionCount - 1,
-    })),
+    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { photoId, gpsDetail }) => {
+        const photo = getPhotoWithId(state, photoId);
+        const updatedState = ({
+            ...state,
+            isLoading: false,
+            error: null,
+            currentPhotoGpsDetail: gpsDetail,
+            pendingActionCount: state.pendingActionCount - 1,
+        });
+
+        if(!!photo) {
+            const newPhoto = ({
+                ...photo,
+                latitude: gpsDetail.override.latitude,
+                longitude: gpsDetail.override.longitude
+            });
+
+            return photoAdapter.upsertOne(newPhoto, updatedState);
+        } else {
+            return updatedState;
+        }
+    }),
     on(PhotoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
@@ -386,6 +402,10 @@ function previousPhotoWithGps(state: State): Photo {
 function getPhotoAtIndex(state: State, idx: number) {
     // entities are keyed by id
     return state.entities[state.ids[idx]];
+}
+
+function getPhotoWithId(state: State, id: number) {
+    return state.entities[id];
 }
 
 function incrementCurrentIndexWithinBounds(state: State, direction: number): number {
