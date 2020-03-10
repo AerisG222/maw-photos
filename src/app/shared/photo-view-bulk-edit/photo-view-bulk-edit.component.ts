@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { Category } from 'src/app/core/models/category.model';
-import { LayoutStoreActions, PhotoCategoryStoreSelectors, PhotoStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreActions, PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 import { Photo } from 'src/app/core/models/photo.model';
 import { sidebarInfoPanelShow, sidebarInfoPanelHide, toolbarShow } from '../animations';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
@@ -93,7 +93,11 @@ export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
     }
 
     onSaveGps(gps: GpsCoordinate): void {
-        console.log(`save coords: ${ gps }`);
+        const photosToUpdate = [...this.selectedPhotos];
+
+        for(const photo of photosToUpdate) {
+            this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: photo.id, latLng: gps }));
+        }
     }
 
     onPhotoSelected(photo: Photo): void {

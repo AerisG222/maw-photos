@@ -24,6 +24,10 @@ const reducer = createReducer(
         isLoading: false,
         error
     })),
+    on(PhotoCategoryActions.loadRequestedSatisfiedByCache, state => ({
+        ...state,
+        isLoading: false
+    })),
     on(PhotoCategoryActions.setCurrent, (state, { category }) => ({
         ...state,
         currentCategory: category

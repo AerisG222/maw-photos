@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, concatMap } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';
@@ -148,7 +148,7 @@ export class PhotoStoreEffects {
     setGpsOverrideRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideRequest),
-            concatMap(action =>
+            mergeMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
                     .pipe(
                         map(gpsDetail => PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, gpsDetail })),
@@ -161,7 +161,7 @@ export class PhotoStoreEffects {
     setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideAndMoveNextRequest),
-            concatMap(action =>
+            mergeMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
                     .pipe(
                         // tslint:disable-next-line: ngrx-no-multiple-actions-in-effects

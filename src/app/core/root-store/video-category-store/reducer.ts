@@ -22,6 +22,10 @@ const reducer = createReducer(
         isLoading: false,
         error
     })),
+    on(VideoCategoryActions.loadRequestedSatisfiedByCache, state => ({
+        ...state,
+        isLoading: false
+    })),
     on(VideoCategoryActions.setCurrent, (state, { category }) => ({
         ...state,
         currentCategory: category

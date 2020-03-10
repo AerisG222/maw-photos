@@ -14,6 +14,7 @@ import { GpsDetail } from '../../models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
+const getPendingActionCount = (state: State): number => state.pendingActionCount;
 const getCurrentPhoto = (state: State): Photo => state.currentPhoto;
 const getFirstPhoto = (state: State): Photo => state.firstPhoto;
 const getLastPhoto = (state: State): Photo => state.lastPhoto;
@@ -59,8 +60,9 @@ export const selectPhotosWithGpsCoordinates =
         }
     });
 
+export const selectIsLoading = createSelector(selectPhotoState, getIsLoading);
+export const selectPendingActionCount = createSelector(selectPhotoState, getPendingActionCount);
 export const selectPhotoError = createSelector(selectPhotoState, getError);
-export const selectPhotoIsLoading = createSelector(selectPhotoState, getIsLoading);
 export const selectCurrentPhoto = createSelector(selectPhotoState, getCurrentPhoto);
 export const selectFirstPhoto = createSelector(selectPhotoState, getFirstPhoto);
 export const selectLastPhoto = createSelector(selectPhotoState, getLastPhoto);

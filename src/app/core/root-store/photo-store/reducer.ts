@@ -264,18 +264,21 @@ const reducer = createReducer(
     on(PhotoActions.setGpsCoordinateOverrideRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: null,
+        pendingActionCount: state.pendingActionCount + 1,
     })),
     on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
         error: null,
-        currentPhotoGpsDetail: gpsDetail
+        currentPhotoGpsDetail: gpsDetail,
+        pendingActionCount: state.pendingActionCount - 1,
     })),
     on(PhotoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
-        error
+        error,
+        pendingActionCount: state.pendingActionCount - 1,
     })),
     on(PhotoActions.rotateClockwiseRequest, state =>
         state

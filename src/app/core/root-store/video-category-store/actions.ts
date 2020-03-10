@@ -16,6 +16,10 @@ export const loadSuccess = createAction(
     props<{ categories: VideoCategory[] }>()
 );
 
+export const loadRequestedSatisfiedByCache = createAction(
+    '[Video Categories] Load Request Satisfied by Cache'
+)
+
 export const setCurrent = createAction(
     '[Video Categories] Set Current',
     props<{ category: VideoCategory }>()

@@ -24,14 +24,17 @@ export class VideoCategoryStoreEffects {
             withLatestFrom(this.store$.pipe(
                 select(videoCategorySelectors.selectAllCategories)
             )),
-            filter(([action, categories]) => categories.length === 0),
-            switchMap(action =>
-                this.api.getCategories()
+            switchMap(([action, categories]) => {
+                if(categories.length !== 0) {
+                    return of(VideoCategoryActions.loadRequestedSatisfiedByCache())
+                }
+
+                return this.api.getCategories()
                     .pipe(
                         map(cat => VideoCategoryActions.loadSuccess({ categories: cat.items })),
                         catchError(error => of(VideoCategoryActions.loadFailure({ error })))
                     )
-            )
+            })
         )
     );
 

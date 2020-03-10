@@ -6,6 +6,8 @@ import { VideoCategoryStoreSelectors } from './video-category-store';
 import { Category } from '../models/category.model';
 import { CategoryFilter } from '../models/category-filter.model';
 import { CategoryType } from '../models/category-type.model';
+import { PhotoStoreSelectors } from './photo-store';
+import { VideoStoreSelectors } from './video-store';
 
 export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
@@ -19,10 +21,21 @@ export const selectError = createSelector(
 export const selectIsLoading = createSelector(
     SettingsStoreSelectors.selectSettingsIsLoading,
     PhotoCategoryStoreSelectors.selectPhotoCategoryIsLoading,
+    PhotoStoreSelectors.selectIsLoading,
     VideoCategoryStoreSelectors.selectVideoCategoryIsLoading,
-    (settingsIsLoading: boolean, photoCategoryIsLoading: boolean, videoCategoryIsLoading: boolean) => {
-        return settingsIsLoading || photoCategoryIsLoading || videoCategoryIsLoading;
-    }
+    VideoStoreSelectors.selectIsLoading,
+    (
+        settingsIsLoading: boolean,
+        photoCategoryIsLoading: boolean,
+        photoIsLoading: boolean,
+        videoCategoryIsLoading: boolean,
+        videoIsLoading: boolean
+    ) =>
+            settingsIsLoading ||
+            photoCategoryIsLoading ||
+            photoIsLoading ||
+            videoCategoryIsLoading ||
+            videoIsLoading
 );
 
 export const selectAllCategories = createSelector(

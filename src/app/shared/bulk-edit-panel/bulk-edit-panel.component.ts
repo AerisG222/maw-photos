@@ -1,9 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { GpsService } from 'src/app/core/services/gps.service';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { PhotoStoreSelectors } from 'src/app/core/root-store';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-bulk-edit-panel',
@@ -12,12 +16,14 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 })
 export class BulkEditPanelComponent implements OnInit {
     gpsForm: FormGroup;
+    hasPendingEdits$: Observable<boolean>;
 
     @Output() showPhotosWithGpsData = new EventEmitter<boolean>();
     @Output() selectAllPhotos = new EventEmitter<boolean>();
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
     constructor(
+        private store$: Store<{}>,
         private formBuilder: FormBuilder,
         private gps: GpsService
     ) {
@@ -29,6 +35,12 @@ export class BulkEditPanelComponent implements OnInit {
             latitude: ['', Validators.required],
             longitude: ['', Validators.required]
         });
+
+        this.hasPendingEdits$ = this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectPendingActionCount),
+                map(c => c > 0)
+            );
     }
 
     onToggleSelectAll(evt: boolean): void {

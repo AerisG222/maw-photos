@@ -44,7 +44,7 @@ export const selectVideoById =
     });
 
 export const selectVideoError = createSelector(selectVideoState, getError);
-export const selectVideoIsLoading = createSelector(selectVideoState, getIsLoading);
+export const selectIsLoading = createSelector(selectVideoState, getIsLoading);
 export const selectCurrentVideo = createSelector(selectVideoState, getCurrentVideo);
 export const selectFirstVideo = createSelector(selectVideoState, getFirstVideo);
 export const selectLastVideo = createSelector(selectVideoState, getLastVideo);

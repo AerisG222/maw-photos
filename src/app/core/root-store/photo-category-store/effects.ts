@@ -24,14 +24,17 @@ export class PhotoCategoryStoreEffects {
             withLatestFrom(this.store$.pipe(
                 select(PhotoCategorySelectors.selectAllCategories)
             )),
-            filter(([action, categories]) => categories.length === 0),
-            switchMap(action =>
-                this.api.getCategories()
+            switchMap(([action, categories]) => {
+                if(categories.length !== 0) {
+                    return of(PhotoCategoryActions.loadRequestedSatisfiedByCache())
+                }
+
+                return this.api.getCategories()
                     .pipe(
                         map(cat => PhotoCategoryActions.loadSuccess({ categories: cat.items })),
                         catchError(error => of(PhotoCategoryActions.loadFailure({ error })))
                     )
-            )
+            })
         )
     );
 
