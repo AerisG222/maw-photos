@@ -56,6 +56,7 @@ export class CategoryTeaserChooserComponent implements OnInit, OnDestroy {
         this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(p => !!p),
                 tap(p => this.id = p.id),
                 tap(p => this.categoryId = p.categoryId)
             ).subscribe()
@@ -72,6 +73,7 @@ export class CategoryTeaserChooserComponent implements OnInit, OnDestroy {
         this.destroySub.add(this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
+                tap(v => !!v),
                 tap(v => this.id = v.id),
                 tap(v => this.categoryId = v.categoryId)
             ).subscribe()
