@@ -71,15 +71,15 @@ export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
     }
 
     onShowPhotosWithGpsData(doShow: boolean): void {
-        this.showPhotosWithGpsData$.next(doShow);
-
         // LAZY: let's just remove any selection when we change this setting to make sure
         // a user does not actually save a change for something that is not visible
         this.onSelectAll(false);
+
+        this.showPhotosWithGpsData$.next(doShow);
     }
 
     onSelectAll(doSelectAll: boolean): void {
-        this.selectedPhotos.splice(0);
+        this.selectedPhotos = [];
 
         if(doSelectAll) {
             combineLatest([

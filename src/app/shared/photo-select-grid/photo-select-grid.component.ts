@@ -19,7 +19,11 @@ export class PhotoSelectGridComponent {
     }
 
     onToggle(evt: MatCheckboxChange, photo: Photo): void {
-        if(evt.checked) {
+        this.setSelected(evt.checked, photo);
+    }
+
+    setSelected(checked: boolean, photo: Photo): void {
+        if(checked) {
             this.photoSelected.next(photo);
         } else {
             this.photoDeselected.next(photo);

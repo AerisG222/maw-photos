@@ -5,7 +5,7 @@
                 <mat-checkbox [checked]="isSelected(photo)" (change)="onToggle($event, photo)" #checkbox></mat-checkbox>
             </mat-card-title>
             <mat-card-content>
-                <img [src]="photo.imageXsSq.url" class="thumbnail" (click)="checkbox.toggle()" />
+                <img [src]="photo.imageXsSq.url" class="thumbnail" (click)="checkbox.toggle(); setSelected(checkbox.checked, photo)" />
             </mat-card-content>
         </mat-card>
     </div>
