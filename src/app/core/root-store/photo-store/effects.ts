@@ -153,7 +153,8 @@ export class PhotoStoreEffects {
                     .pipe(
                         map(gpsDetail => PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, gpsDetail })),
                         catchError(error => of(PhotoActions.setGpsCoordinateOverrideFailure({ error })))
-                    )
+                    ),
+                    24
             )
         )
     );
