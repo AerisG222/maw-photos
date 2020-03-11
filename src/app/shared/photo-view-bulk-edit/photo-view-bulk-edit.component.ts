@@ -1,15 +1,14 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/internal/Observable';
+import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
+import { tap, first, map } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
 import { LayoutStoreActions, PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 import { Photo } from 'src/app/core/models/photo.model';
 import { sidebarInfoPanelShow, sidebarInfoPanelHide, toolbarShow } from '../animations';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
-import { combineLatest, BehaviorSubject } from 'rxjs';
-import { tap, first, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-photo-view-bulk-edit',
