@@ -2,8 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    column-gap: 8px;
-    row-gap: 8px;
+    place-content: stretch center;
+    align-items: stretch;
+
+    & div {
+        padding: 4px;
+    }
 
     & img {
         flex: 0 0 auto;
