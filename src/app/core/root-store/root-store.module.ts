@@ -36,8 +36,6 @@ import { AuthStoreModule } from './auth-store';
         }),
         StoreModule.forRoot({}, {
             runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true,
                 strictStateSerializability: false,
                 strictActionSerializability: false
             }

@@ -22,7 +22,7 @@ const reducer = createReducer(
         error: null
     })),
     on(PhotoActions.loadSuccess, (state, { photos }) => {
-        const entities = photoAdapter.addAll(photos, {
+        const entities = photoAdapter.setAll(photos, {
             ...state,
             isLoading: false,
             error: null

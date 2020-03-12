@@ -52,7 +52,7 @@ const reducer = createReducer(
         error: null
     })),
     on(VideoActions.loadSuccess, (state, { videos }) => {
-        const entities = videoAdapter.addAll(videos, {
+        const entities = videoAdapter.setAll(videos, {
             ...state,
             isLoading: false,
             error: null

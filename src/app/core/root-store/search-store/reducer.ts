@@ -18,7 +18,7 @@ const reducer = createReducer(
         error: null,
     })),
     on(SearchActions.querySuccess, (state, { query, result }) =>
-    searchAdapter.addAll(result.results, {
+    searchAdapter.setAll(result.results, {
             ...state,
             isLoading: false,
             error: null,
