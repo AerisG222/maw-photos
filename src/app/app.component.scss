@@ -1,11 +1,11 @@
-.app-grid {
+:host {
     display: grid;
     grid-template-rows: 100vh;
     grid-template-columns: max-content auto max-content;
 }
 
 @media (max-width: 800px) {
-    .app-grid {
+    :host {
         grid-template-rows: max-content auto 0;
         grid-template-columns: 100%;
     }
