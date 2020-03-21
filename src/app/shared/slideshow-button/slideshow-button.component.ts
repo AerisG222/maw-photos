@@ -1,10 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { PhotoStoreSelectors } from 'src/app/core/root-store';
-import { MatButton } from '@angular/material/button';
-import { CanRipple } from 'src/app/core/models/can-ripple.model';
 
 @Component({
     selector: 'app-slideshow-button',
@@ -12,10 +10,8 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
     styleUrls: ['./slideshow-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SlideshowButtonComponent implements OnInit, CanRipple {
+export class SlideshowButtonComponent implements OnInit {
     @Output() toggleSlideshow = new EventEmitter<void>();
-
-    @ViewChild('slideshowButton') slideshowButton: MatButton;
 
     slideshowPlaying$: Observable<boolean>;
 
@@ -32,11 +28,5 @@ export class SlideshowButtonComponent implements OnInit, CanRipple {
 
     onToggleSlideshow(): void {
         this.toggleSlideshow.emit();
-    }
-
-    triggerRipple(): void {
-        if (!this.slideshowButton.disabled) {
-            this.slideshowButton.ripple.launch({ centered: true });
-        }
     }
 }

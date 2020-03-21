@@ -1,18 +1,16 @@
-<div class="main-grid">
-    <div class="mat-elevation-z4" @toolbarFadeIn>
-        <app-category-list-toolbar></app-category-list-toolbar>
-    </div>
+<div class="mat-elevation-z4" @toolbarFadeIn>
+    <app-category-list-toolbar></app-category-list-toolbar>
+</div>
 
-    <div class="content-scroll-pane">
-        <div class="content-scroll-pane-content" [ngClass]="(margin$ | async).klass">
-            <div class="filter-grid">
-                <app-category-year-filter></app-category-year-filter>
-                <app-category-type-filter></app-category-type-filter>
-            </div>
-            <div>
-                <div *ngFor="let year of years$ | async">
-                    <app-year [year]="year"></app-year>
-                </div>
+<div class="content-scroll-pane">
+    <div class="content-scroll-pane-content" [ngClass]="(margin$ | async).klass">
+        <div class="filter-grid">
+            <app-category-year-filter></app-category-year-filter>
+            <app-category-type-filter></app-category-type-filter>
+        </div>
+        <div>
+            <div *ngFor="let year of years$ | async">
+                <app-year [year]="year"></app-year>
             </div>
         </div>
     </div>

@@ -1,29 +1,26 @@
-<div class="toolbar">
-    <div>
-        <div class="toolbar-group">
-            <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
-            <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-            <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-        </div>
+<app-toolbar>
+    <app-toolbar-group>
+        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-slideshow-button>
+        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async"></app-move-previous-button>
+        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async"></app-move-next-button>
+    </app-toolbar-group>
 
-        <mat-divider></mat-divider>
+    <app-toolbar-divider></app-toolbar-divider>
 
-        <div class="toolbar-group">
-            <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
-            <app-rotate-clockwise-button></app-rotate-clockwise-button>
-        </div>
+    <app-toolbar-group>
+        <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
+        <app-rotate-clockwise-button></app-rotate-clockwise-button>
+    </app-toolbar-group>
 
-        <mat-divider></mat-divider>
+    <app-toolbar-divider></app-toolbar-divider>
 
-        <div class="toolbar-group">
-            <button
-                mat-button
-                matTooltip="Exit Fullscreen (F)"
-                class="toolbar-button"
-                (click)="onExitFullscreen()"
-                #exitFullscreenButton>
-                <mat-icon [inline]="true">fullscreen_exit</mat-icon>
-            </button>
-        </div>
-    </div>
-</div>
+    <app-toolbar-group>
+        <app-toolbar-button
+            [icon]="'fullscreen_exit'"
+            [shortcutKey]="'f'"
+            [shortcutHelp]="'Exit Fullscreen'"
+            [tooltip]="'Exit Fullscreen (F)'"
+            (click)="onExitFullscreen()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar>

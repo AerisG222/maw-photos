@@ -1,14 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { tap } from 'rxjs/operators';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
-import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
-import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
-import { CanRipple } from 'src/app/core/models/can-ripple.model';
-import { tap } from 'rxjs/operators';
 
 // TODO: do not allow moving past end of map list with arrow keys
 
@@ -18,26 +13,18 @@ import { tap } from 'rxjs/operators';
     styleUrls: ['./photo-list-map-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
-    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
-    @ViewChild('mapviewButton') mapviewButton: MatButton;
-
+export class PhotoListMapToolbarComponent implements OnInit {
     isFirst$: Observable<boolean>;
     isLast$: Observable<boolean>;
 
-    private hotkeys: Hotkey[] = [];
     private isFirst: boolean;
     private isLast: boolean;
 
     constructor(
-        private store$: Store<{}>,
-        private hotkeysService: HotkeysService
+        private store$: Store<{}>
     ) { }
 
     ngOnInit() {
-        this.configureHotkeys();
-
         this.isFirst$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates),
@@ -49,10 +36,6 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
                 select(PhotoStoreSelectors.selectIsCurrentPhotoLastWithGpsCoordinates),
                 tap(isLast => this.isLast = isLast)
             );
-    }
-
-    ngOnDestroy(): void {
-        this.hotkeysService.remove(this.hotkeys);
     }
 
     onToggleMapView(): void {
@@ -68,53 +51,6 @@ export class PhotoListMapToolbarComponent implements OnInit, OnDestroy {
     onMovePrevious(): void {
         if (!this.isFirst) {
             this.store$.dispatch(PhotoStoreActions.movePreviousWithGpsRequest());
-        }
-    }
-
-    private configureHotkeys(): void {
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Exit Map View')
-        ) as Hotkey);
-    }
-
-    private onHotkeyMapView(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.mapviewButton);
-        this.onToggleMapView();
-
-        return false;
-    }
-
-    private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
-        this.triggerComponentRipple(this.moveNextButton);
-        this.onMoveNext();
-
-        return false;
-    }
-
-    private onHotkeyMovePrevious(evt: KeyboardEvent): boolean {
-        this.triggerComponentRipple(this.movePreviousButton);
-        this.onMovePrevious();
-
-        return false;
-    }
-
-    private triggerButtonRipple(button: MatButton) {
-        if (button && !button.disabled) {
-            button.ripple.launch({ centered: true });
-        }
-    }
-
-    private triggerComponentRipple(component: CanRipple) {
-        if (component) {
-            component.triggerRipple();
         }
     }
 }

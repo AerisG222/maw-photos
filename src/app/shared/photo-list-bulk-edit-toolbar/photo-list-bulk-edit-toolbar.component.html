@@ -1,14 +1,11 @@
-<div class="toolbar">
-    <div>
-        <div class="toolbar-group">
-            <button
-                mat-button
-                matTooltip="Exit Bulk Edit View (B)"
-                class="toolbar-button"
-                (click)="onToggleBulkEditView()"
-                #bulkEditViewButton>
-                <mat-icon [inline]="true">collections</mat-icon>
-            </button>
-        </div>
-    </div>
-</div>
+<app-toolbar>
+    <app-toolbar-group>
+        <app-toolbar-button
+            [icon]="'collections'"
+            [shortcutKey]="'b'"
+            [shortcutHelp]="'Exit Bulk Edit View'"
+            [tooltip]="'Exit Bulk Edit View (B)'"
+            (click)="onToggleBulkEditView()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar>

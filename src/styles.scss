@@ -35,6 +35,9 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/photo-view/photo-view.component.theme';
 @import 'app/shared/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
 @import 'app/shared/primary-nav/primary-nav.component.theme';
+@import 'app/shared/toolbar/toolbar.component.theme';
+@import 'app/shared/toolbar-button/toolbar-button.component.theme';
+@import 'app/shared/toolbar-link/toolbar-link.component.theme';
 @import 'app/shared/video-info-panel/video-info-panel.component.theme';
 
 @import 'app/stats/header/stats-header.component.theme';
@@ -45,24 +48,6 @@ $custom-typography: mat-typography-config(
 
     mat-tooltip-component .mat-tooltip {
         background-color: mat-color($accent, 900) !important;
-    }
-}
-
-@mixin toolbar-theme($theme) {
-    $accent: map-get($theme, accent);
-
-    .toolbar {
-        background-color: rgba(mat-color($accent, 700), .1);
-    }
-}
-
-@mixin toolbar-button-theme($theme) {
-    $accent: map-get($theme, accent);
-
-    button.toolbar-button:enabled:hover,
-    a.toolbar-button:hover {
-        background-color: rgba(mat-color($accent, 700), .42);
-        color: mat-color($accent, 100);
     }
 }
 
@@ -101,8 +86,6 @@ $custom-typography: mat-typography-config(
     @include app-video-list-component-theme($theme);
     @include app-year-list-component-theme($theme);
 
-    @include toolbar-theme($theme);
-    @include toolbar-button-theme($theme);
     @include primary-nav-button-theme($theme);
     @include sidebar-button-theme($theme);
     @include app-category-header-component-theme($theme);
@@ -113,6 +96,9 @@ $custom-typography: mat-typography-config(
     @include app-photo-view-component-theme($theme);
     @include app-photo-view-bulk-edit-component-theme($theme);
     @include app-primary-nav-component-theme($theme);
+    @include app-toolbar-component-theme($theme);
+    @include app-toolbar-button-theme($theme);
+    @include app-toolbar-link-theme($theme);
     @include app-video-info-panel-component-theme($theme);
 
     @include app-stats-header-component-theme($theme);
@@ -177,36 +163,6 @@ app-primary-nav {
         &.active {
             box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 5px 0 rgba(0, 0, 0, 0.14), 0 1px 0 0 rgba(0, 0, 0, 0.12);
         }
-    }
-}
-
-.toolbar {
-    display: grid;
-    grid-template-columns: min-content;
-    grid-template-rows: repeat(auto-fit, 1fr);
-    height: 100%;
-
-    & .toolbar-group {
-        text-align: center;
-    }
-
-    & .mat-button {
-        width: 100%;
-        min-width: 36px;
-        line-height: 28px;
-        font-size: 18px;
-
-        border-radius: 0 !important;
-
-        &:hover,
-        &:focus,
-        &.active {
-            box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 5px 0 rgba(0, 0, 0, 0.14), 0 1px 0 0 rgba(0, 0, 0, 0.12);
-        }
-    }
-
-    & mat-divider {
-        margin: 16px 8px;
     }
 }
 
@@ -311,24 +267,6 @@ app-primary-nav {
 @media (max-width: 800px) {
     .hide-on-mobile {
         display: none !important;
-    }
-
-    .toolbar {
-        grid-template-columns: 100%;
-        grid-template-rows: max-content;
-
-        & .toolbar-group {
-            display: inline;
-        }
-
-        & .mat-button {
-            width: unset;
-        }
-
-        & mat-divider {
-            display: inline;
-            margin: 0;
-        }
     }
 
     .content-scroll-pane {

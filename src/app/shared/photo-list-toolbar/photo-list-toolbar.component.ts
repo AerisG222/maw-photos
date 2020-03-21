@@ -1,16 +1,10 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Settings } from 'src/app/core/models/settings.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { MovePreviousButtonComponent } from '../move-previous-button/move-previous-button.component';
-import { MoveNextButtonComponent } from '../move-next-button/move-next-button.component';
-import { SlideshowButtonComponent } from '../slideshow-button/slideshow-button.component';
-import { CanRipple } from 'src/app/core/models/can-ripple.model';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
@@ -31,18 +25,7 @@ import { PhotoCategory } from 'src/app/core/models/photo-category.model';
 export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean;
 
-    @ViewChild('toggleBreadcrumbsButton') toggleBreadcrumbsButton: MatButton;
-    @ViewChild('togglePhotoListButton') togglePhotoListButton: MatButton;
-    @ViewChild('toggleThumbnailSizeButton') toggleThumbnailSizeButton: MatButton;
-    @ViewChild('fullscreenButton') fullscreenButton: MatButton;
-    @ViewChild('movePreviousButton') movePreviousButton: MovePreviousButtonComponent;
-    @ViewChild('moveNextButton') moveNextButton: MoveNextButtonComponent;
-    @ViewChild('toggleSlideshowButton') toggleSlideshowButton: SlideshowButtonComponent;
-    @ViewChild('mapViewButton') mapViewButton: MatButton;
-    @ViewChild('bulkEditViewButton') bulkEditViewButton: MatButton;
-
     private destroySub = new Subscription();
-    private hotkeys: Hotkey[] = [];
 
     isAdmin$: Observable<boolean>;
     isFirst$: Observable<boolean>;
@@ -57,17 +40,12 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     prtDownloadUrl: string = null;
 
     constructor(
-        private store$: Store<{}>,
-        private hotkeysService: HotkeysService
+        private store$: Store<{}>
     ) { }
 
     ngOnInit() {
         this.isAdmin$ = this.store$.pipe(
-            select(AuthStoreSelectors.selectIsAdmin),
-            tap(isAdmin => {
-                this.hotkeysService.remove(this.hotkeys);
-                this.configureHotkeys(isAdmin)
-            })
+            select(AuthStoreSelectors.selectIsAdmin)
         );
 
         this.destroySub.add(this.store$
@@ -110,7 +88,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.hotkeysService.remove(this.hotkeys);
         this.destroySub.unsubscribe();
     }
 
@@ -152,120 +129,5 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     onToggleSlideshow(): void {
         this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
-    }
-
-    private configureHotkeys(isAdmin: boolean): void {
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('left', (event: KeyboardEvent) => this.onHotkeyMovePrevious(event), [], 'Move Previous')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('right', (event: KeyboardEvent) => this.onHotkeyMoveNext(event), [], 'Move Next')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('p', (event: KeyboardEvent) => this.onHotkeyToggleSlideshow(event), [], 'Play / Pause Slideshow')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('t', (event: KeyboardEvent) => this.onHotkeyToggleTitle(event), [], 'Toggle Title / Breadcrumbs')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('l', (event: KeyboardEvent) => this.onHotkeyTogglePhotoList(event), [], 'Toggle Photo List')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('s', (event: KeyboardEvent) => this.onHotkeyToggleSize(event), [], 'Toggle Thumbnail Size')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('f', (event: KeyboardEvent) => this.onHotkeyFullscreen(event), [], 'Enter Fullscreen')
-        ) as Hotkey);
-
-        this.hotkeys.push(this.hotkeysService.add(
-            new Hotkey('z', (event: KeyboardEvent) => this.onHotkeyMapView(event), [], 'Enter Map View')
-        ) as Hotkey);
-
-        if(isAdmin) {
-            this.hotkeys.push(this.hotkeysService.add(
-                new Hotkey('b', (event: KeyboardEvent) => this.onHotkeyBulkEditView(event), [], 'Enter Bulk Edit Mode')
-            ) as Hotkey);
-        }
-    }
-
-    private onHotkeyToggleTitle(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleBreadcrumbsButton);
-        this.onToggleCategoryBreadcrumbs();
-
-        return false;
-    }
-
-    private onHotkeyTogglePhotoList(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.togglePhotoListButton);
-        this.onTogglePhotoList();
-
-        return false;
-    }
-
-    private onHotkeyToggleSize(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.toggleThumbnailSizeButton);
-        this.onToggleSize();
-
-        return false;
-    }
-
-    private onHotkeyFullscreen(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.fullscreenButton);
-        this.onToggleFullscreen();
-
-        return false;
-    }
-
-    private onHotkeyMapView(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.mapViewButton);
-        this.onToggleMapView();
-
-        return false;
-    }
-
-    private onHotkeyBulkEditView(evt: KeyboardEvent): boolean {
-        this.triggerButtonRipple(this.bulkEditViewButton);
-        this.onToggleBulkEditView();
-
-        return false;
-    }
-
-    private onHotkeyMoveNext(evt: KeyboardEvent): boolean {
-        this.triggerComponentRipple(this.moveNextButton);
-        this.onMoveNext();
-
-        return false;
-    }
-
-    private onHotkeyMovePrevious(evt: KeyboardEvent): boolean {
-        this.triggerComponentRipple(this.movePreviousButton);
-        this.onMovePrevious();
-
-        return false;
-    }
-
-    private onHotkeyToggleSlideshow(evt: KeyboardEvent): boolean {
-        this.triggerComponentRipple(this.toggleSlideshowButton);
-        this.onToggleSlideshow();
-
-        return false;
-    }
-
-    private triggerButtonRipple(button: MatButton) {
-        if (button && !button.disabled) {
-            button.ripple.launch({ centered: true });
-        }
-    }
-
-    private triggerComponentRipple(component: CanRipple) {
-        if (component) {
-            component.triggerRipple();
-        }
     }
 }

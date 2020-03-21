@@ -1,3 +1,10 @@
+:host {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-template-rows: 100%;
+    height: 100vh;
+}
+
 form mat-icon {
     margin-left: 12px;
     font-size: 24px;
@@ -18,13 +25,6 @@ form mat-icon {
     margin-right: 30%;
 }
 
-.main-grid {
-    display: grid;
-    grid-template-columns: max-content auto;
-    grid-template-rows: 100%;
-    height: 100vh;
-}
-
 .filter-grid {
     display: grid;
     grid-template-columns: max-content max-content;
@@ -38,7 +38,7 @@ form mat-icon {
 }
 
 @media (max-width: 800px) {
-    .main-grid {
+    :host {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;
     }

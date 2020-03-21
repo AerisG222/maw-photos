@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin app-toolbar-button-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-toolbar-button button:enabled:hover {
+        background-color: rgba(mat-color($accent, 700), .42);
+        color: mat-color($accent, 100);
+    }
+}

@@ -1,10 +1,7 @@
-<button
-    mat-button
-    matTooltip="Start/Stop Slideshow (P)"
-    matTooltipPosition="after"
-    class="toolbar-button"
-    (click)="onToggleSlideshow()"
-    #slideshowButton>
-    <mat-icon [inline]="true" *ngIf="(slideshowPlaying$ | async) === false">play_arrow</mat-icon>
-    <mat-icon [inline]="true" *ngIf="slideshowPlaying$ | async">stop</mat-icon>
-</button>
+<app-toolbar-button
+    [icon]="(this.slideshowPlaying$ | async) ? 'stop' : 'play_arrow'"
+    [shortcutKey]="'p'"
+    [shortcutHelp]="'Start/Stop Slideshow'"
+    [tooltip]="'Start/Stop Slideshow (P)'"
+    (click)="onToggleSlideshow()">
+</app-toolbar-button>

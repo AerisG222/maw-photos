@@ -1,7 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild, Input, ChangeDetectionStrategy } from '@angular/core';
-
-import { MatButton } from '@angular/material/button';
-import { CanRipple } from 'src/app/core/models/can-ripple.model';
+import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-move-previous-button',
@@ -9,19 +6,11 @@ import { CanRipple } from 'src/app/core/models/can-ripple.model';
     styleUrls: ['./move-previous-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovePreviousButtonComponent implements CanRipple {
+export class MovePreviousButtonComponent {
     @Input() atStartOfList = true;
     @Output() movePrevious = new EventEmitter<void>();
 
-    @ViewChild('prevButton') prevButton: MatButton;
-
     onMovePrevious(): void {
         this.movePrevious.emit();
-    }
-
-    triggerRipple(): void {
-        if (!this.prevButton.disabled) {
-            this.prevButton.ripple.launch({ centered: true });
-        }
     }
 }

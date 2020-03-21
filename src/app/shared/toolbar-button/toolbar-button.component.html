@@ -1,0 +1,9 @@
+<button
+    mat-button
+    [class.hide-on-mobile]="hideOnMobile"
+    [disabled]="isDisabled"
+    [matTooltip]="tooltip"
+    [matTooltipPosition]="'after'"
+    #button>
+    <mat-icon [inline]="true">{{icon}}</mat-icon>
+</button>

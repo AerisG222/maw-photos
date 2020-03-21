@@ -1,29 +1,21 @@
-<div class="toolbar">
-    <div>
-        <div class="toolbar-group">
-            <a [routerLink]="['/stats/photos']"
-                routerLinkActive="active"
-                mat-button
-                matTooltip="Photo Stats (P)"
-                matTooltipPosition="after">
-                <mat-icon [inline]="true">camera_alt</mat-icon>
-            </a>
+<app-toolbar>
+    <app-toolbar-group>
+        <app-toolbar-link
+            [icon]="'camera_alt'"
+            [routerLink]="['/stats/photos']"
+            [tooltip]="'Photo Stats'">
+        </app-toolbar-link>
 
-            <a [routerLink]="['/stats/videos']"
-                routerLinkActive="active"
-                mat-button
-                matTooltip="Video Stats (V)"
-                matTooltipPosition="after">
-                <mat-icon [inline]="true">videocam</mat-icon>
-            </a>
+        <app-toolbar-link
+            [icon]="'videocam'"
+            [routerLink]="['/stats/videos']"
+            [tooltip]="'Video Stats'">
+        </app-toolbar-link>
 
-            <a [routerLink]="['/stats/combined']"
-                routerLinkActive="active"
-                mat-button
-                matTooltip="Combined Stats (C)"
-                matTooltipPosition="after">
-                <mat-icon [inline]="true">functions</mat-icon>
-            </a>
-        </div>
-    </div>
-</div>
+        <app-toolbar-link
+            [icon]="'functions'"
+            [routerLink]="['/stats/combined']"
+            [tooltip]="'Combined Stats'">
+        </app-toolbar-link>
+    </app-toolbar-group>
+</app-toolbar>

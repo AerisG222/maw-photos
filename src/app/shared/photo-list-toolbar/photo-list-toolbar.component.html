@@ -1,131 +1,116 @@
-<div class="toolbar">
-    <div>
-        <div class="toolbar-group">
-            <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()" #toggleSlideshowButton></app-slideshow-button>
-            <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async" #movePreviousButton></app-move-previous-button>
-            <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async" #moveNextButton></app-move-next-button>
-        </div>
+<app-toolbar>
+    <app-toolbar-group>
+        <app-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-slideshow-button>
+        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async"></app-move-previous-button>
+        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async"></app-move-next-button>
+    </app-toolbar-group>
 
-        <mat-divider></mat-divider>
+    <app-toolbar-divider></app-toolbar-divider>
 
-        <div class="toolbar-group">
-            <button
-                mat-button
-                matTooltip="Enter Full Screen View (F)"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                (click)="onToggleFullscreen()"
-                #fullscreenButton>
-                <mat-icon [inline]="true">fullscreen</mat-icon>
-            </button>
+    <app-toolbar-group>
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            [icon]="'fullscreen'"
+            [shortcutKey]="'f'"
+            [shortcutHelp]="'Enter Full Screen View'"
+            [tooltip]="'Enter Full Screen View (F)'"
+            (click)="onToggleFullscreen()">
+        </app-toolbar-button>
 
-            <button
-                *ngIf="enableMapView$ | async"
-                mat-button
-                matTooltip="Enter Map View (Z)"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                (click)="onToggleMapView()"
-                #mapViewButton>
-                <mat-icon [inline]="true">map</mat-icon>
-            </button>
+        <app-toolbar-button
+            *ngIf="enableMapView$ | async"
+            [hideOnMobile]="true"
+            [icon]="'map'"
+            [shortcutKey]="'z'"
+            [shortcutHelp]="'Enter Map View'"
+            [tooltip]="'Enter Map View (Z)'"
+            (click)="onToggleMapView()">
+        </app-toolbar-button>
 
-            <button
-                *ngIf="isAdmin$ | async"
-                mat-button
-                matTooltip="Enter Bulk Edit Mode (B)"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                (click)="onToggleBulkEditView()"
-                #bulkEditViewButton>
-                <mat-icon [inline]="true">collections</mat-icon>
-            </button>
+        <app-toolbar-button
+            *ngIf="isAdmin$ | async"
+            [hideOnMobile]="true"
+            [icon]="'collections'"
+            [shortcutKey]="'z'"
+            [shortcutHelp]="'Enter Bulk Edit Mode'"
+            [tooltip]="'Enter Bulk Edit Mode (B)'"
+            (click)="onToggleBulkEditView()">
+        </app-toolbar-button>
 
-            <a mat-button
-                matTooltip="Download All Photos in Category (.zip)"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
-                [href]="(category$ | async)?.downloadLink">
-                <mat-icon [inline]="true">save_alt</mat-icon>
-            </a>
-        </div>
+        <app-toolbar-external-link
+            *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
+            [hideOnMobile]="true"
+            [icon]="'save_alt'"
+            [link]="(category$ | async)?.downloadLink"
+            [tooltip]="'Download All Photos in Category (.zip)'">
+        </app-toolbar-external-link>
+    </app-toolbar-group>
 
-        <mat-divider></mat-divider>
+    <app-toolbar-divider></app-toolbar-divider>
 
-        <div class="toolbar-group">
-            <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
-            <app-rotate-clockwise-button></app-rotate-clockwise-button>
+    <app-toolbar-group>
+        <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
+        <app-rotate-clockwise-button></app-rotate-clockwise-button>
 
-            <a mat-button
-                matTooltip="Low Res Download"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                *ngIf="smDownloadUrl"
-                [href]="smDownloadUrl">
-                <mat-icon [inline]="true" class="icon-sm">photo</mat-icon>
-            </a>
+        <app-toolbar-external-link
+            *ngIf="smDownloadUrl"
+            [hideOnMobile]="true"
+            [icon]="'photo'"
+            [iconClass]="'icon-sm'"
+            [link]="smDownloadUrl"
+            [tooltip]="'Low Res Download'">
+        </app-toolbar-external-link>
 
-            <a mat-button
-                matTooltip="Medium Res Download"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                *ngIf="mdDownloadUrl"
-                [href]="mdDownloadUrl">
-                <mat-icon [inline]="true" class="icon-md">photo</mat-icon>
-            </a>
+        <app-toolbar-external-link
+            *ngIf="mdDownloadUrl"
+            [icon]="'photo'"
+            [iconClass]="'icon-md'"
+            [link]="mdDownloadUrl"
+            [tooltip]="'Medium Res Download'">
+        </app-toolbar-external-link>
 
-            <a mat-button
-                matTooltip="High Res Download"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                *ngIf="lgDownloadUrl"
-                [href]="lgDownloadUrl">
-                <mat-icon [inline]="true">photo</mat-icon>
-            </a>
+        <app-toolbar-external-link
+            *ngIf="lgDownloadUrl"
+            [hideOnMobile]="true"
+            [icon]="'photo'"
+            [link]="lgDownloadUrl"
+            [tooltip]="'High Res Download'">
+        </app-toolbar-external-link>
 
-            <a mat-button
-                matTooltip="High Res Download (untouched)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                *ngIf="prtDownloadUrl"
-                [href]="prtDownloadUrl">
-                <mat-icon [inline]="true">photo</mat-icon>
-            </a>
-        </div>
+        <app-toolbar-external-link
+            *ngIf="prtDownloadUrl"
+            [icon]="'photo'"
+            [link]="prtDownloadUrl"
+            [tooltip]="'High Res Download (untouched)'">
+        </app-toolbar-external-link>
+    </app-toolbar-group>
 
-        <mat-divider></mat-divider>
+    <app-toolbar-divider></app-toolbar-divider>
 
-        <div class="toolbar-group">
-            <button
-                mat-button
-                matTooltip="Show/Hide Category Breadcrumbs (T)"
-                matTooltipPosition="after"
-                class="toolbar-button hide-on-mobile"
-                (click)="onToggleCategoryBreadcrumbs()"
-                #toggleBreadcrumbsButton>
-                <mat-icon [inline]="true">title</mat-icon>
-            </button>
+    <app-toolbar-group>
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            [icon]="'title'"
+            [shortcutKey]="'t'"
+            [shortcutHelp]="'Show/Hide Category Breadcrumbs'"
+            [tooltip]="'Show/Hide Category Breadcrumbs (T)'"
+            (click)="onToggleCategoryBreadcrumbs()">
+        </app-toolbar-button>
 
-            <button
-                mat-button
-                matTooltip="Show/Hide Photo List (L)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onTogglePhotoList()"
-                #togglePhotoListButton>
-                <mat-icon [inline]="true">visibility</mat-icon>
-            </button>
+        <app-toolbar-button
+            [icon]="'visibility'"
+            [shortcutKey]="'l'"
+            [shortcutHelp]="'Show/Hide Photo List'"
+            [tooltip]="'Show/Hide Photo List (L)'"
+            (click)="onTogglePhotoList()">
+        </app-toolbar-button>
 
-            <button
-                mat-button
-                matTooltip="Toggle Photo List Thumbnail Size (S)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleSize()"
-                #toggleThumbnailSizeButton>
-                <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-            </button>
-        </div>
-    </div>
-</div>
+        <app-toolbar-button
+            [icon]="'photo_size_select_large'"
+            [shortcutKey]="'s'"
+            [shortcutHelp]="'Toggle Photo List Thumbnail Size'"
+            [tooltip]="'Toggle Photo List Thumbnail Size (S)'"
+            (click)="onToggleSize()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar>

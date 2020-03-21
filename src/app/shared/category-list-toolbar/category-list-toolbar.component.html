@@ -1,63 +1,51 @@
-<div class="toolbar">
-    <div>
-        <div class="toolbar-group">
-            <button
-                mat-button
-                matTooltip="Toggle Grid / List View (G)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleListType()"
-                #toggleListTypeButton>
-                <mat-icon *ngIf="isListView$ | async" [inline]="true">apps</mat-icon>
-                <mat-icon *ngIf="isGridView$ | async" [inline]="true">list</mat-icon>
-            </button>
+<app-toolbar>
+    <app-toolbar-group>
+        <app-toolbar-button
+            [icon]="(isListView$ | async) ? 'apps' : 'list'"
+            [shortcutKey]="'g'"
+            [shortcutHelp]="'Toggle Grid / List View'"
+            [tooltip]="'Toggle Grid / List View (G)'"
+            (click)="onToggleListType()">
+        </app-toolbar-button>
 
-            <mat-divider></mat-divider>
+        <app-toolbar-divider></app-toolbar-divider>
 
-            <button
-                *ngIf="isGridView$ | async"
-                [disabled]="(isGridView$ | async) === false"
-                mat-button
-                matTooltip="Show/Hide Category Titles (T)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleTitle()"
-                #toggleTitlesButton>
-                <mat-icon [inline]="true">title</mat-icon>
-            </button>
+        <app-toolbar-button
+            *ngIf="isGridView$ | async"
+            [icon]="'title'"
+            [isDisabled]="(isGridView$ | async) === false"
+            [shortcutKey]="'t'"
+            [shortcutHelp]="'Show/Hide Category Titles'"
+            [tooltip]="'Show/Hide Category Titles (T)'"
+            (click)="onToggleTitle()">
+        </app-toolbar-button>
 
-            <button
-                *ngIf="isGridView$ | async"
-                mat-button
-                matTooltip="Toggle Grid Thumbnail Size (S)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleSize()"
-                [disabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
-                #toggleThumbnailSizeButton>
-                <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-            </button>
+        <app-toolbar-button
+            *ngIf="isGridView$ | async"
+            [icon]="'photo_size_select_large'"
+            [isDisabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
+            [shortcutKey]="'s'"
+            [shortcutHelp]="'Toggle Grid Thumbnail Size'"
+            [tooltip]="'Toggle Grid Thumbnail Size (S)'"
+            (click)="onToggleSize()">
+        </app-toolbar-button>
 
-            <button
-                *ngIf="isListView$ | async"
-                mat-button
-                matTooltip="Toggle List Thumbnail Size (S)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleListThumbnailSize()"
-                #toggleListThumbnailSizeButton>
-                <mat-icon [inline]="true">photo_size_select_large</mat-icon>
-            </button>
+        <app-toolbar-button
+            *ngIf="isListView$ | async"
+            [icon]="'photo_size_select_large'"
+            [isDisabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
+            [shortcutKey]="'s'"
+            [shortcutHelp]="'Toggle List Thumbnail Size'"
+            [tooltip]="'Toggle List Thumbnail Size (S)'"
+            (click)="onToggleListThumbnailSize()">
+        </app-toolbar-button>
 
-            <button
-                mat-button
-                matTooltip="Toggle Category Margins (M)"
-                matTooltipPosition="after"
-                class="toolbar-button"
-                (click)="onToggleMargins()"
-                #toggleMarginsButton>
-                <mat-icon [inline]="true">format_indent_increase</mat-icon>
-            </button>
-        </div>
-    </div>
-</div>
+        <app-toolbar-button
+            [icon]="'format_indent_increase'"
+            [shortcutKey]="'m'"
+            [shortcutHelp]="'Toggle Category Margins'"
+            [tooltip]="'Toggle Category Margins (M)'"
+            (click)="onToggleMargins()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar>

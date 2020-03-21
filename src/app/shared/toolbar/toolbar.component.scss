@@ -1,0 +1,13 @@
+:host {
+    display: grid;
+    grid-template-columns: min-content;
+    grid-auto-rows: min-content;
+    height: 100%;
+}
+
+@media (max-width: 800px) {
+    :host {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content;
+    }
+}

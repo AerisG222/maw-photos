@@ -67,9 +67,16 @@ import { PhotoViewBulkEditComponent } from './photo-view-bulk-edit/photo-view-bu
 import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolbar/photo-list-bulk-edit-toolbar.component';
 import { PhotoSelectGridComponent } from './photo-select-grid/photo-select-grid.component';
 import { BulkEditPanelComponent } from './bulk-edit-panel/bulk-edit-panel.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarGroupComponent } from './toolbar-group/toolbar-group.component';
+import { ToolbarButtonComponent } from './toolbar-button/toolbar-button.component';
+import { ToolbarDividerComponent } from './toolbar-divider/toolbar-divider.component';
+import { ToolbarLinkComponent } from './toolbar-link/toolbar-link.component';
+import { ToolbarExternalLinkComponent } from './toolbar-external-link/toolbar-external-link.component';
 
 @NgModule({
     declarations: [
+        BulkEditPanelComponent,
         CategoryCardComponent,
         CategoryGridComponent,
         CategoryListComponent,
@@ -97,6 +104,7 @@ import { BulkEditPanelComponent } from './bulk-edit-panel/bulk-edit-panel.compon
         PhotoListFullscreenToolbarComponent,
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
+        PhotoSelectGridComponent,
         PhotoViewBulkEditComponent,
         PhotoViewComponent,
         PhotoViewFullscreenComponent,
@@ -111,9 +119,13 @@ import { BulkEditPanelComponent } from './bulk-edit-panel/bulk-edit-panel.compon
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
-        VideoInfoPanelComponent,
-        PhotoSelectGridComponent,
-        BulkEditPanelComponent
+        ToolbarComponent,
+        ToolbarGroupComponent,
+        ToolbarButtonComponent,
+        ToolbarDividerComponent,
+        ToolbarExternalLinkComponent,
+        ToolbarLinkComponent,
+        VideoInfoPanelComponent
     ],
     imports: [
         CommonModule,
@@ -205,6 +217,12 @@ import { BulkEditPanelComponent } from './bulk-edit-panel/bulk-edit-panel.compon
         SidebarComponent,
         SlideshowButtonComponent,
         StatsLinkComponent,
+        ToolbarComponent,
+        ToolbarButtonComponent,
+        ToolbarDividerComponent,
+        ToolbarExternalLinkComponent,
+        ToolbarGroupComponent,
+        ToolbarLinkComponent,
         VideoInfoPanelComponent
     ]
 })

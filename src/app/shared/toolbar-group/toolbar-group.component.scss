@@ -1,0 +1,9 @@
+:host {
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    :host {
+        display: inline;
+    }
+}

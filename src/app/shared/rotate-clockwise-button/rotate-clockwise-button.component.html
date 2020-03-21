@@ -1,9 +1,7 @@
-<button
-    mat-button
-    matTooltip="Rotate Clockwise (D)"
-    matTooltipPosition="after"
-    class="toolbar-button"
-    (click)="onRotateClockwise()"
-    #rotateClockwiseButton>
-    <mat-icon [inline]="true">rotate_right</mat-icon>
-</button>
+<app-toolbar-button
+    [icon]="'rotate_right'"
+    [shortcutKey]="'d'"
+    [shortcutHelp]="'Rotate Clockwise'"
+    [tooltip]="'Rotate Clockwise (D)'"
+    (click)="onRotateClockwise()">
+</app-toolbar-button>

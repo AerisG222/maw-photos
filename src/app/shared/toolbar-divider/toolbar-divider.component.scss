@@ -1,0 +1,10 @@
+mat-divider {
+    margin: 16px 8px;
+}
+
+@media (max-width: 800px) {
+    mat-divider {
+        display: inline;
+        margin: 0;
+    }
+}
