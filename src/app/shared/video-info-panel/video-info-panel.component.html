@@ -3,21 +3,18 @@
         <div class="content-scroll-pane-content">
             <div class="info-panel-grid">
                 <app-rating
-                    class="widget"
                     *ngIf="showRatings$ | async"
                     [mode]="ratingMode.Videos"
                     @toggleInfoPanel>
                 </app-rating>
 
                 <app-comments
-                    class="widget"
                     *ngIf="showComments$ | async"
                     [mode]="commentMode.Videos"
                     @toggleInfoPanel>
                 </app-comments>
 
                 <app-minimap
-                    class="widget"
                     *ngIf="showMinimap$ | async"
                     [mode]="minimapMode.Videos"
                     @toggleInfoPanel>
@@ -25,14 +22,12 @@
 
                 <ng-container *ngIf="isAdmin$ | async">
                     <app-metadata-editor
-                        class="widget"
                         *ngIf="showMetadataEditor$ | async"
                         [mode]="metadataEditorMode.Videos"
                         @toggleInfoPanel>
                     </app-metadata-editor>
 
                     <app-category-teaser-chooser
-                        class="widget"
                         *ngIf="showCategoryTeaserChooser$ | async"
                         [mode]="categoryTeaserChooserMode.Videos"
                         @toggleInfoPanel>

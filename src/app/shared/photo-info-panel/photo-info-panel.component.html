@@ -3,39 +3,33 @@
         <div class="content-scroll-pane-content">
             <div class="info-panel-grid">
                 <app-rating
-                    class="widget"
                     *ngIf="showRatings$ | async"
                     [mode]="ratingMode.Photos"
                     @toggleInfoPanel>
                 </app-rating>
 
                 <app-comments
-                    class="widget"
                     *ngIf="showComments$ | async"
                     [mode]="commentMode.Photos"
                     @toggleInfoPanel>
                 </app-comments>
 
                 <app-exif
-                    class="widget"
                     *ngIf="showExif$ | async"
                     @toggleInfoPanel>
                 </app-exif>
 
                 <app-effects
-                    class="widget"
                     *ngIf="showEffects$ | async"
                     @toggleInfoPanel>
                 </app-effects>
 
                 <app-histogram
-                    class="widget"
                     *ngIf="showHistogram$ | async"
                     @toggleInfoPanel>
                 </app-histogram>
 
                 <app-minimap
-                    class="widget"
                     *ngIf="showMinimap$ | async"
                     [mode]="minimapMode.Photos"
                     @toggleInfoPanel>
@@ -43,14 +37,12 @@
 
                 <ng-container *ngIf="isAdmin$ | async">
                     <app-metadata-editor
-                        class="widget"
                         *ngIf="showMetadataEditor$ | async"
                         [mode]="metadataEditorMode.Photos"
                         @toggleInfoPanel>
                     </app-metadata-editor>
 
                     <app-category-teaser-chooser
-                        class="widget"
                         *ngIf="showCategoryTeaserChooser$ | async"
                         [mode]="categoryTeaserChooserMode.Photos"
                         @toggleInfoPanel>
