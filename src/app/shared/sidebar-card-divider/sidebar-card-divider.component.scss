@@ -1,3 +1,5 @@
-mat-divider {
-    margin: 0 2px 4px 2px;
+:host mat-divider {
+    margin: 8px 4px;
+    position: relative;
+    width: unset;
 }
