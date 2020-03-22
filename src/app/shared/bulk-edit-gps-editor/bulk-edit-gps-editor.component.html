@@ -1,0 +1,26 @@
+<app-sidebar-card
+    [icon]="'edit_location'"
+    [title]="'Gps'">
+
+    <form [formGroup]="gpsForm">
+        <div class="row-grid">
+            <mat-form-field>
+                <mat-label>Latitude</mat-label>
+                <input matInput formControlName="latitude" (paste)="onPaste($event)">
+            </mat-form-field>
+        </div>
+        <div class="row-grid">
+            <mat-form-field>
+                <mat-label>Longitude</mat-label>
+                <input matInput matInput formControlName="longitude" (paste)="onPaste($event)">
+            </mat-form-field>
+        </div>
+
+        <div class="buttons">
+            <button mat-button (click)="onSaveGps()" color="primary">Save</button>
+            <button mat-button (click)="onCancelGps()" color="accent">Cancel</button>
+            <mat-progress-spinner *ngIf="hasPendingEdits$ | async" mode="indeterminate" diameter="32"></mat-progress-spinner>
+        </div>
+    </form>
+
+</app-sidebar-card>

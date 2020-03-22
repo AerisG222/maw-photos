@@ -76,9 +76,13 @@ import { ToolbarExternalLinkComponent } from './toolbar-external-link/toolbar-ex
 import { ToolbarGroupComponent } from './toolbar-group/toolbar-group.component';
 import { ToolbarLinkComponent } from './toolbar-link/toolbar-link.component';
 import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
+import { BulkEditFilterComponent } from './bulk-edit-filter/bulk-edit-filter.component';
+import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps-editor.component';
 
 @NgModule({
     declarations: [
+        BulkEditFilterComponent,
+        BulkEditGpsEditorComponent,
         BulkEditPanelComponent,
         CategoryCardComponent,
         CategoryGridComponent,
@@ -131,7 +135,7 @@ import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.com
         ToolbarDividerComponent,
         ToolbarExternalLinkComponent,
         ToolbarLinkComponent,
-        VideoInfoPanelComponent,
+        VideoInfoPanelComponent
     ],
     imports: [
         CommonModule,
@@ -183,6 +187,8 @@ import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.com
         ReactiveFormsModule,
 
         // components
+        BulkEditFilterComponent,
+        BulkEditGpsEditorComponent,
         BulkEditPanelComponent,
         CategoryCardComponent,
         CategoryGridComponent,

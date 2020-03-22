@@ -1,47 +1,10 @@
 <div class="info-panel-grid">
-    <mat-card class="bulk-filter">
-        <mat-card-title>
-            <mat-icon [inline]="true">filter_list</mat-icon> Filter/Selection Tools
-        </mat-card-title>
-        <mat-card-content>
-            <div class="gps-toggle">
-                <mat-checkbox (change)="onToggleHidePhotosWithGpsData($event)">Hide Photos with GPS Data</mat-checkbox>
-            </div>
+    <app-bulk-edit-filter
+        (selectAllPhotos)="onToggleSelectAll($event)"
+        (showPhotosWithGpsData)="onToggleHidePhotosWithGpsData($event)">
+    </app-bulk-edit-filter>
 
-            <mat-divider></mat-divider>
-
-            <div class="select-buttons">
-                <button mat-button color="primary" (click)="onToggleSelectAll(true)">Select All</button>
-                <button mat-button color="primary" (click)="onToggleSelectAll(false)">Deselect All</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="gps-editor">
-        <mat-card-title>
-            <mat-icon [inline]="true">edit_location</mat-icon> Gps
-        </mat-card-title>
-        <mat-card-content>
-            <form [formGroup]="gpsForm">
-                <div class="row-grid">
-                    <mat-form-field>
-                        <mat-label>Latitude</mat-label>
-                        <input matInput formControlName="latitude" (paste)="onPaste($event)">
-                    </mat-form-field>
-                </div>
-                <div class="row-grid">
-                    <mat-form-field>
-                        <mat-label>Longitude</mat-label>
-                        <input matInput matInput formControlName="longitude" (paste)="onPaste($event)">
-                    </mat-form-field>
-                </div>
-
-                <div class="buttons">
-                    <button mat-button (click)="onSaveGps()" color="primary">Save</button>
-                    <button mat-button (click)="onCancelGps()" color="accent">Cancel</button>
-                    <mat-progress-spinner *ngIf="hasPendingEdits$ | async" mode="indeterminate" diameter="32"></mat-progress-spinner>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
+    <app-bulk-edit-gps-editor
+        (saveGps)="onSaveGps($event)">
+    </app-bulk-edit-gps-editor>
 </div>

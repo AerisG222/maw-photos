@@ -1,0 +1,21 @@
+.gps-toggle {
+    margin-bottom: 8px;
+}
+
+.select-buttons {
+    margin-top: 8px;
+
+    & button {
+        margin-right: 8px;
+    }
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100%;
+
+    & mat-progress-spinner {
+        justify-self: end;
+    }
+}
