@@ -1,18 +1,17 @@
-<mat-card>
-    <mat-card-title>
-        <mat-icon [inline]="true">tune</mat-icon> EXIF Data
-    </mat-card-title>
-    <mat-card-content>
-        <mat-tab-group dynamicHeight="true">
-            <mat-tab label="EXIF">
-                <app-exif-table [exifData]="(exifContainer$ | async)?.exif"></app-exif-table>
-            </mat-tab>
-            <mat-tab label="Maker">
-                <app-exif-table [exifData]="(exifContainer$ | async)?.maker"></app-exif-table>
-            </mat-tab>
-            <mat-tab label="Composite">
-                <app-exif-table [exifData]="(exifContainer$ | async)?.composite"></app-exif-table>
-            </mat-tab>
-        </mat-tab-group>
-    </mat-card-content>
-</mat-card>
+<app-sidebar-card
+    [icon]="'tune'"
+    [title]="'EXIF Data'">
+
+    <mat-tab-group dynamicHeight="true">
+        <mat-tab label="EXIF">
+            <app-exif-table [exifData]="(exifContainer$ | async)?.exif"></app-exif-table>
+        </mat-tab>
+        <mat-tab label="Maker">
+            <app-exif-table [exifData]="(exifContainer$ | async)?.maker"></app-exif-table>
+        </mat-tab>
+        <mat-tab label="Composite">
+            <app-exif-table [exifData]="(exifContainer$ | async)?.composite"></app-exif-table>
+        </mat-tab>
+    </mat-tab-group>
+
+</app-sidebar-card>

@@ -1,13 +1,12 @@
-<mat-card>
-    <mat-card-title>
-        <mat-icon [inline]="true">image_search</mat-icon> Category Teaser Chooser
-    </mat-card-title>
-    <mat-card-content>
-        <p>Current Teaser:</p>
-        <div class="teaser-img">
-            <img [src]="currentTeaserUrl$ | async" />
-        </div>
+<app-sidebar-card
+    [icon]="'image_search'"
+    [title]="'Category Teaser Chooser'">
 
-        <button mat-button (click)="onSetTeaser()" color="primary">Replace teaser with current photo</button>
-    </mat-card-content>
-</mat-card>
+    <p>Current Teaser:</p>
+    <div class="teaser-img">
+        <img [src]="currentTeaserUrl$ | async" />
+    </div>
+
+    <button mat-button (click)="onSetTeaser()" color="primary">Replace teaser with current photo</button>
+
+</app-sidebar-card>

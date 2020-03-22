@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, ChangeDetectionStrategy, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { NgxStarsComponent } from 'ngx-stars';
 

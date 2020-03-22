@@ -196,40 +196,6 @@ app-primary-nav {
     height: 100vh;
     justify-items: right;
 
-    app-category-teaser-chooser,
-    app-comments,
-    app-effects,
-    app-exif,
-    app-histogram,
-    app-metadata-editor,
-    app-minimap,
-    app-rating,
-    .gps-editor,
-    .bulk-filter {
-        margin: 8px 4px 0 4px;
-    }
-
-    mat-card {
-        padding: 8px;
-    }
-
-    & .panel-heading {
-        padding-left: 4px;
-        width: 100%;
-    }
-
-    & mat-card-title {
-        font-size: 16px;
-
-        & mat-icon {
-            margin-right: 8px;
-        }
-    }
-
-    & mat-divider {
-        margin: 0 2px 4px 2px;
-    }
-
     & .info-panel-grid {
         display: grid;
         grid-template-columns: 525px;

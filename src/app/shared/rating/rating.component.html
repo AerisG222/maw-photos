@@ -1,21 +1,20 @@
-<mat-card>
-    <mat-card-title>
-        <mat-icon [inline]="true">star</mat-icon> Rating
-    </mat-card-title>
-    <mat-card-content>
-        <table>
-            <tr>
-                <td>Your Rating</td>
-                <td>
-                    <ngx-stars [color]="'#edb867'" [maxStars]="5" [wholeStars]="true" (ratingOutput)="onRate($event)" #userRating></ngx-stars>
-                </td>
-            </tr>
-            <tr>
-                <td>Average Rating</td>
-                <td>
-                    <ngx-stars [color]="'#edb867'" [maxStars]="5" [readonly]="true" #averageRating></ngx-stars>
-                </td>
-            </tr>
-        </table>
-    </mat-card-content>
-</mat-card>
+<app-sidebar-card
+    [icon]="'star'"
+    [title]="'Rating'">
+
+    <table>
+        <tr>
+            <td>Your Rating</td>
+            <td>
+                <ngx-stars [color]="'#edb867'" [maxStars]="5" [wholeStars]="true" (ratingOutput)="onRate($event)" #userRating></ngx-stars>
+            </td>
+        </tr>
+        <tr>
+            <td>Average Rating</td>
+            <td>
+                <ngx-stars [color]="'#edb867'" [maxStars]="5" [readonly]="true" #averageRating></ngx-stars>
+            </td>
+        </tr>
+    </table>
+
+</app-sidebar-card>

@@ -1,29 +1,29 @@
-<mat-card>
-    <mat-card-title>
-        <mat-icon [inline]="true">comment</mat-icon> Comments
-    </mat-card-title>
-    <mat-card-content>
-        <div *ngFor="let comment of (comments$ | async)" class="comment-container">
-            <div class="comment-head">
-                <div>
-                    {{ comment.username }}
-                </div>
-                <div></div>
-                <div>
-                    {{ comment.entryDate | date : 'MM/dd/yyyy' }}
-                </div>
+<app-sidebar-card
+    [icon]="'comment'"
+    [title]="'Comments'">
+
+    <div *ngFor="let comment of (comments$ | async)" class="comment-container">
+        <div class="comment-head">
+            <div>
+                {{ comment.username }}
             </div>
-            <div class="comment">
-                {{ comment.commentText }}
+            <div></div>
+            <div>
+                {{ comment.entryDate | date : 'MM/dd/yyyy' }}
             </div>
         </div>
-        <form [formGroup]="form">
-            <mat-form-field appearance="standard" class="comment-input">
-                <textarea matInput formControlName="comment" placeholder="Add Comment" rows="3"></textarea>
-            </mat-form-field>
+        <div class="comment">
+            {{ comment.commentText }}
+        </div>
+    </div>
 
-            <button mat-button (click)="onComment()" color="primary">Save</button>
-            <button mat-button (click)="onCancel()" color="accent">Cancel</button>
-        </form>
-    </mat-card-content>
-</mat-card>
+    <form [formGroup]="form">
+        <mat-form-field appearance="standard" class="comment-input">
+            <textarea matInput formControlName="comment" placeholder="Add Comment" rows="3"></textarea>
+        </mat-form-field>
+
+        <button mat-button (click)="onComment()" color="primary">Save</button>
+        <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+    </form>
+
+</app-sidebar-card>

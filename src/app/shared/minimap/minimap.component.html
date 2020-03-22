@@ -1,16 +1,15 @@
-<mat-card>
-    <mat-card-title>
-        <mat-icon [inline]="true">map</mat-icon> Mini-Map
-    </mat-card-title>
-    <mat-card-content>
-        <google-map
-            [options]="options$ | async"
-            [center]="position$ | async"
-            [zoom]="minimapZoom$ | async"
-            (maptypeidChanged)="onMapTypeChange()"
-            (zoomChanged)="onZoomChange()"
-            #map>
-            <map-marker [position]="position$ | async"></map-marker>
-        </google-map>
-    </mat-card-content>
-</mat-card>
+<app-sidebar-card
+    [icon]="'map'"
+    [title]="'Mini-Map'">
+
+    <google-map
+        [options]="options$ | async"
+        [center]="position$ | async"
+        [zoom]="minimapZoom$ | async"
+        (maptypeidChanged)="onMapTypeChange()"
+        (zoomChanged)="onZoomChange()"
+        #map>
+        <map-marker [position]="position$ | async"></map-marker>
+    </google-map>
+
+</app-sidebar-card>
