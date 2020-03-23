@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 :host {
     display: grid;
     grid-template-columns: max-content auto;
@@ -37,7 +39,7 @@ form mat-icon {
     margin: 0 4px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     :host {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;

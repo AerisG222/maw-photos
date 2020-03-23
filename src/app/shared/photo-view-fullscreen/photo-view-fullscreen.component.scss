@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .fullscreen-grid {
     display: grid;
     grid-template-columns: max-content auto;
@@ -12,7 +14,7 @@ img {
     align-self: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     .fullscreen-grid {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;

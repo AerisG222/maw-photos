@@ -1,8 +1,10 @@
+@import '../../../variables';
+
 mat-divider {
     margin: 16px 8px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     mat-divider {
         display: inline;
         margin: 0;

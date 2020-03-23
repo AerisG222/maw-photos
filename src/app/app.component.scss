@@ -1,12 +1,14 @@
+@import '../variables';
+
 :host {
     display: grid;
     grid-template-rows: 100vh;
     grid-template-columns: max-content auto max-content;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     :host {
-        grid-template-rows: max-content auto 0;
+        grid-template-rows: max-content auto;
         grid-template-columns: 100%;
     }
 }

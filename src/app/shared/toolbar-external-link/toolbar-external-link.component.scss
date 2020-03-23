@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 a {
     width: 100%;
     min-width: 36px;
@@ -21,7 +23,7 @@ a {
     font-size: 14px !important;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     a {
         width: unset;
     }

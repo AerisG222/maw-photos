@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .video-grid {
     display: grid;
     grid-template-columns: max-content auto;
@@ -28,7 +30,7 @@ video {
     text-align: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     .video-grid {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;

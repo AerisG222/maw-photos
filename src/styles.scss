@@ -12,6 +12,7 @@ $custom-typography: mat-typography-config(
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+@import 'variables';
 @import 'themes/dark-theme';
 @import 'themes/light-theme';
 @import 'themes/mulled-wine-theme';
@@ -230,7 +231,7 @@ app-primary-nav {
     overflow-y: auto;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     .hide-on-mobile {
         display: none !important;
     }

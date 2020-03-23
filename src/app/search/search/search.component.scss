@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .main-grid {
     display: grid;
     grid-template-columns: max-content auto;
@@ -30,7 +32,7 @@ app-result-count {
     margin: 12px 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     .main-grid {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;

@@ -1,8 +1,10 @@
+@import '../../../variables';
+
 :host {
     text-align: center;
 }
 
-@media (max-width: 800px) {
+@media (max-width: $mobileBreakpoint) {
     :host {
         display: inline;
     }
