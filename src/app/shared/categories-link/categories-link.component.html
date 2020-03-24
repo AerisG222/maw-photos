@@ -1,8 +1,5 @@
-<a [routerLink]="['/categories']"
-    routerLinkActive="active"
-    mat-button
-    matTooltip="Browse Photos and Videos"
-    class="primary-nav-button"
-    [matTooltipPosition]="tooltipPosition">
-    <mat-icon>home</mat-icon>
-</a>
+<app-primary-nav-link
+    [icon]="'home'"
+    [routerLink]="['/categories']"
+    [tooltip]="'Browse Photos and Videos'">
+</app-primary-nav-link>

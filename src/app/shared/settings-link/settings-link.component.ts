@@ -1,5 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { TooltipPosition } from '@angular/material/tooltip';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-settings-link',
@@ -8,5 +7,5 @@ import { TooltipPosition } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsLinkComponent {
-    @Input() tooltipPosition: TooltipPosition = 'after';
+
 }

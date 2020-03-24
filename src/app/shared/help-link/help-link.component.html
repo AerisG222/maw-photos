@@ -1,8 +1,5 @@
-<a [routerLink]="['/help']"
-    routerLinkActive="active"
-    mat-button
-    matTooltip="Help / About"
-    class="primary-nav-button"
-    [matTooltipPosition]="tooltipPosition">
-    <mat-icon>help_outline</mat-icon>
-</a>
+<app-primary-nav-link
+    [icon]="'help_outline'"
+    [routerLink]="['/help']"
+    [tooltip]="'Help / About'">
+</app-primary-nav-link>

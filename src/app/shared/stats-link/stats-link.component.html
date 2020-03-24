@@ -1,8 +1,5 @@
-<a [routerLink]="['/stats']"
-    routerLinkActive="active"
-    mat-button
-    matTooltip="Statistics"
-    class="primary-nav-button"
-    [matTooltipPosition]="tooltipPosition">
-    <mat-icon>bar_chart</mat-icon>
-</a>
+<app-primary-nav-link
+    [icon]="'bar_chart'"
+    [routerLink]="['/stats']"
+    [tooltip]="'Statistics'">
+</app-primary-nav-link>

@@ -1,8 +1,5 @@
-<a [routerLink]="['/settings']"
-    routerLinkActive="active"
-    mat-button
-    matTooltip="Settings"
-    class="primary-nav-button"
-    [matTooltipPosition]="tooltipPosition">
-    <mat-icon>settings</mat-icon>
-</a>
+<app-primary-nav-link
+    [icon]="'settings'"
+    [routerLink]="['/settings']"
+    [tooltip]="'Settings'">
+</app-primary-nav-link>

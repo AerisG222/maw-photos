@@ -1,8 +1,5 @@
-<a [routerLink]="['/search']"
-    routerLinkActive="active"
-    mat-button
-    matTooltip="Search Photos and Videos"
-    class="primary-nav-button"
-    [matTooltipPosition]="tooltipPosition">
-    <mat-icon>search</mat-icon>
-</a>
+<app-primary-nav-link
+    [icon]="'search'"
+    [routerLink]="['/search']"
+    [tooltip]="'Search Photos and Videos'">
+</app-primary-nav-link>

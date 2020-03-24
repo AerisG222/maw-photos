@@ -1,8 +1,5 @@
-<a [routerLink]="['/random']"
-    routerLinkActive="active"
-    mat-button
-    matTooltip="Random Photos"
-    class="primary-nav-button"
-    [matTooltipPosition]="tooltipPosition">
-    <mat-icon>shuffle</mat-icon>
-</a>
+<app-primary-nav-link
+    [icon]="'shuffle'"
+    [routerLink]="['/random']"
+    [tooltip]="'Random Photos'">
+</app-primary-nav-link>

@@ -79,6 +79,7 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
 import { SidebarButtonGroupComponent } from './sidebar-button-group/sidebar-button-group.component';
 import { SidebarCardGroupComponent } from './sidebar-card-group/sidebar-card-group.component';
 import { SidebarButtonDividerComponent } from './sidebar-button-divider/sidebar-button-divider.component';
+import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.component';
 
 @NgModule({
     declarations: [
@@ -137,7 +138,8 @@ import { SidebarButtonDividerComponent } from './sidebar-button-divider/sidebar-
         ToolbarLinkComponent,
         SidebarButtonGroupComponent,
         SidebarCardGroupComponent,
-        SidebarButtonDividerComponent
+        SidebarButtonDividerComponent,
+        PrimaryNavLinkComponent
     ],
     imports: [
         CommonModule,

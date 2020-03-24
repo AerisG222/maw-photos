@@ -1,5 +1,4 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-help-link',
@@ -8,5 +7,5 @@ import { TooltipPosition } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HelpLinkComponent {
-    @Input() tooltipPosition: TooltipPosition = 'after';
+
 }
