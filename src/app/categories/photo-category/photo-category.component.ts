@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import {
-    LayoutStoreActions,
     PhotoCategoryStoreActions,
     PhotoStoreSelectors, PhotoStoreActions,
     SettingsStoreActions
@@ -49,7 +48,6 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
         this.store$.dispatch(PhotoStoreActions.clearRequest());
         this.store$.dispatch(SettingsStoreActions.loadRequest());
-        this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
 
         this.destroySub.add(this.route.params
             .pipe(
@@ -61,7 +59,6 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
         this.store$.dispatch(PhotoStoreActions.setCurrent({ photo: null }));
         this.destroySub.unsubscribe();
     }

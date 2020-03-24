@@ -11,7 +11,6 @@ import { Video } from 'src/app/core/models/video.model';
 import { Settings } from 'src/app/core/models/settings.model';
 import { Category } from 'src/app/core/models/category.model';
 import {
-    LayoutStoreActions,
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoCategoryStoreActions,
@@ -78,7 +77,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
         this.store$.dispatch(VideoStoreActions.clearRequest());
         this.store$.dispatch(SettingsStoreActions.loadRequest());
-        this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
 
         this.destroySub.add(this.route.params
             .pipe(
@@ -90,7 +88,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
         this.destroySub.unsubscribe();
         this.setCurrentVideo(null);
     }

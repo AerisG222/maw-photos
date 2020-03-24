@@ -31,15 +31,16 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/category-header/category-header.component.theme';
 @import 'app/shared/comments/comments.component.theme';
 @import 'app/shared/exif-table/exif-table.component.theme';
-@import 'app/shared/photo-info-panel/photo-info-panel.component.theme';
 @import 'app/shared/photo-list/photo-list.component.theme';
 @import 'app/shared/photo-view/photo-view.component.theme';
 @import 'app/shared/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
 @import 'app/shared/primary-nav/primary-nav.component.theme';
+@import 'app/shared/sidebar-button/sidebar-button.component.theme';
+@import 'app/shared/sidebar-button-group/sidebar-button-group.component.theme';
+@import 'app/shared/sidebar-card-group/sidebar-card-group.component.theme';
 @import 'app/shared/toolbar/toolbar.component.theme';
 @import 'app/shared/toolbar-button/toolbar-button.component.theme';
 @import 'app/shared/toolbar-link/toolbar-link.component.theme';
-@import 'app/shared/video-info-panel/video-info-panel.component.theme';
 
 @import 'app/stats/header/stats-header.component.theme';
 
@@ -62,20 +63,6 @@ $custom-typography: mat-typography-config(
     }
 }
 
-@mixin sidebar-button-theme($theme) {
-    $accent: map-get($theme, accent);
-
-    button.sidebar-button {
-        cursor: pointer;
-    }
-
-    button.sidebar-button:enabled:hover,
-    button.sidebar-button:enabled.active {
-        background-color: rgba(mat-color($accent, 700), .42);
-        color: mat-color($accent, 100);
-    }
-}
-
 // you only have to add additional componenets here (instead of in every theme class)
 @mixin custom-components-theme($theme) {
     @include app-component-theme($theme);
@@ -88,19 +75,19 @@ $custom-typography: mat-typography-config(
     @include app-year-list-component-theme($theme);
 
     @include primary-nav-button-theme($theme);
-    @include sidebar-button-theme($theme);
     @include app-category-header-component-theme($theme);
     @include app-comments-component-theme($theme);
     @include app-exif-table-component-theme($theme);
-    @include app-photo-info-panel-component-theme($theme);
     @include app-photo-list-component-theme($theme);
     @include app-photo-view-component-theme($theme);
     @include app-photo-view-bulk-edit-component-theme($theme);
     @include app-primary-nav-component-theme($theme);
+    @include app-sidebar-button-theme($theme);
+    @include app-sidebar-button-group-component-theme($theme);
+    @include app-sidebar-card-group-component-theme($theme);
     @include app-toolbar-component-theme($theme);
     @include app-toolbar-button-theme($theme);
     @include app-toolbar-link-theme($theme);
-    @include app-video-info-panel-component-theme($theme);
 
     @include app-stats-header-component-theme($theme);
 
@@ -167,10 +154,6 @@ app-primary-nav {
     }
 }
 
-.sidebar-button {
-    border-radius: 0 !important;
-}
-
 .stats-layout-grid {
     display: grid;
     grid-template-columns: auto;
@@ -187,40 +170,6 @@ app-primary-nav {
 
     & mat-radio-button {
         margin-right: 8px;
-    }
-}
-
-.info-panel {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    grid-template-rows: 100%;
-    height: 100vh;
-    justify-items: right;
-
-    & .info-panel-grid {
-        display: grid;
-        grid-template-columns: 525px;
-        grid-template-rows: repeat(50, max-content);
-        height: 100%;
-    }
-
-    & .toolbar-grid {
-        display: grid;
-        grid-template-columns: max-content;
-        grid-template-rows: repeat(20, max-content);
-        grid-row-gap: 4px;
-        height: 100%;
-
-        & .mat-button {
-            min-width: 24px;
-            font-size: 18px;
-            line-height: 24px;
-            padding: 0;
-        }
-    }
-
-    & .content-scroll-pane {
-        overflow-x: hidden !important;
     }
 }
 

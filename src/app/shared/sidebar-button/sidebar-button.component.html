@@ -1,1 +1,9 @@
-<p>sidebar-button works!</p>
+<button
+    mat-button
+    [class.active]="isActive"
+    [disabled]="isDisabled"
+    [matTooltip]="tooltip"
+    [matTooltipPosition]="'before'"
+    #button>
+    <mat-icon [inline]="true">{{icon}}</mat-icon>
+</button>

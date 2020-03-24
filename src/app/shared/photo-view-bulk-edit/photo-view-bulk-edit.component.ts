@@ -1,5 +1,5 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
 import { tap, first, map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { tap, first, map } from 'rxjs/operators';
 import { Category } from 'src/app/core/models/category.model';
 import { LayoutStoreActions, PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 import { Photo } from 'src/app/core/models/photo.model';
-import { sidebarInfoPanelShow, sidebarInfoPanelHide, toolbarShow } from '../animations';
+import { sidebarCardShow, sidebarCardHide, toolbarShow } from '../animations';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
 
 @Component({
@@ -17,10 +17,10 @@ import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
     animations: [
         trigger('toggleInfoPanel', [
             transition(':enter', [
-                useAnimation(sidebarInfoPanelShow)
+                useAnimation(sidebarCardShow)
             ]),
             transition(':leave', [
-                useAnimation(sidebarInfoPanelHide)
+                useAnimation(sidebarCardHide)
             ])
         ]),
         trigger('toolbarFadeIn', [
@@ -30,7 +30,7 @@ import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
         ])
     ]
 })
-export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
+export class PhotoViewBulkEditComponent implements OnInit {
     category$: Observable<Category>;
     photos$: Observable<Photo[]>;
     showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
@@ -64,10 +64,6 @@ export class PhotoViewBulkEditComponent implements OnInit, OnDestroy {
                     }
                 })
             )
-    }
-
-    ngOnDestroy(): void {
-        this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
     }
 
     onShowPhotosWithGpsData(doShow: boolean): void {

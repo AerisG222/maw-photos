@@ -12,20 +12,6 @@ const reducer = createReducer(
             isRightNavDisplayed: false
         }
     })),
-    on(LayoutActions.openRightSidebarRequest, state => ({
-        ...state,
-        layout: {
-            ...state.layout,
-            isRightNavDisplayed: true
-        }
-    })),
-    on(LayoutActions.closeRightSidebarRequest, state => ({
-        ...state,
-        layout: {
-            ...state.layout,
-            isRightNavDisplayed: false
-        }
-    })),
     on(LayoutActions.toggleFullscreenRequest, state => ({
         ...state,
         layout: {

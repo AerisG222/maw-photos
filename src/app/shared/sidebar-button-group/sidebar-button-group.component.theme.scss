@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+@mixin app-sidebar-button-group-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-sidebar-button-group {
+        background-color: rgba(mat-color($accent, 700), .2);
+    }
+}

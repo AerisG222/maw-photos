@@ -116,7 +116,6 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
 
     onToggleBulkEditView(): void {
         this.store$.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
-        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
     }
 
     onMoveNext(): void {

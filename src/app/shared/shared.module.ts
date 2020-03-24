@@ -39,7 +39,6 @@ import { HelpLinkComponent } from './help-link/help-link.component';
 import { HistogramComponent } from './histogram/histogram.component';
 import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
-import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
 import { MinimapComponent } from './minimap/minimap.component';
@@ -75,9 +74,11 @@ import { ToolbarDividerComponent } from './toolbar-divider/toolbar-divider.compo
 import { ToolbarExternalLinkComponent } from './toolbar-external-link/toolbar-external-link.component';
 import { ToolbarGroupComponent } from './toolbar-group/toolbar-group.component';
 import { ToolbarLinkComponent } from './toolbar-link/toolbar-link.component';
-import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
 import { BulkEditFilterComponent } from './bulk-edit-filter/bulk-edit-filter.component';
 import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps-editor.component';
+import { SidebarButtonGroupComponent } from './sidebar-button-group/sidebar-button-group.component';
+import { SidebarCardGroupComponent } from './sidebar-card-group/sidebar-card-group.component';
+import { SidebarButtonDividerComponent } from './sidebar-button-divider/sidebar-button-divider.component';
 
 @NgModule({
     declarations: [
@@ -99,7 +100,6 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
         HistogramComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
-        InfoPanelComponent,
         MapViewComponent,
         MetadataEditorComponent,
         MinimapComponent,
@@ -135,7 +135,9 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
         ToolbarDividerComponent,
         ToolbarExternalLinkComponent,
         ToolbarLinkComponent,
-        VideoInfoPanelComponent
+        SidebarButtonGroupComponent,
+        SidebarCardGroupComponent,
+        SidebarButtonDividerComponent
     ],
     imports: [
         CommonModule,
@@ -196,6 +198,7 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
         CategoryHeaderComponent,
         CategoriesLinkComponent,
         CategoryListToolbarComponent,
+        CategoryTeaserChooserComponent,
         CommentsComponent,
         EffectsComponent,
         ExifComponent,
@@ -204,7 +207,6 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
         HistogramComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
-        InfoPanelComponent,
         MapViewComponent,
         MetadataEditorComponent,
         MinimapComponent,
@@ -227,7 +229,10 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
         SearchLinkComponent,
         SettingsLinkComponent,
         SidebarButtonComponent,
+        SidebarButtonDividerComponent,
+        SidebarButtonGroupComponent,
         SidebarCardComponent,
+        SidebarCardGroupComponent,
         SidebarCardDividerComponent,
         SidebarComponent,
         SlideshowButtonComponent,
@@ -237,8 +242,7 @@ import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps
         ToolbarDividerComponent,
         ToolbarExternalLinkComponent,
         ToolbarGroupComponent,
-        ToolbarLinkComponent,
-        VideoInfoPanelComponent
+        ToolbarLinkComponent
     ]
 })
 export class SharedModule { }

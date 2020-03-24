@@ -9,7 +9,7 @@ export const sidebarHide = animation([
     animate('200ms ease-out', style({ width: 0 }))
 ]);
 
-export const sidebarInfoPanelShow = animation([
+export const sidebarCardShow = animation([
     style({
         'max-height': 0,
         opacity: 0
@@ -20,7 +20,7 @@ export const sidebarInfoPanelShow = animation([
     }))
 ]);
 
-export const sidebarInfoPanelHide = animation([
+export const sidebarCardHide = animation([
     animate('200ms ease-out', style({
         height: 0,
         opacity: 0

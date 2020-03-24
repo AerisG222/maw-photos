@@ -3,7 +3,7 @@
 :host {
     display: grid;
     grid-template-rows: 100vh;
-    grid-template-columns: max-content auto max-content;
+    grid-template-columns: max-content auto;
 }
 
 @media (max-width: $mobileBreakpoint) {

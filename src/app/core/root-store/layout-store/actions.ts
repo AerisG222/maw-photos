@@ -4,14 +4,6 @@ export const resetLayoutRequest = createAction(
     '[Layout] Reset Request'
 );
 
-export const openRightSidebarRequest = createAction(
-    '[Layout] Open Right Sidebar Request'
-);
-
-export const closeRightSidebarRequest = createAction(
-    '[Layout] Close Right Sidebar Request'
-);
-
 export const enterFullscreenRequest = createAction(
     '[Layout] Enter Fullscreen Request'
 );

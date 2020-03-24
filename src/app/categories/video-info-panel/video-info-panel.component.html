@@ -2,48 +2,33 @@
     <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
         <app-rating
             *ngIf="showRatings$ | async"
-            [mode]="ratingMode.Photos"
-            @toggleInfoPanel>
+            [mode]="ratingMode.Videos"
+            @sidebarCardShowHide>
         </app-rating>
 
         <app-comments
             *ngIf="showComments$ | async"
-            [mode]="commentMode.Photos"
-            @toggleInfoPanel>
+            [mode]="commentMode.Videos"
+            @sidebarCardShowHide>
         </app-comments>
-
-        <app-exif
-            *ngIf="showExif$ | async"
-            @toggleInfoPanel>
-        </app-exif>
-
-        <app-effects
-            *ngIf="showEffects$ | async"
-            @toggleInfoPanel>
-        </app-effects>
-
-        <app-histogram
-            *ngIf="showHistogram$ | async"
-            @toggleInfoPanel>
-        </app-histogram>
 
         <app-minimap
             *ngIf="showMinimap$ | async"
-            [mode]="minimapMode.Photos"
-            @toggleInfoPanel>
+            [mode]="minimapMode.Videos"
+            @sidebarCardShowHide>
         </app-minimap>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-metadata-editor
                 *ngIf="showMetadataEditor$ | async"
-                [mode]="metadataEditorMode.Photos"
-                @toggleInfoPanel>
+                [mode]="metadataEditorMode.Videos"
+                @sidebarCardShowHide>
             </app-metadata-editor>
 
             <app-category-teaser-chooser
                 *ngIf="showCategoryTeaserChooser$ | async"
-                [mode]="categoryTeaserChooserMode.Photos"
-                @toggleInfoPanel>
+                [mode]="categoryTeaserChooserMode.Videos"
+                @sidebarCardShowHide>
             </app-category-teaser-chooser>
         </ng-container>
     </app-sidebar-card-group>
@@ -77,36 +62,6 @@
             [shortcutHelp]="'Show/Hide Comments'"
             [tooltip]="'Show/Hide Comments (C)'"
             (click)="toggleComments()">
-        </app-sidebar-button>
-
-        <app-sidebar-button
-            [icon]="'tune'"
-            [isActive]="showExif$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
-            [shortcutKey]="'w'"
-            [shortcutHelp]="'Show/Hide EXIF'"
-            [tooltip]="'Show/Hide EXIF (W)'"
-            (click)="toggleExif()">
-        </app-sidebar-button>
-
-        <app-sidebar-button
-            [icon]="'photo_filter'"
-            [isActive]="showEffects$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
-            [shortcutKey]="'e'"
-            [shortcutHelp]="'Show/Hide Effects'"
-            [tooltip]="'Show/Hide Effects (E)'"
-            (click)="toggleEffects()">
-        </app-sidebar-button>
-
-        <app-sidebar-button
-            [icon]="'color_lens'"
-            [isActive]="showHistogram$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
-            [shortcutKey]="'h'"
-            [shortcutHelp]="'Show/Hide Histogram'"
-            [tooltip]="'Show/Hide Histogram (H)'"
-            (click)="toggleEffects()">
         </app-sidebar-button>
 
         <app-sidebar-button

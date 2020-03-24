@@ -3,6 +3,8 @@
     [title]="'Mini-Map'">
 
     <google-map
+        [height]="'300px'"
+        [width]="'464px'"
         [options]="options$ | async"
         [center]="position$ | async"
         [zoom]="minimapZoom$ | async"

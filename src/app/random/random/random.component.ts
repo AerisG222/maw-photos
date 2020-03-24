@@ -4,7 +4,6 @@ import { Subject, interval, Subscription, Observable } from 'rxjs';
 import { tap, take, takeUntil, filter } from 'rxjs/operators';
 
 import {
-    LayoutStoreActions,
     PhotoStoreActions,
     PhotoStoreSelectors,
     PhotoCategoryStoreActions,
@@ -63,13 +62,11 @@ export class RandomComponent implements OnInit, OnDestroy {
         );
 
         this.store$.dispatch(SettingsStoreActions.loadRequest());
-        this.store$.dispatch(LayoutStoreActions.openRightSidebarRequest());
         this.store$.dispatch(PhotoStoreActions.loadMultipleRandomRequest({ count: 10 }));
     }
 
     ngOnDestroy(): void {
         this.killFetch.next(true);
-        this.store$.dispatch(LayoutStoreActions.closeRightSidebarRequest());
         this.store$.dispatch(PhotoStoreActions.setCurrent({ photo: null }));
         this.destroySub.unsubscribe();
     }

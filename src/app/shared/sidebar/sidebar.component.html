@@ -1,3 +1,5 @@
-<div *ngIf="(showSidebar$ | async)">
-    <app-info-panel *ngIf="(hidePanel$ | async) === false"></app-info-panel>
+<ng-content select="app-sidebar-card-group"></ng-content>
+
+<div>
+    <ng-content select="app-sidebar-button-group"></ng-content>
 </div>

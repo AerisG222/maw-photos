@@ -12,7 +12,6 @@ import { LayoutStoreSelectors } from 'src/app/core/root-store';
 })
 export class SidebarComponent implements OnInit {
     hidePanel$: Observable<boolean>;
-    showSidebar$: Observable<boolean>;
 
     constructor(
         private store$: Store<{}>
@@ -21,11 +20,6 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.showSidebar$ = this.store$
-            .pipe(
-                select(LayoutStoreSelectors.selectShowRightSidebar)
-            );
-
         this.hidePanel$ = this.store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsFullscreen)

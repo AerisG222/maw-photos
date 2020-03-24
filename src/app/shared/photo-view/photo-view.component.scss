@@ -1,8 +1,8 @@
 @import '../../../variables';
 
-.photo-grid {
+:host {
     display: grid;
-    grid-template-columns: max-content auto;
+    grid-template-columns: max-content auto max-content;
     grid-template-rows: 100%;
     height: 100vh;
 }
@@ -36,7 +36,7 @@ img {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    .photo-grid {
+    :host {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;
     }
