@@ -34,6 +34,7 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/photo-list/photo-list.component.theme';
 @import 'app/shared/photo-view/photo-view.component.theme';
 @import 'app/shared/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
+@import 'app/shared/primary-nav-link/primary-nav-link.component.theme';
 @import 'app/shared/primary-nav/primary-nav.component.theme';
 @import 'app/shared/sidebar-button/sidebar-button.component.theme';
 @import 'app/shared/sidebar-button-group/sidebar-button-group.component.theme';
@@ -44,22 +45,11 @@ $custom-typography: mat-typography-config(
 
 @import 'app/stats/header/stats-header.component.theme';
 
-
 @mixin mat-tooltip-background-override($theme) {
     $accent: map-get($theme, accent);
 
     mat-tooltip-component .mat-tooltip {
         background-color: mat-color($accent, 900) !important;
-    }
-}
-
-@mixin primary-nav-button-theme($theme) {
-    $accent: map-get($theme, accent);
-
-    a.primary-nav-button.active,
-    a.primary-nav-button:hover {
-        background-color: rgba(mat-color($accent, 700), .62);
-        color: mat-color($accent, 100);
     }
 }
 
@@ -74,7 +64,6 @@ $custom-typography: mat-typography-config(
     @include app-video-list-component-theme($theme);
     @include app-year-list-component-theme($theme);
 
-    @include primary-nav-button-theme($theme);
     @include app-category-header-component-theme($theme);
     @include app-comments-component-theme($theme);
     @include app-exif-table-component-theme($theme);
@@ -82,6 +71,7 @@ $custom-typography: mat-typography-config(
     @include app-photo-view-component-theme($theme);
     @include app-photo-view-bulk-edit-component-theme($theme);
     @include app-primary-nav-component-theme($theme);
+    @include app-primary-nav-link-component-theme($theme);
     @include app-sidebar-button-theme($theme);
     @include app-sidebar-button-group-component-theme($theme);
     @include app-sidebar-card-group-component-theme($theme);
@@ -139,18 +129,6 @@ img {
     &.rot90, &.rot270 {
         max-width: 100vh;
         height: 100vh;
-    }
-}
-
-app-primary-nav {
-    & .mat-button {
-        border-radius: 0 !important;
-
-        &:hover,
-        &:focus,
-        &.active {
-            box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 5px 0 rgba(0, 0, 0, 0.14), 0 1px 0 0 rgba(0, 0, 0, 0.12);
-        }
     }
 }
 
