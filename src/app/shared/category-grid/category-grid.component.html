@@ -1,11 +1,7 @@
-<div class="category_holder">
-    <div class="category-grid">
-        <app-category-card
-            *ngFor="let category of categories; trackBy: categoryTrackByFn"
-            [category]="category"
-            [showTitle]="showTitles"
-            [showYear]="showYears"
-            [thumbnailSize]="thumbnailSize">
-        </app-category-card>
-    </div>
-</div>
+<app-category-card
+    *ngFor="let category of categories; trackBy: categoryTrackByFn"
+    [category]="category"
+    [showTitle]="showTitles"
+    [showYear]="showYears"
+    [thumbnailSize]="thumbnailSize">
+</app-category-card>

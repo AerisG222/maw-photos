@@ -1,14 +1,12 @@
-<div>
-    <span class="mat-h1" *ngIf="!year">
-        {{ title }}
-    </span>
+<span class="mat-h1" *ngIf="!year">
+    {{ title }}
+</span>
 
-    <a (click)="onBack()" class="mat-h1" *ngIf="year">
-        {{ title }}
-    </a>
+<a (click)="onBack()" class="mat-h1" *ngIf="year">
+    {{ title }}
+</a>
 
-    <span *ngIf="year" class="mat-h1">
-        <mat-icon>chevron_right</mat-icon>
-        {{year}}
-    </span>
-</div>
+<span *ngIf="year" class="mat-h1">
+    <mat-icon>chevron_right</mat-icon>
+    {{year}}
+</span>

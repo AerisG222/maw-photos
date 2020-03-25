@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-.main-grid {
+:host {
     display: grid;
     grid-template-columns: max-content auto max-content;
     grid-template-rows: 100%;
@@ -24,7 +24,7 @@ mat-divider {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    .main-grid {
+    :host {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto max-content;
     }

@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-.fullscreen-grid {
+:host {
     display: grid;
     grid-template-columns: max-content auto;
     grid-template-rows: 100%;
@@ -15,7 +15,7 @@ img {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    .fullscreen-grid {
+    :host {
         grid-template-columns: 100%;
         grid-template-rows: max-content auto;
     }

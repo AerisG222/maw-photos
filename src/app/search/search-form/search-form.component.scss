@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-.filter-grid {
+:host {
     display: grid;
     grid-template-columns: max-content max-content;
     grid-template-rows: max-content;
@@ -30,7 +30,7 @@ input:-webkit-autofill:active {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    .filter-grid {
+    :host {
         grid-template-columns: 100%;
         grid-template-rows: max-content max-content;
     }

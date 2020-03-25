@@ -1,9 +1,7 @@
-<div class="filter-grid">
-    <form [formGroup]="form">
-        <mat-form-field appearance="standard">
-            <mat-label>Search Terms</mat-label>
-            <input type="search" matInput formControlName="query" />
-        </mat-form-field>
-        <button mat-button (click)="onSearch()" color="primary"><mat-icon>search</mat-icon> Search</button>
-    </form>
-</div>
+<form [formGroup]="form">
+    <mat-form-field appearance="standard">
+        <mat-label>Search Terms</mat-label>
+        <input type="search" matInput formControlName="query" />
+    </mat-form-field>
+    <button mat-button (click)="onSearch()" color="primary"><mat-icon>search</mat-icon> Search</button>
+</form>

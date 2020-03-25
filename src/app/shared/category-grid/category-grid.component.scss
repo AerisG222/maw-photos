@@ -1,13 +1,10 @@
-.category_holder {
-    margin-bottom: 8px;
-}
-
-.category-grid {
+:host {
     display: flex;
     flex-flow: row wrap;
     place-content: stretch center;
     align-items: stretch;
     padding: 4px;
+    margin-bottom: 8px;
 }
 
 app-category-card {
