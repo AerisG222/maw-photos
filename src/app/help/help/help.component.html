@@ -1,253 +1,249 @@
-<div class="content-scroll-pane-no-inner-toolbar">
-    <div class="content-scroll-pane-content">
-        <div class="help-grid">
-            <div></div>
-
-            <div class="content-grid">
-                <div class="logo">
-                    <img src="/android-chrome-192x192.png" />
-                </div>
-                <div class="title">
-                    <a href="https://www.mikeandwan.us">mikeandwan.us</a>
-                </div>
-                <div class="title">
-                    Photos
-                </div>
-                <div class="version">
-                    v{{ version }}
-                </div>
-
-                <mat-tab-group>
-                    <mat-tab label="Help">
-                        <h3><mat-icon>home</mat-icon> - Category View</h3>
-                        <p>
-                            Browse photos and videos by year and category.
-                        </p>
-
-                        <h3><mat-icon>search</mat-icon> - Search</h3>
-                        <p>
-                            Search photo and video categories.
-                        </p>
-
-                        <h3><mat-icon>shuffle</mat-icon> - Random</h3>
-                        <p>
-                            Play though an unending list of random photos.
-                        </p>
-
-                        <h3><mat-icon>bar_chart</mat-icon> - Statistics</h3>
-                        <p>
-                            View statistics for all photos and videos.
-                        </p>
-
-                        <h3><mat-icon>help_outline</mat-icon> - Help</h3>
-                        <p>
-                            This help screen.  Also view release notes.
-                        </p>
-
-                        <h3><mat-icon>settings</mat-icon> - Settings</h3>
-                        <p>
-                            Adjust all settings from one screen to optimize your experience.
-                            Many of these settings are also available throughout the application, primarily in context sensitive toolbars,
-                            often with support for keyboard control.
-                        </p>
-
-                        <h3>Keyboard Shortcuts</h3>
-                        <p>
-                            Throughout the app, toolbars and other controls can often be controlled via the keyboard in addition to
-                            the on screen buttons.  To view the available keyboard shortcuts for a given screen, just type '?'.
-                        </p>
-                    </mat-tab>
-                    <mat-tab label="Release Notes">
-                        <h3><span class="version">v1.2.0</span> - 03/11/2020</h3>
-                        <p>
-                            Additional admin tooling
-                        </p>
-
-                        <ul>
-                            <li>Add new screen for admins to bulk assign GPS data to multiple photos at once</li>
-                            <li>Update Angular to the latest version</li>
-                        </ul>
-
-                        <h3><span class="version">v1.1.1</span> - 02/29/2020</h3>
-                        <p>
-                            Minor Update
-                        </p>
-
-                        <ul>
-                            <li>Add new button to make overriding GPS a bit more efficient for the admin</li>
-                            <li>Update Angular to the latest version</li>
-                        </ul>
-
-                        <h3><span class="version">v1.1.0</span> - 02/23/2020</h3>
-                        <p>
-                            New admin functions and fixes
-                        </p>
-
-                        <ul>
-                            <li>New functions for admins to specify GPS overrides, and easily change the category teaser images</li>
-                            <li>Worked around concatMap issue so calls after the first work</li>
-                            <li>Update dependencies to latest versions</li>
-                        </ul>
-
-                        <h3><span class="version">v1.0.0</span> - 02/09/2020</h3>
-                        <p>
-                            Exciting updates to improve functionality and performance
-                        </p>
-
-                        <ul>
-                            <li>New feature to allow searching for photos and videos</li>
-                            <li>Improve UI, particularly around how the toolbar is presented more consistently and without overlapping other elements</li>
-                            <li>Leverage CSS grid for simplified and more performant layout behavior</li>
-                            <li>Remove use of flex-layout for improved performance and reduced size</li>
-                            <li>Photos/Videos enriched with additional metadata by reverse-geocoding GPS data</li>
-                            <li>Upgrade to Angular 9 with Ivy for improved performance</li>
-                            <li>Upgrade core libraries for improved functionality and performance</li>
-                            <li>Switch to the Angular Components Google Maps component, and fix some navigation issues in the old implementation</li>
-                            <li>Remove some of the ugly themes to reduce overall payload size</li>
-                            <li>Additional code refactoring and improvements across the app</li>
-                        </ul>
-
-                        <h3><span class="version">v0.5.3</span> - 08/31/2019</h3>
-                        <p>
-                            Fix image sizing issue on Chrome
-                        </p>
-
-                        <ul>
-                            <li>The image in chrome had been breaking out of the viewport, this forces it back into place.</li>
-                        </ul>
-
-                        <h3><span class="version">v0.5.2</span> - 07/27/2019</h3>
-                        <p>
-                            Additional improvements to the auth process
-                        </p>
-
-                        <ul>
-                            <li>Hopefully this is the last fix for auth that does not use the popup approach</li>
-                        </ul>
-
-                        <h3><span class="version">v0.5.1</span> - 07/21/2019</h3>
-                        <p>
-                            Fix auth issues (sorry Mahgo!), and minor updates
-                        </p>
-
-                        <ul>
-                            <li>Correct auth handling in callback html files</li>
-                            <li>Upgrade libraries</li>
-                        </ul>
-
-                        <h3><span class="version">v0.5.0</span> - 07/06/2019</h3>
-                        <p>
-                            Improved auth experience and upgrade Angular
-                        </p>
-
-                        <ul>
-                            <li>First attempt to login via popup to avoid reloading app for authentication</li>
-                            <li>Leverage library (ng-oidc-client) to simplify authentication code and integrate with Ngrx</li>
-                            <li>Upgrade to Angular 8</li>
-                        </ul>
-
-                        <h3><span class="version">v0.4.0</span> - 04/07/2019</h3>
-                        <p>
-                            Another attempt at cleaning up some of the clutter on the category listing page
-                        </p>
-
-                        <ul>
-                            <li>Introduce a new list view for categories</li>
-                            <li>Label the current filter icons so it is clear they are not interactive</li>
-                            <li>Prefer radio buttons in the settings page for small lists</li>
-                        </ul>
-
-                        <h3><span class="version">v0.3.3</span> - 04/02/2019</h3>
-                        <p>
-                            Minor Improvements:
-                        </p>
-
-                        <ul>
-                            <li>Make sure categories wrap titles to avoid different item counts per row</li>
-                            <li>Improve help page by linking back to main site</li>
-                        </ul>
-
-                        <h3><span class="version">v0.3.2</span> - 04/01/2019</h3>
-                        <p>
-                            More tweaking:
-                        </p>
-
-                        <ul>
-                            <li>Photo list scrolling should only scroll the photo list and not the whole page, which was particularly problematic in mobile</li>
-                            <li>Try another approach at filtering by year on the category listing page</li>
-                        </ul>
-
-                        <h3><span class="version">v0.3.1</span> - 03/30/2019</h3>
-                        <p>
-                            More mobile improvements:
-                        </p>
-
-                        <ul>
-                            <li>Improve toolbar display / function in mobile</li>
-                            <li>Fix info panel buttons on mobile view</li>
-                        </ul>
-
-                        <h3><span class="version">v0.3.0</span> - 03/29/2019</h3>
-                        <p>
-                            Implement a mobile friendly layout and try to reduce clutter on the main category listing page.  A handful
-                            of bug fixes and some more polish:
-                        </p>
-
-                        <ul>
-                            <li>Add options to de-clutter the main category listing page</li>
-                            <li>Add mobile friendly layout</li>
-                            <li>Add ability to select map types</li>
-                            <li>Re-introduce the download category button for photos</li>
-                            <li>Fix random view to show first photo</li>
-                            <li>Fix CORS settings to fix histograms</li>
-                        </ul>
-
-                        <h3><span class="version">v0.2.0</span> - 03/16/2019</h3>
-                        <p>
-                            Bug fixing, polishing and a few minor features in preparation for beta testing:
-                        </p>
-
-                        <ul>
-                            <li>Improve auth handling and deep linking</li>
-                            <li>Map view now restricts next and previous to only photos that appear on the map</li>
-                            <li>Increase statistic chart sizing</li>
-                            <li>Improve photo scaling on Firefox</li>
-                            <li>Scroll photo and video lists so current item is always visible</li>
-                            <li>Fix issue with histogram</li>
-                            <li>Fix issue with showing photo size stats</li>
-                            <li>Update photo/video lists so active/hovered items stand out more</li>
-                            <li>A number of other fixes and code improvements</li>
-                        </ul>
-
-                        <h3><span class="version">v0.1.0</span> - 03/14/2019</h3>
-                        <p>
-                            Initial Release
-                        </p>
-
-                        <ul>
-                            <li>Total rewrite (again) of the Photos application</li>
-                            <li>Integrates videos and statistics into single application</li>
-                            <li>Rating, commenting, and viewing map location for videos is now possible</li>
-                            <li>Improved interface and implementation</li>
-                        </ul>
-
-                        <p></p>
-                    </mat-tab>
-                    <mat-tab label="Android">
-                        <p class="android_text">
-                            If you have an Android device, consider installing the MaW Photos app for a native and streamlined
-                            experience on your device!  Click the icon below to go to the app in Google Play:
-                        </p>
-                        <p class="android_link">
-                            <a href="https://play.google.com/store/apps/details?id=us.mikeandwan.pictures" target="_blank">
-                                <mat-icon inline="true" class="android_icon">android</mat-icon>
-                            </a>
-                        </p>
-                    </mat-tab>
-                </mat-tab-group>
+<app-scroll-pane>
+    <div class="content-grid">
+        <div class="hero">
+            <div class="logo">
+                <img src="/android-chrome-192x192.png" />
             </div>
-
-            <div></div>
+            <div class="title">
+                <a href="https://www.mikeandwan.us">mikeandwan.us</a>
+            </div>
+            <div class="title">
+                Photos
+            </div>
+            <div class="version">
+                v{{ version }}
+            </div>
         </div>
+
+        <mat-tab-group>
+            <mat-tab label="Help">
+                <h3><mat-icon>home</mat-icon> - Category View</h3>
+                <p>
+                    Browse photos and videos by year and category.
+                </p>
+
+                <h3><mat-icon>search</mat-icon> - Search</h3>
+                <p>
+                    Search photo and video categories.
+                </p>
+
+                <h3><mat-icon>shuffle</mat-icon> - Random</h3>
+                <p>
+                    Play though an unending list of random photos.
+                </p>
+
+                <h3><mat-icon>bar_chart</mat-icon> - Statistics</h3>
+                <p>
+                    View statistics for all photos and videos.
+                </p>
+
+                <h3><mat-icon>help_outline</mat-icon> - Help</h3>
+                <p>
+                    This help screen.  Also view release notes.
+                </p>
+
+                <h3><mat-icon>settings</mat-icon> - Settings</h3>
+                <p>
+                    Adjust all settings from one screen to optimize your experience.
+                    Many of these settings are also available throughout the application, primarily in context sensitive toolbars,
+                    often with support for keyboard control.
+                </p>
+
+                <h3>Keyboard Shortcuts</h3>
+                <p>
+                    Throughout the app, toolbars and other controls can often be controlled via the keyboard in addition to
+                    the on screen buttons.  To view the available keyboard shortcuts for a given screen, just type '?'.
+                </p>
+            </mat-tab>
+
+            <mat-tab label="Release Notes">
+                <h3><span class="version">v1.2.0</span> - 03/11/2020</h3>
+                <p>
+                    Additional admin tooling
+                </p>
+
+                <ul>
+                    <li>Add new screen for admins to bulk assign GPS data to multiple photos at once</li>
+                    <li>Update Angular to the latest version</li>
+                </ul>
+
+                <h3><span class="version">v1.1.1</span> - 02/29/2020</h3>
+                <p>
+                    Minor Update
+                </p>
+
+                <ul>
+                    <li>Add new button to make overriding GPS a bit more efficient for the admin</li>
+                    <li>Update Angular to the latest version</li>
+                </ul>
+
+                <h3><span class="version">v1.1.0</span> - 02/23/2020</h3>
+                <p>
+                    New admin functions and fixes
+                </p>
+
+                <ul>
+                    <li>New functions for admins to specify GPS overrides, and easily change the category teaser images</li>
+                    <li>Worked around concatMap issue so calls after the first work</li>
+                    <li>Update dependencies to latest versions</li>
+                </ul>
+
+                <h3><span class="version">v1.0.0</span> - 02/09/2020</h3>
+                <p>
+                    Exciting updates to improve functionality and performance
+                </p>
+
+                <ul>
+                    <li>New feature to allow searching for photos and videos</li>
+                    <li>Improve UI, particularly around how the toolbar is presented more consistently and without overlapping other elements</li>
+                    <li>Leverage CSS grid for simplified and more performant layout behavior</li>
+                    <li>Remove use of flex-layout for improved performance and reduced size</li>
+                    <li>Photos/Videos enriched with additional metadata by reverse-geocoding GPS data</li>
+                    <li>Upgrade to Angular 9 with Ivy for improved performance</li>
+                    <li>Upgrade core libraries for improved functionality and performance</li>
+                    <li>Switch to the Angular Components Google Maps component, and fix some navigation issues in the old implementation</li>
+                    <li>Remove some of the ugly themes to reduce overall payload size</li>
+                    <li>Additional code refactoring and improvements across the app</li>
+                </ul>
+
+                <h3><span class="version">v0.5.3</span> - 08/31/2019</h3>
+                <p>
+                    Fix image sizing issue on Chrome
+                </p>
+
+                <ul>
+                    <li>The image in chrome had been breaking out of the viewport, this forces it back into place.</li>
+                </ul>
+
+                <h3><span class="version">v0.5.2</span> - 07/27/2019</h3>
+                <p>
+                    Additional improvements to the auth process
+                </p>
+
+                <ul>
+                    <li>Hopefully this is the last fix for auth that does not use the popup approach</li>
+                </ul>
+
+                <h3><span class="version">v0.5.1</span> - 07/21/2019</h3>
+                <p>
+                    Fix auth issues (sorry Mahgo!), and minor updates
+                </p>
+
+                <ul>
+                    <li>Correct auth handling in callback html files</li>
+                    <li>Upgrade libraries</li>
+                </ul>
+
+                <h3><span class="version">v0.5.0</span> - 07/06/2019</h3>
+                <p>
+                    Improved auth experience and upgrade Angular
+                </p>
+
+                <ul>
+                    <li>First attempt to login via popup to avoid reloading app for authentication</li>
+                    <li>Leverage library (ng-oidc-client) to simplify authentication code and integrate with Ngrx</li>
+                    <li>Upgrade to Angular 8</li>
+                </ul>
+
+                <h3><span class="version">v0.4.0</span> - 04/07/2019</h3>
+                <p>
+                    Another attempt at cleaning up some of the clutter on the category listing page
+                </p>
+
+                <ul>
+                    <li>Introduce a new list view for categories</li>
+                    <li>Label the current filter icons so it is clear they are not interactive</li>
+                    <li>Prefer radio buttons in the settings page for small lists</li>
+                </ul>
+
+                <h3><span class="version">v0.3.3</span> - 04/02/2019</h3>
+                <p>
+                    Minor Improvements:
+                </p>
+
+                <ul>
+                    <li>Make sure categories wrap titles to avoid different item counts per row</li>
+                    <li>Improve help page by linking back to main site</li>
+                </ul>
+
+                <h3><span class="version">v0.3.2</span> - 04/01/2019</h3>
+                <p>
+                    More tweaking:
+                </p>
+
+                <ul>
+                    <li>Photo list scrolling should only scroll the photo list and not the whole page, which was particularly problematic in mobile</li>
+                    <li>Try another approach at filtering by year on the category listing page</li>
+                </ul>
+
+                <h3><span class="version">v0.3.1</span> - 03/30/2019</h3>
+                <p>
+                    More mobile improvements:
+                </p>
+
+                <ul>
+                    <li>Improve toolbar display / function in mobile</li>
+                    <li>Fix info panel buttons on mobile view</li>
+                </ul>
+
+                <h3><span class="version">v0.3.0</span> - 03/29/2019</h3>
+                <p>
+                    Implement a mobile friendly layout and try to reduce clutter on the main category listing page.  A handful
+                    of bug fixes and some more polish:
+                </p>
+
+                <ul>
+                    <li>Add options to de-clutter the main category listing page</li>
+                    <li>Add mobile friendly layout</li>
+                    <li>Add ability to select map types</li>
+                    <li>Re-introduce the download category button for photos</li>
+                    <li>Fix random view to show first photo</li>
+                    <li>Fix CORS settings to fix histograms</li>
+                </ul>
+
+                <h3><span class="version">v0.2.0</span> - 03/16/2019</h3>
+                <p>
+                    Bug fixing, polishing and a few minor features in preparation for beta testing:
+                </p>
+
+                <ul>
+                    <li>Improve auth handling and deep linking</li>
+                    <li>Map view now restricts next and previous to only photos that appear on the map</li>
+                    <li>Increase statistic chart sizing</li>
+                    <li>Improve photo scaling on Firefox</li>
+                    <li>Scroll photo and video lists so current item is always visible</li>
+                    <li>Fix issue with histogram</li>
+                    <li>Fix issue with showing photo size stats</li>
+                    <li>Update photo/video lists so active/hovered items stand out more</li>
+                    <li>A number of other fixes and code improvements</li>
+                </ul>
+
+                <h3><span class="version">v0.1.0</span> - 03/14/2019</h3>
+                <p>
+                    Initial Release
+                </p>
+
+                <ul>
+                    <li>Total rewrite (again) of the Photos application</li>
+                    <li>Integrates videos and statistics into single application</li>
+                    <li>Rating, commenting, and viewing map location for videos is now possible</li>
+                    <li>Improved interface and implementation</li>
+                </ul>
+
+                <p></p>
+            </mat-tab>
+
+            <mat-tab label="Android">
+                <p class="android_text">
+                    If you have an Android device, consider installing the MaW Photos app for a native and streamlined
+                    experience on your device!  Click the icon below to go to the app in Google Play:
+                </p>
+                <p class="android_link">
+                    <a href="https://play.google.com/store/apps/details?id=us.mikeandwan.pictures" target="_blank">
+                        <mat-icon inline="true" class="android_icon">android</mat-icon>
+                    </a>
+                </p>
+            </mat-tab>
+        </mat-tab-group>
     </div>
-</div>
+<app-scroll-pane>

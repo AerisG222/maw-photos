@@ -7,35 +7,33 @@
     settings: settings$ | async,
     activeVideo: activeVideo$ | async
 } as data">
-    <div class="content-scroll-pane">
-        <div class="content-scroll-pane-content">
-            <div class="main-video-grid">
-                <div class="category-header">
-                    <app-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
-                </div>
-
-                <div *ngIf="data.activeVideo" class="video-container">
-                    <video
-                        #videoRef
-                        class="center-block"
-                        autoplay="false"
-                        [ngStyle]="getVideoDimensions(data.activeVideo)"
-                        controls>
-                        <source [src]="getVideoUrl(data.activeVideo)" type="video/mp4" />
-                        Your browser does not support the <code>video</code> element.
-                    </video>
-                </div>
-
-                <app-video-list
-                    *ngIf="data.videos && data.settings?.videoListShowVideoList"
-                    [videos]="data.videos"
-                    [thumbnailSize]="data.settings?.videoListThumbnailSize"
-                    [selectedVideo]="data.activeVideo"
-                    (videoSelected)="onSelectVideo($event)">
-                </app-video-list>
+    <app-scroll-pane>
+        <div class="main-video-grid">
+            <div class="category-header">
+                <app-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
             </div>
+
+            <div *ngIf="data.activeVideo" class="video-container">
+                <video
+                    #videoRef
+                    class="center-block"
+                    autoplay="false"
+                    [ngStyle]="getVideoDimensions(data.activeVideo)"
+                    controls>
+                    <source [src]="getVideoUrl(data.activeVideo)" type="video/mp4" />
+                    Your browser does not support the <code>video</code> element.
+                </video>
+            </div>
+
+            <app-video-list
+                *ngIf="data.videos && data.settings?.videoListShowVideoList"
+                [videos]="data.videos"
+                [thumbnailSize]="data.settings?.videoListThumbnailSize"
+                [selectedVideo]="data.activeVideo"
+                (videoSelected)="onSelectVideo($event)">
+            </app-video-list>
         </div>
-    </div>
+    </app-scroll-pane>
 </ng-container>
 
 <app-video-info-panel></app-video-info-panel>

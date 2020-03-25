@@ -1,19 +1,11 @@
-.help-grid {
-    display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
-    grid-template-rows: 100%;
-    height: 100vh
-}
-
-.pad {
-    padding-top: 16px;
-}
+@import '../../../variables';
 
 .content-grid {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(4, max-content) auto;
+    grid-template-rows: max-content auto;
     height: 100vh;
+    padding: 0 20%;
 }
 
 mat-icon {
@@ -27,7 +19,7 @@ h3 {
 
 mat-tab-group {
     width: 100%;
-    margin-bottom: 24px;
+    height: 100%;
 }
 
 .logo {
@@ -81,5 +73,15 @@ mat-tab-group {
 
     & a:hover {
         background-color: transparent;
+    }
+}
+
+@media (max-width: $mobileBreakpoint) {
+    .content-grid {
+        padding: 8px;
+    }
+
+    mat-tab-group {
+        height: calc(100% + 50px);
     }
 }

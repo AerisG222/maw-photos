@@ -80,6 +80,8 @@ import { SidebarButtonGroupComponent } from './sidebar-button-group/sidebar-butt
 import { SidebarCardGroupComponent } from './sidebar-card-group/sidebar-card-group.component';
 import { SidebarButtonDividerComponent } from './sidebar-button-divider/sidebar-button-divider.component';
 import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.component';
+import { ScrollPaneComponent } from './scroll-pane/scroll-pane.component';
+import { ContentMarginComponent } from './content-margin/content-margin.component';
 
 @NgModule({
     declarations: [
@@ -139,7 +141,9 @@ import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.com
         SidebarButtonGroupComponent,
         SidebarCardGroupComponent,
         SidebarButtonDividerComponent,
-        PrimaryNavLinkComponent
+        PrimaryNavLinkComponent,
+        ScrollPaneComponent,
+        ContentMarginComponent
     ],
     imports: [
         CommonModule,
@@ -201,6 +205,7 @@ import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.com
         CategoryListToolbarComponent,
         CategoryTeaserChooserComponent,
         CommentsComponent,
+        ContentMarginComponent,
         EffectsComponent,
         ExifComponent,
         ExifTableComponent,
@@ -225,6 +230,7 @@ import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.com
         PhotoViewMapComponent,
         PrimaryNavComponent,
         RatingComponent,
+        ScrollPaneComponent,
         SidebarButtonComponent,
         SidebarButtonDividerComponent,
         SidebarButtonGroupComponent,

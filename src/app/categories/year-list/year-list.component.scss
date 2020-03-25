@@ -12,31 +12,12 @@ form mat-icon {
     font-size: 24px;
 }
 
-.category-margin-ten {
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.category-margin-twenty {
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
-.category-margin-thirty {
-    margin-left: 30%;
-    margin-right: 30%;
-}
-
 .filter-grid {
     display: grid;
     grid-template-columns: max-content max-content;
     grid-template-rows: max-content;
     grid-column-gap: 24px;
     justify-content: center;
-}
-
-.content-scroll-pane {
-    margin: 0 4px;
 }
 
 @media (max-width: $mobileBreakpoint) {

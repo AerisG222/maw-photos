@@ -12,27 +12,23 @@
 
         <mat-divider></mat-divider>
 
-        <div class="content-scroll-pane">
-            <div class="content-scroll-pane-content">
-                <app-photo-select-grid
-                    [photos]="photos$ | async"
-                    [selectedPhotos]="selectedPhotos"
-                    (photoSelected)="onPhotoSelected($event)"
-                    (photoDeselected)="onPhotoDeselected($event)">
-                </app-photo-select-grid>
-            </div>
-        </div>
+        <app-scroll-pane>
+            <app-photo-select-grid
+                [photos]="photos$ | async"
+                [selectedPhotos]="selectedPhotos"
+                (photoSelected)="onPhotoSelected($event)"
+                (photoDeselected)="onPhotoDeselected($event)">
+            </app-photo-select-grid>
+        </app-scroll-pane>
     </div>
 
-    <div class="info-panel" @toggleInfoPanel>
-        <div class="content-scroll-pane mat-elevation-z4">
-            <div class="content-scroll-pane-content">
-                <app-bulk-edit-panel
-                    (showPhotosWithGpsData)="onShowPhotosWithGpsData($event)"
-                    (selectAllPhotos)="onSelectAll($event)"
-                    (saveGps)="onSaveGps($event)">
-                </app-bulk-edit-panel>
-            </div>
-        </div>
+    <div class="info-panel mat-elevation-z4" @toggleInfoPanel>
+        <app-scroll-pane>
+            <app-bulk-edit-panel
+                (showPhotosWithGpsData)="onShowPhotosWithGpsData($event)"
+                (selectAllPhotos)="onSelectAll($event)"
+                (saveGps)="onSaveGps($event)">
+            </app-bulk-edit-panel>
+        </app-scroll-pane>
     </div>
 </div>

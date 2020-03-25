@@ -1,13 +1,11 @@
-<div>
-    <img
-        *ngFor="let photo of photos; trackBy: trackByPhoto"
-        #itemRef
-        [src]="photo.imageXsSq.url"
-        [ngClass]="thumbnailSize.klass"
-        [style.width.px]="imgWidth"
-        [style.height.px]="imgHeight"
-        [class.selected]="selectedPhoto?.id === photo.id"
-        [class.scrolled]="scrollIntoView(photo.id, itemRef)"
-        (click)="onClickPhoto(photo)"
-        loading="lazy" />
-</div>
+<img
+    *ngFor="let photo of photos; trackBy: trackByPhoto"
+    #itemRef
+    [src]="photo.imageXsSq.url"
+    [ngClass]="thumbnailSize.klass"
+    [style.width.px]="imgWidth"
+    [style.height.px]="imgHeight"
+    [class.selected]="selectedPhoto?.id === photo.id"
+    [class.scrolled]="scrollIntoView(photo.id, itemRef)"
+    (click)="onClickPhoto(photo)"
+    loading="lazy" />
