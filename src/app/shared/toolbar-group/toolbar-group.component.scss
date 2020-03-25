@@ -6,6 +6,7 @@
 
 @media (max-width: $mobileBreakpoint) {
     :host {
+        text-align: unset;
         display: inline;
     }
 }
