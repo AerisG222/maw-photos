@@ -1,13 +1,14 @@
 @import '../../../variables';
 
-.chart-container {
+:host {
+    display: block;
     min-height: 300px;
     width: calc(100vw - 140px);
     height: calc(100vh - 260px);
 }
 
 @media (max-width: $mobileBreakpoint) {
-    .chart-container {
+    :host {
         width: calc(100vw - 20px);
         height: calc(100vh - 360px);
     }

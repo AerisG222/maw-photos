@@ -1,14 +1,18 @@
-<div class="stats-layout-grid">
-    <div>
-        <app-stats-header (clickYear)="onRemoveYearFilter()" title="Combined Stats" [year]="selectedYear$ | async"></app-stats-header>
-    </div>
+<app-stats-layout>
 
-    <div class="stat-card-grid">
+    <app-stats-header
+        layout-header
+        [title]="'Combined Stats'"
+        [year]="selectedYear$ | async"
+        (clickYear)="onRemoveYearFilter()">
+    </app-stats-header>
+
+    <div layout-cards class="stat-card-grid">
         <app-stat-card *ngIf="(selectedYear$ | async) === null" [detail]="totalDetails$ | async"></app-stat-card>
         <app-stat-card *ngIf="selectedYear$ | async" [detail]="yearDetails$ | async"></app-stat-card>
     </div>
 
-    <form [formGroup]="form" class="stat-form-grid">
+    <form layout-form [formGroup]="form">
         <div>
             Aggregate By:
         </div>
@@ -20,11 +24,11 @@
         </div>
     </form>
 
-    <div>
-        <app-stat-chart
-            [chartData]="chartData$ | async"
-            [format]="chartValueFormat"
-            (cellSelected)="onSelectYear($event)">
-        </app-stat-chart>
-    </div>
-</div>
+    <app-stat-chart
+        layout-chart
+        [chartData]="chartData$ | async"
+        [format]="chartValueFormat"
+        (cellSelected)="onSelectYear($event)">
+    </app-stat-chart>
+
+</app-stats-layout>

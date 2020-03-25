@@ -1,10 +1,8 @@
-<div class="chart-container">
-    <ngx-charts-tree-map
-        *ngIf="chartData"
-        [scheme]="colorScheme"
-        [results]="chartData"
-        [valueFormatting]="formatFunc"
-        (select)="onSelect($event)"
-        #treeMap>
-    </ngx-charts-tree-map>
-</div>
+<ngx-charts-tree-map
+    *ngIf="chartData"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [valueFormatting]="formatFunc"
+    (select)="onSelect($event)"
+    #treeMap>
+</ngx-charts-tree-map>
