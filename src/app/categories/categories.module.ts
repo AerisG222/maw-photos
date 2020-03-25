@@ -7,7 +7,7 @@ import { CategoryTypeFilterComponent } from './category-type-filter/category-typ
 import { CategoryYearFilterComponent } from './category-year-filter/category-year-filter.component';
 import { PhotoCategoryComponent } from './photo-category/photo-category.component';
 import { VideoCategoryComponent } from './video-category/video-category.component';
-import { VideoInfoPanelComponent } from './video-info-panel/video-info-panel.component';
+import { VideoSidebarComponent } from './video-sidebar/video-sidebar.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { VideoListToolbarComponent } from './video-list-toolbar/video-list-toolbar.component';
 import { YearComponent } from './year/year.component';
@@ -19,7 +19,7 @@ import { YearListComponent } from './year-list/year-list.component';
         CategoryYearFilterComponent,
         PhotoCategoryComponent,
         VideoCategoryComponent,
-        VideoInfoPanelComponent,
+        VideoSidebarComponent,
         VideoListComponent,
         VideoListToolbarComponent,
         YearComponent,

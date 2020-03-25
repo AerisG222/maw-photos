@@ -13,9 +13,9 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
 import { CategoryTeaserChooserMode } from '../../shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
-    selector: 'app-video-info-panel',
-    templateUrl: './video-info-panel.component.html',
-    styleUrls: ['./video-info-panel.component.scss'],
+    selector: 'app-video-sidebar',
+    templateUrl: './video-sidebar.component.html',
+    styleUrls: ['./video-sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger('sidebarFlyInOut', [
@@ -36,7 +36,7 @@ import { CategoryTeaserChooserMode } from '../../shared/category-teaser-chooser/
         ])
     ]
 })
-export class VideoInfoPanelComponent implements OnInit {
+export class VideoSidebarComponent implements OnInit {
     commentMode = CommentMode;
     minimapMode = MinimapMode;
     ratingMode = RatingMode;

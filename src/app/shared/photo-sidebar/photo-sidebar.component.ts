@@ -16,9 +16,9 @@ import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.mode
 import { CategoryTeaserChooserMode } from '../category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
-    selector: 'app-photo-info-panel',
-    templateUrl: './photo-info-panel.component.html',
-    styleUrls: ['./photo-info-panel.component.scss'],
+    selector: 'app-photo-sidebar',
+    templateUrl: './photo-sidebar.component.html',
+    styleUrls: ['./photo-sidebar.component.scss'],
     animations: [
         trigger('sidebarFlyInOut', [
             transition(':enter', [
@@ -39,7 +39,7 @@ import { CategoryTeaserChooserMode } from '../category-teaser-chooser/category-t
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PhotoInfoPanelComponent implements OnInit {
+export class PhotoSidebarComponent implements OnInit {
     commentMode = CommentMode;
     minimapMode = MinimapMode;
     ratingMode = RatingMode;

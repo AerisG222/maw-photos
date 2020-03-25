@@ -44,7 +44,7 @@ import { MetadataEditorComponent } from './metadata-editor/metadata-editor.compo
 import { MinimapComponent } from './minimap/minimap.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
 import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
-import { PhotoInfoPanelComponent } from './photo-info-panel/photo-info-panel.component';
+import { PhotoSidebarComponent } from './photo-sidebar/photo-sidebar.component';
 import { PhotoListBulkEditToolbarComponent } from './photo-list-bulk-edit-toolbar/photo-list-bulk-edit-toolbar.component';
 import { PhotoListComponent } from './photo-list/photo-list.component';
 import { PhotoListFullscreenToolbarComponent } from './photo-list-fullscreen-toolbar/photo-list-fullscreen-toolbar.component';
@@ -96,6 +96,7 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         CategoryListToolbarComponent,
         CategoryTeaserChooserComponent,
         CommentsComponent,
+        ContentMarginComponent,
         EffectsComponent,
         ExifComponent,
         ExifTableComponent,
@@ -108,18 +109,19 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
-        PhotoInfoPanelComponent,
         PhotoListBulkEditToolbarComponent,
         PhotoListComponent,
         PhotoListFullscreenToolbarComponent,
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
         PhotoSelectGridComponent,
+        PhotoSidebarComponent,
         PhotoViewBulkEditComponent,
         PhotoViewComponent,
         PhotoViewFullscreenComponent,
         PhotoViewMapComponent,
         PrimaryNavComponent,
+        PrimaryNavLinkComponent,
         RandomLinkComponent,
         RatingComponent,
         RotateCounterClockwiseButtonComponent,
@@ -138,12 +140,10 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         ToolbarDividerComponent,
         ToolbarExternalLinkComponent,
         ToolbarLinkComponent,
+        ScrollPaneComponent,
         SidebarButtonGroupComponent,
         SidebarCardGroupComponent,
-        SidebarButtonDividerComponent,
-        PrimaryNavLinkComponent,
-        ScrollPaneComponent,
-        ContentMarginComponent
+        SidebarButtonDividerComponent
     ],
     imports: [
         CommonModule,
@@ -217,13 +217,13 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         MinimapComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
-        PhotoInfoPanelComponent,
         PhotoListComponent,
         PhotoListBulkEditToolbarComponent,
         PhotoListFullscreenToolbarComponent,
         PhotoListMapToolbarComponent,
         PhotoListToolbarComponent,
         PhotoSelectGridComponent,
+        PhotoSidebarComponent,
         PhotoViewBulkEditComponent,
         PhotoViewComponent,
         PhotoViewFullscreenComponent,
