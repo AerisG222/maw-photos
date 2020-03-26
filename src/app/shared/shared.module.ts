@@ -23,7 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxStarsModule } from 'ngx-stars';
 
-import { BulkEditPanelComponent } from './bulk-edit-panel/bulk-edit-panel.component';
+import { BulkEditSidebarComponent } from './bulk-edit-sidebar/bulk-edit-sidebar.component';
 import { CategoriesLinkComponent } from './categories-link/categories-link.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
@@ -87,7 +87,7 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
     declarations: [
         BulkEditFilterComponent,
         BulkEditGpsEditorComponent,
-        BulkEditPanelComponent,
+        BulkEditSidebarComponent,
         CategoryCardComponent,
         CategoryGridComponent,
         CategoryListComponent,
@@ -197,7 +197,7 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         // components
         BulkEditFilterComponent,
         BulkEditGpsEditorComponent,
-        BulkEditPanelComponent,
+        BulkEditSidebarComponent,
         CategoryCardComponent,
         CategoryGridComponent,
         CategoryListComponent,

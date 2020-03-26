@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BulkEditPanelComponent } from './bulk-edit-panel.component';
+import { BulkEditSidebarComponent } from './bulk-edit-sidebar.component';
 
-describe('BulkEditPanelComponent', () => {
-  let component: BulkEditPanelComponent;
-  let fixture: ComponentFixture<BulkEditPanelComponent>;
+describe('BulkEditSidebarComponent', () => {
+  let component: BulkEditSidebarComponent;
+  let fixture: ComponentFixture<BulkEditSidebarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BulkEditPanelComponent ]
+      declarations: [ BulkEditSidebarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BulkEditPanelComponent);
+    fixture = TestBed.createComponent(BulkEditSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

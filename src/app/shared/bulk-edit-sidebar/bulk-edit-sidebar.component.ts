@@ -3,12 +3,12 @@ import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angul
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
 
 @Component({
-    selector: 'app-bulk-edit-panel',
-    templateUrl: './bulk-edit-panel.component.html',
-    styleUrls: ['./bulk-edit-panel.component.scss'],
+    selector: 'app-bulk-edit-sidebar',
+    templateUrl: './bulk-edit-sidebar.component.html',
+    styleUrls: ['./bulk-edit-sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BulkEditPanelComponent {
+export class BulkEditSidebarComponent {
     @Output() showPhotosWithGpsData = new EventEmitter<boolean>();
     @Output() selectAllPhotos = new EventEmitter<boolean>();
     @Output() saveGps = new EventEmitter<GpsCoordinate>();

@@ -21,12 +21,8 @@
     </app-scroll-pane>
 </div>
 
-<div class="info-panel mat-elevation-z4" @toggleInfoPanel>
-    <app-scroll-pane>
-        <app-bulk-edit-panel
-            (showPhotosWithGpsData)="onShowPhotosWithGpsData($event)"
-            (selectAllPhotos)="onSelectAll($event)"
-            (saveGps)="onSaveGps($event)">
-        </app-bulk-edit-panel>
-    </app-scroll-pane>
-</div>
+<app-bulk-edit-sidebar
+    (showPhotosWithGpsData)="onShowPhotosWithGpsData($event)"
+    (selectAllPhotos)="onSelectAll($event)"
+    (saveGps)="onSaveGps($event)">
+</app-bulk-edit-sidebar>
