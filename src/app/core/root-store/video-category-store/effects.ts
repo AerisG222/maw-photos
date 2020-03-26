@@ -13,7 +13,7 @@ export class VideoCategoryStoreEffects {
     constructor(
         @Inject(videoApiServiceToken) private api: VideoApiService,
         private actions$: Actions,
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

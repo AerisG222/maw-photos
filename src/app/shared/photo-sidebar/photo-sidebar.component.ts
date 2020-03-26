@@ -59,7 +59,7 @@ export class PhotoSidebarComponent implements OnInit {
     enableButtons$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

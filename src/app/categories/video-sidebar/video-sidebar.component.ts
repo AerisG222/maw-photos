@@ -54,7 +54,7 @@ export class VideoSidebarComponent implements OnInit {
     enableButtons$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

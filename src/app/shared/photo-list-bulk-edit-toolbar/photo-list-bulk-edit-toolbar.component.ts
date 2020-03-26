@@ -10,7 +10,7 @@ import { PhotoStoreActions } from 'src/app/core/root-store';
 })
 export class PhotoListBulkEditToolbarComponent {
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     onToggleBulkEditView(): void {

@@ -15,7 +15,7 @@ export class PrimaryNavComponent implements OnInit {
     hideNav$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

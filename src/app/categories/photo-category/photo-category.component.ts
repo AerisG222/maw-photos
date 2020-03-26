@@ -25,7 +25,7 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

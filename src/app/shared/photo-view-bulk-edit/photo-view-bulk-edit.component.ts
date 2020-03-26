@@ -37,7 +37,7 @@ export class PhotoViewBulkEditComponent implements OnInit {
     selectedPhotos: Photo[] = [];
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

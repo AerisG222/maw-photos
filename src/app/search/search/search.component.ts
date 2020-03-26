@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     showNoResults$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

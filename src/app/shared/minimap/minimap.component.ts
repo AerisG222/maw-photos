@@ -26,7 +26,7 @@ export class MinimapComponent implements OnInit {
     minimapTheme$: Observable<google.maps.MapTypeStyle[]>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

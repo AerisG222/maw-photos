@@ -45,7 +45,7 @@ export class PhotoViewComponent implements OnInit {
     effects$: Observable<PhotoEffects>;
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private slideshowControlSvc: SlideshowControlService,  // do not remove, needed so service is created before use
         private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer

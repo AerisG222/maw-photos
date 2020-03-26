@@ -12,7 +12,7 @@ import { VideoCategory } from '../models/video-category.model';
 })
 export class VideoCategoriesResolverService implements Resolve<VideoCategory[]> {
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VideoCategory[]> | Observable<never> {

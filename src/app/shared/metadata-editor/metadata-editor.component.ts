@@ -25,7 +25,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     @Input() mode: MetadataEditorMode;
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private formBuilder: FormBuilder,
         private gps: GpsService
     ) {

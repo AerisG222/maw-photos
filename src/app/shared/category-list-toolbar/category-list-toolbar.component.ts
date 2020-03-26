@@ -25,7 +25,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     showCategoryTitles$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit(): void {

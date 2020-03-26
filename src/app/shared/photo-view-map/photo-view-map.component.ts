@@ -34,7 +34,7 @@ export class PhotoViewMapComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

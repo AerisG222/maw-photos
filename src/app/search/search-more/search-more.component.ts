@@ -18,7 +18,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
     private query: string;
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
     ) {
 
     }

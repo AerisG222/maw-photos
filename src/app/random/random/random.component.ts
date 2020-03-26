@@ -25,7 +25,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     isFullscreen$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

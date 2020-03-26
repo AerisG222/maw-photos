@@ -12,7 +12,7 @@ import { searchApiServiceToken, SearchApiService } from '../../services/search-a
 export class SearchStoreEffects {
     constructor(
         private actions$: Actions,
-        private store$: Store<{}>,
+        private store$: Store,
         @Inject(searchApiServiceToken) private api: SearchApiService,
     ) {
 

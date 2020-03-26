@@ -21,7 +21,7 @@ export class CategoryYearFilterComponent implements OnInit {
     selectedYear$: Observable<number|string>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

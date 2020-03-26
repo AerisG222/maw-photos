@@ -27,7 +27,7 @@ export class PhotoViewFullscreenComponent implements OnInit, OnDestroy {
     effects$: Observable<PhotoEffects>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

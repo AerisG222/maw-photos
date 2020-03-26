@@ -24,7 +24,7 @@ export class RatingComponent implements AfterViewInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private changeDetectorRef: ChangeDetectorRef
     ) {
 

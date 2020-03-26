@@ -28,7 +28,7 @@ export class YearComponent implements OnInit {
     gridShowTitles$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

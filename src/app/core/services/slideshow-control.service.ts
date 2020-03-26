@@ -16,7 +16,7 @@ export class SlideshowControlService {
     private settings$: Observable<Settings>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
         this.store$
             .pipe(

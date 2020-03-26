@@ -12,7 +12,7 @@ export class SettingsStoreEffects {
     constructor(
         private settingsService: SettingsService,
         private actions$: Actions,
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

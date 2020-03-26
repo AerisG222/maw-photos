@@ -24,7 +24,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     columnsToDisplay = ['entryDate', 'username', 'commentText'];
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private formBuilder: FormBuilder
     ) {
 

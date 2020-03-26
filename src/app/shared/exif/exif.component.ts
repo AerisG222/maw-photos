@@ -17,7 +17,7 @@ export class ExifComponent implements OnInit, OnDestroy {
     exifContainer$: Observable<ExifContainer>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

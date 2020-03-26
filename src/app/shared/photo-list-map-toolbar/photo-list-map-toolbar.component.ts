@@ -21,7 +21,7 @@ export class PhotoListMapToolbarComponent implements OnInit {
     private isLast: boolean;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

@@ -33,7 +33,7 @@ export class YearListComponent implements OnInit, OnDestroy {
     years$: Observable<number[]>;
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private activatedRoute: ActivatedRoute
     ) {
 

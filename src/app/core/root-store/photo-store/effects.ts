@@ -14,7 +14,7 @@ export class PhotoStoreEffects {
     constructor(
         private actions$: Actions,
         private exifFormatterService: ExifFormatterService,
-        private store$: Store<{}>,
+        private store$: Store,
         @Inject(photoApiServiceToken) private api: PhotoApiService,
     ) {
 

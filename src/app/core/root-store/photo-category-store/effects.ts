@@ -13,7 +13,7 @@ export class PhotoCategoryStoreEffects {
     constructor(
         @Inject(photoApiServiceToken) private api: PhotoApiService,
         private actions$: Actions,
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

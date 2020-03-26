@@ -11,7 +11,7 @@ import { PhotoStoreActions } from 'src/app/core/root-store';
 })
 export class RotateClockwiseButtonComponent {
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     onRotateClockwise(): void {

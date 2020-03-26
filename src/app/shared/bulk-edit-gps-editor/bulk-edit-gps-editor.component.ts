@@ -21,7 +21,7 @@ export class BulkEditGpsEditorComponent implements OnInit {
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private formBuilder: FormBuilder,
         private gps: GpsService
     ) { }

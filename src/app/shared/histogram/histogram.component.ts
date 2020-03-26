@@ -28,7 +28,7 @@ export class HistogramComponent implements OnInit, OnDestroy {
     }
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc
     ) {

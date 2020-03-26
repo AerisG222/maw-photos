@@ -18,7 +18,7 @@ export class EffectsComponent implements OnInit, OnDestroy {
     effects: PhotoEffects;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

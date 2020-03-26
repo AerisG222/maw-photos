@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private hotkeysService: HotkeysService,
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
-        private store$: Store<{}>,
+        private store$: Store,
         private oidcFacade: OidcFacade,
         @Inject(DOCUMENT) private doc
     ) {

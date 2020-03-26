@@ -16,7 +16,7 @@ export class SlideshowButtonComponent implements OnInit {
     slideshowPlaying$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

@@ -25,7 +25,7 @@ export class SearchToolbarComponent implements OnInit, OnDestroy {
     showCategoryYears$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit(): void {

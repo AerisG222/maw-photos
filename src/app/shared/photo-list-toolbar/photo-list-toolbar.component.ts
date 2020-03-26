@@ -40,7 +40,7 @@ export class PhotoListToolbarComponent implements OnInit, OnDestroy {
     prtDownloadUrl: string = null;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

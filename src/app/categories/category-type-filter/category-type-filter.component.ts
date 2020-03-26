@@ -17,7 +17,7 @@ export class CategoryTypeFilterComponent implements OnInit {
     categoryTypeControl = new FormControl('all');
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

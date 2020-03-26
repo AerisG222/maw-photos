@@ -29,7 +29,7 @@ export class CategoryTeaserChooserComponent implements OnInit, OnDestroy {
     @Input() mode: CategoryTeaserChooserMode;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }

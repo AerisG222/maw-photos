@@ -27,7 +27,7 @@ export class VideoListToolbarComponent implements OnInit, OnDestroy {
     settings: Settings;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit() {

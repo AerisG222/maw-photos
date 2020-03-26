@@ -19,7 +19,7 @@ export class PhotoListFullscreenToolbarComponent implements OnInit {
     isLast$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     ngOnInit(): void {

@@ -12,7 +12,7 @@ import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '../root-
 })
 export class PhotoCategoriesResolverService implements Resolve<PhotoCategory[]> {
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PhotoCategory[]> | Observable<never> {

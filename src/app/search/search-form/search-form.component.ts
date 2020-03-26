@@ -14,7 +14,7 @@ export class SearchFormComponent implements OnInit {
     form: FormGroup;
 
     constructor(
-        private store$: Store<{}>,
+        private store$: Store,
         private formBuilder: FormBuilder
     ) {
 

@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
     hidePanel$: Observable<boolean>;
 
     constructor(
-        private store$: Store<{}>
+        private store$: Store
     ) {
 
     }
