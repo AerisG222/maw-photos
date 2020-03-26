@@ -18,7 +18,7 @@ export const loadSuccess = createAction(
 
 export const loadRequestedSatisfiedByCache = createAction(
     '[Video Categories] Load Request Satisfied by Cache'
-)
+);
 
 export const setCurrent = createAction(
     '[Video Categories] Set Current',

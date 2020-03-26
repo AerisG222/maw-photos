@@ -35,7 +35,7 @@ export class CategoryTeaserChooserComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        switch(this.mode)
+        switch (this.mode)
         {
             case CategoryTeaserChooserMode.Photos:
                 this.initPhotos();
@@ -87,7 +87,7 @@ export class CategoryTeaserChooserComponent implements OnInit, OnDestroy {
     }
 
     onSetTeaser(): void {
-        switch(this.mode) {
+        switch (this.mode) {
             case CategoryTeaserChooserMode.Photos:
                 this.store$.dispatch(PhotoCategoryStoreActions.setTeaserRequest({ categoryId: this.categoryId, photoId: this.id }));
                 break;

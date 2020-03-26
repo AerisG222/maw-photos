@@ -43,10 +43,10 @@ export class BulkEditGpsEditorComponent implements OnInit {
         const clipboardData = evt.clipboardData; // || window.clipboardData
         const pastedText = clipboardData.getData('text');
 
-        if(!!pastedText) {
+        if (!!pastedText) {
             const latLng = this.gps.parse(pastedText);
 
-            if(!!latLng) {
+            if (!!latLng) {
                 evt.preventDefault();
 
                 this.updateGpsForm(latLng);
@@ -57,7 +57,7 @@ export class BulkEditGpsEditorComponent implements OnInit {
     onSaveGps(): void {
         const coords = this.getGpsCoordinateFromForm();
 
-        if(coords != null) {
+        if (coords != null) {
             this.saveGps.emit(coords);
         }
     }
@@ -67,14 +67,14 @@ export class BulkEditGpsEditorComponent implements OnInit {
     }
 
     private getGpsCoordinateFromForm(): GpsCoordinate {
-        if(!this.gpsForm.valid) {
+        if (!this.gpsForm.valid) {
             return null;
         }
 
         const latitude = Number(this.gpsForm.get('latitude').value);
         const longitude = Number(this.gpsForm.get('longitude').value);
 
-        if(isNaN(latitude) || isNaN(longitude)) {
+        if (isNaN(latitude) || isNaN(longitude)) {
             return null;
         }
 

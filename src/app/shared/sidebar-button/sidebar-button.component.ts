@@ -28,7 +28,7 @@ export class SidebarButtonComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        if(!!this.shortcutKey) {
+        if (!!this.shortcutKey) {
             this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp);
 
             this.hotkeysService.add(this.hotkey);
@@ -36,7 +36,7 @@ export class SidebarButtonComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if(!!this.hotkey) {
+        if (!!this.hotkey) {
             this.hotkeysService.remove(this.hotkey);
         }
     }

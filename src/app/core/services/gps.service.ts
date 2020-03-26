@@ -11,14 +11,14 @@ export class GpsService {
             .replace('(', '').replace(')', '')
             .split(',');
 
-        if(parts.length !== 2) {
+        if (parts.length !== 2) {
             return null;
         }
 
         const lat = Number(parts[0]);
         const lng = Number(parts[1]);
 
-        if(isNaN(lat) || isNaN(lng)) {
+        if (isNaN(lat) || isNaN(lng)) {
             return null;
         }
 

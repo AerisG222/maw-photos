@@ -167,7 +167,7 @@ export class SettingsService {
                 searchListType: this.getCategoryListType(SettingsService.keySearchListType),
                 searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
             };
-        } catch(e) {
+        } catch (e) {
             return DEFAULT_SETTINGS;
         }
     }

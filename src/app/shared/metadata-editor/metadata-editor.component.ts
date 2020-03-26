@@ -105,10 +105,10 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
         const clipboardData = evt.clipboardData; // || window.clipboardData
         const pastedText = clipboardData.getData('text');
 
-        if(!!pastedText) {
+        if (!!pastedText) {
             const latLng = this.gps.parse(pastedText);
 
-            if(!!latLng) {
+            if (!!latLng) {
                 evt.preventDefault();
 
                 this.updateOverrideData(latLng);
@@ -119,7 +119,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     onSave(): void {
         const latLng = this.getOverrideFromForm();
 
-        if(latLng == null) {
+        if (latLng == null) {
             return;
         }
 
@@ -138,7 +138,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     onSaveAndMoveNext(): void {
         const latLng = this.getOverrideFromForm();
 
-        if(latLng == null) {
+        if (latLng == null) {
             return;
         }
 
@@ -159,14 +159,14 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
     }
 
     private getOverrideFromForm(): GpsCoordinate {
-        if(!this.form.valid) {
+        if (!this.form.valid) {
             return null;
         }
 
         const latitude = Number(this.form.get('latitudeOverride').value);
         const longitude = Number(this.form.get('longitudeOverride').value);
 
-        if(isNaN(latitude) || isNaN(longitude)) {
+        if (isNaN(latitude) || isNaN(longitude)) {
             return null;
         }
 

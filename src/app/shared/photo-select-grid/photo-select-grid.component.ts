@@ -23,7 +23,7 @@ export class PhotoSelectGridComponent {
     }
 
     setSelected(checked: boolean, photo: Photo): void {
-        if(checked) {
+        if (checked) {
             this.photoSelected.next(photo);
         } else {
             this.photoDeselected.next(photo);

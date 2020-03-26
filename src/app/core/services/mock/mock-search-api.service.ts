@@ -22,7 +22,7 @@ export class MockSearchApiService implements SearchApiService {
     search(query: string, start: number): Observable<SearchResult<MultimediaCategory>> {
         let result = null;
 
-        if(this.returnNoResults) {
+        if (this.returnNoResults) {
             result = of({
                 totalFound: 0,
                 startIndex: 0,

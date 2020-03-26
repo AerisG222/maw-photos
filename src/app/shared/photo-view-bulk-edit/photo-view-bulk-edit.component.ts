@@ -57,13 +57,13 @@ export class PhotoViewBulkEditComponent implements OnInit {
             ])
             .pipe(
                 map(parts => {
-                    if(parts[1]) {
-                        return parts[0]
+                    if (parts[1]) {
+                        return parts[0];
                     } else {
                         return parts[0].filter(p => p.latitude == null || p.longitude == null);
                     }
                 })
-            )
+            );
     }
 
     onShowPhotosWithGpsData(doShow: boolean): void {
@@ -77,7 +77,7 @@ export class PhotoViewBulkEditComponent implements OnInit {
     onSelectAll(doSelectAll: boolean): void {
         this.selectedPhotos = [];
 
-        if(doSelectAll) {
+        if (doSelectAll) {
             combineLatest([
                 this.photos$
             ]).pipe(
@@ -90,7 +90,7 @@ export class PhotoViewBulkEditComponent implements OnInit {
     onSaveGps(gps: GpsCoordinate): void {
         const photosToUpdate = [...this.selectedPhotos];
 
-        for(const photo of photosToUpdate) {
+        for (const photo of photosToUpdate) {
             this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: photo.id, latLng: gps }));
         }
     }
@@ -98,7 +98,7 @@ export class PhotoViewBulkEditComponent implements OnInit {
     onPhotoSelected(photo: Photo): void {
         const index = this.getSelectedIndex(photo);
 
-        if(index < 0) {
+        if (index < 0) {
             this.selectedPhotos.push(photo);
         }
     }
@@ -106,7 +106,7 @@ export class PhotoViewBulkEditComponent implements OnInit {
     onPhotoDeselected(photo: Photo): void {
         const index = this.getSelectedIndex(photo);
 
-        if(index >= 0) {
+        if (index >= 0) {
             this.selectedPhotos.splice(index, 1);
         }
     }

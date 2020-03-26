@@ -25,15 +25,15 @@ export class VideoCategoryStoreEffects {
                 select(videoCategorySelectors.selectAllCategories)
             )),
             switchMap(([action, categories]) => {
-                if(categories.length !== 0) {
-                    return of(VideoCategoryActions.loadRequestedSatisfiedByCache())
+                if (categories.length !== 0) {
+                    return of(VideoCategoryActions.loadRequestedSatisfiedByCache());
                 }
 
                 return this.api.getCategories()
                     .pipe(
                         map(cat => VideoCategoryActions.loadSuccess({ categories: cat.items })),
                         catchError(error => of(VideoCategoryActions.loadFailure({ error })))
-                    )
+                    );
             })
         )
     );

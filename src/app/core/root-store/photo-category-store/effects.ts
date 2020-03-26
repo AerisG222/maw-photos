@@ -25,15 +25,15 @@ export class PhotoCategoryStoreEffects {
                 select(PhotoCategorySelectors.selectAllCategories)
             )),
             switchMap(([action, categories]) => {
-                if(categories.length !== 0) {
-                    return of(PhotoCategoryActions.loadRequestedSatisfiedByCache())
+                if (categories.length !== 0) {
+                    return of(PhotoCategoryActions.loadRequestedSatisfiedByCache());
                 }
 
                 return this.api.getCategories()
                     .pipe(
                         map(cat => PhotoCategoryActions.loadSuccess({ categories: cat.items })),
                         catchError(error => of(PhotoCategoryActions.loadFailure({ error })))
-                    )
+                    );
             })
         )
     );

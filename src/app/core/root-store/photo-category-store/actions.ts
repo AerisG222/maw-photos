@@ -18,7 +18,7 @@ export const loadSuccess = createAction(
 
 export const loadRequestedSatisfiedByCache = createAction(
     '[Photo Categories] Load Request Satisfied by Cache'
-)
+);
 
 export const setCurrent = createAction(
     '[Photo Categories] Set Current',

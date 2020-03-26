@@ -127,8 +127,8 @@ export class ExifFormatterService {
                 if (val) {
                     const cfg = ExifFormatterService.formatMap[key];
 
-                    if(!!cfg) {
-                        switch(cfg.category) {
+                    if (!!cfg) {
+                        switch (cfg.category) {
                             case ExifCategory.Exif:
                                 container.exif.push(this.getExifData(key, val, cfg));
                                 break;
