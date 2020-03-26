@@ -33,7 +33,6 @@
         <app-toolbar-button
             *ngIf="isListView$ | async"
             [icon]="'photo_size_select_large'"
-            [isDisabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async)"
             [shortcutKey]="'s'"
             [shortcutHelp]="'Toggle List Thumbnail Size'"
             [tooltip]="'Toggle List Thumbnail Size (S)'"
