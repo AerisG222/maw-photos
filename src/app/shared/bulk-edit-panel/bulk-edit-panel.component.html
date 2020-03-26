@@ -1,10 +1,12 @@
-<div class="info-panel-grid">
-    <app-bulk-edit-filter
-        (selectAllPhotos)="onToggleSelectAll($event)"
-        (showPhotosWithGpsData)="onToggleHidePhotosWithGpsData($event)">
-    </app-bulk-edit-filter>
+<app-sidebar>
+    <app-sidebar-card-group @sidebarFlyInOut>
+        <app-bulk-edit-filter
+            (selectAllPhotos)="onToggleSelectAll($event)"
+            (showPhotosWithGpsData)="onToggleHidePhotosWithGpsData($event)">
+        </app-bulk-edit-filter>
 
-    <app-bulk-edit-gps-editor
-        (saveGps)="onSaveGps($event)">
-    </app-bulk-edit-gps-editor>
-</div>
+        <app-bulk-edit-gps-editor
+            (saveGps)="onSaveGps($event)">
+        </app-bulk-edit-gps-editor>
+    </app-sidebar-card-group>
+</app-sidebar>
