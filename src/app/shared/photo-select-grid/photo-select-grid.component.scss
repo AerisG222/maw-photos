@@ -5,26 +5,29 @@
     place-content: stretch center;
     align-items: stretch;
     margin-bottom: 64px;
-
-    & div {
-        padding: 4px;
-    }
-
-    & img {
-        flex: 0 0 auto;
-        cursor: pointer;
-        margin-right: 2px;
-        border: 1px solid transparent;
-    }
 }
 
-.thumbnail {
+div {
+    padding: 4px;
+}
+
+img {
     width: 160px;
     height: 120px;
+    flex: 0 0 auto;
+    cursor: pointer;
+    filter: saturate(0.4);
+
+    &:hover,
+    .selected & {
+        filter: saturate(1.0);
+    }
 }
 
 mat-card {
     padding: 0;
+    border: 1px solid transparent;
+    cursor: pointer;
 }
 
 mat-card-title {

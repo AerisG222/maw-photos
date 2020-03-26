@@ -32,6 +32,7 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/comments/comments.component.theme';
 @import 'app/shared/exif-table/exif-table.component.theme';
 @import 'app/shared/photo-list/photo-list.component.theme';
+@import 'app/shared/photo-select-grid/photo-select-grid.component.theme';
 @import 'app/shared/photo-view/photo-view.component.theme';
 @import 'app/shared/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
 @import 'app/shared/primary-nav-link/primary-nav-link.component.theme';
@@ -68,6 +69,7 @@ $custom-typography: mat-typography-config(
     @include app-comments-component-theme($theme);
     @include app-exif-table-component-theme($theme);
     @include app-photo-list-component-theme($theme);
+    @include app-photo-select-grid-component-theme($theme);
     @include app-photo-view-component-theme($theme);
     @include app-photo-view-bulk-edit-component-theme($theme);
     @include app-primary-nav-component-theme($theme);

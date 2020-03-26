@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+
+@mixin app-photo-select-grid-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-photo-select-grid {
+        mat-card {
+            &:hover,
+            &.selected {
+                border: 1px solid mat-color($accent, 600);
+                color: mat-color($accent, 100);
+            }
+        }
+    }
+}
