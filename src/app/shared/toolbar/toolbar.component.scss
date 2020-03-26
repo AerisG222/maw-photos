@@ -9,7 +9,8 @@
 
 @media (max-width: $mobileBreakpoint) {
     :host {
-        grid-template-columns: 100%;
-        grid-template-rows: max-content;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        grid-template-columns: unset;
     }
 }
