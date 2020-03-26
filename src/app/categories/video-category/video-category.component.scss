@@ -33,7 +33,7 @@ video {
 @media (max-width: $mobileBreakpoint) {
     :host {
         grid-template-columns: 100%;
-        grid-template-rows: max-content auto;
+        grid-template-rows: max-content auto 0;
     }
 
     .main-video-grid {
