@@ -7,6 +7,10 @@
     height: 100vh;
 }
 
+app-scroll-pane {
+    padding: $contentPad;
+}
+
 .no-results {
     margin-top: 12px;
 }

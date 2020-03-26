@@ -78,7 +78,7 @@ mat-tab-group {
 
 @media (max-width: $mobileBreakpoint) {
     .content-grid {
-        padding: 8px;
+        padding: $contentPad;
     }
 
     mat-tab-group {
