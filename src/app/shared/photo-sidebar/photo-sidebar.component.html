@@ -83,9 +83,9 @@
             [icon]="'tune'"
             [isActive]="showExif$ | async"
             [isDisabled]="(enableButtons$ | async) === false"
-            [shortcutKey]="'w'"
+            [shortcutKey]="'x'"
             [shortcutHelp]="'Show/Hide EXIF'"
-            [tooltip]="'Show/Hide EXIF (W)'"
+            [tooltip]="'Show/Hide EXIF (X)'"
             (click)="toggleExif()">
         </app-sidebar-button>
 
@@ -124,9 +124,9 @@
                 [icon]="'edit'"
                 [isActive]="showMetadataEditor$ | async"
                 [isDisabled]="(enableButtons$ | async) === false"
-                [shortcutKey]="'z'"
+                [shortcutKey]="'n'"
                 [shortcutHelp]="'Show/Hide Metadata Editor'"
-                [tooltip]="'Show/Hide Metadata Editor (Z)'"
+                [tooltip]="'Show/Hide Metadata Editor (N)'"
                 (click)="toggleMetadataEditor()">
             </app-sidebar-button>
 
