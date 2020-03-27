@@ -61,7 +61,7 @@ export const DEFAULT_SETTINGS = ({
     appTheme: Theme.themeDark,
 
     categoryListCategoryFilter: CategoryFilter.all,
-    categoryListCategoryMargin: CategoryMargin.compact,
+    categoryListCategoryMargin: CategoryMargin.dense,
     categoryListShowCategoryTitles: true,
     categoryListThumbnailSize: ThumbnailSize.default,
     categoryListYearFilter: 'all',
@@ -101,7 +101,7 @@ export const DEFAULT_SETTINGS = ({
     videoInfoPanelMinimapMapTypeId: 'roadmap',
     videoInfoPanelMinimapZoom: 10,
 
-    searchCategoryMargin: CategoryMargin.compact,
+    searchCategoryMargin: CategoryMargin.dense,
     searchShowCategoryTitles: true,
     searchShowCategoryYears: true,
     searchThumbnailSize: ThumbnailSize.default,

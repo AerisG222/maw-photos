@@ -80,7 +80,6 @@ import { SidebarButtonGroupComponent } from './sidebar-button-group/sidebar-butt
 import { SidebarCardGroupComponent } from './sidebar-card-group/sidebar-card-group.component';
 import { SidebarButtonDividerComponent } from './sidebar-button-divider/sidebar-button-divider.component';
 import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.component';
-import { ScrollPaneComponent } from './scroll-pane/scroll-pane.component';
 import { ContentMarginComponent } from './content-margin/content-margin.component';
 
 @NgModule({
@@ -140,7 +139,6 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         ToolbarDividerComponent,
         ToolbarExternalLinkComponent,
         ToolbarLinkComponent,
-        ScrollPaneComponent,
         SidebarButtonGroupComponent,
         SidebarCardGroupComponent,
         SidebarButtonDividerComponent
@@ -230,7 +228,6 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         PhotoViewMapComponent,
         PrimaryNavComponent,
         RatingComponent,
-        ScrollPaneComponent,
         SidebarButtonComponent,
         SidebarButtonDividerComponent,
         SidebarButtonGroupComponent,

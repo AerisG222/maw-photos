@@ -3,15 +3,10 @@
 :host {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: auto;
-}
-
-.content-grid {
-    display: grid;
-    grid-template-columns: 100%;
     grid-template-rows: max-content auto;
     height: 100vh;
     padding: 0 20%;
+    overflow-y: auto;
 }
 
 mat-icon {
@@ -83,7 +78,7 @@ mat-tab-group {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    .content-grid {
+    :host {
         padding: $contentPad;
     }
 

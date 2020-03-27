@@ -11,14 +11,12 @@
 
     <mat-divider></mat-divider>
 
-    <app-scroll-pane>
-        <app-photo-select-grid
-            [photos]="photos$ | async"
-            [selectedPhotos]="selectedPhotos"
-            (photoSelected)="onPhotoSelected($event)"
-            (photoDeselected)="onPhotoDeselected($event)">
-        </app-photo-select-grid>
-    </app-scroll-pane>
+    <app-photo-select-grid
+        [photos]="photos$ | async"
+        [selectedPhotos]="selectedPhotos"
+        (photoSelected)="onPhotoSelected($event)"
+        (photoDeselected)="onPhotoDeselected($event)">
+    </app-photo-select-grid>
 </div>
 
 <app-bulk-edit-sidebar

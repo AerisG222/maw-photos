@@ -2,10 +2,8 @@
     <app-stats-toolbar (selectView)="view = $event"></app-stats-toolbar>
 </div>
 
-<app-scroll-pane>
-    <div class="stat-container">
-        <app-photo-stats *ngIf="view === 'photos'"></app-photo-stats>
-        <app-video-stats *ngIf="view === 'videos'"></app-video-stats>
-        <app-combined-stats *ngIf="view === 'combined'"></app-combined-stats>
-    </div>
-</app-scroll-pane>
+<div class="stat-container">
+    <app-photo-stats *ngIf="view === 'photos'"></app-photo-stats>
+    <app-video-stats *ngIf="view === 'videos'"></app-video-stats>
+    <app-combined-stats *ngIf="view === 'combined'"></app-combined-stats>
+</div>

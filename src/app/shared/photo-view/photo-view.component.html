@@ -8,35 +8,33 @@
     effects: effects$ | async,
     activePhoto: activePhoto$ | async
 } as data">
-    <app-scroll-pane>
-        <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
-            <div class="category-header">
-                <app-category-header
-                    *ngIf="data.settings?.photoListShowCategoryBreadcrumbs"
-                    [showCategoryAsLink]="showCategoryAsLink"
-                    [category]="category$ | async"
-                    #header>
-                </app-category-header>
-            </div>
-
-            <img
-                [src]="data.activePhoto?.imageMd?.url"
-                [class]="data.effects?.rotation?.klass"
-                [style.filter]="getEffectStyles(data.effects)"
-                (swipeleft)="onSwipeLeft($event)"
-                (swiperight)="onSwipeRight($event)"
-                loading="eager" />
-
-            <app-photo-list
-                *ngIf="data.photos && data.settings?.photoListShowPhotoList"
-                [photos]="data.photos"
-                [thumbnailSize]="data.settings?.photoListThumbnailSize"
-                (photoSelected)="onSelectPhoto($event)"
-                [selectedPhoto]="data.activePhoto"
-                #photoList>
-            </app-photo-list>
+    <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
+        <div class="category-header">
+            <app-category-header
+                *ngIf="data.settings?.photoListShowCategoryBreadcrumbs"
+                [showCategoryAsLink]="showCategoryAsLink"
+                [category]="category$ | async"
+                #header>
+            </app-category-header>
         </div>
-    </app-scroll-pane>
+
+        <img
+            [src]="data.activePhoto?.imageMd?.url"
+            [class]="data.effects?.rotation?.klass"
+            [style.filter]="getEffectStyles(data.effects)"
+            (swipeleft)="onSwipeLeft($event)"
+            (swiperight)="onSwipeRight($event)"
+            loading="eager" />
+
+        <app-photo-list
+            *ngIf="data.photos && data.settings?.photoListShowPhotoList"
+            [photos]="data.photos"
+            [thumbnailSize]="data.settings?.photoListThumbnailSize"
+            (photoSelected)="onSelectPhoto($event)"
+            [selectedPhoto]="data.activePhoto"
+            #photoList>
+        </app-photo-list>
+    </div>
 </ng-container>
 
 <app-photo-sidebar></app-photo-sidebar>

@@ -23,6 +23,10 @@ mat-divider {
     margin-bottom: 12px;
 }
 
+app-photo-select-grid {
+    overflow-y: auto;
+}
+
 @media (max-width: $mobileBreakpoint) {
     :host {
         grid-template-columns: 100%;

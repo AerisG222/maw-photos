@@ -7,12 +7,17 @@
     height: 100vh;
 }
 
-app-scroll-pane {
+.content-pad {
     padding: $contentPad;
 }
 
 .no-results {
     margin-top: 12px;
+}
+
+app-content-margin {
+    margin-bottom: 36px;
+    overflow-y: auto;
 }
 
 app-result-count {

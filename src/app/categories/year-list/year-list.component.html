@@ -2,19 +2,17 @@
     <app-category-list-toolbar></app-category-list-toolbar>
 </div>
 
-<app-scroll-pane>
-    <app-content-margin [margin]="margin$ | async">
+<app-content-margin [margin]="margin$ | async">
 
-        <div class="filter-grid">
-            <app-category-year-filter></app-category-year-filter>
-            <app-category-type-filter></app-category-type-filter>
+    <div class="filter-grid">
+        <app-category-year-filter></app-category-year-filter>
+        <app-category-type-filter></app-category-type-filter>
+    </div>
+
+    <div>
+        <div *ngFor="let year of years$ | async">
+            <app-year [year]="year"></app-year>
         </div>
+    </div>
 
-        <div>
-            <div *ngFor="let year of years$ | async">
-                <app-year [year]="year"></app-year>
-            </div>
-        </div>
-
-    </app-content-margin>
-</app-scroll-pane>
+</app-content-margin>

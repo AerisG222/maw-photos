@@ -1,3 +1,9 @@
 :host {
     width: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    & ::ng-deep mat-card:last-child {
+        margin-bottom: 8px;
+    }
 }
