@@ -2,4 +2,6 @@
     <app-photo-list-fullscreen-toolbar></app-photo-list-fullscreen-toolbar>
 </div>
 
-<img [src]="(activePhoto$ | async)?.imageLg?.url" [class]="(effects$ | async)?.rotation?.klass" />
+<div class="image-wrapper">
+    <img [src]="(activePhoto$ | async)?.imageLg?.url" [class]="(effects$ | async)?.rotation?.klass" />
+</div>
