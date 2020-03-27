@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -16,7 +17,7 @@ import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.comp
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private destroySub = new Subscription();
 
     constructor(
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private dialog: MatDialog,
         private store$: Store,
         private oidcFacade: OidcFacade,
+        private breakpointObserver: BreakpointObserver,
         @Inject(DOCUMENT) private doc
     ) {
 
@@ -45,6 +47,12 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.store$.dispatch(SettingsStoreActions.loadRequest());
+    }
+
+    ngAfterViewInit(): void {
+        if (this.breakpointObserver.isMatched('(max-width: 800px)')) {
+            this.store$.dispatch(SettingsStoreActions.updateMobileMarginsRequest());
+        }
     }
 
     ngOnDestroy(): void {

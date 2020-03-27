@@ -44,6 +44,8 @@ export class SettingsStoreEffects {
     propertyChangeTriggersSaveEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(
+                SettingsActions.updateMobileMarginsRequest,
+
                 SettingsActions.toggleCategoryListCategoryTitlesRequest,
                 SettingsActions.updateCategoryListYearFilterRequest,
                 SettingsActions.updateCategoryListCategoryFilterRequest,

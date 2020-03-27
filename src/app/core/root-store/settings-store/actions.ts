@@ -7,6 +7,10 @@ import { CategoryMargin } from '../../models/category-margin.model';
 import { CategoryFilter } from '../../models/category-filter.model';
 import { CategoryListType } from '../../models/category-list-type.model';
 
+export const updateMobileMarginsRequest = createAction(
+    '[Settings] Update Mobile Margins Request'
+);
+
 export const loadRequest = createAction(
     '[Settings] Load Request'
 );

@@ -2,9 +2,18 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import { initialState, State } from './state';
 import * as SettingsActions from './actions';
+import { CategoryMargin } from '../../models/category-margin.model';
 
 const reducer = createReducer(
     initialState,
+    on(SettingsActions.updateMobileMarginsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListCategoryMargin: CategoryMargin.dense,
+            searchCategoryMargin: CategoryMargin.dense
+        }
+    })),
     on(SettingsActions.loadRequest, state => ({
         ...state,
         error: null,
