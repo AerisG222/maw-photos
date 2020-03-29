@@ -51,7 +51,13 @@
     <app-toolbar-group>
         <app-rotate-counter-clockwise-button></app-rotate-counter-clockwise-button>
         <app-rotate-clockwise-button></app-rotate-clockwise-button>
+        <app-flip-horizontal-button></app-flip-horizontal-button>
+        <app-flip-vertical-button></app-flip-vertical-button>
+    </app-toolbar-group>
 
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
         <app-toolbar-external-link
             *ngIf="smDownloadUrl"
             [hideOnMobile]="true"

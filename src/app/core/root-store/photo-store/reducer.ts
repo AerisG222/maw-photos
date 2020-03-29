@@ -138,7 +138,9 @@ const reducer = createReducer(
             currentPhoto: newPhoto,
             currentPhotoEffects: {
                 ...state.currentPhotoEffects,
-                rotation: new PhotoRotation()
+                rotation: new PhotoRotation(),
+                flipHorizontal: false,
+                flipVertical: false
             }
         };
     }),
@@ -156,7 +158,9 @@ const reducer = createReducer(
             currentPhoto: newPhoto,
             currentPhotoEffects: {
                 ...state.currentPhotoEffects,
-                rotation: new PhotoRotation()
+                rotation: new PhotoRotation(),
+                flipHorizontal: false,
+                flipVertical: false
             }
         };
     }),
@@ -174,7 +178,9 @@ const reducer = createReducer(
             currentPhoto: newPhoto,
             currentPhotoEffects: {
                 ...state.currentPhotoEffects,
-                rotation: new PhotoRotation()
+                rotation: new PhotoRotation(),
+                flipHorizontal: false,
+                flipVertical: false
             }
         };
     }),
@@ -192,7 +198,9 @@ const reducer = createReducer(
             currentPhoto: newPhoto,
             currentPhotoEffects: {
                 ...state.currentPhotoEffects,
-                rotation: new PhotoRotation()
+                rotation: new PhotoRotation(),
+                flipHorizontal: false,
+                flipVertical: false
             }
         };
     }),
@@ -307,6 +315,20 @@ const reducer = createReducer(
         currentPhotoEffects: {
             ...state.currentPhotoEffects,
             rotation: newRotation
+        }
+    })),
+    on(PhotoActions.flipHorizontalRequest, state => ({
+        ...state,
+        currentPhotoEffects: {
+            ...state.currentPhotoEffects,
+            flipHorizontal: !state.currentPhotoEffects.flipHorizontal
+        }
+    })),
+    on(PhotoActions.flipVerticalRequest, state => ({
+        ...state,
+        currentPhotoEffects: {
+            ...state.currentPhotoEffects,
+            flipVertical: !state.currentPhotoEffects.flipVertical
         }
     })),
     on(PhotoActions.resetEffectsRequest, state => ({

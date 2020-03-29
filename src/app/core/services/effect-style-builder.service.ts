@@ -6,7 +6,7 @@ import { PhotoEffects } from '../models/photo-effects.model';
   providedIn: 'root'
 })
 export class EffectStyleBuilderService {
-    build(effects: PhotoEffects): string[] {
+    buildFilter(effects: PhotoEffects): string[] {
         const style: string[] = [];
 
         if (effects.grayscale > 0) {
@@ -42,5 +42,31 @@ export class EffectStyleBuilderService {
         }
 
         return style;
+    }
+
+    buildTransform(effects: PhotoEffects): string[] {
+        const transforms = [];
+
+        switch (effects.rotation.klass) {
+            case 'rot90':
+                transforms.push('rotate(-90deg)');
+                break;
+            case 'rot180':
+                transforms.push('rotate(-180deg)');
+                break;
+            case 'rot270':
+                transforms.push('rotate(-270deg)');
+                break;
+        }
+
+        if (effects.flipHorizontal) {
+            transforms.push('scaleX(-1)');
+        }
+
+        if (effects.flipVertical) {
+            transforms.push('scaleY(-1)');
+        }
+
+        return transforms;
     }
 }

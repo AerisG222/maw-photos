@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -8,6 +9,7 @@ import { toolbarShow } from '../animations';
 import { LayoutStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
 import { Photo } from 'src/app/core/models/photo.model';
 import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
 
 @Component({
     selector: 'app-photo-view-fullscreen',
@@ -27,7 +29,9 @@ export class PhotoViewFullscreenComponent implements OnInit, OnDestroy {
     effects$: Observable<PhotoEffects>;
 
     constructor(
-        private store$: Store
+        private store$: Store,
+        private effectStyleBuilder: EffectStyleBuilderService,
+        private sanitizer: DomSanitizer
     ) { }
 
     ngOnInit() {
@@ -46,5 +50,11 @@ export class PhotoViewFullscreenComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
+    }
+
+    getTransform(effects: PhotoEffects) {
+        const style = this.effectStyleBuilder.buildTransform(effects);
+
+        return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
     }
 }

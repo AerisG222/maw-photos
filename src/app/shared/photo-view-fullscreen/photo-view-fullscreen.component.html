@@ -3,5 +3,8 @@
 </div>
 
 <div class="image-wrapper">
-    <img [src]="(activePhoto$ | async)?.imageLg?.url" [class]="(effects$ | async)?.rotation?.klass" />
+    <img
+        [src]="(activePhoto$ | async)?.imageLg?.url"
+        [class]="(effects$ | async)?.rotation?.klass"
+        [style.transform]="getTransform(effects$ | async)" />
 </div>

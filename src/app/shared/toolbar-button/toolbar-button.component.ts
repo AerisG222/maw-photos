@@ -13,6 +13,7 @@ export class ToolbarButtonComponent implements OnInit, OnDestroy {
 
     @Input() hideOnMobile = false;
     @Input() icon: string;
+    @Input() iconRotate: number;
     @Input() isDisabled: boolean;
     @Input() shortcutKey: string;
     @Input() shortcutHelp: string;

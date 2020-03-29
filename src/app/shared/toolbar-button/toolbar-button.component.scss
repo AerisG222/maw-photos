@@ -20,3 +20,7 @@ button {
         width: unset;
     }
 }
+
+mat-icon.rotate-90 {
+    transform: rotate(90deg);
+}

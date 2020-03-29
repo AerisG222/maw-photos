@@ -161,6 +161,14 @@ export const rotateSuccess = createAction(
     props<{ newRotation: PhotoRotation }>()
 );
 
+export const flipHorizontalRequest = createAction(
+    '[Photos] Flip Horizontal Request'
+);
+
+export const flipVerticalRequest = createAction(
+    '[Photos] Flip Vertical Request'
+);
+
 export const resetEffectsRequest = createAction(
     '[Photos] Reset Effects Request'
 );

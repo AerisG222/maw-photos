@@ -91,7 +91,13 @@ export class PhotoViewComponent implements OnInit {
     }
 
     getEffectStyles(effects: PhotoEffects) {
-        const style = this.effectStyleBuilder.build(effects);
+        const style = this.effectStyleBuilder.buildFilter(effects);
+
+        return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+    }
+
+    getTransform(effects: PhotoEffects) {
+        const style = this.effectStyleBuilder.buildTransform(effects);
 
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
     }

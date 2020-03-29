@@ -10,4 +10,6 @@ export interface PhotoEffects {
     invert: number;
     blur: number;
     hueRotate: number;
+    flipHorizontal: boolean;
+    flipVertical: boolean;
 }

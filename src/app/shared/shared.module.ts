@@ -35,6 +35,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { EffectsComponent } from './effects/effects.component';
 import { ExifComponent } from './exif/exif.component';
 import { ExifTableComponent } from './exif-table/exif-table.component';
+import { FlipHorizontalButtonComponent } from './flip-horizontal-button/flip-horizontal-button.component';
+import { FlipVerticalButtonComponent } from './flip-vertical-button/flip-vertical-button.component';
 import { HelpLinkComponent } from './help-link/help-link.component';
 import { HistogramComponent } from './histogram/histogram.component';
 import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
@@ -99,6 +101,8 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
         EffectsComponent,
         ExifComponent,
         ExifTableComponent,
+        FlipHorizontalButtonComponent,
+        FlipVerticalButtonComponent,
         HelpLinkComponent,
         HistogramComponent,
         HotkeyDialogComponent,

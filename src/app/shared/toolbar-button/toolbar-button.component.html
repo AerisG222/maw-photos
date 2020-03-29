@@ -5,5 +5,5 @@
     [matTooltip]="tooltip"
     [matTooltipPosition]="'after'"
     #button>
-    <mat-icon [inline]="true">{{icon}}</mat-icon>
+    <mat-icon [inline]="true" [class.rotate-90]="iconRotate === 90">{{icon}}</mat-icon>
 </button>

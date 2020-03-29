@@ -39,6 +39,8 @@ export const initialState: State = photoAdapter.getInitialState({
     currentPhotoExifData: null,
     currentPhotoEffects: {
         rotation: new PhotoRotation(),
+        flipHorizontal: false,
+        flipVertical: false,
         grayscale: 0,
         sepia: 0,
         brightness: 100,
