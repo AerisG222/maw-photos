@@ -1,28 +1,21 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
 import { tap, first, map } from 'rxjs/operators';
 
 import { Category } from 'src/app/core/models/category.model';
-import { LayoutStoreActions, PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 import { Photo } from 'src/app/core/models/photo.model';
-import { sidebarCardShow, sidebarCardHide, toolbarShow } from '../animations';
+import { toolbarShow } from '../animations';
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
 
 @Component({
     selector: 'app-photo-view-bulk-edit',
     templateUrl: './photo-view-bulk-edit.component.html',
     styleUrls: ['./photo-view-bulk-edit.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
-        trigger('toggleInfoPanel', [
-            transition(':enter', [
-                useAnimation(sidebarCardShow)
-            ]),
-            transition(':leave', [
-                useAnimation(sidebarCardHide)
-            ])
-        ]),
         trigger('toolbarFadeIn', [
             transition('* => *', [
                 useAnimation(toolbarShow)
@@ -69,13 +62,13 @@ export class PhotoViewBulkEditComponent implements OnInit {
     onShowPhotosWithGpsData(doShow: boolean): void {
         // LAZY: let's just remove any selection when we change this setting to make sure
         // a user does not actually save a change for something that is not visible
-        this.onSelectAll(false);
+        this.clearSelectedPhotos();
 
         this.showPhotosWithGpsData$.next(doShow);
     }
 
     onSelectAll(doSelectAll: boolean): void {
-        this.selectedPhotos = [];
+        this.clearSelectedPhotos();
 
         if (doSelectAll) {
             combineLatest([
@@ -89,6 +82,10 @@ export class PhotoViewBulkEditComponent implements OnInit {
 
     onSaveGps(gps: GpsCoordinate): void {
         const photosToUpdate = [...this.selectedPhotos];
+
+        // LAZY (part 2): assume success, this will make sure photos that end up w/ gps data
+        // which now might be hidden are removed from our list so they are not updated later
+        this.clearSelectedPhotos();
 
         for (const photo of photosToUpdate) {
             this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: photo.id, latLng: gps }));
@@ -113,5 +110,9 @@ export class PhotoViewBulkEditComponent implements OnInit {
 
     private getSelectedIndex(photo: Photo): number {
         return this.selectedPhotos.findIndex(p => p.id === photo.id);
+    }
+
+    private clearSelectedPhotos(): void {
+        this.selectedPhotos = [];
     }
 }

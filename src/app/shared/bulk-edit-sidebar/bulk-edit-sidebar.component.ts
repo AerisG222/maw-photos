@@ -1,12 +1,24 @@
 import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { sidebarCardShow, sidebarCardHide } from '../animations';
 
 @Component({
     selector: 'app-bulk-edit-sidebar',
     templateUrl: './bulk-edit-sidebar.component.html',
     styleUrls: ['./bulk-edit-sidebar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('toggleInfoPanel', [
+            transition(':enter', [
+                useAnimation(sidebarCardShow)
+            ]),
+            transition(':leave', [
+                useAnimation(sidebarCardHide)
+            ])
+        ])
+    ]
 })
 export class BulkEditSidebarComponent {
     @Output() showPhotosWithGpsData = new EventEmitter<boolean>();
