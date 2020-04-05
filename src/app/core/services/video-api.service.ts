@@ -1,3 +1,4 @@
+import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { VideoCategory } from 'src/app/core/models/video-category.model';
@@ -8,7 +9,7 @@ import { ApiCollection } from '../models/api-collection.model';
 import { GpsCoordinate } from '../models/gps-coordinate.model';
 import { GpsDetail } from '../models/gps-detail.model';
 
-export const videoApiServiceToken = 'VideoApiService';
+export const videoApiServiceToken = new InjectionToken<VideoApiService>('VideoApiService');
 
 export interface VideoApiService {
     getCategories(): Observable<ApiCollection<VideoCategory>>;

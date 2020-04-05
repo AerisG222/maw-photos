@@ -1,3 +1,4 @@
+import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PhotoCategory } from 'src/app/core/models/photo-category.model';
@@ -9,7 +10,7 @@ import { ApiCollection } from '../models/api-collection.model';
 import { GpsCoordinate } from '../models/gps-coordinate.model';
 import { GpsDetail } from '../models/gps-detail.model';
 
-export const photoApiServiceToken = 'PhotoApiService';
+export const photoApiServiceToken = new InjectionToken<PhotoApiService>('PhotoApiService');
 
 export interface PhotoApiService {
     getCategories(): Observable<ApiCollection<PhotoCategory>>;

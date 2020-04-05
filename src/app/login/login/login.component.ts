@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Component, Inject } from '@angular/core';
+
+import { AuthService, authServiceToken } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
     constructor(
-        private authService: AuthService
+        @Inject(authServiceToken) private authService: AuthService
     ) {
         this.authService.handleLoginCallback();
     }

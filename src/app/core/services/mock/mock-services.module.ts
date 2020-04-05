@@ -8,6 +8,8 @@ import { authGuardToken } from '../auth.guard';
 import { MockAuthGuard } from './mock-auth.guard';
 import { searchApiServiceToken } from '../search-api.service';
 import { MockSearchApiService } from './mock-search-api.service';
+import { authServiceToken } from '../auth.service';
+import { MockAuthService } from './mock-auth.service';
 
 @NgModule()
 export class MockServicesModule {
@@ -15,6 +17,7 @@ export class MockServicesModule {
         return {
             providers: [
                 { provide: authGuardToken, useClass: MockAuthGuard },
+                { provide: authServiceToken, useClass: MockAuthService },
                 { provide: photoApiServiceToken, useClass: MockPhotoApiService },
                 { provide: videoApiServiceToken, useClass: MockVideoApiService },
                 { provide: searchApiServiceToken, useClass: MockSearchApiService }
