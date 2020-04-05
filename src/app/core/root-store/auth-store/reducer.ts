@@ -1,13 +1,13 @@
 import { on, createReducer, Action } from '@ngrx/store';
 
 import { initialState, State } from './state';
-import { updateUserPropertiesRequest } from './actions';
+import { updateUserInfoRequest } from './actions';
 
 const reducer = createReducer(
     initialState,
-    on(updateUserPropertiesRequest, (state, { userSettings }) => ({
+    on(updateUserInfoRequest, (state, { userInfo }) => ({
         ...state,
-        auth: userSettings
+        auth: userInfo
     }))
 );
 

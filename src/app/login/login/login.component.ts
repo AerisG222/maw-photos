@@ -1,42 +1,28 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { OidcFacade } from 'ng-oidc-client';
-import { tap } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent {
     constructor(
-        private oidcFacade: OidcFacade,
-        private router: Router
+        private authService: AuthService
     ) {
-
+        this.authService.handleLoginCallback();
     }
 
-    ngAfterViewInit(): void {
-        this.oidcFacade.identity$.pipe(
-            tap(user => {
-                if (!!user && !user.expired) {
-                    this.onLoggedIn();
-                } else {
-                    this.popupLogin();
-                }
-            })
-        ).subscribe();
+    redirectLogin() {
+        this.authService.redirectAndLogin();
     }
 
-    popupLogin(): void {
-        this.oidcFacade.signinPopup();
-    }
+    /*
+    private async loginViaPopup() {
+        await this.oauthService.loadDiscoveryDocument();
+        sessionStorage.setItem('flow', 'implicit');
 
-    redirectLogin(): void {
-        this.oidcFacade.signinRedirect();
+        this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
     }
-
-    onLoggedIn(): void {
-        this.router.navigate(['/']);
-    }
+    */
 }

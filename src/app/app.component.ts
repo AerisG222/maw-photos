@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
-import { OidcFacade } from 'ng-oidc-client';
 
 import { Theme } from './core/models/theme.model';
 import { SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
@@ -25,7 +24,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
         private store$: Store,
-        private oidcFacade: OidcFacade,
         private breakpointObserver: BreakpointObserver,
         @Inject(DOCUMENT) private doc
     ) {
@@ -33,8 +31,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.oidcFacade.getOidcUser();
-
         this.hotkeysService.add(
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );

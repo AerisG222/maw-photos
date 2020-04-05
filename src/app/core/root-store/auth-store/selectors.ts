@@ -5,32 +5,31 @@ import {
 
 import { State } from './state';
 import { AUTH_FEATURE_NAME } from './feature-name';
-import { UserSettings } from 'oidc-client';
 
-const getUserSettings = (state: State): UserSettings => state.auth;
+const getUserInfo = (state: State) => state.auth;
 
 export const selectAuthState = createFeatureSelector<State>(AUTH_FEATURE_NAME);
 
-export const selectUserSettings = createSelector(selectAuthState, getUserSettings);
+export const selectUserInfo = createSelector(selectAuthState, getUserInfo);
 
 export const selectFirstName = createSelector(
-    selectUserSettings,
-    u => u?.profile?.given_name
+    selectUserInfo,
+    u => u?.firstName
 );
 
 export const selectLastName = createSelector(
-    selectUserSettings,
-    u => u?.profile.family_name
+    selectUserInfo,
+    u => u?.lastName
 );
 
 export const selectUsername = createSelector(
-    selectUserSettings,
-    u => u?.profile.name
+    selectUserInfo,
+    u => u?.username
 );
 
 export const selectRoles = createSelector(
-    selectUserSettings,
-    u => u?.profile.role
+    selectUserInfo,
+    u => u?.roles
 );
 
 export const selectIsAdmin = createSelector(

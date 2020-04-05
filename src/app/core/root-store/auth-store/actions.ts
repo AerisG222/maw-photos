@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { UserSettings } from 'oidc-client';
 
-export const updateUserPropertiesRequest = createAction(
-    '[Auth] Update User Properties Request',
-    props<{ userSettings: UserSettings }>()
+import { UserInfo } from '../../models/user-info.model';
+
+export const updateUserInfoRequest = createAction(
+    '[Auth] Update User Info Request',
+    props<{ userInfo: UserInfo }>()
 );

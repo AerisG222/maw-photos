@@ -1,28 +1,26 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HotkeyModule } from 'angular2-hotkeys';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { environment } from 'src/environments/environment';
-import { AuthInterceptor } from './services/auth-interceptor';
+import { config } from 'src/environments/config';
 import { throwIfAlreadyLoaded } from './module-import.guard';
 import { RootStoreModule } from './root-store';
 
 @NgModule({
     declarations: [],
     imports: [
-        CommonModule,
         HotkeyModule.forRoot({ disableCheatSheet: true }),
         HttpClientModule,
-        environment.servicesModule,
+        OAuthModule.forRoot({
+            resourceServer: {
+                allowedUrls: [ config.apiUrl ],
+                sendAccessToken: true
+            }
+        }),
+        environment.servicesModule.forRoot(),
         RootStoreModule
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true
-        }
     ]
 })
 export class CoreModule {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { photoApiServiceToken } from '../photo-api.service';
 import { MockPhotoApiService } from './mock-photo-api.service';
@@ -9,12 +9,17 @@ import { MockAuthGuard } from './mock-auth.guard';
 import { searchApiServiceToken } from '../search-api.service';
 import { MockSearchApiService } from './mock-search-api.service';
 
-@NgModule({
-    providers: [
-        { provide: authGuardToken, useClass: MockAuthGuard },
-        { provide: photoApiServiceToken, useClass: MockPhotoApiService },
-        { provide: videoApiServiceToken, useClass: MockVideoApiService },
-        { provide: searchApiServiceToken, useClass: MockSearchApiService }
-    ]
-})
-export class MockServicesModule { }
+@NgModule()
+export class MockServicesModule {
+    static forRoot(): ModuleWithProviders<MockServicesModule> {
+        return {
+            providers: [
+                { provide: authGuardToken, useClass: MockAuthGuard },
+                { provide: photoApiServiceToken, useClass: MockPhotoApiService },
+                { provide: videoApiServiceToken, useClass: MockVideoApiService },
+                { provide: searchApiServiceToken, useClass: MockSearchApiService }
+            ],
+            ngModule: MockServicesModule
+        };
+    }
+}

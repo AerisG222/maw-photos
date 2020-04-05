@@ -1,9 +1,9 @@
-import { UserSettings } from 'oidc-client';
+import { UserInfo, DEFAULT_USER_INFO } from '../../models/user-info.model';
 
 export interface State {
-    auth: UserSettings;
+    auth: UserInfo;
 }
 
 export const initialState: State = {
-    auth: null
+    auth: DEFAULT_USER_INFO
 };

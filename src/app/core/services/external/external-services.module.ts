@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { photoApiServiceToken } from '../photo-api.service';
 import { ExternalPhotoApiService } from './external-photo-api.service';
@@ -9,12 +9,17 @@ import { authGuardToken } from '../auth.guard';
 import { searchApiServiceToken } from '../search-api.service';
 import { ExternalSearchApiService } from './external-search-api.service';
 
-@NgModule({
-    providers: [
-        { provide: authGuardToken, useClass: ExternalAuthGuard },
-        { provide: photoApiServiceToken, useClass: ExternalPhotoApiService },
-        { provide: videoApiServiceToken, useClass: ExternalVideoApiService },
-        { provide: searchApiServiceToken, useClass: ExternalSearchApiService }
-    ]
-})
-export class ExternalServicesModule { }
+@NgModule()
+export class ExternalServicesModule {
+    static forRoot(): ModuleWithProviders<ExternalServicesModule> {
+        return {
+            providers: [
+                { provide: authGuardToken, useClass: ExternalAuthGuard },
+                { provide: photoApiServiceToken, useClass: ExternalPhotoApiService },
+                { provide: videoApiServiceToken, useClass: ExternalVideoApiService },
+                { provide: searchApiServiceToken, useClass: ExternalSearchApiService }
+            ],
+            ngModule: ExternalServicesModule
+        };
+    }
+}
