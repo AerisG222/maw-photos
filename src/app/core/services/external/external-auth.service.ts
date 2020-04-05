@@ -8,9 +8,7 @@ import { authConfig } from '../../auth-config';
 import { updateUserInfoRequest } from '../../root-store/auth-store/actions';
 import { AuthService } from '../auth.service';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ExternalAuthService implements AuthService {
     constructor(
         private store$: Store,
