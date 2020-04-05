@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -18,7 +17,6 @@ import { AuthStoreModule } from './auth-store';
 @NgModule({
     declarations: [],
     imports: [
-        CommonModule,
         AuthStoreModule,
         LayoutStoreModule,
         PhotoCategoryStoreModule,
