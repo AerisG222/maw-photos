@@ -53,8 +53,8 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/environments/config.ts",
-                  "with": "src/environments/config.prod.ts"
+                  "replace": "src/environments/modules.ts",
+                  "with": "src/environments/modules.prod.ts"
                 }
               ],
               "optimization": true,

@@ -1,9 +1,9 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
 
-import { config } from 'src/environments/config';
+import { environment } from 'src/environments/environment';
 
 export const authConfig: AuthConfig = {
-    issuer: config.authUrl,
+    issuer: environment.authUrl,
     clientId: 'maw-photos',
     responseType: 'code',
     redirectUri: window.location.origin + '/login',
@@ -11,6 +11,6 @@ export const authConfig: AuthConfig = {
     scope: 'offline_access openid profile maw_api role',
     timeoutFactor: 0.5,
     sessionChecksEnabled: true,
-    showDebugInformation: true,
+    showDebugInformation: environment.production === false,
     clearHashAfterLogin: false
 };

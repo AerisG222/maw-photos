@@ -4,7 +4,7 @@ import { HotkeyModule } from 'angular2-hotkeys';
 import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { environment } from 'src/environments/environment';
-import { config } from 'src/environments/config';
+import { modules } from 'src/environments/modules';
 import { throwIfAlreadyLoaded } from './module-import.guard';
 import { RootStoreModule } from './root-store';
 
@@ -15,11 +15,11 @@ import { RootStoreModule } from './root-store';
         HttpClientModule,
         OAuthModule.forRoot({
             resourceServer: {
-                allowedUrls: [ config.apiUrl ],
+                allowedUrls: [ environment.apiUrl ],
                 sendAccessToken: true
             }
         }),
-        environment.servicesModule.forRoot(),
+        modules.servicesModule.forRoot(),
         RootStoreModule
     ]
 })

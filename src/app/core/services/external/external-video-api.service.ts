@@ -10,7 +10,7 @@ import { Rating } from '../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
-import { config } from '../../../../environments/config';
+import { environment } from '../../../../environments/environment';
 import { GpsCoordinate } from '../../models/gps-coordinate.model';
 import { GpsDetail } from '../../models/gps-detail.model';
 
@@ -116,7 +116,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
-        return `${config.apiUrl}/${relativeUrl}`;
+        return `${environment.apiUrl}/${relativeUrl}`;
     }
 
     private cleanupVideoCategories(categories: ApiCollection<VideoCategory>): ApiCollection<VideoCategory> {

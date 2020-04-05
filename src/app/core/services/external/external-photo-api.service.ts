@@ -11,7 +11,7 @@ import { Rating } from 'src/app/core/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
 import { ApiCollection } from '../../models/api-collection.model';
 import { DateService } from '../date.service';
-import { config } from '../../../../environments/config';
+import { environment } from '../../../../environments/environment';
 import { GpsCoordinate } from '../../models/gps-coordinate.model';
 import { GpsDetail } from '../../models/gps-detail.model';
 
@@ -147,7 +147,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
     }
 
     private getAbsoluteUrl(relativeUrl: string) {
-        return `${config.apiUrl}/${relativeUrl}`;
+        return `${environment.apiUrl}/${relativeUrl}`;
     }
 
     private cleanupPhotoCategories(categories: ApiCollection<PhotoCategory>): ApiCollection<PhotoCategory> {

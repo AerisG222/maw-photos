@@ -1,15 +1,11 @@
-import { MockServicesModule } from 'src/app/core/services/mock/mock-services.module';
-import { ExternalServicesModule } from 'src/app/core/services/external/external-services.module';
-
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
     production: false,
     version: require('../../package.json').version,
-    // servicesModule: MockServicesModule  // use this for dev / testing of app functionality
-    servicesModule: ExternalServicesModule  // use this for integration testing / hitting the actual webservices
+
+    apiUrl: 'https://apidev.mikeandwan.us:5011',
+    authUrl: 'https://authdev.mikeandwan.us:5001',
+    photosUrl: 'http://photosdev.mikeandwan.us:4200',
+    wwwUrl: 'https://wwwdev.mikeandwan.us:5021'
 };
 
 /*
@@ -19,4 +15,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';

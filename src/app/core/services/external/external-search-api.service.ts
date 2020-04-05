@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { SearchApiService } from '../search-api.service';
 import { SearchResult } from '../../models/search/search-result.model';
 import { MultimediaCategory } from '../../models/search/multimedia-category.model';
-import { config } from '../../../../environments/config';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class ExternalSearchApiService implements SearchApiService {
@@ -37,10 +37,10 @@ export class ExternalSearchApiService implements SearchApiService {
     }
 
     private getAbsoluteApiUrl(relativeUrl: string) {
-        return `${config.apiUrl}/${relativeUrl}`;
+        return `${environment.apiUrl}/${relativeUrl}`;
     }
 
     private getAbsoluteWwwUrl(relativeUrl: string) {
-        return `${config.wwwUrl}/${relativeUrl}`;
+        return `${environment.wwwUrl}/${relativeUrl}`;
     }
 }
