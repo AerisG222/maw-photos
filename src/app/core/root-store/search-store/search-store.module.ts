@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -10,7 +9,6 @@ import { searchReducer } from './reducer';
 @NgModule({
     declarations: [],
     imports: [
-        CommonModule,
         StoreModule.forFeature(SEARCH_FEATURE_NAME, searchReducer),
         EffectsModule.forFeature([SearchStoreEffects])
     ]
