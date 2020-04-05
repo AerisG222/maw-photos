@@ -6,7 +6,12 @@ import { AuthGuard } from '../auth.guard';
 
 @Injectable()
 export class ExternalAuthGuard implements AuthGuard {
-    constructor(private router: Router, private oauthService: OAuthService) { }
+    constructor(
+        private router: Router,
+        private oauthService: OAuthService
+    ) {
+
+    }
 
     public canActivate() {
         if (
