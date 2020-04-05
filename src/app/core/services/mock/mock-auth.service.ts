@@ -24,6 +24,10 @@ export class MockAuthService implements AuthService {
         this.finishLogin();
     }
 
+    public loginViaPopup() {
+
+    }
+
     private finishLogin() {
         this.storeProfile();
         this.router.navigate(['/']);

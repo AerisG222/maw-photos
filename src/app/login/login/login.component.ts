@@ -21,23 +21,23 @@ export class LoginComponent {
             .pipe(
                 first(),
                 filter(p => p.has('code')),
-                tap(p => this.showLogin = false)
+                tap(p => this.showLogin = false),
+                tap(p => this.authService.handleLoginCallback())
             )
             .subscribe();
 
-        this.authService.handleLoginCallback();
+        // otherwise show login screen and try to use popup
+        this.activatedRoute.queryParamMap
+            .pipe(
+                first(),
+                filter(p => !p.has('code')),
+                tap(p => this.showLogin = true),
+                tap(p => this.authService.loginViaPopup())
+            )
+            .subscribe();
     }
 
     redirectLogin() {
         this.authService.redirectAndLogin();
     }
-
-    /*
-    private async loginViaPopup() {
-        await this.oauthService.loadDiscoveryDocument();
-        sessionStorage.setItem('flow', 'implicit');
-
-        this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
-    }
-    */
 }

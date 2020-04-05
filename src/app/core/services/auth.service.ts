@@ -5,4 +5,5 @@ export const authServiceToken = new InjectionToken<AuthService>('AuthService');
 export interface AuthService {
     handleLoginCallback();
     redirectAndLogin();
+    loginViaPopup();
 }

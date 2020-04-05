@@ -44,6 +44,12 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.initCodeFlow();
     }
 
+    public async loginViaPopup() {
+        await this.oauthService.loadDiscoveryDocument();
+
+        this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
+    }
+
     private finishLogin() {
         if (this.router.routerState.snapshot.url.startsWith('/login')) {
             this.oauthService.loadUserProfile()
