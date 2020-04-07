@@ -41,21 +41,15 @@ import { RotateCounterClockwiseButtonComponent } from './rotate-counter-clockwis
 import { RotateClockwiseButtonComponent } from './rotate-clockwise-button/rotate-clockwise-button.component';
 import { SearchLinkComponent } from './search-link/search-link.component';
 import { SettingsLinkComponent } from './settings-link/settings-link.component';
-import { SidebarButtonComponent } from './sidebar-button/sidebar-button.component';
-import { SidebarCardComponent } from './sidebar-card/sidebar-card.component';
-import { SidebarCardDividerComponent } from './sidebar-card-divider/sidebar-card-divider.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.component';
 import { StatsLinkComponent } from './stats-link/stats-link.component';
 import { BulkEditFilterComponent } from './bulk-edit-filter/bulk-edit-filter.component';
 import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps-editor.component';
-import { SidebarButtonGroupComponent } from './sidebar-button-group/sidebar-button-group.component';
-import { SidebarCardGroupComponent } from './sidebar-card-group/sidebar-card-group.component';
-import { SidebarButtonDividerComponent } from './sidebar-button-divider/sidebar-button-divider.component';
 import { PrimaryNavLinkComponent } from './primary-nav-link/primary-nav-link.component';
 import { ContentMarginComponent } from './content-margin/content-margin.component';
 import { BaseModule } from '../base/base.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
+import { SidebarModule } from './sidebar/sidebar.module';
 
 @NgModule({
     declarations: [
@@ -104,22 +98,17 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         RotateClockwiseButtonComponent,
         SearchLinkComponent,
         SettingsLinkComponent,
-        SidebarButtonComponent,
-        SidebarCardComponent,
-        SidebarCardDividerComponent,
-        SidebarComponent,
         SlideshowButtonComponent,
-        StatsLinkComponent,
-        SidebarButtonGroupComponent,
-        SidebarCardGroupComponent,
-        SidebarButtonDividerComponent
+        StatsLinkComponent
     ],
     imports: [
         BaseModule,
+        SidebarModule,
         ToolbarModule
     ],
     exports: [
         BaseModule,
+        SidebarModule,
         ToolbarModule,
 
         // components
@@ -158,13 +147,6 @@ import { ToolbarModule } from './toolbar/toolbar.module';
         PhotoViewMapComponent,
         PrimaryNavComponent,
         RatingComponent,
-        SidebarButtonComponent,
-        SidebarButtonDividerComponent,
-        SidebarButtonGroupComponent,
-        SidebarCardComponent,
-        SidebarCardGroupComponent,
-        SidebarCardDividerComponent,
-        SidebarComponent,
         SlideshowButtonComponent
     ]
 })
