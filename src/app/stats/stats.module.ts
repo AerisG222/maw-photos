@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -27,7 +26,6 @@ import { StatsLayoutComponent } from './stats-layout/stats-layout.component';
         StatsLayoutComponent
     ],
     imports: [
-        CommonModule,
         NgxChartsModule,
         SharedModule,
         StatsRoutingModule

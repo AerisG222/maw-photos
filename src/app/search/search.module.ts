@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 import { SearchRoutingModule } from './search-routing.module';
@@ -20,7 +19,6 @@ import { ResultCountComponent } from './components/result-count/result-count.com
         ResultCountComponent
     ],
     imports: [
-        CommonModule,
         SearchRoutingModule,
         SearchStoreModule,
         SharedModule

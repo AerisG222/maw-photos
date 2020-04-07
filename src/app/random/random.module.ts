@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RandomComponent } from './random/random.component';
@@ -10,7 +9,6 @@ import { RandomRoutingModule } from './random-routing.module';
         RandomComponent
     ],
     imports: [
-        CommonModule,
         RandomRoutingModule,
         SharedModule
     ]

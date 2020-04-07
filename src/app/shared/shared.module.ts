@@ -174,6 +174,7 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
     ],
     exports: [
         // modules
+        CommonModule,
         GoogleMapsModule,
         MatButtonModule,
         MatCardModule,
