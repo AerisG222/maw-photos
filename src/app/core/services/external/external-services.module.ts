@@ -6,8 +6,8 @@ import { ExternalVideoApiService } from './external-video-api.service';
 import { videoApiServiceToken } from '../video-api.service';
 import { ExternalAuthGuard } from './external-auth.guard';
 import { authGuardToken } from '../auth.guard';
-import { searchApiServiceToken } from '../search-api.service';
-import { ExternalSearchApiService } from './external-search-api.service';
+import { searchApiServiceToken } from '../../../search/services/search-api.service';
+import { ExternalSearchApiService } from '../../../search/services/external/external-search-api.service';
 import { authServiceToken } from '../auth.service';
 import { ExternalAuthService } from './external-auth.service';
 

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { SearchApiService } from '../search-api.service';
-import { SearchResult } from '../../models/search/search-result.model';
-import { MultimediaCategory } from '../../models/search/multimedia-category.model';
+import { SearchResult } from '../../models/search-result.model';
+import { MultimediaCategory } from '../../models/multimedia-category.model';
 import { environment } from '../../../../environments/environment';
 
 @Injectable()

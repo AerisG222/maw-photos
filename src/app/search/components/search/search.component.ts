@@ -5,16 +5,16 @@ import { Observable, combineLatest } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
-import { SearchResult } from 'src/app/core/models/search/search-result.model';
-import { MultimediaCategory } from 'src/app/core/models/search/multimedia-category.model';
-import { selectSearchAllResults, selectSearchCurrentResult, selectSearchHasMoreResults } from 'src/app/core/root-store/search-store/selectors';
+import { SearchResult } from 'src/app/search/models/search-result.model';
+import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { selectSearchAllResults, selectSearchCurrentResult, selectSearchHasMoreResults } from 'src/app/search/store/selectors';
 import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
 import { CategoryType } from 'src/app/core/models/category-type.model';
 import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
 import { CategoryListType } from 'src/app/core/models/category-list-type.model';
 import { CategoryMargin } from 'src/app/core/models/category-margin.model';
-import { clearRequest } from 'src/app/core/root-store/search-store/actions';
+import { clearRequest } from 'src/app/search/store/actions';
 
 @Component({
     selector: 'app-search',

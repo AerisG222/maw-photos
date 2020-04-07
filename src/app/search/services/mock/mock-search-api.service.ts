@@ -3,10 +3,10 @@ import { Observable, forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { SearchApiService } from '../search-api.service';
-import { SearchResult } from '../../models/search/search-result.model';
-import { MultimediaCategory } from '../../models/search/multimedia-category.model';
-import { photoApiServiceToken, PhotoApiService } from '../photo-api.service';
-import { videoApiServiceToken, VideoApiService } from '../video-api.service';
+import { SearchResult } from '../../models/search-result.model';
+import { MultimediaCategory } from '../../models/multimedia-category.model';
+import { photoApiServiceToken, PhotoApiService } from '../../../core/services/photo-api.service';
+import { videoApiServiceToken, VideoApiService } from '../../../core/services/video-api.service';
 
 @Injectable()
 export class MockSearchApiService implements SearchApiService {

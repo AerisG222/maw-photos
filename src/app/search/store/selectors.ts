@@ -2,8 +2,8 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { State, searchAdapter } from './state';
 import { SEARCH_FEATURE_NAME } from './feature-name';
-import { MultimediaCategory } from '../../models/search/multimedia-category.model';
-import { SearchResult } from '../../models/search/search-result.model';
+import { MultimediaCategory } from '../models/multimedia-category.model';
+import { SearchResult } from '../models/search-result.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

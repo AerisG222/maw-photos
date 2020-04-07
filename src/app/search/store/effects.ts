@@ -6,7 +6,7 @@ import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operato
 
 import * as SearchActions from './actions';
 import * as searchSelectors from './selectors';
-import { searchApiServiceToken, SearchApiService } from '../../services/search-api.service';
+import { searchApiServiceToken, SearchApiService } from '../services/search-api.service';
 
 @Injectable()
 export class SearchStoreEffects {

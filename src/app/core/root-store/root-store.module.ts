@@ -11,7 +11,6 @@ import { PhotoStoreModule } from './photo-store/photo-store.module';
 import { SettingsStoreModule } from './settings-store';
 import { VideoCategoryStoreModule } from './video-category-store';
 import { VideoStoreModule } from './video-store';
-import { SearchStoreModule } from './search-store';
 import { AuthStoreModule } from './auth-store';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { AuthStoreModule } from './auth-store';
         LayoutStoreModule,
         PhotoCategoryStoreModule,
         PhotoStoreModule,
-        SearchStoreModule,
         SettingsStoreModule,
         VideoCategoryStoreModule,
         VideoStoreModule,

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { queryRequest } from 'src/app/core/root-store/search-store/actions';
+import { queryRequest } from 'src/app/search/store/actions';
 
 @Component({
     selector: 'app-search-form',

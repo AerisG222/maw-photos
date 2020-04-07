@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { queryRequest } from 'src/app/core/root-store/search-store/actions';
-import { selectSearchCurrentResult, selectSearchQuery } from 'src/app/core/root-store/search-store/selectors';
+import { queryRequest } from 'src/app/search/store/actions';
+import { selectSearchCurrentResult, selectSearchQuery } from 'src/app/search/store/selectors';
 
 @Component({
     selector: 'app-search-more',

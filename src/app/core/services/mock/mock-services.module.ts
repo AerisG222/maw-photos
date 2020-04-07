@@ -6,8 +6,8 @@ import { videoApiServiceToken } from '../video-api.service';
 import { MockVideoApiService } from './mock-video-api.service';
 import { authGuardToken } from '../auth.guard';
 import { MockAuthGuard } from './mock-auth.guard';
-import { searchApiServiceToken } from '../search-api.service';
-import { MockSearchApiService } from './mock-search-api.service';
+import { searchApiServiceToken } from '../../../search/services/search-api.service';
+import { MockSearchApiService } from '../../../search/services/mock/mock-search-api.service';
 import { authServiceToken } from '../auth.service';
 import { MockAuthService } from './mock-auth.service';
 
