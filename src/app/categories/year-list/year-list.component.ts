@@ -1,11 +1,9 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-import { toolbarShow } from 'src/app/shared/animations';
 import { CategoryMargin } from 'src/app/models/category-margin.model';
 import {
     SettingsStoreSelectors,
@@ -17,13 +15,6 @@ import {
     selector: 'app-year-list',
     templateUrl: './year-list.component.html',
     styleUrls: ['./year-list.component.scss'],
-    animations: [
-        trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YearListComponent implements OnInit, OnDestroy {

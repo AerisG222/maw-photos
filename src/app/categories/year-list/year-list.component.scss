@@ -1,12 +1,5 @@
 @import '../../../variables';
 
-:host {
-    display: grid;
-    grid-template-columns: max-content auto;
-    grid-template-rows: 100%;
-    height: 100vh;
-}
-
 form mat-icon {
     margin-left: 12px;
     font-size: 24px;
@@ -25,11 +18,4 @@ app-content-margin {
     grid-template-rows: max-content;
     grid-column-gap: 24px;
     justify-content: center;
-}
-
-@media (max-width: $mobileBreakpoint) {
-    :host {
-        grid-template-columns: 100%;
-        grid-template-rows: max-content auto;
-    }
 }

@@ -1,12 +1,5 @@
 @import '../../../../variables';
 
-:host {
-    display: grid;
-    grid-template-columns: max-content auto;
-    grid-template-rows: 100%;
-    height: 100vh;
-}
-
 .content-pad {
     padding: $contentPad;
 }
@@ -24,11 +17,4 @@ app-result-count {
     display: block;
     text-align: right;
     margin: 12px 0;
-}
-
-@media (max-width: $mobileBreakpoint) {
-    :host {
-        grid-template-columns: 100%;
-        grid-template-rows: max-content auto;
-    }
 }

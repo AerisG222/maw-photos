@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatsComponent } from './stats.component';
+import { ToolbarLayoutComponent } from './toolbar-layout.component';
 
-describe('StatsComponent', () => {
-  let component: StatsComponent;
-  let fixture: ComponentFixture<StatsComponent>;
+describe('ToolbarLayoutComponent', () => {
+  let component: ToolbarLayoutComponent;
+  let fixture: ComponentFixture<ToolbarLayoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatsComponent ]
+      declarations: [ ToolbarLayoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatsComponent);
+    fixture = TestBed.createComponent(ToolbarLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

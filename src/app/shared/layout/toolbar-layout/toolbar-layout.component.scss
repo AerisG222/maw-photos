@@ -1,18 +1,15 @@
-@import '../../../variables';
+@import '../../../../variables';
 
 :host {
     display: grid;
     grid-template-columns: max-content auto;
     grid-template-rows: 100%;
-}
-
-.stat-container {
-    margin: 0 12px;
+    height: 100vh;
 }
 
 @media (max-width: $mobileBreakpoint) {
     :host {
-        grid-template-rows: max-content auto;
         grid-template-columns: 100%;
+        grid-template-rows: max-content auto;
     }
 }

@@ -1,34 +1,38 @@
-<app-stats-layout>
+<app-toolbar-layout>
+    <app-stats-toolbar layout-toolbar></app-stats-toolbar>
 
-    <app-stats-header
-        layout-header
-        [title]="'Photo Stats'"
-        [year]="selectedYear$ | async"
-        (clickYear)="onRemoveYearFilter()">
-    </app-stats-header>
+    <app-stats-layout layout-main>
 
-    <div layout-cards>
-        <app-stat-card *ngIf="(selectedYear$ | async) === null" [detail]="totalDetails$ | async"></app-stat-card>
-        <app-stat-card *ngIf="selectedYear$ | async" [detail]="yearDetails$ | async"></app-stat-card>
-    </div>
+        <app-stats-header
+            layout-header
+            [title]="'Photo Stats'"
+            [year]="selectedYear$ | async"
+            (clickYear)="onRemoveYearFilter()">
+        </app-stats-header>
 
-    <form layout-form [formGroup]="form">
-        <div>
-            Aggregate By:
+        <div layout-cards>
+            <app-stat-card *ngIf="(selectedYear$ | async) === null" [detail]="totalDetails$ | async"></app-stat-card>
+            <app-stat-card *ngIf="selectedYear$ | async" [detail]="yearDetails$ | async"></app-stat-card>
         </div>
-        <div>
-            <mat-radio-group formControlName="aggregateBy">
-                <mat-radio-button value="count">Photo Count</mat-radio-button>
-                <mat-radio-button value="size">File Size</mat-radio-button>
-            </mat-radio-group>
-        </div>
-    </form>
 
-    <app-stat-chart
-        layout-chart
-        [chartData]="chartData$ | async"
-        [format]="chartValueFormat"
-        (cellSelected)="onSelectYear($event)">
-    </app-stat-chart>
+        <form layout-form [formGroup]="form">
+            <div>
+                Aggregate By:
+            </div>
+            <div>
+                <mat-radio-group formControlName="aggregateBy">
+                    <mat-radio-button value="count">Photo Count</mat-radio-button>
+                    <mat-radio-button value="size">File Size</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </form>
 
-</app-stats-layout>
+        <app-stat-chart
+            layout-chart
+            [chartData]="chartData$ | async"
+            [format]="chartValueFormat"
+            (cellSelected)="onSelectYear($event)">
+        </app-stat-chart>
+
+    </app-stats-layout>
+</app-toolbar-layout>

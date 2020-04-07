@@ -1,13 +1,5 @@
 @import '../../../variables';
 
-:host {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: auto;
-    height: 100vh;
-
-}
-
 mat-radio-group {
     display: inline-flex;
     flex-direction: column;
@@ -23,7 +15,7 @@ h3 {
 }
 
 .settings-container {
-    margin: 12px;
+    padding: 0 12px;
     overflow-y: auto;
 }
 
@@ -44,15 +36,15 @@ mat-card {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    :host {
-        grid-template-rows: calc(100vh - 48px);
-    }
-
     .card-grid {
         display: block;
     }
 
     .button-group {
         margin-bottom: 0;
+    }
+
+    .settings-container {
+        padding: 0 $contentPad;
     }
 }

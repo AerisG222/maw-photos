@@ -43,6 +43,7 @@ import { BaseModule } from '../base/base.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { PrimaryNavModule } from './primary-nav/primary-nav.module';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
     declarations: [
@@ -88,12 +89,14 @@ import { PrimaryNavModule } from './primary-nav/primary-nav.module';
     ],
     imports: [
         BaseModule,
+        LayoutModule,
         PrimaryNavModule,
         SidebarModule,
         ToolbarModule
     ],
     exports: [
         BaseModule,
+        LayoutModule,
         PrimaryNavModule,
         SidebarModule,
         ToolbarModule,

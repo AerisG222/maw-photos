@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-:host {
+.container {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: max-content auto;
@@ -78,11 +78,11 @@ mat-tab-group {
 }
 
 @media (max-width: $mobileBreakpoint) {
-    :host {
-        padding: $contentPad;
-    }
-
     mat-tab-group {
         height: calc(100% + 50px);
+    }
+
+    .container {
+        padding: 0 $contentPad;
     }
 }

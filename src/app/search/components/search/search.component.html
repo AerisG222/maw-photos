@@ -1,36 +1,36 @@
-<div class="mat-elevation-z4" @toolbarFadeIn>
-    <app-search-toolbar></app-search-toolbar>
-</div>
+<app-toolbar-layout>
+    <app-search-toolbar layout-toolbar></app-search-toolbar>
 
-<app-content-margin class="content-pad" [margin]="margin$ | async">
-    <app-search-form></app-search-form>
+    <app-content-margin layout-main class="content-pad" [margin]="margin$ | async">
+        <app-search-form></app-search-form>
 
-    <mat-divider mat-color="accent"></mat-divider>
+        <mat-divider mat-color="accent"></mat-divider>
 
-    <p class="no-results" *ngIf="showNoResults$ | async">No results found</p>
+        <p class="no-results" *ngIf="showNoResults$ | async">No results found</p>
 
-    <app-category-list
-        *ngIf="showListView$ | async"
-        [categories]="categories$ | async"
-        [showYears]="true"
-        [thumbnailSize]="listThumbnailSize$ | async">
-    </app-category-list>
+        <app-category-list
+            *ngIf="showListView$ | async"
+            [categories]="categories$ | async"
+            [showYears]="true"
+            [thumbnailSize]="listThumbnailSize$ | async">
+        </app-category-list>
 
-    <app-category-grid
-        *ngIf="showGridView$ | async"
-        [showTitles]="gridShowTitles$ | async"
-        [showYears]="gridShowYears$ | async"
-        [thumbnailSize]="gridThumbnailSize$ | async"
-        [categories]="categories$ | async">
-    </app-category-grid>
+        <app-category-grid
+            *ngIf="showGridView$ | async"
+            [showTitles]="gridShowTitles$ | async"
+            [showYears]="gridShowYears$ | async"
+            [thumbnailSize]="gridThumbnailSize$ | async"
+            [categories]="categories$ | async">
+        </app-category-grid>
 
-    <app-result-count
-        *ngIf="(totalResults$ | async) > 0"
-        [resultsShownCount]="shownResults$ | async"
-        [totalCount]="totalResults$ | async">
-    </app-result-count>
+        <app-result-count
+            *ngIf="(totalResults$ | async) > 0"
+            [resultsShownCount]="shownResults$ | async"
+            [totalCount]="totalResults$ | async">
+        </app-result-count>
 
-    <app-search-more
-        *ngIf="hasMoreResults$ | async">
-    </app-search-more>
-</app-content-margin>
+        <app-search-more
+            *ngIf="hasMoreResults$ | async">
+        </app-search-more>
+    </app-content-margin>
+</app-toolbar-layout>

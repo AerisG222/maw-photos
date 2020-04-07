@@ -1,10 +1,8 @@
-import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { toolbarShow } from 'src/app/shared/animations';
 import { SearchResult } from 'src/app/search/models/search-result.model';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { selectSearchAllResults, selectSearchCurrentResult, selectSearchHasMoreResults } from 'src/app/search/store/selectors';
@@ -20,13 +18,6 @@ import { clearRequest } from 'src/app/search/store/actions';
     selector: 'app-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
-    animations: [
-        trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
