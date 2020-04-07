@@ -3,17 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
-import { ExifDetail } from 'src/app/core/models/exif-detail.model';
-import { Photo } from 'src/app/core/models/photo.model';
-import { Comment } from 'src/app/core/models/comment.model';
-import { Rating } from 'src/app/core/models/rating.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { ExifDetail } from 'src/app/models/exif-detail.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Comment } from 'src/app/models/comment.model';
+import { Rating } from 'src/app/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
-import { ApiCollection } from '../../models/api-collection.model';
+import { ApiCollection } from '../../../models/api-collection.model';
 import { DateService } from '../date.service';
 import { environment } from '../../../../environments/environment';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { GpsCoordinate } from '../../../models/gps-coordinate.model';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 // TODO: remove first()  [https://github.com/angular/angular/issues/20755]
 

@@ -3,9 +3,9 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { Settings } from 'src/app/core/models/settings.model';
-import { VideoSize } from 'src/app/core/models/video-size.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { Settings } from 'src/app/models/settings.model';
+import { VideoSize } from 'src/app/models/video-size.model';
 import {
     SettingsStoreActions,
     SettingsStoreSelectors,

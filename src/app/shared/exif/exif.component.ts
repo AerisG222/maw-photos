@@ -4,7 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
-import { ExifContainer } from 'src/app/core/models/exif-container';
+import { ExifContainer } from 'src/app/models/exif-container';
 
 @Component({
     selector: 'app-exif',

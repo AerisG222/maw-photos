@@ -3,11 +3,11 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
-import { photoCategoryToCategory } from '../../models/category-map-functions';
-import { Category } from '../../models/category.model';
+import { photoCategoryToCategory } from '../../../models/category-map-functions';
+import { Category } from '../../../models/category.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

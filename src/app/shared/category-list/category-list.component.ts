@@ -1,10 +1,10 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from 'src/app/core/models/category.model';
-import { CategoryType } from 'src/app/core/models/category-type.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { Category } from 'src/app/models/category.model';
+import { CategoryType } from 'src/app/models/category-type.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { Router } from '@angular/router';
-import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
+import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 
 @Component({
     selector: 'app-category-list',

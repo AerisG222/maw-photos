@@ -1,12 +1,12 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { Photo } from 'src/app/core/models/photo.model';
-import { Comment } from 'src/app/core/models/comment.model';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
-import { Rating } from 'src/app/core/models/rating.model';
-import { ExifContainer } from '../../models/exif-container';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Comment } from 'src/app/models/comment.model';
+import { PhotoEffects } from 'src/app/models/photo-effects.model';
+import { PhotoRotation } from 'src/app/models/photo-rotation.model';
+import { Rating } from 'src/app/models/rating.model';
+import { ExifContainer } from '../../../models/exif-container';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 

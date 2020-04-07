@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { NgxStarsComponent } from 'ngx-stars';
 
-import { Rating } from 'src/app/core/models/rating.model';
+import { Rating } from 'src/app/models/rating.model';
 import { RatingMode } from './rating-mode.model';
 import { PhotoStoreActions, VideoStoreActions, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
 

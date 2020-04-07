@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 import { toolbarShow } from '../animations';
 import { LayoutStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
-import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { Photo } from 'src/app/models/photo.model';
+import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
 
 @Component({

@@ -4,11 +4,11 @@ import { Store, select } from '@ngrx/store';
 import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
 import { tap, first, map } from 'rxjs/operators';
 
-import { Category } from 'src/app/core/models/category.model';
+import { Category } from 'src/app/models/category.model';
 import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
-import { Photo } from 'src/app/core/models/photo.model';
+import { Photo } from 'src/app/models/photo.model';
 import { toolbarShow } from '../animations';
-import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 
 @Component({
     selector: 'app-photo-view-bulk-edit',

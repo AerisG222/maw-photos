@@ -3,11 +3,11 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
-import { CategoryFilter } from 'src/app/core/models/category-filter.model';
-import { CategoryListType } from 'src/app/core/models/category-list-type.model';
-import { CategoryMargin } from 'src/app/core/models/category-margin.model';
-import { Settings } from 'src/app/core/models/settings.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { CategoryFilter } from 'src/app/models/category-filter.model';
+import { CategoryListType } from 'src/app/models/category-list-type.model';
+import { CategoryMargin } from 'src/app/models/category-margin.model';
+import { Settings } from 'src/app/models/settings.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({

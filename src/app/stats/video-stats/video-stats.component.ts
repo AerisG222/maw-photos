@@ -7,7 +7,7 @@ import * as numeral from 'numeral';
 
 import { StatDetail } from '../models/stat-detail.model';
 import { VideoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { VideoCategory } from 'src/app/core/models/video-category.model';
+import { VideoCategory } from 'src/app/models/video-category.model';
 
 @Component({
     selector: 'app-video-stats',

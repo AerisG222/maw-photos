@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
-import { ExifDetail } from 'src/app/core/models/exif-detail.model';
-import { Photo } from 'src/app/core/models/photo.model';
-import { Comment } from 'src/app/core/models/comment.model';
-import { Rating } from 'src/app/core/models/rating.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { ExifDetail } from 'src/app/models/exif-detail.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Comment } from 'src/app/models/comment.model';
+import { Rating } from 'src/app/models/rating.model';
 import { PhotoApiService } from '../photo-api.service';
-import { ApiCollection } from '../../models/api-collection.model';
+import { ApiCollection } from '../../../models/api-collection.model';
 import { DateService } from '../date.service';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { GpsCoordinate } from '../../../models/gps-coordinate.model';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {

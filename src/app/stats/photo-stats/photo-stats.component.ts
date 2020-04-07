@@ -5,7 +5,7 @@ import { map, tap, delay, filter } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { StatDetail } from '../models/stat-detail.model';
 

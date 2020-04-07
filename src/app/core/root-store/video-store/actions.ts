@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Video } from 'src/app/core/models/video.model';
-import { Rating } from 'src/app/core/models/rating.model';
-import { Comment } from 'src/app/core/models/comment.model';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { Video } from 'src/app/models/video.model';
+import { Rating } from 'src/app/models/rating.model';
+import { Comment } from 'src/app/models/comment.model';
+import { GpsCoordinate } from '../../../models/gps-coordinate.model';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 export const clearRequest = createAction(
     '[Videos] Clear'

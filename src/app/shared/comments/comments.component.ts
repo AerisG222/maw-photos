@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 
 import { CommentMode } from './comment-mode.model';
-import { Comment } from 'src/app/core/models/comment.model';
+import { Comment } from 'src/app/models/comment.model';
 import { PhotoStoreSelectors, PhotoStoreActions, VideoStoreSelectors, VideoStoreActions } from 'src/app/core/root-store';
 import { filter, tap } from 'rxjs/operators';
 

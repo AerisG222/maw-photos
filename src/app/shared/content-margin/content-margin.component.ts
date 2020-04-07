@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { CategoryMargin } from 'src/app/core/models/category-margin.model';
+import { CategoryMargin } from 'src/app/models/category-margin.model';
 
 @Component({
     selector: 'app-content-margin',

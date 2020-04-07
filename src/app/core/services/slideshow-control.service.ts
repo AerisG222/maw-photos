@@ -4,7 +4,7 @@ import { interval, combineLatest, Subject, Observable } from 'rxjs';
 import { tap, filter, takeUntil } from 'rxjs/operators';
 
 import { PhotoStoreSelectors, PhotoStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
-import { Settings } from '../models/settings.model';
+import { Settings } from '../../models/settings.model';
 
 
 @Injectable({

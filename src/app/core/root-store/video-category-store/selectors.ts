@@ -3,11 +3,11 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { VideoCategory } from 'src/app/core/models/video-category.model';
+import { VideoCategory } from 'src/app/models/video-category.model';
 import { VIDEO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { VideoCategoryAdapter, State } from './state';
-import { videoCategoryToCategory } from '../../models/category-map-functions';
-import { Category } from '../../models/category.model';
+import { videoCategoryToCategory } from '../../../models/category-map-functions';
+import { Category } from '../../../models/category.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

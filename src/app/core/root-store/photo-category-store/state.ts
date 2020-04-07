@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
 
 export const photoCategoryAdapter: EntityAdapter<PhotoCategory> = createEntityAdapter<PhotoCategory>({
     sortComparer: (a: PhotoCategory, b: PhotoCategory): number => b.id - a.id

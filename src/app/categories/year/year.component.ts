@@ -3,9 +3,9 @@ import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CategoryListType } from 'src/app/core/models/category-list-type.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
-import { CategoryTeaser } from 'src/app/core/models/category-teaser.model';
+import { CategoryListType } from 'src/app/models/category-list-type.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 import {
     RootStoreSelectors,
     SettingsStoreSelectors

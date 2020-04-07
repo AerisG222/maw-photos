@@ -3,7 +3,7 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { Layout } from 'src/app/core/models/layout.model';
+import { Layout } from 'src/app/models/layout.model';
 import { State } from './state';
 import { LAYOUT_FEATURE_NAME } from './feature-name';
 

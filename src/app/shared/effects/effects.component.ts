@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
+import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 
 @Component({

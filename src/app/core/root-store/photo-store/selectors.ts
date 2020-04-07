@@ -3,14 +3,14 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { Photo } from 'src/app/core/models/photo.model';
-import { Comment } from 'src/app/core/models/comment.model';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { Rating } from 'src/app/core/models/rating.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Comment } from 'src/app/models/comment.model';
+import { PhotoEffects } from 'src/app/models/photo-effects.model';
+import { Rating } from 'src/app/models/rating.model';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
-import { ExifContainer } from '../../models/exif-container';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { ExifContainer } from '../../../models/exif-container';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

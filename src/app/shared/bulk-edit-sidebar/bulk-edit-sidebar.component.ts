@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 
-import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { sidebarCardShow, sidebarCardHide } from '../animations';
 
 @Component({

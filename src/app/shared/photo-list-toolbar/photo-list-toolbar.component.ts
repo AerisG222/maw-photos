@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
 
-import { Settings } from 'src/app/core/models/settings.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { Settings } from 'src/app/models/settings.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import {
     LayoutStoreActions,
     PhotoStoreActions,
@@ -14,7 +14,7 @@ import {
     PhotoCategoryStoreSelectors,
     AuthStoreSelectors
 } from 'src/app/core/root-store';
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
 
 @Component({
     selector: 'app-photo-list-toolbar',

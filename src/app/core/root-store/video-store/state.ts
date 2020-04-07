@@ -1,9 +1,9 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { Comment } from 'src/app/core/models/comment.model';
-import { Rating } from 'src/app/core/models/rating.model';
-import { Video } from '../../models/video.model';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { Comment } from 'src/app/models/comment.model';
+import { Rating } from 'src/app/models/rating.model';
+import { Video } from '../../../models/video.model';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 export const videoAdapter: EntityAdapter<Video> = createEntityAdapter<Video>({
     sortComparer: (a: Video, b: Video): number => b.id - a.id

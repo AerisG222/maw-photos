@@ -7,10 +7,10 @@ import * as numeral from 'numeral';
 
 import { StatDetail } from '../models/stat-detail.model';
 import { RootStoreSelectors } from 'src/app/core/root-store';
-import { VideoCategory } from 'src/app/core/models/video-category.model';
-import { Category } from 'src/app/core/models/category.model';
-import { CategoryType } from 'src/app/core/models/category-type.model';
-import { PhotoCategory } from 'src/app/core/models/photo-category.model';
+import { VideoCategory } from 'src/app/models/video-category.model';
+import { Category } from 'src/app/models/category.model';
+import { CategoryType } from 'src/app/models/category-type.model';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
 
 @Component({
   selector: 'app-combined-stats',

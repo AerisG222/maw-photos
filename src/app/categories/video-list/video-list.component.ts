@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { Video } from 'src/app/core/models/video.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { Video } from 'src/app/models/video.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-video-list',

@@ -1,8 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as PhotoActions from './actions';
-import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
+import { Photo } from 'src/app/models/photo.model';
+import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { photoAdapter, initialState, State } from './state';
 
 // TODO: set gps detail in photo itself

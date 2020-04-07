@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap } from 'rxjs/operators';
 
-import { PhotoRotation } from 'src/app/core/models/photo-rotation.model';
+import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';

@@ -6,10 +6,10 @@ import { Observable, Subscription } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
-import { VideoSize } from 'src/app/core/models/video-size.model';
-import { Video } from 'src/app/core/models/video.model';
-import { Settings } from 'src/app/core/models/settings.model';
-import { Category } from 'src/app/core/models/category.model';
+import { VideoSize } from 'src/app/models/video-size.model';
+import { Video } from 'src/app/models/video.model';
+import { Settings } from 'src/app/models/settings.model';
+import { Category } from 'src/app/models/category.model';
 import {
     SettingsStoreActions,
     SettingsStoreSelectors,

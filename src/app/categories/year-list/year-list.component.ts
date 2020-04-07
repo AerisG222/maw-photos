@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 import { toolbarShow } from 'src/app/shared/animations';
-import { CategoryMargin } from 'src/app/core/models/category-margin.model';
+import { CategoryMargin } from 'src/app/models/category-margin.model';
 import {
     SettingsStoreSelectors,
     SettingsStoreActions,

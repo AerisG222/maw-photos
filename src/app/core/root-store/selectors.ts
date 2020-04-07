@@ -3,9 +3,9 @@ import { createSelector } from '@ngrx/store';
 import { SettingsStoreSelectors } from './settings-store';
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
-import { Category } from '../models/category.model';
-import { CategoryFilter } from '../models/category-filter.model';
-import { CategoryType } from '../models/category-type.model';
+import { Category } from '../../models/category.model';
+import { CategoryFilter } from '../../models/category-filter.model';
+import { CategoryType } from '../../models/category-type.model';
 import { PhotoStoreSelectors } from './photo-store';
 import { VideoStoreSelectors } from './video-store';
 

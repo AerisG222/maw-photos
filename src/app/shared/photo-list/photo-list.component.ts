@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { Photo } from 'src/app/core/models/photo.model';
-import { ThumbnailSize } from 'src/app/core/models/thumbnail-size.model';
+import { Photo } from 'src/app/models/photo.model';
+import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 
 @Component({
     selector: 'app-photo-list',

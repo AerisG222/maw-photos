@@ -3,15 +3,15 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { Settings } from 'src/app/core/models/settings.model';
+import { Settings } from 'src/app/models/settings.model';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
 import { State } from './state';
-import { VideoSize } from '../../models/video-size.model';
-import { Theme } from '../../models/theme.model';
-import { CategoryMargin } from '../../models/category-margin.model';
-import { ThumbnailSize } from '../../models/thumbnail-size.model';
-import { CategoryFilter } from '../../models/category-filter.model';
-import { CategoryListType } from '../../models/category-list-type.model';
+import { VideoSize } from '../../../models/video-size.model';
+import { Theme } from '../../../models/theme.model';
+import { CategoryMargin } from '../../../models/category-margin.model';
+import { ThumbnailSize } from '../../../models/thumbnail-size.model';
+import { CategoryFilter } from '../../../models/category-filter.model';
+import { CategoryListType } from '../../../models/category-list-type.model';
 
 const getError = (state: State): string => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

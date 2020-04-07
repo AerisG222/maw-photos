@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 
-import { VideoCategory } from '../../models/video-category.model';
-import { Video } from '../../models/video.model';
-import { Comment } from '../../models/comment.model';
-import { Rating } from '../../models/rating.model';
+import { VideoCategory } from '../../../models/video-category.model';
+import { Video } from '../../../models/video.model';
+import { Comment } from '../../../models/comment.model';
+import { Rating } from '../../../models/rating.model';
 import { VideoApiService } from '../video-api.service';
-import { ApiCollection } from '../../models/api-collection.model';
+import { ApiCollection } from '../../../models/api-collection.model';
 import { DateService } from '../date.service';
 import { environment } from '../../../../environments/environment';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { GpsCoordinate } from '../../../models/gps-coordinate.model';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 // TODO: remove first()  [https://github.com/angular/angular/issues/20755]
 

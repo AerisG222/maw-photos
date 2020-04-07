@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from 'src/app/core/models/category.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
     selector: 'app-category-header',

@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { GpsService } from 'src/app/core/services/gps.service';
 import { PhotoStoreSelectors } from 'src/app/core/root-store';
-import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 
 @Component({
     selector: 'app-bulk-edit-gps-editor',

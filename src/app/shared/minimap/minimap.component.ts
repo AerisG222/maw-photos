@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
+import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
 import { SettingsStoreSelectors, PhotoStoreSelectors, SettingsStoreActions, VideoStoreSelectors } from 'src/app/core/root-store';
 import { MinimapMode } from './minimap-mode.model';
 import { GoogleMap } from '@angular/google-maps';

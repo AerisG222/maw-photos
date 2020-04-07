@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { toolbarShow } from '../animations';
-import { MapImage } from 'src/app/core/models/map-image.model';
-import { Photo } from 'src/app/core/models/photo.model';
-import { Settings } from 'src/app/core/models/settings.model';
+import { MapImage } from 'src/app/models/map-image.model';
+import { Photo } from 'src/app/models/photo.model';
+import { Settings } from 'src/app/models/settings.model';
 import {
     PhotoStoreSelectors,
     SettingsStoreActions,

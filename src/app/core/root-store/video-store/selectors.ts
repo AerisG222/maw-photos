@@ -3,13 +3,13 @@ import {
     createSelector
 } from '@ngrx/store';
 
-import { Video } from 'src/app/core/models/video.model';
-import { Comment } from 'src/app/core/models/comment.model';
-import { Rating } from 'src/app/core/models/rating.model';
+import { Video } from 'src/app/models/video.model';
+import { Comment } from 'src/app/models/comment.model';
+import { Rating } from 'src/app/models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
-import { GpsCoordinate } from '../../models/gps-coordinate.model';
-import { GpsDetail } from '../../models/gps-detail.model';
+import { GpsCoordinate } from '../../../models/gps-coordinate.model';
+import { GpsDetail } from '../../../models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

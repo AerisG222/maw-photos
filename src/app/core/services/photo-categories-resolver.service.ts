@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, EMPTY } from 'rxjs';
 import { filter, catchError, take } from 'rxjs/operators';
 
-import { PhotoCategory } from '../models/photo-category.model';
+import { PhotoCategory } from '../../models/photo-category.model';
 import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '../root-store';
 
 @Injectable({

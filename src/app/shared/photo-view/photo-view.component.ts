@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
 import { filter, tap, take } from 'rxjs/operators';
 
 import { toolbarShow } from '../animations';
-import { Photo } from 'src/app/core/models/photo.model';
-import { PhotoEffects } from 'src/app/core/models/photo-effects.model';
-import { Settings } from 'src/app/core/models/settings.model';
+import { Photo } from 'src/app/models/photo.model';
+import { PhotoEffects } from 'src/app/models/photo-effects.model';
+import { Settings } from 'src/app/models/settings.model';
 import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
 import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
-import { Category } from 'src/app/core/models/category.model';
+import { Category } from 'src/app/models/category.model';
 import {
     PhotoStoreActions,
     PhotoStoreSelectors,

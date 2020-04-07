@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { ExifCategory } from 'src/app/core/models/exif-category.model';
-import { ExifData } from 'src/app/core/models/exif-data.model';
-import { ExifDetail } from 'src/app/core/models/exif-detail.model';
-import { ExifContainer } from '../models/exif-container';
+import { ExifCategory } from 'src/app/models/exif-category.model';
+import { ExifData } from 'src/app/models/exif-data.model';
+import { ExifDetail } from 'src/app/models/exif-detail.model';
+import { ExifContainer } from '../../models/exif-container';
 
 @Injectable({
     providedIn: 'root'

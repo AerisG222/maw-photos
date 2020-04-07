@@ -12,9 +12,9 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 
-import { MapImage } from 'src/app/core/models/map-image.model';
-import { Photo } from 'src/app/core/models/photo.model';
-import { GoogleMapThemes } from 'src/app/core/models/google-map-themes.model';
+import { MapImage } from 'src/app/models/map-image.model';
+import { Photo } from 'src/app/models/photo.model';
+import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MapMarkerInfo } from './map-marker-info.model';
 

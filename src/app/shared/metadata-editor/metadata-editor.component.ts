@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 
 import { MetadataEditorMode } from './metadata-editor-mode.model';
-import { GpsCoordinate } from 'src/app/core/models/gps-coordinate.model';
+import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { PhotoStoreSelectors, VideoStoreSelectors, PhotoStoreActions, VideoStoreActions } from 'src/app/core/root-store';
 import { GpsService } from 'src/app/core/services/gps.service';
 
