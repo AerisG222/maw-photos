@@ -1,6 +1,6 @@
-@import '../../../variables';
+@import '../../../../variables';
 
-button {
+a {
     width: 100%;
     min-width: 36px;
     line-height: 28px;
@@ -15,12 +15,16 @@ button {
     }
 }
 
-@media (max-width: $mobileBreakpoint) {
-    button {
-        width: unset;
-    }
+.icon-sm {
+    font-size: 10px !important;
 }
 
-mat-icon.rotate-90 {
-    transform: rotate(90deg);
+.icon-md {
+    font-size: 14px !important;
+}
+
+@media (max-width: $mobileBreakpoint) {
+    a {
+        width: unset;
+    }
 }

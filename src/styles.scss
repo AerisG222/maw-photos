@@ -40,9 +40,9 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/sidebar-button/sidebar-button.component.theme';
 @import 'app/shared/sidebar-button-group/sidebar-button-group.component.theme';
 @import 'app/shared/sidebar-card-group/sidebar-card-group.component.theme';
-@import 'app/shared/toolbar/toolbar.component.theme';
-@import 'app/shared/toolbar-button/toolbar-button.component.theme';
-@import 'app/shared/toolbar-link/toolbar-link.component.theme';
+@import 'app/shared/toolbar/toolbar/toolbar.component.theme';
+@import 'app/shared/toolbar/toolbar-button/toolbar-button.component.theme';
+@import 'app/shared/toolbar/toolbar-link/toolbar-link.component.theme';
 
 @import 'app/stats/header/stats-header.component.theme';
 
