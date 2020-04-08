@@ -5,7 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StatsRoutingModule } from './stats-routing.module';
 import { PhotoStatsComponent } from './photo-stats/photo-stats.component';
 import { StatChartComponent } from './stat-chart/stat-chart.component';
-import { StatsHeaderComponent } from './header/stats-header.component';
+import { StatsHeaderComponent } from './stats-header/stats-header.component';
 import { VideoStatsComponent } from './video-stats/video-stats.component';
 import { StatsToolbarComponent } from './stats-toolbar/stats-toolbar.component';
 import { CombinedStatsComponent } from './combined-stats/combined-stats.component';
