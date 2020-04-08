@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { trigger, transition, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { toolbarShow } from '../animations';
 import { MapImage } from 'src/app/models/map-image.model';
 import { Photo } from 'src/app/models/photo.model';
 import { Settings } from 'src/app/models/settings.model';
@@ -19,13 +17,6 @@ import {
     selector: 'app-photo-view-map',
     templateUrl: './photo-view-map.component.html',
     styleUrls: ['./photo-view-map.component.scss'],
-    animations: [
-        trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoViewMapComponent implements OnInit, OnDestroy {

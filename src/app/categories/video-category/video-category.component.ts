@@ -1,11 +1,9 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
 
-import { toolbarShow } from 'src/app/shared/animations';
 import { VideoSize } from 'src/app/models/video-size.model';
 import { Video } from 'src/app/models/video.model';
 import { Settings } from 'src/app/models/settings.model';
@@ -23,13 +21,7 @@ import {
     selector: 'app-video-category',
     templateUrl: './video-category.component.html',
     styleUrls: ['./video-category.component.scss'],
-    animations: [
-        trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoCategoryComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();

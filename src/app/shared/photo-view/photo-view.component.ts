@@ -1,11 +1,9 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, tap, take } from 'rxjs/operators';
 
-import { toolbarShow } from '../animations';
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { Settings } from 'src/app/models/settings.model';
@@ -25,13 +23,6 @@ import {
     selector: 'app-photo-view',
     templateUrl: './photo-view.component.html',
     styleUrls: ['./photo-view.component.scss'],
-    animations: [
-        trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoViewComponent implements OnInit {

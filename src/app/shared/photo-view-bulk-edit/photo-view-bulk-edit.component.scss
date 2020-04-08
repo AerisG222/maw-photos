@@ -1,18 +1,8 @@
-@import '../../../variables';
-
-:host {
-    display: grid;
-    grid-template-columns: max-content auto max-content;
-    grid-template-rows: 100%;
-    height: 100vh;
-}
-
 .content-grid {
     margin: 4px 36px 0 36px;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: max-content auto;
-    height: 100%;
+    grid-template-rows: max-content max-content auto;
 }
 
 .category-header {
@@ -21,15 +11,4 @@
 
 mat-divider {
     margin-bottom: 12px;
-}
-
-app-photo-select-grid {
-    overflow-y: auto;
-}
-
-@media (max-width: $mobileBreakpoint) {
-    :host {
-        grid-template-columns: 100%;
-        grid-template-rows: max-content auto max-content;
-    }
 }

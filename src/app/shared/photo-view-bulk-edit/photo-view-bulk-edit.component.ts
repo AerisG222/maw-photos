@@ -1,4 +1,3 @@
-import { trigger, transition, useAnimation } from '@angular/animations';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
@@ -7,21 +6,13 @@ import { tap, first, map } from 'rxjs/operators';
 import { Category } from 'src/app/models/category.model';
 import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
 import { Photo } from 'src/app/models/photo.model';
-import { toolbarShow } from '../animations';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 
 @Component({
     selector: 'app-photo-view-bulk-edit',
     templateUrl: './photo-view-bulk-edit.component.html',
     styleUrls: ['./photo-view-bulk-edit.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [
-        trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoViewBulkEditComponent implements OnInit {
     category$: Observable<Category>;

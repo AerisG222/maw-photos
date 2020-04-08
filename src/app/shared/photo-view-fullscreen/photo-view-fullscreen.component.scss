@@ -1,12 +1,5 @@
 @import '../../../variables';
 
-:host {
-    display: grid;
-    grid-template-columns: max-content auto;
-    grid-template-rows: 100%;
-    height: 100vh;
-}
-
 .image-wrapper {
     text-align: center;
 }
@@ -16,11 +9,4 @@ img {
     max-height: 100%;
     object-fit: contain;
     align-self: center;
-}
-
-@media (max-width: $mobileBreakpoint) {
-    :host {
-        grid-template-columns: 100%;
-        grid-template-rows: max-content auto;
-    }
 }
