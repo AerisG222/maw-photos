@@ -15,7 +15,13 @@ export class ExternalAuthService implements AuthService {
         private router: Router,
         private oauthService: OAuthService
     ) {
+
+    }
+
+    async init() {
         this.oauthService.configure(authConfig);
+
+        await this.oauthService.loadDiscoveryDocument();
 
         this.oauthService.events
             .pipe(
@@ -24,38 +30,41 @@ export class ExternalAuthService implements AuthService {
             )
             .subscribe();
 
+        if (this.oauthService.hasValidAccessToken())
+        {
+            await this.loadProfile();
+        }
+
         this.oauthService.setupAutomaticSilentRefresh();
     }
 
-    public handleLoginCallback() {
+    handleLoginCallback() {
         if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
-            // if we already have valid tokens, let's use them
-            this.oauthService.loadDiscoveryDocument()
-                .then(_ => this.finishLogin());
+            this.finishLogin();
         } else {
-            // check to see if we are receiving the auth response, and if so, receive the tokens
-            this.oauthService.loadDiscoveryDocumentAndTryLogin();
+            this.oauthService.tryLoginCodeFlow();
         }
     }
 
-    public redirectAndLogin() {
+    redirectAndLogin() {
         this.oauthService.initCodeFlow();
     }
 
-    public async loginViaPopup() {
-        await this.oauthService.loadDiscoveryDocument();
-
+    loginViaPopup() {
         this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
     }
 
-    private finishLogin() {
+    private async finishLogin() {
         if (this.router.routerState.snapshot.url.startsWith('/login')) {
-            this.oauthService.loadUserProfile()
-                .then(profile => {
-                    this.storeProfile(profile);
-                    this.router.navigate(['/']);
-                });
+            await this.loadProfile();
+            this.router.navigate(['/']);
         }
+    }
+
+    private async loadProfile() {
+        const profile = await this.oauthService.loadUserProfile();
+
+        this.storeProfile(profile);
     }
 
     private storeProfile(profile)

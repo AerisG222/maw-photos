@@ -14,15 +14,19 @@ export class MockAuthService implements AuthService {
 
     }
 
-    public handleLoginCallback() {
+    init() {
+
+    }
+
+    handleLoginCallback() {
         this.finishLogin();
     }
 
-    public redirectAndLogin() {
+    redirectAndLogin() {
         this.finishLogin();
     }
 
-    public loginViaPopup() {
+    loginViaPopup() {
 
     }
 

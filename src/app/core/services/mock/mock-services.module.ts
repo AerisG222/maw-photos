@@ -10,12 +10,15 @@ import { searchApiServiceToken } from '../../../search/services/search-api.servi
 import { MockSearchApiService } from '../../../search/services/mock/mock-search-api.service';
 import { authServiceToken } from '../auth.service';
 import { MockAuthService } from './mock-auth.service';
+import { authInitResolverToken } from '../auth-init.resolver';
+import { MockAuthInitResolver } from './mock-auth-init.resolve';
 
 @NgModule()
 export class MockServicesModule {
     static forRoot(): ModuleWithProviders<MockServicesModule> {
         return {
             providers: [
+                { provide: authInitResolverToken, useClass: MockAuthInitResolver },
                 { provide: authGuardToken, useClass: MockAuthGuard },
                 { provide: authServiceToken, useClass: MockAuthService },
                 { provide: photoApiServiceToken, useClass: MockPhotoApiService },
