@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { BaseModule } from '../../base/base.module';
+import { BaseModule } from 'src/app/base/base.module';
 
 import { SidebarButtonComponent } from './sidebar-button/sidebar-button.component';
 import { SidebarCardComponent } from './sidebar-card/sidebar-card.component';

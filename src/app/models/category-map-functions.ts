@@ -6,7 +6,7 @@ import { VideoCategory } from './video-category.model';
 export function photoCategoryToCategory(c: PhotoCategory): Category {
     return {
         type: CategoryType.photo,
-        categoryRoute: 'photos',
+        categoryRoute: '/photos',
         id: c.id,
         name: c.name,
         year: c.year,
@@ -20,7 +20,7 @@ export function photoCategoryToCategory(c: PhotoCategory): Category {
 export function videoCategoryToCategory(c: VideoCategory): Category {
     return {
         type: CategoryType.video,
-        categoryRoute: 'videos',
+        categoryRoute: '/videos',
         id: c.id,
         name: c.name,
         year: c.year,

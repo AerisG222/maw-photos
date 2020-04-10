@@ -2,10 +2,10 @@ import { createAction, props } from '@ngrx/store';
 
 import { Settings } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
-import { VideoSize } from '../../../models/video-size.model';
-import { CategoryMargin } from '../../../models/category-margin.model';
-import { CategoryFilter } from '../../../models/category-filter.model';
-import { CategoryListType } from '../../../models/category-list-type.model';
+import { VideoSize } from 'src/app/models/video-size.model';
+import { CategoryMargin } from 'src/app/models/category-margin.model';
+import { CategoryFilter } from 'src/app/models/category-filter.model';
+import { CategoryListType } from 'src/app/models/category-list-type.model';
 
 export const updateMobileMarginsRequest = createAction(
     '[Settings] Update Mobile Margins Request'

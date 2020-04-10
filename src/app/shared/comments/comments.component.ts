@@ -5,7 +5,8 @@ import { Subscription, Observable } from 'rxjs';
 
 import { CommentMode } from './comment-mode.model';
 import { Comment } from 'src/app/models/comment.model';
-import { PhotoStoreSelectors, PhotoStoreActions, VideoStoreSelectors, VideoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 import { filter, tap } from 'rxjs/operators';
 
 @Component({

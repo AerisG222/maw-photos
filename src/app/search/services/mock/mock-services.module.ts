@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { searchApiServiceToken } from '../../../search/services/search-api.service';
-import { MockSearchApiService } from '../../../search/services/mock/mock-search-api.service';
+import { searchApiServiceToken } from 'src/app/search/services/search-api.service';
+import { MockSearchApiService } from 'src/app/search/services/mock/mock-search-api.service';
 
 @NgModule()
 export class MockServicesModule {

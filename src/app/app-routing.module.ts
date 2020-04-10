@@ -17,14 +17,20 @@ const routes: Routes = [
         resolve: [ authInitResolverToken ]
     },
     {
-        path: 'help',
-        loadChildren: () => import('./help/help.module').then(m => m.HelpModule),
+        path: 'photos',
+        loadChildren: () => import('./photos/photos.module').then(m => m.PhotosModule),
+        canActivate: [authGuardToken],
         resolve: [ authInitResolverToken ]
     },
     {
-        path: 'random',
-        loadChildren: () => import('./random/random.module').then(m => m.RandomModule),
+        path: 'videos',
+        loadChildren: () => import('./videos/videos.module').then(m => m.VideosModule),
         canActivate: [authGuardToken],
+        resolve: [ authInitResolverToken ]
+    },
+    {
+        path: 'help',
+        loadChildren: () => import('./help/help.module').then(m => m.HelpModule),
         resolve: [ authInitResolverToken ]
     },
     {

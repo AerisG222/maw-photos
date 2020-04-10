@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import { initialState, State } from './state';
 import * as SettingsActions from './actions';
-import { CategoryMargin } from '../../../models/category-margin.model';
+import { CategoryMargin } from 'src/app/models/category-margin.model';
 
 const reducer = createReducer(
     initialState,

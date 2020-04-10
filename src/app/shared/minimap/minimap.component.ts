@@ -4,7 +4,9 @@ import { Observable, combineLatest } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
-import { SettingsStoreSelectors, PhotoStoreSelectors, SettingsStoreActions, VideoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors } from 'src/app/photos/store';
+import { VideoStoreSelectors } from 'src/app/videos/store';
+import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { MinimapMode } from './minimap-mode.model';
 import { GoogleMap } from '@angular/google-maps';
 

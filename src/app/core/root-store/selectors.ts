@@ -3,11 +3,9 @@ import { createSelector } from '@ngrx/store';
 import { SettingsStoreSelectors } from './settings-store';
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
-import { Category } from '../../models/category.model';
-import { CategoryFilter } from '../../models/category-filter.model';
-import { CategoryType } from '../../models/category-type.model';
-import { PhotoStoreSelectors } from './photo-store';
-import { VideoStoreSelectors } from './video-store';
+import { Category } from 'src/app/models/category.model';
+import { CategoryFilter } from 'src/app/models/category-filter.model';
+import { CategoryType } from 'src/app/models/category-type.model';
 
 export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
@@ -21,21 +19,15 @@ export const selectError = createSelector(
 export const selectIsLoading = createSelector(
     SettingsStoreSelectors.selectSettingsIsLoading,
     PhotoCategoryStoreSelectors.selectPhotoCategoryIsLoading,
-    PhotoStoreSelectors.selectIsLoading,
     VideoCategoryStoreSelectors.selectVideoCategoryIsLoading,
-    VideoStoreSelectors.selectIsLoading,
     (
         settingsIsLoading: boolean,
         photoCategoryIsLoading: boolean,
-        photoIsLoading: boolean,
-        videoCategoryIsLoading: boolean,
-        videoIsLoading: boolean
+        videoCategoryIsLoading: boolean
     ) =>
             settingsIsLoading ||
             photoCategoryIsLoading ||
-            photoIsLoading ||
-            videoCategoryIsLoading ||
-            videoIsLoading
+            videoCategoryIsLoading
 );
 
 export const selectAllCategories = createSelector(

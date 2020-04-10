@@ -6,7 +6,8 @@ import { filter, tap, map } from 'rxjs/operators';
 
 import { MetadataEditorMode } from './metadata-editor-mode.model';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
-import { PhotoStoreSelectors, VideoStoreSelectors, PhotoStoreActions, VideoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 import { GpsService } from 'src/app/core/services/gps.service';
 
 @Component({

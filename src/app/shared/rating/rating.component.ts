@@ -6,7 +6,8 @@ import { NgxStarsComponent } from 'ngx-stars';
 
 import { Rating } from 'src/app/models/rating.model';
 import { RatingMode } from './rating-mode.model';
-import { PhotoStoreActions, VideoStoreActions, PhotoStoreSelectors, VideoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
+import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
 
 @Component({
     selector: 'app-rating',

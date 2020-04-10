@@ -2,11 +2,11 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { SearchApiService } from '../search-api.service';
-import { SearchResult } from '../../models/search-result.model';
-import { MultimediaCategory } from '../../models/multimedia-category.model';
-import { photoApiServiceToken, PhotoApiService } from '../../../core/services/photo-api.service';
-import { videoApiServiceToken, VideoApiService } from '../../../core/services/video-api.service';
+import { SearchApiService } from 'src/app/search/services/search-api.service';
+import { SearchResult } from 'src/app/search/models/search-result.model';
+import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
+import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 
 @Injectable()
 export class MockSearchApiService implements SearchApiService {

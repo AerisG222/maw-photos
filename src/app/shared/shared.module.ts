@@ -39,7 +39,7 @@ import { SlideshowButtonComponent } from './slideshow-button/slideshow-button.co
 import { BulkEditFilterComponent } from './bulk-edit-filter/bulk-edit-filter.component';
 import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor/bulk-edit-gps-editor.component';
 import { ContentMarginComponent } from './content-margin/content-margin.component';
-import { BaseModule } from '../base/base.module';
+import { BaseModule } from 'src/app/base/base.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { PrimaryNavModule } from './primary-nav/primary-nav.module';

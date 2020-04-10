@@ -1,8 +1,8 @@
 
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { MultimediaCategory } from '../models/multimedia-category.model';
-import { SearchResult } from '../models/search-result.model';
+import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { SearchResult } from 'src/app/search/models/search-result.model';
 
 export const searchAdapter: EntityAdapter<MultimediaCategory> = createEntityAdapter<MultimediaCategory>({
     sortComparer: (a: MultimediaCategory, b: MultimediaCategory): number =>

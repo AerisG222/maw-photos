@@ -1,7 +1,7 @@
 import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { colorSets, NumberCardComponent } from '@swimlane/ngx-charts';
 
-import { StatDetail } from '../models/stat-detail.model';
+import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 
 @Component({
   selector: 'app-stat-card',

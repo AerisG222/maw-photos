@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
 
 import { Histogram } from './histogram';
-import { PhotoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors } from 'src/app/photos/store';
 
 @Component({
     selector: 'app-histogram',

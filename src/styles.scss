@@ -24,7 +24,6 @@ $custom-typography: mat-typography-config(
 @import 'app/help/help/help.component.theme';
 
 @import 'app/categories/year-list/year-list.component.theme';
-@import 'app/categories/video-list/video-list.component.theme';
 
 @import 'app/shared/category-card/category-card.component.theme';
 @import 'app/shared/category-list/category-list.component.theme';
@@ -44,7 +43,9 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/toolbar/toolbar-button/toolbar-button.component.theme';
 @import 'app/shared/toolbar/toolbar-link/toolbar-link.component.theme';
 
-@import 'app/stats/header/stats-header.component.theme';
+@import 'app/stats/stats-header/stats-header.component.theme';
+
+@import 'app/videos/video-list/video-list.component.theme';
 
 @mixin mat-tooltip-background-override($theme) {
     $accent: map-get($theme, accent);

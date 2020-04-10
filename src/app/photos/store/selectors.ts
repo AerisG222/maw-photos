@@ -9,8 +9,8 @@ import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { Rating } from 'src/app/models/rating.model';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
-import { ExifContainer } from '../../../models/exif-container';
-import { GpsDetail } from '../../../models/gps-detail.model';
+import { ExifContainer } from 'src/app/models/exif-container';
+import { GpsDetail } from 'src/app/models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;

@@ -2,11 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import {
-    LayoutStoreActions,
-    PhotoStoreActions,
-    PhotoStoreSelectors
-} from 'src/app/core/root-store';
+import { LayoutStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 
 @Component({
     selector: 'app-photo-list-fullscreen-toolbar',

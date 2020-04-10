@@ -6,12 +6,8 @@ import { map, filter } from 'rxjs/operators';
 import { MapImage } from 'src/app/models/map-image.model';
 import { Photo } from 'src/app/models/photo.model';
 import { Settings } from 'src/app/models/settings.model';
-import {
-    PhotoStoreSelectors,
-    SettingsStoreActions,
-    SettingsStoreSelectors,
-    PhotoStoreActions
-} from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photo-view-map',

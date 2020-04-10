@@ -6,12 +6,8 @@ import { tap } from 'rxjs/operators';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { Settings } from 'src/app/models/settings.model';
 import { VideoSize } from 'src/app/models/video-size.model';
-import {
-    SettingsStoreActions,
-    SettingsStoreSelectors,
-    VideoStoreActions,
-    VideoStoreSelectors
-} from 'src/app/core/root-store';
+import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
+import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-video-list-toolbar',

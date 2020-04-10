@@ -4,9 +4,9 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { filter, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { authConfig } from '../../auth-config';
-import { updateUserInfoRequest } from '../../root-store/auth-store/actions';
-import { AuthService } from '../auth.service';
+import { authConfig } from 'src/app/core/auth-config';
+import { updateUserInfoRequest } from 'src/app/core/root-store/auth-store/actions';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable()
 export class ExternalAuthService implements AuthService {

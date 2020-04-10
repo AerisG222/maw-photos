@@ -3,9 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { Subject, interval, Subscription, Observable } from 'rxjs';
 import { tap, take, takeUntil, filter } from 'rxjs/operators';
 
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import {
-    PhotoStoreActions,
-    PhotoStoreSelectors,
     PhotoCategoryStoreActions,
     PhotoCategoryStoreSelectors,
     SettingsStoreActions,

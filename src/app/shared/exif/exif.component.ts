@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 import { ExifContainer } from 'src/app/models/exif-container';
 
 @Component({

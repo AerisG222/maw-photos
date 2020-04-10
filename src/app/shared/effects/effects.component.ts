@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 
 @Component({
     selector: 'app-effects',

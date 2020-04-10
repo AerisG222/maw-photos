@@ -4,8 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable, EMPTY } from 'rxjs';
 import { filter, catchError, take } from 'rxjs/operators';
 
-import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '../root-store';
-import { VideoCategory } from '../../models/video-category.model';
+import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { VideoCategory } from 'src/app/models/video-category.model';
 
 @Injectable({
     providedIn: 'root'

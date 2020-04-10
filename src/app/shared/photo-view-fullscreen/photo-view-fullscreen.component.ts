@@ -4,10 +4,11 @@ import { Store, select } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { LayoutStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreSelectors } from 'src/app/photos/store';
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
-import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
+import { EffectStyleBuilderService } from 'src/app/photos/services/effect-style-builder.service';
 
 @Component({
     selector: 'app-photo-view-fullscreen',

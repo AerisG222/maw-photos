@@ -3,8 +3,8 @@ import { createAction, props } from '@ngrx/store';
 import { Video } from 'src/app/models/video.model';
 import { Rating } from 'src/app/models/rating.model';
 import { Comment } from 'src/app/models/comment.model';
-import { GpsCoordinate } from '../../../models/gps-coordinate.model';
-import { GpsDetail } from '../../../models/gps-detail.model';
+import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
+import { GpsDetail } from 'src/app/models/gps-detail.model';
 
 export const clearRequest = createAction(
     '[Videos] Clear'

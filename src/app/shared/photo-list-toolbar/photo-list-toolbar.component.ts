@@ -5,10 +5,9 @@ import { tap, filter } from 'rxjs/operators';
 
 import { Settings } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import {
     LayoutStoreActions,
-    PhotoStoreActions,
-    PhotoStoreSelectors,
     SettingsStoreActions,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors,

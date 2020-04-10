@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { searchApiServiceToken } from '../../../search/services/search-api.service';
-import { ExternalSearchApiService } from '../../../search/services/external/external-search-api.service';
+import { searchApiServiceToken } from 'src/app/search/services/search-api.service';
+import { ExternalSearchApiService } from 'src/app/search/services/external/external-search-api.service';
 
 @NgModule()
 export class ExternalServicesModule {

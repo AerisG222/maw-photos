@@ -4,7 +4,8 @@ import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
 import { tap, first, map } from 'rxjs/operators';
 
 import { Category } from 'src/app/models/category.model';
-import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 import { Photo } from 'src/app/models/photo.model';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 

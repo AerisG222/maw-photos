@@ -8,13 +8,12 @@ import { VideoSize } from 'src/app/models/video-size.model';
 import { Video } from 'src/app/models/video.model';
 import { Settings } from 'src/app/models/settings.model';
 import { Category } from 'src/app/models/category.model';
+import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
 import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     VideoCategoryStoreActions,
     VideoCategoryStoreSelectors,
-    VideoStoreActions,
-    VideoStoreSelectors
 } from 'src/app/core/root-store';
 
 @Component({

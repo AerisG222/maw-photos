@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RandomComponent } from './random/random.component';
+import { RandomComponent } from 'src/app/photos/random/random.component';
 import { RandomRoutingModule } from './random-routing.module';
 
 @NgModule({

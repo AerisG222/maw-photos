@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreActions } from 'src/app/photos/store';
 
 @Component({
     selector: 'app-flip-horizontal-button',

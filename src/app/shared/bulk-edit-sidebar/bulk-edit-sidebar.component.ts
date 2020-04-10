@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angul
 import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
-import { sidebarCardShow, sidebarCardHide } from '../animations';
+import { sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
 
 @Component({
     selector: 'app-bulk-edit-sidebar',

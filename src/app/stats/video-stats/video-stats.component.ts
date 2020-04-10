@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, combineLatest, Subscription, concat, of } 
 import { tap, map, delay } from 'rxjs/operators';
 import * as numeral from 'numeral';
 
-import { StatDetail } from '../models/stat-detail.model';
+import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 import { VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { VideoCategory } from 'src/app/models/video-category.model';
 

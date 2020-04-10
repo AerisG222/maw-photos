@@ -4,13 +4,13 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { CategoryTeaserChooserMode } from './category-teaser-chooser-mode.model';
+import { PhotoStoreSelectors } from 'src/app/photos/store';
+import { VideoStoreSelectors } from 'src/app/videos/store';
 import {
-    PhotoCategoryStoreSelectors,
-    VideoCategoryStoreSelectors,
-    PhotoStoreSelectors,
-    VideoStoreSelectors,
     PhotoCategoryStoreActions,
-    VideoCategoryStoreActions
+    PhotoCategoryStoreSelectors,
+    VideoCategoryStoreActions,
+    VideoCategoryStoreSelectors
 } from 'src/app/core/root-store';
 
 @Component({

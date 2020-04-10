@@ -3,17 +3,17 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '../animations';
-import { CommentMode } from '../comments/comment-mode.model';
-import { RatingMode } from '../rating/rating-mode.model';
+import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
+import { CommentMode } from 'src/app/shared/comments/comment-mode.model';
+import { RatingMode } from 'src/app/shared/rating/rating-mode.model';
 import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     AuthStoreSelectors
 } from 'src/app/core/root-store';
-import { MinimapMode } from '../minimap/minimap-mode.model';
-import { MetadataEditorMode } from '../metadata-editor/metadata-editor-mode.model';
-import { CategoryTeaserChooserMode } from '../category-teaser-chooser/category-teaser-chooser-mode.model';
+import { MinimapMode } from 'src/app/shared/minimap/minimap-mode.model';
+import { MetadataEditorMode } from 'src/app/shared/metadata-editor/metadata-editor-mode.model';
+import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
     selector: 'app-photo-sidebar',

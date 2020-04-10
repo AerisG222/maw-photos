@@ -1,16 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { filter, take, map, tap } from 'rxjs/operators';
+import { filter, take, map } from 'rxjs/operators';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
-import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '../../shared/animations';
-import { CommentMode } from '../../shared/comments/comment-mode.model';
-import { MetadataEditorMode } from '../../shared/metadata-editor/metadata-editor-mode.model';
-import { MinimapMode } from '../../shared/minimap/minimap-mode.model';
-import { RatingMode } from '../../shared/rating/rating-mode.model';
+import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
+import { CommentMode } from 'src/app/shared/comments/comment-mode.model';
+import { MetadataEditorMode } from 'src/app/shared/metadata-editor/metadata-editor-mode.model';
+import { MinimapMode } from 'src/app/shared/minimap/minimap-mode.model';
+import { RatingMode } from 'src/app/shared/rating/rating-mode.model';
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
-import { CategoryTeaserChooserMode } from '../../shared/category-teaser-chooser/category-teaser-chooser-mode.model';
+import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
     selector: 'app-video-sidebar',

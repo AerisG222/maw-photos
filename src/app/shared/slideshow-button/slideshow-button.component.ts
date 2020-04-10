@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { PhotoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreSelectors } from 'src/app/photos/store';
 
 @Component({
     selector: 'app-slideshow-button',

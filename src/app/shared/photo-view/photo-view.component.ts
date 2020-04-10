@@ -7,15 +7,11 @@ import { filter, tap, take } from 'rxjs/operators';
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { Settings } from 'src/app/models/settings.model';
-import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
-import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
+import { EffectStyleBuilderService } from 'src/app/photos/services/effect-style-builder.service';
+import { SlideshowControlService } from 'src/app/photos/services/slideshow-control.service';
 import { Category } from 'src/app/models/category.model';
-import {
-    PhotoStoreActions,
-    PhotoStoreSelectors,
-    SettingsStoreSelectors,
-    PhotoCategoryStoreSelectors
-} from 'src/app/core/root-store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
+import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 // TODO: look at updating source images to higher quality jpgs
 

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PhotoCategoriesResolverService } from '../core/services/photo-categories-resolver.service';
-import { VideoCategoriesResolverService } from '../core/services/video-categories-resolver.service';
+import { PhotoCategoriesResolverService } from 'src/app/core/services/photo-categories-resolver.service';
+import { VideoCategoriesResolverService } from 'src/app/core/services/video-categories-resolver.service';
 import { CombinedStatsComponent } from './combined-stats/combined-stats.component';
 import { PhotoStatsComponent } from './photo-stats/photo-stats.component';
 import { VideoStatsComponent } from './video-stats/video-stats.component';

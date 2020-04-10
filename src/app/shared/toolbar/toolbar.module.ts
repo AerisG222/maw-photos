@@ -6,7 +6,7 @@ import { ToolbarDividerComponent } from './toolbar-divider/toolbar-divider.compo
 import { ToolbarExternalLinkComponent } from './toolbar-external-link/toolbar-external-link.component';
 import { ToolbarGroupComponent } from './toolbar-group/toolbar-group.component';
 import { ToolbarLinkComponent } from './toolbar-link/toolbar-link.component';
-import { BaseModule } from '../../base/base.module';
+import { BaseModule } from 'src/app/base/base.module';
 
 @NgModule({
     declarations: [

@@ -5,8 +5,8 @@ import { Comment } from 'src/app/models/comment.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { Rating } from 'src/app/models/rating.model';
-import { ExifContainer } from '../../../models/exif-container';
-import { GpsDetail } from '../../../models/gps-detail.model';
+import { ExifContainer } from 'src/app/models/exif-container';
+import { GpsDetail } from 'src/app/models/gps-detail.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 

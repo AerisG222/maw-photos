@@ -88,7 +88,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             .pipe(
                 select(selectSearchAllResults),
                 map(cats => cats.map(cat => ({
-                    route: `/categories/${ cat.multimediaType }s`,
+                    route: `/${ cat.multimediaType }s`,
                     id: cat.id,
                     year: cat.year,
                     name: cat.name,

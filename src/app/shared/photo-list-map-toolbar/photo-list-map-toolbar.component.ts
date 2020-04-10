@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 
 // TODO: do not allow moving past end of map list with arrow keys
 

@@ -4,11 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import {
-    PhotoCategoryStoreActions,
-    PhotoStoreSelectors, PhotoStoreActions,
-    SettingsStoreActions
-} from 'src/app/core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { PhotoCategoryStoreActions, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photo-category',

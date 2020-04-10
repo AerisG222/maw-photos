@@ -7,7 +7,7 @@ import * as numeral from 'numeral';
 
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { StatDetail } from '../models/stat-detail.model';
+import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 
 @Component({
     selector: 'app-photo-stats',

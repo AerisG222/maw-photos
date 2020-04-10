@@ -1,16 +1,16 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { photoApiServiceToken } from '../photo-api.service';
+import { photoApiServiceToken } from 'src/app/core/services/photo-api.service';
 import { MockPhotoApiService } from './mock-photo-api.service';
-import { videoApiServiceToken } from '../video-api.service';
+import { videoApiServiceToken } from 'src/app/core/services/video-api.service';
 import { MockVideoApiService } from './mock-video-api.service';
-import { authGuardToken } from '../auth.guard';
+import { authGuardToken } from 'src/app/core/services/auth.guard';
 import { MockAuthGuard } from './mock-auth.guard';
-import { searchApiServiceToken } from '../../../search/services/search-api.service';
-import { MockSearchApiService } from '../../../search/services/mock/mock-search-api.service';
-import { authServiceToken } from '../auth.service';
+import { searchApiServiceToken } from 'src/app/search/services/search-api.service';
+import { MockSearchApiService } from 'src/app/search/services/mock/mock-search-api.service';
+import { authServiceToken } from 'src/app/core/services/auth.service';
 import { MockAuthService } from './mock-auth.service';
-import { authInitResolverToken } from '../auth-init.resolver';
+import { authInitResolverToken } from 'src/app/core/services/auth-init.resolver';
 import { MockAuthInitResolver } from './mock-auth-init.resolve';
 
 @NgModule()
