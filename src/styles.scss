@@ -25,15 +25,16 @@ $custom-typography: mat-typography-config(
 
 @import 'app/categories/year-list/year-list.component.theme';
 
+@import 'app/photos/exif-table/exif-table.component.theme';
+@import 'app/photos/photo-list/photo-list.component.theme';
+@import 'app/photos/photo-select-grid/photo-select-grid.component.theme';
+@import 'app/photos/photo-view/photo-view.component.theme';
+@import 'app/photos/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
+
 @import 'app/shared/category-card/category-card.component.theme';
 @import 'app/shared/category-list/category-list.component.theme';
 @import 'app/shared/category-header/category-header.component.theme';
 @import 'app/shared/comments/comments.component.theme';
-@import 'app/shared/exif-table/exif-table.component.theme';
-@import 'app/shared/photo-list/photo-list.component.theme';
-@import 'app/shared/photo-select-grid/photo-select-grid.component.theme';
-@import 'app/shared/photo-view/photo-view.component.theme';
-@import 'app/shared/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
 @import 'app/shared/primary-nav/primary-nav-link/primary-nav-link.component.theme';
 @import 'app/shared/primary-nav/primary-nav/primary-nav.component.theme';
 @import 'app/shared/sidebar/sidebar-button/sidebar-button.component.theme';
