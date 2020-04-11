@@ -25,11 +25,11 @@ $custom-typography: mat-typography-config(
 
 @import 'app/categories/year-list/year-list.component.theme';
 
-@import 'app/photos/exif-table/exif-table.component.theme';
-@import 'app/photos/photo-list/photo-list.component.theme';
-@import 'app/photos/photo-select-grid/photo-select-grid.component.theme';
-@import 'app/photos/photo-view/photo-view.component.theme';
-@import 'app/photos/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
+@import 'app/photos/components/exif-table/exif-table.component.theme';
+@import 'app/photos/components/photo-list/photo-list.component.theme';
+@import 'app/photos/components/photo-select-grid/photo-select-grid.component.theme';
+@import 'app/photos/components/photo-view/photo-view.component.theme';
+@import 'app/photos/components/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
 
 @import 'app/shared/category-card/category-card.component.theme';
 @import 'app/shared/category-list/category-list.component.theme';
@@ -46,7 +46,7 @@ $custom-typography: mat-typography-config(
 
 @import 'app/stats/stats-header/stats-header.component.theme';
 
-@import 'app/videos/video-list/video-list.component.theme';
+@import 'app/videos/components/video-list/video-list.component.theme';
 
 @mixin mat-tooltip-background-override($theme) {
     $accent: map-get($theme, accent);

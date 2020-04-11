@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
-import { VideosRoutingModule } from './videos-routing.module';
-import { VideoCategoryComponent } from './video-category/video-category.component';
-import { VideoSidebarComponent } from './video-sidebar/video-sidebar.component';
-import { VideoListComponent } from './video-list/video-list.component';
-import { VideoListToolbarComponent } from './video-list-toolbar/video-list-toolbar.component';
 import { SharedModule } from '../shared/shared.module';
+import { VideosRoutingModule } from './videos-routing.module';
 import { VideoStoreModule } from './store';
 
+import { VideoCategoryComponent } from './components/video-category/video-category.component';
+import { VideoListComponent } from './components/video-list/video-list.component';
+import { VideoListToolbarComponent } from './components/video-list-toolbar/video-list-toolbar.component';
+import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.component';
 
 @NgModule({
     declarations: [
