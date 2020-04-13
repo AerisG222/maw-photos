@@ -5,11 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 import { CategoryMargin } from 'src/app/models/category-margin.model';
-import {
-    SettingsStoreSelectors,
-    SettingsStoreActions,
-    RootStoreSelectors
-} from 'src/app/core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-year-list',
@@ -31,8 +27,6 @@ export class YearListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.store$.dispatch(SettingsStoreActions.loadRequest());
-
         this.destroySub.add(this.activatedRoute.fragment
             .pipe(
                 filter(f => !!f),

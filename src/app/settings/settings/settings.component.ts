@@ -113,8 +113,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
             )
             .subscribe()
         );
-
-        this.loadSettings();
     }
 
     ngOnDestroy(): void {

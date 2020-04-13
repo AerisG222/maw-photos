@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
-import { PhotoCategoryStoreActions, SettingsStoreActions } from 'src/app/core/root-store';
+import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photo-category',
@@ -44,7 +44,6 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
             );
 
         this.store$.dispatch(PhotoStoreActions.clearRequest());
-        this.store$.dispatch(SettingsStoreActions.loadRequest());
 
         this.destroySub.add(this.route.params
             .pipe(

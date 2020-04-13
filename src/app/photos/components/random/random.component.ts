@@ -4,12 +4,7 @@ import { Subject, interval, Subscription, Observable } from 'rxjs';
 import { tap, take, takeUntil, filter } from 'rxjs/operators';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
-import {
-    PhotoCategoryStoreActions,
-    PhotoCategoryStoreSelectors,
-    SettingsStoreActions,
-    SettingsStoreSelectors
-} from 'src/app/core/root-store';
+import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-random',
@@ -60,7 +55,6 @@ export class RandomComponent implements OnInit, OnDestroy {
             ).subscribe()
         );
 
-        this.store$.dispatch(SettingsStoreActions.loadRequest());
         this.store$.dispatch(PhotoStoreActions.loadMultipleRandomRequest({ count: 10 }));
     }
 

@@ -9,12 +9,7 @@ import { Video } from 'src/app/models/video.model';
 import { Settings } from 'src/app/models/settings.model';
 import { Category } from 'src/app/models/category.model';
 import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
-import {
-    SettingsStoreActions,
-    SettingsStoreSelectors,
-    VideoCategoryStoreActions,
-    VideoCategoryStoreSelectors,
-} from 'src/app/core/root-store';
+import { SettingsStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-video-category',
@@ -67,7 +62,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
             );
 
         this.store$.dispatch(VideoStoreActions.clearRequest());
-        this.store$.dispatch(SettingsStoreActions.loadRequest());
 
         this.destroySub.add(this.route.params
             .pipe(
