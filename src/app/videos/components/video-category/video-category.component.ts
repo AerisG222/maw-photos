@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { map, tap, filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap, filter, first } from 'rxjs/operators';
 
 import { VideoSize } from 'src/app/models/video-size.model';
 import { Video } from 'src/app/models/video.model';
@@ -18,8 +18,6 @@ import { SettingsStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSe
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoCategoryComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
     videoSize = VideoSize;
     showCategoryAsLink = false;
     settings$: Observable<Settings>;
@@ -63,17 +61,16 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
         this.store$.dispatch(VideoStoreActions.clearRequest());
 
-        this.destroySub.add(this.route.params
+        this.route.params
             .pipe(
+                first(),
                 map(p => Number(p.id)),
                 tap(id => this.store$.dispatch(VideoCategoryStoreActions.setCurrentById({ categoryId: id }))),
                 tap(id => this.store$.dispatch(VideoStoreActions.loadRequest({ categoryId: id })))
-            ).subscribe()
-        );
+            ).subscribe();
     }
 
     ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
         this.setCurrentVideo(null);
     }
 

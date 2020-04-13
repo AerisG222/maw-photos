@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { queryRequest } from 'src/app/search/store/actions';
-import { selectSearchCurrentResult, selectSearchQuery } from 'src/app/search/store/selectors';
+import { SearchStoreSelectors } from 'src/app/search/store';
 
 @Component({
     selector: 'app-search-more',
@@ -26,14 +26,14 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.destroySub.add(this.store$
             .pipe(
-                select(selectSearchQuery),
+                select(SearchStoreSelectors.selectSearchQuery),
                 tap(q => this.query = q)
             ).subscribe()
         );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(selectSearchCurrentResult),
+                select(SearchStoreSelectors.selectSearchCurrentResult),
                 tap(result => this.nextIndex = result.startIndex + result.results.length)
             ).subscribe()
         );

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { first, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-category-year-filter',
@@ -15,7 +14,6 @@ import { Subscription } from 'rxjs';
 })
 export class CategoryYearFilterComponent implements OnInit {
     yearControl = new FormControl('');
-    destroySub = new Subscription();
 
     allYears$: Observable<number[]>;
     selectedYear$: Observable<number|string>;

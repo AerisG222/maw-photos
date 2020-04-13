@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, tap, first } from 'rxjs/operators';
 
 import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors } from 'src/app/core/root-store';
@@ -13,9 +13,7 @@ import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors } from
     styleUrls: ['./year-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YearListComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
+export class YearListComponent implements OnInit {
     margin$: Observable<CategoryMargin>;
     years$: Observable<number[]>;
 
@@ -27,8 +25,9 @@ export class YearListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.destroySub.add(this.activatedRoute.fragment
+        this.activatedRoute.fragment
             .pipe(
+                first(),
                 filter(f => !!f),
                 tap(y => {
                     const year = parseInt(y, 10);
@@ -37,8 +36,7 @@ export class YearListComponent implements OnInit, OnDestroy {
                         this.store$.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: year }));
                     }
                 })
-            ).subscribe()
-        );
+            ).subscribe();
 
         this.margin$ = this.store$
             .pipe(
@@ -49,9 +47,5 @@ export class YearListComponent implements OnInit, OnDestroy {
             .pipe(
                 select(RootStoreSelectors.selectAllFilteredCategoryYears)
             );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
     }
 }

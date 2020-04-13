@@ -10,6 +10,7 @@ import { Theme } from './models/theme.model';
 import { SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -37,9 +38,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.destroySub.add(this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectSettings)
+                select(SettingsStoreSelectors.selectSettings),
+                tap(settings => this.setTheme(settings.appTheme))
             )
-            .subscribe(settings => this.setTheme(settings.appTheme))
+            .subscribe()
         );
 
         this.store$.dispatch(SettingsStoreActions.loadRequest());
