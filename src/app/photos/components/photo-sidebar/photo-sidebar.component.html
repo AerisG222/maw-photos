@@ -36,11 +36,10 @@
                 @toggleInfoPanel>
             </app-sidebar-metadata-editor>
 
-            <app-category-teaser-chooser
+            <app-sidebar-category-teaser-chooser
                 *ngIf="showCategoryTeaserChooser$ | async"
-                [mode]="categoryTeaserChooserMode.Photos"
                 @toggleInfoPanel>
-            </app-category-teaser-chooser>
+            </app-sidebar-category-teaser-chooser>
         </ng-container>
     </app-sidebar-card-group>
 

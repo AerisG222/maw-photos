@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
-import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
     selector: 'app-photo-sidebar',
@@ -32,8 +31,6 @@ import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-choose
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSidebarComponent implements OnInit {
-    categoryTeaserChooserMode = CategoryTeaserChooserMode;
-
     isAdmin$: Observable<boolean>;
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;

@@ -12,6 +12,7 @@ import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-
 import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
 import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rating.component';
+import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-category-teaser-chooser/sidebar-category-teaser-chooser.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rati
         SidebarCommentsComponent,
         SidebarMetadataEditorComponent,
         SidebarMinimapComponent,
-        SidebarRatingComponent
+        SidebarRatingComponent,
+        SidebarCategoryTeaserChooserComponent
     ],
     imports: [
         SharedModule,

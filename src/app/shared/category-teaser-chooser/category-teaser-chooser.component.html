@@ -4,7 +4,7 @@
 
     <p>Current Teaser:</p>
     <div class="teaser-img">
-        <img [src]="currentTeaserUrl$ | async" />
+        <img [src]="currentTeaserUrl" />
     </div>
 
     <button mat-button (click)="onSetTeaser()" color="primary">Replace teaser with current photo</button>

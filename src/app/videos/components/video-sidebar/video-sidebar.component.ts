@@ -6,7 +6,6 @@ import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
-import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
     selector: 'app-video-sidebar',
@@ -33,8 +32,6 @@ import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-choose
     ]
 })
 export class VideoSidebarComponent implements OnInit {
-    categoryTeaserChooserMode = CategoryTeaserChooserMode;
-
     isAdmin$: Observable<boolean>;
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;
