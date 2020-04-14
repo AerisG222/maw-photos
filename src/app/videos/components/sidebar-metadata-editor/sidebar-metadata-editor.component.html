@@ -1,0 +1,6 @@
+<app-metadata-editor
+    [overrideGpsData]="overrideGpsData$ | async"
+    [sourceGpsData]="sourceGpsData$ | async"
+    (save)="onSave($event)"
+    (saveAndMoveNext)="onSaveAndMoveNext($event)">
+</app-metadata-editor>

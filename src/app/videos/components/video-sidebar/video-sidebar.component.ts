@@ -5,7 +5,6 @@ import { filter, take, map } from 'rxjs/operators';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
-import { MetadataEditorMode } from 'src/app/shared/metadata-editor/metadata-editor-mode.model';
 import { MinimapMode } from 'src/app/shared/minimap/minimap-mode.model';
 import { RatingMode } from 'src/app/shared/rating/rating-mode.model';
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
@@ -38,7 +37,6 @@ import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-choose
 export class VideoSidebarComponent implements OnInit {
     minimapMode = MinimapMode;
     ratingMode = RatingMode;
-    metadataEditorMode = MetadataEditorMode;
     categoryTeaserChooserMode = CategoryTeaserChooserMode;
 
     isAdmin$: Observable<boolean>;

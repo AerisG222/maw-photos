@@ -1,13 +1,7 @@
-import { Component, Input, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, ChangeDetectionStrategy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter, tap, map } from 'rxjs/operators';
 
-import { MetadataEditorMode } from './metadata-editor-mode.model';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
-import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 import { GpsService } from 'src/app/core/services/gps.service';
 
 @Component({
@@ -16,17 +10,15 @@ import { GpsService } from 'src/app/core/services/gps.service';
     styleUrls: ['./metadata-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MetadataEditorComponent implements OnInit, AfterViewInit {
-    private destroySub = new Subscription();
-    private id: number;
+export class MetadataEditorComponent implements OnInit {
+    @Input() sourceGpsData: GpsCoordinate;
+    @Input() overrideGpsData: GpsCoordinate;
+    @Output() save = new EventEmitter<GpsCoordinate>();
+    @Output() saveAndMoveNext = new EventEmitter<GpsCoordinate>();
 
     form: FormGroup;
-    sourceGpsData$: Observable<GpsCoordinate>;
-
-    @Input() mode: MetadataEditorMode;
 
     constructor(
-        private store$: Store,
         private formBuilder: FormBuilder,
         private gps: GpsService
     ) {
@@ -38,68 +30,6 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
             latitudeOverride: ['', Validators.required],
             longitudeOverride: ['', Validators.required]
         });
-    }
-
-    ngAfterViewInit(): void {
-        switch (this.mode) {
-            case MetadataEditorMode.Photos:
-                this.initPhotoEditor();
-                break;
-            case MetadataEditorMode.Videos:
-                this.initVideoEditor();
-                break;
-            default:
-                throw new Error('invalid metadata editor mode!');
-        }
-    }
-
-    initPhotoEditor(): void {
-        this.sourceGpsData$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
-                map(gpsDetail => gpsDetail?.source)
-            );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(photo => !!photo),
-                tap(photo => this.id = photo.id),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
-            ).subscribe()
-        );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
-                tap(gpsDetail => this.updateOverrideData(gpsDetail?.override))
-            ).subscribe()
-        );
-    }
-
-    initVideoEditor(): void {
-        this.sourceGpsData$ = this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
-                map(gps => gps?.source)
-            );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
-                filter(video => !!video),
-                tap(video => this.id = video.id),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadGpsDetailRequest({ videoId: video.id })))
-            ).subscribe()
-        );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
-                tap(gpsDetail => this.updateOverrideData(gpsDetail?.override))
-            ).subscribe()
-        );
     }
 
     onPaste(evt: ClipboardEvent): void {
@@ -124,16 +54,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
             return;
         }
 
-        switch (this.mode) {
-            case MetadataEditorMode.Photos:
-                this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.id, latLng }));
-                break;
-            case MetadataEditorMode.Videos:
-                this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideRequest({ videoId: this.id, latLng }));
-                break;
-            default:
-                throw new Error('invalid metadata editor mode!');
-        }
+        this.save.next(latLng);
     }
 
     onSaveAndMoveNext(): void {
@@ -143,16 +64,7 @@ export class MetadataEditorComponent implements OnInit, AfterViewInit {
             return;
         }
 
-        switch (this.mode) {
-            case MetadataEditorMode.Photos:
-                this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.id, latLng }));
-                break;
-            case MetadataEditorMode.Videos:
-                this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ videoId: this.id, latLng }));
-                break;
-            default:
-                throw new Error('invalid metadata editor mode!');
-        }
+        this.saveAndMoveNext.next(latLng);
     }
 
     onCancel(): void {

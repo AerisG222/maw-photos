@@ -18,11 +18,10 @@
         </app-minimap>
 
         <ng-container *ngIf="isAdmin$ | async">
-            <app-metadata-editor
+            <app-sidebar-metadata-editor
                 *ngIf="showMetadataEditor$ | async"
-                [mode]="metadataEditorMode.Videos"
                 @sidebarCardShowHide>
-            </app-metadata-editor>
+            </app-sidebar-metadata-editor>
 
             <app-category-teaser-chooser
                 *ngIf="showCategoryTeaserChooser$ | async"

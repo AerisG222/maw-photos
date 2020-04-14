@@ -30,6 +30,7 @@ import { RotateClockwiseButtonComponent } from './components/rotate-clockwise-bu
 import { RotateCounterClockwiseButtonComponent } from './components/rotate-counter-clockwise-button/rotate-counter-clockwise-button.component';
 import { SlideshowButtonComponent } from './components/slideshow-button/slideshow-button.component';
 import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
+import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-
         RotateCounterClockwiseButtonComponent,
         RotateClockwiseButtonComponent,
         SlideshowButtonComponent,
-        SidebarCommentsComponent
+        SidebarCommentsComponent,
+        SidebarMetadataEditorComponent
     ],
     imports: [
         SharedModule,
