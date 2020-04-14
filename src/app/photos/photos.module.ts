@@ -32,6 +32,7 @@ import { SlideshowButtonComponent } from './components/slideshow-button/slidesho
 import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
 import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
+import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rating.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-mi
         SlideshowButtonComponent,
         SidebarCommentsComponent,
         SidebarMetadataEditorComponent,
-        SidebarMinimapComponent
+        SidebarMinimapComponent,
+        SidebarRatingComponent
     ],
     imports: [
         SharedModule,

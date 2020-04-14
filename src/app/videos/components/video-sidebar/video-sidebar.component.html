@@ -1,10 +1,9 @@
 <app-sidebar>
     <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
-        <app-rating
+        <app-sidebar-rating
             *ngIf="showRatings$ | async"
-            [mode]="ratingMode.Videos"
             @sidebarCardShowHide>
-        </app-rating>
+        </app-sidebar-rating>
 
         <app-sidebar-comments
             *ngIf="showComments$ | async"

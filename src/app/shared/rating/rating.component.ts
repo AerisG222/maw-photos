@@ -1,13 +1,8 @@
-import { Component, Input, OnDestroy, ChangeDetectionStrategy, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+// tslint:disable-next-line: max-line-length
+import { Component, Input, ChangeDetectionStrategy, ViewChild, AfterViewInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { NgxStarsComponent } from 'ngx-stars';
 
 import { Rating } from 'src/app/models/rating.model';
-import { RatingMode } from './rating-mode.model';
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
-import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
 
 @Component({
     selector: 'app-rating',
@@ -15,95 +10,44 @@ import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
     styleUrls: ['./rating.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent implements AfterViewInit, OnDestroy {
-    @Input() mode: RatingMode;
+export class RatingComponent implements AfterViewInit {
+    private isReady = false;
+    private theRating: Rating;
+
+    @Input()
+    set rating(value: Rating) {
+        this.theRating = value;
+        this.updateRating();
+    }
+    get rating() { return this.theRating; }
+
+    @Output() rate = new EventEmitter<number>();
 
     @ViewChild('userRating') userRatingComponent: NgxStarsComponent;
     @ViewChild('averageRating') averageRatingComponent: NgxStarsComponent;
 
-    private currentId = -1;
-    private destroySub = new Subscription();
-
     constructor(
-        private store$: Store,
         private changeDetectorRef: ChangeDetectorRef
     ) {
 
     }
 
-    ngAfterViewInit(): void {
-        switch (this.mode) {
-            case RatingMode.Photos:
-                this.initPhotoRating();
-                break;
-            case RatingMode.Videos:
-                this.initVideoRating();
-                break;
-            default:
-                throw new Error('invalid rating mode!');
-        }
-    }
+    ngAfterViewInit() {
+        this.isReady = true;
 
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
-
-    initPhotoRating(): void {
-        this.destroySub.add(this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoRating),
-                filter(rating => !!rating),
-                tap(rating => this.updateRating(rating))
-            ).subscribe()
-        );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(photo => !!photo),
-                tap(photo => this.currentId = photo.id),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
-            ).subscribe()
-        );
-    }
-
-    initVideoRating(): void {
-        this.destroySub.add(this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoRating),
-                filter(rating => !!rating),
-                tap(rating => this.updateRating(rating))
-            ).subscribe()
-        );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
-                filter(video => !!video),
-                tap(video => this.currentId = video.id),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
-            ).subscribe()
-        );
+        this.updateRating();
     }
 
     onRate(userRating: number): void {
-        if (this.currentId === -1) {
-            return;
-        }
-
-        if (this.mode === RatingMode.Photos) {
-            this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.currentId, userRating }));
-        }
-
-        if (this.mode === RatingMode.Videos) {
-            this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.currentId, userRating }));
-        }
+        this.rate.next(userRating);
     }
 
-    private updateRating(rating: Rating) {
-        this.userRatingComponent.setRating(rating.userRating);
-        this.averageRatingComponent.setRating(rating.averageRating);
+    private updateRating() {
+        if (!!this.rating && this.isReady) {
+            this.userRatingComponent.setRating(this.theRating.userRating);
+            this.averageRatingComponent.setRating(this.theRating.averageRating);
 
-        this.changeDetectorRef.detectChanges();
+            this.changeDetectorRef.detectChanges();
+        }
     }
 }

@@ -4,12 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
-import { RatingMode } from 'src/app/shared/rating/rating-mode.model';
-import {
-    SettingsStoreActions,
-    SettingsStoreSelectors,
-    AuthStoreSelectors
-} from 'src/app/core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
 import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
@@ -37,7 +32,6 @@ import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-choose
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSidebarComponent implements OnInit {
-    ratingMode = RatingMode;
     categoryTeaserChooserMode = CategoryTeaserChooserMode;
 
     isAdmin$: Observable<boolean>;

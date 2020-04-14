@@ -11,6 +11,7 @@ import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.
 import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
 import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
+import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rating.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-mi
         VideoListToolbarComponent,
         SidebarCommentsComponent,
         SidebarMetadataEditorComponent,
-        SidebarMinimapComponent
+        SidebarMinimapComponent,
+        SidebarRatingComponent
     ],
     imports: [
         SharedModule,
