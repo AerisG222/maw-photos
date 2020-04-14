@@ -1,0 +1,7 @@
+<app-minimap
+    [mapTypeId]="minimapMapTypeId$ | async"
+    [position]="position$ | async"
+    [zoom]="zoom$ | async"
+    (mapTypeChange)="onMapTypeChange($event)"
+    (zoomChange)="onZoomChange($event)">
+</app-minimap>

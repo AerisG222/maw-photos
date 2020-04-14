@@ -10,7 +10,6 @@ import {
     SettingsStoreSelectors,
     AuthStoreSelectors
 } from 'src/app/core/root-store';
-import { MinimapMode } from 'src/app/shared/minimap/minimap-mode.model';
 import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-chooser/category-teaser-chooser-mode.model';
 
 @Component({
@@ -38,7 +37,6 @@ import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-choose
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSidebarComponent implements OnInit {
-    minimapMode = MinimapMode;
     ratingMode = RatingMode;
     categoryTeaserChooserMode = CategoryTeaserChooserMode;
 

@@ -11,11 +11,10 @@
             @sidebarCardShowHide>
         </app-sidebar-comments>
 
-        <app-minimap
+        <app-sidebar-minimap
             *ngIf="showMinimap$ | async"
-            [mode]="minimapMode.Videos"
             @sidebarCardShowHide>
-        </app-minimap>
+        </app-sidebar-minimap>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-sidebar-metadata-editor

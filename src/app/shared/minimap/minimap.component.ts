@@ -1,14 +1,11 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, EventEmitter, Output, OnChanges } from '@angular/core';
+import { GoogleMap } from '@angular/google-maps';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { Observable, combineLatest, of } from 'rxjs';
+import { map, first, tap } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
-import { PhotoStoreSelectors } from 'src/app/photos/store';
-import { VideoStoreSelectors } from 'src/app/videos/store';
-import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { MinimapMode } from './minimap-mode.model';
-import { GoogleMap } from '@angular/google-maps';
+import { SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-minimap',
@@ -17,15 +14,26 @@ import { GoogleMap } from '@angular/google-maps';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapComponent implements OnInit {
-    @Input() mode: MinimapMode;
+    private _mapTypeId: string;
+    private _zoom: number;
+
+    @Input()
+    set mapTypeId(value: string) { this._mapTypeId = value; this.updateOptions(); }
+    get mapTypeId(): string { return this._mapTypeId; }
+
+    @Input()
+    set zoom(value: number) { this._zoom = value; this.updateOptions(); }
+    get zoom(): number { return this._zoom; }
+
+    @Input() position: google.maps.LatLng;
+
+    @Output() mapTypeChange = new EventEmitter<string>();
+    @Output() zoomChange = new EventEmitter<number>();
 
     @ViewChild(GoogleMap) map: GoogleMap;
 
-    position$: Observable<google.maps.LatLng>;
-    options$: Observable<google.maps.MapOptions>;
-    minimapMapTypeId$: Observable<string>;
-    minimapZoom$: Observable<number>;
-    minimapTheme$: Observable<google.maps.MapTypeStyle[]>;
+    options: google.maps.MapOptions;
+    mapTheme: google.maps.MapTypeStyle[];
 
     constructor(
         private store$: Store
@@ -34,91 +42,12 @@ export class MinimapComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.minimapTheme$ = this.store$.pipe(
+        this.store$.pipe(
             select(SettingsStoreSelectors.selectAppTheme),
-            map(theme => theme.isDark ? GoogleMapThemes.THEME_DARK : GoogleMapThemes.THEME_LIGHT)
-        );
-
-        switch (this.mode) {
-            case MinimapMode.Photos:
-                this.initPhotosMinimap();
-                break;
-            case MinimapMode.Videos:
-                this.initVideosMinimap();
-                break;
-            default:
-                throw new Error('invalid minimap mode!');
-        }
-
-        this.options$ = combineLatest([
-            this.minimapMapTypeId$,
-            this.minimapTheme$,
-            this.minimapZoom$
-        ]).pipe(
-            map(x => ({
-                controlSize: 24,
-                fullscreenControl: true,
-                mapTypeControl: true,
-                streetViewControl: false,
-                mapTypeId: x[0],
-                styles: x[1],
-                zoom: x[2]
-            }))
-        );
-    }
-
-    initPhotosMinimap(): void {
-        const currentPhoto$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(photo => !!photo)
-        );
-
-        this.position$ = currentPhoto$
-            .pipe(
-                map(photo => {
-                    if (!!photo && !!photo.latitude && photo.longitude) {
-                        return new google.maps.LatLng(photo.latitude, photo.longitude);
-                    }
-
-                    return null;
-                })
-            );
-
-        this.minimapMapTypeId$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapMapTypeId)
-        );
-
-        this.minimapZoom$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
-        );
-    }
-
-    initVideosMinimap(): void {
-        const currentVideo$ = this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
-                filter(video => !!video)
-            );
-
-        this.position$ = currentVideo$
-            .pipe(
-                map(video => {
-                    if (!!video && !!video.latitude && video.longitude) {
-                        return new google.maps.LatLng(video.latitude, video.longitude);
-                    }
-
-                    return null;
-                })
-            );
-
-        this.minimapMapTypeId$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId)
-        );
-
-        this.minimapZoom$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom)
-        );
+            first(),
+            tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.THEME_DARK : GoogleMapThemes.THEME_LIGHT),
+            tap(_ => this.updateOptions())
+        ).subscribe();
     }
 
     onMapTypeChange(): void {
@@ -126,13 +55,7 @@ export class MinimapComponent implements OnInit {
             const mapTypeId = this.map.getMapTypeId();
 
             if (!!mapTypeId) {
-                if (this.mode === MinimapMode.Photos) {
-                    this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
-                }
-
-                if (this.mode === MinimapMode.Videos) {
-                    this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
-                }
+                this.mapTypeChange.next(mapTypeId);
             }
         }
     }
@@ -142,14 +65,31 @@ export class MinimapComponent implements OnInit {
             const zoom = this.map.getZoom();
 
             if (!!zoom) {
-                if (this.mode === MinimapMode.Photos) {
-                    this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
-                }
-
-                if (this.mode === MinimapMode.Videos) {
-                    this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
-                }
+                this.zoomChange.next(zoom);
             }
         }
+    }
+
+    private updateOptions(): void {
+        const opts = {
+            controlSize: 24,
+            fullscreenControl: true,
+            mapTypeControl: true,
+            streetViewControl: false
+        } as google.maps.MapOptions;
+
+        if (!!this.mapTypeId) {
+            opts.mapTypeId = this.mapTypeId;
+        }
+
+        if (!!this.mapTheme) {
+            opts.styles = this.mapTheme;
+        }
+
+        if (!!this.zoom) {
+            opts.zoom = this.zoom;
+        }
+
+        this.options = opts;
     }
 }

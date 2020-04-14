@@ -5,13 +5,13 @@
     <google-map
         [height]="'300px'"
         [width]="'464px'"
-        [options]="options$ | async"
-        [center]="position$ | async"
-        [zoom]="minimapZoom$ | async"
+        [options]="options"
+        [center]="position"
+        [zoom]="zoom"
         (maptypeidChanged)="onMapTypeChange()"
         (zoomChanged)="onZoomChange()"
         #map>
-        <map-marker [position]="position$ | async"></map-marker>
+        <map-marker [position]="position"></map-marker>
     </google-map>
 
 </app-sidebar-card>

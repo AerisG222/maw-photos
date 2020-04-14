@@ -26,11 +26,10 @@
             @toggleInfoPanel>
         </app-histogram>
 
-        <app-minimap
+        <app-sidebar-minimap
             *ngIf="showMinimap$ | async"
-            [mode]="minimapMode.Photos"
             @toggleInfoPanel>
-        </app-minimap>
+        </app-sidebar-minimap>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-sidebar-metadata-editor
