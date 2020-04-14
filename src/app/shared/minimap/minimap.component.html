@@ -11,7 +11,7 @@
         (maptypeidChanged)="onMapTypeChange()"
         (zoomChanged)="onZoomChange()"
         #map>
-        <map-marker [position]="position"></map-marker>
+        <map-marker *ngIf="!!position" [position]="position"></map-marker>
     </google-map>
 
 </app-sidebar-card>

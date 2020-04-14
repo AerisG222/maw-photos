@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, EventEmitter, Output, OnChanges } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest, of } from 'rxjs';
-import { map, first, tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
@@ -14,16 +13,16 @@ import { SettingsStoreSelectors } from 'src/app/core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapComponent implements OnInit {
-    private _mapTypeId: string;
-    private _zoom: number;
+    private minimapTypeId: string;
+    private minimapZoom: number;
 
     @Input()
-    set mapTypeId(value: string) { this._mapTypeId = value; this.updateOptions(); }
-    get mapTypeId(): string { return this._mapTypeId; }
+    set mapTypeId(value: string) { this.minimapTypeId = value; this.updateOptions(); }
+    get mapTypeId(): string { return this.minimapTypeId; }
 
     @Input()
-    set zoom(value: number) { this._zoom = value; this.updateOptions(); }
-    get zoom(): number { return this._zoom; }
+    set zoom(value: number) { this.minimapZoom = value; this.updateOptions(); }
+    get zoom(): number { return this.minimapZoom; }
 
     @Input() position: google.maps.LatLng;
 
