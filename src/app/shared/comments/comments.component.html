@@ -2,7 +2,7 @@
     [icon]="'comment'"
     [title]="'Comments'">
 
-    <div *ngFor="let comment of (comments$ | async)" class="comment-container">
+    <div *ngFor="let comment of comments" class="comment-container">
         <div class="comment-head">
             <div>
                 {{ comment.username }}

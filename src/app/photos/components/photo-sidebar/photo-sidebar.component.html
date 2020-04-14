@@ -6,11 +6,10 @@
             @toggleInfoPanel>
         </app-rating>
 
-        <app-comments
+        <app-sidebar-comments
             *ngIf="showComments$ | async"
-            [mode]="commentMode.Photos"
             @toggleInfoPanel>
-        </app-comments>
+        </app-sidebar-comments>
 
         <app-exif
             *ngIf="showExif$ | async"

@@ -6,11 +6,10 @@
             @sidebarCardShowHide>
         </app-rating>
 
-        <app-comments
+        <app-sidebar-comments
             *ngIf="showComments$ | async"
-            [mode]="commentMode.Videos"
             @sidebarCardShowHide>
-        </app-comments>
+        </app-sidebar-comments>
 
         <app-minimap
             *ngIf="showMinimap$ | async"

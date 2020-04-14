@@ -29,6 +29,7 @@ import { RandomComponent } from './components/random/random.component';
 import { RotateClockwiseButtonComponent } from './components/rotate-clockwise-button/rotate-clockwise-button.component';
 import { RotateCounterClockwiseButtonComponent } from './components/rotate-counter-clockwise-button/rotate-counter-clockwise-button.component';
 import { SlideshowButtonComponent } from './components/slideshow-button/slideshow-button.component';
+import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { SlideshowButtonComponent } from './components/slideshow-button/slidesho
         RandomComponent,
         RotateCounterClockwiseButtonComponent,
         RotateClockwiseButtonComponent,
-        SlideshowButtonComponent
+        SlideshowButtonComponent,
+        SidebarCommentsComponent
     ],
     imports: [
         SharedModule,

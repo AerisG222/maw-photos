@@ -8,13 +8,15 @@ import { VideoCategoryComponent } from './components/video-category/video-catego
 import { VideoListComponent } from './components/video-list/video-list.component';
 import { VideoListToolbarComponent } from './components/video-list-toolbar/video-list-toolbar.component';
 import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.component';
+import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
 
 @NgModule({
     declarations: [
         VideoCategoryComponent,
         VideoSidebarComponent,
         VideoListComponent,
-        VideoListToolbarComponent
+        VideoListToolbarComponent,
+        SidebarCommentsComponent
     ],
     imports: [
         SharedModule,

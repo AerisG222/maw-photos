@@ -4,7 +4,6 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
-import { CommentMode } from 'src/app/shared/comments/comment-mode.model';
 import { RatingMode } from 'src/app/shared/rating/rating-mode.model';
 import {
     SettingsStoreActions,
@@ -40,7 +39,6 @@ import { CategoryTeaserChooserMode } from 'src/app/shared/category-teaser-choose
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSidebarComponent implements OnInit {
-    commentMode = CommentMode;
     minimapMode = MinimapMode;
     ratingMode = RatingMode;
     metadataEditorMode = MetadataEditorMode;
