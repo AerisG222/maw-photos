@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { Store, select } from '@ngrx/store';
@@ -10,7 +10,8 @@ import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-stor
 @Component({
     selector: 'app-category-year-filter',
     templateUrl: './category-year-filter.component.html',
-    styleUrls: ['./category-year-filter.component.scss']
+    styleUrls: ['./category-year-filter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryYearFilterComponent implements OnInit {
     yearControl = new FormControl('');

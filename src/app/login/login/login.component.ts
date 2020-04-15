@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthService, authServiceToken } from 'src/app/core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,8 @@ import { first, filter, tap } from 'rxjs/operators';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    styleUrls: ['./login.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
     showLogin = true;

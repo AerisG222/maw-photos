@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, Subscription, concat, of } from 'rxjs';
@@ -12,7 +12,8 @@ import { VideoCategory } from 'src/app/models/video-category.model';
 @Component({
     selector: 'app-video-stats',
     templateUrl: './video-stats.component.html',
-    styleUrls: ['./video-stats.component.scss']
+    styleUrls: ['./video-stats.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoStatsComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();

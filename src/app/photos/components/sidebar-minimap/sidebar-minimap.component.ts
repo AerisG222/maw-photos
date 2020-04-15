@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
 @Component({
     selector: 'app-sidebar-minimap',
     templateUrl: './sidebar-minimap.component.html',
-    styleUrls: ['./sidebar-minimap.component.scss']
+    styleUrls: ['./sidebar-minimap.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarMinimapComponent implements OnInit {
     mapTypeId$: Observable<string>;

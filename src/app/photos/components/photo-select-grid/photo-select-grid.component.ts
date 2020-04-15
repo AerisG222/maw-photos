@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { Photo } from 'src/app/models/photo.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -6,7 +6,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 @Component({
     selector: 'app-photo-select-grid',
     templateUrl: './photo-select-grid.component.html',
-    styleUrls: ['./photo-select-grid.component.scss']
+    styleUrls: ['./photo-select-grid.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSelectGridComponent {
     @Input() photos: Photo[];

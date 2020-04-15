@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { VideoStoreSelectors, VideoStoreActions } from '../../store';
 @Component({
     selector: 'app-sidebar-rating',
     templateUrl: './sidebar-rating.component.html',
-    styleUrls: ['./sidebar-rating.component.scss']
+    styleUrls: ['./sidebar-rating.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarRatingComponent implements OnInit, OnDestroy {
     private currentId = -1;

@@ -1,12 +1,13 @@
-import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { colorSets, NumberCardComponent } from '@swimlane/ngx-charts';
 
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 
 @Component({
-  selector: 'app-stat-card',
-  templateUrl: './stat-card.component.html',
-  styleUrls: ['./stat-card.component.scss']
+    selector: 'app-stat-card',
+    templateUrl: './stat-card.component.html',
+    styleUrls: ['./stat-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatCardComponent implements AfterViewInit {
     @Input() detail: StatDetail[];

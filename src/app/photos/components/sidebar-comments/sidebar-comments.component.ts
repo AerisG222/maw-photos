@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 @Component({
     selector: 'app-sidebar-comments',
     templateUrl: './sidebar-comments.component.html',
-    styleUrls: ['./sidebar-comments.component.scss']
+    styleUrls: ['./sidebar-comments.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarCommentsComponent implements OnInit, OnDestroy {
     currentId = -1;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { VideoCategoryStoreSelectors, VideoCategoryStoreActions } from 'src/app/
 @Component({
     selector: 'app-sidebar-category-teaser-chooser',
     templateUrl: './sidebar-category-teaser-chooser.component.html',
-    styleUrls: ['./sidebar-category-teaser-chooser.component.scss']
+    styleUrls: ['./sidebar-category-teaser-chooser.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy {
     private categoryId = -1;

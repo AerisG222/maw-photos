@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 
@@ -10,7 +10,8 @@ import { tap, first } from 'rxjs/operators';
 @Component({
     selector: 'app-category-type-filter',
     templateUrl: './category-type-filter.component.html',
-    styleUrls: ['./category-type-filter.component.scss']
+    styleUrls: ['./category-type-filter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryTypeFilterComponent implements OnInit {
     categoryTypes = CategoryFilter.allCategoryFilters;

@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { CategoryMargin } from 'src/app/models/category-margin.model';
 
 @Component({
     selector: 'app-content-margin',
     templateUrl: './content-margin.component.html',
-    styleUrls: ['./content-margin.component.scss']
+    styleUrls: ['./content-margin.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentMarginComponent {
     @Input() margin: CategoryMargin;

@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-stats-toolbar',
     templateUrl: './stats-toolbar.component.html',
-    styleUrls: ['./stats-toolbar.component.scss']
+    styleUrls: ['./stats-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatsToolbarComponent {
     @Output() selectView = new EventEmitter<string>();

@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-stats-link',
-  templateUrl: './stats-link.component.html',
-  styleUrls: ['./stats-link.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-stats-link',
+    templateUrl: './stats-link.component.html',
+    styleUrls: ['./stats-link.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatsLinkComponent {
 
