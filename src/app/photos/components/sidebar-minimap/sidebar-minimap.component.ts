@@ -7,7 +7,7 @@ import { PhotoStoreSelectors } from 'src/app/photos/store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-sidebar-minimap',
+    selector: 'app-photos-sidebar-minimap',
     templateUrl: './sidebar-minimap.component.html',
     styleUrls: ['./sidebar-minimap.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

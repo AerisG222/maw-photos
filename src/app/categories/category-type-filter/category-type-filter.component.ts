@@ -8,7 +8,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { tap, first } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-category-type-filter',
+    selector: 'app-categories-category-type-filter',
     templateUrl: './category-type-filter.component.html',
     styleUrls: ['./category-type-filter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,6 +1,6 @@
 @import '~@angular/material/theming';
 
-@mixin app-year-list-component-theme($theme) {
+@mixin app-categories-year-list-component-theme($theme) {
     $accent: map-get($theme, accent);
 
     mat-chip.year-chip {

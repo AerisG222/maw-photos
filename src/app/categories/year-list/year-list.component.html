@@ -4,13 +4,13 @@
     <app-content-margin layout-main [margin]="margin$ | async">
 
         <div class="filter-grid">
-            <app-category-year-filter></app-category-year-filter>
-            <app-category-type-filter></app-category-type-filter>
+            <app-categories-category-year-filter></app-categories-category-year-filter>
+            <app-categories-category-type-filter></app-categories-category-type-filter>
         </div>
 
         <div>
             <div *ngFor="let year of years$ | async">
-                <app-year [year]="year"></app-year>
+                <app-categories-year [year]="year"></app-categories-year>
             </div>
         </div>
 

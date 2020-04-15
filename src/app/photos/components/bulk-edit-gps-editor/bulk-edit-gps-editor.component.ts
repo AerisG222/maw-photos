@@ -9,7 +9,7 @@ import { PhotoStoreSelectors } from 'src/app/photos/store';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 
 @Component({
-    selector: 'app-bulk-edit-gps-editor',
+    selector: 'app-photos-bulk-edit-gps-editor',
     templateUrl: './bulk-edit-gps-editor.component.html',
     styleUrls: ['./bulk-edit-gps-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { first, filter, tap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-login',
+    selector: 'app-login-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

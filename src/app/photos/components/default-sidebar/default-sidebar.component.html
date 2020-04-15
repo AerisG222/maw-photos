@@ -1,0 +1,139 @@
+<app-sidebar>
+    <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
+        <app-photos-sidebar-rating
+            *ngIf="showRatings$ | async"
+            @toggleInfoPanel>
+        </app-photos-sidebar-rating>
+
+        <app-photos-sidebar-comments
+            *ngIf="showComments$ | async"
+            @toggleInfoPanel>
+        </app-photos-sidebar-comments>
+
+        <app-photos-sidebar-exif
+            *ngIf="showExif$ | async"
+            @toggleInfoPanel>
+        </app-photos-sidebar-exif>
+
+        <app-photos-sidebar-effects
+            *ngIf="showEffects$ | async"
+            @toggleInfoPanel>
+        </app-photos-sidebar-effects>
+
+        <app-photos-sidebar-histogram
+            *ngIf="showHistogram$ | async"
+            @toggleInfoPanel>
+        </app-photos-sidebar-histogram>
+
+        <app-photos-sidebar-minimap
+            *ngIf="showMinimap$ | async"
+            @toggleInfoPanel>
+        </app-photos-sidebar-minimap>
+
+        <ng-container *ngIf="isAdmin$ | async">
+            <app-photos-sidebar-metadata-editor
+                *ngIf="showMetadataEditor$ | async"
+                @toggleInfoPanel>
+            </app-photos-sidebar-metadata-editor>
+
+            <app-photos-sidebar-category-teaser-chooser
+                *ngIf="showCategoryTeaserChooser$ | async"
+                @toggleInfoPanel>
+            </app-photos-sidebar-category-teaser-chooser>
+        </ng-container>
+    </app-sidebar-card-group>
+
+    <app-sidebar-button-group>
+        <app-sidebar-button
+            [icon]="(endSidenavExpanded$ | async) ? 'chevron_right' : 'chevron_left'"
+            [shortcutKey]="'i'"
+            [shortcutHelp]="'Show/Hide Info Panel'"
+            [tooltip]="'Show/Hide Info Panel (I)'"
+            (click)="toggleSidebar()">
+        </app-sidebar-button>
+
+        <app-sidebar-button-divider></app-sidebar-button-divider>
+
+        <app-sidebar-button
+            [icon]="'star'"
+            [isActive]="showRatings$ | async"
+            [isDisabled]="(enableButtons$ | async) === false"
+            [shortcutKey]="'r'"
+            [shortcutHelp]="'Show/Hide Ratings'"
+            [tooltip]="'Show/Hide Ratings (R)'"
+            (click)="toggleRatings()">
+        </app-sidebar-button>
+
+        <app-sidebar-button
+            [icon]="'comment'"
+            [isActive]="showComments$ | async"
+            [isDisabled]="(enableButtons$ | async) === false"
+            [shortcutKey]="'c'"
+            [shortcutHelp]="'Show/Hide Comments'"
+            [tooltip]="'Show/Hide Comments (C)'"
+            (click)="toggleComments()">
+        </app-sidebar-button>
+
+        <app-sidebar-button
+            [icon]="'tune'"
+            [isActive]="showExif$ | async"
+            [isDisabled]="(enableButtons$ | async) === false"
+            [shortcutKey]="'x'"
+            [shortcutHelp]="'Show/Hide EXIF'"
+            [tooltip]="'Show/Hide EXIF (X)'"
+            (click)="toggleExif()">
+        </app-sidebar-button>
+
+        <app-sidebar-button
+            [icon]="'photo_filter'"
+            [isActive]="showEffects$ | async"
+            [isDisabled]="(enableButtons$ | async) === false"
+            [shortcutKey]="'e'"
+            [shortcutHelp]="'Show/Hide Effects'"
+            [tooltip]="'Show/Hide Effects (E)'"
+            (click)="toggleEffects()">
+        </app-sidebar-button>
+
+        <app-sidebar-button
+            [icon]="'color_lens'"
+            [isActive]="showHistogram$ | async"
+            [isDisabled]="(enableButtons$ | async) === false"
+            [shortcutKey]="'h'"
+            [shortcutHelp]="'Show/Hide Histogram'"
+            [tooltip]="'Show/Hide Histogram (H)'"
+            (click)="toggleHistogram()">
+        </app-sidebar-button>
+
+        <app-sidebar-button
+            [icon]="'map'"
+            [isActive]="showMinimap$ | async"
+            [isDisabled]="(enableButtons$ | async) === false"
+            [shortcutKey]="'m'"
+            [shortcutHelp]="'Show/Hide Mini-map'"
+            [tooltip]="'Show/Hide Mini-map (M)'"
+            (click)="toggleMinimap()">
+        </app-sidebar-button>
+
+        <ng-container *ngIf="isAdmin$ | async">
+            <app-sidebar-button
+                [icon]="'edit'"
+                [isActive]="showMetadataEditor$ | async"
+                [isDisabled]="(enableButtons$ | async) === false"
+                [shortcutKey]="'n'"
+                [shortcutHelp]="'Show/Hide Metadata Editor'"
+                [tooltip]="'Show/Hide Metadata Editor (N)'"
+                (click)="toggleMetadataEditor()">
+            </app-sidebar-button>
+
+            <app-sidebar-button
+                [icon]="'image_search'"
+                [isActive]="showCategoryTeaserChooser$ | async"
+                [isDisabled]="(enableButtons$ | async) === false"
+                [shortcutKey]="'k'"
+                [shortcutHelp]="'Show/Hide Category Teaser Chooser'"
+                [tooltip]="'Show/Hide Category Teaser Chooser (K)'"
+                (click)="toggleCategoryTeaserChooser()">
+            </app-sidebar-button>
+        </ng-container>
+    </app-sidebar-button-group>
+</app-sidebar>

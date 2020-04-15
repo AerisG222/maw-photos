@@ -15,7 +15,7 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { clearRequest } from 'src/app/search/store/actions';
 
 @Component({
-    selector: 'app-search',
+    selector: 'app-search-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

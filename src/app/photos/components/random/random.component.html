@@ -1,13 +1,13 @@
 <ng-container *ngIf="{
     isFullscreen: isFullscreen$ | async
 } as data">
-    <app-photo-view
+    <app-photos-default-view
         *ngIf="!data.isFullscreen"
         [allowCategoryDownload]="false"
         [showCategoryAsLink]="true">
-    </app-photo-view>
+    </app-photos-default-view>
 
-    <app-photo-view-fullscreen
+    <app-photos-fullscreen-view
         *ngIf="data.isFullscreen">
-    </app-photo-view-fullscreen>
+    </app-photos-fullscreen-view>
 </ng-container>

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { queryRequest } from 'src/app/search/store/actions';
 
 @Component({
-    selector: 'app-search-form',
+    selector: 'app-search-search-form',
     templateUrl: './search-form.component.html',
     styleUrls: ['./search-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

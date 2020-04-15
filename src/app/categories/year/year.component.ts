@@ -12,7 +12,7 @@ import {
 } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-year',
+    selector: 'app-categories-year',
     templateUrl: './year.component.html',
     styleUrls: ['./year.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -4,7 +4,7 @@ import { Photo } from 'src/app/models/photo.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 
 @Component({
-    selector: 'app-photo-list',
+    selector: 'app-photos-photo-list',
     templateUrl: './photo-list.component.html',
     styleUrls: ['./photo-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

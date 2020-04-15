@@ -3,21 +3,21 @@
     isMapView: isMapView$ | async,
     isBulkEditView: isBulkEditView$ | async
 } as data">
-    <app-photo-view
+    <app-photos-default-view
         *ngIf="!data.isFullscreen && !data.isMapView && !data.isBulkEditView"
         [allowCategoryDownload]="true"
         [showCategoryAsLink]="false">
-    </app-photo-view>
+    </app-photos-default-view>
 
-    <app-photo-view-fullscreen
+    <app-photos-fullscreen-view
         *ngIf="data.isFullscreen">
-    </app-photo-view-fullscreen>
+    </app-photos-fullscreen-view>
 
-    <app-photo-view-map
+    <app-photos-map-view
         *ngIf="data.isMapView">
-    </app-photo-view-map>
+    </app-photos-map-view>
 
-    <app-photo-view-bulk-edit
+    <app-photos-bulk-edit
         *ngIf="data.isBulkEditView">
-    </app-photo-view-bulk-edit>
+    </app-photos-bulk-edit>
 </ng-container>

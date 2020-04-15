@@ -7,7 +7,7 @@ import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-random',
+    selector: 'app-photos-random',
     templateUrl: './random.component.html',
     styleUrls: ['./random.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

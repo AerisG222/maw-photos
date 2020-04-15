@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-result-count',
+    selector: 'app-search-result-count',
     templateUrl: './result-count.component.html',
     styleUrls: ['./result-count.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -8,7 +8,7 @@ import { first, tap } from 'rxjs/operators';
 import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-category-year-filter',
+    selector: 'app-categories-category-year-filter',
     templateUrl: './category-year-filter.component.html',
     styleUrls: ['./category-year-filter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -7,7 +7,7 @@ import { queryRequest } from 'src/app/search/store/actions';
 import { SearchStoreSelectors } from 'src/app/search/store';
 
 @Component({
-    selector: 'app-search-more',
+    selector: 'app-search-search-more',
     templateUrl: './search-more.component.html',
     styleUrls: ['./search-more.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

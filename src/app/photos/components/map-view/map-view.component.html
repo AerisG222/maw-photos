@@ -1,0 +1,22 @@
+<app-toolbar-sidebar-layout>
+    <app-photos-map-toolbar layout-toolbar></app-photos-map-toolbar>
+
+    <ng-container
+        layout-main
+        *ngIf="{
+            settings: settings$ | async
+        } as data">
+        <app-map-view
+            [activePhoto]="activePhoto$ | async"
+            [images]="mapImages$ | async"
+            [mapTypeId]="data.settings?.photoListMapViewMapTypeId"
+            [useDarkTheme]="data.settings?.appTheme?.isDark"
+            (mapTypeChange)="onMapTypeIdChange($event)"
+            [zoom]="data.settings?.photoListMapViewZoom"
+            (zoomChange)="onZoomChange($event)"
+            (selectPhoto)="onSelectPhoto($event)">
+        </app-map-view>
+    </ng-container>
+
+    <app-photos-default-sidebar layout-sidebar></app-photos-default-sidebar>
+</app-toolbar-sidebar-layout>

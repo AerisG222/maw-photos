@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SidebarExifTableComponent } from './sidebar-exif-table.component';
+
+describe('SidebarExifTableComponent', () => {
+  let component: SidebarExifTableComponent;
+  let fixture: ComponentFixture<SidebarExifTableComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ SidebarExifTableComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SidebarExifTableComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

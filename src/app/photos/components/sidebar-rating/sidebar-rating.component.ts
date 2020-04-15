@@ -7,7 +7,7 @@ import { Rating } from 'src/app/models/rating.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from '../../store';
 
 @Component({
-    selector: 'app-sidebar-rating',
+    selector: 'app-photos-sidebar-rating',
     templateUrl: './sidebar-rating.component.html',
     styleUrls: ['./sidebar-rating.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

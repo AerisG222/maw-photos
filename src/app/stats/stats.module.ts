@@ -3,25 +3,26 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StatsRoutingModule } from './stats-routing.module';
-import { PhotoStatsComponent } from './photo-stats/photo-stats.component';
-import { StatChartComponent } from './stat-chart/stat-chart.component';
-import { StatsHeaderComponent } from './stats-header/stats-header.component';
-import { VideoStatsComponent } from './video-stats/video-stats.component';
-import { StatsToolbarComponent } from './stats-toolbar/stats-toolbar.component';
-import { CombinedStatsComponent } from './combined-stats/combined-stats.component';
-import { StatCardComponent } from './stat-card/stat-card.component';
-import { StatsLayoutComponent } from './stats-layout/stats-layout.component';
+
+import { CombinedStatsComponent } from './components/combined-stats/combined-stats.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { PhotoStatsComponent } from './components/photo-stats/photo-stats.component';
+import { StatCardComponent } from './components/stat-card/stat-card.component';
+import { StatChartComponent } from './components/stat-chart/stat-chart.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { VideoStatsComponent } from './components/video-stats/video-stats.component';
 
 @NgModule({
     declarations: [
+        CombinedStatsComponent,
+        HeaderComponent,
+        LayoutComponent,
         PhotoStatsComponent,
         StatChartComponent,
-        StatsHeaderComponent,
-        VideoStatsComponent,
-        StatsToolbarComponent,
-        CombinedStatsComponent,
         StatCardComponent,
-        StatsLayoutComponent
+        ToolbarComponent,
+        VideoStatsComponent,
     ],
     imports: [
         NgxChartsModule,

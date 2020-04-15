@@ -8,7 +8,7 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-year-list',
+    selector: 'app-categories-year-list',
     templateUrl: './year-list.component.html',
     styleUrls: ['./year-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

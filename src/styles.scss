@@ -25,11 +25,11 @@ $custom-typography: mat-typography-config(
 
 @import 'app/categories/year-list/year-list.component.theme';
 
-@import 'app/photos/components/exif-table/exif-table.component.theme';
 @import 'app/photos/components/photo-list/photo-list.component.theme';
 @import 'app/photos/components/photo-select-grid/photo-select-grid.component.theme';
-@import 'app/photos/components/photo-view/photo-view.component.theme';
-@import 'app/photos/components/photo-view-bulk-edit/photo-view-bulk-edit.component.theme';
+@import 'app/photos/components/default-view/default-view.component.theme';
+@import 'app/photos/components/bulk-edit/bulk-edit.component.theme';
+@import 'app/photos/components/sidebar-exif-table/sidebar-exif-table.component.theme';
 
 @import 'app/shared/category-card/category-card.component.theme';
 @import 'app/shared/category-list/category-list.component.theme';
@@ -44,7 +44,7 @@ $custom-typography: mat-typography-config(
 @import 'app/shared/toolbar/toolbar-button/toolbar-button.component.theme';
 @import 'app/shared/toolbar/toolbar-link/toolbar-link.component.theme';
 
-@import 'app/stats/stats-header/stats-header.component.theme';
+@import 'app/stats/components/header/header.component.theme';
 
 @import 'app/videos/components/video-list/video-list.component.theme';
 
@@ -62,18 +62,20 @@ $custom-typography: mat-typography-config(
 
     @include app-help-component-theme($theme);
 
+    @include app-categories-year-list-component-theme($theme);
+
     @include app-category-card-component-theme($theme);
     @include app-category-list-component-theme($theme);
     @include app-video-list-component-theme($theme);
-    @include app-year-list-component-theme($theme);
+
+    @include app-photos-sidebar-exif-table-component-theme($theme);
+    @include app-photos-photo-list-component-theme($theme);
+    @include app-photos-photo-select-grid-component-theme($theme);
+    @include app-photos-default-view-component-theme($theme);
+    @include app-photos-bulk-edit-component-theme($theme);
 
     @include app-category-header-component-theme($theme);
     @include app-comments-component-theme($theme);
-    @include app-exif-table-component-theme($theme);
-    @include app-photo-list-component-theme($theme);
-    @include app-photo-select-grid-component-theme($theme);
-    @include app-photo-view-component-theme($theme);
-    @include app-photo-view-bulk-edit-component-theme($theme);
     @include app-primary-nav-component-theme($theme);
     @include app-primary-nav-link-component-theme($theme);
     @include app-sidebar-button-theme($theme);

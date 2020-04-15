@@ -4,7 +4,7 @@ import { Photo } from 'src/app/models/photo.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
-    selector: 'app-photo-select-grid',
+    selector: 'app-photos-photo-select-grid',
     templateUrl: './photo-select-grid.component.html',
     styleUrls: ['./photo-select-grid.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

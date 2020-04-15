@@ -5,7 +5,7 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
 
 @Component({
-    selector: 'app-bulk-edit-sidebar',
+    selector: 'app-photos-bulk-edit-sidebar',
     templateUrl: './bulk-edit-sidebar.component.html',
     styleUrls: ['./bulk-edit-sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,

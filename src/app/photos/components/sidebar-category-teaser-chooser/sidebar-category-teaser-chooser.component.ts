@@ -7,7 +7,7 @@ import { PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/
 import { Subscription, Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-sidebar-category-teaser-chooser',
+    selector: 'app-photos-sidebar-category-teaser-chooser',
     templateUrl: './sidebar-category-teaser-chooser.component.html',
     styleUrls: ['./sidebar-category-teaser-chooser.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

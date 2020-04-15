@@ -8,7 +8,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-photo-category',
+    selector: 'app-photos-photo-category',
     templateUrl: './photo-category.component.html',
     styleUrls: ['./photo-category.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

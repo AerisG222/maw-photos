@@ -7,7 +7,7 @@ import { Comment } from 'src/app/models/comment.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 
 @Component({
-    selector: 'app-sidebar-comments',
+    selector: 'app-photos-sidebar-comments',
     templateUrl: './sidebar-comments.component.html',
     styleUrls: ['./sidebar-comments.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

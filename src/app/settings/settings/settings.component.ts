@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-    selector: 'app-settings',
+    selector: 'app-settings-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
