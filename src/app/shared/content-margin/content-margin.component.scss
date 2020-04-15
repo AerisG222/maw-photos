@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 :host {
     display: block;
 }
@@ -15,4 +17,10 @@
 .category-margin-thirty {
     margin-left: 30%;
     margin-right: 30%;
+}
+
+@media (max-width: $mobileBreakpoint) {
+    :host {
+        margin-bottom: 36px;
+    }
 }
