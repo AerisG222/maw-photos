@@ -2,11 +2,11 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from 
 
 @Component({
     selector: 'app-move-next-button',
-    templateUrl: './move-next-button.component.html',
-    styleUrls: ['./move-next-button.component.scss'],
+    templateUrl: './toolbar-move-next-button.component.html',
+    styleUrls: ['./toolbar-move-next-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MoveNextButtonComponent {
+export class ToolbarMoveNextButtonComponent {
     @Input() atEndOfList = false;
     @Output() moveNext = new EventEmitter<void>();
 

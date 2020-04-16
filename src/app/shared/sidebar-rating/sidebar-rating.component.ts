@@ -6,11 +6,11 @@ import { Rating } from 'src/app/models/rating.model';
 
 @Component({
     selector: 'app-rating',
-    templateUrl: './rating.component.html',
-    styleUrls: ['./rating.component.scss'],
+    templateUrl: './sidebar-rating.component.html',
+    styleUrls: ['./sidebar-rating.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent implements AfterViewInit {
+export class SidebarRatingComponent implements AfterViewInit {
     private isReady = false;
     private theRating: Rating;
 

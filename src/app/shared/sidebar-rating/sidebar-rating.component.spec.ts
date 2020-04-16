@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MovePreviousButtonComponent } from './move-previous-button.component';
+import { SidebarRatingComponent } from './sidebar-rating.component';
 
-describe('MovePreviousButtonComponent', () => {
-  let component: MovePreviousButtonComponent;
-  let fixture: ComponentFixture<MovePreviousButtonComponent>;
+describe('SidebarRatingComponent', () => {
+  let component: SidebarRatingComponent;
+  let fixture: ComponentFixture<SidebarRatingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MovePreviousButtonComponent ]
+      declarations: [ SidebarRatingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MovePreviousButtonComponent);
+    fixture = TestBed.createComponent(SidebarRatingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

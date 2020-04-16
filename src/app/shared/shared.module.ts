@@ -1,26 +1,27 @@
 import { NgModule } from '@angular/core';
 
+import { BaseModule } from 'src/app/base/base.module';
+import { LayoutModule } from './layout/layout.module';
+import { PrimaryNavModule } from './primary-nav/primary-nav.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { ToolbarModule } from './toolbar/toolbar.module';
+
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryListToolbarComponent } from './category-list-toolbar/category-list-toolbar.component';
-import { CategoryTeaserChooserComponent } from './category-teaser-chooser/category-teaser-chooser.component';
-import { CommentsComponent } from './comments/comments.component';
+import { ContentMarginComponent } from './content-margin/content-margin.component';
 import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 import { MapViewComponent } from './map-view/map-view.component';
-import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
-import { MinimapComponent } from './minimap/minimap.component';
-import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
-import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
-import { RatingComponent } from './rating/rating.component';
-import { ContentMarginComponent } from './content-margin/content-margin.component';
-import { BaseModule } from 'src/app/base/base.module';
-import { ToolbarModule } from './toolbar/toolbar.module';
-import { SidebarModule } from './sidebar/sidebar.module';
-import { PrimaryNavModule } from './primary-nav/primary-nav.module';
-import { LayoutModule } from './layout/layout.module';
+import { SidebarCategoryTeaserChooserComponent } from './sidebar-category-teaser-chooser/sidebar-category-teaser-chooser.component';
+import { SidebarCommentsComponent } from './sidebar-comments/sidebar-comments.component';
+import { SidebarMetadataEditorComponent } from './sidebar-metadata-editor/sidebar-metadata-editor.component';
+import { SidebarMinimapComponent } from './sidebar-minimap/sidebar-minimap.component';
+import { SidebarRatingComponent } from './sidebar-rating/sidebar-rating.component';
+import { ToolbarMoveNextButtonComponent } from './toolbar-move-next-button/toolbar-move-next-button.component';
+import { ToolbarMovePreviousButtonComponent } from './toolbar-move-previous-button/toolbar-move-previous-button.component';
 
 @NgModule({
     declarations: [
@@ -29,17 +30,17 @@ import { LayoutModule } from './layout/layout.module';
         CategoryListComponent,
         CategoryHeaderComponent,
         CategoryListToolbarComponent,
-        CategoryTeaserChooserComponent,
-        CommentsComponent,
         ContentMarginComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
         MapViewComponent,
-        MetadataEditorComponent,
-        MinimapComponent,
-        MoveNextButtonComponent,
-        MovePreviousButtonComponent,
-        RatingComponent
+        SidebarCategoryTeaserChooserComponent,
+        SidebarCommentsComponent,
+        SidebarMetadataEditorComponent,
+        SidebarMinimapComponent,
+        SidebarRatingComponent,
+        ToolbarMoveNextButtonComponent,
+        ToolbarMovePreviousButtonComponent
     ],
     imports: [
         BaseModule,
@@ -61,17 +62,17 @@ import { LayoutModule } from './layout/layout.module';
         CategoryListComponent,
         CategoryHeaderComponent,
         CategoryListToolbarComponent,
-        CategoryTeaserChooserComponent,
-        CommentsComponent,
         ContentMarginComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
         MapViewComponent,
-        MetadataEditorComponent,
-        MinimapComponent,
-        MoveNextButtonComponent,
-        MovePreviousButtonComponent,
-        RatingComponent
+        SidebarRatingComponent,
+        SidebarCategoryTeaserChooserComponent,
+        SidebarCommentsComponent,
+        SidebarMetadataEditorComponent,
+        SidebarMinimapComponent,
+        ToolbarMoveNextButtonComponent,
+        ToolbarMovePreviousButtonComponent
     ]
 })
 export class SharedModule { }

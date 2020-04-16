@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy } from 
 
 @Component({
     selector: 'app-move-previous-button',
-    templateUrl: './move-previous-button.component.html',
-    styleUrls: ['./move-previous-button.component.scss'],
+    templateUrl: './toolbar-move-previous-button.component.html',
+    styleUrls: ['./toolbar-move-previous-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovePreviousButtonComponent {
+export class ToolbarMovePreviousButtonComponent {
     @Input() atStartOfList = true;
     @Output() movePrevious = new EventEmitter<void>();
 

@@ -5,11 +5,11 @@ import { Comment } from 'src/app/models/comment.model';
 
 @Component({
     selector: 'app-comments',
-    templateUrl: './comments.component.html',
-    styleUrls: ['./comments.component.scss'],
+    templateUrl: './sidebar-comments.component.html',
+    styleUrls: ['./sidebar-comments.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommentsComponent implements OnInit {
+export class SidebarCommentsComponent implements OnInit {
     @Input() comments: Comment[];
     @Output() saveComment = new EventEmitter<string>();
 

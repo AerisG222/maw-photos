@@ -8,11 +8,11 @@ import { SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-minimap',
-    templateUrl: './minimap.component.html',
-    styleUrls: ['./minimap.component.scss'],
+    templateUrl: './sidebar-minimap.component.html',
+    styleUrls: ['./sidebar-minimap.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MinimapComponent implements OnInit {
+export class SidebarMinimapComponent implements OnInit {
     private minimapTypeId: string;
     private minimapZoom: number;
 

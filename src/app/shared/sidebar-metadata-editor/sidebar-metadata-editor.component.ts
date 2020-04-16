@@ -6,11 +6,11 @@ import { GpsService } from 'src/app/core/services/gps.service';
 
 @Component({
     selector: 'app-metadata-editor',
-    templateUrl: './metadata-editor.component.html',
-    styleUrls: ['./metadata-editor.component.scss'],
+    templateUrl: './sidebar-metadata-editor.component.html',
+    styleUrls: ['./sidebar-metadata-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MetadataEditorComponent implements OnInit {
+export class SidebarMetadataEditorComponent implements OnInit {
     @Input() sourceGpsData: GpsCoordinate;
     @Input() overrideGpsData: GpsCoordinate;
     @Output() save = new EventEmitter<GpsCoordinate>();

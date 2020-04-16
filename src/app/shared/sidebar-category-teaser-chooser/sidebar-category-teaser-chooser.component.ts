@@ -2,11 +2,11 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 
 @Component({
     selector: 'app-category-teaser-chooser',
-    templateUrl: './category-teaser-chooser.component.html',
-    styleUrls: ['./category-teaser-chooser.component.scss'],
+    templateUrl: './sidebar-category-teaser-chooser.component.html',
+    styleUrls: ['./sidebar-category-teaser-chooser.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryTeaserChooserComponent {
+export class SidebarCategoryTeaserChooserComponent {
     @Input() currentTeaserUrl: string;
     @Output() setTeaser = new EventEmitter<void>();
 

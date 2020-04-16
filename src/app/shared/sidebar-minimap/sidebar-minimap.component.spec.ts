@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MetadataEditorComponent } from './metadata-editor.component';
+import { SidebarMinimapComponent } from './sidebar-minimap.component';
 
-describe('MetadataEditorComponent', () => {
-  let component: MetadataEditorComponent;
-  let fixture: ComponentFixture<MetadataEditorComponent>;
+describe('SidebarMinimapComponent', () => {
+  let component: SidebarMinimapComponent;
+  let fixture: ComponentFixture<SidebarMinimapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MetadataEditorComponent ]
+      declarations: [ SidebarMinimapComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MetadataEditorComponent);
+    fixture = TestBed.createComponent(SidebarMinimapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
