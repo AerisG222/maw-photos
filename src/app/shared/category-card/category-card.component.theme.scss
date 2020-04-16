@@ -1,9 +1,9 @@
 @import '~@angular/material/theming';
 
-@mixin app-category-card-component-theme($theme) {
+@mixin app-shared-category-card-component-theme($theme) {
     $accent: map-get($theme, accent);
 
-    app-category-card {
+    app-shared-category-card {
         mat-card {
             &:hover {
                 border: 1px solid mat-color($accent, 600);

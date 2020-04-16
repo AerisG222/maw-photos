@@ -3,7 +3,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-hotkey-dialog',
+    selector: 'app-shared-hotkey-dialog',
     templateUrl: './hotkey-dialog.component.html',
     styleUrls: ['./hotkey-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -19,7 +19,7 @@ import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MapMarkerInfo } from './map-marker-info.model';
 
 @Component({
-    selector: 'app-map-view',
+    selector: 'app-shared-map-view',
     templateUrl: './map-view.component.html',
     styleUrls: ['./map-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

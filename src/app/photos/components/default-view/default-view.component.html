@@ -1,4 +1,4 @@
-<app-toolbar-sidebar-layout>
+<app-layout-toolbar-sidebar>
     <app-photos-default-toolbar layout-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photos-default-toolbar>
 
     <ng-container
@@ -11,12 +11,12 @@
         } as data">
         <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
             <div class="category-header">
-                <app-category-header
+                <app-shared-category-header
                     *ngIf="data.settings?.photoListShowCategoryBreadcrumbs"
                     [showCategoryAsLink]="showCategoryAsLink"
                     [category]="category$ | async"
                     #header>
-                </app-category-header>
+                </app-shared-category-header>
             </div>
 
             <img
@@ -40,4 +40,4 @@
     </ng-container>
 
     <app-photos-default-sidebar layout-sidebar></app-photos-default-sidebar>
-</app-toolbar-sidebar-layout>
+</app-layout-toolbar-sidebar>

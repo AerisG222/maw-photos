@@ -1,0 +1,19 @@
+@import '../../../variables';
+
+:host {
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+    grid-template-rows: 100%;
+    height: 100vh;
+}
+
+.main {
+    overflow-y: auto;
+}
+
+@media (max-width: $mobileBreakpoint) {
+    :host {
+        grid-template-columns: 100%;
+        grid-template-rows: max-content auto 0;
+    }
+}

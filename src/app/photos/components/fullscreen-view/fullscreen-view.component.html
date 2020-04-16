@@ -1,4 +1,4 @@
-<app-toolbar-layout>
+<app-layout-toolbar>
     <app-photos-fullscreen-toolbar layout-toolbar></app-photos-fullscreen-toolbar>
 
     <div layout-main class="image-wrapper">
@@ -7,4 +7,4 @@
             [class]="(effects$ | async)?.rotation?.klass"
             [style.transform]="getTransform(effects$ | async)" />
     </div>
-</app-toolbar-layout>
+</app-layout-toolbar>

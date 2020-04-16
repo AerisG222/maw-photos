@@ -11,7 +11,7 @@ import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-category-list-toolbar',
+    selector: 'app-shared-category-list-toolbar',
     templateUrl: './category-list-toolbar.component.html',
     styleUrls: ['./category-list-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

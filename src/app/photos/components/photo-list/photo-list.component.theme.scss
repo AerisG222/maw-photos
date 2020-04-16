@@ -4,15 +4,13 @@
     $accent: map-get($theme, accent);
 
     app-photos-photo-list {
-        div {
-            & img {
-                &.selected {
-                    border: 1px solid mat-color($accent, 600);
-                }
+        & img {
+            &.selected {
+                border: 1px solid mat-color($accent, 600);
+            }
 
-                &:hover {
-                    border: 1px solid mat-color($accent, 300);
-                }
+            &:hover {
+                border: 1px solid mat-color($accent, 300);
             }
         }
     }

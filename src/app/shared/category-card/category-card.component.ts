@@ -5,7 +5,7 @@ import { CategoryType } from 'src/app/models/category-type.model';
 import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 
 @Component({
-    selector: 'app-category-card',
+    selector: 'app-shared-category-card',
     templateUrl: './category-card.component.html',
     styleUrls: ['./category-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

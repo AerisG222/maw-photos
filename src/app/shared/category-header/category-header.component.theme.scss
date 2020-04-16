@@ -1,9 +1,9 @@
 @import '~@angular/material/theming';
 
-@mixin app-category-header-component-theme($theme) {
+@mixin app-shared-category-header-component-theme($theme) {
     $accent: map-get($theme, accent);
 
-    app-category-header {
+    app-shared-category-header {
         & a:hover {
             color: mat-color($accent, A200);
             background-color: transparent;

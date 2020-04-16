@@ -1,7 +1,7 @@
-<app-toolbar>
+<app-toolbar-toolbar>
     <app-toolbar-group>
-        <app-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async"></app-move-previous-button>
-        <app-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async"></app-move-next-button>
+        <app-toolbar-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async"></app-toolbar-move-previous-button>
+        <app-toolbar-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async"></app-toolbar-move-next-button>
     </app-toolbar-group>
 
     <app-toolbar-divider></app-toolbar-divider>
@@ -45,4 +45,4 @@
             (click)="onToggleThumbnailSize()">
         </app-toolbar-button>
     </app-toolbar-group>
-</app-toolbar>
+</app-toolbar-toolbar>

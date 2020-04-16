@@ -1,4 +1,4 @@
-<app-sidebar>
+<app-sidebar-sidebar>
     <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
         <app-photos-sidebar-rating
             *ngIf="showRatings$ | async"
@@ -136,4 +136,4 @@
             </app-sidebar-button>
         </ng-container>
     </app-sidebar-button-group>
-</app-sidebar>
+</app-sidebar-sidebar>

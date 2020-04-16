@@ -4,7 +4,7 @@ import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 
 @Component({
-    selector: 'app-category-grid',
+    selector: 'app-shared-category-grid',
     templateUrl: './category-grid.component.html',
     styleUrls: ['./category-grid.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

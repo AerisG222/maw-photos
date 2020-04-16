@@ -1,27 +1,27 @@
-<app-toolbar-layout>
+<app-layout-toolbar>
     <app-search-toolbar layout-toolbar></app-search-toolbar>
 
-    <app-content-margin layout-main class="content-pad" [margin]="margin$ | async">
+    <app-shared-content-margin layout-main class="content-pad" [margin]="margin$ | async">
         <app-search-search-form></app-search-search-form>
 
         <mat-divider mat-color="accent"></mat-divider>
 
         <p class="no-results" *ngIf="showNoResults$ | async">No results found</p>
 
-        <app-category-list
+        <app-shared-category-list
             *ngIf="showListView$ | async"
             [categories]="categories$ | async"
             [showYears]="true"
             [thumbnailSize]="listThumbnailSize$ | async">
-        </app-category-list>
+        </app-shared-category-list>
 
-        <app-category-grid
+        <app-shared-category-grid
             *ngIf="showGridView$ | async"
             [showTitles]="gridShowTitles$ | async"
             [showYears]="gridShowYears$ | async"
             [thumbnailSize]="gridThumbnailSize$ | async"
             [categories]="categories$ | async">
-        </app-category-grid>
+        </app-shared-category-grid>
 
         <app-search-result-count
             *ngIf="(totalResults$ | async) > 0"
@@ -32,5 +32,5 @@
         <app-search-search-more
             *ngIf="hasMoreResults$ | async">
         </app-search-search-more>
-    </app-content-margin>
-</app-toolbar-layout>
+    </app-shared-content-margin>
+</app-layout-toolbar>

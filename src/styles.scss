@@ -31,18 +31,21 @@ $custom-typography: mat-typography-config(
 @import 'app/photos/components/bulk-edit/bulk-edit.component.theme';
 @import 'app/photos/components/sidebar-exif-table/sidebar-exif-table.component.theme';
 
+@import 'app/primary-nav/link/link.component.theme';
+@import 'app/primary-nav/primary-nav/primary-nav.component.theme';
+
 @import 'app/shared/category-card/category-card.component.theme';
 @import 'app/shared/category-list/category-list.component.theme';
 @import 'app/shared/category-header/category-header.component.theme';
-@import 'app/shared/sidebar-comments/sidebar-comments.component.theme';
-@import 'app/shared/primary-nav/primary-nav-link/primary-nav-link.component.theme';
-@import 'app/shared/primary-nav/primary-nav/primary-nav.component.theme';
-@import 'app/shared/sidebar/sidebar-button/sidebar-button.component.theme';
-@import 'app/shared/sidebar/sidebar-button-group/sidebar-button-group.component.theme';
-@import 'app/shared/sidebar/sidebar-card-group/sidebar-card-group.component.theme';
-@import 'app/shared/toolbar/toolbar/toolbar.component.theme';
-@import 'app/shared/toolbar/toolbar-button/toolbar-button.component.theme';
-@import 'app/shared/toolbar/toolbar-link/toolbar-link.component.theme';
+
+@import 'app/sidebar/comments-card/comments-card.component.theme';
+@import 'app/sidebar/button/button.component.theme';
+@import 'app/sidebar/button-group/button-group.component.theme';
+@import 'app/sidebar/card-group/card-group.component.theme';
+
+@import 'app/toolbar/toolbar/toolbar.component.theme';
+@import 'app/toolbar/button/button.component.theme';
+@import 'app/toolbar/link/link.component.theme';
 
 @import 'app/stats/components/header/header.component.theme';
 
@@ -60,32 +63,35 @@ $custom-typography: mat-typography-config(
 @mixin custom-components-theme($theme) {
     @include app-component-theme($theme);
 
-    @include app-help-component-theme($theme);
-
     @include app-categories-year-list-component-theme($theme);
 
-    @include app-category-card-component-theme($theme);
-    @include app-category-list-component-theme($theme);
-    @include app-video-list-component-theme($theme);
+    @include app-help-component-theme($theme);
 
-    @include app-photos-sidebar-exif-table-component-theme($theme);
+    @include app-photos-bulk-edit-component-theme($theme);
+    @include app-photos-default-view-component-theme($theme);
     @include app-photos-photo-list-component-theme($theme);
     @include app-photos-photo-select-grid-component-theme($theme);
-    @include app-photos-default-view-component-theme($theme);
-    @include app-photos-bulk-edit-component-theme($theme);
+    @include app-photos-sidebar-exif-table-component-theme($theme);
 
-    @include app-category-header-component-theme($theme);
-    @include app-comments-component-theme($theme);
     @include app-primary-nav-component-theme($theme);
     @include app-primary-nav-link-component-theme($theme);
-    @include app-sidebar-button-theme($theme);
+
+    @include app-shared-category-card-component-theme($theme);
+    @include app-shared-category-header-component-theme($theme);
+    @include app-shared-category-list-component-theme($theme);
+
+    @include app-sidebar-button-component-theme($theme);
     @include app-sidebar-button-group-component-theme($theme);
     @include app-sidebar-card-group-component-theme($theme);
-    @include app-toolbar-component-theme($theme);
-    @include app-toolbar-button-theme($theme);
-    @include app-toolbar-link-theme($theme);
+    @include app-sidebar-comments-card-component-theme($theme);
 
     @include app-stats-header-component-theme($theme);
+
+    @include app-toolbar-button-component-theme($theme);
+    @include app-toolbar-link-component-theme($theme);
+    @include app-toolbar-toolbar-component-theme($theme);
+
+    @include app-videos-video-list-component-theme($theme);
 
     @include mat-tooltip-background-override($theme);
 }

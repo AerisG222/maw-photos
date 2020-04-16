@@ -1,4 +1,4 @@
-<app-toolbar-sidebar-layout>
+<app-layout-toolbar-sidebar>
     <app-videos-toolbar layout-toolbar></app-videos-toolbar>
 
     <ng-container
@@ -10,7 +10,7 @@
         } as data">
         <div class="main-video-grid">
             <div class="category-header">
-                <app-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-category-header>
+                <app-shared-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-shared-category-header>
             </div>
 
             <div *ngIf="data.activeVideo" class="video-container">
@@ -36,4 +36,4 @@
     </ng-container>
 
     <app-videos-sidebar layout-sidebar></app-videos-sidebar>
-</app-toolbar-sidebar-layout>
+</app-layout-toolbar-sidebar>

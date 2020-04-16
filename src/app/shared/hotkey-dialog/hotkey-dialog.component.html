@@ -3,8 +3,8 @@
     <p>Please note: available shortcuts change depending on context.</p>
 
     <div>
-        <app-hotkey-table *ngIf="firstHotkeys" [hotkeys]="firstHotkeys"></app-hotkey-table>
-        <app-hotkey-table *ngIf="secondHotkeys" [hotkeys]="secondHotkeys"></app-hotkey-table>
+        <app-shared-hotkey-table *ngIf="firstHotkeys" [hotkeys]="firstHotkeys"></app-shared-hotkey-table>
+        <app-shared-hotkey-table *ngIf="secondHotkeys" [hotkeys]="secondHotkeys"></app-shared-hotkey-table>
     </div>
 </div>
 <div mat-dialog-actions>

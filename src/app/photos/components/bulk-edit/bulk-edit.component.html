@@ -1,11 +1,11 @@
-<app-toolbar-sidebar-layout>
+<app-layout-toolbar-sidebar>
     <app-photos-bulk-edit-toolbar layout-toolbar></app-photos-bulk-edit-toolbar>
 
     <div layout-main class="content-grid">
         <div class="category-header">
-            <app-category-header
+            <app-shared-category-header
                 [category]="category$ | async">
-            </app-category-header>
+            </app-shared-category-header>
         </div>
 
         <mat-divider></mat-divider>
@@ -24,4 +24,4 @@
         (selectAllPhotos)="onSelectAll($event)"
         (saveGps)="onSaveGps($event)">
     </app-photos-bulk-edit-sidebar>
-</app-toolbar-sidebar-layout>
+</app-layout-toolbar-sidebar>

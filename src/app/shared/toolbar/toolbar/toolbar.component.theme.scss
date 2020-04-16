@@ -1,9 +1,0 @@
-@import '~@angular/material/theming';
-
-@mixin app-toolbar-component-theme($theme) {
-    $accent: map-get($theme, accent);
-
-    app-toolbar {
-        background-color: rgba(mat-color($accent, 700), .1);
-    }
-}

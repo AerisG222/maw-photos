@@ -1,7 +1,7 @@
-<app-toolbar-layout>
-    <app-category-list-toolbar layout-toolbar></app-category-list-toolbar>
+<app-layout-toolbar>
+    <app-shared-category-list-toolbar layout-toolbar></app-shared-category-list-toolbar>
 
-    <app-content-margin layout-main [margin]="margin$ | async">
+    <app-shared-content-margin layout-main [margin]="margin$ | async">
 
         <div class="filter-grid">
             <app-categories-category-year-filter></app-categories-category-year-filter>
@@ -14,5 +14,5 @@
             </div>
         </div>
 
-    </app-content-margin>
-</app-toolbar-layout>
+    </app-shared-content-margin>
+</app-layout-toolbar>

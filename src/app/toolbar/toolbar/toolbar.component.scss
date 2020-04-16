@@ -1,0 +1,16 @@
+@import '../../../variables';
+
+:host {
+    display: grid;
+    grid-template-columns: min-content;
+    grid-auto-rows: min-content;
+    height: 100%;
+}
+
+@media (max-width: $mobileBreakpoint) {
+    :host {
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        grid-template-columns: unset;
+    }
+}

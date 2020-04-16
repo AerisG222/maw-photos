@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Hotkey } from 'angular2-hotkeys';
 
 @Component({
-  selector: 'app-hotkey-table',
+  selector: 'app-shared-hotkey-table',
   templateUrl: './hotkey-table.component.html',
   styleUrls: ['./hotkey-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

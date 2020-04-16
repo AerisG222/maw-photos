@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 
 @Component({
-    selector: 'app-category-list',
+    selector: 'app-shared-category-list',
     templateUrl: './category-list.component.html',
     styleUrls: ['./category-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
