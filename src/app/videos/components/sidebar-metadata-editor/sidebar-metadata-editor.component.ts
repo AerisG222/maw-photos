@@ -7,7 +7,7 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 
 @Component({
-    selector: 'app-sidebar-metadata-editor',
+    selector: 'app-videos-sidebar-metadata-editor',
     templateUrl: './sidebar-metadata-editor.component.html',
     styleUrls: ['./sidebar-metadata-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

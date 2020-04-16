@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VideoListToolbarComponent } from './video-list-toolbar.component';
+import { ToolbarComponent } from './toolbar.component';
 
-describe('VideoListToolbarComponent', () => {
-  let component: VideoListToolbarComponent;
-  let fixture: ComponentFixture<VideoListToolbarComponent>;
+describe('ToolbarComponent', () => {
+  let component: ToolbarComponent;
+  let fixture: ComponentFixture<ToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoListToolbarComponent ]
+      declarations: [ ToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VideoListToolbarComponent);
+    fixture = TestBed.createComponent(ToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

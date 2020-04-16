@@ -7,7 +7,7 @@ import { Comment } from 'src/app/models/comment.model';
 import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 
 @Component({
-    selector: 'app-sidebar-comments',
+    selector: 'app-videos-sidebar-comments',
     templateUrl: './sidebar-comments.component.html',
     styleUrls: ['./sidebar-comments.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

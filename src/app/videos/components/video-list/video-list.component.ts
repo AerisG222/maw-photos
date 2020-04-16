@@ -4,7 +4,7 @@ import { Video } from 'src/app/models/video.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 
 @Component({
-    selector: 'app-video-list',
+    selector: 'app-videos-video-list',
     templateUrl: './video-list.component.html',
     styleUrls: ['./video-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

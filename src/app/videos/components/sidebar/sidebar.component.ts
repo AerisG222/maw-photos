@@ -8,9 +8,9 @@ import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-video-sidebar',
-    templateUrl: './video-sidebar.component.html',
-    styleUrls: ['./video-sidebar.component.scss'],
+    selector: 'app-videos-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger('sidebarFlyInOut', [
@@ -31,7 +31,7 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
         ])
     ]
 })
-export class VideoSidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit {
     isAdmin$: Observable<boolean>;
     endSidenavExpanded$: Observable<boolean>;
     showComments$: Observable<boolean>;

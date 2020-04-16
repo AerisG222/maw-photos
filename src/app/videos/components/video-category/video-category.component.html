@@ -1,5 +1,5 @@
 <app-toolbar-sidebar-layout>
-    <app-video-list-toolbar layout-toolbar></app-video-list-toolbar>
+    <app-videos-toolbar layout-toolbar></app-videos-toolbar>
 
     <ng-container
         layout-main
@@ -25,15 +25,15 @@
                 </video>
             </div>
 
-            <app-video-list
+            <app-videos-video-list
                 *ngIf="data.videos && data.settings?.videoListShowVideoList"
                 [videos]="data.videos"
                 [thumbnailSize]="data.settings?.videoListThumbnailSize"
                 [selectedVideo]="data.activeVideo"
                 (videoSelected)="onSelectVideo($event)">
-            </app-video-list>
+            </app-videos-video-list>
         </div>
     </ng-container>
 
-    <app-video-sidebar layout-sidebar></app-video-sidebar>
+    <app-videos-sidebar layout-sidebar></app-videos-sidebar>
 </app-toolbar-sidebar-layout>

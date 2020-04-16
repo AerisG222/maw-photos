@@ -7,7 +7,7 @@ import { VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-sidebar-minimap',
+    selector: 'app-videos-sidebar-minimap',
     templateUrl: './sidebar-minimap.component.html',
     styleUrls: ['./sidebar-minimap.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

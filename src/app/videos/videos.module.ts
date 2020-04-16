@@ -4,10 +4,10 @@ import { SharedModule } from '../shared/shared.module';
 import { VideosRoutingModule } from './videos-routing.module';
 import { VideoStoreModule } from './store';
 
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VideoCategoryComponent } from './components/video-category/video-category.component';
 import { VideoListComponent } from './components/video-list/video-list.component';
-import { VideoListToolbarComponent } from './components/video-list-toolbar/video-list-toolbar.component';
-import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.component';
 import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
 import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
@@ -16,10 +16,10 @@ import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-cate
 
 @NgModule({
     declarations: [
+        SidebarComponent,
+        ToolbarComponent,
         VideoCategoryComponent,
-        VideoSidebarComponent,
         VideoListComponent,
-        VideoListToolbarComponent,
         SidebarCommentsComponent,
         SidebarMetadataEditorComponent,
         SidebarMinimapComponent,

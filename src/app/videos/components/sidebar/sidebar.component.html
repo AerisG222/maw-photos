@@ -1,30 +1,30 @@
 <app-sidebar>
     <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
-        <app-sidebar-rating
+        <app-videos-sidebar-rating
             *ngIf="showRatings$ | async"
             @sidebarCardShowHide>
-        </app-sidebar-rating>
+        </app-videos-sidebar-rating>
 
-        <app-sidebar-comments
+        <app-videos-sidebar-comments
             *ngIf="showComments$ | async"
             @sidebarCardShowHide>
-        </app-sidebar-comments>
+        </app-videos-sidebar-comments>
 
-        <app-sidebar-minimap
+        <app-videos-sidebar-minimap
             *ngIf="showMinimap$ | async"
             @sidebarCardShowHide>
-        </app-sidebar-minimap>
+        </app-videos-sidebar-minimap>
 
         <ng-container *ngIf="isAdmin$ | async">
-            <app-sidebar-metadata-editor
+            <app-videos-sidebar-metadata-editor
                 *ngIf="showMetadataEditor$ | async"
                 @sidebarCardShowHide>
-            </app-sidebar-metadata-editor>
+            </app-videos-sidebar-metadata-editor>
 
-            <app-sidebar-category-teaser-chooser
+            <app-videos-sidebar-category-teaser-chooser
                 *ngIf="showCategoryTeaserChooser$ | async"
                 @sidebarCardShowHide>
-            </app-sidebar-category-teaser-chooser>
+            </app-videos-sidebar-category-teaser-chooser>
         </ng-container>
     </app-sidebar-card-group>
 

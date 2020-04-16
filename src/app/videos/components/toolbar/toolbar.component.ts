@@ -10,12 +10,12 @@ import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-video-list-toolbar',
-    templateUrl: './video-list-toolbar.component.html',
-    styleUrls: ['./video-list-toolbar.component.scss'],
+    selector: 'app-videos-toolbar',
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoListToolbarComponent implements OnInit, OnDestroy {
+export class ToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     isFirst$: Observable<boolean>;

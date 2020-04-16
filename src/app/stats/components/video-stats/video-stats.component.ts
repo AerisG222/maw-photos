@@ -10,7 +10,7 @@ import { VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { VideoCategory } from 'src/app/models/video-category.model';
 
 @Component({
-    selector: 'app-video-stats',
+    selector: 'app-stats-video-stats',
     templateUrl: './video-stats.component.html',
     styleUrls: ['./video-stats.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -11,11 +11,11 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
 
 @Component({
     selector: 'app-search-toolbar',
-    templateUrl: './search-toolbar.component.html',
-    styleUrls: ['./search-toolbar.component.scss'],
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchToolbarComponent implements OnInit, OnDestroy {
+export class ToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     settings: Settings;

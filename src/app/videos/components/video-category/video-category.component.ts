@@ -12,7 +12,7 @@ import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-video-category',
+    selector: 'app-videos-video-category',
     templateUrl: './video-category.component.html',
     styleUrls: ['./video-category.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
