@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, EventEmitter, Output, OnChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { Store, select } from '@ngrx/store';
 import { first, tap } from 'rxjs/operators';

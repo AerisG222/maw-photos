@@ -2,8 +2,6 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import * as PhotoCategoryActions from './actions';
 import { photoCategoryAdapter, initialState, State } from './state';
-import { PhotoCategory } from 'src/app/models/photo-category.model';
-import { CategoryYearFilterComponent } from 'src/app/categories/category-year-filter/category-year-filter.component';
 
 const reducer = createReducer(
     initialState,

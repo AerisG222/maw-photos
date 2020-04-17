@@ -8,7 +8,6 @@ import { Comment } from 'src/app/models/comment.model';
 import { Rating } from 'src/app/models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
-import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
 
 const getError = (state: State): any => state.error;

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, filter, concatMap } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap } from 'rxjs/operators';
 
 import * as PhotoCategoryActions from './actions';
 import * as PhotoCategorySelectors from './selectors';
