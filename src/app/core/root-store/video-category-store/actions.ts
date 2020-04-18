@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { VideoCategory } from 'src/app/models/video-category.model';
+import { Category } from 'src/app/models/category.model';
 
 export const loadRequest = createAction(
     '[Video Categories] Load Request'
@@ -13,7 +13,7 @@ export const loadFailure = createAction(
 
 export const loadSuccess = createAction(
     '[Video Categories] Load Success',
-    props<{ categories: VideoCategory[] }>()
+    props<{ categories: Category[] }>()
 );
 
 export const loadRequestedSatisfiedByCache = createAction(
@@ -22,7 +22,7 @@ export const loadRequestedSatisfiedByCache = createAction(
 
 export const setCurrent = createAction(
     '[Video Categories] Set Current',
-    props<{ category: VideoCategory }>()
+    props<{ category: Category }>()
 );
 
 export const setCurrentById = createAction(
@@ -42,5 +42,5 @@ export const setTeaserFailure = createAction(
 
 export const setTeaserSuccess = createAction(
     '[Video Categories] Set Teaser Success',
-    props<{ category: VideoCategory }>()
+    props<{ category: Category }>()
 );

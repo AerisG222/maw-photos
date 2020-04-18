@@ -7,6 +7,9 @@ import { switchMap, catchError, map, withLatestFrom, concatMap } from 'rxjs/oper
 import * as PhotoCategoryActions from './actions';
 import * as PhotoCategorySelectors from './selectors';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
+import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { Category } from 'src/app/models/category.model';
+import { CategoryType } from 'src/app/models/category-type.model';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -31,7 +34,7 @@ export class PhotoCategoryStoreEffects {
 
                 return this.api.getCategories()
                     .pipe(
-                        map(cat => PhotoCategoryActions.loadSuccess({ categories: cat.items })),
+                        map(cat => PhotoCategoryActions.loadSuccess({ categories: this.adaptCategories(cat.items) })),
                         catchError(error => of(PhotoCategoryActions.loadFailure({ error })))
                     );
             })
@@ -44,10 +47,28 @@ export class PhotoCategoryStoreEffects {
             concatMap(action =>
                 this.api.setTeaser(action.categoryId, action.photoId)
                     .pipe(
-                        map(category => PhotoCategoryActions.setTeaserSuccess({ category })),
+                        map(category => PhotoCategoryActions.setTeaserSuccess({ category: this.adaptCategory(category) })),
                         catchError(error => of(PhotoCategoryActions.setTeaserFailure({ error })))
                     )
             )
         )
     );
+
+    private adaptCategories(categories: PhotoCategory[]): Category[] {
+        return categories.map(c => this.adaptCategory(c));
+    }
+
+    private adaptCategory(category: PhotoCategory): Category {
+        return {
+            type: CategoryType.photo,
+            categoryRoute: '/photos',
+            id: category.id,
+            name: category.name,
+            year: category.year,
+            createDate: category.createDate,
+            teaserImage: category.teaserImage,
+            teaserImageSq: category.teaserImageSq,
+            actual: category
+        };
+    }
 }

@@ -31,8 +31,8 @@ export const selectIsLoading = createSelector(
 );
 
 export const selectAllCategories = createSelector(
-    PhotoCategoryStoreSelectors.selectAllCategoriesAsCategory,
-    VideoCategoryStoreSelectors.selectAllCategoriesAsCategory,
+    PhotoCategoryStoreSelectors.selectAllCategories,
+    VideoCategoryStoreSelectors.selectAllCategories,
     (photoCategories: Category[], videoCategories: Category[]) => {
         if (photoCategories.length > 0 && videoCategories.length > 0) {
             return [...photoCategories, ...videoCategories].sort(categoriesDescending);

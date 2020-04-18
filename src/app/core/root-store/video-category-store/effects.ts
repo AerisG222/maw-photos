@@ -7,6 +7,9 @@ import { switchMap, catchError, map, withLatestFrom, concatMap } from 'rxjs/oper
 import * as VideoCategoryActions from './actions';
 import * as videoCategorySelectors from './selectors';
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
+import { VideoCategory } from 'src/app/models/video-category.model';
+import { Category } from 'src/app/models/category.model';
+import { CategoryType } from 'src/app/models/category-type.model';
 
 @Injectable()
 export class VideoCategoryStoreEffects {
@@ -31,7 +34,7 @@ export class VideoCategoryStoreEffects {
 
                 return this.api.getCategories()
                     .pipe(
-                        map(cat => VideoCategoryActions.loadSuccess({ categories: cat.items })),
+                        map(cat => VideoCategoryActions.loadSuccess({ categories: this.adaptCategories(cat.items) })),
                         catchError(error => of(VideoCategoryActions.loadFailure({ error })))
                     );
             })
@@ -44,10 +47,28 @@ export class VideoCategoryStoreEffects {
             concatMap(action =>
                 this.api.setTeaser(action.categoryId, action.videoId)
                     .pipe(
-                        map(category => VideoCategoryActions.setTeaserSuccess({ category })),
+                        map(category => VideoCategoryActions.setTeaserSuccess({ category: this.adaptCategory(category) })),
                         catchError(error => of(VideoCategoryActions.setTeaserFailure({ error })))
                     )
             )
         )
     );
+
+    private adaptCategories(categories: VideoCategory[]): Category[] {
+        return categories.map(c => this.adaptCategory(c));
+    }
+
+    private adaptCategory(c: VideoCategory): Category {
+        return {
+            type: CategoryType.video,
+            categoryRoute: '/videos',
+            id: c.id,
+            name: c.name,
+            year: c.year,
+            createDate: c.createDate,
+            teaserImage: c.teaserImage,
+            teaserImageSq: c.teaserImageSq,
+            actual: c
+        };
+    }
 }

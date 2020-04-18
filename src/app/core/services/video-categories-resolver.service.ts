@@ -5,17 +5,17 @@ import { Observable, EMPTY } from 'rxjs';
 import { filter, catchError, take } from 'rxjs/operators';
 
 import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { VideoCategory } from 'src/app/models/video-category.model';
+import { Category } from 'src/app/models/category.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class VideoCategoriesResolverService implements Resolve<VideoCategory[]> {
+export class VideoCategoriesResolverService implements Resolve<Category[]> {
     constructor(
         private store$: Store
     ) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VideoCategory[]> | Observable<never> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Category[]> | Observable<never> {
         this.store$.dispatch(VideoCategoryStoreActions.loadRequest());
 
         return this.store$.pipe(

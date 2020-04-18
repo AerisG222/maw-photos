@@ -43,7 +43,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
         this.category$ = this.store$
             .pipe(
-                select(VideoCategoryStoreSelectors.selectCurrentCategoryAsCategory),
+                select(VideoCategoryStoreSelectors.selectCurrentCategory),
             );
 
         this.videos$ = this.store$

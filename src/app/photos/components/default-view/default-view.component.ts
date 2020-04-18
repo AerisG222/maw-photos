@@ -48,7 +48,7 @@ export class DefaultViewComponent implements OnInit {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategoryAsCategory)
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
             );
 
         this.store$

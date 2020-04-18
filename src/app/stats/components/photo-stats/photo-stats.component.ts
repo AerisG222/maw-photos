@@ -8,6 +8,7 @@ import * as numeral from 'numeral';
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
     selector: 'app-stats-photo-stats',
@@ -101,7 +102,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         this.selectedYear$.next(null);
     }
 
-    private prepareTotalDetails(years: number[], categories: PhotoCategory[]): StatDetail[] {
+    private prepareTotalDetails(years: number[], categories: Category[]): StatDetail[] {
         const details: StatDetail[] = [];
 
         details.push({
@@ -114,7 +115,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         return details;
     }
 
-    private prepareYearDetails(categories: PhotoCategory[], selectedYear: number): StatDetail[] {
+    private prepareYearDetails(categories: Category[], selectedYear: number): StatDetail[] {
         const details: StatDetail[] = [];
 
         categories = categories.filter(x => x.year === selectedYear);
@@ -124,7 +125,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         return details;
     }
 
-    private populateDetails(categories: PhotoCategory[], details: StatDetail[]): void {
+    private populateDetails(categories: Category[], details: StatDetail[]): void {
         details.push({
             name: 'Categories',
             value: numeral(categories.length).format('0,0')
@@ -133,18 +134,18 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         details.push({
             name: 'Photos',
             value: numeral(categories
-                    .reduce((total, cat) => total + cat.photoCount, 0)
+                    .reduce((total, cat) => total + (cat.actual as PhotoCategory).photoCount, 0)
                 ).format('0,0')
         });
 
         details.push({
             name: 'Total Size',
             value: numeral(categories
-                .reduce((total, cat) => total + cat.totalSize, 0)).format('0,0.00 b')
+                .reduce((total, cat) => total + (cat.actual as PhotoCategory).totalSize, 0)).format('0,0.00 b')
         });
     }
 
-    private prepareChartData(years: number[], categories: PhotoCategory[], selectedYear: number, aggregateBy: string) {
+    private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string) {
         let agg = null;
 
         if (aggregateBy === 'count') {
@@ -172,11 +173,11 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
             }));
     }
 
-    private getPhotoCount(category: PhotoCategory): number {
-        return category.photoCount;
+    private getPhotoCount(category: Category): number {
+        return (category.actual as PhotoCategory).photoCount;
     }
 
-    private getPhotoSize(category: PhotoCategory): number {
-        return category.totalSize;
+    private getPhotoSize(category: Category): number {
+        return (category.actual as PhotoCategory).totalSize;
     }
 }

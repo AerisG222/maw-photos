@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
+import { tap, filter, map } from 'rxjs/operators';
 
 import { Settings } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
@@ -56,7 +56,8 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
+                map(c => c.actual as PhotoCategory)
             );
 
         this.enableMapView$ = this.store$

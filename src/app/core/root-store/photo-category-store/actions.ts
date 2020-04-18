@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { Category } from 'src/app/models/category.model';
 
 export const loadRequest = createAction(
     '[Photo Categories] Load Request'
@@ -13,7 +13,7 @@ export const loadFailure = createAction(
 
 export const loadSuccess = createAction(
     '[Photo Categories] Load Success',
-    props<{ categories: PhotoCategory[] }>()
+    props<{ categories: Category[] }>()
 );
 
 export const loadRequestedSatisfiedByCache = createAction(
@@ -22,7 +22,7 @@ export const loadRequestedSatisfiedByCache = createAction(
 
 export const setCurrent = createAction(
     '[Photo Categories] Set Current',
-    props<{ category: PhotoCategory }>()
+    props<{ category: Category }>()
 );
 
 export const setCurrentById = createAction(
@@ -42,5 +42,5 @@ export const setTeaserFailure = createAction(
 
 export const setTeaserSuccess = createAction(
     '[Photo Categories] Set Teaser Success',
-    props<{ category: PhotoCategory }>()
+    props<{ category: Category }>()
 );
