@@ -11,10 +11,12 @@ export interface State extends EntityState<Category> {
     error: string;
     isLoading: boolean;
     currentCategory: Category;
+    categoryIdsByYear: {};
 }
 
 export const initialState: State = VideoCategoryAdapter.getInitialState({
     isLoading: false,
     error: null,
-    currentCategory: null
+    currentCategory: null,
+    categoryIdsByYear: null
 });

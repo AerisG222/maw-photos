@@ -5,7 +5,6 @@ import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
 import { Category } from 'src/app/models/category.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
-import { CategoryType } from 'src/app/models/category-type.model';
 
 export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
@@ -25,9 +24,9 @@ export const selectIsLoading = createSelector(
         photoCategoryIsLoading: boolean,
         videoCategoryIsLoading: boolean
     ) =>
-            settingsIsLoading ||
-            photoCategoryIsLoading ||
-            videoCategoryIsLoading
+        settingsIsLoading ||
+        photoCategoryIsLoading ||
+        videoCategoryIsLoading
 );
 
 export const selectAllCategories = createSelector(
@@ -43,66 +42,51 @@ export const selectAllCategories = createSelector(
 );
 
 export const selectAllYears = createSelector(
-    selectAllCategories,
-    (categories: Category[]) => Array
-        .from(new Set([...categories.map(c => c.year)]))
+    PhotoCategoryStoreSelectors.selectAllYears,
+    VideoCategoryStoreSelectors.selectAllYears,
+    (photoYears: number[], videoYears: number[]) => Array
+        .from(new Set([...photoYears, ...videoYears]))
         .sort(sortNumbersDescending)
 );
 
-export const selectAllCategoriesForYear = createSelector(
-    selectAllCategories,
-    (categories: Category[], props: { year: number }) => categories
-        .filter(c => c.year === props.year)
-);
-
-export const selectAllFilteredCategories = createSelector(
-    selectAllCategories,
-    SettingsStoreSelectors.selectCategoryListCategoryFilter,
-    (allCategories, categoryTypeFilter) => {
-        let cats: Category[];
-
-        switch (categoryTypeFilter) {
-            case null:
-            case CategoryFilter.all:
-                cats = allCategories;
-                break;
-            case CategoryFilter.photos:
-                cats = allCategories.filter(c => c.type === CategoryType.photo);
-                break;
-            case CategoryFilter.videos:
-                cats = allCategories.filter(c => c.type === CategoryType.video);
-                break;
-            default:
-                throw new Error('Unknown Filter Type!');
-        }
-
-        return cats.sort(categoriesDescending);
-    }
-);
-
 export const selectAllFilteredCategoryYears = createSelector(
-    selectAllFilteredCategories,
+    selectAllYears,
+    PhotoCategoryStoreSelectors.selectAllYears,
+    VideoCategoryStoreSelectors.selectAllYears,
     SettingsStoreSelectors.selectCategoryListYearFilter,
-    (cats, yearFilter) => {
-        if (yearFilter !== 'all') {
-            const result = [];
-            result.push(yearFilter);
-
-            return result;
+    SettingsStoreSelectors.selectCategoryListCategoryFilter,
+    (allYears, photoYears, videoYears, yearFilter, typeFilter) => {
+        if (yearFilter === 'all') {
+            switch (typeFilter) {
+                case CategoryFilter.all:
+                    return allYears;
+                case CategoryFilter.photos:
+                    return photoYears;
+                case CategoryFilter.videos:
+                    return videoYears;
+            }
         }
 
-        return Array.from(
-            new Set(
-                cats.map(c => c.year)
-            )
-        );
+        return [yearFilter as number];
     }
 );
 
 export const selectAllFilteredCategoriesForYear = createSelector(
-    selectAllFilteredCategories,
-    (categories: Category[], props: { year: number }) => categories.filter(c => c.year === props.year)
-);
+    PhotoCategoryStoreSelectors.selectCategoriesForYear,
+    VideoCategoryStoreSelectors.selectCategoriesForYear,
+    SettingsStoreSelectors.selectCategoryListCategoryFilter,
+    (photoCategories: Category[], videoCategories: Category[], filter: CategoryFilter, props: { year: number }) => {
+        switch (filter) {
+            case CategoryFilter.all:
+                return [...photoCategories, ...videoCategories];
+            case CategoryFilter.photos:
+                return photoCategories;
+            case CategoryFilter.videos:
+                return videoCategories;
+        }
+
+        return [];
+});
 
 export const selectInitialYearFilterSelection = createSelector(
     selectAllYears,
