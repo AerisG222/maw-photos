@@ -56,6 +56,6 @@ export class CategoryListComponent {
     }
 
     categoryTrackByFn(index: number, teaser: CategoryTeaser) {
-        return teaser.trackBy;
+        return `${teaser.type}_${teaser.id}`;
     }
 }

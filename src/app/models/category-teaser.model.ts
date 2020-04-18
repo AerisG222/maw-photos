@@ -1,11 +1,12 @@
 import { CategoryType } from './category-type.model';
+import { MultimediaAsset } from './multimedia-asset.model';
 
 export interface CategoryTeaser {
     route: string;
     id: number;
     year: number;
     name: string;
-    teaserImageSqUrl: string;
     type: CategoryType;
-    trackBy: string;
+    teaserImage: MultimediaAsset;
+    teaserImageSq: MultimediaAsset;
 }

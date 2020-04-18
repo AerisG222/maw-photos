@@ -92,9 +92,19 @@ export class SearchComponent implements OnInit, OnDestroy {
                     id: cat.id,
                     year: cat.year,
                     name: cat.name,
-                    teaserImageSqUrl: cat.teaserPhotoSqPath,
-                    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video,
-                    trackBy: `${ cat.multimediaType }_${ cat.id }`
+                    teaserImage: {
+                        height: cat.teaserPhotoHeight,
+                        width: cat.teaserPhotoWidth,
+                        url: cat.teaserPhotoPath,
+                        size: null
+                    },
+                    teaserImageSq: {
+                        height: cat.teaserPhotoSqHeight,
+                        width: cat.teaserPhotoSqWidth,
+                        url: cat.teaserPhotoSqPath,
+                        size: null
+                    },
+                    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
                 })))
             );
 

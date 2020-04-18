@@ -63,16 +63,7 @@ export class YearComponent implements OnInit {
 
         this.categories$ = this.store$
             .pipe(
-                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year }),
-                map(cats => cats.map(cat => ({
-                    route: cat.categoryRoute,
-                    id: cat.id,
-                    year: cat.year,
-                    name: cat.name,
-                    teaserImageSqUrl: cat.teaserImageSq.url,
-                    type: cat.type,
-                    trackBy: `${ cat.type }_${ cat.id }`
-                })))
+                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year })
             );
     }
 }

@@ -58,17 +58,17 @@ export class VideoCategoryStoreEffects {
         return categories.map(c => this.adaptCategory(c));
     }
 
-    private adaptCategory(c: VideoCategory): Category {
+    private adaptCategory(category: VideoCategory): Category {
         return {
             type: CategoryType.video,
-            categoryRoute: '/videos',
-            id: c.id,
-            name: c.name,
-            year: c.year,
-            createDate: c.createDate,
-            teaserImage: c.teaserImage,
-            teaserImageSq: c.teaserImageSq,
-            actual: c
+            route: '/videos',
+            id: category.id,
+            name: category.name,
+            year: category.year,
+            createDate: category.createDate,
+            teaserImage: category.teaserImage,
+            teaserImageSq: category.teaserImageSq,
+            actual: category
         };
     }
 }
