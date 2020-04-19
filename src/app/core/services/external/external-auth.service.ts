@@ -35,7 +35,7 @@ export class ExternalAuthService implements AuthService {
             await this.loadProfile();
         }
 
-        this.oauthService.setupAutomaticSilentRefresh();
+        this.oauthService.setupAutomaticSilentRefresh({}, 'access_token');
     }
 
     handleLoginCallback() {
