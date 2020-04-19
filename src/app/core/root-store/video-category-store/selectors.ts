@@ -14,7 +14,10 @@ const getCategoriesForYear = (state: State, year: number): Category[] => {
     if (!!state.categoryIdsByYear && !!state.categoryIdsByYear[year]) {
         const idsForYear = state.categoryIdsByYear[year] as number[];
 
-        return idsForYear.map(id => state.entities[id]);
+        // sort newest to oldest
+        const sortedIdsForYear = [...idsForYear].sort((a, b) => b - a);
+
+        return sortedIdsForYear.map(id => state.entities[id]);
     }
 
     return [];
