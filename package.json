@@ -13,7 +13,8 @@
     "dev_watch": "ng build --extract-css --vendor-chunk=false --watch",
     "dev_build": "ng build --extract-css --vendor-chunk=false --statsJson && ng lint",
     "prod_build": "ng build --aot --vendor-chunk=false --prod --statsJson",
-    "bundle-report": "webpack-bundle-analyzer dist/stats-es2015.json"
+    "bundle-report": "webpack-bundle-analyzer dist/stats-es2015.json",
+    "containerize_dev": "buildah bud -f Containerfile.dev -t maw-photos-dev"
   },
   "private": true,
   "dependencies": {
