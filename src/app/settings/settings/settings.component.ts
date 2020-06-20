@@ -45,6 +45,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     // settings w/o ui
     private categoryListYearFilter: string | number;
+    private categoryListMissingGpsFilter: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -109,7 +110,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(s => this.updateForm(s)),
-                tap(s => this.categoryListYearFilter = s.categoryListYearFilter)
+                tap(s => this.categoryListYearFilter = s.categoryListYearFilter),
+                tap(s => this.categoryListMissingGpsFilter = s.categoryListMissingGpsFilter)
             )
             .subscribe()
         );
@@ -125,6 +127,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
             categoryListCategoryFilter: CategoryFilter.forName(this.form.get('categoryListCategoryFilter').value),
             categoryListCategoryMargin: CategoryMargin.forName(this.form.get('categoryListCategoryMargin').value),
+            categoryListMissingGpsFilter: this.categoryListMissingGpsFilter,
             categoryListShowCategoryTitles: this.form.get('categoryListShowCategoryTitles').value,
             categoryListThumbnailSize: ThumbnailSize.forName(this.form.get('categoryListThumbnailSize').value),
             categoryListYearFilter: this.categoryListYearFilter,

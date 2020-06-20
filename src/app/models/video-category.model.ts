@@ -19,4 +19,5 @@ export interface VideoCategory {
     teaserImageSq: MultimediaAsset;
     self: string;
     videosLink: string;
+    isMissingGpsData: boolean;
 }

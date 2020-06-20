@@ -13,8 +13,9 @@ app-shared-content-margin {
 
 .filter-grid {
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
     grid-template-rows: max-content;
     grid-column-gap: 24px;
     justify-content: center;
+    align-items: center;
 }

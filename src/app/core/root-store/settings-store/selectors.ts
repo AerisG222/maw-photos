@@ -21,6 +21,7 @@ const getAppTheme = (state: State): Theme => state.settings.appTheme;
 
 const getCategoryListCategoryFilter = (state: State): CategoryFilter => state.settings.categoryListCategoryFilter;
 const getCategoryListCategoryMargin = (state: State): CategoryMargin => state.settings.categoryListCategoryMargin;
+const getCategoryListMissingGpsFilter = (state: State): boolean => state.settings.categoryListMissingGpsFilter;
 const getCategoryListShowCategoryTitles = (state: State): boolean => state.settings.categoryListShowCategoryTitles;
 const getCategoryListThumbnailSize = (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize;
 const getCategoryListYearFilter = (state: State): string | number => state.settings.categoryListYearFilter;
@@ -72,6 +73,7 @@ export const selectAppTheme = createSelector(selectSettingsState, getAppTheme);
 
 export const selectCategoryListCategoryFilter = createSelector(selectSettingsState, getCategoryListCategoryFilter);
 export const selectCategoryListCategoryMargin = createSelector(selectSettingsState, getCategoryListCategoryMargin);
+export const selectCategoryListMissingGpsFilter = createSelector(selectSettingsState, getCategoryListMissingGpsFilter);
 export const selectCategoryListShowCategoryTitles = createSelector(selectSettingsState, getCategoryListShowCategoryTitles);
 export const selectCategoryListThumbnailSize = createSelector(selectSettingsState, getCategoryListThumbnailSize);
 export const selectCategoryListYearFilter = createSelector(selectSettingsState, getCategoryListYearFilter);

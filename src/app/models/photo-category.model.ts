@@ -21,4 +21,5 @@ export interface PhotoCategory {
     self: string;
     photosLink: string;
     downloadLink: string;
+    isMissingGpsData: boolean;
 }

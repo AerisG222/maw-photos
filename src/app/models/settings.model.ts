@@ -10,6 +10,7 @@ export interface Settings {
 
     categoryListCategoryFilter: CategoryFilter;
     categoryListCategoryMargin: CategoryMargin;
+    categoryListMissingGpsFilter: boolean;
     categoryListShowCategoryTitles: boolean;
     categoryListThumbnailSize: ThumbnailSize;
     categoryListYearFilter: string | number;
@@ -62,6 +63,7 @@ export const DEFAULT_SETTINGS = ({
 
     categoryListCategoryFilter: CategoryFilter.all,
     categoryListCategoryMargin: CategoryMargin.dense,
+    categoryListMissingGpsFilter: false,
     categoryListShowCategoryTitles: true,
     categoryListThumbnailSize: ThumbnailSize.default,
     categoryListYearFilter: 'all',

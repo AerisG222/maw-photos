@@ -44,6 +44,10 @@ export const toggleCategoryListCategoryTitlesRequest = createAction(
     '[Settings] Toggle Category List Category Titles'
 );
 
+export const toggleCategoryListMissingGpsFilterRequest = createAction(
+    '[Settings] Toggle Category List Missing Gps Filter'
+);
+
 export const updateCategoryListYearFilterRequest = createAction(
     '[Settings] Update Category List Year Filter',
     props<{ yearFilter: string | number }>()

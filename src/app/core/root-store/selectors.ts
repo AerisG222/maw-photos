@@ -75,17 +75,28 @@ export const selectAllFilteredCategoriesForYear = createSelector(
     PhotoCategoryStoreSelectors.selectCategoriesForYear,
     VideoCategoryStoreSelectors.selectCategoriesForYear,
     SettingsStoreSelectors.selectCategoryListCategoryFilter,
-    (photoCategories: Category[], videoCategories: Category[], filter: CategoryFilter, props: { year: number }) => {
+    SettingsStoreSelectors.selectCategoryListMissingGpsFilter,
+    // tslint:disable-next-line: max-line-length
+    (photoCategories: Category[], videoCategories: Category[], filter: CategoryFilter, missingGpsFilter: boolean, props: { year: number }) => {
+        let categories: Category[] = [];
+
         switch (filter) {
             case CategoryFilter.all:
-                return [...photoCategories, ...videoCategories];
+                categories = [...photoCategories, ...videoCategories];
+                break;
             case CategoryFilter.photos:
-                return photoCategories;
+                categories = photoCategories;
+                break;
             case CategoryFilter.videos:
-                return videoCategories;
+                categories = videoCategories;
+                break;
         }
 
-        return [];
+        if (missingGpsFilter) {
+            return categories.filter(c => c.actual.isMissingGpsData);
+        }
+
+        return categories;
 });
 
 export const selectInitialYearFilterSelection = createSelector(

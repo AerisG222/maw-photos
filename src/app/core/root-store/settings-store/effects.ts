@@ -47,6 +47,7 @@ export class SettingsStoreEffects {
                 SettingsActions.updateMobileMarginsRequest,
 
                 SettingsActions.toggleCategoryListCategoryTitlesRequest,
+                SettingsActions.toggleCategoryListMissingGpsFilterRequest,
                 SettingsActions.updateCategoryListYearFilterRequest,
                 SettingsActions.updateCategoryListCategoryFilterRequest,
                 SettingsActions.updateCategoryListCategoryMarginRequest,

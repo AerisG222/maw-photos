@@ -50,6 +50,13 @@ const reducer = createReducer(
             categoryListShowCategoryTitles: !state.settings.categoryListShowCategoryTitles
         }
     })),
+    on(SettingsActions.toggleCategoryListMissingGpsFilterRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListMissingGpsFilter: !state.settings.categoryListMissingGpsFilter
+        }
+    })),
     on(SettingsActions.updateCategoryListYearFilterRequest, (state, { yearFilter }) => ({
         ...state,
         settings: {

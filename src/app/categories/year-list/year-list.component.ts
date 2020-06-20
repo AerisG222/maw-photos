@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { filter, tap, first } from 'rxjs/operators';
 
 import { CategoryMargin } from 'src/app/models/category-margin.model';
-import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-categories-year-list',
@@ -16,6 +16,7 @@ import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors } from
 export class YearListComponent implements OnInit {
     margin$: Observable<CategoryMargin>;
     years$: Observable<number[]>;
+    isAdmin$: Observable<boolean>;
 
     constructor(
         private store$: Store,
@@ -25,6 +26,10 @@ export class YearListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.isAdmin$ = this.store$.pipe(
+            select(AuthStoreSelectors.selectIsAdmin)
+        );
+
         this.activatedRoute.fragment
             .pipe(
                 first(),

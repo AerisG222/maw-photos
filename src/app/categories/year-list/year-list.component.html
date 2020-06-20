@@ -6,6 +6,7 @@
         <div class="filter-grid">
             <app-categories-category-year-filter></app-categories-category-year-filter>
             <app-categories-category-type-filter></app-categories-category-type-filter>
+            <app-categories-category-missing-gps-filter *ngIf="isAdmin$ | async"></app-categories-category-missing-gps-filter>
         </div>
 
         <div>

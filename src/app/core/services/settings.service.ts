@@ -19,6 +19,7 @@ export class SettingsService {
 
     private static readonly keyCategoryListCategoryFilter = 'categoryListCategoryFilter';
     private static readonly keyCategoryListCategoryMargin = 'categoryListCategoryMargin';
+    private static readonly keyCategoryListMissingGpsFilter = 'categoryListMissingGpsFilter';
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
     private static readonly keyCategoryListYearFilter = 'categoryListYearFilter';
@@ -80,6 +81,7 @@ export class SettingsService {
     load(): Settings {
         try {
             const categoryListShowCategoryTitles = this.getBoolean(SettingsService.keyCategoryListShowCategoryTitles);
+            const categoryListMissingGpsFilter = this.getBoolean(SettingsService.keyCategoryListMissingGpsFilter);
             const categoryListYearFilter = this.getStringOrNumber(SettingsService.keyCategoryListYearFilter);
 
             const photoListShowCategoryBreadcrumbs = this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
@@ -119,6 +121,7 @@ export class SettingsService {
 
                 categoryListCategoryFilter: this.getCategoryListCategoryFilter(),
                 categoryListCategoryMargin: this.getCategoryMargin(SettingsService.keyCategoryListCategoryMargin),
+                categoryListMissingGpsFilter: categoryListMissingGpsFilter !== null ? categoryListMissingGpsFilter : false,
                 categoryListThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
                 categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
                 categoryListYearFilter: categoryListYearFilter !== null ? categoryListYearFilter : 'all',
@@ -181,6 +184,7 @@ export class SettingsService {
 
         this.setValue(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
         this.setValue(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
+        this.setValue(SettingsService.keyCategoryListMissingGpsFilter, settings.categoryListMissingGpsFilter);
         this.setValue(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this.setValue(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
         this.setValue(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter);
