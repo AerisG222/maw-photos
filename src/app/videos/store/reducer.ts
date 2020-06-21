@@ -155,12 +155,27 @@ const reducer = createReducer(
         isLoading: true,
         error: null
     })),
-    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { gpsDetail }) => ({
-        ...state,
-        isLoading: false,
-        error: null,
-        currentVideoGpsDetail: gpsDetail
-    })),
+    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { videoId, gpsDetail }) => {
+        const video = getVideoWithId(state, videoId);
+        const updatedState = ({
+            ...state,
+            isLoading: false,
+            error: null,
+            currentVideoGpsDetail: gpsDetail
+        });
+
+        if (!!video) {
+            const newVideo = ({
+                ...video,
+                latitude: gpsDetail.override.latitude,
+                longitude: gpsDetail.override.longitude
+            });
+
+            return videoAdapter.upsertOne(newVideo, updatedState);
+        } else {
+            return updatedState;
+        }
+    }),
     on(VideoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
@@ -194,4 +209,8 @@ function incrementCurrentIndexWithinBounds(state: State, direction: number): num
 
 function getCurrentIndex(state: State): number {
     return (state.ids as number[]).findIndex(id => id === state.currentVideo.id);
+}
+
+function getVideoWithId(state: State, id: number) {
+    return state.entities[id];
 }
