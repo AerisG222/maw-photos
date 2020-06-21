@@ -53,7 +53,22 @@ const reducer = createReducer(
         ...state,
         isLoading: false,
         error
-    }))
+    })),
+    on(PhotoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }) => {
+        const catToUpdate = state.entities[categoryId];
+
+        const newCat = {
+            ...catToUpdate,
+            actual: { ...catToUpdate.actual }
+        };
+
+        newCat.actual.isMissingGpsData = isMissingGpsData;
+
+        // we should be able to just update the one property, but not sure how to do this given that it is nested
+        const update = { id: categoryId, changes: newCat};
+
+        return photoCategoryAdapter.updateOne(update, state);
+    })
 );
 
 export function photoCategoryReducer(state: State | undefined, action: Action) {

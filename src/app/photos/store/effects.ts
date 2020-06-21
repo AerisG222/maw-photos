@@ -1,13 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/photos/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';
+import * as PhotoStoreSelectors from './selectors';
+import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -173,6 +175,30 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
+        )
+    );
+
+    updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
+            debounceTime(700),
+            concatMap(action =>
+                this.store$.pipe(
+                    select(PhotoStoreSelectors.selectAllPhotos),
+                    map(photos => {
+                        const catId = photos[0].categoryId;
+                        let isMissingGpsData = false;
+
+                        for (const photo of photos) {
+                            if (photo.latitude === null || photo.longitude === null) {
+                                isMissingGpsData = true;
+                                break;
+                            }
+                        }
+
+                        return PhotoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
+                    })
+                ))
         )
     );
 

@@ -44,3 +44,8 @@ export const setTeaserSuccess = createAction(
     '[Photo Categories] Set Teaser Success',
     props<{ category: Category }>()
 );
+
+export const setIsMissingGpsData = createAction(
+    '[Photo Categories] Set Is Missing GPS Data Request',
+    props<{ categoryId: number, isMissingGpsData: boolean }>()
+);

@@ -1,15 +1,19 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, concatMap } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, debounceTime } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as VideoActions from './actions';
+import * as VideoStoreSelectors from './selectors';
+import { VideoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Injectable()
 export class VideoStoreEffects {
     constructor(
         private actions$: Actions,
+        private store$: Store,
         @Inject(videoApiServiceToken) private api: VideoApiService,
     ) {
 
@@ -127,6 +131,30 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
+        )
+    );
+
+    updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(VideoActions.setGpsCoordinateOverrideSuccess),
+            debounceTime(700),
+            concatMap(action =>
+                this.store$.pipe(
+                    select(VideoStoreSelectors.selectAllVideos),
+                    map(videos => {
+                        const catId = videos[0].categoryId;
+                        let isMissingGpsData = false;
+
+                        for (const video of videos) {
+                            if (video.latitude === null || video.longitude === null) {
+                                isMissingGpsData = true;
+                                break;
+                            }
+                        }
+
+                        return VideoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
+                    })
+                ))
         )
     );
 }

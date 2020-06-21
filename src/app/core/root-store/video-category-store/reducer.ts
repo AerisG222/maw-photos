@@ -53,7 +53,22 @@ const reducer = createReducer(
         ...state,
         isLoading: false,
         error
-    }))
+    })),
+    on(VideoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }) => {
+        const catToUpdate = state.entities[categoryId];
+
+        const newCat = {
+            ...catToUpdate,
+            actual: { ...catToUpdate.actual }
+        };
+
+        newCat.actual.isMissingGpsData = isMissingGpsData;
+
+        // we should be able to just update the one property, but not sure how to do this given that it is nested
+        const update = { id: categoryId, changes: newCat};
+
+        return VideoCategoryAdapter.updateOne(update, state);
+    })
 );
 
 export function videoCategoryReducer(state: State | undefined, action: Action) {
