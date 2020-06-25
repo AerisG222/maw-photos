@@ -339,6 +339,6 @@ const reducer = createReducer(
     }))
 );
 
-export function settingsReducer(state: State | undefined, action: Action) {
+export function settingsReducer(state: State | undefined, action: Action): State {
     return reducer(state, action);
 }

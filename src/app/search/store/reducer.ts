@@ -52,6 +52,6 @@ const reducer = createReducer(
     }))
 );
 
-export function searchReducer(state: State | undefined, action: Action) {
+export function searchReducer(state: State | undefined, action: Action): State {
     return reducer(state, action);
 }

@@ -13,7 +13,7 @@ export class ExternalAuthGuard implements AuthGuard {
 
     }
 
-    public canActivate() {
+    public canActivate(): boolean {
         if (this.oauthService.hasValidAccessToken()) {
             return true;
         } else {

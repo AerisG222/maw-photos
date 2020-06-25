@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, tap, take } from 'rxjs/operators';
@@ -77,13 +77,13 @@ export class DefaultViewComponent implements OnInit {
             );
     }
 
-    getEffectStyles(effects: PhotoEffects) {
+    getEffectStyles(effects: PhotoEffects): SafeStyle {
         const style = this.effectStyleBuilder.buildFilter(effects);
 
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
     }
 
-    getTransform(effects: PhotoEffects) {
+    getTransform(effects: PhotoEffects): SafeStyle {
         const style = this.effectStyleBuilder.buildTransform(effects);
 
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));

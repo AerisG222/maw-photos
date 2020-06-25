@@ -9,15 +9,15 @@ import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angul
 export class ToolbarComponent {
     @Output() selectView = new EventEmitter<string>();
 
-    onSelectPhoto() {
+    onSelectPhoto(): void {
         this.selectView.emit('photos');
     }
 
-    onSelectVideo() {
+    onSelectVideo(): void {
         this.selectView.emit('videos');
     }
 
-    onSelectCombined() {
+    onSelectCombined(): void {
         this.selectView.emit('combined');
     }
 }

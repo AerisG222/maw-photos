@@ -19,7 +19,7 @@ export class ToolbarSlideshowButtonComponent implements OnInit {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.slideshowPlaying$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectSlideshowIsPlaying)

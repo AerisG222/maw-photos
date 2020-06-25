@@ -17,13 +17,13 @@ export class HotkeyDialogComponent implements OnInit {
         private hotkeysService: HotkeysService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         const keys = [...this.hotkeysService.hotkeys, ...this.hotkeysService.pausedHotkeys];
 
         this.updateDisplay(keys);
     }
 
-    onClose() {
+    onClose(): void {
         this.dialogRef.close();
     }
 

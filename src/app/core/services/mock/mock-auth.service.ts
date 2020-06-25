@@ -14,28 +14,28 @@ export class MockAuthService implements AuthService {
 
     }
 
-    init() {
+    init(): void {
 
     }
 
-    handleLoginCallback() {
+    handleLoginCallback(): void {
         this.finishLogin();
     }
 
-    redirectAndLogin() {
+    redirectAndLogin(): void {
         this.finishLogin();
     }
 
-    loginViaPopup() {
+    loginViaPopup(): void {
 
     }
 
-    private finishLogin() {
+    private finishLogin(): void {
         this.storeProfile();
         this.router.navigate(['/']);
     }
 
-    private storeProfile()
+    private storeProfile(): void
     {
         const userInfo = {
             username: 'testuser',

@@ -46,7 +46,7 @@ export class LocalStorageService {
         return this.strategy.name;
     }
 
-    normalize(raw: string) {
+    normalize(raw: string): string {
         raw = this.isCaseSensitive ? raw : raw.toLowerCase();
         return `${this.prefix}${this.separator}${raw}`;
     }

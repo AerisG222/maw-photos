@@ -34,7 +34,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.settings$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
@@ -94,7 +94,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         return video.videoScaled.url;
     }
 
-    private triggerVideoRefresh() {
+    private triggerVideoRefresh(): void {
         setTimeout(() => {
             if (!!this.videoRef) {
                 this.videoRef.nativeElement.load();

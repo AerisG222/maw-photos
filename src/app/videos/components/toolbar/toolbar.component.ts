@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),

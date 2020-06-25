@@ -334,6 +334,7 @@ const reducer = createReducer(
     on(PhotoActions.resetEffectsRequest, state => ({
         ...state,
         currentPhotoEffects: {
+            ...state.currentPhotoEffects,
             rotation: new PhotoRotation(),
             grayscale: 0,
             sepia: 0,
@@ -401,7 +402,7 @@ const reducer = createReducer(
     }))
 );
 
-export function photoReducer(state: State | undefined, action: Action) {
+export function photoReducer(state: State | undefined, action: Action): State {
     return reducer(state, action);
 }
 
@@ -421,12 +422,12 @@ function previousPhotoWithGps(state: State): Photo {
     return getPhotoAtIndex(state, incrementCurrentIndexWithinGpsBounds(state, -1));
 }
 
-function getPhotoAtIndex(state: State, idx: number) {
+function getPhotoAtIndex(state: State, idx: number): Photo {
     // entities are keyed by id
     return state.entities[state.ids[idx]];
 }
 
-function getPhotoWithId(state: State, id: number) {
+function getPhotoWithId(state: State, id: number): Photo {
     return state.entities[id];
 }
 

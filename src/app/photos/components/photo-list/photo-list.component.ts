@@ -18,7 +18,7 @@ export class PhotoListComponent {
     @Input() selectedPhoto: Photo;
     @Output() photoSelected = new EventEmitter<Photo>();
 
-    get thumbnailSize() {
+    get thumbnailSize(): ThumbnailSize {
         return this.photoThumbnailSize;
     }
 
@@ -54,7 +54,7 @@ export class PhotoListComponent {
         this.photoSelected.emit(photo);
     }
 
-    scrollIntoView(photoId: number, elementRef: HTMLElement) {
+    scrollIntoView(photoId: number, elementRef: HTMLElement): string {
         if (!!this.selectedPhoto && this.selectedPhoto.id === photoId) {
             const parent = elementRef.parentElement;
             const parentMiddle = parent.clientWidth / 2;

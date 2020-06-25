@@ -18,7 +18,7 @@ export class ExternalAuthService implements AuthService {
 
     }
 
-    async init() {
+    async init(): Promise<void> {
         this.oauthService.configure(authConfig);
 
         await this.oauthService.loadDiscoveryDocument();
@@ -38,7 +38,7 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.setupAutomaticSilentRefresh({}, 'access_token');
     }
 
-    handleLoginCallback() {
+    handleLoginCallback(): void {
         if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
             this.finishLogin();
         } else {
@@ -46,28 +46,28 @@ export class ExternalAuthService implements AuthService {
         }
     }
 
-    redirectAndLogin() {
+    redirectAndLogin(): void {
         this.oauthService.initCodeFlow();
     }
 
-    loginViaPopup() {
+    loginViaPopup(): void {
         this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
     }
 
-    private async finishLogin() {
+    private async finishLogin(): Promise<void> {
         if (this.router.routerState.snapshot.url.startsWith('/login')) {
             await this.loadProfile();
             this.router.navigate(['/']);
         }
     }
 
-    private async loadProfile() {
+    private async loadProfile(): Promise<void> {
         const profile = await this.oauthService.loadUserProfile();
 
         this.storeProfile(profile);
     }
 
-    private storeProfile(profile)
+    private storeProfile(profile): void
     {
         if (!!profile) {
             const userInfo = {

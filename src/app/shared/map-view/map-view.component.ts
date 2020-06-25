@@ -42,7 +42,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     @Output() zoomChange = new EventEmitter<number>();
     @Output() selectPhoto = new EventEmitter<number>();
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.updateMapOptions();
     }
 
@@ -61,7 +61,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         this.changeDetectorRef.detectChanges();
     }
 
-    onZoomChange() {
+    onZoomChange(): void {
         if (this.map) {
             const zoom = this.map.getZoom();
 
@@ -71,7 +71,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         }
     }
 
-    onMapTypeChange() {
+    onMapTypeChange(): void {
         if (this.map) {
             const mapTypeId = this.map.getMapTypeId();
 
@@ -89,7 +89,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         }
     }
 
-    getPosition(image: MapImage) {
+    getPosition(image: MapImage): google.maps.LatLng {
         if (!!image && !!image.latitude && !!image.longitude) {
             return new google.maps.LatLng(image.latitude, image.longitude);
         }
@@ -110,7 +110,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         return null;
     }
 
-    updateActivePhoto() {
+    updateActivePhoto(): void {
         const markerInfo = this.markers[this.activePhoto.imageXsSq.url] as MapMarkerInfo;
 
         if (!!markerInfo) {
@@ -118,20 +118,20 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         }
     }
 
-    selectActivePhoto(marker: MapMarker, image: MapImage) {
+    selectActivePhoto(marker: MapMarker, image: MapImage): void {
         this.selectPhoto.emit(image.id);
 
         this.openInfoWindow(marker, image);
     }
 
-    openInfoWindow(marker: MapMarker, image: MapImage) {
+    openInfoWindow(marker: MapMarker, image: MapImage): void {
         this.activeImageUrl = image.imageUrl;
 
         this.infoWindow.close();
         this.infoWindow.open(marker);
     }
 
-    private updateMapOptions() {
+    private updateMapOptions(): void {
         this.options = {
             controlSize: 24,
             center: this.getPosition(this.images[0]),

@@ -36,11 +36,11 @@ export class ExternalSearchApiService implements SearchApiService {
             );
     }
 
-    private getAbsoluteApiUrl(relativeUrl: string) {
+    private getAbsoluteApiUrl(relativeUrl: string): string {
         return `${environment.apiUrl}/${relativeUrl}`;
     }
 
-    private getAbsoluteWwwUrl(relativeUrl: string) {
+    private getAbsoluteWwwUrl(relativeUrl: string): string {
         return `${environment.wwwUrl}/${relativeUrl}`;
     }
 }

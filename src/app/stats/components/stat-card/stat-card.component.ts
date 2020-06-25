@@ -15,7 +15,7 @@ export class StatCardComponent implements AfterViewInit {
 
     colorScheme = colorSets.find(s => s.name === 'cool');
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.updateMargins();
     }
 

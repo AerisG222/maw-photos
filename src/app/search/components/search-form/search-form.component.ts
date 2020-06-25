@@ -20,13 +20,13 @@ export class SearchFormComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form = this.formBuilder.group({
             query: ['', Validators.required]
         });
     }
 
-    onSearch() {
+    onSearch(): void {
         const searchTerm = this.form.get('query').value;
 
         if (!!searchTerm) {

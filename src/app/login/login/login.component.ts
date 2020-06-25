@@ -38,7 +38,7 @@ export class LoginComponent {
             .subscribe();
     }
 
-    redirectLogin() {
+    redirectLogin(): void {
         this.authService.redirectAndLogin();
     }
 }

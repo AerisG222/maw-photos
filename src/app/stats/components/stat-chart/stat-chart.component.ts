@@ -30,7 +30,7 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
     formatFunc = this.formatPlainNumber;
     colorScheme = colorSets.find(s => s.name === 'cool');
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.updateMargins();
     }
 
@@ -38,19 +38,19 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
         this.updateMargins();
     }
 
-    onSelect(evt) {
+    onSelect(evt): void {
         this.cellSelected.emit(evt);
     }
 
-    formatPlainNumber(val: number) {
+    formatPlainNumber(val: number): string {
         return numeral(val).format('0,0');
     }
 
-    formatFilesize(val: number) {
+    formatFilesize(val: number): string {
         return numeral(val).format('0,0.00 b');
     }
 
-    formatTime(val: number) {
+    formatTime(val: number): string {
         return numeral(val).format('00:00:00');
     }
 

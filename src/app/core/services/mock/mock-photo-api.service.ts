@@ -171,7 +171,7 @@ export class MockPhotoApiService implements PhotoApiService {
         });
     }
 
-    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate) {
+    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<GpsDetail> {
         return this.getGpsDetail(photoId);
     }
 
@@ -211,7 +211,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 },
                 self: '/photo-categories/1',
                 photosLink: '/photo-categories/1/photos',
-                downloadLink: '/photos/download-category/1'
+                downloadLink: '/photos/download-category/1',
+                isMissingGpsData: false
             },
             {
                 id: 2,
@@ -243,7 +244,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 },
                 self: '/photo-categories/2',
                 photosLink: '/photo-categories/2/photos',
-                downloadLink: '/photos/download-category/2'
+                downloadLink: '/photos/download-category/2',
+                isMissingGpsData: false
             },
             {
                 id: 3,
@@ -275,7 +277,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 },
                 self: '/photo-categories/3',
                 photosLink: '/photo-categories/3/photos',
-                downloadLink: '/photos/download-category/3'
+                downloadLink: '/photos/download-category/3',
+                isMissingGpsData: true
             },
             {
                 id: 4,
@@ -307,7 +310,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 },
                 self: '/photo-categories/4',
                 photosLink: '/photo-categories/4/photos',
-                downloadLink: '/photos/download-category/4'
+                downloadLink: '/photos/download-category/4',
+                isMissingGpsData: false
             },
             {
                 id: 5,
@@ -339,7 +343,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 },
                 self: '/photo-categories/5',
                 photosLink: '/photo-categories/5/photos',
-                downloadLink: '/photos/download-category/5'
+                downloadLink: '/photos/download-category/5',
+                isMissingGpsData: true
             },
             {
                 id: 6,
@@ -371,7 +376,8 @@ export class MockPhotoApiService implements PhotoApiService {
                 },
                 self: '/photo-categories/6',
                 photosLink: '/photo-categories/6/photos',
-                downloadLink: '/photos/download-category/6'
+                downloadLink: '/photos/download-category/6',
+                isMissingGpsData: true
             }
         ];
 

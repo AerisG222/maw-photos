@@ -24,7 +24,7 @@ export class MapToolbarComponent implements OnInit {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isFirst$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates),

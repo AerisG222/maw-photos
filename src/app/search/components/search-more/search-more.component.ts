@@ -23,7 +23,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.destroySub.add(this.store$
             .pipe(
                 select(SearchStoreSelectors.selectSearchQuery),
@@ -43,7 +43,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
         this.destroySub.unsubscribe();
     }
 
-    onSearchMore() {
+    onSearchMore(): void {
         if (this.nextIndex > 0) {
             this.store$.dispatch(queryRequest({ query: this.query, start: this.nextIndex }));
         }

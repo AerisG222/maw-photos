@@ -15,7 +15,7 @@ export class CategoryGridComponent {
     @Input() showYears: boolean;
     @Input() thumbnailSize: ThumbnailSize;
 
-    categoryTrackByFn(index: number, teaser: CategoryTeaser) {
+    categoryTrackByFn(index: number, teaser: CategoryTeaser): string {
         return `${teaser.type}_${teaser.id}`;
     }
 }

@@ -33,7 +33,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form = this.formBuilder.group({
             aggregateBy: ['count']
         });
@@ -145,7 +145,8 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         });
     }
 
-    private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string) {
+    // tslint:disable-next-line: max-line-length
+    private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string): { name: string, value: number }[] {
         let agg = null;
 
         if (aggregateBy === 'count') {

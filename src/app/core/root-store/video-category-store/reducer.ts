@@ -71,6 +71,6 @@ const reducer = createReducer(
     })
 );
 
-export function videoCategoryReducer(state: State | undefined, action: Action) {
+export function videoCategoryReducer(state: State | undefined, action: Action): State {
     return reducer(state, action);
 }

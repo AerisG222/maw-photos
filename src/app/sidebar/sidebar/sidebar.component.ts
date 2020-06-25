@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.hidePanel$ = this.store$
             .pipe(
                 select(LayoutStoreSelectors.selectLayoutIsFullscreen)

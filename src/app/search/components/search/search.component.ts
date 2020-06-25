@@ -41,7 +41,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.margin$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSearchCategoryMargin)
@@ -132,7 +132,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             );
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.store$.dispatch(clearRequest());
     }
 }

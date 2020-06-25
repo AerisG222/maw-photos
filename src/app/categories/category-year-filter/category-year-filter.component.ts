@@ -25,7 +25,7 @@ export class CategoryYearFilterComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.store$
             .pipe(
                 select(RootStoreSelectors.selectInitialYearFilterSelection),

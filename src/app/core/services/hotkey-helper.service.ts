@@ -10,7 +10,7 @@ export class HotkeyHelperService {
         private hotkeyService: HotkeysService
     ) { }
 
-    pauseAll() {
+    pauseAll(): void {
         // shallow copy because the native pause() is bugged
         const copy = this.hotkeyService.hotkeys.slice(0);
 
@@ -22,7 +22,7 @@ export class HotkeyHelperService {
         }
     }
 
-    unpauseAll() {
+    unpauseAll(): void {
         // shallow copy because the native unpause() is bugged
         const copy = this.hotkeyService.pausedHotkeys.slice(0);
 

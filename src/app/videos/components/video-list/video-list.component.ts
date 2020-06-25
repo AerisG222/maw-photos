@@ -18,7 +18,7 @@ export class VideoListComponent {
     @Input() selectedVideo: Video;
     @Output() videoSelected = new EventEmitter<Video>();
 
-    get thumbnailSize() {
+    get thumbnailSize(): ThumbnailSize {
         return this.videoThumbnailSize;
     }
 

@@ -25,7 +25,7 @@ export class YearListComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isAdmin$ = this.store$.pipe(
             select(AuthStoreSelectors.selectIsAdmin)
         );

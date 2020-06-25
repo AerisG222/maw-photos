@@ -183,7 +183,7 @@ const reducer = createReducer(
     })),
 );
 
-export function videoReducer(state: State | undefined, action: Action) {
+export function videoReducer(state: State | undefined, action: Action): State {
     return reducer(state, action);
 }
 
@@ -195,7 +195,7 @@ function previousVideo(state: State): Video {
     return getVideoAtIndex(state, incrementCurrentIndexWithinBounds(state, -1));
 }
 
-function getVideoAtIndex(state: State, idx: number) {
+function getVideoAtIndex(state: State, idx: number): Video {
     // entities are keyed by id
     return state.entities[state.ids[idx]];
 }
@@ -211,6 +211,6 @@ function getCurrentIndex(state: State): number {
     return (state.ids as number[]).findIndex(id => id === state.currentVideo.id);
 }
 
-function getVideoWithId(state: State, id: number) {
+function getVideoWithId(state: State, id: number): Video {
     return state.entities[id];
 }

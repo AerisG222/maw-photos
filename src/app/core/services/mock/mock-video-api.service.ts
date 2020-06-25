@@ -20,7 +20,7 @@ export class MockVideoApiService implements VideoApiService {
         private dateSvc: DateService
     ) {
         this.initData();
-     }
+    }
 
     getCategories(): Observable<ApiCollection<VideoCategory>> {
         return of({
@@ -72,7 +72,7 @@ export class MockVideoApiService implements VideoApiService {
         });
     }
 
-    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate) {
+    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate): Observable<GpsDetail> {
         return this.getGpsDetail(videoId);
     }
 
@@ -110,7 +110,8 @@ export class MockVideoApiService implements VideoApiService {
                     size: 2000
                 },
                 self: '/video-categories/1',
-                videosLink: '/video-categories/1/videos'
+                videosLink: '/video-categories/1/videos',
+                isMissingGpsData: false
             },
             {
                 id: 1,
@@ -140,7 +141,8 @@ export class MockVideoApiService implements VideoApiService {
                     size: 2000
                 },
                 self: '/video-categories/2',
-                videosLink: '/video-categories/2/videos'
+                videosLink: '/video-categories/2/videos',
+                isMissingGpsData: true
             }
         ];
 

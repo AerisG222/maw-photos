@@ -94,7 +94,7 @@ export class ExternalVideoApiService implements VideoApiService {
             .get<GpsDetail>(url);
     }
 
-    setGpsCoordinateOverride(videoId: number, gps: GpsCoordinate) {
+    setGpsCoordinateOverride(videoId: number, gps: GpsCoordinate): Observable<GpsDetail> {
         const url = this.getAbsoluteUrl(`videos/${videoId}/gps`);
 
         return this.http
@@ -115,7 +115,7 @@ export class ExternalVideoApiService implements VideoApiService {
             );
     }
 
-    private getAbsoluteUrl(relativeUrl: string) {
+    private getAbsoluteUrl(relativeUrl: string): string {
         return `${environment.apiUrl}/${relativeUrl}`;
     }
 

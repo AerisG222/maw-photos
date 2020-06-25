@@ -25,7 +25,7 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isFullscreen$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectIsFullscreenView)

@@ -24,7 +24,7 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.store$.dispatch(PhotoStoreActions.clearRequest());
 
         this.isFullscreen$ = this.store$

@@ -33,7 +33,7 @@ export class YearComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.listThumbnailSize$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectCategoryListListViewThumbnailSize)

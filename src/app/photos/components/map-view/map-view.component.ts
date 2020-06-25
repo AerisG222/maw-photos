@@ -24,7 +24,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.settings$ = this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings)

@@ -18,7 +18,7 @@ export class CategoryCardComponent {
 
     categoryTypes = CategoryType;
 
-    getClass() {
+    getClass(): string {
         const classes: string[] = [];
 
         if (this.showTitle) {

@@ -42,7 +42,7 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isAdmin$ = this.store$.pipe(
             select(AuthStoreSelectors.selectIsAdmin)
         );

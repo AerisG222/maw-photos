@@ -175,7 +175,7 @@ export class SettingsService {
         }
     }
 
-    save(settings: Settings) {
+    save(settings: Settings): void {
         if (!settings) {
             return;
         }
@@ -365,11 +365,11 @@ export class SettingsService {
         return val.replace('\'', '').replace('"', '');
     }
 
-    private setValue(key: string, value: any) {
+    private setValue(key: string, value: any): void {
         this.localStorage.store(key, value);
     }
 
-    private clearValue(key: string) {
+    private clearValue(key: string): void {
         this.localStorage.clear(key);
     }
 }

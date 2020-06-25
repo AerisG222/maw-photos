@@ -125,7 +125,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
             .get<GpsDetail>(url);
     }
 
-    setGpsCoordinateOverride(photoId: number, gps: GpsCoordinate) {
+    setGpsCoordinateOverride(photoId: number, gps: GpsCoordinate): Observable<GpsDetail> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/gps`);
 
         return this.http
@@ -146,7 +146,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
             );
     }
 
-    private getAbsoluteUrl(relativeUrl: string) {
+    private getAbsoluteUrl(relativeUrl: string): string {
         return `${environment.apiUrl}/${relativeUrl}`;
     }
 

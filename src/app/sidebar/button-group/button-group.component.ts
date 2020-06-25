@@ -7,5 +7,5 @@ import { Component, HostBinding, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonGroupComponent {
-    @HostBinding('class.mat-elevation-z4') get() { return true; }
+    @HostBinding('class.mat-elevation-z4') get(): boolean { return true; }
 }

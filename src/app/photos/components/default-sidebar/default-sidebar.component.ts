@@ -47,7 +47,7 @@ export class DefaultSidebarComponent implements OnInit {
         private store$: Store
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.isAdmin$ = this.store$.pipe(
             select(AuthStoreSelectors.selectIsAdmin)
         );

@@ -19,7 +19,7 @@ export class RatingCardComponent implements AfterViewInit {
         this.theRating = value;
         this.updateRating();
     }
-    get rating() { return this.theRating; }
+    get rating(): Rating { return this.theRating; }
 
     @Output() rate = new EventEmitter<number>();
 
@@ -32,7 +32,7 @@ export class RatingCardComponent implements AfterViewInit {
 
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.isReady = true;
 
         this.updateRating();
@@ -42,7 +42,7 @@ export class RatingCardComponent implements AfterViewInit {
         this.rate.next(userRating);
     }
 
-    private updateRating() {
+    private updateRating(): void {
         if (!!this.rating && this.isReady) {
             this.userRatingComponent.setRating(this.theRating.userRating);
             this.averageRatingComponent.setRating(this.theRating.averageRating);

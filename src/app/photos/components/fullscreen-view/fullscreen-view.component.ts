@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -26,7 +26,7 @@ export class FullscreenViewComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.activePhoto$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
@@ -44,7 +44,7 @@ export class FullscreenViewComponent implements OnInit, OnDestroy {
         this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
     }
 
-    getTransform(effects: PhotoEffects) {
+    getTransform(effects: PhotoEffects): SafeStyle {
         const style = this.effectStyleBuilder.buildTransform(effects);
 
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));

@@ -43,7 +43,7 @@ export class MockSearchApiService implements SearchApiService {
     }
 
 
-    private getAll() {
+    private getAll(): Observable<MultimediaCategory[]> {
         const photoCategories = this.photoApi.getCategories().pipe(
             map(cats => {
                 const list: MultimediaCategory[] = [];

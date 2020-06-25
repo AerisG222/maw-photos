@@ -37,7 +37,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         this.img.addEventListener('load', (evt) => this.onImageLoad());
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
@@ -65,11 +65,11 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         );
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.destroySub.unsubscribe();
     }
 
-    private onImageLoad() {
+    private onImageLoad(): void {
         const channel = this.channel;  // grab this here to make sure remaining tasks use consistent value
         const data = this.getImageData();
         const hist = this.calcHistogram(data);
@@ -78,7 +78,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         this.drawHistogram(channel, hist, maxCount);
     }
 
-    private getImageData() {
+    private getImageData(): Uint8ClampedArray {
         const tempCanvas = this.doc.createElement('canvas');
 
         tempCanvas.width = this.img.width;
@@ -174,7 +174,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         ctx.globalCompositeOperation = 'source-over';
     }
 
-    private drawHistogramChannel(ctx, color, maxCount, vals) {
+    private drawHistogramChannel(ctx, color, maxCount, vals): void {
         ctx.fillStyle = color;
 
         ctx.beginPath();
@@ -197,15 +197,15 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         ctx.closePath();
     }
 
-    private includeR(channel: string) {
+    private includeR(channel: string): boolean {
         return channel === 'rgb' || channel === 'r';
     }
 
-    private includeG(channel: string) {
+    private includeG(channel: string): boolean {
         return channel === 'rgb' || channel === 'g';
     }
 
-    private includeB(channel: string) {
+    private includeB(channel: string): boolean {
         return channel === 'rgb' || channel === 'b';
     }
 }
