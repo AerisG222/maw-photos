@@ -25,6 +25,7 @@ import { AuthStoreModule } from './auth-store';
         }),
         StoreModule.forRoot({}, {
             runtimeChecks: {
+                strictActionWithinNgZone: true,
                 strictStateSerializability: false,
                 strictActionSerializability: false
             }
