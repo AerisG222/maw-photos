@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 
 import { Video } from 'src/app/models/video.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 
 @Component({
     selector: 'app-videos-video-list',
@@ -10,16 +11,16 @@ import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoListComponent {
-    videoThumbnailSize: ThumbnailSize;
-    imgWidth: number;
-    imgHeight: number;
+    videoThumbnailSize?: ThumbnailSize;
+    imgWidth?: number;
+    imgHeight?: number;
 
-    @Input() videos: Video[];
-    @Input() selectedVideo: Video;
+    @Input() videos?: Video[];
+    @Input() selectedVideo?: Video;
     @Output() videoSelected = new EventEmitter<Video>();
 
     get thumbnailSize(): ThumbnailSize {
-        return this.videoThumbnailSize;
+        return this.videoThumbnailSize ?? DEFAULT_SETTINGS.videoListThumbnailSize;
     }
 
     @Input()

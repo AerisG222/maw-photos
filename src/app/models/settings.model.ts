@@ -58,7 +58,7 @@ export interface Settings {
     searchListViewThumbnailSize: ThumbnailSize;
 }
 
-export const DEFAULT_SETTINGS = ({
+export const DEFAULT_SETTINGS: Settings = ({
     appTheme: Theme.themeDark,
 
     categoryListCategoryFilter: CategoryFilter.all,

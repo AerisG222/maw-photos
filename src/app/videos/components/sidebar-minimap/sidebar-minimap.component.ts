@@ -5,6 +5,7 @@ import { filter, map } from 'rxjs/operators';
 
 import { VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { Location } from 'src/app/models/location.model';
 
 @Component({
     selector: 'app-videos-sidebar-minimap',
@@ -13,9 +14,9 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarMinimapComponent implements OnInit {
-    mapTypeId$: Observable<string>;
-    zoom$: Observable<number>;
-    position$: Observable<google.maps.LatLng>;
+    mapTypeId$?: Observable<string>;
+    zoom$?: Observable<number>;
+    position$?: Observable<Location>;
 
     constructor(
         private store$: Store
@@ -34,10 +35,16 @@ export class SidebarMinimapComponent implements OnInit {
             .pipe(
                 map(video => {
                     if (!!video && !!video.latitude && video.longitude) {
-                        return new google.maps.LatLng(video.latitude, video.longitude);
+                        return {
+                            position: new google.maps.LatLng(video.latitude, video.longitude),
+                            isValid: true
+                        };
                     }
 
-                    return null;
+                    return {
+                        position: new google.maps.LatLng(0, 0),
+                        isValid: false
+                    };
                 })
             );
 
@@ -50,7 +57,7 @@ export class SidebarMinimapComponent implements OnInit {
         );
     }
 
-    onMapTypeChange(mapTypeId): void {
+    onMapTypeChange(mapTypeId: string): void {
         this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
     }
 

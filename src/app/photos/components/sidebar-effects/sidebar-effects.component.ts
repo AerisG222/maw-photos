@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { PhotoEffects } from 'src/app/models/photo-effects.model';
+import { PhotoEffects, DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 
 @Component({
@@ -15,7 +15,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 })
 export class SidebarEffectsComponent implements OnInit, OnDestroy {
     destroySub = new Subscription();
-    effects: PhotoEffects;
+    effects = DEFAULT_PHOTO_EFFECTS;
 
     constructor(
         private store$: Store
@@ -37,35 +37,35 @@ export class SidebarEffectsComponent implements OnInit, OnDestroy {
     }
 
     onGrayscaleChange(evt: MatSliderChange): void {
-        this.update({...this.effects, grayscale: evt.value });
+        this.update({...this.effects, grayscale: evt.value as number});
     }
 
     onSepiaChange(evt: MatSliderChange): void {
-        this.update({...this.effects, sepia: evt.value });
+        this.update({...this.effects, sepia: evt.value as number });
     }
 
     onBrightnessChange(evt: MatSliderChange): void {
-        this.update({...this.effects, brightness: evt.value });
+        this.update({...this.effects, brightness: evt.value as number });
     }
 
     onSaturationChange(evt: MatSliderChange): void {
-        this.update({...this.effects, saturation: evt.value });
+        this.update({...this.effects, saturation: evt.value as number });
     }
 
     onContrastChange(evt: MatSliderChange): void {
-        this.update({...this.effects, contrast: evt.value });
+        this.update({...this.effects, contrast: evt.value as number });
     }
 
     onInvertChange(evt: MatSliderChange): void {
-        this.update({...this.effects, invert: evt.value });
+        this.update({...this.effects, invert: evt.value as number });
     }
 
     onBlurChange(evt: MatSliderChange): void {
-        this.update({...this.effects, blur: evt.value });
+        this.update({...this.effects, blur: evt.value as number });
     }
 
     onHueRotateChange(evt: MatSliderChange): void {
-        this.update({...this.effects, hueRotate: evt.value });
+        this.update({...this.effects, hueRotate: evt.value as number });
     }
 
     onResetEffects(): void {

@@ -32,15 +32,15 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
     ]
 })
 export class SidebarComponent implements OnInit {
-    isAdmin$: Observable<boolean>;
-    endSidenavExpanded$: Observable<boolean>;
-    showComments$: Observable<boolean>;
-    showRatings$: Observable<boolean>;
-    showMinimap$: Observable<boolean>;
-    minimapUseDarkTheme$: Observable<boolean>;
-    showMetadataEditor$: Observable<boolean>;
-    showCategoryTeaserChooser$: Observable<boolean>;
-    enableButtons$: Observable<boolean>;
+    isAdmin$?: Observable<boolean>;
+    endSidenavExpanded$?: Observable<boolean>;
+    showComments$?: Observable<boolean>;
+    showRatings$?: Observable<boolean>;
+    showMinimap$?: Observable<boolean>;
+    minimapUseDarkTheme$?: Observable<boolean>;
+    showMetadataEditor$?: Observable<boolean>;
+    showCategoryTeaserChooser$?: Observable<boolean>;
+    enableButtons$?: Observable<boolean>;
 
     constructor(
         private store$: Store
@@ -102,28 +102,5 @@ export class SidebarComponent implements OnInit {
 
     toggleMinimap(): void {
         this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
-    }
-
-    private togglePanel(showPanel$: Observable<boolean>, toggleFunc: () => void): void {
-        combineLatest([
-            this.endSidenavExpanded$,
-            showPanel$
-        ]).pipe(
-            filter(x => x[0] != null && x[1] != null),
-            take(1),
-            map(x => {
-                if (!x[0]) {
-                    // show info panel if hidden
-                    this.toggleSidebar();
-
-                    if (!x[1]) {
-                        // if detail panel hidden, make sure we show this too
-                        toggleFunc();
-                    }
-                } else {
-                    toggleFunc();
-                }
-            })
-        ).subscribe();
     }
 }

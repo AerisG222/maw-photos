@@ -21,19 +21,19 @@ import { clearRequest } from 'src/app/search/store/actions';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
-    currentResult$: Observable<SearchResult<MultimediaCategory>>;
-    categories$: Observable<CategoryTeaser[]>;
-    showListView$: Observable<boolean>;
-    showGridView$: Observable<boolean>;
-    gridShowTitles$: Observable<boolean>;
-    gridShowYears$: Observable<boolean>;
-    listThumbnailSize$: Observable<ThumbnailSize>;
-    gridThumbnailSize$: Observable<ThumbnailSize>;
-    margin$: Observable<CategoryMargin>;
-    hasMoreResults$: Observable<boolean>;
-    totalResults$: Observable<number>;
-    shownResults$: Observable<number>;
-    showNoResults$: Observable<boolean>;
+    currentResult$?: Observable<SearchResult<MultimediaCategory>>;
+    categories$?: Observable<CategoryTeaser[]>;
+    showListView$?: Observable<boolean>;
+    showGridView$?: Observable<boolean>;
+    gridShowTitles$?: Observable<boolean>;
+    gridShowYears$?: Observable<boolean>;
+    listThumbnailSize$?: Observable<ThumbnailSize>;
+    gridThumbnailSize$?: Observable<ThumbnailSize>;
+    margin$?: Observable<CategoryMargin>;
+    hasMoreResults$?: Observable<boolean>;
+    totalResults$?: Observable<number>;
+    shownResults$?: Observable<number>;
+    showNoResults$?: Observable<boolean>;
 
     constructor(
         private store$: Store
@@ -96,13 +96,13 @@ export class SearchComponent implements OnInit, OnDestroy {
                         height: cat.teaserPhotoHeight,
                         width: cat.teaserPhotoWidth,
                         url: cat.teaserPhotoPath,
-                        size: null
+                        size: 0
                     },
                     teaserImageSq: {
                         height: cat.teaserPhotoSqHeight,
                         width: cat.teaserPhotoSqWidth,
                         url: cat.teaserPhotoSqPath,
-                        size: null
+                        size: 0
                     },
                     type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
                 })))

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -10,27 +10,27 @@ import { queryRequest } from 'src/app/search/store/actions';
     styleUrls: ['./search-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchFormComponent implements OnInit {
+export class SearchFormComponent {
     form: FormGroup;
 
     constructor(
         private store$: Store,
         private formBuilder: FormBuilder
     ) {
-
-    }
-
-    ngOnInit(): void {
         this.form = this.formBuilder.group({
             query: ['', Validators.required]
         });
     }
 
     onSearch(): void {
-        const searchTerm = this.form.get('query').value;
+        const control = this.form.get('query');
 
-        if (!!searchTerm) {
-            this.store$.dispatch(queryRequest({ query: searchTerm, start: 0 }));
+        if (!!control) {
+            const searchTerm = control.value;
+
+            if (!!searchTerm) {
+                this.store$.dispatch(queryRequest({ query: searchTerm, start: 0 }));
+            }
         }
     }
 }

@@ -20,14 +20,14 @@ import { SettingsStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSe
 export class VideoCategoryComponent implements OnInit, OnDestroy {
     videoSize = VideoSize;
     showCategoryAsLink = false;
-    settings$: Observable<Settings>;
-    category$: Observable<Category>;
-    videos$: Observable<Video[]>;
-    activeVideo$: Observable<Video>;
+    settings$?: Observable<Settings>;
+    category$?: Observable<Category>;
+    videos$?: Observable<Video[]>;
+    activeVideo$?: Observable<Video>;
 
-    @ViewChild('videoRef') videoRef: ElementRef;
+    @ViewChild('videoRef') videoRef?: ElementRef;
 
-    private settings: Settings;
+    private settings?: Settings;
 
     constructor(
         private route: ActivatedRoute,
@@ -71,7 +71,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.setCurrentVideo(null);
+        this.store$.dispatch(VideoStoreActions.clearCurrent());
     }
 
     onSelectVideo(video: Video): void {

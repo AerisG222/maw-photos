@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnCha
 import { colorSets, TreeMapComponent } from '@swimlane/ngx-charts';
 import * as numeral from 'numeral';
 
+import { StatDetail } from '../../models/stat-detail.model';
+
 @Component({
     selector: 'app-stats-stat-chart',
     templateUrl: './stat-chart.component.html',
@@ -9,9 +11,9 @@ import * as numeral from 'numeral';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatChartComponent implements AfterViewInit, OnChanges {
-    @Input() chartData;
+    @Input() chartData?: StatDetail[];
     @Output() cellSelected = new EventEmitter();
-    @ViewChild(TreeMapComponent) treeMap: TreeMapComponent;
+    @ViewChild(TreeMapComponent) treeMap?: TreeMapComponent;
 
     @Input() set format(value: string) {
         switch (value) {
@@ -38,7 +40,7 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
         this.updateMargins();
     }
 
-    onSelect(evt): void {
+    onSelect(evt: StatDetail): void {
         this.cellSelected.emit(evt);
     }
 

@@ -15,7 +15,7 @@ import { SearchStoreSelectors } from 'src/app/search/store';
 export class SearchMoreComponent implements OnInit, OnDestroy {
     private readonly destroySub = new Subscription();
     private nextIndex = -1;
-    private query: string;
+    private query?: string;
 
     constructor(
         private store$: Store,
@@ -45,7 +45,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
 
     onSearchMore(): void {
         if (this.nextIndex > 0) {
-            this.store$.dispatch(queryRequest({ query: this.query, start: this.nextIndex }));
+            this.store$.dispatch(queryRequest({ query: this.query as string, start: this.nextIndex }));
         }
     }
 }

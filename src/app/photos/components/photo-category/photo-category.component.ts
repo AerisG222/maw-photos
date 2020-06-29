@@ -14,9 +14,9 @@ import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoCategoryComponent implements OnInit, OnDestroy {
-    isFullscreen$: Observable<boolean>;
-    isMapView$: Observable<boolean>;
-    isBulkEditView$: Observable<boolean>;
+    isFullscreen$?: Observable<boolean>;
+    isMapView$?: Observable<boolean>;
+    isBulkEditView$?: Observable<boolean>;
 
     constructor(
         private route: ActivatedRoute,
@@ -53,6 +53,6 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo: null }));
+        this.store$.dispatch(PhotoStoreActions.clearCurrent());
     }
 }

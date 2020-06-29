@@ -6,9 +6,9 @@ import { Category } from 'src/app/models/category.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
-const getCurrentCategory = (state: State): Category => state.currentCategory;
+const getCurrentCategory = (state: State): Category | undefined => state.currentCategory;
 const getAllYears = (state: State): number[] => Object.keys(state.categoryIdsByYear).map(y => Number(y));
-const getCategoryById = (state: State, id: number): Category => state.entities[id];
+const getCategoryById = (state: State, id: number): Category | undefined => state.entities[id];
 
 const getCategoriesForYear = (state: State, year: number): Category[] => {
     if (!!state.categoryIdsByYear && !!state.categoryIdsByYear[year]) {

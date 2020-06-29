@@ -5,6 +5,8 @@ import { first, tap } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
+import { Location } from 'src/app/models/location.model';
+import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 
 @Component({
     selector: 'app-sidebar-minimap-card',
@@ -13,8 +15,9 @@ import { SettingsStoreSelectors } from 'src/app/core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapCardComponent implements OnInit {
-    private minimapTypeId: string;
-    private minimapZoom: number;
+    // arbitrarily use photo minimap settings by default
+    private minimapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
+    private minimapZoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
 
     @Input()
     set mapTypeId(value: string) { this.minimapTypeId = value; this.updateOptions(); }
@@ -24,15 +27,15 @@ export class MinimapCardComponent implements OnInit {
     set zoom(value: number) { this.minimapZoom = value; this.updateOptions(); }
     get zoom(): number { return this.minimapZoom; }
 
-    @Input() position: google.maps.LatLng;
+    @Input() position?: Location;
 
     @Output() mapTypeChange = new EventEmitter<string>();
     @Output() zoomChange = new EventEmitter<number>();
 
-    @ViewChild(GoogleMap) map: GoogleMap;
+    @ViewChild(GoogleMap) map?: GoogleMap;
 
-    options: google.maps.MapOptions;
-    mapTheme: google.maps.MapTypeStyle[];
+    options?: google.maps.MapOptions;
+    mapTheme?: google.maps.MapTypeStyle[];
 
     constructor(
         private store$: Store

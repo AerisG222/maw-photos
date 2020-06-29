@@ -8,20 +8,20 @@ const reducer = createReducer(
     on(SearchActions.clearRequest, state => (
         searchAdapter.removeAll({
             ...state,
-            query: null,
-            currentResult: null
+            query: undefined,
+            currentResult: undefined
         })
     )),
     on(SearchActions.queryRequest, (state, { query, start }) => ({
         ...state,
         isLoading: true,
-        error: null,
+        error: undefined,
     })),
     on(SearchActions.querySuccess, (state, { query, result }) =>
     searchAdapter.setAll(result.results, {
             ...state,
             isLoading: false,
-            error: null,
+            error: undefined,
             currentResult: result,
             query
         })
@@ -34,13 +34,13 @@ const reducer = createReducer(
     on(SearchActions.queryMoreRequest, (state, { query, start }) => ({
         ...state,
         isLoading: true,
-        error: null,
+        error: undefined,
     })),
     on(SearchActions.queryMoreSuccess, (state, { query, result }) =>
         searchAdapter.addMany(result.results, {
                 ...state,
                 isLoading: false,
-                error: null,
+                error: undefined,
                 currentResult: result,
                 query
             })

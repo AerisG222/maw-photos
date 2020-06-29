@@ -13,3 +13,17 @@ export interface PhotoEffects {
     flipHorizontal: boolean;
     flipVertical: boolean;
 }
+
+export const DEFAULT_PHOTO_EFFECTS: PhotoEffects = ({
+    rotation: new PhotoRotation(),
+    grayscale: 0,
+    sepia: 0,
+    brightness: 100,
+    saturation: 100,
+    contrast: 100,
+    invert: 0,
+    blur: 0,
+    hueRotate: 0,
+    flipHorizontal: false,
+    flipVertical: false
+});

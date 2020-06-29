@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { filter, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -67,7 +67,7 @@ export class ExternalAuthService implements AuthService {
         this.storeProfile(profile);
     }
 
-    private storeProfile(profile): void
+    private storeProfile(profile: UserInfo): void
     {
         if (!!profile) {
             const userInfo = {

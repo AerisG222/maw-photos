@@ -35,6 +35,6 @@ export class Theme {
                 console.error(`invalid theme requested: ${name}`);
         }
 
-        return null;
+        return Theme.themeDark;
     }
 }

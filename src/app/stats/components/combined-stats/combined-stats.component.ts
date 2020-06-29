@@ -5,6 +5,7 @@ import { tap, map, delay } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import * as numeral from 'numeral';
 
+import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 import { RootStoreSelectors } from 'src/app/core/root-store';
 import { VideoCategory } from 'src/app/models/video-category.model';
@@ -22,24 +23,22 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     form: FormGroup;
-    chartData$: Observable<any>;
+    chartData$?: Observable<StatDetail[]>;
     chartValueFormat = 'count';
-    selectedYear$ = new BehaviorSubject<number>(null);
-    totalDetails$: Observable<StatDetail[]>;
-    yearDetails$: Observable<StatDetail[]>;
+    selectedYear$ = new BehaviorSubject<number>(-1);
+    totalDetails$?: Observable<FormattedStatDetail[]>;
+    yearDetails$?: Observable<FormattedStatDetail[]>;
 
     constructor(
         private formBuilder: FormBuilder,
         private store$: Store
     ) {
-
-    }
-
-    ngOnInit(): void {
         this.form = this.formBuilder.group({
             aggregateBy: ['count']
         });
+    }
 
+    ngOnInit(): void {
         const years$ = this.store$
             .pipe(
                 select(RootStoreSelectors.selectAllYears)
@@ -52,7 +51,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
 
         const aggregateBy$ = concat(
                 of('count'),
-                this.form.get('aggregateBy').valueChanges as Observable<string>
+                this.form.get('aggregateBy')?.valueChanges as Observable<string>
             );
 
         this.chartData$ = combineLatest([
@@ -92,7 +91,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
         this.destroySub.unsubscribe();
     }
 
-    onSelectYear(evt): void {
+    onSelectYear(evt: StatDetail): void {
         const year = Number(evt.name);
 
         if (year > 0) {
@@ -101,11 +100,11 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
     }
 
     onRemoveYearFilter(): void {
-        this.selectedYear$.next(null);
+        this.selectedYear$.next(-1);
     }
 
-    private prepareTotalDetails(years: number[], categories: Category[]): StatDetail[] {
-        const details: StatDetail[] = [];
+    private prepareTotalDetails(years: number[], categories: Category[]): FormattedStatDetail[] {
+        const details: FormattedStatDetail[] = [];
 
         details.push({
             name: 'Years',
@@ -117,8 +116,8 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
         return details;
     }
 
-    private prepareYearDetails(categories: Category[], selectedYear: number): StatDetail[] {
-        const details: StatDetail[] = [];
+    private prepareYearDetails(categories: Category[], selectedYear: number): FormattedStatDetail[] {
+        const details: FormattedStatDetail[] = [];
 
         categories = categories.filter(x => x.year === selectedYear);
 
@@ -127,7 +126,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
         return details;
     }
 
-    private populateDetails(categories: Category[], details: StatDetail[]): void {
+    private populateDetails(categories: Category[], details: FormattedStatDetail[]): void {
         details.push({
             name: 'Categories',
             value: numeral(categories.length).format('0,0')
@@ -149,7 +148,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
 
     // tslint:disable-next-line: max-line-length
     private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string): {name: string, value: number}[] {
-        let agg = null;
+        let agg: (category: Category) => number;
 
         switch (aggregateBy) {
             case 'count':
@@ -160,7 +159,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
                 break;
         }
 
-        if (selectedYear !== null) {
+        if (selectedYear !== -1) {
             return categories
                 .filter(cat => cat.year === selectedYear)
                 .map(cat => ({

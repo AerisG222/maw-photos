@@ -1,1 +1,1 @@
-<mat-slide-toggle [checked]="filterEnabled" (change)="onToggleMissingGpsData()">Missing GPS</mat-slide-toggle>
+<mat-slide-toggle [checked]="filterEnabled | async" (change)="onToggleMissingGpsData()">Missing GPS</mat-slide-toggle>

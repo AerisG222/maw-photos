@@ -17,7 +17,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
     private categoryId = -1;
     private photoId = -1;
 
-    currentTeaserUrl$: Observable<string>;
+    currentTeaserUrl$?: Observable<string>;
 
     constructor(
         private store$: Store

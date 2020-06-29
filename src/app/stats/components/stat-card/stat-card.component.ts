@@ -10,8 +10,8 @@ import { StatDetail } from 'src/app/stats/models/stat-detail.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatCardComponent implements AfterViewInit {
-    @Input() detail: StatDetail[];
-    @ViewChild(NumberCardComponent) cards: NumberCardComponent;
+    @Input() detail?: StatDetail[];
+    @ViewChild(NumberCardComponent) cards?: NumberCardComponent;
 
     colorScheme = colorSets.find(s => s.name === 'cool');
 

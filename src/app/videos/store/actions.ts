@@ -98,6 +98,10 @@ export const setCurrent = createAction(
     props<{ video: Video }>()
 );
 
+export const clearCurrent = createAction(
+    '[Videos] Clear Current'
+);
+
 export const loadGpsDetailRequest = createAction(
     '[Videos] Load GPS Detail Request',
     props<{ videoId: number }>()

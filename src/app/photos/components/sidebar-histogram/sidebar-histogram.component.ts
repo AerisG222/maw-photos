@@ -21,20 +21,24 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     img: HTMLImageElement;
     channel = 'rgb';
 
-    @ViewChild('canvas') canvas: ElementRef;
+    @ViewChild('canvas') canvas?: ElementRef;
 
     get canvasEl(): HTMLCanvasElement {
-        return this.canvas.nativeElement as HTMLCanvasElement;
+        return this.canvas?.nativeElement as HTMLCanvasElement;
     }
 
     constructor(
         private store$: Store,
         private formBuilder: FormBuilder,
-        @Inject(DOCUMENT) private doc
+        @Inject(DOCUMENT) private doc: Document
     ) {
         this.img = doc.createElement('img') as HTMLImageElement;
         this.img.crossOrigin = 'Anonymous';
         this.img.addEventListener('load', (evt) => this.onImageLoad());
+
+        this.form = this.formBuilder.group({
+            channel: ['rgb']
+        });
     }
 
     ngOnInit(): void {
@@ -50,13 +54,9 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
             ).subscribe()
         );
 
-        this.form = this.formBuilder.group({
-            channel: ['rgb']
-        });
-
         // TODO: leverage rxjs to manage dom load event and form state...
 
-        this.destroySub.add(this.form.get('channel').valueChanges
+        this.destroySub.add(this.form.get('channel')?.valueChanges
             .pipe(
                 tap(val => this.channel = val),
                 tap(val => this.onImageLoad())
@@ -150,7 +150,8 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     }
 
     private drawHistogram(channel: string, histogram: Histogram, maxCount: number): void {
-        const ctx = this.canvasEl.getContext('2d');
+        const ctx = this.canvasEl.getContext('2d') as CanvasRenderingContext2D;
+
         ctx.clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
 
         ctx.globalCompositeOperation = 'lighter';
@@ -174,7 +175,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         ctx.globalCompositeOperation = 'source-over';
     }
 
-    private drawHistogramChannel(ctx, color, maxCount, vals): void {
+    private drawHistogramChannel(ctx: CanvasRenderingContext2D, color: string, maxCount: number, vals: number[]): void {
         ctx.fillStyle = color;
 
         ctx.beginPath();

@@ -10,8 +10,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSelectGridComponent {
-    @Input() photos: Photo[];
-    @Input() selectedPhotos: Photo[];
+    @Input() photos?: Photo[];
+    @Input() selectedPhotos?: Photo[];
     @Output() photoSelected = new EventEmitter<Photo>();
     @Output() photoDeselected = new EventEmitter<Photo>();
 
@@ -36,6 +36,10 @@ export class PhotoSelectGridComponent {
     }
 
     private getSelectedIndex(photo: Photo): number {
-        return this.selectedPhotos.findIndex(p => p.id === photo.id);
+        if (!!this.selectedPhotos) {
+            return this.selectedPhotos.findIndex(p => p.id === photo.id);
+        }
+
+        return -1;
     }
 }

@@ -14,8 +14,8 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 })
 export class SidebarMetadataEditorComponent implements OnInit {
     currentId = -1;
-    overrideGpsData$: Observable<GpsCoordinate>;
-    sourceGpsData$: Observable<GpsCoordinate>;
+    overrideGpsData$?: Observable<GpsCoordinate>;
+    sourceGpsData$?: Observable<GpsCoordinate>;
     destroySub = new Subscription();
 
     constructor(

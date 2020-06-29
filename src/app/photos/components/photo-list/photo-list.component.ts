@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 
 import { Photo } from 'src/app/models/photo.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 
 @Component({
     selector: 'app-photos-photo-list',
@@ -10,16 +11,16 @@ import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListComponent {
-    photoThumbnailSize: ThumbnailSize;
-    imgWidth: number;
-    imgHeight: number;
+    photoThumbnailSize?: ThumbnailSize;
+    imgWidth?: number;
+    imgHeight?: number;
 
-    @Input() photos: Photo[];
-    @Input() selectedPhoto: Photo;
+    @Input() photos?: Photo[];
+    @Input() selectedPhoto?: Photo;
     @Output() photoSelected = new EventEmitter<Photo>();
 
     get thumbnailSize(): ThumbnailSize {
-        return this.photoThumbnailSize;
+        return this.photoThumbnailSize ?? DEFAULT_SETTINGS.photoListThumbnailSize;
     }
 
     @Input()
@@ -57,11 +58,14 @@ export class PhotoListComponent {
     scrollIntoView(photoId: number, elementRef: HTMLElement): string {
         if (!!this.selectedPhoto && this.selectedPhoto.id === photoId) {
             const parent = elementRef.parentElement;
-            const parentMiddle = parent.clientWidth / 2;
-            const imgWidth = elementRef.clientWidth / 2;
-            const newLeft = Math.max(0, elementRef.offsetLeft + imgWidth - parentMiddle);
 
-            parent.scrollTo({ top: 0, left: newLeft, behavior: 'smooth' });
+            if (!!parent) {
+                const parentMiddle = parent.clientWidth / 2;
+                const imgWidth = elementRef.clientWidth / 2;
+                const newLeft = Math.max(0, elementRef.offsetLeft + imgWidth - parentMiddle);
+
+                parent.scrollTo({ top: 0, left: newLeft, behavior: 'smooth' });
+            }
         }
 
         return '';

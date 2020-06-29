@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { tap, first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 
 @Component({
@@ -9,7 +10,7 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
     styleUrls: ['./category-missing-gps-filter.component.scss']
 })
 export class CategoryMissingGpsFilterComponent implements OnInit {
-    filterEnabled: boolean;
+    filterEnabled?: Observable<boolean>;
 
     constructor(
         private store$: Store
@@ -20,11 +21,8 @@ export class CategoryMissingGpsFilterComponent implements OnInit {
     ngOnInit(): void {
         this.store$
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListMissingGpsFilter),
-                tap(filter => this.filterEnabled = filter),
-                first()
-            )
-            .subscribe();
+                select(SettingsStoreSelectors.selectCategoryListMissingGpsFilter)
+            );
     }
 
     onToggleMissingGpsData(): void {

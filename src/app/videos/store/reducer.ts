@@ -72,6 +72,10 @@ const reducer = createReducer(
         ...state,
         currentVideo: video
     })),
+    on(VideoActions.clearCurrent, (state) => ({
+        ...state,
+        currentVideo: null
+    })),
     on(VideoActions.moveNextRequest, state => {
         const newVideo = nextVideo(state);
 

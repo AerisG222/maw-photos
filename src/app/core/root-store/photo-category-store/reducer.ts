@@ -9,14 +9,14 @@ const reducer = createReducer(
     on(PhotoCategoryActions.loadRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoCategoryActions.loadSuccess, (state, { categories }) =>
         photoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
-            error: null
+            error: undefined
         })
     ),
     on(PhotoCategoryActions.loadFailure, (state, { error }) => ({
@@ -39,14 +39,14 @@ const reducer = createReducer(
     on(PhotoCategoryActions.setTeaserRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoCategoryActions.setTeaserSuccess, (state, { category }) => (
         photoCategoryAdapter.upsertOne(category, {
             ...state,
             currentCategory: category,
             isLoading: false,
-            error: null
+            error: undefined
         })
     )),
     on(PhotoCategoryActions.setTeaserFailure, (state, { error }) => ({
@@ -57,17 +57,21 @@ const reducer = createReducer(
     on(PhotoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }) => {
         const catToUpdate = state.entities[categoryId];
 
-        const newCat = {
-            ...catToUpdate,
-            actual: { ...catToUpdate.actual }
-        };
+        if(!!catToUpdate) {
+            const newCat = {
+                ...catToUpdate,
+                actual: { ...catToUpdate.actual }
+            };
 
-        newCat.actual.isMissingGpsData = isMissingGpsData;
+            newCat.actual.isMissingGpsData = isMissingGpsData;
 
-        // we should be able to just update the one property, but not sure how to do this given that it is nested
-        const update = { id: categoryId, changes: newCat};
+            // we should be able to just update the one property, but not sure how to do this given that it is nested
+            const update = { id: categoryId, changes: newCat};
 
-        return photoCategoryAdapter.updateOne(update, state);
+            return photoCategoryAdapter.updateOne(update, state);
+        }
+
+        return state;
     })
 );
 
