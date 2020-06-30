@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { MatSliderChange } from '@angular/material/slider';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map, filter } from 'rxjs/operators';
 
 import { PhotoEffects, DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
@@ -27,6 +27,8 @@ export class SidebarEffectsComponent implements OnInit, OnDestroy {
         this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                filter(x => !!x),
+                map(x => x as PhotoEffects),
                 tap(effects => this.effects = effects)
             ).subscribe()
         );

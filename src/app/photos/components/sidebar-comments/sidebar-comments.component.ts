@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
+import { tap, filter, map } from 'rxjs/operators';
 
 import { Comment } from 'src/app/models/comment.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-comments',
@@ -14,7 +15,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 })
 export class SidebarCommentsComponent implements OnInit, OnDestroy {
     currentId = -1;
-    comments$: Observable<Comment[]>;
+    comments$?: Observable<Comment[]>;
     destroySub = new Subscription();
 
     constructor(
@@ -25,13 +26,16 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.comments$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoComments)
+            select(PhotoStoreSelectors.selectCurrentPhotoComments),
+            filter(x => !!x),
+            map(x => x as Comment[])
         );
 
         this.destroySub.add(this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(photo => !!photo),
+                map(photo => photo as Photo),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
                 tap(photo => this.currentId = photo.id)
             ).subscribe()

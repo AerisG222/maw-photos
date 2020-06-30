@@ -18,14 +18,14 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YearComponent implements OnInit {
-    @Input() year: number;
+    @Input() year?: number;
 
-    categories$: Observable<CategoryTeaser[]>;
-    showListView$: Observable<boolean>;
-    showGridView$: Observable<boolean>;
-    listThumbnailSize$: Observable<ThumbnailSize>;
-    gridThumbnailSize$: Observable<ThumbnailSize>;
-    gridShowTitles$: Observable<boolean>;
+    categories$?: Observable<CategoryTeaser[]>;
+    showListView$?: Observable<boolean>;
+    showGridView$?: Observable<boolean>;
+    listThumbnailSize$?: Observable<ThumbnailSize>;
+    gridThumbnailSize$?: Observable<ThumbnailSize>;
+    gridShowTitles$?: Observable<boolean>;
 
     constructor(
         private store$: Store

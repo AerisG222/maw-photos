@@ -9,7 +9,7 @@ import { ExifData } from 'src/app/models/exif-data.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarExifTableComponent {
-    @Input() exifData: ExifData[];
+    @Input() exifData?: ExifData[];
 
     columnsToDisplay = [ 'displayName', 'displayValue' ];
 }

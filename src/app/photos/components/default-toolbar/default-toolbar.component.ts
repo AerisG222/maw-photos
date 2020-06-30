@@ -15,6 +15,7 @@ import {
 } from 'src/app/core/root-store';
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { Category } from 'src/app/models/category.model';
+import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-default-toolbar',
@@ -81,6 +82,7 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(x => !!x),
+                map(x => x as Photo),
                 tap(photo => this.smDownloadUrl = photo.imageSm.downloadUrl),
                 tap(photo => this.mdDownloadUrl = photo.imageMd.downloadUrl),
                 tap(photo => this.lgDownloadUrl = photo.imageLg.downloadUrl),

@@ -69,13 +69,15 @@ export class DefaultViewComponent implements OnInit {
         this.activePhoto$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(x => !!x)
+                filter(x => !!x),
+                map(x => x as Photo)
             );
 
         this.effects$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoEffects),
-                filter(x => !!x)
+                filter(x => !!x),
+                map(x => x as PhotoEffects)
             );
     }
 

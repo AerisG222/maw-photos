@@ -5,6 +5,8 @@ import { map, filter, tap } from 'rxjs/operators';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { GpsDetail } from 'src/app/models/gps-detail.model';
+import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-metadata-editor',
@@ -14,7 +16,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 })
 export class SidebarMetadataEditorComponent implements OnInit {
     currentId = -1;
-    overrideGpsData$?: Observable<GpsCoordinate>;
+    overrideGpsData$?: Observable<GpsCoordinate | undefined>;
     sourceGpsData$?: Observable<GpsCoordinate>;
     destroySub = new Subscription();
 
@@ -28,7 +30,8 @@ export class SidebarMetadataEditorComponent implements OnInit {
         this.sourceGpsData$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
-                map(gpsDetail => gpsDetail?.source)
+                filter(x => !!x),
+                map(gpsDetail => (gpsDetail as GpsDetail)?.source)
             );
 
         this.overrideGpsData$ = this.store$
@@ -41,6 +44,7 @@ export class SidebarMetadataEditorComponent implements OnInit {
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(photo => !!photo),
+                map(photo => photo as Photo),
                 tap(photo => this.currentId = photo.id),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))

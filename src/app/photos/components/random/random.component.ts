@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, interval, Subscription, Observable } from 'rxjs';
-import { tap, take, takeUntil, filter } from 'rxjs/operators';
+import { tap, take, takeUntil, filter, map } from 'rxjs/operators';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { Photo } from 'src/app/models/photo.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
     selector: 'app-photos-random',
@@ -16,7 +18,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     private killFetch = new Subject<boolean>();
     private destroySub = new Subscription();
 
-    isFullscreen$: Observable<boolean>;
+    isFullscreen$?: Observable<boolean>;
 
     constructor(
         private store$: Store
@@ -44,10 +46,13 @@ export class RandomComponent implements OnInit, OnDestroy {
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(x => !!x),
+                map(x => x as Photo),
                 tap(photo => {
                     this.store$
                         .pipe(
                             select(PhotoCategoryStoreSelectors.selectCategoryById, { id: photo.categoryId }),
+                            filter(x => !!x),
+                            map(x => x as Category),
                             tap(category => this.store$.dispatch(PhotoCategoryStoreActions.setCurrent({ category }))),
                             take(1)
                         ).subscribe();
@@ -60,7 +65,7 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.killFetch.next(true);
-        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo: null }));
+        this.store$.dispatch(PhotoStoreActions.clearCurrent());
         this.destroySub.unsubscribe();
     }
 

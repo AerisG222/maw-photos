@@ -5,6 +5,8 @@ import { filter, tap, map } from 'rxjs/operators';
 import { PhotoStoreSelectors } from '../../store';
 import { PhotoCategoryStoreSelectors, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 import { Subscription, Observable } from 'rxjs';
+import { Category } from 'src/app/models/category.model';
+import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-category-teaser-chooser',
@@ -30,6 +32,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(p => !!p),
+                map(p => p as Photo),
                 tap(p => this.photoId = p.id),
                 tap(p => this.categoryId = p.categoryId)
             ).subscribe()
@@ -38,7 +41,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
         this.currentTeaserUrl$ = this.store$.pipe(
             select(PhotoCategoryStoreSelectors.selectCurrentCategory),
             filter(c => !!c),
-            map(c => c.teaserImageSq.url)
+            map(c => (c as Category).teaserImageSq.url)
         );
     }
 

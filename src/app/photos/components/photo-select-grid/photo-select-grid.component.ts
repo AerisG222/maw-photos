@@ -16,7 +16,7 @@ export class PhotoSelectGridComponent {
     @Output() photoDeselected = new EventEmitter<Photo>();
 
     trackByPhoto(index: number, photo: Photo): string {
-        return !!photo ? null : photo.id.toString();
+        return photo.id.toString();
     }
 
     onToggle(evt: MatCheckboxChange, photo: Photo): void {

@@ -72,6 +72,6 @@ export class PhotoListComponent {
     }
 
     trackByPhoto(index: number, photo: Photo): string {
-        return !!photo ? null : photo.id.toString();
+        return photo.id.toString();
     }
 }

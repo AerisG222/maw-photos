@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { LayoutStoreActions } from 'src/app/core/root-store';
@@ -30,13 +30,15 @@ export class FullscreenViewComponent implements OnInit, OnDestroy {
         this.activePhoto$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(x => !!x)
+                filter(x => !!x),
+                map(x => x as Photo)
             );
 
         this.effects$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoEffects),
-                filter(x => !!x)
+                filter(x => !!x),
+                map(x => x as PhotoEffects)
             );
     }
 

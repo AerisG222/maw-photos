@@ -33,13 +33,15 @@ export class MapViewComponent implements OnInit, OnDestroy {
         this.activePhoto$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(x => !!x)
+                filter(x => !!x),
+                map(x => x as Photo)
             );
 
         this.mapImages$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectPhotosWithGpsCoordinates),
-                map(photos => photos.map(x => ({
+                filter(x => !!x),
+                map(photos => (photos as Photo[]).map(x => ({
                     id: x.id,
                     imageUrl: x.imageXsSq.url,
                     latitude: x.latitude,

@@ -3,10 +3,11 @@ import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
+import { tap, filter, map } from 'rxjs/operators';
 
 import { Histogram } from './histogram';
 import { PhotoStoreSelectors } from 'src/app/photos/store';
+import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-histogram',
@@ -46,8 +47,9 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhoto),
                 filter(photo => !!photo),
+                map(photo => photo as Photo),
                 tap(photo => {
-                    if (this.img && photo !== null && photo.imageMd !== null) {
+                    if (this.img && !!photo?.imageMd) {
                         this.img.src = photo.imageMd.url;
                     }
                 })

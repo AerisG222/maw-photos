@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, tap, first } from 'rxjs/operators';
+import { filter, tap, first, map } from 'rxjs/operators';
 
 import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
@@ -14,9 +14,9 @@ import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors, AuthS
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YearListComponent implements OnInit {
-    margin$: Observable<CategoryMargin>;
-    years$: Observable<number[]>;
-    isAdmin$: Observable<boolean>;
+    margin$?: Observable<CategoryMargin>;
+    years$?: Observable<number[]>;
+    isAdmin$?: Observable<boolean>;
 
     constructor(
         private store$: Store,
@@ -50,7 +50,9 @@ export class YearListComponent implements OnInit {
 
         this.years$ = this.store$
             .pipe(
-                select(RootStoreSelectors.selectAllFilteredCategoryYears)
+                select(RootStoreSelectors.selectAllFilteredCategoryYears),
+                filter(x => !!x),
+                map(x => x as number[])
             );
     }
 }
