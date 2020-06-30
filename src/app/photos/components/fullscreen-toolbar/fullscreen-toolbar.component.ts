@@ -12,8 +12,8 @@ import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FullscreenToolbarComponent implements OnInit {
-    isFirst$: Observable<boolean>;
-    isLast$: Observable<boolean>;
+    isFirst$?: Observable<boolean>;
+    isLast$?: Observable<boolean>;
 
     constructor(
         private store$: Store

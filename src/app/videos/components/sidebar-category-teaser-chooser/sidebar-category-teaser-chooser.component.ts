@@ -5,6 +5,8 @@ import { tap, filter, map } from 'rxjs/operators';
 
 import { VideoStoreSelectors } from '../../store';
 import { VideoCategoryStoreSelectors, VideoCategoryStoreActions } from 'src/app/core/root-store';
+import { Category } from 'src/app/models/category.model';
+import { Video } from 'src/app/models/video.model';
 
 @Component({
     selector: 'app-videos-sidebar-category-teaser-chooser',
@@ -30,6 +32,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(v => !!v),
+                map(v => v as Video),
                 tap(v => this.videoId = v.id),
                 tap(v => this.categoryId = v.categoryId)
             ).subscribe()
@@ -38,7 +41,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
         this.currentTeaserUrl$ = this.store$.pipe(
             select(VideoCategoryStoreSelectors.selectCurrentCategory),
             filter(c => !!c),
-            map(c => c.teaserImageSq.url)
+            map(c => (c as Category).teaserImageSq.url)
         );
     }
 

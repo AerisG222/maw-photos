@@ -51,18 +51,13 @@ const reducer = createReducer(
         isLoading: true,
         error: undefined
     })),
-    on(VideoActions.loadSuccess, (state, { videos }) => {
-        const entities = videoAdapter.setAll(videos, {
+    on(VideoActions.loadSuccess, (state, { videos }) =>
+        videoAdapter.setAll(videos, {
             ...state,
             isLoading: false,
-            error: null
-        });
-
-        entities.firstVideo = entities.entities[entities.ids[0]],
-        entities.lastVideo = entities.entities[entities.ids[entities.ids.length - 1]];
-
-        return entities;
-    }),
+            error: undefined
+        })
+    ),
     on(VideoActions.loadFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
@@ -76,34 +71,9 @@ const reducer = createReducer(
         ...state,
         currentVideo: undefined
     })),
-    on(VideoActions.moveNextRequest, state => {
-        const newVideo = nextVideo(state);
+    on(VideoActions.moveNextRequest, state => getStateForNewVideo(state, nextVideo(state))),
+    on(VideoActions.movePreviousRequest, state => getStateForNewVideo(state, previousVideo(state))),
 
-        if (newVideo != null &&
-            state.currentVideo != null &&
-            newVideo.id === state.currentVideo.id) {
-            return state;
-        }
-
-        return {
-            ...state,
-            currentVideo: newVideo
-        };
-    }),
-    on(VideoActions.movePreviousRequest, state => {
-        const newVideo = previousVideo(state);
-
-        if (newVideo != null &&
-            state.currentVideo != null &&
-            newVideo.id === state.currentVideo.id) {
-            return state;
-        }
-
-        return {
-            ...state,
-            currentVideo: newVideo
-        };
-    }),
     on(VideoActions.rateVideoRequest, state => ({
         ...state,
         isLoading: true,
@@ -164,7 +134,7 @@ const reducer = createReducer(
         const updatedState = ({
             ...state,
             isLoading: false,
-            error: null,
+            error: undefined,
             currentVideoGpsDetail: gpsDetail
         });
 
@@ -201,7 +171,7 @@ function previousVideo(state: State): Video {
 
 function getVideoAtIndex(state: State, idx: number): Video {
     // entities are keyed by id
-    return state.entities[state.ids[idx]];
+    return state.entities[state.ids[idx]] as Video;
 }
 
 function incrementCurrentIndexWithinBounds(state: State, direction: number): number {
@@ -212,9 +182,22 @@ function incrementCurrentIndexWithinBounds(state: State, direction: number): num
 }
 
 function getCurrentIndex(state: State): number {
-    return (state.ids as number[]).findIndex(id => id === state.currentVideo.id);
+    return (state.ids as number[]).findIndex(id => id === state.currentVideo?.id);
 }
 
 function getVideoWithId(state: State, id: number): Video {
-    return state.entities[id];
+    return state.entities[id] as Video;
+}
+
+function getStateForNewVideo(state: State, newVideo: Video): State {
+    if (!!newVideo &&
+        !!state.currentVideo &&
+        newVideo.id === state.currentVideo.id) {
+        return state;
+    }
+
+    return {
+        ...state,
+        currentVideo: newVideo
+    };
 }

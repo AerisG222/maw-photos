@@ -16,13 +16,13 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapViewComponent implements OnInit, OnDestroy {
-    activePhoto$: Observable<Photo>;
-    mapImages$: Observable<MapImage[]>;
-    settings$: Observable<Settings>;
+    activePhoto$?: Observable<Photo>;
+    mapImages$?: Observable<MapImage[]>;
+    settings$?: Observable<Settings>;
 
-    constructor(
-        private store$: Store
-    ) { }
+    constructor(private store$: Store) {
+
+    }
 
     ngOnInit(): void {
         this.settings$ = this.store$
@@ -52,7 +52,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
         this.store$.dispatch(PhotoStoreActions.exitMapViewRequest());
     }
 
-    onMapTypeIdChange(mapTypeId): void {
+    onMapTypeIdChange(mapTypeId: string): void {
         this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
     }
 

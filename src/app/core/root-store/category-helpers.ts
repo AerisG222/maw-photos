@@ -1,14 +1,16 @@
 import { Category } from 'src/app/models/category.model';
 
-export function getIdsByYear(categories: Category[]): {} {
-    const idsByYear = {};
+export function getIdsByYear(categories: Category[]): Map<number, number[]> {
+    const idsByYear = new Map<number, number[]>();
 
     for (const currCategory of categories) {
-        if (!(currCategory.year in idsByYear)) {
-            idsByYear[currCategory.year] = [];
+        if (!idsByYear.has(currCategory.year)) {
+            idsByYear.set(currCategory.year, []);
         }
 
-        idsByYear[currCategory.year].push(currCategory.id);
+        const ids = idsByYear.get(currCategory.year) as number[];
+
+        ids.push(currCategory.id);
     }
 
     return idsByYear;

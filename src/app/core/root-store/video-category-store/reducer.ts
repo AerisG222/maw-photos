@@ -57,17 +57,21 @@ const reducer = createReducer(
     on(VideoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }) => {
         const catToUpdate = state.entities[categoryId];
 
-        const newCat = {
-            ...catToUpdate,
-            actual: { ...catToUpdate.actual }
-        };
+        if (!!catToUpdate) {
+            const newCat = {
+                ...catToUpdate,
+                actual: { ...catToUpdate.actual }
+            };
 
-        newCat.actual.isMissingGpsData = isMissingGpsData;
+            newCat.actual.isMissingGpsData = isMissingGpsData;
 
-        // we should be able to just update the one property, but not sure how to do this given that it is nested
-        const update = { id: categoryId, changes: newCat};
+            // we should be able to just update the one property, but not sure how to do this given that it is nested
+            const update = { id: categoryId, changes: newCat};
 
-        return VideoCategoryAdapter.updateOne(update, state);
+            return VideoCategoryAdapter.updateOne(update, state);
+        }
+
+        return state;
     })
 );
 

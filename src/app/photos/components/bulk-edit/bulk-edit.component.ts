@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
-import { tap, first, map } from 'rxjs/operators';
+import { tap, first, map, filter } from 'rxjs/operators';
 
 import { Category } from 'src/app/models/category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
@@ -16,8 +16,8 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BulkEditComponent implements OnInit {
-    category$: Observable<Category>;
-    photos$: Observable<Photo[]>;
+    category$?: Observable<Category>;
+    photos$?: Observable<Photo[]>;
     showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
     selectedPhotos: Photo[] = [];
 
@@ -30,7 +30,9 @@ export class BulkEditComponent implements OnInit {
     ngOnInit(): void {
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
+                filter(x => !!x),
+                map(x => x as Category)
             );
 
         this.photos$ = combineLatest([
@@ -62,12 +64,12 @@ export class BulkEditComponent implements OnInit {
     onSelectAll(doSelectAll: boolean): void {
         this.clearSelectedPhotos();
 
-        if (doSelectAll) {
-            combineLatest([
-                this.photos$
-            ]).pipe(
+        if (!!this.photos$ && doSelectAll) {
+            this.photos$.pipe(
+                filter(photos => !!photos),
                 first(),
-                tap(photos => this.selectedPhotos.push(...photos[0]))
+                map(photos => photos as Photo[]),
+                tap(photos => this.selectedPhotos.push(...photos))
             ).subscribe();
         }
     }

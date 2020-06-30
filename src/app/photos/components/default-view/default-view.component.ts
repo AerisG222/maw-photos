@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, tap, take } from 'rxjs/operators';
+import { filter, tap, take, map } from 'rxjs/operators';
 
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
@@ -22,14 +22,14 @@ import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/cor
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultViewComponent implements OnInit {
-    @Input() allowCategoryDownload: boolean;
-    @Input() showCategoryAsLink: boolean;
+    @Input() allowCategoryDownload?: boolean;
+    @Input() showCategoryAsLink?: boolean;
 
-    settings$: Observable<Settings>;
-    category$: Observable<Category>;
-    photos$: Observable<Photo[]>;
-    activePhoto$: Observable<Photo>;
-    effects$: Observable<PhotoEffects>;
+    settings$?: Observable<Settings>;
+    category$?: Observable<Category>;
+    photos$?: Observable<Photo[]>;
+    activePhoto$?: Observable<Photo>;
+    effects$?: Observable<PhotoEffects>;
 
     constructor(
         private store$: Store,
@@ -48,7 +48,9 @@ export class DefaultViewComponent implements OnInit {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory)
+                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
+                filter(x => !!x),
+                map(x => x as Category)
             );
 
         this.store$
@@ -89,11 +91,11 @@ export class DefaultViewComponent implements OnInit {
         return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
     }
 
-    onSwipeLeft(evt): void {
+    onSwipeLeft(): void {
         this.store$.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
-    onSwipeRight(evt): void {
+    onSwipeRight(): void {
         this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 

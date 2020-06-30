@@ -17,8 +17,8 @@ import { EffectStyleBuilderService } from 'src/app/photos/services/effect-style-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FullscreenViewComponent implements OnInit, OnDestroy {
-    activePhoto$: Observable<Photo>;
-    effects$: Observable<PhotoEffects>;
+    activePhoto$?: Observable<Photo>;
+    effects$?: Observable<PhotoEffects>;
 
     constructor(
         private store$: Store,

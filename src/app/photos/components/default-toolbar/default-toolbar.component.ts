@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
 
-import { Settings } from 'src/app/models/settings.model';
+import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import {
@@ -14,6 +14,7 @@ import {
     AuthStoreSelectors
 } from 'src/app/core/root-store';
 import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
     selector: 'app-photos-default-toolbar',
@@ -22,25 +23,25 @@ import { PhotoCategory } from 'src/app/models/photo-category.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultToolbarComponent implements OnInit, OnDestroy {
-    @Input() allowCategoryDownload: boolean;
+    @Input() allowCategoryDownload?: boolean;
 
     private destroySub = new Subscription();
 
-    isAdmin$: Observable<boolean>;
-    isFirst$: Observable<boolean>;
-    isLast$: Observable<boolean>;
-    enableMapView$: Observable<boolean>;
-    category$: Observable<PhotoCategory>;
-    settings: Settings;
+    isAdmin$?: Observable<boolean>;
+    isFirst$?: Observable<boolean>;
+    isLast$?: Observable<boolean>;
+    enableMapView$?: Observable<boolean>;
+    category$?: Observable<PhotoCategory>;
+    settings?: Settings;
 
-    smDownloadUrl: string = null;
-    mdDownloadUrl: string = null;
-    lgDownloadUrl: string = null;
-    prtDownloadUrl: string = null;
+    smDownloadUrl?: string;
+    mdDownloadUrl?: string;
+    lgDownloadUrl?: string;
+    prtDownloadUrl?: string;
 
-    constructor(
-        private store$: Store
-    ) { }
+    constructor(private store$: Store) {
+
+    }
 
     ngOnInit(): void {
         this.isAdmin$ = this.store$.pipe(
@@ -57,7 +58,8 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
         this.category$ = this.store$
             .pipe(
                 select(PhotoCategoryStoreSelectors.selectCurrentCategory),
-                map(c => c.actual as PhotoCategory)
+                filter(c => !!c),
+                map(c => (c as Category).actual as PhotoCategory)
             );
 
         this.enableMapView$ = this.store$
@@ -100,7 +102,8 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleSize(): void {
-        const size = ThumbnailSize.nextSize(this.settings.photoListThumbnailSize.name);
+        const name = this.settings?.photoListThumbnailSize.name ?? DEFAULT_SETTINGS.photoListThumbnailSize.name;
+        const size = ThumbnailSize.nextSize(name);
 
         this.store$.dispatch(SettingsStoreActions.updatePhotoListThumbnailSizeRequest({ newSize: size }));
     }

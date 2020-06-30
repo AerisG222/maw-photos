@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { tap, filter } from 'rxjs/operators';
+import { tap, filter, map } from 'rxjs/operators';
 
 import { Comment } from 'src/app/models/comment.model';
 import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
+import { Video } from 'src/app/models/video.model';
 
 @Component({
     selector: 'app-videos-sidebar-comments',
@@ -14,7 +15,7 @@ import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 })
 export class SidebarCommentsComponent implements OnInit {
     currentId = -1;
-    comments$: Observable<Comment[]>;
+    comments$?: Observable<Comment[] | undefined>;
     destroySub = new Subscription();
 
     constructor(
@@ -32,6 +33,7 @@ export class SidebarCommentsComponent implements OnInit {
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video),
+                map(video => video as Video),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadCommentsRequest({ videoId: video.id }))),
                 tap(video => this.currentId = video.id)
             ).subscribe()

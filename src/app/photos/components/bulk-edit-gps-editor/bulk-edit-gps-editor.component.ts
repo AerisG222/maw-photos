@@ -16,7 +16,7 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 })
 export class BulkEditGpsEditorComponent implements OnInit {
     gpsForm: FormGroup;
-    hasPendingEdits$: Observable<boolean>;
+    hasPendingEdits$?: Observable<boolean>;
 
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
@@ -24,14 +24,14 @@ export class BulkEditGpsEditorComponent implements OnInit {
         private store$: Store,
         private formBuilder: FormBuilder,
         private gps: GpsService
-    ) { }
-
-    ngOnInit(): void {
+    ) {
         this.gpsForm = this.formBuilder.group({
             latitude: ['', Validators.required],
             longitude: ['', Validators.required]
         });
+    }
 
+    ngOnInit(): void {
         this.hasPendingEdits$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectPendingActionCount),
@@ -41,15 +41,18 @@ export class BulkEditGpsEditorComponent implements OnInit {
 
     onPaste(evt: ClipboardEvent): void {
         const clipboardData = evt.clipboardData; // || window.clipboardData
-        const pastedText = clipboardData.getData('text');
 
-        if (!!pastedText) {
-            const latLng = this.gps.parse(pastedText);
+        if(!!clipboardData) {
+            const pastedText = clipboardData.getData('text');
 
-            if (!!latLng) {
-                evt.preventDefault();
+            if (!!pastedText) {
+                const latLng = this.gps.parse(pastedText);
 
-                this.updateGpsForm(latLng);
+                if (!!latLng) {
+                    evt.preventDefault();
+
+                    this.updateGpsForm(latLng);
+                }
             }
         }
     }
@@ -63,26 +66,26 @@ export class BulkEditGpsEditorComponent implements OnInit {
     }
 
     onCancelGps(): void {
-        this.updateGpsForm(null);
+        this.updateGpsForm(undefined);
     }
 
-    private getGpsCoordinateFromForm(): GpsCoordinate {
+    private getGpsCoordinateFromForm(): GpsCoordinate | undefined {
         if (!this.gpsForm.valid) {
-            return null;
+            return undefined;
         }
 
-        const latitude = Number(this.gpsForm.get('latitude').value);
-        const longitude = Number(this.gpsForm.get('longitude').value);
+        const latitude = Number(this.gpsForm.get('latitude')?.value);
+        const longitude = Number(this.gpsForm.get('longitude')?.value);
 
         if (isNaN(latitude) || isNaN(longitude)) {
-            return null;
+            return undefined;
         }
 
         return { latitude, longitude};
     }
 
-    private updateGpsForm(gps: GpsCoordinate): void {
-        this.gpsForm.get('latitude').setValue(gps?.latitude);
-        this.gpsForm.get('longitude').setValue(gps?.longitude);
+    private updateGpsForm(gps: GpsCoordinate | undefined): void {
+        this.gpsForm.get('latitude')?.setValue(gps?.latitude);
+        this.gpsForm.get('longitude')?.setValue(gps?.longitude);
     }
 }

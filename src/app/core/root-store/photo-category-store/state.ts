@@ -10,12 +10,12 @@ export interface State extends EntityState<Category> {
     error?: string;
     isLoading: boolean;
     currentCategory?: Category;
-    categoryIdsByYear: {};
+    categoryIdsByYear?: Map<number, number[]>;
 }
 
 export const initialState: State = photoCategoryAdapter.getInitialState({
     isLoading: false,
     error: undefined,
     currentCategory: undefined,
-    categoryIdsByYear: {}
+    categoryIdsByYear: undefined
 });

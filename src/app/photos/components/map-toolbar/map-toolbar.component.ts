@@ -14,11 +14,11 @@ import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapToolbarComponent implements OnInit {
-    isFirst$: Observable<boolean>;
-    isLast$: Observable<boolean>;
+    isFirst$?: Observable<boolean>;
+    isLast$?: Observable<boolean>;
 
-    private isFirst: boolean;
-    private isLast: boolean;
+    private isFirst = true;
+    private isLast = true;
 
     constructor(
         private store$: Store

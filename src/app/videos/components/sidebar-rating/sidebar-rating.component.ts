@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, tap, map } from 'rxjs/operators';
 
 import { Rating } from 'src/app/models/rating.model';
 import { VideoStoreSelectors, VideoStoreActions } from '../../store';
+import { Video } from 'src/app/models/video.model';
 
 @Component({
     selector: 'app-videos-sidebar-rating',
@@ -16,7 +17,7 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     private currentId = -1;
     private destroySub = new Subscription();
 
-    rating$: Observable<Rating>;
+    rating$?: Observable<Rating | undefined>;
 
     constructor(
         private store$: Store
@@ -35,6 +36,7 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video),
+                map(video => video as Video),
                 tap(video => this.currentId = video.id),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
             ).subscribe()

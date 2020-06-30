@@ -11,16 +11,14 @@ import { GpsDetail } from 'src/app/models/gps-detail.model';
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
 export interface State extends EntityState<Photo> {
-    error: string;
+    error?: string;
     isLoading: boolean;
-    currentPhoto: Photo;
-    firstPhoto: Photo;
-    lastPhoto: Photo;
-    currentPhotoRating: Rating;
-    currentPhotoComments: Comment[];
-    currentPhotoExifData: ExifContainer;
+    currentPhoto?: Photo;
+    currentPhotoRating?: Rating;
+    currentPhotoComments?: Comment[];
+    currentPhotoExifData?: ExifContainer;
     currentPhotoEffects: PhotoEffects;
-    currentPhotoGpsDetail: GpsDetail;
+    currentPhotoGpsDetail?: GpsDetail;
     slideshowIsPlaying: boolean;
     isFullscreenView: boolean;
     isMapView: boolean;
@@ -30,13 +28,11 @@ export interface State extends EntityState<Photo> {
 
 export const initialState: State = photoAdapter.getInitialState({
     isLoading: false,
-    error: null,
-    currentPhoto: null,
-    firstPhoto: null,
-    lastPhoto: null,
-    currentPhotoRating: null,
-    currentPhotoComments: null,
-    currentPhotoExifData: null,
+    error: undefined,
+    currentPhoto: undefined,
+    currentPhotoRating: undefined,
+    currentPhotoComments: undefined,
+    currentPhotoExifData: undefined,
     currentPhotoEffects: {
         rotation: new PhotoRotation(),
         flipHorizontal: false,
@@ -50,7 +46,7 @@ export const initialState: State = photoAdapter.getInitialState({
         blur: 0,
         hueRotate: 0
     },
-    currentPhotoGpsDetail: null,
+    currentPhotoGpsDetail: undefined,
     slideshowIsPlaying: false,
     isFullscreenView: false,
     isMapView: false,

@@ -11,28 +11,22 @@ const reducer = createReducer(
     on(PhotoActions.clearRequest, state => (
         photoAdapter.removeAll({
             ...state,
-            firstPhoto: null,
-            lastPhoto: null,
-            currentPhoto: null
+            firstPhoto: undefined,
+            lastPhoto: undefined,
+            currentPhoto: undefined
         })
     )),
     on(PhotoActions.loadRequest, (state, { categoryId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
-    on(PhotoActions.loadSuccess, (state, { photos }) => {
-        const entities = photoAdapter.setAll(photos, {
+    on(PhotoActions.loadSuccess, (state, { photos }) =>
+        photoAdapter.setAll(photos, {
             ...state,
             isLoading: false,
-            error: null
-        });
-
-        entities.firstPhoto = entities.entities[entities.ids[0]],
-        entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
-
-        return entities;
-    }),
+            error: undefined})
+    ),
     on(PhotoActions.loadFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
@@ -41,12 +35,12 @@ const reducer = createReducer(
     on(PhotoActions.loadCommentsRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.loadCommentsSuccess, (state, { comments }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentPhotoComments: comments
     })),
     on(PhotoActions.loadCommentsFailure, (state, { error }) => ({
@@ -57,20 +51,15 @@ const reducer = createReducer(
     on(PhotoActions.loadRandomRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
-    on(PhotoActions.loadRandomSuccess, (state, { photo }) => {
-        const entities = photoAdapter.upsertOne(photo, {
+    on(PhotoActions.loadRandomSuccess, (state, { photo }) =>
+        photoAdapter.upsertOne(photo, {
             ...state,
             isLoading: false,
-            error: null
-        });
-
-        entities.firstPhoto = entities.entities[entities.ids[0]];
-        entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
-
-        return entities;
-    }),
+            error: undefined
+        })
+    ),
     on(PhotoActions.loadRandomFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
@@ -79,21 +68,16 @@ const reducer = createReducer(
     on(PhotoActions.loadMultipleRandomRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.loadMultipleRandomSuccess, (state, { photos }) => {
         const uniquePhotos = photos.filter((s1, pos, arr) => arr.findIndex((s2) => s2.id === s1.id) === pos);
 
-        const entities = photoAdapter.addMany(uniquePhotos, {
+        return photoAdapter.addMany(uniquePhotos, {
             ...state,
             isLoading: false,
-            error: null
+            error: undefined
         });
-
-        entities.firstPhoto = entities.entities[entities.ids[0]];
-        entities.lastPhoto = entities.entities[entities.ids[entities.ids.length - 1]];
-
-        return entities;
     }),
     on(PhotoActions.loadMultipleRandomFailure, (state, { error }) => ({
         ...state,
@@ -103,12 +87,12 @@ const reducer = createReducer(
     on(PhotoActions.loadRatingRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.loadRatingSuccess, (state, { rating }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentPhotoRating: rating
     })),
     on(PhotoActions.loadRatingFailure, (state, { error }) => ({
@@ -126,97 +110,21 @@ const reducer = createReducer(
     })),
     on(PhotoActions.clearCurrent, (state) => ({
         ...state,
-        currentPhoto: null
+        currentPhoto: undefined
     })),
-    on(PhotoActions.moveNextRequest, state => {
-        const newPhoto = nextPhoto(state);
-
-        if (newPhoto != null &&
-            state.currentPhoto != null &&
-            newPhoto.id === state.currentPhoto.id) {
-            return state;
-        }
-
-        return {
-            ...state,
-            currentPhoto: newPhoto,
-            currentPhotoEffects: {
-                ...state.currentPhotoEffects,
-                rotation: new PhotoRotation(),
-                flipHorizontal: false,
-                flipVertical: false
-            }
-        };
-    }),
-    on(PhotoActions.moveNextWithGpsRequest, state => {
-        const newPhoto = nextPhotoWithGps(state);
-
-        if (newPhoto != null &&
-            state.currentPhoto != null &&
-            newPhoto.id === state.currentPhoto.id) {
-            return state;
-        }
-
-        return {
-            ...state,
-            currentPhoto: newPhoto,
-            currentPhotoEffects: {
-                ...state.currentPhotoEffects,
-                rotation: new PhotoRotation(),
-                flipHorizontal: false,
-                flipVertical: false
-            }
-        };
-    }),
-    on(PhotoActions.movePreviousRequest, state => {
-        const newPhoto = previousPhoto(state);
-
-        if (newPhoto != null &&
-            state.currentPhoto != null &&
-            newPhoto.id === state.currentPhoto.id) {
-            return state;
-        }
-
-        return {
-            ...state,
-            currentPhoto: newPhoto,
-            currentPhotoEffects: {
-                ...state.currentPhotoEffects,
-                rotation: new PhotoRotation(),
-                flipHorizontal: false,
-                flipVertical: false
-            }
-        };
-    }),
-    on(PhotoActions.movePreviousWithGpsRequest, state => {
-        const newPhoto = previousPhotoWithGps(state);
-
-        if (newPhoto != null &&
-            state.currentPhoto != null &&
-            newPhoto.id === state.currentPhoto.id) {
-            return state;
-        }
-
-        return {
-            ...state,
-            currentPhoto: newPhoto,
-            currentPhotoEffects: {
-                ...state.currentPhotoEffects,
-                rotation: new PhotoRotation(),
-                flipHorizontal: false,
-                flipVertical: false
-            }
-        };
-    }),
+    on(PhotoActions.moveNextRequest, state => getStateForNewPhoto(state, nextPhoto(state))),
+    on(PhotoActions.moveNextWithGpsRequest, state => getStateForNewPhoto(state, nextPhotoWithGps(state))),
+    on(PhotoActions.movePreviousRequest, state => getStateForNewPhoto(state, previousPhoto(state))),
+    on(PhotoActions.movePreviousWithGpsRequest, state => getStateForNewPhoto(state, previousPhotoWithGps(state))),
     on(PhotoActions.ratePhotoRequest, (state, { photoId, userRating }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.ratePhotoSuccess, (state, { rating }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentPhotoRating: {
             userRating: rating.userRating,
             averageRating: Math.round(rating.averageRating)
@@ -230,12 +138,12 @@ const reducer = createReducer(
     on(PhotoActions.addCommentRequest, (state, { photoId, comment }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.addCommentSuccess, (state, { photoId }) => ({
         ...state,
         isLoading: false,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.addCommentFailure, (state, { error }) => ({
         ...state,
@@ -245,12 +153,12 @@ const reducer = createReducer(
     on(PhotoActions.loadExifRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.loadExifSuccess, (state, { exif }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentPhotoExifData: exif
     })),
     on(PhotoActions.loadExifFailure, (state, { error }) => ({
@@ -261,12 +169,12 @@ const reducer = createReducer(
     on(PhotoActions.loadGpsDetailRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(PhotoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentPhotoGpsDetail: gpsDetail
     })),
     on(PhotoActions.loadGpsDetailFailure, (state, { error }) => ({
@@ -277,7 +185,7 @@ const reducer = createReducer(
     on(PhotoActions.setGpsCoordinateOverrideRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: null,
+        error: undefined,
         pendingActionCount: state.pendingActionCount + 1,
     })),
     on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { photoId, gpsDetail }) => {
@@ -285,7 +193,7 @@ const reducer = createReducer(
         const updatedState = ({
             ...state,
             isLoading: false,
-            error: null,
+            error: undefined,
             currentPhotoGpsDetail: gpsDetail,
             pendingActionCount: state.pendingActionCount - 1,
         });
@@ -428,11 +336,11 @@ function previousPhotoWithGps(state: State): Photo {
 
 function getPhotoAtIndex(state: State, idx: number): Photo {
     // entities are keyed by id
-    return state.entities[state.ids[idx]];
+    return state.entities[state.ids[idx]] as Photo;
 }
 
 function getPhotoWithId(state: State, id: number): Photo {
-    return state.entities[id];
+    return state.entities[id] as Photo;
 }
 
 function incrementCurrentIndexWithinBounds(state: State, direction: number): number {
@@ -458,5 +366,24 @@ function incrementCurrentIndexWithinGpsBounds(state: State, direction: number): 
 }
 
 function getCurrentIndex(state: State): number {
-    return (state.ids as number[]).findIndex(id => id === state.currentPhoto.id);
+    return (state.ids as number[]).findIndex(id => id === state.currentPhoto?.id);
+}
+
+function getStateForNewPhoto(state: State, newPhoto: Photo): State {
+    if (!!newPhoto &&
+        !!state.currentPhoto &&
+        newPhoto.id === state.currentPhoto.id) {
+        return state;
+    }
+
+    return {
+        ...state,
+        currentPhoto: newPhoto,
+        currentPhotoEffects: {
+            ...state.currentPhotoEffects,
+            rotation: new PhotoRotation(),
+            flipHorizontal: false,
+            flipVertical: false
+        }
+    };
 }

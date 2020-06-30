@@ -44,6 +44,8 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         this.category$ = this.store$
             .pipe(
                 select(VideoCategoryStoreSelectors.selectCurrentCategory),
+                filter(x => !!x),
+                map(x => x as Category)
             );
 
         this.videos$ = this.store$
@@ -56,6 +58,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(x => !!x),
+                map(x => x as Video),
                 tap(x => this.triggerVideoRefresh())
             );
 

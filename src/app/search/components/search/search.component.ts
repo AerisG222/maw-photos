@@ -21,7 +21,7 @@ import { clearRequest } from 'src/app/search/store/actions';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
-    currentResult$?: Observable<SearchResult<MultimediaCategory>>;
+    currentResult$?: Observable<SearchResult<MultimediaCategory> | undefined>;
     categories$?: Observable<CategoryTeaser[]>;
     showListView$?: Observable<boolean>;
     showGridView$?: Observable<boolean>;

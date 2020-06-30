@@ -15,19 +15,19 @@ import { GpsDetail } from 'src/app/models/gps-detail.model';
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getPendingActionCount = (state: State): number => state.pendingActionCount;
-const getCurrentPhoto = (state: State): Photo => state.currentPhoto;
-const getFirstPhoto = (state: State): Photo => state.firstPhoto;
-const getLastPhoto = (state: State): Photo => state.lastPhoto;
-const getCurrentPhotoRating = (state: State): Rating => state.currentPhotoRating;
-const getCurrentPhotoComments = (state: State): Comment[] => state.currentPhotoComments;
-const getCurrentPhotoExifData = (state: State): ExifContainer => state.currentPhotoExifData;
-const getCurrentPhotoEffects = (state: State): PhotoEffects => state.currentPhotoEffects;
-const getCurrentPhotoGpsDetail = (state: State): GpsDetail => state.currentPhotoGpsDetail;
+const getCurrentPhoto = (state: State): Photo | undefined => state.currentPhoto;
+const getFirstPhoto = (state: State): Photo | undefined => state.entities[state.ids[0]];
+const getLastPhoto = (state: State): Photo | undefined => state.entities[state.ids[state.ids.length - 1]];
+const getCurrentPhotoRating = (state: State): Rating | undefined => state.currentPhotoRating;
+const getCurrentPhotoComments = (state: State): Comment[] | undefined => state.currentPhotoComments;
+const getCurrentPhotoExifData = (state: State): ExifContainer | undefined => state.currentPhotoExifData;
+const getCurrentPhotoEffects = (state: State): PhotoEffects | undefined => state.currentPhotoEffects;
+const getCurrentPhotoGpsDetail = (state: State): GpsDetail | undefined => state.currentPhotoGpsDetail;
 const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
 const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 const getIsMapView = (state: State): boolean => state.isMapView;
 const getIsBulkEditView = (state: State): boolean => state.isBulkEditView;
-const getHasGpsCoordinates = (photos: Photo[]): boolean => photos !== null && photos.length > 0;
+const getHasGpsCoordinates = (photos: Photo[] | undefined): boolean => !!photos && photos.length > 0;
 
 export const selectPhotoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
@@ -56,7 +56,7 @@ export const selectPhotosWithGpsCoordinates =
         if (photos) {
             return photos.filter(x => x.latitude !== null);
         } else {
-            return null;
+            return undefined;
         }
     });
 

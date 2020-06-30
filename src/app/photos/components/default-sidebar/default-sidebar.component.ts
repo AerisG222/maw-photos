@@ -31,17 +31,17 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultSidebarComponent implements OnInit {
-    isAdmin$: Observable<boolean>;
-    endSidenavExpanded$: Observable<boolean>;
-    showComments$: Observable<boolean>;
-    showEffects$: Observable<boolean>;
-    showExif$: Observable<boolean>;
-    showRatings$: Observable<boolean>;
-    showMinimap$: Observable<boolean>;
-    showHistogram$: Observable<boolean>;
-    showMetadataEditor$: Observable<boolean>;
-    showCategoryTeaserChooser$: Observable<boolean>;
-    enableButtons$: Observable<boolean>;
+    isAdmin$?: Observable<boolean>;
+    endSidenavExpanded$?: Observable<boolean>;
+    showComments$?: Observable<boolean>;
+    showEffects$?: Observable<boolean>;
+    showExif$?: Observable<boolean>;
+    showRatings$?: Observable<boolean>;
+    showMinimap$?: Observable<boolean>;
+    showHistogram$?: Observable<boolean>;
+    showMetadataEditor$?: Observable<boolean>;
+    showCategoryTeaserChooser$?: Observable<boolean>;
+    enableButtons$?: Observable<boolean>;
 
     constructor(
         private store$: Store

@@ -34,7 +34,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
         this.destroySub.add(this.store$
             .pipe(
                 select(SearchStoreSelectors.selectSearchCurrentResult),
-                tap(result => this.nextIndex = result.startIndex + result.results.length)
+                tap(result => this.nextIndex = !!result ? result.startIndex + result.results.length : -1)
             ).subscribe()
         );
     }

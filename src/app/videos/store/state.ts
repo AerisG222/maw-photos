@@ -13,8 +13,6 @@ export interface State extends EntityState<Video> {
     error?: string;
     isLoading: boolean;
     currentVideo?: Video;
-    firstVideo?: Video;
-    lastVideo?: Video;
     currentVideoRating?: Rating;
     currentVideoComments?: Comment[];
     currentVideoGpsDetail?: GpsDetail;
@@ -25,8 +23,6 @@ export const initialState: State = videoAdapter.getInitialState({
     isLoading: false,
     error: undefined,
     currentVideo: undefined,
-    firstVideo: undefined,
-    lastVideo: undefined,
     currentVideoRating: undefined,
     currentVideoComments: undefined,
     currentVideoGpsDetail: undefined,

@@ -10,11 +10,11 @@ import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
 
-const getError = (state: State): any => state.error;
+const getError = (state: State): string | undefined => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getCurrentVideo = (state: State): Video | undefined => state.currentVideo;
-const getFirstVideo = (state: State): Video | undefined => state.firstVideo;
-const getLastVideo = (state: State): Video | undefined => state.lastVideo;
+const getFirstVideo = (state: State): Video | undefined => state.entities[state.ids[0]];
+const getLastVideo = (state: State): Video | undefined => state.entities[state.ids[state.ids.length - 1]];
 const getCurrentVideoRating = (state: State): Rating | undefined => state.currentVideoRating;
 const getCurrentVideoComments = (state: State): Comment[] | undefined => state.currentVideoComments;
 const getCurrentVideoGpsDetail = (state: State): GpsDetail | undefined => state.currentVideoGpsDetail;

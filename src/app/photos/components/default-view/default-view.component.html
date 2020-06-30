@@ -24,8 +24,8 @@
                 [class]="data.effects?.rotation?.klass"
                 [style.filter]="getEffectStyles(data.effects)"
                 [style.transform]="getTransform(data.effects)"
-                (swipeleft)="onSwipeLeft($event)"
-                (swiperight)="onSwipeRight($event)"
+                (swipeleft)="onSwipeLeft()"
+                (swiperight)="onSwipeRight()"
                 loading="eager" />
 
             <app-photos-photo-list

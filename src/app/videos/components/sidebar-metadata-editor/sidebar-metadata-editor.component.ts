@@ -5,6 +5,7 @@ import { map, filter, tap } from 'rxjs/operators';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
+import { Video } from 'src/app/models/video.model';
 
 @Component({
     selector: 'app-videos-sidebar-metadata-editor',
@@ -14,8 +15,8 @@ import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 })
 export class SidebarMetadataEditorComponent implements OnInit {
     currentId = -1;
-    overrideGpsData$: Observable<GpsCoordinate>;
-    sourceGpsData$: Observable<GpsCoordinate>;
+    overrideGpsData$?: Observable<GpsCoordinate | undefined>;
+    sourceGpsData$?: Observable<GpsCoordinate | undefined>;
     destroySub = new Subscription();
 
     constructor(
@@ -41,6 +42,7 @@ export class SidebarMetadataEditorComponent implements OnInit {
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideo),
                 filter(video => !!video),
+                map(video => video as Video),
                 tap(video => this.currentId = video.id),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadGpsDetailRequest({ videoId: video.id })))
             ).subscribe()
