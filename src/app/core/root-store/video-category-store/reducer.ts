@@ -9,14 +9,14 @@ const reducer = createReducer(
     on(VideoCategoryActions.loadRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoCategoryActions.loadSuccess, (state, { categories }) =>
         VideoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
-            error: null
+            error: undefined
         })
     ),
     on(VideoCategoryActions.loadFailure, (state, { error }) => ({
@@ -39,14 +39,14 @@ const reducer = createReducer(
     on(VideoCategoryActions.setTeaserRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
         VideoCategoryAdapter.upsertOne(category, {
             ...state,
             currentCategory: category,
             isLoading: false,
-            error: null
+            error: undefined
         })
     )),
     on(VideoCategoryActions.setTeaserFailure, (state, { error }) => ({

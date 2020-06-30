@@ -12,12 +12,12 @@ import { GpsDetail } from 'src/app/models/gps-detail.model';
 
 const getError = (state: State): any => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
-const getCurrentVideo = (state: State): Video => state.currentVideo;
-const getFirstVideo = (state: State): Video => state.firstVideo;
-const getLastVideo = (state: State): Video => state.lastVideo;
-const getCurrentVideoRating = (state: State): Rating => state.currentVideoRating;
-const getCurrentVideoComments = (state: State): Comment[] => state.currentVideoComments;
-const getCurrentVideoGpsDetail = (state: State): GpsDetail => state.currentVideoGpsDetail;
+const getCurrentVideo = (state: State): Video | undefined => state.currentVideo;
+const getFirstVideo = (state: State): Video | undefined => state.firstVideo;
+const getLastVideo = (state: State): Video | undefined => state.lastVideo;
+const getCurrentVideoRating = (state: State): Rating | undefined => state.currentVideoRating;
+const getCurrentVideoComments = (state: State): Comment[] | undefined => state.currentVideoComments;
+const getCurrentVideoGpsDetail = (state: State): GpsDetail | undefined => state.currentVideoGpsDetail;
 const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);

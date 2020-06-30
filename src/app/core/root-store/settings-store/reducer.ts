@@ -16,13 +16,13 @@ const reducer = createReducer(
     })),
     on(SettingsActions.loadRequest, state => ({
         ...state,
-        error: null,
+        error: undefined,
         isLoading: true
     })),
     on(SettingsActions.loadSuccess, (state, { settings }) => ({
         ...state,
         settings: { ...settings },
-        error: null,
+        error: undefined,
         isLoading: false
     })),
     on(SettingsActions.loadFailure, (state, { error }) => ({
@@ -32,7 +32,7 @@ const reducer = createReducer(
     })),
     on(SettingsActions.saveRequest, state => ({
         ...state,
-        error: null
+        error: undefined
     })),
     on(SettingsActions.saveFailure, (state, { error }) => ({
         ...state,
@@ -41,7 +41,7 @@ const reducer = createReducer(
     on(SettingsActions.saveSuccess, (state, { settings }) => ({
         ...state,
         settings: { ...settings },
-        error: null
+        error: undefined
     })),
     on(SettingsActions.toggleCategoryListCategoryTitlesRequest, state => ({
         ...state,

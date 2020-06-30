@@ -9,20 +9,20 @@ const reducer = createReducer(
     on(VideoActions.clearRequest, state =>
         videoAdapter.removeAll({
             ...state,
-            firstVideo: null,
-            lastVideo: null,
-            currentVideo: null
+            firstVideo: undefined,
+            lastVideo: undefined,
+            currentVideo: undefined
         })
     ),
     on(VideoActions.loadCommentsRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.loadCommentsSuccess, (state, { comments }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentVideoComments: comments
     })),
     on(VideoActions.loadCommentsFailure, (state, { error }) => ({
@@ -33,12 +33,12 @@ const reducer = createReducer(
     on(VideoActions.loadRatingRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.loadRatingSuccess, (state, { rating }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentVideoRating: rating
     })),
     on(VideoActions.loadRatingFailure, (state, { error }) => ({
@@ -49,7 +49,7 @@ const reducer = createReducer(
     on(VideoActions.loadRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.loadSuccess, (state, { videos }) => {
         const entities = videoAdapter.setAll(videos, {
@@ -74,7 +74,7 @@ const reducer = createReducer(
     })),
     on(VideoActions.clearCurrent, (state) => ({
         ...state,
-        currentVideo: null
+        currentVideo: undefined
     })),
     on(VideoActions.moveNextRequest, state => {
         const newVideo = nextVideo(state);
@@ -107,12 +107,12 @@ const reducer = createReducer(
     on(VideoActions.rateVideoRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.rateVideoSuccess, (state, { rating }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentVideoRating: {
             userRating: rating.userRating,
             averageRating: Math.round(rating.averageRating)
@@ -126,12 +126,12 @@ const reducer = createReducer(
     on(VideoActions.addCommentRequest, state => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.addCommentSuccess, state => ({
         ...state,
         isLoading: false,
-        error: null
+        error: undefined
     })),
     on(VideoActions.addCommentFailure, (state, { error }) => ({
         ...state,
@@ -141,12 +141,12 @@ const reducer = createReducer(
     on(VideoActions.loadGpsDetailRequest, (state, { videoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
-        error: null,
+        error: undefined,
         currentVideoGpsDetail: gpsDetail
     })),
     on(VideoActions.loadGpsDetailFailure, (state, { error }) => ({
@@ -157,7 +157,7 @@ const reducer = createReducer(
     on(VideoActions.setGpsCoordinateOverrideRequest, (state, { videoId }) => ({
         ...state,
         isLoading: true,
-        error: null
+        error: undefined
     })),
     on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { videoId, gpsDetail }) => {
         const video = getVideoWithId(state, videoId);

@@ -23,7 +23,7 @@ export class CategoryListType {
                 console.error(`invalid category list type requested: ${name}`);
         }
 
-        return null;
+        return CategoryListType.grid;
     }
 
     static nextType(name: string): CategoryListType {
@@ -36,6 +36,6 @@ export class CategoryListType {
                 console.error(`invalid category list type requested: ${name}`);
         }
 
-        return null;
+        return CategoryListType.grid;
     }
 }

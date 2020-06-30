@@ -4,9 +4,9 @@ import { VIDEO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { VideoCategoryAdapter, State } from './state';
 import { Category } from 'src/app/models/category.model';
 
-const getError = (state: State): any => state.error;
+const getError = (state: State): string | undefined => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
-const getCurrentCategory = (state: State): Category => state.currentCategory;
+const getCurrentCategory = (state: State): Category | undefined => state.currentCategory;
 const getAllYears = (state: State): number[] => Object.keys(state.categoryIdsByYear).map(y => Number(y));
 const getCategoryById = (state: State, id: number): Category => state.entities[id];
 

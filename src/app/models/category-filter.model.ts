@@ -29,7 +29,7 @@ export class CategoryFilter {
                 console.error(`invalid category filter requested: ${name}`);
         }
 
-        return null;
+        return CategoryFilter.all;
     }
 
     static forValue(value: string): CategoryFilter {
@@ -44,7 +44,7 @@ export class CategoryFilter {
                 console.error(`invalid category filter requested: ${value}`);
         }
 
-        return null;
+        return CategoryFilter.all;
     }
 
     static nextFilter(name: string): CategoryFilter {
@@ -59,6 +59,6 @@ export class CategoryFilter {
                 console.error(`invalid category filter requested: ${name}`);
         }
 
-        return null;
+        return CategoryFilter.all;
     }
 }

@@ -5,10 +5,10 @@ import { SEARCH_FEATURE_NAME } from './feature-name';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { SearchResult } from 'src/app/search/models/search-result.model';
 
-const getError = (state: State): any => state.error;
+const getError = (state: State): string | undefined => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
-const getQuery = (state: State): string => state.query;
-const getCurrentResult = (state: State): SearchResult<MultimediaCategory> => state.currentResult;
+const getQuery = (state: State): string | undefined => state.query;
+const getCurrentResult = (state: State): SearchResult<MultimediaCategory> | undefined => state.currentResult;
 const getCurrentStartIndex = (state: State): number => !!state.currentResult ? state.currentResult.startIndex : -1;
 const hasMoreResults = (state: State): boolean => {
     if (!!state.currentResult) {

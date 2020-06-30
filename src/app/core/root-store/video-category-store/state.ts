@@ -8,15 +8,15 @@ export const VideoCategoryAdapter: EntityAdapter<Category> = createEntityAdapter
 });
 
 export interface State extends EntityState<Category> {
-    error: string;
+    error?: string;
     isLoading: boolean;
-    currentCategory: Category;
-    categoryIdsByYear: {};
+    currentCategory?: Category;
+    categoryIdsByYear?: {};
 }
 
 export const initialState: State = VideoCategoryAdapter.getInitialState({
     isLoading: false,
-    error: null,
-    currentCategory: null,
-    categoryIdsByYear: null
+    error: undefined,
+    currentCategory: undefined,
+    categoryIdsByYear: {}
 });

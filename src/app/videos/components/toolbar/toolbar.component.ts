@@ -18,13 +18,13 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
 export class ToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
-    isFirst$: Observable<boolean>;
-    isLast$: Observable<boolean>;
-    settings: Settings;
+    isFirst$?: Observable<boolean>;
+    isLast$?: Observable<boolean>;
+    settings?: Settings;
 
-    constructor(
-        private store$: Store
-    ) { }
+    constructor(private store$: Store) {
+
+    }
 
     ngOnInit(): void {
         this.destroySub.add(this.store$
@@ -54,9 +54,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleThumbnailSize(): void {
-        const size = ThumbnailSize.nextSize(this.settings.videoListThumbnailSize.name);
+        const sizeName = this.settings?.videoListThumbnailSize.name;
 
-        this.store$.dispatch(SettingsStoreActions.updateVideoListThumbnailSizeRequest({ newSize: size }));
+        if (!!sizeName) {
+            const size = ThumbnailSize.nextSize(sizeName);
+
+            this.store$.dispatch(SettingsStoreActions.updateVideoListThumbnailSizeRequest({ newSize: size }));
+        }
     }
 
     onToggleShowVideoList(): void {
@@ -64,9 +68,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleVideoSize(): void {
-        const size = VideoSize.nextSize(this.settings.videoListVideoSize.name);
+        const sizeName = this.settings?.videoListVideoSize.name;
 
-        this.store$.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
+        if (!!sizeName) {
+            const size = VideoSize.nextSize(sizeName);
+
+            this.store$.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
+        }
     }
 
     onMovePrevious(): void {
