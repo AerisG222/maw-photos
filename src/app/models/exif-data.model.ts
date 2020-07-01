@@ -5,5 +5,5 @@ export interface ExifData {
     displayName: string;
     displayValue: string;
     sourceField: string;
-    sourceValue: any;
+    sourceValue: string | number | boolean;
 }

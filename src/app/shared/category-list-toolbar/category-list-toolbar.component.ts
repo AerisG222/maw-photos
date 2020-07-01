@@ -19,14 +19,14 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
-    settings: Settings;
-    isListView$: Observable<boolean>;
-    isGridView$: Observable<boolean>;
-    showCategoryTitles$: Observable<boolean>;
+    settings?: Settings;
+    isListView$?: Observable<boolean>;
+    isGridView$?: Observable<boolean>;
+    showCategoryTitles$?: Observable<boolean>;
 
-    constructor(
-        private store$: Store
-    ) { }
+    constructor(private store$: Store) {
+
+    }
 
     ngOnInit(): void {
         this.isListView$ = this.store$

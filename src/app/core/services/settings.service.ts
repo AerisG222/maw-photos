@@ -121,52 +121,52 @@ export class SettingsService {
 
                 categoryListCategoryFilter: this.getCategoryListCategoryFilter(),
                 categoryListCategoryMargin: this.getCategoryMargin(SettingsService.keyCategoryListCategoryMargin),
-                categoryListMissingGpsFilter: categoryListMissingGpsFilter !== null ? categoryListMissingGpsFilter : false,
+                categoryListMissingGpsFilter,
                 categoryListThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
-                categoryListShowCategoryTitles: categoryListShowCategoryTitles !== null ? categoryListShowCategoryTitles : true,
-                categoryListYearFilter: categoryListYearFilter !== null ? categoryListYearFilter : 'all',
+                categoryListShowCategoryTitles,
+                categoryListYearFilter,
                 categoryListListType: this.getCategoryListType(SettingsService.keyCategoryListListType),
                 categoryListListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListListViewThumbnailSize),
 
                 photoListThumbnailSize: this.getPhotoListThumbnailSize(),
                 photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
-                photoListShowCategoryBreadcrumbs: photoListShowCategoryBreadcrumbs !== null ? photoListShowCategoryBreadcrumbs : true,
-                photoListShowPhotoList: photoListShowPhotoList !== null ? photoListShowPhotoList : true,
-                photoListMapViewMapTypeId: photoListMapViewMapTypeId != null ? photoListMapViewMapTypeId : 'roadmap',
-                photoListMapViewZoom: photoListMapViewZoom != null ? photoListMapViewZoom : 10,
+                photoListShowCategoryBreadcrumbs,
+                photoListShowPhotoList,
+                photoListMapViewMapTypeId,
+                photoListMapViewZoom: !!photoListMapViewZoom ? photoListMapViewZoom : DEFAULT_SETTINGS.photoListMapViewZoom,
 
-                photoInfoPanelShowRatings: photoInfoPanelShowRatings !== null ? photoInfoPanelShowRatings : true,
+                photoInfoPanelShowRatings,
+                photoInfoPanelShowCategoryTeaserChooser,
+                photoInfoPanelShowComments,
+                photoInfoPanelShowExif,
+                photoInfoPanelShowEffects,
+                photoInfoPanelShowHistogram,
+                photoInfoPanelShowMetadataEditor,
+                photoInfoPanelShowMinimap,
+                photoInfoPanelExpandedState,
+                photoInfoPanelMinimapMapTypeId,
                 // tslint:disable-next-line: max-line-length
-                photoInfoPanelShowCategoryTeaserChooser: photoInfoPanelShowCategoryTeaserChooser !== null ? photoInfoPanelShowCategoryTeaserChooser : false,
-                photoInfoPanelShowComments: photoInfoPanelShowComments !== null ? photoInfoPanelShowComments : true,
-                photoInfoPanelShowExif: photoInfoPanelShowExif !== null ? photoInfoPanelShowExif : false,
-                photoInfoPanelShowEffects: photoInfoPanelShowEffects !== null ? photoInfoPanelShowEffects : false,
-                photoInfoPanelShowHistogram: photoInfoPanelShowHistogram !== null ? photoInfoPanelShowHistogram : false,
-                photoInfoPanelShowMetadataEditor: photoInfoPanelShowMetadataEditor !== null ? photoInfoPanelShowMetadataEditor : false,
-                photoInfoPanelShowMinimap: photoInfoPanelShowMinimap !== null ? photoInfoPanelShowMinimap : false,
-                photoInfoPanelExpandedState: photoInfoPanelExpandedState !== null ? photoInfoPanelExpandedState : false,
-                photoInfoPanelMinimapMapTypeId: photoInfoPanelMinimapMapTypeId != null ? photoInfoPanelMinimapMapTypeId : 'roadmap',
-                photoInfoPanelMinimapZoom: photoInfoPanelMinimapZoom !== null ? photoInfoPanelMinimapZoom : 10,
+                photoInfoPanelMinimapZoom: !!photoInfoPanelMinimapZoom ? photoInfoPanelMinimapZoom : DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
 
-                videoListShowCategoryBreadcrumbs: videoListShowCategoryBreadcrumbs !== null ? videoListShowCategoryBreadcrumbs : true,
+                videoListShowCategoryBreadcrumbs,
                 videoListThumbnailSize: this.getVideoListThumbnailSize(),
-                videoListShowVideoList: videoListShowVideoList !== null ? videoListShowVideoList : true,
+                videoListShowVideoList,
                 videoListVideoSize: this.getVideoListVideoSize(),
 
-                videoInfoPanelShowRatings: videoInfoPanelShowRatings !== null ? videoInfoPanelShowRatings : true,
+                videoInfoPanelShowRatings,
+                videoInfoPanelShowCategoryTeaserChooser,
+                videoInfoPanelShowComments,
+                videoInfoPanelShowMetadataEditor,
+                videoInfoPanelShowMinimap,
+                videoInfoPanelExpandedState,
+                videoInfoPanelMinimapMapTypeId,
                 // tslint:disable-next-line: max-line-length
-                videoInfoPanelShowCategoryTeaserChooser: videoInfoPanelShowCategoryTeaserChooser !== null ? videoInfoPanelShowCategoryTeaserChooser : false,
-                videoInfoPanelShowComments: videoInfoPanelShowComments !== null ? videoInfoPanelShowComments : true,
-                videoInfoPanelShowMetadataEditor: videoInfoPanelShowMetadataEditor !== null ? videoInfoPanelShowMetadataEditor : false,
-                videoInfoPanelShowMinimap: videoInfoPanelShowMinimap !== null ? videoInfoPanelShowMinimap : false,
-                videoInfoPanelExpandedState: videoInfoPanelExpandedState !== null ? videoInfoPanelExpandedState : false,
-                videoInfoPanelMinimapMapTypeId: videoInfoPanelMinimapMapTypeId !== null ? videoInfoPanelMinimapMapTypeId : 'roadmap',
-                videoInfoPanelMinimapZoom: videoInfoPanelMinimapZoom !== null ? videoInfoPanelMinimapZoom : 10,
+                videoInfoPanelMinimapZoom: !!videoInfoPanelMinimapZoom ? videoInfoPanelMinimapZoom : DEFAULT_SETTINGS.videoInfoPanelMinimapZoom,
 
                 searchCategoryMargin: this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
                 searchThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
-                searchShowCategoryTitles: searchShowCategoryTitles !== null ? searchShowCategoryTitles : true,
-                searchShowCategoryYears: searchShowCategoryYears !== null ? searchShowCategoryYears : true,
+                searchShowCategoryTitles,
+                searchShowCategoryYears,
                 searchListType: this.getCategoryListType(SettingsService.keySearchListType),
                 searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
             };
@@ -347,10 +347,10 @@ export class SettingsService {
         return /^\d+$/.test(value) ? parseInt(value, 10) : value;
     }
 
-    private getNumber(key: string): number {
+    private getNumber(key: string): number | undefined {
         const value = this.getValue(key);
 
-        return /^\d+$/.test(value) ? parseInt(value, 10) : null;
+        return /^\d+$/.test(value) ? parseInt(value, 10) : undefined;
     }
 
     private getBoolean(key: string): boolean {
@@ -365,7 +365,7 @@ export class SettingsService {
         return val.replace('\'', '').replace('"', '');
     }
 
-    private setValue(key: string, value: any): void {
+    private setValue(key: string, value: string): void {
         this.localStorage.store(key, value);
     }
 

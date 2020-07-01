@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Comment } from 'src/app/models/comment.model';
@@ -9,31 +9,27 @@ import { Comment } from 'src/app/models/comment.model';
     styleUrls: ['./comments-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommentsCardComponent implements OnInit {
-    @Input() comments: Comment[];
+export class CommentsCardComponent {
+    @Input() comments?: Comment[];
     @Output() saveComment = new EventEmitter<string>();
 
     form: FormGroup;
     columnsToDisplay = ['entryDate', 'username', 'commentText'];
 
-    constructor(
-        private formBuilder: FormBuilder
-    ) {
-
-    }
-
-    ngOnInit(): void {
+    constructor(private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
             comment: ['', Validators.required]
         });
     }
 
     onComment(): void {
-        const comment = this.form.get('comment').value as string;
+        const comment = this.form.get('comment')?.value;
 
-        this.saveComment.next(comment);
+        if (!!comment) {
+            this.saveComment.next(comment as string);
 
-        this.clearNewComment();
+            this.clearNewComment();
+        }
     }
 
     onCancel(): void {
@@ -45,6 +41,6 @@ export class CommentsCardComponent implements OnInit {
     }
 
     private clearNewComment(): void {
-        this.form.get('comment').setValue('');
+        this.form.get('comment')?.setValue('');
     }
 }

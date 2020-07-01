@@ -11,10 +11,10 @@ import { CategoryTeaser } from 'src/app/models/category-teaser.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryCardComponent {
-    @Input() category: CategoryTeaser;
-    @Input() showTitle: boolean;
-    @Input() showYear: boolean;
-    @Input() thumbnailSize: ThumbnailSize;
+    @Input() category?: CategoryTeaser;
+    @Input() showTitle?: boolean;
+    @Input() showYear?: boolean;
+    @Input() thumbnailSize?: ThumbnailSize;
 
     categoryTypes = CategoryType;
 
@@ -31,7 +31,7 @@ export class CategoryCardComponent {
 
         if (this.showTitle || this.showYear) {
             classes.push(ThumbnailSize.default.klass);
-        } else {
+        } else if (!!this.thumbnailSize) {
             classes.push(this.thumbnailSize.klass);
         }
 

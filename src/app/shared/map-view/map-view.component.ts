@@ -25,15 +25,15 @@ import { MapMarkerInfo } from './map-marker-info.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
-    options: google.maps.MapOptions;
-    activeImageUrl: string = null;
-    markers = {};
+    options?: google.maps.MapOptions;
+    activeImageUrl?: string;
+    markers = new Map<string, MapMarkerInfo>();
 
-    @ViewChild(GoogleMap) map: GoogleMap;
-    @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
+    @ViewChild(GoogleMap) map?: GoogleMap;
+    @ViewChild(MapInfoWindow) infoWindow?: MapInfoWindow;
 
-    @Input() activePhoto: Photo;
-    @Input() images: MapImage[];
+    @Input() activePhoto?: Photo;
+    @Input() images?: MapImage[];
     @Input() mapTypeId = 'roadmap';
     @Input() zoom = 10;
     @Input() useDarkTheme = false;
@@ -89,32 +89,36 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         }
     }
 
-    getPosition(image: MapImage): google.maps.LatLng {
+    getPosition(image: MapImage): google.maps.LatLng | undefined {
         if (!!image && !!image.latitude && !!image.longitude) {
             return new google.maps.LatLng(image.latitude, image.longitude);
         }
 
-        return null;
+        return undefined;
     }
 
-    getMarkerOptions(marker, image): google.maps.MarkerOptions {
+    getMarkerOptions(marker: MapMarker, image: MapImage): google.maps.MarkerOptions | undefined {
         if (!!image && !!image.latitude && !!image.longitude) {
             // track the marker internally to support navigating across markers from the toolbar
-            this.markers[image.imageUrl] = { marker, image };
+            this.markers.set(image.imageUrl, { marker, image });
 
             return {
                 position: this.getPosition(image)
             };
         }
 
-        return null;
+        return undefined;
     }
 
     updateActivePhoto(): void {
-        const markerInfo = this.markers[this.activePhoto.imageXsSq.url] as MapMarkerInfo;
+        const url = this.activePhoto?.imageXsSq?.url;
 
-        if (!!markerInfo) {
-            this.openInfoWindow(markerInfo.marker, markerInfo.image);
+        if (!!url) {
+            const markerInfo = this.markers.get(url);
+
+            if (!!markerInfo) {
+                this.openInfoWindow(markerInfo.marker, markerInfo.image);
+            }
         }
     }
 
@@ -127,18 +131,22 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     openInfoWindow(marker: MapMarker, image: MapImage): void {
         this.activeImageUrl = image.imageUrl;
 
-        this.infoWindow.close();
-        this.infoWindow.open(marker);
+        if (!!this.infoWindow) {
+            this.infoWindow.close();
+            this.infoWindow.open(marker);
+        }
     }
 
     private updateMapOptions(): void {
-        this.options = {
-            controlSize: 24,
-            center: this.getPosition(this.images[0]),
-            fullscreenControl: false,
-            mapTypeControl: true,
-            mapTypeId: this.mapTypeId,
-            styles: this.getMapTheme()
-        };
+        if (!!this.images) {
+            this.options = {
+                controlSize: 24,
+                center: this.getPosition(this.images[0]),
+                fullscreenControl: false,
+                mapTypeControl: true,
+                mapTypeId: this.mapTypeId,
+                styles: this.getMapTheme()
+            };
+        }
     }
 }

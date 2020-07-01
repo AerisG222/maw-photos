@@ -25,7 +25,7 @@ export class VideoSize {
                 console.error(`invalid video size requested: ${name}`);
         }
 
-        return null;
+        return VideoSize.small;
     }
 
     static nextSize(name: string): VideoSize {
@@ -38,6 +38,6 @@ export class VideoSize {
                 console.error(`invalid video size requested: ${name}`);
         }
 
-        return null;
+        return VideoSize.small;
     }
 }

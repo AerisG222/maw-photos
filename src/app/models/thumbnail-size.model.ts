@@ -33,7 +33,7 @@ export class ThumbnailSize {
                 console.error(`invalid thumbnail size requested: ${name}`);
         }
 
-        return null;
+        return ThumbnailSize.default;
     }
 
     static nextSize(name: string): ThumbnailSize {
@@ -50,6 +50,6 @@ export class ThumbnailSize {
                 console.error(`invalid thumbnail size requested: ${name}`);
         }
 
-        return null;
+        return ThumbnailSize.default;
     }
 }

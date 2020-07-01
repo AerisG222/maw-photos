@@ -63,7 +63,7 @@ export class YearComponent implements OnInit {
 
         this.categories$ = this.store$
             .pipe(
-                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year })
+                select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year as number})
             );
     }
 }

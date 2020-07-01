@@ -9,17 +9,17 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit, OnDestroy {
-    private hotkey: Hotkey;
+    private hotkey?: Hotkey;
 
     @Input() hideOnMobile = false;
-    @Input() icon: string;
-    @Input() iconRotate: number;
-    @Input() isDisabled: boolean;
-    @Input() shortcutKey: string;
-    @Input() shortcutHelp: string;
-    @Input() tooltip: string;
+    @Input() icon?: string;
+    @Input() iconRotate?: number;
+    @Input() isDisabled?: boolean;
+    @Input() shortcutKey?: string;
+    @Input() shortcutHelp?: string;
+    @Input() tooltip?: string;
 
-    @ViewChild('button') button: MatButton;
+    @ViewChild('button') button?: MatButton;
 
     constructor(
         private hotkeysService: HotkeysService,
@@ -50,7 +50,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
     }
 
     triggerRipple(): void {
-        if (!this.button.disabled) {
+        if (!!this.button && !this.button.disabled) {
             this.button.ripple.launch({ centered: true });
         }
     }

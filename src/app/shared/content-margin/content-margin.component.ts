@@ -9,5 +9,5 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentMarginComponent {
-    @Input() margin: CategoryMargin;
+    @Input() margin?: CategoryMargin;
 }

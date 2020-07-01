@@ -10,6 +10,6 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
-    @Input() icon: string;
-    @Input() title: string;
+    @Input() icon?: string;
+    @Input() title?: string;
 }

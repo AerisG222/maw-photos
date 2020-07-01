@@ -12,7 +12,7 @@ import { LayoutStoreSelectors } from 'src/app/core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PrimaryNavComponent implements OnInit {
-    hideNav$: Observable<boolean>;
+    hideNav$?: Observable<boolean>;
 
     constructor(
         private store$: Store

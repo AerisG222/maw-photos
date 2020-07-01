@@ -33,7 +33,7 @@ export class CategoryMargin {
                 console.error(`invalid category margin requested: ${name}`);
         }
 
-        return null;
+        return CategoryMargin.compact;
     }
 
     static nextSize(name: string): CategoryMargin {
@@ -50,6 +50,6 @@ export class CategoryMargin {
                 console.error(`invalid category margin requested: ${name}`);
         }
 
-        return null;
+        return CategoryMargin.compact;
     }
 }

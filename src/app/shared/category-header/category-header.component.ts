@@ -9,6 +9,6 @@ import { Category } from 'src/app/models/category.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryHeaderComponent {
-    @Input() category: Category;
-    @Input() showCategoryAsLink: boolean;
+    @Input() category?: Category;
+    @Input() showCategoryAsLink?: boolean;
 }

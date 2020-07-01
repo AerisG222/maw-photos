@@ -16,8 +16,8 @@ import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-stor
 export class CategoryYearFilterComponent implements OnInit {
     yearControl = new FormControl('');
 
-    allYears$: Observable<number[]>;
-    selectedYear$: Observable<number|string>;
+    allYears$?: Observable<number[]>;
+    selectedYear$?: Observable<number|string>;
 
     constructor(
         private store$: Store

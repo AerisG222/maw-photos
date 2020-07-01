@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         private dialog: MatDialog,
         private store$: Store,
         private breakpointObserver: BreakpointObserver,
-        @Inject(DOCUMENT) private doc
+        @Inject(DOCUMENT) private doc: Document
     ) {
 
     }

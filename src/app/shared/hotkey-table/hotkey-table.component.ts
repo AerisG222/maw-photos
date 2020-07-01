@@ -8,7 +8,7 @@ import { Hotkey } from 'angular2-hotkeys';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HotkeyTableComponent {
-    @Input() hotkeys: Hotkey[];
+    @Input() hotkeys?: Hotkey[];
 
     columnsToDisplay = ['formatted', 'description'];
 }

@@ -1,4 +1,5 @@
 export interface ExifDetail {
+    [prop: string]: unknown;
     bitsPerSample: number;
     compression: string;
     contrast: string;

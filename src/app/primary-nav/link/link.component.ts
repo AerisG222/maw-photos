@@ -7,7 +7,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent {
-    @Input() icon: string;
-    @Input() routerLink: string[];
-    @Input() tooltip: string;
+    @Input() icon?: string;
+    @Input() routerLink?: string[];
+    @Input() tooltip?: string;
 }

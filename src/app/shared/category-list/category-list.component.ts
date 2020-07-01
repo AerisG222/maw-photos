@@ -16,8 +16,8 @@ export class CategoryListComponent {
     private readonly colsNoYear = [ 'icon', 'thumbnail', 'title' ];
     private readonly colsWithYear = [ 'icon', 'thumbnail', 'year', 'title' ];
 
-    @Input() categories: CategoryTeaser[];
-    @Input() thumbnailSize: ThumbnailSize;
+    @Input() categories?: CategoryTeaser[];
+    @Input() thumbnailSize?: ThumbnailSize;
 
     @Input() set showYears(showYear: boolean) {
         if (showYear) {
@@ -30,9 +30,9 @@ export class CategoryListComponent {
     categoryTypes = CategoryType;
     columnsToDisplay = this.colsNoYear;
 
-    constructor(
-        private router: Router
-    ) { }
+    constructor(private router: Router) {
+
+    }
 
     selectCategory(category: Category): void {
         if (!!category) {

@@ -8,8 +8,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 })
 export class LinkComponent {
     @Input() hideOnMobile = false;
-    @Input() icon: string;
-    @Input() iconClass: string;
-    @Input() routerLink: string[];
-    @Input() tooltip: string;
+    @Input() icon?: string;
+    @Input() iconClass?: string;
+    @Input() routerLink?: string[];
+    @Input() tooltip?: string;
 }
