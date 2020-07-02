@@ -10,7 +10,7 @@ export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
     PhotoCategoryStoreSelectors.selectPhotoCategoryError,
     VideoCategoryStoreSelectors.selectVideoCategoryError,
-    (settingsError: string, photoCategoryError: string, videoCategoryError: string) => {
+    (settingsError: string | undefined, photoCategoryError: string | undefined, videoCategoryError: string | undefined) => {
         return settingsError || photoCategoryError || videoCategoryError;
     }
 );
@@ -44,8 +44,8 @@ export const selectAllCategories = createSelector(
 export const selectAllYears = createSelector(
     PhotoCategoryStoreSelectors.selectAllYears,
     VideoCategoryStoreSelectors.selectAllYears,
-    (photoYears: number[], videoYears: number[]) => Array
-        .from(new Set([...photoYears, ...videoYears]))
+    (photoYears: number[] | undefined, videoYears: number[] | undefined) => Array
+        .from(new Set([...(photoYears ?? []), ...(videoYears ?? [])]))
         .sort(sortNumbersDescending)
 );
 

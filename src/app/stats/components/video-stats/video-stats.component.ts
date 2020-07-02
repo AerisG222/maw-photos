@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, Subscription, concat, of } from 'rxjs';
-import { tap, map, delay } from 'rxjs/operators';
+import { tap, map, delay, filter } from 'rxjs/operators';
 import * as numeral from 'numeral';
 
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
@@ -61,7 +61,8 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
             .pipe(
                 tap(x => this.chartValueFormat = x[3]),
                 delay(2),
-                map(x => this.prepareChartData(x[0], x[1], x[2], x[3]))
+                filter(x => !!x[0]),
+                map(x => this.prepareChartData(x[0] as number[], x[1], x[2], x[3]))
             );
 
         this.totalDetails$ = combineLatest([
@@ -69,7 +70,8 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
                 categories$,
             ])
             .pipe(
-                map(x => this.prepareTotalDetails(x[0], x[1]))
+                filter(x => !!x[0]),
+                map(x => this.prepareTotalDetails(x[0] as number[], x[1]))
             );
 
         this.yearDetails$ = combineLatest([

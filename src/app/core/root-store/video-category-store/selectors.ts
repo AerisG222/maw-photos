@@ -7,17 +7,17 @@ import { Category } from 'src/app/models/category.model';
 const getError = (state: State): string | undefined => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getCurrentCategory = (state: State): Category | undefined => state.currentCategory;
-const getAllYears = (state: State): number[] => Object.keys(state.categoryIdsByYear).map(y => Number(y));
-const getCategoryById = (state: State, id: number): Category => state.entities[id];
+const getAllYears = (state: State): number[] | undefined => !!state.categoryIdsByYear ? [...state.categoryIdsByYear.keys()] : undefined;
+const getCategoryById = (state: State, id: number): Category | undefined => state.entities[id];
 
 const getCategoriesForYear = (state: State, year: number): Category[] => {
-    if (!!state.categoryIdsByYear && !!state.categoryIdsByYear[year]) {
-        const idsForYear = state.categoryIdsByYear[year] as number[];
+    if (!!state.categoryIdsByYear && state.categoryIdsByYear.has(year)) {
+        const idsForYear = state.categoryIdsByYear.get(year) as number[];
 
         // sort newest to oldest
         const sortedIdsForYear = [...idsForYear].sort((a, b) => b - a);
 
-        return sortedIdsForYear.map(id => state.entities[id]);
+        return sortedIdsForYear.map(id => state.entities[id] as Category);
     }
 
     return [];

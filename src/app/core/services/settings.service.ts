@@ -78,102 +78,66 @@ export class SettingsService {
 
     }
 
+    // tslint:disable: max-line-length
     load(): Settings {
         try {
-            const categoryListShowCategoryTitles = this.getBoolean(SettingsService.keyCategoryListShowCategoryTitles);
-            const categoryListMissingGpsFilter = this.getBoolean(SettingsService.keyCategoryListMissingGpsFilter);
-            const categoryListYearFilter = this.getStringOrNumber(SettingsService.keyCategoryListYearFilter);
-
-            const photoListShowCategoryBreadcrumbs = this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs);
-            const photoListShowPhotoList = this.getBoolean(SettingsService.keyPhotoListShowPhotoList);
-            const photoListMapViewMapTypeId = this.getValue(SettingsService.keyPhotoListMapViewMapTypeId);
-            const photoListMapViewZoom = this.getNumber(SettingsService.keyPhotoListMapViewZoom);
-
-            const photoInfoPanelShowRatings = this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings);
-            const photoInfoPanelShowCategoryTeaserChooser = this.getBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser);
-            const photoInfoPanelShowComments = this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments);
-            const photoInfoPanelShowExif = this.getBoolean(SettingsService.keyPhotoInfoPanelShowExif);
-            const photoInfoPanelShowEffects = this.getBoolean(SettingsService.keyPhotoInfoPanelShowEffects);
-            const photoInfoPanelShowHistogram = this.getBoolean(SettingsService.keyPhotoInfoPanelShowHistogram);
-            const photoInfoPanelShowMetadataEditor = this.getBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor);
-            const photoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap);
-            const photoInfoPanelExpandedState = this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState);
-            const photoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId);
-            const photoInfoPanelMinimapZoom = this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom);
-
-            const videoListShowCategoryBreadcrumbs = this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs);
-            const videoListShowVideoList = this.getBoolean(SettingsService.keyVideoListShowVideoList);
-
-            const videoInfoPanelShowRatings = this.getBoolean(SettingsService.keyVideoInfoPanelShowRatings);
-            const videoInfoPanelShowCategoryTeaserChooser = this.getBoolean(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser);
-            const videoInfoPanelShowComments = this.getBoolean(SettingsService.keyVideoInfoPanelShowComments);
-            const videoInfoPanelShowMetadataEditor = this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor);
-            const videoInfoPanelShowMinimap = this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap);
-            const videoInfoPanelExpandedState = this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState);
-            const videoInfoPanelMinimapMapTypeId = this.getValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId);
-            const videoInfoPanelMinimapZoom = this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom);
-
-            const searchShowCategoryTitles = this.getBoolean(SettingsService.keySearchShowCategoryTitles);
-            const searchShowCategoryYears = this.getBoolean(SettingsService.keySearchShowCategoryYears);
-
             return {
                 appTheme: this.getTheme(),
 
-                categoryListCategoryFilter: this.getCategoryListCategoryFilter(),
-                categoryListCategoryMargin: this.getCategoryMargin(SettingsService.keyCategoryListCategoryMargin),
-                categoryListMissingGpsFilter,
-                categoryListThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
-                categoryListShowCategoryTitles,
-                categoryListYearFilter,
-                categoryListListType: this.getCategoryListType(SettingsService.keyCategoryListListType),
+                categoryListCategoryFilter:        this.getCategoryListCategoryFilter(),
+                categoryListCategoryMargin:        this.getCategoryMargin(SettingsService.keyCategoryListCategoryMargin),
+                categoryListMissingGpsFilter:      this.getBoolean(SettingsService.keyCategoryListMissingGpsFilter),
+                categoryListThumbnailSize:         this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
+                categoryListShowCategoryTitles:    this.getBoolean(SettingsService.keyCategoryListShowCategoryTitles),
+                categoryListYearFilter:            this.getStringOrNumber(SettingsService.keyCategoryListYearFilter),
+                categoryListListType:              this.getCategoryListType(SettingsService.keyCategoryListListType),
                 categoryListListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListListViewThumbnailSize),
 
-                photoListThumbnailSize: this.getPhotoListThumbnailSize(),
+                photoListThumbnailSize:                   this.getPhotoListThumbnailSize(),
                 photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
-                photoListShowCategoryBreadcrumbs,
-                photoListShowPhotoList,
-                photoListMapViewMapTypeId,
-                photoListMapViewZoom: !!photoListMapViewZoom ? photoListMapViewZoom : DEFAULT_SETTINGS.photoListMapViewZoom,
+                photoListShowCategoryBreadcrumbs:         this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs),
+                photoListShowPhotoList:                   this.getBoolean(SettingsService.keyPhotoListShowPhotoList),
+                photoListMapViewMapTypeId:                this.getValue(SettingsService.keyPhotoListMapViewMapTypeId),
+                photoListMapViewZoom:                     this.getNumber(SettingsService.keyPhotoListMapViewZoom) ?? DEFAULT_SETTINGS.photoListMapViewZoom,
 
-                photoInfoPanelShowRatings,
-                photoInfoPanelShowCategoryTeaserChooser,
-                photoInfoPanelShowComments,
-                photoInfoPanelShowExif,
-                photoInfoPanelShowEffects,
-                photoInfoPanelShowHistogram,
-                photoInfoPanelShowMetadataEditor,
-                photoInfoPanelShowMinimap,
-                photoInfoPanelExpandedState,
-                photoInfoPanelMinimapMapTypeId,
-                // tslint:disable-next-line: max-line-length
-                photoInfoPanelMinimapZoom: !!photoInfoPanelMinimapZoom ? photoInfoPanelMinimapZoom : DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
+                photoInfoPanelShowRatings:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings),
+                photoInfoPanelShowCategoryTeaserChooser: this.getBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser),
+                photoInfoPanelShowComments:              this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments),
+                photoInfoPanelShowExif:                  this.getBoolean(SettingsService.keyPhotoInfoPanelShowExif),
+                photoInfoPanelShowEffects:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowEffects),
+                photoInfoPanelShowHistogram:             this.getBoolean(SettingsService.keyPhotoInfoPanelShowHistogram),
+                photoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor),
+                photoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap),
+                photoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState),
+                photoInfoPanelMinimapMapTypeId:          this.getValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId),
+                photoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
 
-                videoListShowCategoryBreadcrumbs,
-                videoListThumbnailSize: this.getVideoListThumbnailSize(),
-                videoListShowVideoList,
-                videoListVideoSize: this.getVideoListVideoSize(),
+                videoListShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs),
+                videoListThumbnailSize:           this.getVideoListThumbnailSize(),
+                videoListShowVideoList:           this.getBoolean(SettingsService.keyVideoListShowVideoList),
+                videoListVideoSize:               this.getVideoListVideoSize(),
 
-                videoInfoPanelShowRatings,
-                videoInfoPanelShowCategoryTeaserChooser,
-                videoInfoPanelShowComments,
-                videoInfoPanelShowMetadataEditor,
-                videoInfoPanelShowMinimap,
-                videoInfoPanelExpandedState,
-                videoInfoPanelMinimapMapTypeId,
-                // tslint:disable-next-line: max-line-length
-                videoInfoPanelMinimapZoom: !!videoInfoPanelMinimapZoom ? videoInfoPanelMinimapZoom : DEFAULT_SETTINGS.videoInfoPanelMinimapZoom,
+                videoInfoPanelShowRatings:               this.getBoolean(SettingsService.keyVideoInfoPanelShowRatings),
+                videoInfoPanelShowCategoryTeaserChooser: this.getBoolean(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser),
+                videoInfoPanelShowComments:              this.getBoolean(SettingsService.keyVideoInfoPanelShowComments),
+                videoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor),
+                videoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap),
+                videoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState),
+                videoInfoPanelMinimapMapTypeId:          this.getValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId),
+                videoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapZoom,
 
-                searchCategoryMargin: this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
-                searchThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
-                searchShowCategoryTitles,
-                searchShowCategoryYears,
-                searchListType: this.getCategoryListType(SettingsService.keySearchListType),
+                searchCategoryMargin:        this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
+                searchThumbnailSize:         this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
+                searchShowCategoryTitles:    this.getBoolean(SettingsService.keySearchShowCategoryTitles),
+                searchShowCategoryYears:     this.getBoolean(SettingsService.keySearchShowCategoryYears),
+                searchListType:              this.getCategoryListType(SettingsService.keySearchListType),
                 searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
             };
         } catch (e) {
             return DEFAULT_SETTINGS;
         }
     }
+    // tslint:restore: max-line-length
 
     save(settings: Settings): void {
         if (!settings) {
@@ -184,49 +148,49 @@ export class SettingsService {
 
         this.setValue(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
         this.setValue(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
-        this.setValue(SettingsService.keyCategoryListMissingGpsFilter, settings.categoryListMissingGpsFilter);
-        this.setValue(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
+        this.setBoolean(SettingsService.keyCategoryListMissingGpsFilter, settings.categoryListMissingGpsFilter);
+        this.setBoolean(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this.setValue(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
-        this.setValue(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter);
+        this.setValue(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter.toString());
         this.setValue(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
         this.setValue(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
 
-        this.setValue(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
+        this.setBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
         this.setValue(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
-        this.setValue(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
-        this.setValue(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
+        this.setBoolean(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
+        this.setNumber(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
         this.setValue(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
-        this.setValue(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
+        this.setNumber(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
-        this.setValue(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser, settings.photoInfoPanelShowCategoryTeaserChooser);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowMetadataEditor, settings.photoInfoPanelShowMetadataEditor);
-        this.setValue(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
-        this.setValue(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser, settings.photoInfoPanelShowCategoryTeaserChooser);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor, settings.photoInfoPanelShowMetadataEditor);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
+        this.setBoolean(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
         this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
-        this.setValue(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
+        this.setNumber(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
-        this.setValue(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
-        this.setValue(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
+        this.setBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
+        this.setBoolean(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
         this.setValue(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
         this.setValue(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
 
-        this.setValue(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
-        this.setValue(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser, settings.videoInfoPanelShowCategoryTeaserChooser);
-        this.setValue(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
-        this.setValue(SettingsService.keyVideoInfoPanelShowMetadataEditor, settings.videoInfoPanelShowMetadataEditor);
-        this.setValue(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
-        this.setValue(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
+        this.setBoolean(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
+        this.setBoolean(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser, settings.videoInfoPanelShowCategoryTeaserChooser);
+        this.setBoolean(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
+        this.setBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor, settings.videoInfoPanelShowMetadataEditor);
+        this.setBoolean(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
+        this.setBoolean(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
         this.setValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
-        this.setValue(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
+        this.setNumber(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
 
         this.setValue(SettingsService.keySearchCategoryMargin, settings.searchCategoryMargin.name);
-        this.setValue(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
-        this.setValue(SettingsService.keySearchShowCategoryYears, settings.searchShowCategoryYears);
+        this.setBoolean(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
+        this.setBoolean(SettingsService.keySearchShowCategoryYears, settings.searchShowCategoryYears);
         this.setValue(SettingsService.keySearchThumbnailSize, settings.searchThumbnailSize.name);
         this.setValue(SettingsService.keySearchListType, settings.searchListType.name);
         this.setValue(SettingsService.keySearchListViewThumbnailSize, settings.searchListViewThumbnailSize.name);
@@ -367,6 +331,14 @@ export class SettingsService {
 
     private setValue(key: string, value: string): void {
         this.localStorage.store(key, value);
+    }
+
+    private setBoolean(key: string, value: boolean): void {
+        this.localStorage.store(key, value.toString());
+    }
+
+    private setNumber(key: string, value: number): void {
+        this.localStorage.store(key, value.toString());
     }
 
     private clearValue(key: string): void {
