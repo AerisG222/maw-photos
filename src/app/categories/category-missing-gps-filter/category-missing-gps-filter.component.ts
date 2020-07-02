@@ -10,7 +10,7 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
     styleUrls: ['./category-missing-gps-filter.component.scss']
 })
 export class CategoryMissingGpsFilterComponent implements OnInit {
-    filterEnabled?: Observable<boolean>;
+    filterEnabled: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

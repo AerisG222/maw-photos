@@ -15,7 +15,7 @@ import { Photo } from 'src/app/models/photo.model';
 })
 export class SidebarCommentsComponent implements OnInit, OnDestroy {
     currentId = -1;
-    comments$?: Observable<Comment[]>;
+    comments$: Observable<Comment[]> | null = null;
     destroySub = new Subscription();
 
     constructor(

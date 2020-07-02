@@ -11,10 +11,10 @@ import { CategoryTeaser } from 'src/app/models/category-teaser.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryCardComponent {
-    @Input() category?: CategoryTeaser;
-    @Input() showTitle?: boolean;
-    @Input() showYear?: boolean;
-    @Input() thumbnailSize?: ThumbnailSize;
+    @Input() category: CategoryTeaser | null = null;
+    @Input() showTitle: boolean | null = null;
+    @Input() showYear: boolean | null = null;
+    @Input() thumbnailSize: ThumbnailSize | null = null;
 
     categoryTypes = CategoryType;
 

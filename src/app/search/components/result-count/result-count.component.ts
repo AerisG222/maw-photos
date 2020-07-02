@@ -7,6 +7,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResultCountComponent {
-    @Input() resultsShownCount?: number;
-    @Input() totalCount?: number;
+    @Input() resultsShownCount: number | null = null;
+    @Input() totalCount: number | null = null;
 }

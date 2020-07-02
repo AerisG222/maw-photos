@@ -7,8 +7,8 @@ import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    @Input() title?: string;
-    @Input() year?: number;
+    @Input() title: string | null = null;
+    @Input() year: number | null = null;
     @Output() clickYear = new EventEmitter<void>();
 
     onBack(): void {

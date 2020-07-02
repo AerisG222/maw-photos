@@ -5,21 +5,21 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
     providedIn: 'root'
 })
 export class GpsService {
-    parse(val: string): GpsCoordinate | undefined {
+    parse(val: string): GpsCoordinate | null {
         const parts = val.trim()
             .replace('[', '').replace(']', '')
             .replace('(', '').replace(')', '')
             .split(',');
 
         if (parts.length !== 2) {
-            return undefined;
+            return null;
         }
 
         const lat = Number(parts[0]);
         const lng = Number(parts[1]);
 
         if (isNaN(lat) || isNaN(lng)) {
-            return undefined;
+            return null;
         }
 
         return {

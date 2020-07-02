@@ -18,9 +18,9 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
 export class ToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
-    isFirst$?: Observable<boolean>;
-    isLast$?: Observable<boolean>;
-    settings?: Settings;
+    isFirst$: Observable<boolean> | null = null;
+    isLast$: Observable<boolean> | null = null;
+    settings: Settings | null = null;
 
     constructor(private store$: Store) {
 

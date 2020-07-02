@@ -9,17 +9,17 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit, OnDestroy {
-    private hotkey?: Hotkey;
+    private hotkey: Hotkey | null = null;
 
     @Input() hideOnMobile = false;
-    @Input() icon?: string;
-    @Input() iconRotate?: number;
-    @Input() isDisabled?: boolean;
-    @Input() shortcutKey?: string;
-    @Input() shortcutHelp?: string;
-    @Input() tooltip?: string;
+    @Input() icon: string | null = null;
+    @Input() iconRotate: number | null = null;
+    @Input() isDisabled: boolean | null = null;
+    @Input() shortcutKey: string | null = null;
+    @Input() shortcutHelp: string | null = null;
+    @Input() tooltip: string | null = null;
 
-    @ViewChild('button') button?: MatButton;
+    @ViewChild('button') button: MatButton | null = null;
 
     constructor(
         private hotkeysService: HotkeysService,
@@ -30,7 +30,8 @@ export class ButtonComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         if (!!this.shortcutKey) {
-            this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp);
+            // tslint:disable-next-line: max-line-length
+            this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp ?? undefined);
 
             this.hotkeysService.add(this.hotkey);
         }

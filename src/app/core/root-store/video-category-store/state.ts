@@ -8,15 +8,15 @@ export const VideoCategoryAdapter: EntityAdapter<Category> = createEntityAdapter
 });
 
 export interface State extends EntityState<Category> {
-    error?: string;
+    error: string | null;
     isLoading: boolean;
-    currentCategory?: Category;
-    categoryIdsByYear?: Map<number, number[]>;
+    currentCategory: Category | null;
+    categoryIdsByYear: Map<number, number[]> | null;
 }
 
 export const initialState: State = VideoCategoryAdapter.getInitialState({
     isLoading: false,
-    error: undefined,
-    currentCategory: undefined,
-    categoryIdsByYear: undefined
+    error: null,
+    currentCategory: null,
+    categoryIdsByYear: null
 });

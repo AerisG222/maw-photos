@@ -1,9 +1,9 @@
-import { on, createReducer, Action } from '@ngrx/store';
+import { on, createReducer } from '@ngrx/store';
 
 import * as LayoutActions from './actions';
-import { initialState, State } from './state';
+import { initialState } from './state';
 
-const reducer = createReducer(
+export const reducer = createReducer(
     initialState,
     on(LayoutActions.resetLayoutRequest, state => ({
         ...state,
@@ -34,7 +34,3 @@ const reducer = createReducer(
         }
     }))
 );
-
-export function layoutReducer(state: State | undefined, action: Action): State {
-    return reducer(state, action);
-}

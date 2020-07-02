@@ -9,8 +9,8 @@ import { MatDialogRef } from '@angular/material/dialog';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HotkeyDialogComponent implements OnInit {
-    firstHotkeys?: Hotkey[];
-    secondHotkeys?: Hotkey[];
+    firstHotkeys: Hotkey[] | null = null;
+    secondHotkeys: Hotkey[] | null = null;
 
     constructor(
         private dialogRef: MatDialogRef<HotkeyDialogComponent>,
@@ -34,7 +34,7 @@ export class HotkeyDialogComponent implements OnInit {
 
         if (keys.length <= 5) {
             this.firstHotkeys = keys;
-            this.secondHotkeys = undefined;
+            this.secondHotkeys = null;
         } else {
             const half = Math.floor(keys.length / 2);
 

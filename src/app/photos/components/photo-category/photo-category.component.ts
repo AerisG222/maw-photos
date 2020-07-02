@@ -14,9 +14,9 @@ import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoCategoryComponent implements OnInit, OnDestroy {
-    isFullscreen$?: Observable<boolean>;
-    isMapView$?: Observable<boolean>;
-    isBulkEditView$?: Observable<boolean>;
+    isFullscreen$: Observable<boolean> | null = null;
+    isMapView$: Observable<boolean> | null = null;
+    isBulkEditView$: Observable<boolean> | null = null;
 
     constructor(
         private route: ActivatedRoute,

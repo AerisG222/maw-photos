@@ -10,7 +10,7 @@
         </app-stats-header>
 
         <div layout-cards>
-            <app-stats-stat-card *ngIf="(selectedYear$ | async) === null" [detail]="totalDetails$ | async"></app-stats-stat-card>
+            <app-stats-stat-card *ngIf="(selectedYear$ | async) === -1" [detail]="totalDetails$ | async"></app-stats-stat-card>
             <app-stats-stat-card *ngIf="selectedYear$ | async" [detail]="yearDetails$ | async"></app-stats-stat-card>
         </div>
 
@@ -29,7 +29,7 @@
 
         <app-stats-stat-chart
             layout-chart
-            [chartData]="chartData$ | async"
+            [chartData]="(chartData$ | async)"
             [format]="chartValueFormat"
             (cellSelected)="onSelectYear($event)">
         </app-stats-stat-chart>

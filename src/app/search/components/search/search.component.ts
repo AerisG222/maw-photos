@@ -21,19 +21,19 @@ import { clearRequest } from 'src/app/search/store/actions';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
-    currentResult$?: Observable<SearchResult<MultimediaCategory> | undefined>;
-    categories$?: Observable<CategoryTeaser[]>;
-    showListView$?: Observable<boolean>;
-    showGridView$?: Observable<boolean>;
-    gridShowTitles$?: Observable<boolean>;
-    gridShowYears$?: Observable<boolean>;
-    listThumbnailSize$?: Observable<ThumbnailSize>;
-    gridThumbnailSize$?: Observable<ThumbnailSize>;
-    margin$?: Observable<CategoryMargin>;
-    hasMoreResults$?: Observable<boolean>;
-    totalResults$?: Observable<number>;
-    shownResults$?: Observable<number>;
-    showNoResults$?: Observable<boolean>;
+    currentResult$: Observable<SearchResult<MultimediaCategory> | null> | null = null;
+    categories$: Observable<CategoryTeaser[]> | null = null;
+    showListView$: Observable<boolean> | null = null;
+    showGridView$: Observable<boolean> | null = null;
+    gridShowTitles$: Observable<boolean> | null = null;
+    gridShowYears$: Observable<boolean> | null = null;
+    listThumbnailSize$: Observable<ThumbnailSize> | null = null;
+    gridThumbnailSize$: Observable<ThumbnailSize> | null = null;
+    margin$: Observable<CategoryMargin> | null = null;
+    hasMoreResults$: Observable<boolean> | null = null;
+    totalResults$: Observable<number> | null = null;
+    shownResults$: Observable<number> | null = null;
+    showNoResults$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

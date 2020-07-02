@@ -15,7 +15,7 @@ import { Video } from 'src/app/models/video.model';
 })
 export class SidebarCommentsComponent implements OnInit {
     currentId = -1;
-    comments$?: Observable<Comment[] | undefined>;
+    comments$: Observable<Comment[] | null> | null = null;
     destroySub = new Subscription();
 
     constructor(

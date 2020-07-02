@@ -1,4 +1,4 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import * as PhotoActions from './actions';
 import { Photo } from 'src/app/models/photo.model';
@@ -6,26 +6,26 @@ import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { photoAdapter, initialState, State } from './state';
 
 // TODO: set gps detail in photo itself
-const reducer = createReducer(
+export const reducer = createReducer(
     initialState,
     on(PhotoActions.clearRequest, state => (
         photoAdapter.removeAll({
             ...state,
-            firstPhoto: undefined,
-            lastPhoto: undefined,
-            currentPhoto: undefined
+            firstPhoto: null,
+            lastPhoto: null,
+            currentPhoto: null
         })
     )),
     on(PhotoActions.loadRequest, (state, { categoryId }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadSuccess, (state, { photos }) =>
         photoAdapter.setAll(photos, {
             ...state,
             isLoading: false,
-            error: undefined})
+            error: null})
     ),
     on(PhotoActions.loadFailure, (state, { error }) => ({
         ...state,
@@ -35,12 +35,12 @@ const reducer = createReducer(
     on(PhotoActions.loadCommentsRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadCommentsSuccess, (state, { comments }) => ({
         ...state,
         isLoading: false,
-        error: undefined,
+        error: null,
         currentPhotoComments: comments
     })),
     on(PhotoActions.loadCommentsFailure, (state, { error }) => ({
@@ -51,13 +51,13 @@ const reducer = createReducer(
     on(PhotoActions.loadRandomRequest, state => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadRandomSuccess, (state, { photo }) =>
         photoAdapter.upsertOne(photo, {
             ...state,
             isLoading: false,
-            error: undefined
+            error: null
         })
     ),
     on(PhotoActions.loadRandomFailure, (state, { error }) => ({
@@ -68,7 +68,7 @@ const reducer = createReducer(
     on(PhotoActions.loadMultipleRandomRequest, state => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadMultipleRandomSuccess, (state, { photos }) => {
         const uniquePhotos = photos.filter((s1, pos, arr) => arr.findIndex((s2) => s2.id === s1.id) === pos);
@@ -76,7 +76,7 @@ const reducer = createReducer(
         return photoAdapter.addMany(uniquePhotos, {
             ...state,
             isLoading: false,
-            error: undefined
+            error: null
         });
     }),
     on(PhotoActions.loadMultipleRandomFailure, (state, { error }) => ({
@@ -87,12 +87,12 @@ const reducer = createReducer(
     on(PhotoActions.loadRatingRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadRatingSuccess, (state, { rating }) => ({
         ...state,
         isLoading: false,
-        error: undefined,
+        error: null,
         currentPhotoRating: rating
     })),
     on(PhotoActions.loadRatingFailure, (state, { error }) => ({
@@ -106,11 +106,11 @@ const reducer = createReducer(
     })),
     on(PhotoActions.setCurrentById, (state, { id }) => ({
         ...state,
-        currentPhoto: state.entities[id]
+        currentPhoto: state.entities[id] ?? null
     })),
     on(PhotoActions.clearCurrent, (state) => ({
         ...state,
-        currentPhoto: undefined
+        currentPhoto: null
     })),
     on(PhotoActions.moveNextRequest, state => getStateForNewPhoto(state, nextPhoto(state))),
     on(PhotoActions.moveNextWithGpsRequest, state => getStateForNewPhoto(state, nextPhotoWithGps(state))),
@@ -119,12 +119,12 @@ const reducer = createReducer(
     on(PhotoActions.ratePhotoRequest, (state, { photoId, userRating }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.ratePhotoSuccess, (state, { rating }) => ({
         ...state,
         isLoading: false,
-        error: undefined,
+        error: null,
         currentPhotoRating: {
             userRating: rating.userRating,
             averageRating: Math.round(rating.averageRating)
@@ -138,12 +138,12 @@ const reducer = createReducer(
     on(PhotoActions.addCommentRequest, (state, { photoId, comment }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.addCommentSuccess, (state, { photoId }) => ({
         ...state,
         isLoading: false,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.addCommentFailure, (state, { error }) => ({
         ...state,
@@ -153,12 +153,12 @@ const reducer = createReducer(
     on(PhotoActions.loadExifRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadExifSuccess, (state, { exif }) => ({
         ...state,
         isLoading: false,
-        error: undefined,
+        error: null,
         currentPhotoExifData: exif
     })),
     on(PhotoActions.loadExifFailure, (state, { error }) => ({
@@ -169,12 +169,12 @@ const reducer = createReducer(
     on(PhotoActions.loadGpsDetailRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
         ...state,
         isLoading: false,
-        error: undefined,
+        error: null,
         currentPhotoGpsDetail: gpsDetail
     })),
     on(PhotoActions.loadGpsDetailFailure, (state, { error }) => ({
@@ -185,7 +185,7 @@ const reducer = createReducer(
     on(PhotoActions.setGpsCoordinateOverrideRequest, (state, { photoId }) => ({
         ...state,
         isLoading: true,
-        error: undefined,
+        error: null,
         pendingActionCount: state.pendingActionCount + 1,
     })),
     on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { photoId, gpsDetail }) => {
@@ -193,7 +193,7 @@ const reducer = createReducer(
         const updatedState = ({
             ...state,
             isLoading: false,
-            error: undefined,
+            error: null,
             currentPhotoGpsDetail: gpsDetail,
             pendingActionCount: state.pendingActionCount - 1,
         });
@@ -313,10 +313,6 @@ const reducer = createReducer(
         isBulkEditView: !state.isBulkEditView
     }))
 );
-
-export function photoReducer(state: State | undefined, action: Action): State {
-    return reducer(state, action);
-}
 
 function nextPhoto(state: State): Photo {
     return getPhotoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));

@@ -16,8 +16,8 @@ import { Photo } from 'src/app/models/photo.model';
 })
 export class SidebarMetadataEditorComponent implements OnInit {
     currentId = -1;
-    overrideGpsData$?: Observable<GpsCoordinate | undefined>;
-    sourceGpsData$?: Observable<GpsCoordinate>;
+    overrideGpsData$: Observable<GpsCoordinate | null> | null = null;
+    sourceGpsData$: Observable<GpsCoordinate | null> | null = null;
     destroySub = new Subscription();
 
     constructor(
@@ -31,13 +31,13 @@ export class SidebarMetadataEditorComponent implements OnInit {
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
                 filter(x => !!x),
-                map(gpsDetail => (gpsDetail as GpsDetail)?.source)
+                map(gpsDetail => gpsDetail?.source ?? null)
             );
 
         this.overrideGpsData$ = this.store$
             .pipe(
                 select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
-                map(gpsDetail => gpsDetail?.override)
+                map(gpsDetail => gpsDetail?.override ?? null)
             );
 
         this.destroySub.add(this.store$

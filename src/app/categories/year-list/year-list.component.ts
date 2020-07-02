@@ -14,9 +14,9 @@ import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors, AuthS
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YearListComponent implements OnInit {
-    margin$?: Observable<CategoryMargin>;
-    years$?: Observable<number[]>;
-    isAdmin$?: Observable<boolean>;
+    margin$: Observable<CategoryMargin> | null = null;
+    years$: Observable<number[]> | null = null;
+    isAdmin$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store,

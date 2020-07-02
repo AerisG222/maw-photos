@@ -16,8 +16,8 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BulkEditComponent implements OnInit {
-    category$?: Observable<Category>;
-    photos$?: Observable<Photo[]>;
+    category$: Observable<Category> | null = null;
+    photos$: Observable<Photo[]> | null = null;
     showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
     selectedPhotos: Photo[] = [];
 

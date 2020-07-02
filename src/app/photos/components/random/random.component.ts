@@ -18,7 +18,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     private killFetch = new Subject<boolean>();
     private destroySub = new Subscription();
 
-    isFullscreen$?: Observable<boolean>;
+    isFullscreen$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

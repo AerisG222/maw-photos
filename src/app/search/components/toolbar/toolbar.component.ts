@@ -18,11 +18,11 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
 export class ToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
-    settings?: Settings;
-    isListView$?: Observable<boolean>;
-    isGridView$?: Observable<boolean>;
-    showCategoryTitles$?: Observable<boolean>;
-    showCategoryYears$?: Observable<boolean>;
+    settings: Settings | null = null;
+    isListView$: Observable<boolean> | null = null;
+    isGridView$: Observable<boolean> | null = null;
+    showCategoryTitles$: Observable<boolean> | null = null;
+    showCategoryYears$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

@@ -4,12 +4,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SearchStoreEffects } from './effects';
 import { SEARCH_FEATURE_NAME } from './feature-name';
-import { searchReducer } from './reducer';
+import { reducer } from './reducer';
 
 @NgModule({
     declarations: [],
     imports: [
-        StoreModule.forFeature(SEARCH_FEATURE_NAME, searchReducer),
+        StoreModule.forFeature(SEARCH_FEATURE_NAME, reducer),
         EffectsModule.forFeature([SearchStoreEffects])
     ]
 })

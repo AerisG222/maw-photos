@@ -1,10 +1,10 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import { initialState, State } from './state';
+import { initialState } from './state';
 import * as SettingsActions from './actions';
 import { CategoryMargin } from 'src/app/models/category-margin.model';
 
-const reducer = createReducer(
+export const reducer = createReducer(
     initialState,
     on(SettingsActions.updateMobileMarginsRequest, state => ({
         ...state,
@@ -16,13 +16,13 @@ const reducer = createReducer(
     })),
     on(SettingsActions.loadRequest, state => ({
         ...state,
-        error: undefined,
+        error: null,
         isLoading: true
     })),
     on(SettingsActions.loadSuccess, (state, { settings }) => ({
         ...state,
         settings: { ...settings },
-        error: undefined,
+        error: null,
         isLoading: false
     })),
     on(SettingsActions.loadFailure, (state, { error }) => ({
@@ -32,7 +32,7 @@ const reducer = createReducer(
     })),
     on(SettingsActions.saveRequest, state => ({
         ...state,
-        error: undefined
+        error: null
     })),
     on(SettingsActions.saveFailure, (state, { error }) => ({
         ...state,
@@ -41,7 +41,7 @@ const reducer = createReducer(
     on(SettingsActions.saveSuccess, (state, { settings }) => ({
         ...state,
         settings: { ...settings },
-        error: undefined
+        error: null
     })),
     on(SettingsActions.toggleCategoryListCategoryTitlesRequest, state => ({
         ...state,
@@ -338,7 +338,3 @@ const reducer = createReducer(
         }
     }))
 );
-
-export function settingsReducer(state: State | undefined, action: Action): State {
-    return reducer(state, action);
-}

@@ -4,11 +4,11 @@ import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 import { Category } from 'src/app/models/category.model';
 
-const getError = (state: State): string | undefined => state.error;
+const getError = (state: State): string | null => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
-const getCurrentCategory = (state: State): Category | undefined => state.currentCategory;
-const getAllYears = (state: State): number[] | undefined => !!state.categoryIdsByYear ? [...state.categoryIdsByYear.keys()] : undefined;
-const getCategoryById = (state: State, id: number): Category | undefined => state.entities[id];
+const getCurrentCategory = (state: State): Category | null => state.currentCategory;
+const getAllYears = (state: State): number[] | null => !!state.categoryIdsByYear ? [...state.categoryIdsByYear.keys()] : null;
+const getCategoryById = (state: State, id: number): Category | null => state.entities[id] ?? null;
 
 const getCategoriesForYear = (state: State, year: number): Category[] => {
     if (!!state.categoryIdsByYear && state.categoryIdsByYear.has(year)) {

@@ -15,8 +15,8 @@ import { Video } from 'src/app/models/video.model';
 })
 export class SidebarMetadataEditorComponent implements OnInit {
     currentId = -1;
-    overrideGpsData$?: Observable<GpsCoordinate | undefined>;
-    sourceGpsData$?: Observable<GpsCoordinate | undefined>;
+    overrideGpsData$: Observable<GpsCoordinate | null> | null = null;
+    sourceGpsData$: Observable<GpsCoordinate | null> | null = null;
     destroySub = new Subscription();
 
     constructor(
@@ -29,13 +29,13 @@ export class SidebarMetadataEditorComponent implements OnInit {
         this.sourceGpsData$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
-                map(gps => gps?.source)
+                map(gps => gps?.source ?? null)
             );
 
         this.overrideGpsData$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
-                map(gps => gps?.override)
+                map(gps => gps?.override ?? null)
             );
 
         this.destroySub.add(this.store$

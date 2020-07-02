@@ -15,7 +15,7 @@ import { Photo } from 'src/app/models/photo.model';
 })
 export class SidebarExifComponent implements OnInit, OnDestroy {
     destroySub = new Subscription();
-    exifContainer$?: Observable<ExifContainer>;
+    exifContainer$: Observable<ExifContainer> | null = null;
 
     constructor(
         private store$: Store

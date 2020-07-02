@@ -10,8 +10,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoSelectGridComponent {
-    @Input() photos?: Photo[];
-    @Input() selectedPhotos?: Photo[];
+    @Input() photos: Photo[] | null = null;
+    @Input() selectedPhotos: Photo[] | null = null;
     @Output() photoSelected = new EventEmitter<Photo>();
     @Output() photoDeselected = new EventEmitter<Photo>();
 

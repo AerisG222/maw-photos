@@ -13,7 +13,7 @@ import { PhotoStoreSelectors } from 'src/app/photos/store';
 export class ToolbarSlideshowButtonComponent implements OnInit {
     @Output() toggleSlideshow = new EventEmitter<void>();
 
-    slideshowPlaying$?: Observable<boolean>;
+    slideshowPlaying$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

@@ -11,9 +11,9 @@ import { StatDetail } from '../../models/stat-detail.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatChartComponent implements AfterViewInit, OnChanges {
-    @Input() chartData?: StatDetail[];
+    @Input() chartData: StatDetail[] | null = null;
     @Output() cellSelected = new EventEmitter();
-    @ViewChild(TreeMapComponent) treeMap?: TreeMapComponent;
+    @ViewChild(TreeMapComponent) treeMap: TreeMapComponent | null = null;
 
     @Input() set format(value: string) {
         switch (value) {

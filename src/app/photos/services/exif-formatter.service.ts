@@ -161,7 +161,7 @@ export class ExifFormatterService {
         exif.category = cfg.category;
         exif.displayName = cfg.displayName;
 
-        if (cfg.formatFunc) {
+        if (!!cfg.formatFunc) {
             exif.displayValue = cfg.formatFunc(value as number);
         }
 

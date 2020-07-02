@@ -4,12 +4,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { VideoStoreEffects } from './effects';
 import { VIDEO_FEATURE_NAME } from './feature-name';
-import { videoReducer } from './reducer';
+import { reducer } from './reducer';
 
 @NgModule({
     declarations: [],
     imports: [
-        StoreModule.forFeature(VIDEO_FEATURE_NAME, videoReducer),
+        StoreModule.forFeature(VIDEO_FEATURE_NAME, reducer),
         EffectsModule.forFeature([VideoStoreEffects])
     ]
 })

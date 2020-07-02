@@ -16,7 +16,7 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 })
 export class BulkEditGpsEditorComponent implements OnInit {
     gpsForm: FormGroup;
-    hasPendingEdits$?: Observable<boolean>;
+    hasPendingEdits$: Observable<boolean> | null = null;
 
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
@@ -66,25 +66,25 @@ export class BulkEditGpsEditorComponent implements OnInit {
     }
 
     onCancelGps(): void {
-        this.updateGpsForm(undefined);
+        this.updateGpsForm(null);
     }
 
-    private getGpsCoordinateFromForm(): GpsCoordinate | undefined {
+    private getGpsCoordinateFromForm(): GpsCoordinate | null {
         if (!this.gpsForm.valid) {
-            return undefined;
+            return null;
         }
 
         const latitude = Number(this.gpsForm.get('latitude')?.value);
         const longitude = Number(this.gpsForm.get('longitude')?.value);
 
         if (isNaN(latitude) || isNaN(longitude)) {
-            return undefined;
+            return null;
         }
 
         return { latitude, longitude};
     }
 
-    private updateGpsForm(gps: GpsCoordinate | undefined): void {
+    private updateGpsForm(gps: GpsCoordinate | null): void {
         this.gpsForm.get('latitude')?.setValue(gps?.latitude);
         this.gpsForm.get('longitude')?.setValue(gps?.longitude);
     }

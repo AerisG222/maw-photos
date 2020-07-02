@@ -10,7 +10,7 @@ import { Comment } from 'src/app/models/comment.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentsCardComponent {
-    @Input() comments?: Comment[];
+    @Input() comments: Comment[] | null = null;
     @Output() saveComment = new EventEmitter<string>();
 
     form: FormGroup;

@@ -13,7 +13,7 @@ import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { CategoryListType } from 'src/app/models/category-list-type.model';
 
-const getError = (state: State): string | undefined => state.error;
+const getError = (state: State): string | null => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getSettings = (state: State): Settings => state.settings;
 

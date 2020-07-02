@@ -10,10 +10,10 @@ import { CategoryTeaser } from 'src/app/models/category-teaser.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryGridComponent {
-    @Input() categories?: CategoryTeaser[];
-    @Input() showTitles?: boolean;
-    @Input() showYears?: boolean;
-    @Input() thumbnailSize?: ThumbnailSize;
+    @Input() categories: CategoryTeaser[] | null = null;
+    @Input() showTitles: boolean | null = null;
+    @Input() showYears: boolean | null = null;
+    @Input() thumbnailSize: ThumbnailSize | null = null;
 
     categoryTrackByFn(index: number, teaser: CategoryTeaser): string {
         return `${teaser.type}_${teaser.id}`;

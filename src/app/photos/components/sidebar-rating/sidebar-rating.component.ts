@@ -17,7 +17,7 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     private currentId = -1;
     private destroySub = new Subscription();
 
-    rating$?: Observable<Rating | undefined>;
+    rating$: Observable<Rating | null> | null = null;
 
     constructor(
         private store$: Store

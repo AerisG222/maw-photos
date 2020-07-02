@@ -12,19 +12,19 @@ import { Rating } from 'src/app/models/rating.model';
 })
 export class RatingCardComponent implements AfterViewInit {
     private isReady = false;
-    private theRating?: Rating;
+    private theRating: Rating | null = null;
 
     @Input()
-    set rating(value: Rating | undefined) {
+    set rating(value: Rating | null) {
         this.theRating = value;
         this.updateRating();
     }
-    get rating(): Rating | undefined { return this.theRating; }
+    get rating(): Rating | null { return this.theRating; }
 
     @Output() rate = new EventEmitter<number>();
 
-    @ViewChild('userRating') userRatingComponent?: NgxStarsComponent;
-    @ViewChild('averageRating') averageRatingComponent?: NgxStarsComponent;
+    @ViewChild('userRating') userRatingComponent: NgxStarsComponent | null = null;
+    @ViewChild('averageRating') averageRatingComponent: NgxStarsComponent | null = null;
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef

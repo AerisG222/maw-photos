@@ -19,7 +19,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
     private videoId = -1;
     private destroySub = new Subscription();
 
-    currentTeaserUrl$?: Observable<string>;
+    currentTeaserUrl$: Observable<string> | null = null;
 
     constructor(
         private store$: Store

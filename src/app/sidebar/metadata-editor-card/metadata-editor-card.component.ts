@@ -11,8 +11,8 @@ import { GpsService } from 'src/app/core/services/gps.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MetadataEditorCardComponent {
-    @Input() sourceGpsData?: GpsCoordinate;
-    @Input() overrideGpsData?: GpsCoordinate;
+    @Input() sourceGpsData: GpsCoordinate | null = null;
+    @Input() overrideGpsData: GpsCoordinate | null = null;
     @Output() save = new EventEmitter<GpsCoordinate>();
     @Output() saveAndMoveNext = new EventEmitter<GpsCoordinate>();
 
@@ -64,25 +64,25 @@ export class MetadataEditorCardComponent {
     }
 
     onCancel(): void {
-        this.updateOverrideData(undefined);
+        this.updateOverrideData(null);
     }
 
-    private getOverrideFromForm(): GpsCoordinate | undefined {
+    private getOverrideFromForm(): GpsCoordinate | null {
         if (!this.form.valid) {
-            return undefined;
+            return null;
         }
 
         const latitude = Number(this.form.get('latitudeOverride')?.value);
         const longitude = Number(this.form.get('longitudeOverride')?.value);
 
         if (isNaN(latitude) || isNaN(longitude)) {
-            return undefined;
+            return null;
         }
 
         return { latitude, longitude};
     }
 
-    private updateOverrideData(gps: GpsCoordinate | undefined): void {
+    private updateOverrideData(gps: GpsCoordinate | null): void {
         this.form.get('latitudeOverride')?.setValue(gps?.latitude);
         this.form.get('longitudeOverride')?.setValue(gps?.longitude);
     }

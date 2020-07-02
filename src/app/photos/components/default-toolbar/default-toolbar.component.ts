@@ -24,21 +24,21 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultToolbarComponent implements OnInit, OnDestroy {
-    @Input() allowCategoryDownload?: boolean;
+    @Input() allowCategoryDownload: boolean | null = null;
 
     private destroySub = new Subscription();
 
-    isAdmin$?: Observable<boolean>;
-    isFirst$?: Observable<boolean>;
-    isLast$?: Observable<boolean>;
-    enableMapView$?: Observable<boolean>;
-    category$?: Observable<PhotoCategory>;
-    settings?: Settings;
+    isAdmin$: Observable<boolean> | null = null;
+    isFirst$: Observable<boolean> | null = null;
+    isLast$: Observable<boolean> | null = null;
+    enableMapView$: Observable<boolean> | null = null;
+    category$: Observable<PhotoCategory> | null = null;
+    settings: Settings | null = null;
 
-    smDownloadUrl?: string;
-    mdDownloadUrl?: string;
-    lgDownloadUrl?: string;
-    prtDownloadUrl?: string;
+    smDownloadUrl: string | null = null;
+    mdDownloadUrl: string | null = null;
+    lgDownloadUrl: string | null = null;
+    prtDownloadUrl: string | null = null;
 
     constructor(private store$: Store) {
 

@@ -16,9 +16,9 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapViewComponent implements OnInit, OnDestroy {
-    activePhoto$?: Observable<Photo>;
-    mapImages$?: Observable<MapImage[]>;
-    settings$?: Observable<Settings>;
+    activePhoto$: Observable<Photo> | null = null;
+    mapImages$: Observable<MapImage[]> | null = null;
+    settings$: Observable<Settings> | null = null;
 
     constructor(private store$: Store) {
 

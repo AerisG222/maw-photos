@@ -14,9 +14,9 @@ import { Location } from 'src/app/models/location.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarMinimapComponent implements OnInit {
-    mapTypeId$?: Observable<string>;
-    zoom$?: Observable<number>;
-    position$?: Observable<Location>;
+    mapTypeId$: Observable<string> | null = null;
+    zoom$: Observable<number> | null = null;
+    position$: Observable<Location> | null = null;
 
     constructor(
         private store$: Store

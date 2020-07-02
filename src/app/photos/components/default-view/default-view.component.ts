@@ -22,14 +22,14 @@ import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/cor
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultViewComponent implements OnInit {
-    @Input() allowCategoryDownload?: boolean;
-    @Input() showCategoryAsLink?: boolean;
+    @Input() allowCategoryDownload: boolean | null = null;
+    @Input() showCategoryAsLink: boolean | null = null;
 
-    settings$?: Observable<Settings>;
-    category$?: Observable<Category>;
-    photos$?: Observable<Photo[]>;
-    activePhoto$?: Observable<Photo>;
-    effects$?: Observable<PhotoEffects>;
+    settings$: Observable<Settings> | null = null;
+    category$: Observable<Category> | null = null;
+    photos$: Observable<Photo[]> | null = null;
+    activePhoto$: Observable<Photo> | null = null;
+    effects$: Observable<PhotoEffects> | null = null;
 
     constructor(
         private store$: Store,

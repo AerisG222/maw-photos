@@ -1,22 +1,22 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import { VideoCategoryAdapter, initialState, State } from './state';
+import { VideoCategoryAdapter, initialState } from './state';
 import * as VideoCategoryActions from './actions';
 import { getIdsByYear } from '../category-helpers';
 
-const reducer = createReducer(
+export const reducer = createReducer(
     initialState,
     on(VideoCategoryActions.loadRequest, state => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(VideoCategoryActions.loadSuccess, (state, { categories }) =>
         VideoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
-            error: undefined
+            error: null
         })
     ),
     on(VideoCategoryActions.loadFailure, (state, { error }) => ({
@@ -34,19 +34,19 @@ const reducer = createReducer(
     })),
     on(VideoCategoryActions.setCurrentById, (state, { categoryId }) => ({
         ...state,
-        currentCategory: state.entities[categoryId]
+        currentCategory: state.entities[categoryId] ?? null
     })),
     on(VideoCategoryActions.setTeaserRequest, state => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
         VideoCategoryAdapter.upsertOne(category, {
             ...state,
             currentCategory: category,
             isLoading: false,
-            error: undefined
+            error: null
         })
     )),
     on(VideoCategoryActions.setTeaserFailure, (state, { error }) => ({
@@ -74,7 +74,3 @@ const reducer = createReducer(
         return state;
     })
 );
-
-export function videoCategoryReducer(state: State | undefined, action: Action): State {
-    return reducer(state, action);
-}

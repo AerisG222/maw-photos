@@ -16,8 +16,8 @@ export class CategoryListComponent {
     private readonly colsNoYear = [ 'icon', 'thumbnail', 'title' ];
     private readonly colsWithYear = [ 'icon', 'thumbnail', 'year', 'title' ];
 
-    @Input() categories?: CategoryTeaser[];
-    @Input() thumbnailSize?: ThumbnailSize;
+    @Input() categories: CategoryTeaser[] | null = null;
+    @Input() thumbnailSize: ThumbnailSize | null = null;
 
     @Input() set showYears(showYear: boolean) {
         if (showYear) {

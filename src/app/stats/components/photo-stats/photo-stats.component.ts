@@ -21,11 +21,11 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     form: FormGroup;
-    chartData$?: Observable<StatDetail[]>;
+    chartData$: Observable<StatDetail[]> | null = null;
     chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(-1);
-    totalDetails$?: Observable<FormattedStatDetail[]>;
-    yearDetails$?: Observable<FormattedStatDetail[]>;
+    totalDetails$: Observable<FormattedStatDetail[]> | null = null;
+    yearDetails$: Observable<FormattedStatDetail[]> | null = null;
 
     constructor(
         private formBuilder: FormBuilder,

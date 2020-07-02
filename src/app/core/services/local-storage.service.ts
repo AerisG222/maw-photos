@@ -35,7 +35,7 @@ export class LocalStorageService {
     }
 
     clear(key?: string): void {
-        if (key !== undefined) {
+        if (!!key) {
             this.strategy.removeItem(this.normalize(key));
         } else {
             this.strategy.clear();

@@ -22,7 +22,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     img: HTMLImageElement;
     channel = 'rgb';
 
-    @ViewChild('canvas') canvas?: ElementRef;
+    @ViewChild('canvas') canvas: ElementRef | null = null;
 
     get canvasEl(): HTMLCanvasElement {
         return this.canvas?.nativeElement as HTMLCanvasElement;

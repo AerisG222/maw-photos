@@ -311,10 +311,10 @@ export class SettingsService {
         return /^\d+$/.test(value) ? parseInt(value, 10) : value;
     }
 
-    private getNumber(key: string): number | undefined {
+    private getNumber(key: string): number | null {
         const value = this.getValue(key);
 
-        return /^\d+$/.test(value) ? parseInt(value, 10) : undefined;
+        return /^\d+$/.test(value) ? parseInt(value, 10) : null;
     }
 
     private getBoolean(key: string): boolean {

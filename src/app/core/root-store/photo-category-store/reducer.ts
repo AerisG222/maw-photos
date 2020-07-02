@@ -1,22 +1,22 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import * as PhotoCategoryActions from './actions';
-import { photoCategoryAdapter, initialState, State } from './state';
+import { photoCategoryAdapter, initialState } from './state';
 import { getIdsByYear } from '../category-helpers';
 
-const reducer = createReducer(
+export const reducer = createReducer(
     initialState,
     on(PhotoCategoryActions.loadRequest, state => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoCategoryActions.loadSuccess, (state, { categories }) =>
         photoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
-            error: undefined
+            error: null
         })
     ),
     on(PhotoCategoryActions.loadFailure, (state, { error }) => ({
@@ -34,19 +34,19 @@ const reducer = createReducer(
     })),
     on(PhotoCategoryActions.setCurrentById, (state, { categoryId }) => ({
         ...state,
-        currentCategory: state.entities[categoryId]
+        currentCategory: state.entities[categoryId] ?? null
     })),
     on(PhotoCategoryActions.setTeaserRequest, state => ({
         ...state,
         isLoading: true,
-        error: undefined
+        error: null
     })),
     on(PhotoCategoryActions.setTeaserSuccess, (state, { category }) => (
         photoCategoryAdapter.upsertOne(category, {
             ...state,
             currentCategory: category,
             isLoading: false,
-            error: undefined
+            error: null
         })
     )),
     on(PhotoCategoryActions.setTeaserFailure, (state, { error }) => ({
@@ -74,7 +74,3 @@ const reducer = createReducer(
         return state;
     })
 );
-
-export function photoCategoryReducer(state: State | undefined, action: Action): State {
-    return reducer(state, action);
-}

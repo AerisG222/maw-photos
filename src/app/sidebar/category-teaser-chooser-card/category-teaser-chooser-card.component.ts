@@ -7,7 +7,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryTeaserChooserCardComponent {
-    @Input() currentTeaserUrl?: string;
+    @Input() currentTeaserUrl: string | null = null;
     @Output() setTeaser = new EventEmitter<void>();
 
     onSetTeaser(): void {

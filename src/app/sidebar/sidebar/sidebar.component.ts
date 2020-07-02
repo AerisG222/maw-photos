@@ -11,7 +11,7 @@ import { LayoutStoreSelectors } from 'src/app/core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent implements OnInit {
-    hidePanel$?: Observable<boolean>;
+    hidePanel$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

@@ -13,15 +13,15 @@ export const searchAdapter: EntityAdapter<MultimediaCategory> = createEntityAdap
 });
 
 export interface State extends EntityState<MultimediaCategory> {
-    error?: string;
+    error: string | null;
     isLoading: boolean;
-    query?: string;
-    currentResult?: SearchResult<MultimediaCategory>;
+    query: string | null;
+    currentResult: SearchResult<MultimediaCategory> | null;
 }
 
 export const initialState: State = searchAdapter.getInitialState({
     isLoading: false,
-    error: undefined,
-    query: undefined,
-    currentResult: undefined
+    error: null,
+    query: null,
+    currentResult: null
 });

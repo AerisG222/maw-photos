@@ -1,27 +1,27 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import { initialState, State, searchAdapter } from './state';
+import { initialState, searchAdapter } from './state';
 import * as SearchActions from './actions';
 
-const reducer = createReducer(
+export const reducer = createReducer(
     initialState,
     on(SearchActions.clearRequest, state => (
         searchAdapter.removeAll({
             ...state,
-            query: undefined,
-            currentResult: undefined
+            query: null,
+            currentResult: null
         })
     )),
     on(SearchActions.queryRequest, (state, { query, start }) => ({
         ...state,
         isLoading: true,
-        error: undefined,
+        error: null,
     })),
     on(SearchActions.querySuccess, (state, { query, result }) =>
     searchAdapter.setAll(result.results, {
             ...state,
             isLoading: false,
-            error: undefined,
+            error: null,
             currentResult: result,
             query
         })
@@ -34,13 +34,13 @@ const reducer = createReducer(
     on(SearchActions.queryMoreRequest, (state, { query, start }) => ({
         ...state,
         isLoading: true,
-        error: undefined,
+        error: null,
     })),
     on(SearchActions.queryMoreSuccess, (state, { query, result }) =>
         searchAdapter.addMany(result.results, {
                 ...state,
                 isLoading: false,
-                error: undefined,
+                error: null,
                 currentResult: result,
                 query
             })
@@ -51,7 +51,3 @@ const reducer = createReducer(
         error
     }))
 );
-
-export function searchReducer(state: State | undefined, action: Action): State {
-    return reducer(state, action);
-}

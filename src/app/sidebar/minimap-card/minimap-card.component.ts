@@ -27,15 +27,15 @@ export class MinimapCardComponent implements OnInit {
     set zoom(value: number) { this.minimapZoom = value; this.updateOptions(); }
     get zoom(): number { return this.minimapZoom; }
 
-    @Input() position?: Location;
+    @Input() position: Location | null = null;
 
     @Output() mapTypeChange = new EventEmitter<string>();
     @Output() zoomChange = new EventEmitter<number>();
 
-    @ViewChild(GoogleMap) map?: GoogleMap;
+    @ViewChild(GoogleMap) map: GoogleMap | null = null;
 
-    options?: google.maps.MapOptions;
-    mapTheme?: google.maps.MapTypeStyle[];
+    options: google.maps.MapOptions | null = null;
+    mapTheme: google.maps.MapTypeStyle[] | null = null;
 
     constructor(
         private store$: Store
