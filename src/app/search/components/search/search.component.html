@@ -24,7 +24,7 @@
         </app-shared-category-grid>
 
         <app-search-result-count
-            *ngIf="(totalResults$ | async) > 0"
+            *ngIf="!!(totalResults$ | async)"
             [resultsShownCount]="shownResults$ | async"
             [totalCount]="totalResults$ | async">
         </app-search-result-count>

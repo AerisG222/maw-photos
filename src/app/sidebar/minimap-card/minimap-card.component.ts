@@ -16,30 +16,35 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 })
 export class MinimapCardComponent implements OnInit {
     // arbitrarily use photo minimap settings by default
-    private minimapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
-    private minimapZoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
+    minimapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
+    minimapZoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
+    options: google.maps.MapOptions | null = null;
+    mapTheme: google.maps.MapTypeStyle[] = GoogleMapThemes.THEME_DARK;
 
     @Input()
-    set mapTypeId(value: string) { this.minimapTypeId = value; this.updateOptions(); }
-    get mapTypeId(): string { return this.minimapTypeId; }
+    set mapTypeId(value: string | null) {
+        if (!!value) {
+            this.minimapTypeId = value;
+            this.updateOptions();
+        }
+    }
 
     @Input()
-    set zoom(value: number) { this.minimapZoom = value; this.updateOptions(); }
-    get zoom(): number { return this.minimapZoom; }
+    set zoom(value: number | null) {
+        if (!!value) {
+            this.minimapZoom = value;
+            this.updateOptions();
+        }
+    }
 
-    @Input() position: Location | null = null;
+    @Input() position: Location = { position: new google.maps.LatLng(0, 0), isValid: false};
 
     @Output() mapTypeChange = new EventEmitter<string>();
     @Output() zoomChange = new EventEmitter<number>();
 
     @ViewChild(GoogleMap) map: GoogleMap | null = null;
 
-    options: google.maps.MapOptions | null = null;
-    mapTheme: google.maps.MapTypeStyle[] | null = null;
-
-    constructor(
-        private store$: Store
-    ) {
+    constructor(private store$: Store) {
 
     }
 
@@ -77,20 +82,12 @@ export class MinimapCardComponent implements OnInit {
             controlSize: 24,
             fullscreenControl: true,
             mapTypeControl: true,
-            streetViewControl: false
+            streetViewControl: false,
         } as google.maps.MapOptions;
 
-        if (!!this.mapTypeId) {
-            opts.mapTypeId = this.mapTypeId;
-        }
-
-        if (!!this.mapTheme) {
-            opts.styles = this.mapTheme;
-        }
-
-        if (!!this.zoom) {
-            opts.zoom = this.zoom;
-        }
+        opts.mapTypeId = this.minimapTypeId;
+        opts.styles = this.mapTheme;
+        opts.zoom = this.minimapZoom;
 
         this.options = opts;
     }

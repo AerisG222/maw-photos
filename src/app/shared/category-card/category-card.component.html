@@ -1,4 +1,5 @@
 <a
+    *ngIf="!!category"
     [routerLink]="[category.route, category.id]"
     [matTooltip]="category.name"
     [matTooltipDisabled]="showTitle">

@@ -81,16 +81,24 @@ export class DefaultViewComponent implements OnInit {
             );
     }
 
-    getEffectStyles(effects: PhotoEffects): SafeStyle {
-        const style = this.effectStyleBuilder.buildFilter(effects);
+    getEffectStyles(effects: PhotoEffects | null): SafeStyle {
+        if (!!effects) {
+            const style = this.effectStyleBuilder.buildFilter(effects);
 
-        return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+            return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+        }
+
+        return '';
     }
 
-    getTransform(effects: PhotoEffects): SafeStyle {
-        const style = this.effectStyleBuilder.buildTransform(effects);
+    getTransform(effects: PhotoEffects | null): SafeStyle {
+        if (!!effects) {
+            const style = this.effectStyleBuilder.buildTransform(effects);
 
-        return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+            return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+        }
+
+        return '';
     }
 
     onSwipeLeft(): void {

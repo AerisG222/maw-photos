@@ -46,9 +46,13 @@ export class FullscreenViewComponent implements OnInit, OnDestroy {
         this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
     }
 
-    getTransform(effects: PhotoEffects): SafeStyle {
-        const style = this.effectStyleBuilder.buildTransform(effects);
+    getTransform(effects: PhotoEffects | null): SafeStyle {
+        if (!!effects) {
+            const style = this.effectStyleBuilder.buildTransform(effects);
 
-        return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+            return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
+        }
+
+        return '';
     }
 }
