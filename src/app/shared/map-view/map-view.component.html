@@ -9,8 +9,8 @@
     #map>
     <map-marker
         *ngFor="let image of images"
-        [options]="getMarkerOptions(marker, image)"
-        (mapClick)="selectActivePhoto(marker, image)"
+        [options]="getMarkerOptions($any(marker), image)"
+        (mapClick)="selectActivePhoto($any(marker), image)"
         #marker>
     </map-marker>
     <map-info-window #infoWindow>
