@@ -43,6 +43,7 @@ const getPhotoInfoPanelMinimapZoom = (state: State): number => state.settings.ph
 const getPhotoListShowPhotoList = (state: State): boolean => state.settings.photoListShowPhotoList;
 const getPhotoListMapViewMapTypeId = (state: State): string => state.settings.photoListMapViewMapTypeId;
 const getPhotoListMapViewZoom = (state: State): number => state.settings.photoListMapViewZoom;
+const getPhotoListSlideshowDisplayDurationSeconds = (state: State): number => state.settings.photoListSlideshowDisplayDurationSeconds;
 
 const getVideoListShowVideoList = (state: State): boolean => state.settings.videoListShowVideoList;
 const getVideoListVideoSize = (state: State): VideoSize => state.settings.videoListVideoSize;
@@ -97,6 +98,8 @@ export const selectPhotoListShowPhotoList = createSelector(selectSettingsState, 
 // tslint:disable-next-line: max-line-length
 export const selectPhotoListMapViewMapTypeId = createSelector(selectSettingsState, getPhotoListMapViewMapTypeId);
 export const selectPhotoListMapViewZoom = createSelector(selectSettingsState, getPhotoListMapViewZoom);
+// tslint:disable-next-line: max-line-length
+export const selectPhotoListSlideshowDisplayDurationSeconds = createSelector(selectSettingsState, getPhotoListSlideshowDisplayDurationSeconds);
 
 export const selectVideoListShowVideoList = createSelector(selectSettingsState, getVideoListShowVideoList);
 export const selectVideoListVideoSize = createSelector(selectSettingsState, getVideoListVideoSize);
