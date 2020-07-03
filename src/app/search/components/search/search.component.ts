@@ -32,6 +32,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     margin$: Observable<CategoryMargin> | null = null;
     hasMoreResults$: Observable<boolean> | null = null;
     totalResults$: Observable<number> | null = null;
+    showTotalResults$: Observable<boolean> | null = null;
     shownResults$: Observable<number> | null = null;
     showNoResults$: Observable<boolean> | null = null;
 
@@ -116,7 +117,12 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.totalResults$ = this.store$
             .pipe(
                 select(selectSearchCurrentResult),
-                map(c => (!!c) ? c.totalFound : 0)
+                map(c => c?.totalFound ?? 0)
+            );
+
+        this.showTotalResults$ = this.totalResults$
+            .pipe(
+                map(x => x > 0)
             );
 
         this.shownResults$ = this.store$

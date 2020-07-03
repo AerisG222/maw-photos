@@ -22,7 +22,7 @@ export interface PhotoApiService {
     getExifData(photoId: number): Observable<ExifDetail>;
     getRating(photoId: number): Observable<Rating>;
     ratePhoto(photoId: number, rating: number): Observable<Rating>;
-    addComment(photoId: number, comment: string): Observable<any>;
+    addComment(photoId: number, comment: string): Observable<ApiCollection<Comment>>;
     setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory>;
     getGpsDetail(photoId: number): Observable<GpsDetail>;
     setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<GpsDetail>;

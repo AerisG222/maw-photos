@@ -97,7 +97,7 @@ export class SettingsService {
                 photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
                 photoListShowCategoryBreadcrumbs:         this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs),
                 photoListShowPhotoList:                   this.getBoolean(SettingsService.keyPhotoListShowPhotoList),
-                photoListMapViewMapTypeId:                this.getValue(SettingsService.keyPhotoListMapViewMapTypeId),
+                photoListMapViewMapTypeId:                this.getStringOrNull(SettingsService.keyPhotoListMapViewMapTypeId) ?? DEFAULT_SETTINGS.photoListMapViewMapTypeId,
                 photoListMapViewZoom:                     this.getNumber(SettingsService.keyPhotoListMapViewZoom) ?? DEFAULT_SETTINGS.photoListMapViewZoom,
 
                 photoInfoPanelShowRatings:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings),
@@ -109,7 +109,7 @@ export class SettingsService {
                 photoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor),
                 photoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap),
                 photoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState),
-                photoInfoPanelMinimapMapTypeId:          this.getValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId),
+                photoInfoPanelMinimapMapTypeId:          this.getStringOrNull(SettingsService.keyPhotoInfoPanelMinimapMapTypeId) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId,
                 photoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
 
                 videoListShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs),
@@ -123,7 +123,7 @@ export class SettingsService {
                 videoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor),
                 videoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap),
                 videoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState),
-                videoInfoPanelMinimapMapTypeId:          this.getValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId),
+                videoInfoPanelMinimapMapTypeId:          this.getStringOrNull(SettingsService.keyVideoInfoPanelMinimapMapTypeId) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapMapTypeId,
                 videoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapZoom,
 
                 searchCategoryMargin:        this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
@@ -215,11 +215,19 @@ export class SettingsService {
     }
 
     getAuthRedirectUrl(): string {
-        return this.getValue(SettingsService.keyAuthRedirectUrl);
+        const url = this.getStringOrNull(SettingsService.keyAuthRedirectUrl);
+
+        if (!!url) {
+            return url;
+        }
+
+        console.error('did not obtain valid auth redirect url');
+
+        return '';
     }
 
     private getTheme(): Theme {
-        const themeName = this.getValue(SettingsService.keyAppTheme);
+        const themeName = this.getStringOrNull(SettingsService.keyAppTheme);
 
         try {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
@@ -229,7 +237,7 @@ export class SettingsService {
     }
 
     private getCategoryListType(key: string): CategoryListType {
-        const name = this.getValue(key);
+        const name = this.getStringOrNull(key);
 
         try {
             return name !== null ? CategoryListType.forName(name) : CategoryListType.grid;
@@ -239,7 +247,7 @@ export class SettingsService {
     }
 
     private getCategoryListCategoryFilter(): CategoryFilter {
-        const name = this.getValue(SettingsService.keyCategoryListCategoryFilter);
+        const name = this.getStringOrNull(SettingsService.keyCategoryListCategoryFilter);
 
         try {
             return name !== null ? CategoryFilter.forName(name) : CategoryFilter.all;
@@ -249,7 +257,7 @@ export class SettingsService {
     }
 
     private getCategoryMargin(key: string): CategoryMargin {
-        const name = this.getValue(key);
+        const name = this.getStringOrNull(key);
 
         try {
             return name !== null ? CategoryMargin.forName(name) : CategoryMargin.compact;
@@ -259,25 +267,37 @@ export class SettingsService {
     }
 
     private getCategoryThumbnailSize(key: string): ThumbnailSize {
-        const sizeName = this.getValue(key);
+        const sizeName = this.getStringOrNull(key);
 
-        return this.getThumbnailSize(sizeName);
+        if (!!sizeName) {
+            return this.getThumbnailSize(sizeName);
+        }
+
+        return DEFAULT_SETTINGS.categoryListThumbnailSize;
     }
 
     private getPhotoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this.getValue(SettingsService.keyPhotoListThumbnailSize);
+        const sizeName = this.getStringOrNull(SettingsService.keyPhotoListThumbnailSize);
 
-        return this.getThumbnailSize(sizeName);
+        if (!!sizeName) {
+            return this.getThumbnailSize(sizeName);
+        }
+
+        return DEFAULT_SETTINGS.photoListThumbnailSize;
     }
 
     private getVideoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this.getValue(SettingsService.keyVideoListThumbnailSize);
+        const sizeName = this.getStringOrNull(SettingsService.keyVideoListThumbnailSize);
 
-        return this.getThumbnailSize(sizeName);
+        if (!!sizeName) {
+            return this.getThumbnailSize(sizeName);
+        }
+
+        return DEFAULT_SETTINGS.videoListThumbnailSize;
     }
 
     private getVideoListVideoSize(): VideoSize {
-        const sizeName = this.getValue(SettingsService.keyVideoListVideoSize);
+        const sizeName = this.getStringOrNull(SettingsService.keyVideoListVideoSize);
 
         try {
             return sizeName !== null ? VideoSize.forName(sizeName) : VideoSize.large;
@@ -306,39 +326,57 @@ export class SettingsService {
     }
 
     private getStringOrNumber(key: string): string | number {
-        const value = this.getValue(key).toLowerCase();
+        const value = this.getStringOrNull(key)?.toLowerCase();
 
-        return /^\d+$/.test(value) ? parseInt(value, 10) : value;
+        if (!!value) {
+            return /^\d+$/.test(value) ? parseInt(value, 10) : value;
+        }
+
+        console.error('did not obtain a string or number!');
+
+        return '';
     }
 
     private getNumber(key: string): number | null {
-        const value = this.getValue(key);
+        const value = this.getStringOrNull(key);
 
-        return /^\d+$/.test(value) ? parseInt(value, 10) : null;
+        if (!!value) {
+            return /^\d+$/.test(value) ? parseInt(value, 10) : null;
+        }
+
+        return null;
     }
 
     private getBoolean(key: string): boolean {
-        const value = this.getValue(key);
+        const value = this.getStringOrNull(key);
 
-        return /^true$/i.test(value);
+        if (!!value) {
+            return /^true$/i.test(value);
+        }
+
+        return false;
     }
 
-    private getValue(key: string): string {
-        const val = this.localStorage.retrieve(key) as string;
+    private getStringOrNull(key: string): string | null {
+        const val = this.localStorage.getStringOrNull(key);
 
-        return val.replace('\'', '').replace('"', '');
+        if (!!val) {
+            return val.replace('\'', '').replace('"', '');
+        }
+
+        return null;
     }
 
     private setValue(key: string, value: string): void {
-        this.localStorage.store(key, value);
+        this.localStorage.setString(key, value);
     }
 
     private setBoolean(key: string, value: boolean): void {
-        this.localStorage.store(key, value.toString());
+        this.localStorage.setString(key, value.toString());
     }
 
     private setNumber(key: string, value: number): void {
-        this.localStorage.store(key, value.toString());
+        this.localStorage.setString(key, value.toString());
     }
 
     private clearValue(key: string): void {

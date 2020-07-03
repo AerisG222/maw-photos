@@ -61,8 +61,8 @@ export class MockVideoApiService implements VideoApiService {
         return of({ userRating: 3, averageRating: 4.5 });
     }
 
-    addComment(videoId: number, comment: string): Observable<any> {
-        return of(true);
+    addComment(videoId: number, comment: string): Observable<ApiCollection<Comment>> {
+        return this.getComments(videoId);
     }
 
     getGpsDetail(videoId: number): Observable<GpsDetail> {

@@ -160,8 +160,8 @@ export class MockPhotoApiService implements PhotoApiService {
         });
     }
 
-    addComment(photoId: number, comment: string): Observable<any> {
-        return of(true);
+    addComment(photoId: number, comment: string): Observable<ApiCollection<Comment>> {
+        return this.getComments(photoId);
     }
 
     getGpsDetail(videoId: number): Observable<GpsDetail> {

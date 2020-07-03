@@ -12,7 +12,7 @@ import { photoAdapter, State } from './state';
 import { ExifContainer } from 'src/app/models/exif-container';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
 
-const getError = (state: State): any => state.error;
+const getError = (state: State): string | null => state.error;
 const getIsLoading = (state: State): boolean => state.isLoading;
 const getPendingActionCount = (state: State): number => state.pendingActionCount;
 const getCurrentPhoto = (state: State): Photo | null => state.currentPhoto;

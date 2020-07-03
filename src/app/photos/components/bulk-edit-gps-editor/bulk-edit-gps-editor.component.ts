@@ -42,7 +42,7 @@ export class BulkEditGpsEditorComponent implements OnInit {
     onPaste(evt: ClipboardEvent): void {
         const clipboardData = evt.clipboardData; // || window.clipboardData
 
-        if(!!clipboardData) {
+        if (!!clipboardData) {
             const pastedText = clipboardData.getData('text');
 
             if (!!pastedText) {

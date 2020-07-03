@@ -10,6 +10,7 @@ import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/pho
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { PhotoEffects } from 'src/app/models/photo-effects.model';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -205,12 +206,13 @@ export class PhotoStoreEffects {
     rotateClockwiseEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),
-            withLatestFrom(this.store$),
+            concatMap(action => of(action).pipe(
+                withLatestFrom(this.store$.pipe(select(PhotoStoreSelectors.selectCurrentPhotoEffects)))
+            )),
             map(x => {
                 const action = x[0];
-                const state = x[1] as any;
-                const effects = state.photos.currentPhotoEffects;
-                const rotation = effects && effects.rotation ? new PhotoRotation(effects.rotation.klass) : new PhotoRotation();
+                const photoEffects = x[1];
+                const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateClockwise();
 
@@ -223,11 +225,13 @@ export class PhotoStoreEffects {
         this.actions$.pipe(
             ofType(PhotoActions.rotateCounterClockwiseRequest),
             withLatestFrom(this.store$),
+            concatMap(action => of(action).pipe(
+                withLatestFrom(this.store$.pipe(select(PhotoStoreSelectors.selectCurrentPhotoEffects)))
+            )),
             map(x => {
                 const action = x[0];
-                const state = x[1] as any;
-                const effects = state.photos.currentPhotoEffects;
-                const rotation = effects && effects.rotation ? new PhotoRotation(effects.rotation.klass) : new PhotoRotation();
+                const photoEffects = x[1];
+                const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateCounterClockwise();
 

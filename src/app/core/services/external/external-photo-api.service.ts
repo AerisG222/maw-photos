@@ -108,11 +108,11 @@ export class ExternalPhotoApiService implements PhotoApiService {
             );
     }
 
-    addComment(photoId: number, comment: string): Observable<any> {
+    addComment(photoId: number, comment: string): Observable<ApiCollection<Comment>> {
         const url = this.getAbsoluteUrl(`photos/${photoId}/comments`);
 
         return this.http
-            .post(url, { photoId, comment })
+            .post<ApiCollection<Comment>>(url, { photoId, comment })
             .pipe(
                 first()
             );
