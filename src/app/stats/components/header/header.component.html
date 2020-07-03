@@ -1,8 +1,8 @@
-<span class="mat-h1" *ngIf="!!!year">
+<span class="mat-h1" *ngIf="!!!year || year <= 0">
     {{ title }}
 </span>
 
-<a (click)="onBack()" class="mat-h1" *ngIf="!!year">
+<a (click)="onBack()" class="mat-h1" *ngIf="!!year && year > 0">
     {{ title }}
 </a>
 
