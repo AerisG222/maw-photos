@@ -5,7 +5,6 @@ import { filter, map } from 'rxjs/operators';
 
 import { PhotoStoreSelectors } from 'src/app/photos/store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { Location } from 'src/app/models/location.model';
 
 @Component({
     selector: 'app-photos-sidebar-minimap',
@@ -16,7 +15,7 @@ import { Location } from 'src/app/models/location.model';
 export class SidebarMinimapComponent implements OnInit {
     mapTypeId$: Observable<string> | null = null;
     zoom$: Observable<number> | null = null;
-    position$: Observable<Location> | null = null;
+    position$: Observable<google.maps.LatLng | null> | null = null;
 
     constructor(
         private store$: Store
@@ -35,16 +34,10 @@ export class SidebarMinimapComponent implements OnInit {
             .pipe(
                 map(photo => {
                     if (!!photo && !!photo.latitude && photo.longitude) {
-                        return {
-                            position: new google.maps.LatLng(photo.latitude, photo.longitude),
-                            isValid: true
-                        };
+                        return new google.maps.LatLng(photo.latitude, photo.longitude);
                     }
 
-                    return {
-                        position: new google.maps.LatLng(0, 0),
-                        isValid: false
-                    };
+                    return null;
                 })
             );
 

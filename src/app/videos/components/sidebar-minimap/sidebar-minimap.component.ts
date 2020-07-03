@@ -5,7 +5,6 @@ import { filter, map } from 'rxjs/operators';
 
 import { VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { Location } from 'src/app/models/location.model';
 
 @Component({
     selector: 'app-videos-sidebar-minimap',
@@ -16,7 +15,7 @@ import { Location } from 'src/app/models/location.model';
 export class SidebarMinimapComponent implements OnInit {
     mapTypeId$: Observable<string> | null = null;
     zoom$: Observable<number> | null = null;
-    position$: Observable<Location> | null = null;
+    position$: Observable<google.maps.LatLng | null> | null = null;
 
     constructor(
         private store$: Store
@@ -35,16 +34,10 @@ export class SidebarMinimapComponent implements OnInit {
             .pipe(
                 map(video => {
                     if (!!video && !!video.latitude && video.longitude) {
-                        return {
-                            position: new google.maps.LatLng(video.latitude, video.longitude),
-                            isValid: true
-                        };
+                        return new google.maps.LatLng(video.latitude, video.longitude);
                     }
 
-                    return {
-                        position: new google.maps.LatLng(0, 0),
-                        isValid: false
-                    };
+                    return null;
                 })
             );
 

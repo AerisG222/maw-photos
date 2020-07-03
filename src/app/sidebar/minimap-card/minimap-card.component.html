@@ -6,12 +6,12 @@
         [height]="'300px'"
         [width]="'464px'"
         [options]="options"
-        [center]="position.position"
+        [center]="center"
         [zoom]="zoom"
         (maptypeidChanged)="onMapTypeChange()"
         (zoomChanged)="onZoomChange()"
         #map>
-        <map-marker *ngIf="position.isValid" [position]="position.position"></map-marker>
+        <map-marker *ngIf="!!poi" [position]="poi"></map-marker>
     </google-map>
 
 </app-sidebar-card>

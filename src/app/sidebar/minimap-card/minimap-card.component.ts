@@ -5,7 +5,6 @@ import { first, tap } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
-import { Location } from 'src/app/models/location.model';
 import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 
 @Component({
@@ -15,11 +14,15 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapCardComponent implements OnInit {
+    private static readonly DEFAULT_CENTER = new google.maps.LatLng(0, 0);
+
     // arbitrarily use photo minimap settings by default
     minimapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
     minimapZoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
     options: google.maps.MapOptions | null = null;
     mapTheme: google.maps.MapTypeStyle[] = GoogleMapThemes.THEME_DARK;
+    center = MinimapCardComponent.DEFAULT_CENTER;
+    poi: google.maps.LatLng | null = null;
 
     @Input()
     set mapTypeId(value: string | null) {
@@ -37,7 +40,16 @@ export class MinimapCardComponent implements OnInit {
         }
     }
 
-    @Input() position: Location = { position: new google.maps.LatLng(0, 0), isValid: false};
+    @Input()
+    set position(pos: google.maps.LatLng | null) {
+        if (!!pos) {
+            this.center = pos;
+            this.poi = pos;
+        } else {
+            this.center = MinimapCardComponent.DEFAULT_CENTER;
+            this.poi = null;
+        }
+    }
 
     @Output() mapTypeChange = new EventEmitter<string>();
     @Output() zoomChange = new EventEmitter<number>();
