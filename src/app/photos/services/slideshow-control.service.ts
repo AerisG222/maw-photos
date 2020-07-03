@@ -29,6 +29,8 @@ export class SlideshowControlService {
                     } else {
                         this.startSlideshow(displayDuration * 1000);
                     }
+                } else {
+                    this.stopSlideshow();
                 }
             })
         ).subscribe();
