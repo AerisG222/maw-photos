@@ -10,8 +10,8 @@
         </app-stats-header>
 
         <div layout-cards>
-            <app-stats-stat-card *ngIf="(selectedYear$ | async) !== null && (selectedYear$ | async) < 0" [detail]="totalDetails$ | async"></app-stats-stat-card>
-            <app-stats-stat-card *ngIf="(selectedYear$ | async) !== null && (selectedYear$ | async) > 0" [detail]="yearDetails$ | async"></app-stats-stat-card>
+            <app-stats-stat-card *ngIf="(selectedYear$ | async)! < 0" [detail]="totalDetails$ | async"></app-stats-stat-card>
+            <app-stats-stat-card *ngIf="(selectedYear$ | async)! > 0" [detail]="yearDetails$ | async"></app-stats-stat-card>
         </div>
 
         <form layout-form [formGroup]="form">
