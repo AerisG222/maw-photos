@@ -1,8 +1,9 @@
-<a
+<button
+    *ngIf="!!link"
     mat-button
     [class.hide-on-mobile]="hideOnMobile"
-    [href]="link"
     [matTooltip]="tooltip"
-    [matTooltipPosition]="'after'">
+    [matTooltipPosition]="'after'"
+    (click)="onClick()">
     <mat-icon [inline]="true" [ngClass]="iconClass">{{ icon }}</mat-icon>
-</a>
+</button>

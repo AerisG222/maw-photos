@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternalLinkComponent } from './external-link.component';
+import { DownloadButtonComponent } from './download-button.component';
 
-describe('ExternalLinkComponent', () => {
-  let component: ExternalLinkComponent;
-  let fixture: ComponentFixture<ExternalLinkComponent>;
+describe('DownloadButtonComponent', () => {
+  let component: DownloadButtonComponent;
+  let fixture: ComponentFixture<DownloadButtonComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExternalLinkComponent ]
+      declarations: [ DownloadButtonComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExternalLinkComponent);
+    fixture = TestBed.createComponent(DownloadButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

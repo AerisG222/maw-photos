@@ -45,6 +45,7 @@ $custom-typography: mat-typography-config(
 
 @import 'app/toolbar/toolbar/toolbar.component.theme';
 @import 'app/toolbar/button/button.component.theme';
+@import 'app/toolbar/download-button//download-button.component.theme';
 @import 'app/toolbar/link/link.component.theme';
 
 @import 'app/stats/components/header/header.component.theme';
@@ -81,6 +82,7 @@ $custom-typography: mat-typography-config(
     @include app-stats-header-component-theme($theme);
 
     @include app-toolbar-button-component-theme($theme);
+    @include app-toolbar-download-button-component-theme($theme);
     @include app-toolbar-link-component-theme($theme);
     @include app-toolbar-toolbar-component-theme($theme);
 

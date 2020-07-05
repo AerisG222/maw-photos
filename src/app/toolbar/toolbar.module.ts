@@ -4,7 +4,7 @@ import { BaseModule } from 'src/app/base/base.module';
 
 import { ButtonComponent } from './button/button.component';
 import { DividerComponent } from './divider/divider.component';
-import { ExternalLinkComponent } from './external-link/external-link.component';
+import { DownloadButtonComponent } from './download-button/download-button.component';
 import { GroupComponent } from './group/group.component';
 import { LinkComponent } from './link/link.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
@@ -16,7 +16,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
         ButtonComponent,
         GroupComponent,
         DividerComponent,
-        ExternalLinkComponent,
+        DownloadButtonComponent,
         LinkComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
@@ -28,7 +28,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     exports: [
         ButtonComponent,
         DividerComponent,
-        ExternalLinkComponent,
+        DownloadButtonComponent,
         GroupComponent,
         LinkComponent,
         MoveNextButtonComponent,
