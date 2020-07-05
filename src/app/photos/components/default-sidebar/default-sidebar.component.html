@@ -2,43 +2,43 @@
     <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
         <app-photos-sidebar-rating
             *ngIf="showRatings$ | async"
-            @toggleInfoPanel>
+            @sidebarCardShowHide>
         </app-photos-sidebar-rating>
 
         <app-photos-sidebar-comments
             *ngIf="showComments$ | async"
-            @toggleInfoPanel>
+            @sidebarCardShowHide>
         </app-photos-sidebar-comments>
 
         <app-photos-sidebar-exif
             *ngIf="showExif$ | async"
-            @toggleInfoPanel>
+            @sidebarCardShowHide>
         </app-photos-sidebar-exif>
 
         <app-photos-sidebar-effects
             *ngIf="showEffects$ | async"
-            @toggleInfoPanel>
+            @sidebarCardShowHide>
         </app-photos-sidebar-effects>
 
         <app-photos-sidebar-histogram
             *ngIf="showHistogram$ | async"
-            @toggleInfoPanel>
+            @sidebarCardShowHide>
         </app-photos-sidebar-histogram>
 
         <app-photos-sidebar-minimap
             *ngIf="showMinimap$ | async"
-            @toggleInfoPanel>
+            @sidebarCardShowHide>
         </app-photos-sidebar-minimap>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-photos-sidebar-metadata-editor
                 *ngIf="showMetadataEditor$ | async"
-                @toggleInfoPanel>
+                @sidebarCardShowHide>
             </app-photos-sidebar-metadata-editor>
 
             <app-photos-sidebar-category-teaser-chooser
                 *ngIf="showCategoryTeaserChooser$ | async"
-                @toggleInfoPanel>
+                @sidebarCardShowHide>
             </app-photos-sidebar-category-teaser-chooser>
         </ng-container>
     </app-sidebar-card-group>

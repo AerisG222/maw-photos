@@ -19,7 +19,7 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
                 useAnimation(sidebarHide)
             ])
         ]),
-        trigger('toggleInfoPanel', [
+        trigger('sidebarCardShowHide', [
             transition(':enter', [
                 useAnimation(sidebarCardShow)
             ]),
