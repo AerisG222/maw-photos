@@ -53,6 +53,7 @@
     "@angular/compiler-cli": "^10.0.2",
     "@angular/language-service": "^10.0.2",
     "@ngrx/schematics": "^9.2.0",
+    "@types/file-saver": "^2.0.1",
     "@types/googlemaps": "^3.39.6",
     "@types/jasmine": "^3.5.10",
     "@types/jasminewd2": "~2.0.8",
