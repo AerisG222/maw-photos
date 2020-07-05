@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, debounceTime } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, debounceTime, filter } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as VideoActions from './actions';
@@ -141,6 +141,7 @@ export class VideoStoreEffects {
             concatMap(action =>
                 this.store$.pipe(
                     select(VideoStoreSelectors.selectAllVideos),
+                    filter(videos => !!videos && !!videos[0]),  // sometimes will get an undefined videos[0] but not sure why
                     map(videos => {
                         const catId = videos[0].categoryId;
                         let isMissingGpsData = false;
