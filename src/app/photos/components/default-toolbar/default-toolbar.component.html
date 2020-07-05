@@ -28,7 +28,7 @@
         </app-toolbar-button>
 
         <app-toolbar-button
-            *ngIf="isAdmin$ | async"
+            *ngIf="enableBulkEdit$ | async"
             [hideOnMobile]="true"
             [icon]="'collections'"
             [shortcutKey]="'b'"

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
 
 import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
@@ -11,7 +11,8 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors,
-    AuthStoreSelectors
+    AuthStoreSelectors,
+    RouterStoreSelectors
 } from 'src/app/core/root-store';
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { Category } from 'src/app/models/category.model';
@@ -28,9 +29,9 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     private destroySub = new Subscription();
 
-    isAdmin$: Observable<boolean> | null = null;
     isFirst$: Observable<boolean> | null = null;
     isLast$: Observable<boolean> | null = null;
+    enableBulkEdit$: Observable<boolean> | null = null;
     enableMapView$: Observable<boolean> | null = null;
     category$: Observable<PhotoCategory> | null = null;
     settings: Settings | null = null;
@@ -45,10 +46,6 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store$.pipe(
-            select(AuthStoreSelectors.selectIsAdmin)
-        );
-
         this.destroySub.add(this.store$
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
@@ -63,10 +60,19 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
                 map(c => (c as Category).actual as PhotoCategory)
             );
 
-        this.enableMapView$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectHasPhotosWithGpsCoordinates)
-            );
+        this.enableBulkEdit$ = combineLatest([
+            this.store$.pipe(select(AuthStoreSelectors.selectIsAdmin)),
+            this.store$.pipe(select(RouterStoreSelectors.selectUrl))
+        ]).pipe(
+            map(([isAdmin, url]) => isAdmin && !this.isRandomView(url))
+        );
+
+        this.enableMapView$ = combineLatest([
+            this.store$.pipe(select(PhotoStoreSelectors.selectHasPhotosWithGpsCoordinates)),
+            this.store$.pipe(select(RouterStoreSelectors.selectUrl))
+        ]).pipe(
+            map(([hasGps, url]) => hasGps && !this.isRandomView(url))
+        );
 
         this.isFirst$ = this.store$
             .pipe(
@@ -133,5 +139,9 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     onToggleSlideshow(): void {
         this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
+    }
+
+    isRandomView(url: string): boolean {
+        return url.indexOf('random') >= 0;
     }
 }
