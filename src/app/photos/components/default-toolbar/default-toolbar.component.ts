@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
-import { tap, filter, map } from 'rxjs/operators';
+import { tap, filter, map, first } from 'rxjs/operators';
+import { WINDOW } from 'ngx-window-token';
 
 import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
@@ -29,6 +30,8 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     private destroySub = new Subscription();
 
+    enableShare: boolean;
+
     isFirst$: Observable<boolean> | null = null;
     isLast$: Observable<boolean> | null = null;
     enableBulkEdit$: Observable<boolean> | null = null;
@@ -41,8 +44,11 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
     lgDownloadUrl: string | null = null;
     prtDownloadUrl: string | null = null;
 
-    constructor(private store$: Store) {
-
+    constructor(
+        private store$: Store,
+        @Inject(WINDOW) private window: Window
+    ) {
+        this.enableShare = !!window?.navigator?.share;
     }
 
     ngOnInit(): void {
@@ -143,5 +149,28 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     isRandomView(url: string): boolean {
         return url.indexOf('random') >= 0;
+    }
+
+    onShare(): void {
+        this.store$
+            .pipe(
+                first(),
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(x => !!x),
+                map(x => x as Photo),
+                tap(x => this.sharePhoto(x))
+            ).subscribe();
+    }
+
+    private async sharePhoto(photo: Photo): Promise<void> {
+        if (!!this.window?.navigator?.share) {
+            try {
+                await navigator.share({ url: photo.imageMd.url });
+            } catch (error) {
+                console.error('Error sharing: ' + error);
+            }
+        } else {
+            console.log('sharing is not enabled on this platform');
+        }
     }
 }
