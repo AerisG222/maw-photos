@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angul
 import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
-import { sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
+import { sidebarShow, sidebarHide } from 'src/app/shared/animations';
 
 @Component({
     selector: 'app-photos-bulk-edit-sidebar',
@@ -10,14 +10,14 @@ import { sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
     styleUrls: ['./bulk-edit-sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
-        trigger('toggleInfoPanel', [
+        trigger('sidebarFlyInOut', [
             transition(':enter', [
-                useAnimation(sidebarCardShow)
+                useAnimation(sidebarShow)
             ]),
             transition(':leave', [
-                useAnimation(sidebarCardHide)
+                useAnimation(sidebarHide)
             ])
-        ])
+        ]),
     ]
 })
 export class BulkEditSidebarComponent {
