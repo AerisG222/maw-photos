@@ -176,6 +176,27 @@ export const reducer = createReducer(
             photoInfoPanelMinimapZoom: zoom
         }
     })),
+    on(SettingsActions.togglePhotoGridShowCategoryBreadcrumbsRequest, state => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoGridShowCategoryBreadcrumbs: !state.settings.photoGridShowCategoryBreadcrumbs
+        }
+    })),
+    on(SettingsActions.updatePhotoGridMarginRequest, (state, { newMargin }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoGridMargin: newMargin
+        }
+    })),
+    on(SettingsActions.updatePhotoGridThumbnailSizeRequest, (state, { newSize }) => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoGridThumbnailSize: newSize
+        }
+    })),
     on(SettingsActions.togglePhotoListShowPhotoListRequest, state => ({
         ...state,
         settings: {

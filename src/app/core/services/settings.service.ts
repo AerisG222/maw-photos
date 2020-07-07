@@ -33,6 +33,10 @@ export class SettingsService {
     private static readonly keyPhotoListMapViewMapTypeId = 'photoListMapViewMapTypeId';
     private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
 
+    private static readonly keyPhotoGridMargin = 'photoGridMargin';
+    private static readonly keyPhotoGridShowCategoryBreadcrumbs = 'photoGridShowCategoryBreadcrumbs';
+    private static readonly keyPhotoGridThumbnailSize = 'photoGridThumbnailSize';
+
     private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
     private static readonly keyPhotoInfoPanelShowCategoryTeaserChooser = 'photoInfoPanelShowCategoryTeaserChooser';
     private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
@@ -100,6 +104,10 @@ export class SettingsService {
                 photoListMapViewMapTypeId:                this.getStringOrNull(SettingsService.keyPhotoListMapViewMapTypeId) ?? DEFAULT_SETTINGS.photoListMapViewMapTypeId,
                 photoListMapViewZoom:                     this.getNumber(SettingsService.keyPhotoListMapViewZoom) ?? DEFAULT_SETTINGS.photoListMapViewZoom,
 
+                photoGridMargin: this.getCategoryMargin(SettingsService.keyPhotoGridMargin),
+                photoGridShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyPhotoGridShowCategoryBreadcrumbs),
+                photoGridThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyPhotoGridThumbnailSize),
+
                 photoInfoPanelShowRatings:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings),
                 photoInfoPanelShowCategoryTeaserChooser: this.getBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser),
                 photoInfoPanelShowComments:              this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments),
@@ -161,6 +169,10 @@ export class SettingsService {
         this.setNumber(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
         this.setValue(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
         this.setNumber(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
+
+        this.setValue(SettingsService.keyPhotoGridMargin, settings.photoGridMargin.name);
+        this.setBoolean(SettingsService.keyPhotoGridShowCategoryBreadcrumbs, settings.photoGridShowCategoryBreadcrumbs);
+        this.setValue(SettingsService.keyPhotoGridThumbnailSize, settings.photoGridThumbnailSize.name);
 
         this.setBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser, settings.photoInfoPanelShowCategoryTeaserChooser);
         this.setBoolean(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);

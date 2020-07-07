@@ -14,6 +14,7 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { CategoryListType } from 'src/app/models/category-list-type.model';
 import { Subscription } from 'rxjs';
+import { selectPhotoGridShowCategoryBreadcrumbs } from 'src/app/core/root-store/settings-store/selectors';
 
 
 @Component({
@@ -32,6 +33,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
     categoryListTypes = CategoryListType.allTypes;
+    photoGridMargins = CategoryMargin.allCategoryMargins;
+    photoGridThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
     mapViewMapTypeIds = MapTypeId.allTypeIds;
@@ -67,6 +70,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListSlideshowDisplayDurationSeconds: [DEFAULT_SETTINGS.photoListSlideshowDisplayDurationSeconds],
             photoListMapViewMapTypeId:                [DEFAULT_SETTINGS.photoListMapViewMapTypeId],
             photoListMapViewZoom:                     [DEFAULT_SETTINGS.photoListMapViewZoom],
+
+            photoGridMargins:                         [DEFAULT_SETTINGS.photoGridMargin],
+            photoGridShowCategoryBreadcrubs:          [DEFAULT_SETTINGS.photoGridShowCategoryBreadcrumbs],
+            photoGridThumbnailSize:                   [DEFAULT_SETTINGS.photoGridThumbnailSize],
 
             photoInfoPanelShowCategoryTeaserChooser:  [DEFAULT_SETTINGS.photoInfoPanelShowCategoryTeaserChooser],
             photoInfoPanelShowComments:               [DEFAULT_SETTINGS.photoInfoPanelShowComments],
@@ -140,6 +147,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListMapViewMapTypeId:                this.getFormString('photoListMapViewMapTypeId',                    DEFAULT_SETTINGS.photoListMapViewMapTypeId),
             photoListMapViewZoom:                     this.getFormNumber('photoListMapViewZoom',                         DEFAULT_SETTINGS.photoListMapViewZoom),
 
+            photoGridMargin:                  CategoryMargin.forName(this.getFormString('photoGridMargin',       DEFAULT_SETTINGS.photoGridMargin.name)),
+            photoGridShowCategoryBreadcrumbs: this.getFormBoolean('photoGridShowCategoryBreadcrumbs',            DEFAULT_SETTINGS.photoGridShowCategoryBreadcrumbs),
+            photoGridThumbnailSize:           ThumbnailSize.forName(this.getFormString('photoGridThumbnailSize', DEFAULT_SETTINGS.photoGridThumbnailSize.name)),
+
             photoInfoPanelShowCategoryTeaserChooser: this.getFormBoolean('photoInfoPanelShowCategoryTeaserChooser', DEFAULT_SETTINGS.photoInfoPanelShowCategoryTeaserChooser),
             photoInfoPanelShowComments:              this.getFormBoolean('photoInfoPanelShowComments',              DEFAULT_SETTINGS.photoInfoPanelShowComments),
             photoInfoPanelShowEffects:               this.getFormBoolean('photoInfoPanelShowEffects',               DEFAULT_SETTINGS.photoInfoPanelShowEffects),
@@ -206,6 +217,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoListSlideshowDisplayDurationSeconds')?.setValue(settings.photoListSlideshowDisplayDurationSeconds);
         this.form.get('photoListMapViewMapTypeId')?.setValue(settings.photoListMapViewMapTypeId);
         this.form.get('photoListMapViewZoom')?.setValue(settings.photoListMapViewZoom);
+
+        this.form.get('photoGridMargin')?.setValue(settings.photoGridMargin.name);
+        this.form.get('photoGridShowCategoryBreadcrumbs')?.setValue(settings.photoGridShowCategoryBreadcrumbs);
+        this.form.get('photoGridThumbnailSize')?.setValue(settings.photoGridThumbnailSize.name);
 
         this.form.get('photoInfoPanelShowCategoryTeaserChooser')?.setValue(settings.photoInfoPanelShowCategoryTeaserChooser);
         this.form.get('photoInfoPanelShowComments')?.setValue(settings.photoInfoPanelShowComments);

@@ -23,6 +23,7 @@ export interface State extends EntityState<Photo> {
     isFullscreenView: boolean;
     isMapView: boolean;
     isBulkEditView: boolean;
+    isGridView: boolean;
     pendingActionCount: number;
 }
 
@@ -51,5 +52,6 @@ export const initialState: State = photoAdapter.getInitialState({
     isFullscreenView: false,
     isMapView: false,
     isBulkEditView: false,
+    isGridView: false,
     pendingActionCount: 0
 });

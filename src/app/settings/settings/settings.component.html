@@ -77,6 +77,19 @@
                             </mat-select>
                         </mat-form-field>
 
+                        <h3>Photo Grid Margin</h3>
+                        <mat-radio-group formControlName="photoGridMargin">
+                            <mat-radio-button *ngFor="let margin of photoGridMargins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                        </mat-radio-group>
+
+                        <h3>Photo Grid Show Category Breadcrumbs</h3>
+                        <mat-slide-toggle formControlName="photoGridShowCategoryBreadcrumbs"></mat-slide-toggle>
+
+                        <h3>Photo Grid Thumbnail Size</h3>
+                        <mat-radio-group formControlName="photoGridThumbnailSize">
+                            <mat-radio-button *ngFor="let size of photoGridThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                        </mat-radio-group>
+
                         <h3>Slideshow Display Duration (in seconds)</h3>
                         <mat-form-field appearance="standard">
                             <mat-label>Duration</mat-label>

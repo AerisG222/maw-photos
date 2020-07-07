@@ -311,7 +311,19 @@ export const reducer = createReducer(
     on(PhotoActions.toggleBulkEditViewRequest, state => ({
         ...state,
         isBulkEditView: !state.isBulkEditView
-    }))
+    })),
+    on(PhotoActions.enterGridViewRequest, state => ({
+        ...state,
+        isGridView: true
+    })),
+    on(PhotoActions.exitGridViewRequest, state => ({
+        ...state,
+        isGridView: false
+    })),
+    on(PhotoActions.toggleGridViewRequest, state => ({
+        ...state,
+        isGridView: !state.isGridView
+    })),
 );
 
 function nextPhoto(state: State): Photo {

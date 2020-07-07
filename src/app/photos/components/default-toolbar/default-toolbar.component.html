@@ -18,6 +18,14 @@
         </app-toolbar-button>
 
         <app-toolbar-button
+            [icon]="'apps'"
+            [shortcutKey]="'q'"
+            [shortcutHelp]="'Enter Grid View'"
+            [tooltip]="'Enter Grid View (Q)'"
+            (click)="onToggleGridView()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
             *ngIf="enableMapView$ | async"
             [hideOnMobile]="true"
             [icon]="'map'"

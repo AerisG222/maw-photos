@@ -147,6 +147,20 @@ export const updatePhotoListThumbnailSizeRequest = createAction(
     props<{ newSize: ThumbnailSize }>()
 );
 
+export const togglePhotoGridShowCategoryBreadcrumbsRequest = createAction(
+    '[Settings] Toggle Photo Grid Show Breadcrumbs Request'
+);
+
+export const updatePhotoGridMarginRequest = createAction(
+    '[Settings] Update Photo Grid Margin Request',
+    props<{ newMargin: CategoryMargin }>()
+);
+
+export const updatePhotoGridThumbnailSizeRequest = createAction(
+    '[Settings] Update Photo Grid Thumbnail Size',
+    props<{ newSize: ThumbnailSize }>()
+);
+
 export const toggleVideoListCategoryBreadcrumbsRequest = createAction(
     '[Settings] Toggle Video List Category Breadcrumbs'
 );

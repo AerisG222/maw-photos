@@ -24,6 +24,10 @@ export interface Settings {
     photoListMapViewMapTypeId: string;
     photoListMapViewZoom: number;
 
+    photoGridMargin: CategoryMargin;
+    photoGridShowCategoryBreadcrumbs: boolean;
+    photoGridThumbnailSize: ThumbnailSize;
+
     photoInfoPanelShowRatings: boolean;
     photoInfoPanelShowCategoryTeaserChooser: boolean;
     photoInfoPanelShowComments: boolean;
@@ -76,6 +80,10 @@ export const DEFAULT_SETTINGS: Settings = ({
     photoListSlideshowDisplayDurationSeconds: 2,
     photoListMapViewMapTypeId: 'roadmap',
     photoListMapViewZoom: 10,
+
+    photoGridMargin: CategoryMargin.dense,
+    photoGridShowCategoryBreadcrumbs: true,
+    photoGridThumbnailSize: ThumbnailSize.default,
 
     photoInfoPanelShowRatings: true,
     photoInfoPanelShowCategoryTeaserChooser: false,

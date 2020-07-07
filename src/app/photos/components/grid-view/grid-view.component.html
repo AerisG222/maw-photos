@@ -1,0 +1,27 @@
+<app-layout-toolbar>
+    <app-photos-grid-view-toolbar layout-toolbar></app-photos-grid-view-toolbar>
+
+    <div layout-main class="container">
+        <div *ngIf="currentPhoto$ | async as currentPhoto" class="current-photo" (click)="clearCurrentPhoto()">
+            <img [src]="currentPhoto.imageMd.url" />
+        </div>
+
+        <app-shared-content-margin layout-main [margin]="margin$ | async">
+            <div class="category-header">
+                <app-shared-category-header
+                    *ngIf="showBreadcrumbs$ | async"
+                    [showCategoryAsLink]="true"
+                    [category]="category$ | async">
+                </app-shared-category-header>
+            </div>
+
+            <div class="photo-grid">
+                <img
+                    *ngFor="let photo of photos$ | async;"
+                    [ngClass]="(thumbnailSize$ | async)?.klass"
+                    [src]="photo.imageXsSq.url"
+                    (click)="setCurrentPhoto(photo)" />
+            </div>
+        </app-shared-content-margin>
+    </div>
+</app-layout-toolbar>

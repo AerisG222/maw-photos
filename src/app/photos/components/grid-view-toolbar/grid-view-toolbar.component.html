@@ -1,0 +1,58 @@
+<app-toolbar-toolbar>
+    <app-toolbar-group>
+        <app-photos-toolbar-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-photos-toolbar-slideshow-button>
+        <app-toolbar-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async"></app-toolbar-move-previous-button>
+        <app-toolbar-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async"></app-toolbar-move-next-button>
+    </app-toolbar-group>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            [icon]="'title'"
+            [shortcutKey]="'t'"
+            [shortcutHelp]="'Show/Hide Category Breadcrumbs'"
+            [tooltip]="'Show/Hide Category Breadcrumbs (T)'"
+            (click)="onToggleCategoryBreadcrumbs()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            [icon]="'format_indent_increase'"
+            [shortcutKey]="'m'"
+            [shortcutHelp]="'Toggle Margins'"
+            [tooltip]="'Toggle Margins (M)'"
+            (click)="onToggleMargins()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            [icon]="'photo_size_select_large'"
+            [shortcutKey]="'s'"
+            [shortcutHelp]="'Toggle Thumbnail Size'"
+            [tooltip]="'Toggle Thumbnail Size (S)'"
+            (click)="onToggleSize()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
+        <app-photos-toolbar-rotate-counter-clockwise-button></app-photos-toolbar-rotate-counter-clockwise-button>
+        <app-photos-toolbar-rotate-clockwise-button></app-photos-toolbar-rotate-clockwise-button>
+        <app-photos-toolbar-flip-horizontal-button></app-photos-toolbar-flip-horizontal-button>
+        <app-photos-toolbar-flip-vertical-button></app-photos-toolbar-flip-vertical-button>
+    </app-toolbar-group>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
+        <app-toolbar-button
+            [icon]="'apps'"
+            [shortcutKey]="'q'"
+            [shortcutHelp]="'Exit Grid View'"
+            [tooltip]="'Exit Grid View (Q)'"
+            (click)="onExitGridView()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar-toolbar>

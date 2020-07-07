@@ -40,6 +40,10 @@ const getPhotoInfoPanelExpandedState = (state: State): boolean => state.settings
 const getPhotoInfoPanelMinimapMapTypeId = (state: State): string => state.settings.photoInfoPanelMinimapMapTypeId;
 const getPhotoInfoPanelMinimapZoom = (state: State): number => state.settings.photoInfoPanelMinimapZoom;
 
+const getPhotoGridMargin = (state: State): CategoryMargin => state.settings.photoGridMargin;
+const getPhotoGridShowCategoryBreadcrumbs = (state: State): boolean => state.settings.photoGridShowCategoryBreadcrumbs;
+const getPhotoGridThumbnailSize = (state: State): ThumbnailSize => state.settings.photoGridThumbnailSize;
+
 const getPhotoListShowPhotoList = (state: State): boolean => state.settings.photoListShowPhotoList;
 const getPhotoListMapViewMapTypeId = (state: State): string => state.settings.photoListMapViewMapTypeId;
 const getPhotoListMapViewZoom = (state: State): number => state.settings.photoListMapViewZoom;
@@ -80,6 +84,10 @@ export const selectCategoryListThumbnailSize = createSelector(selectSettingsStat
 export const selectCategoryListYearFilter = createSelector(selectSettingsState, getCategoryListYearFilter);
 export const selectCategoryListListType = createSelector(selectSettingsState, getCategoryListListType);
 export const selectCategoryListListViewThumbnailSize = createSelector(selectSettingsState, getCategoryListListViewThumbnailSize);
+
+export const selectPhotoGridMargin = createSelector(selectSettingsState, getPhotoGridMargin);
+export const selectPhotoGridShowCategoryBreadcrumbs = createSelector(selectSettingsState, getPhotoGridShowCategoryBreadcrumbs);
+export const selectPhotoGridThumbnailSize = createSelector(selectSettingsState, getPhotoGridThumbnailSize);
 
 export const selectPhotoInfoPanelShowRatings = createSelector(selectSettingsState, getPhotoInfoPanelShowRatings);
 // tslint:disable-next-line: max-line-length

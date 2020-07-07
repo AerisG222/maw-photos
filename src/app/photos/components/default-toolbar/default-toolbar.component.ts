@@ -135,6 +135,10 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
         this.store$.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
     }
 
+    onToggleGridView(): void {
+        this.store$.dispatch(PhotoStoreActions.toggleGridViewRequest());
+    }
+
     onMoveNext(): void {
         this.store$.dispatch(PhotoStoreActions.moveNextRequest());
     }

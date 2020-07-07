@@ -55,6 +55,10 @@ export class SettingsStoreEffects {
                 SettingsActions.updateCategoryListListViewThumbnailSizeRequest,
                 SettingsActions.updateCategoryListThumbnailSizeRequest,
 
+                SettingsActions.togglePhotoGridShowCategoryBreadcrumbsRequest,
+                SettingsActions.updatePhotoGridMarginRequest,
+                SettingsActions.updatePhotoGridThumbnailSizeRequest,
+
                 SettingsActions.togglePhotoInfoPanelCategoryTeaserChooserRequest,
                 SettingsActions.togglePhotoInfoPanelCommentsRequest,
                 SettingsActions.togglePhotoInfoPanelEffectsRequest,

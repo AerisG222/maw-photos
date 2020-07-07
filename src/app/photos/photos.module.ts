@@ -34,6 +34,8 @@ import { ToolbarFlipVerticalButtonComponent } from './components/toolbar-flip-ve
 import { ToolbarRotateClockwiseButtonComponent } from './components/toolbar-rotate-clockwise-button/toolbar-rotate-clockwise-button.component';
 import { ToolbarRotateCounterClockwiseButtonComponent } from './components/toolbar-rotate-counter-clockwise-button/toolbar-rotate-counter-clockwise-button.component';
 import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-button/toolbar-slideshow-button.component';
+import { GridViewComponent } from './components/grid-view/grid-view.component';
+import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-
         ToolbarFlipVerticalButtonComponent,
         ToolbarRotateClockwiseButtonComponent,
         ToolbarRotateCounterClockwiseButtonComponent,
-        ToolbarSlideshowButtonComponent
+        ToolbarSlideshowButtonComponent,
+        GridViewComponent,
+        GridViewToolbarComponent
     ],
     imports: [
         SharedModule,

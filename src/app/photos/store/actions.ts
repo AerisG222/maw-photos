@@ -274,3 +274,15 @@ export const exitBulkEditViewRequest = createAction(
 export const toggleBulkEditViewRequest = createAction(
     '[Photos] Toggle Bulk Edit View Request'
 );
+
+export const enterGridViewRequest = createAction(
+    '[Photos] Enter Grid View Request'
+);
+
+export const exitGridViewRequest = createAction(
+    '[Photos] Exit Grid View Request'
+);
+
+export const toggleGridViewRequest = createAction(
+    '[Photos] Toggle Grid View Request'
+);

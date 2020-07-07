@@ -1,10 +1,11 @@
 <ng-container *ngIf="{
     isFullscreen: isFullscreen$ | async,
     isMapView: isMapView$ | async,
-    isBulkEditView: isBulkEditView$ | async
+    isBulkEditView: isBulkEditView$ | async,
+    isGridView: isGridView$ | async
 } as data">
     <app-photos-default-view
-        *ngIf="!data.isFullscreen && !data.isMapView && !data.isBulkEditView"
+        *ngIf="!data.isFullscreen && !data.isMapView && !data.isBulkEditView && !data.isGridView"
         [allowCategoryDownload]="true"
         [showCategoryAsLink]="false">
     </app-photos-default-view>
@@ -20,4 +21,8 @@
     <app-photos-bulk-edit
         *ngIf="data.isBulkEditView">
     </app-photos-bulk-edit>
+
+    <app-photos-grid-view
+        *ngIf="data.isGridView">
+    </app-photos-grid-view>
 </ng-container>

@@ -1,0 +1,54 @@
+photo-grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    place-content: stretch center;
+    align-items: stretch;
+    margin-bottom: 64px;
+}
+
+div.container {
+    padding: 4px;
+}
+
+.category-header {
+    margin: 8px 0;
+    text-align: center;
+    z-index: 10;
+}
+
+div.photo-grid {
+    padding: 0;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    & img {
+        margin: 4px;
+        width: 160px;
+        height: 120px;
+        border-radius: 4px;
+        flex: 0 0 auto;
+        cursor: pointer;
+        filter: saturate(0.4);
+
+        &:hover,
+        .selected & {
+            filter: saturate(1.0);
+        }
+
+        &.thumb-small {
+            width: 120px;
+            height: 90px;
+        }
+
+        &.thumb-very-small {
+            width: 80px;
+            height: 60px;
+        }
+
+        &.thumb-tiny {
+            width: 40px;
+            height: 30px;
+        }
+    }
+}
