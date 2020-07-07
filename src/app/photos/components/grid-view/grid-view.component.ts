@@ -20,7 +20,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings> | null = null;
     category$: Observable<Category> | null = null;
     photos$: Observable<Photo[]> | null = null;
-    currentPhoto$: Observable<Photo> | null = null;
+    currentPhoto$: Observable<Photo | null> | null = null;
     thumbnailSize$: Observable<ThumbnailSize> | null = null;
     margin$: Observable<CategoryMargin> | null = null;
     showBreadcrumbs$: Observable<boolean> | null =null;
@@ -51,9 +51,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
 
         this.currentPhoto$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
-                filter(x => !!x),
-                map(x => x as Photo)
+                select(PhotoStoreSelectors.selectCurrentPhoto)
             );
 
         this.thumbnailSize$ = this.store$
