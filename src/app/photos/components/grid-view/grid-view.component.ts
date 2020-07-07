@@ -81,4 +81,12 @@ export class GridViewComponent implements OnInit, OnDestroy {
     clearCurrentPhoto(): void {
         this.store$.dispatch(PhotoStoreActions.clearCurrent());
     }
+
+    onSwipeLeft(): void {
+        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
+    }
+
+    onSwipeRight(): void {
+        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+    }
 }

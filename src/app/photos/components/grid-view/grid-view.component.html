@@ -3,7 +3,11 @@
 
     <div layout-main>
         <div *ngIf="currentPhoto$ | async as currentPhoto" class="full-image" (click)="clearCurrentPhoto()">
-            <img [src]="currentPhoto.imageMd.url" />
+            <img
+                [src]="currentPhoto.imageMd.url"
+                (swipeleft)="onSwipeLeft()"
+                (swiperight)="onSwipeRight()"
+                loading="eager" />
         </div>
 
         <app-shared-content-margin [margin]="margin$ | async" [ngStyle]="{ 'display': (currentPhoto$ | async) === null ? 'block' : 'none' }">
@@ -20,7 +24,8 @@
                     *ngFor="let photo of photos$ | async;"
                     [ngClass]="(thumbnailSize$ | async)?.klass"
                     [src]="photo.imageXsSq.url"
-                    (click)="setCurrentPhoto(photo)" />
+                    (click)="setCurrentPhoto(photo)"
+                    loading="lazy" />
             </div>
         </app-shared-content-margin>
     </div>
