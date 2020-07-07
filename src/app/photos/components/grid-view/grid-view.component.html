@@ -1,12 +1,12 @@
 <app-layout-toolbar>
     <app-photos-grid-view-toolbar layout-toolbar></app-photos-grid-view-toolbar>
 
-    <div layout-main class="container">
-        <div *ngIf="currentPhoto$ | async as currentPhoto" class="current-photo" (click)="clearCurrentPhoto()">
+    <div layout-main>
+        <div *ngIf="currentPhoto$ | async as currentPhoto" class="full-image" (click)="clearCurrentPhoto()">
             <img [src]="currentPhoto.imageMd.url" />
         </div>
 
-        <app-shared-content-margin layout-main [margin]="margin$ | async">
+        <app-shared-content-margin [margin]="margin$ | async" [ngStyle]="{ 'display': (currentPhoto$ | async) === null ? 'block' : 'none' }">
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="showBreadcrumbs$ | async"
