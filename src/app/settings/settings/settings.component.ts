@@ -71,9 +71,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListMapViewMapTypeId:                [DEFAULT_SETTINGS.photoListMapViewMapTypeId],
             photoListMapViewZoom:                     [DEFAULT_SETTINGS.photoListMapViewZoom],
 
-            photoGridMargins:                         [DEFAULT_SETTINGS.photoGridMargin],
-            photoGridShowCategoryBreadcrubs:          [DEFAULT_SETTINGS.photoGridShowCategoryBreadcrumbs],
-            photoGridThumbnailSize:                   [DEFAULT_SETTINGS.photoGridThumbnailSize],
+            photoGridMargin:                          [DEFAULT_SETTINGS.photoGridMargin.name],
+            photoGridShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.photoGridShowCategoryBreadcrumbs],
+            photoGridThumbnailSize:                   [DEFAULT_SETTINGS.photoGridThumbnailSize.name],
 
             photoInfoPanelShowCategoryTeaserChooser:  [DEFAULT_SETTINGS.photoInfoPanelShowCategoryTeaserChooser],
             photoInfoPanelShowComments:               [DEFAULT_SETTINGS.photoInfoPanelShowComments],
