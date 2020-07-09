@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { toolbarShow } from 'src/app/shared/animations';
@@ -17,5 +17,21 @@ import { toolbarShow } from 'src/app/shared/animations';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent {
+    @ViewChild('scrollPane') scrollPane: ElementRef | null = null;
 
+    getCurrentScrollTop(): number {
+        if (!!this.scrollPane) {
+            return this.scrollPane.nativeElement.scrollTop;
+        }
+
+        return 0;
+    }
+
+    setCurrentScrollTop(newTop: number): void {
+        if (!!this.scrollPane) {
+            const div = this.scrollPane.nativeElement as HTMLDivElement;
+
+            setTimeout(() => div.scrollTo({ top: newTop, left: 0, behavior: 'smooth' }), 5);
+        }
+    }
 }
