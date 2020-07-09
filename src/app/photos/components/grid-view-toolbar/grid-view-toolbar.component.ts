@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { tap, first, filter, map } from 'rxjs/operators';
+import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '../../store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { tap } from 'rxjs/operators';
 import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryMargin } from 'src/app/models/category-margin.model';
+import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-grid-view-toolbar',
@@ -17,12 +19,17 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
 export class GridViewToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
+    enableShare = false;
+    isPhotoSelected = false;
     settings: Settings | null = null;
     isFirst$: Observable<boolean> | null = null;
     isLast$: Observable<boolean> | null = null;
 
-    constructor(private store$: Store) {
-
+    constructor(
+        private store$: Store,
+        @Inject(WINDOW) private window: Window
+    ) {
+        this.enableShare = !!window?.navigator?.share;
     }
 
     ngOnInit(): void {
@@ -30,6 +37,13 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
             .pipe(
                 select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
+            ).subscribe()
+        );
+
+        this.destroySub.add(this.store$
+            .pipe(
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                map(x => this.isPhotoSelected = !!x)
             ).subscribe()
         );
 
@@ -81,5 +95,28 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
         const size = ThumbnailSize.nextSize(name);
 
         this.store$.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
+    }
+
+    onShare(): void {
+        this.store$
+            .pipe(
+                first(),
+                select(PhotoStoreSelectors.selectCurrentPhoto),
+                filter(x => !!x),
+                map(x => x as Photo),
+                tap(x => this.sharePhoto(x))
+            ).subscribe();
+    }
+
+    private async sharePhoto(photo: Photo): Promise<void> {
+        if (!!this.window?.navigator?.share) {
+            try {
+                await navigator.share({ url: photo.imageMd.url });
+            } catch (error) {
+                console.error('Error sharing: ' + error);
+            }
+        } else {
+            console.log('sharing is not enabled on this platform');
+        }
     }
 }

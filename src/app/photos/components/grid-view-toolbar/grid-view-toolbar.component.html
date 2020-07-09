@@ -31,6 +31,13 @@
             [tooltip]="'Toggle Thumbnail Size (S)'"
             (click)="onToggleSize()">
         </app-toolbar-button>
+
+        <app-toolbar-button
+            *ngIf="enableShare && isPhotoSelected"
+            [icon]="'share'"
+            [tooltip]="'Share Photo'"
+            (click)="onShare()">
+        </app-toolbar-button>
     </app-toolbar-group>
 
     <app-toolbar-divider></app-toolbar-divider>
