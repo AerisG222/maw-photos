@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/photos/services/exif-formatter.service';
@@ -10,7 +10,6 @@ import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/pho
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
-import { PhotoEffects } from 'src/app/models/photo-effects.model';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -182,10 +181,11 @@ export class PhotoStoreEffects {
     updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
-            debounceTime(700),
+            debounceTime(200),
             concatMap(action =>
                 this.store$.pipe(
                     select(PhotoStoreSelectors.selectAllPhotos),
+                    filter(photos => !!photos && !!photos[0]),  // sometimes will get an undefined photos[0] but not sure why
                     map(photos => {
                         const catId = photos[0].categoryId;
                         let isMissingGpsData = false;

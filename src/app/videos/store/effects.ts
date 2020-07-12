@@ -137,7 +137,7 @@ export class VideoStoreEffects {
     updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() =>
         this.actions$.pipe(
             ofType(VideoActions.setGpsCoordinateOverrideSuccess),
-            debounceTime(700),
+            debounceTime(200),
             concatMap(action =>
                 this.store$.pipe(
                     select(VideoStoreSelectors.selectAllVideos),
