@@ -360,9 +360,8 @@ function incrementCurrentIndexWithinBounds(state: State, direction: number): num
 
 function incrementCurrentIndexWithinGpsBounds(state: State, direction: number): number {
     const idx = getCurrentIndex(state);
-    let newIdx = idx;
 
-    for (newIdx = idx + direction; newIdx >= 0 && newIdx < state.ids.length; newIdx + direction) {
+    for (let newIdx = idx + direction; newIdx >= 0 && newIdx < state.ids.length; newIdx += direction) {
         const photo = getPhotoAtIndex(state, newIdx);
 
         if (!!photo && photo.latitude != null) {
