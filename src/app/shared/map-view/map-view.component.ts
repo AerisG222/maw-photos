@@ -51,7 +51,6 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.updateMapOptions();
         this.updateActivePhoto();
     }
 
@@ -130,6 +129,11 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
 
     openInfoWindow(marker: MapMarker, image: MapImage): void {
         this.activeImageUrl = image.imageUrl;
+        const pos = marker.getPosition();
+
+        if (!!pos) {
+            this.map?.panTo(pos);
+        }
 
         if (!!this.infoWindow) {
             this.infoWindow.close();
