@@ -79,6 +79,14 @@ export class GridViewComponent implements OnInit, OnDestroy {
         this.clearCurrentPhoto();
     }
 
+    getSourceset(photo: Photo | null): string {
+        if (!!photo) {
+            return `${photo.imageMd.url} ${photo.imageMd.width}w, ${photo.imageLg.url} ${photo.imageLg.width}w`;
+        }
+
+        return '';
+    }
+
     setCurrentPhoto(photo: Photo): void {
         if (!!this.layout) {
             this.lastScrollTop = this.layout.getCurrentScrollTop();

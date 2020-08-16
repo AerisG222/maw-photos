@@ -5,8 +5,10 @@
         <div *ngIf="currentPhoto$ | async as currentPhoto" class="full-image" (click)="clearCurrentPhoto()">
             <img
                 [src]="currentPhoto.imageMd.url"
+                [srcset]="getSourceset(currentPhoto)"
                 (swipeleft)="onSwipeLeft()"
                 (swiperight)="onSwipeRight()"
+                sizes="100vw"
                 loading="eager" />
         </div>
 
