@@ -81,6 +81,14 @@ export class DefaultViewComponent implements OnInit {
             );
     }
 
+    getSourceset(photo: Photo | null): string {
+        if (!!photo) {
+            return `${photo.imageMd.url} ${photo.imageMd.width}w, ${photo.imageLg.url} ${photo.imageLg.width}w`;
+        }
+
+        return '';
+    }
+
     getEffectStyles(effects: PhotoEffects | null): SafeStyle {
         if (!!effects) {
             const style = this.effectStyleBuilder.buildFilter(effects);
