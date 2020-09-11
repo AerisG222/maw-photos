@@ -30,9 +30,6 @@ import { MapViewComponent } from './map-view/map-view.component';
     ],
     imports: [
         BaseModule,
-        LayoutModule,
-        PrimaryNavModule,
-        SidebarModule,
         ToolbarModule
     ],
     exports: [

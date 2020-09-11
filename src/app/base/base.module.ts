@@ -24,32 +24,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxStarsModule } from 'ngx-stars';
 
 @NgModule({
-    declarations: [],
-    imports: [
-        CommonModule,
-        GoogleMapsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatListModule,
-        MatProgressSpinnerModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-        MatTableModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        NgxStarsModule,
-        ReactiveFormsModule,
-        RouterModule
-    ],
     exports: [
         CommonModule,
         GoogleMapsModule,
