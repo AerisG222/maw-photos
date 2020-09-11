@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SidebarCommentsComponent } from './sidebar-comments.component';
 
@@ -6,7 +6,7 @@ describe('SidebarCommentsComponent', () => {
   let component: SidebarCommentsComponent;
   let fixture: ComponentFixture<SidebarCommentsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SidebarCommentsComponent ]
     })

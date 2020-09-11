@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ToolbarRotateCounterClockwiseButtonComponent } from './toolbar-rotate-counter-clockwise-button.component';
 
@@ -6,7 +6,7 @@ describe('ToolbarRotateCounterClockwiseButtonComponent', () => {
   let component: ToolbarRotateCounterClockwiseButtonComponent;
   let fixture: ComponentFixture<ToolbarRotateCounterClockwiseButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ToolbarRotateCounterClockwiseButtonComponent ]
     })

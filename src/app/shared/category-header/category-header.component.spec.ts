@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CategoryHeaderComponent } from './category-header.component';
 
@@ -6,7 +6,7 @@ describe('CategoryHeaderComponent', () => {
   let component: CategoryHeaderComponent;
   let fixture: ComponentFixture<CategoryHeaderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CategoryHeaderComponent ]
     })

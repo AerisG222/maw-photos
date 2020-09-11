@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonDividerComponent } from './button-divider.component';
 
@@ -6,7 +6,7 @@ describe('ButtonDividerComponent', () => {
   let component: ButtonDividerComponent;
   let fixture: ComponentFixture<ButtonDividerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ButtonDividerComponent ]
     })

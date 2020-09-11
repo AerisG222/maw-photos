@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MinimapCardComponent } from './minimap-card.component';
 
@@ -6,7 +6,7 @@ describe('MinimapCardComponent', () => {
   let component: MinimapCardComponent;
   let fixture: ComponentFixture<MinimapCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MinimapCardComponent ]
     })

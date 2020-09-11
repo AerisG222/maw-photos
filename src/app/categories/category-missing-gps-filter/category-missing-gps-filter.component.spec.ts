@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CategoryMissingGpsFilterComponent } from './category-missing-gps-filter.component';
 
@@ -6,7 +6,7 @@ describe('CategoryMissingGpsFilterComponent', () => {
   let component: CategoryMissingGpsFilterComponent;
   let fixture: ComponentFixture<CategoryMissingGpsFilterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CategoryMissingGpsFilterComponent ]
     })

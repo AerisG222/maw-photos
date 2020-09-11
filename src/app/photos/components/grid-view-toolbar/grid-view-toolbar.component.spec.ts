@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GridViewToolbarComponent } from './grid-view-toolbar.component';
 
@@ -6,7 +6,7 @@ describe('GridViewToolbarComponent', () => {
   let component: GridViewToolbarComponent;
   let fixture: ComponentFixture<GridViewToolbarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GridViewToolbarComponent ]
     })

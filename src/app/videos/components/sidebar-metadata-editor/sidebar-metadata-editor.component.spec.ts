@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SidebarMetadataEditorComponent } from './sidebar-metadata-editor.component';
 
@@ -6,7 +6,7 @@ describe('SidebarMetadataEditorComponent', () => {
   let component: SidebarMetadataEditorComponent;
   let fixture: ComponentFixture<SidebarMetadataEditorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SidebarMetadataEditorComponent ]
     })

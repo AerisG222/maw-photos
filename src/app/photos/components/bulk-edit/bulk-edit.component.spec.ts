@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BulkEditComponent } from './bulk-edit.component';
 
@@ -6,7 +6,7 @@ describe('BulkEditComponent', () => {
   let component: BulkEditComponent;
   let fixture: ComponentFixture<BulkEditComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BulkEditComponent ]
     })

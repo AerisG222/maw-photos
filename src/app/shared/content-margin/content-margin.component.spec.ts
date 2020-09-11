@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ContentMarginComponent } from './content-margin.component';
 
@@ -6,7 +6,7 @@ describe('ContentMarginComponent', () => {
   let component: ContentMarginComponent;
   let fixture: ComponentFixture<ContentMarginComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ContentMarginComponent ]
     })

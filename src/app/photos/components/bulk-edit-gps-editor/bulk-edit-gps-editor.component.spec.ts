@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BulkEditGpsEditorComponent } from './bulk-edit-gps-editor.component';
 
@@ -6,7 +6,7 @@ describe('BulkEditGpsEditorComponent', () => {
   let component: BulkEditGpsEditorComponent;
   let fixture: ComponentFixture<BulkEditGpsEditorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BulkEditGpsEditorComponent ]
     })

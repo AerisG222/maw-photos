@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PhotoSelectGridComponent } from './photo-select-grid.component';
 
@@ -6,7 +6,7 @@ describe('PhotoSelectGridComponent', () => {
   let component: PhotoSelectGridComponent;
   let fixture: ComponentFixture<PhotoSelectGridComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PhotoSelectGridComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SidebarMinimapComponent } from './sidebar-minimap.component';
 
@@ -6,7 +6,7 @@ describe('SidebarMinimapComponent', () => {
   let component: SidebarMinimapComponent;
   let fixture: ComponentFixture<SidebarMinimapComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SidebarMinimapComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ToolbarFlipHorizontalButtonComponent } from './toolbar-flip-horizontal-button.component';
 
@@ -6,7 +6,7 @@ describe('ToolbarFlipHorizontalButtonComponent', () => {
   let component: ToolbarFlipHorizontalButtonComponent;
   let fixture: ComponentFixture<ToolbarFlipHorizontalButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ToolbarFlipHorizontalButtonComponent ]
     })
