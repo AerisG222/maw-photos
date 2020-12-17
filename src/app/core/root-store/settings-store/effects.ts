@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { concatMap, exhaustMap, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from 'src/app/core/services/settings.service';
 import * as SettingsActions from './actions';
@@ -20,9 +21,9 @@ export class SettingsStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.loadRequest),
-            map(action => {
+            exhaustMap(action => {
                 const settings = this.settingsService.load();
-                return SettingsActions.loadSuccess({ settings });
+                return of(SettingsActions.loadSuccess({ settings }));
             })
         );
     });
@@ -30,12 +31,12 @@ export class SettingsStoreEffects {
     saveRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveRequest),
-            map(action => {
+            concatMap(action => {
                 try {
                     this.settingsService.save(action.settings);
-                    return SettingsActions.saveSuccess(action);
+                    return of(SettingsActions.saveSuccess(action));
                 } catch (err) {
-                    return SettingsActions.saveFailure(err);
+                    return of(SettingsActions.saveFailure(err));
                 }
             })
         );
@@ -101,8 +102,8 @@ export class SettingsStoreEffects {
             withLatestFrom(this.store$.pipe(
                 select(settingsSelectors.selectSettings)
             )),
-            map(x => {
-                return SettingsActions.saveRequest({ settings: x[1] });
+            concatMap(x => {
+                return of(SettingsActions.saveRequest({ settings: x[1] }));
             })
         );
     });

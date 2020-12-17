@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, concatMap } from 'rxjs/operators';
+import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/operators';
 
 import * as VideoCategoryActions from './actions';
 import * as videoCategorySelectors from './selectors';
@@ -27,7 +27,7 @@ export class VideoCategoryStoreEffects {
             withLatestFrom(this.store$.pipe(
                 select(videoCategorySelectors.selectAllCategories)
             )),
-            switchMap(([action, categories]) => {
+            exhaustMap(([action, categories]) => {
                 if (categories.length !== 0) {
                     return of(VideoCategoryActions.loadRequestedSatisfiedByCache());
                 }

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/photos/services/exif-formatter.service';
@@ -38,7 +38,7 @@ export class PhotoStoreEffects {
     loadRandomRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.loadRandomRequest),
-            switchMap(action =>
+            exhaustMap(action =>
                 this.api.getRandomPhoto()
                     .pipe(
                         map(photo => PhotoActions.loadRandomSuccess({ photo })),
@@ -77,7 +77,7 @@ export class PhotoStoreEffects {
     ratePhotoRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.ratePhotoRequest),
-            switchMap(action =>
+            concatMap(action =>
                 this.api.ratePhoto(action.photoId, action.userRating)
                     .pipe(
                         map(rating => PhotoActions.ratePhotoSuccess({ rating })),
@@ -116,7 +116,7 @@ export class PhotoStoreEffects {
     addCommentSuccessEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.addCommentSuccess),
-            map(action => PhotoActions.loadCommentsRequest({ photoId: action.photoId }))
+            switchMap(action => of(PhotoActions.loadCommentsRequest({ photoId: action.photoId })))
         );
     });
 
@@ -164,7 +164,7 @@ export class PhotoStoreEffects {
     setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideAndMoveNextRequest),
-            mergeMap(action =>
+            concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
                     .pipe(
                         // tslint:disable-next-line: ngrx-no-multiple-actions-in-effects
@@ -206,17 +206,15 @@ export class PhotoStoreEffects {
     rotateClockwiseEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),
-            concatMap(action => of(action).pipe(
-                withLatestFrom(this.store$.pipe(select(PhotoStoreSelectors.selectCurrentPhotoEffects)))
+            withLatestFrom(this.store$.pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
             )),
-            map(x => {
-                const action = x[0];
-                const photoEffects = x[1];
+            concatMap(([action, photoEffects]) => {
                 const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateClockwise();
 
-                return PhotoActions.rotateSuccess({ newRotation: rotation });
+                return of(PhotoActions.rotateSuccess({ newRotation: rotation }));
             })
         );
     });
@@ -224,18 +222,15 @@ export class PhotoStoreEffects {
     rotateCounterClockwiseEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.rotateCounterClockwiseRequest),
-            withLatestFrom(this.store$),
-            concatMap(action => of(action).pipe(
-                withLatestFrom(this.store$.pipe(select(PhotoStoreSelectors.selectCurrentPhotoEffects)))
+            withLatestFrom(this.store$.pipe(
+                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
             )),
-            map(x => {
-                const action = x[0];
-                const photoEffects = x[1];
+            concatMap(([action, photoEffects]) => {
                 const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateCounterClockwise();
 
-                return PhotoActions.rotateSuccess({ newRotation: rotation });
+                return of(PhotoActions.rotateSuccess({ newRotation: rotation }));
             })
         );
     });

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, debounceTime, filter } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as VideoActions from './actions';
@@ -48,7 +48,7 @@ export class VideoStoreEffects {
     rateVideoRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoActions.rateVideoRequest),
-            switchMap(action =>
+            concatMap(action =>
                 this.api.rateVideo(action.videoId, action.userRating)
                     .pipe(
                         map(rating => VideoActions.rateVideoSuccess({ rating })),
@@ -87,7 +87,7 @@ export class VideoStoreEffects {
     addCommentSuccessEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoActions.addCommentSuccess),
-            map(action => VideoActions.loadCommentsRequest({ videoId: action.videoId }))
+            switchMap(action => of(VideoActions.loadCommentsRequest({ videoId: action.videoId })))
         );
     });
 
@@ -107,7 +107,7 @@ export class VideoStoreEffects {
     setGpsOverrideRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoActions.setGpsCoordinateOverrideRequest),
-            concatMap(action =>
+            mergeMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
                     .pipe(
                         map(gpsDetail => VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail })),
