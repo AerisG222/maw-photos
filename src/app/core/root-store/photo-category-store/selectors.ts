@@ -1,41 +1,36 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Dictionary } from '@ngrx/entity';
 
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 import { Category } from 'src/app/models/category.model';
 
-const getError = (state: State): string | null => state.error;
-const getIsLoading = (state: State): boolean => state.isLoading;
-const getCurrentCategory = (state: State): Category | null => state.currentCategory;
-const getAllYears = (state: State): number[] | null => !!state.categoryIdsByYear ? [...state.categoryIdsByYear.keys()] : null;
-const getCategoryById = (state: State, id: number): Category | null => state.entities[id] ?? null;
+const selectPhotoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
-const getCategoriesForYear = (state: State, year: number): Category[] => {
-    if (!!state.categoryIdsByYear && state.categoryIdsByYear.has(year)) {
-        const idsForYear = state.categoryIdsByYear.get(year) as number[];
+const { selectAll, selectEntities } = photoCategoryAdapter.getSelectors(selectPhotoCategoryState);
 
-        // sort newest to oldest
-        const sortedIdsForYear = [...idsForYear].sort((a, b) => b - a);
+export const selectAllCategories = selectAll;
+export const selectPhotoCategoryError = (state: State): string | null => state.error;
+export const selectPhotoCategoryIsLoading = (state: State): boolean => state.isLoading;
+export const selectCurrentCategoryId = (state: State): number | null => state.currentCategoryId;
 
-        return sortedIdsForYear.map(id => state.entities[id] as Category);
-    }
-
-    return [];
-};
-
-export const selectPhotoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
-
-export const selectAllCategories = photoCategoryAdapter.getSelectors(selectPhotoCategoryState).selectAll;
-
-export const selectPhotoCategoryError = createSelector(selectPhotoCategoryState, getError);
-export const selectPhotoCategoryIsLoading = createSelector(selectPhotoCategoryState, getIsLoading);
-export const selectCurrentCategory = createSelector(selectPhotoCategoryState, getCurrentCategory);
-export const selectAllYears = createSelector(selectPhotoCategoryState, getAllYears);
-
-export const selectCategoriesForYear = createSelector(selectPhotoCategoryState,
-    (state: State, props: {year: number}) => getCategoriesForYear(state, props.year)
+export const selectCurrentCategory = createSelector(
+    selectEntities,
+    selectCurrentCategoryId,
+    (entities: Dictionary<Category>, id: number | null) => !!id ? entities[id]! : null
 );
 
-export const selectCategoryById = createSelector(selectPhotoCategoryState,
-    (state: State, props: {id: number}) => getCategoryById(state, props.id)
+export const selectAllYears = createSelector(
+    selectAll,
+    (categories: Category[]) => [...new Set(categories.map(x => x.year))].sort()
+);
+
+export const selectCategoriesForYear = createSelector(
+    selectAll,
+    (categories: Category[], props: {year: number}) => categories.filter(cat => cat.year === props.year)
+);
+
+export const selectCategoryById = createSelector(
+    selectEntities,
+    (entities: Dictionary<Category>, props: {id: number}) => entities[props.id] ?? null
 );

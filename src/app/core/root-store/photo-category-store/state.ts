@@ -9,13 +9,11 @@ export const photoCategoryAdapter: EntityAdapter<Category> = createEntityAdapter
 export interface State extends EntityState<Category> {
     error: string | null;
     isLoading: boolean;
-    currentCategory: Category | null;
-    categoryIdsByYear: Map<number, number[]> | null;
+    currentCategoryId: number | null;
 }
 
 export const initialState: State = photoCategoryAdapter.getInitialState({
     isLoading: false,
     error: null,
-    currentCategory: null,
-    categoryIdsByYear: null
+    currentCategoryId: null
 });
