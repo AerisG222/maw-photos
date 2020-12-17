@@ -19,8 +19,8 @@ export class VideoStoreEffects {
 
     }
 
-    loadRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.loadRequest),
             switchMap(action =>
                 this.api.getVideosByCategory(action.categoryId)
@@ -29,11 +29,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.loadFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadRatingRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRatingRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.loadRatingRequest),
             switchMap(action =>
                 this.api.getRating(action.videoId)
@@ -42,11 +42,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.loadRatingFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    rateVideoRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    rateVideoRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.rateVideoRequest),
             switchMap(action =>
                 this.api.rateVideo(action.videoId, action.userRating)
@@ -55,11 +55,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.rateVideoFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadCommentsRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadCommentsRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.loadCommentsRequest),
             switchMap(action =>
                 this.api.getComments(action.videoId)
@@ -68,11 +68,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.rateVideoFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    addCommentRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    addCommentRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.addCommentRequest),
             concatMap(action =>
                 this.api.addComment(action.videoId, action.comment)
@@ -81,18 +81,18 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.addCommentFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    addCommentSuccessEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    addCommentSuccessEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.addCommentSuccess),
             map(action => VideoActions.loadCommentsRequest({ videoId: action.videoId }))
-        )
-    );
+        );
+    });
 
-    loadGpsDetailRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadGpsDetailRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.loadGpsDetailRequest),
             switchMap(action =>
                 this.api.getGpsDetail(action.videoId)
@@ -101,11 +101,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.loadGpsDetailFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    setGpsOverrideRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    setGpsOverrideRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.setGpsCoordinateOverrideRequest),
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
@@ -114,11 +114,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.setGpsCoordinateOverrideAndMoveNextRequest),
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
@@ -131,11 +131,11 @@ export class VideoStoreEffects {
                         catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
@@ -156,6 +156,6 @@ export class VideoStoreEffects {
                         return VideoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
                     })
                 ))
-        )
-    );
+        );
+    });
 }

@@ -21,8 +21,8 @@ export class VideoCategoryStoreEffects {
 
     }
 
-    loadRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoCategoryActions.loadRequest),
             withLatestFrom(this.store$.pipe(
                 select(videoCategorySelectors.selectAllCategories)
@@ -38,11 +38,11 @@ export class VideoCategoryStoreEffects {
                         catchError(error => of(VideoCategoryActions.loadFailure({ error })))
                     );
             })
-        )
-    );
+        );
+    });
 
-    setTeaserEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    setTeaserEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(VideoCategoryActions.setTeaserRequest),
             concatMap(action =>
                 this.api.setTeaser(action.categoryId, action.videoId)
@@ -51,8 +51,8 @@ export class VideoCategoryStoreEffects {
                         catchError(error => of(VideoCategoryActions.setTeaserFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
     private adaptCategories(categories: VideoCategory[]): Category[] {
         return categories.map(c => this.adaptCategory(c));

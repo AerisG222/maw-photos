@@ -22,8 +22,8 @@ export class PhotoStoreEffects {
 
     }
 
-    loadRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadRequest),
             switchMap(action =>
                 this.api.getPhotosByCategory(action.categoryId)
@@ -32,11 +32,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.loadFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadRandomRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRandomRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadRandomRequest),
             switchMap(action =>
                 this.api.getRandomPhoto()
@@ -45,11 +45,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.loadRandomFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadMultipleRandomRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadMultipleRandomRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadMultipleRandomRequest),
             switchMap(action =>
                 this.api.getRandomPhotos(action.count)
@@ -58,11 +58,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.loadMultipleRandomFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadRatingRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRatingRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadRatingRequest),
             switchMap(action =>
                 this.api.getRating(action.photoId)
@@ -71,11 +71,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.loadRatingFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    ratePhotoRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    ratePhotoRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.ratePhotoRequest),
             switchMap(action =>
                 this.api.ratePhoto(action.photoId, action.userRating)
@@ -84,11 +84,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.ratePhotoFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadCommentsRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadCommentsRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadCommentsRequest),
             switchMap(action =>
                 this.api.getComments(action.photoId)
@@ -97,11 +97,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.ratePhotoFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    addCommentRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    addCommentRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.addCommentRequest),
             concatMap(action =>
                 this.api.addComment(action.photoId, action.comment)
@@ -110,18 +110,18 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.addCommentFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    addCommentSuccessEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    addCommentSuccessEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.addCommentSuccess),
             map(action => PhotoActions.loadCommentsRequest({ photoId: action.photoId }))
-        )
-    );
+        );
+    });
 
-    loadExifRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadExifRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadExifRequest),
             switchMap(action =>
                 this.api.getExifData(action.photoId)
@@ -131,11 +131,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.loadExifFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    loadGpsDetailRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadGpsDetailRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.loadGpsDetailRequest),
             switchMap(action =>
                 this.api.getGpsDetail(action.photoId)
@@ -144,11 +144,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.loadGpsDetailFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    setGpsOverrideRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    setGpsOverrideRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideRequest),
             mergeMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
@@ -158,11 +158,11 @@ export class PhotoStoreEffects {
                     ),
                     24
             )
-        )
-    );
+        );
+    });
 
-    setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideAndMoveNextRequest),
             mergeMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
@@ -175,11 +175,11 @@ export class PhotoStoreEffects {
                         catchError(error => of(PhotoActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
-    updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
@@ -200,11 +200,11 @@ export class PhotoStoreEffects {
                         return PhotoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
                     })
                 ))
-        )
-    );
+        );
+    });
 
-    rotateClockwiseEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    rotateClockwiseEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),
             concatMap(action => of(action).pipe(
                 withLatestFrom(this.store$.pipe(select(PhotoStoreSelectors.selectCurrentPhotoEffects)))
@@ -218,11 +218,11 @@ export class PhotoStoreEffects {
 
                 return PhotoActions.rotateSuccess({ newRotation: rotation });
             })
-        )
-    );
+        );
+    });
 
-    rotateCounterClockwiseEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    rotateCounterClockwiseEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoActions.rotateCounterClockwiseRequest),
             withLatestFrom(this.store$),
             concatMap(action => of(action).pipe(
@@ -237,6 +237,6 @@ export class PhotoStoreEffects {
 
                 return PhotoActions.rotateSuccess({ newRotation: rotation });
             })
-        )
-    );
+        );
+    });
 }

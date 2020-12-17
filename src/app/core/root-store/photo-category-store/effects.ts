@@ -21,8 +21,8 @@ export class PhotoCategoryStoreEffects {
 
     }
 
-    loadRequestEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    loadRequestEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoCategoryActions.loadRequest),
             withLatestFrom(this.store$.pipe(
                 select(PhotoCategorySelectors.selectAllCategories)
@@ -38,11 +38,11 @@ export class PhotoCategoryStoreEffects {
                         catchError(error => of(PhotoCategoryActions.loadFailure({ error })))
                     );
             })
-        )
-    );
+        );
+    });
 
-    setTeaserEffect$ = createEffect(() =>
-        this.actions$.pipe(
+    setTeaserEffect$ = createEffect(() => {
+        return this.actions$.pipe(
             ofType(PhotoCategoryActions.setTeaserRequest),
             concatMap(action =>
                 this.api.setTeaser(action.categoryId, action.photoId)
@@ -51,8 +51,8 @@ export class PhotoCategoryStoreEffects {
                         catchError(error => of(PhotoCategoryActions.setTeaserFailure({ error })))
                     )
             )
-        )
-    );
+        );
+    });
 
     private adaptCategories(categories: PhotoCategory[]): Category[] {
         return categories.map(c => this.adaptCategory(c));
