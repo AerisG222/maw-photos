@@ -87,7 +87,7 @@ export class VideoStoreEffects {
     addCommentSuccessEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoActions.addCommentSuccess),
-            switchMap(action => of(VideoActions.loadCommentsRequest({ videoId: action.videoId })))
+            concatMap(action => of(VideoActions.loadCommentsRequest({ videoId: action.videoId })))
         );
     });
 

@@ -116,7 +116,7 @@ export class PhotoStoreEffects {
     addCommentSuccessEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.addCommentSuccess),
-            switchMap(action => of(PhotoActions.loadCommentsRequest({ photoId: action.photoId })))
+            concatMap(action => of(PhotoActions.loadCommentsRequest({ photoId: action.photoId })))
         );
     });
 
