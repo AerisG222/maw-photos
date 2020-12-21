@@ -26,14 +26,14 @@ export class SidebarExifComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.exifContainer$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoExifData),
+                select(PhotoStoreSelectors.selectActivePhotoExifData),
                 filter(exif => !!exif),
                 map(exif => exif as ExifContainer)
             );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id })))

@@ -29,14 +29,14 @@ export class FullscreenViewComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.activePhoto$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo)
             );
 
         this.effects$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                select(PhotoStoreSelectors.selectActivePhotoEffects),
                 filter(x => !!x),
                 map(x => x as PhotoEffects)
             );

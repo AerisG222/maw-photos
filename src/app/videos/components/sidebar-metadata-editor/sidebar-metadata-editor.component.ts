@@ -14,7 +14,7 @@ import { Video } from 'src/app/models/video.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarMetadataEditorComponent implements OnInit {
-    currentId = -1;
+    activeId = -1;
     overrideGpsData$: Observable<GpsCoordinate | null> | null = null;
     sourceGpsData$: Observable<GpsCoordinate | null> | null = null;
     destroySub = new Subscription();
@@ -28,32 +28,32 @@ export class SidebarMetadataEditorComponent implements OnInit {
     ngOnInit(): void {
         this.sourceGpsData$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
+                select(VideoStoreSelectors.selectActiveVideoGpsDetail),
                 map(gps => gps?.source ?? null)
             );
 
         this.overrideGpsData$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoGpsDetail),
+                select(VideoStoreSelectors.selectActiveVideoGpsDetail),
                 map(gps => gps?.override ?? null)
             );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
+                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video),
                 map(video => video as Video),
-                tap(video => this.currentId = video.id),
+                tap(video => this.activeId = video.id),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadGpsDetailRequest({ videoId: video.id })))
             ).subscribe()
         );
     }
 
     onSave(latLng: GpsCoordinate): void {
-        this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideRequest({ videoId: this.currentId, latLng }));
+        this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideRequest({ videoId: this.activeId, latLng }));
     }
 
     onSaveAndMoveNext(latLng: GpsCoordinate): void {
-        this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ videoId: this.currentId, latLng }));
+        this.store$.dispatch(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ videoId: this.activeId, latLng }));
     }
 }

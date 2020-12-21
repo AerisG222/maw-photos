@@ -93,13 +93,13 @@ export const movePreviousRequest = createAction(
     '[Videos] Move Previous Request'
 );
 
-export const setCurrent = createAction(
-    '[Videos] Set Current',
-    props<{ video: Video }>()
+export const setActiveVideoId = createAction(
+    '[Videos] Set Active Video Id',
+    props<{ id: number | null }>()
 );
 
-export const clearCurrent = createAction(
-    '[Videos] Clear Current'
+export const unsetActiveVideoId = createAction(
+    '[Videos] Un-Set Active Video Id'
 );
 
 export const loadGpsDetailRequest = createAction(

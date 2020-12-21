@@ -12,19 +12,19 @@ export const videoAdapter: EntityAdapter<Video> = createEntityAdapter<Video>({
 export interface State extends EntityState<Video> {
     error: string | null;
     isLoading: boolean;
-    currentVideo: Video | null;
-    currentVideoRating: Rating | null;
-    currentVideoComments: Comment[] | null;
-    currentVideoGpsDetail: GpsDetail | null;
+    activeVideoId: number | null;
+    activeVideoRating: Rating | null;
+    activeVideoComments: Comment[] | null;
+    activeVideoGpsDetail: GpsDetail | null;
     isFullscreenView: boolean;
 }
 
 export const initialState: State = videoAdapter.getInitialState({
     isLoading: false,
     error: null,
-    currentVideo: null,
-    currentVideoRating: null,
-    currentVideoComments: null,
-    currentVideoGpsDetail: null,
+    activeVideoId: null,
+    activeVideoRating: null,
+    activeVideoComments: null,
+    activeVideoGpsDetail: null,
     isFullscreenView: false
 });

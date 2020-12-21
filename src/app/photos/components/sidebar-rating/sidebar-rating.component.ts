@@ -14,7 +14,7 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarRatingComponent implements OnInit, OnDestroy {
-    private currentId = -1;
+    private activeId = -1;
     private destroySub = new Subscription();
 
     rating$: Observable<Rating | null> | null = null;
@@ -28,15 +28,15 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.rating$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoRating)
+                select(PhotoStoreSelectors.selectActivePhotoRating)
             );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
-                tap(photo => this.currentId = photo.id),
+                tap(photo => this.activeId = photo.id),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
             ).subscribe()
         );
@@ -47,8 +47,8 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     }
 
     onRate(userRating: number): void {
-        if (this.currentId !== -1) {
-            this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.currentId, userRating }));
+        if (this.activeId !== -1) {
+            this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.activeId, userRating }));
         }
     }
 }

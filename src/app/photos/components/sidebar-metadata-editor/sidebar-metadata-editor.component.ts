@@ -5,7 +5,6 @@ import { map, filter, tap } from 'rxjs/operators';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
-import { GpsDetail } from 'src/app/models/gps-detail.model';
 import { Photo } from 'src/app/models/photo.model';
 
 @Component({
@@ -15,7 +14,7 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarMetadataEditorComponent implements OnInit {
-    currentId = -1;
+    activeId = -1;
     overrideGpsData$: Observable<GpsCoordinate | null> | null = null;
     sourceGpsData$: Observable<GpsCoordinate | null> | null = null;
     destroySub = new Subscription();
@@ -29,23 +28,23 @@ export class SidebarMetadataEditorComponent implements OnInit {
     ngOnInit(): void {
         this.sourceGpsData$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
+                select(PhotoStoreSelectors.selectActivePhotoGpsDetail),
                 filter(x => !!x),
                 map(gpsDetail => gpsDetail?.source ?? null)
             );
 
         this.overrideGpsData$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoGpsDetail),
+                select(PhotoStoreSelectors.selectActivePhotoGpsDetail),
                 map(gpsDetail => gpsDetail?.override ?? null)
             );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
-                tap(photo => this.currentId = photo.id),
+                tap(photo => this.activeId = photo.id),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
             ).subscribe()
@@ -53,10 +52,10 @@ export class SidebarMetadataEditorComponent implements OnInit {
     }
 
     onSave(latLng: GpsCoordinate): void {
-        this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.currentId, latLng }));
+        this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.activeId, latLng }));
     }
 
     onSaveAndMoveNext(latLng: GpsCoordinate): void {
-        this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.currentId, latLng }));
+        this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.activeId, latLng }));
     }
 }

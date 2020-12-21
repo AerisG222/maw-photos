@@ -27,13 +27,13 @@ export class MapToolbarComponent implements OnInit {
     ngOnInit(): void {
         this.isFirst$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirstWithGpsCoordinates),
+                select(PhotoStoreSelectors.selectIsActivePhotoFirst),
                 tap(isFirst => this.isFirst = isFirst)
             );
 
         this.isLast$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLastWithGpsCoordinates),
+                select(PhotoStoreSelectors.selectIsActivePhotoLast),
                 tap(isLast => this.isLast = isLast)
             );
     }
@@ -44,13 +44,13 @@ export class MapToolbarComponent implements OnInit {
 
     onMoveNext(): void {
         if (!this.isLast) {
-            this.store$.dispatch(PhotoStoreActions.moveNextWithGpsRequest());
+            this.store$.dispatch(PhotoStoreActions.moveNextRequest());
         }
     }
 
     onMovePrevious(): void {
         if (!this.isFirst) {
-            this.store$.dispatch(PhotoStoreActions.movePreviousWithGpsRequest());
+            this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
         }
     }
 }

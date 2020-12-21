@@ -1,7 +1,5 @@
-import {
-    createFeatureSelector,
-    createSelector
-} from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Dictionary } from '@ngrx/entity';
 
 import { Photo } from 'src/app/models/photo.model';
 import { Comment } from 'src/app/models/comment.model';
@@ -12,115 +10,256 @@ import { photoAdapter, State } from './state';
 import { ExifContainer } from 'src/app/models/exif-container';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
 
-const getError = (state: State): string | null => state.error;
-const getIsLoading = (state: State): boolean => state.isLoading;
-const getPendingActionCount = (state: State): number => state.pendingActionCount;
-const getCurrentPhoto = (state: State): Photo | null => state.currentPhoto;
-const getFirstPhoto = (state: State): Photo | null => state.entities[state.ids[0]] ?? null;
-const getLastPhoto = (state: State): Photo | null => state.entities[state.ids[state.ids.length - 1]] ?? null;
-const getCurrentPhotoRating = (state: State): Rating | null => state.currentPhotoRating;
-const getCurrentPhotoComments = (state: State): Comment[] | null => state.currentPhotoComments;
-const getCurrentPhotoExifData = (state: State): ExifContainer | null => state.currentPhotoExifData;
-const getCurrentPhotoEffects = (state: State): PhotoEffects | null => state.currentPhotoEffects;
-const getCurrentPhotoGpsDetail = (state: State): GpsDetail | null => state.currentPhotoGpsDetail;
-const getSlideshowIsPlaying = (state: State): boolean => state.slideshowIsPlaying;
-const getIsFullscreenView = (state: State): boolean => state.isFullscreenView;
-const getIsMapView = (state: State): boolean => state.isMapView;
-const getIsBulkEditView = (state: State): boolean => state.isBulkEditView;
-const getIsGridView = (state: State): boolean => state.isGridView;
-const getHasGpsCoordinates = (photos: Photo[] | null): boolean => !!photos && photos.length > 0;
+const photoHasGpsData = (photo: Photo) => photo?.latitude !== null;
 
-export const selectPhotoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
+const photoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
-export const selectAllPhotos = photoAdapter.getSelectors(selectPhotoState).selectAll;
+const { selectAll, selectEntities, selectIds } = photoAdapter.getSelectors(photoState);
 
-export const selectPhotosForCategory =
-    createSelector(selectAllPhotos, (photos: Photo[], props: { id: number }) => {
+export const selectAllPhotos = selectAll;
+
+export const selectPhotoError = createSelector(
+    photoState,
+    (state: State): string | null => state.error
+);
+
+export const selectIsLoading = createSelector(
+    photoState,
+    (state: State): boolean => state.isLoading
+);
+
+export const selectPendingActionCount = createSelector(
+    photoState,
+    (state: State): number => state.pendingActionCount
+);
+
+export const selectActivePhotoId = createSelector(
+    photoState,
+    (state: State): number | null => state.activePhotoId
+);
+
+export const selectActivePhotoRating = createSelector(
+    photoState,
+    (state: State): Rating | null => state.activePhotoRating
+);
+
+export const selectActivePhotoComments = createSelector(
+    photoState,
+    (state: State): Comment[] | null => state.activePhotoComments
+);
+
+export const selectActivePhotoExifData = createSelector(
+    photoState,
+    (state: State): ExifContainer | null => state.activePhotoExifData
+);
+
+export const selectActivePhotoEffects = createSelector(
+    photoState,
+    (state: State): PhotoEffects | null => state.activePhotoEffects
+);
+
+export const selectActivePhotoGpsDetail = createSelector(
+    photoState,
+    (state: State): GpsDetail | null => state.activePhotoGpsDetail
+);
+
+export const selectSlideshowIsPlaying = createSelector(
+    photoState,
+    (state: State): boolean => state.slideshowIsPlaying
+);
+
+export const selectIsFullscreenView = createSelector(
+    photoState,
+    (state: State): boolean => state.isFullscreenView
+);
+
+export const selectIsMapView = createSelector(
+    photoState,
+    (state: State): boolean => state.isMapView
+);
+
+export const selectIsBulkEditView = createSelector(
+    photoState,
+    (state: State): boolean => state.isBulkEditView
+);
+
+export const selectIsGridView = createSelector(
+    photoState,
+    (state: State): boolean => state.isGridView
+);
+
+export const selectActivePhotoIndex = createSelector(
+    selectIds,
+    selectActivePhotoId,
+    (ids: string[] | number[], id: number | null): number | null => !!id ? (ids as number[]).indexOf(id) : null
+);
+
+export const selectActivePhoto = createSelector(
+    selectEntities,
+    selectActivePhotoId,
+    (entities: Dictionary<Photo>, id: number | null) => {
+        if (!!id) {
+            const photo = entities[id];
+
+            if (!!photo) {
+                return photo;
+            }
+        }
+
+        return null;
+    }
+);
+
+export const selectFirstPhoto = createSelector(
+    selectAll,
+    selectIsMapView,
+    (photos: Photo[], isMapView: boolean) => {
+        if (isMapView) {
+            return photos.find(photoHasGpsData) ?? null;
+        }
+
+        return photos[0] ?? null;
+    }
+);
+
+export const selectLastPhoto = createSelector(
+    selectAll,
+    selectIsMapView,
+    (photos: Photo[], isMapView: boolean) => {
+        if (isMapView) {
+            for (let i = photos.length; i >= 0; i--) {
+                const photo = photos[i];
+
+                if (photoHasGpsData(photo)) {
+                    return photo;
+                }
+            }
+
+            return null;
+        }
+
+        return photos[photos.length - 1] ?? null;
+    }
+);
+
+export const selectIsActivePhotoFirst = createSelector(
+    selectFirstPhoto,
+    selectActivePhotoId,
+    (first, id) => first?.id === id
+);
+
+export const selectIsActivePhotoLast = createSelector(
+    selectLastPhoto,
+    selectActivePhotoId,
+    (last, id) => last?.id === id
+);
+
+export const selectNextPhotoIndex = createSelector(
+    selectAll,
+    selectActivePhotoIndex,
+    selectIsActivePhotoLast,
+    selectIsMapView,
+    (photos, activePhotoIndex, isActivePhotoLast, isMapView) => {
+        if (isActivePhotoLast) {
+            return activePhotoIndex as number;
+        }
+
+        if (activePhotoIndex === null) {
+            activePhotoIndex = -1;
+        }
+
+        if (isMapView) {
+            for (let i = activePhotoIndex + 1; i < photos.length; i++) {
+                if (photoHasGpsData(photos[i])) {
+                    return i;
+                }
+            }
+
+            return -1;
+        } else {
+            const nextIndex = activePhotoIndex + 1;
+
+            return nextIndex < photos.length ? nextIndex : -1;
+        }
+    }
+);
+
+export const selectNextPhotoId = createSelector(
+    selectIds,
+    selectNextPhotoIndex,
+    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+);
+
+export const selectPreviousPhotoIndex = createSelector(
+    selectAll,
+    selectActivePhotoIndex,
+    selectIsActivePhotoFirst,
+    selectIsMapView,
+    (photos, activePhotoIndex, isActivePhotoFirst, isMapView) => {
+        if (isActivePhotoFirst) {
+            return activePhotoIndex as number;
+        }
+
+        if (activePhotoIndex === null) {
+            activePhotoIndex = -1;
+        }
+
+        if (isMapView) {
+            for (let i = activePhotoIndex - 1; i >= 0; i--) {
+                if (photoHasGpsData(photos[i])) {
+                    return i;
+                }
+            }
+
+            return -1;
+        } else {
+            const previousIndex = activePhotoIndex - 1;
+
+            return previousIndex >= 0 ? previousIndex : -1;
+        }
+    }
+);
+
+export const selectPreviousPhotoId = createSelector(
+    selectIds,
+    selectPreviousPhotoIndex,
+    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+);
+
+export const selectPhotosForCategory = createSelector(
+    selectAllPhotos,
+    (photos: Photo[], props: { id: number }) => {
         if (photos) {
             return photos.filter(x => x.categoryId === props.id);
         } else {
             return null;
         }
-    });
+    }
+);
 
-export const selectPhotoById =
-    createSelector(selectAllPhotos, (photos: Photo[], props: { id: number }) => {
-        if (photos) {
-            return photos.find(p => p.id === props.id);
+export const selectPhotoById = createSelector(
+    selectEntities,
+    (photos: Dictionary<Photo>, props: { id: number }) => {
+        if (!!photos && !!props.id) {
+            return photos[props.id] ?? null;
         } else {
             return null;
         }
-    });
+    }
+);
 
-export const selectPhotosWithGpsCoordinates =
-    createSelector(selectAllPhotos, (photos: Photo[]) => {
-        if (photos) {
+export const selectPhotosWithGpsCoordinates = createSelector(
+    selectAllPhotos,
+    (photos: Photo[]) => {
+        if (!!photos) {
             return photos.filter(x => x.latitude !== null);
         } else {
             return null;
         }
-    });
+    }
+);
 
-export const selectIsLoading = createSelector(selectPhotoState, getIsLoading);
-export const selectPendingActionCount = createSelector(selectPhotoState, getPendingActionCount);
-export const selectPhotoError = createSelector(selectPhotoState, getError);
-export const selectCurrentPhoto = createSelector(selectPhotoState, getCurrentPhoto);
-export const selectFirstPhoto = createSelector(selectPhotoState, getFirstPhoto);
-export const selectLastPhoto = createSelector(selectPhotoState, getLastPhoto);
-export const selectCurrentPhotoRating = createSelector(selectPhotoState, getCurrentPhotoRating);
-export const selectCurrentPhotoComments = createSelector(selectPhotoState, getCurrentPhotoComments);
-export const selectCurrentPhotoExifData = createSelector(selectPhotoState, getCurrentPhotoExifData);
-export const selectCurrentPhotoEffects = createSelector(selectPhotoState, getCurrentPhotoEffects);
-export const selectCurrentPhotoGpsDetail = createSelector(selectPhotoState, getCurrentPhotoGpsDetail);
-export const selectSlideshowIsPlaying = createSelector(selectPhotoState, getSlideshowIsPlaying);
-export const selectIsFullscreenView = createSelector(selectPhotoState, getIsFullscreenView);
-export const selectIsMapView = createSelector(selectPhotoState, getIsMapView);
-export const selectIsBulkEditView = createSelector(selectPhotoState, getIsBulkEditView);
-export const selectIsGridView = createSelector(selectPhotoState, getIsGridView);
-export const selectHasPhotosWithGpsCoordinates = createSelector(selectPhotosWithGpsCoordinates, getHasGpsCoordinates);
-
-export const selectIsCurrentPhotoFirst =
-    createSelector(selectCurrentPhoto, selectFirstPhoto, (current, first) => {
-        return current != null &&
-            first != null &&
-            current.id === first.id;
-    });
-
-export const selectIsCurrentPhotoLast =
-    createSelector(selectCurrentPhoto, selectLastPhoto, (current, last) => {
-        return current != null &&
-            last != null &&
-            current.id === last.id;
-    });
-
-export const selectFirstPhotoWithGpsCoordinates =
-    createSelector(selectPhotosWithGpsCoordinates, (photos) => {
-        if (photos == null) {
-            return null;
-        }
-
-        return photos[0];
-    });
-
-export const selectLastPhotoWithGpsCoordinates =
-    createSelector(selectPhotosWithGpsCoordinates, (photos) => {
-        if (photos == null) {
-            return null;
-        }
-
-        return photos[photos.length - 1];
-    });
-
-export const selectIsCurrentPhotoFirstWithGpsCoordinates =
-    createSelector(selectCurrentPhoto, selectFirstPhotoWithGpsCoordinates, (current, first) => {
-        return current != null &&
-            first != null &&
-            current.id === first.id;
-    });
-
-export const selectIsCurrentPhotoLastWithGpsCoordinates =
-    createSelector(selectCurrentPhoto, selectLastPhotoWithGpsCoordinates, (current, last) => {
-        return current != null &&
-            last != null &&
-            current.id === last.id;
-    });
+export const selectHasPhotosWithGpsCoordinates = createSelector(
+    selectPhotosWithGpsCoordinates,
+    (photos: Photo[] | null): boolean => !!photos && photos.length > 0
+);

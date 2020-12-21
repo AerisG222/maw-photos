@@ -24,13 +24,13 @@ export class SidebarMinimapComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const currentPhoto$ = this.store$
+        const activePhoto$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo)
             );
 
-        this.position$ = currentPhoto$
+        this.position$ = activePhoto$
             .pipe(
                 map(photo => {
                     if (!!photo && !!photo.latitude && photo.longitude) {

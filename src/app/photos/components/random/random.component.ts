@@ -44,19 +44,10 @@ export class RandomComponent implements OnInit, OnDestroy {
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
-                tap(photo => {
-                    this.store$
-                        .pipe(
-                            select(PhotoCategoryStoreSelectors.selectCategoryById, { id: photo.categoryId }),
-                            filter(x => !!x),
-                            map(x => x as Category),
-                            tap(category => this.store$.dispatch(PhotoCategoryStoreActions.setCurrent({ category }))),
-                            take(1)
-                        ).subscribe();
-                })
+                tap(photo => this.store$.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: photo.categoryId })))
             ).subscribe()
         );
 
@@ -65,7 +56,7 @@ export class RandomComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.killFetch.next(true);
-        this.store$.dispatch(PhotoStoreActions.clearCurrent());
+        this.store$.dispatch(PhotoStoreActions.unsetActivePhotoId());
         this.destroySub.unsubscribe();
     }
 

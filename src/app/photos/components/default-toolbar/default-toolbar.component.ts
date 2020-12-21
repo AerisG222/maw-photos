@@ -61,7 +61,7 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
+                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(c => !!c),
                 map(c => (c as Category).actual as PhotoCategory)
             );
@@ -82,17 +82,17 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
         this.isFirst$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+                select(PhotoStoreSelectors.selectIsActivePhotoFirst)
             );
 
         this.isLast$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
+                select(PhotoStoreSelectors.selectIsActivePhotoLast)
             );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
                 tap(photo => this.smDownloadUrl = photo.imageSm.downloadUrl),
@@ -159,7 +159,7 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
         this.store$
             .pipe(
                 first(),
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
                 tap(x => this.sharePhoto(x))

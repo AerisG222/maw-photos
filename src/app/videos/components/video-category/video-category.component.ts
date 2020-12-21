@@ -43,7 +43,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
         this.category$ = this.store$
             .pipe(
-                select(VideoCategoryStoreSelectors.selectCurrentCategory),
+                select(VideoCategoryStoreSelectors.selectActiveCategory),
                 filter(x => !!x),
                 map(x => x as Category)
             );
@@ -51,12 +51,13 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         this.videos$ = this.store$
             .pipe(
                 select(VideoStoreSelectors.selectAllVideos),
-                tap(videos => this.setCurrentVideo(videos[0]))
+                filter(x => !!x && x.length > 0),
+                tap(videos => this.setActiveVideo(videos[0]))
             );
 
         this.activeVideo$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
+                select(VideoStoreSelectors.selectActiveVideo),
                 filter(x => !!x),
                 map(x => x as Video),
                 tap(x => this.triggerVideoRefresh())
@@ -68,17 +69,17 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
             .pipe(
                 first(),
                 map(p => Number(p.id)),
-                tap(id => this.store$.dispatch(VideoCategoryStoreActions.setCurrentById({ categoryId: id }))),
+                tap(id => this.store$.dispatch(VideoCategoryStoreActions.setActiveCategoryId({ categoryId: id }))),
                 tap(id => this.store$.dispatch(VideoStoreActions.loadRequest({ categoryId: id })))
             ).subscribe();
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(VideoStoreActions.clearCurrent());
+        this.store$.dispatch(VideoStoreActions.unsetActiveVideoId());
     }
 
     onSelectVideo(video: Video): void {
-        this.setCurrentVideo(video);
+        this.setActiveVideo(video);
     }
 
     getVideoDimensions(video: Video): { width: string, height: string } {
@@ -106,7 +107,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         }, 0, false);
     }
 
-    private setCurrentVideo(video: Video): void {
-        this.store$.dispatch(VideoStoreActions.setCurrent({ video }));
+    private setActiveVideo(video: Video): void {
+        this.store$.dispatch(VideoStoreActions.setActiveVideoId({ id: video.id }));
     }
 }

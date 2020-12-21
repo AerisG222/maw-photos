@@ -26,7 +26,7 @@ export class SidebarEffectsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                select(PhotoStoreSelectors.selectActivePhotoEffects),
                 filter(x => !!x),
                 map(x => x as PhotoEffects),
                 tap(effects => this.effects = effects)

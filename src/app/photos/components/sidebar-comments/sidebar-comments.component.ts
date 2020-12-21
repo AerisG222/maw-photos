@@ -14,7 +14,7 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarCommentsComponent implements OnInit, OnDestroy {
-    currentId = -1;
+    activeId = -1;
     comments$: Observable<Comment[]> | null = null;
     destroySub = new Subscription();
 
@@ -26,18 +26,18 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.comments$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectCurrentPhotoComments),
+            select(PhotoStoreSelectors.selectActivePhotoComments),
             filter(x => !!x),
             map(x => x as Comment[])
         );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
                 tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
-                tap(photo => this.currentId = photo.id)
+                tap(photo => this.activeId = photo.id)
             ).subscribe()
         );
     }
@@ -47,8 +47,8 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
     }
 
     onComment(comment: string): void {
-        if (this.currentId !== -1) {
-            this.store$.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.currentId, comment }));
+        if (this.activeId !== -1) {
+            this.store$.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.activeId, comment }));
         }
     }
 }

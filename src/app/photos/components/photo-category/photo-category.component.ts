@@ -53,12 +53,12 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
             .pipe(
                 first(),
                 map(p => Number(p.id)),
-                tap(id => this.store$.dispatch(PhotoCategoryStoreActions.setCurrentById({ categoryId: id }))),
+                tap(id => this.store$.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: id }))),
                 tap(id => this.store$.dispatch(PhotoStoreActions.loadRequest({ categoryId: id })))
             ).subscribe();
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(PhotoStoreActions.clearCurrent());
+        this.store$.dispatch(PhotoStoreActions.unsetActivePhotoId());
     }
 }

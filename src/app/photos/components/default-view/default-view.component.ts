@@ -48,7 +48,7 @@ export class DefaultViewComponent implements OnInit {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
+                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(x => !!x),
                 map(x => x as Category)
             );
@@ -57,7 +57,7 @@ export class DefaultViewComponent implements OnInit {
             .pipe(
                 select(PhotoStoreSelectors.selectAllPhotos),
                 filter(photos => !!photos && photos.length > 0),
-                tap(photos => this.setCurrentPhoto(photos[0])),
+                tap(photos => this.setActivePhoto(photos[0])),
                 take(1)
             ).subscribe();
 
@@ -68,14 +68,14 @@ export class DefaultViewComponent implements OnInit {
 
         this.activePhoto$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo)
             );
 
         this.effects$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects),
+                select(PhotoStoreSelectors.selectActivePhotoEffects),
                 filter(x => !!x),
                 map(x => x as PhotoEffects)
             );
@@ -118,10 +118,10 @@ export class DefaultViewComponent implements OnInit {
     }
 
     onSelectPhoto(photo: Photo): void {
-        this.setCurrentPhoto(photo);
+        this.setActivePhoto(photo);
     }
 
-    private setCurrentPhoto(photo: Photo): void {
-        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo }));
+    private setActivePhoto(photo: Photo): void {
+        this.store$.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
     }
 }

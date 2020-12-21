@@ -28,13 +28,9 @@ export const reducer = createReducer(
         ...state,
         isLoading: false
     })),
-    on(PhotoCategoryActions.setCurrent, (state, { category }) => ({
+    on(PhotoCategoryActions.setActiveCategoryId, (state, { categoryId }) => ({
         ...state,
-        currentCategory: category
-    })),
-    on(PhotoCategoryActions.setCurrentById, (state, { categoryId }) => ({
-        ...state,
-        currentCategory: state.entities[categoryId] ?? null
+        activeCategoryId: categoryId
     })),
     on(PhotoCategoryActions.setTeaserRequest, state => ({
         ...state,
@@ -44,7 +40,7 @@ export const reducer = createReducer(
     on(PhotoCategoryActions.setTeaserSuccess, (state, { category }) => (
         photoCategoryAdapter.upsertOne(category, {
             ...state,
-            currentCategory: category,
+            activeCategoryId: category.id,
             isLoading: false,
             error: null
         })

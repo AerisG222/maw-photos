@@ -32,7 +32,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
         this.activePhoto$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo)
             );
@@ -63,6 +63,6 @@ export class MapViewComponent implements OnInit, OnDestroy {
     }
 
     onSelectPhoto(photoId: number): void {
-        this.store$.dispatch(PhotoStoreActions.setCurrentById({ id: photoId }));
+        this.store$.dispatch(PhotoStoreActions.setActivePhotoId({ id: photoId }));
     }
 }

@@ -20,13 +20,8 @@ export const loadRequestedSatisfiedByCache = createAction(
     '[Video Categories] Load Request Satisfied by Cache'
 );
 
-export const setCurrent = createAction(
-    '[Video Categories] Set Current',
-    props<{ category: Category }>()
-);
-
-export const setCurrentById = createAction(
-    '[Video Categories] Set Current By Id',
+export const setActiveCategoryId = createAction(
+    '[Video Categories] Set Active Category Id',
     props<{ categoryId: number }>()
 );
 

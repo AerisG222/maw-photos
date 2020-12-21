@@ -21,7 +21,7 @@ export class SettingsStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.loadRequest),
-            exhaustMap(action => {
+            concatMap(action => {
                 const settings = this.settingsService.load();
                 return of(SettingsActions.loadSuccess({ settings }));
             })

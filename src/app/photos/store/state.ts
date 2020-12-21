@@ -2,23 +2,25 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { Photo } from 'src/app/models/photo.model';
 import { Comment } from 'src/app/models/comment.model';
-import { PhotoEffects } from 'src/app/models/photo-effects.model';
-import { PhotoRotation } from 'src/app/models/photo-rotation.model';
+import { DEFAULT_PHOTO_EFFECTS, PhotoEffects } from 'src/app/models/photo-effects.model';
 import { Rating } from 'src/app/models/rating.model';
 import { ExifContainer } from 'src/app/models/exif-container';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
+// TODO: add properties to flag what info panels are shown
+//       then use an effect to load data that will be used rather than requiring the component to request this data
+
 export interface State extends EntityState<Photo> {
     error: string | null;
     isLoading: boolean;
-    currentPhoto: Photo | null;
-    currentPhotoRating: Rating | null;
-    currentPhotoComments: Comment[] | null;
-    currentPhotoExifData: ExifContainer | null;
-    currentPhotoEffects: PhotoEffects;
-    currentPhotoGpsDetail: GpsDetail | null;
+    activePhotoId: number | null;
+    activePhotoRating: Rating | null;
+    activePhotoComments: Comment[] | null;
+    activePhotoExifData: ExifContainer | null;
+    activePhotoEffects: PhotoEffects;
+    activePhotoGpsDetail: GpsDetail | null;
     slideshowIsPlaying: boolean;
     isFullscreenView: boolean;
     isMapView: boolean;
@@ -30,24 +32,12 @@ export interface State extends EntityState<Photo> {
 export const initialState: State = photoAdapter.getInitialState({
     isLoading: false,
     error: null,
-    currentPhoto: null,
-    currentPhotoRating: null,
-    currentPhotoComments: null,
-    currentPhotoExifData: null,
-    currentPhotoEffects: {
-        rotation: new PhotoRotation(),
-        flipHorizontal: false,
-        flipVertical: false,
-        grayscale: 0,
-        sepia: 0,
-        brightness: 100,
-        saturation: 100,
-        contrast: 100,
-        invert: 0,
-        blur: 0,
-        hueRotate: 0
-    },
-    currentPhotoGpsDetail: null,
+    activePhotoId: null,
+    activePhotoRating: null,
+    activePhotoComments: null,
+    activePhotoExifData: null,
+    activePhotoEffects: DEFAULT_PHOTO_EFFECTS,
+    activePhotoGpsDetail: null,
     slideshowIsPlaying: false,
     isFullscreenView: false,
     isMapView: false,

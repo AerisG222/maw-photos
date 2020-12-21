@@ -24,13 +24,13 @@ export class SidebarMinimapComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const currentVideo$ = this.store$
+        const activeVideo$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
+                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video)
             );
 
-        this.position$ = currentVideo$
+        this.position$ = activeVideo$
             .pipe(
                 map(video => {
                     if (!!video && !!video.latitude && video.longitude) {

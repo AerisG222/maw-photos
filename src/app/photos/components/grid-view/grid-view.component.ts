@@ -22,7 +22,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
     settings$: Observable<Settings> | null = null;
     category$: Observable<Category> | null = null;
     photos$: Observable<Photo[]> | null = null;
-    currentPhoto$: Observable<Photo | null> | null = null;
+    activePhoto$: Observable<Photo | null> | null = null;
     thumbnailSize$: Observable<ThumbnailSize> | null = null;
     margin$: Observable<CategoryMargin> | null = null;
     showBreadcrumbs$: Observable<boolean> | null = null;
@@ -35,7 +35,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.clearCurrentPhoto();
+        this.clearActivePhoto();
 
         this.settings$ = this.store$
             .pipe(
@@ -44,7 +44,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
 
         this.category$ = this.store$
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectCurrentCategory),
+                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(x => !!x),
                 map(x => x as Category)
             );
@@ -54,9 +54,9 @@ export class GridViewComponent implements OnInit, OnDestroy {
                 select(PhotoStoreSelectors.selectAllPhotos)
             );
 
-        this.currentPhoto$ = this.store$
+        this.activePhoto$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto)
+                select(PhotoStoreSelectors.selectActivePhoto)
             );
 
         this.thumbnailSize$ = this.store$
@@ -76,7 +76,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.clearCurrentPhoto();
+        this.clearActivePhoto();
     }
 
     getSourceset(photo: Photo | null): string {
@@ -87,16 +87,16 @@ export class GridViewComponent implements OnInit, OnDestroy {
         return '';
     }
 
-    setCurrentPhoto(photo: Photo): void {
+    setActivePhoto(photo: Photo): void {
         if (!!this.layout) {
             this.lastScrollTop = this.layout.getCurrentScrollTop();
         }
 
-        this.store$.dispatch(PhotoStoreActions.setCurrent({ photo }));
+        this.store$.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
     }
 
-    clearCurrentPhoto(): void {
-        this.store$.dispatch(PhotoStoreActions.clearCurrent());
+    clearActivePhoto(): void {
+        this.store$.dispatch(PhotoStoreActions.unsetActivePhotoId());
 
         if (!!this.layout) {
             this.layout.setCurrentScrollTop(this.lastScrollTop);

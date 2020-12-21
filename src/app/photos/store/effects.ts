@@ -10,6 +10,7 @@ import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/pho
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -206,15 +207,15 @@ export class PhotoStoreEffects {
     rotateClockwiseEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),
-            withLatestFrom(this.store$.pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
+            concatMap(action => of(action).pipe(
+                withLatestFrom(this.store$.select(PhotoStoreSelectors.selectActivePhotoEffects))
             )),
-            concatMap(([action, photoEffects]) => {
+            map(([action, photoEffects]) => {
                 const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateClockwise();
 
-                return of(PhotoActions.rotateSuccess({ newRotation: rotation }));
+                return PhotoActions.rotateSuccess({ newRotation: rotation });
             })
         );
     });
@@ -222,15 +223,66 @@ export class PhotoStoreEffects {
     rotateCounterClockwiseEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.rotateCounterClockwiseRequest),
-            withLatestFrom(this.store$.pipe(
-                select(PhotoStoreSelectors.selectCurrentPhotoEffects)
+            concatMap(action => of(action).pipe(
+                withLatestFrom(this.store$.select(PhotoStoreSelectors.selectActivePhotoEffects))
             )),
-            concatMap(([action, photoEffects]) => {
+            map(([action, photoEffects]) => {
                 const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateCounterClockwise();
 
-                return of(PhotoActions.rotateSuccess({ newRotation: rotation }));
+                return PhotoActions.rotateSuccess({ newRotation: rotation });
+            })
+        );
+    });
+
+    unsetActivePhotoIdEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.unsetActivePhotoId),
+            map(action => {
+                return PhotoActions.setActivePhotoId({ id: null });
+            })
+        );
+    });
+
+    moveNextSetActivePhotoIdEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.moveNextRequest),
+            concatMap(action => of(action).pipe(
+                withLatestFrom(this.store$.select(PhotoStoreSelectors.selectNextPhotoId))
+            )),
+            map(([action, nextId]) => {
+                return PhotoActions.setActivePhotoId({ id: nextId });
+            })
+        );
+    });
+
+    movePreviousSetActivePhotoIdEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.movePreviousRequest),
+            concatMap(action => of(action).pipe(
+                withLatestFrom(this.store$.select(PhotoStoreSelectors.selectPreviousPhotoId))
+            )),
+            map(([action, prevId]) => {
+                return PhotoActions.setActivePhotoId({ id: prevId });
+            })
+        );
+    });
+
+    resetPhotoEffectsForNewPhotoEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.setActivePhotoId),
+            concatMap(action => {
+                return of(PhotoActions.resetEffectsRequest());
+            })
+        );
+    });
+
+    resetPhotoEffectsEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.resetEffectsRequest),
+            concatMap(action => {
+                return of(PhotoActions.updateEffectsRequest({ effects: DEFAULT_PHOTO_EFFECTS }));
             })
         );
     });

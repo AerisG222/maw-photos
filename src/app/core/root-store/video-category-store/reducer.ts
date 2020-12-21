@@ -28,13 +28,9 @@ export const reducer = createReducer(
         ...state,
         isLoading: false
     })),
-    on(VideoCategoryActions.setCurrent, (state, { category }) => ({
+    on(VideoCategoryActions.setActiveCategoryId, (state, { categoryId }) => ({
         ...state,
-        currentCategory: category
-    })),
-    on(VideoCategoryActions.setCurrentById, (state, { categoryId }) => ({
-        ...state,
-        currentCategory: state.entities[categoryId] ?? null
+        activeCategoryId: categoryId
     })),
     on(VideoCategoryActions.setTeaserRequest, state => ({
         ...state,
@@ -44,7 +40,7 @@ export const reducer = createReducer(
     on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
         VideoCategoryAdapter.upsertOne(category, {
             ...state,
-            currentCategory: category,
+            activeCategoryId: category.id,
             isLoading: false,
             error: null
         })

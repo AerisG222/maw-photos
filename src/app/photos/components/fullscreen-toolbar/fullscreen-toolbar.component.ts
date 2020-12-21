@@ -22,12 +22,12 @@ export class FullscreenToolbarComponent implements OnInit {
     ngOnInit(): void {
         this.isFirst$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+                select(PhotoStoreSelectors.selectIsActivePhotoFirst)
             );
 
         this.isLast$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
+                select(PhotoStoreSelectors.selectIsActivePhotoLast)
             );
     }
 

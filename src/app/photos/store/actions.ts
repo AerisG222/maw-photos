@@ -136,16 +136,8 @@ export const moveNextRequest = createAction(
     '[Photos] Move Next Request'
 );
 
-export const moveNextWithGpsRequest = createAction(
-    '[Photos] Move Next With GPS Request'
-);
-
 export const movePreviousRequest = createAction(
     '[Photos] Move Previous Request'
-);
-
-export const movePreviousWithGpsRequest = createAction(
-    '[Photos] Move Previous With GPS Request'
 );
 
 export const rotateClockwiseRequest = createAction(
@@ -214,18 +206,13 @@ export const toggleMapViewRequest = createAction(
     '[Photos] Toggle Map View Request'
 );
 
-export const setCurrent = createAction(
-    '[Photos] Set Current',
-    props<{ photo: Photo }>()
+export const setActivePhotoId = createAction(
+    '[Photos] Set Active Photo ID',
+    props<{ id: number | null }>()
 );
 
-export const clearCurrent = createAction(
-    '[Photos] Clear Current'
-);
-
-export const setCurrentById = createAction(
-    '[Photos] Set Current By Id',
-    props<{ id: number }>()
+export const unsetActivePhotoId = createAction(
+    '[Photos] Un-Set Active Photo ID'
 );
 
 export const loadGpsDetailRequest = createAction(

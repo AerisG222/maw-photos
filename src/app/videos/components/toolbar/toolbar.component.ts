@@ -36,12 +36,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
         this.isFirst$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectIsCurrentVideoFirst)
+                select(VideoStoreSelectors.selectIsActiveVideoFirst)
             );
 
         this.isLast$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectIsCurrentVideoLast)
+                select(VideoStoreSelectors.selectIsActiveVideoLast)
             );
     }
 

@@ -14,7 +14,7 @@ import { Video } from 'src/app/models/video.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarCommentsComponent implements OnInit {
-    currentId = -1;
+    activeId = -1;
     comments$: Observable<Comment[] | null> | null = null;
     destroySub = new Subscription();
 
@@ -26,21 +26,21 @@ export class SidebarCommentsComponent implements OnInit {
 
     ngOnInit(): void {
         this.comments$ = this.store$.pipe(
-            select(VideoStoreSelectors.selectCurrentVideoComments)
+            select(VideoStoreSelectors.selectActiveVideoComments)
         );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
+                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video),
                 map(video => video as Video),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadCommentsRequest({ videoId: video.id }))),
-                tap(video => this.currentId = video.id)
+                tap(video => this.activeId = video.id)
             ).subscribe()
         );
     }
 
     onComment(comment: string): void {
-        this.store$.dispatch(VideoStoreActions.addCommentRequest({ videoId: this.currentId, comment }));
+        this.store$.dispatch(VideoStoreActions.addCommentRequest({ videoId: this.activeId, comment }));
     }
 }

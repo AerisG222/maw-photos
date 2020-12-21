@@ -2,17 +2,17 @@
     <app-photos-grid-view-toolbar layout-toolbar></app-photos-grid-view-toolbar>
 
     <div layout-main>
-        <div *ngIf="currentPhoto$ | async as currentPhoto" class="full-image" (click)="clearCurrentPhoto()">
+        <div *ngIf="activePhoto$ | async as activePhoto" class="full-image" (click)="clearActivePhoto()">
             <img
-                [src]="currentPhoto.imageMd.url"
-                [srcset]="getSourceset(currentPhoto)"
+                [src]="activePhoto.imageMd.url"
+                [srcset]="getSourceset(activePhoto)"
                 (swipeleft)="onSwipeLeft()"
                 (swiperight)="onSwipeRight()"
                 sizes="100vw"
                 loading="eager" />
         </div>
 
-        <app-shared-content-margin [margin]="margin$ | async" [ngStyle]="{ 'display': (currentPhoto$ | async) === null ? 'block' : 'none' }">
+        <app-shared-content-margin [margin]="margin$ | async" [ngStyle]="{ 'display': (activePhoto$ | async) === null ? 'block' : 'none' }">
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="showBreadcrumbs$ | async"
@@ -26,7 +26,7 @@
                     *ngFor="let photo of photos$ | async;"
                     [ngClass]="(thumbnailSize$ | async)?.klass"
                     [src]="photo.imageXsSq.url"
-                    (click)="setCurrentPhoto(photo)"
+                    (click)="setActivePhoto(photo)"
                     loading="lazy" />
             </div>
         </app-shared-content-margin>

@@ -5,19 +5,41 @@ import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 import { Category } from 'src/app/models/category.model';
 
-const selectPhotoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
+const photoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 
-const { selectAll, selectEntities } = photoCategoryAdapter.getSelectors(selectPhotoCategoryState);
+export const { selectAll, selectEntities } = photoCategoryAdapter.getSelectors(photoCategoryState);
 
 export const selectAllCategories = selectAll;
-export const selectPhotoCategoryError = (state: State): string | null => state.error;
-export const selectPhotoCategoryIsLoading = (state: State): boolean => state.isLoading;
-export const selectCurrentCategoryId = (state: State): number | null => state.currentCategoryId;
 
-export const selectCurrentCategory = createSelector(
+export const selectPhotoCategoryError = createSelector(
+    photoCategoryState,
+    (state: State): string | null => state.error
+);
+
+export const selectPhotoCategoryIsLoading = createSelector(
+    photoCategoryState,
+    (state: State): boolean => state.isLoading
+);
+
+export const selectActiveCategoryId = createSelector(
+    photoCategoryState,
+    (state: State): number | null => state.activeCategoryId
+);
+
+export const selectActiveCategory = createSelector(
     selectEntities,
-    selectCurrentCategoryId,
-    (entities: Dictionary<Category>, id: number | null) => !!id ? entities[id]! : null
+    selectActiveCategoryId,
+    (entities, id) => {
+        if (!!id) {
+            const cat = entities[id];
+
+            if (!!cat) {
+                return cat;
+            }
+        }
+
+        return null;
+    }
 );
 
 export const selectAllYears = createSelector(

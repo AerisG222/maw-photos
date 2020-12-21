@@ -42,19 +42,19 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
 
         this.destroySub.add(this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 map(x => this.isPhotoSelected = !!x)
             ).subscribe()
         );
 
         this.isFirst$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoFirst)
+                select(PhotoStoreSelectors.selectIsActivePhotoFirst)
             );
 
         this.isLast$ = this.store$
             .pipe(
-                select(PhotoStoreSelectors.selectIsCurrentPhotoLast)
+                select(PhotoStoreSelectors.selectIsActivePhotoLast)
             );
     }
 
@@ -101,7 +101,7 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
         this.store$
             .pipe(
                 first(),
-                select(PhotoStoreSelectors.selectCurrentPhoto),
+                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
                 tap(x => this.sharePhoto(x))

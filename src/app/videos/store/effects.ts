@@ -158,4 +158,13 @@ export class VideoStoreEffects {
                 ))
         );
     });
+
+    unsetActivePhotoIdEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(VideoActions.unsetActiveVideoId),
+            map(action => {
+                return VideoActions.setActiveVideoId({ id: null });
+            })
+        );
+    });
 }

@@ -14,7 +14,7 @@ import { Video } from 'src/app/models/video.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarRatingComponent implements OnInit, OnDestroy {
-    private currentId = -1;
+    private activeId = -1;
     private destroySub = new Subscription();
 
     rating$: Observable<Rating | null> | null = null;
@@ -28,16 +28,16 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.rating$ = this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideoRating),
+                select(VideoStoreSelectors.selectActiveVideoRating),
                 filter(rating => !!rating)
             );
 
         this.destroySub.add(this.store$
             .pipe(
-                select(VideoStoreSelectors.selectCurrentVideo),
+                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video),
                 map(video => video as Video),
-                tap(video => this.currentId = video.id),
+                tap(video => this.activeId = video.id),
                 tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
             ).subscribe()
         );
@@ -48,8 +48,8 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     }
 
     onRate(userRating: number): void {
-        if (this.currentId !== -1) {
-            this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.currentId, userRating }));
+        if (this.activeId !== -1) {
+            this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.activeId, userRating }));
         }
     }
 }

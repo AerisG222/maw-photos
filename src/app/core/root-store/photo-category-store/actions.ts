@@ -20,13 +20,8 @@ export const loadRequestedSatisfiedByCache = createAction(
     '[Photo Categories] Load Request Satisfied by Cache'
 );
 
-export const setCurrent = createAction(
-    '[Photo Categories] Set Current',
-    props<{ category: Category }>()
-);
-
-export const setCurrentById = createAction(
-    '[Photo Categories] Set Current By Id',
+export const setActiveCategoryId = createAction(
+    '[Photo Categories] Set Active Category Id',
     props<{ categoryId: number }>()
 );
 

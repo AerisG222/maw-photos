@@ -11,7 +11,7 @@ export const reducer = createReducer(
             ...state,
             firstVideo: null,
             lastVideo: null,
-            currentVideo: null
+            activeVideo: null
         })
     ),
     on(VideoActions.loadCommentsRequest, state => ({
@@ -23,7 +23,7 @@ export const reducer = createReducer(
         ...state,
         isLoading: false,
         error: null,
-        currentVideoComments: comments
+        activeVideoComments: comments
     })),
     on(VideoActions.loadCommentsFailure, (state, { error }) => ({
         ...state,
@@ -39,7 +39,7 @@ export const reducer = createReducer(
         ...state,
         isLoading: false,
         error: null,
-        currentVideoRating: rating
+        activeVideoRating: rating
     })),
     on(VideoActions.loadRatingFailure, (state, { error }) => ({
         ...state,
@@ -63,17 +63,10 @@ export const reducer = createReducer(
         isLoading: false,
         error
     })),
-    on(VideoActions.setCurrent, (state, { video }) => ({
+    on(VideoActions.setActiveVideoId, (state, { id }) => ({
         ...state,
-        currentVideo: video
+        activeVideoId: id
     })),
-    on(VideoActions.clearCurrent, (state) => ({
-        ...state,
-        currentVideo: null
-    })),
-    on(VideoActions.moveNextRequest, state => getStateForNewVideo(state, nextVideo(state))),
-    on(VideoActions.movePreviousRequest, state => getStateForNewVideo(state, previousVideo(state))),
-
     on(VideoActions.rateVideoRequest, state => ({
         ...state,
         isLoading: true,
@@ -83,7 +76,7 @@ export const reducer = createReducer(
         ...state,
         isLoading: false,
         error: null,
-        currentVideoRating: {
+        activeVideoRating: {
             userRating: rating.userRating,
             averageRating: Math.round(rating.averageRating)
         }
@@ -117,7 +110,7 @@ export const reducer = createReducer(
         ...state,
         isLoading: false,
         error: null,
-        currentVideoGpsDetail: gpsDetail
+        activeVideoGpsDetail: gpsDetail
     })),
     on(VideoActions.loadGpsDetailFailure, (state, { error }) => ({
         ...state,
@@ -135,7 +128,7 @@ export const reducer = createReducer(
             ...state,
             isLoading: false,
             error: null,
-            currentVideoGpsDetail: gpsDetail
+            activeVideoGpsDetail: gpsDetail
         });
 
         if (!!video) {
@@ -157,43 +150,6 @@ export const reducer = createReducer(
     })),
 );
 
-function nextVideo(state: State): Video {
-    return getVideoAtIndex(state, incrementCurrentIndexWithinBounds(state, 1));
-}
-
-function previousVideo(state: State): Video {
-    return getVideoAtIndex(state, incrementCurrentIndexWithinBounds(state, -1));
-}
-
-function getVideoAtIndex(state: State, idx: number): Video {
-    // entities are keyed by id
-    return state.entities[state.ids[idx]] as Video;
-}
-
-function incrementCurrentIndexWithinBounds(state: State, direction: number): number {
-    const lastIdx = state.ids.length - 1;
-    const idx = getCurrentIndex(state) + direction;
-
-    return Math.max(0, Math.min(idx, lastIdx));
-}
-
-function getCurrentIndex(state: State): number {
-    return (state.ids as number[]).findIndex(id => id === state.currentVideo?.id);
-}
-
 function getVideoWithId(state: State, id: number): Video {
     return state.entities[id] as Video;
-}
-
-function getStateForNewVideo(state: State, newVideo: Video): State {
-    if (!!newVideo &&
-        !!state.currentVideo &&
-        newVideo.id === state.currentVideo.id) {
-        return state;
-    }
-
-    return {
-        ...state,
-        currentVideo: newVideo
-    };
 }
