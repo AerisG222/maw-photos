@@ -13,14 +13,6 @@ import { CategoryType } from 'src/app/models/category-type.model';
 
 @Injectable()
 export class VideoCategoryStoreEffects {
-    constructor(
-        @Inject(videoApiServiceToken) private api: VideoApiService,
-        private actions$: Actions,
-        private store$: Store
-    ) {
-
-    }
-
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoCategoryActions.loadRequest),
@@ -53,6 +45,14 @@ export class VideoCategoryStoreEffects {
             )
         );
     });
+
+    constructor(
+        @Inject(videoApiServiceToken) private api: VideoApiService,
+        private actions$: Actions,
+        private store$: Store
+    ) {
+
+    }
 
     private adaptCategories(categories: VideoCategory[]): Category[] {
         return categories.map(c => this.adaptCategory(c));

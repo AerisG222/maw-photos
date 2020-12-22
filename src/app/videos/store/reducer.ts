@@ -123,7 +123,7 @@ export const reducer = createReducer(
         error: null
     })),
     on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { videoId, gpsDetail }) => {
-        const video = getVideoWithId(state, videoId);
+        const video = state.entities[videoId] as Video;
         const updatedState = ({
             ...state,
             isLoading: false,
@@ -149,7 +149,3 @@ export const reducer = createReducer(
         error
     })),
 );
-
-function getVideoWithId(state: State, id: number): Video {
-    return state.entities[id] as Video;
-}

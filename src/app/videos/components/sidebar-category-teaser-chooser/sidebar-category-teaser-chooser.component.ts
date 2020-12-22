@@ -15,11 +15,11 @@ import { Video } from 'src/app/models/video.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy {
+    currentTeaserUrl$: Observable<string> | null = null;
+
     private categoryId = -1;
     private videoId = -1;
     private destroySub = new Subscription();
-
-    currentTeaserUrl$: Observable<string> | null = null;
 
     constructor(
         private store$: Store

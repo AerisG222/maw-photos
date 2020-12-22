@@ -28,8 +28,6 @@ import { Photo } from 'src/app/models/photo.model';
 export class DefaultToolbarComponent implements OnInit, OnDestroy {
     @Input() allowCategoryDownload: boolean | null = null;
 
-    private destroySub = new Subscription();
-
     enableShare: boolean;
 
     isFirst$: Observable<boolean> | null = null;
@@ -43,6 +41,8 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
     mdDownloadUrl: string | null = null;
     lgDownloadUrl: string | null = null;
     prtDownloadUrl: string | null = null;
+
+    private destroySub = new Subscription();
 
     constructor(
         private store$: Store,

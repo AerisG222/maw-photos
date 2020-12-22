@@ -5,7 +5,7 @@ import { VideoCategoryComponent } from './components/video-category/video-catego
 import { VideoCategoriesResolverService } from 'src/app/core/services/video-categories-resolver.service';
 
 const routes: Routes = [
-    { path: ':id', component: VideoCategoryComponent, resolve: { VideoCategoriesResolverService } },
+    { path: ':id', component: VideoCategoryComponent, resolve: { videoCategoriesResolverService: VideoCategoriesResolverService } },
     { path: '**', redirectTo: '/categories' }
 ];
 

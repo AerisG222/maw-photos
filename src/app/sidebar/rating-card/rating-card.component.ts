@@ -1,4 +1,4 @@
-// tslint:disable-next-line: max-line-length
+// eslint-disable-next-line max-len
 import { Component, Input, ChangeDetectionStrategy, ViewChild, AfterViewInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { NgxStarsComponent } from 'ngx-stars';
 
@@ -11,9 +11,6 @@ import { Rating } from 'src/app/models/rating.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingCardComponent implements AfterViewInit {
-    private isReady = false;
-    private theRating: Rating | null = null;
-
     @Input()
     set rating(value: Rating | null) {
         this.theRating = value;
@@ -25,6 +22,9 @@ export class RatingCardComponent implements AfterViewInit {
 
     @ViewChild('userRating') userRatingComponent: NgxStarsComponent | null = null;
     @ViewChild('averageRating') averageRatingComponent: NgxStarsComponent | null = null;
+
+    private isReady = false;
+    private theRating: Rating | null = null;
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef

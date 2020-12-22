@@ -8,10 +8,12 @@ import { PhotoStatsComponent } from './components/photo-stats/photo-stats.compon
 import { VideoStatsComponent } from './components/video-stats/video-stats.component';
 
 const routes: Routes = [
-    // tslint:disable-next-line: max-line-length
-    { path: 'combined', component: CombinedStatsComponent, resolve: { PhotoCategoriesResolverService, VideoCategoriesResolverService }},
-    { path: 'photos',   component: PhotoStatsComponent,    resolve: { PhotoCategoriesResolverService }},
-    { path: 'videos',   component: VideoStatsComponent,    resolve: { VideoCategoriesResolverService }},
+    // eslint-disable-next-line max-len
+    { path: 'combined', component: CombinedStatsComponent, resolve: {
+        photoCategoriesResolverService: PhotoCategoriesResolverService,
+        videoCategoriesResolverService: VideoCategoriesResolverService }},
+    { path: 'photos',   component: PhotoStatsComponent,    resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }},
+    { path: 'videos',   component: VideoStatsComponent,    resolve: { videoCategoriesResolverService: VideoCategoriesResolverService }},
     { path: '**', redirectTo: 'photos' }
 ];
 

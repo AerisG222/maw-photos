@@ -2,12 +2,12 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
 import { VIDEO_CATEGORY_FEATURE_NAME } from './feature-name';
-import { VideoCategoryAdapter, State } from './state';
+import { videoCategoryAdapter, State } from './state';
 import { Category } from 'src/app/models/category.model';
 
 export const videoCategoryState = createFeatureSelector<State>(VIDEO_CATEGORY_FEATURE_NAME);
 
-const { selectAll, selectEntities } = VideoCategoryAdapter.getSelectors(videoCategoryState);
+const { selectAll, selectEntities } = videoCategoryAdapter.getSelectors(videoCategoryState);
 
 export const selectAllCategories = selectAll;
 

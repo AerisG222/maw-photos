@@ -17,12 +17,12 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListToolbarComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
     settings: Settings | null = null;
     isListView$: Observable<boolean> | null = null;
     isGridView$: Observable<boolean> | null = null;
     showCategoryTitles$: Observable<boolean> | null = null;
+
+    private destroySub = new Subscription();
 
     constructor(private store$: Store) {
 

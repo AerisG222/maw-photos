@@ -16,11 +16,11 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
     isFirst$: Observable<boolean> | null = null;
     isLast$: Observable<boolean> | null = null;
     settings: Settings | null = null;
+
+    private destroySub = new Subscription();
 
     constructor(private store$: Store) {
 

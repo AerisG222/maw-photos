@@ -18,14 +18,14 @@ import { SettingsStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSe
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoCategoryComponent implements OnInit, OnDestroy {
+    @ViewChild('videoRef') videoRef: ElementRef | null = null;
+
     videoSize = VideoSize;
     showCategoryAsLink = false;
     settings$: Observable<Settings> | null = null;
     category$: Observable<Category> | null = null;
     videos$: Observable<Video[]> | null = null;
     activeVideo$: Observable<Video> | null = null;
-
-    @ViewChild('videoRef') videoRef: ElementRef | null = null;
 
     private settings: Settings | null = null;
 
@@ -82,7 +82,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         this.setActiveVideo(video);
     }
 
-    getVideoDimensions(video: Video): { width: string, height: string } {
+    getVideoDimensions(video: Video): { width: string; height: string } {
         if (!!this.settings && this.settings.videoListVideoSize.name === VideoSize.large.name) {
             return { width: `${video.videoFull.width}px`, height: `${video.videoFull.height}px` };
         }

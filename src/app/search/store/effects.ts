@@ -10,14 +10,6 @@ import { searchApiServiceToken, SearchApiService } from 'src/app/search/services
 
 @Injectable()
 export class SearchStoreEffects {
-    constructor(
-        private actions$: Actions,
-        private store$: Store,
-        @Inject(searchApiServiceToken) private api: SearchApiService,
-    ) {
-
-    }
-
     queryRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SearchActions.queryRequest),
@@ -63,4 +55,12 @@ export class SearchStoreEffects {
             )
         );
     });
+
+    constructor(
+        private actions$: Actions,
+        private store$: Store,
+        @Inject(searchApiServiceToken) private api: SearchApiService,
+    ) {
+
+    }
 }

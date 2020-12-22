@@ -15,10 +15,10 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BulkEditGpsEditorComponent implements OnInit {
+    @Output() saveGps = new EventEmitter<GpsCoordinate>();
+
     gpsForm: FormGroup;
     hasPendingEdits$: Observable<boolean> | null = null;
-
-    @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
     constructor(
         private store$: Store,

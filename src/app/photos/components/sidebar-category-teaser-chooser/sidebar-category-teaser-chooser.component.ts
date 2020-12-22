@@ -15,11 +15,11 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy {
+    currentTeaserUrl$: Observable<string> | null = null;
+
     private destroySub = new Subscription();
     private categoryId = -1;
     private photoId = -1;
-
-    currentTeaserUrl$: Observable<string> | null = null;
 
     constructor(
         private store$: Store

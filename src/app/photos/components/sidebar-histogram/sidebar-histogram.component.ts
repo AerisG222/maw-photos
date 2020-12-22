@@ -16,17 +16,17 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarHistogramComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
+    @ViewChild('canvas') canvas: ElementRef | null = null;
 
     form: FormGroup;
     img: HTMLImageElement;
     channel = 'rgb';
 
-    @ViewChild('canvas') canvas: ElementRef | null = null;
-
     get canvasEl(): HTMLCanvasElement {
         return this.canvas?.nativeElement as HTMLCanvasElement;
     }
+
+    private destroySub = new Subscription();
 
     constructor(
         private store$: Store,

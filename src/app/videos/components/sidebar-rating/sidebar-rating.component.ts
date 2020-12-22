@@ -14,10 +14,10 @@ import { Video } from 'src/app/models/video.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarRatingComponent implements OnInit, OnDestroy {
+    rating$: Observable<Rating | null> | null = null;
+
     private activeId = -1;
     private destroySub = new Subscription();
-
-    rating$: Observable<Rating | null> | null = null;
 
     constructor(
         private store$: Store

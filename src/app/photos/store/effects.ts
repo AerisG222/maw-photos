@@ -14,15 +14,6 @@ import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 
 @Injectable()
 export class PhotoStoreEffects {
-    constructor(
-        private actions$: Actions,
-        private exifFormatterService: ExifFormatterService,
-        private store$: Store,
-        @Inject(photoApiServiceToken) private api: PhotoApiService,
-    ) {
-
-    }
-
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.loadRequest),
@@ -168,7 +159,7 @@ export class PhotoStoreEffects {
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.photoId, action.latLng)
                     .pipe(
-                        // tslint:disable-next-line: ngrx-no-multiple-actions-in-effects
+                        // eslint-disable-next-line
                         switchMap(gpsDetail => [
                             PhotoActions.setGpsCoordinateOverrideSuccess({ photoId: action.photoId, gpsDetail }),
                             PhotoActions.moveNextRequest()
@@ -286,4 +277,13 @@ export class PhotoStoreEffects {
             })
         );
     });
+
+    constructor(
+        private actions$: Actions,
+        private exifFormatterService: ExifFormatterService,
+        private store$: Store,
+        @Inject(photoApiServiceToken) private api: PhotoApiService,
+    ) {
+
+    }
 }

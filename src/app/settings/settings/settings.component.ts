@@ -24,8 +24,6 @@ import { selectPhotoGridShowCategoryBreadcrumbs } from 'src/app/core/root-store/
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
     form: FormGroup;
     themes = Theme.allThemes;
     categoryFilters = CategoryFilter.allCategoryFilters;
@@ -45,6 +43,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     videoZoomLevels = MinimapZoom.allSizes;
     videoSizes = VideoSize.allSizes;
     randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
+
+    private destroySub = new Subscription();
 
     // settings w/o ui
     private categoryListYearFilter: string | number = DEFAULT_SETTINGS.categoryListYearFilter;
@@ -126,7 +126,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.destroySub.unsubscribe();
     }
 
-    /* tslint:disable:max-line-length */
+    /* eslint-disable max-len */
     onSave(): void {
         const settings = {
             appTheme: Theme.forName(this.getFormString('appTheme', DEFAULT_SETTINGS.appTheme.name)),
@@ -189,7 +189,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             SettingsStoreActions.saveRequest({ settings })
         );
     }
-    /* tslint:enable:max-line-length */
+    /* eslint-enable max-len */
 
     onCancel(): void {
         this.loadSettings();

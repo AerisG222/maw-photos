@@ -1,6 +1,6 @@
 import { Category } from 'src/app/models/category.model';
 
-export function getIdsByYear(categories: Category[]): Map<number, number[]> {
+export const getIdsByYear = (categories: Category[]): Map<number, number[]> => {
     const idsByYear = new Map<number, number[]>();
 
     for (const currCategory of categories) {
@@ -14,4 +14,4 @@ export function getIdsByYear(categories: Category[]): Map<number, number[]> {
     }
 
     return idsByYear;
-}
+};

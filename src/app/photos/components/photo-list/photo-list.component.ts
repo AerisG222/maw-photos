@@ -11,13 +11,13 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoListComponent {
-    photoThumbnailSize: ThumbnailSize | null = null;
-    imgWidth: number | null = null;
-    imgHeight: number | null = null;
-
     @Input() photos: Photo[] | null = null;
     @Input() selectedPhoto: Photo | null = null;
     @Output() photoSelected = new EventEmitter<Photo>();
+
+    photoThumbnailSize: ThumbnailSize | null = null;
+    imgWidth: number | null = null;
+    imgHeight: number | null = null;
 
     get thumbnailSize(): ThumbnailSize {
         return this.photoThumbnailSize ?? DEFAULT_SETTINGS.photoListThumbnailSize;

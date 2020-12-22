@@ -104,7 +104,7 @@ export const loadRatingSuccess = createAction(
 
 export const addCommentRequest = createAction(
     '[Photos] Add Comment Request',
-    props<{ photoId: number, comment: string }>()
+    props<{ photoId: number; comment: string }>()
 );
 
 export const addCommentFailure = createAction(
@@ -119,7 +119,7 @@ export const addCommentSuccess = createAction(
 
 export const ratePhotoRequest = createAction(
     '[Photos] Rate Photo Request',
-    props<{ photoId: number, userRating: number }>()
+    props<{ photoId: number; userRating: number }>()
 );
 
 export const ratePhotoFailure = createAction(
@@ -232,7 +232,7 @@ export const loadGpsDetailSuccess = createAction(
 
 export const setGpsCoordinateOverrideRequest = createAction(
     '[Photos] Set GPS Coordinate Override Request',
-    props<{ photoId: number, latLng: GpsCoordinate }>()
+    props<{ photoId: number; latLng: GpsCoordinate }>()
 );
 
 export const setGpsCoordinateOverrideFailure = createAction(
@@ -242,12 +242,12 @@ export const setGpsCoordinateOverrideFailure = createAction(
 
 export const setGpsCoordinateOverrideSuccess = createAction(
     '[Photos] Set GPS Coordinate Override Success',
-    props<{ photoId: number, gpsDetail: GpsDetail }>()
+    props<{ photoId: number; gpsDetail: GpsDetail }>()
 );
 
 export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
     '[Photos] Set GPS Coordinate Override and Move Next Request',
-    props<{ photoId: number, latLng: GpsCoordinate }>()
+    props<{ photoId: number; latLng: GpsCoordinate }>()
 );
 
 export const enterBulkEditViewRequest = createAction(

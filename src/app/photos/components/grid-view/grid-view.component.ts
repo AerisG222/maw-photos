@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ContentChild, ViewChild } from '@angular/core';
+ import { Component, OnInit, OnDestroy, ContentChild, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
@@ -10,7 +10,6 @@ import { Photo } from 'src/app/models/photo.model';
 import { Settings } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryMargin } from 'src/app/models/category-margin.model';
-import { ContentMarginComponent } from 'src/app/shared/content-margin/content-margin.component';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
 
 @Component({
@@ -19,6 +18,8 @@ import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
     styleUrls: ['./grid-view.component.scss']
 })
 export class GridViewComponent implements OnInit, OnDestroy {
+    @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
+
     settings$: Observable<Settings> | null = null;
     category$: Observable<Category> | null = null;
     photos$: Observable<Photo[]> | null = null;
@@ -27,8 +28,6 @@ export class GridViewComponent implements OnInit, OnDestroy {
     margin$: Observable<CategoryMargin> | null = null;
     showBreadcrumbs$: Observable<boolean> | null = null;
     lastScrollTop = 0;
-
-    @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
 
     constructor(private store$: Store) {
 

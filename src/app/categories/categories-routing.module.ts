@@ -6,7 +6,10 @@ import { PhotoCategoriesResolverService } from 'src/app/core/services/photo-cate
 import { VideoCategoriesResolverService } from 'src/app/core/services/video-categories-resolver.service';
 
 const routes: Routes = [
-    { path: '',    component: YearListComponent, resolve: { PhotoCategoriesResolverService, VideoCategoriesResolverService }},
+    { path: '',    component: YearListComponent, resolve: {
+        photoCategoriesResolverService: PhotoCategoriesResolverService,
+        videoCategoriesResolverService: VideoCategoriesResolverService }
+    },
     { path: '**',  redirectTo: '' }
 ];
 

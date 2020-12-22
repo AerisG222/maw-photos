@@ -34,7 +34,7 @@ export class CategoryTypeFilterComponent implements OnInit {
     }
 
     onSelectCategoryType(change: MatSelectChange): void {
-        // tslint:disable-next-line: max-line-length
+        // eslint-disable-next-line max-len
         this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter: CategoryFilter.forValue(change.value) }));
     }
 }

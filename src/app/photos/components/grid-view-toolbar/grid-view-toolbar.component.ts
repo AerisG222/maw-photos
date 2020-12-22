@@ -17,13 +17,13 @@ import { Photo } from 'src/app/models/photo.model';
     styleUrls: ['./grid-view-toolbar.component.scss']
 })
 export class GridViewToolbarComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
     enableShare = false;
     isPhotoSelected = false;
     settings: Settings | null = null;
     isFirst$: Observable<boolean> | null = null;
     isLast$: Observable<boolean> | null = null;
+
+    private destroySub = new Subscription();
 
     constructor(
         private store$: Store,

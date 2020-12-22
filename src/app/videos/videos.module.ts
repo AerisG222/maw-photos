@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { concatMap, exhaustMap, withLatestFrom } from 'rxjs/operators';
+import { concatMap, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from 'src/app/core/services/settings.service';
 import * as SettingsActions from './actions';
@@ -10,14 +10,6 @@ import * as settingsSelectors from './selectors';
 
 @Injectable()
 export class SettingsStoreEffects {
-    constructor(
-        private settingsService: SettingsService,
-        private actions$: Actions,
-        private store$: Store
-    ) {
-
-    }
-
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.loadRequest),
@@ -107,4 +99,12 @@ export class SettingsStoreEffects {
             })
         );
     });
+
+    constructor(
+        private settingsService: SettingsService,
+        private actions$: Actions,
+        private store$: Store
+    ) {
+
+    }
 }

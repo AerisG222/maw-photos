@@ -11,14 +11,6 @@ import { VideoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Injectable()
 export class VideoStoreEffects {
-    constructor(
-        private actions$: Actions,
-        private store$: Store,
-        @Inject(videoApiServiceToken) private api: VideoApiService,
-    ) {
-
-    }
-
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoActions.loadRequest),
@@ -123,7 +115,7 @@ export class VideoStoreEffects {
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
                     .pipe(
-                        // tslint:disable-next-line: ngrx-no-multiple-actions-in-effects
+                        // eslint-disable-next-line
                         switchMap(gpsDetail => [
                             VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail }),
                             VideoActions.moveNextRequest()
@@ -167,4 +159,12 @@ export class VideoStoreEffects {
             })
         );
     });
+
+    constructor(
+        private actions$: Actions,
+        private store$: Store,
+        @Inject(videoApiServiceToken) private api: VideoApiService,
+    ) {
+
+    }
 }

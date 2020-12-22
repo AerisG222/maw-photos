@@ -25,10 +25,6 @@ import { MapMarkerInfo } from './map-marker-info.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
-    options: google.maps.MapOptions | null = null;
-    activeImageUrl: string | null = null;
-    markers = new Map<string, MapMarkerInfo>();
-
     @ViewChild(GoogleMap) map: GoogleMap | null = null;
     @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow | null = null;
 
@@ -42,12 +38,16 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     @Output() zoomChange = new EventEmitter<number>();
     @Output() selectPhoto = new EventEmitter<number>();
 
-    ngOnInit(): void {
-        this.updateMapOptions();
-    }
+    options: google.maps.MapOptions | null = null;
+    activeImageUrl: string | null = null;
+    markers = new Map<string, MapMarkerInfo>();
 
     constructor(private changeDetectorRef: ChangeDetectorRef) {
 
+    }
+
+    ngOnInit(): void {
+        this.updateMapOptions();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -82,9 +82,9 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
 
     getMapTheme(): google.maps.MapTypeStyle[] {
         if (this.useDarkTheme) {
-            return GoogleMapThemes.THEME_DARK;
+            return GoogleMapThemes.themeDark;
         } else {
-            return GoogleMapThemes.THEME_LIGHT;
+            return GoogleMapThemes.themeLight;
         }
     }
 

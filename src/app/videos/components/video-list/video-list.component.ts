@@ -11,13 +11,13 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoListComponent {
-    videoThumbnailSize: ThumbnailSize | null = null;
-    imgWidth: number | null = null;
-    imgHeight: number | null = null;
-
     @Input() videos: Video[] | null = null;
     @Input() selectedVideo: Video | null = null;
     @Output() videoSelected = new EventEmitter<Video>();
+
+    videoThumbnailSize: ThumbnailSize | null = null;
+    imgWidth: number | null = null;
+    imgHeight: number | null = null;
 
     get thumbnailSize(): ThumbnailSize {
         return this.videoThumbnailSize ?? DEFAULT_SETTINGS.videoListThumbnailSize;

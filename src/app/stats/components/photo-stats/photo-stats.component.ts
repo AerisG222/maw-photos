@@ -18,14 +18,14 @@ import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoStatsComponent implements OnInit, OnDestroy {
-    private destroySub = new Subscription();
-
     form: FormGroup;
     chartData$: Observable<StatDetail[]> | null = null;
     chartValueFormat = 'count';
     selectedYear$ = new BehaviorSubject<number>(-1);
     totalDetails$: Observable<FormattedStatDetail[]> | null = null;
     yearDetails$: Observable<FormattedStatDetail[]> | null = null;
+
+    private destroySub = new Subscription();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -146,8 +146,8 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         });
     }
 
-    // tslint:disable-next-line: max-line-length
-    private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string): { name: string, value: number }[] {
+    // eslint-disable-next-line max-len
+    private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string): { name: string; value: number }[] {
         let agg: (category: Category) => number;
 
         if (aggregateBy === 'count') {

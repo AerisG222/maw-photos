@@ -13,14 +13,6 @@ import { CategoryType } from 'src/app/models/category-type.model';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
-    constructor(
-        @Inject(photoApiServiceToken) private api: PhotoApiService,
-        private actions$: Actions,
-        private store$: Store
-    ) {
-
-    }
-
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoCategoryActions.loadRequest),
@@ -53,6 +45,14 @@ export class PhotoCategoryStoreEffects {
             )
         );
     });
+
+    constructor(
+        @Inject(photoApiServiceToken) private api: PhotoApiService,
+        private actions$: Actions,
+        private store$: Store
+    ) {
+
+    }
 
     private adaptCategories(categories: PhotoCategory[]): Category[] {
         return categories.map(c => this.adaptCategory(c));

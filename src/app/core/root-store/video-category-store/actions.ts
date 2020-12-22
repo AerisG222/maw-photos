@@ -27,7 +27,7 @@ export const setActiveCategoryId = createAction(
 
 export const setTeaserRequest = createAction(
     '[Video Categories] Set Teaser Request',
-    props<{ categoryId: number, videoId: number }>()
+    props<{ categoryId: number; videoId: number }>()
 );
 
 export const setTeaserFailure = createAction(
@@ -42,5 +42,5 @@ export const setTeaserSuccess = createAction(
 
 export const setIsMissingGpsData = createAction(
     '[Video Categories] Set Is Missing GPS Data Request',
-    props<{ categoryId: number, isMissingGpsData: boolean }>()
+    props<{ categoryId: number; isMissingGpsData: boolean }>()
 );

@@ -14,14 +14,19 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MinimapCardComponent implements OnInit {
-    private static readonly DEFAULT_CENTER = new google.maps.LatLng(0, 0);
+    private static readonly defaultCenter = new google.maps.LatLng(0, 0);
+
+    @Output() mapTypeChange = new EventEmitter<string>();
+    @Output() zoomChange = new EventEmitter<number>();
+
+    @ViewChild(GoogleMap) map: GoogleMap | null = null;
 
     // arbitrarily use photo minimap settings by default
     minimapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
     minimapZoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
     options: google.maps.MapOptions | null = null;
-    mapTheme: google.maps.MapTypeStyle[] = GoogleMapThemes.THEME_DARK;
-    center = MinimapCardComponent.DEFAULT_CENTER;
+    mapTheme: google.maps.MapTypeStyle[] = GoogleMapThemes.themeDark;
+    center = MinimapCardComponent.defaultCenter;
     poi: google.maps.LatLng | null = null;
 
     @Input()
@@ -46,15 +51,10 @@ export class MinimapCardComponent implements OnInit {
             this.center = pos;
             this.poi = pos;
         } else {
-            this.center = MinimapCardComponent.DEFAULT_CENTER;
+            this.center = MinimapCardComponent.defaultCenter;
             this.poi = null;
         }
     }
-
-    @Output() mapTypeChange = new EventEmitter<string>();
-    @Output() zoomChange = new EventEmitter<number>();
-
-    @ViewChild(GoogleMap) map: GoogleMap | null = null;
 
     constructor(private store$: Store) {
 
@@ -64,7 +64,7 @@ export class MinimapCardComponent implements OnInit {
         this.store$.pipe(
             select(SettingsStoreSelectors.selectAppTheme),
             first(),
-            tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.THEME_DARK : GoogleMapThemes.THEME_LIGHT),
+            tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight),
             tap(_ => this.updateOptions())
         ).subscribe();
     }

@@ -76,7 +76,7 @@ export const selectAllFilteredCategoriesForYear = createSelector(
     VideoCategoryStoreSelectors.selectCategoriesForYear,
     SettingsStoreSelectors.selectCategoryListCategoryFilter,
     SettingsStoreSelectors.selectCategoryListMissingGpsFilter,
-    // tslint:disable-next-line: max-line-length
+    // eslint-disable-next-line max-len
     (photoCategories: Category[], videoCategories: Category[], filter: CategoryFilter, missingGpsFilter: boolean, props: { year: number }) => {
         let categories: Category[] = [];
 
@@ -105,11 +105,11 @@ export const selectInitialYearFilterSelection = createSelector(
     (years, filter) => !!filter ? filter : years[0]
 );
 
-function sortNumbersDescending(first: number, second: number): number {
+const sortNumbersDescending = (first: number, second: number): number => {
     return second - first;
-}
+};
 
-function categoriesDescending(first: Category, second: Category): number {
+const categoriesDescending = (first: Category, second: Category): number => {
     if (second.createDate && first.createDate) {
         const s = new Date(second.createDate);
         const f = new Date(first.createDate);
@@ -126,4 +126,4 @@ function categoriesDescending(first: Category, second: Category): number {
     }
 
     return 0;
-}
+};

@@ -82,7 +82,7 @@ export class SettingsService {
 
     }
 
-    // tslint:disable: max-line-length
+    /* eslint-disable max-len */
     load(): Settings {
         try {
             return {

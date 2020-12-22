@@ -1,14 +1,14 @@
 export class MapTypeId {
-    static readonly ROADMAP = new MapTypeId('roadmap',     'Roadmap');
-    static readonly HYBRID = new MapTypeId('hybrid',       'Hybrid');
-    static readonly SATELLITE = new MapTypeId('satellite', 'Satellite');
-    static readonly TERRAIN = new MapTypeId('terrain',     'Terrain');
+    static readonly roadmap = new MapTypeId('roadmap',     'Roadmap');
+    static readonly hybrid = new MapTypeId('hybrid',       'Hybrid');
+    static readonly satellite = new MapTypeId('satellite', 'Satellite');
+    static readonly terrain = new MapTypeId('terrain',     'Terrain');
 
     static readonly allTypeIds = [
-        MapTypeId.ROADMAP,
-        MapTypeId.HYBRID,
-        MapTypeId.SATELLITE,
-        MapTypeId.TERRAIN
+        MapTypeId.roadmap,
+        MapTypeId.hybrid,
+        MapTypeId.satellite,
+        MapTypeId.terrain
     ];
 
     constructor(public value: string, public name: string) {

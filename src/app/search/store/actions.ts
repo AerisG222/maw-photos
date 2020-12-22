@@ -9,7 +9,7 @@ export const clearRequest = createAction(
 
 export const queryRequest = createAction(
     '[Search] Query Request',
-    props<{ query: string, start: number }>()
+    props<{ query: string; start: number }>()
 );
 
 export const queryFailure = createAction(
@@ -19,12 +19,12 @@ export const queryFailure = createAction(
 
 export const querySuccess = createAction(
     '[Search] Query Success',
-    props<{ query: string, result: SearchResult<MultimediaCategory> }>()
+    props<{ query: string; result: SearchResult<MultimediaCategory> }>()
 );
 
 export const queryMoreRequest = createAction(
     '[Search] Query More Request',
-    props<{ query: string, start: number }>()
+    props<{ query: string; start: number }>()
 );
 
 export const queryMoreFailure = createAction(
@@ -34,5 +34,5 @@ export const queryMoreFailure = createAction(
 
 export const queryMoreSuccess = createAction(
     '[Search] Query More Success',
-    props<{ query: string, result: SearchResult<MultimediaCategory> }>()
+    props<{ query: string; result: SearchResult<MultimediaCategory> }>()
 );

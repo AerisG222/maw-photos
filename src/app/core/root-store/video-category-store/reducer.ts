@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { VideoCategoryAdapter, initialState } from './state';
+import { videoCategoryAdapter, initialState } from './state';
 import * as VideoCategoryActions from './actions';
 import { getIdsByYear } from '../category-helpers';
 
@@ -12,7 +12,7 @@ export const reducer = createReducer(
         error: null
     })),
     on(VideoCategoryActions.loadSuccess, (state, { categories }) =>
-        VideoCategoryAdapter.addMany(categories, {
+        videoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
@@ -38,7 +38,7 @@ export const reducer = createReducer(
         error: null
     })),
     on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
-        VideoCategoryAdapter.upsertOne(category, {
+        videoCategoryAdapter.upsertOne(category, {
             ...state,
             activeCategoryId: category.id,
             isLoading: false,
@@ -64,7 +64,7 @@ export const reducer = createReducer(
             // we should be able to just update the one property, but not sure how to do this given that it is nested
             const update = { id: categoryId, changes: newCat};
 
-            return VideoCategoryAdapter.updateOne(update, state);
+            return videoCategoryAdapter.updateOne(update, state);
         }
 
         return state;

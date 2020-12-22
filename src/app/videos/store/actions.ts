@@ -57,7 +57,7 @@ export const loadRatingSuccess = createAction(
 
 export const addCommentRequest = createAction(
     '[Videos] Add Comment Request',
-    props<{ videoId: number, comment: string }>()
+    props<{ videoId: number; comment: string }>()
 );
 
 export const addCommentFailure = createAction(
@@ -72,7 +72,7 @@ export const addCommentSuccess = createAction(
 
 export const rateVideoRequest = createAction(
     '[Videos] Rate Video Request',
-    props<{ videoId: number, userRating: number }>()
+    props<{ videoId: number; userRating: number }>()
 );
 
 export const rateVideoFailure = createAction(
@@ -119,7 +119,7 @@ export const loadGpsDetailSuccess = createAction(
 
 export const setGpsCoordinateOverrideRequest = createAction(
     '[Videos] Set GPS Coordinate Override Request',
-    props<{ videoId: number, latLng: GpsCoordinate }>()
+    props<{ videoId: number; latLng: GpsCoordinate }>()
 );
 
 export const setGpsCoordinateOverrideFailure = createAction(
@@ -129,10 +129,10 @@ export const setGpsCoordinateOverrideFailure = createAction(
 
 export const setGpsCoordinateOverrideSuccess = createAction(
     '[Videos] Set GPS Coordinate Override Success',
-    props<{ videoId: number, gpsDetail: GpsDetail }>()
+    props<{ videoId: number; gpsDetail: GpsDetail }>()
 );
 
 export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
     '[Videos] Set GPS Coordinate Override and Move Next Request',
-    props<{ videoId: number, latLng: GpsCoordinate }>()
+    props<{ videoId: number; latLng: GpsCoordinate }>()
 );

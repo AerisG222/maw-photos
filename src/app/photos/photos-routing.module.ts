@@ -7,8 +7,8 @@ import { RandomComponent } from './components/random/random.component';
 
 
 const routes: Routes = [
-    { path: 'random', component: RandomComponent, resolve: { PhotoCategoriesResolverService } },
-    { path: ':id', component: PhotoCategoryComponent, resolve: { PhotoCategoriesResolverService } },
+    { path: 'random', component: RandomComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':id', component: PhotoCategoryComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
     { path: '**', redirectTo: '/categories' }
 ];
 

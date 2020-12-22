@@ -15,10 +15,10 @@ import { Category } from 'src/app/models/category.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RandomComponent implements OnInit, OnDestroy {
+    isFullscreen$: Observable<boolean> | null = null;
+
     private killFetch = new Subject<boolean>();
     private destroySub = new Subscription();
-
-    isFullscreen$: Observable<boolean> | null = null;
 
     constructor(
         private store$: Store

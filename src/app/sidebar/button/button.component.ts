@@ -9,8 +9,6 @@ import { MatButton } from '@angular/material/button';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit, OnDestroy {
-    private hotkey: Hotkey | null = null;
-
     @Input() icon: string | null = null;
     @Input() isActive: boolean | null = null;
     @Input() isDisabled: boolean | null = null;
@@ -19,6 +17,8 @@ export class ButtonComponent implements OnInit, OnDestroy {
     @Input() tooltip: string | null = null;
 
     @ViewChild('button') button: MatButton | null = null;
+
+    private hotkey: Hotkey | null = null;
 
     constructor(
         private hotkeysService: HotkeysService,
@@ -29,7 +29,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         if (!!this.shortcutKey) {
-            // tslint:disable-next-line: max-line-length
+            // eslint-disable-next-line max-len
             this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp ?? undefined);
 
             this.hotkeysService.add(this.hotkey);
