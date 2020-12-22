@@ -1,7 +1,7 @@
  import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import { SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { Category } from 'src/app/models/category.model';

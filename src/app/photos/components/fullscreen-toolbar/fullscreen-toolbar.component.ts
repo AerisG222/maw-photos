@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { LayoutStoreActions } from 'src/app/core/root-store';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 
 @Component({

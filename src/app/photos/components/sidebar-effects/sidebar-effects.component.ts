@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { MatSliderChange } from '@angular/material/slider';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { tap, map, filter } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { PhotoEffects, DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
