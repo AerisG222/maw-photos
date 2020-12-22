@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 
@@ -20,24 +20,21 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.rating$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectActivePhotoRating)
-            );
+        this.rating$ = this.store.select(PhotoStoreSelectors.selectActivePhotoRating);
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
                 tap(photo => this.activeId = photo.id),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
+                tap(photo => this.store.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
             ).subscribe()
         );
     }
@@ -48,7 +45,7 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
 
     onRate(userRating: number): void {
         if (this.activeId !== -1) {
-            this.store$.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.activeId, userRating }));
+            this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.activeId, userRating }));
         }
     }
 }

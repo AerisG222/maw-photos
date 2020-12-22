@@ -2,72 +2,72 @@ import { createReducer, on } from '@ngrx/store';
 
 import * as PhotoActions from './actions';
 import { Photo } from 'src/app/models/photo.model';
-import { photoAdapter, initialState } from './state';
+import { photoAdapter, initialState, State } from './state';
 
 // TODO: set gps detail in photo itself
 export const reducer = createReducer(
     initialState,
-    on(PhotoActions.clearRequest, state => (
+    on(PhotoActions.clearRequest, (state): State => (
         photoAdapter.removeAll({
             ...state,
             activePhotoId: null
         })
     )),
-    on(PhotoActions.loadRequest, (state, { categoryId }) => ({
+    on(PhotoActions.loadRequest, (state, { categoryId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadSuccess, (state, { photos }) =>
+    on(PhotoActions.loadSuccess, (state, { photos }): State =>
         photoAdapter.setAll(photos, {
             ...state,
             isLoading: false,
             error: null})
     ),
-    on(PhotoActions.loadFailure, (state, { error }) => ({
+    on(PhotoActions.loadFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadCommentsRequest, (state, { photoId }) => ({
+    on(PhotoActions.loadCommentsRequest, (state, { photoId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadCommentsSuccess, (state, { comments }) => ({
+    on(PhotoActions.loadCommentsSuccess, (state, { comments }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activePhotoComments: comments
     })),
-    on(PhotoActions.loadCommentsFailure, (state, { error }) => ({
+    on(PhotoActions.loadCommentsFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadRandomRequest, state => ({
+    on(PhotoActions.loadRandomRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadRandomSuccess, (state, { photo }) =>
+    on(PhotoActions.loadRandomSuccess, (state, { photo }): State =>
         photoAdapter.upsertOne(photo, {
             ...state,
             isLoading: false,
             error: null
         })
     ),
-    on(PhotoActions.loadRandomFailure, (state, { error }) => ({
+    on(PhotoActions.loadRandomFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadMultipleRandomRequest, state => ({
+    on(PhotoActions.loadMultipleRandomRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadMultipleRandomSuccess, (state, { photos }) => {
+    on(PhotoActions.loadMultipleRandomSuccess, (state, { photos }): State => {
         const uniquePhotos = photos.filter((s1, pos, arr) => arr.findIndex((s2) => s2.id === s1.id) === pos);
 
         return photoAdapter.addMany(uniquePhotos, {
@@ -76,37 +76,37 @@ export const reducer = createReducer(
             error: null
         });
     }),
-    on(PhotoActions.loadMultipleRandomFailure, (state, { error }) => ({
+    on(PhotoActions.loadMultipleRandomFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadRatingRequest, (state, { photoId }) => ({
+    on(PhotoActions.loadRatingRequest, (state, { photoId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadRatingSuccess, (state, { rating }) => ({
+    on(PhotoActions.loadRatingSuccess, (state, { rating }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activePhotoRating: rating
     })),
-    on(PhotoActions.loadRatingFailure, (state, { error }) => ({
+    on(PhotoActions.loadRatingFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.setActivePhotoId, (state, { id }) => ({
+    on(PhotoActions.setActivePhotoId, (state, { id }): State => ({
         ...state,
         activePhotoId: id
     })),
-    on(PhotoActions.ratePhotoRequest, (state, { photoId, userRating }) => ({
+    on(PhotoActions.ratePhotoRequest, (state, { photoId, userRating }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.ratePhotoSuccess, (state, { rating }) => ({
+    on(PhotoActions.ratePhotoSuccess, (state, { rating }): State => ({
         ...state,
         isLoading: false,
         error: null,
@@ -115,65 +115,65 @@ export const reducer = createReducer(
             averageRating: Math.round(rating.averageRating)
         }
     })),
-    on(PhotoActions.ratePhotoFailure, (state, { error }) => ({
+    on(PhotoActions.ratePhotoFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.addCommentRequest, (state, { photoId, comment }) => ({
+    on(PhotoActions.addCommentRequest, (state, { photoId, comment }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.addCommentSuccess, (state, { photoId }) => ({
+    on(PhotoActions.addCommentSuccess, (state, { photoId }): State => ({
         ...state,
         isLoading: false,
         error: null
     })),
-    on(PhotoActions.addCommentFailure, (state, { error }) => ({
+    on(PhotoActions.addCommentFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadExifRequest, (state, { photoId }) => ({
+    on(PhotoActions.loadExifRequest, (state, { photoId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadExifSuccess, (state, { exif }) => ({
+    on(PhotoActions.loadExifSuccess, (state, { exif }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activePhotoExifData: exif
     })),
-    on(PhotoActions.loadExifFailure, (state, { error }) => ({
+    on(PhotoActions.loadExifFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.loadGpsDetailRequest, (state, { photoId }) => ({
+    on(PhotoActions.loadGpsDetailRequest, (state, { photoId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
+    on(PhotoActions.loadGpsDetailSuccess, (state, { gpsDetail }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activePhotoGpsDetail: gpsDetail
     })),
-    on(PhotoActions.loadGpsDetailFailure, (state, { error }) => ({
+    on(PhotoActions.loadGpsDetailFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoActions.setGpsCoordinateOverrideRequest, (state, { photoId }) => ({
+    on(PhotoActions.setGpsCoordinateOverrideRequest, (state, { photoId }): State => ({
         ...state,
         isLoading: true,
         error: null,
         pendingActionCount: state.pendingActionCount + 1,
     })),
-    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { photoId, gpsDetail }) => {
+    on(PhotoActions.setGpsCoordinateOverrideSuccess, (state, { photoId, gpsDetail }): State => {
         const photo = state.entities[photoId] as Photo;
         const updatedState = ({
             ...state,
@@ -195,96 +195,96 @@ export const reducer = createReducer(
             return updatedState;
         }
     }),
-    on(PhotoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
+    on(PhotoActions.setGpsCoordinateOverrideFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error,
         pendingActionCount: state.pendingActionCount - 1,
     })),
-    on(PhotoActions.rotateSuccess, (state, { newRotation }) => ({
+    on(PhotoActions.rotateSuccess, (state, { newRotation }): State => ({
         ...state,
         activePhotoEffects: {
             ...state.activePhotoEffects,
             rotation: newRotation
         }
     })),
-    on(PhotoActions.flipHorizontalRequest, state => ({
+    on(PhotoActions.flipHorizontalRequest, (state): State => ({
         ...state,
         activePhotoEffects: {
             ...state.activePhotoEffects,
             flipHorizontal: !state.activePhotoEffects.flipHorizontal
         }
     })),
-    on(PhotoActions.flipVerticalRequest, state => ({
+    on(PhotoActions.flipVerticalRequest, (state): State => ({
         ...state,
         activePhotoEffects: {
             ...state.activePhotoEffects,
             flipVertical: !state.activePhotoEffects.flipVertical
         }
     })),
-    on(PhotoActions.updateEffectsRequest, (state, { effects }) => ({
+    on(PhotoActions.updateEffectsRequest, (state, { effects }): State => ({
         ...state,
         activePhotoEffects: {
             ...effects
         }
     })),
-    on(PhotoActions.toggleSlideshowRequest, state => ({
+    on(PhotoActions.toggleSlideshowRequest, (state): State => ({
         ...state,
         slideshowIsPlaying: !state.slideshowIsPlaying
     })),
-    on(PhotoActions.startSlideshowRequest, state => ({
+    on(PhotoActions.startSlideshowRequest, (state): State => ({
         ...state,
         slideshowIsPlaying: true
     })),
-    on(PhotoActions.stopSlideshowRequest, state => ({
+    on(PhotoActions.stopSlideshowRequest, (state): State => ({
         ...state,
         slideshowIsPlaying: false
     })),
-    on(PhotoActions.toggleFullscreenRequest, state => ({
+    on(PhotoActions.toggleFullscreenRequest, (state): State => ({
         ...state,
         isFullscreenView: !state.isFullscreenView
     })),
-    on(PhotoActions.enterFullscreenRequest, state => ({
+    on(PhotoActions.enterFullscreenRequest, (state): State => ({
         ...state,
         isFullscreenView: true
     })),
-    on(PhotoActions.exitFullscreenRequest, state => ({
+    on(PhotoActions.exitFullscreenRequest, (state): State => ({
         ...state,
         isFullscreenView: false
     })),
-    on(PhotoActions.enterMapViewRequest, state => ({
+    on(PhotoActions.enterMapViewRequest, (state): State => ({
         ...state,
         isMapView: true
     })),
-    on(PhotoActions.exitMapViewRequest, state => ({
+    on(PhotoActions.exitMapViewRequest, (state): State => ({
         ...state,
         isMapView: false
     })),
-    on(PhotoActions.toggleMapViewRequest, state => ({
+    on(PhotoActions.toggleMapViewRequest, (state): State => ({
         ...state,
         isMapView: !state.isMapView
     })),
-    on(PhotoActions.enterBulkEditViewRequest, state => ({
+    on(PhotoActions.enterBulkEditViewRequest, (state): State => ({
         ...state,
         isBulkEditView: true
     })),
-    on(PhotoActions.exitBulkEditViewRequest, state => ({
+    on(PhotoActions.exitBulkEditViewRequest, (state): State => ({
         ...state,
         isBulkEditView: false
     })),
-    on(PhotoActions.toggleBulkEditViewRequest, state => ({
+    on(PhotoActions.toggleBulkEditViewRequest, (state): State => ({
         ...state,
         isBulkEditView: !state.isBulkEditView
     })),
-    on(PhotoActions.enterGridViewRequest, state => ({
+    on(PhotoActions.enterGridViewRequest, (state): State => ({
         ...state,
         isGridView: true
     })),
-    on(PhotoActions.exitGridViewRequest, state => ({
+    on(PhotoActions.exitGridViewRequest, (state): State => ({
         ...state,
         isGridView: false
     })),
-    on(PhotoActions.toggleGridViewRequest, state => ({
+    on(PhotoActions.toggleGridViewRequest, (state): State => ({
         ...state,
         isGridView: !state.isGridView
     }))

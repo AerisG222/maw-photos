@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { first, tap } from 'rxjs/operators';
 
@@ -20,27 +20,24 @@ export class CategoryYearFilterComponent implements OnInit {
     selectedYear$: Observable<number|string> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.store$
+        this.store
+            .select(RootStoreSelectors.selectInitialYearFilterSelection)
             .pipe(
-                select(RootStoreSelectors.selectInitialYearFilterSelection),
                 tap(val => this.yearControl.setValue(val)),
                 first()
             )
             .subscribe();
 
-        this.allYears$ = this.store$
-            .pipe(
-                select(RootStoreSelectors.selectAllYears)
-            );
+        this.allYears$ = this.store.select(RootStoreSelectors.selectAllYears);
     }
 
     onSelectYear(change: MatSelectChange): void {
-        this.store$.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: change.value }));
+        this.store.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: change.value }));
     }
 }

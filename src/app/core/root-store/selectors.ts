@@ -5,6 +5,8 @@ import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
 import { Category } from 'src/app/models/category.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
+import { AuthStoreSelectors } from './auth-store';
+import { RouterStoreSelectors } from './router-store';
 
 export const selectError = createSelector(
     SettingsStoreSelectors.selectSettingsError,
@@ -59,11 +61,11 @@ export const selectAllFilteredCategoryYears = createSelector(
         if (yearFilter === 'all') {
             switch (typeFilter) {
                 case CategoryFilter.all:
-                    return allYears;
+                    return allYears ?? [];
                 case CategoryFilter.photos:
-                    return photoYears;
+                    return photoYears ?? [];
                 case CategoryFilter.videos:
-                    return videoYears;
+                    return videoYears ?? [];
             }
         }
 
@@ -103,6 +105,12 @@ export const selectInitialYearFilterSelection = createSelector(
     selectAllYears,
     SettingsStoreSelectors.selectCategoryListYearFilter,
     (years, filter) => !!filter ? filter : years[0]
+);
+
+export const selectEnableBulkEdit = createSelector(
+    AuthStoreSelectors.selectIsAdmin,
+    RouterStoreSelectors.selectIsRandomView,
+    (isAdmin, isRandomView) => isAdmin && !isRandomView
 );
 
 const sortNumbersDescending = (first: number, second: number): number => {

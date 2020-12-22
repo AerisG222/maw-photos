@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap } from 'rxjs/operators';
 
@@ -131,23 +131,25 @@ export class VideoStoreEffects {
             ofType(VideoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
-                this.store$.pipe(
-                    select(VideoStoreSelectors.selectAllVideos),
-                    filter(videos => !!videos && !!videos[0]),  // sometimes will get an undefined videos[0] but not sure why
-                    map(videos => {
-                        const catId = videos[0].categoryId;
-                        let isMissingGpsData = false;
+                this.store
+                    .select(VideoStoreSelectors.selectAllVideos)
+                    .pipe(
+                        filter(videos => !!videos && !!videos[0]),  // sometimes will get an undefined videos[0] but not sure why
+                        map(videos => {
+                            const catId = videos[0].categoryId;
+                            let isMissingGpsData = false;
 
-                        for (const video of videos) {
-                            if (video.latitude === null || video.longitude === null) {
-                                isMissingGpsData = true;
-                                break;
+                            for (const video of videos) {
+                                if (video.latitude === null || video.longitude === null) {
+                                    isMissingGpsData = true;
+                                    break;
+                                }
                             }
-                        }
 
-                        return VideoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
-                    })
-                ))
+                            return VideoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
+                        })
+                    )
+            )
         );
     });
 
@@ -162,7 +164,7 @@ export class VideoStoreEffects {
 
     constructor(
         private actions$: Actions,
-        private store$: Store,
+        private store: Store,
         @Inject(videoApiServiceToken) private api: VideoApiService,
     ) {
 

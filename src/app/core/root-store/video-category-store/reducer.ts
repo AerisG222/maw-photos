@@ -1,17 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { videoCategoryAdapter, initialState } from './state';
+import { videoCategoryAdapter, initialState, State } from './state';
 import * as VideoCategoryActions from './actions';
 import { getIdsByYear } from '../category-helpers';
 
 export const reducer = createReducer(
     initialState,
-    on(VideoCategoryActions.loadRequest, state => ({
+    on(VideoCategoryActions.loadRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoCategoryActions.loadSuccess, (state, { categories }) =>
+    on(VideoCategoryActions.loadSuccess, (state, { categories }): State =>
         videoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
@@ -19,25 +19,25 @@ export const reducer = createReducer(
             error: null
         })
     ),
-    on(VideoCategoryActions.loadFailure, (state, { error }) => ({
+    on(VideoCategoryActions.loadFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoCategoryActions.loadRequestedSatisfiedByCache, state => ({
+    on(VideoCategoryActions.loadRequestedSatisfiedByCache, (state): State => ({
         ...state,
         isLoading: false
     })),
-    on(VideoCategoryActions.setActiveCategoryId, (state, { categoryId }) => ({
+    on(VideoCategoryActions.setActiveCategoryId, (state, { categoryId }): State => ({
         ...state,
         activeCategoryId: categoryId
     })),
-    on(VideoCategoryActions.setTeaserRequest, state => ({
+    on(VideoCategoryActions.setTeaserRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoCategoryActions.setTeaserSuccess, (state, { category }) => (
+    on(VideoCategoryActions.setTeaserSuccess, (state, { category }): State => (
         videoCategoryAdapter.upsertOne(category, {
             ...state,
             activeCategoryId: category.id,
@@ -45,12 +45,12 @@ export const reducer = createReducer(
             error: null
         })
     )),
-    on(VideoCategoryActions.setTeaserFailure, (state, { error }) => ({
+    on(VideoCategoryActions.setTeaserFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }) => {
+    on(VideoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }): State => {
         const catToUpdate = state.entities[categoryId];
 
         if (!!catToUpdate) {

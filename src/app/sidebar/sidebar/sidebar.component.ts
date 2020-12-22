@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { LayoutStoreSelectors } from 'src/app/core/root-store';
 
@@ -14,15 +14,12 @@ export class SidebarComponent implements OnInit {
     hidePanel$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.hidePanel$ = this.store$
-            .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsFullscreen)
-            );
+        this.hidePanel$ = this.store.select(LayoutStoreSelectors.selectLayoutIsFullscreen);
     }
 }

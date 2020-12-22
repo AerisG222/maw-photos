@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { first, tap } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
@@ -56,17 +56,18 @@ export class MinimapCardComponent implements OnInit {
         }
     }
 
-    constructor(private store$: Store) {
+    constructor(private store: Store) {
 
     }
 
     ngOnInit(): void {
-        this.store$.pipe(
-            select(SettingsStoreSelectors.selectAppTheme),
-            first(),
-            tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight),
-            tap(_ => this.updateOptions())
-        ).subscribe();
+        this.store
+            .select(SettingsStoreSelectors.selectAppTheme)
+            .pipe(
+                first(),
+                tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight),
+                tap(_ => this.updateOptions())
+            ).subscribe();
     }
 
     onMapTypeChange(): void {

@@ -1,5 +1,5 @@
 import * as fromRouter from '@ngrx/router-store';
-import { createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { MinimalRouterStateSnapshot } from '@ngrx/router-store';
 
@@ -14,3 +14,8 @@ export const {
     selectRouteData,      // select the current route data
     selectUrl,            // select the current url
 } = fromRouter.getSelectors(routerState);
+
+export const selectIsRandomView = createSelector(
+    selectUrl,
+    url => url.indexOf('random') >= 0
+);

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors } from 'src/app/photos/store';
 
@@ -16,14 +16,11 @@ export class ToolbarSlideshowButtonComponent implements OnInit {
     slideshowPlaying$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     ngOnInit(): void {
-        this.slideshowPlaying$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectSlideshowIsPlaying)
-            );
+        this.slideshowPlaying$ = this.store.select(PhotoStoreSelectors.selectSlideshowIsPlaying);
     }
 
     onToggleSlideshow(): void {

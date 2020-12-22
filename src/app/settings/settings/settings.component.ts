@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
 import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
@@ -14,7 +14,6 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { CategoryListType } from 'src/app/models/category-list-type.model';
 import { Subscription } from 'rxjs';
-import { selectPhotoGridShowCategoryBreadcrumbs } from 'src/app/core/root-store/settings-store/selectors';
 
 
 @Component({
@@ -52,7 +51,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store
+        private store: Store
     ) {
         this.form = this.formBuilder.group({
             appTheme:                                 [DEFAULT_SETTINGS.appTheme.name, Validators.required],
@@ -111,9 +110,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.selectSettings)
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
                 tap(s => this.updateForm(s)),
                 tap(s => this.categoryListYearFilter = s.categoryListYearFilter),
                 tap(s => this.categoryListMissingGpsFilter = s.categoryListMissingGpsFilter)
@@ -185,7 +184,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             searchListViewThumbnailSize: ThumbnailSize.forName(this.getFormString('searchListViewThumbnailSize', DEFAULT_SETTINGS.searchListViewThumbnailSize.name)),
         };
 
-        this.store$.dispatch(
+        this.store.dispatch(
             SettingsStoreActions.saveRequest({ settings })
         );
     }
@@ -196,7 +195,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     private loadSettings(): void {
-        this.store$.dispatch(
+        this.store.dispatch(
             SettingsStoreActions.loadRequest()
         );
     }

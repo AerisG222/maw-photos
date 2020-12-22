@@ -11,10 +11,10 @@ import { PhotoStoreActions } from 'src/app/photos/store';
 })
 export class ToolbarRotateCounterClockwiseButtonComponent {
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     onRotateCounterClockwise(): void {
-        this.store$.dispatch(PhotoStoreActions.rotateCounterClockwiseRequest());
+        this.store.dispatch(PhotoStoreActions.rotateCounterClockwiseRequest());
     }
 }

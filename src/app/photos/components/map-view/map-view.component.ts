@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
@@ -20,26 +20,23 @@ export class MapViewComponent implements OnInit, OnDestroy {
     mapImages$: Observable<MapImage[]> | null = null;
     settings$: Observable<Settings> | null = null;
 
-    constructor(private store$: Store) {
+    constructor(private store: Store) {
 
     }
 
     ngOnInit(): void {
-        this.settings$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings)
-            );
+        this.settings$ = this.store.select(SettingsStoreSelectors.selectSettings);
 
-        this.activePhoto$ = this.store$
+        this.activePhoto$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo)
             );
 
-        this.mapImages$ = this.store$
+        this.mapImages$ = this.store
+            .select(PhotoStoreSelectors.selectPhotosWithGpsCoordinates)
             .pipe(
-                select(PhotoStoreSelectors.selectPhotosWithGpsCoordinates),
                 filter(x => !!x),
                 map(photos => (photos as Photo[]).map(x => ({
                     id: x.id,
@@ -51,18 +48,18 @@ export class MapViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(PhotoStoreActions.exitMapViewRequest());
+        this.store.dispatch(PhotoStoreActions.exitMapViewRequest());
     }
 
     onMapTypeIdChange(mapTypeId: string): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
+        this.store.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoListMapViewZoomRequest({ zoom }));
+        this.store.dispatch(SettingsStoreActions.updatePhotoListMapViewZoomRequest({ zoom }));
     }
 
     onSelectPhoto(photoId: number): void {
-        this.store$.dispatch(PhotoStoreActions.setActivePhotoId({ id: photoId }));
+        this.store.dispatch(PhotoStoreActions.setActivePhotoId({ id: photoId }));
     }
 }

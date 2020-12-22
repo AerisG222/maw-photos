@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { LayoutStoreActions } from 'src/app/core/root-store';
@@ -16,35 +16,27 @@ export class FullscreenToolbarComponent implements OnInit {
     isLast$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     ngOnInit(): void {
-        this.isFirst$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsActivePhotoFirst)
-            );
-
-        this.isLast$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsActivePhotoLast)
-            );
+        this.isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
+        this.isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
     }
 
     onExitFullscreen(): void {
-        this.store$.dispatch(LayoutStoreActions.exitFullscreenRequest());
-        this.store$.dispatch(PhotoStoreActions.exitFullscreenRequest());
+        this.store.dispatch(PhotoStoreActions.exitFullscreenRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
+        this.store.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onToggleSlideshow(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
+        this.store.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 }

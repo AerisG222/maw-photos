@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
 
@@ -19,24 +19,25 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
     destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.comments$ = this.store$.pipe(
-            select(PhotoStoreSelectors.selectActivePhotoComments),
-            filter(x => !!x),
-            map(x => x as Comment[])
-        );
-
-        this.destroySub.add(this.store$
+        this.comments$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhotoComments)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
+                filter(x => !!x),
+                map(x => x as Comment[])
+            );
+
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
+            .pipe(
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
+                tap(photo => this.store.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
                 tap(photo => this.activeId = photo.id)
             ).subscribe()
         );
@@ -48,7 +49,7 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
 
     onComment(comment: string): void {
         if (this.activeId !== -1) {
-            this.store$.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.activeId, comment }));
+            this.store.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.activeId, comment }));
         }
     }
 }

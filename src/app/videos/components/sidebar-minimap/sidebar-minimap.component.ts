@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -18,15 +18,15 @@ export class SidebarMinimapComponent implements OnInit {
     position$: Observable<google.maps.LatLng | null> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        const activeVideo$ = this.store$
+        const activeVideo$ = this.store
+            .select(VideoStoreSelectors.selectActiveVideo)
             .pipe(
-                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video)
             );
 
@@ -41,20 +41,15 @@ export class SidebarMinimapComponent implements OnInit {
                 })
             );
 
-        this.mapTypeId$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId)
-        );
-
-        this.zoom$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom)
-        );
+        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId);
+        this.zoom$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom);
     }
 
     onMapTypeChange(mapTypeId: string): void {
-        this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+        this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this.store$.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
+        this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
@@ -42,64 +42,41 @@ export class SidebarComponent implements OnInit {
     enableButtons$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store$.pipe(
-            select(AuthStoreSelectors.selectIsAdmin)
-        );
-
-        this.enableButtons$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
-        );
-
-        this.endSidenavExpanded$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState)
-        );
-
-        this.showCategoryTeaserChooser$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelShowCategoryTeaserChooser)
-        );
-
-        this.showComments$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelShowComments)
-        );
-
-        this.showMetadataEditor$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelShowMetadataEditor)
-        );
-
-        this.showMinimap$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelShowMinimap)
-        );
-
-        this.showRatings$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectVideoInfoPanelShowRatings)
-        );
+        this.isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
+        this.enableButtons$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState);
+        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState);
+        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowCategoryTeaserChooser);
+        this.showComments$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowComments);
+        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowMetadataEditor);
+        this.showMinimap$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowMinimap);
+        this.showRatings$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowRatings);
     }
 
     toggleSidebar(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelExpandedStateRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelExpandedStateRequest());
     }
 
     toggleRatings(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelRatingsRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelRatingsRequest());
     }
 
     toggleCategoryTeaserChooser(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelCategoryTeaserChooserRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelCategoryTeaserChooserRequest());
     }
 
     toggleComments(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelCommentsRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelCommentsRequest());
     }
 
     toggleMetadataEditor(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMetadataEditorRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelMetadataEditorRequest());
     }
 
     toggleMinimap(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
     }
 }

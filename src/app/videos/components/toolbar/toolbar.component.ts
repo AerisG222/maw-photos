@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -22,27 +22,20 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     private destroySub = new Subscription();
 
-    constructor(private store$: Store) {
+    constructor(private store: Store) {
 
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.selectSettings)
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
-        this.isFirst$ = this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectIsActiveVideoFirst)
-            );
-
-        this.isLast$ = this.store$
-            .pipe(
-                select(VideoStoreSelectors.selectIsActiveVideoLast)
-            );
+        this.isFirst$ = this.store.select(VideoStoreSelectors.selectIsActiveVideoFirst);
+        this.isLast$ = this.store.select(VideoStoreSelectors.selectIsActiveVideoLast);
     }
 
     ngOnDestroy(): void {
@@ -50,7 +43,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoListCategoryBreadcrumbsRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoListCategoryBreadcrumbsRequest());
     }
 
     onToggleThumbnailSize(): void {
@@ -59,12 +52,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (!!sizeName) {
             const size = ThumbnailSize.nextSize(sizeName);
 
-            this.store$.dispatch(SettingsStoreActions.updateVideoListThumbnailSizeRequest({ newSize: size }));
+            this.store.dispatch(SettingsStoreActions.updateVideoListThumbnailSizeRequest({ newSize: size }));
         }
     }
 
     onToggleShowVideoList(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleVideoListShowVideoListRequest());
+        this.store.dispatch(SettingsStoreActions.toggleVideoListShowVideoListRequest());
     }
 
     onToggleVideoSize(): void {
@@ -73,15 +66,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (!!sizeName) {
             const size = VideoSize.nextSize(sizeName);
 
-            this.store$.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
+            this.store.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
         }
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(VideoStoreActions.movePreviousRequest());
+        this.store.dispatch(VideoStoreActions.movePreviousRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(VideoStoreActions.moveNextRequest());
+        this.store.dispatch(VideoStoreActions.moveNextRequest());
     }
 }

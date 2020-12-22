@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, tap, first, map } from 'rxjs/operators';
 
@@ -19,16 +19,14 @@ export class YearListComponent implements OnInit {
     isAdmin$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store,
+        private store: Store,
         private activatedRoute: ActivatedRoute
     ) {
 
     }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store$.pipe(
-            select(AuthStoreSelectors.selectIsAdmin)
-        );
+        this.isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
 
         this.activatedRoute.fragment
             .pipe(
@@ -38,21 +36,12 @@ export class YearListComponent implements OnInit {
                     const year = parseInt(y, 10);
 
                     if (!isNaN(year)) {
-                        this.store$.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: year }));
+                        this.store.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: year }));
                     }
                 })
             ).subscribe();
 
-        this.margin$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectCategoryListCategoryMargin)
-            );
-
-        this.years$ = this.store$
-            .pipe(
-                select(RootStoreSelectors.selectAllFilteredCategoryYears),
-                filter(x => !!x),
-                map(x => x as number[])
-            );
+        this.margin$ = this.store.select(SettingsStoreSelectors.selectCategoryListCategoryMargin);
+        this.years$ = this.store.select(RootStoreSelectors.selectAllFilteredCategoryYears);
     }
 }

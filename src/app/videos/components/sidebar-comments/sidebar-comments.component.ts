@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { tap, filter, map } from 'rxjs/operators';
 
 import { Comment } from 'src/app/models/comment.model';
@@ -19,28 +19,26 @@ export class SidebarCommentsComponent implements OnInit {
     destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.comments$ = this.store$.pipe(
-            select(VideoStoreSelectors.selectActiveVideoComments)
-        );
+        this.comments$ = this.store.select(VideoStoreSelectors.selectActiveVideoComments);
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(VideoStoreSelectors.selectActiveVideo)
             .pipe(
-                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video),
                 map(video => video as Video),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadCommentsRequest({ videoId: video.id }))),
+                tap(video => this.store.dispatch(VideoStoreActions.loadCommentsRequest({ videoId: video.id }))),
                 tap(video => this.activeId = video.id)
             ).subscribe()
         );
     }
 
     onComment(comment: string): void {
-        this.store$.dispatch(VideoStoreActions.addCommentRequest({ videoId: this.activeId, comment }));
+        this.store.dispatch(VideoStoreActions.addCommentRequest({ videoId: this.activeId, comment }));
     }
 }

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -18,22 +18,22 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
     private query: string | null = null;
 
     constructor(
-        private store$: Store,
+        private store: Store,
     ) {
 
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SearchStoreSelectors.selectSearchQuery)
             .pipe(
-                select(SearchStoreSelectors.selectSearchQuery),
                 tap(q => this.query = q)
             ).subscribe()
         );
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SearchStoreSelectors.selectSearchCurrentResult)
             .pipe(
-                select(SearchStoreSelectors.selectSearchCurrentResult),
                 tap(result => this.nextIndex = !!result ? result.startIndex + result.results.length : -1)
             ).subscribe()
         );
@@ -45,7 +45,7 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
 
     onSearchMore(): void {
         if (this.nextIndex > 0) {
-            this.store$.dispatch(queryRequest({ query: this.query as string, start: this.nextIndex }));
+            this.store.dispatch(queryRequest({ query: this.query as string, start: this.nextIndex }));
         }
     }
 }

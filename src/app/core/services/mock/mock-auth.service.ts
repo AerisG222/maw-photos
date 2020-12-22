@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Injectable()
 export class MockAuthService implements AuthService {
     constructor(
-        private store$: Store,
+        private store: Store,
         private router: Router
     ) {
 
@@ -44,6 +44,6 @@ export class MockAuthService implements AuthService {
             roles: [ 'admin' ]
         };
 
-        this.store$.dispatch(updateUserInfoRequest({ userInfo }));
+        this.store.dispatch(updateUserInfoRequest({ userInfo }));
     }
 }

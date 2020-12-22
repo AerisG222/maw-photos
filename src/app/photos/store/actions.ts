@@ -273,3 +273,8 @@ export const exitGridViewRequest = createAction(
 export const toggleGridViewRequest = createAction(
     '[Photos] Toggle Grid View Request'
 );
+
+export const enterRandomView = createAction(
+    '[Photos] Enter Random View',
+    props<{ count: number }>()
+);

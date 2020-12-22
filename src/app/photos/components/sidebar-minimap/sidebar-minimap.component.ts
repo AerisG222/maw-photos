@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -18,15 +18,15 @@ export class SidebarMinimapComponent implements OnInit {
     position$: Observable<google.maps.LatLng | null> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        const activePhoto$ = this.store$
+        const activePhoto$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo)
             );
 
@@ -41,20 +41,15 @@ export class SidebarMinimapComponent implements OnInit {
                 })
             );
 
-        this.mapTypeId$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapMapTypeId)
-        );
-
-        this.zoom$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom)
-        );
+        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapMapTypeId);
+        this.zoom$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom);
     }
 
     onMapTypeChange(mapTypeId: string): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
     }
 
     onZoomChange(zoom: number): void {
-        this.store$.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
+        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
     }
 }

@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Injectable()
 export class ExternalAuthService implements AuthService {
     constructor(
-        private store$: Store,
+        private store: Store,
         private router: Router,
         private oauthService: OAuthService
     ) {
@@ -77,7 +77,7 @@ export class ExternalAuthService implements AuthService {
                 roles: profile.role as string[]
             };
 
-            this.store$.dispatch(updateUserInfoRequest({ userInfo }));
+            this.store.dispatch(updateUserInfoRequest({ userInfo }));
         }
     }
 }

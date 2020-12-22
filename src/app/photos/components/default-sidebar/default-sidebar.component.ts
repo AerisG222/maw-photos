@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
@@ -44,88 +44,56 @@ export class DefaultSidebarComponent implements OnInit {
     enableButtons$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store$.pipe(
-            select(AuthStoreSelectors.selectIsAdmin)
-        );
-
-        this.enableButtons$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
-        );
-
-        this.endSidenavExpanded$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState)
-        );
-
-        this.showComments$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowComments)
-        );
-
-        this.showMetadataEditor$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowMetadataEditor)
-        );
-
-        this.showCategoryTeaserChooser$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowCategoryTeaserChooser)
-        );
-
-        this.showEffects$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowEffects)
-        );
-
-        this.showExif$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif)
-        );
-
-        this.showHistogram$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowHistogram)
-        );
-
-        this.showMinimap$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap)
-        );
-
-        this.showRatings$ = this.store$.pipe(
-            select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings)
-        );
+        this.isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
+        this.enableButtons$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState);
+        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState);
+        this.showComments$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowComments);
+        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowMetadataEditor);
+        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowCategoryTeaserChooser);
+        this.showEffects$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowEffects);
+        this.showExif$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif);
+        this.showHistogram$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowHistogram);
+        this.showMinimap$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap);
+        this.showRatings$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings);
     }
 
     toggleSidebar(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());
     }
 
     toggleRatings(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelRatingsRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelRatingsRequest());
     }
 
     toggleCategoryTeaserChooser(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelCategoryTeaserChooserRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelCategoryTeaserChooserRequest());
     }
 
     toggleComments(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelCommentsRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelCommentsRequest());
     }
 
     toggleMetadataEditor(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelMetadataEditorRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelMetadataEditorRequest());
     }
 
     toggleExif(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelExifRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelExifRequest());
     }
 
     toggleHistogram(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelHistogramRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelHistogramRequest());
     }
 
     toggleEffects(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelEffectsRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelEffectsRequest());
     }
 
     toggleMinimap(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoInfoPanelMinimapRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelMinimapRequest());
     }
 }

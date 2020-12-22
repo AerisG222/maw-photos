@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { concatMap, withLatestFrom } from 'rxjs/operators';
 
@@ -91,9 +91,7 @@ export class SettingsStoreEffects {
                 SettingsActions.updateSearchListViewThumbnailSizeRequest,
                 SettingsActions.updateSearchThumbnailSizeRequest,
             ),
-            withLatestFrom(this.store$.pipe(
-                select(settingsSelectors.selectSettings)
-            )),
+            withLatestFrom(this.store.select(settingsSelectors.selectSettings)),
             concatMap(x => {
                 return of(SettingsActions.saveRequest({ settings: x[1] }));
             })
@@ -103,7 +101,7 @@ export class SettingsStoreEffects {
     constructor(
         private settingsService: SettingsService,
         private actions$: Actions,
-        private store$: Store
+        private store: Store
     ) {
 
     }

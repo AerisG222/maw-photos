@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, Subscription, concat, of } from 'rxjs';
 import { tap, map, delay, filter } from 'rxjs/operators';
 import * as numeral from 'numeral';
@@ -29,7 +29,7 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store
+        private store: Store
     ) {
         this.form = this.formBuilder.group({
             aggregateBy: ['count']
@@ -37,15 +37,8 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const years$ = this.store$
-            .pipe(
-                select(VideoCategoryStoreSelectors.selectAllYears)
-            );
-
-        const categories$ = this.store$
-            .pipe(
-                select(VideoCategoryStoreSelectors.selectAllCategories)
-            );
+        const years$ = this.store.select(VideoCategoryStoreSelectors.selectAllYears);
+        const categories$ = this.store.select(VideoCategoryStoreSelectors.selectAllCategories);
 
         const aggregateBy$ = concat(
                 of('count'),

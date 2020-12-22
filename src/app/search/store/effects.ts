@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { of, combineLatest } from 'rxjs';
 import { switchMap, catchError, map, withLatestFrom, filter } from 'rxjs/operators';
 
@@ -13,9 +13,7 @@ export class SearchStoreEffects {
     queryRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SearchActions.queryRequest),
-            withLatestFrom(
-                this.store$.pipe(select(searchSelectors.selectSearchQuery))
-            ),
+            withLatestFrom(this.store.select(searchSelectors.selectSearchQuery)),
             map(x => ({
                 action: x[0],
                 currentQueryTerm: x[1]
@@ -33,8 +31,8 @@ export class SearchStoreEffects {
 
     queryMoreEffect$ = createEffect(() => {
         const currentQueryInfo = combineLatest([
-            this.store$.pipe(select(searchSelectors.selectSearchQuery)),
-            this.store$.pipe(select(searchSelectors.selectSearchCurrentStartIndex))
+            this.store.select(searchSelectors.selectSearchQuery),
+            this.store.select(searchSelectors.selectSearchCurrentStartIndex)
         ]);
 
         return this.actions$.pipe(
@@ -58,7 +56,7 @@ export class SearchStoreEffects {
 
     constructor(
         private actions$: Actions,
-        private store$: Store,
+        private store: Store,
         @Inject(searchApiServiceToken) private api: SearchApiService,
     ) {
 

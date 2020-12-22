@@ -11,10 +11,10 @@ import { PhotoStoreActions } from 'src/app/photos/store';
 })
 export class ToolbarFlipHorizontalButtonComponent {
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     onFlipHorizontal(): void {
-        this.store$.dispatch(PhotoStoreActions.flipHorizontalRequest());
+        this.store.dispatch(PhotoStoreActions.flipHorizontalRequest());
     }
 }

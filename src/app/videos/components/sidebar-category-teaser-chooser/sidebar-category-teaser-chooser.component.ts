@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
 
@@ -22,15 +22,15 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(VideoStoreSelectors.selectActiveVideo)
             .pipe(
-                select(VideoStoreSelectors.selectActiveVideo),
                 filter(v => !!v),
                 map(v => v as Video),
                 tap(v => this.videoId = v.id),
@@ -38,11 +38,12 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
             ).subscribe()
         );
 
-        this.currentTeaserUrl$ = this.store$.pipe(
-            select(VideoCategoryStoreSelectors.selectActiveCategory),
-            filter(c => !!c),
-            map(c => (c as Category).teaserImageSq.url)
-        );
+        this.currentTeaserUrl$ = this.store
+            .select(VideoCategoryStoreSelectors.selectActiveCategory)
+            .pipe(
+                filter(c => !!c),
+                map(c => (c as Category).teaserImageSq.url)
+            );
     }
 
     ngOnDestroy(): void {
@@ -51,7 +52,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
 
     onSetTeaser(): void {
         if (this.categoryId !== -1 && this.videoId !== -1) {
-            this.store$.dispatch(VideoCategoryStoreActions.setTeaserRequest({ categoryId: this.categoryId, videoId: this.videoId }));
+            this.store.dispatch(VideoCategoryStoreActions.setTeaserRequest({ categoryId: this.categoryId, videoId: this.videoId }));
         }
     }
 }

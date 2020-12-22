@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
@@ -18,15 +18,15 @@ export class CategoryTypeFilterComponent implements OnInit {
     categoryTypeControl = new FormControl('all');
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.store$
+        this.store
+            .select(SettingsStoreSelectors.selectCategoryListCategoryFilter)
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListCategoryFilter),
                 tap(filter => this.categoryTypeControl.setValue(filter.value)),
                 first()
             )
@@ -35,6 +35,6 @@ export class CategoryTypeFilterComponent implements OnInit {
 
     onSelectCategoryType(change: MatSelectChange): void {
         // eslint-disable-next-line max-len
-        this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter: CategoryFilter.forValue(change.value) }));
+        this.store.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter: CategoryFilter.forValue(change.value) }));
     }
 }

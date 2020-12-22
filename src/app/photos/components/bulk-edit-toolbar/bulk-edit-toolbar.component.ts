@@ -11,10 +11,10 @@ import { PhotoStoreActions } from 'src/app/photos/store';
 })
 export class BulkEditToolbarComponent {
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     onToggleBulkEditView(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
+        this.store.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
     }
 }

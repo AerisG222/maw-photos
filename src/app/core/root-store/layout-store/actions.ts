@@ -1,9 +1,5 @@
 import { createAction } from '@ngrx/store';
 
-export const resetLayoutRequest = createAction(
-    '[Layout] Reset Request'
-);
-
 export const enterFullscreenRequest = createAction(
     '[Layout] Enter Fullscreen Request'
 );

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, Inject } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable, Subscription, combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { tap, filter, map, first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
@@ -8,12 +8,10 @@ import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import {
-    LayoutStoreActions,
     SettingsStoreActions,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors,
-    AuthStoreSelectors,
-    RouterStoreSelectors
+    RootStoreSelectors
 } from 'src/app/core/root-store';
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { Category } from 'src/app/models/category.model';
@@ -45,54 +43,35 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store,
+        private store: Store,
         @Inject(WINDOW) private window: Window
     ) {
         this.enableShare = !!window?.navigator?.share;
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.selectSettings)
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
-        this.category$ = this.store$
+        this.category$ = this.store
+            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(c => !!c),
                 map(c => (c as Category).actual as PhotoCategory)
             );
 
-        this.enableBulkEdit$ = combineLatest([
-            this.store$.pipe(select(AuthStoreSelectors.selectIsAdmin)),
-            this.store$.pipe(select(RouterStoreSelectors.selectUrl))
-        ]).pipe(
-            map(([isAdmin, url]) => isAdmin && !this.isRandomView(url))
-        );
+        this.enableBulkEdit$ = this.store.select(RootStoreSelectors.selectEnableBulkEdit);
+        this.enableMapView$ = this.store.select(PhotoStoreSelectors.selectEnableMapView);
+        this.isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
+        this.isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
 
-        this.enableMapView$ = combineLatest([
-            this.store$.pipe(select(PhotoStoreSelectors.selectHasPhotosWithGpsCoordinates)),
-            this.store$.pipe(select(RouterStoreSelectors.selectUrl))
-        ]).pipe(
-            map(([hasGps, url]) => hasGps && !this.isRandomView(url))
-        );
-
-        this.isFirst$ = this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectIsActivePhotoFirst)
-            );
-
-        this.isLast$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsActivePhotoLast)
-            );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
                 tap(photo => this.smDownloadUrl = photo.imageSm.downloadUrl),
@@ -108,58 +87,53 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoListCategoryBreadcrumbsRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoListCategoryBreadcrumbsRequest());
     }
 
     onTogglePhotoList(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoListShowPhotoListRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoListShowPhotoListRequest());
     }
 
     onToggleSize(): void {
         const name = this.settings?.photoListThumbnailSize.name ?? DEFAULT_SETTINGS.photoListThumbnailSize.name;
         const size = ThumbnailSize.nextSize(name);
 
-        this.store$.dispatch(SettingsStoreActions.updatePhotoListThumbnailSizeRequest({ newSize: size }));
+        this.store.dispatch(SettingsStoreActions.updatePhotoListThumbnailSizeRequest({ newSize: size }));
     }
 
     onToggleFullscreen(): void {
-        this.store$.dispatch(PhotoStoreActions.enterFullscreenRequest());
-        this.store$.dispatch(LayoutStoreActions.enterFullscreenRequest());
+        this.store.dispatch(PhotoStoreActions.enterFullscreenRequest());
     }
 
     onToggleMapView(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleMapViewRequest());
+        this.store.dispatch(PhotoStoreActions.toggleMapViewRequest());
     }
 
     onToggleBulkEditView(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
+        this.store.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
     }
 
     onToggleGridView(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleGridViewRequest());
+        this.store.dispatch(PhotoStoreActions.toggleGridViewRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
+        this.store.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onToggleSlideshow(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
-    }
-
-    isRandomView(url: string): boolean {
-        return url.indexOf('random') >= 0;
+        this.store.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 
     onShare(): void {
-        this.store$
+        this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
                 first(),
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
                 tap(x => this.sharePhoto(x))

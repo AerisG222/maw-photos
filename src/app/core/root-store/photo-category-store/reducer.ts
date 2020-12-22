@@ -1,17 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as PhotoCategoryActions from './actions';
-import { photoCategoryAdapter, initialState } from './state';
+import { photoCategoryAdapter, initialState, State } from './state';
 import { getIdsByYear } from '../category-helpers';
 
 export const reducer = createReducer(
     initialState,
-    on(PhotoCategoryActions.loadRequest, state => ({
+    on(PhotoCategoryActions.loadRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoCategoryActions.loadSuccess, (state, { categories }) =>
+    on(PhotoCategoryActions.loadSuccess, (state, { categories }): State =>
         photoCategoryAdapter.addMany(categories, {
             ...state,
             categoryIdsByYear: getIdsByYear(categories),
@@ -19,25 +19,25 @@ export const reducer = createReducer(
             error: null
         })
     ),
-    on(PhotoCategoryActions.loadFailure, (state, { error }) => ({
+    on(PhotoCategoryActions.loadFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoCategoryActions.loadRequestedSatisfiedByCache, state => ({
+    on(PhotoCategoryActions.loadRequestedSatisfiedByCache, (state): State => ({
         ...state,
         isLoading: false
     })),
-    on(PhotoCategoryActions.setActiveCategoryId, (state, { categoryId }) => ({
+    on(PhotoCategoryActions.setActiveCategoryId, (state, { categoryId }): State => ({
         ...state,
         activeCategoryId: categoryId
     })),
-    on(PhotoCategoryActions.setTeaserRequest, state => ({
+    on(PhotoCategoryActions.setTeaserRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(PhotoCategoryActions.setTeaserSuccess, (state, { category }) => (
+    on(PhotoCategoryActions.setTeaserSuccess, (state, { category }): State => (
         photoCategoryAdapter.upsertOne(category, {
             ...state,
             activeCategoryId: category.id,
@@ -45,12 +45,12 @@ export const reducer = createReducer(
             error: null
         })
     )),
-    on(PhotoCategoryActions.setTeaserFailure, (state, { error }) => ({
+    on(PhotoCategoryActions.setTeaserFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(PhotoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }) => {
+    on(PhotoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }): State => {
         const catToUpdate = state.entities[categoryId];
 
         if (!!catToUpdate) {

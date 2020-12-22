@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
 import { tap, first, map, filter } from 'rxjs/operators';
 
@@ -22,32 +22,29 @@ export class BulkEditComponent implements OnInit {
     selectedPhotos: Photo[] = [];
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.category$ = this.store$
+        this.category$ = this.store
+            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(x => !!x),
                 map(x => x as Category)
             );
 
         this.photos$ = combineLatest([
-                this.store$
-                    .pipe(
-                        select(PhotoStoreSelectors.selectAllPhotos)
-                    ),
+                this.store.select(PhotoStoreSelectors.selectAllPhotos),
                 this.showPhotosWithGpsData$
             ])
             .pipe(
-                map(parts => {
-                    if (parts[1]) {
-                        return parts[0];
+                map(([ photos, showPhotosWithGpsData ]) => {
+                    if (showPhotosWithGpsData) {
+                        return photos;
                     } else {
-                        return parts[0].filter(p => p.latitude == null || p.longitude == null);
+                        return photos.filter(p => p.latitude == null || p.longitude == null);
                     }
                 })
             );
@@ -82,7 +79,7 @@ export class BulkEditComponent implements OnInit {
         this.clearSelectedPhotos();
 
         for (const photo of photosToUpdate) {
-            this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: photo.id, latLng: gps }));
+            this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: photo.id, latLng: gps }));
         }
     }
 

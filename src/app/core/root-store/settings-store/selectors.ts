@@ -73,6 +73,16 @@ export const selectCategoryListListViewThumbnailSize = createSelector(
     (state: State): ThumbnailSize => state.settings.categoryListListViewThumbnailSize
 );
 
+export const selectCategoryListShouldShowListView = createSelector(
+    selectCategoryListListType,
+    (type: CategoryListType): boolean => type.name === CategoryListType.list.name
+);
+
+export const selectCategoryListShouldShowGridView = createSelector(
+    selectCategoryListListType,
+    (type: CategoryListType): boolean => type.name === CategoryListType.grid.name
+);
+
 // -- PHOTO GRID --
 export const selectPhotoGridMargin = createSelector(
     settingsState,

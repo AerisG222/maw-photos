@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { filter, tap, map } from 'rxjs/operators';
 
 import { PhotoStoreSelectors } from '../../store';
@@ -22,15 +22,15 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
     private photoId = -1;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(p => !!p),
                 map(p => p as Photo),
                 tap(p => this.photoId = p.id),
@@ -38,11 +38,12 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
             ).subscribe()
         );
 
-        this.currentTeaserUrl$ = this.store$.pipe(
-            select(PhotoCategoryStoreSelectors.selectActiveCategory),
-            filter(c => !!c),
-            map(c => (c as Category).teaserImageSq.url)
-        );
+        this.currentTeaserUrl$ = this.store
+            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
+            .pipe(
+                filter(c => !!c),
+                map(c => (c as Category).teaserImageSq.url)
+            );
     }
 
     ngOnDestroy(): void {
@@ -50,6 +51,6 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
     }
 
     onSetTeaser(): void {
-        this.store$.dispatch(PhotoCategoryStoreActions.setTeaserRequest({ categoryId: this.categoryId, photoId: this.photoId }));
+        this.store.dispatch(PhotoCategoryStoreActions.setTeaserRequest({ categoryId: this.categoryId, photoId: this.photoId }));
     }
 }

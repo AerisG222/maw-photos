@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
 
@@ -18,18 +18,16 @@ export class SidebarEffectsComponent implements OnInit, OnDestroy {
     effects = DEFAULT_PHOTO_EFFECTS;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhotoEffects)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhotoEffects),
-                filter(x => !!x),
-                map(x => x as PhotoEffects),
-                tap(effects => this.effects = effects)
+                tap(effects => this.effects = effects ?? DEFAULT_PHOTO_EFFECTS)
             ).subscribe()
         );
     }
@@ -71,10 +69,10 @@ export class SidebarEffectsComponent implements OnInit, OnDestroy {
     }
 
     onResetEffects(): void {
-        this.store$.dispatch(PhotoStoreActions.resetEffectsRequest());
+        this.store.dispatch(PhotoStoreActions.resetEffectsRequest());
     }
 
     private update(effects: PhotoEffects): void {
-        this.store$.dispatch(PhotoStoreActions.updateEffectsRequest({ effects }));
+        this.store.dispatch(PhotoStoreActions.updateEffectsRequest({ effects }));
     }
 }

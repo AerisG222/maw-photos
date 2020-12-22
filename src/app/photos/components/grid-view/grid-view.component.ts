@@ -1,5 +1,5 @@
- import { Component, OnInit, OnDestroy, ContentChild, ViewChild } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
@@ -29,49 +29,27 @@ export class GridViewComponent implements OnInit, OnDestroy {
     showBreadcrumbs$: Observable<boolean> | null = null;
     lastScrollTop = 0;
 
-    constructor(private store$: Store) {
+    constructor(private store: Store) {
 
     }
 
     ngOnInit(): void {
         this.clearActivePhoto();
 
-        this.settings$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings)
-            );
+        this.settings$ = this.store.select(SettingsStoreSelectors.selectSettings);
 
-        this.category$ = this.store$
+        this.category$ = this.store
+            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(x => !!x),
                 map(x => x as Category)
             );
 
-        this.photos$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectAllPhotos)
-            );
-
-        this.activePhoto$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto)
-            );
-
-        this.thumbnailSize$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectPhotoGridThumbnailSize)
-            );
-
-        this.margin$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectPhotoGridMargin)
-            );
-
-        this.showBreadcrumbs$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectPhotoGridShowCategoryBreadcrumbs)
-            );
+        this.photos$ = this.store.select(PhotoStoreSelectors.selectAllPhotos);
+        this.activePhoto$ = this.store.select(PhotoStoreSelectors.selectActivePhoto);
+        this.thumbnailSize$ = this.store.select(SettingsStoreSelectors.selectPhotoGridThumbnailSize);
+        this.margin$ = this.store.select(SettingsStoreSelectors.selectPhotoGridMargin);
+        this.showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.selectPhotoGridShowCategoryBreadcrumbs);
     }
 
     ngOnDestroy(): void {
@@ -91,11 +69,11 @@ export class GridViewComponent implements OnInit, OnDestroy {
             this.lastScrollTop = this.layout.getCurrentScrollTop();
         }
 
-        this.store$.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
+        this.store.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
     }
 
     clearActivePhoto(): void {
-        this.store$.dispatch(PhotoStoreActions.unsetActivePhotoId());
+        this.store.dispatch(PhotoStoreActions.unsetActivePhotoId());
 
         if (!!this.layout) {
             this.layout.setCurrentScrollTop(this.lastScrollTop);
@@ -103,10 +81,10 @@ export class GridViewComponent implements OnInit, OnDestroy {
     }
 
     onSwipeLeft(): void {
-        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
+        this.store.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onSwipeRight(): void {
-        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 }

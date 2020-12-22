@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject, combineLatest, Subscription, of, concat } from 'rxjs';
 import { map, tap, delay, filter } from 'rxjs/operators';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as numeral from 'numeral';
 
 import { PhotoCategory } from 'src/app/models/photo-category.model';
@@ -29,7 +29,7 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store
+        private store: Store
     ) {
         this.form = this.formBuilder.group({
             aggregateBy: ['count']
@@ -37,15 +37,8 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const years$ = this.store$
-            .pipe(
-                select(PhotoCategoryStoreSelectors.selectAllYears)
-            );
-
-        const categories$ = this.store$
-            .pipe(
-                select(PhotoCategoryStoreSelectors.selectAllCategories)
-            );
+        const years$ = this.store.select(PhotoCategoryStoreSelectors.selectAllYears);
+        const categories$ = this.store.select(PhotoCategoryStoreSelectors.selectAllCategories);
 
         const aggregateBy$ = concat(
                 of('count'),

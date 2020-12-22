@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 
@@ -20,25 +20,25 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.rating$ = this.store$
+        this.rating$ = this.store
+            .select(VideoStoreSelectors.selectActiveVideoRating)
             .pipe(
-                select(VideoStoreSelectors.selectActiveVideoRating),
                 filter(rating => !!rating)
             );
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(VideoStoreSelectors.selectActiveVideo)
             .pipe(
-                select(VideoStoreSelectors.selectActiveVideo),
                 filter(video => !!video),
                 map(video => video as Video),
                 tap(video => this.activeId = video.id),
-                tap(video => this.store$.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
+                tap(video => this.store.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
             ).subscribe()
         );
     }
@@ -49,7 +49,7 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
 
     onRate(userRating: number): void {
         if (this.activeId !== -1) {
-            this.store$.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.activeId, userRating }));
+            this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.activeId, userRating }));
         }
     }
 }

@@ -6,7 +6,7 @@ import * as VideoActions from './actions';
 
 export const reducer = createReducer(
     initialState,
-    on(VideoActions.clearRequest, state =>
+    on(VideoActions.clearRequest, (state): State =>
         videoAdapter.removeAll({
             ...state,
             firstVideo: null,
@@ -14,65 +14,65 @@ export const reducer = createReducer(
             activeVideo: null
         })
     ),
-    on(VideoActions.loadCommentsRequest, state => ({
+    on(VideoActions.loadCommentsRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.loadCommentsSuccess, (state, { comments }) => ({
+    on(VideoActions.loadCommentsSuccess, (state, { comments }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activeVideoComments: comments
     })),
-    on(VideoActions.loadCommentsFailure, (state, { error }) => ({
+    on(VideoActions.loadCommentsFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoActions.loadRatingRequest, state => ({
+    on(VideoActions.loadRatingRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.loadRatingSuccess, (state, { rating }) => ({
+    on(VideoActions.loadRatingSuccess, (state, { rating }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activeVideoRating: rating
     })),
-    on(VideoActions.loadRatingFailure, (state, { error }) => ({
+    on(VideoActions.loadRatingFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoActions.loadRequest, state => ({
+    on(VideoActions.loadRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.loadSuccess, (state, { videos }) =>
+    on(VideoActions.loadSuccess, (state, { videos }): State =>
         videoAdapter.setAll(videos, {
             ...state,
             isLoading: false,
             error: null
         })
     ),
-    on(VideoActions.loadFailure, (state, { error }) => ({
+    on(VideoActions.loadFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoActions.setActiveVideoId, (state, { id }) => ({
+    on(VideoActions.setActiveVideoId, (state, { id }): State => ({
         ...state,
         activeVideoId: id
     })),
-    on(VideoActions.rateVideoRequest, state => ({
+    on(VideoActions.rateVideoRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.rateVideoSuccess, (state, { rating }) => ({
+    on(VideoActions.rateVideoSuccess, (state, { rating }): State => ({
         ...state,
         isLoading: false,
         error: null,
@@ -81,48 +81,48 @@ export const reducer = createReducer(
             averageRating: Math.round(rating.averageRating)
         }
     })),
-    on(VideoActions.rateVideoFailure, (state, { error }) => ({
+    on(VideoActions.rateVideoFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoActions.addCommentRequest, state => ({
+    on(VideoActions.addCommentRequest, (state): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.addCommentSuccess, state => ({
+    on(VideoActions.addCommentSuccess, (state): State => ({
         ...state,
         isLoading: false,
         error: null
     })),
-    on(VideoActions.addCommentFailure, (state, { error }) => ({
+    on(VideoActions.addCommentFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoActions.loadGpsDetailRequest, (state, { videoId }) => ({
+    on(VideoActions.loadGpsDetailRequest, (state, { videoId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.loadGpsDetailSuccess, (state, { gpsDetail }) => ({
+    on(VideoActions.loadGpsDetailSuccess, (state, { gpsDetail }): State => ({
         ...state,
         isLoading: false,
         error: null,
         activeVideoGpsDetail: gpsDetail
     })),
-    on(VideoActions.loadGpsDetailFailure, (state, { error }) => ({
+    on(VideoActions.loadGpsDetailFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(VideoActions.setGpsCoordinateOverrideRequest, (state, { videoId }) => ({
+    on(VideoActions.setGpsCoordinateOverrideRequest, (state, { videoId }): State => ({
         ...state,
         isLoading: true,
         error: null
     })),
-    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { videoId, gpsDetail }) => {
+    on(VideoActions.setGpsCoordinateOverrideSuccess, (state, { videoId, gpsDetail }): State => {
         const video = state.entities[videoId] as Video;
         const updatedState = ({
             ...state,
@@ -143,7 +143,7 @@ export const reducer = createReducer(
             return updatedState;
         }
     }),
-    on(VideoActions.setGpsCoordinateOverrideFailure, (state, { error }) => ({
+    on(VideoActions.setGpsCoordinateOverrideFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription, BehaviorSubject, Observable, combineLatest, concat, of } from 'rxjs';
 import { tap, map, delay } from 'rxjs/operators';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as numeral from 'numeral';
 
 import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
@@ -31,7 +31,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store$: Store
+        private store: Store
     ) {
         this.form = this.formBuilder.group({
             aggregateBy: ['count']
@@ -39,15 +39,8 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const years$ = this.store$
-            .pipe(
-                select(RootStoreSelectors.selectAllYears)
-            );
-
-        const categories$ = this.store$
-            .pipe(
-                select(RootStoreSelectors.selectAllCategories)
-            );
+        const years$ = this.store.select(RootStoreSelectors.selectAllYears);
+        const categories$ = this.store.select(RootStoreSelectors.selectAllCategories);
 
         const aggregateBy$ = concat(
                 of('count'),

@@ -14,7 +14,7 @@ export class SearchFormComponent {
     form: FormGroup;
 
     constructor(
-        private store$: Store,
+        private store: Store,
         private formBuilder: FormBuilder
     ) {
         this.form = this.formBuilder.group({
@@ -29,7 +29,7 @@ export class SearchFormComponent {
             const searchTerm = control.value;
 
             if (!!searchTerm) {
-                this.store$.dispatch(queryRequest({ query: searchTerm, start: 0 }));
+                this.store.dispatch(queryRequest({ query: searchTerm, start: 0 }));
             }
         }
     }

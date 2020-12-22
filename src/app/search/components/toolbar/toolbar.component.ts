@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
@@ -25,35 +25,28 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     ngOnInit(): void {
-        this.isListView$ = this.store$
+        this.isListView$ = this.store
+            .select(SettingsStoreSelectors.selectSearchListType)
             .pipe(
-                select(SettingsStoreSelectors.selectSearchListType),
                 map(type => type.name === CategoryListType.list.name)
             );
 
-        this.isGridView$ = this.store$
+        this.isGridView$ = this.store
+            .select(SettingsStoreSelectors.selectSearchListType)
             .pipe(
-                select(SettingsStoreSelectors.selectSearchListType),
                 map(type => type.name === CategoryListType.grid.name)
             );
 
-        this.showCategoryTitles$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSearchShowCategoryTitles)
-            );
+        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.selectSearchShowCategoryTitles);
+        this.showCategoryYears$ = this.store.select(SettingsStoreSelectors.selectSearchShowCategoryYears);
 
-        this.showCategoryYears$ = this.store$
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.selectSettings)
             .pipe(
-                select(SettingsStoreSelectors.selectSearchShowCategoryYears)
-            );
-
-        this.destroySub.add(this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
@@ -67,23 +60,23 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const type = CategoryListType.nextType(this.settings.searchListType.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateSearchListTypeRequest({ newType: type }));
+            this.store.dispatch(SettingsStoreActions.updateSearchListTypeRequest({ newType: type }));
         }
     }
 
     onToggleYear(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleSearchCategoryYearsRequest());
+        this.store.dispatch(SettingsStoreActions.toggleSearchCategoryYearsRequest());
     }
 
     onToggleTitle(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleSearchCategoryTitlesRequest());
+        this.store.dispatch(SettingsStoreActions.toggleSearchCategoryTitlesRequest());
     }
 
     onToggleListThumbnailSize(): void {
         if (this.settings) {
             const size = ThumbnailSize.nextSize(this.settings.searchListViewThumbnailSize.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateSearchListViewThumbnailSizeRequest({ newSize: size }));
+            this.store.dispatch(SettingsStoreActions.updateSearchListViewThumbnailSizeRequest({ newSize: size }));
         }
     }
 
@@ -91,7 +84,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (this.settings && !this.settings.searchShowCategoryTitles && !this.settings.searchShowCategoryYears) {
             const size = ThumbnailSize.nextSize(this.settings.searchThumbnailSize.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateSearchThumbnailSizeRequest({ newSize: size }));
+            this.store.dispatch(SettingsStoreActions.updateSearchThumbnailSizeRequest({ newSize: size }));
         }
     }
 
@@ -99,7 +92,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const newMargin = CategoryMargin.nextSize(this.settings.searchCategoryMargin.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateSearchCategoryMarginRequest({ newMargin }));
+            this.store.dispatch(SettingsStoreActions.updateSearchCategoryMarginRequest({ newMargin }));
         }
     }
 }

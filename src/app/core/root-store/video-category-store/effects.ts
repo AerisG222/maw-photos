@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/operators';
 
@@ -16,9 +16,7 @@ export class VideoCategoryStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoCategoryActions.loadRequest),
-            withLatestFrom(this.store$.pipe(
-                select(videoCategorySelectors.selectAllCategories)
-            )),
+            withLatestFrom(this.store.select(videoCategorySelectors.selectAllCategories)),
             exhaustMap(([action, categories]) => {
                 if (categories.length !== 0) {
                     return of(VideoCategoryActions.loadRequestedSatisfiedByCache());
@@ -49,7 +47,7 @@ export class VideoCategoryStoreEffects {
     constructor(
         @Inject(videoApiServiceToken) private api: VideoApiService,
         private actions$: Actions,
-        private store$: Store
+        private store: Store
     ) {
 
     }

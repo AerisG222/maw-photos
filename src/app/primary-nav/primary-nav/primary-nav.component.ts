@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { delay } from 'rxjs/operators';
 
 import { LayoutStoreSelectors } from 'src/app/core/root-store';
@@ -15,15 +15,15 @@ export class PrimaryNavComponent implements OnInit {
     hideNav$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.hideNav$ = this.store$
+        this.hideNav$ = this.store
+            .select(LayoutStoreSelectors.selectLayoutIsFullscreen)
             .pipe(
-                select(LayoutStoreSelectors.selectLayoutIsFullscreen),
                 delay(0)
             );
     }

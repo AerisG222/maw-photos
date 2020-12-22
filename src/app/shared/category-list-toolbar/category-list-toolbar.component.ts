@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
@@ -24,31 +24,28 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
     private destroySub = new Subscription();
 
-    constructor(private store$: Store) {
+    constructor(private store: Store) {
 
     }
 
     ngOnInit(): void {
-        this.isListView$ = this.store$
+        this.isListView$ = this.store
+            .select(SettingsStoreSelectors.selectCategoryListListType)
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
                 map(type => type.name === CategoryListType.list.name)
             );
 
-        this.isGridView$ = this.store$
+        this.isGridView$ = this.store
+            .select(SettingsStoreSelectors.selectCategoryListListType)
             .pipe(
-                select(SettingsStoreSelectors.selectCategoryListListType),
                 map(type => type.name === CategoryListType.grid.name)
             );
 
-        this.showCategoryTitles$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles)
-            );
+        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles);
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.selectSettings)
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
@@ -62,19 +59,19 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const type = CategoryListType.nextType(this.settings.categoryListListType.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListListTypeRequest({ newType: type }));
+            this.store.dispatch(SettingsStoreActions.updateCategoryListListTypeRequest({ newType: type }));
         }
     }
 
     onToggleTitle(): void {
-        this.store$.dispatch(SettingsStoreActions.toggleCategoryListCategoryTitlesRequest());
+        this.store.dispatch(SettingsStoreActions.toggleCategoryListCategoryTitlesRequest());
     }
 
     onToggleListThumbnailSize(): void {
         if (this.settings) {
             const size = ThumbnailSize.nextSize(this.settings.categoryListListViewThumbnailSize.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListListViewThumbnailSizeRequest({ newSize: size }));
+            this.store.dispatch(SettingsStoreActions.updateCategoryListListViewThumbnailSizeRequest({ newSize: size }));
         }
     }
 
@@ -82,7 +79,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings && !this.settings.categoryListShowCategoryTitles) {
             const size = ThumbnailSize.nextSize(this.settings.categoryListThumbnailSize.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListThumbnailSizeRequest({ newSize: size }));
+            this.store.dispatch(SettingsStoreActions.updateCategoryListThumbnailSizeRequest({ newSize: size }));
         }
     }
 
@@ -90,7 +87,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const newFilter = CategoryFilter.nextFilter(this.settings.categoryListCategoryFilter.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter }));
+            this.store.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter }));
         }
     }
 
@@ -98,7 +95,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
         if (this.settings) {
             const newMargin = CategoryMargin.nextSize(this.settings.categoryListCategoryMargin.name);
 
-            this.store$.dispatch(SettingsStoreActions.updateCategoryListCategoryMarginRequest({ newMargin }));
+            this.store.dispatch(SettingsStoreActions.updateCategoryListCategoryMarginRequest({ newMargin }));
         }
     }
 }

@@ -1,23 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { initialState, searchAdapter } from './state';
+import { initialState, searchAdapter, State } from './state';
 import * as SearchActions from './actions';
 
 export const reducer = createReducer(
     initialState,
-    on(SearchActions.clearRequest, state => (
+    on(SearchActions.clearRequest, (state): State => (
         searchAdapter.removeAll({
             ...state,
             query: null,
             currentResult: null
         })
     )),
-    on(SearchActions.queryRequest, (state, { query, start }) => ({
+    on(SearchActions.queryRequest, (state, { query, start }): State => ({
         ...state,
         isLoading: true,
         error: null,
     })),
-    on(SearchActions.querySuccess, (state, { query, result }) =>
+    on(SearchActions.querySuccess, (state, { query, result }): State =>
     searchAdapter.setAll(result.results, {
             ...state,
             isLoading: false,
@@ -26,17 +26,17 @@ export const reducer = createReducer(
             query
         })
     ),
-    on(SearchActions.queryFailure, (state, { error }) => ({
+    on(SearchActions.queryFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error
     })),
-    on(SearchActions.queryMoreRequest, (state, { query, start }) => ({
+    on(SearchActions.queryMoreRequest, (state, { query, start }): State => ({
         ...state,
         isLoading: true,
         error: null,
     })),
-    on(SearchActions.queryMoreSuccess, (state, { query, result }) =>
+    on(SearchActions.queryMoreSuccess, (state, { query, result }): State =>
         searchAdapter.addMany(result.results, {
                 ...state,
                 isLoading: false,
@@ -45,7 +45,7 @@ export const reducer = createReducer(
                 query
             })
     ),
-    on(SearchActions.queryMoreFailure, (state, { error }) => ({
+    on(SearchActions.queryMoreFailure, (state, { error }): State => ({
         ...state,
         isLoading: false,
         error

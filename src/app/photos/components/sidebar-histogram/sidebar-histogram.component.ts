@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap, filter, map } from 'rxjs/operators';
 
@@ -29,7 +29,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store,
+        private store: Store,
         private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc: Document
     ) {
@@ -43,9 +43,9 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
                 tap(photo => {

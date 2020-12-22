@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { GpsService } from 'src/app/core/services/gps.service';
 import { PhotoStoreSelectors } from 'src/app/photos/store';
@@ -21,7 +20,7 @@ export class BulkEditGpsEditorComponent implements OnInit {
     hasPendingEdits$: Observable<boolean> | null = null;
 
     constructor(
-        private store$: Store,
+        private store: Store,
         private formBuilder: FormBuilder,
         private gps: GpsService
     ) {
@@ -32,11 +31,7 @@ export class BulkEditGpsEditorComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.hasPendingEdits$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectPendingActionCount),
-                map(c => c > 0)
-            );
+        this.hasPendingEdits$ = this.store.select(PhotoStoreSelectors.selectHasPendingActions);
     }
 
     onPaste(evt: ClipboardEvent): void {

@@ -9,6 +9,7 @@ import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
 import { ExifContainer } from 'src/app/models/exif-container';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
+import { RouterStoreSelectors } from 'src/app/core/root-store';
 
 const photoHasGpsData = (photo: Photo) => photo?.latitude !== null;
 
@@ -86,6 +87,11 @@ export const selectIsBulkEditView = createSelector(
 export const selectIsGridView = createSelector(
     photoState,
     (state: State): boolean => state.isGridView
+);
+
+export const selectHasPendingActions = createSelector(
+    selectPendingActionCount,
+    (count: number): boolean => count > 0
 );
 
 export const selectActivePhotoIndex = createSelector(
@@ -262,4 +268,10 @@ export const selectPhotosWithGpsCoordinates = createSelector(
 export const selectHasPhotosWithGpsCoordinates = createSelector(
     selectPhotosWithGpsCoordinates,
     (photos: Photo[] | null): boolean => !!photos && photos.length > 0
+);
+
+export const selectEnableMapView = createSelector(
+    selectHasPhotosWithGpsCoordinates,
+    RouterStoreSelectors.selectIsRandomView,
+    (hasGps, isRandom) => hasGps && !isRandom
 );

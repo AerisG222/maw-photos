@@ -11,10 +11,10 @@ import { PhotoStoreActions } from 'src/app/photos/store';
 })
 export class ToolbarFlipVerticalButtonComponent {
     constructor(
-        private store$: Store
+        private store: Store
     ) { }
 
     onFlipVertical(): void {
-        this.store$.dispatch(PhotoStoreActions.flipVerticalRequest());
+        this.store.dispatch(PhotoStoreActions.flipVerticalRequest());
     }
 }

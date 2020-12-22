@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { tap, first, filter, map } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
@@ -26,36 +26,29 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        private store$: Store,
+        private store: Store,
         @Inject(WINDOW) private window: Window
     ) {
         this.enableShare = !!window?.navigator?.share;
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.selectSettings)
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 map(x => this.isPhotoSelected = !!x)
             ).subscribe()
         );
 
-        this.isFirst$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsActivePhotoFirst)
-            );
-
-        this.isLast$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsActivePhotoLast)
-            );
+        this.isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
+        this.isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
     }
 
     ngOnDestroy(): void {
@@ -63,30 +56,30 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
     }
 
     onExitGridView(): void {
-        this.store$.dispatch(PhotoStoreActions.exitGridViewRequest());
+        this.store.dispatch(PhotoStoreActions.exitGridViewRequest());
     }
 
     onMoveNext(): void {
-        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
+        this.store.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onMovePrevious(): void {
-        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onToggleSlideshow(): void {
-        this.store$.dispatch(PhotoStoreActions.toggleSlideshowRequest());
+        this.store.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store$.dispatch(SettingsStoreActions.togglePhotoGridShowCategoryBreadcrumbsRequest());
+        this.store.dispatch(SettingsStoreActions.togglePhotoGridShowCategoryBreadcrumbsRequest());
     }
 
     onToggleMargins(): void {
         if (this.settings) {
             const newMargin = CategoryMargin.nextSize(this.settings.photoGridMargin.name);
 
-            this.store$.dispatch(SettingsStoreActions.updatePhotoGridMarginRequest({ newMargin }));
+            this.store.dispatch(SettingsStoreActions.updatePhotoGridMarginRequest({ newMargin }));
         }
     }
 
@@ -94,14 +87,14 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
         const name = this.settings?.photoGridThumbnailSize.name ?? DEFAULT_SETTINGS.photoGridThumbnailSize.name;
         const size = ThumbnailSize.nextSize(name);
 
-        this.store$.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
+        this.store.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
     }
 
     onShare(): void {
-        this.store$
+        this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
                 first(),
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo),
                 tap(x => this.sharePhoto(x))

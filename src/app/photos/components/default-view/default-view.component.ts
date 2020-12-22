@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, tap, take, map } from 'rxjs/operators';
 
@@ -32,7 +32,7 @@ export class DefaultViewComponent implements OnInit {
     effects$: Observable<PhotoEffects> | null = null;
 
     constructor(
-        private store$: Store,
+        private store: Store,
         private slideshowControlSvc: SlideshowControlService,  // do not remove, needed so service is created before use
         private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer
@@ -41,41 +41,35 @@ export class DefaultViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.settings$ = this.store$
-            .pipe(
-                select(SettingsStoreSelectors.selectSettings)
-            );
+        this.settings$ = this.store.select(SettingsStoreSelectors.selectSettings);
 
-        this.category$ = this.store$
+        this.category$ = this.store
+            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
             .pipe(
-                select(PhotoCategoryStoreSelectors.selectActiveCategory),
                 filter(x => !!x),
                 map(x => x as Category)
             );
 
-        this.store$
+        this.store
+            .select(PhotoStoreSelectors.selectAllPhotos)
             .pipe(
-                select(PhotoStoreSelectors.selectAllPhotos),
                 filter(photos => !!photos && photos.length > 0),
                 tap(photos => this.setActivePhoto(photos[0])),
                 take(1)
             ).subscribe();
 
-        this.photos$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectAllPhotos)
-            );
+        this.photos$ = this.store.select(PhotoStoreSelectors.selectAllPhotos);
 
-        this.activePhoto$ = this.store$
+        this.activePhoto$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(x => !!x),
                 map(x => x as Photo)
             );
 
-        this.effects$ = this.store$
+        this.effects$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhotoEffects)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhotoEffects),
                 filter(x => !!x),
                 map(x => x as PhotoEffects)
             );
@@ -110,11 +104,11 @@ export class DefaultViewComponent implements OnInit {
     }
 
     onSwipeLeft(): void {
-        this.store$.dispatch(PhotoStoreActions.moveNextRequest());
+        this.store.dispatch(PhotoStoreActions.moveNextRequest());
     }
 
     onSwipeRight(): void {
-        this.store$.dispatch(PhotoStoreActions.movePreviousRequest());
+        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onSelectPhoto(photo: Photo): void {
@@ -122,6 +116,6 @@ export class DefaultViewComponent implements OnInit {
     }
 
     private setActivePhoto(photo: Photo): void {
-        this.store$.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
+        this.store.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
     }
 }

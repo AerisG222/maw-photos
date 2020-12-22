@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
 
@@ -20,42 +20,42 @@ export class SidebarMetadataEditorComponent implements OnInit {
     destroySub = new Subscription();
 
     constructor(
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.sourceGpsData$ = this.store$
+        this.sourceGpsData$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhotoGpsDetail)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhotoGpsDetail),
                 filter(x => !!x),
                 map(gpsDetail => gpsDetail?.source ?? null)
             );
 
-        this.overrideGpsData$ = this.store$
+        this.overrideGpsData$ = this.store
+            .select(PhotoStoreSelectors.selectActivePhotoGpsDetail)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhotoGpsDetail),
                 map(gpsDetail => gpsDetail?.override ?? null)
             );
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
-                select(PhotoStoreSelectors.selectActivePhoto),
                 filter(photo => !!photo),
                 map(photo => photo as Photo),
                 tap(photo => this.activeId = photo.id),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
-                tap(photo => this.store$.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
+                tap(photo => this.store.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
+                tap(photo => this.store.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
             ).subscribe()
         );
     }
 
     onSave(latLng: GpsCoordinate): void {
-        this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.activeId, latLng }));
+        this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.activeId, latLng }));
     }
 
     onSaveAndMoveNext(latLng: GpsCoordinate): void {
-        this.store$.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.activeId, latLng }));
+        this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.activeId, latLng }));
     }
 }

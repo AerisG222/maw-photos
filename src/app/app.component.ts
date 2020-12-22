@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, OnDestroy, AfterViewInit } from '@angular/co
 import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         private hotkeysService: HotkeysService,
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
-        private store$: Store,
+        private store: Store,
         private breakpointObserver: BreakpointObserver,
         @Inject(DOCUMENT) private doc: Document
     ) {
@@ -36,20 +36,19 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );
 
-        this.destroySub.add(this.store$
+        this.destroySub.add(this.store.select(SettingsStoreSelectors.selectAppTheme)
             .pipe(
-                select(SettingsStoreSelectors.selectSettings),
-                tap(settings => this.setTheme(settings.appTheme))
+                tap(theme => this.setTheme(theme))
             )
             .subscribe()
         );
 
-        this.store$.dispatch(SettingsStoreActions.loadRequest());
+        this.store.dispatch(SettingsStoreActions.loadRequest());
     }
 
     ngAfterViewInit(): void {
         if (this.breakpointObserver.isMatched('(max-width: 800px)')) {
-            this.store$.dispatch(SettingsStoreActions.updateMobileMarginsRequest());
+            this.store.dispatch(SettingsStoreActions.updateMobileMarginsRequest());
         }
     }
 

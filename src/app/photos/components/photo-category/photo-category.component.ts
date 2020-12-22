@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, tap, first } from 'rxjs/operators';
 
@@ -21,44 +21,29 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private store$: Store
+        private store: Store
     ) {
 
     }
 
     ngOnInit(): void {
-        this.isFullscreen$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsFullscreenView)
-            );
+        this.isFullscreen$ = this.store.select(PhotoStoreSelectors.selectIsFullscreenView);
+        this.isMapView$ = this.store.select(PhotoStoreSelectors.selectIsMapView);
+        this.isBulkEditView$ = this.store.select(PhotoStoreSelectors.selectIsBulkEditView);
+        this.isGridView$ = this.store.select(PhotoStoreSelectors.selectIsGridView);
 
-        this.isMapView$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsMapView)
-            );
-
-        this.isBulkEditView$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsBulkEditView)
-            );
-
-        this.isGridView$ = this.store$
-            .pipe(
-                select(PhotoStoreSelectors.selectIsGridView)
-            );
-
-        this.store$.dispatch(PhotoStoreActions.clearRequest());
+        this.store.dispatch(PhotoStoreActions.clearRequest());
 
         this.route.params
             .pipe(
                 first(),
                 map(p => Number(p.id)),
-                tap(id => this.store$.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: id }))),
-                tap(id => this.store$.dispatch(PhotoStoreActions.loadRequest({ categoryId: id })))
+                tap(id => this.store.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: id }))),
+                tap(id => this.store.dispatch(PhotoStoreActions.loadRequest({ categoryId: id })))
             ).subscribe();
     }
 
     ngOnDestroy(): void {
-        this.store$.dispatch(PhotoStoreActions.unsetActivePhotoId());
+        this.store.dispatch(PhotoStoreActions.unsetActivePhotoId());
     }
 }
