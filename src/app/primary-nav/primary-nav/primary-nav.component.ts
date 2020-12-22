@@ -22,7 +22,7 @@ export class PrimaryNavComponent implements OnInit {
 
     ngOnInit(): void {
         this.hideNav$ = this.store
-            .select(LayoutStoreSelectors.selectLayoutIsFullscreen)
+            .select(LayoutStoreSelectors.isFullscreen)
             .pipe(
                 delay(0)
             );

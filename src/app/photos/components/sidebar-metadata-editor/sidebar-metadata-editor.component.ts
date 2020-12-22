@@ -27,20 +27,20 @@ export class SidebarMetadataEditorComponent implements OnInit {
 
     ngOnInit(): void {
         this.sourceGpsData$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhotoGpsDetail)
+            .select(PhotoStoreSelectors.activePhotoGpsDetail)
             .pipe(
                 filter(x => !!x),
                 map(gpsDetail => gpsDetail?.source ?? null)
             );
 
         this.overrideGpsData$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhotoGpsDetail)
+            .select(PhotoStoreSelectors.activePhotoGpsDetail)
             .pipe(
                 map(gpsDetail => gpsDetail?.override ?? null)
             );
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(photo => !!photo),
                 map(photo => photo as Photo),

@@ -16,12 +16,12 @@ export interface State extends EntityState<MultimediaCategory> {
     error: string | null;
     isLoading: boolean;
     query: string | null;
-    currentResult: SearchResult<MultimediaCategory> | null;
+    activeResult: SearchResult<MultimediaCategory> | null;
 }
 
 export const initialState: State = searchAdapter.getInitialState({
     isLoading: false,
     error: null,
     query: null,
-    currentResult: null
+    activeResult: null
 });

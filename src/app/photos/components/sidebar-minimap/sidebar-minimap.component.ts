@@ -25,7 +25,7 @@ export class SidebarMinimapComponent implements OnInit {
 
     ngOnInit(): void {
         const activePhoto$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(photo => !!photo)
             );
@@ -41,8 +41,8 @@ export class SidebarMinimapComponent implements OnInit {
                 })
             );
 
-        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapMapTypeId);
-        this.zoom$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelMinimapZoom);
+        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapTypeId);
+        this.zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     }
 
     onMapTypeChange(mapTypeId: string): void {

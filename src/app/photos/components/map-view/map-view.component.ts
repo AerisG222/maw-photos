@@ -25,17 +25,17 @@ export class MapViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.settings$ = this.store.select(SettingsStoreSelectors.selectSettings);
+        this.settings$ = this.store.select(SettingsStoreSelectors.settings);
 
         this.activePhoto$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Photo)
             );
 
         this.mapImages$ = this.store
-            .select(PhotoStoreSelectors.selectPhotosWithGpsCoordinates)
+            .select(PhotoStoreSelectors.photosWithGpsCoordinates)
             .pipe(
                 filter(x => !!x),
                 map(photos => (photos as Photo[]).map(x => ({

@@ -26,14 +26,14 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.comments$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhotoComments)
+            .select(PhotoStoreSelectors.activePhotoComments)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Comment[])
             );
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(photo => !!photo),
                 map(photo => photo as Photo),

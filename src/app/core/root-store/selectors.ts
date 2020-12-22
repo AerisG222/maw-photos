@@ -8,32 +8,29 @@ import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { AuthStoreSelectors } from './auth-store';
 import { RouterStoreSelectors } from './router-store';
 
-export const selectError = createSelector(
-    SettingsStoreSelectors.selectSettingsError,
-    PhotoCategoryStoreSelectors.selectPhotoCategoryError,
-    VideoCategoryStoreSelectors.selectVideoCategoryError,
+export const error = createSelector(
+    SettingsStoreSelectors.error,
+    PhotoCategoryStoreSelectors.error,
+    VideoCategoryStoreSelectors.videoCategoryError,
     (settingsError: string | null, photoCategoryError: string | null, videoCategoryError: string | null) => {
         return settingsError || photoCategoryError || videoCategoryError;
     }
 );
 
-export const selectIsLoading = createSelector(
-    SettingsStoreSelectors.selectSettingsIsLoading,
-    PhotoCategoryStoreSelectors.selectPhotoCategoryIsLoading,
-    VideoCategoryStoreSelectors.selectVideoCategoryIsLoading,
-    (
-        settingsIsLoading: boolean,
-        photoCategoryIsLoading: boolean,
-        videoCategoryIsLoading: boolean
-    ) =>
-        settingsIsLoading ||
-        photoCategoryIsLoading ||
-        videoCategoryIsLoading
+export const isLoading = createSelector(
+    SettingsStoreSelectors.isLoading,
+    PhotoCategoryStoreSelectors.isLoading,
+    VideoCategoryStoreSelectors.videoCategoryIsLoading,
+    (settingsIsLoading: boolean, photoCategoryIsLoading: boolean, videoCategoryIsLoading: boolean) => {
+        return settingsIsLoading ||
+            photoCategoryIsLoading ||
+            videoCategoryIsLoading;
+    }
 );
 
-export const selectAllCategories = createSelector(
-    PhotoCategoryStoreSelectors.selectAllCategories,
-    VideoCategoryStoreSelectors.selectAllCategories,
+export const allCategories = createSelector(
+    PhotoCategoryStoreSelectors.allCategories,
+    VideoCategoryStoreSelectors.allCategories,
     (photoCategories: Category[], videoCategories: Category[]) => {
         if (photoCategories.length > 0 && videoCategories.length > 0) {
             return [...photoCategories, ...videoCategories].sort(categoriesDescending);
@@ -43,20 +40,20 @@ export const selectAllCategories = createSelector(
     }
 );
 
-export const selectAllYears = createSelector(
-    PhotoCategoryStoreSelectors.selectAllYears,
-    VideoCategoryStoreSelectors.selectAllYears,
+export const allYears = createSelector(
+    PhotoCategoryStoreSelectors.allYears,
+    VideoCategoryStoreSelectors.allYears,
     (photoYears: number[] | null, videoYears: number[] | null) => Array
         .from(new Set([...(photoYears ?? []), ...(videoYears ?? [])]))
         .sort(sortNumbersDescending)
 );
 
-export const selectAllFilteredCategoryYears = createSelector(
-    selectAllYears,
-    PhotoCategoryStoreSelectors.selectAllYears,
-    VideoCategoryStoreSelectors.selectAllYears,
-    SettingsStoreSelectors.selectCategoryListYearFilter,
-    SettingsStoreSelectors.selectCategoryListCategoryFilter,
+export const allFilteredCategoryYears = createSelector(
+    allYears,
+    PhotoCategoryStoreSelectors.allYears,
+    VideoCategoryStoreSelectors.allYears,
+    SettingsStoreSelectors.categoryListYearFilter,
+    SettingsStoreSelectors.categoryListCategoryFilter,
     (allYears, photoYears, videoYears, yearFilter, typeFilter) => {
         if (yearFilter === 'all') {
             switch (typeFilter) {
@@ -73,11 +70,11 @@ export const selectAllFilteredCategoryYears = createSelector(
     }
 );
 
-export const selectAllFilteredCategoriesForYear = createSelector(
-    PhotoCategoryStoreSelectors.selectCategoriesForYear,
-    VideoCategoryStoreSelectors.selectCategoriesForYear,
-    SettingsStoreSelectors.selectCategoryListCategoryFilter,
-    SettingsStoreSelectors.selectCategoryListMissingGpsFilter,
+export const allFilteredCategoriesForYear = createSelector(
+    PhotoCategoryStoreSelectors.categoriesForYear,
+    VideoCategoryStoreSelectors.categoriesForYear,
+    SettingsStoreSelectors.categoryListCategoryFilter,
+    SettingsStoreSelectors.categoryListMissingGpsFilter,
     // eslint-disable-next-line max-len
     (photoCategories: Category[], videoCategories: Category[], filter: CategoryFilter, missingGpsFilter: boolean, props: { year: number }) => {
         let categories: Category[] = [];
@@ -101,15 +98,15 @@ export const selectAllFilteredCategoriesForYear = createSelector(
         return categories;
 });
 
-export const selectInitialYearFilterSelection = createSelector(
-    selectAllYears,
-    SettingsStoreSelectors.selectCategoryListYearFilter,
+export const initialYearFilterSelection = createSelector(
+    allYears,
+    SettingsStoreSelectors.categoryListYearFilter,
     (years, filter) => !!filter ? filter : years[0]
 );
 
-export const selectEnableBulkEdit = createSelector(
-    AuthStoreSelectors.selectIsAdmin,
-    RouterStoreSelectors.selectIsRandomView,
+export const enableBulkEdit = createSelector(
+    AuthStoreSelectors.isAdmin,
+    RouterStoreSelectors.isRandomView,
     (isAdmin, isRandomView) => isAdmin && !isRandomView
 );
 

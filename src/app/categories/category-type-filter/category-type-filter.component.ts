@@ -25,7 +25,7 @@ export class CategoryTypeFilterComponent implements OnInit {
 
     ngOnInit(): void {
         this.store
-            .select(SettingsStoreSelectors.selectCategoryListCategoryFilter)
+            .select(SettingsStoreSelectors.categoryListCategoryFilter)
             .pipe(
                 tap(filter => this.categoryTypeControl.setValue(filter.value)),
                 first()

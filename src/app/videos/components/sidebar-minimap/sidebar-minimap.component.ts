@@ -25,7 +25,7 @@ export class SidebarMinimapComponent implements OnInit {
 
     ngOnInit(): void {
         const activeVideo$ = this.store
-            .select(VideoStoreSelectors.selectActiveVideo)
+            .select(VideoStoreSelectors.activeVideo)
             .pipe(
                 filter(video => !!video)
             );
@@ -41,8 +41,8 @@ export class SidebarMinimapComponent implements OnInit {
                 })
             );
 
-        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelMinimapMapTypeId);
-        this.zoom$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelMinimapZoom);
+        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapMapTypeId);
+        this.zoom$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapZoom);
     }
 
     onMapTypeChange(mapTypeId: string): void {

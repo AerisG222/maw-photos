@@ -111,7 +111,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(s => this.updateForm(s)),
                 tap(s => this.categoryListYearFilter = s.categoryListYearFilter),

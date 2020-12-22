@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );
 
-        this.destroySub.add(this.store.select(SettingsStoreSelectors.selectAppTheme)
+        this.destroySub.add(this.store.select(SettingsStoreSelectors.appTheme)
             .pipe(
                 tap(theme => this.setTheme(theme))
             )

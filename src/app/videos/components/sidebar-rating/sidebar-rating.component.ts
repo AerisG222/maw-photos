@@ -27,13 +27,13 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.rating$ = this.store
-            .select(VideoStoreSelectors.selectActiveVideoRating)
+            .select(VideoStoreSelectors.activeVideoRating)
             .pipe(
                 filter(rating => !!rating)
             );
 
         this.destroySub.add(this.store
-            .select(VideoStoreSelectors.selectActiveVideo)
+            .select(VideoStoreSelectors.activeVideo)
             .pipe(
                 filter(video => !!video),
                 map(video => video as Video),

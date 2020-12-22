@@ -27,19 +27,19 @@ export class SidebarMetadataEditorComponent implements OnInit {
 
     ngOnInit(): void {
         this.sourceGpsData$ = this.store
-            .select(VideoStoreSelectors.selectActiveVideoGpsDetail)
+            .select(VideoStoreSelectors.activeVideoGpsDetail)
             .pipe(
                 map(gps => gps?.source ?? null)
             );
 
         this.overrideGpsData$ = this.store
-            .select(VideoStoreSelectors.selectActiveVideoGpsDetail)
+            .select(VideoStoreSelectors.activeVideoGpsDetail)
             .pipe(
                 map(gps => gps?.override ?? null)
             );
 
         this.destroySub.add(this.store
-            .select(VideoStoreSelectors.selectActiveVideo)
+            .select(VideoStoreSelectors.activeVideo)
             .pipe(
                 filter(video => !!video),
                 map(video => video as Video),

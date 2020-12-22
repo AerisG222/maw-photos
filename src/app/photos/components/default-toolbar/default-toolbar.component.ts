@@ -51,26 +51,26 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
         this.category$ = this.store
-            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
+            .select(PhotoCategoryStoreSelectors.activeCategory)
             .pipe(
                 filter(c => !!c),
                 map(c => (c as Category).actual as PhotoCategory)
             );
 
-        this.enableBulkEdit$ = this.store.select(RootStoreSelectors.selectEnableBulkEdit);
-        this.enableMapView$ = this.store.select(PhotoStoreSelectors.selectEnableMapView);
-        this.isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
-        this.isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
+        this.enableBulkEdit$ = this.store.select(RootStoreSelectors.enableBulkEdit);
+        this.enableMapView$ = this.store.select(PhotoStoreSelectors.enableMapView);
+        this.isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+        this.isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Photo),
@@ -131,7 +131,7 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     onShare(): void {
         this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 first(),
                 filter(x => !!x),

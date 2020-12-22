@@ -44,7 +44,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(photo => !!photo),
                 map(photo => photo as Photo),

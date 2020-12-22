@@ -3,34 +3,34 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { State } from './state';
 import { AUTH_FEATURE_NAME } from './feature-name';
 
-export const authState = createFeatureSelector<State>(AUTH_FEATURE_NAME);
+const authState = createFeatureSelector<State>(AUTH_FEATURE_NAME);
 
-export const selectUserInfo = createSelector(
+export const userInfo = createSelector(
     authState,
     state => state.auth
 );
 
-export const selectFirstName = createSelector(
-    selectUserInfo,
+export const firstName = createSelector(
+    userInfo,
     u => u?.firstName
 );
 
-export const selectLastName = createSelector(
-    selectUserInfo,
+export const lastName = createSelector(
+    userInfo,
     u => u?.lastName
 );
 
-export const selectUsername = createSelector(
-    selectUserInfo,
+export const username = createSelector(
+    userInfo,
     u => u?.username
 );
 
-export const selectRoles = createSelector(
-    selectUserInfo,
+export const roles = createSelector(
+    userInfo,
     u => u?.roles
 );
 
-export const selectIsAdmin = createSelector(
-    selectRoles,
+export const isAdmin = createSelector(
+    roles,
     roles => !!(roles.find(r => r === 'admin'))
 );

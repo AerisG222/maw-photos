@@ -17,9 +17,9 @@ export class SlideshowControlService {
         private store: Store
     ) {
         combineLatest([
-            this.store.select(PhotoStoreSelectors.selectSlideshowIsPlaying),
-            this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast),
-            this.store.select(SettingsStoreSelectors.selectPhotoListSlideshowDisplayDurationSeconds)
+            this.store.select(PhotoStoreSelectors.slideshowIsPlaying),
+            this.store.select(PhotoStoreSelectors.isActivePhotoLast),
+            this.store.select(SettingsStoreSelectors.photoListSlideshowDisplayDurationSeconds)
         ]).pipe(
             tap(([isPlaying, isLast, displayDuration]) => {
                 if (isPlaying) {

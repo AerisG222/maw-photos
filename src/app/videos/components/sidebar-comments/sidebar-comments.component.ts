@@ -25,10 +25,10 @@ export class SidebarCommentsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.comments$ = this.store.select(VideoStoreSelectors.selectActiveVideoComments);
+        this.comments$ = this.store.select(VideoStoreSelectors.activeVideoComments);
 
         this.destroySub.add(this.store
-            .select(VideoStoreSelectors.selectActiveVideo)
+            .select(VideoStoreSelectors.activeVideo)
             .pipe(
                 filter(video => !!video),
                 map(video => video as Video),

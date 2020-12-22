@@ -29,7 +29,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(p => !!p),
                 map(p => p as Photo),
@@ -39,7 +39,7 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
         );
 
         this.currentTeaserUrl$ = this.store
-            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
+            .select(PhotoCategoryStoreSelectors.activeCategory)
             .pipe(
                 filter(c => !!c),
                 map(c => (c as Category).teaserImageSq.url)

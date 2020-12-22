@@ -37,8 +37,8 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const years$ = this.store.select(PhotoCategoryStoreSelectors.selectAllYears);
-        const categories$ = this.store.select(PhotoCategoryStoreSelectors.selectAllCategories);
+        const years$ = this.store.select(PhotoCategoryStoreSelectors.allYears);
+        const categories$ = this.store.select(PhotoCategoryStoreSelectors.allCategories);
 
         const aggregateBy$ = concat(
                 of('count'),

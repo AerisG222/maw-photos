@@ -9,26 +9,26 @@ export const videoCategoryState = createFeatureSelector<State>(VIDEO_CATEGORY_FE
 
 const { selectAll, selectEntities } = videoCategoryAdapter.getSelectors(videoCategoryState);
 
-export const selectAllCategories = selectAll;
+export const allCategories = selectAll;
 
-export const selectVideoCategoryError = createSelector(
+export const videoCategoryError = createSelector(
     videoCategoryState,
     (state: State): string | null => state.error
 );
 
-export const selectVideoCategoryIsLoading = createSelector(
+export const videoCategoryIsLoading = createSelector(
     videoCategoryState,
     (state: State): boolean => state.isLoading
 );
 
-export const selectActiveCategoryId = createSelector(
+export const activeCategoryId = createSelector(
     videoCategoryState,
     (state: State): number | null => state.activeCategoryId
 );
 
-export const selectActiveCategory = createSelector(
+export const activeCategory = createSelector(
     selectEntities,
-    selectActiveCategoryId,
+    activeCategoryId,
     (entities, id) => {
         if (!!id) {
             const cat = entities[id];
@@ -42,17 +42,17 @@ export const selectActiveCategory = createSelector(
     }
 );
 
-export const selectAllYears = createSelector(
+export const allYears = createSelector(
     selectAll,
     (categories: Category[]) => [...new Set(categories.map(x => x.year))].sort()
 );
 
-export const selectCategoriesForYear = createSelector(
+export const categoriesForYear = createSelector(
     selectAll,
     (categories: Category[], props: {year: number}) => categories.filter(cat => cat.year === props.year)
 );
 
-export const selectCategoryById = createSelector(
+export const categoryById = createSelector(
     selectEntities,
     (entities: Dictionary<Category>, props: {id: number}) => entities[props.id] ?? null
 );

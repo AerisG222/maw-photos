@@ -16,7 +16,7 @@ export class VideoCategoryStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoCategoryActions.loadRequest),
-            withLatestFrom(this.store.select(videoCategorySelectors.selectAllCategories)),
+            withLatestFrom(this.store.select(videoCategorySelectors.allCategories)),
             exhaustMap(([action, categories]) => {
                 if (categories.length !== 0) {
                     return of(VideoCategoryActions.loadRequestedSatisfiedByCache());

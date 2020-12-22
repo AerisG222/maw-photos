@@ -176,7 +176,7 @@ export class PhotoStoreEffects {
             debounceTime(200),
             concatMap(action =>
                 this.store
-                    .select(PhotoStoreSelectors.selectAllPhotos)
+                    .select(PhotoStoreSelectors.allPhotos)
                     .pipe(
                         filter(photos => !!photos && !!photos[0]),  // sometimes will get an undefined photos[0] but not sure why
                         map(photos => {
@@ -201,7 +201,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.rotateClockwiseRequest),
             concatMap(action => of(action).pipe(
-                withLatestFrom(this.store.select(PhotoStoreSelectors.selectActivePhotoEffects))
+                withLatestFrom(this.store.select(PhotoStoreSelectors.activePhotoEffects))
             )),
             map(([action, photoEffects]) => {
                 const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
@@ -217,7 +217,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.rotateCounterClockwiseRequest),
             concatMap(action => of(action).pipe(
-                withLatestFrom(this.store.select(PhotoStoreSelectors.selectActivePhotoEffects))
+                withLatestFrom(this.store.select(PhotoStoreSelectors.activePhotoEffects))
             )),
             map(([action, photoEffects]) => {
                 const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
@@ -242,7 +242,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.moveNextRequest),
             concatMap(action => of(action).pipe(
-                withLatestFrom(this.store.select(PhotoStoreSelectors.selectNextPhotoId))
+                withLatestFrom(this.store.select(PhotoStoreSelectors.nextPhotoId))
             )),
             map(([action, nextId]) => {
                 return PhotoActions.setActivePhotoId({ id: nextId });
@@ -254,7 +254,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.movePreviousRequest),
             concatMap(action => of(action).pipe(
-                withLatestFrom(this.store.select(PhotoStoreSelectors.selectPreviousPhotoId))
+                withLatestFrom(this.store.select(PhotoStoreSelectors.previousPhotoId))
             )),
             map(([action, prevId]) => {
                 return PhotoActions.setActivePhotoId({ id: prevId });

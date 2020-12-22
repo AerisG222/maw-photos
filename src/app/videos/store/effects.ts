@@ -132,7 +132,7 @@ export class VideoStoreEffects {
             debounceTime(200),
             concatMap(action =>
                 this.store
-                    .select(VideoStoreSelectors.selectAllVideos)
+                    .select(VideoStoreSelectors.allVideos)
                     .pipe(
                         filter(videos => !!videos && !!videos[0]),  // sometimes will get an undefined videos[0] but not sure why
                         map(videos => {

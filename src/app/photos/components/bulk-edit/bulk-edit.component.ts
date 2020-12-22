@@ -29,14 +29,14 @@ export class BulkEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.category$ = this.store
-            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
+            .select(PhotoCategoryStoreSelectors.activeCategory)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Category)
             );
 
         this.photos$ = combineLatest([
-                this.store.select(PhotoStoreSelectors.selectAllPhotos),
+                this.store.select(PhotoStoreSelectors.allPhotos),
                 this.showPhotosWithGpsData$
             ])
             .pipe(

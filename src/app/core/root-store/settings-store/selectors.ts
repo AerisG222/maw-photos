@@ -10,251 +10,251 @@ import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { CategoryListType } from 'src/app/models/category-list-type.model';
 
-export const settingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
+const settingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
-export const selectSettingsError = createSelector(
+export const error = createSelector(
     settingsState,
     (state: State): string | null => state.error
 );
 
-export const selectSettingsIsLoading = createSelector(
+export const isLoading = createSelector(
     settingsState,
     (state: State): boolean => state.isLoading
 );
 
-export const selectSettings = createSelector(
+export const settings = createSelector(
     settingsState,
     (state: State): Settings => state.settings
 );
 
-export const selectAppTheme = createSelector(
+export const appTheme = createSelector(
     settingsState,
     (state: State): Theme => state.settings.appTheme
 );
 
 // -- CATEGORY LIST --
-export const selectCategoryListCategoryFilter = createSelector(
+export const categoryListCategoryFilter = createSelector(
     settingsState,
     (state: State): CategoryFilter => state.settings.categoryListCategoryFilter
 );
 
-export const selectCategoryListCategoryMargin = createSelector(
+export const categoryListCategoryMargin = createSelector(
     settingsState,
     (state: State): CategoryMargin => state.settings.categoryListCategoryMargin
 );
 
-export const selectCategoryListMissingGpsFilter = createSelector(
+export const categoryListMissingGpsFilter = createSelector(
     settingsState,
     (state: State): boolean => state.settings.categoryListMissingGpsFilter
 );
 
-export const selectCategoryListShowCategoryTitles = createSelector(
+export const categoryListShowCategoryTitles = createSelector(
     settingsState,
     (state: State): boolean => state.settings.categoryListShowCategoryTitles
 );
 
-export const selectCategoryListThumbnailSize = createSelector(
+export const categoryListThumbnailSize = createSelector(
     settingsState,
     (state: State): ThumbnailSize => state.settings.categoryListThumbnailSize
 );
 
-export const selectCategoryListYearFilter = createSelector(
+export const categoryListYearFilter = createSelector(
     settingsState,
     (state: State): string | number => state.settings.categoryListYearFilter
 );
 
-export const selectCategoryListListType = createSelector(
+export const categoryListListType = createSelector(
     settingsState,
     (state: State): CategoryListType => state.settings.categoryListListType
 );
 
-export const selectCategoryListListViewThumbnailSize = createSelector(
+export const categoryListListViewThumbnailSize = createSelector(
     settingsState,
     (state: State): ThumbnailSize => state.settings.categoryListListViewThumbnailSize
 );
 
-export const selectCategoryListShouldShowListView = createSelector(
-    selectCategoryListListType,
+export const categoryListShouldShowListView = createSelector(
+    categoryListListType,
     (type: CategoryListType): boolean => type.name === CategoryListType.list.name
 );
 
-export const selectCategoryListShouldShowGridView = createSelector(
-    selectCategoryListListType,
+export const categoryListShouldShowGridView = createSelector(
+    categoryListListType,
     (type: CategoryListType): boolean => type.name === CategoryListType.grid.name
 );
 
 // -- PHOTO GRID --
-export const selectPhotoGridMargin = createSelector(
+export const photoGridMargin = createSelector(
     settingsState,
     (state: State): CategoryMargin => state.settings.photoGridMargin
 );
 
-export const selectPhotoGridShowCategoryBreadcrumbs = createSelector(
+export const photoGridShowCategoryBreadcrumbs = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoGridShowCategoryBreadcrumbs
 );
 
-export const selectPhotoGridThumbnailSize = createSelector(
+export const photoGridThumbnailSize = createSelector(
     settingsState,
     (state: State): ThumbnailSize => state.settings.photoGridThumbnailSize
 );
 
 // -- PHOTO INFO PANEL --
-export const selectPhotoInfoPanelShowRatings = createSelector(
+export const photoInfoPanelShowRatings = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowRatings
 );
 
-export const selectPhotoInfoPanelShowCategoryTeaserChooser = createSelector(
+export const photoInfoPanelShowCategoryTeaserChooser = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowCategoryTeaserChooser
 );
 
-export const selectPhotoInfoPanelShowComments = createSelector(
+export const photoInfoPanelShowComments = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowComments
 );
 
-export const selectPhotoInfoPanelShowExif = createSelector(
+export const photoInfoPanelShowExif = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowExif
 );
 
-export const selectPhotoInfoPanelShowEffects = createSelector(
+export const photoInfoPanelShowEffects = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowEffects
 );
 
-export const selectPhotoInfoPanelShowHistogram = createSelector(
+export const photoInfoPanelShowHistogram = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowHistogram
 );
 
-export const selectPhotoInfoPanelShowMetadataEditor = createSelector(
+export const photoInfoPanelShowMetadataEditor = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowMetadataEditor
 );
 
-export const selectPhotoInfoPanelShowMinimap = createSelector(
+export const photoInfoPanelShowMinimap = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelShowMinimap
 );
 
-export const selectPhotoInfoPanelExpandedState = createSelector(
+export const photoInfoPanelExpandedState = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoInfoPanelExpandedState
 );
 
-export const selectPhotoInfoPanelMinimapMapTypeId = createSelector(
+export const photoInfoPanelMinimapMapTypeId = createSelector(
     settingsState,
     (state: State): string => state.settings.photoInfoPanelMinimapMapTypeId
 );
 
-export const selectPhotoInfoPanelMinimapZoom = createSelector(
+export const photoInfoPanelMinimapZoom = createSelector(
     settingsState,
     (state: State): number => state.settings.photoInfoPanelMinimapZoom
 );
 
 // -- PHOTO LIST --
-export const selectPhotoListShowPhotoList = createSelector(
+export const photoListShowPhotoList = createSelector(
     settingsState,
     (state: State): boolean => state.settings.photoListShowPhotoList
 );
 
-export const selectPhotoListMapViewMapTypeId = createSelector(
+export const photoListMapViewMapTypeId = createSelector(
     settingsState,
     (state: State): string => state.settings.photoListMapViewMapTypeId
 );
 
-export const selectPhotoListMapViewZoom = createSelector(
+export const photoListMapViewZoom = createSelector(
     settingsState,
     (state: State): number => state.settings.photoListMapViewZoom
 );
 
-export const selectPhotoListSlideshowDisplayDurationSeconds = createSelector(
+export const photoListSlideshowDisplayDurationSeconds = createSelector(
     settingsState,
     (state: State): number => state.settings.photoListSlideshowDisplayDurationSeconds
 );
 
 // -- VIDEO LIST --
-export const selectVideoListShowVideoList = createSelector(
+export const videoListShowVideoList = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoListShowVideoList
 );
 
-export const selectVideoListVideoSize = createSelector(
+export const videoListVideoSize = createSelector(
     settingsState,
     (state: State): VideoSize => state.settings.videoListVideoSize
 );
 
 // -- VIDEO INFO PANEL --
-export const selectVideoInfoPanelShowRatings = createSelector(
+export const videoInfoPanelShowRatings = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoInfoPanelShowRatings
 );
 
-export const selectVideoInfoPanelShowCategoryTeaserChooser = createSelector(
+export const videoInfoPanelShowCategoryTeaserChooser = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoInfoPanelShowCategoryTeaserChooser
 );
 
-export const selectVideoInfoPanelShowComments = createSelector(
+export const videoInfoPanelShowComments = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoInfoPanelShowComments
 );
 
-export const selectVideoInfoPanelShowMetadataEditor = createSelector(
+export const videoInfoPanelShowMetadataEditor = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoInfoPanelShowMetadataEditor
 );
 
-export const selectVideoInfoPanelShowMinimap = createSelector(
+export const videoInfoPanelShowMinimap = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoInfoPanelShowMinimap
 );
 
-export const selectVideoInfoPanelExpandedState = createSelector(
+export const videoInfoPanelExpandedState = createSelector(
     settingsState,
     (state: State): boolean => state.settings.videoInfoPanelExpandedState
 );
 
-export const selectVideoInfoPanelMinimapMapTypeId = createSelector(
+export const videoInfoPanelMinimapMapTypeId = createSelector(
     settingsState,
     (state: State): string => state.settings.videoInfoPanelMinimapMapTypeId
 );
 
-export const selectVideoInfoPanelMinimapZoom = createSelector(
+export const videoInfoPanelMinimapZoom = createSelector(
     settingsState,
     (state: State): number => state.settings.videoInfoPanelMinimapZoom
 );
 
 // -- SEARCH VIEW --
-export const selectSearchCategoryMargin = createSelector(
+export const searchCategoryMargin = createSelector(
     settingsState,
     (state: State): CategoryMargin => state.settings.searchCategoryMargin
 );
 
-export const selectSearchShowCategoryTitles = createSelector(
+export const searchShowCategoryTitles = createSelector(
     settingsState,
     (state: State): boolean => state.settings.searchShowCategoryTitles
 );
 
-export const selectSearchShowCategoryYears = createSelector(
+export const searchShowCategoryYears = createSelector(
     settingsState,
     (state: State): boolean => state.settings.searchShowCategoryYears
 );
 
-export const selectSearchThumbnailSize = createSelector(
+export const searchThumbnailSize = createSelector(
     settingsState,
     (state: State): ThumbnailSize => state.settings.searchThumbnailSize
 );
 
-export const selectSearchListType = createSelector(
+export const searchListType = createSelector(
     settingsState,
     (state: State): CategoryListType => state.settings.searchListType
 );
 
-export const selectSearchListViewThumbnailSize = createSelector(
+export const searchListViewThumbnailSize = createSelector(
     settingsState,
     (state: State): ThumbnailSize => state.settings.searchListViewThumbnailSize
 );

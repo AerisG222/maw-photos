@@ -15,7 +15,7 @@ export const {
     selectUrl,            // select the current url
 } = fromRouter.getSelectors(routerState);
 
-export const selectIsRandomView = createSelector(
+export const isRandomView = createSelector(
     selectUrl,
     url => url.indexOf('random') >= 0
 );

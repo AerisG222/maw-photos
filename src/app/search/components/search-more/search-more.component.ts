@@ -25,14 +25,14 @@ export class SearchMoreComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(SearchStoreSelectors.selectSearchQuery)
+            .select(SearchStoreSelectors.query)
             .pipe(
                 tap(q => this.query = q)
             ).subscribe()
         );
 
         this.destroySub.add(this.store
-            .select(SearchStoreSelectors.selectSearchCurrentResult)
+            .select(SearchStoreSelectors.activeResult)
             .pipe(
                 tap(result => this.nextIndex = !!result ? result.startIndex + result.results.length : -1)
             ).subscribe()

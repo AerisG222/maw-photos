@@ -34,21 +34,21 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 map(x => this.isPhotoSelected = !!x)
             ).subscribe()
         );
 
-        this.isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
-        this.isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
+        this.isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+        this.isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     }
 
     ngOnDestroy(): void {
@@ -92,7 +92,7 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
 
     onShare(): void {
         this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 first(),
                 filter(x => !!x),

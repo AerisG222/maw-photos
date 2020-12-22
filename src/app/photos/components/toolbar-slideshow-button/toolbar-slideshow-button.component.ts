@@ -20,7 +20,7 @@ export class ToolbarSlideshowButtonComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.slideshowPlaying$ = this.store.select(PhotoStoreSelectors.selectSlideshowIsPlaying);
+        this.slideshowPlaying$ = this.store.select(PhotoStoreSelectors.slideshowIsPlaying);
     }
 
     onToggleSlideshow(): void {

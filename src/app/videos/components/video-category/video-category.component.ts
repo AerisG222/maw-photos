@@ -36,27 +36,27 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.settings$ = this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(settings => this.settings = settings)
             );
 
         this.category$ = this.store
-            .select(VideoCategoryStoreSelectors.selectActiveCategory)
+            .select(VideoCategoryStoreSelectors.activeCategory)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Category)
             );
 
         this.videos$ = this.store
-            .select(VideoStoreSelectors.selectAllVideos)
+            .select(VideoStoreSelectors.allVideos)
             .pipe(
                 filter(x => !!x && x.length > 0),
                 tap(videos => this.setActiveVideo(videos[0]))
             );
 
         this.activeVideo$ = this.store
-            .select(VideoStoreSelectors.selectActiveVideo)
+            .select(VideoStoreSelectors.activeVideo)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Video),

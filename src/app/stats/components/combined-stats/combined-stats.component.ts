@@ -39,8 +39,8 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const years$ = this.store.select(RootStoreSelectors.selectAllYears);
-        const categories$ = this.store.select(RootStoreSelectors.selectAllCategories);
+        const years$ = this.store.select(RootStoreSelectors.allYears);
+        const categories$ = this.store.select(RootStoreSelectors.allCategories);
 
         const aggregateBy$ = concat(
                 of('count'),

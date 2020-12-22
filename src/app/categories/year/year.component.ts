@@ -32,11 +32,11 @@ export class YearComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.listThumbnailSize$ = this.store.select(SettingsStoreSelectors.selectCategoryListListViewThumbnailSize);
-        this.gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.selectCategoryListThumbnailSize);
-        this.gridShowTitles$ = this.store.select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles);
-        this.showListView$ = this.store.select(SettingsStoreSelectors.selectCategoryListShouldShowListView);
-        this.showGridView$ = this.store.select(SettingsStoreSelectors.selectCategoryListShouldShowGridView);
-        this.categories$ = this.store.select(RootStoreSelectors.selectAllFilteredCategoriesForYear, { year: this.year as number});
+        this.listThumbnailSize$ = this.store.select(SettingsStoreSelectors.categoryListListViewThumbnailSize);
+        this.gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.categoryListThumbnailSize);
+        this.gridShowTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);
+        this.showListView$ = this.store.select(SettingsStoreSelectors.categoryListShouldShowListView);
+        this.showGridView$ = this.store.select(SettingsStoreSelectors.categoryListShouldShowGridView);
+        this.categories$ = this.store.select(RootStoreSelectors.allFilteredCategoriesForYear, { year: this.year as number});
     }
 }

@@ -19,7 +19,7 @@ export class PhotoCategoriesResolverService implements Resolve<Category[]> {
         this.store.dispatch(PhotoCategoryStoreActions.loadRequest());
 
         return this.store
-            .select(PhotoCategoryStoreSelectors.selectAllCategories)
+            .select(PhotoCategoryStoreSelectors.allCategories)
             .pipe(
                 filter(cats => !!cats && cats.length > 0),
                 take(1),

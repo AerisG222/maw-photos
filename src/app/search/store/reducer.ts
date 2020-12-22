@@ -9,7 +9,7 @@ export const reducer = createReducer(
         searchAdapter.removeAll({
             ...state,
             query: null,
-            currentResult: null
+            activeResult: null
         })
     )),
     on(SearchActions.queryRequest, (state, { query, start }): State => ({
@@ -22,7 +22,7 @@ export const reducer = createReducer(
             ...state,
             isLoading: false,
             error: null,
-            currentResult: result,
+            activeResult: result,
             query
         })
     ),
@@ -41,7 +41,7 @@ export const reducer = createReducer(
                 ...state,
                 isLoading: false,
                 error: null,
-                currentResult: result,
+                activeResult: result,
                 query
             })
     ),

@@ -17,92 +17,92 @@ const photoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
 const { selectAll, selectEntities, selectIds } = photoAdapter.getSelectors(photoState);
 
-export const selectAllPhotos = selectAll;
+export const allPhotos = selectAll;
 
-export const selectPhotoError = createSelector(
+export const error = createSelector(
     photoState,
     (state: State): string | null => state.error
 );
 
-export const selectIsLoading = createSelector(
+export const isLoading = createSelector(
     photoState,
     (state: State): boolean => state.isLoading
 );
 
-export const selectPendingActionCount = createSelector(
+export const pendingActionCount = createSelector(
     photoState,
     (state: State): number => state.pendingActionCount
 );
 
-export const selectActivePhotoId = createSelector(
+export const activePhotoId = createSelector(
     photoState,
     (state: State): number | null => state.activePhotoId
 );
 
-export const selectActivePhotoRating = createSelector(
+export const activePhotoRating = createSelector(
     photoState,
     (state: State): Rating | null => state.activePhotoRating
 );
 
-export const selectActivePhotoComments = createSelector(
+export const activePhotoComments = createSelector(
     photoState,
     (state: State): Comment[] | null => state.activePhotoComments
 );
 
-export const selectActivePhotoExifData = createSelector(
+export const activePhotoExifData = createSelector(
     photoState,
     (state: State): ExifContainer | null => state.activePhotoExifData
 );
 
-export const selectActivePhotoEffects = createSelector(
+export const activePhotoEffects = createSelector(
     photoState,
     (state: State): PhotoEffects | null => state.activePhotoEffects
 );
 
-export const selectActivePhotoGpsDetail = createSelector(
+export const activePhotoGpsDetail = createSelector(
     photoState,
     (state: State): GpsDetail | null => state.activePhotoGpsDetail
 );
 
-export const selectSlideshowIsPlaying = createSelector(
+export const slideshowIsPlaying = createSelector(
     photoState,
     (state: State): boolean => state.slideshowIsPlaying
 );
 
-export const selectIsFullscreenView = createSelector(
+export const isFullscreenView = createSelector(
     photoState,
     (state: State): boolean => state.isFullscreenView
 );
 
-export const selectIsMapView = createSelector(
+export const isMapView = createSelector(
     photoState,
     (state: State): boolean => state.isMapView
 );
 
-export const selectIsBulkEditView = createSelector(
+export const isBulkEditView = createSelector(
     photoState,
     (state: State): boolean => state.isBulkEditView
 );
 
-export const selectIsGridView = createSelector(
+export const isGridView = createSelector(
     photoState,
     (state: State): boolean => state.isGridView
 );
 
-export const selectHasPendingActions = createSelector(
-    selectPendingActionCount,
+export const hasPendingActions = createSelector(
+    pendingActionCount,
     (count: number): boolean => count > 0
 );
 
-export const selectActivePhotoIndex = createSelector(
+export const activePhotoIndex = createSelector(
     selectIds,
-    selectActivePhotoId,
+    activePhotoId,
     (ids: string[] | number[], id: number | null): number | null => !!id ? (ids as number[]).indexOf(id) : null
 );
 
-export const selectActivePhoto = createSelector(
+export const activePhoto = createSelector(
     selectEntities,
-    selectActivePhotoId,
+    activePhotoId,
     (entities: Dictionary<Photo>, id: number | null) => {
         if (!!id) {
             const photo = entities[id];
@@ -116,9 +116,9 @@ export const selectActivePhoto = createSelector(
     }
 );
 
-export const selectFirstPhoto = createSelector(
+export const firstPhoto = createSelector(
     selectAll,
-    selectIsMapView,
+    isMapView,
     (photos: Photo[], isMapView: boolean) => {
         if (isMapView) {
             return photos.find(photoHasGpsData) ?? null;
@@ -128,9 +128,9 @@ export const selectFirstPhoto = createSelector(
     }
 );
 
-export const selectLastPhoto = createSelector(
+export const lastPhoto = createSelector(
     selectAll,
-    selectIsMapView,
+    isMapView,
     (photos: Photo[], isMapView: boolean) => {
         if (isMapView) {
             for (let i = photos.length; i >= 0; i--) {
@@ -148,23 +148,23 @@ export const selectLastPhoto = createSelector(
     }
 );
 
-export const selectIsActivePhotoFirst = createSelector(
-    selectFirstPhoto,
-    selectActivePhotoId,
+export const isActivePhotoFirst = createSelector(
+    firstPhoto,
+    activePhotoId,
     (first, id) => first?.id === id
 );
 
-export const selectIsActivePhotoLast = createSelector(
-    selectLastPhoto,
-    selectActivePhotoId,
+export const isActivePhotoLast = createSelector(
+    lastPhoto,
+    activePhotoId,
     (last, id) => last?.id === id
 );
 
-export const selectNextPhotoIndex = createSelector(
+export const nextPhotoIndex = createSelector(
     selectAll,
-    selectActivePhotoIndex,
-    selectIsActivePhotoLast,
-    selectIsMapView,
+    activePhotoIndex,
+    isActivePhotoLast,
+    isMapView,
     (photos, activePhotoIndex, isActivePhotoLast, isMapView) => {
         if (isActivePhotoLast) {
             return activePhotoIndex as number;
@@ -190,17 +190,17 @@ export const selectNextPhotoIndex = createSelector(
     }
 );
 
-export const selectNextPhotoId = createSelector(
+export const nextPhotoId = createSelector(
     selectIds,
-    selectNextPhotoIndex,
+    nextPhotoIndex,
     (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
 );
 
-export const selectPreviousPhotoIndex = createSelector(
+export const previousPhotoIndex = createSelector(
     selectAll,
-    selectActivePhotoIndex,
-    selectIsActivePhotoFirst,
-    selectIsMapView,
+    activePhotoIndex,
+    isActivePhotoFirst,
+    isMapView,
     (photos, activePhotoIndex, isActivePhotoFirst, isMapView) => {
         if (isActivePhotoFirst) {
             return activePhotoIndex as number;
@@ -226,14 +226,14 @@ export const selectPreviousPhotoIndex = createSelector(
     }
 );
 
-export const selectPreviousPhotoId = createSelector(
+export const previousPhotoId = createSelector(
     selectIds,
-    selectPreviousPhotoIndex,
+    previousPhotoIndex,
     (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
 );
 
-export const selectPhotosForCategory = createSelector(
-    selectAllPhotos,
+export const photosForCategory = createSelector(
+    allPhotos,
     (photos: Photo[], props: { id: number }) => {
         if (photos) {
             return photos.filter(x => x.categoryId === props.id);
@@ -243,7 +243,7 @@ export const selectPhotosForCategory = createSelector(
     }
 );
 
-export const selectPhotoById = createSelector(
+export const photoById = createSelector(
     selectEntities,
     (photos: Dictionary<Photo>, props: { id: number }) => {
         if (!!photos && !!props.id) {
@@ -254,8 +254,8 @@ export const selectPhotoById = createSelector(
     }
 );
 
-export const selectPhotosWithGpsCoordinates = createSelector(
-    selectAllPhotos,
+export const photosWithGpsCoordinates = createSelector(
+    allPhotos,
     (photos: Photo[]) => {
         if (!!photos) {
             return photos.filter(x => x.latitude !== null);
@@ -265,13 +265,13 @@ export const selectPhotosWithGpsCoordinates = createSelector(
     }
 );
 
-export const selectHasPhotosWithGpsCoordinates = createSelector(
-    selectPhotosWithGpsCoordinates,
+export const hasPhotosWithGpsCoordinates = createSelector(
+    photosWithGpsCoordinates,
     (photos: Photo[] | null): boolean => !!photos && photos.length > 0
 );
 
-export const selectEnableMapView = createSelector(
-    selectHasPhotosWithGpsCoordinates,
-    RouterStoreSelectors.selectIsRandomView,
+export const enableMapView = createSelector(
+    hasPhotosWithGpsCoordinates,
+    RouterStoreSelectors.isRandomView,
     (hasGps, isRandom) => hasGps && !isRandom
 );

@@ -24,13 +24,13 @@ export class MapToolbarComponent implements OnInit {
 
     ngOnInit(): void {
         this.isFirst$ = this.store
-            .select(PhotoStoreSelectors.selectIsActivePhotoFirst)
+            .select(PhotoStoreSelectors.isActivePhotoFirst)
             .pipe(
                 tap(isFirst => this.isFirst = isFirst)
             );
 
         this.isLast$ = this.store
-            .select(PhotoStoreSelectors.selectIsActivePhotoLast)
+            .select(PhotoStoreSelectors.isActivePhotoLast)
             .pipe(
                 tap(isLast => this.isLast = isLast)
             );

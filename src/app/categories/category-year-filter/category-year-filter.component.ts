@@ -27,14 +27,14 @@ export class CategoryYearFilterComponent implements OnInit {
 
     ngOnInit(): void {
         this.store
-            .select(RootStoreSelectors.selectInitialYearFilterSelection)
+            .select(RootStoreSelectors.initialYearFilterSelection)
             .pipe(
                 tap(val => this.yearControl.setValue(val)),
                 first()
             )
             .subscribe();
 
-        this.allYears$ = this.store.select(RootStoreSelectors.selectAllYears);
+        this.allYears$ = this.store.select(RootStoreSelectors.allYears);
     }
 
     onSelectYear(change: MatSelectChange): void {

@@ -12,26 +12,26 @@ export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME)
 
 const { selectAll, selectEntities, selectIds } = videoAdapter.getSelectors(selectVideoState);
 
-export const selectAllVideos = selectAll;
+export const allVideos = selectAll;
 
-export const selectVideoError = createSelector(
+export const error = createSelector(
     selectVideoState,
     (state: State): string | null => state.error
 );
 
-export const selectIsLoading = createSelector(
+export const isLoading = createSelector(
     selectVideoState,
     (state: State): boolean => state.isLoading
 );
 
-export const selectActiveVideoId = createSelector(
+export const activeVideoId = createSelector(
     selectVideoState,
     (state: State): number | null => state.activeVideoId
 );
 
-export const selectActiveVideo = createSelector(
+export const activeVideo = createSelector(
     selectEntities,
-    selectActiveVideoId,
+    activeVideoId,
     (entities: Dictionary<Video>, id: number | null) => {
         if (!!id) {
             const cat = entities[id];
@@ -45,41 +45,41 @@ export const selectActiveVideo = createSelector(
     }
 );
 
-export const selectFirstVideo = createSelector(
+export const firstVideo = createSelector(
     selectIds,
     selectEntities,
     (ids: string[] | number[], entities: Dictionary<Video>) => entities[ids[0]] ?? null
 );
 
-export const selectLastVideo = createSelector(
+export const lastVideo = createSelector(
     selectIds,
     selectEntities,
     (ids: string[] | number[], entities: Dictionary<Video>) => entities[ids[ids.length - 1]] ?? null
 );
 
-export const selectActiveVideoRating = createSelector(
+export const activeVideoRating = createSelector(
     selectVideoState,
     (state: State): Rating | null => state.activeVideoRating
 );
 
-export const selectActiveVideoComments = createSelector(
+export const activeVideoComments = createSelector(
     selectVideoState,
     (state: State): Comment[] | null => state.activeVideoComments
 );
 
-export const selectActiveVideoGpsDetail = createSelector(
+export const activeVideoGpsDetail = createSelector(
     selectVideoState,
     (state: State): GpsDetail | null => state.activeVideoGpsDetail
 );
 
-export const selectIsFullscreenView = createSelector(
+export const isFullscreenView = createSelector(
     selectVideoState,
     (state: State): boolean => state.isFullscreenView
 );
 
-export const selectIsActiveVideoFirst = createSelector(
-    selectActiveVideo,
-    selectFirstVideo,
+export const isActiveVideoFirst = createSelector(
+    activeVideo,
+    firstVideo,
     (active, first) => {
         return active != null &&
             first != null &&
@@ -87,9 +87,9 @@ export const selectIsActiveVideoFirst = createSelector(
     }
 );
 
-export const selectIsActiveVideoLast = createSelector(
-    selectActiveVideo,
-    selectLastVideo,
+export const isActiveVideoLast = createSelector(
+    activeVideo,
+    lastVideo,
     (active, last) => {
         return active != null &&
             last != null &&
@@ -97,8 +97,8 @@ export const selectIsActiveVideoLast = createSelector(
     }
 );
 
-export const selectVideosForCategory = createSelector(
-    selectAllVideos,
+export const videosForCategory = createSelector(
+    allVideos,
     (videos: Video[], props: { id: number }) => {
         if (!!videos) {
             return videos.filter(x => x.categoryId === props.id);
@@ -108,7 +108,7 @@ export const selectVideosForCategory = createSelector(
     }
 );
 
-export const selectVideoById = createSelector(
+export const videoById = createSelector(
     selectEntities,
     (videos: Dictionary<Video>, props: { id: number }) => {
         if (!!videos && !!props.id) {

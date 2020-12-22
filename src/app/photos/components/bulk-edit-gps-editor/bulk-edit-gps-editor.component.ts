@@ -31,7 +31,7 @@ export class BulkEditGpsEditorComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.hasPendingEdits$ = this.store.select(PhotoStoreSelectors.selectHasPendingActions);
+        this.hasPendingEdits$ = this.store.select(PhotoStoreSelectors.hasPendingActions);
     }
 
     onPaste(evt: ClipboardEvent): void {

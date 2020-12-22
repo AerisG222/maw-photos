@@ -26,10 +26,10 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.isFullscreen$ = this.store.select(PhotoStoreSelectors.selectIsFullscreenView);
+        this.isFullscreen$ = this.store.select(PhotoStoreSelectors.isFullscreenView);
 
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(x => this.killFetch.next(true)),
                 tap(settings => this.startRandomFetch(settings.photoListSlideshowDisplayDurationSeconds * 1000))
@@ -37,7 +37,7 @@ export class RandomComponent implements OnInit, OnDestroy {
         );
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Photo),

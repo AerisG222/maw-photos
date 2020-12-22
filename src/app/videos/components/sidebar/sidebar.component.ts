@@ -46,14 +46,14 @@ export class SidebarComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
-        this.enableButtons$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState);
-        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelExpandedState);
-        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowCategoryTeaserChooser);
-        this.showComments$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowComments);
-        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowMetadataEditor);
-        this.showMinimap$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowMinimap);
-        this.showRatings$ = this.store.select(SettingsStoreSelectors.selectVideoInfoPanelShowRatings);
+        this.isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+        this.enableButtons$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
+        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
+        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowCategoryTeaserChooser);
+        this.showComments$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowComments);
+        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMetadataEditor);
+        this.showMinimap$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMinimap);
+        this.showRatings$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowRatings);
     }
 
     toggleSidebar(): void {

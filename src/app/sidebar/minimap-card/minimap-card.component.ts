@@ -62,7 +62,7 @@ export class MinimapCardComponent implements OnInit {
 
     ngOnInit(): void {
         this.store
-            .select(SettingsStoreSelectors.selectAppTheme)
+            .select(SettingsStoreSelectors.appTheme)
             .pipe(
                 first(),
                 tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight),

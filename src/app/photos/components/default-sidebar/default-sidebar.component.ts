@@ -48,17 +48,17 @@ export class DefaultSidebarComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
-        this.enableButtons$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState);
-        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelExpandedState);
-        this.showComments$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowComments);
-        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowMetadataEditor);
-        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowCategoryTeaserChooser);
-        this.showEffects$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowEffects);
-        this.showExif$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowExif);
-        this.showHistogram$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowHistogram);
-        this.showMinimap$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowMinimap);
-        this.showRatings$ = this.store.select(SettingsStoreSelectors.selectPhotoInfoPanelShowRatings);
+        this.isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+        this.enableButtons$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
+        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
+        this.showComments$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowComments);
+        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMetadataEditor);
+        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowCategoryTeaserChooser);
+        this.showEffects$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowEffects);
+        this.showExif$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowExif);
+        this.showHistogram$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowHistogram);
+        this.showMinimap$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMinimap);
+        this.showRatings$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowRatings);
     }
 
     toggleSidebar(): void {

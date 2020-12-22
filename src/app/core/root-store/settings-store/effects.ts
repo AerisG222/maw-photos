@@ -91,7 +91,7 @@ export class SettingsStoreEffects {
                 SettingsActions.updateSearchListViewThumbnailSizeRequest,
                 SettingsActions.updateSearchThumbnailSizeRequest,
             ),
-            withLatestFrom(this.store.select(settingsSelectors.selectSettings)),
+            withLatestFrom(this.store.select(settingsSelectors.settings)),
             concatMap(x => {
                 return of(SettingsActions.saveRequest({ settings: x[1] }));
             })

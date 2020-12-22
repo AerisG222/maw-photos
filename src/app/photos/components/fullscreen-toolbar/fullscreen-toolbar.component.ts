@@ -20,8 +20,8 @@ export class FullscreenToolbarComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
-        this.isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
+        this.isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+        this.isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     }
 
     onExitFullscreen(): void {

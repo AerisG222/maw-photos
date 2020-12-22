@@ -41,34 +41,34 @@ export class DefaultViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.settings$ = this.store.select(SettingsStoreSelectors.selectSettings);
+        this.settings$ = this.store.select(SettingsStoreSelectors.settings);
 
         this.category$ = this.store
-            .select(PhotoCategoryStoreSelectors.selectActiveCategory)
+            .select(PhotoCategoryStoreSelectors.activeCategory)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Category)
             );
 
         this.store
-            .select(PhotoStoreSelectors.selectAllPhotos)
+            .select(PhotoStoreSelectors.allPhotos)
             .pipe(
                 filter(photos => !!photos && photos.length > 0),
                 tap(photos => this.setActivePhoto(photos[0])),
                 take(1)
             ).subscribe();
 
-        this.photos$ = this.store.select(PhotoStoreSelectors.selectAllPhotos);
+        this.photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
 
         this.activePhoto$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Photo)
             );
 
         this.effects$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhotoEffects)
+            .select(PhotoStoreSelectors.activePhotoEffects)
             .pipe(
                 filter(x => !!x),
                 map(x => x as PhotoEffects)

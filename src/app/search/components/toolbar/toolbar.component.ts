@@ -30,22 +30,22 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.isListView$ = this.store
-            .select(SettingsStoreSelectors.selectSearchListType)
+            .select(SettingsStoreSelectors.searchListType)
             .pipe(
                 map(type => type.name === CategoryListType.list.name)
             );
 
         this.isGridView$ = this.store
-            .select(SettingsStoreSelectors.selectSearchListType)
+            .select(SettingsStoreSelectors.searchListType)
             .pipe(
                 map(type => type.name === CategoryListType.grid.name)
             );
 
-        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.selectSearchShowCategoryTitles);
-        this.showCategoryYears$ = this.store.select(SettingsStoreSelectors.selectSearchShowCategoryYears);
+        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.searchShowCategoryTitles);
+        this.showCategoryYears$ = this.store.select(SettingsStoreSelectors.searchShowCategoryYears);
 
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(settings => this.settings = settings)
             ).subscribe()

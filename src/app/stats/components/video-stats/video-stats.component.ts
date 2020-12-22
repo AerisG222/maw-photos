@@ -37,8 +37,8 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const years$ = this.store.select(VideoCategoryStoreSelectors.selectAllYears);
-        const categories$ = this.store.select(VideoCategoryStoreSelectors.selectAllCategories);
+        const years$ = this.store.select(VideoCategoryStoreSelectors.allYears);
+        const categories$ = this.store.select(VideoCategoryStoreSelectors.allCategories);
 
         const aggregateBy$ = concat(
                 of('count'),

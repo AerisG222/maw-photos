@@ -5,39 +5,39 @@ import { SEARCH_FEATURE_NAME } from './feature-name';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { SearchResult } from 'src/app/search/models/search-result.model';
 
-export const searchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);
+const searchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);
 
 const { selectAll } = searchAdapter.getSelectors(searchState);
 
-export const selectSearchAllResults = selectAll;
+export const allResults = selectAll;
 
-export const selectSearchError = createSelector(
+export const error = createSelector(
     searchState,
     (state: State): string | null => state.error
 );
 
-export const selectSearchIsLoading = createSelector(
+export const isLoading = createSelector(
     searchState,
     (state: State): boolean => state.isLoading
 );
 
-export const selectSearchQuery = createSelector(
+export const query = createSelector(
     searchState,
     (state: State): string | null => state.query
 );
 
-export const selectSearchCurrentStartIndex = createSelector(
+export const activeResultStartIndex = createSelector(
     searchState,
-    (state: State): number => !!state.currentResult ? state.currentResult.startIndex : -1
+    (state: State): number => !!state.activeResult ? state.activeResult.startIndex : -1
 );
 
-export const selectSearchCurrentResult = createSelector(
+export const activeResult = createSelector(
     searchState,
-    (state: State): SearchResult<MultimediaCategory> | null => state.currentResult
+    (state: State): SearchResult<MultimediaCategory> | null => state.activeResult
 );
 
-export const selectSearchHasMoreResults = createSelector(
-    selectSearchCurrentResult,
+export const hasMoreResults = createSelector(
+    activeResult,
     (result): boolean => {
         return !!result ? (result.startIndex + result.results.length) < result.totalFound : false;
     }

@@ -19,7 +19,7 @@ export class VideoCategoriesResolverService implements Resolve<Category[]> {
         this.store.dispatch(VideoCategoryStoreActions.loadRequest());
 
         return this.store
-            .select(VideoCategoryStoreSelectors.selectAllCategories)
+            .select(VideoCategoryStoreSelectors.allCategories)
             .pipe(
                 filter(cats => !!cats && cats.length > 0),
                 take(1),

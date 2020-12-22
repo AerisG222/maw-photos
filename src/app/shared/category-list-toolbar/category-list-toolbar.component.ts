@@ -30,21 +30,21 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.isListView$ = this.store
-            .select(SettingsStoreSelectors.selectCategoryListListType)
+            .select(SettingsStoreSelectors.categoryListListType)
             .pipe(
                 map(type => type.name === CategoryListType.list.name)
             );
 
         this.isGridView$ = this.store
-            .select(SettingsStoreSelectors.selectCategoryListListType)
+            .select(SettingsStoreSelectors.categoryListListType)
             .pipe(
                 map(type => type.name === CategoryListType.grid.name)
             );
 
-        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.selectCategoryListShowCategoryTitles);
+        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);
 
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(settings => this.settings = settings)
             ).subscribe()

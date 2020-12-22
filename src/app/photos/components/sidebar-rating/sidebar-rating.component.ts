@@ -26,10 +26,10 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.rating$ = this.store.select(PhotoStoreSelectors.selectActivePhotoRating);
+        this.rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(photo => !!photo),
                 map(photo => photo as Photo),

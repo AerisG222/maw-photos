@@ -16,7 +16,7 @@ export class PhotoCategoryStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoCategoryActions.loadRequest),
-            withLatestFrom(this.store.select(PhotoCategorySelectors.selectAllCategories)),
+            withLatestFrom(this.store.select(PhotoCategorySelectors.allCategories)),
             exhaustMap(([action, categories]) => {
                 if (categories.length !== 0) {
                     return of(PhotoCategoryActions.loadRequestedSatisfiedByCache());

@@ -27,10 +27,10 @@ export class PhotoCategoryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.isFullscreen$ = this.store.select(PhotoStoreSelectors.selectIsFullscreenView);
-        this.isMapView$ = this.store.select(PhotoStoreSelectors.selectIsMapView);
-        this.isBulkEditView$ = this.store.select(PhotoStoreSelectors.selectIsBulkEditView);
-        this.isGridView$ = this.store.select(PhotoStoreSelectors.selectIsGridView);
+        this.isFullscreen$ = this.store.select(PhotoStoreSelectors.isFullscreenView);
+        this.isMapView$ = this.store.select(PhotoStoreSelectors.isMapView);
+        this.isBulkEditView$ = this.store.select(PhotoStoreSelectors.isBulkEditView);
+        this.isGridView$ = this.store.select(PhotoStoreSelectors.isGridView);
 
         this.store.dispatch(PhotoStoreActions.clearRequest());
 

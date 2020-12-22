@@ -43,28 +43,28 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.margin$ = this.store.select(SettingsStoreSelectors.selectSearchCategoryMargin);
+        this.margin$ = this.store.select(SettingsStoreSelectors.searchCategoryMargin);
 
         this.showListView$ = this.store
-            .select(SettingsStoreSelectors.selectSearchListType)
+            .select(SettingsStoreSelectors.searchListType)
             .pipe(
                 map(type => type.name === CategoryListType.list.name)
             );
 
         this.showGridView$ = this.store
-            .select(SettingsStoreSelectors.selectSearchListType)
+            .select(SettingsStoreSelectors.searchListType)
             .pipe(
                 map(type => type.name === CategoryListType.grid.name)
             );
 
-        this.listThumbnailSize$ = this.store.select(SettingsStoreSelectors.selectSearchListViewThumbnailSize);
-        this.gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.selectSearchThumbnailSize);
-        this.gridShowTitles$ = this.store.select(SettingsStoreSelectors.selectSearchShowCategoryTitles);
-        this.gridShowYears$ = this.store.select(SettingsStoreSelectors.selectSearchShowCategoryYears);
-        this.currentResult$ = this.store.select(SearchStoreSelectors.selectSearchCurrentResult);
+        this.listThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchListViewThumbnailSize);
+        this.gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchThumbnailSize);
+        this.gridShowTitles$ = this.store.select(SettingsStoreSelectors.searchShowCategoryTitles);
+        this.gridShowYears$ = this.store.select(SettingsStoreSelectors.searchShowCategoryYears);
+        this.currentResult$ = this.store.select(SearchStoreSelectors.activeResult);
 
         this.categories$ = this.store
-            .select(SearchStoreSelectors.selectSearchAllResults)
+            .select(SearchStoreSelectors.allResults)
             .pipe(
                 map(cats => cats.map(cat => ({
                     route: `/${ cat.multimediaType }s`,
@@ -87,10 +87,10 @@ export class SearchComponent implements OnInit, OnDestroy {
                 })))
             );
 
-        this.hasMoreResults$ = this.store.select(SearchStoreSelectors.selectSearchHasMoreResults);
+        this.hasMoreResults$ = this.store.select(SearchStoreSelectors.hasMoreResults);
 
         this.totalResults$ = this.store
-            .select(SearchStoreSelectors.selectSearchCurrentResult)
+            .select(SearchStoreSelectors.activeResult)
             .pipe(
                 map(c => c?.totalFound ?? 0)
             );
@@ -101,13 +101,13 @@ export class SearchComponent implements OnInit, OnDestroy {
             );
 
         this.shownResults$ = this.store
-            .select(SearchStoreSelectors.selectSearchCurrentResult)
+            .select(SearchStoreSelectors.activeResult)
             .pipe(
                 map(c => (!!c) ? c.startIndex + c.results.length : 0)
             );
 
         this.showNoResults$ = this.store
-            .select(SearchStoreSelectors.selectSearchCurrentResult)
+            .select(SearchStoreSelectors.activeResult)
             .pipe(
                 map(c => (!!c) ? c.totalFound === 0 : false)
             );

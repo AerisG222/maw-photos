@@ -19,7 +19,7 @@ export class CategoryMissingGpsFilterComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.filterEnabled$ = this.store.select(SettingsStoreSelectors.selectCategoryListMissingGpsFilter);
+        this.filterEnabled$ = this.store.select(SettingsStoreSelectors.categoryListMissingGpsFilter);
     }
 
     onToggleMissingGpsData(): void {

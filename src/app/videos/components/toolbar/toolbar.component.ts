@@ -28,14 +28,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.selectSettings)
+            .select(SettingsStoreSelectors.settings)
             .pipe(
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
 
-        this.isFirst$ = this.store.select(VideoStoreSelectors.selectIsActiveVideoFirst);
-        this.isLast$ = this.store.select(VideoStoreSelectors.selectIsActiveVideoLast);
+        this.isFirst$ = this.store.select(VideoStoreSelectors.isActiveVideoFirst);
+        this.isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
     }
 
     ngOnDestroy(): void {

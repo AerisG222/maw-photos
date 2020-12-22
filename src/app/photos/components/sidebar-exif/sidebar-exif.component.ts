@@ -25,14 +25,14 @@ export class SidebarExifComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.exifContainer$ = this.store
-            .select(PhotoStoreSelectors.selectActivePhotoExifData)
+            .select(PhotoStoreSelectors.activePhotoExifData)
             .pipe(
                 filter(exif => !!exif),
                 map(exif => exif as ExifContainer)
             );
 
         this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.selectActivePhoto)
+            .select(PhotoStoreSelectors.activePhoto)
             .pipe(
                 filter(photo => !!photo),
                 map(photo => photo as Photo),

@@ -13,12 +13,12 @@ export class SearchStoreEffects {
     queryRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SearchActions.queryRequest),
-            withLatestFrom(this.store.select(searchSelectors.selectSearchQuery)),
+            withLatestFrom(this.store.select(searchSelectors.query)),
             map(x => ({
                 action: x[0],
-                currentQueryTerm: x[1]
+                activeQueryTerm: x[1]
             })),
-            filter(ctx => ctx.currentQueryTerm !== ctx.action.query),
+            filter(ctx => ctx.activeQueryTerm !== ctx.action.query),
             switchMap(ctx =>
                 this.api.search(ctx.action.query, ctx.action.start)
                     .pipe(
@@ -31,8 +31,8 @@ export class SearchStoreEffects {
 
     queryMoreEffect$ = createEffect(() => {
         const currentQueryInfo = combineLatest([
-            this.store.select(searchSelectors.selectSearchQuery),
-            this.store.select(searchSelectors.selectSearchCurrentStartIndex)
+            this.store.select(searchSelectors.query),
+            this.store.select(searchSelectors.activeResultStartIndex)
         ]);
 
         return this.actions$.pipe(
@@ -40,10 +40,10 @@ export class SearchStoreEffects {
             withLatestFrom(currentQueryInfo),
             map(x => ({
                 action: x[0],
-                currentQueryTerm: x[1][0],
-                currentQueryStart: x[1][1]
+                activeQueryTerm: x[1][0],
+                activeQueryStart: x[1][1]
             })),
-            filter(ctx => ctx.currentQueryTerm === ctx.action.query && ctx.currentQueryStart !== ctx.action.start),
+            filter(ctx => ctx.activeQueryTerm === ctx.action.query && ctx.activeQueryStart !== ctx.action.start),
             switchMap(ctx =>
                 this.api.search(ctx.action.query, ctx.action.start)
                     .pipe(

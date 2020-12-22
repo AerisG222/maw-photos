@@ -26,7 +26,7 @@ export class YearListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
+        this.isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
 
         this.activatedRoute.fragment
             .pipe(
@@ -41,7 +41,7 @@ export class YearListComponent implements OnInit {
                 })
             ).subscribe();
 
-        this.margin$ = this.store.select(SettingsStoreSelectors.selectCategoryListCategoryMargin);
-        this.years$ = this.store.select(RootStoreSelectors.selectAllFilteredCategoryYears);
+        this.margin$ = this.store.select(SettingsStoreSelectors.categoryListCategoryMargin);
+        this.years$ = this.store.select(RootStoreSelectors.allFilteredCategoryYears);
     }
 }
