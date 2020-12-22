@@ -32,5 +32,5 @@ export const roles = createSelector(
 
 export const isAdmin = createSelector(
     roles,
-    roles => !!(roles.find(r => r === 'admin'))
+    userRoles => !!(userRoles.find(r => r === 'admin'))
 );

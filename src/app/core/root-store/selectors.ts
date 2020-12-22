@@ -54,11 +54,11 @@ export const allFilteredCategoryYears = createSelector(
     VideoCategoryStoreSelectors.allYears,
     SettingsStoreSelectors.categoryListYearFilter,
     SettingsStoreSelectors.categoryListCategoryFilter,
-    (allYears, photoYears, videoYears, yearFilter, typeFilter) => {
+    (years, photoYears, videoYears, yearFilter, typeFilter) => {
         if (yearFilter === 'all') {
             switch (typeFilter) {
                 case CategoryFilter.all:
-                    return allYears ?? [];
+                    return years ?? [];
                 case CategoryFilter.photos:
                     return photoYears ?? [];
                 case CategoryFilter.videos:

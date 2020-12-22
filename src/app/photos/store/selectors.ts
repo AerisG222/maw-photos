@@ -119,8 +119,8 @@ export const activePhoto = createSelector(
 export const firstPhoto = createSelector(
     selectAll,
     isMapView,
-    (photos: Photo[], isMapView: boolean) => {
-        if (isMapView) {
+    (photos: Photo[], showMapView: boolean) => {
+        if (showMapView) {
             return photos.find(photoHasGpsData) ?? null;
         }
 
@@ -131,8 +131,8 @@ export const firstPhoto = createSelector(
 export const lastPhoto = createSelector(
     selectAll,
     isMapView,
-    (photos: Photo[], isMapView: boolean) => {
-        if (isMapView) {
+    (photos: Photo[], showMapView: boolean) => {
+        if (showMapView) {
             for (let i = photos.length; i >= 0; i--) {
                 const photo = photos[i];
 
@@ -165,17 +165,17 @@ export const nextPhotoIndex = createSelector(
     activePhotoIndex,
     isActivePhotoLast,
     isMapView,
-    (photos, activePhotoIndex, isActivePhotoLast, isMapView) => {
-        if (isActivePhotoLast) {
-            return activePhotoIndex as number;
+    (photos, activeIndex, isLast, showMapView) => {
+        if (isLast) {
+            return activeIndex as number;
         }
 
-        if (activePhotoIndex === null) {
-            activePhotoIndex = -1;
+        if (activeIndex === null) {
+            activeIndex = -1;
         }
 
-        if (isMapView) {
-            for (let i = activePhotoIndex + 1; i < photos.length; i++) {
+        if (showMapView) {
+            for (let i = activeIndex + 1; i < photos.length; i++) {
                 if (photoHasGpsData(photos[i])) {
                     return i;
                 }
@@ -183,7 +183,7 @@ export const nextPhotoIndex = createSelector(
 
             return -1;
         } else {
-            const nextIndex = activePhotoIndex + 1;
+            const nextIndex = activeIndex + 1;
 
             return nextIndex < photos.length ? nextIndex : -1;
         }
@@ -201,17 +201,17 @@ export const previousPhotoIndex = createSelector(
     activePhotoIndex,
     isActivePhotoFirst,
     isMapView,
-    (photos, activePhotoIndex, isActivePhotoFirst, isMapView) => {
-        if (isActivePhotoFirst) {
-            return activePhotoIndex as number;
+    (photos, activeIndex, isFirst, showMapView) => {
+        if (isFirst) {
+            return activeIndex as number;
         }
 
-        if (activePhotoIndex === null) {
-            activePhotoIndex = -1;
+        if (activeIndex === null) {
+            activeIndex = -1;
         }
 
-        if (isMapView) {
-            for (let i = activePhotoIndex - 1; i >= 0; i--) {
+        if (showMapView) {
+            for (let i = activeIndex - 1; i >= 0; i--) {
                 if (photoHasGpsData(photos[i])) {
                     return i;
                 }
@@ -219,7 +219,7 @@ export const previousPhotoIndex = createSelector(
 
             return -1;
         } else {
-            const previousIndex = activePhotoIndex - 1;
+            const previousIndex = activeIndex - 1;
 
             return previousIndex >= 0 ? previousIndex : -1;
         }
