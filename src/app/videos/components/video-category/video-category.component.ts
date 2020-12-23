@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, tap, filter, first } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 
 import { VideoSize } from 'src/app/models/video-size.model';
 import { Video } from 'src/app/models/video.model';
 import { Settings } from 'src/app/models/settings.model';
 import { Category } from 'src/app/models/category.model';
 import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
-import { SettingsStoreSelectors, VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-videos-video-category',
@@ -30,7 +29,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
     private settings: Settings | null = null;
 
     constructor(
-        private route: ActivatedRoute,
         private store: Store
     ) { }
 
@@ -51,8 +49,7 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
         this.videos$ = this.store
             .select(VideoStoreSelectors.allVideos)
             .pipe(
-                filter(x => !!x && x.length > 0),
-                tap(videos => this.setActiveVideo(videos[0]))
+                filter(x => !!x && x.length > 0)
             );
 
         this.activeVideo$ = this.store
@@ -62,24 +59,12 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
                 map(x => x as Video),
                 tap(x => this.triggerVideoRefresh())
             );
-
-        this.store.dispatch(VideoStoreActions.clearRequest());
-
-        this.route.params
-            .pipe(
-                first(),
-                map(p => Number(p.id)),
-                tap(id => this.store.dispatch(VideoCategoryStoreActions.setActiveCategoryId({ categoryId: id }))),
-                tap(id => this.store.dispatch(VideoStoreActions.loadRequest({ categoryId: id })))
-            ).subscribe();
     }
 
     ngOnDestroy(): void {
+        // TODO: replace w/ effect based on router event
         this.store.dispatch(VideoStoreActions.unsetActiveVideoId());
-    }
-
-    onSelectVideo(video: Video): void {
-        this.setActiveVideo(video);
+        this.store.dispatch(VideoStoreActions.clearRequest());
     }
 
     getVideoDimensions(video: Video): { width: string; height: string } {
@@ -105,9 +90,5 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
                 this.videoRef.nativeElement.play();
             }
         }, 0, false);
-    }
-
-    private setActiveVideo(video: Video): void {
-        this.store.dispatch(VideoStoreActions.setActiveVideoId({ id: video.id }));
     }
 }

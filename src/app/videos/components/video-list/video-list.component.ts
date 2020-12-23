@@ -13,7 +13,6 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 export class VideoListComponent {
     @Input() videos: Video[] | null = null;
     @Input() selectedVideo: Video | null = null;
-    @Output() videoSelected = new EventEmitter<Video>();
 
     videoThumbnailSize: ThumbnailSize | null = null;
     imgWidth: number | null = null;
@@ -49,9 +48,5 @@ export class VideoListComponent {
                 this.imgHeight = 120;
                 break;
         }
-    }
-
-    onClickVideo(video: Video): void {
-        this.videoSelected.emit(video);
     }
 }

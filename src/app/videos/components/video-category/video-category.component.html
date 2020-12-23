@@ -29,8 +29,7 @@
                 *ngIf="data.videos && data.settings?.videoListShowVideoList"
                 [videos]="data.videos"
                 [thumbnailSize]="data.settings?.videoListThumbnailSize"
-                [selectedVideo]="data.activeVideo"
-                (videoSelected)="onSelectVideo($event)">
+                [selectedVideo]="data.activeVideo">
             </app-videos-video-list>
         </div>
     </ng-container>

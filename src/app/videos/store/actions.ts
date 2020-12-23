@@ -136,3 +136,8 @@ export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
     '[Videos] Set GPS Coordinate Override and Move Next Request',
     props<{ videoId: number; latLng: GpsCoordinate }>()
 );
+
+export const navigateToFirstVideo = createAction(
+    '[Videos] Navigate to First Video',
+    props<{ videoId: number }>()
+);
