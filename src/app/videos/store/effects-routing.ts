@@ -44,23 +44,33 @@ export class VideoStoreRoutingEffects {
             ])
             .pipe(
                 filter(([ routeDetails, firstVideo ]) => !!!routeDetails.params.videoId && !!firstVideo),
-                map(([ routeDetails, firstVideo ]) => VideoStoreActions.navigateToFirstVideo({ videoId: (firstVideo as Video).id }))
+                map(([ routeDetails, firstVideo ]) => VideoStoreActions.navigateToVideo({ videoId: (firstVideo as Video).id }))
             );
     });
 
-    navigateToFirstVideo$ = createEffect(() => {
+    navigateToVideo$ = createEffect(() => {
         return this.actions$.pipe (
-            ofType(VideoStoreActions.navigateToFirstVideo),
+            ofType(VideoStoreActions.navigateToVideo),
             withLatestFrom(this.videoRoutes$),
-            tap(([action, routeDetails]) => this.router.navigateByUrl(`${ routeDetails.url }/${ action.videoId }`))
+            tap(([action, routeDetails]) => this.router.navigateByUrl(`/videos/${ routeDetails.params.categoryId }/${ action.videoId }`))
         );
     }, { dispatch: false });
 
     setActiveVideoFromRoute = createEffect(() => {
-        return this.videoRoutes$
+        return combineLatest([
+                this.videoRoutes$,
+                this.store.select(VideoStoreSelectors.entities),
+                this.store.select(VideoStoreSelectors.ids)
+            ])
             .pipe(
-                filter(routeDetails => !!routeDetails.params.videoId),
-                map(routeDetails => VideoStoreActions.setActiveVideoId({ id: routeDetails.params.videoId }))
+                filter(([routeDetails, entities, ids]) => !!routeDetails.params.videoId && !!entities && !!ids && ids.length > 0),
+                map(([routeDetails, entities, ids]) => {
+                    if (routeDetails.params.videoId in entities) {
+                        return VideoStoreActions.setActiveVideoId({ id: routeDetails.params.videoId });
+                    } else {
+                        return VideoStoreActions.navigateToVideo({ videoId: ids[0] as number });
+                    }
+                })
             );
     });
 

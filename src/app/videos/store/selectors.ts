@@ -13,6 +13,8 @@ export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME)
 const { selectAll, selectEntities, selectIds } = videoAdapter.getSelectors(selectVideoState);
 
 export const allVideos = selectAll;
+export const entities = selectEntities;
+export const ids = selectIds;
 
 export const error = createSelector(
     selectVideoState,
