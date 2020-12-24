@@ -59,8 +59,8 @@ export class VideoStoreRoutingEffects {
     setActiveVideoFromRoute = createEffect(() => {
         return combineLatest([
                 this.videoRoutes$,
-                this.store.select(VideoStoreSelectors.entities),
-                this.store.select(VideoStoreSelectors.ids)
+                this.store.select(VideoStoreSelectors.allEntities),
+                this.store.select(VideoStoreSelectors.allIds)
             ])
             .pipe(
                 filter(([routeDetails, entities, ids]) => !!routeDetails.params.videoId && !!entities && !!ids && ids.length > 0),

@@ -4,7 +4,7 @@ import { RouteArea } from 'src/app/models/route-area';
 
 export const routeAreaChanged = createAction(
     '[Router] Area Changed',
-    props<{ leavingArea: RouteArea, enteringArea: RouteArea}>()
+    props<{ leavingArea: RouteArea; enteringArea: RouteArea}>()
 );
 
 export const routeAreaEntering = createAction(
