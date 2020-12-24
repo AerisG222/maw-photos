@@ -29,8 +29,8 @@ const routes: Routes = [
         resolve: [ authInitResolverToken ]
     },
     {
-        path: 'help',
-        loadChildren: () => import('./help/help.module').then(m => m.HelpModule),
+        path: 'about',
+        loadChildren: () => import('./about/about.module').then(m => m.AboutModule),
         resolve: [ authInitResolverToken ]
     },
     {

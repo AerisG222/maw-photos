@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AndroidComponent } from './android/android.component';
-import { HelpDetailsComponent } from './help-details/help-details.component';
 
+import { AndroidComponent } from './android/android.component';
 import { HelpComponent } from './help/help.component';
+import { AboutComponent } from './about/about.component';
 import { ReleaseNotesComponent } from './release-notes/release-notes.component';
 
 const routes: Routes = [
-    { path: '', component: HelpComponent,
+    { path: '', component: AboutComponent,
         children: [
-            { path: 'help', component: HelpDetailsComponent },
+            { path: 'help', component: HelpComponent },
             { path: 'release-notes', component: ReleaseNotesComponent },
             { path: 'android', component: AndroidComponent },
             { path: '', redirectTo: 'help', pathMatch: 'full' }
         ]
     },
-    { path: '**', redirectTo: './help/help' }
+    { path: '**', redirectTo: '/about/help' }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class HelpRoutingModule { }
+export class AboutRoutingModule { }

@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HelpRoutingModule } from './help-routing.module';
+import { AboutRoutingModule } from './about-routing.module';
+import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
-import { HelpDetailsComponent } from './help-details/help-details.component';
 import { ReleaseNotesComponent } from './release-notes/release-notes.component';
 import { AndroidComponent } from './android/android.component';
 
 @NgModule({
     declarations: [
+        AboutComponent,
         HelpComponent,
-        HelpDetailsComponent,
         ReleaseNotesComponent,
         AndroidComponent
     ],
     imports: [
-        HelpRoutingModule,
+        AboutRoutingModule,
         SharedModule
     ]
 })
-export class HelpModule { }
+export class AboutModule { }

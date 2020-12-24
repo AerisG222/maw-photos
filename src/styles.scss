@@ -21,7 +21,7 @@ $custom-typography: mat-typography-config(
 // https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
 @import 'app/app.component.theme';
 
-@import 'app/help/help/help.component.theme';
+@import 'app/about/about/about.component.theme';
 
 @import 'app/categories/year-list/year-list.component.theme';
 
@@ -59,7 +59,7 @@ $custom-typography: mat-typography-config(
 
     @include app-categories-year-list-component-theme($theme);
 
-    @include app-help-component-theme($theme);
+    @include app-about-component-theme($theme);
 
     @include app-photos-bulk-edit-component-theme($theme);
     @include app-photos-default-view-component-theme($theme);
