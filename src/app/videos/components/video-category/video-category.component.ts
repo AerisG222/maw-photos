@@ -7,7 +7,7 @@ import { VideoSize } from 'src/app/models/video-size.model';
 import { Video } from 'src/app/models/video.model';
 import { Settings } from 'src/app/models/settings.model';
 import { Category } from 'src/app/models/category.model';
-import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
+import { VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
@@ -16,7 +16,7 @@ import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from 'src/app/cor
     styleUrls: ['./video-category.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VideoCategoryComponent implements OnInit, OnDestroy {
+export class VideoCategoryComponent implements OnInit {
     @ViewChild('videoRef') videoRef: ElementRef | null = null;
 
     videoSize = VideoSize;
@@ -59,12 +59,6 @@ export class VideoCategoryComponent implements OnInit, OnDestroy {
                 map(x => x as Video),
                 tap(x => this.triggerVideoRefresh())
             );
-    }
-
-    ngOnDestroy(): void {
-        // TODO: replace w/ effect based on router event
-        this.store.dispatch(VideoStoreActions.unsetActiveVideoId());
-        this.store.dispatch(VideoStoreActions.clearRequest());
     }
 
     getVideoDimensions(video: Video): { width: string; height: string } {

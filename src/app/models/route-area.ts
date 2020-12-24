@@ -1,11 +1,11 @@
 export enum RouteArea {
-    unknown,
-    categories,
-    help,
-    photos,
-    random,
-    search,
-    settings,
-    stats,
-    videos
+    unknown = 'unknown',
+    categories = 'categories',
+    help = 'help',
+    photos = 'photos',
+    random = 'random',
+    search = 'search',
+    settings = 'settings',
+    stats = 'stats',
+    videos = 'videos'
 }
