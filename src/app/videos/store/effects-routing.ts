@@ -5,11 +5,12 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
-import { RouterStoreSelectors, VideoCategoryStoreActions } from 'src/app/core/root-store';
+import { RouterStoreActions, RouterStoreSelectors, VideoCategoryStoreActions } from 'src/app/core/root-store';
 import { RouteArea } from 'src/app/models/route-area';
 import { Video } from 'src/app/models/video.model';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
+
 
 @Injectable()
 export class VideoStoreRoutingEffects {
@@ -61,6 +62,22 @@ export class VideoStoreRoutingEffects {
                 filter(routeDetails => !!routeDetails.params.videoId),
                 map(routeDetails => VideoStoreActions.setActiveVideoId({ id: routeDetails.params.videoId }))
             );
+    });
+
+    unsetActiveVideoWhenLeavingArea$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaLeaving),
+            filter(action => action.leavingArea === RouteArea.videos),
+            map(area => VideoStoreActions.unsetActiveVideoId())
+        );
+    });
+
+    clearVideosWhenLeavingArea$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaLeaving),
+            filter(action => action.leavingArea === RouteArea.videos),
+            map(area => VideoStoreActions.clearRequest())
+        );
     });
 
     constructor(
