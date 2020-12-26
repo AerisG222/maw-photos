@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription, Observable } from 'rxjs';
-import { tap, filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
 
 import { VideoStoreSelectors } from '../../store';
 import { VideoCategoryStoreSelectors, VideoCategoryStoreActions } from 'src/app/core/root-store';
@@ -14,12 +14,8 @@ import { Video } from 'src/app/models/video.model';
     styleUrls: ['./sidebar-category-teaser-chooser.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy {
+export class SidebarCategoryTeaserChooserComponent implements OnInit {
     currentTeaserUrl$: Observable<string> | null = null;
-
-    private categoryId = -1;
-    private videoId = -1;
-    private destroySub = new Subscription();
 
     constructor(
         private store: Store
@@ -28,16 +24,6 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(VideoStoreSelectors.activeVideo)
-            .pipe(
-                filter(v => !!v),
-                map(v => v as Video),
-                tap(v => this.videoId = v.id),
-                tap(v => this.categoryId = v.categoryId)
-            ).subscribe()
-        );
-
         this.currentTeaserUrl$ = this.store
             .select(VideoCategoryStoreSelectors.activeCategory)
             .pipe(
@@ -46,13 +32,16 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit, OnDestroy 
             );
     }
 
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
-
     onSetTeaser(): void {
-        if (this.categoryId !== -1 && this.videoId !== -1) {
-            this.store.dispatch(VideoCategoryStoreActions.setTeaserRequest({ categoryId: this.categoryId, videoId: this.videoId }));
-        }
+        this.store.select(VideoStoreSelectors.activeVideo)
+            .pipe(
+                first(),
+                filter(video => !!video),
+                map(video => video as Video)
+            )
+            .subscribe({
+                next: video => this.store.dispatch(VideoCategoryStoreActions.setTeaserRequest({ categoryId: video.categoryId, videoId: video.id })),
+                error: err => console.log(`error trying to set category teaser: ${ err }`)
+            });
     }
 }
