@@ -7,6 +7,7 @@ import { Rating } from 'src/app/models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
+import { SettingsStoreSelectors } from 'src/app/core/root-store';
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
 
@@ -119,4 +120,22 @@ export const videoById = createSelector(
             return null;
         }
     }
+);
+
+export const isCommentCardVisible = createSelector(
+    SettingsStoreSelectors.videoInfoPanelExpandedState,
+    SettingsStoreSelectors.videoInfoPanelShowComments,
+    (isExpanded, showComments) => isExpanded && showComments
+);
+
+export const isRatingCardVisible = createSelector(
+    SettingsStoreSelectors.videoInfoPanelExpandedState,
+    SettingsStoreSelectors.videoInfoPanelShowRatings,
+    (isExpanded, showRatings) => isExpanded && showRatings
+);
+
+export const isMetadataEditorCardVisible = createSelector(
+    SettingsStoreSelectors.videoInfoPanelExpandedState,
+    SettingsStoreSelectors.videoInfoPanelShowMetadataEditor,
+    (isExpanded, showEditor) => isExpanded && showEditor
 );

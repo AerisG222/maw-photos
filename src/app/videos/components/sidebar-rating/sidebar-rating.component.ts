@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter, tap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, first } from 'rxjs/operators';
 
 import { Rating } from 'src/app/models/rating.model';
 import { VideoStoreSelectors, VideoStoreActions } from '../../store';
-import { Video } from 'src/app/models/video.model';
 
 @Component({
     selector: 'app-videos-sidebar-rating',
@@ -13,11 +12,8 @@ import { Video } from 'src/app/models/video.model';
     styleUrls: ['./sidebar-rating.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarRatingComponent implements OnInit, OnDestroy {
+export class SidebarRatingComponent implements OnInit {
     rating$: Observable<Rating | null> | null = null;
-
-    private activeId = -1;
-    private destroySub = new Subscription();
 
     constructor(
         private store: Store
@@ -31,25 +27,15 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
             .pipe(
                 filter(rating => !!rating)
             );
-
-        this.destroySub.add(this.store
-            .select(VideoStoreSelectors.activeVideo)
-            .pipe(
-                filter(video => !!video),
-                map(video => video as Video),
-                tap(video => this.activeId = video.id),
-                tap(video => this.store.dispatch(VideoStoreActions.loadRatingRequest({ videoId: video.id })))
-            ).subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
     }
 
     onRate(userRating: number): void {
-        if (this.activeId !== -1) {
-            this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: this.activeId, userRating }));
-        }
+        this.store.select(VideoStoreSelectors.activeVideoId)
+            .pipe(
+                first()
+            ).subscribe({
+                next: id => this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: id as number, userRating })),
+                error: err => console.log(`error trying to add rating: ${ err }`)
+            });
     }
 }

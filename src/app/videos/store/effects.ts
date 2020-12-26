@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap } from 'rxjs/operators';
+import { combineLatest, of } from 'rxjs';
+import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
-import * as VideoActions from './actions';
+import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 import { VideoCategoryStoreActions } from 'src/app/core/root-store';
 
@@ -13,12 +13,12 @@ import { VideoCategoryStoreActions } from 'src/app/core/root-store';
 export class VideoStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.loadRequest),
+            ofType(VideoStoreActions.loadRequest),
             switchMap(action =>
                 this.api.getVideosByCategory(action.categoryId)
                     .pipe(
-                        map(videos => VideoActions.loadSuccess({ videos: videos.items })),
-                        catchError(error => of(VideoActions.loadFailure({ error })))
+                        map(videos => VideoStoreActions.loadSuccess({ videos: videos.items })),
+                        catchError(error => of(VideoStoreActions.loadFailure({ error })))
                     )
             )
         );
@@ -26,25 +26,36 @@ export class VideoStoreEffects {
 
     loadRatingRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.loadRatingRequest),
+            ofType(VideoStoreActions.loadRatingRequest),
             switchMap(action =>
                 this.api.getRating(action.videoId)
                     .pipe(
-                        map(rating => VideoActions.loadRatingSuccess({ rating })),
-                        catchError(error => of(VideoActions.loadRatingFailure({ error })))
+                        map(rating => VideoStoreActions.loadRatingSuccess({ rating })),
+                        catchError(error => of(VideoStoreActions.loadRatingFailure({ error })))
                     )
             )
         );
     });
 
+    loadRatingsForVideoWhenVisible$ = createEffect(() => {
+        return combineLatest([
+                this.actions$.pipe(ofType(VideoStoreActions.setActiveVideoId)),
+                this.store.select(VideoStoreSelectors.isRatingCardVisible)
+            ])
+            .pipe(
+                filter(([action, isVisible]) => !!action.id && isVisible),
+                map(([action, isVisible ]) => VideoStoreActions.loadRatingRequest({ videoId: action.id as number }))
+            );
+    });
+
     rateVideoRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.rateVideoRequest),
+            ofType(VideoStoreActions.rateVideoRequest),
             concatMap(action =>
                 this.api.rateVideo(action.videoId, action.userRating)
                     .pipe(
-                        map(rating => VideoActions.rateVideoSuccess({ rating })),
-                        catchError(error => of(VideoActions.rateVideoFailure({ error })))
+                        map(rating => VideoStoreActions.rateVideoSuccess({ rating })),
+                        catchError(error => of(VideoStoreActions.rateVideoFailure({ error })))
                     )
             )
         );
@@ -52,25 +63,36 @@ export class VideoStoreEffects {
 
     loadCommentsRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.loadCommentsRequest),
+            ofType(VideoStoreActions.loadCommentsRequest),
             switchMap(action =>
                 this.api.getComments(action.videoId)
                     .pipe(
-                        map(comments => VideoActions.loadCommentsSuccess({ comments: comments.items })),
-                        catchError(error => of(VideoActions.rateVideoFailure({ error })))
+                        map(comments => VideoStoreActions.loadCommentsSuccess({ comments: comments.items })),
+                        catchError(error => of(VideoStoreActions.rateVideoFailure({ error })))
                     )
             )
         );
     });
 
+    loadCommentsForVideoWhenVisible$ = createEffect(() => {
+        return combineLatest([
+            this.actions$.pipe(ofType(VideoStoreActions.setActiveVideoId)),
+            this.store.select(VideoStoreSelectors.isCommentCardVisible)
+        ])
+        .pipe(
+            filter(([action, isVisible]) => !!action.id && isVisible),
+            map(([action, isVisible ]) => VideoStoreActions.loadCommentsRequest({ videoId: action.id as number }))
+        );
+    });
+
     addCommentRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.addCommentRequest),
+            ofType(VideoStoreActions.addCommentRequest),
             concatMap(action =>
                 this.api.addComment(action.videoId, action.comment)
                     .pipe(
-                        map(result => VideoActions.addCommentSuccess({ videoId: action.videoId })),
-                        catchError(error => of(VideoActions.addCommentFailure({ error })))
+                        map(result => VideoStoreActions.addCommentSuccess({ videoId: action.videoId })),
+                        catchError(error => of(VideoStoreActions.addCommentFailure({ error })))
                     )
             )
         );
@@ -78,32 +100,43 @@ export class VideoStoreEffects {
 
     addCommentSuccessEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.addCommentSuccess),
-            concatMap(action => of(VideoActions.loadCommentsRequest({ videoId: action.videoId })))
+            ofType(VideoStoreActions.addCommentSuccess),
+            concatMap(action => of(VideoStoreActions.loadCommentsRequest({ videoId: action.videoId })))
         );
     });
 
     loadGpsDetailRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.loadGpsDetailRequest),
+            ofType(VideoStoreActions.loadGpsDetailRequest),
             switchMap(action =>
                 this.api.getGpsDetail(action.videoId)
                     .pipe(
-                        map(gpsDetail => VideoActions.loadGpsDetailSuccess({ gpsDetail })),
-                        catchError(error => of(VideoActions.loadGpsDetailFailure({ error })))
+                        map(gpsDetail => VideoStoreActions.loadGpsDetailSuccess({ gpsDetail })),
+                        catchError(error => of(VideoStoreActions.loadGpsDetailFailure({ error })))
                     )
             )
         );
     });
 
+    loadGpsDetailForVideoMetadataEditorWhenVisible$ = createEffect(() => {
+        return combineLatest([
+            this.actions$.pipe(ofType(VideoStoreActions.setActiveVideoId)),
+            this.store.select(VideoStoreSelectors.isMetadataEditorCardVisible)
+        ])
+        .pipe(
+            filter(([action, isVisible]) => !!action.id && isVisible),
+            map(([action, isVisible ]) => VideoStoreActions.loadGpsDetailRequest({ videoId: action.id as number }))
+        );
+    });
+
     setGpsOverrideRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.setGpsCoordinateOverrideRequest),
+            ofType(VideoStoreActions.setGpsCoordinateOverrideRequest),
             mergeMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
                     .pipe(
-                        map(gpsDetail => VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail })),
-                        catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
+                        map(gpsDetail => VideoStoreActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail })),
+                        catchError(error => of(VideoStoreActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
         );
@@ -111,16 +144,16 @@ export class VideoStoreEffects {
 
     setGpsOverrideAndMoveNextRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.setGpsCoordinateOverrideAndMoveNextRequest),
+            ofType(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest),
             concatMap(action =>
                 this.api.setGpsCoordinateOverride(action.videoId, action.latLng)
                     .pipe(
                         // eslint-disable-next-line
                         switchMap(gpsDetail => [
-                            VideoActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail }),
-                            VideoActions.moveNextRequest()
+                            VideoStoreActions.setGpsCoordinateOverrideSuccess({ videoId: action.videoId, gpsDetail }),
+                            VideoStoreActions.moveNextRequest()
                         ]),
-                        catchError(error => of(VideoActions.setGpsCoordinateOverrideFailure({ error })))
+                        catchError(error => of(VideoStoreActions.setGpsCoordinateOverrideFailure({ error })))
                     )
             )
         );
@@ -128,7 +161,7 @@ export class VideoStoreEffects {
 
     updateCategoryAfterGpsCoordinateOverideSuccessEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.setGpsCoordinateOverrideSuccess),
+            ofType(VideoStoreActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
                 this.store
@@ -155,9 +188,9 @@ export class VideoStoreEffects {
 
     unsetActivePhotoIdEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoActions.unsetActiveVideoId),
+            ofType(VideoStoreActions.unsetActiveVideoId),
             map(action => {
-                return VideoActions.setActiveVideoId({ id: null });
+                return VideoStoreActions.setActiveVideoId({ id: null });
             })
         );
     });
