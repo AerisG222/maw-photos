@@ -14,7 +14,6 @@ import * as VideoStoreSelectors from './selectors';
 
 @Injectable()
 export class VideoStoreRoutingEffects {
-    firstVideo$ = this.store.select(VideoStoreSelectors.firstVideo);
     videoRoutes$ = this.store
         .select(RouterStoreSelectors.selectRouteDetails)
         .pipe(
@@ -40,7 +39,7 @@ export class VideoStoreRoutingEffects {
     navigateToFirstVideoIfNotInRoute$ = createEffect(() => {
         return combineLatest([
                 this.videoRoutes$,
-                this.firstVideo$
+                this.store.select(VideoStoreSelectors.firstVideo)
             ])
             .pipe(
                 filter(([ routeDetails, firstVideo ]) => !!!routeDetails.params.videoId && !!firstVideo),
