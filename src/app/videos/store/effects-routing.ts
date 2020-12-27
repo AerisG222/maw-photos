@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 import { RouterStoreActions, VideoCategoryStoreActions } from 'src/app/core/root-store';
 import { RouteArea } from 'src/app/models/route-area';
@@ -23,62 +23,59 @@ export class VideoStoreRoutingEffects {
         })
     );
 
-    entering$ = this.actions$.pipe(
-        ofType(RouterStoreActions.routeAreaEntering),
-        filter(action => action.enteringArea === RouteArea.videos)
-    );
-
-    leaving$ = this.actions$.pipe(
-        ofType(RouterStoreActions.routeAreaLeaving),
-        filter(action => action.leavingArea === RouteArea.videos)
-    );
-
     navigateToVideo$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoStoreActions.navigateToVideo),
-            withLatestFrom(this.videoRoutes$),
-            filter(routeDetails => !!routeDetails),
-            tap(([action, routeDetails]) => this.router.navigateByUrl(`/videos/${ routeDetails?.params.categoryId }/${ action.videoId }`))
+            tap(action => this.router.navigateByUrl(`/videos/${ action.categoryId }/${ action.videoId }`))
         );
     }, { dispatch: false });
 
     setActiveVideoFromRoute = createEffect(() => {
         return combineLatest([
-                this.videoRoutes$,
-                this.store.select(VideoStoreSelectors.allEntities),
-                this.store.select(VideoStoreSelectors.allIds)
-            ])
-            .pipe(
-                filter(([routeDetails, entities, ids]) => !!routeDetails && !!entities && !!ids && ids.length > 0),
-                map(([routeDetails, entities, ids]) => {
+            this.actions$.pipe(ofType(RouterStoreActions.routeChanged)),
+            this.store.select(VideoStoreSelectors.allEntities),
+            this.store.select(VideoStoreSelectors.allIds)
+        ]).pipe(
+            filter(([action, entities, ids]) => {
+                return action.routeDetails.area === RouteArea.videos &&
+                    !!entities &&
+                    !!ids &&
+                    ids.length > 0;
+            }),
+            map(([action, entities, ids]) => {
                     // if invalid video id or is not present in url, go to first
-                    if (!!!routeDetails?.params?.videoId || !(routeDetails.params.videoId in entities)) {
-                        return VideoStoreActions.navigateToVideo({ videoId: ids[0] as number });
+                    if (!!!action.routeDetails?.params?.videoId || !(action.routeDetails.params.videoId in entities)) {
+                        return VideoStoreActions.navigateToVideo({
+                            categoryId: action.routeDetails.params.categoryId,
+                            videoId: ids[0] as number
+                        });
                     } else {
-                        return VideoStoreActions.setActiveVideoId({ id: routeDetails.params.videoId });
+                        return VideoStoreActions.setActiveVideoId({ id: action.routeDetails.params.videoId });
                     }
                 })
             );
     });
 
     loadVideosWhenEnteringVideoArea$ = createEffect(() => {
-        return this.entering$.pipe(
-            withLatestFrom(this.videoRoutes$),
-            filter(([action, videoRoute]) => !!videoRoute),
-            map(([action, videoRoute]) => VideoStoreActions.loadRequest({ categoryId: videoRoute?.params.categoryId }))
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaEntering),
+            filter(action => action.enteringArea === RouteArea.videos),
+            map(action => VideoStoreActions.loadRequest({ categoryId: action.enteringRouteDetails?.params?.categoryId }))
         );
     });
 
     setActiveCategoryWhenEnteringVideoArea$ = createEffect(() => {
-        return this.entering$.pipe(
-            withLatestFrom(this.videoRoutes$),
-            filter(([action, videoRoute]) => !!videoRoute),
-            map(([action, videoRoute]) => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: videoRoute?.params.categoryId }))
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaEntering),
+            filter(action => action.enteringArea === RouteArea.videos),
+            map(action => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: action.enteringRouteDetails?.params.categoryId }))
         );
     });
 
     monitorWhenLeavingVideoArea$ = createEffect(() => {
-        return this.leaving$.pipe(
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaLeaving),
+            filter(action => action.leavingArea === RouteArea.videos),
             map(area => VideoStoreActions.exitVideoArea())
         );
     });

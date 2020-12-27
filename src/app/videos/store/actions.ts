@@ -131,7 +131,11 @@ export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
 
 export const navigateToVideo = createAction(
     '[Videos] Navigate to Video',
-    props<{ videoId: number }>()
+    props<{ categoryId: number; videoId: number }>()
+);
+
+export const enterVideoArea = createAction(
+    '[Videos] Entering Video Area'
 );
 
 export const exitVideoArea = createAction(

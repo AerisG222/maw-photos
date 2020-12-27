@@ -14,9 +14,6 @@ interface RouteDetailsChange {
     current: RouteDetails | null;
 }
 
-// TODO: revisit if to see if we nee dto make better distinction of entering vs entered / etc
-//       for example, we currently load videos for a category when the route details say we are in the video area and there are no videos
-//       however, should we instead look for the enter video area action and just load, regardless of the allVideos selector?
 @Injectable()
 export class RouterStoreEffects {
     routeChanged$ = this.actions$.pipe(
@@ -24,16 +21,10 @@ export class RouterStoreEffects {
         withLatestFrom(this.store.select(RouterStoreSelectors.selectRouteDetails))
     );
 
-    routeAreaChange$ = this.routeChanged$.pipe(
+    routeAreaChanged$ = this.routeChanged$.pipe(
         map(([action, currentRouteDetails]) => currentRouteDetails),
         scan((acc: RouteDetailsChange, curr) => {
-            if(!!curr.url) {
-                return { previous: acc?.current, current: curr };
-            } else {
-                // url can be undefined when cancelling, in this case, we do not update our details
-                // as we do not want to fire any enter/leave events in this scenario
-                return acc;
-            }
+            return { previous: acc?.current, current: curr };
         }, { previous: null, current: null}),
         filter(change => change.previous?.area !== change.current?.area)
     );
@@ -45,30 +36,34 @@ export class RouterStoreEffects {
     });
 
     monitorRouteAreaChangeEffect$ = createEffect(() => {
-        return this.routeAreaChange$
+        return this.routeAreaChanged$
             .pipe(
                 map(change => RouterStoreActions.routeAreaChanged({
                     leavingArea: change.previous?.area ?? RouteArea.unknown,
-                    enteringArea: change.current?.area ?? RouteArea.unknown
+                    leavingRouteDetails: change.previous,
+                    enteringArea: change.current?.area ?? RouteArea.unknown,
+                    enteringRouteDetails: change.current
                 }))
             );
         });
 
     monitorRouteAreaEnterEffect$ = createEffect(() => {
-        return this.routeAreaChange$
+        return this.routeAreaChanged$
             .pipe(
                 map(change => RouterStoreActions.routeAreaEntering({
-                    enteringArea: change.current?.area ?? RouteArea.unknown
+                    enteringArea: change.current?.area ?? RouteArea.unknown,
+                    enteringRouteDetails: change.current
                 }))
             );
         });
 
     monitorRouteAreaLeaveEffect$ = createEffect(() => {
-        return this.routeAreaChange$
+        return this.routeAreaChanged$
             .pipe(
                 filter(change => !!change?.previous),
                 map(change => RouterStoreActions.routeAreaLeaving({
-                    leavingArea: change.previous?.area ?? RouteArea.unknown
+                    leavingArea: change.previous?.area ?? RouteArea.unknown,
+                    leavingRouteDetails: change.previous
                 }))
             );
         });
