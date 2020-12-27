@@ -41,7 +41,10 @@ export class SidebarMetadataEditorComponent implements OnInit {
             .pipe(
                 first()
             ).subscribe({
-                next: id => this.store.dispatch(VideoStoreActions.setGpsCoordinateOverrideRequest({ videoId: id as number, latLng })),
+                next: id => this.store.dispatch(VideoStoreActions.setGpsCoordinateOverrideRequest({
+                    videoId: id as number,
+                    latLng
+                })),
                 error: err => console.log(`error trying to set gps coordinate: ${ err }`)
             });
     }
@@ -51,7 +54,10 @@ export class SidebarMetadataEditorComponent implements OnInit {
             .pipe(
                 first()
             ).subscribe({
-                next: id => this.store.dispatch(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ videoId: id as number, latLng })),
+                next: id => this.store.dispatch(VideoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({
+                    videoId: id as number,
+                    latLng
+                })),
                 error: err => console.log(`error trying to set gps coordinate: ${ err }`)
             });
     }

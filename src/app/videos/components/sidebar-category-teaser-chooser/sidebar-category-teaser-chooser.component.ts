@@ -40,7 +40,10 @@ export class SidebarCategoryTeaserChooserComponent implements OnInit {
                 map(video => video as Video)
             )
             .subscribe({
-                next: video => this.store.dispatch(VideoCategoryStoreActions.setTeaserRequest({ categoryId: video.categoryId, videoId: video.id })),
+                next: video => this.store.dispatch(VideoCategoryStoreActions.setTeaserRequest({
+                    categoryId: video.categoryId,
+                    videoId: video.id
+                })),
                 error: err => console.log(`error trying to set category teaser: ${ err }`)
             });
     }
