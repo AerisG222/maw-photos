@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/operators';
 
-import * as VideoCategoryActions from './actions';
-import * as videoCategorySelectors from './selectors';
+import * as VideoCategoryStoreActions from './actions';
+import * as videoCategoryStoreSelectors from './selectors';
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import { VideoCategory } from 'src/app/models/video-category.model';
 import { Category } from 'src/app/models/category.model';
@@ -15,17 +15,17 @@ import { CategoryType } from 'src/app/models/category-type.model';
 export class VideoCategoryStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoCategoryActions.loadRequest),
-            withLatestFrom(this.store.select(videoCategorySelectors.allCategories)),
+            ofType(VideoCategoryStoreActions.loadRequest),
+            withLatestFrom(this.store.select(videoCategoryStoreSelectors.allCategories)),
             exhaustMap(([action, categories]) => {
                 if (categories.length !== 0) {
-                    return of(VideoCategoryActions.loadRequestedSatisfiedByCache());
+                    return of(VideoCategoryStoreActions.loadRequestedSatisfiedByCache());
                 }
 
                 return this.api.getCategories()
                     .pipe(
-                        map(cat => VideoCategoryActions.loadSuccess({ categories: this.adaptCategories(cat.items) })),
-                        catchError(error => of(VideoCategoryActions.loadFailure({ error })))
+                        map(cat => VideoCategoryStoreActions.loadSuccess({ categories: this.adaptCategories(cat.items) })),
+                        catchError(error => of(VideoCategoryStoreActions.loadFailure({ error })))
                     );
             })
         );
@@ -33,12 +33,12 @@ export class VideoCategoryStoreEffects {
 
     setTeaserEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(VideoCategoryActions.setTeaserRequest),
+            ofType(VideoCategoryStoreActions.setTeaserRequest),
             concatMap(action =>
                 this.api.setTeaser(action.categoryId, action.videoId)
                     .pipe(
-                        map(category => VideoCategoryActions.setTeaserSuccess({ category: this.adaptCategory(category) })),
-                        catchError(error => of(VideoCategoryActions.setTeaserFailure({ error })))
+                        map(category => VideoCategoryStoreActions.setTeaserSuccess({ category: this.adaptCategory(category) })),
+                        catchError(error => of(VideoCategoryStoreActions.setTeaserFailure({ error })))
                     )
             )
         );

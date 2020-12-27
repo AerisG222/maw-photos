@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-import { RouterStoreActions, VideoCategoryStoreActions } from 'src/app/core/root-store';
+import { RouterStoreActions } from 'src/app/core/root-store';
 import { RouteArea } from 'src/app/models/route-area';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
@@ -61,14 +61,6 @@ export class VideoStoreRoutingEffects {
             ofType(RouterStoreActions.routeAreaEntering),
             filter(action => action.enteringArea === RouteArea.videos),
             map(action => VideoStoreActions.loadRequest({ categoryId: action.enteringRouteDetails?.params?.categoryId }))
-        );
-    });
-
-    setActiveCategoryWhenEnteringVideoArea$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(RouterStoreActions.routeAreaEntering),
-            filter(action => action.enteringArea === RouteArea.videos),
-            map(action => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: action.enteringRouteDetails?.params.categoryId }))
         );
     });
 
