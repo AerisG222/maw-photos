@@ -19,9 +19,12 @@ interface RouteDetailsChange {
 //       however, should we instead look for the enter video area action and just load, regardless of the allVideos selector?
 @Injectable()
 export class RouterStoreEffects {
-    routeAreaChange$ = this.actions$.pipe(
+    routeChanged$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATED),
-        withLatestFrom(this.store.select(RouterStoreSelectors.selectRouteDetails)),
+        withLatestFrom(this.store.select(RouterStoreSelectors.selectRouteDetails))
+    );
+
+    routeAreaChange$ = this.routeChanged$.pipe(
         map(([action, currentRouteDetails]) => currentRouteDetails),
         scan((acc: RouteDetailsChange, curr) => {
             if(!!curr.url) {
@@ -34,6 +37,12 @@ export class RouterStoreEffects {
         }, { previous: null, current: null}),
         filter(change => change.previous?.area !== change.current?.area)
     );
+
+    monitorRouteChangedEffect$ = createEffect(() => {
+        return this.routeChanged$.pipe(
+            map(([action, routeDetails]) => RouterStoreActions.routeChanged({ routeDetails }))
+        );
+    });
 
     monitorRouteAreaChangeEffect$ = createEffect(() => {
         return this.routeAreaChange$

@@ -5,53 +5,40 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
-import { RouterStoreActions, RouterStoreSelectors, VideoCategoryStoreActions } from 'src/app/core/root-store';
+import { RouterStoreActions, VideoCategoryStoreActions } from 'src/app/core/root-store';
 import { RouteArea } from 'src/app/models/route-area';
-import { Video } from 'src/app/models/video.model';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 
-
 @Injectable()
 export class VideoStoreRoutingEffects {
-    videoRoutes$ = this.store
-        .select(RouterStoreSelectors.selectRouteDetails)
-        .pipe(
-            filter(details => details.area === RouteArea.videos)
-        );
+    videoRoutes$ = this.actions$.pipe(
+        ofType(RouterStoreActions.routeChanged),
+        map(action => {
+            if(action.routeDetails.area === RouteArea.videos) {
+                return action.routeDetails;
+            } else {
+                return null;
+            }
+        })
+    );
 
-    loadVideosForCategoryWhenNavigatingToVideoCategoryScreen$ = createEffect(() => {
-        return this.videoRoutes$
-            .pipe(
-                withLatestFrom(this.store.select(VideoStoreSelectors.allVideos)),
-                filter(([ routeDetails, allVideos ]) => !!!allVideos || allVideos.length === 0),
-                map(([ routeDetails, allVideos ]) => VideoStoreActions.loadRequest({ categoryId: routeDetails.params.categoryId }))
-            );
-    });
+    entering$ = this.actions$.pipe(
+        ofType(RouterStoreActions.routeAreaEntering),
+        filter(action => action.enteringArea === RouteArea.videos)
+    );
 
-    setActiveCategoryWhenNavigatingToVideoCategoryScreen$ = createEffect(() => {
-        return this.videoRoutes$
-            .pipe(
-                map(routeDetails => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: routeDetails.params.categoryId }))
-            );
-    });
-
-    navigateToFirstVideoIfNotInRoute$ = createEffect(() => {
-        return combineLatest([
-                this.videoRoutes$,
-                this.store.select(VideoStoreSelectors.firstVideo)
-            ])
-            .pipe(
-                filter(([ routeDetails, firstVideo ]) => !!!routeDetails.params.videoId && !!firstVideo),
-                map(([ routeDetails, firstVideo ]) => VideoStoreActions.navigateToVideo({ videoId: (firstVideo as Video).id }))
-            );
-    });
+    leaving$ = this.actions$.pipe(
+        ofType(RouterStoreActions.routeAreaLeaving),
+        filter(action => action.leavingArea === RouteArea.videos)
+    );
 
     navigateToVideo$ = createEffect(() => {
-        return this.actions$.pipe (
+        return this.actions$.pipe(
             ofType(VideoStoreActions.navigateToVideo),
             withLatestFrom(this.videoRoutes$),
-            tap(([action, routeDetails]) => this.router.navigateByUrl(`/videos/${ routeDetails.params.categoryId }/${ action.videoId }`))
+            filter(routeDetails => !!routeDetails),
+            tap(([action, routeDetails]) => this.router.navigateByUrl(`/videos/${ routeDetails?.params.categoryId }/${ action.videoId }`))
         );
     }, { dispatch: false });
 
@@ -62,21 +49,36 @@ export class VideoStoreRoutingEffects {
                 this.store.select(VideoStoreSelectors.allIds)
             ])
             .pipe(
-                filter(([routeDetails, entities, ids]) => !!routeDetails.params.videoId && !!entities && !!ids && ids.length > 0),
+                filter(([routeDetails, entities, ids]) => !!routeDetails && !!entities && !!ids && ids.length > 0),
                 map(([routeDetails, entities, ids]) => {
-                    if (routeDetails.params.videoId in entities) {
-                        return VideoStoreActions.setActiveVideoId({ id: routeDetails.params.videoId });
-                    } else {
+                    // if invalid video id or is not present in url, go to first
+                    if (!!!routeDetails?.params?.videoId || !(routeDetails.params.videoId in entities)) {
                         return VideoStoreActions.navigateToVideo({ videoId: ids[0] as number });
+                    } else {
+                        return VideoStoreActions.setActiveVideoId({ id: routeDetails.params.videoId });
                     }
                 })
             );
     });
 
+    loadVideosWhenEnteringVideoArea$ = createEffect(() => {
+        return this.entering$.pipe(
+            withLatestFrom(this.videoRoutes$),
+            filter(([action, videoRoute]) => !!videoRoute),
+            map(([action, videoRoute]) => VideoStoreActions.loadRequest({ categoryId: videoRoute?.params.categoryId }))
+        );
+    });
+
+    setActiveCategoryWhenEnteringVideoArea$ = createEffect(() => {
+        return this.entering$.pipe(
+            withLatestFrom(this.videoRoutes$),
+            filter(([action, videoRoute]) => !!videoRoute),
+            map(([action, videoRoute]) => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: videoRoute?.params.categoryId }))
+        );
+    });
+
     monitorWhenLeavingVideoArea$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(RouterStoreActions.routeAreaLeaving),
-            filter(action => action.leavingArea === RouteArea.videos),
+        return this.leaving$.pipe(
             map(area => VideoStoreActions.exitVideoArea())
         );
     });
