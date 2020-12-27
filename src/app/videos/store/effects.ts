@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as VideoStoreActions from './actions';
@@ -183,15 +183,6 @@ export class VideoStoreEffects {
                         })
                     )
             )
-        );
-    });
-
-    unsetActivePhotoIdEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(VideoStoreActions.unsetActiveVideoId),
-            map(action => {
-                return VideoStoreActions.setActiveVideoId({ id: null });
-            })
         );
     });
 

@@ -6,14 +6,6 @@ import * as VideoActions from './actions';
 
 export const reducer = createReducer(
     initialState,
-    on(VideoActions.clearRequest, (state): State =>
-        videoAdapter.removeAll({
-            ...state,
-            firstVideo: null,
-            lastVideo: null,
-            activeVideo: null
-        })
-    ),
     on(VideoActions.loadCommentsRequest, (state): State => ({
         ...state,
         isLoading: true,
@@ -148,4 +140,9 @@ export const reducer = createReducer(
         isLoading: false,
         error
     })),
+    on(VideoActions.exitVideoArea, (state): State =>
+        videoAdapter.removeAll({
+            ...initialState
+        })
+    )
 );

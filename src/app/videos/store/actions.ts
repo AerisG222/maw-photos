@@ -6,10 +6,6 @@ import { Comment } from 'src/app/models/comment.model';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
 
-export const clearRequest = createAction(
-    '[Videos] Clear'
-);
-
 export const loadRequest = createAction(
     '[Videos] Load Request',
     props<{ categoryId: number }>()
@@ -98,10 +94,6 @@ export const setActiveVideoId = createAction(
     props<{ id: number | null }>()
 );
 
-export const unsetActiveVideoId = createAction(
-    '[Videos] Un-Set Active Video Id'
-);
-
 export const loadGpsDetailRequest = createAction(
     '[Videos] Load GPS Detail Request',
     props<{ videoId: number }>()
@@ -140,4 +132,8 @@ export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
 export const navigateToVideo = createAction(
     '[Videos] Navigate to Video',
     props<{ videoId: number }>()
+);
+
+export const exitVideoArea = createAction(
+    '[Videos] Exiting Video Area'
 );

@@ -74,19 +74,11 @@ export class VideoStoreRoutingEffects {
             );
     });
 
-    unsetActiveVideoWhenLeavingArea$ = createEffect(() => {
+    monitorWhenLeavingVideoArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter(action => action.leavingArea === RouteArea.videos),
-            map(area => VideoStoreActions.unsetActiveVideoId())
-        );
-    });
-
-    clearVideosWhenLeavingArea$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(RouterStoreActions.routeAreaLeaving),
-            filter(action => action.leavingArea === RouteArea.videos),
-            map(area => VideoStoreActions.clearRequest())
+            map(area => VideoStoreActions.exitVideoArea())
         );
     });
 
