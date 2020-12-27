@@ -22,7 +22,7 @@ export const loadRequestedSatisfiedByCache = createAction(
 
 export const setActiveCategoryId = createAction(
     '[Video Categories] Set Active Category Id',
-    props<{ categoryId: number }>()
+    props<{ categoryId: number | null }>()
 );
 
 export const setTeaserRequest = createAction(

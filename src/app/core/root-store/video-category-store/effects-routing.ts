@@ -16,6 +16,14 @@ export class VideoCategoryStoreRoutingEffects {
         );
     });
 
+    resetActiveCategoryWhenLeavingVideoArea$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaLeaving),
+            filter(action => action.leavingArea === RouteArea.videos),
+            map(action => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: null }))
+        );
+    });
+
     constructor(
         private actions$: Actions
     ) {
