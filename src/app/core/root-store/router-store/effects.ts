@@ -5,7 +5,6 @@ import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
-import { SettingsService } from '../../services/settings.service';
 import { RouteDetails } from 'src/app/models/route-details.model';
 import { RouteArea } from 'src/app/models/route-area';
 import { ROUTER_NAVIGATED } from '@ngrx/router-store';
@@ -67,7 +66,6 @@ export class RouterStoreEffects {
 
     constructor(
         private actions$: Actions,
-        private settingsService: SettingsService,
         private store: Store
     ) {
 
