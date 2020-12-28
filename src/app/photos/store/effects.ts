@@ -9,7 +9,7 @@ import { ExifFormatterService } from 'src/app/photos/services/exif-formatter.ser
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
-import { LayoutStoreActions, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreActions, PhotoCategoryStoreActions } from 'src/app/core/root-store';
 import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 
 @Injectable()
