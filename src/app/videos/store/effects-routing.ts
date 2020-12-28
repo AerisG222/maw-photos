@@ -49,7 +49,7 @@ export class VideoStoreRoutingEffects {
                 // if invalid video id or is not present in url, go to first
                 if (isNaN(videoId) || !(videoId in entities)) {
                     return VideoStoreActions.navigateToVideo({
-                        categoryId: categoryId,
+                        categoryId,
                         videoId: ids[0] as number
                     });
                 } else {
