@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Video } from 'src/app/models/video.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
