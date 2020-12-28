@@ -1,13 +1,30 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { filter, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import { RouteArea } from 'src/app/models/route-area';
-import * as VideoCategoryStoreActions from './actions';
 import { RouterStoreActions } from '../router-store';
+import * as VideoCategoryStoreActions from './actions';
+import * as VideoCategoryStoreSelectors from './selectors';
 
 @Injectable()
 export class VideoCategoryStoreRoutingEffects {
+    verifyActiveCategoryOnRouteChange$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeChanged),
+            filter(action => action.routeDetails.area === RouteArea.videos),
+            withLatestFrom(this.store.select(VideoCategoryStoreSelectors.allEntities)),
+            filter(([action, entities]) => {
+                const catId = Number(action.routeDetails.params.categoryId);
+
+                return isNaN(catId) || !(catId in entities);
+            }),
+            tap(_ => this.router.navigateByUrl('/categories'))
+        );
+    }, { dispatch: false });
+
     setActiveCategoryWhenEnteringVideoArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaEntering),
@@ -25,7 +42,9 @@ export class VideoCategoryStoreRoutingEffects {
     });
 
     constructor(
-        private actions$: Actions
+        private actions$: Actions,
+        private store: Store,
+        private router: Router
     ) {
 
     }

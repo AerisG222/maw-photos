@@ -10,6 +10,7 @@ export const videoCategoryState = createFeatureSelector<State>(VIDEO_CATEGORY_FE
 const { selectAll, selectEntities } = videoCategoryAdapter.getSelectors(videoCategoryState);
 
 export const allCategories = selectAll;
+export const allEntities = selectEntities;
 
 export const videoCategoryError = createSelector(
     videoCategoryState,
