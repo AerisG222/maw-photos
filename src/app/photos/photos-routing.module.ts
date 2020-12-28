@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -5,10 +6,10 @@ import { PhotoCategoriesResolverService } from 'src/app/core/services/photo-cate
 import { PhotoCategoryComponent } from './components/photo-category/photo-category.component';
 import { RandomComponent } from './components/random/random.component';
 
-
 const routes: Routes = [
     { path: 'random', component: RandomComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
-    { path: ':id', component: PhotoCategoryComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId', component: PhotoCategoryComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/:photoId', component: PhotoCategoryComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
     { path: '**', redirectTo: '/categories' }
 ];
 

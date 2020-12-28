@@ -10,6 +10,7 @@ const photoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_N
 const { selectAll, selectEntities } = photoCategoryAdapter.getSelectors(photoCategoryState);
 
 export const allCategories = selectAll;
+export const allEntities = selectEntities;
 
 export const error = createSelector(
     photoCategoryState,
