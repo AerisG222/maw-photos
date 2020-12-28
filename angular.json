@@ -89,6 +89,10 @@
                                 {
                                     "replace": "src/environments/modules.ts",
                                     "with": "src/environments/modules.prod.ts"
+                                },
+                                {
+                                    "replace": "src/app/core/root-store/environment/modules.ts",
+                                    "with": "src/app/core/root-store/environment/modules.prod.ts"
                                 }
                             ],
                             "optimization": true,
