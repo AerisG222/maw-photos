@@ -34,7 +34,6 @@
                 *ngIf="data.photos && data.settings?.photoListShowPhotoList"
                 [photos]="data.photos"
                 [thumbnailSize]="data.settings?.photoListThumbnailSize"
-                (photoSelected)="onSelectPhoto($event)"
                 [selectedPhoto]="data.activePhoto"
                 #photoList>
             </app-photos-photo-list>

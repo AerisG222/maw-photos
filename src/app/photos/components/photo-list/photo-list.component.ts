@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Photo } from 'src/app/models/photo.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
@@ -13,7 +13,6 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 export class PhotoListComponent {
     @Input() photos: Photo[] | null = null;
     @Input() selectedPhoto: Photo | null = null;
-    @Output() photoSelected = new EventEmitter<Photo>();
 
     photoThumbnailSize: ThumbnailSize | null = null;
     imgWidth: number | null = null;
@@ -49,10 +48,6 @@ export class PhotoListComponent {
                 this.imgHeight = 120;
                 break;
         }
-    }
-
-    onClickPhoto(photo: Photo): void {
-        this.photoSelected.emit(photo);
     }
 
     scrollIntoView(photoId: number, elementRef: HTMLElement): string {

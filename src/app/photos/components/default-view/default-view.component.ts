@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, tap, take, map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
@@ -49,14 +49,6 @@ export class DefaultViewComponent implements OnInit {
                 filter(x => !!x),
                 map(x => x as Category)
             );
-
-        this.store
-            .select(PhotoStoreSelectors.allPhotos)
-            .pipe(
-                filter(photos => !!photos && photos.length > 0),
-                tap(photos => this.setActivePhoto(photos[0])),
-                take(1)
-            ).subscribe();
 
         this.photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
 
@@ -109,13 +101,5 @@ export class DefaultViewComponent implements OnInit {
 
     onSwipeRight(): void {
         this.store.dispatch(PhotoStoreActions.movePreviousRequest());
-    }
-
-    onSelectPhoto(photo: Photo): void {
-        this.setActivePhoto(photo);
-    }
-
-    private setActivePhoto(photo: Photo): void {
-        this.store.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
     }
 }
