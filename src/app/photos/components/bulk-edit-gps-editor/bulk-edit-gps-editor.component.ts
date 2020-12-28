@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import { GpsService } from 'src/app/core/services/gps.service';
 import { PhotoStoreSelectors } from 'src/app/photos/store';
@@ -13,11 +12,11 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
     styleUrls: ['./bulk-edit-gps-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BulkEditGpsEditorComponent implements OnInit {
+export class BulkEditGpsEditorComponent {
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
     gpsForm: FormGroup;
-    hasPendingEdits$: Observable<boolean> | null = null;
+    hasPendingEdits$ = this.store.select(PhotoStoreSelectors.hasPendingActions);
 
     constructor(
         private store: Store,
@@ -28,10 +27,6 @@ export class BulkEditGpsEditorComponent implements OnInit {
             latitude: ['', Validators.required],
             longitude: ['', Validators.required]
         });
-    }
-
-    ngOnInit(): void {
-        this.hasPendingEdits$ = this.store.select(PhotoStoreSelectors.hasPendingActions);
     }
 
     onPaste(evt: ClipboardEvent): void {

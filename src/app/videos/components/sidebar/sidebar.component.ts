@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
@@ -30,31 +29,19 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
         ])
     ]
 })
-export class SidebarComponent implements OnInit {
-    isAdmin$: Observable<boolean> | null = null;
-    endSidenavExpanded$: Observable<boolean> | null = null;
-    showComments$: Observable<boolean> | null = null;
-    showRatings$: Observable<boolean> | null = null;
-    showMinimap$: Observable<boolean> | null = null;
-    minimapUseDarkTheme$: Observable<boolean> | null = null;
-    showMetadataEditor$: Observable<boolean> | null = null;
-    showCategoryTeaserChooser$: Observable<boolean> | null = null;
-    enableButtons$: Observable<boolean> | null = null;
+export class SidebarComponent {
+    isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+    endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
+    showComments$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowComments);
+    showRatings$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowRatings);
+    showMinimap$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMinimap);
+    showMetadataEditor$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMetadataEditor);
+    showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowCategoryTeaserChooser);
+    enableButtons$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
 
     constructor(
         private store: Store
     ) { }
-
-    ngOnInit(): void {
-        this.isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
-        this.enableButtons$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
-        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
-        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowCategoryTeaserChooser);
-        this.showComments$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowComments);
-        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMetadataEditor);
-        this.showMinimap$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMinimap);
-        this.showRatings$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowRatings);
-    }
 
     toggleSidebar(): void {
         this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelExpandedStateRequest());

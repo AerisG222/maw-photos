@@ -20,7 +20,7 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
     settings: Settings | null = null;
     isListView$: Observable<boolean> | null = null;
     isGridView$: Observable<boolean> | null = null;
-    showCategoryTitles$: Observable<boolean> | null = null;
+    showCategoryTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);
 
     private destroySub = new Subscription();
 
@@ -40,8 +40,6 @@ export class CategoryListToolbarComponent implements OnInit, OnDestroy {
             .pipe(
                 map(type => type.name === CategoryListType.grid.name)
             );
-
-        this.showCategoryTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);
 
         this.destroySub.add(this.store
             .select(SettingsStoreSelectors.settings)

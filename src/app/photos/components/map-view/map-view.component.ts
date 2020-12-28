@@ -5,7 +5,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { MapImage } from 'src/app/models/map-image.model';
 import { Photo } from 'src/app/models/photo.model';
-import { Settings } from 'src/app/models/settings.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
@@ -18,15 +17,13 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
 export class MapViewComponent implements OnInit, OnDestroy {
     activePhoto$: Observable<Photo> | null = null;
     mapImages$: Observable<MapImage[]> | null = null;
-    settings$: Observable<Settings> | null = null;
+    settings$ = this.store.select(SettingsStoreSelectors.settings);
 
     constructor(private store: Store) {
 
     }
 
     ngOnInit(): void {
-        this.settings$ = this.store.select(SettingsStoreSelectors.settings);
-
         this.activePhoto$ = this.store
             .select(PhotoStoreSelectors.activePhoto)
             .pipe(

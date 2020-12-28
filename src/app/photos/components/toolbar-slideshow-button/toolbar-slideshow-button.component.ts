@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors } from 'src/app/photos/store';
@@ -10,18 +9,14 @@ import { PhotoStoreSelectors } from 'src/app/photos/store';
     styleUrls: ['./toolbar-slideshow-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarSlideshowButtonComponent implements OnInit {
+export class ToolbarSlideshowButtonComponent {
     @Output() toggleSlideshow = new EventEmitter<void>();
 
-    slideshowPlaying$: Observable<boolean> | null = null;
+    slideshowPlaying$ = this.store.select(PhotoStoreSelectors.slideshowIsPlaying);
 
     constructor(
         private store: Store
     ) { }
-
-    ngOnInit(): void {
-        this.slideshowPlaying$ = this.store.select(PhotoStoreSelectors.slideshowIsPlaying);
-    }
 
     onToggleSlideshow(): void {
         this.toggleSlideshow.emit();

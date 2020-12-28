@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
@@ -30,36 +29,22 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultSidebarComponent implements OnInit {
-    isAdmin$: Observable<boolean> | null = null;
-    endSidenavExpanded$: Observable<boolean> | null = null;
-    showComments$: Observable<boolean> | null = null;
-    showEffects$: Observable<boolean> | null = null;
-    showExif$: Observable<boolean> | null = null;
-    showRatings$: Observable<boolean> | null = null;
-    showMinimap$: Observable<boolean> | null = null;
-    showHistogram$: Observable<boolean> | null = null;
-    showMetadataEditor$: Observable<boolean> | null = null;
-    showCategoryTeaserChooser$: Observable<boolean> | null = null;
-    enableButtons$: Observable<boolean> | null = null;
+export class DefaultSidebarComponent {
+    isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+    endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
+    showComments$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowComments);
+    showEffects$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowEffects);
+    showExif$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowExif);
+    showRatings$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowRatings);
+    showMinimap$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMinimap);
+    showHistogram$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowHistogram);
+    showMetadataEditor$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMetadataEditor);
+    showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowCategoryTeaserChooser);
+    enableButtons$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
 
     constructor(
         private store: Store
     ) { }
-
-    ngOnInit(): void {
-        this.isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
-        this.enableButtons$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
-        this.endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
-        this.showComments$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowComments);
-        this.showMetadataEditor$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMetadataEditor);
-        this.showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowCategoryTeaserChooser);
-        this.showEffects$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowEffects);
-        this.showExif$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowExif);
-        this.showHistogram$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowHistogram);
-        this.showMinimap$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMinimap);
-        this.showRatings$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowRatings);
-    }
 
     toggleSidebar(): void {
         this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());

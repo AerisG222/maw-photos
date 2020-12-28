@@ -7,9 +7,6 @@ import { SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/cor
 import { Category } from 'src/app/models/category.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from '../../store';
 import { Photo } from 'src/app/models/photo.model';
-import { Settings } from 'src/app/models/settings.model';
-import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
-import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
 
 @Component({
@@ -20,14 +17,14 @@ import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
 export class GridViewComponent implements OnInit, OnDestroy {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
 
-    settings$: Observable<Settings> | null = null;
-    category$: Observable<Category> | null = null;
-    photos$: Observable<Photo[]> | null = null;
-    activePhoto$: Observable<Photo | null> | null = null;
-    thumbnailSize$: Observable<ThumbnailSize> | null = null;
-    margin$: Observable<CategoryMargin> | null = null;
-    showBreadcrumbs$: Observable<boolean> | null = null;
     lastScrollTop = 0;
+    category$: Observable<Category> | null = null;
+    settings$ = this.store.select(SettingsStoreSelectors.settings);
+    photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
+    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
+    thumbnailSize$ = this.store.select(SettingsStoreSelectors.photoGridThumbnailSize);
+    margin$ = this.store.select(SettingsStoreSelectors.photoGridMargin);
+    showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
 
     constructor(private store: Store) {
 
@@ -36,20 +33,12 @@ export class GridViewComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.clearActivePhoto();
 
-        this.settings$ = this.store.select(SettingsStoreSelectors.settings);
-
         this.category$ = this.store
             .select(PhotoCategoryStoreSelectors.activeCategory)
             .pipe(
                 filter(x => !!x),
                 map(x => x as Category)
             );
-
-        this.photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
-        this.activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
-        this.thumbnailSize$ = this.store.select(SettingsStoreSelectors.photoGridThumbnailSize);
-        this.margin$ = this.store.select(SettingsStoreSelectors.photoGridMargin);
-        this.showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
     }
 
     ngOnDestroy(): void {

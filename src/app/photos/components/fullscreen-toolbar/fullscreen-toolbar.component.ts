@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 
@@ -10,18 +9,13 @@ import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
     styleUrls: ['./fullscreen-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FullscreenToolbarComponent implements OnInit {
-    isFirst$: Observable<boolean> | null = null;
-    isLast$: Observable<boolean> | null = null;
+export class FullscreenToolbarComponent {
+    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
     constructor(
         private store: Store
     ) { }
-
-    ngOnInit(): void {
-        this.isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-        this.isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
-    }
 
     onExitFullscreen(): void {
         this.store.dispatch(PhotoStoreActions.exitFullscreenRequest());

@@ -1,9 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 
-import { Comment } from 'src/app/models/comment.model';
 import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
 
 @Component({
@@ -12,17 +10,13 @@ import { VideoStoreSelectors, VideoStoreActions } from 'src/app/videos/store';
     styleUrls: ['./sidebar-comments.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarCommentsComponent implements OnInit {
-    comments$: Observable<Comment[] | null> | null = null;
+export class SidebarCommentsComponent {
+    comments$ = this.store.select(VideoStoreSelectors.activeVideoComments);
 
     constructor(
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.comments$ = this.store.select(VideoStoreSelectors.activeVideoComments);
     }
 
     onComment(comment: string): void {

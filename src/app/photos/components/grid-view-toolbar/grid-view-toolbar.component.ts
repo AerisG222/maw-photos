@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { tap, first, filter, map } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
@@ -20,8 +20,8 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
     enableShare = false;
     isPhotoSelected = false;
     settings: Settings | null = null;
-    isFirst$: Observable<boolean> | null = null;
-    isLast$: Observable<boolean> | null = null;
+    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
     private destroySub = new Subscription();
 
@@ -46,9 +46,6 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
                 map(x => this.isPhotoSelected = !!x)
             ).subscribe()
         );
-
-        this.isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-        this.isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     }
 
     ngOnDestroy(): void {

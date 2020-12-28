@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { LayoutStoreSelectors } from 'src/app/core/root-store';
@@ -10,16 +9,12 @@ import { LayoutStoreSelectors } from 'src/app/core/root-store';
     styleUrls: ['./sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarComponent implements OnInit {
-    hidePanel$: Observable<boolean> | null = null;
+export class SidebarComponent {
+    hidePanel$ = this.store.select(LayoutStoreSelectors.isFullscreen);
 
     constructor(
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.hidePanel$ = this.store.select(LayoutStoreSelectors.isFullscreen);
     }
 }

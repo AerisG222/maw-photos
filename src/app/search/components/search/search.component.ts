@@ -3,15 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { SearchResult } from 'src/app/search/models/search-result.model';
-import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { SearchStoreSelectors } from 'src/app/search/store';
 import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 import { CategoryType } from 'src/app/models/category-type.model';
-import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
 import { CategoryListType } from 'src/app/models/category-list-type.model';
-import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { clearRequest } from 'src/app/search/store/actions';
 
 @Component({
@@ -21,20 +17,20 @@ import { clearRequest } from 'src/app/search/store/actions';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit, OnDestroy {
-    currentResult$: Observable<SearchResult<MultimediaCategory> | null> | null = null;
     categories$: Observable<CategoryTeaser[]> | null = null;
     showListView$: Observable<boolean> | null = null;
     showGridView$: Observable<boolean> | null = null;
-    gridShowTitles$: Observable<boolean> | null = null;
-    gridShowYears$: Observable<boolean> | null = null;
-    listThumbnailSize$: Observable<ThumbnailSize> | null = null;
-    gridThumbnailSize$: Observable<ThumbnailSize> | null = null;
-    margin$: Observable<CategoryMargin> | null = null;
-    hasMoreResults$: Observable<boolean> | null = null;
     totalResults$: Observable<number> | null = null;
     showTotalResults$: Observable<boolean> | null = null;
     shownResults$: Observable<number> | null = null;
     showNoResults$: Observable<boolean> | null = null;
+    hasMoreResults$ = this.store.select(SearchStoreSelectors.hasMoreResults);
+    margin$ = this.store.select(SettingsStoreSelectors.searchCategoryMargin);
+    currentResult$ = this.store.select(SearchStoreSelectors.activeResult);
+    gridShowTitles$ = this.store.select(SettingsStoreSelectors.searchShowCategoryTitles);
+    gridShowYears$ = this.store.select(SettingsStoreSelectors.searchShowCategoryYears);
+    listThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchListViewThumbnailSize);
+    gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchThumbnailSize);
 
     constructor(
         private store: Store
@@ -43,8 +39,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.margin$ = this.store.select(SettingsStoreSelectors.searchCategoryMargin);
-
         this.showListView$ = this.store
             .select(SettingsStoreSelectors.searchListType)
             .pipe(
@@ -56,12 +50,6 @@ export class SearchComponent implements OnInit, OnDestroy {
             .pipe(
                 map(type => type.name === CategoryListType.grid.name)
             );
-
-        this.listThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchListViewThumbnailSize);
-        this.gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchThumbnailSize);
-        this.gridShowTitles$ = this.store.select(SettingsStoreSelectors.searchShowCategoryTitles);
-        this.gridShowYears$ = this.store.select(SettingsStoreSelectors.searchShowCategoryYears);
-        this.currentResult$ = this.store.select(SearchStoreSelectors.activeResult);
 
         this.categories$ = this.store
             .select(SearchStoreSelectors.allResults)
@@ -86,8 +74,6 @@ export class SearchComponent implements OnInit, OnDestroy {
                     type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
                 })))
             );
-
-        this.hasMoreResults$ = this.store.select(SearchStoreSelectors.hasMoreResults);
 
         this.totalResults$ = this.store
             .select(SearchStoreSelectors.activeResult)

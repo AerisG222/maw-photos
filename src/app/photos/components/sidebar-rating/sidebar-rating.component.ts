@@ -14,7 +14,7 @@ import { Photo } from 'src/app/models/photo.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarRatingComponent implements OnInit, OnDestroy {
-    rating$: Observable<Rating | null> | null = null;
+    rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
 
     private activeId = -1;
     private destroySub = new Subscription();
@@ -26,8 +26,6 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
-
         this.destroySub.add(this.store
             .select(PhotoStoreSelectors.activePhoto)
             .pipe(

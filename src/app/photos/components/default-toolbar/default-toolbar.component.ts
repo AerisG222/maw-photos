@@ -28,12 +28,12 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
 
     enableShare: boolean;
 
-    isFirst$: Observable<boolean> | null = null;
-    isLast$: Observable<boolean> | null = null;
-    enableBulkEdit$: Observable<boolean> | null = null;
-    enableMapView$: Observable<boolean> | null = null;
     category$: Observable<PhotoCategory> | null = null;
     settings: Settings | null = null;
+    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
+    enableBulkEdit$ = this.store.select(RootStoreSelectors.enableBulkEdit);
+    enableMapView$ = this.store.select(PhotoStoreSelectors.enableMapView);
 
     smDownloadUrl: string | null = null;
     mdDownloadUrl: string | null = null;
@@ -63,11 +63,6 @@ export class DefaultToolbarComponent implements OnInit, OnDestroy {
                 filter(c => !!c),
                 map(c => (c as Category).actual as PhotoCategory)
             );
-
-        this.enableBulkEdit$ = this.store.select(RootStoreSelectors.enableBulkEdit);
-        this.enableMapView$ = this.store.select(PhotoStoreSelectors.enableMapView);
-        this.isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-        this.isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
         this.destroySub.add(this.store
             .select(PhotoStoreSelectors.activePhoto)

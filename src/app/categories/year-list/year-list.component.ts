@@ -14,9 +14,9 @@ import { SettingsStoreSelectors, SettingsStoreActions, RootStoreSelectors, AuthS
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YearListComponent implements OnInit {
-    margin$: Observable<CategoryMargin> | null = null;
-    years$: Observable<number[]> | null = null;
-    isAdmin$: Observable<boolean> | null = null;
+    margin$ = this.store.select(SettingsStoreSelectors.categoryListCategoryMargin);
+    years$ = this.store.select(RootStoreSelectors.allFilteredCategoryYears);
+    isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
 
     constructor(
         private store: Store,
@@ -26,8 +26,6 @@ export class YearListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
-
         this.activatedRoute.fragment
             .pipe(
                 first(),
@@ -40,8 +38,5 @@ export class YearListComponent implements OnInit {
                     }
                 })
             ).subscribe();
-
-        this.margin$ = this.store.select(SettingsStoreSelectors.categoryListCategoryMargin);
-        this.years$ = this.store.select(RootStoreSelectors.allFilteredCategoryYears);
     }
 }

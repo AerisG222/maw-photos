@@ -13,9 +13,9 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarMinimapComponent implements OnInit {
-    mapTypeId$: Observable<string> | null = null;
-    zoom$: Observable<number> | null = null;
     position$: Observable<google.maps.LatLng | null> | null = null;
+    mapTypeId$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapTypeId);
+    zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
 
     constructor(
         private store: Store
@@ -40,9 +40,6 @@ export class SidebarMinimapComponent implements OnInit {
                     return null;
                 })
             );
-
-        this.mapTypeId$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapTypeId);
-        this.zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     }
 
     onMapTypeChange(mapTypeId: string): void {

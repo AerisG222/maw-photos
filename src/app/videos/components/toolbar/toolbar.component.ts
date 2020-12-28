@@ -16,8 +16,8 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-    isFirst$: Observable<boolean> | null = null;
-    isLast$: Observable<boolean> | null = null;
+    isFirst$ = this.store.select(VideoStoreSelectors.isActiveVideoFirst);
+    isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
     settings: Settings | null = null;
 
     private destroySub = new Subscription();
@@ -33,9 +33,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
                 tap(settings => this.settings = settings)
             ).subscribe()
         );
-
-        this.isFirst$ = this.store.select(VideoStoreSelectors.isActiveVideoFirst);
-        this.isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
     }
 
     ngOnDestroy(): void {
