@@ -3,8 +3,8 @@ import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { filter, map } from 'rxjs/operators';
 
 import { RouteArea } from 'src/app/models/route-area';
-import { VideoCategoryStoreActions } from '.';
-import { RouterStoreActions } from '..';
+import * as VideoCategoryStoreActions from './actions';
+import { RouterStoreActions } from '../router-store';
 
 @Injectable()
 export class VideoCategoryStoreRoutingEffects {
