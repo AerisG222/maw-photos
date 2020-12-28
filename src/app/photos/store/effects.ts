@@ -179,7 +179,8 @@ export class PhotoStoreEffects {
                     .pipe(
                         filter(missingDetails => !!missingDetails),
                         map(missingDetails => {
-                            return PhotoCategoryStoreActions.setIsMissingGpsData(missingDetails);
+                            // eslint-disable-next-line max-len
+                            return PhotoCategoryStoreActions.setIsMissingGpsData(missingDetails as { categoryId: number; isMissingGpsData: boolean });
                         })
                     )
             )
