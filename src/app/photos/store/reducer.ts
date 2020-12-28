@@ -287,5 +287,10 @@ export const reducer = createReducer(
     on(PhotoActions.toggleGridViewRequest, (state): State => ({
         ...state,
         isGridView: !state.isGridView
-    }))
+    })),
+    on(PhotoActions.exitPhotoArea, (state): State =>
+        photoAdapter.removeAll({
+            ...initialState
+        })
+    )
 );

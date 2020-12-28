@@ -18,6 +18,8 @@ const photoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 const { selectAll, selectEntities, selectIds } = photoAdapter.getSelectors(photoState);
 
 export const allPhotos = selectAll;
+export const allEntities = selectEntities;
+export const allIds = selectIds;
 
 export const error = createSelector(
     photoState,

@@ -278,3 +278,16 @@ export const enterRandomView = createAction(
     '[Photos] Enter Random View',
     props<{ count: number }>()
 );
+
+export const navigateToPhoto = createAction(
+    '[Photos] Navigate to Photo',
+    props<{ categoryId: number; photoId: number }>()
+);
+
+export const enterPhotoArea = createAction(
+    '[Photos] Entering Photo Area'
+);
+
+export const exitPhotoArea = createAction(
+    '[Photos] Exiting Photo Area'
+);
