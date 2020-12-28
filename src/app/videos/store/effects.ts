@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
-import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap } from 'rxjs/operators';
+import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
 import * as VideoStoreActions from './actions';
@@ -183,6 +183,30 @@ export class VideoStoreEffects {
                         })
                     )
             )
+        );
+    });
+
+    moveNextEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(VideoStoreActions.moveNextRequest),
+            withLatestFrom(this.store.select(VideoStoreSelectors.nextVideo)),
+            filter(([action, video]) => !!video),
+            map(([action, video]) => VideoStoreActions.navigateToVideo({
+                categoryId: video?.categoryId as number,
+                videoId: video?.id as number
+            }))
+        );
+    });
+
+    movePreviousEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(VideoStoreActions.movePreviousRequest),
+            withLatestFrom(this.store.select(VideoStoreSelectors.previousVideo)),
+            filter(([action, video]) => !!video),
+            map(([action, video]) => VideoStoreActions.navigateToVideo({
+                categoryId: video?.categoryId as number,
+                videoId: video?.id as number
+            }))
         );
     });
 
