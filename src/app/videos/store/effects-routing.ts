@@ -43,17 +43,20 @@ export class VideoStoreRoutingEffects {
                     ids.length > 0;
             }),
             map(([action, entities, ids]) => {
-                    // if invalid video id or is not present in url, go to first
-                    if (!!!action.routeDetails?.params?.videoId || !(action.routeDetails.params.videoId in entities)) {
-                        return VideoStoreActions.navigateToVideo({
-                            categoryId: action.routeDetails.params.categoryId,
-                            videoId: ids[0] as number
-                        });
-                    } else {
-                        return VideoStoreActions.setActiveVideoId({ id: action.routeDetails.params.videoId });
-                    }
-                })
-            );
+                const categoryId = Number(action.routeDetails.params.categoryId);
+                const videoId = Number(action.routeDetails.params.videoId);
+
+                // if invalid video id or is not present in url, go to first
+                if (isNaN(videoId) || !(videoId in entities)) {
+                    return VideoStoreActions.navigateToVideo({
+                        categoryId: categoryId,
+                        videoId: ids[0] as number
+                    });
+                } else {
+                    return VideoStoreActions.setActiveVideoId({ id: videoId });
+                }
+            })
+        );
     });
 
     loadVideosWhenEnteringVideoArea$ = createEffect(() => {
