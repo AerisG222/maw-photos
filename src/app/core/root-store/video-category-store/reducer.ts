@@ -2,7 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 
 import { videoCategoryAdapter, initialState, State } from './state';
 import * as VideoCategoryActions from './actions';
-import { getIdsByYear } from '../category-helpers';
 
 export const reducer = createReducer(
     initialState,
@@ -14,7 +13,6 @@ export const reducer = createReducer(
     on(VideoCategoryActions.loadSuccess, (state, { categories }): State =>
         videoCategoryAdapter.addMany(categories, {
             ...state,
-            categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
             error: null
         })

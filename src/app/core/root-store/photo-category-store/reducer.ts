@@ -2,7 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 
 import * as PhotoCategoryActions from './actions';
 import { photoCategoryAdapter, initialState, State } from './state';
-import { getIdsByYear } from '../category-helpers';
 
 export const reducer = createReducer(
     initialState,
@@ -14,7 +13,6 @@ export const reducer = createReducer(
     on(PhotoCategoryActions.loadSuccess, (state, { categories }): State =>
         photoCategoryAdapter.addMany(categories, {
             ...state,
-            categoryIdsByYear: getIdsByYear(categories),
             isLoading: false,
             error: null
         })
