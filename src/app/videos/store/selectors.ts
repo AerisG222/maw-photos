@@ -32,6 +32,12 @@ export const activeVideoId = createSelector(
     (state: State): number | null => state.activeVideoId
 );
 
+export const activeVideoIndex = createSelector(
+    selectIds,
+    activeVideoId,
+    (ids: string[] | number[], id: number | null): number | null => !!id ? (ids as number[]).indexOf(id) : null
+);
+
 export const activeVideo = createSelector(
     selectEntities,
     activeVideoId,
@@ -121,6 +127,73 @@ export const videoById = createSelector(
         }
     }
 );
+
+export const nextVideoIndex = createSelector(
+    selectAll,
+    activeVideoIndex,
+    isActiveVideoLast,
+    (videos, activeIndex, isLast) => {
+        if (isLast) {
+            return activeIndex as number;
+        }
+
+        if (activeIndex === null) {
+            activeIndex = -1;
+        }
+
+        const nextIndex = activeIndex + 1;
+
+        return nextIndex < videos.length ? nextIndex : -1;
+    }
+);
+
+export const nextVideoId = createSelector(
+    selectIds,
+    nextVideoIndex,
+    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+);
+
+export const nextVideo = createSelector(
+    selectEntities,
+    nextVideoId,
+    (entities, nextId) => {
+        return !!nextId ? entities[nextId] as Video : null;
+    }
+);
+
+export const previousVideoIndex = createSelector(
+    selectAll,
+    activeVideoIndex,
+    isActiveVideoFirst,
+    (photos, activeIndex, isFirst) => {
+        if (isFirst) {
+            return activeIndex as number;
+        }
+
+        if (activeIndex === null) {
+            activeIndex = -1;
+        }
+
+        const previousIndex = activeIndex - 1;
+
+        return previousIndex >= 0 ? previousIndex : -1;
+    }
+);
+
+export const previousVideoId = createSelector(
+    selectIds,
+    previousVideoIndex,
+    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+);
+
+export const previousVideo = createSelector(
+    selectEntities,
+    previousVideoId,
+    (entities, previousId) => {
+        return !!previousId ? entities[previousId] as Video : null;
+    }
+);
+
 
 export const isCommentCardVisible = createSelector(
     SettingsStoreSelectors.videoInfoPanelExpandedState,
