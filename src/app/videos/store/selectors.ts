@@ -165,7 +165,7 @@ export const previousVideoIndex = createSelector(
     selectAll,
     activeVideoIndex,
     isActiveVideoFirst,
-    (photos, activeIndex, isFirst) => {
+    (videos, activeIndex, isFirst) => {
         if (isFirst) {
             return activeIndex as number;
         }
