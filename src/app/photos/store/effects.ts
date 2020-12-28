@@ -9,7 +9,7 @@ import { ExifFormatterService } from 'src/app/photos/services/exif-formatter.ser
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
-import { LayoutStoreActions, PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { LayoutStoreActions, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 
 @Injectable()
@@ -175,22 +175,11 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
-                this.store
-                    .select(PhotoStoreSelectors.allPhotos)
+                this.store.select(PhotoStoreSelectors.anyPhotosMissingGpsCoordinates)
                     .pipe(
-                        filter(photos => !!photos && !!photos[0]),  // sometimes will get an undefined photos[0] but not sure why
-                        map(photos => {
-                            const catId = photos[0].categoryId;
-                            let isMissingGpsData = false;
-
-                            for (const photo of photos) {
-                                if (photo.latitude === null || photo.longitude === null) {
-                                    isMissingGpsData = true;
-                                    break;
-                                }
-                            }
-
-                            return PhotoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
+                        filter(missingDetails => !!missingDetails),
+                        map(missingDetails => {
+                            return PhotoCategoryStoreActions.setIsMissingGpsData(missingDetails);
                         })
                     )
             )

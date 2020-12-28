@@ -9,7 +9,7 @@ import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
 import { ExifContainer } from 'src/app/models/exif-container';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
-import { RouterStoreSelectors } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors, RouterStoreSelectors } from 'src/app/core/root-store';
 
 const photoHasGpsData = (photo: Photo) => photo?.latitude !== null;
 
@@ -280,6 +280,20 @@ export const photosWithGpsCoordinates = createSelector(
         } else {
             return null;
         }
+    }
+);
+
+export const anyPhotosMissingGpsCoordinates = createSelector(
+    PhotoCategoryStoreSelectors.activeCategoryId,
+    allPhotos,
+    (categoryId: number | null, photos: Photo[]) => {
+        if(!!!categoryId || !!!photos) {
+            return null;
+        }
+
+        const isMissingGpsData = !!photos.find(photo => photo.latitude === null || photo.longitude === null);
+
+        return { categoryId: categoryId as number, isMissingGpsData };
     }
 );
 
