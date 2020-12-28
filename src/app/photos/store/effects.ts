@@ -238,27 +238,27 @@ export class PhotoStoreEffects {
         );
     });
 
-    moveNextSetActivePhotoIdEffect$ = createEffect(() => {
+    moveNextEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.moveNextRequest),
-            concatMap(action => of(action).pipe(
-                withLatestFrom(this.store.select(PhotoStoreSelectors.nextPhotoId))
-            )),
-            map(([action, nextId]) => {
-                return PhotoActions.setActivePhotoId({ id: nextId });
-            })
+            withLatestFrom(this.store.select(PhotoStoreSelectors.nextPhoto)),
+            filter(([action, photo]) => !!photo),
+            map(([action, photo]) => PhotoActions.navigateToPhoto({
+                categoryId: photo?.categoryId as number,
+                photoId: photo?.id as number
+            }))
         );
     });
 
-    movePreviousSetActivePhotoIdEffect$ = createEffect(() => {
+    movePreviousEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.movePreviousRequest),
-            concatMap(action => of(action).pipe(
-                withLatestFrom(this.store.select(PhotoStoreSelectors.previousPhotoId))
-            )),
-            map(([action, prevId]) => {
-                return PhotoActions.setActivePhotoId({ id: prevId });
-            })
+            withLatestFrom(this.store.select(PhotoStoreSelectors.previousPhoto)),
+            filter(([action, photo]) => !!photo),
+            map(([action, photo]) => PhotoActions.navigateToPhoto({
+                categoryId: photo?.categoryId as number,
+                photoId: photo?.id as number
+            }))
         );
     });
 

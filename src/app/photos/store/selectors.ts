@@ -198,6 +198,14 @@ export const nextPhotoId = createSelector(
     (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
 );
 
+export const nextPhoto = createSelector(
+    selectEntities,
+    nextPhotoId,
+    (entities, nextId) => {
+        return !!nextId ? entities[nextId] as Photo : null;
+    }
+);
+
 export const previousPhotoIndex = createSelector(
     selectAll,
     activePhotoIndex,
@@ -232,6 +240,14 @@ export const previousPhotoId = createSelector(
     selectIds,
     previousPhotoIndex,
     (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+);
+
+export const previousPhoto = createSelector(
+    selectEntities,
+    previousPhotoId,
+    (entities, previousId) => {
+        return !!previousId ? entities[previousId] as Photo : null;
+    }
 );
 
 export const photosForCategory = createSelector(
