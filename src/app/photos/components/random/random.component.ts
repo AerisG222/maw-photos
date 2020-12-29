@@ -16,7 +16,6 @@ import { Photo } from 'src/app/models/photo.model';
 export class RandomComponent implements OnInit, OnDestroy {
     isFullscreen$ = this.store.select(PhotoStoreSelectors.isFullscreenView);
 
-    private killFetch = new Subject<boolean>();
     private destroySub = new Subscription();
 
     constructor(
@@ -26,14 +25,6 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.settings)
-            .pipe(
-                tap(x => this.killFetch.next(true)),
-                tap(settings => this.startRandomFetch(settings.photoListSlideshowDisplayDurationSeconds * 1000))
-            ).subscribe()
-        );
-
         this.destroySub.add(this.store
             .select(PhotoStoreSelectors.activePhoto)
             .pipe(
@@ -45,16 +36,7 @@ export class RandomComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.killFetch.next(true);
         this.store.dispatch(PhotoStoreActions.unsetActivePhotoId());
         this.destroySub.unsubscribe();
-    }
-
-    private startRandomFetch(delay: number): void {
-        interval(delay)
-            .pipe(
-                tap(x => this.store.dispatch(PhotoStoreActions.loadRandomRequest())),
-                takeUntil(this.killFetch)
-            ).subscribe();
     }
 }

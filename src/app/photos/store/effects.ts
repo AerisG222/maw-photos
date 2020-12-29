@@ -1,15 +1,16 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap } from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+// eslint-disable-next-line max-len
+import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap, takeUntil } from 'rxjs/operators';
 
 import { PhotoRotation } from 'src/app/models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/photos/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
-import { LayoutStoreActions, PhotoCategoryStoreActions } from 'src/app/core/root-store';
+import { LayoutStoreActions, PhotoCategoryStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 
 @Injectable()
@@ -284,6 +285,21 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.exitFullscreenRequest),
             concatMap(action => {
                 return of(LayoutStoreActions.exitFullscreenRequest());
+            })
+        );
+    });
+
+    periodicLoadOfRandomPhotoEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.startPeriodicRandomLoad),
+            withLatestFrom(this.store.select(SettingsStoreSelectors.photoListSlideshowDisplayDurationSeconds)),
+            switchMap(([, delay]) => {
+                return timer(delay * 1000, delay * 1000).pipe(
+                    takeUntil(this.actions$.pipe(
+                        ofType(PhotoActions.stopPeriodicRandomLoad)
+                    )),
+                    map(() => PhotoActions.loadRandomRequest())
+                );
             })
         );
     });

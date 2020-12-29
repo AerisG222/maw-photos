@@ -291,3 +291,19 @@ export const enterPhotoArea = createAction(
 export const exitPhotoArea = createAction(
     '[Photos] Exiting Photo Area'
 );
+
+export const enterRandomArea = createAction(
+    '[Photos] Entering Random Area'
+);
+
+export const exitRandomArea = createAction(
+    '[Photos] Exiting Random Area'
+);
+
+export const startPeriodicRandomLoad = createAction(
+    '[Photos] Start Periodic Random Load'
+);
+
+export const stopPeriodicRandomLoad = createAction(
+    '[Photos] Stop Periodic Random Load'
+);

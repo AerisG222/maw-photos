@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
-import { RouterStoreActions } from 'src/app/core/root-store';
+import { RouterStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { RouteArea } from 'src/app/models/route-area';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
@@ -64,6 +64,22 @@ export class PhotoStoreRoutingEffects {
             ofType(RouterStoreActions.routeAreaEntering),
             filter(action => action.enteringArea === RouteArea.random),
             map(action => PhotoStoreActions.loadMultipleRandomRequest({ count: 10 }))
+        );
+    });
+
+    startPeriodicLoadOfRandomPhotosWhenEnteringRandomArea$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaEntering),
+            filter(action => action.enteringArea === RouteArea.random),
+            map(action => PhotoStoreActions.startPeriodicRandomLoad())
+        );
+    });
+
+    stopPeriodicLoadOfRandomPhotosWhenExitingRandomArea$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaLeaving),
+            filter(action => action.leavingArea === RouteArea.random),
+            map(area => PhotoStoreActions.stopPeriodicRandomLoad())
         );
     });
 
