@@ -16,8 +16,8 @@ import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-stor
 export class CategoryYearFilterComponent implements OnInit {
     yearControl = new FormControl('');
 
-    allYears$: Observable<number[]> | null = null;
     selectedYear$: Observable<number|string> | null = null;
+    allYears$ = this.store.select(RootStoreSelectors.allYears);
 
     constructor(
         private store: Store
@@ -33,8 +33,6 @@ export class CategoryYearFilterComponent implements OnInit {
                 first()
             )
             .subscribe();
-
-        this.allYears$ = this.store.select(RootStoreSelectors.allYears);
     }
 
     onSelectYear(change: MatSelectChange): void {
