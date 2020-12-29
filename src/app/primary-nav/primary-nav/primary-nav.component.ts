@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { delay } from 'rxjs/operators';
 
 import { LayoutStoreSelectors } from 'src/app/core/root-store';
 
@@ -11,20 +9,12 @@ import { LayoutStoreSelectors } from 'src/app/core/root-store';
     styleUrls: ['./primary-nav.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimaryNavComponent implements OnInit {
-    hideNav$: Observable<boolean> | null = null;
+export class PrimaryNavComponent {
+    hideNav$ = this.store.select(LayoutStoreSelectors.isFullscreen);
 
     constructor(
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.hideNav$ = this.store
-            .select(LayoutStoreSelectors.isFullscreen)
-            .pipe(
-                delay(0)
-            );
     }
 }
