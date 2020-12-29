@@ -134,10 +134,6 @@ export const navigateToVideo = createAction(
     props<{ categoryId: number; videoId: number }>()
 );
 
-export const enterVideoArea = createAction(
-    '[Videos] Entering Video Area'
-);
-
 export const exitVideoArea = createAction(
     '[Videos] Exiting Video Area'
 );
