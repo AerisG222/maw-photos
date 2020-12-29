@@ -42,8 +42,6 @@ export class RandomComponent implements OnInit, OnDestroy {
                 tap(photo => this.store.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: photo.categoryId })))
             ).subscribe()
         );
-
-        this.store.dispatch(PhotoStoreActions.enterRandomView({ count: 10 }));
     }
 
     ngOnDestroy(): void {

@@ -59,6 +59,14 @@ export class PhotoStoreRoutingEffects {
         );
     });
 
+    loadRandomPhotosWhenEnteringRandomArea$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaEntering),
+            filter(action => action.enteringArea === RouteArea.random),
+            map(action => PhotoStoreActions.loadMultipleRandomRequest({ count: 10 }))
+        );
+    });
+
     loadPhotosWhenEnteringPhotoArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaEntering),
@@ -70,7 +78,7 @@ export class PhotoStoreRoutingEffects {
     monitorWhenLeavingPhotoArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
-            filter(action => action.leavingArea === RouteArea.photos),
+            filter(action => action.leavingArea === RouteArea.photos || action.leavingArea === RouteArea.random),
             map(area => PhotoStoreActions.exitPhotoArea())
         );
     });

@@ -288,24 +288,6 @@ export class PhotoStoreEffects {
         );
     });
 
-    enterRandomViewClearsPhotosEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoActions.enterRandomView),
-            concatMap(action => {
-                return of(PhotoActions.clearRequest());
-            })
-        );
-    });
-
-    enterRandomViewLoadsRandomPhotosEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoActions.enterRandomView),
-            concatMap(action => {
-                return of(PhotoActions.loadMultipleRandomRequest({ count: action.count }));
-            })
-        );
-    });
-
     constructor(
         private actions$: Actions,
         private exifFormatterService: ExifFormatterService,
