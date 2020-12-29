@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { tap, filter, map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
-import { Comment } from 'src/app/models/comment.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
-import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-comments',
@@ -13,10 +10,8 @@ import { Photo } from 'src/app/models/photo.model';
     styleUrls: ['./sidebar-comments.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarCommentsComponent implements OnInit, OnDestroy {
-    activeId = -1;
-    comments$: Observable<Comment[]> | null = null;
-    destroySub = new Subscription();
+export class SidebarCommentsComponent {
+    comments$ = this.store.select(PhotoStoreSelectors.activePhotoComments);
 
     constructor(
         private store: Store
@@ -24,32 +19,13 @@ export class SidebarCommentsComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit(): void {
-        this.comments$ = this.store
-            .select(PhotoStoreSelectors.activePhotoComments)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Comment[])
-            );
-
-        this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(photo => !!photo),
-                map(photo => photo as Photo),
-                tap(photo => this.store.dispatch(PhotoStoreActions.loadCommentsRequest({ photoId: photo.id }))),
-                tap(photo => this.activeId = photo.id)
-            ).subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
-
     onComment(comment: string): void {
-        if (this.activeId !== -1) {
-            this.store.dispatch(PhotoStoreActions.addCommentRequest({ photoId: this.activeId, comment }));
-        }
+        this.store.select(PhotoStoreSelectors.activePhotoId)
+            .pipe(
+                first()
+            ).subscribe({
+                next: id => this.store.dispatch(PhotoStoreActions.addCommentRequest({ photoId: id as number, comment })),
+                error: err => console.log(`error trying to add comment: ${ err }`)
+            });
     }
 }

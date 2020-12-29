@@ -1,11 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { map, filter, tap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
-import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-metadata-editor',
@@ -13,11 +11,9 @@ import { Photo } from 'src/app/models/photo.model';
     styleUrls: ['./sidebar-metadata-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarMetadataEditorComponent implements OnInit {
-    activeId = -1;
-    overrideGpsData$: Observable<GpsCoordinate | null> | null = null;
-    sourceGpsData$: Observable<GpsCoordinate | null> | null = null;
-    destroySub = new Subscription();
+export class SidebarMetadataEditorComponent {
+    overrideGpsData$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailOverride);
+    sourceGpsData$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailSource);
 
     constructor(
         private store: Store
@@ -25,37 +21,24 @@ export class SidebarMetadataEditorComponent implements OnInit {
 
     }
 
-    ngOnInit(): void {
-        this.sourceGpsData$ = this.store
-            .select(PhotoStoreSelectors.activePhotoGpsDetail)
-            .pipe(
-                filter(x => !!x),
-                map(gpsDetail => gpsDetail?.source ?? null)
-            );
-
-        this.overrideGpsData$ = this.store
-            .select(PhotoStoreSelectors.activePhotoGpsDetail)
-            .pipe(
-                map(gpsDetail => gpsDetail?.override ?? null)
-            );
-
-        this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(photo => !!photo),
-                map(photo => photo as Photo),
-                tap(photo => this.activeId = photo.id),
-                tap(photo => this.store.dispatch(PhotoStoreActions.loadExifRequest({ photoId: photo.id }))),
-                tap(photo => this.store.dispatch(PhotoStoreActions.loadGpsDetailRequest({ photoId: photo.id })))
-            ).subscribe()
-        );
-    }
-
     onSave(latLng: GpsCoordinate): void {
-        this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: this.activeId, latLng }));
+        this.store.select(PhotoStoreSelectors.activePhotoId)
+            .pipe(
+                first()
+            ).subscribe({
+                next: id => this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: id as number, latLng })),
+                error: err => console.log(`error trying to save gps override: ${ err }`)
+            });
     }
 
     onSaveAndMoveNext(latLng: GpsCoordinate): void {
-        this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: this.activeId, latLng }));
+        this.store.select(PhotoStoreSelectors.activePhotoId)
+            .pipe(
+                first()
+            ).subscribe({
+                // eslint-disable-next-line max-len
+                next: id => this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: id as number, latLng })),
+                error: err => console.log(`error trying to save gps override: ${ err }`)
+            });
     }
 }

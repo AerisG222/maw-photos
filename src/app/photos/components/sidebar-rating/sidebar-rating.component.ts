@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { filter, tap, map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
-import { Rating } from 'src/app/models/rating.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from '../../store';
-import { Photo } from 'src/app/models/photo.model';
 
 @Component({
     selector: 'app-photos-sidebar-rating',
@@ -13,11 +10,8 @@ import { Photo } from 'src/app/models/photo.model';
     styleUrls: ['./sidebar-rating.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarRatingComponent implements OnInit, OnDestroy {
+export class SidebarRatingComponent {
     rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
-
-    private activeId = -1;
-    private destroySub = new Subscription();
 
     constructor(
         private store: Store
@@ -25,25 +19,13 @@ export class SidebarRatingComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(photo => !!photo),
-                map(photo => photo as Photo),
-                tap(photo => this.activeId = photo.id),
-                tap(photo => this.store.dispatch(PhotoStoreActions.loadRatingRequest({ photoId: photo.id })))
-            ).subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
-
     onRate(userRating: number): void {
-        if (this.activeId !== -1) {
-            this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: this.activeId, userRating }));
-        }
+        this.store.select(PhotoStoreSelectors.activePhotoId)
+            .pipe(
+                first()
+            ).subscribe({
+                next: id => this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: id as number, userRating })),
+                error: err => console.log(`error trying to add rating: ${ err }`)
+            });
     }
 }

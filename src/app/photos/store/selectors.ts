@@ -9,7 +9,7 @@ import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
 import { ExifContainer } from 'src/app/models/exif-container';
 import { GpsDetail } from 'src/app/models/gps-detail.model';
-import { PhotoCategoryStoreSelectors, RouterStoreSelectors } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 const photoHasGpsData = (photo: Photo) => photo?.latitude !== null;
 
@@ -297,6 +297,16 @@ export const anyPhotosMissingGpsCoordinates = createSelector(
     }
 );
 
+export const activePhotoGpsDetailSource = createSelector(
+    activePhotoGpsDetail,
+    detail => detail?.source
+);
+
+export const activePhotoGpsDetailOverride = createSelector(
+    activePhotoGpsDetail,
+    detail => detail?.override
+);
+
 export const hasPhotosWithGpsCoordinates = createSelector(
     photosWithGpsCoordinates,
     (photos: Photo[] | null): boolean => !!photos && photos.length > 0
@@ -306,4 +316,28 @@ export const enableMapView = createSelector(
     hasPhotosWithGpsCoordinates,
     RouterStoreSelectors.isRandomView,
     (hasGps, isRandom) => hasGps && !isRandom
+);
+
+export const isCommentCardVisible = createSelector(
+    SettingsStoreSelectors.photoInfoPanelExpandedState,
+    SettingsStoreSelectors.photoInfoPanelShowComments,
+    (isExpanded, showComments) => isExpanded && showComments
+);
+
+export const isRatingCardVisible = createSelector(
+    SettingsStoreSelectors.photoInfoPanelExpandedState,
+    SettingsStoreSelectors.photoInfoPanelShowRatings,
+    (isExpanded, showRatings) => isExpanded && showRatings
+);
+
+export const isMetadataEditorCardVisible = createSelector(
+    SettingsStoreSelectors.photoInfoPanelExpandedState,
+    SettingsStoreSelectors.photoInfoPanelShowMetadataEditor,
+    (isExpanded, showEditor) => isExpanded && showEditor
+);
+
+export const isExifCardVisible = createSelector(
+    SettingsStoreSelectors.photoInfoPanelExpandedState,
+    SettingsStoreSelectors.photoInfoPanelShowExif,
+    (isExpanded, showExif) => isExpanded && showExif
 );

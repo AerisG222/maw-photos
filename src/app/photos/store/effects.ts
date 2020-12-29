@@ -12,6 +12,7 @@ import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import { LayoutStoreActions, PhotoCategoryStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
+import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -54,6 +55,17 @@ export class PhotoStoreEffects {
         );
     });
 
+    loadRatingsForPhotoWhenVisible$ = createEffect(() => {
+        return combineLatest([
+                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.isRatingCardVisible)
+            ])
+            .pipe(
+                filter(([action, isVisible]) => !!action.id && isVisible),
+                map(([action, isVisible ]) => PhotoActions.loadRatingRequest({ photoId: action.id as number }))
+            );
+    });
+
     loadRatingRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.loadRatingRequest),
@@ -78,6 +90,17 @@ export class PhotoStoreEffects {
                     )
             )
         );
+    });
+
+    loadCommentsForPhotoWhenVisible$ = createEffect(() => {
+        return combineLatest([
+                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.isCommentCardVisible)
+            ])
+            .pipe(
+                filter(([action, isVisible]) => !!action.id && isVisible),
+                map(([action, isVisible ]) => PhotoActions.loadCommentsRequest({ photoId: action.id as number }))
+            );
     });
 
     loadCommentsRequestEffect$ = createEffect(() => {
@@ -113,6 +136,17 @@ export class PhotoStoreEffects {
         );
     });
 
+    loadExifDataForPhotoWhenVisible$ = createEffect(() => {
+        return combineLatest([
+                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.isExifCardVisible)
+            ])
+            .pipe(
+                filter(([action, isVisible]) => !!action.id && isVisible),
+                map(([action, isVisible ]) => PhotoActions.loadExifRequest({ photoId: action.id as number }))
+            );
+    });
+
     loadExifRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.loadExifRequest),
@@ -125,6 +159,17 @@ export class PhotoStoreEffects {
                     )
             )
         );
+    });
+
+    loadGpsDetailForPhotoWhenVisible$ = createEffect(() => {
+        return combineLatest([
+                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.isMetadataEditorCardVisible)
+            ])
+            .pipe(
+                filter(([action, isVisible]) => !!action.id && isVisible),
+                map(([action, isVisible ]) => PhotoActions.loadGpsDetailRequest({ photoId: action.id as number }))
+            );
     });
 
     loadGpsDetailRequestEffect$ = createEffect(() => {
