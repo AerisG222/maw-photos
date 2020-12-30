@@ -33,7 +33,7 @@
         </app-toolbar-button>
 
         <app-toolbar-button
-            *ngIf="enableShare && isPhotoSelected"
+            *ngIf="enableShare && (activePhotoId$ | async) != null"
             [icon]="'share'"
             [tooltip]="'Share Photo'"
             (click)="onShare()">

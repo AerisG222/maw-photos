@@ -1,6 +1,6 @@
 <app-toolbar-toolbar>
     <app-toolbar-group>
-        <app-photos-toolbar-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-photos-toolbar-slideshow-button>
+        <app-photos-toolbar-slideshow-button></app-photos-toolbar-slideshow-button>
         <app-toolbar-move-previous-button (movePrevious)="onMovePrevious()" [atStartOfList]="isFirst$ | async"></app-toolbar-move-previous-button>
         <app-toolbar-move-next-button (moveNext)="onMoveNext()" [atEndOfList]="isLast$ | async"></app-toolbar-move-next-button>
     </app-toolbar-group>
@@ -67,34 +67,34 @@
 
     <app-toolbar-group>
         <app-photos-toolbar-download-button
-            *ngIf="smDownloadUrl"
+            *ngIf="smDownloadUrl$ | async"
             [hideOnMobile]="true"
             [icon]="'photo'"
             [iconClass]="'icon-sm'"
-            [link]="smDownloadUrl"
+            [link]="smDownloadUrl$ | async"
             [tooltip]="'Low Res Download'">
         </app-photos-toolbar-download-button>
 
         <app-photos-toolbar-download-button
-            *ngIf="mdDownloadUrl"
+            *ngIf="mdDownloadUrl$ | async"
             [icon]="'photo'"
             [iconClass]="'icon-md'"
-            [link]="mdDownloadUrl"
+            [link]="mdDownloadUrl$ | async"
             [tooltip]="'Medium Res Download'">
         </app-photos-toolbar-download-button>
 
         <app-photos-toolbar-download-button
-            *ngIf="lgDownloadUrl"
+            *ngIf="lgDownloadUrl$ | async"
             [hideOnMobile]="true"
             [icon]="'photo'"
-            [link]="lgDownloadUrl"
+            [link]="lgDownloadUrl$ | async"
             [tooltip]="'High Res Download'">
         </app-photos-toolbar-download-button>
 
         <app-photos-toolbar-download-button
-            *ngIf="prtDownloadUrl"
+            *ngIf="prtDownloadUrl$ | async"
             [icon]="'photo'"
-            [link]="prtDownloadUrl"
+            [link]="prtDownloadUrl$ | async"
             [tooltip]="'High Res Download (untouched)'">
         </app-photos-toolbar-download-button>
 

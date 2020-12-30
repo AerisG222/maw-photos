@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, interval, Subscription } from 'rxjs';
-import { tap, takeUntil, filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
-import { PhotoCategoryStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
-import { Photo } from 'src/app/models/photo.model';
+import { PhotoCategoryStoreActions } from 'src/app/core/root-store';
 
 @Component({
     selector: 'app-photos-random',
@@ -27,11 +25,13 @@ export class RandomComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.destroySub.add(this.store
             .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Photo),
-                tap(photo => this.store.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: photo.categoryId })))
-            ).subscribe()
+            .subscribe({
+                next: photo => {
+                    if(!!photo) {
+                        this.store.dispatch(PhotoCategoryStoreActions.setActiveCategoryId({ categoryId: photo.categoryId }));
+                    }
+                }
+            })
         );
     }
 

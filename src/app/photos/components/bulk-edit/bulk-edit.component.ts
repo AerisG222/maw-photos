@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable, BehaviorSubject } from 'rxjs';
+import { combineLatest, BehaviorSubject } from 'rxjs';
 import { tap, first, map, filter } from 'rxjs/operators';
 
-import { Category } from 'src/app/models/category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 import { Photo } from 'src/app/models/photo.model';
@@ -15,39 +14,28 @@ import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
     styleUrls: ['./bulk-edit.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BulkEditComponent implements OnInit {
-    category$: Observable<Category> | null = null;
-    photos$: Observable<Photo[]> | null = null;
-    showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
+export class BulkEditComponent {
     selectedPhotos: Photo[] = [];
+    showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
+    category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
+    photos$ = combineLatest([
+            this.store.select(PhotoStoreSelectors.allPhotos),
+            this.showPhotosWithGpsData$
+        ])
+        .pipe(
+            map(([ photos, showPhotosWithGpsData ]) => {
+                if (showPhotosWithGpsData) {
+                    return photos;
+                } else {
+                    return photos.filter(p => p.latitude == null || p.longitude == null);
+                }
+            })
+        );
 
     constructor(
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.category$ = this.store
-            .select(PhotoCategoryStoreSelectors.activeCategory)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Category)
-            );
-
-        this.photos$ = combineLatest([
-                this.store.select(PhotoStoreSelectors.allPhotos),
-                this.showPhotosWithGpsData$
-            ])
-            .pipe(
-                map(([ photos, showPhotosWithGpsData ]) => {
-                    if (showPhotosWithGpsData) {
-                        return photos;
-                    } else {
-                        return photos.filter(p => p.latitude == null || p.longitude == null);
-                    }
-                })
-            );
     }
 
     onShowPhotosWithGpsData(doShow: boolean): void {

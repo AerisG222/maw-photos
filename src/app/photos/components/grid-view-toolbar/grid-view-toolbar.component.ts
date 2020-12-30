@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { tap, first, filter, map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '../../store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
-import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
+import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { Photo } from 'src/app/models/photo.model';
@@ -16,40 +15,17 @@ import { Photo } from 'src/app/models/photo.model';
     templateUrl: './grid-view-toolbar.component.html',
     styleUrls: ['./grid-view-toolbar.component.scss']
 })
-export class GridViewToolbarComponent implements OnInit, OnDestroy {
+export class GridViewToolbarComponent {
     enableShare = false;
-    isPhotoSelected = false;
-    settings: Settings | null = null;
+    activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
     isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
-
-    private destroySub = new Subscription();
 
     constructor(
         private store: Store,
         @Inject(WINDOW) private window: Window
     ) {
         this.enableShare = !!window?.navigator?.share;
-    }
-
-    ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.settings)
-            .pipe(
-                tap(settings => this.settings = settings)
-            ).subscribe()
-        );
-
-        this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                map(x => this.isPhotoSelected = !!x)
-            ).subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
     }
 
     onExitGridView(): void {
@@ -73,33 +49,50 @@ export class GridViewToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleMargins(): void {
-        if (this.settings) {
-            const newMargin = CategoryMargin.nextSize(this.settings.photoGridMargin.name);
+        this.store.select(SettingsStoreSelectors.settings)
+            .pipe(
+                first()
+            ).subscribe({
+                next: settings => {
+                    if (!!settings) {
+                        const newMargin = CategoryMargin.nextSize(settings.photoGridMargin.name);
 
-            this.store.dispatch(SettingsStoreActions.updatePhotoGridMarginRequest({ newMargin }));
-        }
+                        this.store.dispatch(SettingsStoreActions.updatePhotoGridMarginRequest({ newMargin }));
+                    }
+                },
+                error: err => console.log(`error toggling margins: ${ err }`)
+            });
     }
 
     onToggleSize(): void {
-        const name = this.settings?.photoGridThumbnailSize.name ?? DEFAULT_SETTINGS.photoGridThumbnailSize.name;
-        const size = ThumbnailSize.nextSize(name);
+        this.store
+            .select(SettingsStoreSelectors.settings)
+            .pipe(
+                first()
+            ).subscribe({
+                next: settings => {
+                    const name = settings?.photoGridThumbnailSize.name ?? DEFAULT_SETTINGS.photoGridThumbnailSize.name;
+                    const size = ThumbnailSize.nextSize(name);
 
-        this.store.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
+                    this.store.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
+                },
+                error: err => console.log(`error toggling size: ${ err }`)
+            });
     }
 
     onShare(): void {
-        this.store
-            .select(PhotoStoreSelectors.activePhoto)
+        this.store.select(PhotoStoreSelectors.activePhoto)
             .pipe(
-                first(),
-                filter(x => !!x),
-                map(x => x as Photo),
-                tap(x => this.sharePhoto(x))
-            ).subscribe();
+                first()
+            )
+            .subscribe({
+                next: photo => this.sharePhoto(photo),
+                error: err => console.log(`error sharing photo: ${ err }`)
+            });
     }
 
-    private async sharePhoto(photo: Photo): Promise<void> {
-        if (!!this.window?.navigator?.share) {
+    private async sharePhoto(photo: Photo | null): Promise<void> {
+        if (!!photo && !!this.window?.navigator?.share) {
             try {
                 await navigator.share({ url: photo.imageMd.url });
             } catch (error) {

@@ -1,14 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { EffectStyleBuilderService } from 'src/app/photos/services/effect-style-builder.service';
 import { SlideshowControlService } from 'src/app/photos/services/slideshow-control.service';
-import { Category } from 'src/app/models/category.model';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
@@ -20,13 +17,13 @@ import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/cor
     styleUrls: ['./default-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultViewComponent implements OnInit {
+export class DefaultViewComponent {
     @Input() allowCategoryDownload: boolean | null = null;
     @Input() showCategoryAsLink: boolean | null = null;
 
-    category$: Observable<Category> | null = null;
-    activePhoto$: Observable<Photo> | null = null;
-    effects$: Observable<PhotoEffects> | null = null;
+    category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
+    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
+    effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
     settings$ = this.store.select(SettingsStoreSelectors.settings);
 
@@ -37,29 +34,6 @@ export class DefaultViewComponent implements OnInit {
         private sanitizer: DomSanitizer
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.category$ = this.store
-            .select(PhotoCategoryStoreSelectors.activeCategory)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Category)
-            );
-
-        this.activePhoto$ = this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Photo)
-            );
-
-        this.effects$ = this.store
-            .select(PhotoStoreSelectors.activePhotoEffects)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as PhotoEffects)
-            );
     }
 
     getSourceset(photo: Photo | null): string {

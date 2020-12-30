@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreSelectors } from 'src/app/photos/store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 
 @Component({
     selector: 'app-photos-toolbar-slideshow-button',
@@ -10,15 +10,15 @@ import { PhotoStoreSelectors } from 'src/app/photos/store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarSlideshowButtonComponent {
-    @Output() toggleSlideshow = new EventEmitter<void>();
-
     slideshowPlaying$ = this.store.select(PhotoStoreSelectors.slideshowIsPlaying);
 
     constructor(
         private store: Store
-    ) { }
+    ) {
+
+    }
 
     onToggleSlideshow(): void {
-        this.toggleSlideshow.emit();
+        this.store.dispatch(PhotoStoreActions.toggleSlideshowRequest());
     }
 }

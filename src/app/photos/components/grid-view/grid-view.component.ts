@@ -1,10 +1,7 @@
  import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 
 import { SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { Category } from 'src/app/models/category.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from '../../store';
 import { Photo } from 'src/app/models/photo.model';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
@@ -18,7 +15,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
 
     lastScrollTop = 0;
-    category$: Observable<Category> | null = null;
+    category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
     settings$ = this.store.select(SettingsStoreSelectors.settings);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
@@ -32,13 +29,6 @@ export class GridViewComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.clearActivePhoto();
-
-        this.category$ = this.store
-            .select(PhotoCategoryStoreSelectors.activeCategory)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Category)
-            );
     }
 
     ngOnDestroy(): void {

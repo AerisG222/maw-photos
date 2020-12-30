@@ -283,6 +283,22 @@ export const photosWithGpsCoordinates = createSelector(
     }
 );
 
+export const photosWithGpsCoordinatesAsMapImages = createSelector(
+    photosWithGpsCoordinates,
+    photos => {
+        if(!!photos) {
+            return photos.map(x => ({
+                id: x.id,
+                imageUrl: x.imageXsSq.url,
+                latitude: x.latitude,
+                longitude: x.longitude
+            }));
+        }
+
+        return null;
+    }
+);
+
 export const anyPhotosMissingGpsCoordinates = createSelector(
     PhotoCategoryStoreSelectors.activeCategoryId,
     allPhotos,
@@ -321,6 +337,26 @@ export const activePhotoGoogleLatLng = createSelector(
 
         return null;
     }
+);
+
+export const activePhotoSmDownloadUrl = createSelector(
+    activePhoto,
+    photo => photo?.imageSm.downloadUrl
+);
+
+export const activePhotoMdDownloadUrl = createSelector(
+    activePhoto,
+    photo => photo?.imageMd.downloadUrl
+);
+
+export const activePhotoLgDownloadUrl = createSelector(
+    activePhoto,
+    photo => photo?.imageLg.downloadUrl
+);
+
+export const activePhotoPrtDownloadUrl = createSelector(
+    activePhoto,
+    photo => photo?.imagePrt.downloadUrl
 );
 
 export const enableMapView = createSelector(

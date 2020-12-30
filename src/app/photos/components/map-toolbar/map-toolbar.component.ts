@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
 
@@ -11,29 +10,14 @@ import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
     styleUrls: ['./map-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapToolbarComponent implements OnInit {
-    isFirst$: Observable<boolean> | null = null;
-    isLast$: Observable<boolean> | null = null;
-
-    private isFirst = true;
-    private isLast = true;
+export class MapToolbarComponent {
+    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
+    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
     constructor(
         private store: Store
-    ) { }
+    ) {
 
-    ngOnInit(): void {
-        this.isFirst$ = this.store
-            .select(PhotoStoreSelectors.isActivePhotoFirst)
-            .pipe(
-                tap(isFirst => this.isFirst = isFirst)
-            );
-
-        this.isLast$ = this.store
-            .select(PhotoStoreSelectors.isActivePhotoLast)
-            .pipe(
-                tap(isLast => this.isLast = isLast)
-            );
     }
 
     onToggleMapView(): void {
@@ -41,14 +25,28 @@ export class MapToolbarComponent implements OnInit {
     }
 
     onMoveNext(): void {
-        if (!this.isLast) {
-            this.store.dispatch(PhotoStoreActions.moveNextRequest());
-        }
+        this.store.select(PhotoStoreSelectors.isActivePhotoLast)
+            .pipe(
+                first()
+            ).subscribe({
+                next: isLast => {
+                    if (!isLast) {
+                        this.store.dispatch(PhotoStoreActions.moveNextRequest());
+                    }
+                }
+            });
     }
 
     onMovePrevious(): void {
-        if (!this.isFirst) {
-            this.store.dispatch(PhotoStoreActions.movePreviousRequest());
-        }
+        this.store.select(PhotoStoreSelectors.isActivePhotoFirst)
+            .pipe(
+                first()
+            ).subscribe({
+                next: isFirst => {
+                    if (!isFirst) {
+                        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
+                    }
+                }
+            });
     }
 }

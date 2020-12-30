@@ -1,10 +1,6 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 
-import { MapImage } from 'src/app/models/map-image.model';
-import { Photo } from 'src/app/models/photo.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
@@ -14,34 +10,13 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     styleUrls: ['./map-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapViewComponent implements OnInit, OnDestroy {
-    activePhoto$: Observable<Photo> | null = null;
-    mapImages$: Observable<MapImage[]> | null = null;
+export class MapViewComponent implements OnDestroy {
+    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
+    mapImages$ = this.store.select(PhotoStoreSelectors.photosWithGpsCoordinatesAsMapImages);
     settings$ = this.store.select(SettingsStoreSelectors.settings);
 
     constructor(private store: Store) {
 
-    }
-
-    ngOnInit(): void {
-        this.activePhoto$ = this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(x => !!x),
-                map(x => x as Photo)
-            );
-
-        this.mapImages$ = this.store
-            .select(PhotoStoreSelectors.photosWithGpsCoordinates)
-            .pipe(
-                filter(x => !!x),
-                map(photos => (photos as Photo[]).map(x => ({
-                    id: x.id,
-                    imageUrl: x.imageXsSq.url,
-                    latitude: x.latitude,
-                    longitude: x.longitude
-                })))
-            );
     }
 
     ngOnDestroy(): void {
