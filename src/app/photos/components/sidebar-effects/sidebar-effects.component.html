@@ -10,7 +10,7 @@
 
     <app-sidebar-card-divider></app-sidebar-card-divider>
 
-    <div>
+    <div *ngIf="effects$ | async as effects">
         <table>
             <tr>
                 <td>Grayscale ({{ grayscale.value }}%)</td>

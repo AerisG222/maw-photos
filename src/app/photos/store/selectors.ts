@@ -312,6 +312,17 @@ export const hasPhotosWithGpsCoordinates = createSelector(
     (photos: Photo[] | null): boolean => !!photos && photos.length > 0
 );
 
+export const activePhotoGoogleLatLng = createSelector(
+    activePhoto,
+    photo => {
+        if (!!photo && !!photo.latitude && photo.longitude) {
+            return new google.maps.LatLng(photo.latitude, photo.longitude);
+        }
+
+        return null;
+    }
+);
+
 export const enableMapView = createSelector(
     hasPhotosWithGpsCoordinates,
     RouterStoreSelectors.isRandomView,

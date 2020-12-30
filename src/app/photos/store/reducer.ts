@@ -228,6 +228,62 @@ export const reducer = createReducer(
             ...effects
         }
     })),
+    on(PhotoActions.updateEffectBlur, (state, { blur }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            blur
+        }
+    })),
+    on(PhotoActions.updateEffectBrightness, (state, { brightness }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            brightness
+        }
+    })),
+    on(PhotoActions.updateEffectContrast, (state, { contrast }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            contrast
+        }
+    })),
+    on(PhotoActions.updateEffectGrayscale, (state, { grayscale }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            grayscale
+        }
+    })),
+    on(PhotoActions.updateEffectHueRotate, (state, { hueRotate }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            hueRotate
+        }
+    })),
+    on(PhotoActions.updateEffectInvert, (state, { invert }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            invert
+        }
+    })),
+    on(PhotoActions.updateEffectSaturation, (state, { saturation }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            saturation
+        }
+    })),
+    on(PhotoActions.updateEffectSepia, (state, { sepia }): State => ({
+        ...state,
+        activePhotoEffects: {
+            ...state.activePhotoEffects,
+            sepia
+        }
+    })),
     on(PhotoActions.toggleSlideshowRequest, (state): State => ({
         ...state,
         slideshowIsPlaying: !state.slideshowIsPlaying

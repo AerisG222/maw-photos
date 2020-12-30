@@ -165,6 +165,46 @@ export const resetEffectsRequest = createAction(
     '[Photos] Reset Effects Request'
 );
 
+export const updateEffectGrayscale = createAction(
+    '[Photos] Update Effect Grayscale',
+    props<{ grayscale: number }>()
+);
+
+export const updateEffectSepia = createAction(
+    '[Photos] Update Effect Sepia',
+    props<{ sepia: number }>()
+);
+
+export const updateEffectBrightness = createAction(
+    '[Photos] Update Effect Brightness',
+    props<{ brightness: number }>()
+);
+
+export const updateEffectSaturation = createAction(
+    '[Photos] Update Effect Saturation',
+    props<{ saturation: number }>()
+);
+
+export const updateEffectContrast = createAction(
+    '[Photos] Update Effect Contrast',
+    props<{ contrast: number }>()
+);
+
+export const updateEffectInvert = createAction(
+    '[Photos] Update Effect Invert',
+    props<{ invert: number }>()
+);
+
+export const updateEffectBlur = createAction(
+    '[Photos] Update Effect Blur',
+    props<{ blur: number }>()
+);
+
+export const updateEffectHueRotate = createAction(
+    '[Photos] Update Effect Hue Rotate',
+    props<{ hueRotate: number }>()
+);
+
 export const updateEffectsRequest = createAction(
     '[Photos] Update Effects Request',
     props<{ effects: PhotoEffects }>()

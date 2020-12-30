@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 
 import { PhotoStoreSelectors } from 'src/app/photos/store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
@@ -12,8 +10,8 @@ import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-
     styleUrls: ['./sidebar-minimap.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarMinimapComponent implements OnInit {
-    position$: Observable<google.maps.LatLng | null> | null = null;
+export class SidebarMinimapComponent {
+    position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
     mapTypeId$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapTypeId);
     zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
 
@@ -21,25 +19,6 @@ export class SidebarMinimapComponent implements OnInit {
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        const activePhoto$ = this.store
-            .select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                filter(photo => !!photo)
-            );
-
-        this.position$ = activePhoto$
-            .pipe(
-                map(photo => {
-                    if (!!photo && !!photo.latitude && photo.longitude) {
-                        return new google.maps.LatLng(photo.latitude, photo.longitude);
-                    }
-
-                    return null;
-                })
-            );
     }
 
     onMapTypeChange(mapTypeId: string): void {

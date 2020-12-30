@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { of, timer } from 'rxjs';
+import { combineLatest, of, timer } from 'rxjs';
 // eslint-disable-next-line max-len
 import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap, takeUntil } from 'rxjs/operators';
 
@@ -12,7 +12,6 @@ import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import { LayoutStoreActions, PhotoCategoryStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
-import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 
 @Injectable()
 export class PhotoStoreEffects {

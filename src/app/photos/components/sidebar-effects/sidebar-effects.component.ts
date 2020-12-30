@@ -1,10 +1,7 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
-import { PhotoEffects, DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
 
 @Component({
@@ -13,9 +10,8 @@ import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
     styleUrls: ['./sidebar-effects.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarEffectsComponent implements OnInit, OnDestroy {
-    destroySub = new Subscription();
-    effects = DEFAULT_PHOTO_EFFECTS;
+export class SidebarEffectsComponent {
+    effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);
 
     constructor(
         private store: Store
@@ -23,56 +19,39 @@ export class SidebarEffectsComponent implements OnInit, OnDestroy {
 
     }
 
-    ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(PhotoStoreSelectors.activePhotoEffects)
-            .pipe(
-                tap(effects => this.effects = effects ?? DEFAULT_PHOTO_EFFECTS)
-            ).subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
-
     onGrayscaleChange(evt: MatSliderChange): void {
-        this.update({...this.effects, grayscale: evt.value as number});
+        this.store.dispatch(PhotoStoreActions.updateEffectGrayscale({ grayscale: evt.value as number }));
     }
 
     onSepiaChange(evt: MatSliderChange): void {
-        this.update({...this.effects, sepia: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectSepia({ sepia: evt.value as number }));
     }
 
     onBrightnessChange(evt: MatSliderChange): void {
-        this.update({...this.effects, brightness: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectBrightness({ brightness: evt.value as number }));
     }
 
     onSaturationChange(evt: MatSliderChange): void {
-        this.update({...this.effects, saturation: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectSaturation({ saturation: evt.value as number }));
     }
 
     onContrastChange(evt: MatSliderChange): void {
-        this.update({...this.effects, contrast: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectContrast({ contrast: evt.value as number }));
     }
 
     onInvertChange(evt: MatSliderChange): void {
-        this.update({...this.effects, invert: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectInvert({ invert: evt.value as number }));
     }
 
     onBlurChange(evt: MatSliderChange): void {
-        this.update({...this.effects, blur: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectBlur({ blur: evt.value as number }));
     }
 
     onHueRotateChange(evt: MatSliderChange): void {
-        this.update({...this.effects, hueRotate: evt.value as number });
+        this.store.dispatch(PhotoStoreActions.updateEffectHueRotate({ hueRotate: evt.value as number }));
     }
 
     onResetEffects(): void {
         this.store.dispatch(PhotoStoreActions.resetEffectsRequest());
-    }
-
-    private update(effects: PhotoEffects): void {
-        this.store.dispatch(PhotoStoreActions.updateEffectsRequest({ effects }));
     }
 }

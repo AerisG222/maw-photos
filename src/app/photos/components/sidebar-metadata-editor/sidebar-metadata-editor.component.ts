@@ -26,7 +26,11 @@ export class SidebarMetadataEditorComponent {
             .pipe(
                 first()
             ).subscribe({
-                next: id => this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: id as number, latLng })),
+                next: id => {
+                    if(!!id) {
+                        this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: id as number, latLng }));
+                    }
+                },
                 error: err => console.log(`error trying to save gps override: ${ err }`)
             });
     }
@@ -36,8 +40,12 @@ export class SidebarMetadataEditorComponent {
             .pipe(
                 first()
             ).subscribe({
-                // eslint-disable-next-line max-len
-                next: id => this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: id as number, latLng })),
+                next: id => {
+                    if(!!id) {
+                        // eslint-disable-next-line max-len
+                        this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: id as number, latLng }));
+                    }
+                },
                 error: err => console.log(`error trying to save gps override: ${ err }`)
             });
     }

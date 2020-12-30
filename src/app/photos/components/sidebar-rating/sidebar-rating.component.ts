@@ -24,7 +24,11 @@ export class SidebarRatingComponent {
             .pipe(
                 first()
             ).subscribe({
-                next: id => this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: id as number, userRating })),
+                next: id => {
+                    if(!!id) {
+                        this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: id as number, userRating }));
+                    }
+                },
                 error: err => console.log(`error trying to add rating: ${ err }`)
             });
     }
