@@ -45,13 +45,13 @@
             (click)="onToggleBulkEditView()">
         </app-toolbar-button>
 
-        <app-toolbar-download-button
+        <app-photos-toolbar-download-button
             *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
             [hideOnMobile]="true"
             [icon]="'save_alt'"
             [link]="(category$ | async)?.downloadLink"
             [tooltip]="'Download All Photos in Category (.zip)'">
-        </app-toolbar-download-button>
+        </app-photos-toolbar-download-button>
     </app-toolbar-group>
 
     <app-toolbar-divider></app-toolbar-divider>
@@ -66,37 +66,37 @@
     <app-toolbar-divider></app-toolbar-divider>
 
     <app-toolbar-group>
-        <app-toolbar-download-button
+        <app-photos-toolbar-download-button
             *ngIf="smDownloadUrl"
             [hideOnMobile]="true"
             [icon]="'photo'"
             [iconClass]="'icon-sm'"
             [link]="smDownloadUrl"
             [tooltip]="'Low Res Download'">
-        </app-toolbar-download-button>
+        </app-photos-toolbar-download-button>
 
-        <app-toolbar-download-button
+        <app-photos-toolbar-download-button
             *ngIf="mdDownloadUrl"
             [icon]="'photo'"
             [iconClass]="'icon-md'"
             [link]="mdDownloadUrl"
             [tooltip]="'Medium Res Download'">
-        </app-toolbar-download-button>
+        </app-photos-toolbar-download-button>
 
-        <app-toolbar-download-button
+        <app-photos-toolbar-download-button
             *ngIf="lgDownloadUrl"
             [hideOnMobile]="true"
             [icon]="'photo'"
             [link]="lgDownloadUrl"
             [tooltip]="'High Res Download'">
-        </app-toolbar-download-button>
+        </app-photos-toolbar-download-button>
 
-        <app-toolbar-download-button
+        <app-photos-toolbar-download-button
             *ngIf="prtDownloadUrl"
             [icon]="'photo'"
             [link]="prtDownloadUrl"
             [tooltip]="'High Res Download (untouched)'">
-        </app-toolbar-download-button>
+        </app-photos-toolbar-download-button>
 
         <app-toolbar-button
             *ngIf="enableShare"

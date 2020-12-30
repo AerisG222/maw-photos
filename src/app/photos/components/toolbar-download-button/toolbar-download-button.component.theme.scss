@@ -1,9 +1,9 @@
 @import '~@angular/material/theming';
 
-@mixin app-toolbar-download-button-component-theme($theme) {
+@mixin app-photos-toolbar-download-button-component-theme($theme) {
     $accent: map-get($theme, accent);
 
-    app-toolbar-download-button button:enabled:hover {
+    app-photos-toolbar-download-button button:enabled:hover {
         background-color: rgba(mat-color($accent, 700), .42);
         color: mat-color($accent, 100);
     }
