@@ -10,7 +10,7 @@
         } as data">
         <div class="main-video-grid">
             <div class="category-header">
-                <app-shared-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="showCategoryAsLink" [category]="(category$ | async)"></app-shared-category-header>
+                <app-shared-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="false" [category]="(category$ | async)"></app-shared-category-header>
             </div>
 
             <div *ngIf="data.activeVideo" class="video-container">
@@ -18,9 +18,9 @@
                     #videoRef
                     class="center-block"
                     autoplay="false"
-                    [ngStyle]="getVideoDimensions(data.activeVideo)"
+                    [ngStyle]="getVideoDimensions(data.activeVideo, data.settings)"
                     controls>
-                    <source [src]="getVideoUrl(data.activeVideo)" type="video/mp4" />
+                    <source [src]="getVideoUrl(data.activeVideo, data.settings)" type="video/mp4" />
                     Your browser does not support the <code>video</code> element.
                 </video>
             </div>

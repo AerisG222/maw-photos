@@ -43,6 +43,11 @@ export const activeCategory = createSelector(
     }
 );
 
+export const activeCategoryTeaserUrl = createSelector(
+    activeCategory,
+    cat => cat?.teaserImageSq.url
+);
+
 export const allYears = createSelector(
     selectAll,
     (categories: Category[]) => [...new Set(categories.map(x => x.year))].sort()

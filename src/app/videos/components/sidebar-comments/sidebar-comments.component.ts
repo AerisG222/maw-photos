@@ -24,7 +24,11 @@ export class SidebarCommentsComponent {
             .pipe(
                 first()
             ).subscribe({
-                next: id => this.store.dispatch(VideoStoreActions.addCommentRequest({ videoId: id as number, comment })),
+                next: id => {
+                    if(!!id) {
+                        this.store.dispatch(VideoStoreActions.addCommentRequest({ videoId: id as number, comment }));
+                    }
+                },
                 error: err => console.log(`error trying to add a comment: ${ err }`)
             });
     }

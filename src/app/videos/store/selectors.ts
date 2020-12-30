@@ -194,6 +194,26 @@ export const previousVideo = createSelector(
     }
 );
 
+export const activeVideoGpsDetailSource = createSelector(
+    activeVideoGpsDetail,
+    detail => detail?.source
+);
+
+export const activeVideoGpsDetailOverride = createSelector(
+    activeVideoGpsDetail,
+    detail => detail?.override
+);
+
+export const activeVideoGoogleLatLng = createSelector(
+    activeVideo,
+    video => {
+        if (!!video && !!video.latitude && video.longitude) {
+            return new google.maps.LatLng(video.latitude, video.longitude);
+        }
+
+        return null;
+    }
+);
 
 export const isCommentCardVisible = createSelector(
     SettingsStoreSelectors.videoInfoPanelExpandedState,

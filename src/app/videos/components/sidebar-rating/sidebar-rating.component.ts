@@ -34,7 +34,11 @@ export class SidebarRatingComponent implements OnInit {
             .pipe(
                 first()
             ).subscribe({
-                next: id => this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: id as number, userRating })),
+                next: id => {
+                    if(!!id) {
+                        this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: id as number, userRating }));
+                    }
+                },
                 error: err => console.log(`error trying to add rating: ${ err }`)
             });
     }
