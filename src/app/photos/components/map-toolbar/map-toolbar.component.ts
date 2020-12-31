@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/photos/store';
+import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
 
 @Component({
     selector: 'app-photos-map-toolbar',

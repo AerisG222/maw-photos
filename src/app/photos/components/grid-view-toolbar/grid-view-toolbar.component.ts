@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
-import { PhotoStoreActions, PhotoStoreSelectors } from '../../store';
+import { PhotoStoreActions, PhotoStoreSelectors } from '../../../core/root-store/photos-store';
 import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
 import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';

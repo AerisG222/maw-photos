@@ -25,12 +25,13 @@ $custom-typography: mat-typography-config(
 
 @import 'app/categories/year-list/year-list.component.theme';
 
-@import 'app/photos/components/photo-list/photo-list.component.theme';
+@import 'app/photos-shared/components/photo-list/photo-list.component.theme';
+@import 'app/photos-shared/components/default-view/default-view.component.theme';
+@import 'app/photos-shared/components/sidebar-exif-table/sidebar-exif-table.component.theme';
+@import 'app/photos-shared/components/toolbar-download-button/toolbar-download-button.component.theme';
+
 @import 'app/photos/components/photo-select-grid/photo-select-grid.component.theme';
-@import 'app/photos/components/default-view/default-view.component.theme';
 @import 'app/photos/components/bulk-edit/bulk-edit.component.theme';
-@import 'app/photos/components/sidebar-exif-table/sidebar-exif-table.component.theme';
-@import 'app/photos/components/toolbar-download-button/toolbar-download-button.component.theme';
 
 @import 'app/primary-nav/link/link.component.theme';
 @import 'app/primary-nav/primary-nav/primary-nav.component.theme';

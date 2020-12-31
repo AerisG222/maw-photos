@@ -29,6 +29,12 @@ const routes: Routes = [
         resolve: [ authInitResolverToken ]
     },
     {
+        path: 'random',
+        loadChildren: () => import('./random/random.module').then(m => m.RandomModule),
+        canActivate: [authGuardToken],
+        resolve: [ authInitResolverToken ]
+    },
+    {
         path: 'about',
         loadChildren: () => import('./about/about.module').then(m => m.AboutModule),
         resolve: [ authInitResolverToken ]

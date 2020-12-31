@@ -2,7 +2,7 @@
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { PhotoStoreSelectors, PhotoStoreActions } from '../../store';
+import { PhotoStoreSelectors, PhotoStoreActions } from '../../../core/root-store/photos-store';
 import { Photo } from 'src/app/models/photo.model';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
 

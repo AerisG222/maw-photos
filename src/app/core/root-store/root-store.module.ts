@@ -10,6 +10,7 @@ import { VideoCategoryStoreModule } from './video-category-store';
 import { AuthStoreModule } from './auth-store';
 import { RouterStoreModule } from './router-store';
 import { extModules } from './environment/modules';
+import { PhotoStoreModule } from './photos-store';
 
 @NgModule({
     declarations: [],
@@ -17,6 +18,7 @@ import { extModules } from './environment/modules';
         AuthStoreModule,
         LayoutStoreModule,
         PhotoCategoryStoreModule,
+        PhotoStoreModule,
         SettingsStoreModule,
         VideoCategoryStoreModule,
         RouterStoreModule,

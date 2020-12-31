@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/photos/store';
+import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photos-store';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
