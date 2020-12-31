@@ -49,5 +49,10 @@ export const reducer = createReducer(
         ...state,
         isLoading: false,
         error
-    }))
+    })),
+    on(SearchActions.exitSearchArea, (state): State =>
+        searchAdapter.removeAll({
+            ...initialState
+        })
+    )
 );

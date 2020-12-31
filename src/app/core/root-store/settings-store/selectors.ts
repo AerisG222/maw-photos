@@ -258,3 +258,13 @@ export const searchListViewThumbnailSize = createSelector(
     settingsState,
     (state: State): ThumbnailSize => state.settings.searchListViewThumbnailSize
 );
+
+export const showSearchResultsInListView = createSelector(
+    searchListType,
+    type => type.name === CategoryListType.list.name
+);
+
+export const showSearchResultsInGridView = createSelector(
+    searchListType,
+    type => type.name === CategoryListType.grid.name
+);

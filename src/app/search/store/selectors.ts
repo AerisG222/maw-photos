@@ -4,6 +4,8 @@ import { State, searchAdapter } from './state';
 import { SEARCH_FEATURE_NAME } from './feature-name';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { SearchResult } from 'src/app/search/models/search-result.model';
+import { CategoryType } from 'src/app/models/category-type.model';
+import { CategoryTeaser } from 'src/app/models/category-teaser.model';
 
 const searchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);
 
@@ -42,3 +44,53 @@ export const hasMoreResults = createSelector(
         return !!result ? (result.startIndex + result.results.length) < result.totalFound : false;
     }
 );
+
+export const totalResults = createSelector(
+    activeResult,
+    result => result?.totalFound ?? 0
+);
+
+export const showTotalResults = createSelector(
+    totalResults,
+    total => total > 0
+);
+
+export const allResultsAsCategories = createSelector(
+    allResults,
+    cats => cats.map(adaptSearchResultToCategory)
+);
+
+export const shownResults = createSelector(
+    activeResult,
+    result => (!!result) ? result.startIndex + result.results.length : 0
+);
+
+export const showNoResults = createSelector(
+    activeResult,
+    result => (!!result) ? result.totalFound === 0 : false
+);
+
+export const nextResultIndex = createSelector(
+    activeResult,
+    result => !!result ? result.startIndex + result.results.length : -1
+);
+
+const adaptSearchResultToCategory = (cat: MultimediaCategory): CategoryTeaser => ({
+    route: `/${ cat.multimediaType }s`,
+    id: cat.id,
+    year: cat.year,
+    name: cat.name,
+    teaserImage: {
+        height: cat.teaserPhotoHeight,
+        width: cat.teaserPhotoWidth,
+        url: cat.teaserPhotoPath,
+        size: 0
+    },
+    teaserImageSq: {
+        height: cat.teaserPhotoSqHeight,
+        width: cat.teaserPhotoSqWidth,
+        url: cat.teaserPhotoSqPath,
+        size: 0
+    },
+    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
+});

@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { first, withLatestFrom } from 'rxjs/operators';
 
 import { queryRequest } from 'src/app/search/store/actions';
 import { SearchStoreSelectors } from 'src/app/search/store';
@@ -12,40 +11,26 @@ import { SearchStoreSelectors } from 'src/app/search/store';
     styleUrls: ['./search-more.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchMoreComponent implements OnInit, OnDestroy {
-    private readonly destroySub = new Subscription();
-    private nextIndex = -1;
-    private query: string | null = null;
-
+export class SearchMoreComponent {
     constructor(
-        private store: Store,
+        private store: Store
     ) {
 
     }
 
-    ngOnInit(): void {
-        this.destroySub.add(this.store
+    onSearchMore(): void {
+        this.store
             .select(SearchStoreSelectors.query)
             .pipe(
-                tap(q => this.query = q)
-            ).subscribe()
-        );
-
-        this.destroySub.add(this.store
-            .select(SearchStoreSelectors.activeResult)
-            .pipe(
-                tap(result => this.nextIndex = !!result ? result.startIndex + result.results.length : -1)
-            ).subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
-
-    onSearchMore(): void {
-        if (this.nextIndex > 0) {
-            this.store.dispatch(queryRequest({ query: this.query as string, start: this.nextIndex }));
-        }
+                withLatestFrom(this.store.select(SearchStoreSelectors.nextResultIndex)),
+                first()
+            ).subscribe({
+                next: ([query, nextIndex]) => {
+                    if (nextIndex > 0) {
+                        this.store.dispatch(queryRequest({ query: query as string, start: nextIndex }));
+                    }
+                },
+                error: err => console.log(`error searching for more: ${ err }`)
+            });
     }
 }

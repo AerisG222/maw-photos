@@ -36,3 +36,7 @@ export const queryMoreSuccess = createAction(
     '[Search] Query More Success',
     props<{ query: string; result: SearchResult<MultimediaCategory> }>()
 );
+
+export const exitSearchArea = createAction(
+    '[Search] Exiting Search Area'
+);
