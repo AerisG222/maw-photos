@@ -1,7 +1,8 @@
 export enum RouteArea {
     unknown = 'unknown',
+    about = 'about',
     categories = 'categories',
-    help = 'help',
+    login = 'login',
     photos = 'photos',
     random = 'random',
     search = 'search',

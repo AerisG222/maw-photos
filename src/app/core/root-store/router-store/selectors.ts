@@ -5,6 +5,7 @@ import { MinimalRouterStateSnapshot } from '@ngrx/router-store';
 
 import { RouteDetails } from 'src/app/models/route-details.model';
 import { RouteArea } from 'src/app/models/route-area';
+import { RouteHelperService } from '../../services/route-helper.service';
 
 export const routerState = createFeatureSelector<fromRouter.RouterReducerState<MinimalRouterStateSnapshot>>('router');
 
@@ -45,8 +46,11 @@ export const selectRouteDetails = createSelector(
     selectRouteNestedParams,
     selectRouteData,
     (url, fragment, params, data): RouteDetails => {
+        // TODO: is there a way to have this injected?
+        const routeHelperService = new RouteHelperService();
+
         return {
-            area: getArea(url),
+            area: routeHelperService.getArea(url),
             url,
             fragment: fragment ?? null,
             params,
@@ -59,28 +63,3 @@ export const isRandomView = createSelector(
     selectRouteDetails,
     details => details.area === RouteArea.random
 );
-
-const areaMap = [
-    { urlStart: '/categories', area: RouteArea.categories },
-    { urlStart: '/help', area: RouteArea.help },
-    { urlStart: '/photos/random', area: RouteArea.random },
-    { urlStart: '/photos', area: RouteArea.photos },
-    { urlStart: '/search', area: RouteArea.search },
-    { urlStart: '/settings', area: RouteArea.settings },
-    { urlStart: '/stats', area: RouteArea.stats },
-    { urlStart: '/videos', area: RouteArea.videos }
-];
-
-const getArea = (url: string): RouteArea => {
-    if(!!!url) {
-        return RouteArea.unknown;
-    }
-
-    for(const mapping of areaMap) {
-        if(url.startsWith(mapping.urlStart)) {
-            return mapping.area;
-        }
-    }
-
-    return RouteArea.unknown;
-};

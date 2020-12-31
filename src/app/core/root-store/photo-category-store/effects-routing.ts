@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, withLatestFrom, filter, tap } from 'rxjs/operators';
 
 import { RouteArea } from 'src/app/models/route-area';
+import { RouteHelperService } from '../../services/route-helper.service';
 import { RouterStoreActions } from '../router-store';
 import * as PhotoCategoryStoreActions from './actions';
 import * as PhotoCategoryStoreSelectors from './selectors';
@@ -21,7 +22,7 @@ export class PhotoCategoryStoreRoutingEffects {
 
                 return isNaN(catId) || !(catId in entities);
             }),
-            tap(_ => this.router.navigateByUrl('/categories'))
+            tap(_ => this.router.navigateByUrl(this.routeBuilderService.categoriesAbs()))
         );
     }, { dispatch: false });
 
@@ -44,7 +45,8 @@ export class PhotoCategoryStoreRoutingEffects {
     constructor(
         private actions$: Actions,
         private store: Store,
-        private router: Router
+        private router: Router,
+        private routeBuilderService: RouteHelperService
     ) {
 
     }

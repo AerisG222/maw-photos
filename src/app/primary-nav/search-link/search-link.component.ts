@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouteHelperService } from 'src/app/core/services/route-helper.service';
 
 @Component({
     selector: 'app-primary-nav-search-link',
@@ -7,5 +8,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchLinkComponent {
+    searchLink = this.routeHelperService.searchAbs();
 
+    constructor(private routeHelperService: RouteHelperService) {
+
+    }
 }

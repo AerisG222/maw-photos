@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouteHelperService } from 'src/app/core/services/route-helper.service';
 
 @Component({
     selector: 'app-primary-nav-categories-link',
@@ -7,5 +8,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesLinkComponent {
+    categoriesLink = this.routeHelperService.categoriesAbs();
 
+    constructor(private routeHelperService: RouteHelperService) {
+
+    }
 }

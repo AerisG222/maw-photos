@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouteHelperService } from 'src/app/core/services/route-helper.service';
 
 @Component({
     selector: 'app-primary-nav-random-link',
@@ -7,5 +8,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RandomLinkComponent {
+    randomLink = this.routeHelperService.randomAbs();
 
+    constructor(private routeHelperService: RouteHelperService) {
+
+    }
 }

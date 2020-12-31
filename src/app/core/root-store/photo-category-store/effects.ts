@@ -10,6 +10,7 @@ import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/pho
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { Category } from 'src/app/models/category.model';
 import { CategoryType } from 'src/app/models/category-type.model';
+import { RouteHelperService } from '../../services/route-helper.service';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -47,7 +48,8 @@ export class PhotoCategoryStoreEffects {
     constructor(
         @Inject(photoApiServiceToken) private api: PhotoApiService,
         private actions$: Actions,
-        private store: Store
+        private store: Store,
+        private routeBuilderService: RouteHelperService
     ) {
 
     }
@@ -59,7 +61,7 @@ export class PhotoCategoryStoreEffects {
     private adaptCategory(category: PhotoCategory): Category {
         return {
             type: CategoryType.photo,
-            route: '/photos',
+            route: this.routeBuilderService.photoCategoriesAbs(),
             id: category.id,
             name: category.name,
             year: category.year,

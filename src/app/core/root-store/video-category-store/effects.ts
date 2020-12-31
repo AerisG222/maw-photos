@@ -10,6 +10,7 @@ import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/vid
 import { VideoCategory } from 'src/app/models/video-category.model';
 import { Category } from 'src/app/models/category.model';
 import { CategoryType } from 'src/app/models/category-type.model';
+import { RouteHelperService } from '../../services/route-helper.service';
 
 @Injectable()
 export class VideoCategoryStoreEffects {
@@ -47,7 +48,8 @@ export class VideoCategoryStoreEffects {
     constructor(
         @Inject(videoApiServiceToken) private api: VideoApiService,
         private actions$: Actions,
-        private store: Store
+        private store: Store,
+        private routeBuilderService: RouteHelperService
     ) {
 
     }
@@ -59,7 +61,7 @@ export class VideoCategoryStoreEffects {
     private adaptCategory(category: VideoCategory): Category {
         return {
             type: CategoryType.video,
-            route: '/videos',
+            route: this.routeBuilderService.videoCategoriesAbs(),
             id: category.id,
             name: category.name,
             year: category.year,

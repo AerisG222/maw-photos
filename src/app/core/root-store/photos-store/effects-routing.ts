@@ -7,6 +7,7 @@ import { filter, map, tap } from 'rxjs/operators';
 
 import * as RouterStoreActions from 'src/app/core/root-store/router-store/actions';
 import { RouteArea } from 'src/app/models/route-area';
+import { RouteHelperService } from '../../services/route-helper.service';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 
@@ -26,7 +27,8 @@ export class PhotoStoreRoutingEffects {
     navigateToPhoto$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.navigateToPhoto),
-            tap(action => this.router.navigateByUrl(`/photos/${ action.categoryId }/${ action.photoId }`))
+            map(action => this.routeBuilderService.photoCategoriesAbs(action.categoryId, action.photoId)),
+            tap(url => this.router.navigateByUrl(url))
         );
     }, { dispatch: false });
 
@@ -102,7 +104,8 @@ export class PhotoStoreRoutingEffects {
     constructor(
         private actions$: Actions,
         private store: Store,
-        private router: Router
+        private router: Router,
+        private routeBuilderService: RouteHelperService
     ) {
 
     }
