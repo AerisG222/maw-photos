@@ -14,6 +14,8 @@ import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-ed
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
 import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rating.component';
 import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-category-teaser-chooser/sidebar-category-teaser-chooser.component';
+import { Navigable } from '../models/store-facades/navigable';
+import { VideoStoreFacadeService } from './services/video-store-facade.service';
 
 @NgModule({
     declarations: [
@@ -31,6 +33,10 @@ import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-cate
         SharedModule,
         VideosRoutingModule,
         VideoStoreModule
+    ],
+    providers: [
+        VideoStoreFacadeService,
+        { provide: Navigable, useExisting: VideoStoreFacadeService }
     ]
 })
 export class VideosModule { }

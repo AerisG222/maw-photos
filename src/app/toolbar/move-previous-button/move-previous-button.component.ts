@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { Navigable } from 'src/app/models/store-facades/navigable';
 
 @Component({
     selector: 'app-toolbar-move-previous-button',
@@ -7,10 +9,9 @@ import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy } from 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovePreviousButtonComponent {
-    @Input() atStartOfList = true;
-    @Output() movePrevious = new EventEmitter<void>();
+    constructor(
+        public navigable: Navigable
+    ) {
 
-    onMovePrevious(): void {
-        this.movePrevious.emit();
     }
 }

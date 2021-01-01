@@ -1,4 +1,6 @@
-import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { Navigable } from 'src/app/models/store-facades/navigable';
 
 @Component({
     selector: 'app-toolbar-move-next-button',
@@ -7,10 +9,9 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MoveNextButtonComponent {
-    @Input() atEndOfList = false;
-    @Output() moveNext = new EventEmitter<void>();
+    constructor(
+        public navigable: Navigable
+    ) {
 
-    onMoveNext(): void {
-        this.moveNext.emit();
     }
 }

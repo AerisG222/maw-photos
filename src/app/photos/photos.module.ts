@@ -15,6 +15,8 @@ import { PhotoSelectGridComponent } from './components/photo-select-grid/photo-s
 import { GridViewComponent } from './components/grid-view/grid-view.component';
 import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
+import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
+import { Navigable } from '../models/store-facades/navigable';
 
 @NgModule({
     declarations: [
@@ -34,6 +36,10 @@ import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
         PhotosRoutingModule,
         PhotosSharedModule,
         PhotoStoreModule
+    ],
+    providers: [
+        PhotoStoreFacadeService,
+        { provide: Navigable, useExisting: PhotoStoreFacadeService }
     ]
 })
 export class PhotosModule { }

@@ -1,9 +1,9 @@
 <app-toolbar-button
     [hideOnMobile]="true"
     [icon]="'chevron_left'"
-    [isDisabled]="atStartOfList"
+    [isDisabled]="navigable.isFirst$ | async"
     [shortcutKey]="'left'"
     [shortcutHelp]="'Move Previous'"
     [tooltip]="'Previous (&larr;)'"
-    (click)="onMovePrevious()">
+    (click)="navigable.movePrevious()">
 </app-toolbar-button>

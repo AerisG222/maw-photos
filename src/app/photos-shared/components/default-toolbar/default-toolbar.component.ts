@@ -25,8 +25,6 @@ export class DefaultToolbarComponent {
 
     enableShare: boolean;
 
-    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     enableBulkEdit$ = this.store.select(RootStoreSelectors.enableBulkEdit);
     enableMapView$ = this.store.select(PhotoStoreSelectors.enableMapView);
     smDownloadUrl$ = this.store.select(PhotoStoreSelectors.activePhotoSmDownloadUrl);
@@ -79,14 +77,6 @@ export class DefaultToolbarComponent {
 
     onToggleGridView(): void {
         this.store.dispatch(PhotoStoreActions.toggleGridViewRequest());
-    }
-
-    onMoveNext(): void {
-        this.store.dispatch(PhotoStoreActions.moveNextRequest());
-    }
-
-    onMovePrevious(): void {
-        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onShare(): void {

@@ -18,8 +18,6 @@ import { Photo } from 'src/app/models/photo.model';
 export class GridViewToolbarComponent {
     enableShare = false;
     activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
-    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
     constructor(
         private store: Store,
@@ -30,14 +28,6 @@ export class GridViewToolbarComponent {
 
     onExitGridView(): void {
         this.store.dispatch(PhotoStoreActions.exitGridViewRequest());
-    }
-
-    onMoveNext(): void {
-        this.store.dispatch(PhotoStoreActions.moveNextRequest());
-    }
-
-    onMovePrevious(): void {
-        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 
     onToggleSlideshow(): void {

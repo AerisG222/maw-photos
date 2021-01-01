@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { Settings } from 'src/app/models/settings.model';
 import { VideoSize } from 'src/app/models/video-size.model';
-import { VideoStoreActions, VideoStoreSelectors } from 'src/app/videos/store';
+import { VideoStoreActions } from 'src/app/videos/store';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
@@ -16,8 +16,6 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-    isFirst$ = this.store.select(VideoStoreSelectors.isActiveVideoFirst);
-    isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
     settings: Settings | null = null;
 
     private destroySub = new Subscription();
@@ -65,13 +63,5 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
             this.store.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
         }
-    }
-
-    onMovePrevious(): void {
-        this.store.dispatch(VideoStoreActions.movePreviousRequest());
-    }
-
-    onMoveNext(): void {
-        this.store.dispatch(VideoStoreActions.moveNextRequest());
     }
 }
