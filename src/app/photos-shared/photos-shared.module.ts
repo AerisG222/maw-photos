@@ -9,7 +9,6 @@ import { FullscreenToolbarComponent } from './components/fullscreen-toolbar/full
 import { FullscreenViewComponent } from './components/fullscreen-view/fullscreen-view.component';
 import { PhotoListComponent } from '../photos-shared/components/photo-list/photo-list.component';
 import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-category-teaser-chooser/sidebar-category-teaser-chooser.component';
-import { SidebarCommentsComponent } from './components/sidebar-comments/sidebar-comments.component';
 import { SidebarEffectsComponent } from './components/sidebar-effects/sidebar-effects.component';
 import { SidebarExifTableComponent } from './components/sidebar-exif-table/sidebar-exif-table.component';
 import { SidebarExifComponent } from './components/sidebar-exif/sidebar-exif.component';
@@ -33,7 +32,6 @@ import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-
         FullscreenViewComponent,
         PhotoListComponent,
         SidebarCategoryTeaserChooserComponent,
-        SidebarCommentsComponent,
         SidebarEffectsComponent,
         SidebarExifComponent,
         SidebarExifTableComponent,

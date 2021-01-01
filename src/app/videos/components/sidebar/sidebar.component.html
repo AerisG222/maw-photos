@@ -5,10 +5,10 @@
             @sidebarCardShowHide>
         </app-videos-sidebar-rating>
 
-        <app-videos-sidebar-comments
+        <app-sidebar-comments-card
             *ngIf="showComments$ | async"
             @sidebarCardShowHide>
-        </app-videos-sidebar-comments>
+        </app-sidebar-comments-card>
 
         <app-videos-sidebar-minimap
             *ngIf="showMinimap$ | async"

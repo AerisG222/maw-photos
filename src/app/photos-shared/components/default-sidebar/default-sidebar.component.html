@@ -5,10 +5,10 @@
             @sidebarCardShowHide>
         </app-photos-sidebar-rating>
 
-        <app-photos-sidebar-comments
+        <app-sidebar-comments-card
             *ngIf="showComments$ | async"
             @sidebarCardShowHide>
-        </app-photos-sidebar-comments>
+        </app-sidebar-comments-card>
 
         <app-photos-sidebar-exif
             *ngIf="showExif$ | async"

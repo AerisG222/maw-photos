@@ -1,7 +1,7 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Comment } from 'src/app/models/comment.model';
+import { Commentable } from 'src/app/models/store-facades/commentable';
 
 @Component({
     selector: 'app-sidebar-comments-card',
@@ -10,13 +10,13 @@ import { Comment } from 'src/app/models/comment.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentsCardComponent {
-    @Input() comments: Comment[] | null = null;
-    @Output() saveComment = new EventEmitter<string>();
-
     form: FormGroup;
     columnsToDisplay = ['entryDate', 'username', 'commentText'];
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(
+        private formBuilder: FormBuilder,
+        public commentable: Commentable
+    ) {
         this.form = this.formBuilder.group({
             comment: ['', Validators.required]
         });
@@ -25,11 +25,9 @@ export class CommentsCardComponent {
     onComment(): void {
         const comment = this.form.get('comment')?.value;
 
-        if (!!comment) {
-            this.saveComment.next(comment as string);
+        this.commentable.addComment(comment);
 
-            this.clearNewComment();
-        }
+        this.clearNewComment();
     }
 
     onCancel(): void {

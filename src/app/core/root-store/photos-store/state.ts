@@ -17,7 +17,7 @@ export interface State extends EntityState<Photo> {
     isLoading: boolean;
     activePhotoId: number | null;
     activePhotoRating: Rating | null;
-    activePhotoComments: Comment[] | null;
+    activePhotoComments: Comment[];
     activePhotoExifData: ExifContainer | null;
     activePhotoEffects: PhotoEffects;
     activePhotoGpsDetail: GpsDetail | null;
@@ -34,7 +34,7 @@ export const initialState: State = photoAdapter.getInitialState({
     error: null,
     activePhotoId: null,
     activePhotoRating: null,
-    activePhotoComments: null,
+    activePhotoComments: [],
     activePhotoExifData: null,
     activePhotoEffects: DEFAULT_PHOTO_EFFECTS,
     activePhotoGpsDetail: null,

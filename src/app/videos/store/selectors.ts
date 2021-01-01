@@ -73,7 +73,7 @@ export const activeVideoRating = createSelector(
 
 export const activeVideoComments = createSelector(
     selectVideoState,
-    (state: State): Comment[] | null => state.activeVideoComments
+    (state: State): Comment[] => state.activeVideoComments
 );
 
 export const activeVideoGpsDetail = createSelector(

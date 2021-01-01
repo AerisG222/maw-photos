@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
+import { Commentable } from 'src/app/models/store-facades/commentable';
+import { helpAddComment } from 'src/app/models/store-facades/commentable-helper';
 import { Navigable } from 'src/app/models/store-facades/navigable';
 import { helpMoveNext, helpMovePrevious } from 'src/app/models/store-facades/navigable-helpers';
 
 @Injectable()
-export class PhotoStoreFacadeService implements Navigable {
+export class PhotoStoreFacadeService implements Navigable, Commentable {
+    activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
+    comments$ = this.store.select(PhotoStoreSelectors.activePhotoComments);
     isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
@@ -14,6 +18,12 @@ export class PhotoStoreFacadeService implements Navigable {
         private store: Store
     ) {
 
+    }
+
+    addComment(comment: string): void {
+        helpAddComment(this.activeId$, comment, (id, commentText) =>  {
+            this.store.dispatch(PhotoStoreActions.addCommentRequest({ photoId: id as number, comment: commentText }));
+        });
     }
 
     moveNext(): void {

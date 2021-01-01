@@ -17,6 +17,7 @@ import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-vi
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
 import { Navigable } from '../models/store-facades/navigable';
+import { Commentable } from '../models/store-facades/commentable';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { Navigable } from '../models/store-facades/navigable';
     ],
     providers: [
         PhotoStoreFacadeService,
-        { provide: Navigable, useExisting: PhotoStoreFacadeService }
+        { provide: Navigable,   useExisting: PhotoStoreFacadeService },
+        { provide: Commentable, useExisting: PhotoStoreFacadeService }
     ]
 })
 export class PhotosModule { }

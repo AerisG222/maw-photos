@@ -50,7 +50,7 @@ export const activePhotoRating = createSelector(
 
 export const activePhotoComments = createSelector(
     photoState,
-    (state: State): Comment[] | null => state.activePhotoComments
+    (state: State): Comment[] => state.activePhotoComments
 );
 
 export const activePhotoExifData = createSelector(
