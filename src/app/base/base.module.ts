@@ -21,11 +21,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgxStarsModule } from 'ngx-stars';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 @NgModule({
     exports: [
         CommonModule,
+        BarRatingModule,
         GoogleMapsModule,
         MatButtonModule,
         MatCardModule,
@@ -45,7 +46,6 @@ import { NgxStarsModule } from 'ngx-stars';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        NgxStarsModule,
         ReactiveFormsModule,
         RouterModule
     ]

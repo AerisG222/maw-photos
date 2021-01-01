@@ -6,13 +6,13 @@
         <tr>
             <td>Your Rating</td>
             <td>
-                <ngx-stars [color]="'#edb867'" [maxStars]="5" [wholeStars]="true" (ratingOutput)="onRate($event)" #userRating></ngx-stars>
+                <bar-rating [max]="5" (rateChange)="onRate($event)" [rate]="userRating$ | async"></bar-rating>
             </td>
         </tr>
         <tr>
             <td>Average Rating</td>
             <td>
-                <ngx-stars [color]="'#edb867'" [maxStars]="5" [readonly]="true" #averageRating></ngx-stars>
+                <bar-rating [max]="5" [readOnly]="true" [rate]="averageRating$ | async"></bar-rating>
             </td>
         </tr>
     </table>

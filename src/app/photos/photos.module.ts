@@ -18,6 +18,7 @@ import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
 import { Navigable } from '../models/store-facades/navigable';
 import { Commentable } from '../models/store-facades/commentable';
+import { Ratable } from '../models/store-facades/ratable';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { Commentable } from '../models/store-facades/commentable';
     providers: [
         PhotoStoreFacadeService,
         { provide: Navigable,   useExisting: PhotoStoreFacadeService },
-        { provide: Commentable, useExisting: PhotoStoreFacadeService }
+        { provide: Commentable, useExisting: PhotoStoreFacadeService },
+        { provide: Ratable,     useExisting: PhotoStoreFacadeService }
     ]
 })
 export class PhotosModule { }

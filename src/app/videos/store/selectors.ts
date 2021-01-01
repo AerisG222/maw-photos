@@ -68,7 +68,7 @@ export const lastVideo = createSelector(
 
 export const activeVideoRating = createSelector(
     selectVideoState,
-    (state: State): Rating | null => state.activeVideoRating
+    (state: State): Rating => state.activeVideoRating
 );
 
 export const activeVideoComments = createSelector(

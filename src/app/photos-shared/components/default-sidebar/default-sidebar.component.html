@@ -1,9 +1,9 @@
 <app-sidebar-sidebar>
     <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
-        <app-photos-sidebar-rating
+        <app-sidebar-rating-card
             *ngIf="showRatings$ | async"
             @sidebarCardShowHide>
-        </app-photos-sidebar-rating>
+        </app-sidebar-rating-card>
 
         <app-sidebar-comments-card
             *ngIf="showComments$ | async"

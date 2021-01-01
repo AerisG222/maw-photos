@@ -13,7 +13,7 @@ export interface State extends EntityState<Video> {
     error: string | null;
     isLoading: boolean;
     activeVideoId: number | null;
-    activeVideoRating: Rating | null;
+    activeVideoRating: Rating;
     activeVideoComments: Comment[];
     activeVideoGpsDetail: GpsDetail | null;
     isFullscreenView: boolean;
@@ -23,7 +23,7 @@ export const initialState: State = videoAdapter.getInitialState({
     isLoading: false,
     error: null,
     activeVideoId: null,
-    activeVideoRating: null,
+    activeVideoRating: { averageRating: 0, userRating: 0 },
     activeVideoComments: [],
     activeVideoGpsDetail: null,
     isFullscreenView: false

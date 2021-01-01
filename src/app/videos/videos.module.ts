@@ -11,11 +11,11 @@ import { VideoCategoryComponent } from './components/video-category/video-catego
 import { VideoListComponent } from './components/video-list/video-list.component';
 import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
-import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rating.component';
 import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-category-teaser-chooser/sidebar-category-teaser-chooser.component';
 import { Navigable } from '../models/store-facades/navigable';
 import { VideoStoreFacadeService } from './services/video-store-facade.service';
 import { Commentable } from '../models/store-facades/commentable';
+import { Ratable } from '../models/store-facades/ratable';
 
 @NgModule({
     declarations: [
@@ -25,7 +25,6 @@ import { Commentable } from '../models/store-facades/commentable';
         VideoListComponent,
         SidebarMetadataEditorComponent,
         SidebarMinimapComponent,
-        SidebarRatingComponent,
         SidebarCategoryTeaserChooserComponent
     ],
     imports: [
@@ -36,7 +35,8 @@ import { Commentable } from '../models/store-facades/commentable';
     providers: [
         VideoStoreFacadeService,
         { provide: Navigable,   useExisting: VideoStoreFacadeService },
-        { provide: Commentable, useExisting: VideoStoreFacadeService }
+        { provide: Commentable, useExisting: VideoStoreFacadeService },
+        { provide: Ratable,     useExisting: VideoStoreFacadeService }
     ]
 })
 export class VideosModule { }

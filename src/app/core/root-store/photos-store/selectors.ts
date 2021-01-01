@@ -45,7 +45,7 @@ export const activePhotoId = createSelector(
 
 export const activePhotoRating = createSelector(
     photoState,
-    (state: State): Rating | null => state.activePhotoRating
+    (state: State): Rating => state.activePhotoRating
 );
 
 export const activePhotoComments = createSelector(

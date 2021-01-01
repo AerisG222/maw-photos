@@ -7,6 +7,7 @@ import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { Navigable } from '../models/store-facades/navigable';
 import { RandomStoreFacadeService } from './services/random-store-facade.service';
 import { Commentable } from '../models/store-facades/commentable';
+import { Ratable } from '../models/store-facades/ratable';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { Commentable } from '../models/store-facades/commentable';
     providers: [
         RandomStoreFacadeService,
         { provide: Navigable,   useExisting: RandomStoreFacadeService },
-        { provide: Commentable, useExisting: RandomStoreFacadeService }
+        { provide: Commentable, useExisting: RandomStoreFacadeService },
+        { provide: Ratable,     useExisting: RandomStoreFacadeService }
     ]
 })
 export class RandomModule { }

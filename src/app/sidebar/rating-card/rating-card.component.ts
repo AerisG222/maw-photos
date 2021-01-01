@@ -1,8 +1,7 @@
-// eslint-disable-next-line max-len
-import { Component, Input, ChangeDetectionStrategy, ViewChild, AfterViewInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
-import { NgxStarsComponent } from 'ngx-stars';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { map } from 'rxjs/operators';
 
-import { Rating } from 'src/app/models/rating.model';
+import { Ratable } from 'src/app/models/store-facades/ratable';
 
 @Component({
     selector: 'app-sidebar-rating-card',
@@ -10,44 +9,22 @@ import { Rating } from 'src/app/models/rating.model';
     styleUrls: ['./rating-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingCardComponent implements AfterViewInit {
-    @Input()
-    set rating(value: Rating | null) {
-        this.theRating = value;
-        this.updateRating();
-    }
-    get rating(): Rating | null { return this.theRating; }
+export class RatingCardComponent  {
+    userRating$ = this.ratable.rating$.pipe(
+        map(rating => rating.userRating)
+    );
 
-    @Output() rate = new EventEmitter<number>();
-
-    @ViewChild('userRating') userRatingComponent: NgxStarsComponent | null = null;
-    @ViewChild('averageRating') averageRatingComponent: NgxStarsComponent | null = null;
-
-    private isReady = false;
-    private theRating: Rating | null = null;
+    averageRating$ = this.ratable.rating$.pipe(
+        map(rating => rating.averageRating)
+    );
 
     constructor(
-        private changeDetectorRef: ChangeDetectorRef
+        public ratable: Ratable
     ) {
 
     }
 
-    ngAfterViewInit(): void {
-        this.isReady = true;
-
-        this.updateRating();
-    }
-
     onRate(userRating: number): void {
-        this.rate.next(userRating);
-    }
-
-    private updateRating(): void {
-        if (!!this.theRating && this.isReady) {
-            this.userRatingComponent?.setRating(this.theRating.userRating);
-            this.averageRatingComponent?.setRating(this.theRating.averageRating);
-
-            this.changeDetectorRef.detectChanges();
-        }
+        this.ratable.rate(userRating);
     }
 }

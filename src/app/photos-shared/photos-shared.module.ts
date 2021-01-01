@@ -15,7 +15,6 @@ import { SidebarExifComponent } from './components/sidebar-exif/sidebar-exif.com
 import { SidebarHistogramComponent } from './components/sidebar-histogram/sidebar-histogram.component';
 import { SidebarMetadataEditorComponent } from './components/sidebar-metadata-editor/sidebar-metadata-editor.component';
 import { SidebarMinimapComponent } from './components/sidebar-minimap/sidebar-minimap.component';
-import { SidebarRatingComponent } from './components/sidebar-rating/sidebar-rating.component';
 import { ToolbarDownloadButtonComponent } from './components/toolbar-download-button/toolbar-download-button.component';
 import { ToolbarFlipHorizontalButtonComponent } from './components/toolbar-flip-horizontal-button/toolbar-flip-horizontal-button.component';
 import { ToolbarFlipVerticalButtonComponent } from './components/toolbar-flip-vertical-button/toolbar-flip-vertical-button.component';
@@ -38,7 +37,6 @@ import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-
         SidebarHistogramComponent,
         SidebarMetadataEditorComponent,
         SidebarMinimapComponent,
-        SidebarRatingComponent,
         ToolbarDownloadButtonComponent,
         ToolbarFlipHorizontalButtonComponent,
         ToolbarFlipVerticalButtonComponent,
