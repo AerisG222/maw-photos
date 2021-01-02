@@ -21,6 +21,7 @@ import { Commentable } from '../models/store-facades/commentable';
 import { Ratable } from '../models/store-facades/ratable';
 import { MetadataEditable } from '../models/store-facades/metadata-editable';
 import { MiniMapable } from '../models/store-facades/mini-mapable';
+import { CategoryTeaserSelectable } from '../models/store-facades/category-teaser-selectable';
 
 @NgModule({
     declarations: [
@@ -43,11 +44,12 @@ import { MiniMapable } from '../models/store-facades/mini-mapable';
     ],
     providers: [
         PhotoStoreFacadeService,
-        { provide: Navigable,        useExisting: PhotoStoreFacadeService },
-        { provide: Commentable,      useExisting: PhotoStoreFacadeService },
-        { provide: Ratable,          useExisting: PhotoStoreFacadeService },
-        { provide: MetadataEditable, useExisting: PhotoStoreFacadeService },
-        { provide: MiniMapable,      useExisting: PhotoStoreFacadeService }
+        { provide: Navigable,                useExisting: PhotoStoreFacadeService },
+        { provide: Commentable,              useExisting: PhotoStoreFacadeService },
+        { provide: Ratable,                  useExisting: PhotoStoreFacadeService },
+        { provide: MetadataEditable,         useExisting: PhotoStoreFacadeService },
+        { provide: MiniMapable,              useExisting: PhotoStoreFacadeService },
+        { provide: CategoryTeaserSelectable, useExisting: PhotoStoreFacadeService }
     ]
 })
 export class PhotosModule { }

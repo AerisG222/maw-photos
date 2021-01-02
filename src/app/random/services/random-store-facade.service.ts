@@ -13,9 +13,13 @@ import { Navigable } from 'src/app/models/store-facades/navigable';
 import { helpMoveNext, helpMovePrevious } from 'src/app/models/store-facades/navigable-helpers';
 import { Ratable } from 'src/app/models/store-facades/ratable';
 import { helpRate } from 'src/app/models/store-facades/ratable-helper';
+import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store/photo-category-store';
+import { CategoryTeaserSelectable } from 'src/app/models/store-facades/category-teaser-selectable';
+import { helpSaveCategoryTeaser } from 'src/app/models/store-facades/category-teaser-selectable-helper';
 
 @Injectable()
-export class RandomStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable {
+export class RandomStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable {
+    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
     comments$ = this.store.select(PhotoStoreSelectors.activePhotoComments);
     rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
@@ -27,6 +31,7 @@ export class RandomStoreFacadeService implements Navigable, Commentable, Ratable
     position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
     zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
+    currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
 
     constructor(
         private store: Store
@@ -76,5 +81,14 @@ export class RandomStoreFacadeService implements Navigable, Commentable, Ratable
 
     onZoomChange(zoom: number): void {
         this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
+    }
+
+    setCategoryTeaser() {
+        helpSaveCategoryTeaser(this.activePhoto$, (categoryId, photoId) => {
+            this.store.dispatch(PhotoCategoryStoreActions.setTeaserRequest({
+                categoryId,
+                photoId
+            }));
+        });
     }
 }

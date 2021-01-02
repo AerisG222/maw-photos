@@ -13,9 +13,13 @@ import { helpRate } from 'src/app/models/store-facades/ratable-helper';
 import { VideoStoreActions, VideoStoreSelectors } from '../store';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store/settings-store';
 import { MiniMapable } from 'src/app/models/store-facades/mini-mapable';
+import { CategoryTeaserSelectable } from 'src/app/models/store-facades/category-teaser-selectable';
+import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store/video-category-store';
+import { helpSaveCategoryTeaser } from 'src/app/models/store-facades/category-teaser-selectable-helper';
 
 @Injectable()
-export class VideoStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable {
+export class VideoStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable {
+    activeVideo$ = this.store.select(VideoStoreSelectors.activeVideo);
     activeId$ = this.store.select(VideoStoreSelectors.activeVideoId);
     comments$ = this.store.select(VideoStoreSelectors.activeVideoComments);
     rating$ = this.store.select(VideoStoreSelectors.activeVideoRating);
@@ -27,6 +31,7 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
     zoom$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapZoom);
     position$ = this.store.select(VideoStoreSelectors.activeVideoGoogleLatLng);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
+    currentTeaserUrl$ = this.store.select(VideoCategoryStoreSelectors.activeCategoryTeaserUrl);
 
     constructor(
         private store: Store
@@ -76,5 +81,14 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
 
     onZoomChange(zoom: number): void {
         this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
+    }
+
+    setCategoryTeaser() {
+        helpSaveCategoryTeaser(this.activeVideo$, (categoryId, videoId) => {
+            this.store.dispatch(VideoCategoryStoreActions.setTeaserRequest({
+                categoryId,
+                videoId
+            }));
+        });
     }
 }

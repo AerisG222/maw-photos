@@ -4,9 +4,9 @@
 
     <p>Current Teaser:</p>
     <div class="teaser-img">
-        <img [src]="currentTeaserUrl" />
+        <img [src]="categoryTeaserSelectable.currentTeaserUrl$ | async" />
     </div>
 
-    <button mat-button (click)="onSetTeaser()" color="primary">Replace teaser with current photo</button>
+    <button mat-button (click)="categoryTeaserSelectable.setCategoryTeaser()" color="primary">Replace teaser with current photo</button>
 
 </app-sidebar-card>

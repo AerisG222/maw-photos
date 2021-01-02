@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { CategoryTeaserSelectable } from 'src/app/models/store-facades/category-teaser-selectable';
 
 @Component({
     selector: 'app-sidebar-category-teaser-chooser-card',
@@ -7,10 +8,9 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryTeaserChooserCardComponent {
-    @Input() currentTeaserUrl: string | null = null;
-    @Output() setTeaser = new EventEmitter<void>();
+    constructor(
+        public categoryTeaserSelectable: CategoryTeaserSelectable
+    ) {
 
-    onSetTeaser(): void {
-        this.setTeaser.next();
     }
 }

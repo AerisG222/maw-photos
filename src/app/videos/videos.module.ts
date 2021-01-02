@@ -9,21 +9,20 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VideoCategoryComponent } from './components/video-category/video-category.component';
 import { VideoListComponent } from './components/video-list/video-list.component';
-import { SidebarCategoryTeaserChooserComponent } from './components/sidebar-category-teaser-chooser/sidebar-category-teaser-chooser.component';
 import { Navigable } from '../models/store-facades/navigable';
 import { VideoStoreFacadeService } from './services/video-store-facade.service';
 import { Commentable } from '../models/store-facades/commentable';
 import { Ratable } from '../models/store-facades/ratable';
 import { MetadataEditable } from '../models/store-facades/metadata-editable';
 import { MiniMapable } from '../models/store-facades/mini-mapable';
+import { CategoryTeaserSelectable } from '../models/store-facades/category-teaser-selectable';
 
 @NgModule({
     declarations: [
         SidebarComponent,
         ToolbarComponent,
         VideoCategoryComponent,
-        VideoListComponent,
-        SidebarCategoryTeaserChooserComponent
+        VideoListComponent
     ],
     imports: [
         SharedModule,
@@ -32,11 +31,12 @@ import { MiniMapable } from '../models/store-facades/mini-mapable';
     ],
     providers: [
         VideoStoreFacadeService,
-        { provide: Navigable,        useExisting: VideoStoreFacadeService },
-        { provide: Commentable,      useExisting: VideoStoreFacadeService },
-        { provide: Ratable,          useExisting: VideoStoreFacadeService },
-        { provide: MetadataEditable, useExisting: VideoStoreFacadeService },
-        { provide: MiniMapable,      useExisting: VideoStoreFacadeService }
+        { provide: Navigable,                useExisting: VideoStoreFacadeService },
+        { provide: Commentable,              useExisting: VideoStoreFacadeService },
+        { provide: Ratable,                  useExisting: VideoStoreFacadeService },
+        { provide: MetadataEditable,         useExisting: VideoStoreFacadeService },
+        { provide: MiniMapable,              useExisting: VideoStoreFacadeService },
+        { provide: CategoryTeaserSelectable, useExisting: VideoStoreFacadeService }
     ]
 })
 export class VideosModule { }
