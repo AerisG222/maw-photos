@@ -16,9 +16,20 @@ import { helpRate } from 'src/app/models/store-facades/ratable-helper';
 import { CategoryTeaserSelectable } from 'src/app/models/store-facades/category-teaser-selectable';
 import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store/photo-category-store';
 import { helpSaveCategoryTeaser } from 'src/app/models/store-facades/category-teaser-selectable-helper';
+import { PhotoLinkable } from 'src/app/models/store-facades/photo-linkable';
+import { RouteHelperService } from 'src/app/core/services/route-helper.service';
+import { Photo } from 'src/app/models/photo.model';
 
 @Injectable()
-export class PhotoStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable {
+export class PhotoStoreFacadeService implements
+    Navigable,
+    Commentable,
+    Ratable,
+    MetadataEditable,
+    MiniMapable,
+    CategoryTeaserSelectable,
+    PhotoLinkable
+{
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
     comments$ = this.store.select(PhotoStoreSelectors.activePhotoComments);
@@ -34,7 +45,8 @@ export class PhotoStoreFacadeService implements Navigable, Commentable, Ratable,
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
 
     constructor(
-        private store: Store
+        private store: Store,
+        private routeHelper: RouteHelperService
     ) {
 
     }
@@ -90,5 +102,9 @@ export class PhotoStoreFacadeService implements Navigable, Commentable, Ratable,
                 photoId
             }));
         });
+    }
+
+    buildPhotoLink(photo: Photo) {
+        return this.routeHelper.photoCategoriesAbs(photo.categoryId, photo.id);
     }
 }

@@ -11,6 +11,7 @@ import { Ratable } from '../models/store-facades/ratable';
 import { MetadataEditable } from '../models/store-facades/metadata-editable';
 import { MiniMapable } from '../models/store-facades/mini-mapable';
 import { CategoryTeaserSelectable } from '../models/store-facades/category-teaser-selectable';
+import { PhotoLinkable } from '../models/store-facades/photo-linkable';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { CategoryTeaserSelectable } from '../models/store-facades/category-tease
         { provide: Ratable,                  useExisting: RandomStoreFacadeService },
         { provide: MetadataEditable,         useExisting: RandomStoreFacadeService },
         { provide: MiniMapable,              useExisting: RandomStoreFacadeService },
-        { provide: CategoryTeaserSelectable, useExisting: RandomStoreFacadeService }
+        { provide: CategoryTeaserSelectable, useExisting: RandomStoreFacadeService },
+        { provide: PhotoLinkable,            useExisting: RandomStoreFacadeService }
     ]
 })
 export class RandomModule { }

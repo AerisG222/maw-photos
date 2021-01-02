@@ -3,6 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Photo } from 'src/app/models/photo.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
+import { PhotoLinkable } from 'src/app/models/store-facades/photo-linkable';
 
 @Component({
     selector: 'app-photos-photo-list',
@@ -48,6 +49,12 @@ export class PhotoListComponent {
                 this.imgHeight = 120;
                 break;
         }
+    }
+
+    constructor(
+        public photoLinkable: PhotoLinkable
+    ) {
+
     }
 
     scrollIntoView(photoId: number, elementRef: HTMLElement): string {

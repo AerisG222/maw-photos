@@ -1,5 +1,5 @@
 <a *ngFor="let photo of photos; trackBy: trackByPhoto"
-    routerLink="/photos/{{photo.categoryId}}/{{photo.id}}">
+    [routerLink]="photoLinkable.buildPhotoLink(photo)">
     <img
         #itemRef
         [src]="photo.imageXsSq.url"
