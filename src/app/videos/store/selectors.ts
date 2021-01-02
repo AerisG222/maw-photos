@@ -196,12 +196,12 @@ export const previousVideo = createSelector(
 
 export const activeVideoGpsDetailSource = createSelector(
     activeVideoGpsDetail,
-    detail => detail?.source
+    detail => detail?.source ?? null
 );
 
 export const activeVideoGpsDetailOverride = createSelector(
     activeVideoGpsDetail,
-    detail => detail?.override
+    detail => detail?.override ?? null
 );
 
 export const activeVideoGoogleLatLng = createSelector(

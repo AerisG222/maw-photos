@@ -317,12 +317,12 @@ export const anyPhotosMissingGpsCoordinates = createSelector(
 
 export const activePhotoGpsDetailSource = createSelector(
     activePhotoGpsDetail,
-    detail => detail?.source
+    detail => detail?.source ?? null
 );
 
 export const activePhotoGpsDetailOverride = createSelector(
     activePhotoGpsDetail,
-    detail => detail?.override
+    detail => detail?.override ?? null
 );
 
 export const hasPhotosWithGpsCoordinates = createSelector(

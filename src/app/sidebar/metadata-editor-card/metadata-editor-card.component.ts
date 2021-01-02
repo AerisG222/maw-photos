@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, ChangeDetectionStrategy, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { GpsService } from 'src/app/core/services/gps.service';
+import { MetadataEditable } from 'src/app/models/store-facades/metadata-editable';
 
 @Component({
     selector: 'app-sidebar-metadata-editor-card',
@@ -11,16 +12,12 @@ import { GpsService } from 'src/app/core/services/gps.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MetadataEditorCardComponent {
-    @Input() sourceGpsData: GpsCoordinate | null = null;
-    @Input() overrideGpsData: GpsCoordinate | null = null;
-    @Output() save = new EventEmitter<GpsCoordinate>();
-    @Output() saveAndMoveNext = new EventEmitter<GpsCoordinate>();
-
     form: FormGroup;
 
     constructor(
         private formBuilder: FormBuilder,
-        private gps: GpsService
+        private gps: GpsService,
+        public metadataEditable: MetadataEditable
     ) {
         this.form = this.formBuilder.group({
             latitudeOverride: ['', Validators.required],
@@ -50,7 +47,7 @@ export class MetadataEditorCardComponent {
             return;
         }
 
-        this.save.next(latLng);
+        this.metadataEditable.saveGpsOverride(latLng);
     }
 
     onSaveAndMoveNext(): void {
@@ -60,7 +57,7 @@ export class MetadataEditorCardComponent {
             return;
         }
 
-        this.saveAndMoveNext.next(latLng);
+        this.metadataEditable.saveGpsOverrideAndMoveNext(latLng);
     }
 
     onCancel(): void {

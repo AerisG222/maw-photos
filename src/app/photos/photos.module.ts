@@ -19,6 +19,7 @@ import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
 import { Navigable } from '../models/store-facades/navigable';
 import { Commentable } from '../models/store-facades/commentable';
 import { Ratable } from '../models/store-facades/ratable';
+import { MetadataEditable } from '../models/store-facades/metadata-editable';
 
 @NgModule({
     declarations: [
@@ -41,9 +42,10 @@ import { Ratable } from '../models/store-facades/ratable';
     ],
     providers: [
         PhotoStoreFacadeService,
-        { provide: Navigable,   useExisting: PhotoStoreFacadeService },
-        { provide: Commentable, useExisting: PhotoStoreFacadeService },
-        { provide: Ratable,     useExisting: PhotoStoreFacadeService }
+        { provide: Navigable,        useExisting: PhotoStoreFacadeService },
+        { provide: Commentable,      useExisting: PhotoStoreFacadeService },
+        { provide: Ratable,          useExisting: PhotoStoreFacadeService },
+        { provide: MetadataEditable, useExisting: PhotoStoreFacadeService }
     ]
 })
 export class PhotosModule { }
