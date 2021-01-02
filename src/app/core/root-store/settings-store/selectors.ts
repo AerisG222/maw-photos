@@ -9,6 +9,7 @@ import { CategoryMargin } from 'src/app/models/category-margin.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryFilter } from 'src/app/models/category-filter.model';
 import { CategoryListType } from 'src/app/models/category-list-type.model';
+import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
 
 const settingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 
@@ -30,6 +31,11 @@ export const settings = createSelector(
 export const appTheme = createSelector(
     settingsState,
     (state: State): Theme => state.settings.appTheme
+);
+
+export const mapTheme = createSelector(
+    appTheme,
+    theme => theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight
 );
 
 // -- CATEGORY LIST --

@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store/settings-store';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
 import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
 import { Commentable } from 'src/app/models/store-facades/commentable';
 import { helpAddComment } from 'src/app/models/store-facades/commentable-helper';
 import { MetadataEditable } from 'src/app/models/store-facades/metadata-editable';
 import { helpSaveGpsOverride } from 'src/app/models/store-facades/metadata-editable-helper';
+import { MiniMapable } from 'src/app/models/store-facades/mini-mapable';
 import { Navigable } from 'src/app/models/store-facades/navigable';
 import { helpMoveNext, helpMovePrevious } from 'src/app/models/store-facades/navigable-helpers';
 import { Ratable } from 'src/app/models/store-facades/ratable';
 import { helpRate } from 'src/app/models/store-facades/ratable-helper';
 
 @Injectable()
-export class RandomStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable {
+export class RandomStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable {
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
     comments$ = this.store.select(PhotoStoreSelectors.activePhotoComments);
     rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
@@ -21,6 +23,10 @@ export class RandomStoreFacadeService implements Navigable, Commentable, Ratable
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     overrideGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailOverride);
     sourceGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailSource);
+    mapTypeId$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapTypeId);
+    position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
+    zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
+    mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
 
     constructor(
         private store: Store
@@ -62,5 +68,13 @@ export class RandomStoreFacadeService implements Navigable, Commentable, Ratable
         helpSaveGpsOverride(this.activeId$, latLng, (id, gps) => {
             this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideAndMoveNextRequest({ photoId: id, latLng: gps }));
         });
+    }
+
+    onMapTypeChange(mapTypeId: string): void {
+        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+    }
+
+    onZoomChange(zoom: number): void {
+        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
     }
 }

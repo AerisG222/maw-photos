@@ -25,10 +25,10 @@
             @sidebarCardShowHide>
         </app-photos-sidebar-histogram>
 
-        <app-photos-sidebar-minimap
+        <app-sidebar-minimap-card
             *ngIf="showMinimap$ | async"
             @sidebarCardShowHide>
-        </app-photos-sidebar-minimap>
+        </app-sidebar-minimap-card>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-sidebar-metadata-editor-card

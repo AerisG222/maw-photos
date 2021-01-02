@@ -1,11 +1,11 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
-import { Store } from '@ngrx/store';
-import { first, tap } from 'rxjs/operators';
 
 import { GoogleMapThemes } from 'src/app/models/google-map-themes.model';
-import { SettingsStoreSelectors } from 'src/app/core/root-store';
 import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
+import { MiniMapable } from 'src/app/models/store-facades/mini-mapable';
+import { Subscription } from 'rxjs';
+import { filter, startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'app-sidebar-minimap-card',
@@ -13,61 +13,68 @@ import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
     styleUrls: ['./minimap-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MinimapCardComponent implements OnInit {
+export class MinimapCardComponent implements OnDestroy {
     private static readonly defaultCenter = new google.maps.LatLng(0, 0);
-
-    @Output() mapTypeChange = new EventEmitter<string>();
-    @Output() zoomChange = new EventEmitter<number>();
 
     @ViewChild(GoogleMap) map: GoogleMap | null = null;
 
     // arbitrarily use photo minimap settings by default
-    minimapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
-    minimapZoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
-    options: google.maps.MapOptions | null = null;
-    mapTheme: google.maps.MapTypeStyle[] = GoogleMapThemes.themeDark;
-    center = MinimapCardComponent.defaultCenter;
-    poi: google.maps.LatLng | null = null;
+    options = this.initOptions();
+    center$ = this.miniMapable.position$
+        .pipe(
+            startWith(MinimapCardComponent.defaultCenter),
+            filter(pos => !!pos)
+        );
+    poi$ = this.miniMapable.position$;
 
-    @Input()
-    set mapTypeId(value: string | null) {
-        if (!!value) {
-            this.minimapTypeId = value;
-            this.updateOptions();
-        }
+    private destroySub = new Subscription();
+
+    constructor(
+        public miniMapable: MiniMapable
+    ) {
+        this.destroySub.add(this.miniMapable.mapTypeId$
+            .subscribe({
+                next: mapTypeId => {
+                    if (!!mapTypeId) {
+                        this.options = {
+                            ...this.options,
+                            mapTypeId
+                        };
+                    }
+                }
+            })
+        );
+
+        this.destroySub.add(this.miniMapable.zoom$
+            .subscribe({
+                next: zoom => {
+                    if(!!zoom) {
+                        this.options = {
+                            ...this.options,
+                            zoom
+                        };
+                    }
+                }
+            })
+        );
+
+        this.destroySub.add(this.miniMapable.mapTheme$
+            .subscribe({
+                next: theme => {
+                    if(!!theme) {
+                        this.options = {
+                            ...this.options,
+                            styles: theme
+                        };
+                    }
+                }
+            })
+
+        );
     }
 
-    @Input()
-    set zoom(value: number | null) {
-        if (!!value) {
-            this.minimapZoom = value;
-            this.updateOptions();
-        }
-    }
-
-    @Input()
-    set position(pos: google.maps.LatLng | null) {
-        if (!!pos) {
-            this.center = pos;
-            this.poi = pos;
-        } else {
-            this.center = MinimapCardComponent.defaultCenter;
-            this.poi = null;
-        }
-    }
-
-    constructor(private store: Store) {
-
-    }
-
-    ngOnInit(): void {
-        this.store
-            .select(SettingsStoreSelectors.appTheme)
-            .pipe(
-                first(),
-                tap(theme => this.mapTheme = theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight),
-                tap(_ => this.updateOptions())
-            ).subscribe();
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
     }
 
     onMapTypeChange(): void {
@@ -75,7 +82,7 @@ export class MinimapCardComponent implements OnInit {
             const mapTypeId = this.map.getMapTypeId();
 
             if (!!mapTypeId) {
-                this.mapTypeChange.next(mapTypeId);
+                this.miniMapable.onMapTypeChange(mapTypeId);
             }
         }
     }
@@ -85,12 +92,12 @@ export class MinimapCardComponent implements OnInit {
             const zoom = this.map.getZoom();
 
             if (!!zoom) {
-                this.zoomChange.next(zoom);
+                this.miniMapable.onZoomChange(zoom);
             }
         }
     }
 
-    private updateOptions(): void {
+    private initOptions(): google.maps.MapOptions {
         const opts = {
             controlSize: 24,
             fullscreenControl: true,
@@ -98,10 +105,10 @@ export class MinimapCardComponent implements OnInit {
             streetViewControl: false,
         } as google.maps.MapOptions;
 
-        opts.mapTypeId = this.minimapTypeId;
-        opts.styles = this.mapTheme;
-        opts.zoom = this.minimapZoom;
+        opts.mapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
+        opts.styles = GoogleMapThemes.themeDark;
+        opts.zoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
 
-        this.options = opts;
+        return opts;
     }
 }

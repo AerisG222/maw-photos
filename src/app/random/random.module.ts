@@ -9,6 +9,7 @@ import { RandomStoreFacadeService } from './services/random-store-facade.service
 import { Commentable } from '../models/store-facades/commentable';
 import { Ratable } from '../models/store-facades/ratable';
 import { MetadataEditable } from '../models/store-facades/metadata-editable';
+import { MiniMapable } from '../models/store-facades/mini-mapable';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MetadataEditable } from '../models/store-facades/metadata-editable';
         { provide: Navigable,        useExisting: RandomStoreFacadeService },
         { provide: Commentable,      useExisting: RandomStoreFacadeService },
         { provide: Ratable,          useExisting: RandomStoreFacadeService },
-        { provide: MetadataEditable, useExisting: RandomStoreFacadeService }
+        { provide: MetadataEditable, useExisting: RandomStoreFacadeService },
+        { provide: MiniMapable,      useExisting: RandomStoreFacadeService }
     ]
 })
 export class RandomModule { }
