@@ -17,7 +17,6 @@ const routes: Routes = [
     { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: false }, children: [
         { path: ':photoId', component: GridPhotoComponent, data: { requirePhotoId: true } }
     ]},
-//    { path: ':categoryId/grid/:photoId',       component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
     { path: ':categoryId/map',                 component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
 //    { path: ':categoryId/map/:photoId',        component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
     { path: ':categoryId', redirectTo: ':categoryId/grid', pathMatch: 'full' },
