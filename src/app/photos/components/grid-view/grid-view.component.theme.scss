@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+
+@mixin app-photos-grid-view-component-theme($theme) {
+    $accent: map-get($theme, accent);
+
+    app-photos-grid-view {
+        & .photo-grid a {
+            &:hover {
+                border: 1px solid mat-color($accent, 300);
+            }
+        }
+    }
+}
