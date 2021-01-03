@@ -15,11 +15,10 @@
 
             <div class="photo-grid">
                 <a *ngFor="let photo of photos$ | async;"
-                    [routerLink]="[photo.id]">
+                    [routerLink]="[photo.id]" (click)="trackScrollPosition()">
                     <img
                         [ngClass]="(thumbnailSize$ | async)?.klass"
                         [src]="photo.imageXsSq.url"
-                        (click)="setActivePhoto(photo)"
                         loading="lazy" />
                 </a>
             </div>

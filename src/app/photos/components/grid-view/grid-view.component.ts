@@ -1,17 +1,17 @@
- import { Component, ViewChild } from '@angular/core';
+ import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreSelectors, PhotoCategoryStoreSelectors, RouterStoreSelectors } from 'src/app/core/root-store';
-import { PhotoStoreSelectors, PhotoStoreActions } from '../../../core/root-store/photos-store';
-import { Photo } from 'src/app/models/photo.model';
+import { PhotoStoreSelectors } from '../../../core/root-store/photos-store';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-photos-grid-view',
     templateUrl: './grid-view.component.html',
     styleUrls: ['./grid-view.component.scss']
 })
-export class GridViewComponent {
+export class GridViewComponent implements OnDestroy {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
 
     lastScrollTop = 0;
@@ -24,22 +24,35 @@ export class GridViewComponent {
     showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
     showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
 
+    private destroySub = new Subscription();
+
     constructor(
         private store: Store
     ) {
-
+        this.destroySub.add(this.store.select(RouterStoreSelectors.selectRouteDetails)
+            .subscribe({
+                next: details => {
+                    // main grid view does not require a photo id, so when it is not present, move to last scroll position
+                    if(!!!details.data.requirePhotoId) {
+                        this.returnToScrollPosition();
+                    }
+                }
+            })
+        );
     }
 
-    setActivePhoto(photo: Photo): void {
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
+    }
+
+    trackScrollPosition(): void {
         if (!!this.layout) {
             this.lastScrollTop = this.layout.getCurrentScrollTop();
         }
-
-        this.store.dispatch(PhotoStoreActions.setActivePhotoId({ id: photo.id }));
     }
 
-    clearActivePhoto(): void {
-        if (!!this.layout) {
+    returnToScrollPosition(): void {
+        if (!!this.layout && this.layout.getCurrentScrollTop() !== this.lastScrollTop) {
             this.layout.setCurrentScrollTop(this.lastScrollTop);
         }
     }
