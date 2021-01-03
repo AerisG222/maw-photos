@@ -11,11 +11,11 @@ import { GridViewComponent } from './components/grid-view/grid-view.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 
 const routes: Routes = [
-    { path: ':categoryId/bulk-edit',           component: BulkEditComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
-    { path: ':categoryId/detail/:photoId',     component: DefaultViewComponent,    resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
-    { path: ':categoryId/fullscreen/:photoId', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
-    { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, children: [
-        { path: ':photoId', component: GridPhotoComponent }
+    { path: ':categoryId/bulk-edit',           component: BulkEditComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: false } },
+    { path: ':categoryId/detail/:photoId',     component: DefaultViewComponent,    resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: true } },
+    { path: ':categoryId/fullscreen/:photoId', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: true } },
+    { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: false }, children: [
+        { path: ':photoId', component: GridPhotoComponent, data: { requirePhotoId: true } }
     ]},
 //    { path: ':categoryId/grid/:photoId',       component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
     { path: ':categoryId/map',                 component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },

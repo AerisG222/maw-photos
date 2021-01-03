@@ -1,7 +1,7 @@
  import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, PhotoCategoryStoreSelectors, RouterStoreSelectors } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from '../../../core/root-store/photos-store';
 import { Photo } from 'src/app/models/photo.model';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
@@ -22,9 +22,12 @@ export class GridViewComponent {
     thumbnailSize$ = this.store.select(SettingsStoreSelectors.photoGridThumbnailSize);
     margin$ = this.store.select(SettingsStoreSelectors.photoGridMargin);
     showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
+    showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
 
-    constructor(private store: Store) {
-        console.log('a');
+    constructor(
+        private store: Store
+    ) {
+
     }
 
     setActivePhoto(photo: Photo): void {

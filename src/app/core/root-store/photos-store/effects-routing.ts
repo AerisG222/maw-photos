@@ -28,7 +28,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.navigateToPhoto),
             map(action => this.routeBuilderService.photoCategoriesAbs(action.categoryId, action.photoId)),
-         //   tap(url => this.router.navigateByUrl(url))
+            tap(url => this.router.navigateByUrl(url))
         );
     }, { dispatch: false });
 
@@ -47,15 +47,19 @@ export class PhotoStoreRoutingEffects {
             map(([action, entities, ids]) => {
                 const categoryId = Number(action.routeDetails.params.categoryId);
                 const photoId = Number(action.routeDetails.params.photoId);
+                const requiresPhotoId = action.routeDetails.data.requirePhotoId as boolean ?? false;
 
-                // if invalid photo id or is not present in url, go to first
-                if (isNaN(photoId) || !(photoId in entities)) {
-                    return PhotoStoreActions.navigateToPhoto({
-                        categoryId,
-                        photoId: ids[0] as number
-                    });
+                if (requiresPhotoId) {
+                    if(isNaN(photoId) || !(photoId in entities)) {
+                        return PhotoStoreActions.navigateToPhoto({
+                            categoryId,
+                            photoId: ids[0] as number
+                        });
+                    } else {
+                        return PhotoStoreActions.setActivePhotoId({ id: photoId });
+                    }
                 } else {
-                    return PhotoStoreActions.setActivePhotoId({ id: photoId });
+                    return PhotoStoreActions.setActivePhotoId({ id: null });
                 }
             })
         );

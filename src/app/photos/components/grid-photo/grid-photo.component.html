@@ -1,5 +1,5 @@
 <div *ngIf="activePhoto$ | async as activePhoto" class="full-image">
-    <a [routerLink]="['..']">close</a>
+    <a [routerLink]="['..']">
         <img
             [src]="activePhoto.imageMd.url"
             [srcset]="getSourceset(activePhoto)"
@@ -7,4 +7,5 @@
             (swiperight)="onSwipeRight()"
             sizes="100vw"
             loading="eager" />
+    </a>
 </div>

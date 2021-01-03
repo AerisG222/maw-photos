@@ -8,7 +8,7 @@
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="showBreadcrumbs$ | async"
-                    [showCategoryAsLink]="true"
+                    [showCategoryAsLink]="showCategoryAsLink$ | async"
                     [category]="category$ | async">
                 </app-shared-category-header>
             </div>
