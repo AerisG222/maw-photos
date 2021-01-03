@@ -18,6 +18,12 @@ import { ToolbarFlipVerticalButtonComponent } from './components/toolbar-flip-ve
 import { ToolbarRotateClockwiseButtonComponent } from './components/toolbar-rotate-clockwise-button/toolbar-rotate-clockwise-button.component';
 import { ToolbarRotateCounterClockwiseButtonComponent } from './components/toolbar-rotate-counter-clockwise-button/toolbar-rotate-counter-clockwise-button.component';
 import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-button/toolbar-slideshow-button.component';
+import { ToolbarGroupSelectViewComponent } from './components/toolbar-group-select-view/toolbar-group-select-view.component';
+import { ToolbarViewGridButtonComponent } from './components/toolbar-view-grid-button/toolbar-view-grid-button.component';
+import { ToolbarViewBulkEditButtonComponent } from './components/toolbar-view-bulk-edit-button/toolbar-view-bulk-edit-button.component';
+import { ToolbarViewFullscreenButtonComponent } from './components/toolbar-view-fullscreen-button/toolbar-view-fullscreen-button.component';
+import { ToolbarViewMapButtonComponent } from './components/toolbar-view-map-button/toolbar-view-map-button.component';
+import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-detail-button/toolbar-view-detail-button.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +42,13 @@ import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-
         ToolbarFlipVerticalButtonComponent,
         ToolbarRotateClockwiseButtonComponent,
         ToolbarRotateCounterClockwiseButtonComponent,
-        ToolbarSlideshowButtonComponent
+        ToolbarSlideshowButtonComponent,
+        ToolbarGroupSelectViewComponent,
+        ToolbarViewGridButtonComponent,
+        ToolbarViewBulkEditButtonComponent,
+        ToolbarViewFullscreenButtonComponent,
+        ToolbarViewMapButtonComponent,
+        ToolbarViewDetailButtonComponent
     ],
     imports: [
         SharedModule
@@ -47,7 +59,8 @@ import { ToolbarSlideshowButtonComponent } from './components/toolbar-slideshow-
         DefaultViewComponent,
         DefaultSidebarComponent,
         FullscreenViewComponent,
-        ToolbarSlideshowButtonComponent
+        ToolbarSlideshowButtonComponent,
+        ToolbarGroupSelectViewComponent
     ]
 })
 export class PhotosSharedModule { }

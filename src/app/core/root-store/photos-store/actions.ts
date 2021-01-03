@@ -222,30 +222,6 @@ export const toggleSlideshowRequest = createAction(
     '[Photos] Toggle Slideshow Request'
 );
 
-export const enterFullscreenRequest = createAction(
-    '[Photos] Enter Fullscreen Request'
-);
-
-export const exitFullscreenRequest = createAction(
-    '[Photos] Exit Fullscreen Request'
-);
-
-export const toggleFullscreenRequest = createAction(
-    '[Photos] Toggle Fullscreen Request'
-);
-
-export const enterMapViewRequest = createAction(
-    '[Photos] Enter Map View Request'
-);
-
-export const exitMapViewRequest = createAction(
-    '[Photos] Exit Map View Request'
-);
-
-export const toggleMapViewRequest = createAction(
-    '[Photos] Toggle Map View Request'
-);
-
 export const setActivePhotoId = createAction(
     '[Photos] Set Active Photo ID',
     props<{ id: number | null }>()
@@ -290,38 +266,14 @@ export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
     props<{ photoId: number; latLng: GpsCoordinate }>()
 );
 
-export const enterBulkEditViewRequest = createAction(
-    '[Photos] Enter Bulk Edit View Request'
-);
-
-export const exitBulkEditViewRequest = createAction(
-    '[Photos] Exit Bulk Edit View Request'
-);
-
-export const toggleBulkEditViewRequest = createAction(
-    '[Photos] Toggle Bulk Edit View Request'
-);
-
-export const enterGridViewRequest = createAction(
-    '[Photos] Enter Grid View Request'
-);
-
-export const exitGridViewRequest = createAction(
-    '[Photos] Exit Grid View Request'
-);
-
-export const toggleGridViewRequest = createAction(
-    '[Photos] Toggle Grid View Request'
-);
-
-export const enterRandomView = createAction(
-    '[Photos] Enter Random View',
-    props<{ count: number }>()
+export const changeViewRequest = createAction(
+    '[Photos] Change View Request',
+    props<{ view: string }>()
 );
 
 export const navigateToPhoto = createAction(
     '[Photos] Navigate to Photo',
-    props<{ categoryId: number; photoId: number }>()
+    props<{ view: string; categoryId: number; photoId?: number }>()
 );
 
 export const enterPhotoArea = createAction(

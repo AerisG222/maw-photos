@@ -1,0 +1,8 @@
+<app-toolbar-button
+    [isActive]="isActive$ | async"
+    [icon]="'apps'"
+    [shortcutKey]="'q'"
+    [shortcutHelp]="'Grid View'"
+    [tooltip]="'Grid View (Q)'"
+    (click)="onToggleGridView()">
+</app-toolbar-button>

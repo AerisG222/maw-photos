@@ -16,6 +16,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
     @Input() shortcutKey: string | null = null;
     @Input() shortcutHelp: string | null = null;
     @Input() tooltip: string | null = null;
+    @Input() isActive = false;
 
     @ViewChild('button') button: MatButton | null = null;
 

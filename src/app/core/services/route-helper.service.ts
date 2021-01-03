@@ -15,6 +15,13 @@ export class RouteHelperService {
     static readonly stats = 'stats';
     static readonly videoCategories = 'video-categories';
 
+    static readonly photoViewBulkEdit = 'bulk-edit';
+    static readonly photoViewDetail = 'detail';
+    static readonly photoViewFullscreen = 'fullscreen';
+    static readonly photoViewGrid = 'grid';
+    static readonly photoViewMap = 'map';
+    static readonly photoViewDefault = RouteHelperService.photoViewGrid;
+
     static readonly areaMap = [
         { urlStart: RouteHelperService.about,           area: RouteArea.about },
         { urlStart: RouteHelperService.categories,      area: RouteArea.categories },
@@ -51,11 +58,19 @@ export class RouteHelperService {
         return `/${ RouteHelperService.login }`;
     }
 
-    photoCategoriesAbs(categoryId?: number, photoId?: number) {
+    photoCategoriesAbs(view?: string, categoryId?: number, photoId?: number) {
         let url = `/${ RouteHelperService.photoCategories }`;
 
         if(!!categoryId) {
             url += `/${ categoryId }`;
+        }
+
+        if(!!photoId && !!!view) {
+            view = RouteHelperService.photoViewDefault;
+        }
+
+        if(!!view) {
+            url += `/${ view }`;
         }
 
         if(!!photoId) {

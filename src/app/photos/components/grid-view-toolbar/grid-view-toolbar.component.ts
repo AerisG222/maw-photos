@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { filter, first, map } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '../../../core/root-store/photos-store';
-import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
 import { CategoryMargin } from 'src/app/models/category-margin.model';
@@ -18,16 +18,16 @@ import { Photo } from 'src/app/models/photo.model';
 export class GridViewToolbarComponent {
     enableShare = false;
     activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
+    detailLink$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryId).pipe(
+        filter(id => !!id),
+        map(id => ['/photo-categories', id?.toString(), 'detail'] as string[])
+    );
 
     constructor(
         private store: Store,
         @Inject(WINDOW) private window: Window
     ) {
         this.enableShare = !!window?.navigator?.share;
-    }
-
-    onExitGridView(): void {
-        this.store.dispatch(PhotoStoreActions.exitGridViewRequest());
     }
 
     onToggleSlideshow(): void {

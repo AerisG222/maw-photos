@@ -11,14 +11,17 @@ import { GridViewComponent } from './components/grid-view/grid-view.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 
 const routes: Routes = [
-    { path: ':categoryId/bulk-edit',           component: BulkEditComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: false } },
-    { path: ':categoryId/detail/:photoId',     component: DefaultViewComponent,    resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: true } },
-    { path: ':categoryId/fullscreen/:photoId', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: true } },
-    { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { requirePhotoId: false }, children: [
-        { path: ':photoId', component: GridPhotoComponent, data: { requirePhotoId: true } }
+    { path: ':categoryId/bulk-edit',           component: BulkEditComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'bulk-edit', requirePhotoId: false } },
+    { path: ':categoryId/detail',              component: DefaultViewComponent,    resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'detail', requirePhotoId: true }, children: [
+        { path: ':photoId', component: DefaultViewComponent, data: { view: 'detail', requirePhotoId: true } }
     ]},
-    { path: ':categoryId/map',                 component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
-//    { path: ':categoryId/map/:photoId',        component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/fullscreen/:photoId', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'fullscreen', requirePhotoId: true } },
+    { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'grid', requirePhotoId: false }, children: [
+        { path: ':photoId', component: GridPhotoComponent, data: { view: 'grid', requirePhotoId: true } }
+    ]},
+    { path: ':categoryId/map',                 component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'map', requirePhotoId: false }, children: [
+        { path: ':photoId', component: MapViewComponent, data: { view: 'map', requirePhotoId: true } }
+    ]},
     { path: ':categoryId', redirectTo: ':categoryId/grid', pathMatch: 'full' },
     { path: '**', redirectTo: '/categories' }
 ];

@@ -5,7 +5,7 @@ import { WINDOW } from 'ngx-window-token';
 
 import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
 import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
+import { PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
 import {
     SettingsStoreActions,
     SettingsStoreSelectors,
@@ -61,22 +61,6 @@ export class DefaultToolbarComponent {
                 },
                 error: err => console.log(`error toggling size: ${ err }`)
             });
-    }
-
-    onToggleFullscreen(): void {
-        this.store.dispatch(PhotoStoreActions.enterFullscreenRequest());
-    }
-
-    onToggleMapView(): void {
-        this.store.dispatch(PhotoStoreActions.toggleMapViewRequest());
-    }
-
-    onToggleBulkEditView(): void {
-        this.store.dispatch(PhotoStoreActions.toggleBulkEditViewRequest());
-    }
-
-    onToggleGridView(): void {
-        this.store.dispatch(PhotoStoreActions.toggleGridViewRequest());
     }
 
     onShare(): void {

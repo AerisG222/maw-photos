@@ -17,10 +17,6 @@ export class FullscreenToolbarComponent {
         private store: Store
     ) { }
 
-    onExitFullscreen(): void {
-        this.store.dispatch(PhotoStoreActions.exitFullscreenRequest());
-    }
-
     onMoveNext(): void {
         this.store.dispatch(PhotoStoreActions.moveNextRequest());
     }

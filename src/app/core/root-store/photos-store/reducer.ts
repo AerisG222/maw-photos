@@ -296,54 +296,6 @@ export const reducer = createReducer(
         ...state,
         slideshowIsPlaying: false
     })),
-    on(PhotoActions.toggleFullscreenRequest, (state): State => ({
-        ...state,
-        isFullscreenView: !state.isFullscreenView
-    })),
-    on(PhotoActions.enterFullscreenRequest, (state): State => ({
-        ...state,
-        isFullscreenView: true
-    })),
-    on(PhotoActions.exitFullscreenRequest, (state): State => ({
-        ...state,
-        isFullscreenView: false
-    })),
-    on(PhotoActions.enterMapViewRequest, (state): State => ({
-        ...state,
-        isMapView: true
-    })),
-    on(PhotoActions.exitMapViewRequest, (state): State => ({
-        ...state,
-        isMapView: false
-    })),
-    on(PhotoActions.toggleMapViewRequest, (state): State => ({
-        ...state,
-        isMapView: !state.isMapView
-    })),
-    on(PhotoActions.enterBulkEditViewRequest, (state): State => ({
-        ...state,
-        isBulkEditView: true
-    })),
-    on(PhotoActions.exitBulkEditViewRequest, (state): State => ({
-        ...state,
-        isBulkEditView: false
-    })),
-    on(PhotoActions.toggleBulkEditViewRequest, (state): State => ({
-        ...state,
-        isBulkEditView: !state.isBulkEditView
-    })),
-    on(PhotoActions.enterGridViewRequest, (state): State => ({
-        ...state,
-        isGridView: true
-    })),
-    on(PhotoActions.exitGridViewRequest, (state): State => ({
-        ...state,
-        isGridView: false
-    })),
-    on(PhotoActions.toggleGridViewRequest, (state): State => ({
-        ...state,
-        isGridView: !state.isGridView
-    })),
     on(PhotoActions.exitPhotoArea, (state): State =>
         photoAdapter.removeAll({
             ...initialState

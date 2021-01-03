@@ -1,11 +1,11 @@
 @import '~@angular/material/theming';
 
-@mixin app-toolbar-button-component-theme($theme) {
+@mixin app-toolbar-view-grid-button-component-theme($theme) {
     $accent: map-get($theme, accent);
 
-    app-toolbar-button {
-        & button.active {
-            background-color: rgba(mat-color($accent, 700), .62);
+    app-toolbar-view-grid-button {
+        & .active {
+            background-color: rgba(mat-color($accent, 'A00'), .42);
         }
 
         & button:enabled:hover {

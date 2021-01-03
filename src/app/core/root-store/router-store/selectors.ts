@@ -64,7 +64,44 @@ export const isPhotosView = createSelector(
     details => details.area === RouteArea.photos
 );
 
+export const isPhotosBulkEditView = createSelector(
+    selectRouteData,
+    data => data.view === RouteHelperService.photoViewBulkEdit
+);
+
+export const isPhotosDetailView = createSelector(
+    selectRouteData,
+    data => data.view === RouteHelperService.photoViewDetail
+);
+
+export const isPhotosFullscreenView = createSelector(
+    selectRouteData,
+    data => data.view === RouteHelperService.photoViewFullscreen
+);
+
+export const isPhotosGridView = createSelector(
+    selectRouteData,
+    data => data.view === RouteHelperService.photoViewGrid
+);
+
+export const isPhotosMapView = createSelector(
+    selectRouteData,
+    data => data.view === RouteHelperService.photoViewMap
+);
+
 export const isRandomView = createSelector(
     selectRouteDetails,
     details => details.area === RouteArea.random
 );
+
+export const photoView = createSelector(
+    selectRouteData,
+    data => data?.view as string ?? RouteHelperService.photoViewDefault
+);
+
+const buildUrl = (view: string, catId: string, photoId: string | null) => {
+    const routeHelperService = new RouteHelperService();
+    const id = !!photoId ? Number(photoId) : undefined;
+
+    return routeHelperService.photoCategoriesAbs(view, Number(catId), id);
+};

@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from 'src/app/core/root-store/router-store/actions';
 import { RouteArea } from 'src/app/models/route-area';
 import { RouteHelperService } from '../../services/route-helper.service';
+import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 
@@ -27,7 +28,7 @@ export class PhotoStoreRoutingEffects {
     navigateToPhoto$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.navigateToPhoto),
-            map(action => this.routeBuilderService.photoCategoriesAbs(action.categoryId, action.photoId)),
+            map(action => this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId)),
             tap(url => this.router.navigateByUrl(url))
         );
     }, { dispatch: false });
@@ -48,10 +49,12 @@ export class PhotoStoreRoutingEffects {
                 const categoryId = Number(action.routeDetails.params.categoryId);
                 const photoId = Number(action.routeDetails.params.photoId);
                 const requiresPhotoId = action.routeDetails.data.requirePhotoId as boolean ?? false;
+                const view = action.routeDetails.data.view as string ?? RouteHelperService.photoViewDefault;
 
                 if (requiresPhotoId) {
                     if(isNaN(photoId) || !(photoId in entities)) {
                         return PhotoStoreActions.navigateToPhoto({
+                            view,
                             categoryId,
                             photoId: ids[0] as number
                         });
@@ -102,6 +105,29 @@ export class PhotoStoreRoutingEffects {
             ofType(RouterStoreActions.routeAreaLeaving),
             filter(action => action.leavingArea === RouteArea.photos || action.leavingArea === RouteArea.random),
             map(area => PhotoStoreActions.exitPhotoArea())
+        );
+    });
+
+    changeView$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoStoreActions.changeViewRequest),
+            withLatestFrom(
+                this.store.select(PhotoCategoryStoreSelectors.activeCategoryId),
+                this.store.select(PhotoStoreSelectors.activePhotoId)
+            ),
+            map(([action, categoryId, photoId]) => {
+                let id = photoId ?? undefined;
+
+                if(!!id && action.view === RouteHelperService.photoViewBulkEdit) {
+                    id = undefined;
+                }
+
+                return PhotoStoreActions.navigateToPhoto({
+                    view: action.view,
+                    categoryId: categoryId as number,
+                    photoId: id
+                });
+            })
         );
     });
 

@@ -14,6 +14,7 @@ import * as LayoutStoreActions from 'src/app/core/root-store/layout-store/action
 import * as PhotoCategoryStoreActions from 'src/app/core/root-store/photo-category-store/actions';
 import * as SettingsStoreSelectors from 'src/app/core/root-store/settings-store/selectors';
 import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
+import { RouterStoreSelectors } from '../router-store';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -278,9 +279,13 @@ export class PhotoStoreEffects {
     moveNextEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.moveNextRequest),
-            withLatestFrom(this.store.select(PhotoStoreSelectors.nextPhoto)),
-            filter(([action, photo]) => !!photo),
-            map(([action, photo]) => PhotoActions.navigateToPhoto({
+            withLatestFrom(
+                this.store.select(PhotoStoreSelectors.nextPhoto),
+                this.store.select(RouterStoreSelectors.photoView)
+            ),
+            filter(([action, photo, view]) => !!photo),
+            map(([action, photo, view]) => PhotoActions.navigateToPhoto({
+                view,
                 categoryId: photo?.categoryId as number,
                 photoId: photo?.id as number
             }))
@@ -290,9 +295,13 @@ export class PhotoStoreEffects {
     movePreviousEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.movePreviousRequest),
-            withLatestFrom(this.store.select(PhotoStoreSelectors.previousPhoto)),
-            filter(([action, photo]) => !!photo),
-            map(([action, photo]) => PhotoActions.navigateToPhoto({
+            withLatestFrom(
+                this.store.select(PhotoStoreSelectors.previousPhoto),
+                this.store.select(RouterStoreSelectors.photoView)
+            ),
+            filter(([action, photo, view]) => !!photo),
+            map(([action, photo, view]) => PhotoActions.navigateToPhoto({
+                view,
                 categoryId: photo?.categoryId as number,
                 photoId: photo?.id as number
             }))
@@ -317,6 +326,7 @@ export class PhotoStoreEffects {
         );
     });
 
+    /* TODO
     enterFullScreenEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.enterFullscreenRequest),
@@ -326,6 +336,7 @@ export class PhotoStoreEffects {
         );
     });
 
+
     exitFullScreenEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.exitFullscreenRequest),
@@ -334,6 +345,7 @@ export class PhotoStoreEffects {
             })
         );
     });
+    */
 
     periodicLoadOfRandomPhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(

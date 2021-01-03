@@ -22,10 +22,6 @@ export interface State extends EntityState<Photo> {
     activePhotoEffects: PhotoEffects;
     activePhotoGpsDetail: GpsDetail | null;
     slideshowIsPlaying: boolean;
-    isFullscreenView: boolean;
-    isMapView: boolean;
-    isBulkEditView: boolean;
-    isGridView: boolean;
     pendingActionCount: number;
 }
 
@@ -39,9 +35,5 @@ export const initialState: State = photoAdapter.getInitialState({
     activePhotoEffects: DEFAULT_PHOTO_EFFECTS,
     activePhotoGpsDetail: null,
     slideshowIsPlaying: false,
-    isFullscreenView: false,
-    isMapView: false,
-    isBulkEditView: false,
-    isGridView: false,
     pendingActionCount: 0
 });

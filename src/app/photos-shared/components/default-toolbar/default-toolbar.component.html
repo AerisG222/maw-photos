@@ -1,4 +1,8 @@
 <app-toolbar-toolbar>
+    <app-toolbar-group-select-view></app-toolbar-group-select-view>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
     <app-toolbar-group>
         <app-photos-toolbar-slideshow-button></app-photos-toolbar-slideshow-button>
         <app-toolbar-move-previous-button></app-toolbar-move-previous-button>
@@ -8,43 +12,6 @@
     <app-toolbar-divider></app-toolbar-divider>
 
     <app-toolbar-group>
-        <app-toolbar-button
-            [hideOnMobile]="true"
-            [icon]="'fullscreen'"
-            [shortcutKey]="'f'"
-            [shortcutHelp]="'Enter Full Screen View'"
-            [tooltip]="'Enter Full Screen View (F)'"
-            (click)="onToggleFullscreen()">
-        </app-toolbar-button>
-
-        <app-toolbar-button
-            [icon]="'apps'"
-            [shortcutKey]="'q'"
-            [shortcutHelp]="'Enter Grid View'"
-            [tooltip]="'Enter Grid View (Q)'"
-            (click)="onToggleGridView()">
-        </app-toolbar-button>
-
-        <app-toolbar-button
-            *ngIf="enableMapView$ | async"
-            [hideOnMobile]="true"
-            [icon]="'map'"
-            [shortcutKey]="'z'"
-            [shortcutHelp]="'Enter Map View'"
-            [tooltip]="'Enter Map View (Z)'"
-            (click)="onToggleMapView()">
-        </app-toolbar-button>
-
-        <app-toolbar-button
-            *ngIf="enableBulkEdit$ | async"
-            [hideOnMobile]="true"
-            [icon]="'collections'"
-            [shortcutKey]="'b'"
-            [shortcutHelp]="'Enter Bulk Edit Mode'"
-            [tooltip]="'Enter Bulk Edit Mode (B)'"
-            (click)="onToggleBulkEditView()">
-        </app-toolbar-button>
-
         <app-photos-toolbar-download-button
             *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
             [hideOnMobile]="true"

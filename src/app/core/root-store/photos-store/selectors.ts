@@ -73,26 +73,6 @@ export const slideshowIsPlaying = createSelector(
     (state: State): boolean => state.slideshowIsPlaying
 );
 
-export const isFullscreenView = createSelector(
-    photoState,
-    (state: State): boolean => state.isFullscreenView
-);
-
-export const isMapView = createSelector(
-    photoState,
-    (state: State): boolean => state.isMapView
-);
-
-export const isBulkEditView = createSelector(
-    photoState,
-    (state: State): boolean => state.isBulkEditView
-);
-
-export const isGridView = createSelector(
-    photoState,
-    (state: State): boolean => state.isGridView
-);
-
 export const hasPendingActions = createSelector(
     pendingActionCount,
     (count: number): boolean => count > 0
@@ -122,7 +102,7 @@ export const activePhoto = createSelector(
 
 export const firstPhoto = createSelector(
     selectAll,
-    isMapView,
+    RouterStoreSelectors.isPhotosMapView,
     (photos: Photo[], showMapView: boolean) => {
         if (showMapView) {
             return photos.find(photoHasGpsData) ?? null;
@@ -134,7 +114,7 @@ export const firstPhoto = createSelector(
 
 export const lastPhoto = createSelector(
     selectAll,
-    isMapView,
+    RouterStoreSelectors.isPhotosMapView,
     (photos: Photo[], showMapView: boolean) => {
         if (showMapView) {
             for (let i = photos.length; i >= 0; i--) {
@@ -168,7 +148,7 @@ export const nextPhotoIndex = createSelector(
     selectAll,
     activePhotoIndex,
     isActivePhotoLast,
-    isMapView,
+    RouterStoreSelectors.isPhotosMapView,
     (photos, activeIndex, isLast, showMapView) => {
         if (isLast) {
             return activeIndex as number;
@@ -212,7 +192,7 @@ export const previousPhotoIndex = createSelector(
     selectAll,
     activePhotoIndex,
     isActivePhotoFirst,
-    isMapView,
+    RouterStoreSelectors.isPhotosMapView,
     (photos, activeIndex, isFirst, showMapView) => {
         if (isFirst) {
             return activeIndex as number;

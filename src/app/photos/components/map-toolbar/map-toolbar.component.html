@@ -1,18 +1,10 @@
 <app-toolbar-toolbar>
-    <app-toolbar-group>
-        <app-toolbar-move-previous-button></app-toolbar-move-previous-button>
-        <app-toolbar-move-next-button></app-toolbar-move-next-button>
-    </app-toolbar-group>
+    <app-toolbar-group-select-view></app-toolbar-group-select-view>
 
     <app-toolbar-divider></app-toolbar-divider>
 
     <app-toolbar-group>
-        <app-toolbar-button
-            [icon]="'map'"
-            [shortcutKey]="'z'"
-            [shortcutHelp]="'Exit Map View'"
-            [tooltip]="'Exit Map View (Z)'"
-            (click)="onToggleMapView()">
-        </app-toolbar-button>
+        <app-toolbar-move-previous-button></app-toolbar-move-previous-button>
+        <app-toolbar-move-next-button></app-toolbar-move-next-button>
     </app-toolbar-group>
 </app-toolbar-toolbar>

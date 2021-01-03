@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photos-store';
@@ -10,17 +10,13 @@ import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-
     styleUrls: ['./map-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapViewComponent implements OnDestroy {
+export class MapViewComponent {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     mapImages$ = this.store.select(PhotoStoreSelectors.photosWithGpsCoordinatesAsMapImages);
     settings$ = this.store.select(SettingsStoreSelectors.settings);
 
     constructor(private store: Store) {
 
-    }
-
-    ngOnDestroy(): void {
-        this.store.dispatch(PhotoStoreActions.exitMapViewRequest());
     }
 
     onMapTypeIdChange(mapTypeId: string): void {

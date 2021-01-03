@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store/settings-store';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
@@ -19,9 +20,11 @@ import { helpSaveCategoryTeaser } from 'src/app/models/store-facades/category-te
 import { PhotoLinkable } from 'src/app/models/store-facades/photo-linkable';
 import { RouteHelperService } from 'src/app/core/services/route-helper.service';
 import { Photo } from 'src/app/models/photo.model';
+import { RouterStoreSelectors } from 'src/app/core/root-store';
 
 @Injectable()
 export class PhotoStoreFacadeService implements
+    OnDestroy,
     Navigable,
     Commentable,
     Ratable,
@@ -43,12 +46,24 @@ export class PhotoStoreFacadeService implements
     zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
+    view$ = this.store.select(RouterStoreSelectors.photoView);
+
+    private destroySub = new Subscription();
+    private view = 'grid';
 
     constructor(
         private store: Store,
         private routeHelper: RouteHelperService
     ) {
+        // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
+        this.destroySub.add(this.store.select(RouterStoreSelectors.photoView)
+            .subscribe({
+                next: view => this.view = view
+            }));
+    }
 
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
     }
 
     addComment(comment: string): void {
@@ -105,6 +120,6 @@ export class PhotoStoreFacadeService implements
     }
 
     buildPhotoLink(photo: Photo) {
-        return this.routeHelper.photoCategoriesAbs(photo.categoryId, photo.id);
+        return this.routeHelper.photoCategoriesAbs(this.view, photo.categoryId, photo.id);
     }
 }
