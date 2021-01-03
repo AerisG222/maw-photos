@@ -1,4 +1,4 @@
- import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+ import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreSelectors, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
@@ -11,7 +11,7 @@ import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
     templateUrl: './grid-view.component.html',
     styleUrls: ['./grid-view.component.scss']
 })
-export class GridViewComponent implements OnInit, OnDestroy {
+export class GridViewComponent {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
 
     lastScrollTop = 0;
@@ -24,23 +24,7 @@ export class GridViewComponent implements OnInit, OnDestroy {
     showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
 
     constructor(private store: Store) {
-
-    }
-
-    ngOnInit(): void {
-        this.clearActivePhoto();
-    }
-
-    ngOnDestroy(): void {
-        this.clearActivePhoto();
-    }
-
-    getSourceset(photo: Photo | null): string {
-        if (!!photo) {
-            return `${photo.imageMd.url} ${photo.imageMd.width}w, ${photo.imageLg.url} ${photo.imageLg.width}w`;
-        }
-
-        return '';
+        console.log('a');
     }
 
     setActivePhoto(photo: Photo): void {
@@ -52,18 +36,8 @@ export class GridViewComponent implements OnInit, OnDestroy {
     }
 
     clearActivePhoto(): void {
-        this.store.dispatch(PhotoStoreActions.unsetActivePhotoId());
-
         if (!!this.layout) {
             this.layout.setCurrentScrollTop(this.lastScrollTop);
         }
-    }
-
-    onSwipeLeft(): void {
-        this.store.dispatch(PhotoStoreActions.moveNextRequest());
-    }
-
-    onSwipeRight(): void {
-        this.store.dispatch(PhotoStoreActions.movePreviousRequest());
     }
 }

@@ -3,11 +3,24 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PhotoCategoriesResolverService } from 'src/app/core/services/photo-categories-resolver.service';
-import { PhotoCategoryComponent } from './components/photo-category/photo-category.component';
+import { DefaultViewComponent } from '../photos-shared/components/default-view/default-view.component';
+import { FullscreenViewComponent } from '../photos-shared/components/fullscreen-view/fullscreen-view.component';
+import { BulkEditComponent } from './components/bulk-edit/bulk-edit.component';
+import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
+import { GridViewComponent } from './components/grid-view/grid-view.component';
+import { MapViewComponent } from './components/map-view/map-view.component';
 
 const routes: Routes = [
-    { path: ':categoryId', component: PhotoCategoryComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
-    { path: ':categoryId/:photoId', component: PhotoCategoryComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/bulk-edit',           component: BulkEditComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/detail/:photoId',     component: DefaultViewComponent,    resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/fullscreen/:photoId', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, children: [
+        { path: ':photoId', component: GridPhotoComponent }
+    ]},
+//    { path: ':categoryId/grid/:photoId',       component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId/map',                 component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+//    { path: ':categoryId/map/:photoId',        component: MapViewComponent,        resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },
+    { path: ':categoryId', redirectTo: ':categoryId/grid', pathMatch: 'full' },
     { path: '**', redirectTo: '/categories' }
 ];
 

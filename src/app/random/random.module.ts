@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { RandomRoutingModule } from './random-routing.module';
-import { RandomComponent } from './components/random/random.component';
 import { SharedModule } from '../shared/shared.module';
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { Navigable } from '../models/store-facades/navigable';
@@ -14,9 +13,7 @@ import { CategoryTeaserSelectable } from '../models/store-facades/category-tease
 import { PhotoLinkable } from '../models/store-facades/photo-linkable';
 
 @NgModule({
-    declarations: [
-        RandomComponent,
-    ],
+    declarations: [],
     imports: [
         SharedModule,
         PhotosSharedModule,

@@ -2,15 +2,7 @@
     <app-photos-grid-view-toolbar layout-toolbar></app-photos-grid-view-toolbar>
 
     <div layout-main>
-        <div *ngIf="activePhoto$ | async as activePhoto" class="full-image" (click)="clearActivePhoto()">
-            <img
-                [src]="activePhoto.imageMd.url"
-                [srcset]="getSourceset(activePhoto)"
-                (swipeleft)="onSwipeLeft()"
-                (swiperight)="onSwipeRight()"
-                sizes="100vw"
-                loading="eager" />
-        </div>
+        <router-outlet></router-outlet>
 
         <app-shared-content-margin [margin]="margin$ | async" [ngStyle]="{ 'display': (activePhoto$ | async) === null ? 'block' : 'none' }">
             <div class="category-header">
@@ -22,12 +14,14 @@
             </div>
 
             <div class="photo-grid">
-                <img
-                    *ngFor="let photo of photos$ | async;"
-                    [ngClass]="(thumbnailSize$ | async)?.klass"
-                    [src]="photo.imageXsSq.url"
-                    (click)="setActivePhoto(photo)"
-                    loading="lazy" />
+                <a *ngFor="let photo of photos$ | async;"
+                    [routerLink]="[photo.id]">
+                    <img
+                        [ngClass]="(thumbnailSize$ | async)?.klass"
+                        [src]="photo.imageXsSq.url"
+                        (click)="setActivePhoto(photo)"
+                        loading="lazy" />
+                </a>
             </div>
         </app-shared-content-margin>
     </div>

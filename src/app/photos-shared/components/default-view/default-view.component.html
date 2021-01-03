@@ -1,5 +1,5 @@
 <app-layout-toolbar-sidebar>
-    <app-photos-default-toolbar layout-toolbar [allowCategoryDownload]="allowCategoryDownload"></app-photos-default-toolbar>
+    <app-photos-default-toolbar layout-toolbar [allowCategoryDownload]="allowCategoryDownload$ | async"></app-photos-default-toolbar>
 
     <ng-container
         layout-main
@@ -13,7 +13,7 @@
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="data.settings?.photoListShowCategoryBreadcrumbs"
-                    [showCategoryAsLink]="showCategoryAsLink"
+                    [showCategoryAsLink]="showCategoryAsLink$ | async"
                     [category]="category$ | async"
                     #header>
                 </app-shared-category-header>

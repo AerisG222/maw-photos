@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
@@ -7,7 +7,7 @@ import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
 import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
-import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
 // TODO: look at updating source images to higher quality jpgs
 
@@ -18,9 +18,8 @@ import { PhotoCategoryStoreSelectors, SettingsStoreSelectors } from 'src/app/cor
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultViewComponent {
-    @Input() allowCategoryDownload: boolean | null = null;
-    @Input() showCategoryAsLink: boolean | null = null;
-
+    showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
+    allowCategoryDownload$ = this.store.select(RouterStoreSelectors.isPhotosView);
     category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);

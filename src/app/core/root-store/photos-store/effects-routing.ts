@@ -28,7 +28,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.navigateToPhoto),
             map(action => this.routeBuilderService.photoCategoriesAbs(action.categoryId, action.photoId)),
-            tap(url => this.router.navigateByUrl(url))
+         //   tap(url => this.router.navigateByUrl(url))
         );
     }, { dispatch: false });
 

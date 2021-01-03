@@ -59,6 +59,11 @@ export const selectRouteDetails = createSelector(
     }
 );
 
+export const isPhotosView = createSelector(
+    selectRouteDetails,
+    details => details.area === RouteArea.photos
+);
+
 export const isRandomView = createSelector(
     selectRouteDetails,
     details => details.area === RouteArea.random

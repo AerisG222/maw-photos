@@ -10,7 +10,6 @@ import { BulkEditSidebarComponent } from './components/bulk-edit-sidebar/bulk-ed
 import { BulkEditToolbarComponent } from './components/bulk-edit-toolbar/bulk-edit-toolbar.component';
 import { MapToolbarComponent } from './components/map-toolbar/map-toolbar.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
-import { PhotoCategoryComponent } from './components/photo-category/photo-category.component';
 import { PhotoSelectGridComponent } from './components/photo-select-grid/photo-select-grid.component';
 import { GridViewComponent } from './components/grid-view/grid-view.component';
 import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
@@ -23,6 +22,7 @@ import { MetadataEditable } from '../models/store-facades/metadata-editable';
 import { MiniMapable } from '../models/store-facades/mini-mapable';
 import { CategoryTeaserSelectable } from '../models/store-facades/category-teaser-selectable';
 import { PhotoLinkable } from '../models/store-facades/photo-linkable';
+import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
 
 @NgModule({
     declarations: [
@@ -33,10 +33,10 @@ import { PhotoLinkable } from '../models/store-facades/photo-linkable';
         BulkEditToolbarComponent,
         MapToolbarComponent,
         MapViewComponent,
-        PhotoCategoryComponent,
         PhotoSelectGridComponent,
         GridViewComponent,
-        GridViewToolbarComponent
+        GridViewToolbarComponent,
+        GridPhotoComponent
     ],
     imports: [
         PhotosRoutingModule,
