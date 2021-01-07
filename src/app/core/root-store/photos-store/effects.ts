@@ -347,6 +347,45 @@ export class PhotoStoreEffects {
     });
     */
 
+    toggleSlideshowEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.toggleSlideshowRequest),
+            withLatestFrom(this.store.select(PhotoStoreSelectors.slideshowIsPlaying)),
+            map(([action, isPlaying]) => {
+                if(isPlaying) {
+                    return PhotoActions.stopSlideshowRequest();
+                } else {
+                    return PhotoActions.startSlideshowRequest();
+                }
+            })
+        );
+    });
+
+    stopSlideshowAtEndOfListEffect$ = createEffect(() => {
+        return combineLatest([
+            this.store.select(PhotoStoreSelectors.isActivePhotoLast),
+            this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
+        ]).pipe(
+            filter(([isLast, isPlaying]) => isLast && isPlaying),
+            map(([isLast, isPlaying]) => PhotoActions.stopSlideshowRequest())
+        );
+    });
+
+    runSlideshowEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.startSlideshowRequest),
+            withLatestFrom(this.store.select(SettingsStoreSelectors.photoListSlideshowDisplayDurationSeconds)),
+            switchMap(([, delay]) => {
+                return timer(delay * 1000, delay * 1000).pipe(
+                    takeUntil(this.actions$.pipe(
+                        ofType(PhotoActions.stopSlideshowRequest)
+                    )),
+                    map(() => PhotoActions.moveNextRequest())
+                );
+            })
+        );
+    });
+
     periodicLoadOfRandomPhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.startPeriodicRandomLoad),

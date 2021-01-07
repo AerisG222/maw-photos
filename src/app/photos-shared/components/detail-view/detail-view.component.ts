@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { Photo } from 'src/app/models/photo.model';
 import { PhotoEffects } from 'src/app/models/photo-effects.model';
 import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
-import { SlideshowControlService } from 'src/app/core/services/slideshow-control.service';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
 import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelectors } from 'src/app/core/root-store';
 
@@ -28,7 +27,6 @@ export class DetailViewComponent {
 
     constructor(
         private store: Store,
-        private slideshowControlSvc: SlideshowControlService,  // do not remove, needed so service is created before use
         private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer
     ) {

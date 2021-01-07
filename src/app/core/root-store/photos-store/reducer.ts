@@ -284,10 +284,6 @@ export const reducer = createReducer(
             sepia
         }
     })),
-    on(PhotoActions.toggleSlideshowRequest, (state): State => ({
-        ...state,
-        slideshowIsPlaying: !state.slideshowIsPlaying
-    })),
     on(PhotoActions.startSlideshowRequest, (state): State => ({
         ...state,
         slideshowIsPlaying: true
