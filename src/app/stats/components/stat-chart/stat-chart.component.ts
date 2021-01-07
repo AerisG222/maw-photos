@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { colorSets, TreeMapComponent } from '@swimlane/ngx-charts';
-import * as numeral from 'numeral';
+import numbro from 'numbro';
 
 import { StatDetail } from '../../models/stat-detail.model';
 
@@ -45,15 +45,15 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
     }
 
     formatPlainNumber(val: number): string {
-        return numeral(val).format('0,0');
+        return numbro(val).format({ thousandSeparated: true });
     }
 
     formatFilesize(val: number): string {
-        return numeral(val).format('0,0.00 b');
+        return numbro(val).format({ output: 'byte', base: 'decimal', mantissa: 2, spaceSeparated: true });
     }
 
     formatTime(val: number): string {
-        return numeral(val).format('00:00:00');
+        return numbro(val).format({ output: 'time' });
     }
 
     private updateMargins(): void {

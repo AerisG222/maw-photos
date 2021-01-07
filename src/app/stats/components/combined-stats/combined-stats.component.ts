@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription, BehaviorSubject, Observable, combineLatest, concat, of } from 'rxjs';
 import { tap, map, delay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import * as numeral from 'numeral';
+import numbro from 'numbro';
 
 import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
@@ -122,20 +122,21 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
     private populateDetails(categories: Category[], details: FormattedStatDetail[]): void {
         details.push({
             name: 'Categories',
-            value: numeral(categories.length).format('0,0')
+            value: numbro(categories.length).format({ thousandSeparated: true })
         });
 
         details.push({
             name: 'Items',
-            value: numeral(categories
+            value: numbro(categories
                     .reduce((total, cat) => total + this.getCount(cat), 0)
-                ).format('0,0')
+                ).format({ thousandSeparated: true })
         });
 
         details.push({
             name: 'Total Size',
-            value: numeral(categories
-                .reduce((total, cat) => total + cat.actual.totalSize, 0)).format('0,0.00 b')
+            value: numbro(categories
+                // eslint-disable-next-line max-len
+                .reduce((total, cat) => total + cat.actual.totalSize, 0)).format({ output: 'byte', base: 'decimal', mantissa: 2, spaceSeparated: true })
         });
     }
 

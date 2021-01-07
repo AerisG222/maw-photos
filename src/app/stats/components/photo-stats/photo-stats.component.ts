@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject, combineLatest, Subscription, of, concat } from 'rxjs';
 import { map, tap, delay, filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import * as numeral from 'numeral';
+import numbro from 'numbro';
 
 import { PhotoCategory } from 'src/app/models/photo-category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
@@ -122,20 +122,21 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
     private populateDetails(categories: Category[], details: FormattedStatDetail[]): void {
         details.push({
             name: 'Categories',
-            value: numeral(categories.length).format('0,0')
+            value: numbro(categories.length).format({ thousandSeparated: true })
         });
 
         details.push({
             name: 'Photos',
-            value: numeral(categories
+            value: numbro(categories
                     .reduce((total, cat) => total + (cat.actual as PhotoCategory).photoCount, 0)
-                ).format('0,0')
+                ).format({ thousandSeparated: true })
         });
 
         details.push({
             name: 'Total Size',
-            value: numeral(categories
-                .reduce((total, cat) => total + (cat.actual as PhotoCategory).totalSize, 0)).format('0,0.00 b')
+            value: numbro(categories
+                // eslint-disable-next-line max-len
+                .reduce((total, cat) => total + (cat.actual as PhotoCategory).totalSize, 0)).format({ output: 'byte', base: 'decimal', mantissa: 2, spaceSeparated: true })
         });
     }
 
