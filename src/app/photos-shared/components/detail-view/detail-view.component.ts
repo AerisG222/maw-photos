@@ -32,7 +32,7 @@ export class DetailViewComponent {
         private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer
     ) {
-        console.log('a');
+
     }
 
     getSourceset(photo: Photo | null): string {

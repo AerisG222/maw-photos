@@ -19,7 +19,7 @@ export class GridPhotoComponent implements OnInit {
     showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
 
     constructor(private store: Store) {
-        console.log('b');
+
     }
 
     ngOnInit(): void {
