@@ -5,13 +5,13 @@
 
     <app-toolbar-group>
         <app-photos-toolbar-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-photos-toolbar-slideshow-button>
-        <app-toolbar-move-previous-button></app-toolbar-move-previous-button>
-        <app-toolbar-move-next-button></app-toolbar-move-next-button>
+        <app-toolbar-move-previous-button *ngIf="(activePhotoId$ | async) != null"></app-toolbar-move-previous-button>
+        <app-toolbar-move-next-button *ngIf="(activePhotoId$ | async) != null"></app-toolbar-move-next-button>
     </app-toolbar-group>
 
-    <app-toolbar-divider></app-toolbar-divider>
+    <app-toolbar-divider *ngIf="(activePhotoId$ | async) == null"></app-toolbar-divider>
 
-    <app-toolbar-group>
+    <app-toolbar-group *ngIf="(activePhotoId$ | async) == null">
         <app-toolbar-button
             [icon]="'title'"
             [shortcutKey]="'t'"
@@ -35,9 +35,18 @@
             [tooltip]="'Toggle Thumbnail Size (S)'"
             (click)="onToggleSize()">
         </app-toolbar-button>
+    </app-toolbar-group>
+
+    <app-toolbar-divider *ngIf="(activePhotoId$ | async) != null"></app-toolbar-divider>
+
+    <app-toolbar-group *ngIf="(activePhotoId$ | async) != null">
+        <app-photos-toolbar-rotate-counter-clockwise-button></app-photos-toolbar-rotate-counter-clockwise-button>
+        <app-photos-toolbar-rotate-clockwise-button></app-photos-toolbar-rotate-clockwise-button>
+        <app-photos-toolbar-flip-horizontal-button></app-photos-toolbar-flip-horizontal-button>
+        <app-photos-toolbar-flip-vertical-button></app-photos-toolbar-flip-vertical-button>
 
         <app-toolbar-button
-            *ngIf="enableShare && (activePhotoId$ | async) != null"
+            *ngIf="enableShare"
             [icon]="'share'"
             [tooltip]="'Share Photo'"
             (click)="onShare()">
