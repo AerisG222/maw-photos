@@ -98,10 +98,3 @@ export const photoView = createSelector(
     selectRouteData,
     data => data?.view as string ?? RouteHelperService.photoViewDefault
 );
-
-const buildUrl = (view: string, catId: string, photoId: string | null) => {
-    const routeHelperService = new RouteHelperService();
-    const id = !!photoId ? Number(photoId) : undefined;
-
-    return routeHelperService.photoCategoriesAbs(view, Number(catId), id);
-};
