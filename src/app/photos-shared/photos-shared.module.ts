@@ -2,9 +2,9 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { DefaultSidebarComponent } from './components/default-sidebar/default-sidebar.component';
-import { DefaultToolbarComponent } from './components/default-toolbar/default-toolbar.component';
-import { DefaultViewComponent } from './components/default-view/default-view.component';
+import { DetailSidebarComponent } from './components/detail-sidebar/detail-sidebar.component';
+import { DetailToolbarComponent } from './components/detail-toolbar/detail-toolbar.component';
+import { DetailViewComponent } from './components/detail-view/detail-view.component';
 import { FullscreenToolbarComponent } from './components/fullscreen-toolbar/fullscreen-toolbar.component';
 import { FullscreenViewComponent } from './components/fullscreen-view/fullscreen-view.component';
 import { PhotoListComponent } from '../photos-shared/components/photo-list/photo-list.component';
@@ -27,9 +27,9 @@ import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-deta
 
 @NgModule({
     declarations: [
-        DefaultSidebarComponent,
-        DefaultToolbarComponent,
-        DefaultViewComponent,
+        DetailSidebarComponent,
+        DetailToolbarComponent,
+        DetailViewComponent,
         FullscreenToolbarComponent,
         FullscreenViewComponent,
         PhotoListComponent,
@@ -56,8 +56,8 @@ import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-deta
     exports: [
         SharedModule,
 
-        DefaultViewComponent,
-        DefaultSidebarComponent,
+        DetailViewComponent,
+        DetailSidebarComponent,
         FullscreenViewComponent,
         ToolbarSlideshowButtonComponent,
         ToolbarGroupSelectViewComponent

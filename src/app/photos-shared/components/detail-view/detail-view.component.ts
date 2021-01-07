@@ -12,12 +12,12 @@ import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelecto
 // TODO: look at updating source images to higher quality jpgs
 
 @Component({
-    selector: 'app-photos-default-view',
-    templateUrl: './default-view.component.html',
-    styleUrls: ['./default-view.component.scss'],
+    selector: 'app-photos-detail-view',
+    templateUrl: './detail-view.component.html',
+    styleUrls: ['./detail-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultViewComponent {
+export class DetailViewComponent {
     showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
     allowCategoryDownload$ = this.store.select(RouterStoreSelectors.isPhotosView);
     category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);

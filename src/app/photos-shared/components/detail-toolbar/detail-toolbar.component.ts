@@ -15,12 +15,12 @@ import {
 import { Photo } from 'src/app/models/photo.model';
 
 @Component({
-    selector: 'app-photos-default-toolbar',
-    templateUrl: './default-toolbar.component.html',
-    styleUrls: ['./default-toolbar.component.scss'],
+    selector: 'app-photos-detail-toolbar',
+    templateUrl: './detail-toolbar.component.html',
+    styleUrls: ['./detail-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultToolbarComponent {
+export class DetailToolbarComponent {
     @Input() allowCategoryDownload: boolean | null = null;
 
     enableShare: boolean;

@@ -6,9 +6,9 @@ import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
 
 @Component({
-    selector: 'app-photos-default-sidebar',
-    templateUrl: './default-sidebar.component.html',
-    styleUrls: ['./default-sidebar.component.scss'],
+    selector: 'app-photos-detail-sidebar',
+    templateUrl: './detail-sidebar.component.html',
+    styleUrls: ['./detail-sidebar.component.scss'],
     animations: [
         trigger('sidebarFlyInOut', [
             transition(':enter', [
@@ -29,7 +29,7 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultSidebarComponent {
+export class DetailSidebarComponent {
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
     endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
     showComments$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowComments);

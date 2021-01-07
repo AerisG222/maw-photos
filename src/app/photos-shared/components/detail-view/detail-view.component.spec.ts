@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DefaultSidebarComponent } from './default-sidebar.component';
+import { DetailViewComponent } from './detail-view.component';
 
-describe('DefaultSidebarComponent', () => {
-  let component: DefaultSidebarComponent;
-  let fixture: ComponentFixture<DefaultSidebarComponent>;
+describe('DetailViewComponent', () => {
+  let component: DetailViewComponent;
+  let fixture: ComponentFixture<DetailViewComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DefaultSidebarComponent ]
+      declarations: [ DetailViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefaultSidebarComponent);
+    fixture = TestBed.createComponent(DetailViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

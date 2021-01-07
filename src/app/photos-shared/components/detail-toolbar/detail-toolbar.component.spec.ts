@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DefaultViewComponent } from './default-view.component';
+import { DetailToolbarComponent } from './detail-toolbar.component';
 
-describe('DefaultViewComponent', () => {
-  let component: DefaultViewComponent;
-  let fixture: ComponentFixture<DefaultViewComponent>;
+describe('DetailToolbarComponent', () => {
+  let component: DetailToolbarComponent;
+  let fixture: ComponentFixture<DetailToolbarComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DefaultViewComponent ]
+      declarations: [ DetailToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefaultViewComponent);
+    fixture = TestBed.createComponent(DetailToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
