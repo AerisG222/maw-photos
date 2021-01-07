@@ -66,27 +66,27 @@ export const isPhotosView = createSelector(
 
 export const isPhotosBulkEditView = createSelector(
     selectRouteData,
-    data => data.view === RouteHelperService.photoViewBulkEdit
+    data => data?.view === RouteHelperService.photoViewBulkEdit
 );
 
 export const isPhotosDetailView = createSelector(
     selectRouteData,
-    data => data.view === RouteHelperService.photoViewDetail
+    data => data?.view === RouteHelperService.photoViewDetail
 );
 
 export const isPhotosFullscreenView = createSelector(
     selectRouteData,
-    data => data.view === RouteHelperService.photoViewFullscreen
+    data => data?.view === RouteHelperService.photoViewFullscreen
 );
 
 export const isPhotosGridView = createSelector(
     selectRouteData,
-    data => data.view === RouteHelperService.photoViewGrid
+    data => data?.view === RouteHelperService.photoViewGrid
 );
 
 export const isPhotosMapView = createSelector(
     selectRouteData,
-    data => data.view === RouteHelperService.photoViewMap
+    data => data?.view === RouteHelperService.photoViewMap
 );
 
 export const isRandomView = createSelector(
