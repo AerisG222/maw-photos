@@ -6,7 +6,6 @@
         *ngIf="{
             photos: photos$ | async,
             settings: settings$ | async,
-            effects: effects$ | async,
             activePhoto: activePhoto$ | async
         } as data">
         <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
@@ -19,16 +18,7 @@
                 </app-shared-category-header>
             </div>
 
-            <img
-                [src]="data.activePhoto?.imageMd?.url"
-                [srcset]="getSourceset(data.activePhoto)"
-                [class]="data.effects?.rotation?.klass"
-                [style.filter]="getEffectStyles(data.effects)"
-                [style.transform]="getTransform(data.effects)"
-                (swipeleft)="onSwipeLeft()"
-                (swiperight)="onSwipeRight()"
-                sizes="100vw"
-                loading="eager" />
+            <app-photos-main-photo></app-photos-main-photo>
 
             <app-photos-photo-list
                 *ngIf="data.photos && data.settings?.photoListShowPhotoList"

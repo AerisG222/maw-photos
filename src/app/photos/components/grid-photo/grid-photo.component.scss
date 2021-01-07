@@ -8,13 +8,6 @@ a {
     display: grid;
     text-align: center;
     height: 100vh;
-
-    & img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        align-self: center;
-    }
 }
 
 @media (max-width: $mobileBreakpoint) {

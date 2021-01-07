@@ -24,6 +24,7 @@ import { ToolbarViewBulkEditButtonComponent } from './components/toolbar-view-bu
 import { ToolbarViewFullscreenButtonComponent } from './components/toolbar-view-fullscreen-button/toolbar-view-fullscreen-button.component';
 import { ToolbarViewMapButtonComponent } from './components/toolbar-view-map-button/toolbar-view-map-button.component';
 import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-detail-button/toolbar-view-detail-button.component';
+import { MainPhotoComponent } from './components/main-photo/main-photo.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-deta
         ToolbarViewBulkEditButtonComponent,
         ToolbarViewFullscreenButtonComponent,
         ToolbarViewMapButtonComponent,
-        ToolbarViewDetailButtonComponent
+        ToolbarViewDetailButtonComponent,
+        MainPhotoComponent
     ],
     imports: [
         SharedModule
@@ -60,7 +62,12 @@ import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-deta
         DetailSidebarComponent,
         FullscreenViewComponent,
         ToolbarSlideshowButtonComponent,
-        ToolbarGroupSelectViewComponent
+        ToolbarGroupSelectViewComponent,
+        ToolbarFlipHorizontalButtonComponent,
+        ToolbarFlipVerticalButtonComponent,
+        ToolbarRotateClockwiseButtonComponent,
+        ToolbarRotateCounterClockwiseButtonComponent,
+        MainPhotoComponent,
     ]
 })
 export class PhotosSharedModule { }

@@ -1,0 +1,15 @@
+<ng-container *ngIf="{
+    activePhoto: activePhoto$ | async,
+    effects: effects$ | async
+} as data">
+    <img
+        [src]="data.activePhoto?.imageMd?.url"
+        [srcset]="getSourceset(data.activePhoto)"
+        [class]="data.effects?.rotation?.klass"
+        [style.filter]="getEffectStyles(data.effects)"
+        [style.transform]="getTransform(data.effects)"
+        (swipeleft)="onSwipeLeft()"
+        (swiperight)="onSwipeRight()"
+        sizes="100vw"
+        loading="eager" />
+</ng-container>

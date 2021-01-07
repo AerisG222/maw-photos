@@ -8,21 +8,6 @@
     padding: 0 4px;
 }
 
-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    align-self: center;
-    justify-self: center;
-}
-
-@supports (-moz-appearance:none) {
-    img {
-        /* mimic the object-fit:contain that chrome is doing */
-        max-height: calc(100vh - 162px);
-    }
-}
-
 .category-header {
     text-align: center;
     z-index: 10;
