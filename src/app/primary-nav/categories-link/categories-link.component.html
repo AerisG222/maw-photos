@@ -1,5 +1,6 @@
 <app-primary-nav-link
     [icon]="'home'"
     [routerLink]="[categoriesLink]"
+    [forceActive]="inCategoryArea$ | async"
     [tooltip]="'Browse Photos and Videos'">
 </app-primary-nav-link>

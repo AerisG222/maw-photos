@@ -1,4 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { RouterStoreSelectors } from 'src/app/core/root-store';
 import { RouteHelperService } from 'src/app/core/services/route-helper.service';
 
 @Component({
@@ -9,8 +11,12 @@ import { RouteHelperService } from 'src/app/core/services/route-helper.service';
 })
 export class CategoriesLinkComponent {
     categoriesLink = this.routeHelperService.categoriesAbs();
+    inCategoryArea$ = this.store.select(RouterStoreSelectors.inCategoryArea);
 
-    constructor(private routeHelperService: RouteHelperService) {
+    constructor(
+        private store: Store,
+        private routeHelperService: RouteHelperService
+    ) {
 
     }
 }

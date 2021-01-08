@@ -98,3 +98,16 @@ export const photoView = createSelector(
     selectRouteData,
     data => data?.view as string ?? RouteHelperService.photoViewDefault
 );
+
+export const inCategoryArea = createSelector(
+    selectRouteDetails,
+    details => {
+        if(!!details) {
+            return details.area === RouteArea.categories ||
+                details.area === RouteArea.photos ||
+                details.area === RouteArea.videos;
+        }
+
+        return false;
+    }
+);

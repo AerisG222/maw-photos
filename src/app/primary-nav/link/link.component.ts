@@ -10,4 +10,5 @@ export class LinkComponent {
     @Input() icon: string | null = null;
     @Input() routerLink: string[] | null = null;
     @Input() tooltip: string | null = null;
+    @Input() forceActive: boolean | null = null;
 }
