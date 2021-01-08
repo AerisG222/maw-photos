@@ -299,3 +299,7 @@ export const startPeriodicRandomLoad = createAction(
 export const stopPeriodicRandomLoad = createAction(
     '[Photos] Stop Periodic Random Load'
 );
+
+export const navigateUpFromIndividualPhoto = createAction(
+    '[Photos] Navigate Up From Individual Photo'
+);

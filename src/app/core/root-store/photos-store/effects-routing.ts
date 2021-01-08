@@ -9,6 +9,7 @@ import * as RouterStoreActions from 'src/app/core/root-store/router-store/action
 import { RouteArea } from 'src/app/models/route-area';
 import { RouteHelperService } from '../../services/route-helper.service';
 import { PhotoCategoryStoreSelectors } from '../photo-category-store';
+import { RouterStoreSelectors } from '../router-store';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 
@@ -30,6 +31,18 @@ export class PhotoStoreRoutingEffects {
             ofType(PhotoStoreActions.navigateToPhoto),
             map(action => this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId)),
             tap(url => this.router.navigateByUrl(url))
+        );
+    }, { dispatch: false });
+
+    navigateUpFromIndividualPhoto$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoStoreActions.navigateUpFromIndividualPhoto),
+            withLatestFrom(this.store.select(RouterStoreSelectors.selectUrl)),
+            tap(([action, url]) => {
+                if(!!url) {
+                    this.router.navigateByUrl(url.substring(0, url.lastIndexOf('/')));
+                }
+            })
         );
     }, { dispatch: false });
 
