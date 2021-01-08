@@ -1,10 +1,10 @@
 <a *ngFor="let video of videos"
+    [class.selected]="selectedVideo?.id === video.id"
     [routerLink]="routeHelper.videoCategoriesAbs(video.categoryId, video.id)">
     <img
         [src]="video.thumbnailSq.url"
         [ngClass]="thumbnailSize.klass"
         [style.width.px]="imgWidth"
         [style.height.px]="imgHeight"
-        [class.selected]="selectedVideo?.id === video.id"
         loading="lazy" />
 </a>

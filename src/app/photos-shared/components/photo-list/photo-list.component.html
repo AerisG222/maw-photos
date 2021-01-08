@@ -1,4 +1,5 @@
 <a *ngFor="let photo of photos; trackBy: trackByPhoto"
+    [class.selected]="selectedPhoto?.id === photo.id"
     [routerLink]="photoLinkable.buildPhotoLink(photo)">
     <img
         #itemRef
@@ -6,7 +7,6 @@
         [ngClass]="thumbnailSize.klass"
         [style.width.px]="imgWidth"
         [style.height.px]="imgHeight"
-        [class.selected]="selectedPhoto?.id === photo.id"
         [class.scrolled]="scrollIntoView(photo.id, itemRef)"
         loading="lazy" />
 </a>

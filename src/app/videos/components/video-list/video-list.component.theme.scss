@@ -4,7 +4,9 @@
     $accent: map-get($theme, accent);
 
     app-videos-video-list {
-        & img {
+        & a {
+            border: 1px solid transparent;
+
             &.selected {
                 border: 1px solid mat-color($accent, 600);
             }

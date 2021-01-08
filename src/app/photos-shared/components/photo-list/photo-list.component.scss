@@ -3,18 +3,20 @@
     flex-wrap: nowrap;
     overflow-x: auto;
 
-    & img {
+    a {
         flex: 0 0 auto;
-        cursor: pointer;
         margin-right: 2px;
-        border: 1px solid transparent;
+    }
+
+    & img {
+        margin-bottom: -4px;
         filter: saturate(0.4);
 
-        &.selected {
+        & .selected {
             filter: saturate(1.0);
         }
 
-        &:hover {
+        & :hover {
             filter: saturate(1.0);
         }
     }

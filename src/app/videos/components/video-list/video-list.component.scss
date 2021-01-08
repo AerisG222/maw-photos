@@ -3,11 +3,13 @@
     flex-wrap: nowrap;
     overflow-x: auto;
 
-    & img {
-        /* flex: 0 0 auto; */
-        cursor: pointer;
+    a {
+        flex: 0 0 auto;
         margin-right: 2px;
-        border: 1px solid transparent;
+    }
+
+    & img {
+        margin-bottom: -4px;
         filter: saturate(0.4);
 
         &.selected {
