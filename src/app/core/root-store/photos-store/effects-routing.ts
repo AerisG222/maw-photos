@@ -131,7 +131,9 @@ export class PhotoStoreRoutingEffects {
             map(([action, categoryId, photoId]) => {
                 let id = photoId ?? undefined;
 
-                if(!!id && action.view === RouteHelperService.photoViewBulkEdit) {
+                if(action.view === RouteHelperService.photoViewBulkEdit ||
+                    action.view === RouteHelperService.photoViewGrid
+                ) {
                     id = undefined;
                 }
 
