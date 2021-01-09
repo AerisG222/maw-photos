@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services/route-helper.service';
+import { RouteHelperService } from '@core/services';
 
 @Component({
     selector: 'app-toolbar-view-bulk-edit-button',

@@ -18,7 +18,7 @@ import {
     helpSaveCategoryTeaser,
     PhotoLinkable,
  } from '@core/facades';
-import { RouteHelperService } from '@core/services/route-helper.service';
+import { RouteHelperService } from '@core/services';
 import { Photo } from '@models/photo.model';
 // eslint-disable-next-line max-len
 import { RouterStoreSelectors, SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';

@@ -5,9 +5,8 @@ import { VideoCategory } from '@models/video-category.model';
 import { Video } from '@models/video.model';
 import { Comment } from '@models/comment.model';
 import { Rating } from '@models/rating.model';
-import { VideoApiService } from '@core/services/video-api.service';
+import { DateService, VideoApiService } from '@core/services';
 import { ApiCollection } from '@models/api-collection.model';
-import { DateService } from '@core/services/date.service';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 import { GpsDetail } from '@models/gps-detail.model';
 

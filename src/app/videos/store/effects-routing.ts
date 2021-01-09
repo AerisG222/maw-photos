@@ -6,7 +6,7 @@ import { combineLatest } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { RouterStoreActions } from '@core/root-store';
-import { RouteHelperService } from '@core/services/route-helper.service';
+import { RouteHelperService } from '@core/services';
 import { RouteArea } from '@models/route-area';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';

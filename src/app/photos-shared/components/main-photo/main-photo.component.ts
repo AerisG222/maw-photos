@@ -3,7 +3,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
-import { EffectStyleBuilderService } from '@core/services/effect-style-builder.service';
+import { EffectStyleBuilderService } from '@core/services';
 import { PhotoEffects } from '@models/photo-effects.model';
 import { Photo } from '@models/photo.model';
 

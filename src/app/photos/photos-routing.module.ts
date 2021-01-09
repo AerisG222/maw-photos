@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PhotoCategoriesResolverService } from '@core/services/photo-categories-resolver.service';
+import { PhotoCategoriesResolverService } from '@core/services';
 import { DetailViewComponent } from '../photos-shared/components/detail-view/detail-view.component';
 import { FullscreenViewComponent } from '../photos-shared/components/fullscreen-view/fullscreen-view.component';
 import { BulkEditComponent } from './components/bulk-edit/bulk-edit.component';

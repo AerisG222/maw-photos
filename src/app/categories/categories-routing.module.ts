@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { YearListComponent } from './year-list/year-list.component';
-import { PhotoCategoriesResolverService } from '@core/services/photo-categories-resolver.service';
-import { VideoCategoriesResolverService } from '@core/services/video-categories-resolver.service';
+import { PhotoCategoriesResolverService, VideoCategoriesResolverService } from '@core/services';
 
 const routes: Routes = [
     { path: '',    component: YearListComponent, resolve: {

@@ -5,8 +5,7 @@ import { map } from 'rxjs/operators';
 import { SearchApiService } from 'src/app/search/services/search-api.service';
 import { SearchResult } from 'src/app/search/models/search-result.model';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
-import { photoApiServiceToken, PhotoApiService } from '@core/services/photo-api.service';
-import { videoApiServiceToken, VideoApiService } from '@core/services/video-api.service';
+import { photoApiServiceToken, PhotoApiService, videoApiServiceToken, VideoApiService } from '@core/services';
 
 @Injectable()
 export class MockSearchApiService implements SearchApiService {

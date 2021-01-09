@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 
 import { authConfig } from '@models/auth-config';
 import { updateUserInfoRequest } from '@core/root-store/auth-store/actions';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services';
 
 @Injectable()
 export class ExternalAuthService implements AuthService {

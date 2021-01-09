@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RouterStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services/route-helper.service';
+import { RouteHelperService } from '@core/services';
 
 @Component({
     selector: 'app-primary-nav-categories-link',

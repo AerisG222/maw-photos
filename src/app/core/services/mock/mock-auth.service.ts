@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { updateUserInfoRequest } from '@core/root-store/auth-store/actions';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services';
 
 @Injectable()
 export class MockAuthService implements AuthService {

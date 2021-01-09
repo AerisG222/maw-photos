@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { AuthGuard } from '@core/services/auth.guard';
+import { AuthGuard } from '@core/services';
 
 @Injectable()
 export class ExternalAuthGuard implements AuthGuard {

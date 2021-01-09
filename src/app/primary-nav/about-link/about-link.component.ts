@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { RouteHelperService } from '@core/services/route-helper.service';
+import { RouteHelperService } from '@core/services';
 
 @Component({
     selector: 'app-primary-nav-about-link',

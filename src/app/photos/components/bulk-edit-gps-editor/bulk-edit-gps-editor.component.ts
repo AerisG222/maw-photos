@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angul
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { GpsService } from '@core/services/gps.service';
+import { GpsService } from '@core/services';
 import { PhotoStoreSelectors } from '@core/root-store';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 

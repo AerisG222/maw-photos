@@ -20,7 +20,7 @@ import {
     PhotoLinkable,
  } from '@core/facades';
 import { Photo } from '@models/photo.model';
-import { RouteHelperService } from '@core/services/route-helper.service';
+import { RouteHelperService } from '@core/services';
 
 @Injectable()
 export class RandomStoreFacadeService implements
