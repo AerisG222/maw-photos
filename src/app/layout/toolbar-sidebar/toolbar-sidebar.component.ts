@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 
-import { toolbarShow } from 'src/app/shared/animations';
+import { toolbarShow } from '@shared/animations';
 
 @Component({
     selector: 'app-layout-toolbar-sidebar',

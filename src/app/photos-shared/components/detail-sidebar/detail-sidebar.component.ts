@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store } from '@ngrx/store';
 
-import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
+import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '@shared/animations';
 import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from '@core/root-store';
 
 @Component({

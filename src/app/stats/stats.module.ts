@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { StatsRoutingModule } from './stats-routing.module';
 
 import { CombinedStatsComponent } from './components/combined-stats/combined-stats.component';
