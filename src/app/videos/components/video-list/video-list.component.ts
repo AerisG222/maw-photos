@@ -1,8 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Video } from '@models/video.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { DEFAULT_SETTINGS } from '@models/settings.model';
+import { DEFAULT_SETTINGS, ThumbnailSize, Video } from '@models';
 import { RouteHelperService } from '@core/services';
 
 @Component({

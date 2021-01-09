@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Category } from '@models/category.model';
+import { Category } from '@models';
 
 @Component({
     selector: 'app-shared-category-header',

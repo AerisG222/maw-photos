@@ -3,8 +3,7 @@ import * as fromRouter from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MinimalRouterStateSnapshot } from '@ngrx/router-store';
 
-import { RouteDetails } from '@models/route-details.model';
-import { RouteArea } from '@models/route-area';
+import { RouteDetails, RouteArea } from '@models';
 import { RouteHelperService } from '../../services/route-helper.service';
 
 export const routerState = createFeatureSelector<fromRouter.RouterReducerState<MinimalRouterStateSnapshot>>('router');

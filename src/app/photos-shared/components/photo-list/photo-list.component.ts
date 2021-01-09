@@ -1,8 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Photo } from '@models/photo.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { DEFAULT_SETTINGS } from '@models/settings.model';
+import { Photo, DEFAULT_SETTINGS, ThumbnailSize } from '@models';
 import { PhotoLinkable } from '@core/facades';
 
 @Component({

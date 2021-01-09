@@ -3,16 +3,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
-import { Settings, DEFAULT_SETTINGS } from '@models/settings.model';
-import { Theme } from '@models/theme.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
+import {
+    Settings,
+    DEFAULT_SETTINGS,
+    Theme,
+    ThumbnailSize,
+    VideoSize,
+    MinimapZoom,
+    MapTypeId,
+    CategoryMargin,
+    CategoryFilter,
+    CategoryListType,
+} from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { VideoSize } from '@models/video-size.model';
-import { MinimapZoom } from '@models/minimap-zoom.model';
-import { MapTypeId } from '@models/map-type-id.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { CategoryFilter } from '@models/category-filter.model';
-import { CategoryListType } from '@models/category-list-type.model';
 import { Subscription } from 'rxjs';
 
 

@@ -5,8 +5,7 @@ import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
-import { RouteDetails } from '@models/route-details.model';
-import { RouteArea } from '@models/route-area';
+import { RouteDetails, RouteArea } from '@models';
 import { ROUTER_NAVIGATED } from '@ngrx/router-store';
 
 interface RouteDetailsChange {

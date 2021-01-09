@@ -1,12 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
-import { Video } from '@models/video.model';
-import { Comment } from '@models/comment.model';
-import { Rating } from '@models/rating.model';
+import { Video, GpsDetail, Comment, Rating } from '@models';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
-import { GpsDetail } from '@models/gps-detail.model';
 import { SettingsStoreSelectors } from '@core/root-store';
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);

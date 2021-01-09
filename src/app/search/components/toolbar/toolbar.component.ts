@@ -1,12 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { CategoryListType } from '@models/category-list-type.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
+import {
+    CategoryListType,
+    CategoryMargin,
+    ThumbnailSize,
+    Settings,
+ } from '@models';
 import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
 import { first } from 'rxjs/operators';
-import { Settings } from '@models/settings.model';
 
 @Component({
     selector: 'app-search-toolbar',

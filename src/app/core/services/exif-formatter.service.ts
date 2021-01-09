@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { ExifCategory } from '@models/exif-category.model';
-import { ExifData } from '@models/exif-data.model';
-import { ExifDetail } from '@models/exif-detail.model';
-import { ExifContainer } from '@models/exif-container';
+import {
+    ExifCategory,
+    ExifData,
+    ExifDetail,
+    ExifContainer,
+ } from '@models';
 
 interface FormatInstruction {
     category: ExifCategory;

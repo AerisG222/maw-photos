@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 // eslint-disable-next-line max-len
 import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { Photo, GpsCoordinate } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -19,7 +19,6 @@ import {
     helpSaveCategoryTeaser,
     PhotoLinkable,
  } from '@core/facades';
-import { Photo } from '@models/photo.model';
 import { RouteHelperService } from '@core/services';
 
 @Injectable()

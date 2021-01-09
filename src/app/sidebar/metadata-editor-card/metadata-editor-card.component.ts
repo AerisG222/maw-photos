@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { GpsCoordinate } from '@models';
 import { GpsService } from '@core/services';
 import { MetadataEditable } from '@core/facades';
 

@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { RouteArea } from '@models/route-area';
-import { RouteDetails } from '@models/route-details.model';
+import { RouteArea, RouteDetails } from '@models';
 
 export const routeChanged = createAction(
     '[Router] Route Changed',

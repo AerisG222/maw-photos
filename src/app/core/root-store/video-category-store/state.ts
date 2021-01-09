@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { Category } from '@models/category.model';
+import { Category } from '@models';
 
 export const videoCategoryAdapter: EntityAdapter<Category> = createEntityAdapter<Category>({
     sortComparer: (a: Category, b: Category): number => b.id - a.id

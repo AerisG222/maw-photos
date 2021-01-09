@@ -1,14 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
-import { Photo } from '@models/photo.model';
-import { Comment } from '@models/comment.model';
-import { PhotoEffects } from '@models/photo-effects.model';
-import { Rating } from '@models/rating.model';
+import {
+    Photo,
+    Comment,
+    PhotoEffects,
+    Rating,
+    ExifContainer,
+    GpsDetail,
+ } from '@models';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
-import { ExifContainer } from '@models/exif-container';
-import { GpsDetail } from '@models/gps-detail.model';
 import * as PhotoCategoryStoreSelectors from '@core/root-store/photo-category-store/selectors';
 import * as RouterStoreSelectors from '@core/root-store/router-store/selectors';
 import * as SettingsStoreSelectors from '@core/root-store/settings-store/selectors';

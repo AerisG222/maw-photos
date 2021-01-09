@@ -1,13 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Photo } from '@models/photo.model';
-import { Rating } from '@models/rating.model';
-import { Comment } from '@models/comment.model';
-import { PhotoRotation } from '@models/photo-rotation.model';
-import { PhotoEffects } from '@models/photo-effects.model';
-import { ExifContainer } from '@models/exif-container';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
-import { GpsDetail } from '@models/gps-detail.model';
+import {
+    Photo,
+    Rating,
+    Comment,
+    PhotoRotation,
+    PhotoEffects,
+    ExifContainer,
+    GpsCoordinate,
+    GpsDetail,
+ } from '@models';
 
 export const clearRequest = createAction(
     '[Photos] Clear'

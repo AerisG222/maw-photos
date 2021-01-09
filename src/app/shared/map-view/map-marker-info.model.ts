@@ -1,6 +1,6 @@
 import { MapMarker } from '@angular/google-maps';
 
-import { MapImage } from '@models/map-image.model';
+import { MapImage } from '@models';
 
 export interface MapMarkerInfo {
     marker: MapMarker;

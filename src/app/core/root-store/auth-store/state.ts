@@ -1,4 +1,4 @@
-import { UserInfo, DEFAULT_USER_INFO } from '@models/user-info.model';
+import { UserInfo, DEFAULT_USER_INFO } from '@models';
 
 export interface State {
     auth: UserInfo;

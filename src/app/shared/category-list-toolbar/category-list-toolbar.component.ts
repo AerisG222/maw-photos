@@ -1,11 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { CategoryFilter } from '@models/category-filter.model';
-import { CategoryListType } from '@models/category-list-type.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { Settings } from '@models/settings.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
+import {
+    CategoryFilter,
+    CategoryListType,
+    CategoryMargin,
+    Settings,
+    ThumbnailSize,
+ } from '@models';
 import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
 import { first } from 'rxjs/operators';
 

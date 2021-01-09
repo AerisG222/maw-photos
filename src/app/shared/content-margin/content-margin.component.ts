@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { CategoryMargin } from '@models/category-margin.model';
+import { CategoryMargin } from '@models';
 
 @Component({
     selector: 'app-shared-content-margin',

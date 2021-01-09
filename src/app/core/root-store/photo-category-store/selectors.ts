@@ -3,8 +3,7 @@ import { Dictionary } from '@ngrx/entity';
 
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
-import { Category } from '@models/category.model';
-import { PhotoCategory } from '@models/photo-category.model';
+import { Category, PhotoCategory } from '@models';
 
 const photoCategoryState = createFeatureSelector<State>(PHOTO_CATEGORY_FEATURE_NAME);
 

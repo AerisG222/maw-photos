@@ -3,16 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 
-import { PhotoCategory } from '@models/photo-category.model';
-import { ExifDetail } from '@models/exif-detail.model';
-import { Photo } from '@models/photo.model';
-import { Comment } from '@models/comment.model';
-import { Rating } from '@models/rating.model';
-import { DateService, PhotoApiService } from '@core/services';
-import { ApiCollection } from '@models/api-collection.model';
+import {
+    PhotoCategory,
+    ExifDetail,
+    Photo,
+    Comment,
+    Rating,
+    ApiCollection,
+    GpsCoordinate,
+    GpsDetail,
+ } from '@models';
 import { environment } from 'src/environments/environment';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
-import { GpsDetail } from '@models/gps-detail.model';
+import { DateService, PhotoApiService } from '@core/services';
 
 // TODO: remove first()  [https://github.com/angular/angular/issues/20755]
 

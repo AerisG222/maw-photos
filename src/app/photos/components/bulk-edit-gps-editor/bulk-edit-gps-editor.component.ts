@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { GpsService } from '@core/services';
 import { PhotoStoreSelectors } from '@core/root-store';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { GpsCoordinate } from '@models';
 
 @Component({
     selector: 'app-photos-bulk-edit-gps-editor',

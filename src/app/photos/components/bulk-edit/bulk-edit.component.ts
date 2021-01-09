@@ -4,8 +4,7 @@ import { combineLatest, BehaviorSubject } from 'rxjs';
 import { tap, first, map, filter } from 'rxjs/operators';
 
 import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
-import { Photo } from '@models/photo.model';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { GpsCoordinate, Photo } from '@models';
 
 @Component({
     selector: 'app-photos-bulk-edit',

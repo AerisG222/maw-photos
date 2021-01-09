@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { Photo, GpsCoordinate } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -19,7 +19,6 @@ import {
     PhotoLinkable,
  } from '@core/facades';
 import { RouteHelperService } from '@core/services';
-import { Photo } from '@models/photo.model';
 // eslint-disable-next-line max-len
 import { RouterStoreSelectors, SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
 

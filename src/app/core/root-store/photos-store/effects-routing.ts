@@ -6,7 +6,7 @@ import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
-import { RouteArea } from '@models/route-area';
+import { RouteArea } from '@models';
 import { RouteHelperService } from '../../services/route-helper.service';
 import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import { RouterStoreSelectors } from '../router-store';

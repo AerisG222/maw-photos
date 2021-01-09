@@ -8,10 +8,7 @@ import numbro from 'numbro';
 import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 import { RootStoreSelectors } from '@core/root-store';
-import { VideoCategory } from '@models/video-category.model';
-import { Category } from '@models/category.model';
-import { CategoryType } from '@models/category-type.model';
-import { PhotoCategory } from '@models/photo-category.model';
+import { Category, CategoryType, PhotoCategory, VideoCategory } from '@models';
 
 @Component({
   selector: 'app-stats-combined-stats',

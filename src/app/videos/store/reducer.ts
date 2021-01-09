@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { Video } from '@models/video.model';
+import { Video } from '@models';
 import { videoAdapter, initialState, State } from './state';
 import * as VideoActions from './actions';
 

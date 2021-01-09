@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 
-import { GoogleMapThemes } from '@models/google-map-themes.model';
-import { DEFAULT_SETTINGS } from '@models/settings.model';
+import { GoogleMapThemes, DEFAULT_SETTINGS } from '@models';
 import { MiniMapable } from '@core/facades';
 import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';

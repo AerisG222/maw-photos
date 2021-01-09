@@ -3,8 +3,7 @@ import { createSelector } from '@ngrx/store';
 import { SettingsStoreSelectors } from './settings-store';
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
-import { Category } from '@models/category.model';
-import { CategoryFilter } from '@models/category-filter.model';
+import { Category, CategoryFilter } from '@models';
 import { AuthStoreSelectors } from './auth-store';
 import { RouterStoreSelectors } from './router-store';
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { CategoryFilter } from '@models/category-filter.model';
+import { CategoryFilter } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { MatSelectChange } from '@angular/material/select';
 import { tap, first } from 'rxjs/operators';

@@ -11,11 +11,9 @@ import {
     SimpleChanges,
     ChangeDetectorRef
 } from '@angular/core';
-
-import { MapImage } from '@models/map-image.model';
-import { Photo } from '@models/photo.model';
-import { GoogleMapThemes } from '@models/google-map-themes.model';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
+
+import { Photo, MapImage, GoogleMapThemes } from '@models';
 import { MapMarkerInfo } from './map-marker-info.model';
 
 @Component({

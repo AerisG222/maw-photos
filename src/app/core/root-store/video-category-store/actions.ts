@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Category } from '@models/category.model';
+import { Category } from '@models';
 
 export const loadRequest = createAction(
     '[Video Categories] Load Request'

@@ -1,10 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-
-import { Category } from '@models/category.model';
-import { CategoryType } from '@models/category-type.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
 import { Router } from '@angular/router';
-import { CategoryTeaser } from '@models/category-teaser.model';
+
+import { Category, CategoryTeaser, CategoryType, ThumbnailSize } from '@models';
 
 @Component({
     selector: 'app-shared-category-list',

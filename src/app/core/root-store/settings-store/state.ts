@@ -1,4 +1,4 @@
-import { Settings, DEFAULT_SETTINGS } from '@models/settings.model';
+import { Settings, DEFAULT_SETTINGS } from '@models';
 
 export interface State {
     error: string | null;

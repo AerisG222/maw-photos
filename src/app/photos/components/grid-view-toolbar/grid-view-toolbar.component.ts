@@ -5,10 +5,12 @@ import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '../../../core/root-store/photos-store';
 import { SettingsStoreSelectors, SettingsStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
-import { DEFAULT_SETTINGS } from '@models/settings.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { Photo } from '@models/photo.model';
+import {
+    DEFAULT_SETTINGS,
+    ThumbnailSize,
+    CategoryMargin,
+    Photo,
+ } from '@models';
 
 @Component({
     selector: 'app-photos-grid-view-toolbar',

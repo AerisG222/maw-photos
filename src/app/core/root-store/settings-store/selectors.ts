@@ -1,15 +1,17 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { Settings } from '@models/settings.model';
+import {
+    Settings,
+    VideoSize,
+    Theme,
+    CategoryMargin,
+    ThumbnailSize,
+    CategoryFilter,
+    CategoryListType,
+    GoogleMapThemes,
+} from '@models';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
 import { State } from './state';
-import { VideoSize } from '@models/video-size.model';
-import { Theme } from '@models/theme.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { CategoryFilter } from '@models/category-filter.model';
-import { CategoryListType } from '@models/category-list-type.model';
-import { GoogleMapThemes } from '@models/google-map-themes.model';
 
 const settingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
 

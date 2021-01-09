@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+
+import { GpsCoordinate } from '@models';
 
 @Injectable({
     providedIn: 'root'

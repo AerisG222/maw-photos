@@ -1,10 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Video } from '@models/video.model';
-import { Rating } from '@models/rating.model';
-import { Comment } from '@models/comment.model';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
-import { GpsDetail } from '@models/gps-detail.model';
+import {
+    Video,
+    Rating,
+    Comment,
+    GpsCoordinate,
+    GpsDetail,
+ } from '@models';
 
 export const loadRequest = createAction(
     '[Videos] Load Request',

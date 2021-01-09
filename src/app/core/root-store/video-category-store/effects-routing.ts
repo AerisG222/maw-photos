@@ -4,7 +4,7 @@ import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
-import { RouteArea } from '@models/route-area';
+import { RouteArea } from '@models';
 import { RouteHelperService } from '../../services/route-helper.service';
 import { RouterStoreActions } from '../router-store';
 import * as VideoCategoryStoreActions from './actions';

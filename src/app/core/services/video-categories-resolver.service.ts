@@ -5,7 +5,7 @@ import { Observable, EMPTY } from 'rxjs';
 import { filter, catchError, take } from 'rxjs/operators';
 
 import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '@core/root-store';
-import { Category } from '@models/category.model';
+import { Category } from '@models';
 
 @Injectable({
     providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { GpsCoordinate } from '@models';
 import {
     Commentable,
     helpAddComment,

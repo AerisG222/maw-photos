@@ -1,13 +1,15 @@
 import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { VideoCategory } from '@models/video-category.model';
-import { Video } from '@models/video.model';
-import { Comment } from '@models/comment.model';
-import { Rating } from '@models/rating.model';
-import { ApiCollection } from '@models/api-collection.model';
-import { GpsCoordinate } from '@models/gps-coordinate.model';
-import { GpsDetail } from '@models/gps-detail.model';
+import {
+    VideoCategory,
+    Video,
+    Comment,
+    Rating,
+    ApiCollection,
+    GpsCoordinate,
+    GpsDetail,
+ } from '@models';
 
 export const videoApiServiceToken = new InjectionToken<VideoApiService>('VideoApiService');
 

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import { Settings, DEFAULT_SETTINGS } from '@models/settings.model';
-import { Theme } from '@models/theme.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { VideoSize } from '@models/video-size.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { CategoryFilter } from '@models/category-filter.model';
-import { CategoryListType } from '@models/category-list-type.model';
+import {
+    Settings,
+    DEFAULT_SETTINGS,
+    Theme,
+    ThumbnailSize,
+    VideoSize,
+    CategoryMargin,
+    CategoryFilter,
+    CategoryListType,
+ } from '@models';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({

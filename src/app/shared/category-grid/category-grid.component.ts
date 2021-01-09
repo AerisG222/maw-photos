@@ -1,7 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { CategoryTeaser } from '@models/category-teaser.model';
+import { CategoryTeaser, ThumbnailSize } from '@models';
 
 @Component({
     selector: 'app-shared-category-grid',

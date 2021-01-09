@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PhotoEffects } from '@models/photo-effects.model';
+import { PhotoEffects } from '@models';
 
 @Injectable({
   providedIn: 'root'

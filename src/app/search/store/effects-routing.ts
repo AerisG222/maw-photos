@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { filter, map } from 'rxjs/operators';
 
 import { RouterStoreActions } from '@core/root-store';
-import { RouteArea } from '@models/route-area';
+import { RouteArea } from '@models';
 import * as SearchStoreActions from './actions';
 
 @Injectable()

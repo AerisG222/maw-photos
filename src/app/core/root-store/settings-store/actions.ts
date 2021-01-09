@@ -1,11 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Settings } from '@models/settings.model';
-import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { VideoSize } from '@models/video-size.model';
-import { CategoryMargin } from '@models/category-margin.model';
-import { CategoryFilter } from '@models/category-filter.model';
-import { CategoryListType } from '@models/category-list-type.model';
+import {
+    Settings,
+    ThumbnailSize,
+    VideoSize,
+    CategoryMargin,
+    CategoryFilter,
+    CategoryListType,
+ } from '@models';
 
 export const updateMobileMarginsRequest = createAction(
     '[Settings] Update Mobile Margins Request'

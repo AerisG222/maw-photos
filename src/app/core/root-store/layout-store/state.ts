@@ -1,4 +1,4 @@
-import { Layout } from '@models/layout.model';
+import { Layout } from '@models';
 
 export interface State {
     layout: Layout;
