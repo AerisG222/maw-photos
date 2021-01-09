@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store/photos-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-photos-sidebar-effects',

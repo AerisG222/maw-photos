@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import {
     RootStoreSelectors,
     SettingsStoreSelectors
-} from 'src/app/core/root-store';
+} from '@core/root-store';
 import { CategoryTeaser } from '@models/category-teaser.model';
 
 @Component({

@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, BehaviorSubject } from 'rxjs';
 import { tap, first, map, filter } from 'rxjs/operators';
 
-import { PhotoCategoryStoreSelectors } from '@core/root-store';
-import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store/photos-store';
+import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
 import { Photo } from '@models/photo.model';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 

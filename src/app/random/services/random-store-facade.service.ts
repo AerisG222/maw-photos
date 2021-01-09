@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
-import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store/photos-store';
+// eslint-disable-next-line max-len
+import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 import { Commentable } from '@models/store-facades/commentable';
 import { helpAddComment } from '@models/store-facades/commentable-helper';
@@ -13,7 +13,6 @@ import { Navigable } from '@models/store-facades/navigable';
 import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-helpers';
 import { Ratable } from '@models/store-facades/ratable';
 import { helpRate } from '@models/store-facades/ratable-helper';
-import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store/photo-category-store';
 import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
 import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
 import { PhotoLinkable } from '@models/store-facades/photo-linkable';

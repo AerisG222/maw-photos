@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { GpsService } from '@core/services/gps.service';
-import { PhotoStoreSelectors } from '@core/root-store/photos-store';
+import { PhotoStoreSelectors } from '@core/root-store';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 
 @Component({

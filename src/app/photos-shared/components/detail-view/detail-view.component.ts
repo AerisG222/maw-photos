@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreSelectors } from '@core/root-store/photos-store';
-import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
+import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelectors, PhotoStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-photos-detail-view',

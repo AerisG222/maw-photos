@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { Histogram } from './histogram';
-import { PhotoStoreSelectors } from '@core/root-store/photos-store';
+import { PhotoStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-photos-sidebar-histogram',

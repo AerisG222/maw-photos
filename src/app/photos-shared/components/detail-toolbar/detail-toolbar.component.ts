@@ -5,13 +5,13 @@ import { WINDOW } from 'ngx-window-token';
 
 import { DEFAULT_SETTINGS } from '@models/settings.model';
 import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { PhotoStoreSelectors } from '@core/root-store/photos-store';
 import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors,
+    PhotoStoreSelectors,
     RootStoreSelectors
-} from 'src/app/core/root-store';
+} from '@core/root-store';
 import { Photo } from '@models/photo.model';
 
 @Component({

@@ -2,8 +2,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
-import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store/photos-store';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 import { Commentable } from '@models/store-facades/commentable';
 import { helpAddComment } from '@models/store-facades/commentable-helper';
@@ -15,12 +13,12 @@ import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-
 import { Ratable } from '@models/store-facades/ratable';
 import { helpRate } from '@models/store-facades/ratable-helper';
 import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
-import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store/photo-category-store';
 import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
 import { PhotoLinkable } from '@models/store-facades/photo-linkable';
 import { RouteHelperService } from '@core/services/route-helper.service';
 import { Photo } from '@models/photo.model';
-import { RouterStoreSelectors } from '@core/root-store';
+// eslint-disable-next-line max-len
+import { RouterStoreSelectors, SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
 
 @Injectable()
 export class PhotoStoreFacadeService implements
