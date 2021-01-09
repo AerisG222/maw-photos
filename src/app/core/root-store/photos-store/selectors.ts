@@ -350,25 +350,29 @@ export const enableMapView = createSelector(
 );
 
 export const isCommentCardVisible = createSelector(
+    RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelExpandedState,
     SettingsStoreSelectors.photoInfoPanelShowComments,
-    (isExpanded, showComments) => isExpanded && showComments
+    (isDetailView, isExpanded, showComments) => isDetailView && isExpanded && showComments
 );
 
 export const isRatingCardVisible = createSelector(
+    RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelExpandedState,
     SettingsStoreSelectors.photoInfoPanelShowRatings,
-    (isExpanded, showRatings) => isExpanded && showRatings
+    (isDetailView, isExpanded, showRatings) => isDetailView && isExpanded && showRatings
 );
 
 export const isMetadataEditorCardVisible = createSelector(
+    RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelExpandedState,
     SettingsStoreSelectors.photoInfoPanelShowMetadataEditor,
-    (isExpanded, showEditor) => isExpanded && showEditor
+    (isDetailView, isExpanded, showEditor) => isDetailView && isExpanded && showEditor
 );
 
 export const isExifCardVisible = createSelector(
+    RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelExpandedState,
     SettingsStoreSelectors.photoInfoPanelShowExif,
-    (isExpanded, showExif) => isExpanded && showExif
+    (isDetailView, isExpanded, showExif) => isDetailView && isExpanded && showExif
 );
