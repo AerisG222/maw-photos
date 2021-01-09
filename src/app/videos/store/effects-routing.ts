@@ -7,7 +7,7 @@ import { filter, map, tap } from 'rxjs/operators';
 
 import { RouterStoreActions } from 'src/app/core/root-store';
 import { RouteHelperService } from 'src/app/core/services/route-helper.service';
-import { RouteArea } from 'src/app/models/route-area';
+import { RouteArea } from '@models/route-area';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 

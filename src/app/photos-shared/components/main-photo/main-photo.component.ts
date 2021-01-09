@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
 import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
-import { PhotoEffects } from 'src/app/models/photo-effects.model';
-import { Photo } from 'src/app/models/photo.model';
+import { PhotoEffects } from '@models/photo-effects.model';
+import { Photo } from '@models/photo.model';
 
 @Component({
     selector: 'app-photos-main-photo',

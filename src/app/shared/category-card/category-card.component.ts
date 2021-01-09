@@ -1,8 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
-import { CategoryType } from 'src/app/models/category-type.model';
-import { CategoryTeaser } from 'src/app/models/category-teaser.model';
+import { ThumbnailSize } from '@models/thumbnail-size.model';
+import { CategoryType } from '@models/category-type.model';
+import { CategoryTeaser } from '@models/category-teaser.model';
 
 @Component({
     selector: 'app-shared-category-card',

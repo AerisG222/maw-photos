@@ -2,9 +2,9 @@ import { Component, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angu
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
-import { VideoSize } from 'src/app/models/video-size.model';
-import { Video } from 'src/app/models/video.model';
-import { Settings } from 'src/app/models/settings.model';
+import { VideoSize } from '@models/video-size.model';
+import { Video } from '@models/video.model';
+import { Settings } from '@models/settings.model';
 import { VideoStoreSelectors } from 'src/app/videos/store';
 import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
 

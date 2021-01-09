@@ -6,7 +6,7 @@ import {
     RootStoreSelectors,
     SettingsStoreSelectors
 } from 'src/app/core/root-store';
-import { CategoryTeaser } from 'src/app/models/category-teaser.model';
+import { CategoryTeaser } from '@models/category-teaser.model';
 
 @Component({
     selector: 'app-categories-year',

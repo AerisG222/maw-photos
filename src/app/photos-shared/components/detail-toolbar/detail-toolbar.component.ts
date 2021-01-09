@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
-import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
-import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { DEFAULT_SETTINGS } from '@models/settings.model';
+import { ThumbnailSize } from '@models/thumbnail-size.model';
 import { PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
 import {
     SettingsStoreActions,
@@ -12,7 +12,7 @@ import {
     PhotoCategoryStoreSelectors,
     RootStoreSelectors
 } from 'src/app/core/root-store';
-import { Photo } from 'src/app/models/photo.model';
+import { Photo } from '@models/photo.model';
 
 @Component({
     selector: 'app-photos-detail-toolbar',

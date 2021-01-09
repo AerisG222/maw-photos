@@ -5,10 +5,10 @@ import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '../../../core/root-store/photos-store';
 import { SettingsStoreSelectors, SettingsStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { DEFAULT_SETTINGS } from 'src/app/models/settings.model';
-import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
-import { CategoryMargin } from 'src/app/models/category-margin.model';
-import { Photo } from 'src/app/models/photo.model';
+import { DEFAULT_SETTINGS } from '@models/settings.model';
+import { ThumbnailSize } from '@models/thumbnail-size.model';
+import { CategoryMargin } from '@models/category-margin.model';
+import { Photo } from '@models/photo.model';
 
 @Component({
     selector: 'app-photos-grid-view-toolbar',

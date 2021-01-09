@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { Navigable } from 'src/app/models/store-facades/navigable';
+import { Navigable } from '@models/store-facades/navigable';
 
 @Component({
     selector: 'app-toolbar-move-next-button',

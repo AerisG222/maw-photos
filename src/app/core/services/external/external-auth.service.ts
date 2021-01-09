@@ -4,7 +4,7 @@ import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { filter, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { authConfig } from 'src/app/models/auth-config';
+import { authConfig } from '@models/auth-config';
 import { updateUserInfoRequest } from 'src/app/core/root-store/auth-store/actions';
 import { AuthService } from 'src/app/core/services/auth.service';
 

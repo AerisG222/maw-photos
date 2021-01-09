@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { Photo } from 'src/app/models/photo.model';
+import { Photo } from '@models/photo.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({

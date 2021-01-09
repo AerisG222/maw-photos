@@ -1,4 +1,4 @@
-import { Category } from 'src/app/models/category.model';
+import { Category } from '@models/category.model';
 
 export const getIdsByYear = (categories: Category[]): Map<number, number[]> => {
     const idsByYear = new Map<number, number[]>();

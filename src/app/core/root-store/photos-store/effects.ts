@@ -5,7 +5,7 @@ import { combineLatest, of, timer } from 'rxjs';
 // eslint-disable-next-line max-len
 import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap, takeUntil } from 'rxjs/operators';
 
-import { PhotoRotation } from 'src/app/models/photo-rotation.model';
+import { PhotoRotation } from '@models/photo-rotation.model';
 import { ExifFormatterService } from 'src/app/core/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
 import * as PhotoActions from './actions';
@@ -13,7 +13,7 @@ import * as PhotoStoreSelectors from './selectors';
 import * as LayoutStoreActions from 'src/app/core/root-store/layout-store/actions';
 import * as PhotoCategoryStoreActions from 'src/app/core/root-store/photo-category-store/actions';
 import * as SettingsStoreSelectors from 'src/app/core/root-store/settings-store/selectors';
-import { DEFAULT_PHOTO_EFFECTS } from 'src/app/models/photo-effects.model';
+import { DEFAULT_PHOTO_EFFECTS } from '@models/photo-effects.model';
 import { RouterStoreSelectors } from '../router-store';
 
 @Injectable()

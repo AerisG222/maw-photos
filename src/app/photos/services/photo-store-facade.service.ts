@@ -4,22 +4,22 @@ import { Subscription } from 'rxjs';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store/settings-store';
 import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
-import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
-import { Commentable } from 'src/app/models/store-facades/commentable';
-import { helpAddComment } from 'src/app/models/store-facades/commentable-helper';
-import { MetadataEditable } from 'src/app/models/store-facades/metadata-editable';
-import { helpSaveGpsOverride } from 'src/app/models/store-facades/metadata-editable-helper';
-import { MiniMapable } from 'src/app/models/store-facades/mini-mapable';
-import { Navigable } from 'src/app/models/store-facades/navigable';
-import { helpMoveNext, helpMovePrevious } from 'src/app/models/store-facades/navigable-helpers';
-import { Ratable } from 'src/app/models/store-facades/ratable';
-import { helpRate } from 'src/app/models/store-facades/ratable-helper';
-import { CategoryTeaserSelectable } from 'src/app/models/store-facades/category-teaser-selectable';
+import { GpsCoordinate } from '@models/gps-coordinate.model';
+import { Commentable } from '@models/store-facades/commentable';
+import { helpAddComment } from '@models/store-facades/commentable-helper';
+import { MetadataEditable } from '@models/store-facades/metadata-editable';
+import { helpSaveGpsOverride } from '@models/store-facades/metadata-editable-helper';
+import { MiniMapable } from '@models/store-facades/mini-mapable';
+import { Navigable } from '@models/store-facades/navigable';
+import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-helpers';
+import { Ratable } from '@models/store-facades/ratable';
+import { helpRate } from '@models/store-facades/ratable-helper';
+import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
 import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store/photo-category-store';
-import { helpSaveCategoryTeaser } from 'src/app/models/store-facades/category-teaser-selectable-helper';
-import { PhotoLinkable } from 'src/app/models/store-facades/photo-linkable';
+import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
+import { PhotoLinkable } from '@models/store-facades/photo-linkable';
 import { RouteHelperService } from 'src/app/core/services/route-helper.service';
-import { Photo } from 'src/app/models/photo.model';
+import { Photo } from '@models/photo.model';
 import { RouterStoreSelectors } from 'src/app/core/root-store';
 
 @Injectable()

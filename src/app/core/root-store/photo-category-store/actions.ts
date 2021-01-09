@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Category } from 'src/app/models/category.model';
+import { Category } from '@models/category.model';
 
 export const loadRequest = createAction(
     '[Photo Categories] Load Request'

@@ -3,16 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
-import { Settings, DEFAULT_SETTINGS } from 'src/app/models/settings.model';
-import { Theme } from 'src/app/models/theme.model';
-import { ThumbnailSize } from 'src/app/models/thumbnail-size.model';
+import { Settings, DEFAULT_SETTINGS } from '@models/settings.model';
+import { Theme } from '@models/theme.model';
+import { ThumbnailSize } from '@models/thumbnail-size.model';
 import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
-import { VideoSize } from 'src/app/models/video-size.model';
-import { MinimapZoom } from 'src/app/models/minimap-zoom.model';
-import { MapTypeId } from 'src/app/models/map-type-id.model';
-import { CategoryMargin } from 'src/app/models/category-margin.model';
-import { CategoryFilter } from 'src/app/models/category-filter.model';
-import { CategoryListType } from 'src/app/models/category-list-type.model';
+import { VideoSize } from '@models/video-size.model';
+import { MinimapZoom } from '@models/minimap-zoom.model';
+import { MapTypeId } from '@models/map-type-id.model';
+import { CategoryMargin } from '@models/category-margin.model';
+import { CategoryFilter } from '@models/category-filter.model';
+import { CategoryListType } from '@models/category-list-type.model';
 import { Subscription } from 'rxjs';
 
 

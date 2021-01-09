@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RouteArea } from 'src/app/models/route-area';
+import { RouteArea } from '@models/route-area';
 
 @Injectable({
     providedIn: 'root'

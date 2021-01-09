@@ -5,8 +5,8 @@ import { tap, first, map, filter } from 'rxjs/operators';
 
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { PhotoStoreSelectors, PhotoStoreActions } from 'src/app/core/root-store/photos-store';
-import { Photo } from 'src/app/models/photo.model';
-import { GpsCoordinate } from 'src/app/models/gps-coordinate.model';
+import { Photo } from '@models/photo.model';
+import { GpsCoordinate } from '@models/gps-coordinate.model';
 
 @Component({
     selector: 'app-photos-bulk-edit',

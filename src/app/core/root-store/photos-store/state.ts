@@ -1,11 +1,11 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { Photo } from 'src/app/models/photo.model';
-import { Comment } from 'src/app/models/comment.model';
-import { DEFAULT_PHOTO_EFFECTS, PhotoEffects } from 'src/app/models/photo-effects.model';
-import { Rating } from 'src/app/models/rating.model';
-import { ExifContainer } from 'src/app/models/exif-container';
-import { GpsDetail } from 'src/app/models/gps-detail.model';
+import { Photo } from '@models/photo.model';
+import { Comment } from '@models/comment.model';
+import { DEFAULT_PHOTO_EFFECTS, PhotoEffects } from '@models/photo-effects.model';
+import { Rating } from '@models/rating.model';
+import { ExifContainer } from '@models/exif-container';
+import { GpsDetail } from '@models/gps-detail.model';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 

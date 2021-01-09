@@ -5,10 +5,10 @@ import { map, tap, delay, filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 
-import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { PhotoCategory } from '@models/photo-category.model';
 import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
-import { Category } from 'src/app/models/category.model';
+import { Category } from '@models/category.model';
 import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';
 
 @Component({

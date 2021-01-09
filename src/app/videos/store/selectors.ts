@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
-import { Video } from 'src/app/models/video.model';
-import { Comment } from 'src/app/models/comment.model';
-import { Rating } from 'src/app/models/rating.model';
+import { Video } from '@models/video.model';
+import { Comment } from '@models/comment.model';
+import { Rating } from '@models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
-import { GpsDetail } from 'src/app/models/gps-detail.model';
+import { GpsDetail } from '@models/gps-detail.model';
 import { SettingsStoreSelectors } from 'src/app/core/root-store';
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);

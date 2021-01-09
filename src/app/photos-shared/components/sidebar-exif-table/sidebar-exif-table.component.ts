@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { ExifData } from 'src/app/models/exif-data.model';
+import { ExifData } from '@models/exif-data.model';
 
 @Component({
   selector: 'app-photos-sidebar-exif-table',

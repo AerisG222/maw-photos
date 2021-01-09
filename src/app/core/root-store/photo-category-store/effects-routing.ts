@@ -4,7 +4,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom, filter, tap } from 'rxjs/operators';
 
-import { RouteArea } from 'src/app/models/route-area';
+import { RouteArea } from '@models/route-area';
 import { RouteHelperService } from '../../services/route-helper.service';
 import { RouterStoreActions } from '../router-store';
 import * as PhotoCategoryStoreActions from './actions';

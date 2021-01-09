@@ -7,8 +7,8 @@ import numbro from 'numbro';
 
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 import { VideoCategoryStoreSelectors } from 'src/app/core/root-store';
-import { VideoCategory } from 'src/app/models/video-category.model';
-import { Category } from 'src/app/models/category.model';
+import { VideoCategory } from '@models/video-category.model';
+import { Category } from '@models/category.model';
 import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';
 
 @Component({

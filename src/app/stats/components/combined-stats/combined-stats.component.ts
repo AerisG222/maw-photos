@@ -8,10 +8,10 @@ import numbro from 'numbro';
 import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 import { RootStoreSelectors } from 'src/app/core/root-store';
-import { VideoCategory } from 'src/app/models/video-category.model';
-import { Category } from 'src/app/models/category.model';
-import { CategoryType } from 'src/app/models/category-type.model';
-import { PhotoCategory } from 'src/app/models/photo-category.model';
+import { VideoCategory } from '@models/video-category.model';
+import { Category } from '@models/category.model';
+import { CategoryType } from '@models/category-type.model';
+import { PhotoCategory } from '@models/photo-category.model';
 
 @Component({
   selector: 'app-stats-combined-stats',

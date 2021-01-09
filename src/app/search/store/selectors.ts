@@ -4,8 +4,8 @@ import { State, searchAdapter } from './state';
 import { SEARCH_FEATURE_NAME } from './feature-name';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { SearchResult } from 'src/app/search/models/search-result.model';
-import { CategoryType } from 'src/app/models/category-type.model';
-import { CategoryTeaser } from 'src/app/models/category-teaser.model';
+import { CategoryType } from '@models/category-type.model';
+import { CategoryTeaser } from '@models/category-teaser.model';
 
 const searchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);
 

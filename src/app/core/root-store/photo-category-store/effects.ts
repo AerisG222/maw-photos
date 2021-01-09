@@ -7,9 +7,9 @@ import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/ope
 import * as PhotoCategoryActions from './actions';
 import * as PhotoCategorySelectors from './selectors';
 import { photoApiServiceToken, PhotoApiService } from 'src/app/core/services/photo-api.service';
-import { PhotoCategory } from 'src/app/models/photo-category.model';
-import { Category } from 'src/app/models/category.model';
-import { CategoryType } from 'src/app/models/category-type.model';
+import { PhotoCategory } from '@models/photo-category.model';
+import { Category } from '@models/category.model';
+import { CategoryType } from '@models/category-type.model';
 import { RouteHelperService } from '../../services/route-helper.service';
 
 @Injectable()
