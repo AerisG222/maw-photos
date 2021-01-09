@@ -68,6 +68,7 @@ import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-vi
         DetailSidebarComponent,
         FullscreenViewComponent,
         GridViewComponent,
+        GridPhotoComponent,
         ToolbarSlideshowButtonComponent,
         ToolbarGroupSelectViewComponent,
         ToolbarFlipHorizontalButtonComponent,
