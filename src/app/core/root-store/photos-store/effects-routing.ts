@@ -12,7 +12,7 @@ import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import { RouterStoreSelectors } from '../router-store';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
-import { LayoutStoreActions, LayoutStoreSelectors } from '../layout-store';
+import { LayoutStoreActions } from '../layout-store';
 
 @Injectable()
 export class PhotoStoreRoutingEffects {
@@ -132,6 +132,13 @@ export class PhotoStoreRoutingEffects {
                     return LayoutStoreActions.exitFullscreenRequest();
                 }
             })
+        );
+    });
+
+    exitFullScreenLayoutWhenLeavingPhotos$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaLeaving),
+            map(action => LayoutStoreActions.exitFullscreenRequest())
         );
     });
 
