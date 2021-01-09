@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 // eslint-disable-next-line max-len
-import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
 import { Photo, GpsCoordinate } from '@models';
 import {
     Commentable,
@@ -20,9 +20,11 @@ import {
     PhotoLinkable,
  } from '@core/facades';
 import { RouteHelperService } from '@core/services';
+import { Subscription } from 'rxjs';
 
 @Injectable()
 export class RandomStoreFacadeService implements
+    OnDestroy,
     Navigable,
     Commentable,
     Ratable,
@@ -45,11 +47,22 @@ export class RandomStoreFacadeService implements
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
 
+    private destroySub = new Subscription();
+    private view = 'grid';
+
     constructor(
         private store: Store,
         private routeHelper: RouteHelperService
     ) {
+        // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
+        this.destroySub.add(this.store.select(RouterStoreSelectors.photoView)
+            .subscribe({
+                next: view => this.view = view
+            }));
+    }
 
+    ngOnDestroy(): void {
+        this.destroySub.unsubscribe();
     }
 
     addComment(comment: string): void {
@@ -106,6 +119,6 @@ export class RandomStoreFacadeService implements
     }
 
     buildPhotoLink(photo: Photo) {
-        return this.routeHelper.randomAbs(photo.id);
+        return this.routeHelper.randomAbs(this.view, photo.id);
     }
 }
