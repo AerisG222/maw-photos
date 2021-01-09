@@ -3,18 +3,21 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
 import { GpsCoordinate } from '@models/gps-coordinate.model';
-import { Commentable } from '@models/store-facades/commentable';
-import { helpAddComment } from '@models/store-facades/commentable-helper';
-import { MetadataEditable } from '@models/store-facades/metadata-editable';
-import { helpSaveGpsOverride } from '@models/store-facades/metadata-editable-helper';
-import { MiniMapable } from '@models/store-facades/mini-mapable';
-import { Navigable } from '@models/store-facades/navigable';
-import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-helpers';
-import { Ratable } from '@models/store-facades/ratable';
-import { helpRate } from '@models/store-facades/ratable-helper';
-import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
-import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
-import { PhotoLinkable } from '@models/store-facades/photo-linkable';
+import {
+    Commentable,
+    helpAddComment,
+    MetadataEditable,
+    helpMovePrevious,
+    helpSaveGpsOverride,
+    MiniMapable,
+    Navigable,
+    helpMoveNext,
+    Ratable,
+    helpRate,
+    CategoryTeaserSelectable,
+    helpSaveCategoryTeaser,
+    PhotoLinkable,
+ } from '@core/facades';
 import { RouteHelperService } from '@core/services/route-helper.service';
 import { Photo } from '@models/photo.model';
 // eslint-disable-next-line max-len

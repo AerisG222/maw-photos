@@ -9,13 +9,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VideoCategoryComponent } from './components/video-category/video-category.component';
 import { VideoListComponent } from './components/video-list/video-list.component';
-import { Navigable } from '../models/store-facades/navigable';
+import {
+    Navigable,
+    Commentable,
+    Ratable,
+    MetadataEditable,
+    MiniMapable,
+    CategoryTeaserSelectable,
+ } from '@core/facades';
 import { VideoStoreFacadeService } from './services/video-store-facade.service';
-import { Commentable } from '../models/store-facades/commentable';
-import { Ratable } from '../models/store-facades/ratable';
-import { MetadataEditable } from '../models/store-facades/metadata-editable';
-import { MiniMapable } from '../models/store-facades/mini-mapable';
-import { CategoryTeaserSelectable } from '../models/store-facades/category-teaser-selectable';
 
 @NgModule({
     declarations: [

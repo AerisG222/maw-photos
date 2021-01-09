@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { Photo } from '../photo.model';
-import { Video } from '../video.model';
+import { Photo } from '../../models/photo.model';
+import { Video } from '../../models/video.model';
 
 export const helpSaveCategoryTeaser = (
     activePhoto$: Observable<Photo | Video | null>,

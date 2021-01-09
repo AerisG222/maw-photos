@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 import { GpsService } from '@core/services/gps.service';
-import { MetadataEditable } from '@models/store-facades/metadata-editable';
+import { MetadataEditable } from '@core/facades';
 
 @Component({
     selector: 'app-sidebar-metadata-editor-card',

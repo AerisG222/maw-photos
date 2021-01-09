@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { GpsCoordinate } from '../gps-coordinate.model';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 export abstract class MetadataEditable {
     abstract overrideGps$: Observable<GpsCoordinate | null>;

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { GpsCoordinate } from '../gps-coordinate.model';
+import { GpsCoordinate } from '../../models/gps-coordinate.model';
 
 export const helpSaveGpsOverride = (
     id$: Observable<number | null>,

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { Ratable } from '@models/store-facades/ratable';
+import { Ratable } from '@core/facades';
 
 @Component({
     selector: 'app-sidebar-rating-card',

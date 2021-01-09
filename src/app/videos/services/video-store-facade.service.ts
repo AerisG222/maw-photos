@@ -2,20 +2,23 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { GpsCoordinate } from '@models/gps-coordinate.model';
-import { Commentable } from '@models/store-facades/commentable';
-import { helpAddComment } from '@models/store-facades/commentable-helper';
-import { MetadataEditable } from '@models/store-facades/metadata-editable';
-import { helpSaveGpsOverride } from '@models/store-facades/metadata-editable-helper';
-import { Navigable } from '@models/store-facades/navigable';
-import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-helpers';
-import { Ratable } from '@models/store-facades/ratable';
-import { helpRate } from '@models/store-facades/ratable-helper';
+import {
+    Commentable,
+    helpAddComment,
+    MetadataEditable,
+    helpSaveGpsOverride,
+    Navigable,
+    helpMoveNext,
+    helpMovePrevious,
+    Ratable,
+    helpRate,
+    MiniMapable,
+    CategoryTeaserSelectable,
+    helpSaveCategoryTeaser,
+} from '@core/facades';
 import { VideoStoreActions, VideoStoreSelectors } from '../store';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
-import { MiniMapable } from '@models/store-facades/mini-mapable';
-import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
 import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '@core/root-store/video-category-store';
-import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
 
 @Injectable()
 export class VideoStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable {

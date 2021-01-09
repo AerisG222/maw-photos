@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Photo } from '@models/photo.model';
 import { ThumbnailSize } from '@models/thumbnail-size.model';
 import { DEFAULT_SETTINGS } from '@models/settings.model';
-import { PhotoLinkable } from '@models/store-facades/photo-linkable';
+import { PhotoLinkable } from '@core/facades';
 
 @Component({
     selector: 'app-photos-photo-list',

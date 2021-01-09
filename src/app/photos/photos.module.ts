@@ -15,13 +15,7 @@ import { GridViewComponent } from './components/grid-view/grid-view.component';
 import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
-import { Navigable } from '../models/store-facades/navigable';
-import { Commentable } from '../models/store-facades/commentable';
-import { Ratable } from '../models/store-facades/ratable';
-import { MetadataEditable } from '../models/store-facades/metadata-editable';
-import { MiniMapable } from '../models/store-facades/mini-mapable';
-import { CategoryTeaserSelectable } from '../models/store-facades/category-teaser-selectable';
-import { PhotoLinkable } from '../models/store-facades/photo-linkable';
+import { Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable, PhotoLinkable } from '@core/facades';
 import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
 
 @NgModule({

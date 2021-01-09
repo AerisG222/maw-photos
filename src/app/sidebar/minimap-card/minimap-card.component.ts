@@ -3,7 +3,7 @@ import { GoogleMap } from '@angular/google-maps';
 
 import { GoogleMapThemes } from '@models/google-map-themes.model';
 import { DEFAULT_SETTINGS } from '@models/settings.model';
-import { MiniMapable } from '@models/store-facades/mini-mapable';
+import { MiniMapable } from '@core/facades';
 import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
 
