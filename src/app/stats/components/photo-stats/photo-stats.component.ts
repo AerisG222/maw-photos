@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 
 import { PhotoCategory } from '@models/photo-category.model';
-import { PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { PhotoCategoryStoreSelectors } from '@core/root-store';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
 import { Category } from '@models/category.model';
 import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';

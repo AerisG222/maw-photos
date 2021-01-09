@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { LayoutStoreActions } from 'src/app/core/root-store';
+import { LayoutStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-photos-fullscreen-view',

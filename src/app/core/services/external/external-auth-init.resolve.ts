@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
-import { AuthInitResolver } from 'src/app/core/services/auth-init.resolver';
-import { authServiceToken, AuthService } from 'src/app/core/services/auth.service';
+import { AuthInitResolver } from '@core/services/auth-init.resolver';
+import { authServiceToken, AuthService } from '@core/services/auth.service';
 
 @Injectable()
 export class ExternalAuthInitResolver implements AuthInitResolver {

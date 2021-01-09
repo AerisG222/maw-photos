@@ -11,10 +11,10 @@ import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-
 import { Ratable } from '@models/store-facades/ratable';
 import { helpRate } from '@models/store-facades/ratable-helper';
 import { VideoStoreActions, VideoStoreSelectors } from '../store';
-import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store/settings-store';
+import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
 import { MiniMapable } from '@models/store-facades/mini-mapable';
 import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
-import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from 'src/app/core/root-store/video-category-store';
+import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '@core/root-store/video-category-store';
 import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
 
 @Injectable()

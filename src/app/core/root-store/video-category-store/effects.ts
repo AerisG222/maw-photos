@@ -6,7 +6,7 @@ import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/ope
 
 import * as VideoCategoryStoreActions from './actions';
 import * as videoCategoryStoreSelectors from './selectors';
-import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
+import { videoApiServiceToken, VideoApiService } from '@core/services/video-api.service';
 import { VideoCategory } from '@models/video-category.model';
 import { Category } from '@models/category.model';
 import { CategoryType } from '@models/category-type.model';

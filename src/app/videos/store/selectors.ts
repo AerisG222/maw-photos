@@ -7,7 +7,7 @@ import { Rating } from '@models/rating.model';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
 import { GpsDetail } from '@models/gps-detail.model';
-import { SettingsStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors } from '@core/root-store';
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
 

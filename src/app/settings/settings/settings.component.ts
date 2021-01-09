@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 import { Settings, DEFAULT_SETTINGS } from '@models/settings.model';
 import { Theme } from '@models/theme.model';
 import { ThumbnailSize } from '@models/thumbnail-size.model';
-import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { VideoSize } from '@models/video-size.model';
 import { MinimapZoom } from '@models/minimap-zoom.model';
 import { MapTypeId } from '@models/map-type-id.model';

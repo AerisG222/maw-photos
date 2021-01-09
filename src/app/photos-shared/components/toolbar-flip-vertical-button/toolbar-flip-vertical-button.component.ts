@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreActions } from 'src/app/core/root-store/photos-store';
+import { PhotoStoreActions } from '@core/root-store/photos-store';
 
 @Component({
     selector: 'app-photos-toolbar-flip-vertical-button',

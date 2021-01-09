@@ -4,10 +4,10 @@ import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
 import { switchMap, catchError, map, concatMap, debounceTime, filter, mergeMap, withLatestFrom } from 'rxjs/operators';
 
-import { videoApiServiceToken, VideoApiService } from 'src/app/core/services/video-api.service';
+import { videoApiServiceToken, VideoApiService } from '@core/services/video-api.service';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
-import { VideoCategoryStoreActions } from 'src/app/core/root-store';
+import { VideoCategoryStoreActions } from '@core/root-store';
 
 @Injectable()
 export class VideoStoreEffects {

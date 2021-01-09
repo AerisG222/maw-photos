@@ -6,9 +6,9 @@ import { ExifDetail } from '@models/exif-detail.model';
 import { Photo } from '@models/photo.model';
 import { Comment } from '@models/comment.model';
 import { Rating } from '@models/rating.model';
-import { PhotoApiService } from 'src/app/core/services/photo-api.service';
+import { PhotoApiService } from '@core/services/photo-api.service';
 import { ApiCollection } from '@models/api-collection.model';
-import { DateService } from 'src/app/core/services/date.service';
+import { DateService } from '@core/services/date.service';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 import { GpsDetail } from '@models/gps-detail.model';
 

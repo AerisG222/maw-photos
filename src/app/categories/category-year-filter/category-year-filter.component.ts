@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { first, tap } from 'rxjs/operators';
 
-import { RootStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { RootStoreSelectors, SettingsStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-categories-category-year-filter',

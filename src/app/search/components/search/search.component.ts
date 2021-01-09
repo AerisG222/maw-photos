@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SearchStoreSelectors } from 'src/app/search/store';
-import { SettingsStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-search-search',

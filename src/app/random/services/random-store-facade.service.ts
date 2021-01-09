@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreActions, SettingsStoreSelectors } from 'src/app/core/root-store/settings-store';
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
+import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
+import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store/photos-store';
 import { GpsCoordinate } from '@models/gps-coordinate.model';
 import { Commentable } from '@models/store-facades/commentable';
 import { helpAddComment } from '@models/store-facades/commentable-helper';
@@ -13,12 +13,12 @@ import { Navigable } from '@models/store-facades/navigable';
 import { helpMoveNext, helpMovePrevious } from '@models/store-facades/navigable-helpers';
 import { Ratable } from '@models/store-facades/ratable';
 import { helpRate } from '@models/store-facades/ratable-helper';
-import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store/photo-category-store';
+import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store/photo-category-store';
 import { CategoryTeaserSelectable } from '@models/store-facades/category-teaser-selectable';
 import { helpSaveCategoryTeaser } from '@models/store-facades/category-teaser-selectable-helper';
 import { PhotoLinkable } from '@models/store-facades/photo-linkable';
 import { Photo } from '@models/photo.model';
-import { RouteHelperService } from 'src/app/core/services/route-helper.service';
+import { RouteHelperService } from '@core/services/route-helper.service';
 
 @Injectable()
 export class RandomStoreFacadeService implements

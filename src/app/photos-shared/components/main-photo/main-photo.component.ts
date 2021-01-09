@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreActions, PhotoStoreSelectors } from 'src/app/core/root-store';
-import { EffectStyleBuilderService } from 'src/app/core/services/effect-style-builder.service';
+import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
+import { EffectStyleBuilderService } from '@core/services/effect-style-builder.service';
 import { PhotoEffects } from '@models/photo-effects.model';
 import { Photo } from '@models/photo.model';
 

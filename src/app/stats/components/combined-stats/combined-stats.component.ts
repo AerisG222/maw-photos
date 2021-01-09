@@ -7,7 +7,7 @@ import numbro from 'numbro';
 
 import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
-import { RootStoreSelectors } from 'src/app/core/root-store';
+import { RootStoreSelectors } from '@core/root-store';
 import { VideoCategory } from '@models/video-category.model';
 import { Category } from '@models/category.model';
 import { CategoryType } from '@models/category-type.model';

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { LayoutStoreSelectors } from 'src/app/core/root-store';
+import { LayoutStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-sidebar-sidebar',

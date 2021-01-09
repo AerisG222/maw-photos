@@ -4,7 +4,7 @@ import { filter, first, map } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '../../../core/root-store/photos-store';
-import { SettingsStoreSelectors, SettingsStoreActions, PhotoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
 import { DEFAULT_SETTINGS } from '@models/settings.model';
 import { ThumbnailSize } from '@models/thumbnail-size.model';
 import { CategoryMargin } from '@models/category-margin.model';

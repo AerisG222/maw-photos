@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PhotoStoreActions, RouterStoreSelectors } from 'src/app/core/root-store';
-import { RouteHelperService } from 'src/app/core/services/route-helper.service';
+import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
+import { RouteHelperService } from '@core/services/route-helper.service';
 
 @Component({
     selector: 'app-toolbar-view-detail-button',

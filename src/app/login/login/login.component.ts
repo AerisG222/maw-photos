@@ -1,6 +1,6 @@
 import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 
-import { AuthService, authServiceToken } from 'src/app/core/services/auth.service';
+import { AuthService, authServiceToken } from '@core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { first, filter, tap } from 'rxjs/operators';
 

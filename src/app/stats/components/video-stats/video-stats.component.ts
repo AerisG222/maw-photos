@@ -6,7 +6,7 @@ import { tap, map, delay, filter } from 'rxjs/operators';
 import numbro from 'numbro';
 
 import { StatDetail } from 'src/app/stats/models/stat-detail.model';
-import { VideoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { VideoCategoryStoreSelectors } from '@core/root-store';
 import { VideoCategory } from '@models/video-category.model';
 import { Category } from '@models/category.model';
 import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';

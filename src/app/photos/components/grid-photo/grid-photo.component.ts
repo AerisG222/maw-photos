@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import { PhotoStoreActions } from 'src/app/core/root-store';
+import { PhotoStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-grid-photo',

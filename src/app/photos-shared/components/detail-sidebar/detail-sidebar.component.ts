@@ -3,7 +3,7 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store } from '@ngrx/store';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from 'src/app/shared/animations';
-import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-photos-detail-sidebar',

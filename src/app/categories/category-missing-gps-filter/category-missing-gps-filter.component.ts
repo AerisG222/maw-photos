@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreSelectors, SettingsStoreActions } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-categories-category-missing-gps-filter',

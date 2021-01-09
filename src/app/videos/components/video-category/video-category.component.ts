@@ -6,7 +6,7 @@ import { VideoSize } from '@models/video-size.model';
 import { Video } from '@models/video.model';
 import { Settings } from '@models/settings.model';
 import { VideoStoreSelectors } from 'src/app/videos/store';
-import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from 'src/app/core/root-store';
+import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-videos-video-category',

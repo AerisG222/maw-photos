@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
-import * as RouterStoreActions from 'src/app/core/root-store/router-store/actions';
+import * as RouterStoreActions from '@core/root-store/router-store/actions';
 import { RouteArea } from '@models/route-area';
 import { RouteHelperService } from '../../services/route-helper.service';
 import { PhotoCategoryStoreSelectors } from '../photo-category-store';

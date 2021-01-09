@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreSelectors } from 'src/app/core/root-store/photos-store';
+import { PhotoStoreSelectors } from '@core/root-store/photos-store';
 
 @Component({
     selector: 'app-photos-sidebar-exif',

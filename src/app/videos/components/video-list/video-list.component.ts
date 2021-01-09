@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Video } from '@models/video.model';
 import { ThumbnailSize } from '@models/thumbnail-size.model';
 import { DEFAULT_SETTINGS } from '@models/settings.model';
-import { RouteHelperService } from 'src/app/core/services/route-helper.service';
+import { RouteHelperService } from '@core/services/route-helper.service';
 
 @Component({
     selector: 'app-videos-video-list',

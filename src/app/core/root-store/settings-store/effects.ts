@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { concatMap, withLatestFrom } from 'rxjs/operators';
 
-import { SettingsService } from 'src/app/core/services/settings.service';
+import { SettingsService } from '@core/services/settings.service';
 import * as SettingsActions from './actions';
 import * as settingsSelectors from './selectors';
 
