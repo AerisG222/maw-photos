@@ -16,22 +16,24 @@ import { LayoutStoreActions } from '../layout-store';
 
 @Injectable()
 export class PhotoStoreRoutingEffects {
-    photoRoutes$ = this.actions$.pipe(
-        ofType(RouterStoreActions.routeChanged),
-        map(action => {
-            if(action.routeDetails.area === RouteArea.photos) {
-                return action.routeDetails;
-            } else {
-                return null;
-            }
-        })
-    );
-
     navigateToPhoto$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.navigateToPhoto),
-            map(action => this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId)),
-            tap(url => this.router.navigateByUrl(url))
+            withLatestFrom(
+                this.store.select(RouterStoreSelectors.isPhotosView),
+                this.store.select(RouterStoreSelectors.isRandomView)
+            ),
+            map(([action, isPhotos, isRandom]) => {
+                if(isPhotos) {
+                    return this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId);
+                } else if(isRandom) {
+                    return this.routeBuilderService.randomAbs(action.view, action?.photoId);
+                }
+
+                return null;
+            }),
+            filter(url => !!url),
+            tap(url => this.router.navigateByUrl(url as string))
         );
     }, { dispatch: false });
 
@@ -54,7 +56,7 @@ export class PhotoStoreRoutingEffects {
             this.store.select(PhotoStoreSelectors.allIds)
         ]).pipe(
             filter(([action, entities, ids]) => {
-                return action.routeDetails.area === RouteArea.photos &&
+                return (action.routeDetails.area === RouteArea.photos || action.routeDetails.area === RouteArea.random) &&
                     !!entities &&
                     !!ids &&
                     ids.length > 0;
