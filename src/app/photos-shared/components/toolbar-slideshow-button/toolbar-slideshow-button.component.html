@@ -1,7 +1,7 @@
 <app-toolbar-button
     [icon]="(this.slideshowPlaying$ | async) ? 'stop' : 'play_arrow'"
-    [shortcutKey]="'p'"
-    [shortcutHelp]="'Start/Stop Slideshow'"
-    [tooltip]="'Start/Stop Slideshow (P)'"
+    shortcutKey="p"
+    shortcutHelp="Start/Stop Slideshow"
+    tooltip="Start/Stop Slideshow (P)"
     (click)="onToggleSlideshow()">
 </app-toolbar-button>

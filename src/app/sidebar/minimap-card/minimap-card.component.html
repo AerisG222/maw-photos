@@ -1,10 +1,10 @@
 <app-sidebar-card
-    [icon]="'map'"
-    [title]="'Mini-Map'">
+    icon="map"
+    title="Mini-Map">
 
     <google-map
-        [height]="'300px'"
-        [width]="'464px'"
+        height="300px"
+        width="464px"
         [options]="options"
         [center]="center$ | async"
         (maptypeidChanged)="onMapTypeChange()"

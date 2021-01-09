@@ -15,9 +15,9 @@
         <app-photos-toolbar-download-button
             *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink"
             [hideOnMobile]="true"
-            [icon]="'save_alt'"
+            icon="save_alt"
             [link]="(category$ | async)?.downloadLink"
-            [tooltip]="'Download All Photos in Category (.zip)'">
+            tooltip="Download All Photos in Category (.zip)">
         </app-photos-toolbar-download-button>
     </app-toolbar-group>
 
@@ -36,39 +36,39 @@
         <app-photos-toolbar-download-button
             *ngIf="smDownloadUrl$ | async"
             [hideOnMobile]="true"
-            [icon]="'photo'"
-            [iconClass]="'icon-sm'"
+            icon="photo"
+            iconClass="icon-sm"
             [link]="smDownloadUrl$ | async"
-            [tooltip]="'Low Res Download'">
+            tooltip="Low Res Download">
         </app-photos-toolbar-download-button>
 
         <app-photos-toolbar-download-button
             *ngIf="mdDownloadUrl$ | async"
-            [icon]="'photo'"
-            [iconClass]="'icon-md'"
+            icon="photo"
+            iconClass="icon-md"
             [link]="mdDownloadUrl$ | async"
-            [tooltip]="'Medium Res Download'">
+            tooltip="Medium Res Download">
         </app-photos-toolbar-download-button>
 
         <app-photos-toolbar-download-button
             *ngIf="lgDownloadUrl$ | async"
             [hideOnMobile]="true"
-            [icon]="'photo'"
+            icon="photo"
             [link]="lgDownloadUrl$ | async"
-            [tooltip]="'High Res Download'">
+            tooltip="High Res Download">
         </app-photos-toolbar-download-button>
 
         <app-photos-toolbar-download-button
             *ngIf="prtDownloadUrl$ | async"
-            [icon]="'photo'"
+            icon="photo"
             [link]="prtDownloadUrl$ | async"
-            [tooltip]="'High Res Download (untouched)'">
+            tooltip="High Res Download (untouched)">
         </app-photos-toolbar-download-button>
 
         <app-toolbar-button
             *ngIf="enableShare"
-            [icon]="'share'"
-            [tooltip]="'Share Photo'"
+            icon="share"
+            tooltip="Share Photo"
             (click)="onShare()">
         </app-toolbar-button>
     </app-toolbar-group>
@@ -78,26 +78,26 @@
     <app-toolbar-group>
         <app-toolbar-button
             [hideOnMobile]="true"
-            [icon]="'title'"
-            [shortcutKey]="'t'"
-            [shortcutHelp]="'Show/Hide Category Breadcrumbs'"
-            [tooltip]="'Show/Hide Category Breadcrumbs (T)'"
+            icon="title"
+            shortcutKey="t"
+            shortcutHelp="Show/Hide Category Breadcrumbs"
+            tooltip="Show/Hide Category Breadcrumbs (T)"
             (click)="onToggleCategoryBreadcrumbs()">
         </app-toolbar-button>
 
         <app-toolbar-button
-            [icon]="'visibility'"
-            [shortcutKey]="'l'"
-            [shortcutHelp]="'Show/Hide Photo List'"
-            [tooltip]="'Show/Hide Photo List (L)'"
+            icon="visibility"
+            shortcutKey="l"
+            shortcutHelp="Show/Hide Photo List"
+            tooltip="Show/Hide Photo List (L)"
             (click)="onTogglePhotoList()">
         </app-toolbar-button>
 
         <app-toolbar-button
-            [icon]="'photo_size_select_large'"
-            [shortcutKey]="'s'"
-            [shortcutHelp]="'Toggle Photo List Thumbnail Size'"
-            [tooltip]="'Toggle Photo List Thumbnail Size (S)'"
+            icon="photo_size_select_large"
+            shortcutKey="s"
+            shortcutHelp="Toggle Photo List Thumbnail Size"
+            tooltip="Toggle Photo List Thumbnail Size (S)"
             (click)="onToggleSize()">
         </app-toolbar-button>
     </app-toolbar-group>

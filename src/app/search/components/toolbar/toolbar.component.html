@@ -3,9 +3,9 @@
         <app-toolbar-button
             [hideOnMobile]="true"
             [icon]="(isListView$ | async) ? 'apps' : 'list'"
-            [shortcutKey]="'g'"
-            [shortcutHelp]="'Toggle Grid / List View'"
-            [tooltip]="'Toggle Grid / List View (G)'"
+            shortcutKey="g"
+            shortcutHelp="Toggle Grid / List View"
+            tooltip="Toggle Grid / List View (G)"
             (click)="onToggleListType()">
         </app-toolbar-button>
 
@@ -13,49 +13,49 @@
 
         <app-toolbar-button
             *ngIf="isGridView$ | async"
-            [icon]="'today'"
+            icon="today"
             [isDisabled]="(isGridView$ | async) === false"
-            [shortcutKey]="'y'"
-            [shortcutHelp]="'Show/Hide Category Years'"
-            [tooltip]="'Show/Hide Category Years (Y)'"
+            shortcutKey="y"
+            shortcutHelp="Show/Hide Category Years"
+            tooltip="Show/Hide Category Years (Y)"
             (click)="onToggleYear()">
         </app-toolbar-button>
 
         <app-toolbar-button
             *ngIf="isGridView$ | async"
-            [icon]="'title'"
+            icon="title"
             [isDisabled]="(isGridView$ | async) === false"
-            [shortcutKey]="'t'"
-            [shortcutHelp]="'Show/Hide Category Titles'"
-            [tooltip]="'Show/Hide Category Titles (T)'"
+            shortcutKey="t"
+            shortcutHelp="Show/Hide Category Titles"
+            tooltip="Show/Hide Category Titles (T)"
             (click)="onToggleTitle()">
         </app-toolbar-button>
 
         <app-toolbar-button
             *ngIf="isGridView$ | async"
-            [icon]="'photo_size_select_large'"
+            icon="photo_size_select_large"
             [isDisabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async) || (showCategoryYears$ | async)"
-            [shortcutKey]="'s'"
-            [shortcutHelp]="'Toggle Grid Thumbnail Size'"
-            [tooltip]="'Toggle Grid Thumbnail Size (S)'"
+            shortcutKey="s"
+            shortcutHelp="Toggle Grid Thumbnail Size"
+            tooltip="Toggle Grid Thumbnail Size (S)"
             (click)="onToggleSize()">
         </app-toolbar-button>
 
         <app-toolbar-button
             *ngIf="isListView$ | async"
-            [icon]="'photo_size_select_large'"
-            [shortcutKey]="'s'"
-            [shortcutHelp]="'Toggle List Thumbnail Size'"
-            [tooltip]="'Toggle List Thumbnail Size (S)'"
+            icon="photo_size_select_large"
+            shortcutKey="s"
+            shortcutHelp="Toggle List Thumbnail Size"
+            tooltip="Toggle List Thumbnail Size (S)"
             (click)="onToggleListThumbnailSize()">
         </app-toolbar-button>
 
         <app-toolbar-button
             [hideOnMobile]="true"
-            [icon]="'format_indent_increase'"
-            [shortcutKey]="'m'"
-            [shortcutHelp]="'Toggle Category Margins'"
-            [tooltip]="'Toggle Category Margins (M)'"
+            icon="format_indent_increase"
+            shortcutKey="m"
+            shortcutHelp="Toggle Category Margins"
+            tooltip="Toggle Category Margins (M)"
             (click)="onToggleMargins()">
         </app-toolbar-button>
     </app-toolbar-group>

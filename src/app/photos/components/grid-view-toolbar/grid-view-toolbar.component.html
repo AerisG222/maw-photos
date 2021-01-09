@@ -9,30 +9,30 @@
         <app-toolbar-move-next-button *ngIf="(activePhotoId$ | async) != null"></app-toolbar-move-next-button>
     </app-toolbar-group>
 
-    <app-toolbar-divider *ngIf="(activePhotoId$ | async) == null"></app-toolbar-divider>
+    <app-toolbar-divider *ngIf="(activePhotoId$ | async) === null"></app-toolbar-divider>
 
-    <app-toolbar-group *ngIf="(activePhotoId$ | async) == null">
+    <app-toolbar-group *ngIf="(activePhotoId$ | async) === null">
         <app-toolbar-button
-            [icon]="'title'"
-            [shortcutKey]="'t'"
-            [shortcutHelp]="'Show/Hide Category Breadcrumbs'"
-            [tooltip]="'Show/Hide Category Breadcrumbs (T)'"
+            icon="title"
+            shortcutKey="t"
+            shortcutHelp="Show/Hide Category Breadcrumbs"
+            tooltip="Show/Hide Category Breadcrumbs (T)"
             (click)="onToggleCategoryBreadcrumbs()">
         </app-toolbar-button>
 
         <app-toolbar-button
-            [icon]="'format_indent_increase'"
-            [shortcutKey]="'m'"
-            [shortcutHelp]="'Toggle Margins'"
-            [tooltip]="'Toggle Margins (M)'"
+            icon="format_indent_increase"
+            shortcutKey="m"
+            shortcutHelp="Toggle Margins"
+            tooltip="Toggle Margins (M)"
             (click)="onToggleMargins()">
         </app-toolbar-button>
 
         <app-toolbar-button
-            [icon]="'photo_size_select_large'"
-            [shortcutKey]="'s'"
-            [shortcutHelp]="'Toggle Thumbnail Size'"
-            [tooltip]="'Toggle Thumbnail Size (S)'"
+            icon="photo_size_select_large"
+            shortcutKey="s"
+            shortcutHelp="Toggle Thumbnail Size"
+            tooltip="Toggle Thumbnail Size (S)"
             (click)="onToggleSize()">
         </app-toolbar-button>
     </app-toolbar-group>
@@ -47,8 +47,8 @@
 
         <app-toolbar-button
             *ngIf="enableShare"
-            [icon]="'share'"
-            [tooltip]="'Share Photo'"
+            icon="share"
+            tooltip="Share Photo"
             (click)="onShare()">
         </app-toolbar-button>
     </app-toolbar-group>

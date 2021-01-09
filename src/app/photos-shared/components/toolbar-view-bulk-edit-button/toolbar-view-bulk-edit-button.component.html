@@ -2,9 +2,9 @@
     *ngIf="enableBulkEdit$ | async"
     [isActive]="isActive$ | async"
     [hideOnMobile]="true"
-    [icon]="'collections'"
-    [shortcutKey]="'b'"
-    [shortcutHelp]="'Bulk Edit View'"
-    [tooltip]="'Bulk Edit View (B)'"
+    icon="collections"
+    shortcutKey="b"
+    shortcutHelp="Bulk Edit View"
+    tooltip="Bulk Edit View (B)"
     (click)="onToggleBulkEditView()">
 </app-toolbar-button>

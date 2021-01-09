@@ -2,9 +2,9 @@
     *ngIf="enableMapView$ | async"
     [isActive]="isActive$ | async"
     [hideOnMobile]="true"
-    [icon]="'map'"
-    [shortcutKey]="'z'"
-    [shortcutHelp]="'Map View'"
-    [tooltip]="'Map View (Z)'"
+    icon="map"
+    shortcutKey="z"
+    shortcutHelp="Map View"
+    tooltip="Map View (Z)"
     (click)="onToggleMapView()">
 </app-toolbar-button>

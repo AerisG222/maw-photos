@@ -1,6 +1,6 @@
 <app-sidebar-card
-    [icon]="'comment'"
-    [title]="'Comments'">
+    icon="comment"
+    title="Comments">
 
     <div *ngFor="let comment of commentable.comments$ | async" class="comment-container">
         <div class="comment-head">
