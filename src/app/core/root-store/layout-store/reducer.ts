@@ -5,13 +5,6 @@ import { initialState, State } from './state';
 
 export const reducer = createReducer(
     initialState,
-    on(LayoutActions.toggleFullscreenRequest, (state): State => ({
-        ...state,
-        layout: {
-            ...state.layout,
-            isFullscreen: !state.layout.isFullscreen
-        }
-    })),
     on(LayoutActions.enterFullscreenRequest, (state): State => ({
         ...state,
         layout: {

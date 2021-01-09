@@ -7,7 +7,3 @@ export const enterFullscreenRequest = createAction(
 export const exitFullscreenRequest = createAction(
     '[Layout] Exit Fullscreen Request'
 );
-
-export const toggleFullscreenRequest = createAction(
-    '[Layout] Toggle Fullscreen Request'
-);

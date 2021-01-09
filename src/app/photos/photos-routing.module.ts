@@ -15,8 +15,10 @@ const routes: Routes = [
     { path: ':categoryId/detail',    component: DetailViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'detail', requirePhotoId: true }, children: [
         { path: ':photoId', component: DetailViewComponent, data: { view: 'detail', requirePhotoId: true } }
     ]},
-    { path: ':categoryId/fullscreen/:photoId', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'fullscreen', requirePhotoId: true } },
-    { path: ':categoryId/grid',                component: GridViewComponent,       resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'grid', requirePhotoId: false }, children: [
+    { path: ':categoryId/fullscreen', component: FullscreenViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'fullscreen', requirePhotoId: true }, children: [
+        { path: ':photoId', component: FullscreenViewComponent, data: { view: 'fullscreen', requirePhotoId: true } }
+    ]},
+    { path: ':categoryId/grid', component: GridViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'grid', requirePhotoId: false }, children: [
         { path: ':photoId', component: GridPhotoComponent, data: { view: 'grid', requirePhotoId: true } }
     ]},
     { path: ':categoryId/map', component: MapViewComponent, resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService }, data: { view: 'map', requirePhotoId: false }, children: [

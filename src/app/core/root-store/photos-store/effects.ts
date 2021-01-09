@@ -10,7 +10,6 @@ import { ExifFormatterService } from '@core/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from '@core/services/photo-api.service';
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
-import * as LayoutStoreActions from '@core/root-store/layout-store/actions';
 import * as PhotoCategoryStoreActions from '@core/root-store/photo-category-store/actions';
 import * as SettingsStoreSelectors from '@core/root-store/settings-store/selectors';
 import { RouterStoreSelectors } from '../router-store';
@@ -324,27 +323,6 @@ export class PhotoStoreEffects {
             })
         );
     });
-
-    /* TODO
-    enterFullScreenEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoActions.enterFullscreenRequest),
-            concatMap(action => {
-                return of(LayoutStoreActions.enterFullscreenRequest());
-            })
-        );
-    });
-
-
-    exitFullScreenEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoActions.exitFullscreenRequest),
-            concatMap(action => {
-                return of(LayoutStoreActions.exitFullscreenRequest());
-            })
-        );
-    });
-    */
 
     toggleSlideshowEffect$ = createEffect(() => {
         return this.actions$.pipe(

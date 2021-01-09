@@ -1,7 +1,4 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import { LayoutStoreActions } from '@core/root-store';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'app-photos-fullscreen-view',
@@ -9,12 +6,6 @@ import { LayoutStoreActions } from '@core/root-store';
     styleUrls: ['./fullscreen-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FullscreenViewComponent implements OnDestroy {
-    constructor(
-        private store: Store,
-    ) { }
+export class FullscreenViewComponent {
 
-    ngOnDestroy(): void {
-        this.store.dispatch(LayoutStoreActions.exitFullscreenRequest());
-    }
 }
