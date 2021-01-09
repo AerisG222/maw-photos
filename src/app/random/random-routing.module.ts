@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PhotoCategoriesResolverService } from '../core/services/photo-categories-resolver.service';
 import { DetailViewComponent } from '../photos-shared/components/detail-view/detail-view.component';
 import { FullscreenViewComponent } from '../photos-shared/components/fullscreen-view/fullscreen-view.component';
-import { GridViewComponent } from '../photos/components/grid-view/grid-view.component';
+import { GridViewComponent } from '../photos-shared/components/grid-view/grid-view.component';
 
 const routes: Routes = [
     { path: 'detail/:photoId',     component: DetailViewComponent,     resolve: { photoCategoriesResolverService: PhotoCategoriesResolverService } },

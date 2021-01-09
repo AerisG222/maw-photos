@@ -11,12 +11,9 @@ import { BulkEditToolbarComponent } from './components/bulk-edit-toolbar/bulk-ed
 import { MapToolbarComponent } from './components/map-toolbar/map-toolbar.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 import { PhotoSelectGridComponent } from './components/photo-select-grid/photo-select-grid.component';
-import { GridViewComponent } from './components/grid-view/grid-view.component';
-import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
 import { Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable, PhotoLinkable } from '@core/facades';
-import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
 
 @NgModule({
     declarations: [
@@ -27,10 +24,7 @@ import { GridPhotoComponent } from './components/grid-photo/grid-photo.component
         BulkEditToolbarComponent,
         MapToolbarComponent,
         MapViewComponent,
-        PhotoSelectGridComponent,
-        GridViewComponent,
-        GridViewToolbarComponent,
-        GridPhotoComponent
+        PhotoSelectGridComponent
     ],
     imports: [
         PhotosRoutingModule,

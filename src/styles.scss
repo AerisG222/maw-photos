@@ -29,8 +29,8 @@ $custom-typography: mat-typography-config(
 @import 'app/photos-shared/components/detail-view/detail-view.component.theme';
 @import 'app/photos-shared/components/sidebar-exif-table/sidebar-exif-table.component.theme';
 @import 'app/photos-shared/components/toolbar-download-button/toolbar-download-button.component.theme';
+@import 'app/photos-shared/components/grid-view/grid-view.component.theme';
 
-@import 'app/photos/components/grid-view/grid-view.component.theme';
 @import 'app/photos/components/photo-select-grid/photo-select-grid.component.theme';
 @import 'app/photos/components/bulk-edit/bulk-edit.component.theme';
 

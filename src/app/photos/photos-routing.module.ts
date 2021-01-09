@@ -6,8 +6,8 @@ import { PhotoCategoriesResolverService } from '@core/services';
 import { DetailViewComponent } from '../photos-shared/components/detail-view/detail-view.component';
 import { FullscreenViewComponent } from '../photos-shared/components/fullscreen-view/fullscreen-view.component';
 import { BulkEditComponent } from './components/bulk-edit/bulk-edit.component';
-import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
-import { GridViewComponent } from './components/grid-view/grid-view.component';
+import { GridPhotoComponent } from '../photos-shared/components/grid-photo/grid-photo.component';
+import { GridViewComponent } from '../photos-shared/components/grid-view/grid-view.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 
 const routes: Routes = [

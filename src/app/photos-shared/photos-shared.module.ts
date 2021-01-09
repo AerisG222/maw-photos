@@ -25,6 +25,9 @@ import { ToolbarViewFullscreenButtonComponent } from './components/toolbar-view-
 import { ToolbarViewMapButtonComponent } from './components/toolbar-view-map-button/toolbar-view-map-button.component';
 import { ToolbarViewDetailButtonComponent } from './components/toolbar-view-detail-button/toolbar-view-detail-button.component';
 import { MainPhotoComponent } from './components/main-photo/main-photo.component';
+import { GridViewComponent } from './components/grid-view/grid-view.component';
+import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
+import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +36,9 @@ import { MainPhotoComponent } from './components/main-photo/main-photo.component
         DetailViewComponent,
         FullscreenToolbarComponent,
         FullscreenViewComponent,
+        GridViewComponent,
+        GridPhotoComponent,
+        GridViewToolbarComponent,
         PhotoListComponent,
         SidebarEffectsComponent,
         SidebarExifComponent,
@@ -50,7 +56,7 @@ import { MainPhotoComponent } from './components/main-photo/main-photo.component
         ToolbarViewFullscreenButtonComponent,
         ToolbarViewMapButtonComponent,
         ToolbarViewDetailButtonComponent,
-        MainPhotoComponent
+        MainPhotoComponent,
     ],
     imports: [
         SharedModule
@@ -61,6 +67,7 @@ import { MainPhotoComponent } from './components/main-photo/main-photo.component
         DetailViewComponent,
         DetailSidebarComponent,
         FullscreenViewComponent,
+        GridViewComponent,
         ToolbarSlideshowButtonComponent,
         ToolbarGroupSelectViewComponent,
         ToolbarFlipHorizontalButtonComponent,
