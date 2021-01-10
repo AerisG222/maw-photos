@@ -81,8 +81,14 @@ export class RouteHelperService {
         return url;
     }
 
-    randomAbs(photoId?: number) {
+    randomAbs(view?: string, photoId?: number) {
         let url = `/${ RouteHelperService.random }`;
+
+        if(!!!view) {
+            view = RouteHelperService.photoViewGrid;
+        }
+
+        url += `/${ view }`;
 
         if(!!photoId) {
             url += `/${ photoId }`;

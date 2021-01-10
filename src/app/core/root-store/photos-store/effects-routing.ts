@@ -6,7 +6,7 @@ import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
-import { RouteArea } from '@models';
+import { RouteArea, RouteDetails } from '@models';
 import { RouteHelperService } from '../../services/route-helper.service';
 import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import { RouterStoreSelectors } from '../router-store';
@@ -30,7 +30,17 @@ export class PhotoStoreRoutingEffects {
     navigateToPhoto$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.navigateToPhoto),
-            map(action => this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId)),
+            withLatestFrom(
+                this.store.select(RouterStoreSelectors.isPhotosView),
+                this.store.select(RouterStoreSelectors.isRandomView)
+            ),
+            map(([action, isPhotosView, isRandomView]) => {
+                if(isPhotosView) {
+                    return this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId);
+                }
+
+                return this.routeBuilderService.randomAbs(action.view, action.photoId);
+            }),
             tap(url => this.router.navigateByUrl(url))
         );
     }, { dispatch: false });
@@ -51,13 +61,14 @@ export class PhotoStoreRoutingEffects {
         return combineLatest([
             this.store.select(RouterStoreSelectors.selectRouteDetails),
             this.store.select(PhotoStoreSelectors.allEntities),
-            this.store.select(PhotoStoreSelectors.allIds)
+            this.store.select(PhotoStoreSelectors.allIds),
+            this.store.select(PhotoStoreSelectors.activePhotoId)
         ]).pipe(
-            filter(([routeDetails, entities, ids]) => {
+            filter(([routeDetails, entities, ids, activeId]) => {
                 return (routeDetails.area === RouteArea.photos || routeDetails.area === RouteArea.random) &&
                     !!entities &&
-                    !!ids &&
-                    ids.length > 0;
+                    !!ids?.length &&
+                    this.isActiveIdDifferentFromRoute(activeId, routeDetails);
             }),
             map(([routeDetails, entities, ids]) => {
                 const categoryId = Number(routeDetails.params.categoryId);
@@ -175,4 +186,11 @@ export class PhotoStoreRoutingEffects {
     ) {
 
     }
+
+    private isActiveIdDifferentFromRoute(activeId: number | null, routeDetails: RouteDetails): boolean {
+        const id = Number(routeDetails?.params?.photoId);
+        const photoId = isNaN(id) ? null : id;
+
+        return activeId !== id;
+    };
 }
