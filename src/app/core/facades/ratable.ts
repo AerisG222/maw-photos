@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Rating } from '../../models/rating.model';
+import { Rating } from '@models';
 
 export abstract class Ratable {
     abstract rating$: Observable<Rating>;
