@@ -1,4 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { RouterStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
 
 @Component({
@@ -9,8 +12,10 @@ import { RouteHelperService } from '@core/services';
 })
 export class RandomLinkComponent {
     randomLink = this.routeHelperService.randomAbs();
+    inRandomArea$ = this.store.select(RouterStoreSelectors.isRandomView);
 
-    constructor(private routeHelperService: RouteHelperService) {
-
-    }
+    constructor(
+        private routeHelperService: RouteHelperService,
+        private store: Store
+    ) { }
 }
