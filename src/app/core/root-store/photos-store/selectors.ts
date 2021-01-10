@@ -8,6 +8,7 @@ import {
     Rating,
     ExifContainer,
     GpsDetail,
+    CategoryGpsStatus,
  } from '@models';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
@@ -283,7 +284,7 @@ export const photosWithGpsCoordinatesAsMapImages = createSelector(
     }
 );
 
-export const anyPhotosMissingGpsCoordinates = createSelector(
+export const categoryGpsStatus = createSelector(
     PhotoCategoryStoreSelectors.activeCategoryId,
     allPhotos,
     (categoryId: number | null, photos: Photo[]) => {
@@ -293,7 +294,7 @@ export const anyPhotosMissingGpsCoordinates = createSelector(
 
         const isMissingGpsData = !!photos.find(photo => photo.latitude === null || photo.longitude === null);
 
-        return { categoryId: categoryId as number, isMissingGpsData };
+        return { categoryId: categoryId as number, isMissingGpsData } as CategoryGpsStatus;
     }
 );
 

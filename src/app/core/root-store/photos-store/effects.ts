@@ -5,7 +5,7 @@ import { combineLatest, of, timer } from 'rxjs';
 // eslint-disable-next-line max-len
 import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap, takeUntil } from 'rxjs/operators';
 
-import { DEFAULT_PHOTO_EFFECTS, PhotoRotation } from '@models';
+import { CategoryGpsStatus, DEFAULT_PHOTO_EFFECTS, PhotoRotation } from '@models';
 import { ExifFormatterService } from '@core/services/exif-formatter.service';
 import { photoApiServiceToken, PhotoApiService } from '@core/services/photo-api.service';
 import * as PhotoActions from './actions';
@@ -221,12 +221,12 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
-                this.store.select(PhotoStoreSelectors.anyPhotosMissingGpsCoordinates)
+                this.store.select(PhotoStoreSelectors.categoryGpsStatus)
                     .pipe(
                         filter(missingDetails => !!missingDetails),
+                        // eslint-disable-next-line ngrx/avoid-mapping-selectors
                         map(missingDetails => {
-                            // eslint-disable-next-line max-len
-                            return PhotoCategoryStoreActions.setIsMissingGpsData(missingDetails as { categoryId: number; isMissingGpsData: boolean });
+                            return PhotoCategoryStoreActions.setIsMissingGpsData(missingDetails as CategoryGpsStatus);
                         })
                     )
             )

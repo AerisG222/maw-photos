@@ -8,6 +8,7 @@ import { videoApiServiceToken, VideoApiService } from '@core/services';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 import { VideoCategoryStoreActions } from '@core/root-store';
+import { CategoryGpsStatus } from '@models';
 
 @Injectable()
 export class VideoStoreEffects {
@@ -164,23 +165,12 @@ export class VideoStoreEffects {
             ofType(VideoStoreActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(action =>
-                this.store
-                    .select(VideoStoreSelectors.allVideos)
+                this.store.select(VideoStoreSelectors.categoryGpsStatus)
                     .pipe(
-                        filter(videos => !!videos && !!videos[0]),  // sometimes will get an undefined videos[0] but not sure why
-                        map(videos => {
-                            const catId = videos[0].categoryId;
-                            let isMissingGpsData = false;
-
-                            for (const video of videos) {
-                                if (video.latitude === null || video.longitude === null) {
-                                    isMissingGpsData = true;
-                                    break;
-                                }
-                            }
-
-                            return VideoCategoryStoreActions.setIsMissingGpsData({ categoryId: catId, isMissingGpsData});
-                        })
+                        filter(status => !!status),
+                        // eslint-disable-next-line max-len
+                        // eslint-disable-next-line ngrx/avoid-mapping-selectors
+                        map(status => VideoCategoryStoreActions.setIsMissingGpsData(status as CategoryGpsStatus))
                     )
             )
         );

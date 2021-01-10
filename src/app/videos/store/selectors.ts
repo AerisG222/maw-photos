@@ -4,7 +4,8 @@ import { Dictionary } from '@ngrx/entity';
 import { Video, GpsDetail, Comment, Rating } from '@models';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
-import { SettingsStoreSelectors } from '@core/root-store';
+import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from '@core/root-store';
+import { CategoryGpsStatus } from '@models';
 
 export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
 
@@ -228,4 +229,18 @@ export const isMetadataEditorCardVisible = createSelector(
     SettingsStoreSelectors.videoInfoPanelExpandedState,
     SettingsStoreSelectors.videoInfoPanelShowMetadataEditor,
     (isExpanded, showEditor) => isExpanded && showEditor
+);
+
+export const categoryGpsStatus = createSelector(
+    VideoCategoryStoreSelectors.activeCategoryId,
+    allVideos,
+    (categoryId, videos) => {
+        if(!!!categoryId || !!!videos) {
+            return null;
+        }
+
+        const isMissingGpsData = !!videos.find(video => video.latitude === null || video.longitude === null);
+
+        return { categoryId: categoryId as number, isMissingGpsData } as CategoryGpsStatus;
+    }
 );
