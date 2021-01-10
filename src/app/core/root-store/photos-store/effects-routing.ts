@@ -47,23 +47,23 @@ export class PhotoStoreRoutingEffects {
         );
     }, { dispatch: false });
 
-    setActivePhotoFromRoute = createEffect(() => {
+    setActivePhotoFromRoute$ = createEffect(() => {
         return combineLatest([
-            this.actions$.pipe(ofType(RouterStoreActions.routeChanged)),
+            this.store.select(RouterStoreSelectors.selectRouteDetails),
             this.store.select(PhotoStoreSelectors.allEntities),
             this.store.select(PhotoStoreSelectors.allIds)
         ]).pipe(
-            filter(([action, entities, ids]) => {
-                return action.routeDetails.area === RouteArea.photos &&
+            filter(([routeDetails, entities, ids]) => {
+                return (routeDetails.area === RouteArea.photos || routeDetails.area === RouteArea.random) &&
                     !!entities &&
                     !!ids &&
                     ids.length > 0;
             }),
-            map(([action, entities, ids]) => {
-                const categoryId = Number(action.routeDetails.params.categoryId);
-                const photoId = Number(action.routeDetails.params.photoId);
-                const requiresPhotoId = action.routeDetails.data.requirePhotoId as boolean ?? false;
-                const view = action.routeDetails.data.view as string ?? RouteHelperService.photoViewDefault;
+            map(([routeDetails, entities, ids]) => {
+                const categoryId = Number(routeDetails.params.categoryId);
+                const photoId = Number(routeDetails.params.photoId);
+                const requiresPhotoId = routeDetails.data.requirePhotoId as boolean ?? false;
+                const view = routeDetails.data.view as string ?? RouteHelperService.photoViewDefault;
 
                 if (requiresPhotoId) {
                     if(isNaN(photoId) || !(photoId in entities)) {
