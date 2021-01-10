@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-import { RouterStoreActions } from '@core/root-store';
+import { RouterStoreActions, RouterStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
 import { RouteArea } from '@models';
 import * as VideoStoreActions from './actions';
@@ -34,19 +34,19 @@ export class VideoStoreRoutingEffects {
 
     setActiveVideoFromRoute = createEffect(() => {
         return combineLatest([
-            this.actions$.pipe(ofType(RouterStoreActions.routeChanged)),
+            this.store.select(RouterStoreSelectors.selectRouteDetails),
             this.store.select(VideoStoreSelectors.allEntities),
             this.store.select(VideoStoreSelectors.allIds)
         ]).pipe(
-            filter(([action, entities, ids]) => {
-                return action.routeDetails.area === RouteArea.videos &&
+            filter(([routeDetails, entities, ids]) => {
+                return routeDetails.area === RouteArea.videos &&
                     !!entities &&
                     !!ids &&
                     ids.length > 0;
             }),
-            map(([action, entities, ids]) => {
-                const categoryId = Number(action.routeDetails.params.categoryId);
-                const videoId = Number(action.routeDetails.params.videoId);
+            map(([routeDetails, entities, ids]) => {
+                const categoryId = Number(routeDetails.params.categoryId);
+                const videoId = Number(routeDetails.params.videoId);
 
                 // if invalid video id or is not present in url, go to first
                 if (isNaN(videoId) || !(videoId in entities)) {

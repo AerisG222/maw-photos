@@ -57,12 +57,12 @@ export class PhotoStoreEffects {
 
     loadRatingsForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.activePhotoId),
                 this.store.select(PhotoStoreSelectors.isRatingCardVisible)
             ])
             .pipe(
-                filter(([action, isVisible]) => !!action.id && isVisible),
-                map(([action, isVisible ]) => PhotoActions.loadRatingRequest({ photoId: action.id as number }))
+                filter(([photoId, isVisible]) => !!photoId && isVisible),
+                map(([photoId, isVisible ]) => PhotoActions.loadRatingRequest({ photoId: photoId as number }))
             );
     });
 
@@ -94,12 +94,12 @@ export class PhotoStoreEffects {
 
     loadCommentsForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.activePhotoId),
                 this.store.select(PhotoStoreSelectors.isCommentCardVisible)
             ])
             .pipe(
-                filter(([action, isVisible]) => !!action.id && isVisible),
-                map(([action, isVisible ]) => PhotoActions.loadCommentsRequest({ photoId: action.id as number }))
+                filter(([photoId, isVisible]) => !!photoId && isVisible),
+                map(([photoId, isVisible ]) => PhotoActions.loadCommentsRequest({ photoId: photoId as number }))
             );
     });
 
@@ -138,12 +138,12 @@ export class PhotoStoreEffects {
 
     loadExifDataForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.activePhotoId),
                 this.store.select(PhotoStoreSelectors.isExifCardVisible)
             ])
             .pipe(
-                filter(([action, isVisible]) => !!action.id && isVisible),
-                map(([action, isVisible ]) => PhotoActions.loadExifRequest({ photoId: action.id as number }))
+                filter(([photoId, isVisible]) => !!photoId && isVisible),
+                map(([photoId, isVisible ]) => PhotoActions.loadExifRequest({ photoId: photoId as number }))
             );
     });
 
@@ -163,12 +163,12 @@ export class PhotoStoreEffects {
 
     loadGpsDetailForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-                this.actions$.pipe(ofType(PhotoActions.setActivePhotoId)),
+                this.store.select(PhotoStoreSelectors.activePhotoId),
                 this.store.select(PhotoStoreSelectors.isMetadataEditorCardVisible)
             ])
             .pipe(
-                filter(([action, isVisible]) => !!action.id && isVisible),
-                map(([action, isVisible ]) => PhotoActions.loadGpsDetailRequest({ photoId: action.id as number }))
+                filter(([photoId, isVisible]) => !!photoId && isVisible),
+                map(([photoId, isVisible ]) => PhotoActions.loadGpsDetailRequest({ photoId: photoId as number }))
             );
     });
 

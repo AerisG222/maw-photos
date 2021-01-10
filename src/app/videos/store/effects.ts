@@ -39,12 +39,12 @@ export class VideoStoreEffects {
 
     loadRatingsForVideoWhenVisible$ = createEffect(() => {
         return combineLatest([
-                this.actions$.pipe(ofType(VideoStoreActions.setActiveVideoId)),
+                this.store.select(VideoStoreSelectors.activeVideoId),
                 this.store.select(VideoStoreSelectors.isRatingCardVisible)
             ])
             .pipe(
-                filter(([action, isVisible]) => !!action.id && isVisible),
-                map(([action, isVisible ]) => VideoStoreActions.loadRatingRequest({ videoId: action.id as number }))
+                filter(([videoId, isVisible]) => !!videoId && isVisible),
+                map(([videoId, isVisible ]) => VideoStoreActions.loadRatingRequest({ videoId: videoId as number }))
             );
     });
 
@@ -76,12 +76,12 @@ export class VideoStoreEffects {
 
     loadCommentsForVideoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.actions$.pipe(ofType(VideoStoreActions.setActiveVideoId)),
+            this.store.select(VideoStoreSelectors.activeVideoId),
             this.store.select(VideoStoreSelectors.isCommentCardVisible)
         ])
         .pipe(
-            filter(([action, isVisible]) => !!action.id && isVisible),
-            map(([action, isVisible ]) => VideoStoreActions.loadCommentsRequest({ videoId: action.id as number }))
+            filter(([videoId, isVisible]) => !!videoId && isVisible),
+            map(([videoId, isVisible ]) => VideoStoreActions.loadCommentsRequest({ videoId: videoId as number }))
         );
     });
 
@@ -120,12 +120,12 @@ export class VideoStoreEffects {
 
     loadGpsDetailForVideoMetadataEditorWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.actions$.pipe(ofType(VideoStoreActions.setActiveVideoId)),
+            this.store.select(VideoStoreSelectors.activeVideoId),
             this.store.select(VideoStoreSelectors.isMetadataEditorCardVisible)
         ])
         .pipe(
-            filter(([action, isVisible]) => !!action.id && isVisible),
-            map(([action, isVisible ]) => VideoStoreActions.loadGpsDetailRequest({ videoId: action.id as number }))
+            filter(([videoId, isVisible]) => !!videoId && isVisible),
+            map(([videoId, isVisible ]) => VideoStoreActions.loadGpsDetailRequest({ videoId: videoId as number }))
         );
     });
 
