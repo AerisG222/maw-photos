@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, first, map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
-import { PhotoStoreActions, PhotoStoreSelectors } from '../../../core/root-store/photos-store';
-import { SettingsStoreSelectors, SettingsStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
+import { PhotoStoreActions, PhotoStoreSelectors, SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
 import {
     DEFAULT_SETTINGS,
     ThumbnailSize,
@@ -20,10 +19,6 @@ import {
 export class GridViewToolbarComponent {
     enableShare = false;
     activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
-    detailLink$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryId).pipe(
-        filter(id => !!id),
-        map(id => ['/photo-categories', id?.toString(), 'detail'] as string[])
-    );
 
     constructor(
         private store: Store,
@@ -41,13 +36,13 @@ export class GridViewToolbarComponent {
     }
 
     onToggleMargins(): void {
-        this.store.select(SettingsStoreSelectors.settings)
+        this.store.select(SettingsStoreSelectors.photoGridMargin)
             .pipe(
                 first()
             ).subscribe({
-                next: settings => {
-                    if (!!settings) {
-                        const newMargin = CategoryMargin.nextSize(settings.photoGridMargin.name);
+                next: margin => {
+                    if (!!margin) {
+                        const newMargin = CategoryMargin.nextSize(margin.name);
 
                         this.store.dispatch(SettingsStoreActions.updatePhotoGridMarginRequest({ newMargin }));
                     }
@@ -58,12 +53,12 @@ export class GridViewToolbarComponent {
 
     onToggleSize(): void {
         this.store
-            .select(SettingsStoreSelectors.settings)
+            .select(SettingsStoreSelectors.photoGridThumbnailSize)
             .pipe(
                 first()
             ).subscribe({
-                next: settings => {
-                    const name = settings?.photoGridThumbnailSize.name ?? DEFAULT_SETTINGS.photoGridThumbnailSize.name;
+                next: thumbnailSize => {
+                    const name = thumbnailSize?.name ?? DEFAULT_SETTINGS.photoGridThumbnailSize.name;
                     const size = ThumbnailSize.nextSize(name);
 
                     this.store.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
