@@ -16,6 +16,10 @@ export class RouteHelperService {
     static readonly stats = 'stats';
     static readonly videoCategories = 'video-categories';
 
+    static readonly categoryViewGrid = 'grid';
+    static readonly categoryViewList = 'list';
+    static readonly categoryViewDefault = RouteHelperService.categoryViewGrid;
+
     static readonly photoViewBulkEdit = 'bulk-edit';
     static readonly photoViewDetail = 'detail';
     static readonly photoViewFullscreen = 'fullscreen';

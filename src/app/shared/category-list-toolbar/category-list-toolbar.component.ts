@@ -3,12 +3,11 @@ import { Store } from '@ngrx/store';
 
 import {
     CategoryFilter,
-    CategoryListType,
     CategoryMargin,
     Settings,
     ThumbnailSize,
  } from '@models';
-import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
+import { SettingsStoreSelectors, SettingsStoreActions, RouterStoreSelectors } from '@core/root-store';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -18,25 +17,16 @@ import { first } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListToolbarComponent {
-    isListView$ = this.store.select(SettingsStoreSelectors.categoryListShouldShowListView);
-    isGridView$ = this.store.select(SettingsStoreSelectors.categoryListShouldShowGridView);
+    isListView$ = this.store.select(RouterStoreSelectors.isCategoriesListView);
+    isGridView$ = this.store.select(RouterStoreSelectors.isCategoriesGridView);
     showCategoryTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);
 
     constructor(private store: Store) {
 
     }
+
     onToggleTitle(): void {
         this.store.dispatch(SettingsStoreActions.toggleCategoryListCategoryTitlesRequest());
-    }
-
-    onToggleListType(): void {
-        this.execWithSettings(settings => {
-            if (!!settings) {
-                const type = CategoryListType.nextType(settings.categoryListListType.name);
-
-                this.store.dispatch(SettingsStoreActions.updateCategoryListListTypeRequest({ newType: type }));
-            }
-        });
     }
 
     onToggleListThumbnailSize(): void {

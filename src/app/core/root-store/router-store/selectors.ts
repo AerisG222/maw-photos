@@ -64,28 +64,33 @@ export const isPhotosView = createSelector(
 );
 
 export const isPhotosBulkEditView = createSelector(
+    isPhotosView,
     selectRouteData,
-    data => data?.view === RouteHelperService.photoViewBulkEdit
+    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewBulkEdit
 );
 
 export const isPhotosDetailView = createSelector(
+    isPhotosView,
     selectRouteData,
-    data => data?.view === RouteHelperService.photoViewDetail
+    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewDetail
 );
 
 export const isPhotosFullscreenView = createSelector(
+    isPhotosView,
     selectRouteData,
-    data => data?.view === RouteHelperService.photoViewFullscreen
+    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewFullscreen
 );
 
 export const isPhotosGridView = createSelector(
+    isPhotosView,
     selectRouteData,
-    data => data?.view === RouteHelperService.photoViewGrid
+    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewGrid
 );
 
 export const isPhotosMapView = createSelector(
+    isPhotosView,
     selectRouteData,
-    data => data?.view === RouteHelperService.photoViewMap
+    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewMap
 );
 
 export const isRandomView = createSelector(
@@ -109,4 +114,21 @@ export const inCategoryArea = createSelector(
 
         return false;
     }
+);
+
+export const isCategoriesArea = createSelector(
+    selectRouteDetails,
+    details => details.area === RouteArea.categories
+);
+
+export const isCategoriesGridView = createSelector(
+    isCategoriesArea,
+    selectRouteParams,
+    (isCategories, params) => isCategories && params?.view === RouteHelperService.categoryViewGrid
+);
+
+export const isCategoriesListView = createSelector(
+    isCategoriesArea,
+    selectRouteParams,
+    (isCategories, params) => isCategories && params?.view === RouteHelperService.categoryViewList
 );

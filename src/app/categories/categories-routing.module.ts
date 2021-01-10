@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { YearListComponent } from './year-list/year-list.component';
-import { PhotoCategoriesResolverService, VideoCategoriesResolverService } from '@core/services';
+import { PhotoCategoriesResolverService, RouteHelperService, VideoCategoriesResolverService } from '@core/services';
 
 const routes: Routes = [
-    { path: '',    component: YearListComponent, resolve: {
+    { path: ':view', component: YearListComponent, resolve: {
         photoCategoriesResolverService: PhotoCategoriesResolverService,
         videoCategoriesResolverService: VideoCategoriesResolverService }
     },
+    { path: '', redirectTo: RouteHelperService.categoryViewDefault },
     { path: '**',  redirectTo: '' }
 ];
 

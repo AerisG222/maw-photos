@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, Input, OnDestroy, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ElementRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { HotkeysService, Hotkey } from 'angular2-hotkeys';
+import { HotkeysService } from 'angular2-hotkeys';
+import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.component';
 
 @Component({
     selector: 'app-toolbar-button',
@@ -8,52 +9,23 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
     styleUrls: ['./button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonComponent implements OnInit, OnDestroy {
-    @Input() hideOnMobile = false;
-    @Input() icon: string | null = null;
-    @Input() iconRotate: number | null = null;
-    @Input() isDisabled: boolean | null = null;
-    @Input() shortcutKey: string | null = null;
-    @Input() shortcutHelp: string | null = null;
-    @Input() tooltip: string | null = null;
+export class ButtonComponent extends ButtonLinkBaseComponent implements OnInit, OnDestroy  {
     @Input() isActive = false;
 
     @ViewChild('button') button: MatButton | null = null;
 
-    private hotkey: Hotkey | null = null;
-
     constructor(
-        private hotkeysService: HotkeysService,
-        private el: ElementRef
+        public hotkeysService: HotkeysService,
+        public el: ElementRef
     ) {
-
+        super(hotkeysService, el);
     }
 
     ngOnInit(): void {
-        if (!!this.shortcutKey) {
-            // eslint-disable-next-line max-len
-            this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp ?? undefined);
-
-            this.hotkeysService.add(this.hotkey);
-        }
+        super.ngOnInit();
     }
 
     ngOnDestroy(): void {
-        if (!!this.hotkey) {
-            this.hotkeysService.remove(this.hotkey);
-        }
-    }
-
-    onHotkeyTriggered(event: KeyboardEvent): boolean {
-        this.triggerRipple();
-        this.el.nativeElement.click();
-
-        return false;
-    }
-
-    triggerRipple(): void {
-        if (!!this.button && !this.button.disabled) {
-            this.button.ripple.launch({ centered: true });
-        }
+        super.ngOnDestroy();
     }
 }

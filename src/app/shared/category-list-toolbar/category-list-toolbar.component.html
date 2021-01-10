@@ -1,12 +1,20 @@
 <app-toolbar-toolbar>
     <app-toolbar-group>
-        <app-toolbar-button
-            [icon]="(isListView$ | async) ? 'apps' : 'list'"
+        <app-toolbar-link
+        [routerLink]="['/categories/grid']"
+            icon="apps"
             shortcutKey="g"
-            shortcutHelp="Toggle Grid / List View"
-            tooltip="Toggle Grid / List View (G)"
-            (click)="onToggleListType()">
-        </app-toolbar-button>
+            shortcutHelp="Grid View"
+            tooltip="Grid View (G)">
+        </app-toolbar-link>
+
+        <app-toolbar-link
+            [routerLink]="['/categories/list']"
+            icon="list"
+            shortcutKey="l"
+            shortcutHelp="List View"
+            tooltip="List View (L)">
+        </app-toolbar-link>
 
         <app-toolbar-divider></app-toolbar-divider>
 

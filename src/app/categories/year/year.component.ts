@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import {
     RootStoreSelectors,
+    RouterStoreSelectors,
     SettingsStoreSelectors
 } from '@core/root-store';
 import { CategoryTeaser } from '@models';
@@ -18,8 +19,8 @@ export class YearComponent implements OnInit {
     @Input() year: number | null = null;
 
     categories$: Observable<CategoryTeaser[]> | null = null;
-    showListView$ = this.store.select(SettingsStoreSelectors.categoryListShouldShowListView);
-    showGridView$ = this.store.select(SettingsStoreSelectors.categoryListShouldShowGridView);
+    showListView$ = this.store.select(RouterStoreSelectors.isCategoriesListView);
+    showGridView$ = this.store.select(RouterStoreSelectors.isCategoriesGridView);
     listThumbnailSize$ = this.store.select(SettingsStoreSelectors.categoryListListViewThumbnailSize);
     gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.categoryListThumbnailSize);
     gridShowTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);
