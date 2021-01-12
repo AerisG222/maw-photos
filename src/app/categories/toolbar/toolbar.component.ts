@@ -12,11 +12,11 @@ import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-shared-category-list-toolbar',
-    templateUrl: './category-list-toolbar.component.html',
-    styleUrls: ['./category-list-toolbar.component.scss'],
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryListToolbarComponent {
+export class ToolbarComponent {
     isListView$ = this.store.select(RouterStoreSelectors.isCategoriesListView);
     isGridView$ = this.store.select(RouterStoreSelectors.isCategoriesGridView);
     showCategoryTitles$ = this.store.select(SettingsStoreSelectors.categoryListShowCategoryTitles);

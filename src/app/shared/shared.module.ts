@@ -10,7 +10,6 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { CategoryListComponent } from './category-list/category-list.component';
-import { CategoryListToolbarComponent } from './category-list-toolbar/category-list-toolbar.component';
 import { ContentMarginComponent } from './content-margin/content-margin.component';
 import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
@@ -22,7 +21,6 @@ import { MapViewComponent } from './map-view/map-view.component';
         CategoryGridComponent,
         CategoryListComponent,
         CategoryHeaderComponent,
-        CategoryListToolbarComponent,
         ContentMarginComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
@@ -44,7 +42,6 @@ import { MapViewComponent } from './map-view/map-view.component';
         CategoryGridComponent,
         CategoryListComponent,
         CategoryHeaderComponent,
-        CategoryListToolbarComponent,
         ContentMarginComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
