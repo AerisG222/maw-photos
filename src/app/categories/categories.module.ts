@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { CategoriesRoutingModule } from './categories-routing.module';
 
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { CategoryTypeFilterComponent } from './category-type-filter/category-type-filter.component';
-import { CategoryYearFilterComponent } from './category-year-filter/category-year-filter.component';
-import { CategoryMissingGpsFilterComponent } from './category-missing-gps-filter/category-missing-gps-filter.component';
-import { YearComponent } from './year/year.component';
-import { YearListComponent } from './year-list/year-list.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { CategoryTypeFilterComponent } from './components/category-type-filter/category-type-filter.component';
+import { CategoryYearFilterComponent } from './components/category-year-filter/category-year-filter.component';
+import { CategoryMissingGpsFilterComponent } from './components/category-missing-gps-filter/category-missing-gps-filter.component';
+import { YearComponent } from './components/year/year.component';
+import { YearListComponent } from './components/year-list/year-list.component';
+import { CategoriesStoreModule } from './store/categories-store.module';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { YearListComponent } from './year-list/year-list.component';
     ],
     imports: [
         CategoriesRoutingModule,
+        CategoriesStoreModule,
         SharedModule
     ]
 })

@@ -7,4 +7,5 @@ export interface RouteDetails {
     params: Params;
     data: Data;
     fragment: string | null;
+    queryParams: Params | null;
 }

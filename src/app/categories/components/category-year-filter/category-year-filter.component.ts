@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { first, tap } from 'rxjs/operators';
 
-import { RootStoreSelectors, SettingsStoreActions } from '@core/root-store';
+import { RootStoreSelectors } from '@core/root-store';
+import { CategoriesStoreActions, CategoriesStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-categories-category-year-filter',
@@ -27,7 +28,7 @@ export class CategoryYearFilterComponent implements OnInit {
 
     ngOnInit(): void {
         this.store
-            .select(RootStoreSelectors.initialYearFilterSelection)
+            .select(CategoriesStoreSelectors.categoryEffectiveYearFilter)
             .pipe(
                 tap(val => this.yearControl.setValue(val)),
                 first()
@@ -36,6 +37,6 @@ export class CategoryYearFilterComponent implements OnInit {
     }
 
     onSelectYear(change: MatSelectChange): void {
-        this.store.dispatch(SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: change.value }));
+        this.store.dispatch(CategoriesStoreActions.categoriesYearFilterChanged({ filter: change.value }));
     }
 }

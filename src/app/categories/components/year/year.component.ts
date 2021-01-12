@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
-    RootStoreSelectors,
     RouterStoreSelectors,
     SettingsStoreSelectors
 } from '@core/root-store';
 import { CategoryTeaser } from '@models';
+import { CategoriesStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-categories-year',
@@ -32,6 +32,6 @@ export class YearComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.categories$ = this.store.select(RootStoreSelectors.allFilteredCategoriesForYear, { year: this.year as number});
+        this.categories$ = this.store.select(CategoriesStoreSelectors.allFilteredCategoriesForYear, { year: this.year as number});
     }
 }

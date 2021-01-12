@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { concatMap, withLatestFrom } from 'rxjs/operators';
+import { concatMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from '@core/services/settings.service';
 import * as SettingsActions from './actions';
@@ -23,12 +23,12 @@ export class SettingsStoreEffects {
     saveRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveRequest),
-            concatMap(action => {
+            map(action => {
                 try {
                     this.settingsService.save(action.settings);
-                    return of(SettingsActions.saveSuccess(action));
+                    return SettingsActions.saveSuccess(action);
                 } catch (err) {
-                    return of(SettingsActions.saveFailure(err));
+                    return SettingsActions.saveFailure(err);
                 }
             })
         );
@@ -92,8 +92,8 @@ export class SettingsStoreEffects {
                 SettingsActions.updateSearchThumbnailSizeRequest,
             ),
             withLatestFrom(this.store.select(settingsSelectors.settings)),
-            concatMap(x => {
-                return of(SettingsActions.saveRequest({ settings: x[1] }));
+            map(([action, settings]) => {
+                return SettingsActions.saveRequest({ settings });
             })
         );
     });

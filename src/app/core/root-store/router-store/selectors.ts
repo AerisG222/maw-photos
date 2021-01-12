@@ -43,8 +43,9 @@ export const selectRouteDetails = createSelector(
     selectUrl,
     selectFragment,
     selectRouteNestedParams,
+    selectQueryParams,
     selectRouteData,
-    (url, fragment, params, data): RouteDetails => {
+    (url, fragment, params, queryParams, data): RouteDetails => {
         // TODO: is there a way to have this injected?
         const routeHelperService = new RouteHelperService();
 
@@ -53,6 +54,7 @@ export const selectRouteDetails = createSelector(
             url,
             fragment: fragment ?? null,
             params,
+            queryParams,
             data
         };
     }

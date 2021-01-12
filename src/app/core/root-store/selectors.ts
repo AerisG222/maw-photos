@@ -3,7 +3,7 @@ import { createSelector } from '@ngrx/store';
 import { SettingsStoreSelectors } from './settings-store';
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
-import { Category, CategoryFilter } from '@models';
+import { Category } from '@models';
 import { AuthStoreSelectors } from './auth-store';
 import { RouterStoreSelectors } from './router-store';
 
@@ -27,6 +27,12 @@ export const isLoading = createSelector(
     }
 );
 
+export const enableBulkEdit = createSelector(
+    AuthStoreSelectors.isAdmin,
+    RouterStoreSelectors.isRandomView,
+    (isAdmin, isRandomView) => isAdmin && !isRandomView
+);
+
 export const allCategories = createSelector(
     PhotoCategoryStoreSelectors.allCategories,
     VideoCategoryStoreSelectors.allCategories,
@@ -45,68 +51,6 @@ export const allYears = createSelector(
     (photoYears: number[] | null, videoYears: number[] | null) => Array
         .from(new Set([...(photoYears ?? []), ...(videoYears ?? [])]))
         .sort(sortNumbersDescending)
-);
-
-export const allFilteredCategoryYears = createSelector(
-    allYears,
-    PhotoCategoryStoreSelectors.allYears,
-    VideoCategoryStoreSelectors.allYears,
-    SettingsStoreSelectors.categoryListYearFilter,
-    SettingsStoreSelectors.categoryListCategoryFilter,
-    (years, photoYears, videoYears, yearFilter, typeFilter) => {
-        if (yearFilter === 'all') {
-            switch (typeFilter) {
-                case CategoryFilter.all:
-                    return years ?? [];
-                case CategoryFilter.photos:
-                    return photoYears ?? [];
-                case CategoryFilter.videos:
-                    return videoYears ?? [];
-            }
-        }
-
-        return [yearFilter as number];
-    }
-);
-
-export const allFilteredCategoriesForYear = createSelector(
-    PhotoCategoryStoreSelectors.categoriesForYear,
-    VideoCategoryStoreSelectors.categoriesForYear,
-    SettingsStoreSelectors.categoryListCategoryFilter,
-    SettingsStoreSelectors.categoryListMissingGpsFilter,
-    // eslint-disable-next-line max-len
-    (photoCategories: Category[], videoCategories: Category[], filter: CategoryFilter, missingGpsFilter: boolean, props: { year: number }) => {
-        let categories: Category[] = [];
-
-        switch (filter) {
-            case CategoryFilter.all:
-                categories = [...photoCategories, ...videoCategories];
-                break;
-            case CategoryFilter.photos:
-                categories = photoCategories;
-                break;
-            case CategoryFilter.videos:
-                categories = videoCategories;
-                break;
-        }
-
-        if (missingGpsFilter) {
-            return categories.filter(c => c.actual.isMissingGpsData);
-        }
-
-        return categories;
-});
-
-export const initialYearFilterSelection = createSelector(
-    allYears,
-    SettingsStoreSelectors.categoryListYearFilter,
-    (years, filter) => !!filter ? filter : years[0]
-);
-
-export const enableBulkEdit = createSelector(
-    AuthStoreSelectors.isAdmin,
-    RouterStoreSelectors.isRandomView,
-    (isAdmin, isRandomView) => isAdmin && !isRandomView
 );
 
 const sortNumbersDescending = (first: number, second: number): number => {

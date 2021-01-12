@@ -6,6 +6,7 @@ import { CategoryFilter } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { MatSelectChange } from '@angular/material/select';
 import { tap, first } from 'rxjs/operators';
+import { CategoriesStoreActions } from '../../store';
 
 @Component({
     selector: 'app-categories-category-type-filter',
@@ -34,7 +35,8 @@ export class CategoryTypeFilterComponent implements OnInit {
     }
 
     onSelectCategoryType(change: MatSelectChange): void {
-        // eslint-disable-next-line max-len
-        this.store.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter: CategoryFilter.forValue(change.value) }));
+        const filter = CategoryFilter.forValue(change.value);
+
+        this.store.dispatch(CategoriesStoreActions.categoriesTypeFilterChanged({ filter }));
     }
 }
