@@ -27,6 +27,10 @@ export class RouteHelperService {
     static readonly photoViewMap = 'map';
     static readonly photoViewDefault = RouteHelperService.photoViewGrid;
 
+    static readonly searchViewGrid = 'grid';
+    static readonly searchViewList = 'list';
+    static readonly searchViewDefault = 'grid';
+
     static readonly areaMap = [
         { urlStart: RouteHelperService.about,           area: RouteArea.about },
         { urlStart: RouteHelperService.categories,      area: RouteArea.categories },

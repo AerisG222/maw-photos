@@ -132,3 +132,21 @@ export const isCategoriesListView = createSelector(
     selectRouteParams,
     (isCategories, params) => isCategories && params?.view === RouteHelperService.categoryViewList
 );
+
+export const isSearchArea = createSelector(
+    selectRouteDetails,
+    details => details.area === RouteArea.search
+);
+
+export const isSearchGridView = createSelector(
+    isSearchArea,
+    selectRouteData,
+    (isSearch, data) => isSearch && data?.view === RouteHelperService.searchViewGrid
+);
+
+export const isSearchListView = createSelector(
+    isSearchArea,
+    selectRouteData,
+    (isSearch, data) => isSearch && data?.view === RouteHelperService.searchViewList
+);
+
