@@ -3,9 +3,7 @@
 @mixin app-about-component-theme($theme) {
     $accent: map-get($theme, accent);
 
-    app-about-about {
-        & .version {
-            color: mat-color($accent, 500);
-        }
+    .version {
+        color: mat-color($accent, 500);
     }
 }
