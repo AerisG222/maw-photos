@@ -27,8 +27,7 @@ import { MapViewComponent } from './map-view/map-view.component';
         MapViewComponent
     ],
     imports: [
-        BaseModule,
-        ToolbarModule
+        BaseModule
     ],
     exports: [
         BaseModule,
