@@ -15,7 +15,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'help', pathMatch: 'full' }
         ]
     },
-    { path: '**', redirectTo: '/about/help' }
+    { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
