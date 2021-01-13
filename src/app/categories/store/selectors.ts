@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 
 import {
     PhotoCategoryStoreSelectors,
@@ -8,10 +8,6 @@ import {
     RootStoreSelectors
 } from '@core/root-store';
 import { Category, CategoryFilter } from '@models';
-import { CATEGORIES_FEATURE_NAME } from './feature-name';
-import { State } from './state';
-
-const categoriesState = createFeatureSelector<State>(CATEGORIES_FEATURE_NAME);
 
 const getValidYearFilter = (filter: string | number, years: number[]): string | number | null => {
     if(filter === 'all') {
