@@ -10,6 +10,7 @@ import { CategoryMissingGpsFilterComponent } from './components/category-missing
 import { YearComponent } from './components/year/year.component';
 import { YearListComponent } from './components/year-list/year-list.component';
 import { CategoriesStoreModule } from './store/categories-store.module';
+import { UrlGuardGuard } from './services/url-guard.guard';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,9 @@ import { CategoriesStoreModule } from './store/categories-store.module';
         CategoriesRoutingModule,
         CategoriesStoreModule,
         SharedModule
+    ],
+    providers: [
+        UrlGuardGuard
     ]
 })
 export class CategoriesModule { }
