@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { CategoryFilter } from '@models';
+import { CategoryTypeFilter } from '@models';
 
 export const categoriesYearFilterChanged = createAction(
     '[Categories] Year Filter Changed',
@@ -9,5 +9,5 @@ export const categoriesYearFilterChanged = createAction(
 
 export const categoriesTypeFilterChanged = createAction(
     '[Categories] Type Filter Changed',
-    props<{ filter: CategoryFilter }>()
+    props<{ filter: CategoryTypeFilter }>()
 );

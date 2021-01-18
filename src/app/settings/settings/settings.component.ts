@@ -12,7 +12,7 @@ import {
     MinimapZoom,
     MapTypeId,
     CategoryMargin,
-    CategoryFilter,
+    CategoryTypeFilter,
     CategoryListType,
 } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
@@ -28,7 +28,7 @@ import { Subscription } from 'rxjs';
 export class SettingsComponent implements OnInit, OnDestroy {
     form: FormGroup;
     themes = Theme.allThemes;
-    categoryFilters = CategoryFilter.allCategoryFilters;
+    categoryFilters = CategoryTypeFilter.allCategoryFilters;
     categoryMargins = CategoryMargin.allCategoryMargins;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
@@ -133,7 +133,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         const settings = {
             appTheme: Theme.forName(this.getFormString('appTheme', DEFAULT_SETTINGS.appTheme.name)),
 
-            categoryListCategoryFilter:        CategoryFilter.forName(this.getFormString('categoryListCategoryFilter',       DEFAULT_SETTINGS.categoryListCategoryFilter.name)),
+            categoryListCategoryFilter:        CategoryTypeFilter.forName(this.getFormString('categoryListCategoryFilter',       DEFAULT_SETTINGS.categoryListCategoryFilter.name)),
             categoryListCategoryMargin:        CategoryMargin.forName(this.getFormString('categoryListCategoryMargin',       DEFAULT_SETTINGS.categoryListCategoryMargin.name)),
             categoryListMissingGpsFilter:      this.categoryListMissingGpsFilter,
             categoryListShowCategoryTitles:    this.getFormBoolean('categoryListShowCategoryTitles',                         DEFAULT_SETTINGS.categoryListShowCategoryTitles),

@@ -6,7 +6,7 @@ import {
     Theme,
     CategoryMargin,
     ThumbnailSize,
-    CategoryFilter,
+    CategoryTypeFilter,
     CategoryListType,
     GoogleMapThemes,
 } from '@models';
@@ -43,7 +43,7 @@ export const mapTheme = createSelector(
 // -- CATEGORY LIST --
 export const categoryListCategoryFilter = createSelector(
     settingsState,
-    (state: State): CategoryFilter => state.settings.categoryListCategoryFilter
+    (state: State): CategoryTypeFilter => state.settings.categoryListCategoryFilter
 );
 
 export const categoryListCategoryMargin = createSelector(

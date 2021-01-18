@@ -5,7 +5,7 @@ import {
     ThumbnailSize,
     VideoSize,
     CategoryMargin,
-    CategoryFilter,
+    CategoryTypeFilter,
     CategoryListType,
  } from '@models';
 
@@ -57,7 +57,7 @@ export const updateCategoryListYearFilterRequest = createAction(
 
 export const updateCategoryListCategoryFilterRequest = createAction(
     '[Settings] Update Category List Category Filter',
-    props<{ newFilter: CategoryFilter }>()
+    props<{ newFilter: CategoryTypeFilter }>()
 );
 
 export const updateCategoryListCategoryMarginRequest = createAction(

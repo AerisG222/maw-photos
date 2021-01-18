@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
-    CategoryFilter,
+    CategoryTypeFilter,
     CategoryMargin,
     Settings,
     ThumbnailSize,
@@ -52,7 +52,7 @@ export class ToolbarComponent {
     onToggleFilter(): void {
         this.execWithSettings(settings => {
             if (!!settings) {
-                const newFilter = CategoryFilter.nextFilter(settings.categoryListCategoryFilter.name);
+                const newFilter = CategoryTypeFilter.nextFilter(settings.categoryListCategoryFilter.name);
 
                 this.store.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter }));
             }

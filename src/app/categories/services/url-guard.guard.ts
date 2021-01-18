@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
-import { CategoryFilter, CategoryListType } from '@models';
+import { CategoryTypeFilter, CategoryListType } from '@models';
 
 @Injectable()
 export class UrlGuardGuard implements CanActivate {
@@ -95,12 +95,12 @@ export class UrlGuardGuard implements CanActivate {
             return preferredTypeFilter;
         }
 
-        return CategoryFilter.all;
+        return CategoryTypeFilter.all;
     }
 
     isValidTypeFilter(filter: string) {
-        return filter === CategoryFilter.all.name ||
-            filter === CategoryFilter.photos.name ||
-            filter === CategoryFilter.videos.name;
+        return filter === CategoryTypeFilter.all.name ||
+            filter === CategoryTypeFilter.photos.name ||
+            filter === CategoryTypeFilter.videos.name;
     }
 }

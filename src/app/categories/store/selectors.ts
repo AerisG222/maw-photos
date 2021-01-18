@@ -7,7 +7,7 @@ import {
     RouterStoreSelectors,
     RootStoreSelectors
 } from '@core/root-store';
-import { Category, CategoryFilter } from '@models';
+import { Category, CategoryTypeFilter } from '@models';
 
 const getValidYearFilter = (filter: string | number, years: number[]): string | number | null => {
     if(filter === 'all') {
@@ -23,9 +23,9 @@ const getValidYearFilter = (filter: string | number, years: number[]): string | 
     return null;
 };
 
-const getValidTypeFilter = (filter: string): CategoryFilter | null => {
-    if(CategoryFilter.allCategoryFilters.map(f => f.value).indexOf(filter) >= 0) {
-        return CategoryFilter.forValue(filter);
+const getValidTypeFilter = (filter: string): CategoryTypeFilter | null => {
+    if(CategoryTypeFilter.allCategoryFilters.map(f => f.value).indexOf(filter) >= 0) {
+        return CategoryTypeFilter.forValue(filter);
     }
 
     return null;
@@ -67,11 +67,11 @@ export const allFilteredCategoryYears = createSelector(
     (years, photoYears, videoYears, yearFilter, typeFilter) => {
         if (yearFilter === 'all') {
             switch (typeFilter) {
-                case CategoryFilter.all:
+                case CategoryTypeFilter.all:
                     return years ?? [];
-                case CategoryFilter.photos:
+                case CategoryTypeFilter.photos:
                     return photoYears ?? [];
-                case CategoryFilter.videos:
+                case CategoryTypeFilter.videos:
                     return videoYears ?? [];
                 default:
                     // return all for bogus url
@@ -92,13 +92,13 @@ export const allFilteredCategoriesForYear = createSelector(
     (photoCategories, videoCategories, typeFilter, missingGpsFilter, props: { year: number }) => {
         let categories: Category[] = [];
         switch (typeFilter) {
-            case CategoryFilter.all:
+            case CategoryTypeFilter.all:
                 categories = [...photoCategories, ...videoCategories];
                 break;
-            case CategoryFilter.photos:
+            case CategoryTypeFilter.photos:
                 categories = photoCategories;
                 break;
-            case CategoryFilter.videos:
+            case CategoryTypeFilter.videos:
                 categories = videoCategories;
                 break;
             default:

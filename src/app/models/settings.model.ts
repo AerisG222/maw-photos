@@ -2,13 +2,13 @@ import { Theme } from './theme.model';
 import { ThumbnailSize } from './thumbnail-size.model';
 import { VideoSize } from './video-size.model';
 import { CategoryMargin } from './category-margin.model';
-import { CategoryFilter } from './category-filter.model';
+import { CategoryTypeFilter } from './category-type-filter.model';
 import { CategoryListType } from './category-list-type.model';
 
 export interface Settings {
     appTheme: Theme;
 
-    categoryListCategoryFilter: CategoryFilter;
+    categoryListCategoryFilter: CategoryTypeFilter;
     categoryListCategoryMargin: CategoryMargin;
     categoryListMissingGpsFilter: boolean;
     categoryListShowCategoryTitles: boolean;
@@ -65,7 +65,7 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = ({
     appTheme: Theme.themeDark,
 
-    categoryListCategoryFilter: CategoryFilter.all,
+    categoryListCategoryFilter: CategoryTypeFilter.all,
     categoryListCategoryMargin: CategoryMargin.dense,
     categoryListMissingGpsFilter: false,
     categoryListShowCategoryTitles: true,

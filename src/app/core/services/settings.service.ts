@@ -7,7 +7,7 @@ import {
     ThumbnailSize,
     VideoSize,
     CategoryMargin,
-    CategoryFilter,
+    CategoryTypeFilter,
     CategoryListType,
  } from '@models';
 import { LocalStorageService } from './local-storage.service';
@@ -261,13 +261,13 @@ export class SettingsService {
         }
     }
 
-    private getCategoryListCategoryFilter(): CategoryFilter {
+    private getCategoryListCategoryFilter(): CategoryTypeFilter {
         const name = this.getStringOrNull(SettingsService.keyCategoryListCategoryFilter);
 
         try {
-            return name !== null ? CategoryFilter.forName(name) : CategoryFilter.all;
+            return name !== null ? CategoryTypeFilter.forName(name) : CategoryTypeFilter.all;
         } catch {
-            return CategoryFilter.all;
+            return CategoryTypeFilter.all;
         }
     }
 

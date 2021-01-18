@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SettingsStoreActions } from '@core/root-store/settings-store';
-import { CategoryFilter } from '@models';
+import { CategoryTypeFilter } from '@models';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ export class CategoriesStoreEffects {
             ofType(CategoryStoreActions.categoriesTypeFilterChanged),
             // eslint-disable-next-line max-len
             map(action => {
-                const newFilter = CategoryFilter.forName(action.filter.name);
+                const newFilter = CategoryTypeFilter.forName(action.filter.name);
 
                 return SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter });
             })
