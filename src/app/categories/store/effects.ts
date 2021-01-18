@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { SettingsStoreActions } from '@core/root-store/settings-store';
-import { CategoryTypeFilter } from '@models';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
 
@@ -18,12 +17,7 @@ export class CategoriesStoreEffects {
     categoriesTypeFilterChanged$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(CategoryStoreActions.categoriesTypeFilterChanged),
-            // eslint-disable-next-line max-len
-            map(action => {
-                const newFilter = CategoryTypeFilter.forName(action.filter.name);
-
-                return SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter });
-            })
+            map(action => SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter: action.filter }))
         );
     });
 

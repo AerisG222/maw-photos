@@ -1,64 +1,22 @@
-export class CategoryTypeFilter {
-    static readonly all = new CategoryTypeFilter('all', 'Photos and Videos');
-    static readonly photos = new CategoryTypeFilter('photo', 'Photos');
-    static readonly videos = new CategoryTypeFilter('video', 'Videos');
+import { ValueDescriptor } from './value-descriptor';
 
-    static readonly allCategoryFilters = [
-        CategoryTypeFilter.all,
-        CategoryTypeFilter.photos,
-        CategoryTypeFilter.videos
-    ];
-
-    readonly name: string;
-    readonly value: string;
-
-    constructor(value: string, name: string) {
-        this.value = value;
-        this.name = name;
-    }
-
-    static forName(name: string): CategoryTypeFilter {
-        switch (name) {
-            case CategoryTypeFilter.all.name:
-                return CategoryTypeFilter.all;
-            case CategoryTypeFilter.photos.name:
-                return CategoryTypeFilter.photos;
-            case CategoryTypeFilter.videos.name:
-                return CategoryTypeFilter.videos;
-            default:
-                console.error(`invalid category filter requested: ${name}`);
-        }
-
-        return CategoryTypeFilter.all;
-    }
-
-    static forValue(value: string): CategoryTypeFilter {
-        switch (value) {
-            case CategoryTypeFilter.all.value:
-                return CategoryTypeFilter.all;
-            case CategoryTypeFilter.photos.value:
-                return CategoryTypeFilter.photos;
-            case CategoryTypeFilter.videos.value:
-                return CategoryTypeFilter.videos;
-            default:
-                console.error(`invalid category filter requested: ${value}`);
-        }
-
-        return CategoryTypeFilter.all;
-    }
-
-    static nextFilter(name: string): CategoryTypeFilter {
-        switch (name) {
-            case CategoryTypeFilter.all.name:
-                return CategoryTypeFilter.photos;
-            case CategoryTypeFilter.photos.name:
-                return CategoryTypeFilter.videos;
-            case CategoryTypeFilter.videos.name:
-                return CategoryTypeFilter.all;
-            default:
-                console.error(`invalid category filter requested: ${name}`);
-        }
-
-        return CategoryTypeFilter.all;
-    }
+export enum CategoryTypeFilter {
+    all = 'all',
+    photos = 'photos',
+    videos = 'videos'
 }
+
+export const allCategoryTypeFilters: ValueDescriptor<CategoryTypeFilter>[] = [
+    { value: CategoryTypeFilter.all, name: 'Photos and Videos' },
+    { value: CategoryTypeFilter.photos, name: 'Photos' },
+    { value: CategoryTypeFilter.videos, name: 'Videos' }
+];
+
+export const toCategoryTypeFilter = (val?: string|null): CategoryTypeFilter|undefined => {
+    if(!!!val)
+    {
+        return undefined;
+    }
+
+    return CategoryTypeFilter[val as keyof typeof CategoryTypeFilter];
+};

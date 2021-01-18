@@ -9,6 +9,7 @@ import {
     CategoryMargin,
     CategoryTypeFilter,
     CategoryListType,
+    toCategoryTypeFilter,
  } from '@models';
 import { LocalStorageService } from './local-storage.service';
 
@@ -157,7 +158,7 @@ export class SettingsService {
 
         this.setValue(SettingsService.keyAppTheme, settings.appTheme.name);
 
-        this.setValue(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter.name);
+        this.setValue(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter);
         this.setValue(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
         this.setBoolean(SettingsService.keyCategoryListMissingGpsFilter, settings.categoryListMissingGpsFilter);
         this.setBoolean(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
@@ -265,7 +266,7 @@ export class SettingsService {
         const name = this.getStringOrNull(SettingsService.keyCategoryListCategoryFilter);
 
         try {
-            return name !== null ? CategoryTypeFilter.forName(name) : CategoryTypeFilter.all;
+            return toCategoryTypeFilter(name) ?? CategoryTypeFilter.all;
         } catch {
             return CategoryTypeFilter.all;
         }

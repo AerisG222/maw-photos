@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
-import { CategoryTypeFilter, CategoryListType } from '@models';
+import { CategoryTypeFilter, CategoryListType, toCategoryTypeFilter } from '@models';
 
 @Injectable()
 export class UrlGuardGuard implements CanActivate {
@@ -15,6 +15,8 @@ export class UrlGuardGuard implements CanActivate {
         private router: Router
     ) { }
 
+    // TODO: this runs before resolvers, so allYears is always empty and we can't properly identify
+    //       a complete url when this runs.  move this to an effect that runs once there is a category route change
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
@@ -28,7 +30,7 @@ export class UrlGuardGuard implements CanActivate {
             map(([allYears, preferredView, preferredYearFilter, preferredTypeFilter]) => {
                 const view = this.getValidView(route.params?.vew, preferredView?.name);
                 const yearFilter = this.getValidYearFilter(route.params?.year, preferredYearFilter, allYears);
-                const typeFilter = this.getValidTypeFilter(route.params?.type, preferredTypeFilter.name);
+                const typeFilter = this.getValidTypeFilter(route.params?.type, preferredTypeFilter);
 
                 if(
                     view === route.params?.view &&
@@ -87,20 +89,20 @@ export class UrlGuardGuard implements CanActivate {
     }
 
     getValidTypeFilter(requestedTypeFilter: string | null, preferredTypeFilter: string | null) {
-        if(!!requestedTypeFilter && this.isValidTypeFilter(requestedTypeFilter)) {
+        if(this.isValidTypeFilter(requestedTypeFilter)) {
             return requestedTypeFilter;
         }
 
-        if(!!preferredTypeFilter && this.isValidTypeFilter(preferredTypeFilter)) {
+        if(this.isValidTypeFilter(preferredTypeFilter)) {
             return preferredTypeFilter;
         }
 
         return CategoryTypeFilter.all;
     }
 
-    isValidTypeFilter(filter: string) {
-        return filter === CategoryTypeFilter.all.name ||
-            filter === CategoryTypeFilter.photos.name ||
-            filter === CategoryTypeFilter.videos.name;
+    isValidTypeFilter(filter: string|null) {
+        const validatedFilter = toCategoryTypeFilter(filter);
+
+        return !!validatedFilter;
     }
 }

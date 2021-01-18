@@ -49,16 +49,6 @@ export class ToolbarComponent {
         });
     }
 
-    onToggleFilter(): void {
-        this.execWithSettings(settings => {
-            if (!!settings) {
-                const newFilter = CategoryTypeFilter.nextFilter(settings.categoryListCategoryFilter.name);
-
-                this.store.dispatch(SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter }));
-            }
-        });
-    }
-
     onToggleMargins(): void {
         this.execWithSettings(settings => {
             if (!!settings) {

@@ -12,8 +12,9 @@ import {
     MinimapZoom,
     MapTypeId,
     CategoryMargin,
-    CategoryTypeFilter,
     CategoryListType,
+    toCategoryTypeFilter,
+    allCategoryTypeFilters,
 } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { Subscription } from 'rxjs';
@@ -28,7 +29,7 @@ import { Subscription } from 'rxjs';
 export class SettingsComponent implements OnInit, OnDestroy {
     form: FormGroup;
     themes = Theme.allThemes;
-    categoryFilters = CategoryTypeFilter.allCategoryFilters;
+    categoryFilters = allCategoryTypeFilters;
     categoryMargins = CategoryMargin.allCategoryMargins;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
@@ -133,7 +134,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         const settings = {
             appTheme: Theme.forName(this.getFormString('appTheme', DEFAULT_SETTINGS.appTheme.name)),
 
-            categoryListCategoryFilter:        CategoryTypeFilter.forName(this.getFormString('categoryListCategoryFilter',       DEFAULT_SETTINGS.categoryListCategoryFilter.name)),
+            categoryListCategoryFilter:        toCategoryTypeFilter(this.getFormString('categoryListCategoryFilter', '')) ?? DEFAULT_SETTINGS.categoryListCategoryFilter,
             categoryListCategoryMargin:        CategoryMargin.forName(this.getFormString('categoryListCategoryMargin',       DEFAULT_SETTINGS.categoryListCategoryMargin.name)),
             categoryListMissingGpsFilter:      this.categoryListMissingGpsFilter,
             categoryListShowCategoryTitles:    this.getFormBoolean('categoryListShowCategoryTitles',                         DEFAULT_SETTINGS.categoryListShowCategoryTitles),
@@ -206,7 +207,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private updateForm(settings: Settings): void {
         this.form.get('appTheme')?.setValue(settings.appTheme.name);
 
-        this.form.get('categoryListCategoryFilter')?.setValue(settings.categoryListCategoryFilter.name);
+        this.form.get('categoryListCategoryFilter')?.setValue(settings.categoryListCategoryFilter);
         this.form.get('categoryListCategoryMargin')?.setValue(settings.categoryListCategoryMargin.name);
         this.form.get('categoryListShowCategoryTitles')?.setValue(settings.categoryListShowCategoryTitles);
         this.form.get('categoryListThumbnailSize')?.setValue(settings.categoryListThumbnailSize.name);

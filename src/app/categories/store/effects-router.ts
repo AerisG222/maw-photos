@@ -19,7 +19,7 @@ export class CategoriesStoreRouterEffects {
         // eslint-disable-next-line rxjs/no-cyclic-action
         return this.actions$.pipe(
             ofType(CategoryStoreActions.categoriesTypeFilterChanged),
-            tap(action => this.router.navigate(['.'], { queryParams: { type: action.filter.value }, queryParamsHandling: 'merge' }))
+            tap(action => this.router.navigate(['.'], { queryParams: { type: action.filter }, queryParamsHandling: 'merge' }))
         );
     }, { dispatch: false });
 

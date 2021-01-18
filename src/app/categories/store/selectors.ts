@@ -7,7 +7,7 @@ import {
     RouterStoreSelectors,
     RootStoreSelectors
 } from '@core/root-store';
-import { Category, CategoryTypeFilter } from '@models';
+import { Category, CategoryTypeFilter, toCategoryTypeFilter } from '@models';
 
 const getValidYearFilter = (filter: string | number, years: number[]): string | number | null => {
     if(filter === 'all') {
@@ -18,14 +18,6 @@ const getValidYearFilter = (filter: string | number, years: number[]): string | 
 
     if(years.indexOf(year) >= 0) {
         return year;
-    }
-
-    return null;
-};
-
-const getValidTypeFilter = (filter: string): CategoryTypeFilter | null => {
-    if(CategoryTypeFilter.allCategoryFilters.map(f => f.value).indexOf(filter) >= 0) {
-        return CategoryTypeFilter.forValue(filter);
     }
 
     return null;
@@ -52,7 +44,7 @@ export const categoryEffectiveTypeFilter = createSelector(
     SettingsStoreSelectors.categoryListCategoryFilter,
     RouterStoreSelectors.selectRouteDetails,
     (typeFilter, routeDetails) => {
-        const queryFilter = getValidTypeFilter(routeDetails?.queryParams?.type as string);
+        const queryFilter = toCategoryTypeFilter(routeDetails?.queryParams?.type as string);
 
         return queryFilter ?? typeFilter;
     }
