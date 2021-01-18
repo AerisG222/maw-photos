@@ -3,10 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { YearListComponent } from './components/year-list/year-list.component';
 import { RouteHelperService } from '@core/services';
-import { UrlGuardGuard } from './services/url-guard.guard';
 
 const routes: Routes = [
-    { path: ':view', component: YearListComponent, canActivate: [ UrlGuardGuard ] },
+    { path: ':view', component: YearListComponent },
     { path: '', redirectTo: RouteHelperService.categoryViewDefault },
     { path: '**',  redirectTo: '' }
 ];
