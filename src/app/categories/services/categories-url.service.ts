@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
@@ -15,7 +15,7 @@ export class CategoriesUrlService {
         private router: Router
     ) { }
 
-    ensureCompleteUrl(routeDetails: RouteDetails): Observable<unknown> {
+    ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
         return combineLatest([
             this.store.select(RootStoreSelectors.allYears),
             this.store.select(SettingsStoreSelectors.categoryListListType),
@@ -23,20 +23,26 @@ export class CategoriesUrlService {
             this.store.select(SettingsStoreSelectors.categoryListCategoryFilter)
         ]).pipe(
             tap(([allYears, preferredView, preferredYearFilter, preferredTypeFilter]) => {
-                const view = this.getValidView(routeDetails.params?.vew, preferredView?.name);
-                const yearFilter = this.getValidYearFilter(routeDetails.params?.year, preferredYearFilter, allYears);
-                const typeFilter = this.getValidTypeFilter(routeDetails.params?.type, preferredTypeFilter);
+                if(allYears.length === 0) {
+                    return;
+                }
+
+                // TODO: fix more enums and clean the line below
+                const view = this.getValidView(routeDetails.params?.vew, preferredView.toString());
+                const yearFilter = this.getValidYearFilter(routeDetails.queryParams?.year, preferredYearFilter, allYears);
+                const typeFilter = this.getValidTypeFilter(routeDetails.queryParams?.type, preferredTypeFilter);
 
                 if(
-                    view !== routeDetails.params?.view &&
-                    yearFilter !== routeDetails.params?.year &&
-                    typeFilter !== routeDetails.params?.type
+                    view !== routeDetails.params?.view ||
+                    yearFilter !== routeDetails.queryParams?.year ||
+                    typeFilter !== routeDetails.queryParams?.type
                 ) {
                     const url = `/${ RouteHelperService.categories }/${ view }?year=${ yearFilter }&type=${ typeFilter }`;
 
                     this.router.navigateByUrl(url);
                 }
-            })
+            }),
+            map(x => true)
         );
     }
 
