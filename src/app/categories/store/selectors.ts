@@ -7,36 +7,15 @@ import {
     RouterStoreSelectors,
     RootStoreSelectors
 } from '@core/root-store';
-import { Category, CategoryTypeFilter, toCategoryTypeFilter } from '@models';
-
-const getValidYearFilter = (filter: string | number, years: number[]): string | number | null => {
-    if(filter === 'all') {
-        return filter;
-    }
-
-    const year = Number(filter);
-
-    if(years.indexOf(year) >= 0) {
-        return year;
-    }
-
-    return null;
-};
+import { Category, CategoryTypeFilter } from '@models';
+import { CategoriesUrlService } from '../services/categories-url.service';
 
 export const categoryEffectiveYearFilter = createSelector(
     RootStoreSelectors.allYears,
     SettingsStoreSelectors.categoryListYearFilter,
     RouterStoreSelectors.selectRouteDetails,
     (years, yearFilter, routeDetails) => {
-        const queryYearFilter = getValidYearFilter(routeDetails?.queryParams?.year as string, years);
-
-        if(!!queryYearFilter) {
-            return queryYearFilter;
-        }
-
-        const settingsYearFilter = getValidYearFilter(yearFilter, years);
-
-        return !!settingsYearFilter ? settingsYearFilter : years[0];
+        return CategoriesUrlService.getValidYearFilter(routeDetails?.queryParams?.year as string, yearFilter, years);
     }
 );
 
@@ -44,9 +23,7 @@ export const categoryEffectiveTypeFilter = createSelector(
     SettingsStoreSelectors.categoryListCategoryFilter,
     RouterStoreSelectors.selectRouteDetails,
     (typeFilter, routeDetails) => {
-        const queryFilter = toCategoryTypeFilter(routeDetails?.queryParams?.type as string);
-
-        return queryFilter ?? typeFilter;
+        return CategoriesUrlService.getValidTypeFilter(routeDetails?.queryParams?.type as string, typeFilter);
     }
 );
 

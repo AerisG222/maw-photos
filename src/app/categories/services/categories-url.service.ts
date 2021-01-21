@@ -13,7 +13,69 @@ export class CategoriesUrlService {
     constructor(
         private store: Store,
         private router: Router
-    ) { }
+    ) {
+
+    }
+
+    static getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]) {
+        if(!!requestedYearFilter) {
+            const result = CategoriesUrlService.isValidYearFilter(requestedYearFilter, allYears);
+
+            if(result[0]) {
+                return result[1];
+            }
+        }
+
+        if(!!preferredYearFilter) {
+            const result = CategoriesUrlService.isValidYearFilter(preferredYearFilter, allYears);
+
+            if(result[0]) {
+                return result[1];
+            }
+        }
+
+        return allYears[0];
+    }
+
+    static getValidTypeFilter(requestedTypeFilter: string | null, preferredTypeFilter: string | null) {
+        if(CategoriesUrlService.isValidTypeFilter(requestedTypeFilter)) {
+            return requestedTypeFilter;
+        }
+
+        if(CategoriesUrlService.isValidTypeFilter(preferredTypeFilter)) {
+            return preferredTypeFilter;
+        }
+
+        return CategoryTypeFilter.all;
+    }
+
+    private static isValidYearFilter(yearFilter: string | number, allYears: number[]): [boolean, string|number|null] {
+        if(yearFilter === 'all') {
+            return [true, yearFilter];
+        }
+
+        const year = Number(yearFilter);
+
+        if(!isNaN(year) && allYears.indexOf(year) >= 0) {
+            return [true, year];
+        } else {
+            return [false, null];
+        }
+    }
+
+    private static isValidTypeFilter(filter: string|null) {
+        const validatedFilter = toCategoryTypeFilter(filter);
+
+        return !!validatedFilter;
+    }
+
+    updateYearFilterInUrl(filter: string | number) {
+        this.router.navigate(['.'], { queryParams: { year: filter }, queryParamsHandling: 'merge' });
+    }
+
+    updateCategoryTypeFilterInUrl(filter: CategoryTypeFilter) {
+        this.router.navigate(['.'], { queryParams: { type: filter }, queryParamsHandling: 'merge' });
+    }
 
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
         return combineLatest([
@@ -29,8 +91,9 @@ export class CategoriesUrlService {
 
                 // TODO: fix more enums and clean the line below
                 const view = this.getValidView(routeDetails.params?.vew, preferredView.toString());
-                const yearFilter = this.getValidYearFilter(routeDetails.queryParams?.year, preferredYearFilter, allYears);
-                const typeFilter = this.getValidTypeFilter(routeDetails.queryParams?.type, preferredTypeFilter);
+                // eslint-disable-next-line max-len
+                const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, preferredYearFilter, allYears)?.toString();
+                const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, preferredTypeFilter);
 
                 if(
                     view !== routeDetails.params?.view ||
@@ -62,46 +125,5 @@ export class CategoriesUrlService {
     private isValidView(viewName: string) {
         return viewName === CategoryListType.grid.name.toLowerCase() ||
             viewName === CategoryListType.list.name.toLowerCase();
-    }
-
-    private getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]) {
-        if(!!requestedYearFilter && this.isValidYearFilter(requestedYearFilter, allYears)) {
-            return requestedYearFilter;
-        }
-
-        if(!!preferredYearFilter && this.isValidYearFilter(preferredYearFilter, allYears)) {
-            return preferredYearFilter;
-        }
-
-        return allYears[0];
-    }
-
-    private isValidYearFilter(yearFilter: string | number, allYears: number[]) {
-        if(yearFilter === 'all') {
-            return yearFilter;
-        }
-
-        const year = Number(yearFilter);
-
-        return !isNaN(year) &&
-            allYears.indexOf(year) >= 0;
-    }
-
-    private getValidTypeFilter(requestedTypeFilter: string | null, preferredTypeFilter: string | null) {
-        if(this.isValidTypeFilter(requestedTypeFilter)) {
-            return requestedTypeFilter;
-        }
-
-        if(this.isValidTypeFilter(preferredTypeFilter)) {
-            return preferredTypeFilter;
-        }
-
-        return CategoryTypeFilter.all;
-    }
-
-    private isValidTypeFilter(filter: string|null) {
-        const validatedFilter = toCategoryTypeFilter(filter);
-
-        return !!validatedFilter;
     }
 }
