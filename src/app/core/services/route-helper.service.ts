@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RouterStateSnapshot, Params } from '@angular/router';
 
 import { RouteArea } from '@models';
 
@@ -154,4 +155,34 @@ export class RouteHelperService {
 
         return RouteArea.unknown;
     };
+
+    getRouteDetails(state: RouterStateSnapshot) {
+        return {
+            area: RouteArea.categories,
+            url: state.url,
+            fragment: state.root.fragment,
+            params: this.getRouteNestedParams(state),
+            queryParams: state.root.queryParams,
+            data: state.root.data
+        };
+    }
+
+    isCategoriesArea(url: string) {
+        return this.getArea(url) === RouteArea.categories;
+    }
+
+    private getRouteNestedParams(state: RouterStateSnapshot) {
+        let currentRoute = state?.root;
+        let params: Params = {};
+
+        while (currentRoute?.firstChild) {
+            currentRoute = currentRoute.firstChild;
+            params = {
+                ...params,
+                ...currentRoute.params,
+            };
+        }
+
+        return params;
+    }
 }

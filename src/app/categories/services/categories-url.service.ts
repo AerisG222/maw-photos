@@ -1,29 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Params, ResolveEnd, Router, RouterStateSnapshot } from '@angular/router';
+import { ResolveEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
-import { CategoryTypeFilter, CategoryListType, toCategoryTypeFilter, RouteDetails, RouteArea } from '@models';
+import { CategoryTypeFilter, CategoryListType, toCategoryTypeFilter, RouteDetails } from '@models';
 
 @Injectable()
 export class CategoriesUrlService {
     categoriesBeforeNavigate$ = this.router.events.pipe(
         filter(evt => evt instanceof ResolveEnd),
         map(evt => (evt as ResolveEnd).state),
-        filter(state => this.routeHelper.getArea(state.url) === RouteArea.categories),
-        map(state => {
-            return {
-                area: RouteArea.categories,
-                url: state.url,
-                fragment: state.root.fragment,
-                params: CategoriesUrlService.getRouteNestedParams(state),
-                queryParams: state.root.queryParams,
-                data: state.root.data
-            };
-        })
+        filter(state => this.routeHelper.isCategoriesArea(state.url)),
+        map(state => this.routeHelper.getRouteDetails(state))
     );
 
     constructor(
@@ -32,22 +23,6 @@ export class CategoriesUrlService {
         private routeHelper: RouteHelperService
     ) {
 
-    }
-
-    // TODO: this should probably go elsewhere
-    static getRouteNestedParams(state: RouterStateSnapshot) {
-        let currentRoute = state?.root;
-        let params: Params = {};
-
-        while (currentRoute?.firstChild) {
-            currentRoute = currentRoute.firstChild;
-            params = {
-                ...params,
-                ...currentRoute.params,
-            };
-        }
-
-        return params;
     }
 
     static getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]) {
@@ -96,18 +71,18 @@ export class CategoriesUrlService {
         }
     }
 
-    private static isValidTypeFilter(filter: string|null) {
-        const validatedFilter = toCategoryTypeFilter(filter);
+    private static isValidTypeFilter(typeFilter: string|null) {
+        const validatedFilter = toCategoryTypeFilter(typeFilter);
 
         return !!validatedFilter;
     }
 
-    updateYearFilterInUrl(filter: string | number) {
-        this.router.navigate(['.'], { queryParams: { year: filter }, queryParamsHandling: 'merge' });
+    updateYearFilterInUrl(yearFilter: string | number) {
+        this.router.navigate(['.'], { queryParams: { year: yearFilter }, queryParamsHandling: 'merge' });
     }
 
-    updateCategoryTypeFilterInUrl(filter: CategoryTypeFilter) {
-        this.router.navigate(['.'], { queryParams: { type: filter }, queryParamsHandling: 'merge' });
+    updateCategoryTypeFilterInUrl(typeFilter: CategoryTypeFilter) {
+        this.router.navigate(['.'], { queryParams: { type: typeFilter }, queryParamsHandling: 'merge' });
     }
 
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
