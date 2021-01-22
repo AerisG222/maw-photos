@@ -12,9 +12,11 @@ import {
     MinimapZoom,
     MapTypeId,
     CategoryMargin,
-    CategoryListType,
+    CategoryViewMode,
     toCategoryTypeFilter,
     allCategoryTypeFilters,
+    allCategoryViewModes,
+    toCategoryViewMode,
 } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { Subscription } from 'rxjs';
@@ -33,7 +35,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     categoryMargins = CategoryMargin.allCategoryMargins;
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
-    categoryListTypes = CategoryListType.allTypes;
+    categoryViewModes = allCategoryViewModes;
     photoGridMargins = CategoryMargin.allCategoryMargins;
     photoGridThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
@@ -64,7 +66,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             categoryListCategoryMargin:               [DEFAULT_SETTINGS.categoryListCategoryMargin.name],
             categoryListShowCategoryTitles:           [DEFAULT_SETTINGS.categoryListShowCategoryTitles],
             categoryListThumbnailSize:                [DEFAULT_SETTINGS.categoryListThumbnailSize],
-            categoryListListType:                     [DEFAULT_SETTINGS.categoryListListType.name],
+            categoryListViewMode:                     [DEFAULT_SETTINGS.categoryListViewMode],
             categoryListListViewThumbnailSize:        [DEFAULT_SETTINGS.categoryListListViewThumbnailSize.name],
 
             photoListShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.photoListShowCategoryBreadcrumbs],
@@ -108,7 +110,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             searchShowCategoryTitles:                 [DEFAULT_SETTINGS.searchShowCategoryTitles],
             searchShowCategoryYears:                  [DEFAULT_SETTINGS.searchShowCategoryYears],
             searchThumbnailSize:                      [DEFAULT_SETTINGS.searchListViewThumbnailSize.name],
-            searchListType:                           [DEFAULT_SETTINGS.searchListType.name],
+            searchViewMode:                           [DEFAULT_SETTINGS.searchViewMode],
             searchListViewThumbnailSize:              [DEFAULT_SETTINGS.searchListViewThumbnailSize.name]
         });
     }
@@ -140,7 +142,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             categoryListShowCategoryTitles:    this.getFormBoolean('categoryListShowCategoryTitles',                         DEFAULT_SETTINGS.categoryListShowCategoryTitles),
             categoryListThumbnailSize:         ThumbnailSize.forName(this.getFormString('categoryListThumbnailSize',         DEFAULT_SETTINGS.categoryListThumbnailSize.name)),
             categoryListYearFilter:            this.categoryListYearFilter,
-            categoryListListType:              CategoryListType.forName(this.getFormString('categoryListListType',           DEFAULT_SETTINGS.categoryListListType.name)),
+            categoryListViewMode:              toCategoryViewMode(this.getFormString('categoryListViewMode', '')) ?? DEFAULT_SETTINGS.categoryListViewMode,
             categoryListListViewThumbnailSize: ThumbnailSize.forName(this.getFormString('categoryListListViewThumbnailSize', DEFAULT_SETTINGS.categoryListListViewThumbnailSize.name)),
 
             photoListShowCategoryBreadcrumbs:         this.getFormBoolean('photoListShowCategoryBreadcrumbs',            DEFAULT_SETTINGS.photoListShowCategoryBreadcrumbs),
@@ -184,7 +186,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             searchShowCategoryTitles:    this.getFormBoolean('searchShowCategoryTitles',                         DEFAULT_SETTINGS.searchShowCategoryTitles),
             searchShowCategoryYears:     this.getFormBoolean('searchShowCategoryYears',                          DEFAULT_SETTINGS.searchShowCategoryYears),
             searchThumbnailSize:         ThumbnailSize.forName(this.getFormString('searchThumbnailSize',         DEFAULT_SETTINGS.searchThumbnailSize.name)),
-            searchListType:              CategoryListType.forName(this.getFormString('searchListType',           DEFAULT_SETTINGS.searchListType.name)),
+            searchViewMode:              toCategoryViewMode(this.getFormString('searchViewMode', '')) ?? DEFAULT_SETTINGS.searchViewMode,
             searchListViewThumbnailSize: ThumbnailSize.forName(this.getFormString('searchListViewThumbnailSize', DEFAULT_SETTINGS.searchListViewThumbnailSize.name)),
         };
 
@@ -211,7 +213,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('categoryListCategoryMargin')?.setValue(settings.categoryListCategoryMargin.name);
         this.form.get('categoryListShowCategoryTitles')?.setValue(settings.categoryListShowCategoryTitles);
         this.form.get('categoryListThumbnailSize')?.setValue(settings.categoryListThumbnailSize.name);
-        this.form.get('categoryListListType')?.setValue(settings.categoryListListType.name);
+        this.form.get('categoryListViewMode')?.setValue(settings.categoryListViewMode);
         this.form.get('categoryListListViewThumbnailSize')?.setValue(settings.categoryListListViewThumbnailSize.name);
 
         this.form.get('photoListShowCategoryBreadcrumbs')?.setValue(settings.photoListShowCategoryBreadcrumbs);
@@ -255,7 +257,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('searchShowCategoryTitles')?.setValue(settings.searchShowCategoryTitles);
         this.form.get('searchShowCategoryYears')?.setValue(settings.searchShowCategoryYears);
         this.form.get('searchThumbnailSize')?.setValue(settings.searchThumbnailSize.name);
-        this.form.get('searchListType')?.setValue(settings.searchListType.name);
+        this.form.get('searchViewMode')?.setValue(settings.searchViewMode);
         this.form.get('searchListViewThumbnailSize')?.setValue(settings.searchListViewThumbnailSize.name);
     }
 

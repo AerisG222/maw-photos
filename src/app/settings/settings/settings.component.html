@@ -22,7 +22,7 @@
                     <mat-card-content>
                         <h3>Category Filter</h3>
                         <mat-radio-group formControlName="categoryListCategoryFilter">
-                            <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.name">{{ filter.name }}</mat-radio-button>
+                            <mat-radio-button *ngFor="let filter of categoryFilters" [value]="filter.value">{{ filter.name }}</mat-radio-button>
                         </mat-radio-group>
 
                         <h3>Margins</h3>
@@ -31,8 +31,8 @@
                         </mat-radio-group>
 
                         <h3>Category Display Type</h3>
-                        <mat-radio-group formControlName="categoryListListType">
-                            <mat-radio-button *ngFor="let type of categoryListTypes" [value]="type.name">{{ type.name }}</mat-radio-button>
+                        <mat-radio-group formControlName="categoryListViewMode">
+                            <mat-radio-button *ngFor="let type of categoryViewModes" [value]="type.value">{{ type.name }}</mat-radio-button>
                         </mat-radio-group>
 
                         <h3>Thumbnail Size (list view)</h3>
@@ -188,8 +188,8 @@
                         </mat-radio-group>
 
                         <h3>Search Result Display Type</h3>
-                        <mat-radio-group formControlName="searchListType">
-                            <mat-radio-button *ngFor="let type of categoryListTypes" [value]="type.name">{{ type.name }}</mat-radio-button>
+                        <mat-radio-group formControlName="searchViewMode">
+                            <mat-radio-button *ngFor="let type of categoryViewModes" [value]="type.value">{{ type.name }}</mat-radio-button>
                         </mat-radio-group>
 
                         <h3>Thumbnail Size (list view)</h3>

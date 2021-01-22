@@ -8,8 +8,9 @@ import {
     VideoSize,
     CategoryMargin,
     CategoryTypeFilter,
-    CategoryListType,
+    CategoryViewMode,
     toCategoryTypeFilter,
+    toCategoryViewMode,
  } from '@models';
 import { LocalStorageService } from './local-storage.service';
 
@@ -27,7 +28,7 @@ export class SettingsService {
     private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
     private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
     private static readonly keyCategoryListYearFilter = 'categoryListYearFilter';
-    private static readonly keyCategoryListListType = 'categoryListListType';
+    private static readonly keyCategoryListViewMode = 'categoryListViewMode';
     private static readonly keyCategoryListListViewThumbnailSize = 'categoryListListViewThumbnailSize';
 
     private static readonly keyPhotoListShowCategoryBreadcrumbs = 'photoListShowCategoryBreadcrumbs';
@@ -71,7 +72,7 @@ export class SettingsService {
     private static readonly keySearchThumbnailSize = 'searchThumbnailSize';
     private static readonly keySearchShowCategoryTitles = 'searchShowCategoryTitles';
     private static readonly keySearchShowCategoryYears = 'searchShowCategoryYears';
-    private static readonly keySearchListType = 'searchListType';
+    private static readonly keySearchViewMode = 'searchViewMode';
     private static readonly keySearchListViewThumbnailSize = 'searchListViewThumbnailSize';
 
     private static readonly removedKeyCategoryListYearFilter = 'categoryListYearFilterEnabled';
@@ -79,6 +80,8 @@ export class SettingsService {
     private static readonly removedKeyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
     private static readonly removedKeyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
     private static readonly removedKeyVideoListToolbarExpandedState = 'videoListToolbarExpandedState';
+    private static readonly removedKeyCategoryListListType = 'categoryListListType';
+    private static readonly removedKeySearchListType = 'searchListType';
 
     constructor(
         private localStorage: LocalStorageService
@@ -98,7 +101,7 @@ export class SettingsService {
                 categoryListThumbnailSize:         this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
                 categoryListShowCategoryTitles:    this.getBoolean(SettingsService.keyCategoryListShowCategoryTitles),
                 categoryListYearFilter:            this.getStringOrNumber(SettingsService.keyCategoryListYearFilter),
-                categoryListListType:              this.getCategoryListType(SettingsService.keyCategoryListListType),
+                categoryListViewMode:              this.getCategoryViewMode(SettingsService.keyCategoryListViewMode),
                 categoryListListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListListViewThumbnailSize),
 
                 photoListThumbnailSize:                   this.getPhotoListThumbnailSize(),
@@ -142,7 +145,7 @@ export class SettingsService {
                 searchThumbnailSize:         this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
                 searchShowCategoryTitles:    this.getBoolean(SettingsService.keySearchShowCategoryTitles),
                 searchShowCategoryYears:     this.getBoolean(SettingsService.keySearchShowCategoryYears),
-                searchListType:              this.getCategoryListType(SettingsService.keySearchListType),
+                searchViewMode:              this.getCategoryViewMode(SettingsService.keySearchViewMode),
                 searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
             };
         } catch (e) {
@@ -164,7 +167,7 @@ export class SettingsService {
         this.setBoolean(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
         this.setValue(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
         this.setValue(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter.toString());
-        this.setValue(SettingsService.keyCategoryListListType, settings.categoryListListType.name);
+        this.setValue(SettingsService.keyCategoryListViewMode, settings.categoryListViewMode);
         this.setValue(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
 
         this.setBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
@@ -208,7 +211,7 @@ export class SettingsService {
         this.setBoolean(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
         this.setBoolean(SettingsService.keySearchShowCategoryYears, settings.searchShowCategoryYears);
         this.setValue(SettingsService.keySearchThumbnailSize, settings.searchThumbnailSize.name);
-        this.setValue(SettingsService.keySearchListType, settings.searchListType.name);
+        this.setValue(SettingsService.keySearchViewMode, settings.searchViewMode);
         this.setValue(SettingsService.keySearchListViewThumbnailSize, settings.searchListViewThumbnailSize.name);
 
         this.killRemovedSettings();
@@ -220,6 +223,8 @@ export class SettingsService {
         this.clearValue(SettingsService.removedKeyPhotoListToolbarExpandedState);
         this.clearValue(SettingsService.removedKeyPhotoListFullscreenToolbarExpandedState);
         this.clearValue(SettingsService.removedKeyVideoListToolbarExpandedState);
+        this.clearValue(SettingsService.removedKeyCategoryListListType);
+        this.clearValue(SettingsService.removedKeySearchListType);
     }
 
     clearAuthRedirectUrl(): void {
@@ -252,13 +257,13 @@ export class SettingsService {
         }
     }
 
-    private getCategoryListType(key: string): CategoryListType {
+    private getCategoryViewMode(key: string): CategoryViewMode {
         const name = this.getStringOrNull(key);
 
         try {
-            return name !== null ? CategoryListType.forName(name) : CategoryListType.grid;
+            return toCategoryViewMode(name) ?? CategoryViewMode.grid;
         } catch {
-            return CategoryListType.grid;
+            return CategoryViewMode.grid;
         }
     }
 

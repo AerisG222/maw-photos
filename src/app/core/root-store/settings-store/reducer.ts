@@ -82,7 +82,7 @@ export const reducer = createReducer(
         ...state,
         settings: {
             ...state.settings,
-            categoryListListType: newType
+            categoryListViewMode: newType
         }
     })),
     on(SettingsActions.updateCategoryListListViewThumbnailSizeRequest, (state, { newSize }): State => ({
@@ -341,7 +341,7 @@ export const reducer = createReducer(
         ...state,
         settings: {
             ...state.settings,
-            searchListType: newType
+            searchViewMode: newType
         }
     })),
     on(SettingsActions.updateSearchListViewThumbnailSizeRequest, (state, { newSize }): State => ({

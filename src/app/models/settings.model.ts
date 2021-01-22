@@ -3,7 +3,7 @@ import { ThumbnailSize } from './thumbnail-size.model';
 import { VideoSize } from './video-size.model';
 import { CategoryMargin } from './category-margin.model';
 import { CategoryTypeFilter } from './category-type-filter.model';
-import { CategoryListType } from './category-list-type.model';
+import { CategoryViewMode } from './category-view-mode.model';
 
 export interface Settings {
     appTheme: Theme;
@@ -14,7 +14,7 @@ export interface Settings {
     categoryListShowCategoryTitles: boolean;
     categoryListThumbnailSize: ThumbnailSize;
     categoryListYearFilter: string | number;
-    categoryListListType: CategoryListType;
+    categoryListViewMode: CategoryViewMode;
     categoryListListViewThumbnailSize: ThumbnailSize;
 
     photoListShowCategoryBreadcrumbs: boolean;
@@ -58,7 +58,7 @@ export interface Settings {
     searchShowCategoryTitles: boolean;
     searchShowCategoryYears: boolean;
     searchThumbnailSize: ThumbnailSize;
-    searchListType: CategoryListType;
+    searchViewMode: CategoryViewMode;
     searchListViewThumbnailSize: ThumbnailSize;
 }
 
@@ -71,7 +71,7 @@ export const DEFAULT_SETTINGS: Settings = ({
     categoryListShowCategoryTitles: true,
     categoryListThumbnailSize: ThumbnailSize.default,
     categoryListYearFilter: 'all',
-    categoryListListType: CategoryListType.grid,
+    categoryListViewMode: CategoryViewMode.grid,
     categoryListListViewThumbnailSize: ThumbnailSize.default,
 
     photoListShowCategoryBreadcrumbs: true,
@@ -115,6 +115,6 @@ export const DEFAULT_SETTINGS: Settings = ({
     searchShowCategoryTitles: true,
     searchShowCategoryYears: true,
     searchThumbnailSize: ThumbnailSize.default,
-    searchListType: CategoryListType.grid,
+    searchViewMode: CategoryViewMode.grid,
     searchListViewThumbnailSize: ThumbnailSize.default
 });

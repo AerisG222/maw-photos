@@ -6,7 +6,7 @@ import { filter, map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
-import { CategoryTypeFilter, CategoryListType, toCategoryTypeFilter, RouteDetails } from '@models';
+import { CategoryTypeFilter, CategoryViewMode, toCategoryTypeFilter, RouteDetails } from '@models';
 
 @Injectable()
 export class CategoriesUrlService {
@@ -97,8 +97,7 @@ export class CategoriesUrlService {
                     return;
                 }
 
-                // TODO: fix more enums and clean the line below
-                const view = this.getValidView(routeDetails.params?.vew, preferredView.toString());
+                const view = this.getValidView(routeDetails.params?.vew, preferredView);
                 // eslint-disable-next-line max-len
                 const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, preferredYearFilter, allYears)?.toString();
                 const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, preferredTypeFilter);
@@ -127,11 +126,11 @@ export class CategoriesUrlService {
             return preferredView;
         }
 
-        return CategoryListType.grid.name.toLowerCase();
+        return CategoryViewMode.grid;
     }
 
     private isValidView(viewName: string) {
-        return viewName === CategoryListType.grid.name.toLowerCase() ||
-            viewName === CategoryListType.list.name.toLowerCase();
+        return viewName === CategoryViewMode.grid ||
+            viewName === CategoryViewMode.list;
     }
 }

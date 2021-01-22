@@ -7,7 +7,7 @@ import {
     CategoryMargin,
     ThumbnailSize,
     CategoryTypeFilter,
-    CategoryListType,
+    CategoryViewMode,
     GoogleMapThemes,
 } from '@models';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
@@ -73,7 +73,7 @@ export const categoryListYearFilter = createSelector(
 
 export const categoryListListType = createSelector(
     settingsState,
-    (state: State): CategoryListType => state.settings.categoryListListType
+    (state: State): CategoryViewMode => state.settings.categoryListViewMode
 );
 
 export const categoryListListViewThumbnailSize = createSelector(
@@ -83,12 +83,12 @@ export const categoryListListViewThumbnailSize = createSelector(
 
 export const categoryListShouldShowListView = createSelector(
     categoryListListType,
-    (type: CategoryListType): boolean => type.name === CategoryListType.list.name
+    (type: CategoryViewMode): boolean => type === CategoryViewMode.list
 );
 
 export const categoryListShouldShowGridView = createSelector(
     categoryListListType,
-    (type: CategoryListType): boolean => type.name === CategoryListType.grid.name
+    (type: CategoryViewMode): boolean => type === CategoryViewMode.grid
 );
 
 // -- PHOTO GRID --
@@ -259,7 +259,7 @@ export const searchThumbnailSize = createSelector(
 
 export const searchListType = createSelector(
     settingsState,
-    (state: State): CategoryListType => state.settings.searchListType
+    (state: State): CategoryViewMode => state.settings.searchViewMode
 );
 
 export const searchListViewThumbnailSize = createSelector(
@@ -269,10 +269,10 @@ export const searchListViewThumbnailSize = createSelector(
 
 export const showSearchResultsInListView = createSelector(
     searchListType,
-    type => type.name === CategoryListType.list.name
+    type => type === CategoryViewMode.list
 );
 
 export const showSearchResultsInGridView = createSelector(
     searchListType,
-    type => type.name === CategoryListType.grid.name
+    type => type === CategoryViewMode.grid
 );

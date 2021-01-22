@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
-    CategoryListType,
     CategoryMargin,
     ThumbnailSize,
     Settings,
@@ -34,16 +33,6 @@ export class ToolbarComponent {
 
     onToggleTitle(): void {
         this.store.dispatch(SettingsStoreActions.toggleSearchCategoryTitlesRequest());
-    }
-
-    onToggleListType(): void {
-        this.execWithSettings(settings => {
-            if (!!settings) {
-                const type = CategoryListType.nextType(settings.searchListType.name);
-
-                this.store.dispatch(SettingsStoreActions.updateSearchListTypeRequest({ newType: type }));
-            }
-        });
     }
 
     onToggleListThumbnailSize(): void {

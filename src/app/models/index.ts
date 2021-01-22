@@ -2,7 +2,7 @@ export * from './api-collection.model';
 export * from './auth-config';
 export * from './category-type-filter.model';
 export * from './category-gps-status.model';
-export * from './category-list-type.model';
+export * from './category-view-mode.model';
 export * from './category-margin.model';
 export * from './category.model';
 export * from './category-teaser.model';

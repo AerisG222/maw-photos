@@ -6,7 +6,7 @@ import {
     VideoSize,
     CategoryMargin,
     CategoryTypeFilter,
-    CategoryListType,
+    CategoryViewMode,
  } from '@models';
 
 export const updateMobileMarginsRequest = createAction(
@@ -67,7 +67,7 @@ export const updateCategoryListCategoryMarginRequest = createAction(
 
 export const updateCategoryListListTypeRequest = createAction(
     '[Settings] Update Category List List Type',
-    props<{ newType: CategoryListType }>()
+    props<{ newType: CategoryViewMode }>()
 );
 
 export const updateCategoryListListViewThumbnailSizeRequest = createAction(
@@ -230,7 +230,7 @@ export const updateSearchCategoryMarginRequest = createAction(
 
 export const updateSearchListTypeRequest = createAction(
     '[Settings] Update Search List Type',
-    props<{ newType: CategoryListType }>()
+    props<{ newType: CategoryViewMode }>()
 );
 
 export const updateSearchListViewThumbnailSizeRequest = createAction(
