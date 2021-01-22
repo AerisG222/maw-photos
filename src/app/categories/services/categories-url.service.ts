@@ -1,20 +1,53 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Params, ResolveEnd, Router, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
-import { CategoryTypeFilter, CategoryListType, toCategoryTypeFilter, RouteDetails } from '@models';
+import { CategoryTypeFilter, CategoryListType, toCategoryTypeFilter, RouteDetails, RouteArea } from '@models';
 
 @Injectable()
 export class CategoriesUrlService {
+    categoriesBeforeNavigate$ = this.router.events.pipe(
+        filter(evt => evt instanceof ResolveEnd),
+        map(evt => (evt as ResolveEnd).state),
+        filter(state => this.routeHelper.getArea(state.url) === RouteArea.categories),
+        map(state => {
+            return {
+                area: RouteArea.categories,
+                url: state.url,
+                fragment: state.root.fragment,
+                params: CategoriesUrlService.getRouteNestedParams(state),
+                queryParams: state.root.queryParams,
+                data: state.root.data
+            };
+        })
+    );
+
     constructor(
         private store: Store,
-        private router: Router
+        private router: Router,
+        private routeHelper: RouteHelperService
     ) {
 
+    }
+
+    // TODO: this should probably go elsewhere
+    static getRouteNestedParams(state: RouterStateSnapshot) {
+        let currentRoute = state?.root;
+        let params: Params = {};
+
+        while (currentRoute?.firstChild) {
+            currentRoute = currentRoute.firstChild;
+            params = {
+                ...params,
+                ...currentRoute.params,
+            };
+        }
+
+        return params;
     }
 
     static getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]) {
