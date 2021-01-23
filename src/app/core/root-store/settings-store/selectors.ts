@@ -72,7 +72,7 @@ export const categoryListYearFilter = createSelector(
     (state: State): string | number => state.settings.categoryListYearFilter
 );
 
-export const categoryListListType = createSelector(
+export const categoryViewMode = createSelector(
     settingsState,
     (state: State): CategoryViewMode => state.settings.categoryListViewMode
 );
@@ -83,12 +83,12 @@ export const categoryListListViewThumbnailSize = createSelector(
 );
 
 export const categoryListShouldShowListView = createSelector(
-    categoryListListType,
+    categoryViewMode,
     (type: CategoryViewMode): boolean => type === CategoryViewMode.list
 );
 
 export const categoryListShouldShowGridView = createSelector(
-    categoryListListType,
+    categoryViewMode,
     (type: CategoryViewMode): boolean => type === CategoryViewMode.grid
 );
 

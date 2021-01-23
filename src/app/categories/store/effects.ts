@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { SettingsStoreActions } from '@core/root-store/settings-store';
 import * as CategoryStoreActions from './actions';
 import { CategoriesUrlService } from '../services/categories-url.service';
+import { combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { RootStoreSelectors, RouterStoreSelectors } from '@core/root-store';
+import { RouteArea } from '@models';
 
 @Injectable()
 export class CategoriesStoreEffects {
@@ -40,14 +44,20 @@ export class CategoriesStoreEffects {
 
     // originally tried to implement as a canactivate guard, but resolvers won't have run when that is called
     ensureCompleteUrl$ = createEffect(() => {
-        return this.categoriesUrlService.categoriesBeforeNavigate$.pipe(
-            switchMap(routeDetails => this.categoriesUrlService.ensureCompleteUrl(routeDetails))
+        return combineLatest([
+            this.store.select(RouterStoreSelectors.selectRouteDetails),
+            this.store.select(RootStoreSelectors.allYears)
+        ]).pipe(
+            filter(([route, years]) => route.area === RouteArea.categories),
+            filter(([route, years]) => years.length > 0),
+            switchMap(([route, years]) => this.categoriesUrlService.ensureCompleteUrl(route))
         );
     }, { dispatch: false });
 
     constructor(
         private actions$: Actions,
-        private categoriesUrlService: CategoriesUrlService
+        private categoriesUrlService: CategoriesUrlService,
+        private store: Store
     ) {
 
     }

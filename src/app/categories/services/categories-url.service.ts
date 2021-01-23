@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ResolveEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
 import { RouteHelperService } from '@core/services';
@@ -10,17 +10,9 @@ import { CategoryTypeFilter, CategoryViewMode, toCategoryTypeFilter, RouteDetail
 
 @Injectable()
 export class CategoriesUrlService {
-    categoriesBeforeNavigate$ = this.router.events.pipe(
-        filter(evt => evt instanceof ResolveEnd),
-        map(evt => (evt as ResolveEnd).state),
-        filter(state => this.routeHelper.isCategoriesArea(state.url)),
-        map(state => this.routeHelper.getRouteDetails(state))
-    );
-
     constructor(
         private store: Store,
-        private router: Router,
-        private routeHelper: RouteHelperService
+        private router: Router
     ) {
 
     }
@@ -88,7 +80,7 @@ export class CategoriesUrlService {
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
         return combineLatest([
             this.store.select(RootStoreSelectors.allYears),
-            this.store.select(SettingsStoreSelectors.categoryListListType),
+            this.store.select(SettingsStoreSelectors.categoryViewMode),
             this.store.select(SettingsStoreSelectors.categoryListYearFilter),
             this.store.select(SettingsStoreSelectors.categoryListCategoryFilter)
         ]).pipe(
