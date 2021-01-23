@@ -1,11 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { allCategoryTypeFilters, CategoryTypeFilter, toCategoryTypeFilter } from '@models';
 import { SettingsStoreSelectors } from '@core/root-store';
 import { MatSelectChange } from '@angular/material/select';
-import { tap, first } from 'rxjs/operators';
 import { CategoriesStoreActions } from '../../store';
 
 @Component({
@@ -14,24 +12,14 @@ import { CategoriesStoreActions } from '../../store';
     styleUrls: ['./category-type-filter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryTypeFilterComponent implements OnInit {
+export class CategoryTypeFilterComponent {
+    effectiveFilter$ = this.store.select(SettingsStoreSelectors.categoryListCategoryFilter);
     categoryTypes = allCategoryTypeFilters;
-    categoryTypeControl = new FormControl('all');
 
     constructor(
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.store
-            .select(SettingsStoreSelectors.categoryListCategoryFilter)
-            .pipe(
-                tap(filter => this.categoryTypeControl.setValue(filter)),
-                first()
-            )
-            .subscribe();
     }
 
     onSelectCategoryType(change: MatSelectChange): void {
