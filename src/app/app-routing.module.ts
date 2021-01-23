@@ -4,14 +4,12 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { authGuardToken } from './core/services/auth.guard';
 import { authInitResolverToken } from './core/services/auth-init.resolver';
 import { RouteHelperService } from './core/services/route-helper.service';
-import { PhotoCategoriesResolverService, VideoCategoriesResolverService } from '@core/services';
 
 const routes: Routes = [
     {
         path: '',
         resolve: [ authInitResolverToken ],
         children: [
-            // ANONYMOUS ACCESS
             {
                 path: '',
                 pathMatch: 'full',
@@ -26,15 +24,9 @@ const routes: Routes = [
                     }
                 ]
             },
-
-            // AUTHORIZED ACCESS
             {
                 path: '',
                 canActivate: [authGuardToken],
-                resolve: {
-                    photoCategoriesResolverService: PhotoCategoriesResolverService,
-                    videoCategoriesResolverService: VideoCategoriesResolverService
-                },
                 children: [
                     {
                         path: RouteHelperService.categories,

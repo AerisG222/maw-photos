@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { ROUTER_NAVIGATED } from '@ngrx/router-store';
 import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
 import { RouteDetails, RouteArea } from '@models';
-import { ROUTER_NAVIGATED } from '@ngrx/router-store';
+import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '../photo-category-store';
+import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '../video-category-store';
 
 interface RouteDetailsChange {
     previous: RouteDetails | null;
@@ -44,7 +46,7 @@ export class RouterStoreEffects {
                     enteringRouteDetails: change.current
                 }))
             );
-        });
+    });
 
     monitorRouteAreaEnterEffect$ = createEffect(() => {
         return this.routeAreaChanged$
@@ -54,7 +56,7 @@ export class RouterStoreEffects {
                     enteringRouteDetails: change.current
                 }))
             );
-        });
+    });
 
     monitorRouteAreaLeaveEffect$ = createEffect(() => {
         return this.routeAreaChanged$
@@ -65,7 +67,7 @@ export class RouterStoreEffects {
                     leavingRouteDetails: change.previous
                 }))
             );
-        });
+    });
 
     constructor(
         private actions$: Actions,

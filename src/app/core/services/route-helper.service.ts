@@ -171,6 +171,14 @@ export class RouteHelperService {
         return this.getArea(url) === RouteArea.categories;
     }
 
+    doesRouteAreaNeedCategoryData(area: RouteArea | undefined): boolean {
+        return area === RouteArea.categories ||
+            area === RouteArea.photos ||
+            area === RouteArea.random ||
+            area === RouteArea.stats ||
+            area === RouteArea.videos;
+    }
+
     private getRouteNestedParams(state: RouterStateSnapshot) {
         let currentRoute = state?.root;
         let params: Params = {};

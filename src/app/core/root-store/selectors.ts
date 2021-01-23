@@ -48,9 +48,16 @@ export const allCategories = createSelector(
 export const allYears = createSelector(
     PhotoCategoryStoreSelectors.allYears,
     VideoCategoryStoreSelectors.allYears,
-    (photoYears: number[] | null, videoYears: number[] | null) => Array
-        .from(new Set([...(photoYears ?? []), ...(videoYears ?? [])]))
-        .sort(sortNumbersDescending)
+    (photoYears: number[], videoYears: number[]) => {
+        if(photoYears.length > 0 && videoYears.length > 0)
+        {
+            return Array
+            .from(new Set([...(photoYears ?? []), ...(videoYears ?? [])]))
+            .sort(sortNumbersDescending);
+        }
+
+        return [];
+    }
 );
 
 const sortNumbersDescending = (first: number, second: number): number => {

@@ -8,8 +8,6 @@ export * from './gps.service';
 export * from './hotkey-helper.service';
 export * from './local-storage.service';
 export * from './photo-api.service';
-export * from './photo-categories-resolver.service';
 export * from './route-helper.service';
 export * from './settings.service';
 export * from './video-api.service';
-export * from './video-categories-resolver.service';

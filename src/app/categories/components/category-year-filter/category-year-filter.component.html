@@ -1,6 +1,6 @@
 <mat-form-field appearance="standard">
     <mat-label>Year</mat-label>
-    <mat-select [formControl]="yearControl" (selectionChange)="onSelectYear($event)">
+    <mat-select (selectionChange)="onSelectYear($event)" [value]="effectiveFilter$ | async">
         <mat-option value="all">All Years</mat-option>
         <mat-option *ngFor="let year of allYears$ | async" [value]="year">{{ year }}</mat-option>
     </mat-select>

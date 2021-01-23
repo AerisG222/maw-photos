@@ -12,6 +12,16 @@ import * as VideoCategoryStoreSelectors from './selectors';
 
 @Injectable()
 export class VideoCategoryStoreRoutingEffects {
+    ensureVideoCategoriesLoadedEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeAreaChanged),
+            filter(change => this.routeHelperService.doesRouteAreaNeedCategoryData(change.enteringArea)),
+            withLatestFrom(this.store.select(VideoCategoryStoreSelectors.allCategories)),
+            filter(([change, categories]) => !!!categories || categories.length === 0),
+            map(([change, categories]) => VideoCategoryStoreActions.loadRequest())
+        );
+    });
+
     verifyActiveCategoryOnRouteChange$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
@@ -22,7 +32,7 @@ export class VideoCategoryStoreRoutingEffects {
 
                 return isNaN(catId) || !(catId in entities);
             }),
-            tap(_ => this.router.navigateByUrl(this.routeBuilderService.categoriesAbs()))
+            tap(_ => this.router.navigateByUrl(this.routeHelperService.categoriesAbs()))
         );
     }, { dispatch: false });
 
@@ -46,7 +56,7 @@ export class VideoCategoryStoreRoutingEffects {
         private actions$: Actions,
         private store: Store,
         private router: Router,
-        private routeBuilderService: RouteHelperService
+        private routeHelperService: RouteHelperService
     ) {
 
     }

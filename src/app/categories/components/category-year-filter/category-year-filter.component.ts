@@ -1,9 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/internal/Observable';
-import { first, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors } from '@core/root-store';
 import { CategoriesStoreActions, CategoriesStoreSelectors } from '../../store';
@@ -14,26 +11,14 @@ import { CategoriesStoreActions, CategoriesStoreSelectors } from '../../store';
     styleUrls: ['./category-year-filter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryYearFilterComponent implements OnInit {
-    yearControl = new FormControl('');
-
-    selectedYear$: Observable<number|string> | null = null;
+export class CategoryYearFilterComponent {
+    effectiveFilter$ = this.store.select(CategoriesStoreSelectors.categoryEffectiveYearFilter);
     allYears$ = this.store.select(RootStoreSelectors.allYears);
 
     constructor(
         private store: Store
     ) {
 
-    }
-
-    ngOnInit(): void {
-        this.store
-            .select(CategoriesStoreSelectors.categoryEffectiveYearFilter)
-            .pipe(
-                tap(val => this.yearControl.setValue(val)),
-                first()
-            )
-            .subscribe();
     }
 
     onSelectYear(change: MatSelectChange): void {
