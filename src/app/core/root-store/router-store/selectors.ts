@@ -148,4 +148,3 @@ export const isSearchListView = createSelector(
     selectRouteData,
     (isSearch, data) => isSearch && data?.view === RouteHelper.searchViewList
 );
-
