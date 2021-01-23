@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
     PhotoCategory,
@@ -15,8 +15,6 @@ import {
  } from '@models';
 import { environment } from 'src/environments/environment';
 import { DateService, PhotoApiService } from '@core/services';
-
-// TODO: remove first()  [https://github.com/angular/angular/issues/20755]
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
@@ -113,10 +111,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl(`photos/${photoId}/comments`);
 
         return this.http
-            .post<ApiCollection<Comment>>(url, { photoId, comment })
-            .pipe(
-                first()
-            );
+            .post<ApiCollection<Comment>>(url, { photoId, comment });
     }
 
     getGpsDetail(photoId: number): Observable<GpsDetail> {
@@ -130,10 +125,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
         const url = this.getAbsoluteUrl(`photos/${photoId}/gps`);
 
         return this.http
-            .patch<GpsDetail>(url, gps)
-            .pipe(
-                first()
-            );
+            .patch<GpsDetail>(url, gps);
     }
 
     setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory> {
@@ -142,7 +134,6 @@ export class ExternalPhotoApiService implements PhotoApiService {
         return this.http
             .patch<PhotoCategory>(url, { photoId })
             .pipe(
-                first(),
                 map(p => this.cleanupPhotoCategory(p))
             );
     }

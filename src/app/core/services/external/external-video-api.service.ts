@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
     VideoCategory,
@@ -14,8 +14,6 @@ import {
  } from '@models';
 import { DateService, VideoApiService } from '@core/services';
 import { environment } from 'src/environments/environment';
-
-// TODO: remove first()  [https://github.com/angular/angular/issues/20755]
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
@@ -82,10 +80,7 @@ export class ExternalVideoApiService implements VideoApiService {
         const url = this.getAbsoluteUrl(`videos/${videoId}/comments`);
 
         return this.http
-            .post<ApiCollection<Comment>>(url, { videoId, comment })
-            .pipe(
-                first()
-            );
+            .post<ApiCollection<Comment>>(url, { videoId, comment });
     }
 
     getGpsDetail(videoId: number): Observable<GpsDetail> {
@@ -99,10 +94,7 @@ export class ExternalVideoApiService implements VideoApiService {
         const url = this.getAbsoluteUrl(`videos/${videoId}/gps`);
 
         return this.http
-            .patch<GpsDetail>(url, gps)
-            .pipe(
-                first()
-            );
+            .patch<GpsDetail>(url, gps);
     }
 
     setTeaser(categoryId: number, videoId: number): Observable<VideoCategory> {
@@ -111,7 +103,6 @@ export class ExternalVideoApiService implements VideoApiService {
         return this.http
             .patch<VideoCategory>(url, { videoId })
             .pipe(
-                first(),
                 map(v => this.cleanupVideoCategory(v))
             );
     }
