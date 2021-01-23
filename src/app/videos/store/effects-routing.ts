@@ -6,8 +6,7 @@ import { combineLatest } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 import { RouterStoreActions, RouterStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services';
-import { RouteArea } from '@models';
+import { RouteArea, RouteHelper } from '@models';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 
@@ -27,7 +26,7 @@ export class VideoStoreRoutingEffects {
     navigateToVideo$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoStoreActions.navigateToVideo),
-            map(action => this.routeBuilderService.videoCategoriesAbs(action.categoryId, action.videoId)),
+            map(action => RouteHelper.videoCategoriesAbs(action.categoryId, action.videoId)),
             tap(url => this.router.navigateByUrl(url))
         );
     }, { dispatch: false });
@@ -80,8 +79,7 @@ export class VideoStoreRoutingEffects {
     constructor(
         private actions$: Actions,
         private store: Store,
-        private router: Router,
-        private routeBuilderService: RouteHelperService
+        private router: Router
     ) {
 
     }

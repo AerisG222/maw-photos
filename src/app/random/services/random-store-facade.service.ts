@@ -1,9 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 // eslint-disable-next-line max-len
 import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
-import { Photo, GpsCoordinate, MapType } from '@models';
+import { Photo, GpsCoordinate, MapType, RouteHelper } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -19,8 +20,6 @@ import {
     helpSaveCategoryTeaser,
     PhotoLinkable,
  } from '@core/facades';
-import { RouteHelperService } from '@core/services';
-import { Subscription } from 'rxjs';
 
 @Injectable()
 export class RandomStoreFacadeService implements
@@ -51,8 +50,7 @@ export class RandomStoreFacadeService implements
     private view = 'grid';
 
     constructor(
-        private store: Store,
-        private routeHelper: RouteHelperService
+        private store: Store
     ) {
         // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
         this.destroySub.add(this.store.select(RouterStoreSelectors.photoView)
@@ -119,6 +117,6 @@ export class RandomStoreFacadeService implements
     }
 
     buildPhotoLink(photo: Photo) {
-        return this.routeHelper.randomAbs(this.view, photo.id);
+        return RouteHelper.randomAbs(this.view, photo.id);
     }
 }

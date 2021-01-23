@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { Photo, GpsCoordinate, MapType } from '@models';
+import { Photo, GpsCoordinate, MapType, RouteHelper } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -18,7 +18,6 @@ import {
     helpSaveCategoryTeaser,
     PhotoLinkable,
  } from '@core/facades';
-import { RouteHelperService } from '@core/services';
 // eslint-disable-next-line max-len
 import { RouterStoreSelectors, SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
 
@@ -52,8 +51,7 @@ export class PhotoStoreFacadeService implements
     private view = 'grid';
 
     constructor(
-        private store: Store,
-        private routeHelper: RouteHelperService
+        private store: Store
     ) {
         // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
         this.destroySub.add(this.store.select(RouterStoreSelectors.photoView)
@@ -120,6 +118,6 @@ export class PhotoStoreFacadeService implements
     }
 
     buildPhotoLink(photo: Photo) {
-        return this.routeHelper.photoCategoriesAbs(this.view, photo.categoryId, photo.id);
+        return RouteHelper.photoCategoriesAbs(this.view, photo.categoryId, photo.id);
     }
 }

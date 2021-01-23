@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { authGuardToken } from './core/services/auth.guard';
 import { authInitResolverToken } from './core/services/auth-init.resolver';
-import { RouteHelperService } from './core/services/route-helper.service';
+import { RouteHelper } from '@models';
 
 const routes: Routes = [
     {
@@ -19,7 +19,7 @@ const routes: Routes = [
                 path: '',
                 children: [
                     {
-                        path: RouteHelperService.login,
+                        path: RouteHelper.login,
                         loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
                     }
                 ]
@@ -29,35 +29,35 @@ const routes: Routes = [
                 canActivate: [authGuardToken],
                 children: [
                     {
-                        path: RouteHelperService.categories,
+                        path: RouteHelper.categories,
                         loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
                     },
                     {
-                        path: RouteHelperService.photoCategories,
+                        path: RouteHelper.photoCategories,
                         loadChildren: () => import('./photos/photos.module').then(m => m.PhotosModule),
                     },
                     {
-                        path: RouteHelperService.videoCategories,
+                        path: RouteHelper.videoCategories,
                         loadChildren: () => import('./videos/videos.module').then(m => m.VideosModule),
                     },
                     {
-                        path: RouteHelperService.random,
+                        path: RouteHelper.random,
                         loadChildren: () => import('./random/random.module').then(m => m.RandomModule),
                     },
                     {
-                        path: RouteHelperService.about,
+                        path: RouteHelper.about,
                         loadChildren: () => import('./about/about.module').then(m => m.AboutModule),
                     },
                     {
-                        path: RouteHelperService.search,
+                        path: RouteHelper.search,
                         loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
                     },
                     {
-                        path: RouteHelperService.settings,
+                        path: RouteHelper.settings,
                         loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
                     },
                     {
-                        path: RouteHelperService.stats,
+                        path: RouteHelper.stats,
                         loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule),
                     },
                 ]

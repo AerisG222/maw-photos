@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services';
+import { RouteHelper } from '@models';
 
 @Component({
     selector: 'app-toolbar-view-bulk-edit-button',
@@ -20,6 +20,6 @@ export class ToolbarViewBulkEditButtonComponent {
     }
 
     onToggleBulkEditView(): void {
-        this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelperService.photoViewBulkEdit }));
+        this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewBulkEdit }));
     }
 }

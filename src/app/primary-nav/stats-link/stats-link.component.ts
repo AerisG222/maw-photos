@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { RouteHelperService } from '@core/services';
+
+import { RouteHelper } from '@models';
 
 @Component({
     selector: 'app-primary-nav-stats-link',
@@ -8,9 +9,5 @@ import { RouteHelperService } from '@core/services';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatsLinkComponent {
-    statsLink = this.routeHelperService.statsAbs();
-
-    constructor(private routeHelperService: RouteHelperService) {
-
-    }
+    statsLink = RouteHelper.statsAbs();
 }

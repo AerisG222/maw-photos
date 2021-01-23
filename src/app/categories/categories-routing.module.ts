@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { YearListComponent } from './components/year-list/year-list.component';
-import { RouteHelperService } from '@core/services';
+import { RouteHelper } from '@models';
 
 const routes: Routes = [
     { path: ':view', component: YearListComponent },
-    { path: '', redirectTo: RouteHelperService.categoryViewDefault },
+    { path: '', redirectTo: RouteHelper.categoryViewDefault },
     { path: '**',  redirectTo: '' }
 ];
 

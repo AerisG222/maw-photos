@@ -42,7 +42,6 @@ export class CategoriesStoreEffects {
         );
     }, { dispatch: false });
 
-    // originally tried to implement as a canactivate guard, but resolvers won't have run when that is called
     ensureCompleteUrl$ = createEffect(() => {
         return combineLatest([
             this.store.select(RouterStoreSelectors.selectRouteDetails),

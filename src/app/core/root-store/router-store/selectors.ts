@@ -4,19 +4,19 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MinimalRouterStateSnapshot } from '@ngrx/router-store';
 
 import { RouteDetails, RouteArea } from '@models';
-import { RouteHelperService } from '../../services/route-helper.service';
+import { RouteHelper } from '@models';
 
 export const routerState = createFeatureSelector<fromRouter.RouterReducerState<MinimalRouterStateSnapshot>>('router');
 
 export const {
-    selectCurrentRoute,   // select the current route
-    selectFragment,       // select the current route fragment
-    selectQueryParams,    // select the current route query params
-    selectQueryParam,     // factory function to select a query param
-    selectRouteParams,    // select the current route params
-    selectRouteParam,     // factory function to select a route param
-    selectRouteData,      // select the current route data
-    selectUrl,            // select the current url
+    selectCurrentRoute,
+    selectFragment,
+    selectQueryParams,
+    selectQueryParam,
+    selectRouteParams,
+    selectRouteParam,
+    selectRouteData,
+    selectUrl,
 } = fromRouter.getSelectors(routerState);
 
 // https://ngrx.io/guide/router-store/selectors
@@ -46,11 +46,8 @@ export const selectRouteDetails = createSelector(
     selectQueryParams,
     selectRouteData,
     (url, fragment, params, queryParams, data): RouteDetails => {
-        // TODO: is there a way to have this injected?
-        const routeHelperService = new RouteHelperService();
-
         return {
-            area: routeHelperService.getArea(url),
+            area: RouteHelper.getArea(url),
             url,
             fragment: fragment ?? null,
             params,
@@ -68,31 +65,31 @@ export const isPhotosView = createSelector(
 export const isPhotosBulkEditView = createSelector(
     isPhotosView,
     selectRouteData,
-    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewBulkEdit
+    (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewBulkEdit
 );
 
 export const isPhotosDetailView = createSelector(
     isPhotosView,
     selectRouteData,
-    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewDetail
+    (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewDetail
 );
 
 export const isPhotosFullscreenView = createSelector(
     isPhotosView,
     selectRouteData,
-    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewFullscreen
+    (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewFullscreen
 );
 
 export const isPhotosGridView = createSelector(
     isPhotosView,
     selectRouteData,
-    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewGrid
+    (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewGrid
 );
 
 export const isPhotosMapView = createSelector(
     isPhotosView,
     selectRouteData,
-    (isPhotos, data) => isPhotos && data?.view === RouteHelperService.photoViewMap
+    (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewMap
 );
 
 export const isRandomView = createSelector(
@@ -102,7 +99,7 @@ export const isRandomView = createSelector(
 
 export const photoView = createSelector(
     selectRouteData,
-    data => data?.view as string ?? RouteHelperService.photoViewDefault
+    data => data?.view as string ?? RouteHelper.photoViewDefault
 );
 
 export const inCategoryArea = createSelector(
@@ -126,13 +123,13 @@ export const isCategoriesArea = createSelector(
 export const isCategoriesGridView = createSelector(
     isCategoriesArea,
     selectRouteParams,
-    (isCategories, params) => isCategories && params?.view === RouteHelperService.categoryViewGrid
+    (isCategories, params) => isCategories && params?.view === RouteHelper.categoryViewGrid
 );
 
 export const isCategoriesListView = createSelector(
     isCategoriesArea,
     selectRouteParams,
-    (isCategories, params) => isCategories && params?.view === RouteHelperService.categoryViewList
+    (isCategories, params) => isCategories && params?.view === RouteHelper.categoryViewList
 );
 
 export const isSearchArea = createSelector(
@@ -143,12 +140,12 @@ export const isSearchArea = createSelector(
 export const isSearchGridView = createSelector(
     isSearchArea,
     selectRouteData,
-    (isSearch, data) => isSearch && data?.view === RouteHelperService.searchViewGrid
+    (isSearch, data) => isSearch && data?.view === RouteHelper.searchViewGrid
 );
 
 export const isSearchListView = createSelector(
     isSearchArea,
     selectRouteData,
-    (isSearch, data) => isSearch && data?.view === RouteHelperService.searchViewList
+    (isSearch, data) => isSearch && data?.view === RouteHelper.searchViewList
 );
 

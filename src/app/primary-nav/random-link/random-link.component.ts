@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { RouterStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services';
+import { RouteHelper } from '@models';
 
 @Component({
     selector: 'app-primary-nav-random-link',
@@ -11,11 +11,10 @@ import { RouteHelperService } from '@core/services';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RandomLinkComponent {
-    randomLink = this.routeHelperService.randomAbs();
+    randomLink = RouteHelper.randomAbs();
     inRandomArea$ = this.store.select(RouterStoreSelectors.isRandomView);
 
     constructor(
-        private routeHelperService: RouteHelperService,
         private store: Store
     ) { }
 }

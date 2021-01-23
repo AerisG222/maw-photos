@@ -1,7 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { DEFAULT_SETTINGS, ThumbnailSize, Video } from '@models';
-import { RouteHelperService } from '@core/services';
 
 @Component({
     selector: 'app-videos-video-list',
@@ -47,11 +46,5 @@ export class VideoListComponent {
                 this.imgHeight = 120;
                 break;
         }
-    }
-
-    constructor(
-        public routeHelper: RouteHelperService
-    ) {
-
     }
 }

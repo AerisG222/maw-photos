@@ -5,7 +5,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services';
+import { RouteHelper } from '@models';
 import { CategoryTypeFilter, CategoryViewMode, toCategoryTypeFilter, RouteDetails } from '@models';
 
 @Injectable()
@@ -99,7 +99,7 @@ export class CategoriesUrlService {
                     yearFilter !== routeDetails.queryParams?.year ||
                     typeFilter !== routeDetails.queryParams?.type
                 ) {
-                    const url = `/${ RouteHelperService.categories }/${ view }?year=${ yearFilter }&type=${ typeFilter }`;
+                    const url = `/${ RouteHelper.categories }/${ view }?year=${ yearFilter }&type=${ typeFilter }`;
 
                     this.router.navigateByUrl(url);
                 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
-import { RouteHelperService } from '@core/services';
+import { RouteHelper } from '@models';
 
 @Component({
     selector: 'app-toolbar-view-fullscreen-button',
@@ -18,6 +18,6 @@ export class ToolbarViewFullscreenButtonComponent {
     }
 
     onToggleFullscreen(): void {
-        this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelperService.photoViewFullscreen }));
+        this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewFullscreen }));
     }
 }

@@ -7,8 +7,7 @@ import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/ope
 import * as PhotoCategoryActions from './actions';
 import * as PhotoCategorySelectors from './selectors';
 import { photoApiServiceToken, PhotoApiService } from '@core/services/photo-api.service';
-import { PhotoCategory, Category, CategoryType } from '@models';
-import { RouteHelperService } from '../../services/route-helper.service';
+import { PhotoCategory, Category, CategoryType, RouteHelper } from '@models';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -46,8 +45,7 @@ export class PhotoCategoryStoreEffects {
     constructor(
         @Inject(photoApiServiceToken) private api: PhotoApiService,
         private actions$: Actions,
-        private store: Store,
-        private routeBuilderService: RouteHelperService
+        private store: Store
     ) {
 
     }
@@ -59,7 +57,7 @@ export class PhotoCategoryStoreEffects {
     private adaptCategory(category: PhotoCategory): Category {
         return {
             type: CategoryType.photo,
-            route: this.routeBuilderService.photoCategoriesAbs(),
+            route: RouteHelper.photoCategoriesAbs(),
             id: category.id,
             name: category.name,
             year: category.year,

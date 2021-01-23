@@ -12,9 +12,6 @@ import {
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
-// TODO: add properties to flag what info panels are shown
-//       then use an effect to load data that will be used rather than requiring the component to request this data
-
 export interface State extends EntityState<Photo> {
     error: string | null;
     isLoading: boolean;

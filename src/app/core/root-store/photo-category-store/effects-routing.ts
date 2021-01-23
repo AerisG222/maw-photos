@@ -4,8 +4,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom, filter, tap } from 'rxjs/operators';
 
-import { RouteArea } from '@models';
-import { RouteHelperService } from '../../services/route-helper.service';
+import { RouteArea, RouteHelper } from '@models';
 import { RouterStoreActions } from '../router-store';
 import * as PhotoCategoryStoreActions from './actions';
 import * as PhotoCategoryStoreSelectors from './selectors';
@@ -15,7 +14,7 @@ export class PhotoCategoryStoreRoutingEffects {
     ensurePhotoCategoriesLoadedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaChanged),
-            filter(change => this.routeHelperService.doesRouteAreaNeedCategoryData(change.enteringArea)),
+            filter(change => RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)),
             withLatestFrom(this.store.select(PhotoCategoryStoreSelectors.allCategories)),
             filter(([change, categories]) => !!!categories || categories.length === 0),
             map(([change, categories]) => PhotoCategoryStoreActions.loadRequest())
@@ -32,7 +31,7 @@ export class PhotoCategoryStoreRoutingEffects {
 
                 return isNaN(catId) || !(catId in entities);
             }),
-            tap(_ => this.router.navigateByUrl(this.routeHelperService.categoriesAbs()))
+            tap(_ => this.router.navigateByUrl(RouteHelper.categoriesAbs()))
         );
     }, { dispatch: false });
 
@@ -55,8 +54,7 @@ export class PhotoCategoryStoreRoutingEffects {
     constructor(
         private actions$: Actions,
         private store: Store,
-        private router: Router,
-        private routeHelperService: RouteHelperService
+        private router: Router
     ) {
 
     }

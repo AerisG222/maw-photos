@@ -6,8 +6,7 @@ import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
-import { RouteArea, RouteDetails } from '@models';
-import { RouteHelperService } from '../../services/route-helper.service';
+import { RouteArea, RouteDetails, RouteHelper } from '@models';
 import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import { RouterStoreSelectors } from '../router-store';
 import * as PhotoStoreActions from './actions';
@@ -25,9 +24,9 @@ export class PhotoStoreRoutingEffects {
             ),
             map(([action, isPhotos, isRandom]) => {
                 if(isPhotos) {
-                    return this.routeBuilderService.photoCategoriesAbs(action.view, action.categoryId, action.photoId);
+                    return RouteHelper.photoCategoriesAbs(action.view, action.categoryId, action.photoId);
                 } else if(isRandom) {
-                    return this.routeBuilderService.randomAbs(action.view, action?.photoId);
+                    return RouteHelper.randomAbs(action.view, action?.photoId);
                 }
 
                 return null;
@@ -66,7 +65,7 @@ export class PhotoStoreRoutingEffects {
                 const categoryId = Number(routeDetails.params.categoryId);
                 const photoId = Number(routeDetails.params.photoId);
                 const requiresPhotoId = routeDetails.data.requirePhotoId as boolean ?? false;
-                const view = routeDetails.data.view as string ?? RouteHelperService.photoViewDefault;
+                const view = routeDetails.data.view as string ?? RouteHelper.photoViewDefault;
 
                 if (requiresPhotoId) {
                     if(isNaN(photoId) || !(photoId in entities)) {
@@ -129,7 +128,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(PhotoStoreActions.changeViewRequest),
             map(action => {
-                if(action?.view === RouteHelperService.photoViewFullscreen) {
+                if(action?.view === RouteHelper.photoViewFullscreen) {
                     return LayoutStoreActions.enterFullscreenRequest();
                 } else {
                     return LayoutStoreActions.exitFullscreenRequest();
@@ -155,8 +154,8 @@ export class PhotoStoreRoutingEffects {
             map(([action, categoryId, photoId]) => {
                 let id = photoId ?? undefined;
 
-                if(action.view === RouteHelperService.photoViewBulkEdit ||
-                    action.view === RouteHelperService.photoViewGrid
+                if(action.view === RouteHelper.photoViewBulkEdit ||
+                    action.view === RouteHelper.photoViewGrid
                 ) {
                     id = undefined;
                 }
@@ -173,8 +172,7 @@ export class PhotoStoreRoutingEffects {
     constructor(
         private actions$: Actions,
         private store: Store,
-        private router: Router,
-        private routeBuilderService: RouteHelperService
+        private router: Router
     ) {
 
     }

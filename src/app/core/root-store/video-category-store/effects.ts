@@ -7,8 +7,7 @@ import { catchError, map, withLatestFrom, concatMap, exhaustMap } from 'rxjs/ope
 import * as VideoCategoryStoreActions from './actions';
 import * as videoCategoryStoreSelectors from './selectors';
 import { videoApiServiceToken, VideoApiService } from '@core/services/video-api.service';
-import { Category, CategoryType, VideoCategory } from '@models';
-import { RouteHelperService } from '../../services/route-helper.service';
+import { Category, CategoryType, VideoCategory, RouteHelper } from '@models';
 
 @Injectable()
 export class VideoCategoryStoreEffects {
@@ -46,8 +45,7 @@ export class VideoCategoryStoreEffects {
     constructor(
         @Inject(videoApiServiceToken) private api: VideoApiService,
         private actions$: Actions,
-        private store: Store,
-        private routeBuilderService: RouteHelperService
+        private store: Store
     ) {
 
     }
@@ -59,7 +57,7 @@ export class VideoCategoryStoreEffects {
     private adaptCategory(category: VideoCategory): Category {
         return {
             type: CategoryType.video,
-            route: this.routeBuilderService.videoCategoriesAbs(),
+            route: RouteHelper.videoCategoriesAbs(),
             id: category.id,
             name: category.name,
             year: category.year,

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { RouteHelperService } from '@core/services';
+import { RouteHelper } from '@models';
 
 @Component({
     selector: 'app-primary-nav-about-link',
@@ -8,9 +8,5 @@ import { RouteHelperService } from '@core/services';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutLinkComponent {
-    aboutLink = this.routeHelperService.aboutAbs();
-
-    constructor(private routeHelperService: RouteHelperService) {
-
-    }
+    aboutLink = RouteHelper.aboutAbs();
 }

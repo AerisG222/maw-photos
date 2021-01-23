@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { RouteHelperService } from '@core/services';
+
+import { RouteHelper } from '@models';
 
 @Component({
     selector: 'app-primary-nav-settings-link',
@@ -8,9 +9,5 @@ import { RouteHelperService } from '@core/services';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsLinkComponent {
-    settingsLink = this.routeHelperService.settingsAbs();
-
-    constructor(private routeHelperService: RouteHelperService) {
-
-    }
+    settingsLink = RouteHelper.settingsAbs();
 }

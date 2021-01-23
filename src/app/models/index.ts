@@ -1,3 +1,5 @@
+import * as RouteHelper from './route-helper.model';
+
 export * from './api-collection.model';
 export * from './auth-config';
 export * from './category-type-filter.model';
@@ -35,3 +37,4 @@ export * from './user-info.model';
 export * from './video-category.model';
 export * from './video.model';
 export * from './video-size.model';
+export { RouteHelper };
