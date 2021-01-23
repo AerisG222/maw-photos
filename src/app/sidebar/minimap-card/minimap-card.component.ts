@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 
-import { GoogleMapThemes, DEFAULT_SETTINGS } from '@models';
+import { GoogleMapThemes, DEFAULT_SETTINGS, toMapType } from '@models';
 import { MiniMapable } from '@core/facades';
 import { Subscription } from 'rxjs';
 import { filter, startWith } from 'rxjs/operators';
@@ -31,13 +31,13 @@ export class MinimapCardComponent implements OnDestroy {
     constructor(
         public miniMapable: MiniMapable
     ) {
-        this.destroySub.add(this.miniMapable.mapTypeId$
+        this.destroySub.add(this.miniMapable.mapType$
             .subscribe({
-                next: mapTypeId => {
-                    if (!!mapTypeId) {
+                next: mapType => {
+                    if (!!mapType) {
                         this.options = {
                             ...this.options,
-                            mapTypeId
+                            mapTypeId: mapType
                         };
                     }
                 }
@@ -78,10 +78,10 @@ export class MinimapCardComponent implements OnDestroy {
 
     onMapTypeChange(): void {
         if (!!this.map) {
-            const mapTypeId = this.map.getMapTypeId();
+            const mapType = toMapType(this.map.getMapTypeId());
 
-            if (!!mapTypeId) {
-                this.miniMapable.onMapTypeChange(mapTypeId);
+            if (!!mapType) {
+                this.miniMapable.onMapTypeChange(mapType);
             }
         }
     }
@@ -104,7 +104,7 @@ export class MinimapCardComponent implements OnDestroy {
             streetViewControl: false,
         } as google.maps.MapOptions;
 
-        opts.mapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId;
+        opts.mapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapType;
         opts.styles = GoogleMapThemes.themeDark;
         opts.zoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { GpsCoordinate } from '@models';
+import { GpsCoordinate, MapType } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -30,7 +30,7 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
     isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
     overrideGps$ = this.store.select(VideoStoreSelectors.activeVideoGpsDetailOverride);
     sourceGps$ = this.store.select(VideoStoreSelectors.activeVideoGpsDetailSource);
-    mapTypeId$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapMapTypeId);
+    mapType$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapMapType);
     zoom$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapZoom);
     position$ = this.store.select(VideoStoreSelectors.activeVideoGoogleLatLng);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
@@ -78,8 +78,8 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
         });
     }
 
-    onMapTypeChange(mapTypeId: string): void {
-        this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+    onMapTypeChange(mapType: MapType): void {
+        this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeRequest({ mapType }));
     }
 
     onZoomChange(zoom: number): void {

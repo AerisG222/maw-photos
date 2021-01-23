@@ -162,11 +162,11 @@ export const reducer = createReducer(
             photoInfoPanelExpandedState: !state.settings.photoInfoPanelExpandedState
         }
     })),
-    on(SettingsActions.updatePhotoInfoPanelMinimapMapTypeIdRequest, (state, { mapTypeId }): State => ({
+    on(SettingsActions.updatePhotoInfoPanelMinimapMapTypeRequest, (state, { mapType }): State => ({
         ...state,
         settings: {
             ...state.settings,
-            photoInfoPanelMinimapMapTypeId: mapTypeId
+            photoInfoPanelMinimapMapType: mapType
         }
     })),
     on(SettingsActions.updatePhotoInfoPanelMinimapZoomRequest, (state, { zoom }): State => ({
@@ -218,11 +218,11 @@ export const reducer = createReducer(
             photoListShowCategoryBreadcrumbs: !state.settings.photoListShowCategoryBreadcrumbs
         }
     })),
-    on(SettingsActions.updatePhotoListMapViewMapTypeIdRequest, (state, { mapTypeId }): State => ({
+    on(SettingsActions.updatePhotoListMapViewMapTypeRequest, (state, { mapType }): State => ({
         ...state,
         settings: {
             ...state.settings,
-            photoListMapViewMapTypeId: mapTypeId
+            photoListMapViewMapType: mapType
         }
     })),
     on(SettingsActions.updatePhotoListMapViewZoomRequest, (state, { zoom }): State => ({
@@ -302,11 +302,11 @@ export const reducer = createReducer(
             videoInfoPanelExpandedState: !state.settings.videoInfoPanelExpandedState
         }
     })),
-    on(SettingsActions.updateVideoInfoPanelMinimapMapTypeIdRequest, (state, { mapTypeId }): State => ({
+    on(SettingsActions.updateVideoInfoPanelMinimapMapTypeRequest, (state, { mapType }): State => ({
         ...state,
         settings: {
             ...state.settings,
-            videoInfoPanelMinimapMapTypeId: mapTypeId
+            videoInfoPanelMinimapMapType: mapType
         }
     })),
     on(SettingsActions.updateVideoInfoPanelMinimapZoomRequest, (state, { zoom }): State => ({

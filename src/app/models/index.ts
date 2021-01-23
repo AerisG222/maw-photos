@@ -17,7 +17,7 @@ export * from './gps-coordinate.model';
 export * from './gps-detail.model';
 export * from './layout.model';
 export * from './map-image.model';
-export * from './map-type-id.model';
+export * from './map-type.model';
 export * from './minimap-zoom.model';
 export * from './multimedia-asset.model';
 export * from './photo-category.model';

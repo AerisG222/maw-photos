@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
+import { MapType } from '@models';
 
 @Component({
     selector: 'app-photos-map-view',
@@ -18,8 +19,8 @@ export class MapViewComponent {
 
     }
 
-    onMapTypeIdChange(mapTypeId: string): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeIdRequest({ mapTypeId }));
+    onMapTypeIdChange(mapType: MapType): void {
+        this.store.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeRequest({ mapType }));
     }
 
     onZoomChange(zoom: number): void {

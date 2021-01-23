@@ -7,6 +7,7 @@ import {
     CategoryMargin,
     CategoryTypeFilter,
     CategoryViewMode,
+    MapType,
  } from '@models';
 
 export const updateMobileMarginsRequest = createAction(
@@ -116,9 +117,9 @@ export const togglePhotoInfoPanelRatingsRequest = createAction(
     '[Settings] Toggle Photo Info Panel Ratings'
 );
 
-export const updatePhotoInfoPanelMinimapMapTypeIdRequest = createAction(
-    '[Settings] Update Photo Info Panel Minimap Map Type Id',
-    props<{ mapTypeId: string }>()
+export const updatePhotoInfoPanelMinimapMapTypeRequest = createAction(
+    '[Settings] Update Photo Info Panel Minimap Map Type',
+    props<{ mapType: MapType }>()
 );
 
 export const updatePhotoInfoPanelMinimapZoomRequest = createAction(
@@ -134,9 +135,9 @@ export const togglePhotoListShowPhotoListRequest = createAction(
     '[Settings] Toggle Photo List Show Photo List'
 );
 
-export const updatePhotoListMapViewMapTypeIdRequest = createAction(
-    '[Settings] Update Photo List Map View Map Type Id',
-    props<{ mapTypeId: string }>()
+export const updatePhotoListMapViewMapTypeRequest = createAction(
+    '[Settings] Update Photo List Map View Map Type',
+    props<{ mapType: MapType }>()
 );
 
 export const updatePhotoListMapViewZoomRequest = createAction(
@@ -205,9 +206,9 @@ export const toggleVideoInfoPanelRatingsRequest = createAction(
     '[Settings] Toggle Video Info Panel Ratings'
 );
 
-export const updateVideoInfoPanelMinimapMapTypeIdRequest = createAction(
-    '[Settings] Update Video Info Panel Minimap Map Type Id',
-    props<{ mapTypeId: string }>()
+export const updateVideoInfoPanelMinimapMapTypeRequest = createAction(
+    '[Settings] Update Video Info Panel Minimap Map Type',
+    props<{ mapType: MapType }>()
 );
 
 export const updateVideoInfoPanelMinimapZoomRequest = createAction(

@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { Photo, GpsCoordinate } from '@models';
+import { Photo, GpsCoordinate, MapType } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -41,7 +41,7 @@ export class PhotoStoreFacadeService implements
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     overrideGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailOverride);
     sourceGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailSource);
-    mapTypeId$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapTypeId);
+    mapType$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapType);
     position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
     zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
@@ -102,8 +102,8 @@ export class PhotoStoreFacadeService implements
         });
     }
 
-    onMapTypeChange(mapTypeId: string): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeIdRequest({ mapTypeId }));
+    onMapTypeChange(mapType: MapType): void {
+        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeRequest({ mapType }));
     }
 
     onZoomChange(zoom: number): void {

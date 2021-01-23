@@ -1,6 +1,5 @@
 export class MinimapZoom {
     static readonly allSizes = [
-        new MinimapZoom(1, '0'),
         new MinimapZoom(1, '1 - World'),
         new MinimapZoom(2, '2'),
         new MinimapZoom(3, '3'),

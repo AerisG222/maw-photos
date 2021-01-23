@@ -4,6 +4,7 @@ import { VideoSize } from './video-size.model';
 import { CategoryMargin } from './category-margin.model';
 import { CategoryTypeFilter } from './category-type-filter.model';
 import { CategoryViewMode } from './category-view-mode.model';
+import { MapType } from './map-type.model';
 
 export interface Settings {
     appTheme: Theme;
@@ -21,7 +22,7 @@ export interface Settings {
     photoListThumbnailSize: ThumbnailSize;
     photoListShowPhotoList: boolean;
     photoListSlideshowDisplayDurationSeconds: number;
-    photoListMapViewMapTypeId: string;
+    photoListMapViewMapType: MapType;
     photoListMapViewZoom: number;
 
     photoGridMargin: CategoryMargin;
@@ -38,7 +39,7 @@ export interface Settings {
     photoInfoPanelShowMinimap: boolean;
     photoInfoPanelExpandedState: boolean;
     photoInfoPanelMinimapZoom: number;
-    photoInfoPanelMinimapMapTypeId: string;
+    photoInfoPanelMinimapMapType: MapType;
 
     videoListShowCategoryBreadcrumbs: boolean;
     videoListThumbnailSize: ThumbnailSize;
@@ -51,7 +52,7 @@ export interface Settings {
     videoInfoPanelShowMetadataEditor: boolean;
     videoInfoPanelShowMinimap: boolean;
     videoInfoPanelExpandedState: boolean;
-    videoInfoPanelMinimapMapTypeId: string;
+    videoInfoPanelMinimapMapType: MapType;
     videoInfoPanelMinimapZoom: number;
 
     searchCategoryMargin: CategoryMargin;
@@ -78,7 +79,7 @@ export const DEFAULT_SETTINGS: Settings = ({
     photoListThumbnailSize: ThumbnailSize.default,
     photoListShowPhotoList: true,
     photoListSlideshowDisplayDurationSeconds: 2,
-    photoListMapViewMapTypeId: 'roadmap',
+    photoListMapViewMapType: MapType.roadmap,
     photoListMapViewZoom: 10,
 
     photoGridMargin: CategoryMargin.dense,
@@ -94,7 +95,7 @@ export const DEFAULT_SETTINGS: Settings = ({
     photoInfoPanelShowMetadataEditor: false,
     photoInfoPanelShowMinimap: false,
     photoInfoPanelExpandedState: false,
-    photoInfoPanelMinimapMapTypeId: 'roadmap',
+    photoInfoPanelMinimapMapType: MapType.roadmap,
     photoInfoPanelMinimapZoom: 10,
 
     videoListShowCategoryBreadcrumbs: true,
@@ -108,7 +109,7 @@ export const DEFAULT_SETTINGS: Settings = ({
     videoInfoPanelShowMetadataEditor: false,
     videoInfoPanelShowMinimap: false,
     videoInfoPanelExpandedState: false,
-    videoInfoPanelMinimapMapTypeId: 'roadmap',
+    videoInfoPanelMinimapMapType: MapType.roadmap,
     videoInfoPanelMinimapZoom: 10,
 
     searchCategoryMargin: CategoryMargin.dense,

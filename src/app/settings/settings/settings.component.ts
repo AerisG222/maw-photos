@@ -10,13 +10,15 @@ import {
     ThumbnailSize,
     VideoSize,
     MinimapZoom,
-    MapTypeId,
+    MapType,
     CategoryMargin,
     CategoryViewMode,
     toCategoryTypeFilter,
     allCategoryTypeFilters,
     allCategoryViewModes,
     toCategoryViewMode,
+    allMapTypes,
+    toMapType,
 } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { Subscription } from 'rxjs';
@@ -40,9 +42,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     photoGridThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
     videoListThumbnailSizes = ThumbnailSize.allSizes;
-    mapViewMapTypeIds = MapTypeId.allTypeIds;
-    photoMinimapMapTypeIds = MapTypeId.allTypeIds;
-    videoMinimapMapTypeIds = MapTypeId.allTypeIds;
+    mapTypes = allMapTypes;
     mapViewZoomLevels = MinimapZoom.allSizes;
     photoZoomLevels = MinimapZoom.allSizes;
     videoZoomLevels = MinimapZoom.allSizes;
@@ -73,7 +73,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListThumbnailSize:                   [DEFAULT_SETTINGS.photoListThumbnailSize.name],
             photoListShowPhotoList:                   [DEFAULT_SETTINGS.photoListShowPhotoList],
             photoListSlideshowDisplayDurationSeconds: [DEFAULT_SETTINGS.photoListSlideshowDisplayDurationSeconds],
-            photoListMapViewMapTypeId:                [DEFAULT_SETTINGS.photoListMapViewMapTypeId],
+            photoListMapViewMapType:                [DEFAULT_SETTINGS.photoListMapViewMapType],
             photoListMapViewZoom:                     [DEFAULT_SETTINGS.photoListMapViewZoom],
 
             photoGridMargin:                          [DEFAULT_SETTINGS.photoGridMargin.name],
@@ -89,7 +89,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoInfoPanelShowMinimap:                [DEFAULT_SETTINGS.photoInfoPanelShowMinimap],
             photoInfoPanelShowRatings:                [DEFAULT_SETTINGS.photoInfoPanelShowRatings],
             photoInfoPanelExpandedState:              [DEFAULT_SETTINGS.photoInfoPanelExpandedState],
-            photoInfoPanelMinimapMapTypeId:           [DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId],
+            photoInfoPanelMinimapMapType:           [DEFAULT_SETTINGS.photoInfoPanelMinimapMapType],
             photoInfoPanelMinimapZoom:                [DEFAULT_SETTINGS.photoInfoPanelMinimapZoom],
 
             videoListShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.videoListShowCategoryBreadcrumbs],
@@ -103,7 +103,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoInfoPanelShowMinimap:                [DEFAULT_SETTINGS.videoInfoPanelShowMinimap],
             videoInfoPanelShowRatings:                [DEFAULT_SETTINGS.videoInfoPanelShowRatings],
             videoInfoPanelExpandedState:              [DEFAULT_SETTINGS.videoInfoPanelExpandedState],
-            videoInfoPanelMinimapMapTypeId:           [DEFAULT_SETTINGS.videoInfoPanelMinimapMapTypeId],
+            videoInfoPanelMinimapMapType:           [DEFAULT_SETTINGS.videoInfoPanelMinimapMapType],
             videoInfoPanelMinimapZoom:                [DEFAULT_SETTINGS.videoInfoPanelMinimapZoom],
 
             searchCategoryMargin:                     [DEFAULT_SETTINGS.searchCategoryMargin.name],
@@ -149,7 +149,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoListThumbnailSize:                   ThumbnailSize.forName(this.getFormString('photoListThumbnailSize', DEFAULT_SETTINGS.photoListThumbnailSize.name)),
             photoListShowPhotoList:                   this.getFormBoolean('photoListShowPhotoList',                      DEFAULT_SETTINGS.photoListShowPhotoList),
             photoListSlideshowDisplayDurationSeconds: this.getFormNumber('photoListSlideshowDisplayDurationSeconds',     DEFAULT_SETTINGS.photoListSlideshowDisplayDurationSeconds),
-            photoListMapViewMapTypeId:                this.getFormString('photoListMapViewMapTypeId',                    DEFAULT_SETTINGS.photoListMapViewMapTypeId),
+            photoListMapViewMapType:                toMapType(this.getFormString('photoListMapViewMapType', '')) ??      DEFAULT_SETTINGS.photoListMapViewMapType,
             photoListMapViewZoom:                     this.getFormNumber('photoListMapViewZoom',                         DEFAULT_SETTINGS.photoListMapViewZoom),
 
             photoGridMargin:                  CategoryMargin.forName(this.getFormString('photoGridMargin',       DEFAULT_SETTINGS.photoGridMargin.name)),
@@ -165,7 +165,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoInfoPanelShowMinimap:               this.getFormBoolean('photoInfoPanelShowMinimap',               DEFAULT_SETTINGS.photoInfoPanelShowMinimap),
             photoInfoPanelShowRatings:               this.getFormBoolean('photoInfoPanelShowRatings',               DEFAULT_SETTINGS.photoInfoPanelShowRatings),
             photoInfoPanelExpandedState:             this.getFormBoolean('photoInfoPanelExpandedState',             DEFAULT_SETTINGS.photoInfoPanelExpandedState),
-            photoInfoPanelMinimapMapTypeId:          this.getFormString('photoInfoPanelMinimapMapTypeId',           DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId),
+            photoInfoPanelMinimapMapType:          toMapType(this.getFormString('photoInfoPanelMinimapMapType', '')) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapMapType,
             photoInfoPanelMinimapZoom:               this.getFormNumber('photoInfoPanelMinimapZoom',                DEFAULT_SETTINGS.photoInfoPanelMinimapZoom),
 
             videoListShowCategoryBreadcrumbs: this.getFormBoolean('videoListShowCategoryBreadcrumbs',            DEFAULT_SETTINGS.videoListShowCategoryBreadcrumbs),
@@ -179,7 +179,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             videoInfoPanelShowMinimap:               this.getFormBoolean('videoInfoPanelShowMinimap',               DEFAULT_SETTINGS.videoInfoPanelShowMinimap),
             videoInfoPanelShowRatings:               this.getFormBoolean('videoInfoPanelShowRatings',               DEFAULT_SETTINGS.videoInfoPanelShowRatings),
             videoInfoPanelExpandedState:             this.getFormBoolean('videoInfoPanelExpandedState',             DEFAULT_SETTINGS.videoInfoPanelExpandedState),
-            videoInfoPanelMinimapMapTypeId:          this.getFormString('videoInfoPanelMinimapMapTypeId',           DEFAULT_SETTINGS.videoInfoPanelMinimapMapTypeId),
+            videoInfoPanelMinimapMapType:          toMapType(this.getFormString('videoInfoPanelMinimapMapType', '')) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapMapType,
             videoInfoPanelMinimapZoom:               this.getFormNumber('videoInfoPanelMinimapZoom',                DEFAULT_SETTINGS.videoInfoPanelMinimapZoom),
 
             searchCategoryMargin:        CategoryMargin.forName(this.getFormString('searchCategoryMargin',       DEFAULT_SETTINGS.searchCategoryMargin.name)),
@@ -220,7 +220,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoListThumbnailSize')?.setValue(settings.photoListThumbnailSize.name);
         this.form.get('photoListShowPhotoList')?.setValue(settings.photoListShowPhotoList);
         this.form.get('photoListSlideshowDisplayDurationSeconds')?.setValue(settings.photoListSlideshowDisplayDurationSeconds);
-        this.form.get('photoListMapViewMapTypeId')?.setValue(settings.photoListMapViewMapTypeId);
+        this.form.get('photoListMapViewMapType')?.setValue(settings.photoListMapViewMapType);
         this.form.get('photoListMapViewZoom')?.setValue(settings.photoListMapViewZoom);
 
         this.form.get('photoGridMargin')?.setValue(settings.photoGridMargin.name);
@@ -236,7 +236,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoInfoPanelShowMinimap')?.setValue(settings.photoInfoPanelShowMinimap);
         this.form.get('photoInfoPanelShowRatings')?.setValue(settings.photoInfoPanelShowRatings);
         this.form.get('photoInfoPanelExpandedState')?.setValue(settings.photoInfoPanelExpandedState);
-        this.form.get('photoInfoPanelMinimapMapTypeId')?.setValue(settings.photoInfoPanelMinimapMapTypeId);
+        this.form.get('photoInfoPanelMinimapMapType')?.setValue(settings.photoInfoPanelMinimapMapType);
         this.form.get('photoInfoPanelMinimapZoom')?.setValue(settings.photoInfoPanelMinimapZoom);
 
         this.form.get('videoListShowCategoryBreadcrumbs')?.setValue(settings.videoListShowCategoryBreadcrumbs);
@@ -250,7 +250,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('videoInfoPanelShowMinimap')?.setValue(settings.videoInfoPanelShowMinimap);
         this.form.get('videoInfoPanelShowRatings')?.setValue(settings.videoInfoPanelShowRatings);
         this.form.get('videoInfoPanelExpandedState')?.setValue(settings.videoInfoPanelExpandedState);
-        this.form.get('videoInfoPanelMinimapMapTypeId')?.setValue(settings.videoInfoPanelMinimapMapTypeId);
+        this.form.get('videoInfoPanelMinimapMapType')?.setValue(settings.videoInfoPanelMinimapMapType);
         this.form.get('videoInfoPanelMinimapZoom')?.setValue(settings.videoInfoPanelMinimapZoom);
 
         this.form.get('searchCategoryMargin')?.setValue(settings.searchCategoryMargin.name);

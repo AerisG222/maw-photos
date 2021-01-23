@@ -9,6 +9,7 @@ import {
     CategoryTypeFilter,
     CategoryViewMode,
     GoogleMapThemes,
+    MapType,
 } from '@models';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
 import { State } from './state';
@@ -153,9 +154,9 @@ export const photoInfoPanelExpandedState = createSelector(
     (state: State): boolean => state.settings.photoInfoPanelExpandedState
 );
 
-export const photoInfoPanelMinimapMapTypeId = createSelector(
+export const photoInfoPanelMinimapMapType = createSelector(
     settingsState,
-    (state: State): string => state.settings.photoInfoPanelMinimapMapTypeId
+    (state: State): MapType => state.settings.photoInfoPanelMinimapMapType
 );
 
 export const photoInfoPanelMinimapZoom = createSelector(
@@ -169,9 +170,9 @@ export const photoListShowPhotoList = createSelector(
     (state: State): boolean => state.settings.photoListShowPhotoList
 );
 
-export const photoListMapViewMapTypeId = createSelector(
+export const photoListMapViewMapType = createSelector(
     settingsState,
-    (state: State): string => state.settings.photoListMapViewMapTypeId
+    (state: State): MapType => state.settings.photoListMapViewMapType
 );
 
 export const photoListMapViewZoom = createSelector(
@@ -226,9 +227,9 @@ export const videoInfoPanelExpandedState = createSelector(
     (state: State): boolean => state.settings.videoInfoPanelExpandedState
 );
 
-export const videoInfoPanelMinimapMapTypeId = createSelector(
+export const videoInfoPanelMinimapMapType = createSelector(
     settingsState,
-    (state: State): string => state.settings.videoInfoPanelMinimapMapTypeId
+    (state: State): MapType => state.settings.videoInfoPanelMinimapMapType
 );
 
 export const videoInfoPanelMinimapZoom = createSelector(

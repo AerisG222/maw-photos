@@ -11,6 +11,8 @@ import {
     CategoryViewMode,
     toCategoryTypeFilter,
     toCategoryViewMode,
+    MapType,
+    toMapType,
  } from '@models';
 import { LocalStorageService } from './local-storage.service';
 
@@ -35,7 +37,7 @@ export class SettingsService {
     private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
     private static readonly keyPhotoListShowPhotoList = 'photoListShowPhotoList';
     private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
-    private static readonly keyPhotoListMapViewMapTypeId = 'photoListMapViewMapTypeId';
+    private static readonly keyPhotoListMapViewMapType = 'photoListMapViewMapTypeId';
     private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
 
     private static readonly keyPhotoGridMargin = 'photoGridMargin';
@@ -51,7 +53,7 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelShowMetadataEditor = 'photoInfoPanelShowMetadataEditor';
     private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
-    private static readonly keyPhotoInfoPanelMinimapMapTypeId = 'photoInfoPanelMinimapMapTypeId';
+    private static readonly keyPhotoInfoPanelMinimapMapType = 'photoInfoPanelMinimapMapTypeId';
     private static readonly keyPhotoInfoPanelMinimapZoom = 'photoInfoPanelMinimapZoom';
 
     private static readonly keyVideoListShowCategoryBreadcrumbs = 'videoListShowCategoryBreadcrumbs';
@@ -65,7 +67,7 @@ export class SettingsService {
     private static readonly keyVideoInfoPanelShowMetadataEditor = 'videoInfoPanelShowMetadataEditor';
     private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
     private static readonly keyVideoInfoPanelExpandedState = 'videoInfoPanelExpandedState';
-    private static readonly keyVideoInfoPanelMinimapMapTypeId = 'videoInfoPanelMinimapMapTypeId';
+    private static readonly keyVideoInfoPanelMinimapMapType = 'videoInfoPanelMinimapMapTypeId';
     private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
 
     private static readonly keySearchCategoryMargin = 'searchCategoryMargin';
@@ -108,7 +110,7 @@ export class SettingsService {
                 photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
                 photoListShowCategoryBreadcrumbs:         this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs),
                 photoListShowPhotoList:                   this.getBoolean(SettingsService.keyPhotoListShowPhotoList),
-                photoListMapViewMapTypeId:                this.getStringOrNull(SettingsService.keyPhotoListMapViewMapTypeId) ?? DEFAULT_SETTINGS.photoListMapViewMapTypeId,
+                photoListMapViewMapType:                this.getMapType(SettingsService.keyPhotoListMapViewMapType, DEFAULT_SETTINGS.photoListMapViewMapType),
                 photoListMapViewZoom:                     this.getNumber(SettingsService.keyPhotoListMapViewZoom) ?? DEFAULT_SETTINGS.photoListMapViewZoom,
 
                 photoGridMargin: this.getCategoryMargin(SettingsService.keyPhotoGridMargin),
@@ -124,7 +126,7 @@ export class SettingsService {
                 photoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor),
                 photoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap),
                 photoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState),
-                photoInfoPanelMinimapMapTypeId:          this.getStringOrNull(SettingsService.keyPhotoInfoPanelMinimapMapTypeId) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapMapTypeId,
+                photoInfoPanelMinimapMapType:          this.getMapType(SettingsService.keyPhotoInfoPanelMinimapMapType, DEFAULT_SETTINGS.photoInfoPanelMinimapMapType),
                 photoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
 
                 videoListShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs),
@@ -138,7 +140,7 @@ export class SettingsService {
                 videoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor),
                 videoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap),
                 videoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState),
-                videoInfoPanelMinimapMapTypeId:          this.getStringOrNull(SettingsService.keyVideoInfoPanelMinimapMapTypeId) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapMapTypeId,
+                videoInfoPanelMinimapMapType:          this.getMapType(SettingsService.keyVideoInfoPanelMinimapMapType, DEFAULT_SETTINGS.videoInfoPanelMinimapMapType),
                 videoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapZoom,
 
                 searchCategoryMargin:        this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
@@ -174,7 +176,7 @@ export class SettingsService {
         this.setValue(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
         this.setBoolean(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
         this.setNumber(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
-        this.setValue(SettingsService.keyPhotoListMapViewMapTypeId, settings.photoListMapViewMapTypeId);
+        this.setValue(SettingsService.keyPhotoListMapViewMapType, settings.photoListMapViewMapType);
         this.setNumber(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
 
         this.setValue(SettingsService.keyPhotoGridMargin, settings.photoGridMargin.name);
@@ -190,7 +192,7 @@ export class SettingsService {
         this.setBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor, settings.photoInfoPanelShowMetadataEditor);
         this.setBoolean(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
         this.setBoolean(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
-        this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapTypeId, settings.photoInfoPanelMinimapMapTypeId);
+        this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapType, settings.photoInfoPanelMinimapMapType);
         this.setNumber(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
         this.setBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
@@ -204,7 +206,7 @@ export class SettingsService {
         this.setBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor, settings.videoInfoPanelShowMetadataEditor);
         this.setBoolean(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
         this.setBoolean(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
-        this.setValue(SettingsService.keyVideoInfoPanelMinimapMapTypeId, settings.videoInfoPanelMinimapMapTypeId);
+        this.setValue(SettingsService.keyVideoInfoPanelMinimapMapType, settings.videoInfoPanelMinimapMapType);
         this.setNumber(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
 
         this.setValue(SettingsService.keySearchCategoryMargin, settings.searchCategoryMargin.name);
@@ -274,6 +276,16 @@ export class SettingsService {
             return toCategoryTypeFilter(name) ?? CategoryTypeFilter.all;
         } catch {
             return CategoryTypeFilter.all;
+        }
+    }
+
+    private getMapType(key: string, defaultValue: MapType): MapType {
+        const name = this.getStringOrNull(key);
+
+        try {
+            return toMapType(name) ?? defaultValue;
+        } catch {
+            return defaultValue;
         }
     }
 

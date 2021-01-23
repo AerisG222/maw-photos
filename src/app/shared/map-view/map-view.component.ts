@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 
-import { Photo, MapImage, GoogleMapThemes } from '@models';
+import { Photo, MapImage, GoogleMapThemes, MapType, toMapType } from '@models';
 import { MapMarkerInfo } from './map-marker-info.model';
 
 @Component({
@@ -28,11 +28,11 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
 
     @Input() activePhoto: Photo | null = null;
     @Input() images: MapImage[] | null = null;
-    @Input() mapTypeId = 'roadmap';
+    @Input() mapType = MapType.roadmap;
     @Input() zoom = 10;
     @Input() useDarkTheme = false;
 
-    @Output() mapTypeChange = new EventEmitter<string>();
+    @Output() mapTypeChange = new EventEmitter<MapType>();
     @Output() zoomChange = new EventEmitter<number>();
     @Output() selectPhoto = new EventEmitter<number>();
 
@@ -71,9 +71,10 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     onMapTypeChange(): void {
         if (this.map) {
             const mapTypeId = this.map.getMapTypeId();
+            const mapType = toMapType(mapTypeId);
 
-            if (!!mapTypeId) {
-                this.mapTypeChange.emit(mapTypeId);
+            if (!!mapType) {
+                this.mapTypeChange.emit(mapType);
             }
         }
     }
@@ -146,7 +147,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
                 center: this.getPosition(this.images[0]) ?? undefined,
                 fullscreenControl: false,
                 mapTypeControl: true,
-                mapTypeId: this.mapTypeId,
+                mapTypeId: this.mapType,
                 styles: this.getMapTheme()
             };
         }

@@ -61,12 +61,12 @@ export class SettingsStoreEffects {
                 SettingsActions.togglePhotoInfoPanelMetadataEditorRequest,
                 SettingsActions.togglePhotoInfoPanelMinimapRequest,
                 SettingsActions.togglePhotoInfoPanelRatingsRequest,
-                SettingsActions.updatePhotoInfoPanelMinimapMapTypeIdRequest,
+                SettingsActions.updatePhotoInfoPanelMinimapMapTypeRequest,
                 SettingsActions.updatePhotoInfoPanelMinimapZoomRequest,
 
                 SettingsActions.togglePhotoListCategoryBreadcrumbsRequest,
                 SettingsActions.togglePhotoListShowPhotoListRequest,
-                SettingsActions.updatePhotoListMapViewMapTypeIdRequest,
+                SettingsActions.updatePhotoListMapViewMapTypeRequest,
                 SettingsActions.updatePhotoListMapViewZoomRequest,
                 SettingsActions.updatePhotoListThumbnailSizeRequest,
 
@@ -81,7 +81,7 @@ export class SettingsStoreEffects {
                 SettingsActions.toggleVideoInfoPanelMetadataEditorRequest,
                 SettingsActions.toggleVideoInfoPanelMinimapRequest,
                 SettingsActions.toggleVideoInfoPanelRatingsRequest,
-                SettingsActions.updateVideoInfoPanelMinimapMapTypeIdRequest,
+                SettingsActions.updateVideoInfoPanelMinimapMapTypeRequest,
                 SettingsActions.updateVideoInfoPanelMinimapZoomRequest,
 
                 SettingsActions.toggleSearchCategoryTitlesRequest,

@@ -9,7 +9,7 @@
         <app-shared-map-view
             [activePhoto]="activePhoto$ | async"
             [images]="mapImages$ | async"
-            [mapTypeId]="data.settings?.photoListMapViewMapTypeId"
+            [mapType]="data.settings?.photoListMapViewMapType"
             [useDarkTheme]="data.settings?.appTheme?.isDark"
             (mapTypeChange)="onMapTypeIdChange($event)"
             [zoom]="data.settings?.photoListMapViewZoom"
