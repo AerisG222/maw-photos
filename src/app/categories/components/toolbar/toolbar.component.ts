@@ -1,14 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
 import {
-    CategoryTypeFilter,
     CategoryMargin,
     Settings,
     ThumbnailSize,
  } from '@models';
 import { SettingsStoreSelectors, SettingsStoreActions, RouterStoreSelectors } from '@core/root-store';
-import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-shared-category-list-toolbar',
