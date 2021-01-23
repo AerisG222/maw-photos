@@ -7,8 +7,6 @@ import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
 import { RouteDetails, RouteArea } from '@models';
-import { PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '../photo-category-store';
-import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '../video-category-store';
 
 interface RouteDetailsChange {
     previous: RouteDetails | null;
