@@ -145,7 +145,6 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
         });
     }
 
-    // eslint-disable-next-line max-len
     private prepareChartData(years: number[], categories: Category[], selectedYear: number, aggregateBy: string): StatDetail[] {
         let agg: (category: Category) => number;
 

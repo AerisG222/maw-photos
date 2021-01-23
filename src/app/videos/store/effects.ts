@@ -168,7 +168,6 @@ export class VideoStoreEffects {
                 this.store.select(VideoStoreSelectors.categoryGpsStatus)
                     .pipe(
                         filter(status => !!status),
-                        // eslint-disable-next-line max-len
                         // eslint-disable-next-line ngrx/avoid-mapping-selectors
                         map(status => VideoCategoryStoreActions.setIsMissingGpsData(status as CategoryGpsStatus))
                     )

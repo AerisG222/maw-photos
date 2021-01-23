@@ -57,7 +57,6 @@ export const allFilteredCategoriesForYear = createSelector(
     VideoCategoryStoreSelectors.categoriesForYear,
     categoryEffectiveTypeFilter,
     SettingsStoreSelectors.categoryListMissingGpsFilter,
-    // eslint-disable-next-line max-len
     (photoCategories, videoCategories, typeFilter, missingGpsFilter, props: { year: number }) => {
         let categories: Category[] = [];
         switch (typeFilter) {
