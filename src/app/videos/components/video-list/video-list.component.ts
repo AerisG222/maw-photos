@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { DEFAULT_SETTINGS, ThumbnailSize, Video } from '@models';
+import { DEFAULT_SETTINGS, RouteHelper, ThumbnailSize, Video } from '@models';
 
 @Component({
     selector: 'app-videos-video-list',
@@ -15,6 +15,7 @@ export class VideoListComponent {
     videoThumbnailSize: ThumbnailSize | null = null;
     imgWidth: number | null = null;
     imgHeight: number | null = null;
+    routeHelper = RouteHelper;
 
     get thumbnailSize(): ThumbnailSize {
         return this.videoThumbnailSize ?? DEFAULT_SETTINGS.videoListThumbnailSize;

@@ -1,7 +1,7 @@
 import { CategoryType } from './category-type.model';
-import { MultimediaAsset } from './multimedia-asset.model';
-import { PhotoCategory } from './photo-category.model';
-import { VideoCategory } from './video-category.model';
+import { MultimediaAsset } from './api/multimedia-asset.model';
+import { PhotoCategory } from './api/photo-category.model';
+import { VideoCategory } from './api/video-category.model';
 import { CategoryTeaser } from './category-teaser.model';
 
 export interface Category extends CategoryTeaser{
