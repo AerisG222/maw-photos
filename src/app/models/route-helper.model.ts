@@ -53,7 +53,7 @@ export const categoriesAbs = (year?: number) => {
     let url = `/${ categories }`;
 
     if(!!year) {
-        url += `#${ year }`;
+        url += `?year=${ year }`;
     }
 
     return url;
