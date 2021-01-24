@@ -5,9 +5,8 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { SettingsStoreActions } from '@core/root-store/settings-store';
 import * as CategoryStoreActions from './actions';
 import { CategoriesUrlService } from '../services/categories-url.service';
-import { combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { RootStoreSelectors, RouterStoreSelectors } from '@core/root-store';
+import { RootStoreSelectors, RouterStoreActions } from '@core/root-store';
 import { RouteArea } from '@models';
 
 @Injectable()
@@ -42,14 +41,16 @@ export class CategoriesStoreEffects {
         );
     }, { dispatch: false });
 
-    ensureCompleteUrl$ = createEffect(() => {
-        return combineLatest([
-            this.store.select(RouterStoreSelectors.selectRouteDetails),
-            this.store.select(RootStoreSelectors.allYears)
-        ]).pipe(
-            filter(([route, years]) => route.area === RouteArea.categories),
-            filter(([route, years]) => years.length > 0),
-            switchMap(([route, years]) => this.categoriesUrlService.ensureCompleteUrl(route))
+    ensureCompleteUrlOnRouteChange$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeChanged),
+            filter(route => route.routeDetails.area === RouteArea.categories),
+            switchMap(action => {
+                return this.store.select(RootStoreSelectors.allYears).pipe(
+                    filter((years) => years.length > 0),
+                    switchMap((years) => this.categoriesUrlService.ensureCompleteUrl(action.routeDetails))
+                );
+            })
         );
     }, { dispatch: false });
 
