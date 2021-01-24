@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ElementRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { HotkeysService } from 'angular2-hotkeys';
 import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.component';
@@ -15,10 +15,9 @@ export class ButtonComponent extends ButtonLinkBaseComponent implements OnInit, 
     @ViewChild('button') button: MatButton | null = null;
 
     constructor(
-        public hotkeysService: HotkeysService,
-        public el: ElementRef
+        public hotkeysService: HotkeysService
     ) {
-        super(hotkeysService, el);
+        super(hotkeysService);
     }
 
     ngOnInit(): void {

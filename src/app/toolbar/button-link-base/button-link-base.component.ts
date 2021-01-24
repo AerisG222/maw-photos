@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
@@ -21,8 +21,7 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
     abstract button: MatButton | null = null;
 
     constructor(
-        public hotkeysService: HotkeysService,
-        public el: ElementRef
+        public hotkeysService: HotkeysService
     ) { }
 
     ngOnInit(): void {
@@ -40,16 +39,13 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
         }
     }
 
-    onHotkeyTriggered(event: KeyboardEvent): boolean {
-        this.triggerRipple();
-        this.el.nativeElement.click();
-
-        return false;
-    }
-
-    triggerRipple(): void {
+    private onHotkeyTriggered(event: KeyboardEvent): boolean {
         if (!!this.button && !this.button.disabled) {
             this.button.ripple.launch({ centered: true });
+            // eslint-disable-next-line no-underscore-dangle
+            this.button._elementRef.nativeElement.click();
         }
+
+        return false;
     }
 }

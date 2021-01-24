@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { HotkeysService } from 'angular2-hotkeys';
 import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.component';
@@ -10,15 +10,14 @@ import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.co
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LinkComponent extends ButtonLinkBaseComponent implements OnInit, OnDestroy {
-    @Input() routerLink: string[] | null = null;
+    @Input() link: string[] | null = null;
 
-    @ViewChild('link') button: MatButton | null = null;
+    @ViewChild('linkElement') button: MatButton | null = null;
 
     constructor(
-        public hotkeysService: HotkeysService,
-        public el: ElementRef
+        public hotkeysService: HotkeysService
     ) {
-        super(hotkeysService, el);
+        super(hotkeysService);
     }
 
     ngOnInit(): void {
