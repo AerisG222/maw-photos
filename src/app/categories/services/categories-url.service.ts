@@ -89,7 +89,7 @@ export class CategoriesUrlService {
                     return;
                 }
 
-                const view = this.getValidView(routeDetails.params?.vew, preferredView);
+                const view = this.getValidView(routeDetails.params?.view, preferredView);
                 // eslint-disable-next-line max-len
                 const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, preferredYearFilter, allYears)?.toString();
                 const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, preferredTypeFilter);
