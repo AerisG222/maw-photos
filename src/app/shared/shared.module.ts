@@ -15,6 +15,7 @@ import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { CategoryListItemComponent } from './category-list-item/category-list-item.component';
+import { HotkeyListItemComponent } from './hotkey-list-item/hotkey-list-item.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { CategoryListItemComponent } from './category-list-item/category-list-it
         HotkeyDialogComponent,
         HotkeyTableComponent,
         MapViewComponent,
-        CategoryListItemComponent
+        CategoryListItemComponent,
+        HotkeyListItemComponent
     ],
     imports: [
         BaseModule
