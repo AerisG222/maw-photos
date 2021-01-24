@@ -1,0 +1,45 @@
+a {
+    text-decoration: none;
+}
+
+.listitem {
+    border-bottom: 1px solid;
+    border-bottom-color: hsla(0,0%,100%,.12);
+    display: block;
+}
+
+mat-icon {
+    padding: 0 24px;
+    vertical-align: middle;
+}
+
+.text {
+    margin: 0 16px 0 0;
+}
+
+:hover img {
+    filter: saturate(1);
+}
+
+img {
+    margin: 4px 24px 4px 4px;
+    vertical-align: middle;
+    width: 160px;
+    height: 120px;
+    filter: saturate(0.4);
+
+    &.thumb-small {
+        width: 120px;
+        height: 90px;
+    }
+
+    &.thumb-very-small {
+        width: 80px;
+        height: 60px;
+    }
+
+    &.thumb-tiny {
+        width: 40px;
+        height: 30px;
+    }
+}

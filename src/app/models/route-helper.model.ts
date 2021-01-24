@@ -1,5 +1,7 @@
 import { RouterStateSnapshot, Params } from '@angular/router';
 
+import { CategoryTeaser } from './category-teaser.model';
+import { CategoryType } from './category-type.model';
 import { RouteArea } from './route-area';
 
 export const about = 'about';
@@ -172,6 +174,16 @@ export const doesRouteAreaNeedCategoryData = (area: RouteArea | undefined): bool
         area === RouteArea.random ||
         area === RouteArea.stats ||
         area === RouteArea.videos;
+};
+
+export const getCategoryRoute = (category?: CategoryTeaser) => {
+    if(!!!category) {
+        return null;
+    }
+
+    return category.type === CategoryType.photo ?
+        photoCategoriesAbs(undefined, category.id) :
+        videoCategoriesAbs(undefined, category.id);
 };
 
 const getRouteNestedParams = (state: RouterStateSnapshot) => {

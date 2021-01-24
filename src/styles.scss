@@ -38,7 +38,7 @@ $custom-typography: mat-typography-config(
 @import 'app/primary-nav/primary-nav/primary-nav.component.theme';
 
 @import 'app/shared/category-card/category-card.component.theme';
-@import 'app/shared/category-list/category-list.component.theme';
+@import 'app/shared/category-list-item/category-list-item.component.theme';
 @import 'app/shared/category-header/category-header.component.theme';
 
 @import 'app/sidebar/comments-card/comments-card.component.theme';
@@ -77,7 +77,7 @@ $custom-typography: mat-typography-config(
 
     @include app-shared-category-card-component-theme($theme);
     @include app-shared-category-header-component-theme($theme);
-    @include app-shared-category-list-component-theme($theme);
+    @include app-shared-category-list-item-component-theme($theme);
 
     @include app-sidebar-button-component-theme($theme);
     @include app-sidebar-button-group-component-theme($theme);

@@ -14,6 +14,7 @@ import { ContentMarginComponent } from './content-margin/content-margin.componen
 import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
 import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 import { MapViewComponent } from './map-view/map-view.component';
+import { CategoryListItemComponent } from './category-list-item/category-list-item.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { MapViewComponent } from './map-view/map-view.component';
         ContentMarginComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
-        MapViewComponent
+        MapViewComponent,
+        CategoryListItemComponent
     ],
     imports: [
         BaseModule
