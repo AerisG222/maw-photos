@@ -43,6 +43,14 @@ export const saveFailure = createAction(
     props<{ error: string }>()
 );
 
+export const selectCategoryGridViewMode = createAction(
+    '[Settings] Select Category Grid View Mode'
+);
+
+export const selectCategoryListViewMode = createAction(
+    '[Settings] Select Category List View Mode'
+);
+
 export const toggleCategoryListCategoryTitlesRequest = createAction(
     '[Settings] Toggle Category List Category Titles'
 );

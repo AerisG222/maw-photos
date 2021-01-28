@@ -39,6 +39,8 @@ export class SettingsStoreEffects {
             ofType(
                 SettingsActions.updateMobileMarginsRequest,
 
+                SettingsActions.selectCategoryGridViewMode,
+                SettingsActions.selectCategoryListViewMode,
                 SettingsActions.toggleCategoryListCategoryTitlesRequest,
                 SettingsActions.toggleCategoryListMissingGpsFilterRequest,
                 SettingsActions.updateCategoryListYearFilterRequest,

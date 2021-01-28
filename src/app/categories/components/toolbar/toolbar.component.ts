@@ -58,6 +58,14 @@ export class ToolbarComponent {
         });
     }
 
+    onSelectGridView(): void {
+        this.store.dispatch(SettingsStoreActions.selectCategoryGridViewMode());
+    }
+
+    onSelectListView(): void {
+        this.store.dispatch(SettingsStoreActions.selectCategoryListViewMode());
+    }
+
     private execWithSettings(func: (settings: Settings) => void): void {
         this.store.select(SettingsStoreSelectors.settings)
             .pipe(

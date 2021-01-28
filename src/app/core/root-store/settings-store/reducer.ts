@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import { initialState, State } from './state';
 import * as SettingsActions from './actions';
-import { CategoryMargin } from '@models';
+import { CategoryMargin, CategoryViewMode } from '@models';
 
 export const reducer = createReducer(
     initialState,
@@ -42,6 +42,20 @@ export const reducer = createReducer(
         ...state,
         settings: { ...settings },
         error: null
+    })),
+    on(SettingsActions.selectCategoryGridViewMode, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListViewMode: CategoryViewMode.grid
+        }
+    })),
+    on(SettingsActions.selectCategoryListViewMode, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            categoryListViewMode: CategoryViewMode.list
+        }
     })),
     on(SettingsActions.toggleCategoryListCategoryTitlesRequest, (state): State => ({
         ...state,
