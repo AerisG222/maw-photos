@@ -1,6 +1,6 @@
 <div *ngIf="category">
     <a [routerLink]="['/categories']"
-       fragment="{{category.year}}"
+       [queryParams]="{ year: category.year }"
        class="mat-h3">
         {{ category.year }}
     </a>
@@ -12,7 +12,7 @@
     </span>
 
     <a *ngIf="showCategoryAsLink"
-       [routerLink]="['/photos', category.id]"
+       [routerLink]="['/photo-categories', category.id]"
        class="mat-h3">
         {{ category.name }}
     </a>
