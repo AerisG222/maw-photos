@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
@@ -7,7 +7,8 @@ import { RouteHelper } from '@models';
 @Component({
     selector: 'app-toolbar-view-grid-button',
     templateUrl: './toolbar-view-grid-button.component.html',
-    styleUrls: ['./toolbar-view-grid-button.component.scss']
+    styleUrls: ['./toolbar-view-grid-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarViewGridButtonComponent {
     isActive$ = this.store.select(RouterStoreSelectors.isPhotosGridView);

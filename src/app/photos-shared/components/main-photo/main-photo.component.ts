@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
@@ -9,7 +9,8 @@ import { Photo, PhotoEffects } from '@models';
 @Component({
     selector: 'app-photos-main-photo',
     templateUrl: './main-photo.component.html',
-    styleUrls: ['./main-photo.component.scss']
+    styleUrls: ['./main-photo.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPhotoComponent {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
@@ -6,7 +6,8 @@ import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
 @Component({
     selector: 'app-categories-category-missing-gps-filter',
     templateUrl: './category-missing-gps-filter.component.html',
-    styleUrls: ['./category-missing-gps-filter.component.scss']
+    styleUrls: ['./category-missing-gps-filter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryMissingGpsFilterComponent {
     filterEnabled$ = this.store.select(SettingsStoreSelectors.categoryListMissingGpsFilter);

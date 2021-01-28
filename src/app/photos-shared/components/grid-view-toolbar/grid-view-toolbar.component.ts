@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
@@ -14,7 +14,8 @@ import {
 @Component({
     selector: 'app-photos-grid-view-toolbar',
     templateUrl: './grid-view-toolbar.component.html',
-    styleUrls: ['./grid-view-toolbar.component.scss']
+    styleUrls: ['./grid-view-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridViewToolbarComponent {
     enableShare = false;

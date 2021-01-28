@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,7 +15,8 @@ import { tap } from 'rxjs/operators';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private destroySub = new Subscription();

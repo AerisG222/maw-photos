@@ -1,4 +1,4 @@
- import { Component, OnDestroy, ViewChild } from '@angular/core';
+ import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreSelectors, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-photos-grid-view',
     templateUrl: './grid-view.component.html',
-    styleUrls: ['./grid-view.component.scss']
+    styleUrls: ['./grid-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridViewComponent implements OnDestroy {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;

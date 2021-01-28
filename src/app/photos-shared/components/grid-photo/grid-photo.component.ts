@@ -1,12 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
+
 import { PhotoStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-grid-photo',
     templateUrl: './grid-photo.component.html',
-    styleUrls: ['./grid-photo.component.scss']
+    styleUrls: ['./grid-photo.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridPhotoComponent implements OnInit, OnDestroy {
     hotkey: Hotkey | null = null;

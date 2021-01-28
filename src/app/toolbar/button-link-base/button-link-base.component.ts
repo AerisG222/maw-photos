@@ -1,11 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 @Component({
     selector: 'app-button-link-base',
     templateUrl: './button-link-base.component.html',
-    styleUrls: ['./button-link-base.component.scss']
+    styleUrls: ['./button-link-base.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
     @Input() hideOnMobile = false;
