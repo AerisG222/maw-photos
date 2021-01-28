@@ -1,6 +1,6 @@
 <a
     *ngIf="!!category"
-    [routerLink]="[category.route, category.id]"
+    [routerLink]="category.route"
     [matTooltip]="category.name"
     [matTooltipDisabled]="showTitle">
     <mat-card>

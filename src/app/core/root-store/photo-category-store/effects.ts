@@ -57,7 +57,7 @@ export class PhotoCategoryStoreEffects {
     private adaptCategory(category: PhotoCategory): Category {
         return {
             type: CategoryType.photo,
-            route: RouteHelper.photoCategoriesAbs(),
+            route: RouteHelper.photoCategoriesAbs(undefined, category.id),
             id: category.id,
             name: category.name,
             year: category.year,

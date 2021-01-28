@@ -76,8 +76,8 @@ export const nextResultIndex = createSelector(
 
 const getUrl = (cat: MultimediaCategory): string => {
     return cat.multimediaType === 'photo' ?
-        RouteHelper.photoCategoriesAbs() :
-        RouteHelper.videoCategoriesAbs();
+        RouteHelper.photoCategoriesAbs(undefined, cat.id) :
+        RouteHelper.videoCategoriesAbs(undefined, cat.id);
 };
 
 const adaptSearchResultToCategory = (cat: MultimediaCategory): CategoryTeaser => ({
