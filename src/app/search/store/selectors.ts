@@ -4,7 +4,7 @@ import { State, searchAdapter } from './state';
 import { SEARCH_FEATURE_NAME } from './feature-name';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 import { SearchResult } from 'src/app/search/models/search-result.model';
-import { CategoryType, CategoryTeaser } from '@models';
+import { CategoryType, CategoryTeaser, RouteHelper } from '@models';
 
 const searchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);
 
@@ -74,8 +74,14 @@ export const nextResultIndex = createSelector(
     result => !!result ? result.startIndex + result.results.length : -1
 );
 
+const getUrl = (cat: MultimediaCategory): string => {
+    return cat.multimediaType === 'photo' ?
+        RouteHelper.photoCategoriesAbs() :
+        RouteHelper.videoCategoriesAbs();
+};
+
 const adaptSearchResultToCategory = (cat: MultimediaCategory): CategoryTeaser => ({
-    route: `/${ cat.multimediaType }s`,
+    route: getUrl(cat),
     id: cat.id,
     year: cat.year,
     name: cat.name,
