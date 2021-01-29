@@ -18,7 +18,11 @@
                 </app-shared-category-header>
             </div>
 
-            <app-photos-main-photo></app-photos-main-photo>
+            <app-photos-main-photo
+                [showHeader]="data.settings?.photoListShowCategoryBreadcrumbs"
+                [showPhotoList]="data.settings?.photoListShowPhotoList"
+                [photoListThumbnailSize]="data.settings?.photoListThumbnailSize">
+            </app-photos-main-photo>
 
             <app-photos-photo-list
                 *ngIf="data.photos && data.settings?.photoListShowPhotoList"

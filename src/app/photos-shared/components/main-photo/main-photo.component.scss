@@ -1,3 +1,16 @@
+@import '../../../../variables';
+
+.image-wrapper {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.fullscreen {
+    height: 100vh;
+}
+
 img {
     width: 100%;
     height: 100%;
@@ -23,9 +36,141 @@ img {
     }
 }
 
+// WHAT A MESS!
+// maximize height of image by dynamically subtracting out height of header
+// and photo list thumbnail heights depending on what is displayed
+// 28px = height of header
+// scrollHeight: 15px;
+
+.no-header-no-thumb {
+    max-height: 100vh;
+}
+
+.no-header-thumb {
+    max-height: calc(100vh - 126px - 15px);
+}
+
+.no-header-small-thumb {
+    max-height: calc(100vh - 96px - 15px);
+}
+
+.no-header-very-small-thumb {
+    max-height: calc(100vh - 66px - 15px);
+}
+
+.no-header-tiny-thumb {
+    max-height: calc(100vh - 36px - 15px);
+}
+
+.header-no-thumb {
+    max-height: calc(100vh - 28px);
+}
+
+.header-thumb {
+    max-height: calc(100vh - 28px - 126px - 15px);
+}
+
+.header-small-thumb {
+    max-height: calc(100vh - 28px - 96px - 15px);
+}
+
+.header-very-small-thumb {
+    max-height: calc(100vh - 28px - 66px - 15px);
+}
+
+.header-tiny-thumb {
+    max-height: calc(100vh - 28px - 36px - 15px);
+}
+
 @supports (-moz-appearance:none) {
     img {
         // mimic the object-fit:contain that chrome is doing
         max-height: calc(100vh - 162px);
+    }
+}
+
+// primaryNavHeight: 36px;
+// toolbarHeight: 29.25px;
+@media (max-width: $mobileBreakpoint) {
+    .no-header-no-thumb {
+        max-height: calc(100vh - 36px - 29.25px);
+    }
+
+    .no-header-thumb {
+        max-height: calc(100vh - 126px - 15px - 36px - 29.25px);
+    }
+
+    .no-header-small-thumb {
+        max-height: calc(100vh - 96px - 15px - 36px - 29.25px);
+    }
+
+    .no-header-very-small-thumb {
+        max-height: calc(100vh - 66px - 15px - 36px - 29.25px);
+    }
+
+    .no-header-tiny-thumb {
+        max-height: calc(100vh - 36px - 15px - 36px - 29.25px);
+    }
+
+    .header-no-thumb {
+        max-height: calc(100vh - 28px - 36px - 29.25px);
+    }
+
+    .header-thumb {
+        max-height: calc(100vh - 28px - 126px - 15px - 36px - 29.25px);
+    }
+
+    .header-small-thumb {
+        max-height: calc(100vh - 28px - 96px - 15px - 36px - 29.25px);
+    }
+
+    .header-very-small-thumb {
+        max-height: calc(100vh - 28px - 66px - 15px - 36px - 29.25px);
+    }
+
+    .header-tiny-thumb {
+        max-height: calc(100vh - 28px - 36px - 15px - 36px - 29.25px);
+    }
+
+    .fullscreen {
+        .no-header-no-thumb {
+            max-height: calc(100vh - 29.25px);
+        }
+
+        .no-header-thumb {
+            max-height: calc(100vh - 126px - 15px - 29.25px);
+        }
+
+        .no-header-small-thumb {
+            max-height: calc(100vh - 96px - 15px - 29.25px);
+        }
+
+        .no-header-very-small-thumb {
+            max-height: calc(100vh - 66px - 15px - 29.25px);
+        }
+
+        .no-header-tiny-thumb {
+            max-height: calc(100vh - 36px - 15px - 29.25px);
+        }
+
+        .header-no-thumb {
+            max-height: calc(100vh - 28px - 29.25px);
+        }
+
+        .header-thumb {
+            max-height: calc(100vh - 28px - 126px - 15px - 29.25px);
+        }
+
+        .header-small-thumb {
+            max-height: calc(100vh - 28px - 96px - 15px - 29.25px);
+        }
+
+        .header-very-small-thumb {
+            max-height: calc(100vh - 28px - 66px - 15px - 29.25px);
+        }
+
+        .header-tiny-thumb {
+            max-height: calc(100vh - 28px - 36px - 15px - 29.25px);
+        }
     }
 }

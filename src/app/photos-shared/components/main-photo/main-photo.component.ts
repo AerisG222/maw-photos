@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
 import { EffectStyleBuilderService } from '@core/services';
-import { Photo, PhotoEffects } from '@models';
+import { Photo, PhotoEffects, ThumbnailSize } from '@models';
 
 @Component({
     selector: 'app-photos-main-photo',
@@ -13,6 +13,11 @@ import { Photo, PhotoEffects } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPhotoComponent {
+    @Input() showHeader = false;
+    @Input() showPhotoList = false;
+    @Input() hasOneToolbarInMobile = false;
+    @Input() photoListThumbnailSize = ThumbnailSize.default;
+
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);
 
@@ -56,5 +61,35 @@ export class MainPhotoComponent {
         }
 
         return '';
+    }
+
+    getMaxHeightClass(): string {
+        let clss: string;
+
+        if(this.showHeader) {
+            clss = 'header-';
+        } else {
+            clss = 'no-header-';
+        }
+
+        if(this.showPhotoList) {
+            switch(this.photoListThumbnailSize) {
+                case ThumbnailSize.small:
+                    clss += 'small-thumb';
+                    break;
+                case ThumbnailSize.verySmall:
+                    clss += 'very-small-thumb';
+                    break;
+                case ThumbnailSize.tiny:
+                    clss += 'tiny-thumb';
+                    break;
+                default:
+                    clss += 'thumb';
+            }
+        } else {
+            clss += 'no-thumb';
+        }
+
+        return clss;
     }
 }

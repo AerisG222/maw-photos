@@ -1,7 +1,10 @@
 <app-layout-toolbar>
     <app-photos-fullscreen-toolbar layout-toolbar></app-photos-fullscreen-toolbar>
 
-    <div layout-main class="image-wrapper">
-        <app-photos-main-photo></app-photos-main-photo>
+    <div layout-main>
+        <app-photos-main-photo
+            [showHeader]="false"
+            [showPhotoList]="false"
+            [hasOneToolbarInMobile]="true"></app-photos-main-photo>
     </div>
 </app-layout-toolbar>
