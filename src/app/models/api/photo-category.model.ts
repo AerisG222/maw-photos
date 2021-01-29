@@ -5,8 +5,8 @@ export interface PhotoCategory {
     name: string;
     year: number;
     createDate: Date;
-    latitude: number;
-    longitude: number;
+    latitude: number | null;
+    longitude: number | null;
     photoCount: number;
     totalSizeXs: number;
     totalSizeXsSq: number;

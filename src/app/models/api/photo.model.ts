@@ -4,8 +4,8 @@ export interface Photo {
     id: number;
     categoryId: number;
     createDate: Date;
-    latitude: number;
-    longitude: number;
+    latitude: number | null;
+    longitude: number | null;
     imageXsSq: PhotoMultimediaAsset;
     imageXs: PhotoMultimediaAsset;
     imageSm: PhotoMultimediaAsset;

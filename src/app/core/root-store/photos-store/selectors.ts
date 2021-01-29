@@ -261,7 +261,7 @@ export const photosWithGpsCoordinates = createSelector(
     allPhotos,
     (photos: Photo[]) => {
         if (!!photos) {
-            return photos.filter(x => x.latitude !== null);
+            return photos.filter(x => x.latitude !== null && x.longitude !== null);
         } else {
             return null;
         }
@@ -275,8 +275,8 @@ export const photosWithGpsCoordinatesAsMapImages = createSelector(
             return photos.map(x => ({
                 id: x.id,
                 imageUrl: x.imageXsSq.url,
-                latitude: x.latitude,
-                longitude: x.longitude
+                latitude: x.latitude as number,
+                longitude: x.longitude as number
             }));
         }
 

@@ -5,8 +5,8 @@ export interface VideoCategory {
     name: string;
     year: number;
     createDate: Date;
-    latitude: null;
-    longitude: null;
+    latitude: number | null;
+    longitude: number | null;
     videoCount: number;
     totalDuration: number;
     totalSizeThumbnail: number;
