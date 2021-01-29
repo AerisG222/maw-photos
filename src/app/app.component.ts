@@ -10,7 +10,6 @@ import { Theme } from '@models';
 import { SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
-import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -37,11 +36,11 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );
 
-        this.destroySub.add(this.store.select(SettingsStoreSelectors.appTheme)
-            .pipe(
-                tap(theme => this.setTheme(theme))
-            )
-            .subscribe()
+        this.destroySub.add(this.store
+            .select(SettingsStoreSelectors.appTheme)
+            .subscribe({
+                next: theme => this.setTheme(theme)
+            })
         );
 
         this.store.dispatch(SettingsStoreActions.loadRequest());
@@ -81,8 +80,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.destroySub.add(dialogRef
             .afterClosed()
-            .subscribe(x => {
-                this.hotkeyHelper.unpauseAll();
+            .subscribe({
+                next: x => this.hotkeyHelper.unpauseAll()
             })
         );
 
