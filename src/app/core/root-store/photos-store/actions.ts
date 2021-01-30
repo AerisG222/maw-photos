@@ -229,10 +229,6 @@ export const setActivePhotoId = createAction(
     props<{ id: number | null }>()
 );
 
-export const unsetActivePhotoId = createAction(
-    '[Photos] Un-Set Active Photo ID'
-);
-
 export const loadGpsDetailRequest = createAction(
     '[Photos] Load GPS Detail Request',
     props<{ photoId: number }>()

@@ -265,15 +265,6 @@ export class PhotoStoreEffects {
         );
     });
 
-    unsetActivePhotoIdEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoActions.unsetActivePhotoId),
-            map(action => {
-                return PhotoActions.setActivePhotoId({ id: null });
-            })
-        );
-    });
-
     moveNextEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.moveNextRequest),
