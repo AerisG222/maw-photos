@@ -8,8 +8,7 @@ import {
     SettingsStoreActions,
     SettingsStoreSelectors,
     PhotoCategoryStoreSelectors,
-    PhotoStoreSelectors,
-    RootStoreSelectors
+    PhotoStoreSelectors
 } from '@core/root-store';
 
 @Component({
@@ -23,8 +22,6 @@ export class DetailToolbarComponent {
 
     enableShare: boolean;
 
-    enableBulkEdit$ = this.store.select(RootStoreSelectors.enableBulkEdit);
-    enableMapView$ = this.store.select(PhotoStoreSelectors.enableMapView);
     smDownloadUrl$ = this.store.select(PhotoStoreSelectors.activePhotoSmDownloadUrl);
     mdDownloadUrl$ = this.store.select(PhotoStoreSelectors.activePhotoMdDownloadUrl);
     lgDownloadUrl$ = this.store.select(PhotoStoreSelectors.activePhotoLgDownloadUrl);
