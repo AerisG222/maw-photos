@@ -8,6 +8,8 @@ import * as PhotoCategoryActions from './actions';
 import * as PhotoCategorySelectors from './selectors';
 import { photoApiServiceToken, PhotoApiService } from '@core/services/photo-api.service';
 import { PhotoCategory, Category, CategoryType, RouteHelper } from '@models';
+import * as PhotoStoreActions from '../photos-store/actions';
+import * as PhotoStoreSelectors from '../photos-store/selectors';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -39,6 +41,23 @@ export class PhotoCategoryStoreEffects {
                         catchError(error => of(PhotoCategoryActions.setTeaserFailure({ error })))
                     )
             )
+        );
+    });
+
+    // TODO: seems like a funny place to put this, but we need to reset the category in random mode when the photo changes
+    updateCategoryOnActivePhotoUpdate$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoStoreActions.setActivePhotoId),
+            concatMap(id => this.store.select(PhotoStoreSelectors.activePhoto)),
+            map(photo => {
+                const catId = photo?.categoryId;
+
+                if(!!catId) {
+                    return PhotoCategoryActions.setActiveCategoryId({ categoryId: catId });
+                } else {
+                    return PhotoCategoryActions.setActiveCategoryId({ categoryId: null });
+                }
+            })
         );
     });
 
