@@ -1,7 +1,23 @@
 <app-toolbar-group>
-    <app-toolbar-view-grid-button></app-toolbar-view-grid-button>
-    <app-toolbar-view-detail-button></app-toolbar-view-detail-button>
-    <app-toolbar-view-fullscreen-button></app-toolbar-view-fullscreen-button>
-    <app-toolbar-view-map-button></app-toolbar-view-map-button>
-    <app-toolbar-view-bulk-edit-button></app-toolbar-view-bulk-edit-button>
+    <app-toolbar-view-grid-button
+        [isActive]="isGridViewActive">
+    </app-toolbar-view-grid-button>
+
+    <app-toolbar-view-detail-button
+        [isActive]="isDetailViewActive">
+    </app-toolbar-view-detail-button>
+
+    <app-toolbar-view-fullscreen-button
+        [isActive]="isFullscreenViewActive">
+    </app-toolbar-view-fullscreen-button>
+
+    <app-toolbar-view-map-button
+        *ngIf="enableMapView$ | async"
+        [isActive]="isMapViewActive">
+    </app-toolbar-view-map-button>
+
+    <app-toolbar-view-bulk-edit-button
+        *ngIf="enableBulkEdit$ | async"
+        [isActive]="isBulkEditViewActive">
+    </app-toolbar-view-bulk-edit-button>
 </app-toolbar-group>

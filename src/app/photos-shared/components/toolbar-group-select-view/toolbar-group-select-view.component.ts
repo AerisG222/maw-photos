@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RouterStoreSelectors } from '@core/root-store';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -8,6 +9,15 @@ import { Store } from '@ngrx/store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarGroupSelectViewComponent {
+    @Input() isBulkEditViewActive = false;
+    @Input() isDetailViewActive = false;
+    @Input() isFullscreenViewActive = false;
+    @Input() isGridViewActive = false;
+    @Input() isMapViewActive = false;
+
+    enableMapView$ = this.store.select(RouterStoreSelectors.isPhotosView);
+    enableBulkEdit$ = this.store.select(RouterStoreSelectors.isPhotosView);
+
     constructor(
         private store: Store
     ) {

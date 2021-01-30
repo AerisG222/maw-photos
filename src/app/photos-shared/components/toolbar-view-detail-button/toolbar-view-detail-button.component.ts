@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
+import { PhotoStoreActions } from '@core/root-store';
 import { RouteHelper } from '@models';
 
 @Component({
@@ -11,7 +11,7 @@ import { RouteHelper } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarViewDetailButtonComponent {
-    isActive$ = this.store.select(RouterStoreSelectors.isPhotosDetailView);
+    @Input() isActive = false;
 
     constructor(
         private store: Store
