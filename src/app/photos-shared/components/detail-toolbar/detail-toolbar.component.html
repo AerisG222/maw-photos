@@ -11,7 +11,9 @@
         <app-toolbar-move-next-button></app-toolbar-move-next-button>
     </app-toolbar-group>
 
-    <app-toolbar-divider></app-toolbar-divider>
+    <app-toolbar-divider
+        *ngIf="allowCategoryDownload && (category$ | async)?.downloadLink">
+    </app-toolbar-divider>
 
     <app-toolbar-group>
         <app-photos-toolbar-download-button
