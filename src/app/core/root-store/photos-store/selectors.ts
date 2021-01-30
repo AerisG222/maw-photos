@@ -9,6 +9,7 @@ import {
     ExifContainer,
     GpsDetail,
     CategoryGpsStatus,
+    Category,
  } from '@models';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
@@ -79,6 +80,11 @@ export const slideshowIsPlaying = createSelector(
 export const hasPendingActions = createSelector(
     pendingActionCount,
     (count: number): boolean => count > 0
+);
+
+export const categoryIdForActivePhoto = createSelector(
+    photoState,
+    (state: State): number | null => state.activePhotoCategoryId
 );
 
 export const activePhotoIndex = createSelector(
@@ -376,4 +382,25 @@ export const isExifCardVisible = createSelector(
     SettingsStoreSelectors.photoInfoPanelExpandedState,
     SettingsStoreSelectors.photoInfoPanelShowExif,
     (isDetailView, isExpanded, showExif) => isDetailView && isExpanded && showExif
+);
+
+// hmm - does it seem funny that we reference the photo category selectors here?
+export const categoryForActivePhoto = createSelector(
+    categoryIdForActivePhoto,
+    PhotoCategoryStoreSelectors.allEntities,
+    (categoryId, entities) => {
+        if(!!categoryId) {
+            return entities[categoryId];
+        } else {
+            return null;
+        }
+    }
+);
+
+export const activeCategory = createSelector(
+    categoryForActivePhoto,
+    PhotoCategoryStoreSelectors.activeCategory,
+    (activePhotoCat, activeCat) => {
+        return (activePhotoCat ?? activeCat) || null;
+    }
 );

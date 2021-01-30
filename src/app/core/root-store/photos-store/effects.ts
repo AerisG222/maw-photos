@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, of, timer } from 'rxjs';
 // eslint-disable-next-line max-len
-import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap, takeUntil } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, concatMap, mergeMap, debounceTime, filter, exhaustMap, takeUntil, first } from 'rxjs/operators';
 
 import { CategoryGpsStatus, DEFAULT_PHOTO_EFFECTS, PhotoRotation } from '@models';
 import { ExifFormatterService } from '@core/services/exif-formatter.service';
@@ -11,6 +11,7 @@ import { photoApiServiceToken, PhotoApiService } from '@core/services/photo-api.
 import * as PhotoActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import * as PhotoCategoryStoreActions from '@core/root-store/photo-category-store/actions';
+import * as PhotoCategoryStoreSelectors from '@core/root-store/photo-category-store/selectors';
 import * as SettingsStoreSelectors from '@core/root-store/settings-store/selectors';
 import { RouterStoreSelectors } from '../router-store';
 
@@ -365,6 +366,18 @@ export class PhotoStoreEffects {
                     )),
                     map(() => PhotoActions.loadRandomRequest())
                 );
+            })
+        );
+    });
+
+    setCategoryIdForActivePhotoEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(PhotoActions.setActivePhotoId),
+            withLatestFrom(this.store.select(PhotoStoreSelectors.activePhoto)),
+            map(([action, photo]) => {
+                const categoryId = photo?.categoryId ?? null;
+
+                return PhotoActions.setCategoryIdForActivePhoto({ categoryId });
             })
         );
     });

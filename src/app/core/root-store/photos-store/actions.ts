@@ -9,6 +9,7 @@ import {
     ExifContainer,
     GpsCoordinate,
     GpsDetail,
+    Category,
  } from '@models';
 
 export const clearRequest = createAction(
@@ -227,6 +228,11 @@ export const toggleSlideshowRequest = createAction(
 export const setActivePhotoId = createAction(
     '[Photos] Set Active Photo ID',
     props<{ id: number | null }>()
+);
+
+export const setCategoryIdForActivePhoto = createAction(
+    '[Photos] Set Category ID for Active Photo',
+    props<{ categoryId: number | null }>()
 );
 
 export const loadGpsDetailRequest = createAction(

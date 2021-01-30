@@ -8,6 +8,7 @@ import {
     ExifContainer,
     GpsDetail,
     PhotoEffects,
+    Category,
  } from '@models';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
@@ -23,6 +24,7 @@ export interface State extends EntityState<Photo> {
     activePhotoGpsDetail: GpsDetail | null;
     slideshowIsPlaying: boolean;
     pendingActionCount: number;
+    activePhotoCategoryId: number | null;
 }
 
 export const initialState: State = photoAdapter.getInitialState({
@@ -35,5 +37,6 @@ export const initialState: State = photoAdapter.getInitialState({
     activePhotoEffects: DEFAULT_PHOTO_EFFECTS,
     activePhotoGpsDetail: null,
     slideshowIsPlaying: false,
-    pendingActionCount: 0
+    pendingActionCount: 0,
+    activePhotoCategoryId: null
 });

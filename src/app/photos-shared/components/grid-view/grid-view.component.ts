@@ -1,7 +1,7 @@
  import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreSelectors, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
+import { SettingsStoreSelectors, RouterStoreSelectors } from '@core/root-store';
 import { PhotoStoreSelectors } from '../../../core/root-store/photos-store';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ export class GridViewComponent implements OnDestroy {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
 
     lastScrollTop = 0;
-    category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
+    category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     settings$ = this.store.select(SettingsStoreSelectors.settings);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);

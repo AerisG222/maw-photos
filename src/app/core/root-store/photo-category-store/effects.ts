@@ -44,23 +44,6 @@ export class PhotoCategoryStoreEffects {
         );
     });
 
-    // TODO: seems like a funny place to put this, but we need to reset the category in random mode when the photo changes
-    updateCategoryOnActivePhotoUpdate$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoStoreActions.setActivePhotoId),
-            concatMap(id => this.store.select(PhotoStoreSelectors.activePhoto)),
-            map(photo => {
-                const catId = photo?.categoryId;
-
-                if(!!catId) {
-                    return PhotoCategoryActions.setActiveCategoryId({ categoryId: catId });
-                } else {
-                    return PhotoCategoryActions.setActiveCategoryId({ categoryId: null });
-                }
-            })
-        );
-    });
-
     constructor(
         @Inject(photoApiServiceToken) private api: PhotoApiService,
         private actions$: Actions,

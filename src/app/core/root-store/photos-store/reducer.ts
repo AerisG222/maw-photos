@@ -101,6 +101,10 @@ export const reducer = createReducer(
         ...state,
         activePhotoId: id
     })),
+    on(PhotoActions.setCategoryIdForActivePhoto, (state, { categoryId }): State => ({
+        ...state,
+        activePhotoCategoryId: categoryId
+    })),
     on(PhotoActions.ratePhotoRequest, (state, { photoId, userRating }): State => ({
         ...state,
         isLoading: true,

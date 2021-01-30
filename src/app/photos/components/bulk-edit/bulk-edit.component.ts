@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, BehaviorSubject } from 'rxjs';
 import { tap, first, map, filter } from 'rxjs/operators';
 
-import { PhotoCategoryStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
 import { GpsCoordinate, Photo } from '@models';
 
 @Component({
@@ -15,7 +15,7 @@ import { GpsCoordinate, Photo } from '@models';
 export class BulkEditComponent {
     selectedPhotos: Photo[] = [];
     showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
-    category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
+    category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     photos$ = combineLatest([
             this.store.select(PhotoStoreSelectors.allPhotos),
             this.showPhotosWithGpsData$

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelectors, PhotoStoreSelectors } from '@core/root-store';
+import { RouterStoreSelectors, SettingsStoreSelectors, PhotoStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-photos-detail-view',
@@ -12,7 +12,7 @@ import { PhotoCategoryStoreSelectors, RouterStoreSelectors, SettingsStoreSelecto
 export class DetailViewComponent {
     showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
     allowCategoryDownload$ = this.store.select(RouterStoreSelectors.isPhotosView);
-    category$ = this.store.select(PhotoCategoryStoreSelectors.activeCategory);
+    category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
     settings$ = this.store.select(SettingsStoreSelectors.settings);
