@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import { initialState, State } from './state';
 import * as SettingsActions from './actions';
-import { CategoryMargin, CategoryViewMode } from '@models';
+import { CategoryMargin, CategoryViewMode, PhotoViewMode } from '@models';
 
 export const reducer = createReducer(
     initialState,
@@ -244,6 +244,41 @@ export const reducer = createReducer(
         settings: {
             ...state.settings,
             photoListMapViewZoom: zoom
+        }
+    })),
+    on(SettingsActions.selectPhotoViewModeBulkEdit, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoViewMode: PhotoViewMode.bulkEdit
+        }
+    })),
+    on(SettingsActions.selectPhotoViewModeDetail, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoViewMode: PhotoViewMode.detail
+        }
+    })),
+    on(SettingsActions.selectPhotoViewModeFullscreen, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoViewMode: PhotoViewMode.fullscreen
+        }
+    })),
+    on(SettingsActions.selectPhotoViewModeGrid, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoViewMode: PhotoViewMode.grid
+        }
+    })),
+    on(SettingsActions.selectPhotoViewModeMap, (state): State => ({
+        ...state,
+        settings: {
+            ...state.settings,
+            photoViewMode: PhotoViewMode.map
         }
     })),
     on(SettingsActions.toggleVideoListShowVideoListRequest, (state): State => ({

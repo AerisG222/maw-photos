@@ -10,6 +10,7 @@ import {
     CategoryViewMode,
     GoogleMapThemes,
     MapType,
+    PhotoViewMode,
 } from '@models';
 import { SETTINGS_FEATURE_NAME } from './feature-name';
 import { State } from './state';
@@ -90,6 +91,12 @@ export const categoryListShouldShowListView = createSelector(
 export const categoryListShouldShowGridView = createSelector(
     categoryViewMode,
     (type: CategoryViewMode): boolean => type === CategoryViewMode.grid
+);
+
+// -- PHOTO VIEW MODE --
+export const photoViewMode = createSelector(
+    settingsState,
+    (state: State): PhotoViewMode => state.settings.photoViewMode
 );
 
 // -- PHOTO GRID --

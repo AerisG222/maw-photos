@@ -11,6 +11,8 @@ import {
     CategoryViewMode,
     toCategoryTypeFilter,
     toCategoryViewMode,
+    PhotoViewMode,
+    toPhotoViewMode,
     MapType,
     toMapType,
  } from '@models';
@@ -55,6 +57,8 @@ export class SettingsService {
     private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
     private static readonly keyPhotoInfoPanelMinimapMapType = 'photoInfoPanelMinimapMapTypeId';
     private static readonly keyPhotoInfoPanelMinimapZoom = 'photoInfoPanelMinimapZoom';
+
+    private static readonly keyPhotoViewMode = 'photoViewMode';
 
     private static readonly keyVideoListShowCategoryBreadcrumbs = 'videoListShowCategoryBreadcrumbs';
     private static readonly keyVideoListThumbnailSize = 'videoListThumbnailSize';
@@ -129,6 +133,8 @@ export class SettingsService {
                 photoInfoPanelMinimapMapType:          this.getMapType(SettingsService.keyPhotoInfoPanelMinimapMapType, DEFAULT_SETTINGS.photoInfoPanelMinimapMapType),
                 photoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
 
+                photoViewMode: this.getPhotoViewMode(SettingsService.keyPhotoViewMode),
+
                 videoListShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs),
                 videoListThumbnailSize:           this.getVideoListThumbnailSize(),
                 videoListShowVideoList:           this.getBoolean(SettingsService.keyVideoListShowVideoList),
@@ -195,6 +201,8 @@ export class SettingsService {
         this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapType, settings.photoInfoPanelMinimapMapType);
         this.setNumber(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
 
+        this.setValue(SettingsService.keyPhotoViewMode, settings.photoViewMode);
+
         this.setBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
         this.setBoolean(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
         this.setValue(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
@@ -256,6 +264,16 @@ export class SettingsService {
             return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
         } catch {
             return Theme.themeDark;
+        }
+    }
+
+    private getPhotoViewMode(key: string): PhotoViewMode {
+        const name = this.getStringOrNull(key);
+
+        try {
+            return toPhotoViewMode(name) ?? PhotoViewMode.grid;
+        } catch {
+            return PhotoViewMode.grid;
         }
     }
 

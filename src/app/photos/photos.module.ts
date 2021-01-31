@@ -14,6 +14,9 @@ import { PhotoSelectGridComponent } from './components/photo-select-grid/photo-s
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
 import { Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable, PhotoLinkable } from '@core/facades';
+import { ViewModeGuard } from './services/view-mode.guard';
+import { PhotosUrlService } from './services/photos-url.service';
+import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 
 @NgModule({
     declarations: [
@@ -39,7 +42,10 @@ import { Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, Categor
         { provide: MetadataEditable,         useExisting: PhotoStoreFacadeService },
         { provide: MiniMapable,              useExisting: PhotoStoreFacadeService },
         { provide: CategoryTeaserSelectable, useExisting: PhotoStoreFacadeService },
-        { provide: PhotoLinkable,            useExisting: PhotoStoreFacadeService }
+        { provide: PhotoLinkable,            useExisting: PhotoStoreFacadeService },
+        { provide: PhotoViewModeSelectable,  useExisting: PhotoStoreFacadeService },
+        PhotosUrlService,
+        ViewModeGuard
     ]
 })
 export class PhotosModule { }

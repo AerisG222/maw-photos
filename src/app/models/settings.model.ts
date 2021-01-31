@@ -5,6 +5,7 @@ import { CategoryMargin } from './category-margin.model';
 import { CategoryTypeFilter } from './category-type-filter.model';
 import { CategoryViewMode } from './category-view-mode.model';
 import { MapType } from './map-type.model';
+import { PhotoViewMode } from './photo-view-mode.model';
 
 export interface Settings {
     appTheme: Theme;
@@ -40,6 +41,8 @@ export interface Settings {
     photoInfoPanelExpandedState: boolean;
     photoInfoPanelMinimapZoom: number;
     photoInfoPanelMinimapMapType: MapType;
+
+    photoViewMode: PhotoViewMode;
 
     videoListShowCategoryBreadcrumbs: boolean;
     videoListThumbnailSize: ThumbnailSize;
@@ -97,6 +100,8 @@ export const DEFAULT_SETTINGS: Settings = ({
     photoInfoPanelExpandedState: false,
     photoInfoPanelMinimapMapType: MapType.roadmap,
     photoInfoPanelMinimapZoom: 10,
+
+    photoViewMode: PhotoViewMode.grid,
 
     videoListShowCategoryBreadcrumbs: true,
     videoListThumbnailSize: ThumbnailSize.default,

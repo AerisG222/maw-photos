@@ -53,6 +53,11 @@
                 <mat-card>
                     <mat-card-title>Photo List</mat-card-title>
                     <mat-card-content>
+                        <h3>Photo View Mode</h3>
+                        <mat-radio-group formControlName="photoViewMode">
+                            <mat-radio-button *ngFor="let type of photoViewModes" [value]="type.value">{{ type.name }}</mat-radio-button>
+                        </mat-radio-group>
+
                         <h3>Show Category Breadcrumbs</h3>
                         <mat-slide-toggle formControlName="photoListShowCategoryBreadcrumbs"></mat-slide-toggle>
 

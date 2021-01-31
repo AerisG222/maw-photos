@@ -72,6 +72,12 @@ export class SettingsStoreEffects {
                 SettingsActions.updatePhotoListMapViewZoomRequest,
                 SettingsActions.updatePhotoListThumbnailSizeRequest,
 
+                SettingsActions.selectPhotoViewModeBulkEdit,
+                SettingsActions.selectPhotoViewModeDetail,
+                SettingsActions.selectPhotoViewModeFullscreen,
+                SettingsActions.selectPhotoViewModeGrid,
+                SettingsActions.selectPhotoViewModeMap,
+
                 SettingsActions.toggleVideoListCategoryBreadcrumbsRequest,
                 SettingsActions.toggleVideoListShowVideoListRequest,
                 SettingsActions.updateVideoListThumbnailSizeRequest,

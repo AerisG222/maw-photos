@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions } from '@core/root-store';
-import { RouteHelper } from '@models';
+import { PhotoViewMode, RouteHelper } from '@models';
+import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 
 @Component({
     selector: 'app-toolbar-view-bulk-edit-button',
@@ -14,12 +15,14 @@ export class ToolbarViewBulkEditButtonComponent {
     @Input() isActive = false;
 
     constructor(
-        private store: Store
+        private store: Store,
+        private viewMode: PhotoViewModeSelectable
     ) {
 
     }
 
     onToggleBulkEditView(): void {
         this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewBulkEdit }));
+        this.viewMode.selectPhotoViewMode(PhotoViewMode.bulkEdit);
     }
 }

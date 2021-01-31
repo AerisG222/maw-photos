@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 // eslint-disable-next-line max-len
 import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
-import { Photo, GpsCoordinate, MapType, RouteHelper } from '@models';
+import { Photo, GpsCoordinate, MapType, RouteHelper, PhotoViewMode } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -20,6 +20,7 @@ import {
     helpSaveCategoryTeaser,
     PhotoLinkable,
  } from '@core/facades';
+import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 
 @Injectable()
 export class RandomStoreFacadeService implements
@@ -30,7 +31,8 @@ export class RandomStoreFacadeService implements
     MetadataEditable,
     MiniMapable,
     CategoryTeaserSelectable,
-    PhotoLinkable
+    PhotoLinkable,
+    PhotoViewModeSelectable
 {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
@@ -45,6 +47,8 @@ export class RandomStoreFacadeService implements
     zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
+    activePhotoViewMode$ = this.store.select(RouterStoreSelectors.photoView);
+    preferredPhotoViewMode$ = this.store.select(SettingsStoreSelectors.photoViewMode);
 
     private destroySub = new Subscription();
     private view = 'grid';
@@ -118,5 +122,22 @@ export class RandomStoreFacadeService implements
 
     buildPhotoLink(photo: Photo) {
         return RouteHelper.randomAbs(this.view, photo.id);
+    }
+
+    // TODO: add random settings/prefs
+    selectPhotoViewMode(mode: PhotoViewMode) {
+        switch(mode) {
+            case PhotoViewMode.detail:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeDetail());
+                break;
+            case PhotoViewMode.fullscreen:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeFullscreen());
+                break;
+            case PhotoViewMode.grid:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeGrid());
+                break;
+            default:
+                throw Error(`unknown photo view mode: ${ mode }`);
+        }
     }
 }

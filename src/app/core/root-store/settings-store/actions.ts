@@ -172,6 +172,26 @@ export const updatePhotoGridThumbnailSizeRequest = createAction(
     props<{ newSize: ThumbnailSize }>()
 );
 
+export const selectPhotoViewModeBulkEdit = createAction(
+    '[Settings] Select Photo View Mode Bulk Edit'
+);
+
+export const selectPhotoViewModeDetail = createAction(
+    '[Settings] Select Photo View Mode Detail'
+);
+
+export const selectPhotoViewModeFullscreen = createAction(
+    '[Settings] Select Photo View Mode Fullscreen'
+);
+
+export const selectPhotoViewModeGrid = createAction(
+    '[Settings] Select Photo View Mode Grid'
+);
+
+export const selectPhotoViewModeMap = createAction(
+    '[Settings] Select Photo View Mode Map'
+);
+
 export const toggleVideoListCategoryBreadcrumbsRequest = createAction(
     '[Settings] Toggle Video List Category Breadcrumbs'
 );

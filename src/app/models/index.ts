@@ -31,6 +31,7 @@ export * from './minimap-zoom.model';
 export * from './photo-effects.model';
 export * from './photo-multimedia-asset.model';
 export * from './photo-rotation.model';
+export * from './photo-view-mode.model';
 export * from './route-area';
 export * from './route-details.model';
 export * from './settings.model';

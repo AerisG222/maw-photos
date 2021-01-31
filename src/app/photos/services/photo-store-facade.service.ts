@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { Photo, GpsCoordinate, MapType, RouteHelper } from '@models';
+import { Photo, GpsCoordinate, MapType, RouteHelper, PhotoViewMode } from '@models';
 import {
     Commentable,
     helpAddComment,
@@ -20,6 +20,7 @@ import {
  } from '@core/facades';
 // eslint-disable-next-line max-len
 import { RouterStoreSelectors, SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
+import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 
 @Injectable()
 export class PhotoStoreFacadeService implements
@@ -30,7 +31,8 @@ export class PhotoStoreFacadeService implements
     MetadataEditable,
     MiniMapable,
     CategoryTeaserSelectable,
-    PhotoLinkable
+    PhotoLinkable,
+    PhotoViewModeSelectable
 {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
@@ -45,7 +47,8 @@ export class PhotoStoreFacadeService implements
     zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
     mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
-    view$ = this.store.select(RouterStoreSelectors.photoView);
+    activePhotoViewMode$ = this.store.select(RouterStoreSelectors.photoView);
+    preferredPhotoViewMode$ = this.store.select(SettingsStoreSelectors.photoViewMode);
 
     private destroySub = new Subscription();
     private view = 'grid';
@@ -119,5 +122,27 @@ export class PhotoStoreFacadeService implements
 
     buildPhotoLink(photo: Photo) {
         return RouteHelper.photoCategoriesAbs(this.view, photo.categoryId, photo.id);
+    }
+
+    selectPhotoViewMode(mode: PhotoViewMode) {
+        switch(mode) {
+            case PhotoViewMode.bulkEdit:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeBulkEdit());
+                break;
+            case PhotoViewMode.detail:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeDetail());
+                break;
+            case PhotoViewMode.fullscreen:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeFullscreen());
+                break;
+            case PhotoViewMode.grid:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeGrid());
+                break;
+            case PhotoViewMode.map:
+                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeMap());
+                break;
+            default:
+                throw Error(`unknown photo view mode: ${ mode }`);
+        }
     }
 }

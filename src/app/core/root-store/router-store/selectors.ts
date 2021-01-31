@@ -3,7 +3,7 @@ import * as fromRouter from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MinimalRouterStateSnapshot } from '@ngrx/router-store';
 
-import { RouteDetails, RouteArea } from '@models';
+import { RouteDetails, RouteArea, PhotoViewMode } from '@models';
 import { RouteHelper } from '@models';
 
 export const routerState = createFeatureSelector<fromRouter.RouterReducerState<MinimalRouterStateSnapshot>>('router');
@@ -99,7 +99,7 @@ export const isRandomView = createSelector(
 
 export const photoView = createSelector(
     selectRouteData,
-    data => data?.view as string ?? RouteHelper.photoViewDefault
+    data => data?.view as PhotoViewMode ?? RouteHelper.photoViewDefault
 );
 
 export const inCategoryArea = createSelector(

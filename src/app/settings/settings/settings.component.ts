@@ -19,6 +19,8 @@ import {
     toCategoryViewMode,
     allMapTypes,
     toMapType,
+    allPhotoViewModes,
+    toPhotoViewMode,
 } from '@models';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { Subscription } from 'rxjs';
@@ -38,6 +40,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     categoryThumbnailSizes = ThumbnailSize.allSizes;
     categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
     categoryViewModes = allCategoryViewModes;
+    photoViewModes = allPhotoViewModes;
     photoGridMargins = CategoryMargin.allCategoryMargins;
     photoGridThumbnailSizes = ThumbnailSize.allSizes;
     photoListThumbnailSizes = ThumbnailSize.allSizes;
@@ -91,6 +94,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoInfoPanelExpandedState:              [DEFAULT_SETTINGS.photoInfoPanelExpandedState],
             photoInfoPanelMinimapMapType:           [DEFAULT_SETTINGS.photoInfoPanelMinimapMapType],
             photoInfoPanelMinimapZoom:                [DEFAULT_SETTINGS.photoInfoPanelMinimapZoom],
+
+            photoViewMode: [DEFAULT_SETTINGS.photoViewMode],
 
             videoListShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.videoListShowCategoryBreadcrumbs],
             videoListThumbnailSize:                   [DEFAULT_SETTINGS.videoListThumbnailSize.name],
@@ -168,6 +173,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
             photoInfoPanelMinimapMapType:          toMapType(this.getFormString('photoInfoPanelMinimapMapType', '')) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapMapType,
             photoInfoPanelMinimapZoom:               this.getFormNumber('photoInfoPanelMinimapZoom',                DEFAULT_SETTINGS.photoInfoPanelMinimapZoom),
 
+            photoViewMode: toPhotoViewMode(this.getFormString('photoViewMode', '')) ?? DEFAULT_SETTINGS.photoViewMode,
+
             videoListShowCategoryBreadcrumbs: this.getFormBoolean('videoListShowCategoryBreadcrumbs',            DEFAULT_SETTINGS.videoListShowCategoryBreadcrumbs),
             videoListThumbnailSize:           ThumbnailSize.forName(this.getFormString('videoListThumbnailSize', DEFAULT_SETTINGS.videoListThumbnailSize.name)),
             videoListShowVideoList:           this.getFormBoolean('videoListShowVideoList',                      DEFAULT_SETTINGS.videoListShowVideoList),
@@ -238,6 +245,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.form.get('photoInfoPanelExpandedState')?.setValue(settings.photoInfoPanelExpandedState);
         this.form.get('photoInfoPanelMinimapMapType')?.setValue(settings.photoInfoPanelMinimapMapType);
         this.form.get('photoInfoPanelMinimapZoom')?.setValue(settings.photoInfoPanelMinimapZoom);
+
+        this.form.get('photoViewMode')?.setValue(settings.photoViewMode);
 
         this.form.get('videoListShowCategoryBreadcrumbs')?.setValue(settings.videoListShowCategoryBreadcrumbs);
         this.form.get('videoListThumbnailSize')?.setValue(settings.videoListThumbnailSize.name);
