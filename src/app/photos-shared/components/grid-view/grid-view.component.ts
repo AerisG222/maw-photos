@@ -23,7 +23,7 @@ export class GridViewComponent implements OnDestroy {
     thumbnailSize$ = this.store.select(SettingsStoreSelectors.photoGridThumbnailSize);
     margin$ = this.store.select(SettingsStoreSelectors.photoGridMargin);
     showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
-    showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
+    isRandomView$ = this.store.select(RouterStoreSelectors.isRandomView);
 
     private destroySub = new Subscription();
 

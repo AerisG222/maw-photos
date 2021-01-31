@@ -15,6 +15,7 @@
 
     <app-toolbar-group *ngIf="(activePhotoId$ | async) === null">
         <app-toolbar-button
+            *ngIf="!isRandom"
             icon="title"
             shortcutKey="t"
             shortcutHelp="Show/Hide Category Breadcrumbs"

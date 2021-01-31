@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
@@ -18,6 +18,8 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridViewToolbarComponent {
+    @Input() isRandom = false;
+
     enableShare = false;
     activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
 

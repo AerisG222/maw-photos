@@ -1,5 +1,5 @@
 <app-layout-toolbar>
-    <app-photos-grid-view-toolbar layout-toolbar></app-photos-grid-view-toolbar>
+    <app-photos-grid-view-toolbar [isRandom]="isRandomView$ | async" layout-toolbar></app-photos-grid-view-toolbar>
 
     <div layout-main>
         <router-outlet></router-outlet>
@@ -8,7 +8,7 @@
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="showBreadcrumbs$ | async"
-                    [showCategoryAsLink]="showCategoryAsLink$ | async"
+                    [showCategoryAsLink]="isRandomView$ | async"
                     [category]="category$ | async">
                 </app-shared-category-header>
             </div>
