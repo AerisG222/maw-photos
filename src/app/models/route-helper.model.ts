@@ -1,6 +1,7 @@
 import { RouterStateSnapshot, Params } from '@angular/router';
 
 import { CategoryTeaser } from './category-teaser.model';
+import { CategoryTypeFilter } from './category-type-filter.model';
 import { CategoryType } from './category-type.model';
 import { RouteArea } from './route-area';
 
@@ -51,11 +52,19 @@ export const aboutAbs = (section?: string) => {
     return url;
 };
 
-export const categoriesAbs = (year?: number) => {
+export const categoriesAbs = (view?: string, year?: number | string, type?: CategoryTypeFilter) => {
     let url = `/${ categories }`;
+
+    if(!!view) {
+        url += `/${ view }`;
+    }
 
     if(!!year) {
         url += `?year=${ year }`;
+    }
+
+    if(!!type) {
+        url += `?type=${ type }`;
     }
 
     return url;

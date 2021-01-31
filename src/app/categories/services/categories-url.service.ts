@@ -69,6 +69,31 @@ export class CategoriesUrlService {
         return !!validatedFilter;
     }
 
+    isValidView(viewName: string) {
+        return viewName === CategoryViewMode.grid ||
+            viewName === CategoryViewMode.list;
+    }
+
+    getValidView(requestedView: string | null, preferredView: string | null) {
+        if(!!requestedView && this.isValidView(requestedView)) {
+            return requestedView;
+        }
+
+        if(!!preferredView && this.isValidView(preferredView)) {
+            return preferredView;
+        }
+
+        return CategoryViewMode.grid;
+    }
+
+    getDefaultView() {
+        return this.store.select(SettingsStoreSelectors.categoryViewMode)
+            .pipe(
+                // eslint-disable-next-line ngrx/avoid-mapping-selectors
+                map(view => this.getValidView(null, view))
+            );
+    }
+
     updateYearFilterInUrl(yearFilter: string | number) {
         this.router.navigate(['.'], { queryParams: { year: yearFilter }, queryParamsHandling: 'merge' });
     }
@@ -106,23 +131,5 @@ export class CategoriesUrlService {
             }),
             map(x => true)
         );
-    }
-
-    private getValidView(requestedView: string | null, preferredView: string | null)
-    {
-        if(!!requestedView && this.isValidView(requestedView)) {
-            return requestedView;
-        }
-
-        if(!!preferredView && this.isValidView(preferredView)) {
-            return preferredView;
-        }
-
-        return CategoryViewMode.grid;
-    }
-
-    private isValidView(viewName: string) {
-        return viewName === CategoryViewMode.grid ||
-            viewName === CategoryViewMode.list;
     }
 }

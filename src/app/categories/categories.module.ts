@@ -11,6 +11,7 @@ import { YearComponent } from './components/year/year.component';
 import { YearListComponent } from './components/year-list/year-list.component';
 import { CategoriesStoreModule } from './store/categories-store.module';
 import { CategoriesUrlService } from './services/categories-url.service';
+import { ViewModeGuard } from './services/view-mode.guard';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { CategoriesUrlService } from './services/categories-url.service';
         SharedModule
     ],
     providers: [
-        CategoriesUrlService
+        CategoriesUrlService,
+        ViewModeGuard
     ]
 })
 export class CategoriesModule { }
