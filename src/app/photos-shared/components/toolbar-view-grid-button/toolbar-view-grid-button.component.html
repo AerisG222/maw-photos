@@ -1,8 +1,8 @@
 <app-toolbar-button
-    [isActive]="isActive"
+    [isActive]="isActive$ | async"
     icon="apps"
     shortcutKey="g"
     shortcutHelp="Grid View"
     tooltip="Grid View (G)"
-    (click)="onToggleGridView()">
+    (click)="onSelectView()">
 </app-toolbar-button>

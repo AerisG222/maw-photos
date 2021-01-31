@@ -1,8 +1,8 @@
 <app-toolbar-button
-    [isActive]="isActive"
+    [isActive]="isActive$ | async"
     icon="dashboard"
     shortcutKey="d"
     shortcutHelp="Detail View"
     tooltip="Detail View (D)"
-    (click)="onToggleDetailView()">
+    (click)="onSelectView()">
 </app-toolbar-button>

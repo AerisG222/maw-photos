@@ -1,9 +1,9 @@
 <app-toolbar-button
-    [isActive]="isActive"
+    [isActive]="isActive$ | async"
     [hideOnMobile]="true"
     icon="map"
     shortcutKey="m"
     shortcutHelp="Map View"
     tooltip="Map View (M)"
-    (click)="onToggleMapView()">
+    (click)="onSelectView()">
 </app-toolbar-button>

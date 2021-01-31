@@ -1,9 +1,9 @@
 <app-toolbar-button
-    [isActive]="isActive"
+    [isActive]="isActive$ | async"
     [hideOnMobile]="true"
     icon="collections"
     shortcutKey="b"
     shortcutHelp="Bulk Edit View"
     tooltip="Bulk Edit View (B)"
-    (click)="onToggleBulkEditView()">
+    (click)="onSelectView()">
 </app-toolbar-button>

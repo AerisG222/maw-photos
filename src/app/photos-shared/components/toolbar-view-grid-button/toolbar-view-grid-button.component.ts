@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { PhotoStoreActions } from '@core/root-store';
-import { PhotoViewMode, RouteHelper } from '@models';
+import { PhotoViewMode } from '@models';
 import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
+import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/toolbar-view-button-base.component';
 
 @Component({
     selector: 'app-toolbar-view-grid-button',
@@ -11,18 +10,8 @@ import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectabl
     styleUrls: ['./toolbar-view-grid-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToolbarViewGridButtonComponent {
-    @Input() isActive = false;
-
-    constructor(
-        private store: Store,
-        private viewMode: PhotoViewModeSelectable
-    ) {
-
-    }
-
-    onToggleGridView(): void {
-        this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewGrid }));
-        this.viewMode.selectPhotoViewMode(PhotoViewMode.grid);
+export class ToolbarViewGridButtonComponent extends ToolbarViewButtonBaseComponent {
+    constructor(public viewModeSelectable: PhotoViewModeSelectable) {
+        super(viewModeSelectable, PhotoViewMode.grid);
     }
 }

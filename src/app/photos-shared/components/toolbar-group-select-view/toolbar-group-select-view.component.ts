@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarGroupSelectViewComponent {
+    // TODO: remove these inputs
     @Input() isBulkEditViewActive = false;
     @Input() isDetailViewActive = false;
     @Input() isFullscreenViewActive = false;

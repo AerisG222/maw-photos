@@ -1,9 +1,9 @@
 <app-toolbar-button
-    [isActive]="isActive"
+    [isActive]="isActive$ | async"
     [hideOnMobile]="true"
     icon="fullscreen"
     shortcutKey="f"
     shortcutHelp="Full Screen View"
     tooltip="Full Screen View (F)"
-    (click)="onToggleFullscreen()">
+    (click)="onSelectView()">
 </app-toolbar-button>

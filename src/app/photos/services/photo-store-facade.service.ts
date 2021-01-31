@@ -127,18 +127,23 @@ export class PhotoStoreFacadeService implements
     selectPhotoViewMode(mode: PhotoViewMode) {
         switch(mode) {
             case PhotoViewMode.bulkEdit:
+                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewBulkEdit }));
                 this.store.dispatch(SettingsStoreActions.selectPhotoViewModeBulkEdit());
                 break;
             case PhotoViewMode.detail:
+                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewDetail }));
                 this.store.dispatch(SettingsStoreActions.selectPhotoViewModeDetail());
                 break;
             case PhotoViewMode.fullscreen:
+                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewFullscreen }));
                 this.store.dispatch(SettingsStoreActions.selectPhotoViewModeFullscreen());
                 break;
             case PhotoViewMode.grid:
+                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewGrid }));
                 this.store.dispatch(SettingsStoreActions.selectPhotoViewModeGrid());
                 break;
             case PhotoViewMode.map:
+                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewMap }));
                 this.store.dispatch(SettingsStoreActions.selectPhotoViewModeMap());
                 break;
             default:
