@@ -12,6 +12,8 @@ export * from './api/rating.model';
 export * from './api/video-category.model';
 export * from './api/video.model';
 
+export * from './settings/settings.model';
+
 export * from './auth-config';
 export * from './category-type-filter.model';
 export * from './category-gps-status.model';
@@ -34,7 +36,6 @@ export * from './photo-rotation.model';
 export * from './photo-view-mode.model';
 export * from './route-area';
 export * from './route-details.model';
-export * from './settings.model';
 export * from './theme.model';
 export * from './thumbnail-size.model';
 export * from './user-info.model';
