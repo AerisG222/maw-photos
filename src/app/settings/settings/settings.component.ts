@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
 
 import {
     Settings,
@@ -9,22 +7,13 @@ import {
     Theme,
     ThumbnailSize,
     VideoSize,
-    MinimapZoom,
-    MapType,
     CategoryMargin,
-    CategoryViewMode,
     toCategoryTypeFilter,
-    allCategoryTypeFilters,
-    allCategoryViewModes,
     toCategoryViewMode,
-    allMapTypes,
     toMapType,
-    allPhotoViewModes,
     toPhotoViewMode,
 } from '@models';
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { Subscription } from 'rxjs';
-
+import { SettingsStoreActions } from '@core/root-store';
 
 @Component({
     selector: 'app-settings-settings',
@@ -32,109 +21,11 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./settings.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent implements OnInit, OnDestroy {
-    form: FormGroup;
-    themes = Theme.allThemes;
-    categoryFilters = allCategoryTypeFilters;
-    categoryMargins = CategoryMargin.allCategoryMargins;
-    categoryThumbnailSizes = ThumbnailSize.allSizes;
-    categoryListListViewThumbnailSizes = ThumbnailSize.allSizes;
-    categoryViewModes = allCategoryViewModes;
-    photoViewModes = allPhotoViewModes;
-    photoGridMargins = CategoryMargin.allCategoryMargins;
-    photoGridThumbnailSizes = ThumbnailSize.allSizes;
-    photoListThumbnailSizes = ThumbnailSize.allSizes;
-    videoListThumbnailSizes = ThumbnailSize.allSizes;
-    mapTypes = allMapTypes;
-    mapViewZoomLevels = MinimapZoom.allSizes;
-    photoZoomLevels = MinimapZoom.allSizes;
-    videoZoomLevels = MinimapZoom.allSizes;
-    videoSizes = VideoSize.allSizes;
-    randomDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
-
-    private destroySub = new Subscription();
-
-    // settings w/o ui
-    private categoryListYearFilter: string | number = DEFAULT_SETTINGS.categoryListYearFilter;
-    private categoryListMissingGpsFilter = DEFAULT_SETTINGS.categoryListMissingGpsFilter;
-
+export class SettingsComponent implements OnInit {
     constructor(
-        private formBuilder: FormBuilder,
         private store: Store
-    ) {
-        this.form = this.formBuilder.group({
-            appTheme:                                 [DEFAULT_SETTINGS.appTheme.name, Validators.required],
+    ) { }
 
-            categoryListCategoryFilter:               [DEFAULT_SETTINGS.categoryListCategoryFilter],
-            categoryListCategoryMargin:               [DEFAULT_SETTINGS.categoryListCategoryMargin.name],
-            categoryListShowCategoryTitles:           [DEFAULT_SETTINGS.categoryListShowCategoryTitles],
-            categoryListThumbnailSize:                [DEFAULT_SETTINGS.categoryListThumbnailSize],
-            categoryListViewMode:                     [DEFAULT_SETTINGS.categoryListViewMode],
-            categoryListListViewThumbnailSize:        [DEFAULT_SETTINGS.categoryListListViewThumbnailSize.name],
-
-            photoListShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.photoListShowCategoryBreadcrumbs],
-            photoListThumbnailSize:                   [DEFAULT_SETTINGS.photoListThumbnailSize.name],
-            photoListShowPhotoList:                   [DEFAULT_SETTINGS.photoListShowPhotoList],
-            photoListSlideshowDisplayDurationSeconds: [DEFAULT_SETTINGS.photoListSlideshowDisplayDurationSeconds],
-            photoListMapViewMapType:                [DEFAULT_SETTINGS.photoListMapViewMapType],
-            photoListMapViewZoom:                     [DEFAULT_SETTINGS.photoListMapViewZoom],
-
-            photoGridMargin:                          [DEFAULT_SETTINGS.photoGridMargin.name],
-            photoGridShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.photoGridShowCategoryBreadcrumbs],
-            photoGridThumbnailSize:                   [DEFAULT_SETTINGS.photoGridThumbnailSize.name],
-
-            photoInfoPanelShowCategoryTeaserChooser:  [DEFAULT_SETTINGS.photoInfoPanelShowCategoryTeaserChooser],
-            photoInfoPanelShowComments:               [DEFAULT_SETTINGS.photoInfoPanelShowComments],
-            photoInfoPanelShowEffects:                [DEFAULT_SETTINGS.photoInfoPanelShowEffects],
-            photoInfoPanelShowExif:                   [DEFAULT_SETTINGS.photoInfoPanelShowExif],
-            photoInfoPanelShowHistogram:              [DEFAULT_SETTINGS.photoInfoPanelShowHistogram],
-            photoInfoPanelShowMetadataEditor:         [DEFAULT_SETTINGS.photoInfoPanelShowMetadataEditor],
-            photoInfoPanelShowMinimap:                [DEFAULT_SETTINGS.photoInfoPanelShowMinimap],
-            photoInfoPanelShowRatings:                [DEFAULT_SETTINGS.photoInfoPanelShowRatings],
-            photoInfoPanelExpandedState:              [DEFAULT_SETTINGS.photoInfoPanelExpandedState],
-            photoInfoPanelMinimapMapType:           [DEFAULT_SETTINGS.photoInfoPanelMinimapMapType],
-            photoInfoPanelMinimapZoom:                [DEFAULT_SETTINGS.photoInfoPanelMinimapZoom],
-
-            photoViewMode: [DEFAULT_SETTINGS.photoViewMode],
-
-            videoListShowCategoryBreadcrumbs:         [DEFAULT_SETTINGS.videoListShowCategoryBreadcrumbs],
-            videoListThumbnailSize:                   [DEFAULT_SETTINGS.videoListThumbnailSize.name],
-            videoListShowVideoList:                   [DEFAULT_SETTINGS.videoListShowVideoList],
-            videoListVideoSize:                       [DEFAULT_SETTINGS.videoListVideoSize.name],
-
-            videoInfoPanelShowCategoryTeaserChooser:  [DEFAULT_SETTINGS.videoInfoPanelShowCategoryTeaserChooser],
-            videoInfoPanelShowComments:               [DEFAULT_SETTINGS.videoInfoPanelShowComments],
-            videoInfoPanelShowMetadataEditor:         [DEFAULT_SETTINGS.videoInfoPanelShowMetadataEditor],
-            videoInfoPanelShowMinimap:                [DEFAULT_SETTINGS.videoInfoPanelShowMinimap],
-            videoInfoPanelShowRatings:                [DEFAULT_SETTINGS.videoInfoPanelShowRatings],
-            videoInfoPanelExpandedState:              [DEFAULT_SETTINGS.videoInfoPanelExpandedState],
-            videoInfoPanelMinimapMapType:           [DEFAULT_SETTINGS.videoInfoPanelMinimapMapType],
-            videoInfoPanelMinimapZoom:                [DEFAULT_SETTINGS.videoInfoPanelMinimapZoom],
-
-            searchCategoryMargin:                     [DEFAULT_SETTINGS.searchCategoryMargin.name],
-            searchShowCategoryTitles:                 [DEFAULT_SETTINGS.searchShowCategoryTitles],
-            searchShowCategoryYears:                  [DEFAULT_SETTINGS.searchShowCategoryYears],
-            searchThumbnailSize:                      [DEFAULT_SETTINGS.searchListViewThumbnailSize.name],
-            searchViewMode:                           [DEFAULT_SETTINGS.searchViewMode],
-            searchListViewThumbnailSize:              [DEFAULT_SETTINGS.searchListViewThumbnailSize.name]
-        });
-    }
-
-    ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.settings)
-            .pipe(
-                tap(s => this.updateForm(s)),
-                tap(s => this.categoryListYearFilter = s.categoryListYearFilter),
-                tap(s => this.categoryListMissingGpsFilter = s.categoryListMissingGpsFilter)
-            )
-            .subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
 
     /* eslint-disable max-len */
     onSave(): void {

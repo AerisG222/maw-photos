@@ -1,0 +1,91 @@
+<app-heading sectionName="Random Photos"></app-heading>
+
+<form [formGroup]="form">
+    <div class="card-grid">
+        <mat-card formGroupName="page">
+            <mat-card-title>Random Page</mat-card-title>
+            <mat-card-content>
+                <h3>View Mode</h3>
+                <mat-radio-group formControlName="viewMode">
+                    <mat-radio-button *ngFor="let mode of viewModes" [value]="mode.value">{{ mode.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Slideshow Display Duration</h3>
+                <mat-form-field appearance="standard">
+                    <mat-label>Duration (seconds)</mat-label>
+                    <mat-select formControlName="slideshowDisplayDurationSeconds">
+                        <mat-option *ngFor="let duration of slideshowDurations" [value]="duration">{{ duration }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card formGroupName="detail">
+            <mat-card-title>Detail View</mat-card-title>
+            <mat-card-content>
+                <h3>Show Breadcrumbs</h3>
+                <mat-slide-toggle formControlName="showBreadcrumbs"></mat-slide-toggle>
+
+                <h3>Show Photo List</h3>
+                <mat-slide-toggle formControlName="showPhotoList"></mat-slide-toggle>
+
+                <h3>Thumbnail Size</h3>
+                <mat-radio-group formControlName="thumbnailSize">
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <div formGroupName="infoPanel">
+                    <h3>Info Panel</h3>
+                    <mat-checkbox formControlName="expandedState">Show Info Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showRatings">Show Ratings Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showComments">Show Comments Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showExif">Show EXIF Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showHistogram">Show Histogram Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showEffects">Show Effects Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showMinimap">Show Mini-map Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showMetadataEditor">Show Metadata Editor Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showCategoryTeaserChooser">Show Category Teaser Chooser Panel</mat-checkbox>
+
+                    <h3>Map Type</h3>
+                    <mat-radio-group formControlName="minimapType">
+                        <mat-radio-button  *ngFor="let type of mapTypes" [value]="type.value">{{ type.name }}</mat-radio-button>
+                    </mat-radio-group>
+
+                    <h3>Map Zoom Level</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Zoom</mat-label>
+                        <mat-select formControlName="minimapZoom">
+                            <mat-option *ngFor="let zoom of zoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card formGroupName="grid">
+            <mat-card-title>Grid View</mat-card-title>
+            <mat-card-content>
+                <h3>Margin</h3>
+                <mat-radio-group formControlName="margin">
+                    <mat-radio-button *ngFor="let margin of margins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Show Breadcrumbs</h3>
+                <mat-slide-toggle formControlName="showBreadcrumbs"></mat-slide-toggle>
+
+                <h3>Thumbnail Size</h3>
+                <mat-radio-group formControlName="thumbnailSize">
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</form>

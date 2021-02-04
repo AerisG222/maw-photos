@@ -1,0 +1,51 @@
+<app-heading sectionName="Seearch"></app-heading>
+
+<form [formGroup]="form">
+    <div class="card-grid">
+        <mat-card formGroupName="page">
+            <mat-card-title>Search Page</mat-card-title>
+            <mat-card-content>
+                <h3>View Mode</h3>
+                <mat-radio-group formControlName="viewMode">
+                    <mat-radio-button *ngFor="let mode of viewModes" [value]="mode.value">{{ mode.name }}</mat-radio-button>
+                </mat-radio-group>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card formGroupName="grid">
+            <mat-card-title>Grid View</mat-card-title>
+            <mat-card-content>
+                <h3>Show Category Titles</h3>
+                <mat-slide-toggle formControlName="showTitles"></mat-slide-toggle>
+
+                <h3>Show Category Years</h3>
+                <mat-slide-toggle formControlName="showYears"></mat-slide-toggle>
+
+                <h3>Margins</h3>
+                <mat-radio-group formControlName="margin">
+                    <mat-radio-button *ngFor="let margin of margins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Thumbnail Size</h3>
+                <mat-radio-group formControlName="categoryListThumbnailSize">
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card formGroupName="list">
+            <mat-card-title>List View</mat-card-title>
+            <mat-card-content>
+                <h3>Margins</h3>
+                <mat-radio-group formControlName="margin">
+                    <mat-radio-button *ngFor="let margin of margins" [value]="margin.name">{{ margin.name }}</mat-radio-button>
+                </mat-radio-group>
+
+                <h3>Thumbnail Size</h3>
+                <mat-radio-group formControlName="searchListViewThumbnailSize">
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                </mat-radio-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</form>

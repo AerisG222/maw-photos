@@ -11,7 +11,7 @@ export interface VideoInfoPanelSettings {
     minimapZoom: number;
 }
 
-export const DEFAULT_VIDEO_INFO_PANEL_VIEW_SETTINGS: VideoInfoPanelSettings = {
+export const DEFAULT_VIDEO_INFO_PANEL_SETTINGS: VideoInfoPanelSettings = {
     showRatings: true,
     showCategoryTeaserChooser: false,
     showComments: true,
