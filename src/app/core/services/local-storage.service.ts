@@ -6,27 +6,25 @@ import { Injectable } from '@angular/core';
 export class LocalStorageService {
     private readonly prefix = 'maw-photos';
     private readonly separator = '|';
-    private readonly isCaseSensitive = false;
     private strategy: Storage;
 
     constructor() {
         this.strategy = window.localStorage;
     }
 
-    getString(key: string, def: string): string {
-        const val = this.get(key);
+    get<T>(key: string): T | null {
+        if(!!!key)
+        {
+            throw Error('key must be specified');
+        }
 
-        return val ?? def;
+        const val = this.strategy.getItem(this.normalize(key));
+
+        return val && JSON.parse(val);
     }
 
-    getStringOrNull(key: string): string | null {
-        const val = this.get(key);
-
-        return val;
-    }
-
-    setString(key: string, value: string): void {
-        this.set(key, value);
+    set<T>(key: string, value: T): void {
+        this.set(key, JSON.stringify(value));
     }
 
     clear(key?: string): void {
@@ -37,16 +35,9 @@ export class LocalStorageService {
         }
     }
 
-    private get(key: string): string | null {
-        return this.strategy.getItem(this.normalize(key));
-    }
+    private normalize(key: string): string {
+        key = key.toLowerCase();
 
-    private set(key: string, value: string): void {
-        this.strategy.setItem(this.normalize(key), value);
-    }
-
-    private normalize(raw: string): string {
-        raw = this.isCaseSensitive ? raw : raw.toLowerCase();
-        return `${this.prefix}${this.separator}${raw}`;
+        return `${this.prefix}${this.separator}${key}`;
     }
 }

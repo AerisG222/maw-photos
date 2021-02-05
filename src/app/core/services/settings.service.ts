@@ -1,252 +1,304 @@
 import { Injectable } from '@angular/core';
 
-import {
-    Settings,
-    DEFAULT_SETTINGS,
-    Theme,
-    ThumbnailSize,
-    VideoSize,
-    CategoryMargin,
-    CategoryTypeFilter,
-    CategoryViewMode,
-    toCategoryTypeFilter,
-    toCategoryViewMode,
-    PhotoViewMode,
-    toPhotoViewMode,
-    MapType,
-    toMapType,
- } from '@models';
+import { AppSettings, DEFAULT_APP_SETTINGS } from 'src/app/models/settings/app-settings';
+import { CategoryFilterSettings, DEFAULT_CATEGORY_FILTER_SETTINGS } from 'src/app/models/settings/category-filter-settings';
+import { CategoryGridViewSettings, DEFAULT_CATEGORY_GRID_VIEW_SETTINGS } from 'src/app/models/settings/category-grid-view-settings';
+import { CategoryListViewSettings, DEFAULT_CATEGORY_LIST_VIEW_SETTINGS } from 'src/app/models/settings/category-list-view-settings';
+import { CategoryPageSettings, DEFAULT_CATEGORY_SETTINGS } from 'src/app/models/settings/category-page-settings';
+import { DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS, PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
+import { DEFAULT_PHOTO_GRID_VIEW_SETTINGS, PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
+import { DEFAULT_PHOTO_INFO_PANEL_SETTINGS, PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
+import { DEFAULT_PHOTO_MAP_VIEW_SETTINGS, PhotoMapViewSettings } from 'src/app/models/settings/photo-map-view-settings';
+import { DEFAULT_PHOTO_SETTINGS, PhotoPageSettings } from 'src/app/models/settings/photo-page-settings';
+import { DEFAULT_RANDOM_SETTINGS, RandomPageSettings } from 'src/app/models/settings/random-page-settings';
+import { DEFAULT_SEARCH_GRID_VIEW_SETTINGS, SearchGridViewSettings } from 'src/app/models/settings/search-grid-view-settings';
+import { DEFAULT_SEARCH_LIST_VIEW_SETTINGS, SearchListViewSettings } from 'src/app/models/settings/search-list-view-settings';
+import { DEFAULT_SEARCH_SETTINGS, SearchPageSettings } from 'src/app/models/settings/search-page-settings';
+import { Settings } from 'src/app/models/settings/settings';
+import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
+import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS, VideoInfoPanelSettings } from 'src/app/models/settings/video-info-panel-settings';
+import { DEFAULT_VIDEO_SETTINGS, VideoPageSettings } from 'src/app/models/settings/video-page-settings';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SettingsService {
+    private static readonly currentSettingsVersion = 1;
+
     private static readonly keyAuthRedirectUrl = 'authRedirectUrl';
 
-    private static readonly keyAppTheme = 'appTheme';
+    private static readonly keyVersion = 'version';
 
-    private static readonly keyCategoryListCategoryFilter = 'categoryListCategoryFilter';
-    private static readonly keyCategoryListCategoryMargin = 'categoryListCategoryMargin';
-    private static readonly keyCategoryListMissingGpsFilter = 'categoryListMissingGpsFilter';
-    private static readonly keyCategoryListThumbnailSize = 'categoryListThumbnailSize';
-    private static readonly keyCategoryListShowCategoryTitles = 'categoryListShowCategoryTitles';
-    private static readonly keyCategoryListYearFilter = 'categoryListYearFilter';
-    private static readonly keyCategoryListViewMode = 'categoryListViewMode';
-    private static readonly keyCategoryListListViewThumbnailSize = 'categoryListListViewThumbnailSize';
+    private static readonly keyApp = 'app';
 
-    private static readonly keyPhotoListShowCategoryBreadcrumbs = 'photoListShowCategoryBreadcrumbs';
-    private static readonly keyPhotoListThumbnailSize = 'photoListThumbnailSize';
-    private static readonly keyPhotoListShowPhotoList = 'photoListShowPhotoList';
-    private static readonly keyPhotoListSlideshowDisplayDurationSeconds = 'photoListSlideshowDisplayDurationSeconds';
-    private static readonly keyPhotoListMapViewMapType = 'photoListMapViewMapTypeId';
-    private static readonly keyPhotoListMapViewZoom = 'photoListMapViewZoom';
+    private static readonly keyCategoryFilter = 'categoryFilter';
+    private static readonly keyCategoryGridView = 'categoryGridView';
+    private static readonly keyCategoryListView = 'categoryListView';
+    private static readonly keyCategoryPage = 'categoryPage';
 
-    private static readonly keyPhotoGridMargin = 'photoGridMargin';
-    private static readonly keyPhotoGridShowCategoryBreadcrumbs = 'photoGridShowCategoryBreadcrumbs';
-    private static readonly keyPhotoGridThumbnailSize = 'photoGridThumbnailSize';
+    private static readonly keyPhotoDetailView = 'photoDetailView';
+    private static readonly keyPhotoGridView = 'photoGridView';
+    private static readonly keyPhotoInfoPanel = 'photoInfoPanel';
+    private static readonly keyPhotoMapView = 'photoMapView';
+    private static readonly keyPhotoPage = 'photoPage';
 
-    private static readonly keyPhotoInfoPanelShowRatings = 'photoInfoPanelShowRatings';
-    private static readonly keyPhotoInfoPanelShowCategoryTeaserChooser = 'photoInfoPanelShowCategoryTeaserChooser';
-    private static readonly keyPhotoInfoPanelShowComments = 'photoInfoPanelShowComments';
-    private static readonly keyPhotoInfoPanelShowExif = 'photoInfoPanelShowExif';
-    private static readonly keyPhotoInfoPanelShowEffects = 'photoInfoPanelShowEffects';
-    private static readonly keyPhotoInfoPanelShowHistogram = 'photoInfoPanelShowHistogram';
-    private static readonly keyPhotoInfoPanelShowMetadataEditor = 'photoInfoPanelShowMetadataEditor';
-    private static readonly keyPhotoInfoPanelShowMinimap = 'photoInfoPanelShowMinimap';
-    private static readonly keyPhotoInfoPanelExpandedState = 'photoInfoPanelExpandedState';
-    private static readonly keyPhotoInfoPanelMinimapMapType = 'photoInfoPanelMinimapMapTypeId';
-    private static readonly keyPhotoInfoPanelMinimapZoom = 'photoInfoPanelMinimapZoom';
+    private static readonly keyRandomDetailView = 'randomDetailView';
+    private static readonly keyRandomGridView = 'randomGridView';
+    private static readonly keyRandomInfoPanel = 'randomInfoPanel';
+    private static readonly keyRandomPage = 'randomPage';
 
-    private static readonly keyPhotoViewMode = 'photoViewMode';
+    private static readonly keySearchGridView = 'searchGridView';
+    private static readonly keySearchListView = 'searchListView';
+    private static readonly keySearchPage = 'searchPage';
 
-    private static readonly keyVideoListShowCategoryBreadcrumbs = 'videoListShowCategoryBreadcrumbs';
-    private static readonly keyVideoListThumbnailSize = 'videoListThumbnailSize';
-    private static readonly keyVideoListShowVideoList = 'videoListShowVideoList';
-    private static readonly keyVideoListVideoSize = 'videoListVideoSize';
+    private static readonly keyVideoDetailView = 'videoDetailView';
+    private static readonly keyVideoInfoPanel = 'videoInfoPanel';
+    private static readonly keyVideoPage = 'videoPage';
 
-    private static readonly keyVideoInfoPanelShowRatings = 'videoInfoPanelShowRatings';
-    private static readonly keyVideoInfoPanelShowCategoryTeaserChooser = 'videoInfoPanelShowCategoryTeaserChooser';
-    private static readonly keyVideoInfoPanelShowComments = 'videoInfoPanelShowComments';
-    private static readonly keyVideoInfoPanelShowMetadataEditor = 'videoInfoPanelShowMetadataEditor';
-    private static readonly keyVideoInfoPanelShowMinimap = 'videoInfoPanelShowMinimap';
-    private static readonly keyVideoInfoPanelExpandedState = 'videoInfoPanelExpandedState';
-    private static readonly keyVideoInfoPanelMinimapMapType = 'videoInfoPanelMinimapMapTypeId';
-    private static readonly keyVideoInfoPanelMinimapZoom = 'videoInfoPanelMinimapZoom';
-
-    private static readonly keySearchCategoryMargin = 'searchCategoryMargin';
-    private static readonly keySearchThumbnailSize = 'searchThumbnailSize';
-    private static readonly keySearchShowCategoryTitles = 'searchShowCategoryTitles';
-    private static readonly keySearchShowCategoryYears = 'searchShowCategoryYears';
-    private static readonly keySearchViewMode = 'searchViewMode';
-    private static readonly keySearchListViewThumbnailSize = 'searchListViewThumbnailSize';
-
-    private static readonly removedKeyCategoryListYearFilter = 'categoryListYearFilterEnabled';
-    private static readonly removedKeyCategoryListToolbarExpandedState = 'categoryListToolbarExpandedState';
-    private static readonly removedKeyPhotoListToolbarExpandedState = 'photoListToolbarExpandedState';
-    private static readonly removedKeyPhotoListFullscreenToolbarExpandedState = 'photoListFullscreenToolbarExpandedState';
-    private static readonly removedKeyVideoListToolbarExpandedState = 'videoListToolbarExpandedState';
-    private static readonly removedKeyCategoryListListType = 'categoryListListType';
-    private static readonly removedKeySearchListType = 'searchListType';
-
-    constructor(
-        private localStorage: LocalStorageService
-    ) {
-
+    constructor(private localStorage: LocalStorageService) {
+        this.cleanLegacySettings();
     }
 
-    /* eslint-disable max-len */
-    load(): Settings {
-        try {
-            return {
-                appTheme: this.getTheme(),
-
-                categoryListCategoryFilter:        this.getCategoryListCategoryFilter(),
-                categoryListCategoryMargin:        this.getCategoryMargin(SettingsService.keyCategoryListCategoryMargin),
-                categoryListMissingGpsFilter:      this.getBoolean(SettingsService.keyCategoryListMissingGpsFilter),
-                categoryListThumbnailSize:         this.getCategoryThumbnailSize(SettingsService.keyCategoryListThumbnailSize),
-                categoryListShowCategoryTitles:    this.getBoolean(SettingsService.keyCategoryListShowCategoryTitles),
-                categoryListYearFilter:            this.getStringOrNumber(SettingsService.keyCategoryListYearFilter),
-                categoryListViewMode:              this.getCategoryViewMode(SettingsService.keyCategoryListViewMode),
-                categoryListListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyCategoryListListViewThumbnailSize),
-
-                photoListThumbnailSize:                   this.getPhotoListThumbnailSize(),
-                photoListSlideshowDisplayDurationSeconds: this.getPhotoListSlideshowDisplayDurationSeconds(),
-                photoListShowCategoryBreadcrumbs:         this.getBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs),
-                photoListShowPhotoList:                   this.getBoolean(SettingsService.keyPhotoListShowPhotoList),
-                photoListMapViewMapType:                this.getMapType(SettingsService.keyPhotoListMapViewMapType, DEFAULT_SETTINGS.photoListMapViewMapType),
-                photoListMapViewZoom:                     this.getNumber(SettingsService.keyPhotoListMapViewZoom) ?? DEFAULT_SETTINGS.photoListMapViewZoom,
-
-                photoGridMargin: this.getCategoryMargin(SettingsService.keyPhotoGridMargin),
-                photoGridShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyPhotoGridShowCategoryBreadcrumbs),
-                photoGridThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keyPhotoGridThumbnailSize),
-
-                photoInfoPanelShowRatings:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowRatings),
-                photoInfoPanelShowCategoryTeaserChooser: this.getBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser),
-                photoInfoPanelShowComments:              this.getBoolean(SettingsService.keyPhotoInfoPanelShowComments),
-                photoInfoPanelShowExif:                  this.getBoolean(SettingsService.keyPhotoInfoPanelShowExif),
-                photoInfoPanelShowEffects:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowEffects),
-                photoInfoPanelShowHistogram:             this.getBoolean(SettingsService.keyPhotoInfoPanelShowHistogram),
-                photoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor),
-                photoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyPhotoInfoPanelShowMinimap),
-                photoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyPhotoInfoPanelExpandedState),
-                photoInfoPanelMinimapMapType:          this.getMapType(SettingsService.keyPhotoInfoPanelMinimapMapType, DEFAULT_SETTINGS.photoInfoPanelMinimapMapType),
-                photoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyPhotoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.photoInfoPanelMinimapZoom,
-
-                photoViewMode: this.getPhotoViewMode(SettingsService.keyPhotoViewMode),
-
-                videoListShowCategoryBreadcrumbs: this.getBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs),
-                videoListThumbnailSize:           this.getVideoListThumbnailSize(),
-                videoListShowVideoList:           this.getBoolean(SettingsService.keyVideoListShowVideoList),
-                videoListVideoSize:               this.getVideoListVideoSize(),
-
-                videoInfoPanelShowRatings:               this.getBoolean(SettingsService.keyVideoInfoPanelShowRatings),
-                videoInfoPanelShowCategoryTeaserChooser: this.getBoolean(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser),
-                videoInfoPanelShowComments:              this.getBoolean(SettingsService.keyVideoInfoPanelShowComments),
-                videoInfoPanelShowMetadataEditor:        this.getBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor),
-                videoInfoPanelShowMinimap:               this.getBoolean(SettingsService.keyVideoInfoPanelShowMinimap),
-                videoInfoPanelExpandedState:             this.getBoolean(SettingsService.keyVideoInfoPanelExpandedState),
-                videoInfoPanelMinimapMapType:          this.getMapType(SettingsService.keyVideoInfoPanelMinimapMapType, DEFAULT_SETTINGS.videoInfoPanelMinimapMapType),
-                videoInfoPanelMinimapZoom:               this.getNumber(SettingsService.keyVideoInfoPanelMinimapZoom) ?? DEFAULT_SETTINGS.videoInfoPanelMinimapZoom,
-
-                searchCategoryMargin:        this.getCategoryMargin(SettingsService.keySearchCategoryMargin),
-                searchThumbnailSize:         this.getCategoryThumbnailSize(SettingsService.keySearchThumbnailSize),
-                searchShowCategoryTitles:    this.getBoolean(SettingsService.keySearchShowCategoryTitles),
-                searchShowCategoryYears:     this.getBoolean(SettingsService.keySearchShowCategoryYears),
-                searchViewMode:              this.getCategoryViewMode(SettingsService.keySearchViewMode),
-                searchListViewThumbnailSize: this.getCategoryThumbnailSize(SettingsService.keySearchListViewThumbnailSize),
-            };
-        } catch (e) {
-            return DEFAULT_SETTINGS;
+    cleanLegacySettings() {
+        if(!!!this.getVersion()) {
+            this.localStorage.clear();
+            this.saveVersion();
         }
     }
-    // tslint:restore: max-line-length
 
-    save(settings: Settings): void {
-        if (!settings) {
+    getAppSettings(): AppSettings {
+        return this.localStorage.get(SettingsService.keyApp) ?? DEFAULT_APP_SETTINGS;
+    }
+
+    getCategoryFilterSettings(): CategoryFilterSettings {
+        return this.localStorage.get(SettingsService.keyCategoryFilter) ?? DEFAULT_CATEGORY_FILTER_SETTINGS;
+    }
+
+    getCategoryGridViewSettings(): CategoryGridViewSettings {
+        return this.localStorage.get(SettingsService.keyCategoryGridView) ?? DEFAULT_CATEGORY_GRID_VIEW_SETTINGS;
+    }
+
+    getCategoryListViewSettings(): CategoryListViewSettings {
+        return this.localStorage.get(SettingsService.keyCategoryListView) ?? DEFAULT_CATEGORY_LIST_VIEW_SETTINGS;
+    }
+
+    getCategoryPageSettings(): CategoryPageSettings {
+        return this.localStorage.get(SettingsService.keyCategoryPage) ?? DEFAULT_CATEGORY_SETTINGS;
+    }
+
+    getPhotoDetailViewSettings(): PhotoDetailViewSettings {
+        return this.localStorage.get(SettingsService.keyPhotoDetailView) ?? DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS;
+    }
+
+    getPhotoGridViewSettings(): PhotoGridViewSettings {
+        return this.localStorage.get(SettingsService.keyPhotoGridView) ?? DEFAULT_PHOTO_GRID_VIEW_SETTINGS;
+    }
+
+    getPhotoInfoPanelSettings(): PhotoInfoPanelSettings {
+        return this.localStorage.get(SettingsService.keyPhotoInfoPanel) ?? DEFAULT_PHOTO_INFO_PANEL_SETTINGS;
+    }
+
+    getPhotoMapViewSettings(): PhotoMapViewSettings {
+        return this.localStorage.get(SettingsService.keyPhotoMapView) ?? DEFAULT_PHOTO_MAP_VIEW_SETTINGS;
+    }
+
+    getPhotoPageSettings(): PhotoPageSettings {
+        return this.localStorage.get(SettingsService.keyPhotoPage) ?? DEFAULT_PHOTO_SETTINGS;
+    }
+
+    getRandomDetailViewSettings(): PhotoDetailViewSettings {
+        return this.localStorage.get(SettingsService.keyRandomDetailView) ?? DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS;
+    }
+
+    getRandomGridViewSettings(): PhotoGridViewSettings {
+        return this.localStorage.get(SettingsService.keyRandomGridView) ?? DEFAULT_PHOTO_GRID_VIEW_SETTINGS;
+    }
+
+    getRandomInfoPanelSettings(): PhotoInfoPanelSettings {
+        return this.localStorage.get(SettingsService.keyRandomInfoPanel) ?? DEFAULT_PHOTO_INFO_PANEL_SETTINGS;
+    }
+
+    getRandomPageSettings(): RandomPageSettings {
+        return this.localStorage.get(SettingsService.keyRandomPage) ?? DEFAULT_RANDOM_SETTINGS;
+    }
+
+    getSearchGridViewSettings(): SearchGridViewSettings {
+        return this.localStorage.get(SettingsService.keySearchGridView) ?? DEFAULT_SEARCH_GRID_VIEW_SETTINGS;
+    }
+
+    getSearchListViewSettings(): SearchListViewSettings {
+        return this.localStorage.get(SettingsService.keySearchListView) ?? DEFAULT_SEARCH_LIST_VIEW_SETTINGS;
+    }
+
+    getSearchPageSettings(): SearchPageSettings {
+        return this.localStorage.get(SettingsService.keySearchPage) ?? DEFAULT_SEARCH_SETTINGS;
+    }
+
+    getVideoDetailViewSettings(): VideoDetailViewSettings {
+        return this.localStorage.get(SettingsService.keyVideoDetailView) ?? DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS;
+    }
+
+    getVideoInfoPanelSettings(): VideoInfoPanelSettings {
+        return this.localStorage.get(SettingsService.keyVideoInfoPanel) ?? DEFAULT_VIDEO_INFO_PANEL_SETTINGS;
+    }
+
+    getVideoPageSettings(): VideoPageSettings {
+        return this.localStorage.get(SettingsService.keyVideoPage) ?? DEFAULT_VIDEO_SETTINGS;
+    }
+
+    getAllSettings(): Settings {
+        return {
+            app: this.getAppSettings(),
+
+            categoryFilter: this.getCategoryFilterSettings(),
+            categoryGridView: this.getCategoryGridViewSettings(),
+            categoryListView: this.getCategoryListViewSettings(),
+            categoryPage: this.getCategoryPageSettings(),
+
+            photoDetailView: this.getPhotoDetailViewSettings(),
+            photoGridView: this.getPhotoGridViewSettings(),
+            photoInfoPanel: this.getPhotoInfoPanelSettings(),
+            photoMapView: this.getPhotoMapViewSettings(),
+            photoPage: this.getPhotoPageSettings(),
+
+            randomDetailView: this.getRandomDetailViewSettings(),
+            randomGridView: this.getRandomGridViewSettings(),
+            randomInfoPanel: this.getRandomInfoPanelSettings(),
+            randomPage: this.getRandomPageSettings(),
+
+            searchGridView: this.getSearchGridViewSettings(),
+            searchListView: this.getSearchListViewSettings(),
+            searchPage: this.getSearchPageSettings(),
+
+            videoDetailView: this.getVideoDetailViewSettings(),
+            videoInfoPanel: this.getVideoInfoPanelSettings(),
+            videoPage: this.getVideoPageSettings()
+        };
+    }
+
+    saveAppSettings(settings: AppSettings): void {
+        this.save(SettingsService.keyApp, settings);
+    }
+
+    saveCategoryFilterSettings(settings: CategoryFilterSettings): void {
+        this.save(SettingsService.keyCategoryFilter, settings);
+    }
+
+    saveCategoryGridViewSettings(settings: CategoryGridViewSettings): void {
+        this.save(SettingsService.keyCategoryGridView, settings);
+    }
+
+    saveCategoryListViewSettings(settings: CategoryListViewSettings): void {
+        this.save(SettingsService.keyCategoryListView, settings);
+    }
+
+    saveCategoryPageSettings(settings: CategoryPageSettings): void {
+        this.save(SettingsService.keyCategoryPage, settings);
+    }
+
+    savePhotoDetailViewSettings(settings: PhotoDetailViewSettings): void {
+        this.save(SettingsService.keyPhotoDetailView, settings);
+    }
+
+    savePhotoGridViewSettings(settings: PhotoGridViewSettings): void {
+        this.save(SettingsService.keyPhotoGridView, settings);
+    }
+
+    savePhotoInfoPanelSettings(settings: PhotoInfoPanelSettings): void {
+        this.save(SettingsService.keyPhotoInfoPanel, settings);
+    }
+
+    savePhotoMapViewSettings(settings: PhotoMapViewSettings): void {
+        this.save(SettingsService.keyPhotoMapView, settings);
+    }
+
+    savePhotoPageSettings(settings: PhotoPageSettings): void {
+        this.save(SettingsService.keyPhotoPage, settings);
+    }
+
+    saveRandomDetailViewSettings(settings: PhotoDetailViewSettings): void {
+        this.save(SettingsService.keyRandomDetailView, settings);
+    }
+
+    saveRandomGridViewSettings(settings: PhotoGridViewSettings): void {
+        this.save(SettingsService.keyRandomGridView, settings);
+    }
+
+    saveRandomInfoPanelSettings(settings: PhotoInfoPanelSettings): void {
+        this.save(SettingsService.keyRandomInfoPanel, settings);
+    }
+
+    saveRandomPageSettings(settings: RandomPageSettings): void {
+        this.save(SettingsService.keyRandomPage, settings);
+    }
+
+    saveSearchGridViewSettings(settings: SearchGridViewSettings): void {
+        this.save(SettingsService.keySearchGridView, settings);
+    }
+
+    saveSearchListViewSettings(settings: SearchListViewSettings): void {
+        this.save(SettingsService.keySearchListView, settings);
+    }
+
+    saveSearchPageSettings(settings: SearchPageSettings): void {
+        this.save(SettingsService.keySearchPage, settings);
+    }
+
+    saveVideoDetailViewSettings(settings: VideoDetailViewSettings): void {
+        this.save(SettingsService.keyVideoDetailView, settings);
+    }
+
+    saveVideoInfoPanelSettings(settings: VideoInfoPanelSettings): void {
+        this.save(SettingsService.keyVideoInfoPanel, settings);
+    }
+
+    saveVideoPageSettings(settings: VideoPageSettings): void {
+        this.save(SettingsService.keyVideoPage, settings);
+    }
+
+    saveAllSettings(settings: Settings): void {
+        if (!!!settings) {
             return;
         }
 
-        this.setValue(SettingsService.keyAppTheme, settings.appTheme.name);
+        this.saveAppSettings(settings.app);
 
-        this.setValue(SettingsService.keyCategoryListCategoryFilter, settings.categoryListCategoryFilter);
-        this.setValue(SettingsService.keyCategoryListCategoryMargin, settings.categoryListCategoryMargin.name);
-        this.setBoolean(SettingsService.keyCategoryListMissingGpsFilter, settings.categoryListMissingGpsFilter);
-        this.setBoolean(SettingsService.keyCategoryListShowCategoryTitles, settings.categoryListShowCategoryTitles);
-        this.setValue(SettingsService.keyCategoryListThumbnailSize, settings.categoryListThumbnailSize.name);
-        this.setValue(SettingsService.keyCategoryListYearFilter, settings.categoryListYearFilter.toString());
-        this.setValue(SettingsService.keyCategoryListViewMode, settings.categoryListViewMode);
-        this.setValue(SettingsService.keyCategoryListListViewThumbnailSize, settings.categoryListListViewThumbnailSize.name);
+        this.saveCategoryFilterSettings(settings.categoryFilter);
+        this.saveCategoryGridViewSettings(settings.categoryGridView);
+        this.saveCategoryListViewSettings(settings.categoryListView);
+        this.saveCategoryPageSettings(settings.categoryPage);
 
-        this.setBoolean(SettingsService.keyPhotoListShowCategoryBreadcrumbs, settings.photoListShowCategoryBreadcrumbs);
-        this.setValue(SettingsService.keyPhotoListThumbnailSize, settings.photoListThumbnailSize.name);
-        this.setBoolean(SettingsService.keyPhotoListShowPhotoList, settings.photoListShowPhotoList);
-        this.setNumber(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds, settings.photoListSlideshowDisplayDurationSeconds);
-        this.setValue(SettingsService.keyPhotoListMapViewMapType, settings.photoListMapViewMapType);
-        this.setNumber(SettingsService.keyPhotoListMapViewZoom, settings.photoListMapViewZoom);
+        this.savePhotoDetailViewSettings(settings.photoDetailView);
+        this.savePhotoGridViewSettings(settings.photoGridView);
+        this.savePhotoInfoPanelSettings(settings.photoInfoPanel);
+        this.savePhotoMapViewSettings(settings.photoMapView);
+        this.savePhotoPageSettings(settings.photoPage);
 
-        this.setValue(SettingsService.keyPhotoGridMargin, settings.photoGridMargin.name);
-        this.setBoolean(SettingsService.keyPhotoGridShowCategoryBreadcrumbs, settings.photoGridShowCategoryBreadcrumbs);
-        this.setValue(SettingsService.keyPhotoGridThumbnailSize, settings.photoGridThumbnailSize.name);
+        this.saveRandomDetailViewSettings(settings.randomDetailView);
+        this.saveRandomGridViewSettings(settings.randomGridView);
+        this.saveRandomInfoPanelSettings(settings.randomInfoPanel);
+        this.saveRandomPageSettings(settings.randomPage);
 
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowCategoryTeaserChooser, settings.photoInfoPanelShowCategoryTeaserChooser);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowComments, settings.photoInfoPanelShowComments);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowEffects, settings.photoInfoPanelShowEffects);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowExif, settings.photoInfoPanelShowExif);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowHistogram, settings.photoInfoPanelShowHistogram);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowRatings, settings.photoInfoPanelShowRatings);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowMetadataEditor, settings.photoInfoPanelShowMetadataEditor);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelShowMinimap, settings.photoInfoPanelShowMinimap);
-        this.setBoolean(SettingsService.keyPhotoInfoPanelExpandedState, settings.photoInfoPanelExpandedState);
-        this.setValue(SettingsService.keyPhotoInfoPanelMinimapMapType, settings.photoInfoPanelMinimapMapType);
-        this.setNumber(SettingsService.keyPhotoInfoPanelMinimapZoom, settings.photoInfoPanelMinimapZoom);
+        this.saveSearchGridViewSettings(settings.searchGridView);
+        this.saveSearchListViewSettings(settings.searchListView);
+        this.saveSearchPageSettings(settings.searchPage);
 
-        this.setValue(SettingsService.keyPhotoViewMode, settings.photoViewMode);
-
-        this.setBoolean(SettingsService.keyVideoListShowCategoryBreadcrumbs, settings.videoListShowCategoryBreadcrumbs);
-        this.setBoolean(SettingsService.keyVideoListShowVideoList, settings.videoListShowVideoList);
-        this.setValue(SettingsService.keyVideoListThumbnailSize, settings.videoListThumbnailSize.name);
-        this.setValue(SettingsService.keyVideoListVideoSize, settings.videoListVideoSize.name);
-
-        this.setBoolean(SettingsService.keyVideoInfoPanelExpandedState, settings.videoInfoPanelExpandedState);
-        this.setBoolean(SettingsService.keyVideoInfoPanelShowCategoryTeaserChooser, settings.videoInfoPanelShowCategoryTeaserChooser);
-        this.setBoolean(SettingsService.keyVideoInfoPanelShowComments, settings.videoInfoPanelShowComments);
-        this.setBoolean(SettingsService.keyVideoInfoPanelShowMetadataEditor, settings.videoInfoPanelShowMetadataEditor);
-        this.setBoolean(SettingsService.keyVideoInfoPanelShowMinimap, settings.videoInfoPanelShowMinimap);
-        this.setBoolean(SettingsService.keyVideoInfoPanelShowRatings, settings.videoInfoPanelShowRatings);
-        this.setValue(SettingsService.keyVideoInfoPanelMinimapMapType, settings.videoInfoPanelMinimapMapType);
-        this.setNumber(SettingsService.keyVideoInfoPanelMinimapZoom, settings.videoInfoPanelMinimapZoom);
-
-        this.setValue(SettingsService.keySearchCategoryMargin, settings.searchCategoryMargin.name);
-        this.setBoolean(SettingsService.keySearchShowCategoryTitles, settings.searchShowCategoryTitles);
-        this.setBoolean(SettingsService.keySearchShowCategoryYears, settings.searchShowCategoryYears);
-        this.setValue(SettingsService.keySearchThumbnailSize, settings.searchThumbnailSize.name);
-        this.setValue(SettingsService.keySearchViewMode, settings.searchViewMode);
-        this.setValue(SettingsService.keySearchListViewThumbnailSize, settings.searchListViewThumbnailSize.name);
-
-        this.killRemovedSettings();
-    }
-
-    killRemovedSettings(): void {
-        this.clearValue(SettingsService.removedKeyCategoryListYearFilter);
-        this.clearValue(SettingsService.removedKeyCategoryListToolbarExpandedState);
-        this.clearValue(SettingsService.removedKeyPhotoListToolbarExpandedState);
-        this.clearValue(SettingsService.removedKeyPhotoListFullscreenToolbarExpandedState);
-        this.clearValue(SettingsService.removedKeyVideoListToolbarExpandedState);
-        this.clearValue(SettingsService.removedKeyCategoryListListType);
-        this.clearValue(SettingsService.removedKeySearchListType);
+        this.saveVideoDetailViewSettings(settings.videoDetailView);
+        this.saveVideoInfoPanelSettings(settings.videoInfoPanel);
+        this.saveVideoPageSettings(settings.videoPage);
     }
 
     clearAuthRedirectUrl(): void {
-        this.clearValue(SettingsService.keyAuthRedirectUrl);
+        this.localStorage.clear(SettingsService.keyAuthRedirectUrl);
     }
 
     setAuthRedirectUrl(url: string): void {
-        this.setValue(SettingsService.keyAuthRedirectUrl, url);
+        this.localStorage.set(SettingsService.keyAuthRedirectUrl, url);
     }
 
     getAuthRedirectUrl(): string {
-        const url = this.getStringOrNull(SettingsService.keyAuthRedirectUrl);
+        const url = this.localStorage.get<string | null>(SettingsService.keyAuthRedirectUrl);
 
         if (!!url) {
             return url;
@@ -257,180 +309,16 @@ export class SettingsService {
         return '';
     }
 
-    private getTheme(): Theme {
-        const themeName = this.getStringOrNull(SettingsService.keyAppTheme);
-
-        try {
-            return themeName !== null ? Theme.forName(themeName) : Theme.themeDark;
-        } catch {
-            return Theme.themeDark;
-        }
+    private getVersion(): number | null {
+        return this.localStorage.get(SettingsService.keyVersion);
     }
 
-    private getPhotoViewMode(key: string): PhotoViewMode {
-        const name = this.getStringOrNull(key);
-
-        try {
-            return toPhotoViewMode(name) ?? PhotoViewMode.grid;
-        } catch {
-            return PhotoViewMode.grid;
-        }
+    private saveVersion() {
+        this.localStorage.set(SettingsService.keyVersion, SettingsService.currentSettingsVersion);
     }
 
-    private getCategoryViewMode(key: string): CategoryViewMode {
-        const name = this.getStringOrNull(key);
-
-        try {
-            return toCategoryViewMode(name) ?? CategoryViewMode.grid;
-        } catch {
-            return CategoryViewMode.grid;
-        }
-    }
-
-    private getCategoryListCategoryFilter(): CategoryTypeFilter {
-        const name = this.getStringOrNull(SettingsService.keyCategoryListCategoryFilter);
-
-        try {
-            return toCategoryTypeFilter(name) ?? CategoryTypeFilter.all;
-        } catch {
-            return CategoryTypeFilter.all;
-        }
-    }
-
-    private getMapType(key: string, defaultValue: MapType): MapType {
-        const name = this.getStringOrNull(key);
-
-        try {
-            return toMapType(name) ?? defaultValue;
-        } catch {
-            return defaultValue;
-        }
-    }
-
-    private getCategoryMargin(key: string): CategoryMargin {
-        const name = this.getStringOrNull(key);
-
-        try {
-            return name !== null ? CategoryMargin.forName(name) : CategoryMargin.compact;
-        } catch {
-            return CategoryMargin.compact;
-        }
-    }
-
-    private getCategoryThumbnailSize(key: string): ThumbnailSize {
-        const sizeName = this.getStringOrNull(key);
-
-        if (!!sizeName) {
-            return this.getThumbnailSize(sizeName);
-        }
-
-        return DEFAULT_SETTINGS.categoryListThumbnailSize;
-    }
-
-    private getPhotoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this.getStringOrNull(SettingsService.keyPhotoListThumbnailSize);
-
-        if (!!sizeName) {
-            return this.getThumbnailSize(sizeName);
-        }
-
-        return DEFAULT_SETTINGS.photoListThumbnailSize;
-    }
-
-    private getVideoListThumbnailSize(): ThumbnailSize {
-        const sizeName = this.getStringOrNull(SettingsService.keyVideoListThumbnailSize);
-
-        if (!!sizeName) {
-            return this.getThumbnailSize(sizeName);
-        }
-
-        return DEFAULT_SETTINGS.videoListThumbnailSize;
-    }
-
-    private getVideoListVideoSize(): VideoSize {
-        const sizeName = this.getStringOrNull(SettingsService.keyVideoListVideoSize);
-
-        try {
-            return sizeName !== null ? VideoSize.forName(sizeName) : VideoSize.large;
-        } catch {
-            return VideoSize.large;
-        }
-    }
-
-    private getThumbnailSize(sizeName: string): ThumbnailSize {
-        try {
-            return sizeName !== null ? ThumbnailSize.forName(sizeName) : ThumbnailSize.default;
-        } catch {
-            return ThumbnailSize.default;
-        }
-    }
-
-    private getPhotoListSlideshowDisplayDurationSeconds(): number {
-        const def = 2;
-        const secs = this.getNumber(SettingsService.keyPhotoListSlideshowDisplayDurationSeconds);
-
-        if (!!secs) {
-            return secs;
-        }
-
-        return def;
-    }
-
-    private getStringOrNumber(key: string): string | number {
-        const value = this.getStringOrNull(key)?.toLowerCase();
-
-        if (!!value) {
-            return /^\d+$/.test(value) ? parseInt(value, 10) : value;
-        }
-
-        console.error('did not obtain a string or number!');
-
-        return '';
-    }
-
-    private getNumber(key: string): number | null {
-        const value = this.getStringOrNull(key);
-
-        if (!!value) {
-            return /^\d+$/.test(value) ? parseInt(value, 10) : null;
-        }
-
-        return null;
-    }
-
-    private getBoolean(key: string): boolean {
-        const value = this.getStringOrNull(key);
-
-        if (!!value) {
-            return /^true$/i.test(value);
-        }
-
-        return false;
-    }
-
-    private getStringOrNull(key: string): string | null {
-        const val = this.localStorage.getStringOrNull(key);
-
-        if (!!val) {
-            return val.replace('\'', '').replace('"', '');
-        }
-
-        return null;
-    }
-
-    private setValue(key: string, value: string): void {
-        this.localStorage.setString(key, value);
-    }
-
-    private setBoolean(key: string, value: boolean): void {
-        this.localStorage.setString(key, value.toString());
-    }
-
-    private setNumber(key: string, value: number): void {
-        this.localStorage.setString(key, value.toString());
-    }
-
-    private clearValue(key: string): void {
-        this.localStorage.clear(key);
+    private save<T>(key: string, value: T) {
+        this.saveVersion();
+        this.localStorage.set(key, value);
     }
 }
