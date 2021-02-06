@@ -39,10 +39,6 @@ export abstract class PhotoInfoPanelSettingsFacade extends BaseSettingsFacade<Ph
 export abstract class PhotoMapSettingsFacade extends BaseSettingsFacade<PhotoMapViewSettings> { }
 export abstract class PhotoPageSettingsFacade extends BaseSettingsFacade<PhotoPageSettings> { }
 
-// TODO: hmm - share the above?  but might need these separated to support the settings page which will include both...
-export abstract class RandomDetailSettingsFacade extends BaseSettingsFacade<PhotoDetailViewSettings> { }
-export abstract class RandomGridSettingsFacade extends BaseSettingsFacade<PhotoGridViewSettings> { }
-export abstract class RandomInfoPanelSettingsFacade extends BaseSettingsFacade<PhotoInfoPanelSettings> { }
 export abstract class RandomPageSettingsFacade extends BaseSettingsFacade<RandomPageSettings> { }
 
 export abstract class SearchGridSettingsFacade extends BaseSettingsFacade<SearchGridViewSettings> { }
