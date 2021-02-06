@@ -4,11 +4,12 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { authGuardToken } from './core/services/auth.guard';
 import { authInitResolverToken } from './core/services/auth-init.resolver';
 import { RouteHelper } from '@models';
+import { SettingsResolver } from '@core/services/settings.resolver';
 
 const routes: Routes = [
     {
         path: '',
-        resolve: [ authInitResolverToken ],
+        resolve: [ authInitResolverToken, SettingsResolver ],
         children: [
             {
                 path: '',

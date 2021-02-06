@@ -1,5 +1,8 @@
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { SettingsStoreActions } from '@core/root-store';
 import { AppSettings } from 'src/app/models/settings/app-settings';
 import { CategoryFilterSettings } from 'src/app/models/settings/category-filter-settings';
 import { CategoryGridViewSettings } from 'src/app/models/settings/category-grid-view-settings';
@@ -20,7 +23,7 @@ import { VideoPageSettings } from 'src/app/models/settings/video-page-settings';
 export abstract class BaseSettingsFacade<T> {
     abstract settings$: Observable<T>;
 
-    abstract update(settings: T): void;
+    abstract save(settings: T): void;
 }
 
 export abstract class AppSettingsFacade extends BaseSettingsFacade<AppSettings> { }
@@ -48,3 +51,14 @@ export abstract class SearchPageSettingsFacade extends BaseSettingsFacade<Search
 
 export abstract class VideoDetailSettingsFacade extends BaseSettingsFacade<VideoDetailViewSettings> { }
 export abstract class VideoPageSettingsFacade extends BaseSettingsFacade<VideoPageSettings> { }
+
+@Injectable({
+    providedIn: 'root'
+})
+export class SettingsFacade {
+    constructor(private store: Store) { }
+
+    load() {
+        this.store.dispatch(SettingsStoreActions.loadRequest());
+    }
+}

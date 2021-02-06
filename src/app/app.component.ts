@@ -1,14 +1,13 @@
 import { Component, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Theme } from '@models';
-import { SettingsStoreSelectors, SettingsStoreActions } from './core/root-store';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
+import { AppSettingsFacade } from '@core/facades/settings-facades';
 
 @Component({
     selector: 'app-root',
@@ -23,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private hotkeysService: HotkeysService,
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
-        private store: Store,
+        private appSettingsFacade: AppSettingsFacade,
         @Inject(DOCUMENT) private doc: Document
     ) {
 
@@ -34,14 +33,11 @@ export class AppComponent implements OnInit, OnDestroy {
             new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
         );
 
-        this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.appTheme)
+        this.destroySub.add(this.appSettingsFacade.settings$
             .subscribe({
-                next: theme => this.applyTheme(theme)
+                next: appSettings => this.applyTheme(appSettings.theme)
             })
         );
-
-        this.store.dispatch(SettingsStoreActions.loadRequest());
     }
 
     ngOnDestroy(): void {
