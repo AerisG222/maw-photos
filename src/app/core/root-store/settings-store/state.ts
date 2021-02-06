@@ -1,13 +1,11 @@
-import { Settings, DEFAULT_SETTINGS } from '@models';
+import { Settings } from 'src/app/models/settings/settings';
 
 export interface State {
     error: string | null;
-    isLoading: boolean;
-    settings: Settings;
+    settings: Settings | null;
 }
 
 export const initialState: State = {
     error: null,
-    isLoading: false,
-    settings: DEFAULT_SETTINGS
+    settings: null
 };

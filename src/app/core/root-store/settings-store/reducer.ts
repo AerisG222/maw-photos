@@ -6,28 +6,16 @@ import { CategoryMargin, CategoryViewMode, PhotoViewMode } from '@models';
 
 export const reducer = createReducer(
     initialState,
-    on(SettingsActions.updateMobileMarginsRequest, (state): State => ({
-        ...state,
-        settings: {
-            ...state.settings,
-            categoryListCategoryMargin: CategoryMargin.dense,
-            searchCategoryMargin: CategoryMargin.dense
-        }
-    })),
     on(SettingsActions.loadRequest, (state): State => ({
         ...state,
-        error: null,
-        isLoading: true
     })),
     on(SettingsActions.loadSuccess, (state, { settings }): State => ({
         ...state,
         settings: { ...settings },
         error: null,
-        isLoading: false
     })),
     on(SettingsActions.loadFailure, (state, { error }): State => ({
         ...state,
-        isLoading: false,
         error
     })),
     on(SettingsActions.saveRequest, (state): State => ({

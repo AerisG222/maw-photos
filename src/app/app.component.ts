@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit, OnDestroy, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -17,7 +16,7 @@ import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.comp
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
@@ -25,7 +24,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         private hotkeyHelper: HotkeyHelperService,
         private dialog: MatDialog,
         private store: Store,
-        private breakpointObserver: BreakpointObserver,
         @Inject(DOCUMENT) private doc: Document
     ) {
 
@@ -39,17 +37,11 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.destroySub.add(this.store
             .select(SettingsStoreSelectors.appTheme)
             .subscribe({
-                next: theme => this.setTheme(theme)
+                next: theme => this.applyTheme(theme)
             })
         );
 
         this.store.dispatch(SettingsStoreActions.loadRequest());
-    }
-
-    ngAfterViewInit(): void {
-        if (this.breakpointObserver.isMatched('(max-width: 800px)')) {
-            this.store.dispatch(SettingsStoreActions.updateMobileMarginsRequest());
-        }
     }
 
     ngOnDestroy(): void {
@@ -57,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.destroySub.unsubscribe();
     }
 
-    private setTheme(theme: Theme): void {
+    private applyTheme(theme: Theme): void {
         const classList: DOMTokenList = this.doc.documentElement.classList;
 
         if (!classList.contains('mat-app-background')) {
