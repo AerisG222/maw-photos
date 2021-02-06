@@ -7,7 +7,7 @@ import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 import { Theme } from '@models';
 import { HotkeyHelperService } from './core/services/hotkey-helper.service';
 import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
-import { AppSettingsFacade } from '@core/facades/settings-facades';
+import { AppSettingsFacade } from '@core/facades/settings/settings-facades';
 
 @Component({
     selector: 'app-root',

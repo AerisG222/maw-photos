@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-import { SettingsFacade } from '@core/facades/settings-facades';
+import { SettingsFacade } from '@core/facades/settings/settings-facades';
 
 @Injectable({
     providedIn: 'root'

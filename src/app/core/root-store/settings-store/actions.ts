@@ -1,273 +1,117 @@
 import { createAction, props } from '@ngrx/store';
 
-import {
-    Settings,
-    ThumbnailSize,
-    VideoSize,
-    CategoryMargin,
-    CategoryTypeFilter,
-    CategoryViewMode,
-    MapType,
- } from '@models';
-
-export const updateMobileMarginsRequest = createAction(
-    '[Settings] Update Mobile Margins Request'
-);
+import { AppSettings } from 'src/app/models/settings/app-settings';
+import { CategoryFilterSettings } from 'src/app/models/settings/category-filter-settings';
+import { CategoryGridViewSettings } from 'src/app/models/settings/category-grid-view-settings';
+import { CategoryListViewSettings } from 'src/app/models/settings/category-list-view-settings';
+import { CategoryPageSettings } from 'src/app/models/settings/category-page-settings';
+import { PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
+import { PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
+import { PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
+import { PhotoMapViewSettings } from 'src/app/models/settings/photo-map-view-settings';
+import { PhotoPageSettings } from 'src/app/models/settings/photo-page-settings';
+import { RandomPageSettings } from 'src/app/models/settings/random-page-settings';
+import { SearchGridViewSettings } from 'src/app/models/settings/search-grid-view-settings';
+import { SearchListViewSettings } from 'src/app/models/settings/search-list-view-settings';
+import { SearchPageSettings } from 'src/app/models/settings/search-page-settings';
+import { VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
+import { VideoPageSettings } from 'src/app/models/settings/video-page-settings';
 
 export const loadRequest = createAction(
     '[Settings] Load Request'
 );
 
-export const loadFailure = createAction(
-    '[Settings] Load Failure',
-    props<{ error: string }>()
+export const saveAppSettings = createAction(
+    '[Settings] Save App Settings',
+    props<{ settings: AppSettings }>()
 );
 
-export const loadSuccess = createAction(
-    '[Settings] Load Success',
-    props<{ settings: Settings }>()
+export const saveCategoryFilterSettings = createAction(
+    '[Settings] Save Category Filter Settings',
+    props<{ settings: CategoryFilterSettings }>()
 );
 
-export const saveRequest = createAction(
-    '[Settings] Save Request',
-    props<{ settings: Settings }>()
+export const saveCategoryGridViewSettings = createAction(
+    '[Settings] Save Category Grid View Settings',
+    props<{ settings: CategoryGridViewSettings }>()
 );
 
-export const saveSuccess = createAction(
-    '[Settings] Save Success',
-    props<{ settings: Settings }>()
+export const saveCategoryListViewSettings = createAction(
+    '[Settings] Save Category List View Settings',
+    props<{ settings: CategoryListViewSettings }>()
 );
 
-export const saveFailure = createAction(
-    '[Settings] Save Failure',
-    props<{ error: string }>()
+export const saveCategoryPageSettings = createAction(
+    '[Settings] Save Page Settings',
+    props<{ settings: CategoryPageSettings }>()
 );
 
-export const selectCategoryGridViewMode = createAction(
-    '[Settings] Select Category Grid View Mode'
+export const savePhotoDetailViewSettings = createAction(
+    '[Settings] Save Photo Detail View Settings',
+    props<{ settings: PhotoDetailViewSettings }>()
 );
 
-export const selectCategoryListViewMode = createAction(
-    '[Settings] Select Category List View Mode'
+export const savePhotoGridViewSettings = createAction(
+    '[Settings] Save Photo Grid View Settings',
+    props<{ settings: PhotoGridViewSettings }>()
 );
 
-export const toggleCategoryListCategoryTitlesRequest = createAction(
-    '[Settings] Toggle Category List Category Titles'
+export const savePhotoInfoPanelSettings = createAction(
+    '[Settings] Save Photo Info Panel Settings',
+    props<{ settings: PhotoInfoPanelSettings }>()
 );
 
-export const toggleCategoryListMissingGpsFilterRequest = createAction(
-    '[Settings] Toggle Category List Missing Gps Filter'
+export const savePhotoMapViewSettings = createAction(
+    '[Settings] Save Photo Map View Settings',
+    props<{ settings: PhotoMapViewSettings }>()
 );
 
-export const updateCategoryListYearFilterRequest = createAction(
-    '[Settings] Update Category List Year Filter',
-    props<{ yearFilter: string | number }>()
+export const savePhotoPageSettings = createAction(
+    '[Settings] Save Photo Page Settings',
+    props<{ settings: PhotoPageSettings }>()
 );
 
-export const updateCategoryListCategoryFilterRequest = createAction(
-    '[Settings] Update Category List Category Filter',
-    props<{ newFilter: CategoryTypeFilter }>()
+export const saveRandomDetailViewSettings = createAction(
+    '[Settings] Save Random Detail View Settings',
+    props<{ settings: PhotoDetailViewSettings }>()
 );
 
-export const updateCategoryListCategoryMarginRequest = createAction(
-    '[Settings] Update Category List Category Margin',
-    props<{ newMargin: CategoryMargin }>()
+export const saveRandomGridViewSettings = createAction(
+    '[Settings] Save Random Grid View Settings',
+    props<{ settings: PhotoGridViewSettings }>()
 );
 
-export const updateCategoryListListTypeRequest = createAction(
-    '[Settings] Update Category List List Type',
-    props<{ newType: CategoryViewMode }>()
+export const saveRandomInfoPanelSettings = createAction(
+    '[Settings] Save Random Info Panel Settings',
+    props<{ settings: PhotoInfoPanelSettings }>()
 );
 
-export const updateCategoryListListViewThumbnailSizeRequest = createAction(
-    '[Settings] Update Category List List View Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
+export const saveRandomPageSettings = createAction(
+    '[Settings] Save Random Page Settings',
+    props<{ settings: RandomPageSettings }>()
 );
 
-export const updateCategoryListThumbnailSizeRequest = createAction(
-    '[Settings] Update Category List Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
+export const saveSearchGridViewSettings = createAction(
+    '[Settings] Save Search Grid View Settings',
+    props<{ settings: SearchGridViewSettings }>()
 );
 
-export const togglePhotoInfoPanelCategoryTeaserChooserRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Category Teaser Chooser'
+export const saveSearchListViewSettings = createAction(
+    '[Settings] Save Search List View Settings',
+    props<{ settings: SearchListViewSettings }>()
 );
 
-export const togglePhotoInfoPanelCommentsRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Comments'
+export const saveSearchPageSettings = createAction(
+    '[Settings] Save Search Page Settings',
+    props<{ settings: SearchPageSettings }>()
 );
 
-export const togglePhotoInfoPanelEffectsRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Effects'
+export const saveVideoDetailViewSettings = createAction(
+    '[Settings] Save Video Detail View Settings',
+    props<{ settings: VideoDetailViewSettings }>()
 );
 
-export const togglePhotoInfoPanelExifRequest = createAction(
-    '[Settings] Toggle Photo Info Panel EXIF'
-);
-
-export const togglePhotoInfoPanelExpandedStateRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Expanded State'
-);
-
-export const togglePhotoInfoPanelHistogramRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Histogram'
-);
-
-export const togglePhotoInfoPanelMetadataEditorRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Metadata Editor'
-);
-
-export const togglePhotoInfoPanelMinimapRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Minimap'
-);
-
-export const togglePhotoInfoPanelRatingsRequest = createAction(
-    '[Settings] Toggle Photo Info Panel Ratings'
-);
-
-export const updatePhotoInfoPanelMinimapMapTypeRequest = createAction(
-    '[Settings] Update Photo Info Panel Minimap Map Type',
-    props<{ mapType: MapType }>()
-);
-
-export const updatePhotoInfoPanelMinimapZoomRequest = createAction(
-    '[Settings] Update Photo Info Panel Minimap Zoom',
-    props<{ zoom: number }>()
-);
-
-export const togglePhotoListCategoryBreadcrumbsRequest = createAction(
-    '[Settings] Toggle Photo List Category Breadcrumbs'
-);
-
-export const togglePhotoListShowPhotoListRequest = createAction(
-    '[Settings] Toggle Photo List Show Photo List'
-);
-
-export const updatePhotoListMapViewMapTypeRequest = createAction(
-    '[Settings] Update Photo List Map View Map Type',
-    props<{ mapType: MapType }>()
-);
-
-export const updatePhotoListMapViewZoomRequest = createAction(
-    '[Settings] Update Photo List Map View Zoom',
-    props<{ zoom: number }>()
-);
-
-export const updatePhotoListThumbnailSizeRequest = createAction(
-    '[Settings] Update Photo List Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
-);
-
-export const togglePhotoGridShowCategoryBreadcrumbsRequest = createAction(
-    '[Settings] Toggle Photo Grid Show Breadcrumbs Request'
-);
-
-export const updatePhotoGridMarginRequest = createAction(
-    '[Settings] Update Photo Grid Margin Request',
-    props<{ newMargin: CategoryMargin }>()
-);
-
-export const updatePhotoGridThumbnailSizeRequest = createAction(
-    '[Settings] Update Photo Grid Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
-);
-
-export const selectPhotoViewModeBulkEdit = createAction(
-    '[Settings] Select Photo View Mode Bulk Edit'
-);
-
-export const selectPhotoViewModeDetail = createAction(
-    '[Settings] Select Photo View Mode Detail'
-);
-
-export const selectPhotoViewModeFullscreen = createAction(
-    '[Settings] Select Photo View Mode Fullscreen'
-);
-
-export const selectPhotoViewModeGrid = createAction(
-    '[Settings] Select Photo View Mode Grid'
-);
-
-export const selectPhotoViewModeMap = createAction(
-    '[Settings] Select Photo View Mode Map'
-);
-
-export const toggleVideoListCategoryBreadcrumbsRequest = createAction(
-    '[Settings] Toggle Video List Category Breadcrumbs'
-);
-
-export const toggleVideoListShowVideoListRequest = createAction(
-    '[Settings] Toggle Video List Show Video List'
-);
-
-export const updateVideoListThumbnailSizeRequest = createAction(
-    '[Settings] Update Video List Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
-);
-
-export const updateVideoListVideoSizeRequest = createAction(
-    '[Settings] Update Video List Video Size',
-    props<{ newSize: VideoSize }>()
-);
-
-export const toggleVideoInfoPanelCategoryTeaserChooserRequest = createAction(
-    '[Settings] Toggle Video Info Panel Category Teaser Chooser'
-);
-
-export const toggleVideoInfoPanelCommentsRequest = createAction(
-    '[Settings] Toggle Video Info Panel Comments'
-);
-
-export const toggleVideoInfoPanelExpandedStateRequest = createAction(
-    '[Settings] Toggle Video Info Panel Expanded State'
-);
-
-export const toggleVideoInfoPanelMetadataEditorRequest = createAction(
-    '[Settings] Toggle Video Info Panel Metadata Editor'
-);
-
-export const toggleVideoInfoPanelMinimapRequest = createAction(
-    '[Settings] Toggle Video Info Panel Minimap'
-);
-
-export const toggleVideoInfoPanelRatingsRequest = createAction(
-    '[Settings] Toggle Video Info Panel Ratings'
-);
-
-export const updateVideoInfoPanelMinimapMapTypeRequest = createAction(
-    '[Settings] Update Video Info Panel Minimap Map Type',
-    props<{ mapType: MapType }>()
-);
-
-export const updateVideoInfoPanelMinimapZoomRequest = createAction(
-    '[Settings] Update Video Info Panel Minimap Zoom',
-    props<{ zoom: number }>()
-);
-
-export const toggleSearchCategoryTitlesRequest = createAction(
-    '[Settings] Toggle Search Category Titles'
-);
-
-export const toggleSearchCategoryYearsRequest = createAction(
-    '[Settings] Toggle Search Category Years'
-);
-
-export const updateSearchCategoryMarginRequest = createAction(
-    '[Settings] Update Search Category Margin',
-    props<{ newMargin: CategoryMargin }>()
-);
-
-export const updateSearchListTypeRequest = createAction(
-    '[Settings] Update Search List Type',
-    props<{ newType: CategoryViewMode }>()
-);
-
-export const updateSearchListViewThumbnailSizeRequest = createAction(
-    '[Settings] Update Search List View Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
-);
-
-export const updateSearchThumbnailSizeRequest = createAction(
-    '[Settings] Update Search Thumbnail Size',
-    props<{ newSize: ThumbnailSize }>()
+export const saveVideoPageSettings = createAction(
+    '[Settings] Save Video Page Settings',
+    props<{ settings: VideoPageSettings }>()
 );
