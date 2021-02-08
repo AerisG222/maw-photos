@@ -5,9 +5,9 @@ import { Subscription } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
 import { Theme } from '@models';
-import { HotkeyHelperService } from './core/services/hotkey-helper.service';
-import { HotkeyDialogComponent } from './shared/hotkey-dialog/hotkey-dialog.component';
-import { AppSettingsFacade } from '@core/facades/settings/settings-facades';
+import { HotkeyHelperService } from '@core/services/hotkey-helper.service';
+import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
+import { HotkeyDialogComponent } from '@shared/hotkey-dialog/hotkey-dialog.component';
 
 @Component({
     selector: 'app-root',
