@@ -1,0 +1,33 @@
+<app-toolbar-toolbar>
+    <app-toolbar-group-select-view></app-toolbar-group-select-view>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
+        <app-toolbar-button
+            icon="title"
+            shortcutKey="t"
+            shortcutHelp="Show/Hide Category Titles"
+            tooltip="Show/Hide Category Titles (T)"
+            (click)="onToggleTitle()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            icon="photo_size_select_large"
+            [isDisabled]="showTitles"
+            shortcutKey="s"
+            shortcutHelp="Toggle Grid Thumbnail Size"
+            tooltip="Toggle Grid Thumbnail Size (S)"
+            (click)="onToggleSize()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            icon="format_indent_increase"
+            shortcutKey="m"
+            shortcutHelp="Toggle Category Margins"
+            tooltip="Toggle Category Margins (M)"
+            (click)="onToggleMargins()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar-toolbar>

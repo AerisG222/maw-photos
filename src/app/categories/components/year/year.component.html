@@ -2,16 +2,4 @@
 
 <mat-divider mat-color="accent"></mat-divider>
 
-<app-shared-category-list
-    *ngIf="showListView$ | async"
-    [categories]="categories$ | async"
-    [thumbnailSize]="listThumbnailSize$ | async">
-</app-shared-category-list>
-
-<app-shared-category-grid
-    *ngIf="showGridView$ | async"
-    [categories]="categories$ | async"
-    [showTitles]="gridShowTitles$ | async"
-    [showYears]="false"
-    [thumbnailSize]="gridThumbnailSize$ | async">
-</app-shared-category-grid>
+<ng-content></ng-content>

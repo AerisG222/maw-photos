@@ -8,10 +8,12 @@ import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 @Injectable({
     providedIn: 'root'
 })
-export class AppSettingsFacade implements BaseSettingsFacade<AppSettings> {
+export class AppSettingsFacade extends BaseSettingsFacade<AppSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.appSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: AppSettings) {
         this.store.dispatch(SettingsStoreActions.saveAppSettings({ settings }));

@@ -1,0 +1,20 @@
+<app-layout-toolbar *ngIf="listSettings$ | async; let listSettings">
+    <app-list-toolbar layout-toolbar></app-list-toolbar>
+
+    <app-shared-content-margin layout-main [margin]="listSettings.margin">
+
+        <app-filter-bar></app-filter-bar>
+
+        <div>
+            <div *ngFor="let year of years$ | async">
+                <app-categories-year [year]="year">
+                    <app-shared-category-list
+                        [categories]="categoriesForYear(year) | async"
+                        [thumbnailSize]="listSettings.thumbnailSize">
+                    </app-shared-category-list>
+                </app-categories-year>
+            </div>
+        </div>
+
+    </app-shared-content-margin>
+</app-layout-toolbar>

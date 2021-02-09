@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { CategoryTypeFilter } from '@models';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
 
 import { CategoryFilterSettings } from 'src/app/models/settings/category-filter-settings';
 import { BaseSettingsFacade } from './base-settings-facade';
@@ -10,10 +9,12 @@ import { BaseSettingsFacade } from './base-settings-facade';
 @Injectable({
     providedIn: 'root'
 })
-export class CategoryFilterSettingsFacade implements BaseSettingsFacade<CategoryFilterSettings> {
+export class CategoryFilterSettingsFacade extends BaseSettingsFacade<CategoryFilterSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.categoryFilterSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: CategoryFilterSettings): void {
         this.store.dispatch(SettingsStoreActions.saveCategoryFilterSettings({ settings }));
@@ -29,16 +30,5 @@ export class CategoryFilterSettingsFacade implements BaseSettingsFacade<Category
 
     saveMissingGpsFilter(gpsFilter: boolean) {
         this.saveUpdatedField(s => s.missingGpsFilter = gpsFilter);
-    }
-
-    private saveUpdatedField(action: (s: CategoryFilterSettings) => void) {
-        this.settings$.pipe(
-            first(),
-        ).subscribe({
-            next: filterSettings => {
-                action({ ...filterSettings });
-                this.save(filterSettings);
-            }
-        });
     }
 }

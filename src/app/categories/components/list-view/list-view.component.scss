@@ -1,0 +1,7 @@
+@import '../../../../variables';
+
+app-shared-content-margin {
+    padding: $contentPad;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

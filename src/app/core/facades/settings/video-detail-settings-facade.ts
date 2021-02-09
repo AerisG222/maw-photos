@@ -8,10 +8,12 @@ import { VideoDetailViewSettings } from 'src/app/models/settings/video-detail-vi
 @Injectable({
     providedIn: 'root'
 })
-export class VideoDetailSettingsFacade implements BaseSettingsFacade<VideoDetailViewSettings> {
+export class VideoDetailSettingsFacade extends BaseSettingsFacade<VideoDetailViewSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.videoDetailViewSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: VideoDetailViewSettings): void {
         this.store.dispatch(SettingsStoreActions.saveVideoDetailViewSettings({ settings }));

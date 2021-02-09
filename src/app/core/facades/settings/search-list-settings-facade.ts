@@ -8,10 +8,12 @@ import { SearchListViewSettings } from 'src/app/models/settings/search-list-view
 @Injectable({
     providedIn: 'root'
 })
-export class SearchListSettingsFacade implements BaseSettingsFacade<SearchListViewSettings> {
+export class SearchListSettingsFacade extends BaseSettingsFacade<SearchListViewSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.searchListViewSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: SearchListViewSettings): void {
         this.store.dispatch(SettingsStoreActions.saveSearchListViewSettings({ settings }));

@@ -1,7 +1,21 @@
 import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
-export interface BaseSettingsFacade<T> {
-    settings$: Observable<T>;
+export abstract class BaseSettingsFacade<T> {
+    abstract settings$: Observable<T>;
 
-    save(settings: T): void;
+    protected saveUpdatedField(action: (settings: T) => void) {
+        this.settings$.pipe(
+            first(),
+        ).subscribe({
+            next: currentSettings => {
+                const newSettings = { ...currentSettings };
+                action(newSettings);
+
+                this.save(newSettings);
+            }
+        });
+    }
+
+    abstract save(settings: T): void;
 }

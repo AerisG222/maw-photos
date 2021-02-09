@@ -1,0 +1,30 @@
+<app-layout-toolbar *ngIf="gridSettings$ | async; let gridSettings">
+    <app-grid-toolbar
+        layout-toolbar
+        [margin]="gridSettings.margin"
+        [showTitles]="gridSettings.showTitles"
+        [thumbnailSize]="gridSettings.thumbnailSize"
+        (toggleMargin)="onToggleMargins($event)"
+        (toggleShowTitle)="onToggleShowTitle()"
+        (toggleThumbnailSize)="onToggleThumbnailSize($event)">
+    </app-grid-toolbar>
+
+    <app-shared-content-margin layout-main [margin]="gridSettings.margin">
+
+        <app-filter-bar></app-filter-bar>
+
+        <div>
+            <div *ngFor="let year of years$ | async">
+                <app-categories-year [year]="year">
+                    <app-shared-category-grid
+                        [categories]="categoriesForYear(year) | async"
+                        [showTitles]="gridSettings.showTitles"
+                        [showYears]="false"
+                        [thumbnailSize]="gridSettings.thumbnailSize">
+                    </app-shared-category-grid>
+                </app-categories-year>
+            </div>
+        </div>
+
+    </app-shared-content-margin>
+</app-layout-toolbar>

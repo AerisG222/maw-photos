@@ -8,10 +8,12 @@ import { SearchGridViewSettings } from 'src/app/models/settings/search-grid-view
 @Injectable({
     providedIn: 'root'
 })
-export class SearchGridSettingsFacade implements BaseSettingsFacade<SearchGridViewSettings> {
+export class SearchGridSettingsFacade extends BaseSettingsFacade<SearchGridViewSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.searchGridViewSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: SearchGridViewSettings): void {
         this.store.dispatch(SettingsStoreActions.saveSearchGridViewSettings({ settings }));

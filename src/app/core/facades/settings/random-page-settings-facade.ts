@@ -8,10 +8,12 @@ import { RandomPageSettings } from 'src/app/models/settings/random-page-settings
 @Injectable({
     providedIn: 'root'
 })
-export class RandomPageSettingsFacade implements BaseSettingsFacade<RandomPageSettings> {
+export class RandomPageSettingsFacade extends BaseSettingsFacade<RandomPageSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.randomPageSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: RandomPageSettings): void {
         this.store.dispatch(SettingsStoreActions.saveRandomPageSettings({ settings }));

@@ -1,0 +1,19 @@
+<app-toolbar-group>
+    <app-toolbar-link
+        [link]="['/categories/grid']"
+        icon="apps"
+        shortcutKey="g"
+        shortcutHelp="Grid View"
+        tooltip="Grid View (G)"
+        (click)="onSelectGridView()">
+    </app-toolbar-link>
+
+    <app-toolbar-link
+        [link]="['/categories/list']"
+        icon="list"
+        shortcutKey="l"
+        shortcutHelp="List View"
+        tooltip="List View (L)"
+        (click)="onSelectListView()">
+    </app-toolbar-link>
+</app-toolbar-group>

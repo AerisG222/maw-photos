@@ -8,10 +8,12 @@ import { VideoPageSettings } from 'src/app/models/settings/video-page-settings';
 @Injectable({
     providedIn: 'root'
 })
-export class VideoPageSettingsFacade implements BaseSettingsFacade<VideoPageSettings> {
+export class VideoPageSettingsFacade extends BaseSettingsFacade<VideoPageSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.videoPageSettings);
 
-    constructor(private store: Store) { }
+    constructor(private store: Store) {
+        super();
+    }
 
     save(settings: VideoPageSettings): void {
         this.store.dispatch(SettingsStoreActions.saveVideoPageSettings({ settings }));
