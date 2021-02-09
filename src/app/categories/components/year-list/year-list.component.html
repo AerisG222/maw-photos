@@ -3,10 +3,21 @@
 
     <app-shared-content-margin layout-main [margin]="margin$ | async">
 
-        <div class="filter-grid">
-            <app-categories-category-year-filter></app-categories-category-year-filter>
-            <app-categories-category-type-filter></app-categories-category-type-filter>
-            <app-categories-category-missing-gps-filter *ngIf="isAdmin$ | async"></app-categories-category-missing-gps-filter>
+        <div class="filter-grid" *ngIf="(filterSettings$ | async); let filterSettings">
+            <app-categories-category-year-filter
+                [allYears]="allYears$ | async"
+                [yearFilter]="filterSettings.yearFilter"
+                (filterChange)="onChangeYearFilter($event)">
+            </app-categories-category-year-filter>
+            <app-categories-category-type-filter
+                [typeFilter]="filterSettings.typeFilter"
+                (filterChange)="onChangeTypeFilter($event)">
+            </app-categories-category-type-filter>
+            <app-categories-category-missing-gps-filter
+                *ngIf="isAdmin$ | async"
+                [filterEnabled]="filterSettings.missingGpsFilter"
+                (filterChange)="onChangeGpsFilter($event)">
+            </app-categories-category-missing-gps-filter>
         </div>
 
         <div>

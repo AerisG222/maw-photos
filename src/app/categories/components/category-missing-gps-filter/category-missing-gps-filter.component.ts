@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
     selector: 'app-categories-category-missing-gps-filter',
@@ -10,15 +8,10 @@ import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryMissingGpsFilterComponent {
-    filterEnabled$ = this.store.select(SettingsStoreSelectors.categoryListMissingGpsFilter);
+    @Input() filterEnabled = false;
+    @Output() filterChange = new EventEmitter<boolean>();
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
-
-    onToggleMissingGpsData(): void {
-        this.store.dispatch(SettingsStoreActions.toggleCategoryListMissingGpsFilterRequest());
+    onToggleMissingGpsData(evt: MatSlideToggleChange): void {
+        this.filterChange.next(evt.checked);
     }
 }

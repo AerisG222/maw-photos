@@ -1,9 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { Store } from '@ngrx/store';
-
-import { RootStoreSelectors } from '@core/root-store';
-import { CategoriesStoreActions, CategoriesStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-categories-category-year-filter',
@@ -12,16 +8,11 @@ import { CategoriesStoreActions, CategoriesStoreSelectors } from '../../store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryYearFilterComponent {
-    effectiveFilter$ = this.store.select(CategoriesStoreSelectors.categoryEffectiveYearFilter);
-    allYears$ = this.store.select(RootStoreSelectors.allYears);
-
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    @Input() yearFilter = '';
+    @Input() allYears = [];
+    @Output() filterChange = new EventEmitter<number | string>();
 
     onSelectYear(change: MatSelectChange): void {
-        this.store.dispatch(CategoriesStoreActions.categoriesYearFilterChanged({ filter: change.value }));
+        this.filterChange.next(change.value);
     }
 }

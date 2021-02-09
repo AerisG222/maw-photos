@@ -1,10 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { allCategoryTypeFilters, CategoryTypeFilter, toCategoryTypeFilter } from '@models';
-import { SettingsStoreSelectors } from '@core/root-store';
 import { MatSelectChange } from '@angular/material/select';
-import { CategoriesStoreActions } from '../../store';
 
 @Component({
     selector: 'app-categories-category-type-filter',
@@ -13,18 +10,14 @@ import { CategoriesStoreActions } from '../../store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryTypeFilterComponent {
-    effectiveFilter$ = this.store.select(SettingsStoreSelectors.categoryListCategoryFilter);
+    @Input() typeFilter = CategoryTypeFilter.all;
+    @Output() filterChange = new EventEmitter<CategoryTypeFilter>();
+
     categoryTypes = allCategoryTypeFilters;
-
-    constructor(
-        private store: Store
-    ) {
-
-    }
 
     onSelectCategoryType(change: MatSelectChange): void {
         const filter = toCategoryTypeFilter(change.value) as CategoryTypeFilter;
 
-        this.store.dispatch(CategoriesStoreActions.categoriesTypeFilterChanged({ filter }));
+        this.filterChange.next(filter);
     }
 }
