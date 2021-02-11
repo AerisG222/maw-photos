@@ -23,8 +23,6 @@ $custom-typography: mat-typography-config(
 
 @import 'app/about/about/about.component.theme';
 
-@import 'app/categories/components/year-list/year-list.component.theme';
-
 @import 'app/photos-shared/components/photo-list/photo-list.component.theme';
 @import 'app/photos-shared/components/detail-view/detail-view.component.theme';
 @import 'app/photos-shared/components/sidebar-exif-table/sidebar-exif-table.component.theme';
@@ -59,8 +57,6 @@ $custom-typography: mat-typography-config(
 // you only have to add additional components here (instead of in every theme class)
 @mixin custom-components-theme($theme) {
     @include app-component-theme($theme);
-
-    @include app-categories-year-list-component-theme($theme);
 
     @include app-about-component-theme($theme);
 
