@@ -123,7 +123,7 @@ export class PhotoSettingsComponent {
             showHistogram: this.form.get('detail.infoPanel.showHistogram')?.value as boolean,
             showMinimap: this.form.get('detail.infoPanel.showMinimap')?.value as boolean,
             showMetadataEditor: this.form.get('detail.infoPanel.showMetadataEditor')?.value as boolean,
-            showCategoryTeaserChooser: this.form.get('detail.infoPanel.showCategoryTeaserChoser')?.value as boolean,
+            showCategoryTeaserChooser: this.form.get('detail.infoPanel.showCategoryTeaserChooser')?.value as boolean,
             minimapMapType: this.form.get('detail.infoPanel.minimapType')?.value as MapType,
             minimapZoom: this.form.get('detail.infoPanel.minimapZoom')?.value as number
         };
