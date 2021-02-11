@@ -1,8 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { allPhotoViewModes, allMapTypes, CategoryMargin, ThumbnailSize, MinimapZoom, VideoSize } from '@models';
-import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS } from 'src/app/models/settings/video-detail-view-settings';
-import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS } from 'src/app/models/settings/video-info-panel-settings';
+import { combineLatest } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
+import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
+import { allPhotoViewModes, allMapTypes, CategoryMargin, ThumbnailSize, MinimapZoom, VideoSize, MapType } from '@models';
+import { VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
+import { VideoInfoPanelSettings } from 'src/app/models/settings/video-info-panel-settings';
 
 @Component({
     selector: 'app-video-settings',
@@ -19,30 +24,94 @@ export class VideoSettingsComponent {
     zoomLevels = MinimapZoom.allSizes;
     videoSizes = VideoSize.allSizes;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private detailFacade: VideoDetailSettingsFacade,
+        private infoFacade: VideoInfoPanelSettingsFacade
+    ) {
         this.form = this.fb.group({
-            videoSize: DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS.videoSize.name,
-            showBreadcrumbs: DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS.showBreadcrumbs,
-            showVideoList: DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS.showVideoList,
-            thumbnailSize: DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS.thumbnailSize,
-            infoPanel: this.fb.group({
-                expandedState: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.expandedState,
-                showRatings: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.showRatings,
-                showComments: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.showComments,
-                showMinimap: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.showMinimap,
-                showMetadataEditor: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.showMetadataEditor,
-                showCategoryTeaserChooser: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.showCategoryTeaserChooser,
-                minimapType: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.minimapMapType,
-                minimapZoom: DEFAULT_VIDEO_INFO_PANEL_SETTINGS.minimapZoom
+            detail: this.fb.group({
+                videoSize: '',
+                showBreadcrumbs: '',
+                showVideoList: '',
+                thumbnailSize: '',
+                infoPanel: this.fb.group({
+                    expandedState: '',
+                    showRatings: '',
+                    showComments: '',
+                    showMinimap: '',
+                    showMetadataEditor: '',
+                    showCategoryTeaserChooser: '',
+                    minimapType: '',
+                    minimapZoom: ''
+                })
             })
         });
+
+        this.resetForm();
     }
 
     onSave() {
+        const detail = this.readDetailForm();
+        const info = this.readInfoForm();
 
+        this.detailFacade.save(detail);
+        this.infoFacade.save(info);
     }
 
     onCancel() {
+        this.resetForm();
+    }
 
+    private readDetailForm(): VideoDetailViewSettings {
+        return {
+            videoSize: this.form.get('detail.videoSize')?.value,
+            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
+            showVideoList: this.form.get('detail.showVideoList')?.value as boolean,
+            thumbnailSize: ThumbnailSize.forName(this.form.get('detail.thumbnailSIze')?.value)
+        };
+    }
+
+    private readInfoForm(): VideoInfoPanelSettings {
+        return {
+            expandedState: this.form.get('detail.infoPanel.expandedState')?.value as boolean,
+            showRatings: this.form.get('detail.infoPanel.showRatings')?.value as boolean,
+            showComments: this.form.get('detail.infoPanel.showComments')?.value as boolean,
+            showMinimap: this.form.get('detail.infoPanel.showMinimap')?.value as boolean,
+            showMetadataEditor: this.form.get('detail.infoPanel.showMetadataEditor')?.value as boolean,
+            showCategoryTeaserChooser: this.form.get('detail.infoPanel.showCategoryTeaserChooser')?.value as boolean,
+            minimapMapType: this.form.get('detail.infoPanel.minimapType')?.value as MapType,
+            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')?.value as number
+        };
+    }
+
+    private resetForm() {
+        combineLatest([
+            this.detailFacade.settings$,
+            this.infoFacade.settings$
+        ]).pipe(
+            first()
+        ).subscribe({
+            next: ([detail, info]) => {
+                this.form.patchValue({
+                    detail: {
+                        videoSize: detail.videoSize.name,
+                        showBreadcrumbs: detail.showBreadcrumbs,
+                        showVideoList: detail.showVideoList,
+                        thumbnailSize: detail.thumbnailSize.name,
+                        infoPanel: {
+                            expandedState: info.expandedState,
+                            showRatings: info.showRatings,
+                            showComments: info.showComments,
+                            showMinimap: info.showMinimap,
+                            showMetadataEditor: info.showMetadataEditor,
+                            showCategoryTeaserChooser: info.showCategoryTeaserChooser,
+                            minimapType: info.minimapMapType,
+                            minimapZoom: info.minimapZoom
+                        }
+                    }
+                });
+            }
+        });
     }
 }

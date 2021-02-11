@@ -2,7 +2,7 @@
 
 <form [formGroup]="form">
     <div class="card-grid">
-        <mat-card>
+        <mat-card formGroupName="detail">
             <mat-card-title>Video Page</mat-card-title>
             <mat-card-content>
                 <h3>Video Size</h3>
@@ -21,31 +21,33 @@
                     <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
 
-                <h3>Info Panel</h3>
-                <mat-checkbox formControlName="expandedState">Show Info Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="showRatings">Show Ratings Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="showComments">Show Comments Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="showMinimap">Show Mini-map Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="showMetadataEditor">Show Metadata Editor Panel</mat-checkbox>
-                <br />
-                <mat-checkbox formControlName="showCategoryTeaserChooser">Show Category Teaser Chooser Panel</mat-checkbox>
+                <div formGroupName="infoPanel">
+                    <h3>Info Panel</h3>
+                    <mat-checkbox formControlName="expandedState">Show Info Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showRatings">Show Ratings Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showComments">Show Comments Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showMinimap">Show Mini-map Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showMetadataEditor">Show Metadata Editor Panel</mat-checkbox>
+                    <br />
+                    <mat-checkbox formControlName="showCategoryTeaserChooser">Show Category Teaser Chooser Panel</mat-checkbox>
 
-                <h3>Minimap Type</h3>
-                <mat-radio-group formControlName="minimapType">
-                    <mat-radio-button  *ngFor="let type of mapTypes" [value]="type.value">{{ type.name }}</mat-radio-button>
-                </mat-radio-group>
+                    <h3>Minimap Type</h3>
+                    <mat-radio-group formControlName="minimapType">
+                        <mat-radio-button  *ngFor="let type of mapTypes" [value]="type.value">{{ type.name }}</mat-radio-button>
+                    </mat-radio-group>
 
-                <h3>Minimap Zoom Level</h3>
-                <mat-form-field appearance="standard">
-                    <mat-label>Zoom</mat-label>
-                    <mat-select formControlName="minimapZoom">
-                        <mat-option *ngFor="let zoom of zoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <h3>Minimap Zoom Level</h3>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Zoom</mat-label>
+                        <mat-select formControlName="minimapZoom">
+                            <mat-option *ngFor="let zoom of zoomLevels" [value]="zoom.value">{{ zoom.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
