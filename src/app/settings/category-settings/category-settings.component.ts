@@ -66,10 +66,14 @@ export class CategorySettingsComponent {
             this.form.get('page.typeFilter')?.value
         ) as CategoryTypeFilter;
 
+        const pageSettings = this.readPageForm();
+        const gridSettings = this.readGridForm();
+        const listSettings = this.readListForm();
+
         this.filterFacade.saveTypeFilter(typeFilter);
-        this.pageFacade.save(this.readPageForm());
-        this.gridFacade.save(this.readGridForm());
-        this.listFacade.save(this.readListForm());
+        this.pageFacade.save(pageSettings);
+        this.gridFacade.save(gridSettings);
+        this.listFacade.save(listSettings);
     }
 
     onCancel() {
