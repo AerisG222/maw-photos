@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import { allMapTypes, allPhotoViewModes, CategoryMargin, MapType, MinimapZoom, ThumbnailSize } from '@models';
 import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
@@ -8,7 +9,6 @@ import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-sett
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
 import { PhotoMapSettingsFacade } from '@core/facades/settings/photo-map-settings-facade';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
-import { first } from 'rxjs/operators';
 import { PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
 import { PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
 import { PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
