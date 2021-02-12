@@ -14,7 +14,6 @@ import { DEFAULT_SEARCH_LIST_VIEW_SETTINGS, SearchListViewSettings } from './sea
 import { DEFAULT_SEARCH_SETTINGS, SearchPageSettings } from './search-page-settings';
 import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, VideoDetailViewSettings } from './video-detail-view-settings';
 import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS, VideoInfoPanelSettings } from './video-info-panel-settings';
-import { DEFAULT_VIDEO_SETTINGS, VideoPageSettings } from './video-page-settings';
 
 export interface Settings {
     app: AppSettings;
@@ -41,7 +40,6 @@ export interface Settings {
 
     videoDetailView: VideoDetailViewSettings;
     videoInfoPanel: VideoInfoPanelSettings;
-    videoPage: VideoPageSettings;
 }
 
 export const DEFAULT_SETTINGS = {
@@ -68,6 +66,5 @@ export const DEFAULT_SETTINGS = {
     searchPage: DEFAULT_SEARCH_SETTINGS,
 
     videoDetailView: DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS,
-    videoInfoPanel: DEFAULT_VIDEO_INFO_PANEL_SETTINGS,
-    videoPage: DEFAULT_VIDEO_SETTINGS,
+    videoInfoPanel: DEFAULT_VIDEO_INFO_PANEL_SETTINGS
 };

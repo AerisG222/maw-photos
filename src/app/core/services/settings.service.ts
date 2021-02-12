@@ -17,7 +17,6 @@ import { DEFAULT_SEARCH_SETTINGS, SearchPageSettings } from 'src/app/models/sett
 import { Settings } from 'src/app/models/settings/settings';
 import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
 import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS, VideoInfoPanelSettings } from 'src/app/models/settings/video-info-panel-settings';
-import { DEFAULT_VIDEO_SETTINGS, VideoPageSettings } from 'src/app/models/settings/video-page-settings';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
