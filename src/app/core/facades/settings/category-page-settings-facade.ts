@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { CategoryPageSettings } from 'src/app/models/settings/category-page-settings';
+import { CategoryPageSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 import { CategoryViewMode } from '@models';
 

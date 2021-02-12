@@ -7,9 +7,9 @@ import { SearchPageSettingsFacade } from '@core/facades/settings/search-page-set
 import { allCategoryViewModes, CategoryMargin, ThumbnailSize } from '@models';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { SearchGridViewSettings } from 'src/app/models/settings/search-grid-view-settings';
-import { SearchListViewSettings } from 'src/app/models/settings/search-list-view-settings';
-import { SearchPageSettings } from 'src/app/models/settings/search-page-settings';
+import { SearchGridViewSettings } from '@models';
+import { SearchListViewSettings } from '@models';
+import { SearchPageSettings } from '@models';
 
 @Component({
     selector: 'app-search-settings',

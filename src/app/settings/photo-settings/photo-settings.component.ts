@@ -9,11 +9,11 @@ import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-sett
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
 import { PhotoMapSettingsFacade } from '@core/facades/settings/photo-map-settings-facade';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
-import { PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
-import { PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
-import { PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
-import { PhotoMapViewSettings } from 'src/app/models/settings/photo-map-view-settings';
-import { PhotoPageSettings } from 'src/app/models/settings/photo-page-settings';
+import { PhotoDetailViewSettings } from '@models';
+import { PhotoGridViewSettings } from '@models';
+import { PhotoInfoPanelSettings } from '@models';
+import { PhotoMapViewSettings } from '@models';
+import { PhotoPageSettings } from '@models';
 
 @Component({
     selector: 'app-photo-settings',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { CategoryGridViewSettings } from 'src/app/models/settings/category-grid-view-settings';
+import { CategoryGridViewSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 import { CategoryMargin, ThumbnailSize } from '@models';
 

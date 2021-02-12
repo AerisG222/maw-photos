@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS, Settings } from 'src/app/models/settings/settings';
+import { DEFAULT_SETTINGS, Settings } from '@models';
 
 export interface State {
     settings: Settings;

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
+import { PhotoDetailViewSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 export abstract class BasePhotoDetailSettingsFacade extends BaseSettingsFacade<PhotoDetailViewSettings> {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
+import { PhotoDetailViewSettings } from '@models';
 import { BasePhotoDetailSettingsFacade } from './base-photo-detail-settings-facade';
 
 @Injectable({

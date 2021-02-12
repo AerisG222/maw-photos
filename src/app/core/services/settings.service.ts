@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { AppSettings, DEFAULT_APP_SETTINGS } from 'src/app/models/settings/app-settings';
-import { CategoryFilterSettings, DEFAULT_CATEGORY_FILTER_SETTINGS } from 'src/app/models/settings/category-filter-settings';
-import { CategoryGridViewSettings, DEFAULT_CATEGORY_GRID_VIEW_SETTINGS } from 'src/app/models/settings/category-grid-view-settings';
-import { CategoryListViewSettings, DEFAULT_CATEGORY_LIST_VIEW_SETTINGS } from 'src/app/models/settings/category-list-view-settings';
-import { CategoryPageSettings, DEFAULT_CATEGORY_SETTINGS } from 'src/app/models/settings/category-page-settings';
-import { DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS, PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
-import { DEFAULT_PHOTO_GRID_VIEW_SETTINGS, PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
-import { DEFAULT_PHOTO_INFO_PANEL_SETTINGS, PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
-import { DEFAULT_PHOTO_MAP_VIEW_SETTINGS, PhotoMapViewSettings } from 'src/app/models/settings/photo-map-view-settings';
-import { DEFAULT_PHOTO_SETTINGS, PhotoPageSettings } from 'src/app/models/settings/photo-page-settings';
-import { DEFAULT_RANDOM_SETTINGS, RandomPageSettings } from 'src/app/models/settings/random-page-settings';
-import { DEFAULT_SEARCH_GRID_VIEW_SETTINGS, SearchGridViewSettings } from 'src/app/models/settings/search-grid-view-settings';
-import { DEFAULT_SEARCH_LIST_VIEW_SETTINGS, SearchListViewSettings } from 'src/app/models/settings/search-list-view-settings';
-import { DEFAULT_SEARCH_SETTINGS, SearchPageSettings } from 'src/app/models/settings/search-page-settings';
-import { Settings } from 'src/app/models/settings/settings';
-import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
-import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS, VideoInfoPanelSettings } from 'src/app/models/settings/video-info-panel-settings';
+import { AppSettings, DEFAULT_APP_SETTINGS } from '@models';
+import { CategoryFilterSettings, DEFAULT_CATEGORY_FILTER_SETTINGS } from '@models';
+import { CategoryGridViewSettings, DEFAULT_CATEGORY_GRID_VIEW_SETTINGS } from '@models';
+import { CategoryListViewSettings, DEFAULT_CATEGORY_LIST_VIEW_SETTINGS } from '@models';
+import { CategoryPageSettings, DEFAULT_CATEGORY_SETTINGS } from '@models';
+import { DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS, PhotoDetailViewSettings } from '@models';
+import { DEFAULT_PHOTO_GRID_VIEW_SETTINGS, PhotoGridViewSettings } from '@models';
+import { DEFAULT_PHOTO_INFO_PANEL_SETTINGS, PhotoInfoPanelSettings } from '@models';
+import { DEFAULT_PHOTO_MAP_VIEW_SETTINGS, PhotoMapViewSettings } from '@models';
+import { DEFAULT_PHOTO_SETTINGS, PhotoPageSettings } from '@models';
+import { DEFAULT_RANDOM_SETTINGS, RandomPageSettings } from '@models';
+import { DEFAULT_SEARCH_GRID_VIEW_SETTINGS, SearchGridViewSettings } from '@models';
+import { DEFAULT_SEARCH_LIST_VIEW_SETTINGS, SearchListViewSettings } from '@models';
+import { DEFAULT_SEARCH_SETTINGS, SearchPageSettings } from '@models';
+import { Settings } from '@models';
+import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, VideoDetailViewSettings } from '@models';
+import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS, VideoInfoPanelSettings } from '@models';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({

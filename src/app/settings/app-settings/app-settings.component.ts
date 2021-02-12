@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
 import { Theme } from '@models';
-import { AppSettings, DEFAULT_APP_SETTINGS } from 'src/app/models/settings/app-settings';
+import { AppSettings, DEFAULT_APP_SETTINGS } from '@models';
 import { BaseSettingsComponent } from '../base-settings/base-settings.component';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
+import { PhotoGridViewSettings } from '@models';
 import { BasePhotoGridSettingsFacade } from './base-photo-grid-settings-facade';
 
 @Injectable({

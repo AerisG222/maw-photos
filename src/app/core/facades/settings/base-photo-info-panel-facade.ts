@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
+import { PhotoInfoPanelSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 export abstract class BasePhotoInfoPanelSettingsFacade extends BaseSettingsFacade<PhotoInfoPanelSettings> {

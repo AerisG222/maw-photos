@@ -3,7 +3,7 @@ import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { CategoryTypeFilter } from '@models';
 import { Store } from '@ngrx/store';
 
-import { CategoryFilterSettings } from 'src/app/models/settings/category-filter-settings';
+import { CategoryFilterSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 @Injectable({

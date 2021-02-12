@@ -8,10 +8,10 @@ import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
 import { allPhotoViewModes, allMapTypes, CategoryMargin, ThumbnailSize, MinimapZoom, MapType } from '@models';
-import { PhotoDetailViewSettings } from 'src/app/models/settings/photo-detail-view-settings';
-import { PhotoGridViewSettings } from 'src/app/models/settings/photo-grid-view-settings';
-import { PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
-import { RandomPageSettings } from 'src/app/models/settings/random-page-settings';
+import { PhotoDetailViewSettings } from '@models';
+import { PhotoGridViewSettings } from '@models';
+import { PhotoInfoPanelSettings } from '@models';
+import { RandomPageSettings } from '@models';
 
 @Component({
     selector: 'app-random-settings',

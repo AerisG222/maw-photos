@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { SearchListViewSettings } from 'src/app/models/settings/search-list-view-settings';
+import { SearchListViewSettings } from '@models';
 
 @Injectable({
     providedIn: 'root'

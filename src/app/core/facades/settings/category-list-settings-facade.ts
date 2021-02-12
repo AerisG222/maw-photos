@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { CategoryListViewSettings } from 'src/app/models/settings/category-list-view-settings';
+import { CategoryListViewSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 import { CategoryMargin, ThumbnailSize } from '@models';
 

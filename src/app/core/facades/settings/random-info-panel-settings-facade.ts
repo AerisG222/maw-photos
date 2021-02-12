@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { PhotoInfoPanelSettings } from 'src/app/models/settings/photo-info-panel-settings';
+import { PhotoInfoPanelSettings } from '@models';
 import { BasePhotoInfoPanelSettingsFacade } from './base-photo-info-panel-facade';
 
 @Injectable({

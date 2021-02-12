@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { RandomPageSettings } from 'src/app/models/settings/random-page-settings';
+import { RandomPageSettings } from '@models';
 
 @Injectable({
     providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AppSettings } from 'src/app/models/settings/app-settings';
+import { AppSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 

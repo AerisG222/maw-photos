@@ -7,9 +7,9 @@ import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-fi
 import { CategoryGridSettingsFacade } from '@core/facades/settings/category-grid-settings-facade';
 import { CategoryListSettingsFacade } from '@core/facades/settings/category-list-settings-facade';
 import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
-import { CategoryGridViewSettings } from 'src/app/models/settings/category-grid-view-settings';
-import { CategoryListViewSettings } from 'src/app/models/settings/category-list-view-settings';
-import { CategoryPageSettings } from 'src/app/models/settings/category-page-settings';
+import { CategoryGridViewSettings } from '@models';
+import { CategoryListViewSettings } from '@models';
+import { CategoryPageSettings } from '@models';
 import {
     allCategoryTypeFilters,
     CategoryMargin,

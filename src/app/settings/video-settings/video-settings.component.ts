@@ -6,8 +6,8 @@ import { first } from 'rxjs/operators';
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
 import { allPhotoViewModes, allMapTypes, CategoryMargin, ThumbnailSize, MinimapZoom, VideoSize, MapType } from '@models';
-import { VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
-import { VideoInfoPanelSettings } from 'src/app/models/settings/video-info-panel-settings';
+import { VideoDetailViewSettings } from '@models';
+import { VideoInfoPanelSettings } from '@models';
 
 @Component({
     selector: 'app-video-settings',

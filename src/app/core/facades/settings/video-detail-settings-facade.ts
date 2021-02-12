@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { VideoDetailViewSettings } from 'src/app/models/settings/video-detail-view-settings';
+import { VideoDetailViewSettings } from '@models';
 
 @Injectable({
     providedIn: 'root'
