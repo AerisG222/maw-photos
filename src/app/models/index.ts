@@ -12,7 +12,23 @@ export * from './api/rating.model';
 export * from './api/video-category.model';
 export * from './api/video.model';
 
-export * from './settings/settings.model';
+export * from './settings/app-settings';
+export * from './settings/category-filter-settings';
+export * from './settings/category-grid-view-settings';
+export * from './settings/category-list-view-settings';
+export * from './settings/category-page-settings';
+export * from './settings/photo-detail-view-settings';
+export * from './settings/photo-grid-view-settings';
+export * from './settings/photo-info-panel-settings';
+export * from './settings/photo-map-view-settings';
+export * from './settings/photo-page-settings';
+export * from './settings/random-page-settings';
+export * from './settings/search-grid-view-settings';
+export * from './settings/search-list-view-settings';
+export * from './settings/search-page-settings';
+export * from './settings/settings';
+export * from './settings/video-detail-view-settings';
+export * from './settings/video-info-panel-settings';
 
 export * from './auth-config';
 export * from './category-type-filter.model';
