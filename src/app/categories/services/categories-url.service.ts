@@ -4,15 +4,19 @@ import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { RootStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
+import { RootStoreSelectors } from '@core/root-store';
 import { RouteHelper } from '@models';
 import { CategoryTypeFilter, CategoryViewMode, toCategoryTypeFilter, RouteDetails } from '@models';
+import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
+import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-filter-settings-facade';
 
 @Injectable()
 export class CategoriesUrlService {
     constructor(
         private store: Store,
-        private router: Router
+        private router: Router,
+        private categoryPageFacade: CategoryPageSettingsFacade,
+        private categoryFilterFacade: CategoryFilterSettingsFacade
     ) {
 
     }
@@ -87,10 +91,9 @@ export class CategoriesUrlService {
     }
 
     getDefaultView() {
-        return this.store.select(SettingsStoreSelectors.categoryViewMode)
+        return this.categoryPageFacade.settings$
             .pipe(
-                // eslint-disable-next-line ngrx/avoid-mapping-selectors
-                map(view => this.getValidView(null, view))
+                map(({ viewMode }) => this.getValidView(null, viewMode))
             );
     }
 
@@ -105,19 +108,18 @@ export class CategoriesUrlService {
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
         return combineLatest([
             this.store.select(RootStoreSelectors.allYears),
-            this.store.select(SettingsStoreSelectors.categoryViewMode),
-            this.store.select(SettingsStoreSelectors.categoryListYearFilter),
-            this.store.select(SettingsStoreSelectors.categoryListCategoryFilter)
+            this.categoryPageFacade.settings$,
+            this.categoryFilterFacade.settings$
         ]).pipe(
-            tap(([allYears, preferredView, preferredYearFilter, preferredTypeFilter]) => {
+            tap(([allYears, page, filter]) => {
                 if(allYears.length === 0) {
                     return;
                 }
 
-                const view = this.getValidView(routeDetails.params?.view, preferredView);
+                const view = this.getValidView(routeDetails.params?.view, page.viewMode);
                 // eslint-disable-next-line max-len
-                const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, preferredYearFilter, allYears)?.toString();
-                const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, preferredTypeFilter);
+                const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, filter.yearFilter, allYears)?.toString();
+                const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, filter.typeFilter);
 
                 if(
                     view !== routeDetails.params?.view ||
