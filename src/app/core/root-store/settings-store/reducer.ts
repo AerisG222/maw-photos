@@ -201,15 +201,5 @@ export const reducer = createReducer(
                 videoInfoPanel: settings
             }
         })
-    ),
-    on(
-        SettingsActions.saveVideoPageSettingsSuccess,
-        (state, { settings }): State => ({
-            ...state,
-            settings: {
-                ...state.settings,
-                videoPage: settings
-            }
-        })
-    ),
+    )
 );

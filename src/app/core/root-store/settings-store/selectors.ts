@@ -121,8 +121,3 @@ export const videoInfoPanelSettings = createSelector(
     settings,
     (s): VideoInfoPanelSettings => s.videoInfoPanel
 );
-
-export const videoPageSettings = createSelector(
-    settings,
-    (s): VideoPageSettings => s.videoPage
-);

@@ -53,7 +53,6 @@ export class SettingsService {
 
     private static readonly keyVideoDetailView = 'videoDetailView';
     private static readonly keyVideoInfoPanel = 'videoInfoPanel';
-    private static readonly keyVideoPage = 'videoPage';
 
     constructor(private localStorage: LocalStorageService) {
         this.cleanLegacySettings();
@@ -142,10 +141,6 @@ export class SettingsService {
         return this.localStorage.get(SettingsService.keyVideoInfoPanel) ?? DEFAULT_VIDEO_INFO_PANEL_SETTINGS;
     }
 
-    getVideoPageSettings(): VideoPageSettings {
-        return this.localStorage.get(SettingsService.keyVideoPage) ?? DEFAULT_VIDEO_SETTINGS;
-    }
-
     getAllSettings(): Settings {
         return {
             app: this.getAppSettings(),
@@ -171,8 +166,7 @@ export class SettingsService {
             searchPage: this.getSearchPageSettings(),
 
             videoDetailView: this.getVideoDetailViewSettings(),
-            videoInfoPanel: this.getVideoInfoPanelSettings(),
-            videoPage: this.getVideoPageSettings()
+            videoInfoPanel: this.getVideoInfoPanelSettings()
         };
     }
 
@@ -252,10 +246,6 @@ export class SettingsService {
         this.save(SettingsService.keyVideoInfoPanel, settings);
     }
 
-    saveVideoPageSettings(settings: VideoPageSettings): void {
-        this.save(SettingsService.keyVideoPage, settings);
-    }
-
     saveAllSettings(settings: Settings): void {
         if (!!!settings) {
             return;
@@ -285,7 +275,6 @@ export class SettingsService {
 
         this.saveVideoDetailViewSettings(settings.videoDetailView);
         this.saveVideoInfoPanelSettings(settings.videoInfoPanel);
-        this.saveVideoPageSettings(settings.videoPage);
     }
 
     clearAuthRedirectUrl(): void {

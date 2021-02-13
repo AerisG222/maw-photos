@@ -17,7 +17,6 @@ import { SearchPageSettings } from '@models';
 import { Settings } from '@models';
 import { VideoDetailViewSettings } from '@models';
 import { VideoInfoPanelSettings } from '@models';
-import { VideoPageSettings } from '@models';
 
 export const loadRequest = createAction(
     '[Settings] Load Request'
@@ -310,20 +309,5 @@ export const saveVideoInfoPanelSettingsSuccess = createAction(
 
 export const saveVideoInfoPanelSettingsFailure = createAction(
     '[Settings] Save Video Info Panel Settings Failure',
-    props<{ err: unknown }>()
-);
-
-export const saveVideoPageSettings = createAction(
-    '[Settings] Save Video Page Settings',
-    props<{ settings: VideoPageSettings }>()
-);
-
-export const saveVideoPageSettingsSuccess = createAction(
-    '[Settings] Save Video Page Settings Success',
-    props<{ settings: VideoPageSettings }>()
-);
-
-export const saveVideoPageSettingsFailure = createAction(
-    '[Settings] Save Video Page Settings Failure',
     props<{ err: unknown }>()
 );

@@ -284,20 +284,6 @@ export class SettingsStoreEffects {
         );
     });
 
-    saveVideoPageSettings$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(SettingsActions.saveVideoPageSettings),
-            map(({settings}) => {
-                try {
-                    this.settingsService.saveVideoPageSettings(settings);
-                    return SettingsActions.saveVideoPageSettingsSuccess({ settings });
-                } catch (err: unknown) {
-                    return SettingsActions.saveVideoPageSettingsFailure({ err });
-                }
-            })
-        );
-    });
-
     constructor(
         private settingsService: SettingsService,
         private actions$: Actions

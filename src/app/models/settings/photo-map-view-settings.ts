@@ -1,4 +1,4 @@
-import { MapType } from '@models';
+import { MapType } from 'src/app/models/map-type.model';
 
 export interface PhotoMapViewSettings {
     mapType: MapType;
