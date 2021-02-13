@@ -14,6 +14,8 @@ import * as PhotoCategoryStoreActions from '@core/root-store/photo-category-stor
 import * as PhotoCategoryStoreSelectors from '@core/root-store/photo-category-store/selectors';
 import * as SettingsStoreSelectors from '@core/root-store/settings-store/selectors';
 import { RouterStoreSelectors } from '../router-store';
+import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
+import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -343,9 +345,9 @@ export class PhotoStoreEffects {
     runSlideshowEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.startSlideshowRequest),
-            withLatestFrom(this.store.select(SettingsStoreSelectors.photoListSlideshowDisplayDurationSeconds)),
-            switchMap(([, delay]) => {
-                return timer(delay * 1000, delay * 1000).pipe(
+            withLatestFrom(this.photoPage.settings$),
+            switchMap(([, settings]) => {
+                return timer(settings.slideshowDisplayDurationSeconds * 1000, settings.slideshowDisplayDurationSeconds * 1000).pipe(
                     takeUntil(this.actions$.pipe(
                         ofType(PhotoActions.stopSlideshowRequest)
                     )),
@@ -358,9 +360,9 @@ export class PhotoStoreEffects {
     periodicLoadOfRandomPhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.startPeriodicRandomLoad),
-            withLatestFrom(this.store.select(SettingsStoreSelectors.photoListSlideshowDisplayDurationSeconds)),
-            switchMap(([, delay]) => {
-                return timer(delay * 1000, delay * 1000).pipe(
+            withLatestFrom(this.randomPage.settings$),
+            switchMap(([, settings]) => {
+                return timer(settings.slideshowDisplayDurationSeconds * 1000, settings.slideshowDisplayDurationSeconds * 1000).pipe(
                     takeUntil(this.actions$.pipe(
                         ofType(PhotoActions.stopPeriodicRandomLoad)
                     )),
@@ -386,6 +388,8 @@ export class PhotoStoreEffects {
         private actions$: Actions,
         private exifFormatterService: ExifFormatterService,
         private store: Store,
+        private photoPage: PhotoPageSettingsFacade,
+        private randomPage: RandomPageSettingsFacade,
         @Inject(photoApiServiceToken) private api: PhotoApiService,
     ) {
 

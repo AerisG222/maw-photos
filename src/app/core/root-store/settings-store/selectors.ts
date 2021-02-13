@@ -19,14 +19,8 @@ import { SearchListViewSettings } from '@models';
 import { SearchPageSettings } from '@models';
 import { VideoDetailViewSettings } from '@models';
 import { VideoInfoPanelSettings } from '@models';
-import { VideoPageSettings } from '@models';
 
 const settingsState = createFeatureSelector<State>(SETTINGS_FEATURE_NAME);
-
-export const error = createSelector(
-    settingsState,
-    (state: State): string | null => state.error
-);
 
 export const settings = createSelector(
     settingsState,

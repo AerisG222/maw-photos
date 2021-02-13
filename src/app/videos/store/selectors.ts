@@ -214,21 +214,18 @@ export const activeVideoGoogleLatLng = createSelector(
 );
 
 export const isCommentCardVisible = createSelector(
-    SettingsStoreSelectors.videoInfoPanelExpandedState,
-    SettingsStoreSelectors.videoInfoPanelShowComments,
-    (isExpanded, showComments) => isExpanded && showComments
+    SettingsStoreSelectors.videoInfoPanelSettings,
+    (infoPanel) => infoPanel.expandedState && infoPanel.showComments
 );
 
 export const isRatingCardVisible = createSelector(
-    SettingsStoreSelectors.videoInfoPanelExpandedState,
-    SettingsStoreSelectors.videoInfoPanelShowRatings,
-    (isExpanded, showRatings) => isExpanded && showRatings
+    SettingsStoreSelectors.videoInfoPanelSettings,
+    (infoPanel) => infoPanel.expandedState && infoPanel.showRatings
 );
 
 export const isMetadataEditorCardVisible = createSelector(
-    SettingsStoreSelectors.videoInfoPanelExpandedState,
-    SettingsStoreSelectors.videoInfoPanelShowMetadataEditor,
-    (isExpanded, showEditor) => isExpanded && showEditor
+    SettingsStoreSelectors.videoInfoPanelSettings,
+    (infoPanel) => infoPanel.expandedState && infoPanel.showMetadataEditor
 );
 
 export const categoryGpsStatus = createSelector(

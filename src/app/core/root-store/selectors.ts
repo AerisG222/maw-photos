@@ -1,6 +1,5 @@
 import { createSelector } from '@ngrx/store';
 
-import { SettingsStoreSelectors } from './settings-store';
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
 import { Category } from '@models';
@@ -8,22 +7,18 @@ import { AuthStoreSelectors } from './auth-store';
 import { RouterStoreSelectors } from './router-store';
 
 export const error = createSelector(
-    SettingsStoreSelectors.error,
     PhotoCategoryStoreSelectors.error,
     VideoCategoryStoreSelectors.videoCategoryError,
-    (settingsError: string | null, photoCategoryError: string | null, videoCategoryError: string | null) => {
-        return settingsError || photoCategoryError || videoCategoryError;
+    (photoCategoryError: string | null, videoCategoryError: string | null) => {
+        return photoCategoryError || videoCategoryError;
     }
 );
 
 export const isLoading = createSelector(
-    SettingsStoreSelectors.isLoading,
     PhotoCategoryStoreSelectors.isLoading,
     VideoCategoryStoreSelectors.videoCategoryIsLoading,
-    (settingsIsLoading: boolean, photoCategoryIsLoading: boolean, videoCategoryIsLoading: boolean) => {
-        return settingsIsLoading ||
-            photoCategoryIsLoading ||
-            videoCategoryIsLoading;
+    (photoCategoryIsLoading: boolean, videoCategoryIsLoading: boolean) => {
+        return photoCategoryIsLoading || videoCategoryIsLoading;
     }
 );
 

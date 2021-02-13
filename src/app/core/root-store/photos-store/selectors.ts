@@ -8,8 +8,7 @@ import {
     Rating,
     ExifContainer,
     GpsDetail,
-    CategoryGpsStatus,
-    Category,
+    CategoryGpsStatus
  } from '@models';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
@@ -358,30 +357,26 @@ export const enableMapView = createSelector(
 
 export const isCommentCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
-    SettingsStoreSelectors.photoInfoPanelExpandedState,
-    SettingsStoreSelectors.photoInfoPanelShowComments,
-    (isDetailView, isExpanded, showComments) => isDetailView && isExpanded && showComments
+    SettingsStoreSelectors.photoInfoPanelSettings,
+    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showComments
 );
 
 export const isRatingCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
-    SettingsStoreSelectors.photoInfoPanelExpandedState,
-    SettingsStoreSelectors.photoInfoPanelShowRatings,
-    (isDetailView, isExpanded, showRatings) => isDetailView && isExpanded && showRatings
+    SettingsStoreSelectors.photoInfoPanelSettings,
+    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showRatings
 );
 
 export const isMetadataEditorCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
-    SettingsStoreSelectors.photoInfoPanelExpandedState,
-    SettingsStoreSelectors.photoInfoPanelShowMetadataEditor,
-    (isDetailView, isExpanded, showEditor) => isDetailView && isExpanded && showEditor
+    SettingsStoreSelectors.photoInfoPanelSettings,
+    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showMetadataEditor
 );
 
 export const isExifCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
-    SettingsStoreSelectors.photoInfoPanelExpandedState,
-    SettingsStoreSelectors.photoInfoPanelShowExif,
-    (isDetailView, isExpanded, showExif) => isDetailView && isExpanded && showExif
+    SettingsStoreSelectors.photoInfoPanelSettings,
+    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showExif
 );
 
 // hmm - does it seem funny that we reference the photo category selectors here?
