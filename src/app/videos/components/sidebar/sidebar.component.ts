@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '@shared/animations';
-import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from '@core/root-store';
+import { AuthStoreSelectors } from '@core/root-store';
+import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
 
 @Component({
     selector: 'app-videos-sidebar',
@@ -31,39 +32,34 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
 })
 export class SidebarComponent {
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
-    endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
-    showComments$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowComments);
-    showRatings$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowRatings);
-    showMinimap$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMinimap);
-    showMetadataEditor$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowMetadataEditor);
-    showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.videoInfoPanelShowCategoryTeaserChooser);
-    enableButtons$ = this.store.select(SettingsStoreSelectors.videoInfoPanelExpandedState);
+    settings$ = this.infoPanelFacade.settings$;
 
     constructor(
-        private store: Store
+        private store: Store,
+        private infoPanelFacade: VideoInfoPanelSettingsFacade
     ) { }
 
     toggleSidebar(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelExpandedStateRequest());
+        this.infoPanelFacade.toggleSidebar();
     }
 
     toggleRatings(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelRatingsRequest());
+        this.infoPanelFacade.toggleRatings();
     }
 
     toggleCategoryTeaserChooser(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelCategoryTeaserChooserRequest());
+        this.infoPanelFacade.toggleCategoryTeaserChooser();
     }
 
     toggleComments(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelCommentsRequest());
+        this.infoPanelFacade.toggleComments();
     }
 
     toggleMetadataEditor(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelMetadataEditorRequest());
+        this.infoPanelFacade.toggleMetadataEditor();
     }
 
     toggleMinimap(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoInfoPanelMinimapRequest());
+        this.infoPanelFacade.toggleMinimap();
     }
 }

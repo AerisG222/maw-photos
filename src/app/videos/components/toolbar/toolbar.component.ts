@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { Settings, ThumbnailSize, VideoSize } from '@models';
 import { VideoStoreActions } from 'src/app/videos/store';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
+import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 
 @Component({
     selector: 'app-videos-toolbar',
@@ -18,7 +19,9 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     private destroySub = new Subscription();
 
-    constructor(private store: Store) {
+    constructor(
+        private store: Store,
+        private videoFacade: VideoDetailSettingsFacade) {
 
     }
 
@@ -36,30 +39,18 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoListCategoryBreadcrumbsRequest());
+        this.videoFacade.toggleBreadcrumbs();
     }
 
     onToggleThumbnailSize(): void {
-        const sizeName = this.settings?.videoListThumbnailSize.name;
-
-        if (!!sizeName) {
-            const size = ThumbnailSize.nextSize(sizeName);
-
-            this.store.dispatch(SettingsStoreActions.updateVideoListThumbnailSizeRequest({ newSize: size }));
-        }
+        this.videoFacade.toggleThumbnailSize();
     }
 
     onToggleShowVideoList(): void {
-        this.store.dispatch(SettingsStoreActions.toggleVideoListShowVideoListRequest());
+        this.videoFacade.toggleShowVideoList();
     }
 
     onToggleVideoSize(): void {
-        const sizeName = this.settings?.videoListVideoSize.name;
-
-        if (!!sizeName) {
-            const size = VideoSize.nextSize(sizeName);
-
-            this.store.dispatch(SettingsStoreActions.updateVideoListVideoSizeRequest({ newSize: size }));
-        }
+        this.videoFacade.toggleVideoSize();
     }
 }

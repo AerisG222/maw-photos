@@ -20,10 +20,34 @@ export class VideoInfoPanelSettingsFacade extends BaseSettingsFacade<VideoInfoPa
     }
 
     saveMinimapType(mapType: MapType): void {
-        this.saveUpdatedField(settings => settings.minimapMapType = mapType);
+        this.saveUpdatedField(x => x.minimapMapType = mapType);
     }
 
     saveMinimapZoom(zoom: number): void {
-        this.saveUpdatedField(settings => settings.minimapZoom = zoom);
+        this.saveUpdatedField(x => x.minimapZoom = zoom);
+    }
+
+    toggleSidebar(): void {
+        this.saveUpdatedField(x => x.expandedState = !x.expandedState);
+    }
+
+    toggleRatings(): void {
+        this.saveUpdatedField(x => x.showRatings = !x.showRatings);
+    }
+
+    toggleCategoryTeaserChooser(): void {
+        this.saveUpdatedField(x => x.showCategoryTeaserChooser = !x.showCategoryTeaserChooser);
+    }
+
+    toggleComments(): void {
+        this.saveUpdatedField(x => x.showComments = !x.showComments);
+    }
+
+    toggleMetadataEditor(): void {
+        this.saveUpdatedField(x => x.showMetadataEditor = !x.showMetadataEditor);
+    }
+
+    toggleMinimap(): void {
+        this.saveUpdatedField(x => x.showMinimap = !x.showMinimap);
     }
 }
