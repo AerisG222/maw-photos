@@ -2,7 +2,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SearchStoreSelectors } from 'src/app/search/store';
-import { RouterStoreSelectors, SettingsStoreSelectors } from '@core/root-store';
+import { RouterStoreSelectors } from '@core/root-store';
+import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-settings-facade';
+import { SearchListSettingsFacade } from '@core/facades/settings/search-list-settings-facade';
+import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-search-search',
@@ -17,17 +21,26 @@ export class SearchComponent {
     categories$ = this.store.select(SearchStoreSelectors.allResultsAsCategories);
     totalResults$ = this.store.select(SearchStoreSelectors.totalResults);
     hasMoreResults$ = this.store.select(SearchStoreSelectors.hasMoreResults);
-    margin$ = this.store.select(SettingsStoreSelectors.searchCategoryMargin);
     currentResult$ = this.store.select(SearchStoreSelectors.activeResult);
-    gridShowTitles$ = this.store.select(SettingsStoreSelectors.searchShowCategoryTitles);
-    gridShowYears$ = this.store.select(SettingsStoreSelectors.searchShowCategoryYears);
-    listThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchListViewThumbnailSize);
-    gridThumbnailSize$ = this.store.select(SettingsStoreSelectors.searchThumbnailSize);
     showGridView$ = this.store.select(RouterStoreSelectors.isSearchGridView);
     showListView$ = this.store.select(RouterStoreSelectors.isSearchListView);
+    gridSettings$ = this.gridSettings.settings$;
+    listSettings$ = this.listSettings.settings$;
+
+    margin$ = combineLatest([
+        this.showGridView$,
+        this.gridSettings$,
+        this.listSettings$
+    ]).pipe(
+        map(([showGrid, gridSettings, listSettings]) => {
+            return showGrid ? gridSettings.margin : listSettings.margin;
+        })
+    );
 
     constructor(
-        private store: Store
+        private store: Store,
+        private gridSettings: SearchGridSettingsFacade,
+        private listSettings: SearchListSettingsFacade
     ) {
 
     }

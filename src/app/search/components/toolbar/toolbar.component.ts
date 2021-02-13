@@ -1,13 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
-import {
-    CategoryMargin,
-    ThumbnailSize,
-    Settings,
- } from '@models';
-import { SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
-import { first } from 'rxjs/operators';
+import { RouteHelper } from '@models';
+import { SearchPageSettingsFacade } from '@core/facades/settings/search-page-settings-facade';
+import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-settings-facade';
+import { SearchListSettingsFacade } from '@core/facades/settings/search-list-settings-facade';
 
 @Component({
     selector: 'app-search-toolbar',
@@ -16,62 +13,40 @@ import { first } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent {
-    isListView$ = this.store.select(SettingsStoreSelectors.showSearchResultsInListView);
-    isGridView$ = this.store.select(SettingsStoreSelectors.showSearchResultsInGridView);
-    showCategoryTitles$ = this.store.select(SettingsStoreSelectors.searchShowCategoryTitles);
-    showCategoryYears$ = this.store.select(SettingsStoreSelectors.searchShowCategoryYears);
+    isListView$ = this.pageSettings.settings$.pipe(map(x => x.viewMode === RouteHelper.searchViewList));
+    isGridView$ = this.pageSettings.settings$.pipe(map(x => x.viewMode === RouteHelper.searchViewGrid));
+    gridSettings$ = this.gridSettings.settings$;
 
+    // TODO: break out separate components for grid and list toolbars
     constructor(
-        private store: Store
+        private pageSettings: SearchPageSettingsFacade,
+        private gridSettings: SearchGridSettingsFacade,
+        private listSettings: SearchListSettingsFacade
     ) {
 
     }
 
     onToggleYear(): void {
-        this.store.dispatch(SettingsStoreActions.toggleSearchCategoryYearsRequest());
+        this.gridSettings.toggleYears();
     }
 
     onToggleTitle(): void {
-        this.store.dispatch(SettingsStoreActions.toggleSearchCategoryTitlesRequest());
+        this.gridSettings.toggleTitles();
     }
 
     onToggleListThumbnailSize(): void {
-        this.execWithSettings(settings => {
-            if (!!settings) {
-                const size = ThumbnailSize.nextSize(settings.searchListViewThumbnailSize.name);
-
-                this.store.dispatch(SettingsStoreActions.updateSearchListViewThumbnailSizeRequest({ newSize: size }));
-            }
-        });
+        this.listSettings.toggleThumbnailSize();
     }
 
-    onToggleSize(): void {
-        this.execWithSettings(settings => {
-            if (!!settings && !settings.searchShowCategoryTitles && !settings.searchShowCategoryYears) {
-                const size = ThumbnailSize.nextSize(settings.searchThumbnailSize.name);
-
-                this.store.dispatch(SettingsStoreActions.updateSearchThumbnailSizeRequest({ newSize: size }));
-            }
-        });
+    onToggleGridThumbnailSize(): void {
+        this.gridSettings.toggleThumbnailSize();
     }
 
-    onToggleMargins(): void {
-        this.execWithSettings(settings => {
-            if (!!settings) {
-                const newMargin = CategoryMargin.nextSize(settings.searchCategoryMargin.name);
-
-                this.store.dispatch(SettingsStoreActions.updateSearchCategoryMarginRequest({ newMargin }));
-            }
-        });
+    onToggleGridMargins(): void {
+        this.gridSettings.toggleMargins();
     }
 
-    private execWithSettings(func: (settings: Settings) => void): void {
-        this.store.select(SettingsStoreSelectors.settings)
-            .pipe(
-                first()
-            ).subscribe({
-                next: settings => func(settings),
-                error: err => console.log(`error trying to update settings: ${ err }`)
-            });
+    onToggleListMargins(): void {
+        this.listSettings.toggleMargins();
     }
 }

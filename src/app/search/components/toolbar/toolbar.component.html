@@ -1,4 +1,4 @@
-<app-toolbar-toolbar>
+<app-toolbar-toolbar *ngIf="gridSettings$ | async; let gridSettings">
     <app-toolbar-group>
         <app-toolbar-link
             [link]="['/search/grid']"
@@ -41,11 +41,11 @@
         <app-toolbar-button
             *ngIf="isGridView$ | async"
             icon="photo_size_select_large"
-            [isDisabled]="(isGridView$ | async) === false || (showCategoryTitles$ | async) || (showCategoryYears$ | async)"
+            [isDisabled]="(isGridView$ | async) === false || gridSettings.showTitles || gridSettings.showYears"
             shortcutKey="s"
             shortcutHelp="Toggle Grid Thumbnail Size"
             tooltip="Toggle Grid Thumbnail Size (S)"
-            (click)="onToggleSize()">
+            (click)="onToggleGridThumbnailSize()">
         </app-toolbar-button>
 
         <app-toolbar-button
@@ -58,12 +58,23 @@
         </app-toolbar-button>
 
         <app-toolbar-button
+            *ngIf="isGridView$ | async"
             [hideOnMobile]="true"
             icon="format_indent_increase"
             shortcutKey="m"
             shortcutHelp="Toggle Category Margins"
             tooltip="Toggle Category Margins (M)"
-            (click)="onToggleMargins()">
+            (click)="onToggleGridMargins()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            *ngIf="isListView$ | async"
+            [hideOnMobile]="true"
+            icon="format_indent_increase"
+            shortcutKey="m"
+            shortcutHelp="Toggle Category Margins"
+            tooltip="Toggle Category Margins (M)"
+            (click)="onToggleListMargins()">
         </app-toolbar-button>
     </app-toolbar-group>
 </app-toolbar-toolbar>

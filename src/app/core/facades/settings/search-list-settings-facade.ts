@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { SearchListViewSettings } from '@models';
+import { CategoryMargin, SearchListViewSettings, ThumbnailSize } from '@models';
 
 @Injectable({
     providedIn: 'root'
@@ -17,5 +17,19 @@ export class SearchListSettingsFacade extends BaseSettingsFacade<SearchListViewS
 
     save(settings: SearchListViewSettings): void {
         this.store.dispatch(SettingsStoreActions.saveSearchListViewSettings({ settings }));
+    }
+
+    toggleThumbnailSize(): void {
+        this.saveUpdatedField(x => {
+            const newSize = ThumbnailSize.nextSize(x.thumbnailSize.name);
+            x.thumbnailSize = newSize;
+        });
+    }
+
+    toggleMargins(): void {
+        this.saveUpdatedField(x => {
+            const newSize = CategoryMargin.nextSize(x.margin.name);
+            x.margin = newSize;
+        });
     }
 }
