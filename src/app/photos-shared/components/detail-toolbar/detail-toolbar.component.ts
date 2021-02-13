@@ -3,13 +3,9 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
-import { ThumbnailSize, Photo, DEFAULT_SETTINGS } from '@models';
-import {
-    SettingsStoreActions,
-    SettingsStoreSelectors,
-    PhotoCategoryStoreSelectors,
-    PhotoStoreSelectors
-} from '@core/root-store';
+import { Photo } from '@models';
+import { PhotoCategoryStoreSelectors, PhotoStoreSelectors } from '@core/root-store';
+import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 
 @Component({
     selector: 'app-photos-detail-toolbar',
@@ -30,32 +26,22 @@ export class DetailToolbarComponent {
 
     constructor(
         private store: Store,
+        private detailSettings: PhotoDetailSettingsFacade,
         @Inject(WINDOW) private window: Window
     ) {
         this.enableShare = !!window?.navigator?.share;
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoListCategoryBreadcrumbsRequest());
+        this.detailSettings.toggleBreadcrumbs();
     }
 
     onTogglePhotoList(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoListShowPhotoListRequest());
+        this.detailSettings.togglePhotoList();
     }
 
     onToggleSize(): void {
-        this.store.select(SettingsStoreSelectors.settings)
-            .pipe(
-                first()
-            ).subscribe({
-                next: settings => {
-                    const name = settings?.photoListThumbnailSize.name ?? DEFAULT_SETTINGS.photoListThumbnailSize.name;
-                    const size = ThumbnailSize.nextSize(name);
-
-                    this.store.dispatch(SettingsStoreActions.updatePhotoListThumbnailSizeRequest({ newSize: size }));
-                },
-                error: err => console.log(`error toggling size: ${ err }`)
-            });
+        this.detailSettings.toggleThumbnailSize();
     }
 
     onShare(): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
+import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
 import { PhotoPageSettings, PhotoViewMode } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 

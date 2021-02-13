@@ -5,6 +5,7 @@ import { SettingsStoreSelectors, RouterStoreSelectors } from '@core/root-store';
 import { PhotoStoreSelectors } from '../../../core/root-store/photos-store';
 import { ToolbarComponent } from 'src/app/layout/toolbar/toolbar.component';
 import { Subscription } from 'rxjs';
+import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
 
 @Component({
     selector: 'app-photos-grid-view',
@@ -20,15 +21,14 @@ export class GridViewComponent implements OnDestroy {
     settings$ = this.store.select(SettingsStoreSelectors.settings);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
-    thumbnailSize$ = this.store.select(SettingsStoreSelectors.photoGridThumbnailSize);
-    margin$ = this.store.select(SettingsStoreSelectors.photoGridMargin);
-    showBreadcrumbs$ = this.store.select(SettingsStoreSelectors.photoGridShowCategoryBreadcrumbs);
+    gridSettings$ = this.gridSettings.settings$;
     isRandomView$ = this.store.select(RouterStoreSelectors.isRandomView);
 
     private destroySub = new Subscription();
 
     constructor(
-        private store: Store
+        private store: Store,
+        private gridSettings: PhotoGridSettingsFacade
     ) {
         this.destroySub.add(this.store.select(RouterStoreSelectors.selectRouteDetails)
             .subscribe({

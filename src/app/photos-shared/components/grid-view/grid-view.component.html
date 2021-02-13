@@ -1,13 +1,13 @@
-<app-layout-toolbar>
+<app-layout-toolbar *ngIf="gridSettings$ | async; let gridSettings">
     <app-photos-grid-view-toolbar [isRandom]="isRandomView$ | async" layout-toolbar></app-photos-grid-view-toolbar>
 
     <div layout-main>
         <router-outlet></router-outlet>
 
-        <app-shared-content-margin [margin]="margin$ | async" [ngStyle]="{ 'display': (activePhoto$ | async) === null ? 'block' : 'none' }">
+        <app-shared-content-margin [margin]="gridSettings.margin" [ngStyle]="{ 'display': (activePhoto$ | async) === null ? 'block' : 'none' }">
             <div class="category-header">
                 <app-shared-category-header
-                    *ngIf="showBreadcrumbs$ | async"
+                    *ngIf="gridSettings.showBreadcrumbs"
                     [showCategoryAsLink]="isRandomView$ | async"
                     [category]="category$ | async">
                 </app-shared-category-header>
@@ -17,7 +17,7 @@
                 <a *ngFor="let photo of photos$ | async;"
                     [routerLink]="[photo.id]" (click)="trackScrollPosition()">
                     <img
-                        [ngClass]="(thumbnailSize$ | async)?.klass"
+                        [ngClass]="gridSettings.thumbnailSize.klass"
                         [src]="photo.imageXsSq.url"
                         loading="lazy" />
                 </a>

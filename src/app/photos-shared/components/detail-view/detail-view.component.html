@@ -11,7 +11,7 @@
         <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
             <div class="category-header">
                 <app-shared-category-header
-                    *ngIf="data.settings?.photoListShowCategoryBreadcrumbs"
+                    *ngIf="data.settings?.showBreadcrumbs"
                     [showCategoryAsLink]="showCategoryAsLink$ | async"
                     [category]="category$ | async"
                     #header>
@@ -19,15 +19,15 @@
             </div>
 
             <app-photos-main-photo
-                [showHeader]="data.settings?.photoListShowCategoryBreadcrumbs"
-                [showPhotoList]="data.settings?.photoListShowPhotoList"
-                [photoListThumbnailSize]="data.settings?.photoListThumbnailSize">
+                [showHeader]="data.settings?.showBreadcrumbs"
+                [showPhotoList]="data.settings?.showPhotoList"
+                [photoListThumbnailSize]="data.settings?.thumbnailSize">
             </app-photos-main-photo>
 
             <app-photos-photo-list
-                *ngIf="data.photos && data.settings?.photoListShowPhotoList"
+                *ngIf="data.photos && data.settings?.showPhotoList"
                 [photos]="data.photos"
-                [thumbnailSize]="data.settings?.photoListThumbnailSize"
+                [thumbnailSize]="data.settings?.thumbnailSize"
                 [selectedPhoto]="data.activePhoto"
                 #photoList>
             </app-photos-photo-list>

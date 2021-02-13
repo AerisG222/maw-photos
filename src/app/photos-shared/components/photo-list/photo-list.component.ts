@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Photo, DEFAULT_SETTINGS, ThumbnailSize } from '@models';
+import { Photo, ThumbnailSize, DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS } from '@models';
 import { PhotoLinkable } from '@core/facades';
 
 @Component({
@@ -18,7 +18,7 @@ export class PhotoListComponent {
     imgHeight: number | null = null;
 
     get thumbnailSize(): ThumbnailSize {
-        return this.photoThumbnailSize ?? DEFAULT_SETTINGS.photoListThumbnailSize;
+        return this.photoThumbnailSize ?? DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS.thumbnailSize;
     }
 
     @Input()

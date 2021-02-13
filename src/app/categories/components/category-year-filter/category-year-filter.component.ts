@@ -8,8 +8,8 @@ import { MatSelectChange } from '@angular/material/select';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryYearFilterComponent {
-    @Input() yearFilter = '';
-    @Input() allYears = [];
+    @Input() yearFilter: string|number = '';
+    @Input() allYears: number[] = [];
     @Output() filterChange = new EventEmitter<number | string>();
 
     onSelectYear(change: MatSelectChange): void {

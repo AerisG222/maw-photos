@@ -1,43 +1,43 @@
-<app-sidebar-sidebar>
-    <app-sidebar-card-group *ngIf="enableButtons$ | async" @sidebarFlyInOut>
+<app-sidebar-sidebar *ngIf="settings$ | async; let settings">
+    <app-sidebar-card-group *ngIf="settings.expandedState" @sidebarFlyInOut>
         <app-sidebar-rating-card
-            *ngIf="showRatings$ | async"
+            *ngIf="settings.showRatings"
             @sidebarCardShowHide>
         </app-sidebar-rating-card>
 
         <app-sidebar-comments-card
-            *ngIf="showComments$ | async"
+            *ngIf="settings.showComments"
             @sidebarCardShowHide>
         </app-sidebar-comments-card>
 
         <app-photos-sidebar-exif
-            *ngIf="showExif$ | async"
+            *ngIf="settings.showExif"
             @sidebarCardShowHide>
         </app-photos-sidebar-exif>
 
         <app-photos-sidebar-effects
-            *ngIf="showEffects$ | async"
+            *ngIf="settings.showEffects"
             @sidebarCardShowHide>
         </app-photos-sidebar-effects>
 
         <app-photos-sidebar-histogram
-            *ngIf="showHistogram$ | async"
+            *ngIf="settings.showHistogram"
             @sidebarCardShowHide>
         </app-photos-sidebar-histogram>
 
         <app-sidebar-minimap-card
-            *ngIf="showMinimap$ | async"
+            *ngIf="settings.showMinimap"
             @sidebarCardShowHide>
         </app-sidebar-minimap-card>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-sidebar-metadata-editor-card
-                *ngIf="showMetadataEditor$ | async"
+                *ngIf="settings.showMetadataEditor"
                 @sidebarCardShowHide>
             </app-sidebar-metadata-editor-card>
 
             <app-sidebar-category-teaser-chooser-card
-                *ngIf="showCategoryTeaserChooser$ | async"
+                *ngIf="settings.showCategoryTeaserChooser"
                 @sidebarCardShowHide>
             </app-sidebar-category-teaser-chooser-card>
         </ng-container>
@@ -45,7 +45,7 @@
 
     <app-sidebar-button-group>
         <app-sidebar-button
-            [icon]="(endSidenavExpanded$ | async) ? 'chevron_right' : 'chevron_left'"
+            [icon]="settings.expandedState ? 'chevron_right' : 'chevron_left'"
             shortcutKey="i"
             shortcutHelp="Show/Hide Info Panel"
             tooltip="Show/Hide Info Panel (I)"
@@ -56,8 +56,8 @@
 
         <app-sidebar-button
             icon="star"
-            [isActive]="showRatings$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
+            [isActive]="settings.showRatings"
+            [isDisabled]="settings.expandedState === false"
             shortcutKey="r"
             shortcutHelp="Show/Hide Ratings"
             tooltip="Show/Hide Ratings (R)"
@@ -66,8 +66,8 @@
 
         <app-sidebar-button
             icon="comment"
-            [isActive]="showComments$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
+            [isActive]="settings.showComments"
+            [isDisabled]="settings.expandedState === false"
             shortcutKey="c"
             shortcutHelp="Show/Hide Comments"
             tooltip="Show/Hide Comments (C)"
@@ -76,8 +76,8 @@
 
         <app-sidebar-button
             icon="tune"
-            [isActive]="showExif$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
+            [isActive]="settings.showExif"
+            [isDisabled]="settings.expandedState === false"
             shortcutKey="x"
             shortcutHelp="Show/Hide EXIF"
             tooltip="Show/Hide EXIF (X)"
@@ -86,8 +86,8 @@
 
         <app-sidebar-button
             icon="photo_filter"
-            [isActive]="showEffects$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
+            [isActive]="settings.showEffects"
+            [isDisabled]="settings.expandedState === false"
             shortcutKey="e"
             shortcutHelp="Show/Hide Effects"
             tooltip="Show/Hide Effects (E)"
@@ -96,8 +96,8 @@
 
         <app-sidebar-button
             icon="color_lens"
-            [isActive]="showHistogram$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
+            [isActive]="settings.showHistogram"
+            [isDisabled]="settings.expandedState === false"
             shortcutKey="h"
             shortcutHelp="Show/Hide Histogram"
             tooltip="Show/Hide Histogram (H)"
@@ -106,8 +106,8 @@
 
         <app-sidebar-button
             icon="map"
-            [isActive]="showMinimap$ | async"
-            [isDisabled]="(enableButtons$ | async) === false"
+            [isActive]="settings.showMinimap"
+            [isDisabled]="settings.expandedState === false"
             shortcutKey="z"
             shortcutHelp="Show/Hide Mini-map"
             tooltip="Show/Hide Mini-map (Z)"
@@ -117,8 +117,8 @@
         <ng-container *ngIf="isAdmin$ | async">
             <app-sidebar-button
                 icon="edit"
-                [isActive]="showMetadataEditor$ | async"
-                [isDisabled]="(enableButtons$ | async) === false"
+                [isActive]="settings.showMetadataEditor"
+                [isDisabled]="settings.expandedState === false"
                 shortcutKey="n"
                 shortcutHelp="Show/Hide Metadata Editor"
                 tooltip="Show/Hide Metadata Editor (N)"
@@ -127,8 +127,8 @@
 
             <app-sidebar-button
                 icon="image_search"
-                [isActive]="showCategoryTeaserChooser$ | async"
-                [isDisabled]="(enableButtons$ | async) === false"
+                [isActive]="settings.showCategoryTeaserChooser"
+                [isDisabled]="settings.expandedState === false"
                 shortcutKey="k"
                 shortcutHelp="Show/Hide Category Teaser Chooser"
                 tooltip="Show/Hide Category Teaser Chooser (K)"

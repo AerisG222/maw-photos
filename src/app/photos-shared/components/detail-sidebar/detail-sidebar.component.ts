@@ -3,7 +3,8 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store } from '@ngrx/store';
 
 import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '@shared/animations';
-import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from '@core/root-store';
+import { AuthStoreSelectors } from '@core/root-store';
+import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
 
 @Component({
     selector: 'app-photos-detail-sidebar',
@@ -31,54 +32,46 @@ import { SettingsStoreActions, SettingsStoreSelectors, AuthStoreSelectors } from
 })
 export class DetailSidebarComponent {
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
-    endSidenavExpanded$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
-    showComments$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowComments);
-    showEffects$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowEffects);
-    showExif$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowExif);
-    showRatings$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowRatings);
-    showMinimap$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMinimap);
-    showHistogram$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowHistogram);
-    showMetadataEditor$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowMetadataEditor);
-    showCategoryTeaserChooser$ = this.store.select(SettingsStoreSelectors.photoInfoPanelShowCategoryTeaserChooser);
-    enableButtons$ = this.store.select(SettingsStoreSelectors.photoInfoPanelExpandedState);
+    settings$ = this.infoPanelSettings.settings$;
 
     constructor(
-        private store: Store
+        private store: Store,
+        private infoPanelSettings: PhotoInfoPanelSettingsFacade
     ) { }
 
     toggleSidebar(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelExpandedStateRequest());
+        this.infoPanelSettings.toggleSidebar();
     }
 
     toggleRatings(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelRatingsRequest());
+        this.infoPanelSettings.toggleRating();
     }
 
     toggleCategoryTeaserChooser(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelCategoryTeaserChooserRequest());
+        this.infoPanelSettings.toggleCategoryTeaserChooser();
     }
 
     toggleComments(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelCommentsRequest());
+        this.infoPanelSettings.toggleComments();
     }
 
     toggleMetadataEditor(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelMetadataEditorRequest());
+        this.infoPanelSettings.toggleMetadataEditor();
     }
 
     toggleExif(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelExifRequest());
+        this.infoPanelSettings.toggleExif();
     }
 
     toggleHistogram(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelHistogramRequest());
+        this.infoPanelSettings.toggleHistogram();
     }
 
     toggleEffects(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelEffectsRequest());
+        this.infoPanelSettings.toggleEffects();
     }
 
     toggleMinimap(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoInfoPanelMinimapRequest());
+        this.infoPanelSettings.toggleMinimap();
     }
 }

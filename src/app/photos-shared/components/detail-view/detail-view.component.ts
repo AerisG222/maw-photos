@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { RouterStoreSelectors, SettingsStoreSelectors, PhotoStoreSelectors } from '@core/root-store';
+import { RouterStoreSelectors, PhotoStoreSelectors } from '@core/root-store';
+import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 
 @Component({
     selector: 'app-photos-detail-view',
@@ -15,11 +16,11 @@ export class DetailViewComponent {
     category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
-    settings$ = this.store.select(SettingsStoreSelectors.settings);
+    settings$ = this.detailSettings.settings$;
 
     constructor(
         private store: Store,
-
+        private detailSettings: PhotoDetailSettingsFacade
     ) {
 
     }

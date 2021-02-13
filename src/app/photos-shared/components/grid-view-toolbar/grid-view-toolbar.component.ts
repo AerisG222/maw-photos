@@ -3,13 +3,9 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
-import { PhotoStoreActions, PhotoStoreSelectors, SettingsStoreSelectors, SettingsStoreActions } from '@core/root-store';
-import {
-    DEFAULT_SETTINGS,
-    ThumbnailSize,
-    CategoryMargin,
-    Photo,
- } from '@models';
+import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
+import { Photo, } from '@models';
+import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
 
 @Component({
     selector: 'app-photos-grid-view-toolbar',
@@ -25,6 +21,7 @@ export class GridViewToolbarComponent {
 
     constructor(
         private store: Store,
+        private gridSettings: PhotoGridSettingsFacade,
         @Inject(WINDOW) private window: Window
     ) {
         this.enableShare = !!window?.navigator?.share;
@@ -35,39 +32,15 @@ export class GridViewToolbarComponent {
     }
 
     onToggleCategoryBreadcrumbs(): void {
-        this.store.dispatch(SettingsStoreActions.togglePhotoGridShowCategoryBreadcrumbsRequest());
+        this.gridSettings.toggleBreadcrumbs();
     }
 
     onToggleMargins(): void {
-        this.store.select(SettingsStoreSelectors.photoGridMargin)
-            .pipe(
-                first()
-            ).subscribe({
-                next: margin => {
-                    if (!!margin) {
-                        const newMargin = CategoryMargin.nextSize(margin.name);
-
-                        this.store.dispatch(SettingsStoreActions.updatePhotoGridMarginRequest({ newMargin }));
-                    }
-                },
-                error: err => console.log(`error toggling margins: ${ err }`)
-            });
+        this.gridSettings.toggleMargin();
     }
 
     onToggleSize(): void {
-        this.store
-            .select(SettingsStoreSelectors.photoGridThumbnailSize)
-            .pipe(
-                first()
-            ).subscribe({
-                next: thumbnailSize => {
-                    const name = thumbnailSize?.name ?? DEFAULT_SETTINGS.photoGridThumbnailSize.name;
-                    const size = ThumbnailSize.nextSize(name);
-
-                    this.store.dispatch(SettingsStoreActions.updatePhotoGridThumbnailSizeRequest({ newSize: size }));
-                },
-                error: err => console.log(`error toggling size: ${ err }`)
-            });
+        this.gridSettings.toggleThumbnailSize();
     }
 
     onShare(): void {
