@@ -2,9 +2,10 @@ import { Component, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angu
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 
-import { Settings, Video, VideoSize } from '@models';
+import { Video, VideoDetailViewSettings, VideoSize } from '@models';
 import { VideoStoreSelectors } from 'src/app/videos/store';
-import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from '@core/root-store';
+import { VideoCategoryStoreSelectors } from '@core/root-store';
+import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 
 @Component({
     selector: 'app-videos-video-category',
@@ -16,7 +17,7 @@ export class VideoCategoryComponent {
     @ViewChild('videoRef') videoRef: ElementRef | null = null;
 
     videoSize = VideoSize;
-    settings$ = this.store.select(SettingsStoreSelectors.settings);
+    settings$ = this.videoFacade.settings$;
     category$ = this.store.select(VideoCategoryStoreSelectors.activeCategory);
     videos$ = this.store.select(VideoStoreSelectors.allVideos);
     activeVideo$ = this.store
@@ -26,19 +27,20 @@ export class VideoCategoryComponent {
         );
 
     constructor(
-        private store: Store
+        private store: Store,
+        private videoFacade: VideoDetailSettingsFacade
     ) { }
 
-    getVideoDimensions(video: Video, settings: Settings | null): { width: string; height: string } {
-        if (!!settings && settings.videoListVideoSize.name === VideoSize.large.name) {
+    getVideoDimensions(video: Video, settings: VideoDetailViewSettings | null): { width: string; height: string } {
+        if (!!settings && settings.videoSize.name === VideoSize.large.name) {
             return { width: `${video.videoFull.width}px`, height: `${video.videoFull.height}px` };
         }
 
         return { width: `${video.videoScaled.width}px`, height: `${video.videoScaled.height}px` };
     }
 
-    getVideoUrl(video: Video, settings: Settings | null): string {
-        if (!!settings && settings.videoListVideoSize.name === VideoSize.large.name) {
+    getVideoUrl(video: Video, settings: VideoDetailViewSettings | null): string {
+        if (!!settings && settings.videoSize.name === VideoSize.large.name) {
             return video.videoFull.url;
         }
 

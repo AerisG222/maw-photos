@@ -10,7 +10,7 @@
         } as data">
         <div class="main-video-grid">
             <div class="category-header">
-                <app-shared-category-header *ngIf="data.settings?.videoListShowCategoryBreadcrumbs" [showCategoryAsLink]="false" [category]="(category$ | async)"></app-shared-category-header>
+                <app-shared-category-header *ngIf="data.settings?.showBreadcrumbs" [showCategoryAsLink]="false" [category]="(category$ | async)"></app-shared-category-header>
             </div>
 
             <div *ngIf="data.activeVideo" class="video-container">
@@ -26,9 +26,9 @@
             </div>
 
             <app-videos-video-list
-                *ngIf="data.videos && data.settings?.videoListShowVideoList"
+                *ngIf="data.videos && data.settings?.showVideoList"
                 [videos]="data.videos"
-                [thumbnailSize]="data.settings?.videoListThumbnailSize"
+                [thumbnailSize]="data.settings?.thumbnailSize"
                 [selectedVideo]="data.activeVideo">
             </app-videos-video-list>
         </div>
