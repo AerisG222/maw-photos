@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy, Output } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-submit-buttons',

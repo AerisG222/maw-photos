@@ -12,7 +12,6 @@ import { SearchSettingsComponent } from './search-settings/search-settings.compo
 import { VideoSettingsComponent } from './video-settings/video-settings.component';
 import { SubmitButtonsComponent } from './submit-buttons/submit-buttons.component';
 import { HeadingComponent } from './heading/heading.component';
-import { BaseSettingsComponent } from './base-settings/base-settings.component';
 
 @NgModule({
     declarations: [
@@ -25,8 +24,7 @@ import { BaseSettingsComponent } from './base-settings/base-settings.component';
         SearchSettingsComponent,
         VideoSettingsComponent,
         SubmitButtonsComponent,
-        HeadingComponent,
-        BaseSettingsComponent
+        HeadingComponent
     ],
     imports: [
         SettingsRoutingModule,
