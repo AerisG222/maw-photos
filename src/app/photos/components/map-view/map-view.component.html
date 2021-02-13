@@ -4,15 +4,16 @@
     <ng-container
         layout-main
         *ngIf="{
-            settings: settings$ | async
+            settings: settings$ | async,
+            appTheme: appTheme$ | async
         } as data">
         <app-shared-map-view
             [activePhoto]="activePhoto$ | async"
             [images]="mapImages$ | async"
-            [mapType]="data.settings?.photoListMapViewMapType"
-            [useDarkTheme]="data.settings?.appTheme?.isDark"
+            [mapType]="data.settings?.mapType"
+            [useDarkTheme]="data.appTheme?.isDark"
+            [zoom]="data.settings?.zoom"
             (mapTypeChange)="onMapTypeIdChange($event)"
-            [zoom]="data.settings?.photoListMapViewZoom"
             (zoomChange)="onZoomChange($event)"
             (selectPhoto)="onSelectPhoto($event)">
         </app-shared-map-view>

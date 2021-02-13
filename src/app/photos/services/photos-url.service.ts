@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 
-import { SettingsStoreSelectors } from '@core/root-store';
 import { isValidPhotoViewMode, PhotoViewMode } from '@models';
+import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 
 @Injectable()
 export class PhotosUrlService {
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private photoPage: PhotoPageSettingsFacade) { }
 
     getValidView(requestedView: string | null, preferredView: string | null) {
         if (isValidPhotoViewMode(requestedView)) {
@@ -26,10 +21,9 @@ export class PhotosUrlService {
     }
 
     getDefaultView() {
-        return this.store.select(SettingsStoreSelectors.photoViewMode)
+        return this.photoPage.settings$
             .pipe(
-                // eslint-disable-next-line ngrx/avoid-mapping-selectors
-                map(view => this.getValidView(null, view))
+                map(s => this.getValidView(null, s.viewMode))
             );
     }
 }

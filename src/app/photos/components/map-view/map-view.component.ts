@@ -1,8 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
+import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
 import { MapType } from '@models';
+import { PhotoMapSettingsFacade } from '@core/facades/settings/photo-map-settings-facade';
+import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-photos-map-view',
@@ -13,18 +16,23 @@ import { MapType } from '@models';
 export class MapViewComponent {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     mapImages$ = this.store.select(PhotoStoreSelectors.photosWithGpsCoordinatesAsMapImages);
-    settings$ = this.store.select(SettingsStoreSelectors.settings);
+    settings$ = this.mapSettings.settings$;
+    appTheme$ = this.appSettings.settings$.pipe(map(x => x.theme));
 
-    constructor(private store: Store) {
+    constructor(
+        private appSettings: AppSettingsFacade,
+        private mapSettings: PhotoMapSettingsFacade,
+        private store: Store
+    ) {
 
     }
 
     onMapTypeIdChange(mapType: MapType): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoListMapViewMapTypeRequest({ mapType }));
+        this.mapSettings.saveMapType(mapType);
     }
 
     onZoomChange(zoom: number): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoListMapViewZoomRequest({ zoom }));
+        this.mapSettings.saveZoom(zoom);
     }
 
     onSelectPhoto(photoId: number): void {
