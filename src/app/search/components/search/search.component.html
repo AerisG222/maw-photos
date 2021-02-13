@@ -12,14 +12,14 @@
             *ngIf="showListView$ | async"
             [categories]="categories$ | async"
             [showYears]="true"
-            [thumbnailSize]="(listSettings$ | async).thumbnailSize">
+            [thumbnailSize]="(listSettings$ | async)?.thumbnailSize">
         </app-shared-category-list>
 
         <app-shared-category-grid
             *ngIf="showGridView$ | async"
-            [showTitles]="(gridSettings$ | async).showTitles"
-            [showYears]="(gridSettings$ | async).showYears"
-            [thumbnailSize]="(gridSettings$ | async).thumbnailSize"
+            [showTitles]="(gridSettings$ | async)?.showTitles"
+            [showYears]="(gridSettings$ | async)?.showYears"
+            [thumbnailSize]="(gridSettings$ | async)?.thumbnailSize"
             [categories]="categories$ | async">
         </app-shared-category-grid>
 
