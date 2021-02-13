@@ -12,18 +12,18 @@ import { CategoriesUrlService } from '../services/categories-url.service';
 
 export const categoryEffectiveYearFilter = createSelector(
     RootStoreSelectors.allYears,
-    SettingsStoreSelectors.categoryListYearFilter,
+    SettingsStoreSelectors.categoryFilterSettings,
     RouterStoreSelectors.selectRouteDetails,
-    (years, yearFilter, routeDetails) => {
-        return CategoriesUrlService.getValidYearFilter(routeDetails?.queryParams?.year as string, yearFilter, years);
+    (years, filterSettings, routeDetails) => {
+        return CategoriesUrlService.getValidYearFilter(routeDetails?.queryParams?.year as string, filterSettings.yearFilter, years);
     }
 );
 
 export const categoryEffectiveTypeFilter = createSelector(
-    SettingsStoreSelectors.categoryListCategoryFilter,
+    SettingsStoreSelectors.categoryFilterSettings,
     RouterStoreSelectors.selectRouteDetails,
-    (typeFilter, routeDetails) => {
-        return CategoriesUrlService.getValidTypeFilter(routeDetails?.queryParams?.type as string, typeFilter);
+    (filterSettings, routeDetails) => {
+        return CategoriesUrlService.getValidTypeFilter(routeDetails?.queryParams?.type as string, filterSettings.typeFilter);
     }
 );
 
@@ -56,8 +56,8 @@ export const allFilteredCategoriesForYear = createSelector(
     PhotoCategoryStoreSelectors.categoriesForYear,
     VideoCategoryStoreSelectors.categoriesForYear,
     categoryEffectiveTypeFilter,
-    SettingsStoreSelectors.categoryListMissingGpsFilter,
-    (photoCategories, videoCategories, typeFilter, missingGpsFilter, props: { year: number }) => {
+    SettingsStoreSelectors.categoryFilterSettings,
+    (photoCategories, videoCategories, typeFilter, filterSettings, props: { year: number }) => {
         let categories: Category[] = [];
         switch (typeFilter) {
             case CategoryTypeFilter.all:
@@ -73,7 +73,7 @@ export const allFilteredCategoriesForYear = createSelector(
                 categories = [...photoCategories, ...videoCategories];
         }
 
-        if (missingGpsFilter) {
+        if (filterSettings.missingGpsFilter) {
             return categories.filter(c => c.actual.isMissingGpsData);
         }
 

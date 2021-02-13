@@ -2,22 +2,15 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 
-import { SettingsStoreActions } from '@core/root-store/settings-store';
 import * as CategoryStoreActions from './actions';
 import { CategoriesUrlService } from '../services/categories-url.service';
 import { Store } from '@ngrx/store';
 import { RootStoreSelectors, RouterStoreActions } from '@core/root-store';
 import { RouteArea } from '@models';
+import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-filter-settings-facade';
 
 @Injectable()
 export class CategoriesStoreEffects {
-    categoriesYearFilterChangedSaveSettingEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(CategoryStoreActions.categoriesYearFilterChanged),
-            map(action => SettingsStoreActions.updateCategoryListYearFilterRequest({ yearFilter: action.filter }))
-        );
-    });
-
     categoriesYearFilterChangedUpdateUrlEffect$ = createEffect(() => {
         // eslint-disable-next-line rxjs/no-cyclic-action
         return this.actions$.pipe(
@@ -25,13 +18,6 @@ export class CategoriesStoreEffects {
             tap(action => this.categoriesUrlService.updateYearFilterInUrl(action.filter))
         );
     }, { dispatch: false });
-
-    categoriesTypeFilterChangedSaveSettingEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(CategoryStoreActions.categoriesTypeFilterChanged),
-            map(action => SettingsStoreActions.updateCategoryListCategoryFilterRequest({ newFilter: action.filter }))
-        );
-    });
 
     categoriesTypeFilterChangedUpdateUrlEffect$ = createEffect(() => {
         // eslint-disable-next-line rxjs/no-cyclic-action
@@ -57,7 +43,8 @@ export class CategoriesStoreEffects {
     constructor(
         private actions$: Actions,
         private categoriesUrlService: CategoriesUrlService,
-        private store: Store
+        private store: Store,
+        private filterSettings: CategoryFilterSettingsFacade
     ) {
 
     }
