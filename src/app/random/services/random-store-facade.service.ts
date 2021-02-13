@@ -1,9 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // eslint-disable-next-line max-len
-import { SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
+import { SettingsStoreActions, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors, RouterStoreSelectors } from '@core/root-store';
 import { Photo, GpsCoordinate, MapType, RouteHelper, PhotoViewMode } from '@models';
 import {
     Commentable,
@@ -21,6 +22,8 @@ import {
     PhotoLinkable,
  } from '@core/facades';
 import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
+import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
+import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
 
 @Injectable()
 export class RandomStoreFacadeService implements
@@ -42,19 +45,20 @@ export class RandomStoreFacadeService implements
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     overrideGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailOverride);
     sourceGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailSource);
-    mapType$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapType);
     position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
-    zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
-    mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
+    mapType$ = this.infoPanelFacade.settings$.pipe(map(x => x.minimapMapType));
+    zoom$ = this.infoPanelFacade.settings$.pipe(map(x => x.minimapZoom));
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
     activePhotoViewMode$ = this.store.select(RouterStoreSelectors.photoView);
-    preferredPhotoViewMode$ = this.store.select(SettingsStoreSelectors.photoViewMode);
+    preferredPhotoViewMode$ = this.randomPageFacade.settings$.pipe(map(x => x.viewMode));
 
     private destroySub = new Subscription();
     private view = 'grid';
 
     constructor(
-        private store: Store
+        private store: Store,
+        private infoPanelFacade: RandomInfoPanelSettingsFacade,
+        private randomPageFacade: RandomPageSettingsFacade
     ) {
         // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
         this.destroySub.add(this.store.select(RouterStoreSelectors.photoView)
@@ -104,11 +108,11 @@ export class RandomStoreFacadeService implements
     }
 
     onMapTypeChange(mapType: MapType): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeRequest({ mapType }));
+        this.infoPanelFacade.saveMinimapType(mapType);
     }
 
     onZoomChange(zoom: number): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
+        this.infoPanelFacade.saveMinimapZoom(zoom);
     }
 
     setCategoryTeaser() {
@@ -124,20 +128,7 @@ export class RandomStoreFacadeService implements
         return RouteHelper.randomAbs(this.view, photo.id);
     }
 
-    // TODO: add random settings/prefs
     selectPhotoViewMode(mode: PhotoViewMode) {
-        switch(mode) {
-            case PhotoViewMode.detail:
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeDetail());
-                break;
-            case PhotoViewMode.fullscreen:
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeFullscreen());
-                break;
-            case PhotoViewMode.grid:
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeGrid());
-                break;
-            default:
-                throw Error(`unknown photo view mode: ${ mode }`);
-        }
+        this.randomPageFacade.saveViewMode(mode);
     }
 }

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { VideoInfoPanelSettings } from '@models';
+import { MapType, VideoInfoPanelSettings } from '@models';
 
 @Injectable({
     providedIn: 'root'
@@ -17,5 +17,13 @@ export class VideoInfoPanelSettingsFacade extends BaseSettingsFacade<VideoInfoPa
 
     save(settings: VideoInfoPanelSettings): void {
         this.store.dispatch(SettingsStoreActions.saveVideoInfoPanelSettings({ settings }));
+    }
+
+    saveMinimapType(mapType: MapType): void {
+        this.saveUpdatedField(settings => settings.minimapMapType = mapType);
+    }
+
+    saveMinimapZoom(zoom: number): void {
+        this.saveUpdatedField(settings => settings.minimapZoom = zoom);
     }
 }

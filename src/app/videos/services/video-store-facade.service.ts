@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { GpsCoordinate, MapType } from '@models';
@@ -17,8 +18,8 @@ import {
     helpSaveCategoryTeaser,
 } from '@core/facades';
 import { VideoStoreActions, VideoStoreSelectors } from '../store';
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
 import { VideoCategoryStoreActions, VideoCategoryStoreSelectors } from '@core/root-store/video-category-store';
+import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
 
 @Injectable()
 export class VideoStoreFacadeService implements Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable {
@@ -30,14 +31,14 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
     isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
     overrideGps$ = this.store.select(VideoStoreSelectors.activeVideoGpsDetailOverride);
     sourceGps$ = this.store.select(VideoStoreSelectors.activeVideoGpsDetailSource);
-    mapType$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapMapType);
-    zoom$ = this.store.select(SettingsStoreSelectors.videoInfoPanelMinimapZoom);
+    mapType$ = this.videoInfoPanelFacade.settings$.pipe(map(x => x.minimapMapType));
+    zoom$ = this.videoInfoPanelFacade.settings$.pipe(map(x => x.minimapZoom));
     position$ = this.store.select(VideoStoreSelectors.activeVideoGoogleLatLng);
-    mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
     currentTeaserUrl$ = this.store.select(VideoCategoryStoreSelectors.activeCategoryTeaserUrl);
 
     constructor(
-        private store: Store
+        private store: Store,
+        private videoInfoPanelFacade: VideoInfoPanelSettingsFacade
     ) {
 
     }
@@ -79,11 +80,11 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
     }
 
     onMapTypeChange(mapType: MapType): void {
-        this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapMapTypeRequest({ mapType }));
+        this.videoInfoPanelFacade.saveMinimapType(mapType);
     }
 
     onZoomChange(zoom: number): void {
-        this.store.dispatch(SettingsStoreActions.updateVideoInfoPanelMinimapZoomRequest({ zoom }));
+        this.videoInfoPanelFacade.saveMinimapZoom(zoom);
     }
 
     setCategoryTeaser() {

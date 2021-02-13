@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
-import { PhotoPageSettings } from '@models';
+import { PhotoPageSettings, PhotoViewMode } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 @Injectable({
@@ -17,5 +17,9 @@ export class PhotoPageSettingsFacade extends BaseSettingsFacade<PhotoPageSetting
 
     save(settings: PhotoPageSettings): void {
         this.store.dispatch(SettingsStoreActions.savePhotoPageSettings({ settings }));
+    }
+
+    saveViewMode(viewMode: PhotoViewMode): void {
+        this.saveUpdatedField(x => x.viewMode = viewMode);
     }
 }

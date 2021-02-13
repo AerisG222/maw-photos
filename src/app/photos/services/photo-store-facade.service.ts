@@ -19,8 +19,11 @@ import {
     PhotoLinkable,
  } from '@core/facades';
 // eslint-disable-next-line max-len
-import { RouterStoreSelectors, SettingsStoreActions, SettingsStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
+import { RouterStoreSelectors, PhotoStoreActions, PhotoStoreSelectors, PhotoCategoryStoreActions, PhotoCategoryStoreSelectors } from '@core/root-store';
 import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
+import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
+import { map } from 'rxjs/operators';
+import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 
 @Injectable()
 export class PhotoStoreFacadeService implements
@@ -42,19 +45,20 @@ export class PhotoStoreFacadeService implements
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
     overrideGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailOverride);
     sourceGps$ = this.store.select(PhotoStoreSelectors.activePhotoGpsDetailSource);
-    mapType$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapMapType);
     position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
-    zoom$ = this.store.select(SettingsStoreSelectors.photoInfoPanelMinimapZoom);
-    mapTheme$ = this.store.select(SettingsStoreSelectors.mapTheme);
+    mapType$ = this.infoPanelFacade.settings$.pipe(map(x => x.minimapMapType));
+    zoom$ = this.infoPanelFacade.settings$.pipe(map(x => x.minimapZoom));
     currentTeaserUrl$ = this.store.select(PhotoCategoryStoreSelectors.activeCategoryTeaserUrl);
     activePhotoViewMode$ = this.store.select(RouterStoreSelectors.photoView);
-    preferredPhotoViewMode$ = this.store.select(SettingsStoreSelectors.photoViewMode);
+    preferredPhotoViewMode$ = this.photoFacade.settings$.pipe(map(x => x.viewMode));
 
     private destroySub = new Subscription();
     private view = 'grid';
 
     constructor(
-        private store: Store
+        private store: Store,
+        private infoPanelFacade: PhotoInfoPanelSettingsFacade,
+        private photoFacade: PhotoPageSettingsFacade
     ) {
         // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
         this.destroySub.add(this.store.select(RouterStoreSelectors.photoView)
@@ -104,11 +108,11 @@ export class PhotoStoreFacadeService implements
     }
 
     onMapTypeChange(mapType: MapType): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapMapTypeRequest({ mapType }));
+        this.infoPanelFacade.saveMinimapType(mapType);
     }
 
     onZoomChange(zoom: number): void {
-        this.store.dispatch(SettingsStoreActions.updatePhotoInfoPanelMinimapZoomRequest({ zoom }));
+        this.infoPanelFacade.saveMinimapZoom(zoom);
     }
 
     setCategoryTeaser() {
@@ -125,29 +129,7 @@ export class PhotoStoreFacadeService implements
     }
 
     selectPhotoViewMode(mode: PhotoViewMode) {
-        switch(mode) {
-            case PhotoViewMode.bulkEdit:
-                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewBulkEdit }));
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeBulkEdit());
-                break;
-            case PhotoViewMode.detail:
-                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewDetail }));
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeDetail());
-                break;
-            case PhotoViewMode.fullscreen:
-                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewFullscreen }));
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeFullscreen());
-                break;
-            case PhotoViewMode.grid:
-                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewGrid }));
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeGrid());
-                break;
-            case PhotoViewMode.map:
-                this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: RouteHelper.photoViewMap }));
-                this.store.dispatch(SettingsStoreActions.selectPhotoViewModeMap());
-                break;
-            default:
-                throw Error(`unknown photo view mode: ${ mode }`);
-        }
+        this.store.dispatch(PhotoStoreActions.changeViewRequest({ view: mode }));
+        this.photoFacade.saveViewMode(mode);
     }
 }

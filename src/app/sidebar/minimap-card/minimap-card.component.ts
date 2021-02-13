@@ -1,10 +1,11 @@
 import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 
-import { GoogleMapThemes, DEFAULT_SETTINGS, toMapType } from '@models';
+import { GoogleMapThemes, DEFAULT_SETTINGS, toMapType, Theme, DEFAULT_APP_SETTINGS, DEFAULT_PHOTO_INFO_PANEL_SETTINGS } from '@models';
 import { MiniMapable } from '@core/facades';
 import { Subscription } from 'rxjs';
-import { filter, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
+import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
 
 @Component({
     selector: 'app-sidebar-minimap-card',
@@ -29,8 +30,10 @@ export class MinimapCardComponent implements OnDestroy {
     private destroySub = new Subscription();
 
     constructor(
-        public miniMapable: MiniMapable
+        public miniMapable: MiniMapable,
+        private appSettingsFacade: AppSettingsFacade
     ) {
+        // TODO: simplify/merge into combinelatest
         this.destroySub.add(this.miniMapable.mapType$
             .subscribe({
                 next: mapType => {
@@ -57,13 +60,15 @@ export class MinimapCardComponent implements OnDestroy {
             })
         );
 
-        this.destroySub.add(this.miniMapable.mapTheme$
-            .subscribe({
+        this.destroySub.add(this.appSettingsFacade.settings$
+            .pipe(
+                map(s => s.theme)
+            ).subscribe({
                 next: theme => {
                     if(!!theme) {
                         this.options = {
                             ...this.options,
-                            styles: theme
+                            styles: this.getMapThemeForAppTheme(theme)
                         };
                     }
                 }
@@ -104,10 +109,15 @@ export class MinimapCardComponent implements OnDestroy {
             streetViewControl: false,
         } as google.maps.MapOptions;
 
-        opts.mapTypeId = DEFAULT_SETTINGS.photoInfoPanelMinimapMapType;
-        opts.styles = GoogleMapThemes.themeDark;
-        opts.zoom = DEFAULT_SETTINGS.photoInfoPanelMinimapZoom;
+        // TODO: can we avoid use of default here?
+        opts.mapTypeId = DEFAULT_PHOTO_INFO_PANEL_SETTINGS.minimapMapType;
+        opts.styles = this.getMapThemeForAppTheme(DEFAULT_APP_SETTINGS.theme);
+        opts.zoom = DEFAULT_PHOTO_INFO_PANEL_SETTINGS.minimapZoom;
 
         return opts;
+    }
+
+    private getMapThemeForAppTheme(theme: Theme) {
+        return theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight;
     }
 }

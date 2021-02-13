@@ -6,7 +6,6 @@ export abstract class MiniMapable {
     abstract mapType$: Observable<MapType>;
     abstract zoom$: Observable<number>;
     abstract position$: Observable<google.maps.LatLng | null>;
-    abstract mapTheme$: Observable<google.maps.MapTypeStyle[]>;
 
     abstract onMapTypeChange(mapType: MapType): void;
     abstract onZoomChange(zoom: number): void;
