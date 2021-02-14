@@ -10,6 +10,7 @@ import { RouteArea } from '@models';
 @Injectable()
 export class CategoriesStoreEffects {
     categoryFilterUpdated$ = createEffect(() => {
+        // eslint-disable-next-line rxjs/no-cyclic-action
         return this.actions$.pipe(
             ofType(SettingsStoreActions.saveCategoryFilterSettingsSuccess),
             tap(({ settings }) => this.categoriesUrlService.updateFilterInUrl(settings))
