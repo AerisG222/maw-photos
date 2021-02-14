@@ -24,7 +24,7 @@ export class LocalStorageService {
     }
 
     set<T>(key: string, value: T): void {
-        this.set(key, JSON.stringify(value));
+        this.strategy.setItem(this.normalize(key), JSON.stringify(value));
     }
 
     clear(key?: string): void {
