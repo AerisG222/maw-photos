@@ -112,8 +112,14 @@ export const randomAbs = (view?: string, photoId?: number) => {
     return url;
 };
 
-export const searchAbs = () => {
-    return `/${ search }`;
+export const searchAbs = (view?: string) => {
+    const url = `/${ search }`;
+
+    if(!!!view) {
+        view = searchViewDefault;
+    }
+
+    return `${url}/${view}`;
 };
 
 export const settingsAbs = () => {

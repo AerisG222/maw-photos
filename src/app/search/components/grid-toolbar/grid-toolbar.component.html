@@ -1,0 +1,41 @@
+<app-toolbar-toolbar *ngIf="gridSettings$ | async; let gridSettings">
+    <app-toolbar-group-select-view></app-toolbar-group-select-view>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
+        <app-toolbar-button
+            icon="today"
+            shortcutKey="y"
+            shortcutHelp="Show/Hide Years"
+            tooltip="Show/Hide Years (Y)"
+            (click)="onToggleYear()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            icon="title"
+            shortcutKey="t"
+            shortcutHelp="Show/Hide Titles"
+            tooltip="Show/Hide Titles (T)"
+            (click)="onToggleTitle()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            icon="photo_size_select_large"
+            [isDisabled]="gridSettings.showTitles || gridSettings.showYears"
+            shortcutKey="s"
+            shortcutHelp="Toggle Thumbnail Size"
+            tooltip="Toggle Thumbnail Size (S)"
+            (click)="onToggleThumbnailSize()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            icon="format_indent_increase"
+            shortcutKey="m"
+            shortcutHelp="Toggle Margins"
+            tooltip="Toggle Margins (M)"
+            (click)="onToggleMargins()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar-toolbar>

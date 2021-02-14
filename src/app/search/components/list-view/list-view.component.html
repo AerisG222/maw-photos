@@ -1,0 +1,27 @@
+<app-layout-toolbar *ngIf="listSettings$ | async; let listSettings">
+    <app-list-toolbar layout-toolbar></app-list-toolbar>
+
+    <app-shared-content-margin layout-main class="content-pad" [margin]="listSettings.margin">
+        <app-search-search-form></app-search-search-form>
+
+        <mat-divider mat-color="accent"></mat-divider>
+
+        <app-no-results-found *ngIf="showNoResults$ | async"></app-no-results-found>
+
+        <app-shared-category-list
+            [categories]="categories$ | async"
+            [showYears]="true"
+            [thumbnailSize]="listSettings.thumbnailSize">
+        </app-shared-category-list>
+
+        <app-search-result-count
+            *ngIf="showTotalResults$ | async"
+            [resultsShownCount]="shownResults$ | async"
+            [totalCount]="totalResults$ | async">
+        </app-search-result-count>
+
+        <app-search-search-more
+            *ngIf="hasMoreResults$ | async">
+        </app-search-search-more>
+    </app-shared-content-margin>
+</app-layout-toolbar>

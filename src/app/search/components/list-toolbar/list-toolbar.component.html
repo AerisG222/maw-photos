@@ -1,0 +1,24 @@
+<app-toolbar-toolbar>
+    <app-toolbar-group-select-view></app-toolbar-group-select-view>
+
+    <app-toolbar-divider></app-toolbar-divider>
+
+    <app-toolbar-group>
+        <app-toolbar-button
+            icon="photo_size_select_large"
+            shortcutKey="s"
+            shortcutHelp="Toggle Thumbnail Size"
+            tooltip="Toggle Thumbnail Size (S)"
+            (click)="onToggleThumbnailSize()">
+        </app-toolbar-button>
+
+        <app-toolbar-button
+            [hideOnMobile]="true"
+            icon="format_indent_increase"
+            shortcutKey="m"
+            shortcutHelp="Toggle Margins"
+            tooltip="Toggle Margins (M)"
+            (click)="onToggleMargins()">
+        </app-toolbar-button>
+    </app-toolbar-group>
+</app-toolbar-toolbar>

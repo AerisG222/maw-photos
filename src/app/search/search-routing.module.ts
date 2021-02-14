@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { RouteHelper } from '@models';
-import { SearchComponent } from './components/search/search.component';
+import { GridViewComponent } from './components/grid-view/grid-view.component';
+import { ListViewComponent } from './components/list-view/list-view.component';
+import { ViewModeGuard } from './services/view-mode.guard';
 
 const routes: Routes = [
-    { path: '', component: SearchComponent, children: [
-        { path: 'grid', component: SearchComponent, data: { view: 'grid' }},
-        { path: 'list', component: SearchComponent, data: { view: 'list' }},
-        { path: '', redirectTo: RouteHelper.searchViewDefault, pathMatch: 'full'},
-    ]},
+    { path: 'grid', component: GridViewComponent },
+    { path: 'list', component: ListViewComponent },
+    { path: '', canActivate: [ ViewModeGuard ]},
     { path: '**',  redirectTo: RouteHelper.searchViewDefault }
 ];
 
