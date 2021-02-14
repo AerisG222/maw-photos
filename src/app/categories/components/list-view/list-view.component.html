@@ -1,5 +1,11 @@
 <app-layout-toolbar *ngIf="listSettings$ | async; let listSettings">
-    <app-list-toolbar layout-toolbar></app-list-toolbar>
+    <app-list-toolbar
+        layout-toolbar
+        [margin]="listSettings.margin"
+        [thumbnailSize]="listSettings.thumbnailSize"
+        (toggleMargin)="onToggleMargins($event)"
+        (toggleThumbnailSize)="onToggleThumbnailSize($event)">
+    </app-list-toolbar>
 
     <app-shared-content-margin layout-main [margin]="listSettings.margin">
 
