@@ -1,5 +1,9 @@
 @import '../../../variables';
 
+.settings-content {
+    margin: 0 12px;
+}
+
 mat-radio-group {
     display: inline-flex;
     flex-direction: column;

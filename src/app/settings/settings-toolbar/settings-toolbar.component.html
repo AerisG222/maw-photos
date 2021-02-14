@@ -1,8 +1,32 @@
-<ul class="links">
-    <li><a [routerLink]="['./app']">App</a></li>
-    <li><a [routerLink]="['./categories']">Categories</a></li>
-    <li><a [routerLink]="['./photos']">Photos</a></li>
-    <li><a [routerLink]="['./random']">Random</a></li>
-    <li><a [routerLink]="['./search']">Search</a></li>
-    <li><a [routerLink]="['./videos']">Videos</a></li>
-</ul>
+<app-toolbar-toolbar>
+    <app-toolbar-link
+        [link]="['./app']"
+        icon="apps"
+        tooltip="Application">
+    </app-toolbar-link>
+    <app-toolbar-link
+        [link]="['./categories']"
+        icon="collections"
+        tooltip="Categories">
+    </app-toolbar-link>
+    <app-toolbar-link
+        [link]="['./photos']"
+        icon="image"
+        tooltip="Photos">
+    </app-toolbar-link>
+    <app-toolbar-link
+        [link]="['./random']"
+        icon="shuffle"
+        tooltip="Random">
+    </app-toolbar-link>
+    <app-toolbar-link
+        [link]="['./search']"
+        icon="search"
+        tooltip="Search">
+    </app-toolbar-link>
+    <app-toolbar-link
+        [link]="['./videos']"
+        icon="videocam"
+        tooltip="Videos">
+    </app-toolbar-link>
+</app-toolbar-toolbar>

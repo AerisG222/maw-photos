@@ -1,4 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { CategoryMargin } from '@models';
+
 @Component({
     selector: 'app-settings-settings',
     templateUrl: './settings.component.html',
@@ -6,5 +9,5 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent {
-
+    margin = CategoryMargin.compact;
 }
