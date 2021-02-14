@@ -5,9 +5,8 @@ import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors } from '@core/root-store';
-import { CategoryFilterSettings, RouteHelper } from '@models';
+import { CategoryFilterSettings } from '@models';
 import { CategoryTypeFilter, toCategoryTypeFilter, RouteDetails } from '@models';
-import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
 import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-filter-settings-facade';
 
 @Injectable()
@@ -15,18 +14,17 @@ export class CategoriesUrlService {
     constructor(
         private store: Store,
         private router: Router,
-        private categoryPageFacade: CategoryPageSettingsFacade,
         private categoryFilterFacade: CategoryFilterSettingsFacade
     ) {
 
     }
 
-    static getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]) {
+    static getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]): string|number {
         if(!!requestedYearFilter) {
             const result = CategoriesUrlService.isValidYearFilter(requestedYearFilter, allYears);
 
             if(result[0]) {
-                return result[1];
+                return result[1] as string|number;
             }
         }
 
@@ -34,20 +32,20 @@ export class CategoriesUrlService {
             const result = CategoriesUrlService.isValidYearFilter(preferredYearFilter, allYears);
 
             if(result[0]) {
-                return result[1];
+                return result[1] as string|number;
             }
         }
 
         return allYears[0];
     }
 
-    static getValidTypeFilter(requestedTypeFilter: string | null, preferredTypeFilter: string | null) {
+    static getValidTypeFilter(requestedTypeFilter: string | null, preferredTypeFilter: string | null): string {
         if(CategoriesUrlService.isValidTypeFilter(requestedTypeFilter)) {
-            return requestedTypeFilter;
+            return requestedTypeFilter as string;
         }
 
         if(CategoriesUrlService.isValidTypeFilter(preferredTypeFilter)) {
-            return preferredTypeFilter;
+            return preferredTypeFilter as string;
         }
 
         return CategoryTypeFilter.all;
@@ -79,20 +77,15 @@ export class CategoriesUrlService {
             type: settings.typeFilter
         };
 
-        this.router.navigate([], {
-            relativeTo: this.router.routerState.root,
-            queryParams: filterParams,
-            queryParamsHandling: 'merge'
-        });
+        this.addFilterToUrl(filterParams);
     }
 
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
         return combineLatest([
             this.store.select(RootStoreSelectors.allYears),
-            this.categoryPageFacade.settings$,
             this.categoryFilterFacade.settings$
         ]).pipe(
-            tap(([allYears, page, filter]) => {
+            tap(([allYears, filter]) => {
                 if(allYears.length === 0) {
                     return;
                 }
@@ -101,20 +94,20 @@ export class CategoriesUrlService {
                     return;
                 }
 
-                // eslint-disable-next-line max-len
-                const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, filter.yearFilter, allYears)?.toString();
-                const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, filter.typeFilter);
-
-                if(
-                    yearFilter !== routeDetails.queryParams?.year ||
-                    typeFilter !== routeDetails.queryParams?.type
-                ) {
-                    const url = `/${ RouteHelper.categories }/${ page.viewMode }?year=${ yearFilter }&type=${ typeFilter }`;
-
-                    this.router.navigateByUrl(url);
-                }
+                this.addFilterToUrl({
+                    year: CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, filter.yearFilter, allYears),
+                    type: CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, filter.typeFilter)
+                });
             }),
             map(x => true)
         );
+    }
+
+    private addFilterToUrl(filterParams: { type: string; year: string | number }) {
+        this.router.navigate([], {
+            relativeTo: this.router.routerState.root,
+            queryParams: filterParams,
+            queryParamsHandling: 'merge'
+        });
     }
 }
