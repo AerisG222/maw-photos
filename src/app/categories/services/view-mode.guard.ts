@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { RouteHelper } from '@models';
-import { CategoriesUrlService } from './categories-url.service';
+import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
 
 @Injectable()
 export class ViewModeGuard implements CanActivate {
     constructor(
-        private urlService: CategoriesUrlService,
+        private categoryPageSettings: CategoryPageSettingsFacade,
         private router: Router
     ) {
 
@@ -19,18 +19,12 @@ export class ViewModeGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const view = route.params?.view;
-
-        // this should never happen based on where the guard is configured in the
-        // router configuration
-        if(this.urlService.isValidView(view)) {
-            return true;
-        }
-
-        return this.urlService.getDefaultView().pipe(
-            map(defaultView => this.router.parseUrl(
-                RouteHelper.categoriesAbs(defaultView, route.queryParams.year, route.queryParams.type)
-            ))
+        return this.categoryPageSettings.settings$
+            .pipe(
+                map(({viewMode}) => this.router.parseUrl(
+                    RouteHelper.categoriesAbs(viewMode, route.queryParams.year, route.queryParams.type)
+                )
+            )
         );
     }
 }

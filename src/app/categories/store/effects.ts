@@ -1,29 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
-
-import * as CategoryStoreActions from './actions';
-import { CategoriesUrlService } from '../services/categories-url.service';
 import { Store } from '@ngrx/store';
-import { RootStoreSelectors, RouterStoreActions } from '@core/root-store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { filter, switchMap, tap } from 'rxjs/operators';
+
+import { CategoriesUrlService } from '../services/categories-url.service';
+import { RootStoreSelectors, RouterStoreActions, SettingsStoreActions } from '@core/root-store';
 import { RouteArea } from '@models';
-import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-filter-settings-facade';
 
 @Injectable()
 export class CategoriesStoreEffects {
-    categoriesYearFilterChangedUpdateUrlEffect$ = createEffect(() => {
-        // eslint-disable-next-line rxjs/no-cyclic-action
+    categoryFilterUpdated$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(CategoryStoreActions.categoriesYearFilterChanged),
-            tap(action => this.categoriesUrlService.updateYearFilterInUrl(action.filter))
-        );
-    }, { dispatch: false });
-
-    categoriesTypeFilterChangedUpdateUrlEffect$ = createEffect(() => {
-        // eslint-disable-next-line rxjs/no-cyclic-action
-        return this.actions$.pipe(
-            ofType(CategoryStoreActions.categoriesTypeFilterChanged),
-            tap(action => this.categoriesUrlService.updateCategoryTypeFilterInUrl(action.filter))
+            ofType(SettingsStoreActions.saveCategoryFilterSettingsSuccess),
+            tap(({ settings }) => this.categoriesUrlService.updateFilterInUrl(settings))
         );
     }, { dispatch: false });
 
@@ -43,8 +32,7 @@ export class CategoriesStoreEffects {
     constructor(
         private actions$: Actions,
         private categoriesUrlService: CategoriesUrlService,
-        private store: Store,
-        private filterSettings: CategoryFilterSettingsFacade
+        private store: Store
     ) {
 
     }

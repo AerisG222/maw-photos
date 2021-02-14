@@ -5,8 +5,8 @@ import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { RootStoreSelectors } from '@core/root-store';
-import { RouteHelper } from '@models';
-import { CategoryTypeFilter, CategoryViewMode, toCategoryTypeFilter, RouteDetails } from '@models';
+import { CategoryFilterSettings, RouteHelper } from '@models';
+import { CategoryTypeFilter, toCategoryTypeFilter, RouteDetails } from '@models';
 import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
 import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-filter-settings-facade';
 
@@ -73,36 +73,17 @@ export class CategoriesUrlService {
         return !!validatedFilter;
     }
 
-    isValidView(viewName: string) {
-        return viewName === CategoryViewMode.grid ||
-            viewName === CategoryViewMode.list;
-    }
+    updateFilterInUrl(settings: CategoryFilterSettings) {
+        const filterParams = {
+            year: settings.yearFilter,
+            type: settings.typeFilter
+        };
 
-    getValidView(requestedView: string | null, preferredView: string | null) {
-        if(!!requestedView && this.isValidView(requestedView)) {
-            return requestedView;
-        }
-
-        if(!!preferredView && this.isValidView(preferredView)) {
-            return preferredView;
-        }
-
-        return CategoryViewMode.grid;
-    }
-
-    getDefaultView() {
-        return this.categoryPageFacade.settings$
-            .pipe(
-                map(({ viewMode }) => this.getValidView(null, viewMode))
-            );
-    }
-
-    updateYearFilterInUrl(yearFilter: string | number) {
-        this.router.navigate(['.'], { queryParams: { year: yearFilter }, queryParamsHandling: 'merge' });
-    }
-
-    updateCategoryTypeFilterInUrl(typeFilter: CategoryTypeFilter) {
-        this.router.navigate(['.'], { queryParams: { type: typeFilter }, queryParamsHandling: 'merge' });
+        this.router.navigate([], {
+            relativeTo: this.router.routerState.root,
+            queryParams: filterParams,
+            queryParamsHandling: 'merge'
+        });
     }
 
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
@@ -116,17 +97,19 @@ export class CategoriesUrlService {
                     return;
                 }
 
-                const view = this.getValidView(routeDetails.params?.view, page.viewMode);
+                if(!!routeDetails.queryParams?.year && !!routeDetails.queryParams.type) {
+                    return;
+                }
+
                 // eslint-disable-next-line max-len
                 const yearFilter = CategoriesUrlService.getValidYearFilter(routeDetails.queryParams?.year, filter.yearFilter, allYears)?.toString();
                 const typeFilter = CategoriesUrlService.getValidTypeFilter(routeDetails.queryParams?.type, filter.typeFilter);
 
                 if(
-                    view !== routeDetails.params?.view ||
                     yearFilter !== routeDetails.queryParams?.year ||
                     typeFilter !== routeDetails.queryParams?.type
                 ) {
-                    const url = `/${ RouteHelper.categories }/${ view }?year=${ yearFilter }&type=${ typeFilter }`;
+                    const url = `/${ RouteHelper.categories }/${ page.viewMode }?year=${ yearFilter }&type=${ typeFilter }`;
 
                     this.router.navigateByUrl(url);
                 }
