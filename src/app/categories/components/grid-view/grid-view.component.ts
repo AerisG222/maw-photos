@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { CategoryGridSettingsFacade } from '@core/facades/settings/category-grid-settings-facade';
-import { Category, CategoryMargin, ThumbnailSize } from '@models';
+import { Category, Margin, ThumbnailSize } from '@models';
 import { CategoriesStoreSelectors } from '../../store';
 
 @Component({
@@ -22,7 +22,7 @@ export class GridViewComponent {
         this.gridViewFacade.saveThumbnailSize(newSize);
     }
 
-    onToggleMargins(newMargin: CategoryMargin): void {
+    onToggleMargins(newMargin: Margin): void {
         this.gridViewFacade.saveMargin(newMargin);
     }
 

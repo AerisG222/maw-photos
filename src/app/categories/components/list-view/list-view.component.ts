@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { CategoryListSettingsFacade } from '@core/facades/settings/category-list-settings-facade';
-import { ThumbnailSize, CategoryMargin, Category } from '@models';
+import { ThumbnailSize, Margin, Category } from '@models';
 import { CategoriesStoreSelectors } from '../../store';
 
 @Component({
@@ -22,7 +22,7 @@ export class ListViewComponent {
         this.listViewFacade.saveThumbnailSize(newSize);
     }
 
-    onToggleMargins(newMargin: CategoryMargin): void {
+    onToggleMargins(newMargin: Margin): void {
         this.listViewFacade.saveMargin(newMargin);
     }
 

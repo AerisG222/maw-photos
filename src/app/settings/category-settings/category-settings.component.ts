@@ -12,7 +12,7 @@ import { CategoryListViewSettings } from '@models';
 import { CategoryPageSettings } from '@models';
 import {
     allCategoryTypeFilters,
-    CategoryMargin,
+    Margin,
     ThumbnailSize,
     allCategoryViewModes,
     toCategoryViewMode,
@@ -30,7 +30,7 @@ import {
 export class CategorySettingsComponent {
     form: FormGroup;
     typeFilters = allCategoryTypeFilters;
-    margins = CategoryMargin.allCategoryMargins;
+    margins = Margin.allCategoryMargins;
     thumbnailSizes = ThumbnailSize.allSizes;
     listViewThumbnailSizes = ThumbnailSize.allSizes;
     viewModes = allCategoryViewModes;
@@ -125,7 +125,7 @@ export class CategorySettingsComponent {
     private readGridForm(): CategoryGridViewSettings {
         return {
             showTitles: this.form.get('grid.showTitles')?.value as boolean,
-            margin: this.form.get('grid.margin')?.value as CategoryMargin,
+            margin: this.form.get('grid.margin')?.value as Margin,
             thumbnailSize: ThumbnailSize.forName(
                 this.form.get('grid.thumbnailSize')?.value
             ),
@@ -134,7 +134,7 @@ export class CategorySettingsComponent {
 
     private readListForm(): CategoryListViewSettings {
         return {
-            margin: this.form.get('list.margin')?.value as CategoryMargin,
+            margin: this.form.get('list.margin')?.value as Margin,
             thumbnailSize: ThumbnailSize.forName(
                 this.form.get('list.thumbnailSize')?.value
             ),

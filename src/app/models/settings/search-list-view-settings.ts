@@ -1,12 +1,12 @@
-import { CategoryMargin } from '../category-margin.model';
+import { Margin } from '../margin.model';
 import { ThumbnailSize } from '../thumbnail-size.model';
 
 export interface SearchListViewSettings {
-    margin: CategoryMargin;
+    margin: Margin;
     thumbnailSize: ThumbnailSize;
 }
 
 export const DEFAULT_SEARCH_LIST_VIEW_SETTINGS: SearchListViewSettings = {
-    margin: CategoryMargin.dense,
+    margin: Margin.dense,
     thumbnailSize: ThumbnailSize.default
 };

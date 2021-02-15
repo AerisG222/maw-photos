@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { allMapTypes, allPhotoViewModes, CategoryMargin, MapType, MinimapZoom, ThumbnailSize } from '@models';
+import { allMapTypes, allPhotoViewModes, Margin, MapType, MinimapZoom, ThumbnailSize } from '@models';
 import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
@@ -25,7 +25,7 @@ export class PhotoSettingsComponent {
     form: FormGroup;
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
-    margins = CategoryMargin.allCategoryMargins;
+    margins = Margin.allCategoryMargins;
     thumbnailSizes = ThumbnailSize.allSizes;
     zoomLevels = MinimapZoom.allSizes;
     slideshowDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
@@ -107,7 +107,7 @@ export class PhotoSettingsComponent {
 
     private readGridForm(): PhotoGridViewSettings {
         return {
-            margin: CategoryMargin.forName(this.form.get('grid.margin')?.value),
+            margin: Margin.forName(this.form.get('grid.margin')?.value),
             showBreadcrumbs: this.form.get('grid.showBreadcrumbs')?.value as boolean,
             thumbnailSize: ThumbnailSize.forName(this.form.get('grid.thumbnailSize')?.value)
         };

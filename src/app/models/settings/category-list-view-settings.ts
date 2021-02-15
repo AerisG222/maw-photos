@@ -1,12 +1,12 @@
-import { CategoryMargin } from '../category-margin.model';
+import { Margin } from '../margin.model';
 import { ThumbnailSize } from '../thumbnail-size.model';
 
 export interface CategoryListViewSettings {
-    margin: CategoryMargin;
+    margin: Margin;
     thumbnailSize: ThumbnailSize;
 }
 
 export const DEFAULT_CATEGORY_LIST_VIEW_SETTINGS: CategoryListViewSettings = {
-    margin: CategoryMargin.dense,
+    margin: Margin.dense,
     thumbnailSize: ThumbnailSize.default,
 };

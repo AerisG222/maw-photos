@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { CategoryGridViewSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { CategoryMargin, ThumbnailSize } from '@models';
+import { Margin, ThumbnailSize } from '@models';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +20,7 @@ export class CategoryGridSettingsFacade extends BaseSettingsFacade<CategoryGridV
         this.store.dispatch(SettingsStoreActions.saveCategoryGridViewSettings({ settings }));
     }
 
-    saveMargin(newMargin: CategoryMargin) {
+    saveMargin(newMargin: Margin) {
         this.saveUpdatedField(s => s.margin = newMargin);
     }
 

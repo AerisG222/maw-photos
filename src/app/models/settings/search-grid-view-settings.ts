@@ -1,8 +1,8 @@
-import { CategoryMargin } from 'src/app/models/category-margin.model';
+import { Margin } from 'src/app/models/margin.model';
 import { ThumbnailSize } from '../thumbnail-size.model';
 
 export interface SearchGridViewSettings {
-    margin: CategoryMargin;
+    margin: Margin;
     showTitles: boolean;
     showYears: boolean;
     thumbnailSize: ThumbnailSize;
@@ -11,6 +11,6 @@ export interface SearchGridViewSettings {
 export const DEFAULT_SEARCH_GRID_VIEW_SETTINGS: SearchGridViewSettings = {
     showTitles: true,
     showYears: true,
-    margin: CategoryMargin.dense,
+    margin: Margin.dense,
     thumbnailSize: ThumbnailSize.default
 };

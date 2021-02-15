@@ -34,7 +34,7 @@ export * from './auth-config';
 export * from './category-type-filter.model';
 export * from './category-gps-status.model';
 export * from './category-view-mode.model';
-export * from './category-margin.model';
+export * from './margin.model';
 export * from './category.model';
 export * from './category-teaser.model';
 export * from './category-type.model';

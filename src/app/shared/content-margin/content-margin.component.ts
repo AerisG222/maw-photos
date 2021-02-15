@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { CategoryMargin } from '@models';
+import { Margin } from '@models';
 
 @Component({
     selector: 'app-shared-content-margin',
@@ -9,5 +9,5 @@ import { CategoryMargin } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentMarginComponent {
-    @Input() margin: CategoryMargin | null = null;
+    @Input() margin: Margin | null = null;
 }

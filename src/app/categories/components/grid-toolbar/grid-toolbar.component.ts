@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
-import { CategoryMargin, ThumbnailSize } from '@models';
+import { Margin, ThumbnailSize } from '@models';
 
 @Component({
     selector: 'app-grid-toolbar',
@@ -9,10 +9,10 @@ import { CategoryMargin, ThumbnailSize } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridToolbarComponent {
-    @Input() margin = CategoryMargin.dense;
+    @Input() margin = Margin.dense;
     @Input() showTitles = false;
     @Input() thumbnailSize = ThumbnailSize.default;
-    @Output() toggleMargin = new EventEmitter<CategoryMargin>();
+    @Output() toggleMargin = new EventEmitter<Margin>();
     @Output() toggleShowTitle = new EventEmitter<boolean>();
     @Output() toggleThumbnailSize = new EventEmitter<ThumbnailSize>();
 
@@ -27,7 +27,7 @@ export class GridToolbarComponent {
     }
 
     onToggleMargins(): void {
-        const newMargin = CategoryMargin.nextSize(this.margin.name);
+        const newMargin = Margin.nextSize(this.margin.name);
 
         this.toggleMargin.next(newMargin);
     }
