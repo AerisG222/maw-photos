@@ -3,9 +3,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
+// eslint-disable-next-line max-len
+import { allPhotoViewModes, allMapTypes, MinimapZoom, VideoSize, MapType, toThumbnailSizeDefaulted, allThumbnailSizes, allVideoSizes } from '@models';
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
-import { allPhotoViewModes, allMapTypes, MinimapZoom, VideoSize, MapType, toThumbnailSizeDefaulted, allThumbnailSizes } from '@models';
 import { VideoDetailViewSettings } from '@models';
 import { VideoInfoPanelSettings } from '@models';
 
@@ -21,7 +22,7 @@ export class VideoSettingsComponent {
     mapTypes = allMapTypes;
     thumbnailSizes = allThumbnailSizes;
     zoomLevels = MinimapZoom.allSizes;
-    videoSizes = VideoSize.allSizes;
+    videoSizes = allVideoSizes;
 
     constructor(
         private fb: FormBuilder,
@@ -94,7 +95,7 @@ export class VideoSettingsComponent {
             next: ([detail, info]) => {
                 this.form.patchValue({
                     detail: {
-                        videoSize: detail.videoSize.name,
+                        videoSize: detail.videoSize,
                         showBreadcrumbs: detail.showBreadcrumbs,
                         showVideoList: detail.showVideoList,
                         thumbnailSize: detail.thumbnailSize,

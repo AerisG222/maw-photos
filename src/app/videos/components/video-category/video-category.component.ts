@@ -32,7 +32,7 @@ export class VideoCategoryComponent {
     ) { }
 
     getVideoDimensions(video: Video, settings: VideoDetailViewSettings | null): { width: string; height: string } {
-        if (!!settings && settings.videoSize.name === VideoSize.large.name) {
+        if (!!settings && settings.videoSize === VideoSize.large) {
             return { width: `${video.videoFull.width}px`, height: `${video.videoFull.height}px` };
         }
 
@@ -40,7 +40,7 @@ export class VideoCategoryComponent {
     }
 
     getVideoUrl(video: Video, settings: VideoDetailViewSettings | null): string {
-        if (!!settings && settings.videoSize.name === VideoSize.large.name) {
+        if (!!settings && settings.videoSize === VideoSize.large) {
             return video.videoFull.url;
         }
 

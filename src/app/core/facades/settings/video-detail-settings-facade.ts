@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { nextThumbnailSize, VideoDetailViewSettings, VideoSize } from '@models';
+import { nextThumbnailSize, nextVideoSize, VideoDetailViewSettings } from '@models';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +32,6 @@ export class VideoDetailSettingsFacade extends BaseSettingsFacade<VideoDetailVie
     }
 
     toggleVideoSize(): void {
-        this.saveUpdatedField(x => x.videoSize = VideoSize.nextSize(x.videoSize.name));
+        this.saveUpdatedField(x => x.videoSize = nextVideoSize(x.videoSize));
     }
 }

@@ -1,43 +1,39 @@
-export class VideoSize {
-    static readonly small = new VideoSize('Small', 'video-small');
-    static readonly large = new VideoSize('Large', 'video-large');
+import { ValueDescriptor } from './value-descriptor';
 
-    static readonly allSizes = [
-        VideoSize.small,
-        VideoSize.large
-    ];
-
-    readonly name: string;
-    readonly klass: string;
-
-    constructor(name: string, klass: string) {
-        this.name = name;
-        this.klass = klass;
-    }
-
-    static forName(name: string): VideoSize {
-        switch (name) {
-            case VideoSize.small.name:
-                return VideoSize.small;
-            case VideoSize.large.name:
-                return VideoSize.large;
-            default:
-                console.error(`invalid video size requested: ${name}`);
-        }
-
-        return VideoSize.small;
-    }
-
-    static nextSize(name: string): VideoSize {
-        switch (name) {
-            case VideoSize.small.name:
-                return VideoSize.large;
-            case VideoSize.large.name:
-                return VideoSize.small;
-            default:
-                console.error(`invalid video size requested: ${name}`);
-        }
-
-        return VideoSize.small;
-    }
+export enum VideoSize {
+    small = 'small',
+    large = 'large'
 }
+
+export const allVideoSizes: ValueDescriptor<VideoSize>[] = [
+    { value: VideoSize.small, name: 'Small' },
+    { value: VideoSize.large, name: 'Large' },
+];
+
+export const toVideoSize = (val: string | null): VideoSize | undefined => {
+    if(!!!val)
+    {
+        return undefined;
+    }
+
+    return VideoSize[val as keyof typeof VideoSize];
+};
+
+export const toVideoSizeDefaulted = (val: string | null): VideoSize | null => {
+    const size = toVideoSize(val);
+
+    return !!size ? size : VideoSize.small;
+};
+
+export const nextVideoSize = (size: VideoSize): VideoSize => {
+    switch (size) {
+        case VideoSize.small:
+            return VideoSize.large;
+        case VideoSize.large:
+            return VideoSize.small;
+        default:
+            console.error(`invalid video size requested: ${size}`);
+    }
+
+    return VideoSize.small;
+};
