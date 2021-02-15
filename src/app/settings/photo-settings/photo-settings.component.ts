@@ -162,7 +162,7 @@ export class PhotoSettingsComponent {
                     detail: {
                         showBreadcrumbs: detail.showBreadcrumbs,
                         showPhotoList: detail.showPhotoList,
-                        thumbnailSize: detail.thumbnailSize,
+                        thumbnailSize: detail.thumbnailSize.name,
                         infoPanel: {
                             expandedState: info.expandedState,
                             showRatings: info.showRatings,
