@@ -17,9 +17,9 @@ const routes: Routes = [
         { path: 'random', component: RandomSettingsComponent },
         { path: 'search', component: SearchSettingsComponent },
         { path: 'videos', component: VideoSettingsComponent },
-        { path: '', redirectTo: './app', pathMatch: 'full' }
+        { path: '**', redirectTo: 'app' }
     ]},
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'app' }
 ];
 
 @NgModule({
