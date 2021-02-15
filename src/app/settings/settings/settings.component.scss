@@ -1,59 +1,59 @@
 @import '../../../variables';
 
-::ng-deep {
-    .settings-content {
-        margin: 0 12px;
-    }
+.settings-content {
+    margin: 0 12px;
 
-    mat-radio-group {
-        display: inline-flex;
-        flex-direction: column;
-    }
-
-    mat-radio-button {
-        margin: 4px;
-    }
-
-    mat-card {
-        min-width: 300px;
-        margin-right: 12px;
-        margin-bottom: 12px;
-
-        .mat-card-title {
-            margin-bottom: 24px;
+    ::ng-deep {
+        mat-radio-group {
+            display: inline-flex;
+            flex-direction: column;
         }
 
-        .mat-card-content h3 {
-            margin: 12px 0 4px 0;
-        }
-    }
-
-    .settings-container {
-        padding: 0 12px;
-        overflow-y: auto;
-    }
-
-    .card-grid {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 12px;
-    }
-
-    .button-group {
-        margin-bottom: 24px;
-    }
-
-    @media (max-width: $mobileBreakpoint) {
-        .card-grid {
-            display: block;
+        mat-radio-button {
+            margin: 4px;
         }
 
-        .button-group {
-            margin-bottom: 0;
+        mat-card {
+            min-width: 300px;
+            margin-right: 12px;
+            margin-bottom: 12px;
+
+            .mat-card-title {
+                margin-bottom: 24px;
+            }
+
+            .mat-card-content h3 {
+                margin: 12px 0 4px 0;
+            }
         }
 
         .settings-container {
-            padding: 0 $contentPad;
+            padding: 0 12px;
+            overflow-y: auto;
+        }
+
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .button-group {
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: $mobileBreakpoint) {
+            .card-grid {
+                display: block;
+            }
+
+            .button-group {
+                margin-bottom: 0;
+            }
+
+            .settings-container {
+                padding: 0 $contentPad;
+            }
         }
     }
 }
