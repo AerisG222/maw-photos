@@ -7,7 +7,7 @@
             <mat-card-content>
                 <h3>Video Size</h3>
                 <mat-radio-group formControlName="videoSize">
-                    <mat-radio-button *ngFor="let size of videoSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    <mat-radio-button *ngFor="let size of videoSizes" [value]="size.value">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
 
                 <h3>Show Breadcrumbs</h3>
@@ -18,7 +18,7 @@
 
                 <h3>Thumbnail Size</h3>
                 <mat-radio-group formControlName="thumbnailSize">
-                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.value">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
 
                 <div formGroupName="infoPanel">
