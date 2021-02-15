@@ -35,9 +35,9 @@ $custom-typography: mat-typography-config(
 @import 'app/primary-nav/link/link.component.theme';
 @import 'app/primary-nav/primary-nav/primary-nav.component.theme';
 
-@import 'app/shared/category-card/category-card.component.theme';
-@import 'app/shared/category-list-item/category-list-item.component.theme';
-@import 'app/shared/category-header/category-header.component.theme';
+@import 'app/shared/components/category-card/category-card.component.theme';
+@import 'app/shared/components/category-list-item/category-list-item.component.theme';
+@import 'app/shared/components/category-header/category-header.component.theme';
 
 @import 'app/sidebar/comments-card/comments-card.component.theme';
 @import 'app/sidebar/button/button.component.theme';

@@ -6,16 +6,16 @@ import { PrimaryNavModule } from '../primary-nav/primary-nav.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { ToolbarModule } from '../toolbar/toolbar.module';
 
-import { CategoryCardComponent } from './category-card/category-card.component';
-import { CategoryGridComponent } from './category-grid/category-grid.component';
-import { CategoryHeaderComponent } from './category-header/category-header.component';
-import { CategoryListComponent } from './category-list/category-list.component';
-import { ContentMarginComponent } from './content-margin/content-margin.component';
-import { HotkeyDialogComponent } from './hotkey-dialog/hotkey-dialog.component';
-import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
-import { MapViewComponent } from './map-view/map-view.component';
-import { CategoryListItemComponent } from './category-list-item/category-list-item.component';
-import { HotkeyListItemComponent } from './hotkey-list-item/hotkey-list-item.component';
+import { CategoryCardComponent } from './components/category-card/category-card.component';
+import { CategoryGridComponent } from './components/category-grid/category-grid.component';
+import { CategoryHeaderComponent } from './components/category-header/category-header.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { ContentMarginComponent } from './components/content-margin/content-margin.component';
+import { HotkeyDialogComponent } from './components/hotkey-dialog/hotkey-dialog.component';
+import { HotkeyTableComponent } from './components/hotkey-table/hotkey-table.component';
+import { MapViewComponent } from './components/map-view/map-view.component';
+import { CategoryListItemComponent } from './components/category-list-item/category-list-item.component';
+import { HotkeyListItemComponent } from './components/hotkey-list-item/hotkey-list-item.component';
 import { MarginClassPipe } from './pipes/margin-class.pipe';
 
 @NgModule({
