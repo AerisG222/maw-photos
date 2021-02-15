@@ -55,6 +55,7 @@ export class RandomSettingsComponent {
                     showMetadataEditor: '',
                     showCategoryTeaserChooser: '',
                     minimapType: '',
+                    minimapZoom: ''
                 })
             }),
             grid: this.fb.group({
@@ -122,7 +123,7 @@ export class RandomSettingsComponent {
     private readPageForm(): RandomPageSettings {
         return {
             viewMode: this.form.get('page.viewMode')?.value,
-            slideshowDisplayDurationSeconds: this.form.get('page.slideshowDisplayDurationSeconds')?.value as number
+            slideshowDisplayDurationSeconds: this.form.get('page.slideshowDuration')?.value as number
         };
     }
 

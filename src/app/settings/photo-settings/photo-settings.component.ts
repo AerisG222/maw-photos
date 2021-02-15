@@ -139,7 +139,7 @@ export class PhotoSettingsComponent {
     private readPageForm(): PhotoPageSettings {
         return {
             viewMode: this.form.get('page.viewMode')?.value,
-            slideshowDisplayDurationSeconds: this.form.get('page.slideshowDisplayDurationSeconds')?.value as number
+            slideshowDisplayDurationSeconds: this.form.get('page.slideshowDuration')?.value as number
         };
     }
 
