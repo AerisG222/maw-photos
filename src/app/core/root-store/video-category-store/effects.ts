@@ -57,7 +57,7 @@ export class VideoCategoryStoreEffects {
     private adaptCategory(category: VideoCategory): Category {
         return {
             type: CategoryType.video,
-            route: RouteHelper.videoCategoriesAbs(),
+            route: RouteHelper.videoCategoriesAbs(category.id),
             id: category.id,
             name: category.name,
             year: category.year,
