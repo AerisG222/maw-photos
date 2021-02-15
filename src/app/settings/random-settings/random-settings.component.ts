@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
+// eslint-disable-next-line max-len
+import { allPhotoViewModes, allMapTypes, MinimapZoom, MapType, allMargins, toMarginDefaulted, toThumbnailSizeDefaulted, allThumbnailSizes } from '@models';
 import { RandomGridSettingsFacade } from '@core/facades/settings/photo-grid-settings-facade';
 import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail-settings-facade';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
-import { allPhotoViewModes, allMapTypes, ThumbnailSize, MinimapZoom, MapType, allMargins, toMarginDefaulted } from '@models';
 import { PhotoDetailViewSettings } from '@models';
 import { PhotoGridViewSettings } from '@models';
 import { PhotoInfoPanelSettings } from '@models';
@@ -24,7 +25,7 @@ export class RandomSettingsComponent {
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
     margins = allMargins;
-    thumbnailSizes = ThumbnailSize.allSizes;
+    thumbnailSizes = allThumbnailSizes;
     zoomLevels = MinimapZoom.allSizes;
     slideshowDurations = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60];
 
@@ -92,7 +93,7 @@ export class RandomSettingsComponent {
         return {
             showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
             showPhotoList: this.form.get('detail.showPhotoList')?.value as boolean,
-            thumbnailSize: ThumbnailSize.forName(this.form.get('detail.thumbnailSIze')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('detail.thumbnailSIze')?.value)
         };
     }
 
@@ -100,7 +101,7 @@ export class RandomSettingsComponent {
         return {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
             showBreadcrumbs: this.form.get('grid.showBreadcrumbs')?.value as boolean,
-            thumbnailSize: ThumbnailSize.forName(this.form.get('grid.thumbnailSize')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value)
         };
     }
 
@@ -163,7 +164,7 @@ export class RandomSettingsComponent {
                     grid: {
                         margin: grid.margin,
                         showBreadcrumbs: grid.showBreadcrumbs,
-                        thumbnailSize: grid.thumbnailSize.name,
+                        thumbnailSize: grid.thumbnailSize,
                     }
                 });
             }

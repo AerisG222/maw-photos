@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { allMapTypes, allPhotoViewModes, Margin, MapType, MinimapZoom, ThumbnailSize, allMargins, toMarginDefaulted } from '@models';
+// eslint-disable-next-line max-len
+import { allMapTypes, allPhotoViewModes, MapType, MinimapZoom, allMargins, toMarginDefaulted, toThumbnailSizeDefaulted, allThumbnailSizes } from '@models';
 import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
@@ -26,7 +27,7 @@ export class PhotoSettingsComponent {
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
     margins = allMargins;
-    thumbnailSizes = ThumbnailSize.allSizes;
+    thumbnailSizes = allThumbnailSizes;
     zoomLevels = MinimapZoom.allSizes;
     slideshowDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
 
@@ -101,7 +102,7 @@ export class PhotoSettingsComponent {
         return {
             showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
             showPhotoList: this.form.get('detail.showPhotoList')?.value as boolean,
-            thumbnailSize: ThumbnailSize.forName(this.form.get('detail.thumbnailSIze')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('detail.thumbnailSIze')?.value)
         };
     }
 
@@ -109,7 +110,7 @@ export class PhotoSettingsComponent {
         return {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
             showBreadcrumbs: this.form.get('grid.showBreadcrumbs')?.value as boolean,
-            thumbnailSize: ThumbnailSize.forName(this.form.get('grid.thumbnailSize')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value)
         };
     }
 
@@ -162,7 +163,7 @@ export class PhotoSettingsComponent {
                     detail: {
                         showBreadcrumbs: detail.showBreadcrumbs,
                         showPhotoList: detail.showPhotoList,
-                        thumbnailSize: detail.thumbnailSize.name,
+                        thumbnailSize: detail.thumbnailSize,
                         infoPanel: {
                             expandedState: info.expandedState,
                             showRatings: info.showRatings,
@@ -180,7 +181,7 @@ export class PhotoSettingsComponent {
                     grid: {
                         margin: grid.margin,
                         showBreadcrumbs: grid.showBreadcrumbs,
-                        thumbnailSize: grid.thumbnailSize.name,
+                        thumbnailSize: grid.thumbnailSize,
                     },
                     map: {
                         mapType: map.mapType,

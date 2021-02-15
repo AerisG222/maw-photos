@@ -3,7 +3,7 @@
     [routerLink]="routeHelper.videoCategoriesAbs(video.categoryId, video.id)">
     <img
         [src]="video.thumbnailSq.url"
-        [ngClass]="thumbnailSize.klass"
+        [ngClass]="thumbnailSize | thumbnailSizeClass"
         [style.width.px]="imgWidth"
         [style.height.px]="imgHeight"
         loading="lazy" />

@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
-import { allPhotoViewModes, allMapTypes, ThumbnailSize, MinimapZoom, VideoSize, MapType } from '@models';
+import { allPhotoViewModes, allMapTypes, MinimapZoom, VideoSize, MapType, toThumbnailSizeDefaulted, allThumbnailSizes } from '@models';
 import { VideoDetailViewSettings } from '@models';
 import { VideoInfoPanelSettings } from '@models';
 
@@ -19,7 +19,7 @@ export class VideoSettingsComponent {
     form: FormGroup;
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
-    thumbnailSizes = ThumbnailSize.allSizes;
+    thumbnailSizes = allThumbnailSizes;
     zoomLevels = MinimapZoom.allSizes;
     videoSizes = VideoSize.allSizes;
 
@@ -67,7 +67,7 @@ export class VideoSettingsComponent {
             videoSize: this.form.get('detail.videoSize')?.value,
             showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
             showVideoList: this.form.get('detail.showVideoList')?.value as boolean,
-            thumbnailSize: ThumbnailSize.forName(this.form.get('detail.thumbnailSIze')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('detail.thumbnailSIze')?.value)
         };
     }
 
@@ -97,7 +97,7 @@ export class VideoSettingsComponent {
                         videoSize: detail.videoSize.name,
                         showBreadcrumbs: detail.showBreadcrumbs,
                         showVideoList: detail.showVideoList,
-                        thumbnailSize: detail.thumbnailSize.name,
+                        thumbnailSize: detail.thumbnailSize,
                         infoPanel: {
                             expandedState: info.expandedState,
                             showRatings: info.showRatings,

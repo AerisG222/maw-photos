@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
-import { Margin, nextMargin, ThumbnailSize } from '@models';
+import { Margin, nextMargin, nextThumbnailSize, ThumbnailSize } from '@models';
 
 @Component({
     selector: 'app-grid-toolbar',
@@ -21,7 +21,7 @@ export class GridToolbarComponent {
     }
 
     onToggleSize(): void {
-        const newSize = ThumbnailSize.nextSize(this.thumbnailSize.name);
+        const newSize = nextThumbnailSize(this.thumbnailSize);
 
         this.toggleThumbnailSize.next(newSize);
     }

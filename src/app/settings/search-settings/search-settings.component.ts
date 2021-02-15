@@ -4,7 +4,7 @@ import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-set
 import { SearchListSettingsFacade } from '@core/facades/settings/search-list-settings-facade';
 import { SearchPageSettingsFacade } from '@core/facades/settings/search-page-settings-facade';
 
-import { allCategoryViewModes, allMargins, ThumbnailSize, toMarginDefaulted } from '@models';
+import { allCategoryViewModes, allMargins, allThumbnailSizes, toMarginDefaulted, toThumbnailSizeDefaulted } from '@models';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { SearchGridViewSettings } from '@models';
@@ -21,7 +21,7 @@ export class SearchSettingsComponent {
     form: FormGroup;
     margins = allMargins;
     viewModes = allCategoryViewModes;
-    thumbnailSizes = ThumbnailSize.allSizes;
+    thumbnailSizes = allThumbnailSizes;
 
     constructor(
         private fb: FormBuilder,
@@ -71,14 +71,14 @@ export class SearchSettingsComponent {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
             showTitles: this.form.get('grid.showTitles')?.value,
             showYears: this.form.get('grid.showYears')?.value,
-            thumbnailSize: ThumbnailSize.forName(this.form.get('grid.thumbnailSize')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value)
         };
     }
 
     private readListForm(): SearchListViewSettings {
         return {
             margin: toMarginDefaulted(this.form.get('list.margin')?.value),
-            thumbnailSize: ThumbnailSize.forName(this.form.get('list.thumbnailSize')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('list.thumbnailSize')?.value)
         };
     }
 
@@ -105,11 +105,11 @@ export class SearchSettingsComponent {
                         showTitles: grid.showTitles,
                         showYears: grid.showYears,
                         margin: grid.margin,
-                        thumbnailSize: grid.thumbnailSize.name
+                        thumbnailSize: grid.thumbnailSize
                     },
                     list: {
                         margin: list.margin,
-                        thumbnailSize: list.thumbnailSize.name
+                        thumbnailSize: list.thumbnailSize
                     }
                 });
             }

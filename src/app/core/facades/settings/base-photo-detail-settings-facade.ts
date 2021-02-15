@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { PhotoDetailViewSettings, ThumbnailSize } from '@models';
+import { nextThumbnailSize, PhotoDetailViewSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 export abstract class BasePhotoDetailSettingsFacade extends BaseSettingsFacade<PhotoDetailViewSettings> {
@@ -15,10 +15,7 @@ export abstract class BasePhotoDetailSettingsFacade extends BaseSettingsFacade<P
     }
 
     toggleThumbnailSize(): void {
-        this.saveUpdatedField(x => {
-            const newSize = ThumbnailSize.nextSize(x.thumbnailSize.name);
-            x.thumbnailSize = newSize;
-        });
+        this.saveUpdatedField(x => x.thumbnailSize = nextThumbnailSize(x.thumbnailSize));
     }
 
     abstract save(settings: PhotoDetailViewSettings): void;

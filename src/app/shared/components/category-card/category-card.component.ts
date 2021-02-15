@@ -15,24 +15,4 @@ export class CategoryCardComponent {
     @Input() thumbnailSize: ThumbnailSize | null = null;
 
     categoryTypes = CategoryType;
-
-    getClass(): string {
-        const classes: string[] = [];
-
-        if (this.showTitle) {
-            classes.push('show_title');
-        }
-
-        if (this.showYear) {
-            classes.push('show_year');
-        }
-
-        if (this.showTitle || this.showYear) {
-            classes.push(ThumbnailSize.default.klass);
-        } else if (!!this.thumbnailSize) {
-            classes.push(this.thumbnailSize.klass);
-        }
-
-        return classes.join(' ');
-    }
 }

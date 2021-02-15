@@ -2,7 +2,7 @@
     <mat-icon matListIcon *ngIf="category?.type == categoryTypes.photo">camera_alt</mat-icon>
     <mat-icon matListIcon *ngIf="category?.type == categoryTypes.video">videocam</mat-icon>
 
-    <img class="thumbnail" [class]="thumbnailSize.klass" [src]="category?.teaserImageSq?.url" [alt]="category?.name" loading="lazy" />
+    <img class="thumbnail" [class]="thumbnailSize | thumbnailSizeClass" [src]="category?.teaserImageSq?.url" [alt]="category?.name" loading="lazy" />
 
     <span *ngIf="showYears" class="text">{{ category?.year }}</span>
     <span class="text">{{ category?.name }}</span>

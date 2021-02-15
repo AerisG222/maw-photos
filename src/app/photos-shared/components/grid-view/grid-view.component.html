@@ -17,7 +17,7 @@
                 <a *ngFor="let photo of photos$ | async;"
                     [routerLink]="[photo.id]" (click)="trackScrollPosition()">
                     <img
-                        [ngClass]="gridSettings.thumbnailSize.klass"
+                        [ngClass]="gridSettings.thumbnailSize | thumbnailSizeClass"
                         [src]="photo.imageXsSq.url"
                         loading="lazy" />
                 </a>

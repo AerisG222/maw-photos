@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
-import { ThumbnailSize, Margin, nextMargin } from '@models';
+import { ThumbnailSize, Margin, nextMargin, nextThumbnailSize } from '@models';
 
 @Component({
   selector: 'app-list-toolbar',
@@ -15,7 +15,7 @@ export class ListToolbarComponent {
     @Output() toggleMargin = new EventEmitter<Margin>();
 
     onToggleThumbnailSize(): void {
-        const newSize = ThumbnailSize.nextSize(this.thumbnailSize.name);
+        const newSize = nextThumbnailSize(this.thumbnailSize);
 
         this.toggleThumbnailSize.next(newSize);
     }

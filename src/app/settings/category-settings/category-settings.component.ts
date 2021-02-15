@@ -7,13 +7,12 @@ import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-fi
 import { CategoryGridSettingsFacade } from '@core/facades/settings/category-grid-settings-facade';
 import { CategoryListSettingsFacade } from '@core/facades/settings/category-list-settings-facade';
 import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
-import { allMargins, CategoryGridViewSettings } from '@models';
+import { allMargins, allThumbnailSizes, CategoryGridViewSettings, toThumbnailSizeDefaulted } from '@models';
 import { CategoryListViewSettings } from '@models';
 import { CategoryPageSettings } from '@models';
 import {
     allCategoryTypeFilters,
     Margin,
-    ThumbnailSize,
     allCategoryViewModes,
     toCategoryViewMode,
     toCategoryTypeFilter,
@@ -31,8 +30,7 @@ export class CategorySettingsComponent {
     form: FormGroup;
     typeFilters = allCategoryTypeFilters;
     margins = allMargins;
-    thumbnailSizes = ThumbnailSize.allSizes;
-    listViewThumbnailSizes = ThumbnailSize.allSizes;
+    thumbnailSizes = allThumbnailSizes;
     viewModes = allCategoryViewModes;
 
     constructor(
@@ -103,11 +101,11 @@ export class CategorySettingsComponent {
                         grid: {
                             showTitles: gridSettings.showTitles,
                             margin: gridSettings.margin,
-                            thumbnailSize: gridSettings.thumbnailSize.name,
+                            thumbnailSize: gridSettings.thumbnailSize,
                         },
                         list: {
                             margin: listSettings.margin,
-                            thumbnailSize: listSettings.thumbnailSize.name,
+                            thumbnailSize: listSettings.thumbnailSize,
                         },
                     });
                 },
@@ -126,18 +124,14 @@ export class CategorySettingsComponent {
         return {
             showTitles: this.form.get('grid.showTitles')?.value as boolean,
             margin: this.form.get('grid.margin')?.value as Margin,
-            thumbnailSize: ThumbnailSize.forName(
-                this.form.get('grid.thumbnailSize')?.value
-            ),
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value),
         };
     }
 
     private readListForm(): CategoryListViewSettings {
         return {
             margin: this.form.get('list.margin')?.value as Margin,
-            thumbnailSize: ThumbnailSize.forName(
-                this.form.get('list.thumbnailSize')?.value
-            ),
+            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('list.thumbnailSize')?.value),
         };
     }
 }

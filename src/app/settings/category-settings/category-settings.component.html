@@ -30,7 +30,7 @@
 
                 <h3>Thumbnail Size</h3>
                 <mat-radio-group formControlName="thumbnailSize">
-                    <mat-radio-button *ngFor="let size of listViewThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
             </mat-card-content>
         </mat-card>
@@ -45,7 +45,7 @@
 
                 <h3>Thumbnail Size</h3>
                 <mat-radio-group formControlName="thumbnailSize">
-                    <mat-radio-button *ngFor="let size of listViewThumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
+                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.name">{{ size.name }}</mat-radio-button>
                 </mat-radio-group>
             </mat-card-content>
         </mat-card>
