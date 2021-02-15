@@ -97,7 +97,7 @@ export class SearchSettingsComponent {
             first()
         ).subscribe({
             next: ([grid, list, page]) => {
-                return {
+                this.form.patchValue({
                     page: {
                         viewMode: page.viewMode
                     },
@@ -111,7 +111,7 @@ export class SearchSettingsComponent {
                         margin: list.margin.name,
                         thumbnailSize: list.thumbnailSize.name
                     }
-                };
+                });
             }
         });
     }
