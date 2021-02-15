@@ -42,30 +42,3 @@ export const nextThumbnailSize = (size: ThumbnailSize): ThumbnailSize => {
             return ThumbnailSize.default;
     }
 };
-
-/*
-export class ThumbnailSizeDetail {
-    static readonly default = new ThumbnailSize('Default', '');
-    static readonly small = new ThumbnailSize('Small', 'thumb-small');
-    static readonly verySmall = new ThumbnailSize('Very Small', 'thumb-very-small');
-    static readonly tiny = new ThumbnailSize('Tiny', 'thumb-tiny');
-
-
-    static nextSize(name: string): ThumbnailSize {
-        switch (name) {
-            case ThumbnailSize.default.name:
-                return ThumbnailSize.small;
-            case ThumbnailSize.small.name:
-                return ThumbnailSize.verySmall;
-            case ThumbnailSize.verySmall.name:
-                return ThumbnailSize.tiny;
-            case ThumbnailSize.tiny.name:
-                return ThumbnailSize.default;
-            default:
-                console.error(`invalid thumbnail size requested: ${name}`);
-        }
-
-        return ThumbnailSize.default;
-    }
-}
-*/
