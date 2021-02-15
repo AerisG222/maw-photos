@@ -64,7 +64,14 @@
                                     "with": "src/environments/modules.containerdev.ts"
                                 }
                             ],
-                            "optimization": true,
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": true
+                                },
+                                "fonts": true
+                            },
                             "outputHashing": "all",
                             "sourceMap": true,
                             "namedChunks": true,
@@ -99,7 +106,14 @@
                                     "with": "src/app/core/root-store/environment/modules.prod.ts"
                                 }
                             ],
-                            "optimization": true,
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": true
+                                },
+                                "fonts": true
+                            },
                             "outputHashing": "all",
                             "sourceMap": true,
                             "namedChunks": true,
