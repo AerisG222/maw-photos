@@ -13,8 +13,7 @@
                 <app-shared-category-header
                     *ngIf="data.settings?.showBreadcrumbs"
                     [showCategoryAsLink]="showCategoryAsLink$ | async"
-                    [category]="category$ | async"
-                    #header>
+                    [category]="category$ | async">
                 </app-shared-category-header>
             </div>
 
@@ -28,8 +27,7 @@
                 *ngIf="data.photos && data.settings?.showPhotoList"
                 [photos]="data.photos"
                 [thumbnailSize]="data.settings?.thumbnailSize"
-                [selectedPhoto]="data.activePhoto"
-                #photoList>
+                [selectedPhoto]="data.activePhoto">
             </app-photos-photo-list>
         </div>
     </ng-container>
