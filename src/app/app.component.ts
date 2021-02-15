@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { HotkeysService, Hotkey } from 'angular2-hotkeys';
 
-import { Theme } from '@models';
+import { allThemeDetails, Theme, toThemeDetail } from '@models';
 import { HotkeyHelperService } from '@core/services/hotkey-helper.service';
 import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
 import { HotkeyDialogComponent } from '@shared/components/hotkey-dialog/hotkey-dialog.component';
@@ -52,11 +52,13 @@ export class AppComponent implements OnInit, OnDestroy {
             classList.add('mat-app-background');
         }
 
-        Theme.allThemes.forEach(x => {
+        allThemeDetails.forEach(x => {
             classList.remove(x.klass);
         });
 
-        classList.add(theme.klass);
+        const themeDetail = toThemeDetail(theme);
+
+        classList.add(themeDetail.klass);
     }
 
     private onHotkeyHelp(evt: KeyboardEvent): boolean {

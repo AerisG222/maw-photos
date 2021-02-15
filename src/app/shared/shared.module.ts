@@ -17,6 +17,7 @@ import { MapViewComponent } from './components/map-view/map-view.component';
 import { CategoryListItemComponent } from './components/category-list-item/category-list-item.component';
 import { HotkeyListItemComponent } from './components/hotkey-list-item/hotkey-list-item.component';
 import { MarginClassPipe } from './pipes/margin-class.pipe';
+import { ThemeIsDarkPipe } from './pipes/theme-is-dark.pipe';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { MarginClassPipe } from './pipes/margin-class.pipe';
         MapViewComponent,
         CategoryListItemComponent,
         HotkeyListItemComponent,
-        MarginClassPipe
+        MarginClassPipe,
+        ThemeIsDarkPipe
     ],
     imports: [
         BaseModule
@@ -50,7 +52,10 @@ import { MarginClassPipe } from './pipes/margin-class.pipe';
         ContentMarginComponent,
         HotkeyDialogComponent,
         HotkeyTableComponent,
-        MapViewComponent
+        MapViewComponent,
+
+        // pipes
+        ThemeIsDarkPipe
     ]
 })
 export class SharedModule { }

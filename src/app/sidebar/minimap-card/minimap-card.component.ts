@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, ViewChild, OnDestroy } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 
-import { GoogleMapThemes, DEFAULT_SETTINGS, toMapType, Theme, DEFAULT_APP_SETTINGS, DEFAULT_PHOTO_INFO_PANEL_SETTINGS } from '@models';
+import { GoogleMapThemes, toMapType, Theme, DEFAULT_APP_SETTINGS, DEFAULT_PHOTO_INFO_PANEL_SETTINGS, toThemeDetail } from '@models';
 import { MiniMapable } from '@core/facades';
 import { Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
 
 @Component({
@@ -118,6 +118,8 @@ export class MinimapCardComponent implements OnDestroy {
     }
 
     private getMapThemeForAppTheme(theme: Theme) {
-        return theme.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight;
+        const themeDetail = toThemeDetail(theme);
+
+        return themeDetail.isDark ? GoogleMapThemes.themeDark : GoogleMapThemes.themeLight;
     }
 }

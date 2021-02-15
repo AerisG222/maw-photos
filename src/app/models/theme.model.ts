@@ -1,40 +1,56 @@
-export class Theme {
-    static readonly themeDark = new Theme('Dark', 'maw-dark-theme', true);
-    static readonly themeLight = new Theme('Light', 'maw-light-theme', false);
-    static readonly themeMulledWine = new Theme('Mulled Wine', 'maw-mulled-wine-theme', true);
-    static readonly themePaleNight = new Theme('Pale Night', 'maw-pale-night-theme', true);
-
-    static readonly allThemes = [
-        Theme.themeDark,
-        Theme.themeLight,
-        Theme.themeMulledWine,
-        Theme.themePaleNight
-    ];
-
-    readonly name: string;
-    readonly klass: string;
-    readonly isDark: boolean;
-
-    constructor(name: string, klass: string, isDark: boolean) {
-        this.name = name;
-        this.klass = klass;
-        this.isDark = isDark;
-    }
-
-    static forName(name: string): Theme {
-        switch (name) {
-            case Theme.themeDark.name:
-                return Theme.themeDark;
-            case Theme.themeLight.name:
-                return Theme.themeLight;
-            case Theme.themeMulledWine.name:
-                return Theme.themeMulledWine;
-            case Theme.themePaleNight.name:
-                return Theme.themePaleNight;
-            default:
-                console.error(`invalid theme requested: ${name}`);
-        }
-
-        return Theme.themeDark;
-    }
+export enum Theme {
+    dark = 'dark',
+    light = 'light',
+    mulledWine = 'mulledWine',
+    paleNight = 'paleNight'
 }
+
+export class ThemeDetail {
+    static readonly dark = new ThemeDetail(Theme.dark, 'Dark', 'maw-dark-theme', true);
+    static readonly light = new ThemeDetail(Theme.light, 'Light', 'maw-light-theme', false);
+    static readonly mulledWine = new ThemeDetail(Theme.mulledWine, 'Mulled Wine', 'maw-mulled-wine-theme', true);
+    static readonly paleNight = new ThemeDetail(Theme.paleNight, 'Pale Night', 'maw-pale-night-theme', true);
+
+    constructor(
+        public readonly theme: Theme,
+        public readonly name: string,
+        public readonly klass: string,
+        public readonly isDark: boolean
+    ) { }
+}
+
+export const allThemeDetails = [
+    ThemeDetail.dark,
+    ThemeDetail.light,
+    ThemeDetail.mulledWine,
+    ThemeDetail.paleNight
+];
+
+export const toTheme = (val?: string | null): Theme | undefined => {
+    if(!!!val)
+    {
+        return undefined;
+    }
+
+    return Theme[val as keyof typeof Theme];
+};
+
+export const toThemeDefaulted = (val?: string | null): Theme => {
+    const theme = toTheme(val);
+
+    return !!theme ? theme : Theme.dark;
+};
+
+export const toThemeDetail = (theme: Theme): ThemeDetail => {
+    switch(theme) {
+        case Theme.light:
+            return ThemeDetail.light;
+        case Theme.mulledWine:
+            return ThemeDetail.mulledWine;
+        case Theme.paleNight:
+            return ThemeDetail.paleNight;
+        case Theme.dark:
+        default:
+            return ThemeDetail.dark;
+    }
+};

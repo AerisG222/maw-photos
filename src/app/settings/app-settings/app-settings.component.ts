@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
-import { Theme } from '@models';
+import { allThemeDetails, toThemeDefaulted } from '@models';
 import { AppSettings, DEFAULT_APP_SETTINGS } from '@models';
 import { BaseSettingsComponent } from '../base-settings/base-settings.component';
 
@@ -14,7 +14,7 @@ import { BaseSettingsComponent } from '../base-settings/base-settings.component'
 })
 export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
     form: FormGroup;
-    themes = Theme.allThemes;
+    themes = allThemeDetails;
 
     constructor(private fb: FormBuilder, public facade: AppSettingsFacade) {
         super(facade);
@@ -28,13 +28,13 @@ export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
 
     protected readForm(): AppSettings {
         return {
-            theme: Theme.forName(this.form.get('theme')?.value as string)
+            theme: toThemeDefaulted(this.form.get('theme')?.value as string)
         };
     }
 
     protected updateForm(settings: AppSettings) {
         this.form.patchValue({
-            theme: settings.theme.name
+            theme: settings.theme
         });
     }
 }

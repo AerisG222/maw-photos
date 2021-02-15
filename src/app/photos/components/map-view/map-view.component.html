@@ -11,7 +11,7 @@
             [activePhoto]="activePhoto$ | async"
             [images]="mapImages$ | async"
             [mapType]="data.settings?.mapType"
-            [useDarkTheme]="data.appTheme?.isDark"
+            [useDarkTheme]="data.appTheme | themeIsDark"
             [zoom]="data.settings?.zoom"
             (mapTypeChange)="onMapTypeIdChange($event)"
             (zoomChange)="onZoomChange($event)"
