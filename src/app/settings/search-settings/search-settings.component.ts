@@ -84,7 +84,7 @@ export class SearchSettingsComponent {
 
     private readPageForm(): SearchPageSettings {
         return {
-            viewMode: this.form.get('list.thumbnailSize')?.value
+            viewMode: this.form.get('page.viewMode')?.value
         };
     }
 
