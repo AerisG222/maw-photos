@@ -1,55 +1,47 @@
-export class Margin {
-    static readonly dense = new Margin('Dense', '');
-    static readonly compact = new Margin('Compact', 'category-margin-ten');
-    static readonly comfy = new Margin('Comfy', 'category-margin-twenty');
-    static readonly cozy = new Margin('Cozy', 'category-margin-thirty');
+import { ValueDescriptor } from './value-descriptor';
 
-    static readonly allCategoryMargins = [
-        Margin.dense,
-        Margin.compact,
-        Margin.comfy,
-        Margin.cozy
-    ];
-
-    readonly name: string;
-    readonly klass: string;
-
-    constructor(name: string, klass: string) {
-        this.name = name;
-        this.klass = klass;
-    }
-
-    static forName(name: string): Margin {
-        switch (name) {
-            case Margin.dense.name:
-                return Margin.dense;
-            case Margin.compact.name:
-                return Margin.compact;
-            case Margin.comfy.name:
-                return Margin.comfy;
-            case Margin.cozy.name:
-                return Margin.cozy;
-            default:
-                console.error(`invalid category margin requested: ${name}`);
-        }
-
-        return Margin.compact;
-    }
-
-    static nextSize(name: string): Margin {
-        switch (name) {
-            case Margin.dense.name:
-                return Margin.compact;
-            case Margin.compact.name:
-                return Margin.comfy;
-            case Margin.comfy.name:
-                return Margin.cozy;
-            case Margin.cozy.name:
-                return Margin.dense;
-            default:
-                console.error(`invalid category margin requested: ${name}`);
-        }
-
-        return Margin.compact;
-    }
+export enum Margin {
+    dense = 'dense',
+    compact = 'compact',
+    comfy = 'comfy',
+    cozy = 'cozy'
 }
+
+export const allMargins: ValueDescriptor<Margin>[] = [
+    { value: Margin.dense, name: 'Dense' },
+    { value: Margin.compact, name: 'Compact' },
+    { value: Margin.comfy, name: 'Comfy' },
+    { value: Margin.cozy, name: 'Cozy' }
+];
+
+export const toMargin = (val?: string | null): Margin | undefined => {
+    if(!!!val)
+    {
+        return undefined;
+    }
+
+    return Margin[val as keyof typeof Margin];
+};
+
+export const toMarginDefaulted = (val?: string | null): Margin => {
+    const margin = toMargin(val);
+
+    return !!margin ? margin : Margin.compact;
+};
+
+export const nextMargin = (margin: Margin): Margin => {
+    switch (margin) {
+        case Margin.dense:
+            return Margin.compact;
+        case Margin.compact:
+            return Margin.comfy;
+        case Margin.comfy:
+            return Margin.cozy;
+        case Margin.cozy:
+            return Margin.dense;
+        default:
+            console.error(`invalid margin requested: ${margin}`);
+    }
+
+    return Margin.compact;
+};

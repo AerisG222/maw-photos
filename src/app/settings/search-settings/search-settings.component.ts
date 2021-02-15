@@ -4,7 +4,7 @@ import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-set
 import { SearchListSettingsFacade } from '@core/facades/settings/search-list-settings-facade';
 import { SearchPageSettingsFacade } from '@core/facades/settings/search-page-settings-facade';
 
-import { allCategoryViewModes, Margin, ThumbnailSize } from '@models';
+import { allCategoryViewModes, allMargins, ThumbnailSize, toMarginDefaulted } from '@models';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { SearchGridViewSettings } from '@models';
@@ -19,7 +19,7 @@ import { SearchPageSettings } from '@models';
 })
 export class SearchSettingsComponent {
     form: FormGroup;
-    margins = Margin.allCategoryMargins;
+    margins = allMargins;
     viewModes = allCategoryViewModes;
     thumbnailSizes = ThumbnailSize.allSizes;
 
@@ -68,7 +68,7 @@ export class SearchSettingsComponent {
 
     private readGridForm(): SearchGridViewSettings {
         return {
-            margin: Margin.forName(this.form.get('grid.margin')?.value),
+            margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
             showTitles: this.form.get('grid.showTitles')?.value,
             showYears: this.form.get('grid.showYears')?.value,
             thumbnailSize: ThumbnailSize.forName(this.form.get('grid.thumbnailSize')?.value)
@@ -77,7 +77,7 @@ export class SearchSettingsComponent {
 
     private readListForm(): SearchListViewSettings {
         return {
-            margin: Margin.forName(this.form.get('list.margin')?.value),
+            margin: toMarginDefaulted(this.form.get('list.margin')?.value),
             thumbnailSize: ThumbnailSize.forName(this.form.get('list.thumbnailSize')?.value)
         };
     }
@@ -104,11 +104,11 @@ export class SearchSettingsComponent {
                     grid: {
                         showTitles: grid.showTitles,
                         showYears: grid.showYears,
-                        margin: grid.margin.name,
+                        margin: grid.margin,
                         thumbnailSize: grid.thumbnailSize.name
                     },
                     list: {
-                        margin: list.margin.name,
+                        margin: list.margin,
                         thumbnailSize: list.thumbnailSize.name
                     }
                 });

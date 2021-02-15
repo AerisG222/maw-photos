@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { Margin, SearchListViewSettings, ThumbnailSize } from '@models';
+import { nextMargin, SearchListViewSettings, ThumbnailSize } from '@models';
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +28,7 @@ export class SearchListSettingsFacade extends BaseSettingsFacade<SearchListViewS
 
     toggleMargins(): void {
         this.saveUpdatedField(x => {
-            const newSize = Margin.nextSize(x.margin.name);
+            const newSize = nextMargin(x.margin);
             x.margin = newSize;
         });
     }

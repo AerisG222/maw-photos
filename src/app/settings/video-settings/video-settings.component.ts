@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
-import { allPhotoViewModes, allMapTypes, Margin, ThumbnailSize, MinimapZoom, VideoSize, MapType } from '@models';
+import { allPhotoViewModes, allMapTypes, ThumbnailSize, MinimapZoom, VideoSize, MapType } from '@models';
 import { VideoDetailViewSettings } from '@models';
 import { VideoInfoPanelSettings } from '@models';
 
@@ -19,7 +19,6 @@ export class VideoSettingsComponent {
     form: FormGroup;
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
-    margins = Margin.allCategoryMargins;
     thumbnailSizes = ThumbnailSize.allSizes;
     zoomLevels = MinimapZoom.allSizes;
     videoSizes = VideoSize.allSizes;

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Margin, PhotoGridViewSettings, ThumbnailSize } from '@models';
+import { nextMargin, PhotoGridViewSettings, ThumbnailSize } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 export abstract class BasePhotoGridSettingsFacade extends BaseSettingsFacade<PhotoGridViewSettings> {
@@ -12,7 +12,7 @@ export abstract class BasePhotoGridSettingsFacade extends BaseSettingsFacade<Pho
 
     toggleMargin(): void {
         this.saveUpdatedField(x => {
-            const newSize = Margin.nextSize(x.margin.name);
+            const newSize = nextMargin(x.margin);
             x.margin = newSize;
         });
     }

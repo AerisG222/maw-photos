@@ -7,7 +7,7 @@ import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-fi
 import { CategoryGridSettingsFacade } from '@core/facades/settings/category-grid-settings-facade';
 import { CategoryListSettingsFacade } from '@core/facades/settings/category-list-settings-facade';
 import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
-import { CategoryGridViewSettings } from '@models';
+import { allMargins, CategoryGridViewSettings } from '@models';
 import { CategoryListViewSettings } from '@models';
 import { CategoryPageSettings } from '@models';
 import {
@@ -30,7 +30,7 @@ import {
 export class CategorySettingsComponent {
     form: FormGroup;
     typeFilters = allCategoryTypeFilters;
-    margins = Margin.allCategoryMargins;
+    margins = allMargins;
     thumbnailSizes = ThumbnailSize.allSizes;
     listViewThumbnailSizes = ThumbnailSize.allSizes;
     viewModes = allCategoryViewModes;
@@ -102,11 +102,11 @@ export class CategorySettingsComponent {
                         },
                         grid: {
                             showTitles: gridSettings.showTitles,
-                            margin: gridSettings.margin.name,
+                            margin: gridSettings.margin,
                             thumbnailSize: gridSettings.thumbnailSize.name,
                         },
                         list: {
-                            margin: listSettings.margin.name,
+                            margin: listSettings.margin,
                             thumbnailSize: listSettings.thumbnailSize.name,
                         },
                     });

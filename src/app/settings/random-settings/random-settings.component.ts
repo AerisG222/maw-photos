@@ -7,7 +7,7 @@ import { RandomGridSettingsFacade } from '@core/facades/settings/photo-grid-sett
 import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail-settings-facade';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
-import { allPhotoViewModes, allMapTypes, Margin, ThumbnailSize, MinimapZoom, MapType } from '@models';
+import { allPhotoViewModes, allMapTypes, ThumbnailSize, MinimapZoom, MapType, allMargins, toMarginDefaulted } from '@models';
 import { PhotoDetailViewSettings } from '@models';
 import { PhotoGridViewSettings } from '@models';
 import { PhotoInfoPanelSettings } from '@models';
@@ -23,7 +23,7 @@ export class RandomSettingsComponent {
     form: FormGroup;
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
-    margins = Margin.allCategoryMargins;
+    margins = allMargins;
     thumbnailSizes = ThumbnailSize.allSizes;
     zoomLevels = MinimapZoom.allSizes;
     slideshowDurations = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60];
@@ -98,7 +98,7 @@ export class RandomSettingsComponent {
 
     private readGridForm(): PhotoGridViewSettings {
         return {
-            margin: Margin.forName(this.form.get('grid.margin')?.value),
+            margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
             showBreadcrumbs: this.form.get('grid.showBreadcrumbs')?.value as boolean,
             thumbnailSize: ThumbnailSize.forName(this.form.get('grid.thumbnailSize')?.value)
         };
@@ -161,7 +161,7 @@ export class RandomSettingsComponent {
                         }
                     },
                     grid: {
-                        margin: grid.margin.name,
+                        margin: grid.margin,
                         showBreadcrumbs: grid.showBreadcrumbs,
                         thumbnailSize: grid.thumbnailSize.name,
                     }

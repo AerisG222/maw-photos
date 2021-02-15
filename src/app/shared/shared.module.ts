@@ -16,6 +16,7 @@ import { HotkeyTableComponent } from './hotkey-table/hotkey-table.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { CategoryListItemComponent } from './category-list-item/category-list-item.component';
 import { HotkeyListItemComponent } from './hotkey-list-item/hotkey-list-item.component';
+import { MarginClassPipe } from './pipes/margin-class.pipe';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { HotkeyListItemComponent } from './hotkey-list-item/hotkey-list-item.com
         HotkeyTableComponent,
         MapViewComponent,
         CategoryListItemComponent,
-        HotkeyListItemComponent
+        HotkeyListItemComponent,
+        MarginClassPipe
     ],
     imports: [
         BaseModule

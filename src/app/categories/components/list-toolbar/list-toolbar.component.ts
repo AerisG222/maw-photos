@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 
-import { ThumbnailSize, Margin } from '@models';
+import { ThumbnailSize, Margin, nextMargin } from '@models';
 
 @Component({
   selector: 'app-list-toolbar',
@@ -21,7 +21,7 @@ export class ListToolbarComponent {
     }
 
     onToggleMargins(): void {
-        const newMargin = Margin.nextSize(this.margin.name);
+        const newMargin = nextMargin(this.margin);
 
         this.toggleMargin.next(newMargin);
     }
