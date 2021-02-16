@@ -4,8 +4,13 @@
     $accent: map-get($theme, accent);
 
     app-stats-header {
-        & a {
+        a {
+
             color: mat-color($accent, A200);
+        }
+
+        a:hover {
+            background-color: transparent;
         }
     }
 }
