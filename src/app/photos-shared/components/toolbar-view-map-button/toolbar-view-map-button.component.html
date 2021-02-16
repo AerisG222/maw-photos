@@ -1,9 +1,9 @@
-<app-toolbar-button
-    [isActive]="isActive$ | async"
+<app-toolbar-link
+    [link]="url$ | async"
     [hideOnMobile]="true"
     icon="map"
     shortcutKey="z"
     shortcutHelp="Map View"
     tooltip="Map View (Z)"
     (click)="onSelectView()">
-</app-toolbar-button>
+</app-toolbar-link>

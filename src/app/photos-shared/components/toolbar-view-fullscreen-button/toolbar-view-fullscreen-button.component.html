@@ -1,9 +1,9 @@
-<app-toolbar-button
-    [isActive]="isActive$ | async"
+<app-toolbar-link
+    [link]="url$ | async"
     [hideOnMobile]="true"
     icon="fullscreen"
     shortcutKey="f"
     shortcutHelp="Full Screen View"
     tooltip="Full Screen View (F)"
     (click)="onSelectView()">
-</app-toolbar-button>
+</app-toolbar-link>

@@ -1,8 +1,8 @@
-<app-toolbar-button
-    [isActive]="isActive$ | async"
+<app-toolbar-link
+    [link]="url$ | async"
     icon="apps"
     shortcutKey="g"
     shortcutHelp="Grid View"
     tooltip="Grid View (G)"
     (click)="onSelectView()">
-</app-toolbar-button>
+</app-toolbar-link>

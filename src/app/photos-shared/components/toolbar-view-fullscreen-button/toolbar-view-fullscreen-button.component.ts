@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { PhotoViewMode } from '@models';
 import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
@@ -11,7 +12,7 @@ import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/tool
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarViewFullscreenButtonComponent extends ToolbarViewButtonBaseComponent {
-    constructor(public viewModeSelectable: PhotoViewModeSelectable) {
-        super(viewModeSelectable, PhotoViewMode.fullscreen);
+    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store) {
+        super(viewModeSelectable, store, PhotoViewMode.fullscreen);
     }
 }

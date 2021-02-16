@@ -1,8 +1,8 @@
-<app-toolbar-button
-    [isActive]="isActive$ | async"
+<app-toolbar-link
+    [link]="url$ | async"
     icon="dashboard"
     shortcutKey="d"
     shortcutHelp="Detail View"
     tooltip="Detail View (D)"
     (click)="onSelectView()">
-</app-toolbar-button>
+</app-toolbar-link>

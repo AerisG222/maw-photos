@@ -7,6 +7,7 @@ import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
 import { RouteDetails, RouteArea } from '@models';
+import { LayoutStoreActions } from '../layout-store';
 
 interface RouteDetailsChange {
     previous: RouteDetails | null;
@@ -64,6 +65,20 @@ export class RouterStoreEffects {
                     leavingArea: change.previous?.area ?? RouteArea.unknown,
                     leavingRouteDetails: change.previous
                 }))
+            );
+    });
+
+    // TODO: rework
+    monitorFullScreenEffect$ = createEffect(() => {
+        return this.routeChanged$
+            .pipe(
+                map(([action, routeDetails]) => {
+                    if(routeDetails.url.indexOf('fullscreen') >= 0) {
+                        return LayoutStoreActions.enterFullscreenRequest();
+                    } else {
+                        return LayoutStoreActions.exitFullscreenRequest();
+                    }
+                })
             );
     });
 
