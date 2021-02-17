@@ -16,8 +16,7 @@
                 "createDefaultProgram": true
             },
             "extends": [
-                "plugin:@angular-eslint/ng-cli-compat",
-                "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+                "plugin:@angular-eslint/recommended",
                 "plugin:@angular-eslint/template/process-inline-templates",
                 "plugin:ngrx/recommended"
             ],
@@ -41,6 +40,7 @@
                         "style": "camelCase"
                     }
                 ],
+                // TODO: remove the items below?
                 "@typescript-eslint/no-explicit-any": "error",
                 "arrow-body-style": "off",
                 "no-shadow": "off",
