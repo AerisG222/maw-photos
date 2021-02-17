@@ -8,7 +8,7 @@ import { GridPhotoComponent } from '../photos-shared/components/grid-photo/grid-
 import { GridViewComponent } from '../photos-shared/components/grid-view/grid-view.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 import { ViewModeGuard } from './services/view-mode.guard';
-import { PhotoViewMode } from '../models/photo-view-mode.model';
+import { PhotoViewMode } from '../models/photo-view-mode';
 
 const routes: Routes = [
     {

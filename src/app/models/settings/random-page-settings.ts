@@ -1,4 +1,4 @@
-import { PhotoViewMode } from '../photo-view-mode.model';
+import { PhotoViewMode } from '../photo-view-mode';
 
 export interface RandomPageSettings {
     viewMode: PhotoViewMode;

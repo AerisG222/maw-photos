@@ -1,4 +1,4 @@
-import { PhotoRotation } from './photo-rotation.model';
+import { PhotoRotation } from './photo-rotation';
 
 export interface PhotoEffects {
     rotation: PhotoRotation;

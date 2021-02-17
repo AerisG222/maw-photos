@@ -1,4 +1,4 @@
-import { MultimediaAsset } from './multimedia-asset.model';
+import { MultimediaAsset } from './multimedia-asset';
 
 export interface Video {
     id: number;

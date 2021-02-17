@@ -1,4 +1,4 @@
-import { CategoryTypeFilter } from '../category-type-filter.model';
+import { CategoryTypeFilter } from '../category-type-filter';
 
 export interface CategoryFilterSettings {
     typeFilter: CategoryTypeFilter;

@@ -1,4 +1,4 @@
-import { CategoryViewMode } from '../category-view-mode.model';
+import { CategoryViewMode } from '../category-view-mode';
 
 export interface CategoryPageSettings {
     viewMode: CategoryViewMode;

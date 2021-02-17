@@ -1,5 +1,5 @@
-import { CategoryType } from './category-type.model';
-import { MultimediaAsset } from './api/multimedia-asset.model';
+import { CategoryType } from './category-type';
+import { MultimediaAsset } from './api/multimedia-asset';
 
 export interface CategoryTeaser {
     route: string;

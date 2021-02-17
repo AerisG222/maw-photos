@@ -1,5 +1,5 @@
-import { Margin } from 'src/app/models/margin.model';
-import { ThumbnailSize } from '../thumbnail-size.model';
+import { Margin } from 'src/app/models/margin';
+import { ThumbnailSize } from '../thumbnail-size';
 
 export interface SearchGridViewSettings {
     margin: Margin;

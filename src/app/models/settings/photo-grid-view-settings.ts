@@ -1,5 +1,5 @@
-import { Margin } from '../margin.model';
-import { ThumbnailSize } from '../thumbnail-size.model';
+import { Margin } from '../margin';
+import { ThumbnailSize } from '../thumbnail-size';
 
 export interface PhotoGridViewSettings {
     margin: Margin;

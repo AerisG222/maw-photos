@@ -1,4 +1,4 @@
-import { MapType } from 'src/app/models/map-type.model';
+import { MapType } from 'src/app/models/map-type';
 
 export interface PhotoInfoPanelSettings {
     showRatings: boolean;

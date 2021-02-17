@@ -1,5 +1,5 @@
-import { ThumbnailSize } from '../thumbnail-size.model';
-import { VideoSize } from '../video-size.model';
+import { ThumbnailSize } from '../thumbnail-size';
+import { VideoSize } from '../video-size';
 
 export interface VideoDetailViewSettings {
     showBreadcrumbs: boolean;

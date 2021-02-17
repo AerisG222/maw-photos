@@ -1,8 +1,8 @@
 import { RouterStateSnapshot, Params } from '@angular/router';
 
-import { CategoryTeaser } from './category-teaser.model';
-import { CategoryTypeFilter } from './category-type-filter.model';
-import { CategoryType } from './category-type.model';
+import { CategoryTeaser } from './category-teaser';
+import { CategoryTypeFilter } from './category-type-filter';
+import { CategoryType } from './category-type';
 import { RouteArea } from './route-area';
 
 export const about = 'about';
