@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -12,7 +17,7 @@ import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-s
     selector: 'app-videos-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
     settings: Settings | null = null;
@@ -21,16 +26,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     constructor(
         private store: Store,
-        private videoFacade: VideoDetailSettingsFacade) {
-
-    }
+        private videoFacade: VideoDetailSettingsFacade
+    ) {}
 
     ngOnInit(): void {
-        this.destroySub.add(this.store
-            .select(SettingsStoreSelectors.settings)
-            .pipe(
-                tap(settings => this.settings = settings)
-            ).subscribe()
+        this.destroySub.add(
+            this.store
+                .select(SettingsStoreSelectors.settings)
+                .pipe(tap((settings) => (this.settings = settings)))
+                .subscribe()
         );
     }
 

@@ -7,15 +7,17 @@ export abstract class BasePhotoDetailSettingsFacade extends BaseSettingsFacade<P
     abstract settings$: Observable<PhotoDetailViewSettings>;
 
     toggleBreadcrumbs(): void {
-        this.saveUpdatedField(x => x.showBreadcrumbs = !x.showBreadcrumbs);
+        this.saveUpdatedField((x) => (x.showBreadcrumbs = !x.showBreadcrumbs));
     }
 
     togglePhotoList(): void {
-        this.saveUpdatedField(x => x.showPhotoList = !x.showPhotoList);
+        this.saveUpdatedField((x) => (x.showPhotoList = !x.showPhotoList));
     }
 
     toggleThumbnailSize(): void {
-        this.saveUpdatedField(x => x.thumbnailSize = nextThumbnailSize(x.thumbnailSize));
+        this.saveUpdatedField(
+            (x) => (x.thumbnailSize = nextThumbnailSize(x.thumbnailSize))
+        );
     }
 
     abstract save(settings: PhotoDetailViewSettings): void;

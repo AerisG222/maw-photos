@@ -15,13 +15,13 @@ import { RootStoreModule } from './root-store';
         HttpClientModule,
         OAuthModule.forRoot({
             resourceServer: {
-                allowedUrls: [ environment.apiUrl ],
-                sendAccessToken: true
-            }
+                allowedUrls: [environment.apiUrl],
+                sendAccessToken: true,
+            },
         }),
         modules.servicesModule.forRoot(),
-        RootStoreModule
-    ]
+        RootStoreModule,
+    ],
 })
 export class CoreModule {
     constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

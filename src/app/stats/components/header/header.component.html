@@ -1,6 +1,4 @@
-<span class="mat-h1" *ngIf="!!!year || year <= 0">
-    {{ title }}
-</span>
+<span class="mat-h1" *ngIf="!!!year || year <= 0"> {{ title }} </span>
 
 <a (click)="onBack()" class="mat-h1" *ngIf="!!year && year > 0">
     {{ title }}
@@ -8,5 +6,5 @@
 
 <span *ngIf="!!year && year > 0" class="mat-h1">
     <mat-icon>chevron_right</mat-icon>
-    {{year}}
+    {{ year }}
 </span>

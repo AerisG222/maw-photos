@@ -7,5 +7,5 @@ export interface PhotoMapViewSettings {
 
 export const DEFAULT_PHOTO_MAP_VIEW_SETTINGS: PhotoMapViewSettings = {
     mapType: MapType.roadmap,
-    zoom: 10
+    zoom: 10,
 };

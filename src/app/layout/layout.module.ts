@@ -5,17 +5,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ToolbarSidebarComponent } from './toolbar-sidebar/toolbar-sidebar.component';
 
 @NgModule({
-    declarations: [
-        EmptyComponent,
-        ToolbarComponent,
-        ToolbarSidebarComponent
-    ],
-    imports: [
-    ],
-    exports: [
-        EmptyComponent,
-        ToolbarComponent,
-        ToolbarSidebarComponent
-    ]
+    declarations: [EmptyComponent, ToolbarComponent, ToolbarSidebarComponent],
+    imports: [],
+    exports: [EmptyComponent, ToolbarComponent, ToolbarSidebarComponent],
 })
-export class LayoutModule { }
+export class LayoutModule {}

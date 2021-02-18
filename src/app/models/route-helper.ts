@@ -31,67 +31,75 @@ export const searchViewList = 'list';
 export const searchViewDefault = 'grid';
 
 export const areaMap = [
-    { urlStart: about,           area: RouteArea.about },
-    { urlStart: categories,      area: RouteArea.categories },
-    { urlStart: login,           area: RouteArea.login },
+    { urlStart: about, area: RouteArea.about },
+    { urlStart: categories, area: RouteArea.categories },
+    { urlStart: login, area: RouteArea.login },
     { urlStart: photoCategories, area: RouteArea.photos },
-    { urlStart: random,          area: RouteArea.random },
-    { urlStart: search,          area: RouteArea.search },
-    { urlStart: settings,        area: RouteArea.settings },
-    { urlStart: stats,           area: RouteArea.stats },
-    { urlStart: videoCategories, area: RouteArea.videos }
+    { urlStart: random, area: RouteArea.random },
+    { urlStart: search, area: RouteArea.search },
+    { urlStart: settings, area: RouteArea.settings },
+    { urlStart: stats, area: RouteArea.stats },
+    { urlStart: videoCategories, area: RouteArea.videos },
 ];
 
 export const aboutAbs = (section?: string) => {
-    let url = `/${ about }`;
+    let url = `/${about}`;
 
-    if(section) {
+    if (section) {
         url += `/${section}`;
     }
 
     return url;
 };
 
-export const categoriesAbs = (view?: string, year?: number | string, type?: CategoryTypeFilter) => {
-    let url = `/${ categories }`;
+export const categoriesAbs = (
+    view?: string,
+    year?: number | string,
+    type?: CategoryTypeFilter
+) => {
+    let url = `/${categories}`;
 
-    if(view) {
-        url += `/${ view }`;
+    if (view) {
+        url += `/${view}`;
     }
 
-    if(year) {
-        url += `?year=${ year }`;
+    if (year) {
+        url += `?year=${year}`;
     }
 
-    if(type) {
-        url += `?type=${ type }`;
+    if (type) {
+        url += `?type=${type}`;
     }
 
     return url;
 };
 
 export const loginAbs = () => {
-    return `/${ login }`;
+    return `/${login}`;
 };
 
-export const photoCategoriesAbs = (view?: string, categoryId?: number, photoId?: number) => {
-    let url = `/${ photoCategories }`;
+export const photoCategoriesAbs = (
+    view?: string,
+    categoryId?: number,
+    photoId?: number
+) => {
+    let url = `/${photoCategories}`;
 
-    if(categoryId) {
-        url += `/${ categoryId }`;
+    if (categoryId) {
+        url += `/${categoryId}`;
     }
 
-    if(!!photoId && !view) {
+    if (!!photoId && !view) {
         view = photoViewDefault;
     }
 
-    if(view) {
-        url += `/${ view }`;
+    if (view) {
+        url += `/${view}`;
     }
 
-    if(photoId) {
-        if(!(view === photoViewBulkEdit || view === photoViewGrid)) {
-            url += `/${ photoId }`;
+    if (photoId) {
+        if (!(view === photoViewBulkEdit || view === photoViewGrid)) {
+            url += `/${photoId}`;
         }
     }
 
@@ -99,17 +107,17 @@ export const photoCategoriesAbs = (view?: string, categoryId?: number, photoId?:
 };
 
 export const randomAbs = (view?: string, photoId?: number) => {
-    let url = `/${ random }`;
+    let url = `/${random}`;
 
-    if(!view) {
+    if (!view) {
         view = photoViewDefault;
     }
 
-    url += `/${ view }`;
+    url += `/${view}`;
 
-    if(photoId) {
-        if(view !== photoViewGrid) {
-            url += `/${ photoId }`;
+    if (photoId) {
+        if (view !== photoViewGrid) {
+            url += `/${photoId}`;
         }
     }
 
@@ -117,9 +125,9 @@ export const randomAbs = (view?: string, photoId?: number) => {
 };
 
 export const searchAbs = (view?: string) => {
-    const url = `/${ search }`;
+    const url = `/${search}`;
 
-    if(!view) {
+    if (!view) {
         view = searchViewDefault;
     }
 
@@ -127,44 +135,44 @@ export const searchAbs = (view?: string) => {
 };
 
 export const settingsAbs = () => {
-    return `/${ settings }`;
+    return `/${settings}`;
 };
 
 export const statsAbs = (section?: string) => {
-    let url = `/${ stats }`;
+    let url = `/${stats}`;
 
-    if(section) {
-        url += `/${ section }`;
+    if (section) {
+        url += `/${section}`;
     }
 
     return url;
 };
 
 export const videoCategoriesAbs = (categoryId?: number, videoId?: number) => {
-    let url = `/${ videoCategories }`;
+    let url = `/${videoCategories}`;
 
-    if(categoryId) {
-        url += `/${ categoryId }`;
+    if (categoryId) {
+        url += `/${categoryId}`;
     }
 
-    if(videoId) {
-        url += `/${ videoId }`;
+    if (videoId) {
+        url += `/${videoId}`;
     }
 
     return url;
 };
 
 export const getArea = (url: string): RouteArea => {
-    if(!url) {
+    if (!url) {
         return RouteArea.unknown;
     }
 
-    if(url.startsWith('/')) {
+    if (url.startsWith('/')) {
         url = url.substr(1);
     }
 
-    for(const mapping of areaMap) {
-        if(url.startsWith(mapping.urlStart)) {
+    for (const mapping of areaMap) {
+        if (url.startsWith(mapping.urlStart)) {
             return mapping.area;
         }
     }
@@ -179,7 +187,7 @@ export const getRouteDetails = (state: RouterStateSnapshot) => {
         fragment: state.root.fragment,
         params: getRouteNestedParams(state),
         queryParams: state.root.queryParams,
-        data: state.root.data
+        data: state.root.data,
     };
 };
 
@@ -187,22 +195,26 @@ export const isCategoriesArea = (url: string) => {
     return getArea(url) === RouteArea.categories;
 };
 
-export const doesRouteAreaNeedCategoryData = (area: RouteArea | undefined): boolean => {
-    return area === RouteArea.categories ||
+export const doesRouteAreaNeedCategoryData = (
+    area: RouteArea | undefined
+): boolean => {
+    return (
+        area === RouteArea.categories ||
         area === RouteArea.photos ||
         area === RouteArea.random ||
         area === RouteArea.stats ||
-        area === RouteArea.videos;
+        area === RouteArea.videos
+    );
 };
 
 export const getCategoryRoute = (category?: CategoryTeaser) => {
-    if(!category) {
+    if (!category) {
         return null;
     }
 
-    return category.type === CategoryType.photo ?
-        photoCategoriesAbs(undefined, category.id) :
-        videoCategoriesAbs(undefined, category.id);
+    return category.type === CategoryType.photo
+        ? photoCategoriesAbs(undefined, category.id)
+        : videoCategoriesAbs(undefined, category.id);
 };
 
 const getRouteNestedParams = (state: RouterStateSnapshot) => {

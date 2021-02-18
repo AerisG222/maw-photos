@@ -11,14 +11,10 @@ export class SearchStoreRoutingEffects {
     monitorWhenLeavingRandomArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
-            filter(action => action.leavingArea === RouteArea.search),
-            map(area => SearchStoreActions.exitSearchArea())
+            filter((action) => action.leavingArea === RouteArea.search),
+            map((area) => SearchStoreActions.exitSearchArea())
         );
     });
 
-    constructor(
-        private actions$: Actions
-    ) {
-
-    }
+    constructor(private actions$: Actions) {}
 }

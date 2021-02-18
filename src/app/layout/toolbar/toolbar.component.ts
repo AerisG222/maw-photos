@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    ViewChild,
+    ElementRef,
+} from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { toolbarShow } from '@shared/animations';
@@ -9,12 +14,10 @@ import { toolbarShow } from '@shared/animations';
     styleUrls: ['./toolbar.component.scss'],
     animations: [
         trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
+            transition('* => *', [useAnimation(toolbarShow)]),
+        ]),
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
     @ViewChild('scrollPane') scrollPane: ElementRef | null = null;
@@ -31,7 +34,11 @@ export class ToolbarComponent {
         if (this.scrollPane) {
             const div = this.scrollPane.nativeElement as HTMLDivElement;
 
-            setTimeout(() => div.scrollTo({ top: newTop, left: 0, behavior: 'smooth' }), 5);
+            setTimeout(
+                () =>
+                    div.scrollTo({ top: newTop, left: 0, behavior: 'smooth' }),
+                5
+            );
         }
     }
 }

@@ -6,7 +6,7 @@ import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-setti
 
 @Injectable()
 export class PhotosUrlService {
-    constructor(private photoPage: PhotoPageSettingsFacade) { }
+    constructor(private photoPage: PhotoPageSettingsFacade) {}
 
     getValidView(requestedView: string | null, preferredView: string | null) {
         if (isValidPhotoViewMode(requestedView)) {
@@ -21,9 +21,8 @@ export class PhotosUrlService {
     }
 
     getDefaultView() {
-        return this.photoPage.settings$
-            .pipe(
-                map(s => this.getValidView(null, s.viewMode))
-            );
+        return this.photoPage.settings$.pipe(
+            map((s) => this.getValidView(null, s.viewMode))
+        );
     }
 }

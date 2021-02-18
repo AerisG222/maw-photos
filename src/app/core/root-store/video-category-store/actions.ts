@@ -2,9 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Category } from '@models';
 
-export const loadRequest = createAction(
-    '[Video Categories] Load Request'
-);
+export const loadRequest = createAction('[Video Categories] Load Request');
 
 export const loadFailure = createAction(
     '[Video Categories] Load Failure',

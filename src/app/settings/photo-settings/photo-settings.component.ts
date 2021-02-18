@@ -4,7 +4,16 @@ import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 // eslint-disable-next-line max-len
-import { allMapTypes, allPhotoViewModes, MapType, MinimapZoom, allMargins, toMarginDefaulted, toThumbnailSizeDefaulted, allThumbnailSizes } from '@models';
+import {
+    allMapTypes,
+    allPhotoViewModes,
+    MapType,
+    MinimapZoom,
+    allMargins,
+    toMarginDefaulted,
+    toThumbnailSizeDefaulted,
+    allThumbnailSizes,
+} from '@models';
 import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
@@ -20,7 +29,7 @@ import { PhotoPageSettings } from '@models';
     selector: 'app-photo-settings',
     templateUrl: './photo-settings.component.html',
     styleUrls: ['./photo-settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoSettingsComponent {
     form: FormGroup;
@@ -29,7 +38,7 @@ export class PhotoSettingsComponent {
     margins = allMargins;
     thumbnailSizes = allThumbnailSizes;
     zoomLevels = MinimapZoom.allSizes;
-    slideshowDurations = [ 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60 ];
+    slideshowDurations = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60];
 
     constructor(
         private fb: FormBuilder,
@@ -42,7 +51,7 @@ export class PhotoSettingsComponent {
         this.form = this.fb.group({
             page: this.fb.group({
                 viewMode: '',
-                slideshowDuration: ''
+                slideshowDuration: '',
             }),
             detail: this.fb.group({
                 showBreadcrumbs: '',
@@ -59,8 +68,8 @@ export class PhotoSettingsComponent {
                     showMetadataEditor: '',
                     showCategoryTeaserChooser: '',
                     minimapType: '',
-                    minimapZoom: ''
-                })
+                    minimapZoom: '',
+                }),
             }),
             grid: this.fb.group({
                 margin: '',
@@ -70,14 +79,14 @@ export class PhotoSettingsComponent {
             map: this.fb.group({
                 mapType: '',
                 zoom: '',
-            })
+            }),
         });
 
         this.resetForm();
     }
 
     onSave() {
-        if(!this.form.valid) {
+        if (!this.form.valid) {
             return;
         }
 
@@ -100,47 +109,69 @@ export class PhotoSettingsComponent {
 
     private readDetailForm(): PhotoDetailViewSettings {
         return {
-            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
-            showPhotoList: this.form.get('detail.showPhotoList')?.value as boolean,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('detail.thumbnailSIze')?.value)
+            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')
+                ?.value as boolean,
+            showPhotoList: this.form.get('detail.showPhotoList')
+                ?.value as boolean,
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('detail.thumbnailSIze')?.value
+            ),
         };
     }
 
     private readGridForm(): PhotoGridViewSettings {
         return {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
-            showBreadcrumbs: this.form.get('grid.showBreadcrumbs')?.value as boolean,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value)
+            showBreadcrumbs: this.form.get('grid.showBreadcrumbs')
+                ?.value as boolean,
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('grid.thumbnailSize')?.value
+            ),
         };
     }
 
     private readInfoForm(): PhotoInfoPanelSettings {
         return {
-            expandedState: this.form.get('detail.infoPanel.expandedState')?.value as boolean,
-            showRatings: this.form.get('detail.infoPanel.showRatings')?.value as boolean,
-            showComments: this.form.get('detail.infoPanel.showComments')?.value as boolean,
-            showEffects: this.form.get('detail.infoPanel.showEffects')?.value as boolean,
-            showExif: this.form.get('detail.infoPanel.showExif')?.value as boolean,
-            showHistogram: this.form.get('detail.infoPanel.showHistogram')?.value as boolean,
-            showMinimap: this.form.get('detail.infoPanel.showMinimap')?.value as boolean,
-            showMetadataEditor: this.form.get('detail.infoPanel.showMetadataEditor')?.value as boolean,
-            showCategoryTeaserChooser: this.form.get('detail.infoPanel.showCategoryTeaserChooser')?.value as boolean,
-            minimapMapType: this.form.get('detail.infoPanel.minimapType')?.value as MapType,
-            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')?.value as number
+            expandedState: this.form.get('detail.infoPanel.expandedState')
+                ?.value as boolean,
+            showRatings: this.form.get('detail.infoPanel.showRatings')
+                ?.value as boolean,
+            showComments: this.form.get('detail.infoPanel.showComments')
+                ?.value as boolean,
+            showEffects: this.form.get('detail.infoPanel.showEffects')
+                ?.value as boolean,
+            showExif: this.form.get('detail.infoPanel.showExif')
+                ?.value as boolean,
+            showHistogram: this.form.get('detail.infoPanel.showHistogram')
+                ?.value as boolean,
+            showMinimap: this.form.get('detail.infoPanel.showMinimap')
+                ?.value as boolean,
+            showMetadataEditor: this.form.get(
+                'detail.infoPanel.showMetadataEditor'
+            )?.value as boolean,
+            showCategoryTeaserChooser: this.form.get(
+                'detail.infoPanel.showCategoryTeaserChooser'
+            )?.value as boolean,
+            minimapMapType: this.form.get('detail.infoPanel.minimapType')
+                ?.value as MapType,
+            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')
+                ?.value as number,
         };
     }
 
     private readMapForm(): PhotoMapViewSettings {
         return {
             mapType: this.form.get('map.mapType')?.value as MapType,
-            zoom: this.form.get('map.zoom')?.value as number
+            zoom: this.form.get('map.zoom')?.value as number,
         };
     }
 
     private readPageForm(): PhotoPageSettings {
         return {
             viewMode: this.form.get('page.viewMode')?.value,
-            slideshowDisplayDurationSeconds: this.form.get('page.slideshowDuration')?.value as number
+            slideshowDisplayDurationSeconds: this.form.get(
+                'page.slideshowDuration'
+            )?.value as number,
         };
     }
 
@@ -150,45 +181,47 @@ export class PhotoSettingsComponent {
             this.gridFacade.settings$,
             this.infoFacade.settings$,
             this.mapFacade.settings$,
-            this.pageFacade.settings$
-        ]).pipe(
-            first()
-        ).subscribe({
-            next: ([detail, grid, info, map, page]) => {
-                this.form.patchValue({
-                    page: {
-                        viewMode: page.viewMode,
-                        slideshowDuration: page.slideshowDisplayDurationSeconds
-                    },
-                    detail: {
-                        showBreadcrumbs: detail.showBreadcrumbs,
-                        showPhotoList: detail.showPhotoList,
-                        thumbnailSize: detail.thumbnailSize,
-                        infoPanel: {
-                            expandedState: info.expandedState,
-                            showRatings: info.showRatings,
-                            showComments: info.showComments,
-                            showExif: info.showExif,
-                            showHistogram: info.showHistogram,
-                            showEffects: info.showEffects,
-                            showMinimap: info.showMinimap,
-                            showMetadataEditor: info.showMetadataEditor,
-                            showCategoryTeaserChooser: info.showCategoryTeaserChooser,
-                            minimapType: info.minimapMapType,
-                            minimapZoom: info.minimapZoom
-                        }
-                    },
-                    grid: {
-                        margin: grid.margin,
-                        showBreadcrumbs: grid.showBreadcrumbs,
-                        thumbnailSize: grid.thumbnailSize,
-                    },
-                    map: {
-                        mapType: map.mapType,
-                        zoom: map.zoom,
-                    }
-                });
-            }
-        });
+            this.pageFacade.settings$,
+        ])
+            .pipe(first())
+            .subscribe({
+                next: ([detail, grid, info, map, page]) => {
+                    this.form.patchValue({
+                        page: {
+                            viewMode: page.viewMode,
+                            slideshowDuration:
+                                page.slideshowDisplayDurationSeconds,
+                        },
+                        detail: {
+                            showBreadcrumbs: detail.showBreadcrumbs,
+                            showPhotoList: detail.showPhotoList,
+                            thumbnailSize: detail.thumbnailSize,
+                            infoPanel: {
+                                expandedState: info.expandedState,
+                                showRatings: info.showRatings,
+                                showComments: info.showComments,
+                                showExif: info.showExif,
+                                showHistogram: info.showHistogram,
+                                showEffects: info.showEffects,
+                                showMinimap: info.showMinimap,
+                                showMetadataEditor: info.showMetadataEditor,
+                                showCategoryTeaserChooser:
+                                    info.showCategoryTeaserChooser,
+                                minimapType: info.minimapMapType,
+                                minimapZoom: info.minimapZoom,
+                            },
+                        },
+                        grid: {
+                            margin: grid.margin,
+                            showBreadcrumbs: grid.showBreadcrumbs,
+                            thumbnailSize: grid.thumbnailSize,
+                        },
+                        map: {
+                            mapType: map.mapType,
+                            zoom: map.zoom,
+                        },
+                    });
+                },
+            });
     }
 }

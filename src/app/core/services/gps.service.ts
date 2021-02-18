@@ -3,13 +3,16 @@ import { Injectable } from '@angular/core';
 import { GpsCoordinate } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class GpsService {
     parse(val: string): GpsCoordinate | null {
-        const parts = val.trim()
-            .replace('[', '').replace(']', '')
-            .replace('(', '').replace(')', '')
+        const parts = val
+            .trim()
+            .replace('[', '')
+            .replace(']', '')
+            .replace('(', '')
+            .replace(')', '')
             .split(',');
 
         if (parts.length !== 2) {
@@ -25,7 +28,7 @@ export class GpsService {
 
         return {
             latitude: lat,
-            longitude: lng
+            longitude: lng,
         };
     }
 }

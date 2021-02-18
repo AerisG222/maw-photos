@@ -7,5 +7,5 @@ export { VideoCategoryStoreModule } from './video-category-store.module';
 export {
     VideoCategoryStoreActions,
     VideoCategoryStoreSelectors,
-    VideoCategoryStoreState
+    VideoCategoryStoreState,
 };

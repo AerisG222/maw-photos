@@ -19,10 +19,16 @@ export const routeAreaChanged = createAction(
 
 export const routeAreaEntering = createAction(
     '[Router] Area Entering',
-    props<{ enteringArea: RouteArea; enteringRouteDetails: RouteDetails | null }>()
+    props<{
+        enteringArea: RouteArea;
+        enteringRouteDetails: RouteDetails | null;
+    }>()
 );
 
 export const routeAreaLeaving = createAction(
     '[Router] Area Leaving',
-    props<{ leavingArea: RouteArea; leavingRouteDetails: RouteDetails | null }>()
+    props<{
+        leavingArea: RouteArea;
+        leavingRouteDetails: RouteDetails | null;
+    }>()
 );

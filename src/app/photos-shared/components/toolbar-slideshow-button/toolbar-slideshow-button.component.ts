@@ -7,16 +7,14 @@ import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
     selector: 'app-photos-toolbar-slideshow-button',
     templateUrl: './toolbar-slideshow-button.component.html',
     styleUrls: ['./toolbar-slideshow-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarSlideshowButtonComponent {
-    slideshowPlaying$ = this.store.select(PhotoStoreSelectors.slideshowIsPlaying);
+    slideshowPlaying$ = this.store.select(
+        PhotoStoreSelectors.slideshowIsPlaying
+    );
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 
     onToggleSlideshow(): void {
         this.store.dispatch(PhotoStoreActions.toggleSlideshowRequest());

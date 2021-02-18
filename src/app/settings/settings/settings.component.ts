@@ -6,7 +6,7 @@ import { Margin } from '@models';
     selector: 'app-settings-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent {
     margin = Margin.compact;

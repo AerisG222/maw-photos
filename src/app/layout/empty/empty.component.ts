@@ -4,8 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-layout-empty',
     templateUrl: './empty.component.html',
     styleUrls: ['./empty.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmptyComponent {
-
-}
+export class EmptyComponent {}

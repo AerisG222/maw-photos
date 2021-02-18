@@ -7,14 +7,10 @@ import { LayoutStoreSelectors } from '@core/root-store';
     selector: 'app-primary-nav-primary-nav',
     templateUrl: './primary-nav.component.html',
     styleUrls: ['./primary-nav.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrimaryNavComponent {
     hideNav$ = this.store.select(LayoutStoreSelectors.isFullscreen);
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 }

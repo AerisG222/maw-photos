@@ -9,7 +9,7 @@ import { MetadataEditable } from '@core/facades';
     selector: 'app-sidebar-metadata-editor-card',
     templateUrl: './metadata-editor-card.component.html',
     styleUrls: ['./metadata-editor-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MetadataEditorCardComponent {
     form: FormGroup;
@@ -21,7 +21,7 @@ export class MetadataEditorCardComponent {
     ) {
         this.form = this.formBuilder.group({
             latitudeOverride: ['', Validators.required],
-            longitudeOverride: ['', Validators.required]
+            longitudeOverride: ['', Validators.required],
         });
     }
 
@@ -76,7 +76,7 @@ export class MetadataEditorCardComponent {
             return null;
         }
 
-        return { latitude, longitude};
+        return { latitude, longitude };
     }
 
     private updateOverrideData(gps: GpsCoordinate | null): void {

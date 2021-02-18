@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     selector: 'app-search-result-count',
     templateUrl: './result-count.component.html',
     styleUrls: ['./result-count.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultCountComponent {
     @Input() resultsShownCount: number | null = null;

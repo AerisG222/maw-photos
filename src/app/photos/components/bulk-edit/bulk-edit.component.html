@@ -3,8 +3,7 @@
 
     <div layout-main class="content-grid">
         <div class="category-header">
-            <app-shared-category-header
-                [category]="category$ | async">
+            <app-shared-category-header [category]="category$ | async">
             </app-shared-category-header>
         </div>
 
@@ -14,7 +13,8 @@
             [photos]="photos$ | async"
             [selectedPhotos]="selectedPhotos"
             (photoSelected)="onPhotoSelected($event)"
-            (photoDeselected)="onPhotoDeselected($event)">
+            (photoDeselected)="onPhotoDeselected($event)"
+        >
         </app-photos-photo-select-grid>
     </div>
 
@@ -22,6 +22,7 @@
         layout-sidebar
         (showPhotosWithGpsData)="onShowPhotosWithGpsData($event)"
         (selectAllPhotos)="onSelectAll($event)"
-        (saveGps)="onSaveGps($event)">
+        (saveGps)="onSaveGps($event)"
+    >
     </app-photos-bulk-edit-sidebar>
 </app-layout-toolbar-sidebar>

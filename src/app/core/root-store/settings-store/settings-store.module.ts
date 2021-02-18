@@ -10,7 +10,7 @@ import { reducer } from './reducer';
     declarations: [],
     imports: [
         StoreModule.forFeature(SETTINGS_FEATURE_NAME, reducer),
-        EffectsModule.forFeature([SettingsStoreEffects])
-    ]
+        EffectsModule.forFeature([SettingsStoreEffects]),
+    ],
 })
-export class SettingsStoreModule { }
+export class SettingsStoreModule {}

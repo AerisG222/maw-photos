@@ -7,14 +7,10 @@ import { PhotoStoreSelectors } from '@core/root-store';
     selector: 'app-photos-sidebar-exif',
     templateUrl: './sidebar-exif.component.html',
     styleUrls: ['./sidebar-exif.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarExifComponent {
     exifContainer$ = this.store.select(PhotoStoreSelectors.activePhotoExifData);
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 }

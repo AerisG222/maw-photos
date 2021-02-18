@@ -2,7 +2,7 @@ import { ValueDescriptor } from './value-descriptor';
 
 export enum VideoSize {
     small = 'small',
-    large = 'large'
+    large = 'large',
 }
 
 export const allVideoSizes: ValueDescriptor<VideoSize>[] = [
@@ -11,8 +11,7 @@ export const allVideoSizes: ValueDescriptor<VideoSize>[] = [
 ];
 
 export const toVideoSize = (val: string | null): VideoSize | undefined => {
-    if(!val)
-    {
+    if (!val) {
         return undefined;
     }
 

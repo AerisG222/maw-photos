@@ -1,7 +1,4 @@
-<app-sidebar-card
-    icon="photo_filter"
-    title="Effects">
-
+<app-sidebar-card icon="photo_filter" title="Effects">
     <div>
         <button mat-button (click)="onResetEffects()" color="primary">
             <mat-icon>clear</mat-icon> Reset
@@ -18,10 +15,24 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="100" step="1" [value]="effects?.grayscale ? effects.grayscale : 0" (input)="onGrayscaleChange($event)" #grayscale></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="100"
+                        step="1"
+                        [value]="effects?.grayscale ? effects.grayscale : 0"
+                        (input)="onGrayscaleChange($event)"
+                        #grayscale
+                    ></mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="100" step="1" [value]="effects?.sepia ? effects.sepia : 0" (input)="onSepiaChange($event)" #sepia></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="100"
+                        step="1"
+                        [value]="effects?.sepia ? effects.sepia : 0"
+                        (input)="onSepiaChange($event)"
+                        #sepia
+                    ></mat-slider>
                 </td>
             </tr>
             <tr>
@@ -30,10 +41,24 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="1000" step="1" [value]="effects?.brightness ? effects.brightness : 100" (input)="onBrightnessChange($event)" #brightness></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="1000"
+                        step="1"
+                        [value]="effects?.brightness ? effects.brightness : 100"
+                        (input)="onBrightnessChange($event)"
+                        #brightness
+                    ></mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="1000" step="1" [value]="effects?.saturation ? effects.saturation : 100" (input)="onSaturationChange($event)" #saturate></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="1000"
+                        step="1"
+                        [value]="effects?.saturation ? effects.saturation : 100"
+                        (input)="onSaturationChange($event)"
+                        #saturate
+                    ></mat-slider>
                 </td>
             </tr>
             <tr>
@@ -42,25 +67,52 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="1000" step="1" [value]="effects?.contrast ? effects.contrast : 100" (input)="onContrastChange($event)" #contrast></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="1000"
+                        step="1"
+                        [value]="effects?.contrast ? effects.contrast : 100"
+                        (input)="onContrastChange($event)"
+                        #contrast
+                    ></mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="100" step="1" [value]="effects?.invert ? effects.invert : 0" (input)="onInvertChange($event)" #invert></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="100"
+                        step="1"
+                        [value]="effects?.invert ? effects.invert : 0"
+                        (input)="onInvertChange($event)"
+                        #invert
+                    ></mat-slider>
                 </td>
             </tr>
             <tr>
-                <td>Blur ({{ blur.value | number:'1.1-1' }}px)</td>
+                <td>Blur ({{ blur.value | number: "1.1-1" }}px)</td>
                 <td>Hue-Rotate ({{ huerotate.value }}&deg;)</td>
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="10" step="0.1" [value]="effects?.blur ? effects.blur : 0" (input)="onBlurChange($event)" #blur></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="10"
+                        step="0.1"
+                        [value]="effects?.blur ? effects.blur : 0"
+                        (input)="onBlurChange($event)"
+                        #blur
+                    ></mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="360" step="1" [value]="effects?.hueRotate ? effects.hueRotate : 0" (input)="onHueRotateChange($event)" #huerotate></mat-slider>
+                    <mat-slider
+                        min="0"
+                        max="360"
+                        step="1"
+                        [value]="effects?.hueRotate ? effects.hueRotate : 0"
+                        (input)="onHueRotateChange($event)"
+                        #huerotate
+                    ></mat-slider>
                 </td>
             </tr>
         </table>
     </div>
-
 </app-sidebar-card>

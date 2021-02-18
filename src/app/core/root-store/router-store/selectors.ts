@@ -6,7 +6,9 @@ import { MinimalRouterStateSnapshot } from '@ngrx/router-store';
 import { RouteDetails, RouteArea, PhotoViewMode } from '@models';
 import { RouteHelper } from '@models';
 
-export const routerState = createFeatureSelector<fromRouter.RouterReducerState<MinimalRouterStateSnapshot>>('router');
+export const routerState = createFeatureSelector<
+    fromRouter.RouterReducerState<MinimalRouterStateSnapshot>
+>('router');
 
 export const {
     selectCurrentRoute,
@@ -36,7 +38,10 @@ export const selectRouteNestedParams = createSelector(routerState, (router) => {
 });
 
 export const selectRouteNestedParam = (param: string) => {
-    return createSelector(selectRouteNestedParams, (params) => params && params[param]);
+    return createSelector(
+        selectRouteNestedParams,
+        (params) => params && params[param]
+    );
 };
 
 export const selectRouteDetails = createSelector(
@@ -52,14 +57,14 @@ export const selectRouteDetails = createSelector(
             fragment: fragment ?? null,
             params,
             queryParams,
-            data
+            data,
         };
     }
 );
 
 export const isPhotosView = createSelector(
     selectRouteDetails,
-    details => details.area === RouteArea.photos
+    (details) => details.area === RouteArea.photos
 );
 
 export const isPhotosBulkEditView = createSelector(
@@ -77,7 +82,8 @@ export const isPhotosDetailView = createSelector(
 export const isPhotosFullscreenView = createSelector(
     isPhotosView,
     selectRouteData,
-    (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewFullscreen
+    (isPhotos, data) =>
+        isPhotos && data?.view === RouteHelper.photoViewFullscreen
 );
 
 export const isPhotosGridView = createSelector(
@@ -94,47 +100,48 @@ export const isPhotosMapView = createSelector(
 
 export const isRandomView = createSelector(
     selectRouteDetails,
-    details => details.area === RouteArea.random
+    (details) => details.area === RouteArea.random
 );
 
 export const photoView = createSelector(
     selectRouteData,
-    data => data?.view as PhotoViewMode ?? RouteHelper.photoViewDefault
+    (data) => (data?.view as PhotoViewMode) ?? RouteHelper.photoViewDefault
 );
 
-export const inCategoryArea = createSelector(
-    selectRouteDetails,
-    details => {
-        if(details) {
-            return details.area === RouteArea.categories ||
-                details.area === RouteArea.photos ||
-                details.area === RouteArea.videos;
-        }
-
-        return false;
+export const inCategoryArea = createSelector(selectRouteDetails, (details) => {
+    if (details) {
+        return (
+            details.area === RouteArea.categories ||
+            details.area === RouteArea.photos ||
+            details.area === RouteArea.videos
+        );
     }
-);
+
+    return false;
+});
 
 export const isCategoriesArea = createSelector(
     selectRouteDetails,
-    details => details.area === RouteArea.categories
+    (details) => details.area === RouteArea.categories
 );
 
 export const isCategoriesGridView = createSelector(
     isCategoriesArea,
     selectRouteParams,
-    (isCategories, params) => isCategories && params?.view === RouteHelper.categoryViewGrid
+    (isCategories, params) =>
+        isCategories && params?.view === RouteHelper.categoryViewGrid
 );
 
 export const isCategoriesListView = createSelector(
     isCategoriesArea,
     selectRouteParams,
-    (isCategories, params) => isCategories && params?.view === RouteHelper.categoryViewList
+    (isCategories, params) =>
+        isCategories && params?.view === RouteHelper.categoryViewList
 );
 
 export const isSearchArea = createSelector(
     selectRouteDetails,
-    details => details.area === RouteArea.search
+    (details) => details.area === RouteArea.search
 );
 
 export const isSearchGridView = createSelector(

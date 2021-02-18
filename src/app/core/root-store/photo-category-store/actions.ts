@@ -2,9 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Category } from '@models';
 
-export const loadRequest = createAction(
-    '[Photo Categories] Load Request'
-);
+export const loadRequest = createAction('[Photo Categories] Load Request');
 
 export const loadFailure = createAction(
     '[Photo Categories] Load Failure',

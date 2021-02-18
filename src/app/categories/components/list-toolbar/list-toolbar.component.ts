@@ -1,12 +1,18 @@
-import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    Input,
+    EventEmitter,
+    Output,
+} from '@angular/core';
 
 import { ThumbnailSize, Margin, nextMargin, nextThumbnailSize } from '@models';
 
 @Component({
-  selector: 'app-list-toolbar',
-  templateUrl: './list-toolbar.component.html',
-  styleUrls: ['./list-toolbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-list-toolbar',
+    templateUrl: './list-toolbar.component.html',
+    styleUrls: ['./list-toolbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListToolbarComponent {
     @Input() thumbnailSize = ThumbnailSize.default;

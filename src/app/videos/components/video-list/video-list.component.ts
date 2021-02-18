@@ -1,18 +1,25 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { DEFAULT_SETTINGS, DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, RouteHelper, ThumbnailSize, Video } from '@models';
+import {
+    DEFAULT_SETTINGS,
+    DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS,
+    RouteHelper,
+    ThumbnailSize,
+    Video,
+} from '@models';
 
 @Component({
     selector: 'app-videos-video-list',
     templateUrl: './video-list.component.html',
     styleUrls: ['./video-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoListComponent {
     @Input() videos: Video[] | null = null;
     @Input() selectedVideo: Video | null = null;
 
-    videoThumbnailSize: ThumbnailSize = DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS.thumbnailSize;
+    videoThumbnailSize: ThumbnailSize =
+        DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS.thumbnailSize;
     imgWidth: number | null = null;
     imgHeight: number | null = null;
     routeHelper = RouteHelper;

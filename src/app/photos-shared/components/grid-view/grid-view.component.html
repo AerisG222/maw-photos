@@ -1,25 +1,40 @@
 <app-layout-toolbar *ngIf="gridSettings$ | async; let gridSettings">
-    <app-photos-grid-view-toolbar [isRandom]="isRandomView$ | async" layout-toolbar></app-photos-grid-view-toolbar>
+    <app-photos-grid-view-toolbar
+        [isRandom]="isRandomView$ | async"
+        layout-toolbar
+    ></app-photos-grid-view-toolbar>
 
     <div layout-main>
         <router-outlet></router-outlet>
 
-        <app-shared-content-margin [margin]="gridSettings.margin" [ngStyle]="{ 'display': (activePhoto$ | async) === null ? 'block' : 'none' }">
+        <app-shared-content-margin
+            [margin]="gridSettings.margin"
+            [ngStyle]="{
+                display: (activePhoto$ | async) === null ? 'block' : 'none'
+            }"
+        >
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="gridSettings.showBreadcrumbs"
                     [showCategoryAsLink]="isRandomView$ | async"
-                    [category]="category$ | async">
+                    [category]="category$ | async"
+                >
                 </app-shared-category-header>
             </div>
 
             <div class="photo-grid">
-                <a *ngFor="let photo of photos$ | async;"
-                    [routerLink]="[photo.id]" (click)="trackScrollPosition()">
+                <a
+                    *ngFor="let photo of photos$ | async"
+                    [routerLink]="[photo.id]"
+                    (click)="trackScrollPosition()"
+                >
                     <img
-                        [ngClass]="gridSettings.thumbnailSize | thumbnailSizeClass"
+                        [ngClass]="
+                            gridSettings.thumbnailSize | thumbnailSizeClass
+                        "
                         [src]="photo.imageXsSq.url"
-                        loading="lazy" />
+                        loading="lazy"
+                    />
                 </a>
             </div>
         </app-shared-content-margin>

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store/settings-store';
+import {
+    SettingsStoreActions,
+    SettingsStoreSelectors,
+} from '@core/root-store/settings-store';
 import { PhotoPageSettings, PhotoViewMode } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class PhotoPageSettingsFacade extends BaseSettingsFacade<PhotoPageSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.photoPageSettings);
@@ -16,10 +19,12 @@ export class PhotoPageSettingsFacade extends BaseSettingsFacade<PhotoPageSetting
     }
 
     save(settings: PhotoPageSettings): void {
-        this.store.dispatch(SettingsStoreActions.savePhotoPageSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.savePhotoPageSettings({ settings })
+        );
     }
 
     saveViewMode(viewMode: PhotoViewMode): void {
-        this.saveUpdatedField(x => x.viewMode = viewMode);
+        this.saveUpdatedField((x) => (x.viewMode = viewMode));
     }
 }

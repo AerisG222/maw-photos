@@ -7,10 +7,15 @@
             videos: videos$ | async,
             settings: settings$ | async,
             activeVideo: activeVideo$ | async
-        } as data">
+        } as data"
+    >
         <div class="main-video-grid">
             <div class="category-header">
-                <app-shared-category-header *ngIf="data.settings?.showBreadcrumbs" [showCategoryAsLink]="false" [category]="(category$ | async)"></app-shared-category-header>
+                <app-shared-category-header
+                    *ngIf="data.settings?.showBreadcrumbs"
+                    [showCategoryAsLink]="false"
+                    [category]="category$ | async"
+                ></app-shared-category-header>
             </div>
 
             <div *ngIf="data.activeVideo" class="video-container">
@@ -18,10 +23,17 @@
                     #videoRef
                     class="center-block"
                     autoplay="false"
-                    [ngStyle]="getVideoDimensions(data.activeVideo, data.settings)"
-                    controls>
-                    <source [src]="getVideoUrl(data.activeVideo, data.settings)" type="video/mp4" />
-                    Your browser does not support the <code>video</code> element.
+                    [ngStyle]="
+                        getVideoDimensions(data.activeVideo, data.settings)
+                    "
+                    controls
+                >
+                    <source
+                        [src]="getVideoUrl(data.activeVideo, data.settings)"
+                        type="video/mp4"
+                    />
+                    Your browser does not support the
+                    <code>video</code> element.
                 </video>
             </div>
 
@@ -29,7 +41,8 @@
                 *ngIf="data.videos && data.settings?.showVideoList"
                 [videos]="data.videos"
                 [thumbnailSize]="data.settings?.thumbnailSize"
-                [selectedVideo]="data.activeVideo">
+                [selectedVideo]="data.activeVideo"
+            >
             </app-videos-video-list>
         </div>
     </ng-container>

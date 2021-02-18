@@ -10,5 +10,5 @@ export const authConfig: AuthConfig = {
     silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
     scope: 'offline_access openid profile maw_api role',
     showDebugInformation: environment.production === false,
-    clearHashAfterLogin: false
+    clearHashAfterLogin: false,
 };

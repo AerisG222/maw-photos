@@ -41,7 +41,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
         MatTabsModule,
         MatTooltipModule,
         ReactiveFormsModule,
-        RouterModule
-    ]
+        RouterModule,
+    ],
 })
-export class BaseModule { }
+export class BaseModule {}

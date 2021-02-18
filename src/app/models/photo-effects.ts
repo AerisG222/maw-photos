@@ -14,7 +14,7 @@ export interface PhotoEffects {
     flipVertical: boolean;
 }
 
-export const DEFAULT_PHOTO_EFFECTS: PhotoEffects = ({
+export const DEFAULT_PHOTO_EFFECTS: PhotoEffects = {
     rotation: new PhotoRotation(),
     grayscale: 0,
     sepia: 0,
@@ -25,5 +25,5 @@ export const DEFAULT_PHOTO_EFFECTS: PhotoEffects = ({
     blur: 0,
     hueRotate: 0,
     flipHorizontal: false,
-    flipVertical: false
-});
+    flipVertical: false,
+};

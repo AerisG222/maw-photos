@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 @Component({
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
     @Input() hideOnMobile = false;
@@ -19,14 +25,17 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
 
     abstract button: MatButton | null = null;
 
-    constructor(
-        public hotkeysService: HotkeysService
-    ) { }
+    constructor(public hotkeysService: HotkeysService) {}
 
     ngOnInit(): void {
         if (this.shortcutKey) {
             // eslint-disable-next-line max-len
-            this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp ?? undefined);
+            this.hotkey = new Hotkey(
+                this.shortcutKey,
+                (event: KeyboardEvent) => this.onHotkeyTriggered(event),
+                [],
+                this.shortcutHelp ?? undefined
+            );
 
             this.hotkeysService.add(this.hotkey);
         }

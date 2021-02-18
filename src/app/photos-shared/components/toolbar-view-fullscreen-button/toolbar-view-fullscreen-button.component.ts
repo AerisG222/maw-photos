@@ -9,10 +9,13 @@ import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/tool
     selector: 'app-toolbar-view-fullscreen-button',
     templateUrl: './toolbar-view-fullscreen-button.component.html',
     styleUrls: ['./toolbar-view-fullscreen-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewFullscreenButtonComponent extends ToolbarViewButtonBaseComponent {
-    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store) {
+    constructor(
+        public viewModeSelectable: PhotoViewModeSelectable,
+        public store: Store
+    ) {
         super(viewModeSelectable, store, PhotoViewMode.fullscreen);
     }
 }

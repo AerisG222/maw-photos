@@ -6,12 +6,8 @@ import { Navigable } from '@core/facades';
     selector: 'app-toolbar-move-next-button',
     templateUrl: './move-next-button.component.html',
     styleUrls: ['./move-next-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoveNextButtonComponent {
-    constructor(
-        public navigable: Navigable
-    ) {
-
-    }
+    constructor(public navigable: Navigable) {}
 }

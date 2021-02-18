@@ -4,8 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-toolbar-divider',
     templateUrl: './divider.component.html',
     styleUrls: ['./divider.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DividerComponent {
-
-}
+export class DividerComponent {}

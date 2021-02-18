@@ -6,11 +6,11 @@
         [thumbnailSize]="gridSettings.thumbnailSize"
         (toggleMargin)="onToggleMargins($event)"
         (toggleShowTitle)="onToggleShowTitle($event)"
-        (toggleThumbnailSize)="onToggleThumbnailSize($event)">
+        (toggleThumbnailSize)="onToggleThumbnailSize($event)"
+    >
     </app-grid-toolbar>
 
     <app-shared-content-margin layout-main [margin]="gridSettings.margin">
-
         <app-filter-bar></app-filter-bar>
 
         <div>
@@ -20,11 +20,11 @@
                         [categories]="categoriesForYear(year) | async"
                         [showTitles]="gridSettings.showTitles"
                         [showYears]="false"
-                        [thumbnailSize]="gridSettings.thumbnailSize">
+                        [thumbnailSize]="gridSettings.thumbnailSize"
+                    >
                     </app-shared-category-grid>
                 </app-categories-year>
             </div>
         </div>
-
     </app-shared-content-margin>
 </app-layout-toolbar>

@@ -4,15 +4,13 @@ import { Store } from '@ngrx/store';
 import { PhotoStoreActions } from '@core/root-store';
 
 @Component({
-  selector: 'app-photos-toolbar-rotate-counter-clockwise-button',
-  templateUrl: './toolbar-rotate-counter-clockwise-button.component.html',
-  styleUrls: ['./toolbar-rotate-counter-clockwise-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-photos-toolbar-rotate-counter-clockwise-button',
+    templateUrl: './toolbar-rotate-counter-clockwise-button.component.html',
+    styleUrls: ['./toolbar-rotate-counter-clockwise-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarRotateCounterClockwiseButtonComponent {
-    constructor(
-        private store: Store
-    ) { }
+    constructor(private store: Store) {}
 
     onRotateCounterClockwise(): void {
         this.store.dispatch(PhotoStoreActions.rotateCounterClockwiseRequest());

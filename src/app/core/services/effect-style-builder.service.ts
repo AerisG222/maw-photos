@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { PhotoEffects } from '@models';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class EffectStyleBuilderService {
     buildFilter(effects: PhotoEffects): string[] {

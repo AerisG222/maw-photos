@@ -2,6 +2,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export const extModules = [
     StoreDevtoolsModule.instrument({
-        maxAge: 50
-    })
+        maxAge: 50,
+    }),
 ];

@@ -1,7 +1,9 @@
 <div *ngIf="category">
-    <a [routerLink]="['/categories']"
-       [queryParams]="{ year: category.year }"
-       class="mat-h3">
+    <a
+        [routerLink]="['/categories']"
+        [queryParams]="{ year: category.year }"
+        class="mat-h3"
+    >
         {{ category.year }}
     </a>
 
@@ -11,9 +13,11 @@
         {{ category.name }}
     </span>
 
-    <a *ngIf="showCategoryAsLink"
-       [routerLink]="['/photo-categories', category.id]"
-       class="mat-h3">
+    <a
+        *ngIf="showCategoryAsLink"
+        [routerLink]="['/photo-categories', category.id]"
+        class="mat-h3"
+    >
         {{ category.name }}
     </a>
 </div>

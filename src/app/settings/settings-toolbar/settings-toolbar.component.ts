@@ -4,8 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-settings-toolbar',
     templateUrl: './settings-toolbar.component.html',
     styleUrls: ['./settings-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsToolbarComponent {
-
-}
+export class SettingsToolbarComponent {}

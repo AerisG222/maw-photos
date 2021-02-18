@@ -58,9 +58,7 @@ import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-vi
         ToolbarViewDetailButtonComponent,
         MainPhotoComponent,
     ],
-    imports: [
-        SharedModule
-    ],
+    imports: [SharedModule],
     exports: [
         SharedModule,
 
@@ -76,6 +74,6 @@ import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-vi
         ToolbarRotateClockwiseButtonComponent,
         ToolbarRotateCounterClockwiseButtonComponent,
         MainPhotoComponent,
-    ]
+    ],
 })
-export class PhotosSharedModule { }
+export class PhotosSharedModule {}

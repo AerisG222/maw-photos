@@ -4,8 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-photos-map-toolbar',
     templateUrl: './map-toolbar.component.html',
     styleUrls: ['./map-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapToolbarComponent {
-
-}
+export class MapToolbarComponent {}

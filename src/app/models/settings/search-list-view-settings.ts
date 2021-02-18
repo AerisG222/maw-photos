@@ -8,5 +8,5 @@ export interface SearchListViewSettings {
 
 export const DEFAULT_SEARCH_LIST_VIEW_SETTINGS: SearchListViewSettings = {
     margin: Margin.dense,
-    thumbnailSize: ThumbnailSize.default
+    thumbnailSize: ThumbnailSize.default,
 };

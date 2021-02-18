@@ -9,9 +9,11 @@ import {
     ApiCollection,
     GpsCoordinate,
     GpsDetail,
- } from '@models';
+} from '@models';
 
-export const videoApiServiceToken = new InjectionToken<VideoApiService>('VideoApiService');
+export const videoApiServiceToken = new InjectionToken<VideoApiService>(
+    'VideoApiService'
+);
 
 export interface VideoApiService {
     getCategories(): Observable<ApiCollection<VideoCategory>>;
@@ -20,8 +22,14 @@ export interface VideoApiService {
     getComments(videoId: number): Observable<ApiCollection<Comment>>;
     getRating(videoId: number): Observable<Rating>;
     rateVideo(videoId: number, rating: number): Observable<Rating>;
-    addComment(videoId: number, comment: string): Observable<ApiCollection<Comment>>;
+    addComment(
+        videoId: number,
+        comment: string
+    ): Observable<ApiCollection<Comment>>;
     setTeaser(categoryId: number, videoId: number): Observable<VideoCategory>;
     getGpsDetail(videoId: number): Observable<GpsDetail>;
-    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate): Observable<GpsDetail>;
+    setGpsCoordinateOverride(
+        videoId: number,
+        latLng: GpsCoordinate
+    ): Observable<GpsDetail>;
 }

@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     selector: 'app-shared-hotkey-dialog',
     templateUrl: './hotkey-dialog.component.html',
     styleUrls: ['./hotkey-dialog.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HotkeyDialogComponent implements OnInit {
     firstHotkeys: Hotkey[] | null = null;
@@ -15,10 +15,13 @@ export class HotkeyDialogComponent implements OnInit {
     constructor(
         private dialogRef: MatDialogRef<HotkeyDialogComponent>,
         private hotkeysService: HotkeysService
-    ) { }
+    ) {}
 
     ngOnInit(): void {
-        const keys = [...this.hotkeysService.hotkeys, ...this.hotkeysService.pausedHotkeys];
+        const keys = [
+            ...this.hotkeysService.hotkeys,
+            ...this.hotkeysService.pausedHotkeys,
+        ];
 
         this.updateDisplay(keys);
     }

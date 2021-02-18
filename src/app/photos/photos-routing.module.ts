@@ -27,7 +27,10 @@ const routes: Routes = [
                     {
                         path: ':photoId',
                         component: DetailViewComponent,
-                        data: { view: PhotoViewMode.detail, requirePhotoId: true },
+                        data: {
+                            view: PhotoViewMode.detail,
+                            requirePhotoId: true,
+                        },
                     },
                 ],
             },
@@ -39,7 +42,10 @@ const routes: Routes = [
                     {
                         path: ':photoId',
                         component: FullscreenViewComponent,
-                        data: { view: PhotoViewMode.fullscreen, requirePhotoId: true },
+                        data: {
+                            view: PhotoViewMode.fullscreen,
+                            requirePhotoId: true,
+                        },
                     },
                 ],
             },
@@ -51,7 +57,10 @@ const routes: Routes = [
                     {
                         path: ':photoId',
                         component: GridPhotoComponent,
-                        data: { view: PhotoViewMode.grid, requirePhotoId: true },
+                        data: {
+                            view: PhotoViewMode.grid,
+                            requirePhotoId: true,
+                        },
                     },
                 ],
             },
@@ -67,7 +76,7 @@ const routes: Routes = [
                     },
                 ],
             },
-            { path: '', canActivate: [ ViewModeGuard ] },
+            { path: '', canActivate: [ViewModeGuard] },
         ],
     },
     { path: '**', redirectTo: '/categories' },

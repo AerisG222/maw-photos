@@ -10,31 +10,28 @@ import { GpsCoordinate, Photo } from '@models';
     selector: 'app-photos-bulk-edit',
     templateUrl: './bulk-edit.component.html',
     styleUrls: ['./bulk-edit.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BulkEditComponent {
     selectedPhotos: Photo[] = [];
     showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
     category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     photos$ = combineLatest([
-            this.store.select(PhotoStoreSelectors.allPhotos),
-            this.showPhotosWithGpsData$
-        ])
-        .pipe(
-            map(([ photos, showPhotosWithGpsData ]) => {
-                if (showPhotosWithGpsData) {
-                    return photos;
-                } else {
-                    return photos.filter(p => p.latitude == null || p.longitude == null);
-                }
-            })
-        );
+        this.store.select(PhotoStoreSelectors.allPhotos),
+        this.showPhotosWithGpsData$,
+    ]).pipe(
+        map(([photos, showPhotosWithGpsData]) => {
+            if (showPhotosWithGpsData) {
+                return photos;
+            } else {
+                return photos.filter(
+                    (p) => p.latitude == null || p.longitude == null
+                );
+            }
+        })
+    );
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 
     onShowPhotosWithGpsData(doShow: boolean): void {
         // LAZY: let's just remove any selection when we change this setting to make sure
@@ -48,12 +45,14 @@ export class BulkEditComponent {
         this.clearSelectedPhotos();
 
         if (!!this.photos$ && doSelectAll) {
-            this.photos$.pipe(
-                filter(photos => !!photos),
-                first(),
-                map(photos => photos ),
-                tap(photos => this.selectedPhotos.push(...photos))
-            ).subscribe();
+            this.photos$
+                .pipe(
+                    filter((photos) => !!photos),
+                    first(),
+                    map((photos) => photos),
+                    tap((photos) => this.selectedPhotos.push(...photos))
+                )
+                .subscribe();
         }
     }
 
@@ -65,7 +64,12 @@ export class BulkEditComponent {
         this.clearSelectedPhotos();
 
         for (const photo of photosToUpdate) {
-            this.store.dispatch(PhotoStoreActions.setGpsCoordinateOverrideRequest({ photoId: photo.id, latLng: gps }));
+            this.store.dispatch(
+                PhotoStoreActions.setGpsCoordinateOverrideRequest({
+                    photoId: photo.id,
+                    latLng: gps,
+                })
+            );
         }
     }
 
@@ -86,7 +90,7 @@ export class BulkEditComponent {
     }
 
     private getSelectedIndex(photo: Photo): number {
-        return this.selectedPhotos.findIndex(p => p.id === photo.id);
+        return this.selectedPhotos.findIndex((p) => p.id === photo.id);
     }
 
     private clearSelectedPhotos(): void {

@@ -10,5 +10,5 @@ export interface PhotoGridViewSettings {
 export const DEFAULT_PHOTO_GRID_VIEW_SETTINGS: PhotoGridViewSettings = {
     margin: Margin.dense,
     showBreadcrumbs: true,
-    thumbnailSize: ThumbnailSize.default
+    thumbnailSize: ThumbnailSize.default,
 };

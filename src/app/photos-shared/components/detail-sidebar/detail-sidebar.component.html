@@ -2,43 +2,48 @@
     <app-sidebar-card-group *ngIf="settings.expandedState" @sidebarFlyInOut>
         <app-sidebar-rating-card
             *ngIf="settings.showRatings"
-            @sidebarCardShowHide>
+            @sidebarCardShowHide
+        >
         </app-sidebar-rating-card>
 
         <app-sidebar-comments-card
             *ngIf="settings.showComments"
-            @sidebarCardShowHide>
+            @sidebarCardShowHide
+        >
         </app-sidebar-comments-card>
 
-        <app-photos-sidebar-exif
-            *ngIf="settings.showExif"
-            @sidebarCardShowHide>
+        <app-photos-sidebar-exif *ngIf="settings.showExif" @sidebarCardShowHide>
         </app-photos-sidebar-exif>
 
         <app-photos-sidebar-effects
             *ngIf="settings.showEffects"
-            @sidebarCardShowHide>
+            @sidebarCardShowHide
+        >
         </app-photos-sidebar-effects>
 
         <app-photos-sidebar-histogram
             *ngIf="settings.showHistogram"
-            @sidebarCardShowHide>
+            @sidebarCardShowHide
+        >
         </app-photos-sidebar-histogram>
 
         <app-sidebar-minimap-card
             *ngIf="settings.showMinimap"
-            @sidebarCardShowHide>
+            @sidebarCardShowHide
+        >
         </app-sidebar-minimap-card>
 
         <ng-container *ngIf="isAdmin$ | async">
             <app-sidebar-metadata-editor-card
                 *ngIf="settings.showMetadataEditor"
-                @sidebarCardShowHide>
+                @sidebarCardShowHide
+            >
             </app-sidebar-metadata-editor-card>
 
             <app-sidebar-category-teaser-chooser-card
                 *ngIf="settings.showCategoryTeaserChooser"
-                @sidebarCardShowHide>
+                @sidebarCardShowHide
+            >
             </app-sidebar-category-teaser-chooser-card>
         </ng-container>
     </app-sidebar-card-group>
@@ -49,7 +54,8 @@
             shortcutKey="i"
             shortcutHelp="Show/Hide Info Panel"
             tooltip="Show/Hide Info Panel (I)"
-            (click)="toggleSidebar()">
+            (click)="toggleSidebar()"
+        >
         </app-sidebar-button>
 
         <app-sidebar-button-divider></app-sidebar-button-divider>
@@ -61,7 +67,8 @@
             shortcutKey="r"
             shortcutHelp="Show/Hide Ratings"
             tooltip="Show/Hide Ratings (R)"
-            (click)="toggleRatings()">
+            (click)="toggleRatings()"
+        >
         </app-sidebar-button>
 
         <app-sidebar-button
@@ -71,7 +78,8 @@
             shortcutKey="c"
             shortcutHelp="Show/Hide Comments"
             tooltip="Show/Hide Comments (C)"
-            (click)="toggleComments()">
+            (click)="toggleComments()"
+        >
         </app-sidebar-button>
 
         <app-sidebar-button
@@ -81,7 +89,8 @@
             shortcutKey="x"
             shortcutHelp="Show/Hide EXIF"
             tooltip="Show/Hide EXIF (X)"
-            (click)="toggleExif()">
+            (click)="toggleExif()"
+        >
         </app-sidebar-button>
 
         <app-sidebar-button
@@ -91,7 +100,8 @@
             shortcutKey="e"
             shortcutHelp="Show/Hide Effects"
             tooltip="Show/Hide Effects (E)"
-            (click)="toggleEffects()">
+            (click)="toggleEffects()"
+        >
         </app-sidebar-button>
 
         <app-sidebar-button
@@ -101,7 +111,8 @@
             shortcutKey="h"
             shortcutHelp="Show/Hide Histogram"
             tooltip="Show/Hide Histogram (H)"
-            (click)="toggleHistogram()">
+            (click)="toggleHistogram()"
+        >
         </app-sidebar-button>
 
         <app-sidebar-button
@@ -111,7 +122,8 @@
             shortcutKey="v"
             shortcutHelp="Show/Hide Mini-map"
             tooltip="Show/Hide Mini-map (V)"
-            (click)="toggleMinimap()">
+            (click)="toggleMinimap()"
+        >
         </app-sidebar-button>
 
         <ng-container *ngIf="isAdmin$ | async">
@@ -122,7 +134,8 @@
                 shortcutKey="n"
                 shortcutHelp="Show/Hide Metadata Editor"
                 tooltip="Show/Hide Metadata Editor (N)"
-                (click)="toggleMetadataEditor()">
+                (click)="toggleMetadataEditor()"
+            >
             </app-sidebar-button>
 
             <app-sidebar-button
@@ -132,7 +145,8 @@
                 shortcutKey="k"
                 shortcutHelp="Show/Hide Category Teaser Chooser"
                 tooltip="Show/Hide Category Teaser Chooser (K)"
-                (click)="toggleCategoryTeaserChooser()">
+                (click)="toggleCategoryTeaserChooser()"
+            >
             </app-sidebar-button>
         </ng-container>
     </app-sidebar-button-group>

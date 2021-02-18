@@ -7,12 +7,10 @@ import { PhotoStoreActions } from '@core/root-store';
     selector: 'app-photos-toolbar-flip-horizontal-button',
     templateUrl: './toolbar-flip-horizontal-button.component.html',
     styleUrls: ['./toolbar-flip-horizontal-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarFlipHorizontalButtonComponent {
-    constructor(
-        private store: Store
-    ) { }
+    constructor(private store: Store) {}
 
     onFlipHorizontal(): void {
         this.store.dispatch(PhotoStoreActions.flipHorizontalRequest());

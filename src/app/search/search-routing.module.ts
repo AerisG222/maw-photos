@@ -9,12 +9,12 @@ import { ViewModeGuard } from './services/view-mode.guard';
 const routes: Routes = [
     { path: 'grid', component: GridViewComponent },
     { path: 'list', component: ListViewComponent },
-    { path: '', canActivate: [ ViewModeGuard ]},
-    { path: '**',  redirectTo: RouteHelper.searchViewDefault }
+    { path: '', canActivate: [ViewModeGuard] },
+    { path: '**', redirectTo: RouteHelper.searchViewDefault },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class SearchRoutingModule { }
+export class SearchRoutingModule {}

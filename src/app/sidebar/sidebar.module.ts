@@ -28,11 +28,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         MetadataEditorCardComponent,
         MinimapCardComponent,
         RatingCardComponent,
-        SidebarComponent
+        SidebarComponent,
     ],
-    imports: [
-        BaseModule
-    ],
+    imports: [BaseModule],
     exports: [
         ButtonComponent,
         ButtonDividerComponent,
@@ -45,7 +43,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         MetadataEditorCardComponent,
         MinimapCardComponent,
         RatingCardComponent,
-        SidebarComponent
-    ]
+        SidebarComponent,
+    ],
 })
-export class SidebarModule { }
+export class SidebarModule {}

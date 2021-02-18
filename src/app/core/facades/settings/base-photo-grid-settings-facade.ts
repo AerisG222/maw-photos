@@ -7,15 +7,17 @@ export abstract class BasePhotoGridSettingsFacade extends BaseSettingsFacade<Pho
     abstract settings$: Observable<PhotoGridViewSettings>;
 
     toggleBreadcrumbs(): void {
-        this.saveUpdatedField(x => x.showBreadcrumbs = !x.showBreadcrumbs);
+        this.saveUpdatedField((x) => (x.showBreadcrumbs = !x.showBreadcrumbs));
     }
 
     toggleMargin(): void {
-        this.saveUpdatedField(x => x.margin = nextMargin(x.margin));
+        this.saveUpdatedField((x) => (x.margin = nextMargin(x.margin)));
     }
 
     toggleThumbnailSize(): void {
-        this.saveUpdatedField(x => x.thumbnailSize = nextThumbnailSize(x.thumbnailSize));
+        this.saveUpdatedField(
+            (x) => (x.thumbnailSize = nextThumbnailSize(x.thumbnailSize))
+        );
     }
 
     abstract save(settings: PhotoGridViewSettings): void;

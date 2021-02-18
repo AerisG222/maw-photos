@@ -5,7 +5,10 @@ import { AuthInitResolver } from '@core/services';
 
 @Injectable()
 export class MockAuthInitResolver implements AuthInitResolver {
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): boolean {
         return true;
     }
 }

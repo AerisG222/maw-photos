@@ -2,33 +2,52 @@ export enum Theme {
     dark = 'dark',
     light = 'light',
     mulledWine = 'mulledWine',
-    paleNight = 'paleNight'
+    paleNight = 'paleNight',
 }
 
 export class ThemeDetail {
-    static readonly dark = new ThemeDetail(Theme.dark, 'Dark', 'maw-dark-theme', true);
-    static readonly light = new ThemeDetail(Theme.light, 'Light', 'maw-light-theme', false);
-    static readonly mulledWine = new ThemeDetail(Theme.mulledWine, 'Mulled Wine', 'maw-mulled-wine-theme', true);
-    static readonly paleNight = new ThemeDetail(Theme.paleNight, 'Pale Night', 'maw-pale-night-theme', true);
+    static readonly dark = new ThemeDetail(
+        Theme.dark,
+        'Dark',
+        'maw-dark-theme',
+        true
+    );
+    static readonly light = new ThemeDetail(
+        Theme.light,
+        'Light',
+        'maw-light-theme',
+        false
+    );
+    static readonly mulledWine = new ThemeDetail(
+        Theme.mulledWine,
+        'Mulled Wine',
+        'maw-mulled-wine-theme',
+        true
+    );
+    static readonly paleNight = new ThemeDetail(
+        Theme.paleNight,
+        'Pale Night',
+        'maw-pale-night-theme',
+        true
+    );
 
     constructor(
         public readonly theme: Theme,
         public readonly name: string,
         public readonly klass: string,
         public readonly isDark: boolean
-    ) { }
+    ) {}
 }
 
 export const allThemeDetails = [
     ThemeDetail.dark,
     ThemeDetail.light,
     ThemeDetail.mulledWine,
-    ThemeDetail.paleNight
+    ThemeDetail.paleNight,
 ];
 
 export const toTheme = (val?: string | null): Theme | undefined => {
-    if(!val)
-    {
+    if (!val) {
         return undefined;
     }
 
@@ -42,7 +61,7 @@ export const toThemeDefaulted = (val?: string | null): Theme => {
 };
 
 export const toThemeDetail = (theme: Theme): ThemeDetail => {
-    switch(theme) {
+    switch (theme) {
         case Theme.light:
             return ThemeDetail.light;
         case Theme.mulledWine:

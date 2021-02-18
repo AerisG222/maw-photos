@@ -27,10 +27,7 @@ export const settings = createSelector(
     (state: State): Settings => state.settings
 );
 
-export const appSettings = createSelector(
-    settings,
-    (s): AppSettings => s.app
-);
+export const appSettings = createSelector(settings, (s): AppSettings => s.app);
 
 export const categoryFilterSettings = createSelector(
     settings,

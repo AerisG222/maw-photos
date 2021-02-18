@@ -2,11 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Margin } from '@models';
 
 @Pipe({
-    name: 'marginClass'
+    name: 'marginClass',
 })
 export class MarginClassPipe implements PipeTransform {
-    transform(margin: Margin | null, ...args: unknown[]): string | null{
-        switch(margin) {
+    transform(margin: Margin | null, ...args: unknown[]): string | null {
+        switch (margin) {
             case Margin.compact:
                 return 'category-margin-ten';
             case Margin.comfy:

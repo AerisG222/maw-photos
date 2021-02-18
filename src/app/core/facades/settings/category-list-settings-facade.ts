@@ -7,24 +7,28 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { Margin, ThumbnailSize } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CategoryListSettingsFacade extends BaseSettingsFacade<CategoryListViewSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.categoryListViewSettings);
+    settings$ = this.store.select(
+        SettingsStoreSelectors.categoryListViewSettings
+    );
 
     constructor(private store: Store) {
         super();
     }
 
     save(settings: CategoryListViewSettings): void {
-        this.store.dispatch(SettingsStoreActions.saveCategoryListViewSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.saveCategoryListViewSettings({ settings })
+        );
     }
 
     saveMargin(newMargin: Margin) {
-        this.saveUpdatedField(s => s.margin = newMargin);
+        this.saveUpdatedField((s) => (s.margin = newMargin));
     }
 
     saveThumbnailSize(newSize: ThumbnailSize) {
-        this.saveUpdatedField(s => s.thumbnailSize = newSize);
+        this.saveUpdatedField((s) => (s.thumbnailSize = newSize));
     }
 }

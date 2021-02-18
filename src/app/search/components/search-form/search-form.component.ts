@@ -8,17 +8,14 @@ import { queryRequest } from 'src/app/search/store/actions';
     selector: 'app-search-search-form',
     templateUrl: './search-form.component.html',
     styleUrls: ['./search-form.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFormComponent {
     form: FormGroup;
 
-    constructor(
-        private store: Store,
-        private formBuilder: FormBuilder
-    ) {
+    constructor(private store: Store, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
-            query: ['', Validators.required]
+            query: ['', Validators.required],
         });
     }
 
@@ -29,7 +26,9 @@ export class SearchFormComponent {
             const searchTerm = control.value;
 
             if (searchTerm) {
-                this.store.dispatch(queryRequest({ query: searchTerm, start: 0 }));
+                this.store.dispatch(
+                    queryRequest({ query: searchTerm, start: 0 })
+                );
             }
         }
     }

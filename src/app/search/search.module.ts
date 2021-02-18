@@ -24,12 +24,8 @@ import { NoResultsFoundComponent } from './components/no-results-found/no-result
         ListToolbarComponent,
         GridToolbarComponent,
         ToolbarGroupSelectViewComponent,
-        NoResultsFoundComponent
+        NoResultsFoundComponent,
     ],
-    imports: [
-        SearchRoutingModule,
-        SearchStoreModule,
-        SharedModule
-    ]
+    imports: [SearchRoutingModule, SearchStoreModule, SharedModule],
 })
-export class SearchModule { }
+export class SearchModule {}

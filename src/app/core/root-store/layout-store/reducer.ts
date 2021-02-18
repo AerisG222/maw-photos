@@ -5,18 +5,24 @@ import { initialState, State } from './state';
 
 export const reducer = createReducer(
     initialState,
-    on(LayoutActions.enterFullscreenRequest, (state): State => ({
-        ...state,
-        layout: {
-            ...state.layout,
-            isFullscreen: true
-        }
-    })),
-    on(LayoutActions.exitFullscreenRequest, (state): State => ({
-        ...state,
-        layout: {
-            ...state.layout,
-            isFullscreen: false
-        }
-    }))
+    on(
+        LayoutActions.enterFullscreenRequest,
+        (state): State => ({
+            ...state,
+            layout: {
+                ...state.layout,
+                isFullscreen: true,
+            },
+        })
+    ),
+    on(
+        LayoutActions.exitFullscreenRequest,
+        (state): State => ({
+            ...state,
+            layout: {
+                ...state.layout,
+                isFullscreen: false,
+            },
+        })
+    )
 );

@@ -9,7 +9,7 @@ import { CategoryTypeFilter } from '@models';
     selector: 'app-filter-bar',
     templateUrl: './filter-bar.component.html',
     styleUrls: ['./filter-bar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterBarComponent {
     filterSettings$ = this.filterFacade.settings$;
@@ -18,9 +18,8 @@ export class FilterBarComponent {
 
     constructor(
         private filterFacade: CategoryFilterSettingsFacade,
-        private store: Store) {
-
-    }
+        private store: Store
+    ) {}
 
     onChangeTypeFilter(evt: CategoryTypeFilter) {
         this.filterFacade.saveTypeFilter(evt);

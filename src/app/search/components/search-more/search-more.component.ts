@@ -9,28 +9,32 @@ import { SearchStoreSelectors } from 'src/app/search/store';
     selector: 'app-search-search-more',
     templateUrl: './search-more.component.html',
     styleUrls: ['./search-more.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchMoreComponent {
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 
     onSearchMore(): void {
         this.store
             .select(SearchStoreSelectors.query)
             .pipe(
-                withLatestFrom(this.store.select(SearchStoreSelectors.nextResultIndex)),
+                withLatestFrom(
+                    this.store.select(SearchStoreSelectors.nextResultIndex)
+                ),
                 first()
-            ).subscribe({
+            )
+            .subscribe({
                 next: ([query, nextIndex]) => {
                     if (nextIndex > 0) {
-                        this.store.dispatch(queryRequest({ query: query as string, start: nextIndex }));
+                        this.store.dispatch(
+                            queryRequest({
+                                query: query as string,
+                                start: nextIndex,
+                            })
+                        );
                     }
                 },
-                error: err => console.log(`error searching for more: ${ err }`)
+                error: (err) => console.log(`error searching for more: ${err}`),
             });
     }
 }

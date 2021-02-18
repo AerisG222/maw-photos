@@ -34,11 +34,9 @@ import { ThumbnailSizeClassPipe } from './pipes/thumbnail-size-class.pipe';
         HotkeyListItemComponent,
         MarginClassPipe,
         ThemeIsDarkPipe,
-        ThumbnailSizeClassPipe
+        ThumbnailSizeClassPipe,
     ],
-    imports: [
-        BaseModule
-    ],
+    imports: [BaseModule],
     exports: [
         BaseModule,
         LayoutModule,
@@ -58,7 +56,7 @@ import { ThumbnailSizeClassPipe } from './pipes/thumbnail-size-class.pipe';
 
         // pipes
         ThemeIsDarkPipe,
-        ThumbnailSizeClassPipe
-    ]
+        ThumbnailSizeClassPipe,
+    ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,20 +1,24 @@
-<app-sidebar-card
-    icon="star"
-    title="Rating">
-
+<app-sidebar-card icon="star" title="Rating">
     <table>
         <tr>
             <td>Your Rating</td>
             <td>
-                <bar-rating [max]="5" (rateChange)="onRate($event)" [rate]="userRating$ | async"></bar-rating>
+                <bar-rating
+                    [max]="5"
+                    (rateChange)="onRate($event)"
+                    [rate]="userRating$ | async"
+                ></bar-rating>
             </td>
         </tr>
         <tr>
             <td>Average Rating</td>
             <td>
-                <bar-rating [max]="5" [readOnly]="true" [rate]="averageRating$ | async"></bar-rating>
+                <bar-rating
+                    [max]="5"
+                    [readOnly]="true"
+                    [rate]="averageRating$ | async"
+                ></bar-rating>
             </td>
         </tr>
     </table>
-
 </app-sidebar-card>

@@ -7,15 +7,13 @@ import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
     selector: 'app-photos-fullscreen-toolbar',
     templateUrl: './fullscreen-toolbar.component.html',
     styleUrls: ['./fullscreen-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullscreenToolbarComponent {
     isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
     isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
 
-    constructor(
-        private store: Store
-    ) { }
+    constructor(private store: Store) {}
 
     onMoveNext(): void {
         this.store.dispatch(PhotoStoreActions.moveNextRequest());

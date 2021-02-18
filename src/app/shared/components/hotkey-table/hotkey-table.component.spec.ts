@@ -3,23 +3,24 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HotkeyTableComponent } from './hotkey-table.component';
 
 describe('HotkeyTableComponent', () => {
-  let component: HotkeyTableComponent;
-  let fixture: ComponentFixture<HotkeyTableComponent>;
+    let component: HotkeyTableComponent;
+    let fixture: ComponentFixture<HotkeyTableComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HotkeyTableComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [HotkeyTableComponent],
+            }).compileComponents();
+        })
+    );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HotkeyTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HotkeyTableComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

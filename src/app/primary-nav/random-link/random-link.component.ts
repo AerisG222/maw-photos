@@ -8,13 +8,11 @@ import { RouteHelper } from '@models';
     selector: 'app-primary-nav-random-link',
     templateUrl: './random-link.component.html',
     styleUrls: ['./random-link.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RandomLinkComponent {
     randomLink = RouteHelper.randomAbs();
     inRandomArea$ = this.store.select(RouterStoreSelectors.isRandomView);
 
-    constructor(
-        private store: Store
-    ) { }
+    constructor(private store: Store) {}
 }

@@ -1,11 +1,14 @@
-<a *ngFor="let photo of photos; trackBy: trackByPhoto"
+<a
+    *ngFor="let photo of photos; trackBy: trackByPhoto"
     [class.selected]="selectedPhoto?.id === photo.id"
     [class.scrolled]="scrollIntoView(photo.id, itemRef)"
     [routerLink]="photoLinkable.buildPhotoLink(photo)"
-    #itemRef>
+    #itemRef
+>
     <img
         [src]="photo.imageXsSq.url"
         [style.width.px]="imgWidth"
         [style.height.px]="imgHeight"
-        loading="lazy" />
+        loading="lazy"
+    />
 </a>

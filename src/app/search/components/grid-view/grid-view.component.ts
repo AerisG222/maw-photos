@@ -8,13 +8,17 @@ import { SearchStoreSelectors } from '../../store';
     selector: 'app-grid-view',
     templateUrl: './grid-view.component.html',
     styleUrls: ['./grid-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridViewComponent {
-    categories$ = this.store.select(SearchStoreSelectors.allResultsAsCategories);
+    categories$ = this.store.select(
+        SearchStoreSelectors.allResultsAsCategories
+    );
     shownResults$ = this.store.select(SearchStoreSelectors.shownResults);
     showNoResults$ = this.store.select(SearchStoreSelectors.showNoResults);
-    showTotalResults$ = this.store.select(SearchStoreSelectors.showTotalResults);
+    showTotalResults$ = this.store.select(
+        SearchStoreSelectors.showTotalResults
+    );
     totalResults$ = this.store.select(SearchStoreSelectors.totalResults);
     hasMoreResults$ = this.store.select(SearchStoreSelectors.hasMoreResults);
     gridSettings$ = this.gridSettings.settings$;
@@ -22,5 +26,5 @@ export class GridViewComponent {
     constructor(
         private gridSettings: SearchGridSettingsFacade,
         private store: Store
-    ) { }
+    ) {}
 }

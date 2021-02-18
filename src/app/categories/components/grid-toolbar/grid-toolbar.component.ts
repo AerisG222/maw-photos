@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    Input,
+    EventEmitter,
+    Output,
+} from '@angular/core';
 
 import { Margin, nextMargin, nextThumbnailSize, ThumbnailSize } from '@models';
 
@@ -6,7 +12,7 @@ import { Margin, nextMargin, nextThumbnailSize, ThumbnailSize } from '@models';
     selector: 'app-grid-toolbar',
     templateUrl: './grid-toolbar.component.html',
     styleUrls: ['./grid-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridToolbarComponent {
     @Input() margin = Margin.dense;

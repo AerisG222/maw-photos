@@ -7,28 +7,32 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { Margin, ThumbnailSize } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CategoryGridSettingsFacade extends BaseSettingsFacade<CategoryGridViewSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.categoryGridViewSettings);
+    settings$ = this.store.select(
+        SettingsStoreSelectors.categoryGridViewSettings
+    );
 
     constructor(private store: Store) {
         super();
     }
 
     save(settings: CategoryGridViewSettings): void {
-        this.store.dispatch(SettingsStoreActions.saveCategoryGridViewSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.saveCategoryGridViewSettings({ settings })
+        );
     }
 
     saveMargin(newMargin: Margin) {
-        this.saveUpdatedField(s => s.margin = newMargin);
+        this.saveUpdatedField((s) => (s.margin = newMargin));
     }
 
     saveShowTitles(doShow: boolean) {
-        this.saveUpdatedField(s => s.showTitles = doShow);
+        this.saveUpdatedField((s) => (s.showTitles = doShow));
     }
 
     saveThumbnailSize(newSize: ThumbnailSize) {
-        this.saveUpdatedField(s => s.thumbnailSize = newSize);
+        this.saveUpdatedField((s) => (s.thumbnailSize = newSize));
     }
 }

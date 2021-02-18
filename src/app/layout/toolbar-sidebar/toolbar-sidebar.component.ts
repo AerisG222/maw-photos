@@ -9,13 +9,9 @@ import { toolbarShow } from '@shared/animations';
     styleUrls: ['./toolbar-sidebar.component.scss'],
     animations: [
         trigger('toolbarFadeIn', [
-            transition('* => *', [
-                useAnimation(toolbarShow)
-            ])
-        ])
+            transition('* => *', [useAnimation(toolbarShow)]),
+        ]),
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToolbarSidebarComponent {
-
-}
+export class ToolbarSidebarComponent {}

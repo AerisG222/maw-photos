@@ -8,12 +8,12 @@ import { ViewModeGuard } from './services/view-mode.guard';
 const routes: Routes = [
     { path: 'grid', component: GridViewComponent },
     { path: 'list', component: ListViewComponent },
-    { path: '', canActivate: [ ViewModeGuard ]},
-    { path: '**',  redirectTo: '' }
+    { path: '', canActivate: [ViewModeGuard] },
+    { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class CategoriesRoutingModule { }
+export class CategoriesRoutingModule {}

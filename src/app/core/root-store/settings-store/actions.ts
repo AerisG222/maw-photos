@@ -18,9 +18,7 @@ import { Settings } from '@models';
 import { VideoDetailViewSettings } from '@models';
 import { VideoInfoPanelSettings } from '@models';
 
-export const loadRequest = createAction(
-    '[Settings] Load Request'
-);
+export const loadRequest = createAction('[Settings] Load Request');
 
 export const loadSuccess = createAction(
     '[Settings] Load Success',

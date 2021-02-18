@@ -8,9 +8,12 @@ export class MockServicesModule {
     static forRoot(): ModuleWithProviders<MockServicesModule> {
         return {
             providers: [
-                { provide: searchApiServiceToken, useClass: MockSearchApiService }
+                {
+                    provide: searchApiServiceToken,
+                    useClass: MockSearchApiService,
+                },
             ],
-            ngModule: MockServicesModule
+            ngModule: MockServicesModule,
         };
     }
 }

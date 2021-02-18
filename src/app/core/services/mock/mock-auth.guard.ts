@@ -6,7 +6,10 @@ import { AuthGuard } from '@core/services';
 
 @Injectable()
 export class MockAuthGuard implements AuthGuard {
-    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    public canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<boolean> | boolean {
         return true;
     }
 }

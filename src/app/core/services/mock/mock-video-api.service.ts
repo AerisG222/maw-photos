@@ -9,7 +9,7 @@ import {
     ApiCollection,
     GpsCoordinate,
     GpsDetail,
- } from '@models';
+} from '@models';
 import { DateService, VideoApiService } from '@core/services';
 
 @Injectable()
@@ -17,40 +17,45 @@ export class MockVideoApiService implements VideoApiService {
     private categories: VideoCategory[];
     private videos: Video[];
 
-    constructor(
-        private dateSvc: DateService
-    ) {
+    constructor(private dateSvc: DateService) {
         this.initData();
     }
 
     getCategories(): Observable<ApiCollection<VideoCategory>> {
         return of({
             count: this.categories.length,
-            items: this.categories
+            items: this.categories,
         });
     }
 
     getCategory(categoryId: number): Observable<VideoCategory> {
-        return of(this.categories.filter(x => x.id === categoryId)[0]);
+        return of(this.categories.filter((x) => x.id === categoryId)[0]);
     }
 
     getVideosByCategory(categoryId: number): Observable<ApiCollection<Video>> {
-        const videos = this.videos
-            .filter(x => x.categoryId === categoryId);
+        const videos = this.videos.filter((x) => x.categoryId === categoryId);
 
         return of({
             count: videos.length,
-            items: videos
+            items: videos,
         });
     }
 
     getComments(videoId: number): Observable<ApiCollection<Comment>> {
-        return of(​{
+        return of({
             count: 2,
             items: [
-                { entryDate: new Date('2012-11-15T14:50:45'), commentText: 'another test', username: 'mmorano' },
-                { entryDate: new Date('2012-10-15T14:50:45'), commentText: 'a test', username: 'mmorano' }
-            ]
+                {
+                    entryDate: new Date('2012-11-15T14:50:45'),
+                    commentText: 'another test',
+                    username: 'mmorano',
+                },
+                {
+                    entryDate: new Date('2012-10-15T14:50:45'),
+                    commentText: 'a test',
+                    username: 'mmorano',
+                },
+            ],
         });
     }
 
@@ -62,18 +67,24 @@ export class MockVideoApiService implements VideoApiService {
         return of({ userRating: 3, averageRating: 4.5 });
     }
 
-    addComment(videoId: number, comment: string): Observable<ApiCollection<Comment>> {
+    addComment(
+        videoId: number,
+        comment: string
+    ): Observable<ApiCollection<Comment>> {
         return this.getComments(videoId);
     }
 
     getGpsDetail(videoId: number): Observable<GpsDetail> {
         return of({
-            source: { latitude: 43.12345, longitude: -72.67890 },
-            override: { latitude: 43.11111, longitude: -72.55555 }
+            source: { latitude: 43.12345, longitude: -72.6789 },
+            override: { latitude: 43.11111, longitude: -72.55555 },
         });
     }
 
-    setGpsCoordinateOverride(videoId: number, latLng: GpsCoordinate): Observable<GpsDetail> {
+    setGpsCoordinateOverride(
+        videoId: number,
+        latLng: GpsCoordinate
+    ): Observable<GpsDetail> {
         return this.getGpsDetail(videoId);
     }
 
@@ -102,17 +113,17 @@ export class MockVideoApiService implements VideoApiService {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/xs/DSC_1122.jpg',
-                    size: 2000
+                    size: 2000,
                 },
                 teaserImageSq: {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/xs/DSC_1122.jpg',
-                    size: 2000
+                    size: 2000,
                 },
                 self: '/video-categories/1',
                 videosLink: '/video-categories/1/videos',
-                isMissingGpsData: false
+                isMissingGpsData: false,
             },
             {
                 id: 1,
@@ -133,18 +144,18 @@ export class MockVideoApiService implements VideoApiService {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test2/xs/DSC_1122.jpg',
-                    size: 2000
+                    size: 2000,
                 },
                 teaserImageSq: {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test2/xs/DSC_1122.jpg',
-                    size: 2000
+                    size: 2000,
                 },
                 self: '/video-categories/2',
                 videosLink: '/video-categories/2/videos',
-                isMissingGpsData: true
-            }
+                isMissingGpsData: true,
+            },
         ];
 
         this.videos = [
@@ -159,36 +170,36 @@ export class MockVideoApiService implements VideoApiService {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/xs/DSC_1122.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 thumbnailSq: {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/xs_sq/DSC_1122.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 videoScaled: {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/sm/DSC_1122.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 videoFull: {
                     height: 600,
                     width: 600,
                     url: '/assets/movies/2018/test1/md/DSC_1122.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 videoRaw: {
                     height: 600,
                     width: 600,
                     url: '/assets/movies/2018/test1/lg/DSC_1122.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 self: '/videos/1',
                 categoryLink: '/video-categories/1',
                 commentsLink: '/videos/1/comments',
-                ratingLink: '/videos/1/rating'
+                ratingLink: '/videos/1/rating',
             },
             {
                 id: 2,
@@ -201,37 +212,37 @@ export class MockVideoApiService implements VideoApiService {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/xs/DSC_1123.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 thumbnailSq: {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/xs_sq/DSC_1123.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 videoScaled: {
                     height: 400,
                     width: 400,
                     url: '/assets/movies/2018/test1/sm/DSC_1123.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 videoFull: {
                     height: 600,
                     width: 600,
                     url: '/assets/movies/2018/test1/md/DSC_1123.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 videoRaw: {
                     height: 600,
                     width: 600,
                     url: '/assets/movies/2018/test1/lg/DSC_1123.jpg',
-                    size: 1000
+                    size: 1000,
                 },
                 self: '/videos/2',
                 categoryLink: '/video-categories/1',
                 commentsLink: '/videos/2/comments',
-                ratingLink: '/videos/2/rating'
-            }
+                ratingLink: '/videos/2/rating',
+            },
         ];
     }
 }

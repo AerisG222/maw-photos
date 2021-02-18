@@ -3,7 +3,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Comment, GpsDetail, Rating, Video } from '@models';
 
 export const videoAdapter: EntityAdapter<Video> = createEntityAdapter<Video>({
-    sortComparer: (a: Video, b: Video): number => b.id - a.id
+    sortComparer: (a: Video, b: Video): number => b.id - a.id,
 });
 
 export interface State extends EntityState<Video> {
@@ -23,5 +23,5 @@ export const initialState: State = videoAdapter.getInitialState({
     activeVideoRating: { averageRating: 0, userRating: 0 },
     activeVideoComments: [],
     activeVideoGpsDetail: null,
-    isFullscreenView: false
+    isFullscreenView: false,
 });

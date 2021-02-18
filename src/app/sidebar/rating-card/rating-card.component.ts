@@ -7,22 +7,16 @@ import { Ratable } from '@core/facades';
     selector: 'app-sidebar-rating-card',
     templateUrl: './rating-card.component.html',
     styleUrls: ['./rating-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RatingCardComponent  {
-    userRating$ = this.ratable.rating$.pipe(
-        map(rating => rating.userRating)
-    );
+export class RatingCardComponent {
+    userRating$ = this.ratable.rating$.pipe(map((rating) => rating.userRating));
 
     averageRating$ = this.ratable.rating$.pipe(
-        map(rating => rating.averageRating)
+        map((rating) => rating.averageRating)
     );
 
-    constructor(
-        public ratable: Ratable
-    ) {
-
-    }
+    constructor(public ratable: Ratable) {}
 
     onRate(userRating: number): void {
         this.ratable.rate(userRating);

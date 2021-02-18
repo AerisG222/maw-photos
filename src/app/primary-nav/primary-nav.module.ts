@@ -20,13 +20,9 @@ import { StatsLinkComponent } from './stats-link/stats-link.component';
         RandomLinkComponent,
         SearchLinkComponent,
         SettingsLinkComponent,
-        StatsLinkComponent
+        StatsLinkComponent,
     ],
-    imports: [
-        BaseModule
-    ],
-    exports: [
-        PrimaryNavComponent
-    ]
+    imports: [BaseModule],
+    exports: [PrimaryNavComponent],
 })
-export class PrimaryNavModule { }
+export class PrimaryNavModule {}

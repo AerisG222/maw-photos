@@ -6,12 +6,14 @@
     [zoom]="zoom"
     (maptypeidChanged)="onMapTypeChange()"
     (zoomChanged)="onZoomChange()"
-    #map>
+    #map
+>
     <map-marker
         *ngFor="let image of images"
         [options]="getMarkerOptions(marker, image)"
         (mapClick)="selectActivePhoto(marker, image)"
-        #marker="mapMarker">
+        #marker="mapMarker"
+    >
     </map-marker>
     <map-info-window #infoWindow>
         <img class="info-window-image" [src]="activeImageUrl" />

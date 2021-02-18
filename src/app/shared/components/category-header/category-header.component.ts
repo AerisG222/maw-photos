@@ -6,7 +6,7 @@ import { Category } from '@models';
     selector: 'app-shared-category-header',
     templateUrl: './category-header.component.html',
     styleUrls: ['./category-header.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryHeaderComponent {
     @Input() category: Category | null = null;

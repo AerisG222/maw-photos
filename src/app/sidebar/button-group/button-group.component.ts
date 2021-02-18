@@ -4,8 +4,10 @@ import { Component, HostBinding, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-sidebar-button-group',
     templateUrl: './button-group.component.html',
     styleUrls: ['./button-group.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupComponent {
-    @HostBinding('class.mat-elevation-z4') get(): boolean { return true; }
+    @HostBinding('class.mat-elevation-z4') get(): boolean {
+        return true;
+    }
 }

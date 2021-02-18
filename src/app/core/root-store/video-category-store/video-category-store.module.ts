@@ -11,7 +11,10 @@ import { VideoCategoryStoreRoutingEffects } from './effects-routing';
     declarations: [],
     imports: [
         StoreModule.forFeature(VIDEO_CATEGORY_FEATURE_NAME, reducer),
-        EffectsModule.forFeature([ VideoCategoryStoreEffects, VideoCategoryStoreRoutingEffects ])
-    ]
+        EffectsModule.forFeature([
+            VideoCategoryStoreEffects,
+            VideoCategoryStoreRoutingEffects,
+        ]),
+    ],
 })
-export class VideoCategoryStoreModule { }
+export class VideoCategoryStoreModule {}

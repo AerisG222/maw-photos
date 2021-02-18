@@ -10,13 +10,18 @@ import { CategoriesStoreSelectors } from '../../store';
     selector: 'app-list-view',
     templateUrl: './list-view.component.html',
     styleUrls: ['./list-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListViewComponent {
     listSettings$ = this.listViewFacade.settings$;
-    years$ = this.store.select(CategoriesStoreSelectors.allFilteredCategoryYears);
+    years$ = this.store.select(
+        CategoriesStoreSelectors.allFilteredCategoryYears
+    );
 
-    constructor(private listViewFacade: CategoryListSettingsFacade, private store: Store) { }
+    constructor(
+        private listViewFacade: CategoryListSettingsFacade,
+        private store: Store
+    ) {}
 
     onToggleThumbnailSize(newSize: ThumbnailSize): void {
         this.listViewFacade.saveThumbnailSize(newSize);
@@ -27,6 +32,9 @@ export class ListViewComponent {
     }
 
     categoriesForYear(year: number): Observable<Category[]> {
-        return this.store.select(CategoriesStoreSelectors.allFilteredCategoriesForYear, { year });
+        return this.store.select(
+            CategoriesStoreSelectors.allFilteredCategoriesForYear,
+            { year }
+        );
     }
 }

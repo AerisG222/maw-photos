@@ -9,7 +9,7 @@ export const reducer = createReducer(
         SettingsActions.loadSuccess,
         (state, { settings }): State => ({
             ...state,
-            settings: { ...settings }
+            settings: { ...settings },
         })
     ),
     on(
@@ -18,8 +18,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                app: settings
-            }
+                app: settings,
+            },
         })
     ),
     on(
@@ -28,8 +28,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                categoryFilter: settings
-            }
+                categoryFilter: settings,
+            },
         })
     ),
     on(
@@ -38,8 +38,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                categoryGridView: settings
-            }
+                categoryGridView: settings,
+            },
         })
     ),
     on(
@@ -48,8 +48,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                categoryListView: settings
-            }
+                categoryListView: settings,
+            },
         })
     ),
     on(
@@ -58,8 +58,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                categoryPage: settings
-            }
+                categoryPage: settings,
+            },
         })
     ),
     on(
@@ -68,8 +68,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                photoDetailView: settings
-            }
+                photoDetailView: settings,
+            },
         })
     ),
     on(
@@ -78,8 +78,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                photoGridView: settings
-            }
+                photoGridView: settings,
+            },
         })
     ),
     on(
@@ -88,8 +88,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                photoInfoPanel: settings
-            }
+                photoInfoPanel: settings,
+            },
         })
     ),
     on(
@@ -98,8 +98,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                photoMapView: settings
-            }
+                photoMapView: settings,
+            },
         })
     ),
     on(
@@ -108,8 +108,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                photoPage: settings
-            }
+                photoPage: settings,
+            },
         })
     ),
     on(
@@ -118,8 +118,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                randomDetailView: settings
-            }
+                randomDetailView: settings,
+            },
         })
     ),
     on(
@@ -128,8 +128,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                randomGridView: settings
-            }
+                randomGridView: settings,
+            },
         })
     ),
     on(
@@ -138,8 +138,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                randomInfoPanel: settings
-            }
+                randomInfoPanel: settings,
+            },
         })
     ),
     on(
@@ -148,8 +148,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                randomPage: settings
-            }
+                randomPage: settings,
+            },
         })
     ),
     on(
@@ -158,8 +158,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                searchGridView: settings
-            }
+                searchGridView: settings,
+            },
         })
     ),
     on(
@@ -168,8 +168,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                searchListView: settings
-            }
+                searchListView: settings,
+            },
         })
     ),
     on(
@@ -178,8 +178,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                searchPage: settings
-            }
+                searchPage: settings,
+            },
         })
     ),
     on(
@@ -188,8 +188,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                videoDetailView: settings
-            }
+                videoDetailView: settings,
+            },
         })
     ),
     on(
@@ -198,8 +198,8 @@ export const reducer = createReducer(
             ...state,
             settings: {
                 ...state.settings,
-                videoInfoPanel: settings
-            }
+                videoInfoPanel: settings,
+            },
         })
     )
 );

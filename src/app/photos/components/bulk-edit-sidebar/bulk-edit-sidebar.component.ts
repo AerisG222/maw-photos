@@ -1,4 +1,9 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    Output,
+    EventEmitter,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { GpsCoordinate } from '@models';
@@ -11,14 +16,10 @@ import { sidebarShow, sidebarHide } from '@shared/animations';
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger('sidebarFlyInOut', [
-            transition(':enter', [
-                useAnimation(sidebarShow)
-            ]),
-            transition(':leave', [
-                useAnimation(sidebarHide)
-            ])
+            transition(':enter', [useAnimation(sidebarShow)]),
+            transition(':leave', [useAnimation(sidebarHide)]),
         ]),
-    ]
+    ],
 })
 export class BulkEditSidebarComponent {
     @Output() showPhotosWithGpsData = new EventEmitter<boolean>();

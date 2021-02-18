@@ -3,8 +3,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
     templateUrl: './release-notes.component.html',
     styleUrls: ['./release-notes.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReleaseNotesComponent {
-
-}
+export class ReleaseNotesComponent {}

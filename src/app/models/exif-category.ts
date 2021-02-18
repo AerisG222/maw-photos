@@ -1,5 +1,5 @@
 export enum ExifCategory {
     exif,
     maker,
-    composite
+    composite,
 }

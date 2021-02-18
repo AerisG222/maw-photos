@@ -6,12 +6,13 @@ describe('PrimaryNavComponent', () => {
     let component: PrimaryNavComponent;
     let fixture: ComponentFixture<PrimaryNavComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ PrimaryNavComponent ]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [PrimaryNavComponent],
+            }).compileComponents();
         })
-        .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PrimaryNavComponent);

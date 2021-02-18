@@ -6,7 +6,7 @@ import { PhotoGridViewSettings } from '@models';
 import { BasePhotoGridSettingsFacade } from './base-photo-grid-settings-facade';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class PhotoGridSettingsFacade extends BasePhotoGridSettingsFacade {
     settings$ = this.store.select(SettingsStoreSelectors.photoGridViewSettings);
@@ -16,6 +16,8 @@ export class PhotoGridSettingsFacade extends BasePhotoGridSettingsFacade {
     }
 
     save(settings: PhotoGridViewSettings): void {
-        this.store.dispatch(SettingsStoreActions.savePhotoGridViewSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.savePhotoGridViewSettings({ settings })
+        );
     }
 }

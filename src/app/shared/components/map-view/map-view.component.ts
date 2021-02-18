@@ -9,7 +9,7 @@ import {
     AfterViewInit,
     OnChanges,
     SimpleChanges,
-    ChangeDetectorRef
+    ChangeDetectorRef,
 } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 
@@ -20,7 +20,7 @@ import { MapMarkerInfo } from './map-marker-info.model';
     selector: 'app-shared-map-view',
     templateUrl: './map-view.component.html',
     styleUrls: ['./map-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     @ViewChild(GoogleMap) map: GoogleMap | null = null;
@@ -40,9 +40,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     activeImageUrl: string | null = null;
     markers = new Map<string, MapMarkerInfo>();
 
-    constructor(private changeDetectorRef: ChangeDetectorRef) {
-
-    }
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit(): void {
         this.updateMapOptions();
@@ -95,13 +93,16 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         return null;
     }
 
-    getMarkerOptions(marker: MapMarker, image: MapImage): google.maps.MarkerOptions | null {
+    getMarkerOptions(
+        marker: MapMarker,
+        image: MapImage
+    ): google.maps.MarkerOptions | null {
         if (!!image && !!image.latitude && !!image.longitude) {
             // track the marker internally to support navigating across markers from the toolbar
             this.markers.set(image.imageUrl, { marker, image });
 
             return {
-                position: this.getPosition(image) ?? undefined
+                position: this.getPosition(image) ?? undefined,
             };
         }
 
@@ -148,7 +149,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
                 fullscreenControl: false,
                 mapTypeControl: true,
                 mapTypeId: this.mapType,
-                styles: this.getMapTheme()
+                styles: this.getMapTheme(),
             };
         }
     }

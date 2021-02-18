@@ -1,4 +1,4 @@
-import {ExifCategory} from './exif-category';
+import { ExifCategory } from './exif-category';
 
 export interface ExifData {
     category: ExifCategory;

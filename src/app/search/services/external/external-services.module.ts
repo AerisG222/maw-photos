@@ -8,9 +8,12 @@ export class ExternalServicesModule {
     static forRoot(): ModuleWithProviders<ExternalServicesModule> {
         return {
             providers: [
-                { provide: searchApiServiceToken, useClass: ExternalSearchApiService }
+                {
+                    provide: searchApiServiceToken,
+                    useClass: ExternalSearchApiService,
+                },
             ],
-            ngModule: ExternalServicesModule
+            ngModule: ExternalServicesModule,
         };
     }
 }

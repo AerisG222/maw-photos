@@ -11,21 +11,21 @@ import { map } from 'rxjs/operators';
     selector: 'app-photos-map-view',
     templateUrl: './map-view.component.html',
     styleUrls: ['./map-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapViewComponent {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
-    mapImages$ = this.store.select(PhotoStoreSelectors.photosWithGpsCoordinatesAsMapImages);
+    mapImages$ = this.store.select(
+        PhotoStoreSelectors.photosWithGpsCoordinatesAsMapImages
+    );
     settings$ = this.mapSettings.settings$;
-    appTheme$ = this.appSettings.settings$.pipe(map(x => x.theme));
+    appTheme$ = this.appSettings.settings$.pipe(map((x) => x.theme));
 
     constructor(
         private appSettings: AppSettingsFacade,
         private mapSettings: PhotoMapSettingsFacade,
         private store: Store
-    ) {
-
-    }
+    ) {}
 
     onMapTypeIdChange(mapType: MapType): void {
         this.mapSettings.saveMapType(mapType);
@@ -36,6 +36,8 @@ export class MapViewComponent {
     }
 
     onSelectPhoto(photoId: number): void {
-        this.store.dispatch(PhotoStoreActions.setActivePhotoId({ id: photoId }));
+        this.store.dispatch(
+            PhotoStoreActions.setActivePhotoId({ id: photoId })
+        );
     }
 }

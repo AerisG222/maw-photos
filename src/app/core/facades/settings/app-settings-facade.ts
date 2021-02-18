@@ -6,7 +6,7 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AppSettingsFacade extends BaseSettingsFacade<AppSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.appSettings);

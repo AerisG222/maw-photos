@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnDestroy, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    OnDestroy,
+    ChangeDetectionStrategy,
+    ViewChild,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { HotkeysService } from 'angular2-hotkeys';
 import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.component';
@@ -7,16 +14,16 @@ import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.co
     selector: 'app-toolbar-button',
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent extends ButtonLinkBaseComponent implements OnInit, OnDestroy  {
+export class ButtonComponent
+    extends ButtonLinkBaseComponent
+    implements OnInit, OnDestroy {
     @Input() isActive = false;
 
     @ViewChild('button') button: MatButton | null = null;
 
-    constructor(
-        public hotkeysService: HotkeysService
-    ) {
+    constructor(public hotkeysService: HotkeysService) {
         super(hotkeysService);
     }
 

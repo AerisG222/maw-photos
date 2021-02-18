@@ -4,7 +4,13 @@ import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-set
 import { SearchListSettingsFacade } from '@core/facades/settings/search-list-settings-facade';
 import { SearchPageSettingsFacade } from '@core/facades/settings/search-page-settings-facade';
 
-import { allCategoryViewModes, allMargins, allThumbnailSizes, toMarginDefaulted, toThumbnailSizeDefaulted } from '@models';
+import {
+    allCategoryViewModes,
+    allMargins,
+    allThumbnailSizes,
+    toMarginDefaulted,
+    toThumbnailSizeDefaulted,
+} from '@models';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { SearchGridViewSettings } from '@models';
@@ -15,7 +21,7 @@ import { SearchPageSettings } from '@models';
     selector: 'app-search-settings',
     templateUrl: './search-settings.component.html',
     styleUrls: ['./search-settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchSettingsComponent {
     form: FormGroup;
@@ -31,25 +37,25 @@ export class SearchSettingsComponent {
     ) {
         this.form = this.fb.group({
             page: this.fb.group({
-                viewMode: ''
+                viewMode: '',
             }),
             grid: this.fb.group({
                 showTitles: '',
                 showYears: '',
                 margin: '',
-                thumbnailSize: ''
+                thumbnailSize: '',
             }),
             list: this.fb.group({
                 margin: '',
-                thumbnailSize: ''
-            })
+                thumbnailSize: '',
+            }),
         });
 
         this.resetForm();
     }
 
     onSave() {
-        if(!this.form.valid) {
+        if (!this.form.valid) {
             return;
         }
 
@@ -71,20 +77,24 @@ export class SearchSettingsComponent {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
             showTitles: this.form.get('grid.showTitles')?.value,
             showYears: this.form.get('grid.showYears')?.value,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('grid.thumbnailSize')?.value
+            ),
         };
     }
 
     private readListForm(): SearchListViewSettings {
         return {
             margin: toMarginDefaulted(this.form.get('list.margin')?.value),
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('list.thumbnailSize')?.value)
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('list.thumbnailSize')?.value
+            ),
         };
     }
 
     private readPageForm(): SearchPageSettings {
         return {
-            viewMode: this.form.get('page.viewMode')?.value
+            viewMode: this.form.get('page.viewMode')?.value,
         };
     }
 
@@ -92,27 +102,27 @@ export class SearchSettingsComponent {
         combineLatest([
             this.gridFacade.settings$,
             this.listFacade.settings$,
-            this.pageFacade.settings$
-        ]).pipe(
-            first()
-        ).subscribe({
-            next: ([grid, list, page]) => {
-                this.form.patchValue({
-                    page: {
-                        viewMode: page.viewMode
-                    },
-                    grid: {
-                        showTitles: grid.showTitles,
-                        showYears: grid.showYears,
-                        margin: grid.margin,
-                        thumbnailSize: grid.thumbnailSize
-                    },
-                    list: {
-                        margin: list.margin,
-                        thumbnailSize: list.thumbnailSize
-                    }
-                });
-            }
-        });
+            this.pageFacade.settings$,
+        ])
+            .pipe(first())
+            .subscribe({
+                next: ([grid, list, page]) => {
+                    this.form.patchValue({
+                        page: {
+                            viewMode: page.viewMode,
+                        },
+                        grid: {
+                            showTitles: grid.showTitles,
+                            showYears: grid.showYears,
+                            margin: grid.margin,
+                            thumbnailSize: grid.thumbnailSize,
+                        },
+                        list: {
+                            margin: list.margin,
+                            thumbnailSize: list.thumbnailSize,
+                        },
+                    });
+                },
+            });
     }
 }

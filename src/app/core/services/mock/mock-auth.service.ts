@@ -7,16 +7,9 @@ import { AuthService } from '@core/services';
 
 @Injectable()
 export class MockAuthService implements AuthService {
-    constructor(
-        private store: Store,
-        private router: Router
-    ) {
+    constructor(private store: Store, private router: Router) {}
 
-    }
-
-    async init(): Promise<void> {
-
-    }
+    async init(): Promise<void> {}
 
     handleLoginCallback(): void {
         this.finishLogin();
@@ -26,22 +19,19 @@ export class MockAuthService implements AuthService {
         this.finishLogin();
     }
 
-    loginViaPopup(): void {
-
-    }
+    loginViaPopup(): void {}
 
     private finishLogin(): void {
         this.storeProfile();
         this.router.navigate(['/']);
     }
 
-    private storeProfile(): void
-    {
+    private storeProfile(): void {
         const userInfo = {
             username: 'testuser',
             firstName: 'Test',
             lastName: 'User',
-            roles: [ 'admin' ]
+            roles: ['admin'],
         };
 
         this.store.dispatch(updateUserInfoRequest({ userInfo }));

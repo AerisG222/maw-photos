@@ -7,7 +7,7 @@ import { Commentable } from '@core/facades';
     selector: 'app-sidebar-comments-card',
     templateUrl: './comments-card.component.html',
     styleUrls: ['./comments-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentsCardComponent {
     form: FormGroup;
@@ -18,7 +18,7 @@ export class CommentsCardComponent {
         public commentable: Commentable
     ) {
         this.form = this.formBuilder.group({
-            comment: ['', Validators.required]
+            comment: ['', Validators.required],
         });
     }
 

@@ -4,8 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-photos-bulk-edit-toolbar',
     templateUrl: './bulk-edit-toolbar.component.html',
     styleUrls: ['./bulk-edit-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BulkEditToolbarComponent {
-
-}
+export class BulkEditToolbarComponent {}

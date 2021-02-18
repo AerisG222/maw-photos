@@ -1,12 +1,13 @@
 <app-toolbar-toolbar>
-    <app-toolbar-group-select-view
-        [isFullscreenViewActive]="true">
+    <app-toolbar-group-select-view [isFullscreenViewActive]="true">
     </app-toolbar-group-select-view>
 
     <app-toolbar-divider></app-toolbar-divider>
 
     <app-toolbar-group>
-        <app-photos-toolbar-slideshow-button (toggleSlideshow)="onToggleSlideshow()"></app-photos-toolbar-slideshow-button>
+        <app-photos-toolbar-slideshow-button
+            (toggleSlideshow)="onToggleSlideshow()"
+        ></app-photos-toolbar-slideshow-button>
         <app-toolbar-move-previous-button></app-toolbar-move-previous-button>
         <app-toolbar-move-next-button></app-toolbar-move-next-button>
     </app-toolbar-group>

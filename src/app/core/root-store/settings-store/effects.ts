@@ -11,7 +11,7 @@ export class SettingsStoreEffects {
     loadRequest$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.loadRequest),
-            concatMap(action => {
+            concatMap((action) => {
                 const settings = this.settingsService.getAllSettings();
                 return of(SettingsActions.loadSuccess({ settings }));
             })
@@ -21,7 +21,7 @@ export class SettingsStoreEffects {
     saveAppSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveAppSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveAppSettings(settings);
                     return SettingsActions.saveAppSettingsSuccess({ settings });
@@ -35,12 +35,16 @@ export class SettingsStoreEffects {
     saveCategoryFilterSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveCategoryFilterSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveCategoryFilterSettings(settings);
-                    return SettingsActions.saveCategoryFilterSettingsSuccess({ settings });
+                    return SettingsActions.saveCategoryFilterSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveCategoryFilterSettingsFailure({ err });
+                    return SettingsActions.saveCategoryFilterSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -49,12 +53,16 @@ export class SettingsStoreEffects {
     saveCategoryGridViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveCategoryGridViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveCategoryGridViewSettings(settings);
-                    return SettingsActions.saveCategoryGridViewSettingsSuccess({ settings });
+                    return SettingsActions.saveCategoryGridViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveCategoryGridViewSettingsFailure({ err });
+                    return SettingsActions.saveCategoryGridViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -63,12 +71,16 @@ export class SettingsStoreEffects {
     saveCategoryListViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveCategoryListViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveCategoryListViewSettings(settings);
-                    return SettingsActions.saveCategoryListViewSettingsSuccess({ settings });
+                    return SettingsActions.saveCategoryListViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveCategoryListViewSettingsFailure({ err });
+                    return SettingsActions.saveCategoryListViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -77,12 +89,16 @@ export class SettingsStoreEffects {
     saveCategoryPageSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveCategoryPageSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveCategoryPageSettings(settings);
-                    return SettingsActions.saveCategoryPageSettingsSuccess({ settings });
+                    return SettingsActions.saveCategoryPageSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveCategoryPageSettingsFailure({ err });
+                    return SettingsActions.saveCategoryPageSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -91,12 +107,16 @@ export class SettingsStoreEffects {
     savePhotoDetailViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.savePhotoDetailViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.savePhotoDetailViewSettings(settings);
-                    return SettingsActions.savePhotoDetailViewSettingsSuccess({ settings });
+                    return SettingsActions.savePhotoDetailViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.savePhotoDetailViewSettingsFailure({ err });
+                    return SettingsActions.savePhotoDetailViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -105,12 +125,16 @@ export class SettingsStoreEffects {
     savePhotoGridViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.savePhotoGridViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.savePhotoGridViewSettings(settings);
-                    return SettingsActions.savePhotoGridViewSettingsSuccess({ settings });
+                    return SettingsActions.savePhotoGridViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.savePhotoGridViewSettingsFailure({ err });
+                    return SettingsActions.savePhotoGridViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -119,12 +143,16 @@ export class SettingsStoreEffects {
     savePhotoInfoPanelSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.savePhotoInfoPanelSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.savePhotoInfoPanelSettings(settings);
-                    return SettingsActions.savePhotoInfoPanelSettingsSuccess({ settings });
+                    return SettingsActions.savePhotoInfoPanelSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.savePhotoInfoPanelSettingsFailure({ err });
+                    return SettingsActions.savePhotoInfoPanelSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -133,12 +161,16 @@ export class SettingsStoreEffects {
     savePhotoMapViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.savePhotoMapViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.savePhotoMapViewSettings(settings);
-                    return SettingsActions.savePhotoMapViewSettingsSuccess({ settings });
+                    return SettingsActions.savePhotoMapViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.savePhotoMapViewSettingsFailure({ err });
+                    return SettingsActions.savePhotoMapViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -147,12 +179,16 @@ export class SettingsStoreEffects {
     savePhotoPageSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.savePhotoPageSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.savePhotoPageSettings(settings);
-                    return SettingsActions.savePhotoPageSettingsSuccess({ settings });
+                    return SettingsActions.savePhotoPageSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.savePhotoPageSettingsFailure({ err });
+                    return SettingsActions.savePhotoPageSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -161,12 +197,16 @@ export class SettingsStoreEffects {
     saveRandomDetailViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveRandomDetailViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveRandomDetailViewSettings(settings);
-                    return SettingsActions.saveRandomDetailViewSettingsSuccess({ settings });
+                    return SettingsActions.saveRandomDetailViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveRandomDetailViewSettingsFailure({ err });
+                    return SettingsActions.saveRandomDetailViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -175,12 +215,16 @@ export class SettingsStoreEffects {
     saveRandomGridViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveRandomGridViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveRandomGridViewSettings(settings);
-                    return SettingsActions.saveRandomGridViewSettingsSuccess({ settings });
+                    return SettingsActions.saveRandomGridViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveRandomGridViewSettingsFailure({ err });
+                    return SettingsActions.saveRandomGridViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -189,12 +233,16 @@ export class SettingsStoreEffects {
     saveRandomInfoPanelSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveRandomInfoPanelSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveRandomInfoPanelSettings(settings);
-                    return SettingsActions.saveRandomInfoPanelSettingsSuccess({ settings });
+                    return SettingsActions.saveRandomInfoPanelSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveRandomInfoPanelSettingsFailure({ err });
+                    return SettingsActions.saveRandomInfoPanelSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -203,12 +251,16 @@ export class SettingsStoreEffects {
     saveRandomPageSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveRandomPageSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveRandomPageSettings(settings);
-                    return SettingsActions.saveRandomPageSettingsSuccess({ settings });
+                    return SettingsActions.saveRandomPageSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveRandomPageSettingsFailure({ err });
+                    return SettingsActions.saveRandomPageSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -217,12 +269,16 @@ export class SettingsStoreEffects {
     saveSearchGridViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveSearchGridViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveSearchGridViewSettings(settings);
-                    return SettingsActions.saveSearchGridViewSettingsSuccess({ settings });
+                    return SettingsActions.saveSearchGridViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveSearchGridViewSettingsFailure({ err });
+                    return SettingsActions.saveSearchGridViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -231,12 +287,16 @@ export class SettingsStoreEffects {
     saveSearchListViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveSearchListViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveSearchListViewSettings(settings);
-                    return SettingsActions.saveSearchListViewSettingsSuccess({ settings });
+                    return SettingsActions.saveSearchListViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveSearchListViewSettingsFailure({ err });
+                    return SettingsActions.saveSearchListViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -245,12 +305,16 @@ export class SettingsStoreEffects {
     saveSearchPageSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveSearchPageSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveSearchPageSettings(settings);
-                    return SettingsActions.saveSearchPageSettingsSuccess({ settings });
+                    return SettingsActions.saveSearchPageSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveSearchPageSettingsFailure({ err });
+                    return SettingsActions.saveSearchPageSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -259,12 +323,16 @@ export class SettingsStoreEffects {
     saveVideoDetailViewSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveVideoDetailViewSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveVideoDetailViewSettings(settings);
-                    return SettingsActions.saveVideoDetailViewSettingsSuccess({ settings });
+                    return SettingsActions.saveVideoDetailViewSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveVideoDetailViewSettingsFailure({ err });
+                    return SettingsActions.saveVideoDetailViewSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -273,12 +341,16 @@ export class SettingsStoreEffects {
     saveVideoInfoPanelSettings$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SettingsActions.saveVideoInfoPanelSettings),
-            map(({settings}) => {
+            map(({ settings }) => {
                 try {
                     this.settingsService.saveVideoInfoPanelSettings(settings);
-                    return SettingsActions.saveVideoInfoPanelSettingsSuccess({ settings });
+                    return SettingsActions.saveVideoInfoPanelSettingsSuccess({
+                        settings,
+                    });
                 } catch (err: unknown) {
-                    return SettingsActions.saveVideoInfoPanelSettingsFailure({ err });
+                    return SettingsActions.saveVideoInfoPanelSettingsFailure({
+                        err,
+                    });
                 }
             })
         );
@@ -287,7 +359,5 @@ export class SettingsStoreEffects {
     constructor(
         private settingsService: SettingsService,
         private actions$: Actions
-    ) {
-
-    }
+    ) {}
 }

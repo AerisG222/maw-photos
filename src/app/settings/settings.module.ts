@@ -24,11 +24,8 @@ import { HeadingComponent } from './heading/heading.component';
         SearchSettingsComponent,
         VideoSettingsComponent,
         SubmitButtonsComponent,
-        HeadingComponent
+        HeadingComponent,
     ],
-    imports: [
-        SettingsRoutingModule,
-        SharedModule
-    ]
+    imports: [SettingsRoutingModule, SharedModule],
 })
-export class SettingsModule { }
+export class SettingsModule {}

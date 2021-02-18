@@ -1,8 +1,14 @@
-<ng-container *ngIf="{
-    activePhoto: activePhoto$ | async,
-    effects: effects$ | async
-} as data">
-    <div class="image-wrapper" [ngClass]="getMaxHeightClass()" [class.fullscreen]="!showHeader && !showPhotoList">
+<ng-container
+    *ngIf="{
+        activePhoto: activePhoto$ | async,
+        effects: effects$ | async
+    } as data"
+>
+    <div
+        class="image-wrapper"
+        [ngClass]="getMaxHeightClass()"
+        [class.fullscreen]="!showHeader && !showPhotoList"
+    >
         <img
             [ngClass]="getMaxHeightClass()"
             [src]="data.activePhoto?.imageMd?.url"
@@ -13,6 +19,7 @@
             (swipeleft)="onSwipeLeft()"
             (swiperight)="onSwipeRight()"
             sizes="100vw"
-            loading="eager" />
+            loading="eager"
+        />
     </div>
 </ng-container>

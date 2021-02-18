@@ -6,8 +6,6 @@ import { reducer } from './reducer';
 
 @NgModule({
     declarations: [],
-    imports: [
-        StoreModule.forFeature(LAYOUT_FEATURE_NAME, reducer)
-    ]
+    imports: [StoreModule.forFeature(LAYOUT_FEATURE_NAME, reducer)],
 })
-export class LayoutStoreModule { }
+export class LayoutStoreModule {}

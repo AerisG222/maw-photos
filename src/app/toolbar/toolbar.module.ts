@@ -19,11 +19,9 @@ import { ButtonLinkBaseComponent } from './button-link-base/button-link-base.com
         LinkComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
-        ToolbarComponent
+        ToolbarComponent,
     ],
-    imports: [
-        BaseModule
-    ],
+    imports: [BaseModule],
     exports: [
         ButtonComponent,
         DividerComponent,
@@ -31,7 +29,7 @@ import { ButtonLinkBaseComponent } from './button-link-base/button-link-base.com
         LinkComponent,
         MoveNextButtonComponent,
         MovePreviousButtonComponent,
-        ToolbarComponent
-    ]
+        ToolbarComponent,
+    ],
 })
-export class ToolbarModule { }
+export class ToolbarModule {}

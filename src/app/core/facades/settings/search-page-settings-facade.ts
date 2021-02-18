@@ -6,7 +6,7 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { SearchPageSettings } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SearchPageSettingsFacade extends BaseSettingsFacade<SearchPageSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.searchPageSettings);
@@ -16,6 +16,8 @@ export class SearchPageSettingsFacade extends BaseSettingsFacade<SearchPageSetti
     }
 
     save(settings: SearchPageSettings): void {
-        this.store.dispatch(SettingsStoreActions.saveSearchPageSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.saveSearchPageSettings({ settings })
+        );
     }
 }

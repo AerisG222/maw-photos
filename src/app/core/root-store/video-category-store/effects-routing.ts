@@ -14,40 +14,65 @@ export class VideoCategoryStoreRoutingEffects {
     ensureVideoCategoriesLoadedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaChanged),
-            filter(change => RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)),
-            withLatestFrom(this.store.select(VideoCategoryStoreSelectors.allCategories)),
-            filter(([change, categories]) => !categories || categories.length === 0),
-            map(([change, categories]) => VideoCategoryStoreActions.loadRequest())
+            filter((change) =>
+                RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)
+            ),
+            withLatestFrom(
+                this.store.select(VideoCategoryStoreSelectors.allCategories)
+            ),
+            filter(
+                ([change, categories]) => !categories || categories.length === 0
+            ),
+            map(([change, categories]) =>
+                VideoCategoryStoreActions.loadRequest()
+            )
         );
     });
 
-    verifyActiveCategoryOnRouteChange$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(RouterStoreActions.routeChanged),
-            filter(action => action.routeDetails.area === RouteArea.videos),
-            withLatestFrom(this.store.select(VideoCategoryStoreSelectors.allEntities)),
-            filter(([action, entities]) => {
-                const catId = Number(action.routeDetails.params.categoryId);
+    verifyActiveCategoryOnRouteChange$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(RouterStoreActions.routeChanged),
+                filter(
+                    (action) => action.routeDetails.area === RouteArea.videos
+                ),
+                withLatestFrom(
+                    this.store.select(VideoCategoryStoreSelectors.allEntities)
+                ),
+                filter(([action, entities]) => {
+                    const catId = Number(action.routeDetails.params.categoryId);
 
-                return isNaN(catId) || !(catId in entities);
-            }),
-            tap(_ => this.router.navigateByUrl(RouteHelper.categoriesAbs()))
-        );
-    }, { dispatch: false });
+                    return isNaN(catId) || !(catId in entities);
+                }),
+                tap((_) =>
+                    this.router.navigateByUrl(RouteHelper.categoriesAbs())
+                )
+            );
+        },
+        { dispatch: false }
+    );
 
     setActiveCategoryWhenEnteringVideoArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaEntering),
-            filter(action => action.enteringArea === RouteArea.videos),
-            map(action => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: action.enteringRouteDetails?.params.categoryId }))
+            filter((action) => action.enteringArea === RouteArea.videos),
+            map((action) =>
+                VideoCategoryStoreActions.setActiveCategoryId({
+                    categoryId: action.enteringRouteDetails?.params.categoryId,
+                })
+            )
         );
     });
 
     resetActiveCategoryWhenLeavingVideoArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
-            filter(action => action.leavingArea === RouteArea.videos),
-            map(action => VideoCategoryStoreActions.setActiveCategoryId({ categoryId: null }))
+            filter((action) => action.leavingArea === RouteArea.videos),
+            map((action) =>
+                VideoCategoryStoreActions.setActiveCategoryId({
+                    categoryId: null,
+                })
+            )
         );
     });
 
@@ -55,7 +80,5 @@ export class VideoCategoryStoreRoutingEffects {
         private actions$: Actions,
         private store: Store,
         private router: Router
-    ) {
-
-    }
+    ) {}
 }

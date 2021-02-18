@@ -29,58 +29,60 @@ export const query = createSelector(
 
 export const activeResultStartIndex = createSelector(
     searchState,
-    (state: State): number => state.activeResult ? state.activeResult.startIndex : -1
+    (state: State): number =>
+        state.activeResult ? state.activeResult.startIndex : -1
 );
 
 export const activeResult = createSelector(
     searchState,
-    (state: State): SearchResult<MultimediaCategory> | null => state.activeResult
+    (state: State): SearchResult<MultimediaCategory> | null =>
+        state.activeResult
 );
 
 export const hasMoreResults = createSelector(
     activeResult,
     (result): boolean => {
-        return result ? (result.startIndex + result.results.length) < result.totalFound : false;
+        return result
+            ? result.startIndex + result.results.length < result.totalFound
+            : false;
     }
 );
 
 export const totalResults = createSelector(
     activeResult,
-    result => result?.totalFound ?? 0
+    (result) => result?.totalFound ?? 0
 );
 
 export const showTotalResults = createSelector(
     totalResults,
-    total => total > 0
+    (total) => total > 0
 );
 
-export const allResultsAsCategories = createSelector(
-    allResults,
-    cats => cats.map(adaptSearchResultToCategory)
+export const allResultsAsCategories = createSelector(allResults, (cats) =>
+    cats.map(adaptSearchResultToCategory)
 );
 
-export const shownResults = createSelector(
-    activeResult,
-    result => (result) ? result.startIndex + result.results.length : 0
+export const shownResults = createSelector(activeResult, (result) =>
+    result ? result.startIndex + result.results.length : 0
 );
 
-export const showNoResults = createSelector(
-    activeResult,
-    result => (result) ? result.totalFound === 0 : false
+export const showNoResults = createSelector(activeResult, (result) =>
+    result ? result.totalFound === 0 : false
 );
 
-export const nextResultIndex = createSelector(
-    activeResult,
-    result => result ? result.startIndex + result.results.length : -1
+export const nextResultIndex = createSelector(activeResult, (result) =>
+    result ? result.startIndex + result.results.length : -1
 );
 
 const getUrl = (cat: MultimediaCategory): string => {
-    return cat.multimediaType === 'photo' ?
-        RouteHelper.photoCategoriesAbs(undefined, cat.id) :
-        RouteHelper.videoCategoriesAbs(undefined, cat.id);
+    return cat.multimediaType === 'photo'
+        ? RouteHelper.photoCategoriesAbs(undefined, cat.id)
+        : RouteHelper.videoCategoriesAbs(undefined, cat.id);
 };
 
-const adaptSearchResultToCategory = (cat: MultimediaCategory): CategoryTeaser => ({
+const adaptSearchResultToCategory = (
+    cat: MultimediaCategory
+): CategoryTeaser => ({
     route: getUrl(cat),
     id: cat.id,
     year: cat.year,
@@ -89,13 +91,16 @@ const adaptSearchResultToCategory = (cat: MultimediaCategory): CategoryTeaser =>
         height: cat.teaserPhotoHeight,
         width: cat.teaserPhotoWidth,
         url: cat.teaserPhotoPath,
-        size: 0
+        size: 0,
     },
     teaserImageSq: {
         height: cat.teaserPhotoSqHeight,
         width: cat.teaserPhotoSqWidth,
         url: cat.teaserPhotoSqPath,
-        size: 0
+        size: 0,
     },
-    type: cat.multimediaType === 'photo' ? CategoryType.photo : CategoryType.video
+    type:
+        cat.multimediaType === 'photo'
+            ? CategoryType.photo
+            : CategoryType.video,
 });

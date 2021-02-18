@@ -6,10 +6,10 @@ import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page
     selector: 'app-toolbar-group-select-view',
     templateUrl: './toolbar-group-select-view.component.html',
     styleUrls: ['./toolbar-group-select-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarGroupSelectViewComponent {
-    constructor(private pageFacade: CategoryPageSettingsFacade) { }
+    constructor(private pageFacade: CategoryPageSettingsFacade) {}
 
     onSelectGridView(): void {
         this.pageFacade.selectGridView();

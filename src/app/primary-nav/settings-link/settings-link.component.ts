@@ -6,7 +6,7 @@ import { RouteHelper } from '@models';
     selector: 'app-primary-nav-settings-link',
     templateUrl: './settings-link.component.html',
     styleUrls: ['./settings-link.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsLinkComponent {
     settingsLink = RouteHelper.settingsAbs();

@@ -1,12 +1,14 @@
-<app-sidebar-card
-    icon="image_search"
-    title="Category Teaser Chooser">
-
+<app-sidebar-card icon="image_search" title="Category Teaser Chooser">
     <p>Current Teaser:</p>
     <div class="teaser-img">
         <img [src]="categoryTeaserSelectable.currentTeaserUrl$ | async" />
     </div>
 
-    <button mat-button (click)="categoryTeaserSelectable.setCategoryTeaser()" color="primary">Replace teaser with current photo</button>
-
+    <button
+        mat-button
+        (click)="categoryTeaserSelectable.setCategoryTeaser()"
+        color="primary"
+    >
+        Replace teaser with current photo
+    </button>
 </app-sidebar-card>

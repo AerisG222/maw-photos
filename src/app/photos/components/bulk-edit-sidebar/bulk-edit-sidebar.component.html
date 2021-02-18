@@ -2,11 +2,11 @@
     <app-sidebar-card-group @sidebarFlyInOut>
         <app-photos-bulk-edit-filter
             (selectAllPhotos)="onToggleSelectAll($event)"
-            (showPhotosWithGpsData)="onToggleHidePhotosWithGpsData($event)">
+            (showPhotosWithGpsData)="onToggleHidePhotosWithGpsData($event)"
+        >
         </app-photos-bulk-edit-filter>
 
-        <app-photos-bulk-edit-gps-editor
-            (saveGps)="onSaveGps($event)">
+        <app-photos-bulk-edit-gps-editor (saveGps)="onSaveGps($event)">
         </app-photos-bulk-edit-gps-editor>
     </app-sidebar-card-group>
 </app-sidebar-sidebar>

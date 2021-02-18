@@ -6,7 +6,7 @@ import { CategoryTeaser, CategoryType, ThumbnailSize } from '@models';
     selector: 'app-shared-category-card',
     templateUrl: './category-card.component.html',
     styleUrls: ['./category-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryCardComponent {
     @Input() category: CategoryTeaser | null = null;

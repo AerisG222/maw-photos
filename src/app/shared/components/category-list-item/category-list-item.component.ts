@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CategoryTeaser, CategoryType, RouteHelper, ThumbnailSize } from '@models';
+import {
+    CategoryTeaser,
+    CategoryType,
+    RouteHelper,
+    ThumbnailSize,
+} from '@models';
 
 @Component({
-  selector: 'app-shared-category-list-item',
-  templateUrl: './category-list-item.component.html',
-  styleUrls: ['./category-list-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-shared-category-list-item',
+    templateUrl: './category-list-item.component.html',
+    styleUrls: ['./category-list-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryListItemComponent {
     @Input() category?: CategoryTeaser;

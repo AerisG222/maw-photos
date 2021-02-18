@@ -1,4 +1,12 @@
-import { Component, ViewChild, ElementRef, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    ViewChild,
+    ElementRef,
+    Inject,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -11,7 +19,7 @@ import { PhotoStoreSelectors } from '@core/root-store';
     selector: 'app-photos-sidebar-histogram',
     templateUrl: './sidebar-histogram.component.html',
     styleUrls: ['./sidebar-histogram.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarHistogramComponent implements OnInit, OnDestroy {
     @ViewChild('canvas') canvas: ElementRef | null = null;
@@ -31,34 +39,34 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc: Document
     ) {
-        this.img = doc.createElement('img') ;
+        this.img = doc.createElement('img');
         this.img.crossOrigin = 'Anonymous';
         this.img.addEventListener('load', (evt) => this.onImageLoad());
 
         this.form = this.formBuilder.group({
-            channel: ['rgb']
+            channel: ['rgb'],
         });
     }
 
     ngOnInit(): void {
-        this.destroySub.add(this.store.select(PhotoStoreSelectors.activePhoto)
-            .subscribe({
-                next: photo => {
+        this.destroySub.add(
+            this.store.select(PhotoStoreSelectors.activePhoto).subscribe({
+                next: (photo) => {
                     if (this.img && !!photo?.imageMd) {
                         this.img.src = photo.imageMd.url;
                     }
-                }
+                },
             })
         );
 
         // TODO: leverage rxjs to manage dom load event and form state...
 
-        this.destroySub.add(this.form.get('channel')?.valueChanges
-            .subscribe({
-                next: val => {
+        this.destroySub.add(
+            this.form.get('channel')?.valueChanges.subscribe({
+                next: (val) => {
                     this.channel = val;
                     this.onImageLoad();
-                }
+                },
             })
         );
     }
@@ -68,7 +76,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     }
 
     private onImageLoad(): void {
-        const channel = this.channel;  // grab this here to make sure remaining tasks use consistent value
+        const channel = this.channel; // grab this here to make sure remaining tasks use consistent value
         const data = this.getImageData();
         const hist = this.calcHistogram(data);
         const maxCount = this.getMaxCount(channel, hist);
@@ -147,7 +155,11 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         return maxCount;
     }
 
-    private drawHistogram(channel: string, histogram: Histogram, maxCount: number): void {
+    private drawHistogram(
+        channel: string,
+        histogram: Histogram,
+        maxCount: number
+    ): void {
         const ctx = this.canvasEl.getContext('2d') as CanvasRenderingContext2D;
 
         ctx.clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
@@ -173,7 +185,12 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         ctx.globalCompositeOperation = 'source-over';
     }
 
-    private drawHistogramChannel(ctx: CanvasRenderingContext2D, color: string, maxCount: number, vals: number[]): void {
+    private drawHistogramChannel(
+        ctx: CanvasRenderingContext2D,
+        color: string,
+        maxCount: number,
+        vals: number[]
+    ): void {
         ctx.fillStyle = color;
 
         ctx.beginPath();

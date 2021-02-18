@@ -3,9 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { SearchResult } from 'src/app/search/models/search-result.model';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
 
-export const clearRequest = createAction(
-    '[Search] Clear'
-);
+export const clearRequest = createAction('[Search] Clear');
 
 export const queryRequest = createAction(
     '[Search] Query Request',
@@ -37,6 +35,4 @@ export const queryMoreSuccess = createAction(
     props<{ query: string; result: SearchResult<MultimediaCategory> }>()
 );
 
-export const exitSearchArea = createAction(
-    '[Search] Exiting Search Area'
-);
+export const exitSearchArea = createAction('[Search] Exiting Search Area');

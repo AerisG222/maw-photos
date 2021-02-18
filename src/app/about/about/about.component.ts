@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Component({
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent {
     version = environment.version;

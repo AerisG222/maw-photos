@@ -7,12 +7,20 @@
             <mat-card-content>
                 <h3>Type Filter</h3>
                 <mat-radio-group formControlName="typeFilter">
-                    <mat-radio-button *ngFor="let filter of typeFilters" [value]="filter.value">{{ filter.name }}</mat-radio-button>
+                    <mat-radio-button
+                        *ngFor="let filter of typeFilters"
+                        [value]="filter.value"
+                        >{{ filter.name }}</mat-radio-button
+                    >
                 </mat-radio-group>
 
                 <h3>View</h3>
                 <mat-radio-group formControlName="viewMode">
-                    <mat-radio-button *ngFor="let type of viewModes" [value]="type.value">{{ type.name }}</mat-radio-button>
+                    <mat-radio-button
+                        *ngFor="let type of viewModes"
+                        [value]="type.value"
+                        >{{ type.name }}</mat-radio-button
+                    >
                 </mat-radio-group>
             </mat-card-content>
         </mat-card>
@@ -21,16 +29,26 @@
             <mat-card-title>Grid View</mat-card-title>
             <mat-card-content>
                 <h3>Show Titles</h3>
-                <mat-slide-toggle formControlName="showTitles"></mat-slide-toggle>
+                <mat-slide-toggle
+                    formControlName="showTitles"
+                ></mat-slide-toggle>
 
                 <h3>Margins</h3>
                 <mat-radio-group formControlName="margin">
-                    <mat-radio-button *ngFor="let margin of margins" [value]="margin.value">{{ margin.name }}</mat-radio-button>
+                    <mat-radio-button
+                        *ngFor="let margin of margins"
+                        [value]="margin.value"
+                        >{{ margin.name }}</mat-radio-button
+                    >
                 </mat-radio-group>
 
                 <h3>Thumbnail Size</h3>
                 <mat-radio-group formControlName="thumbnailSize">
-                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.value">{{ size.name }}</mat-radio-button>
+                    <mat-radio-button
+                        *ngFor="let size of thumbnailSizes"
+                        [value]="size.value"
+                        >{{ size.name }}</mat-radio-button
+                    >
                 </mat-radio-group>
             </mat-card-content>
         </mat-card>
@@ -40,19 +58,25 @@
             <mat-card-content>
                 <h3>Margins</h3>
                 <mat-radio-group formControlName="margin">
-                    <mat-radio-button *ngFor="let margin of margins" [value]="margin.value">{{ margin.name }}</mat-radio-button>
+                    <mat-radio-button
+                        *ngFor="let margin of margins"
+                        [value]="margin.value"
+                        >{{ margin.name }}</mat-radio-button
+                    >
                 </mat-radio-group>
 
                 <h3>Thumbnail Size</h3>
                 <mat-radio-group formControlName="thumbnailSize">
-                    <mat-radio-button *ngFor="let size of thumbnailSizes" [value]="size.value">{{ size.name }}</mat-radio-button>
+                    <mat-radio-button
+                        *ngFor="let size of thumbnailSizes"
+                        [value]="size.value"
+                        >{{ size.name }}</mat-radio-button
+                    >
                 </mat-radio-group>
             </mat-card-content>
         </mat-card>
     </div>
 
-    <app-submit-buttons
-        (save)="onSave()"
-        (cancel)="onCancel()">
+    <app-submit-buttons (save)="onSave()" (cancel)="onCancel()">
     </app-submit-buttons>
 </form>

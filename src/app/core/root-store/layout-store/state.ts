@@ -6,6 +6,6 @@ export interface State {
 
 export const initialState: State = {
     layout: {
-        isFullscreen: false
-    }
+        isFullscreen: false,
+    },
 };

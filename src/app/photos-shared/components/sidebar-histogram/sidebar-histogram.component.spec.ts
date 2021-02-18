@@ -3,23 +3,24 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SidebarHistogramComponent } from './sidebar-histogram.component';
 
 describe('SidebarHistogramComponent', () => {
-  let component: SidebarHistogramComponent;
-  let fixture: ComponentFixture<SidebarHistogramComponent>;
+    let component: SidebarHistogramComponent;
+    let fixture: ComponentFixture<SidebarHistogramComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SidebarHistogramComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [SidebarHistogramComponent],
+            }).compileComponents();
+        })
+    );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SidebarHistogramComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SidebarHistogramComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

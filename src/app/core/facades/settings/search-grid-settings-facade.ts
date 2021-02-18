@@ -6,32 +6,38 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { nextMargin, nextThumbnailSize, SearchGridViewSettings } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SearchGridSettingsFacade extends BaseSettingsFacade<SearchGridViewSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.searchGridViewSettings);
+    settings$ = this.store.select(
+        SettingsStoreSelectors.searchGridViewSettings
+    );
 
     constructor(private store: Store) {
         super();
     }
 
     save(settings: SearchGridViewSettings): void {
-        this.store.dispatch(SettingsStoreActions.saveSearchGridViewSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.saveSearchGridViewSettings({ settings })
+        );
     }
 
     toggleYears(): void {
-        this.saveUpdatedField(x => x.showYears = !x.showYears);
+        this.saveUpdatedField((x) => (x.showYears = !x.showYears));
     }
 
     toggleTitles(): void {
-        this.saveUpdatedField(x => x.showTitles = !x.showTitles);
+        this.saveUpdatedField((x) => (x.showTitles = !x.showTitles));
     }
 
     toggleThumbnailSize(): void {
-        this.saveUpdatedField(x => x.thumbnailSize = nextThumbnailSize(x.thumbnailSize));
+        this.saveUpdatedField(
+            (x) => (x.thumbnailSize = nextThumbnailSize(x.thumbnailSize))
+        );
     }
 
     toggleMargins(): void {
-        this.saveUpdatedField(x => x.margin = nextMargin(x.margin));
+        this.saveUpdatedField((x) => (x.margin = nextMargin(x.margin)));
     }
 }

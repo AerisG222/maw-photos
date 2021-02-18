@@ -1,4 +1,10 @@
-import { Component, Input, AfterViewInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    Input,
+    AfterViewInit,
+    ViewChild,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { colorSets, NumberCardComponent } from '@swimlane/ngx-charts';
 
 import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';
@@ -7,13 +13,13 @@ import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';
     selector: 'app-stats-stat-card',
     templateUrl: './stat-card.component.html',
     styleUrls: ['./stat-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatCardComponent implements AfterViewInit {
     @Input() detail: FormattedStatDetail[] | null = null;
     @ViewChild(NumberCardComponent) cards: NumberCardComponent | null = null;
 
-    colorScheme = colorSets.find(s => s.name === 'cool');
+    colorScheme = colorSets.find((s) => s.name === 'cool');
 
     ngAfterViewInit(): void {
         this.updateMargins();

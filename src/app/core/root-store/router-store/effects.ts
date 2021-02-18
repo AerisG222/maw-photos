@@ -18,74 +18,78 @@ interface RouteDetailsChange {
 export class RouterStoreEffects {
     routeChanged$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATED),
-        withLatestFrom(this.store.select(RouterStoreSelectors.selectRouteDetails))
+        withLatestFrom(
+            this.store.select(RouterStoreSelectors.selectRouteDetails)
+        )
     );
 
     routeAreaChanged$ = this.routeChanged$.pipe(
         map(([action, currentRouteDetails]) => currentRouteDetails),
-        scan((acc: RouteDetailsChange, curr) => {
-            return { previous: acc?.current, current: curr };
-        }, { previous: null, current: null}),
-        filter(change => change.previous?.area !== change.current?.area)
+        scan(
+            (acc: RouteDetailsChange, curr) => {
+                return { previous: acc?.current, current: curr };
+            },
+            { previous: null, current: null }
+        ),
+        filter((change) => change.previous?.area !== change.current?.area)
     );
 
     monitorRouteChangedEffect$ = createEffect(() => {
         return this.routeChanged$.pipe(
-            map(([action, routeDetails]) => RouterStoreActions.routeChanged({ routeDetails }))
+            map(([action, routeDetails]) =>
+                RouterStoreActions.routeChanged({ routeDetails })
+            )
         );
     });
 
     monitorRouteAreaChangeEffect$ = createEffect(() => {
-        return this.routeAreaChanged$
-            .pipe(
-                map(change => RouterStoreActions.routeAreaChanged({
+        return this.routeAreaChanged$.pipe(
+            map((change) =>
+                RouterStoreActions.routeAreaChanged({
                     leavingArea: change.previous?.area ?? RouteArea.unknown,
                     leavingRouteDetails: change.previous,
                     enteringArea: change.current?.area ?? RouteArea.unknown,
-                    enteringRouteDetails: change.current
-                }))
-            );
+                    enteringRouteDetails: change.current,
+                })
+            )
+        );
     });
 
     monitorRouteAreaEnterEffect$ = createEffect(() => {
-        return this.routeAreaChanged$
-            .pipe(
-                map(change => RouterStoreActions.routeAreaEntering({
+        return this.routeAreaChanged$.pipe(
+            map((change) =>
+                RouterStoreActions.routeAreaEntering({
                     enteringArea: change.current?.area ?? RouteArea.unknown,
-                    enteringRouteDetails: change.current
-                }))
-            );
+                    enteringRouteDetails: change.current,
+                })
+            )
+        );
     });
 
     monitorRouteAreaLeaveEffect$ = createEffect(() => {
-        return this.routeAreaChanged$
-            .pipe(
-                filter(change => !!change?.previous),
-                map(change => RouterStoreActions.routeAreaLeaving({
+        return this.routeAreaChanged$.pipe(
+            filter((change) => !!change?.previous),
+            map((change) =>
+                RouterStoreActions.routeAreaLeaving({
                     leavingArea: change.previous?.area ?? RouteArea.unknown,
-                    leavingRouteDetails: change.previous
-                }))
-            );
+                    leavingRouteDetails: change.previous,
+                })
+            )
+        );
     });
 
     // TODO: rework
     monitorFullScreenEffect$ = createEffect(() => {
-        return this.routeChanged$
-            .pipe(
-                map(([action, routeDetails]) => {
-                    if(routeDetails.url.indexOf('fullscreen') >= 0) {
-                        return LayoutStoreActions.enterFullscreenRequest();
-                    } else {
-                        return LayoutStoreActions.exitFullscreenRequest();
-                    }
-                })
-            );
+        return this.routeChanged$.pipe(
+            map(([action, routeDetails]) => {
+                if (routeDetails.url.indexOf('fullscreen') >= 0) {
+                    return LayoutStoreActions.enterFullscreenRequest();
+                } else {
+                    return LayoutStoreActions.exitFullscreenRequest();
+                }
+            })
+        );
     });
 
-    constructor(
-        private actions$: Actions,
-        private store: Store
-    ) {
-
-    }
+    constructor(private actions$: Actions, private store: Store) {}
 }

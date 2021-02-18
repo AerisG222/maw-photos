@@ -6,7 +6,7 @@ import { MapType, PhotoMapViewSettings } from '@models';
 import { BaseSettingsFacade } from './base-settings-facade';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class PhotoMapSettingsFacade extends BaseSettingsFacade<PhotoMapViewSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.photoMapViewSettings);
@@ -16,14 +16,16 @@ export class PhotoMapSettingsFacade extends BaseSettingsFacade<PhotoMapViewSetti
     }
 
     save(settings: PhotoMapViewSettings): void {
-        this.store.dispatch(SettingsStoreActions.savePhotoMapViewSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.savePhotoMapViewSettings({ settings })
+        );
     }
 
     saveMapType(mapType: MapType) {
-        this.saveUpdatedField(x => x.mapType = mapType);
+        this.saveUpdatedField((x) => (x.mapType = mapType));
     }
 
     saveZoom(zoom: number) {
-        this.saveUpdatedField(x => x.zoom = zoom);
+        this.saveUpdatedField((x) => (x.zoom = zoom));
     }
 }

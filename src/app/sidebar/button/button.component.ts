@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    Input,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ElementRef,
+} from '@angular/core';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 import { MatButton } from '@angular/material/button';
 
@@ -6,7 +14,7 @@ import { MatButton } from '@angular/material/button';
     selector: 'app-sidebar-button',
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent implements OnInit, OnDestroy {
     @Input() icon: string | null = null;
@@ -23,14 +31,17 @@ export class ButtonComponent implements OnInit, OnDestroy {
     constructor(
         private hotkeysService: HotkeysService,
         private el: ElementRef
-    ) {
-
-    }
+    ) {}
 
     ngOnInit(): void {
         if (this.shortcutKey) {
             // eslint-disable-next-line max-len
-            this.hotkey = new Hotkey(this.shortcutKey, (event: KeyboardEvent) => this.onHotkeyTriggered(event), [], this.shortcutHelp ?? undefined);
+            this.hotkey = new Hotkey(
+                this.shortcutKey,
+                (event: KeyboardEvent) => this.onHotkeyTriggered(event),
+                [],
+                this.shortcutHelp ?? undefined
+            );
 
             this.hotkeysService.add(this.hotkey);
         }

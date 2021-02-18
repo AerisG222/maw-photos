@@ -11,7 +11,7 @@ import { reducer } from './reducer';
     declarations: [],
     imports: [
         StoreModule.forFeature(VIDEO_FEATURE_NAME, reducer),
-        EffectsModule.forFeature([ VideoStoreEffects, VideoStoreRoutingEffects ])
-    ]
+        EffectsModule.forFeature([VideoStoreEffects, VideoStoreRoutingEffects]),
+    ],
 })
-export class VideoStoreModule { }
+export class VideoStoreModule {}

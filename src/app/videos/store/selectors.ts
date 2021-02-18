@@ -4,12 +4,19 @@ import { Dictionary } from '@ngrx/entity';
 import { Video, GpsDetail, Comment, Rating } from '@models';
 import { VIDEO_FEATURE_NAME } from './feature-name';
 import { videoAdapter, State } from './state';
-import { SettingsStoreSelectors, VideoCategoryStoreSelectors } from '@core/root-store';
+import {
+    SettingsStoreSelectors,
+    VideoCategoryStoreSelectors,
+} from '@core/root-store';
 import { CategoryGpsStatus } from '@models';
 
-export const selectVideoState = createFeatureSelector<State>(VIDEO_FEATURE_NAME);
+export const selectVideoState = createFeatureSelector<State>(
+    VIDEO_FEATURE_NAME
+);
 
-const { selectAll, selectEntities, selectIds } = videoAdapter.getSelectors(selectVideoState);
+const { selectAll, selectEntities, selectIds } = videoAdapter.getSelectors(
+    selectVideoState
+);
 
 export const allVideos = selectAll;
 export const allEntities = selectEntities;
@@ -33,7 +40,8 @@ export const activeVideoId = createSelector(
 export const activeVideoIndex = createSelector(
     selectIds,
     activeVideoId,
-    (ids: string[] | number[], id: number | null): number | null => id ? (ids as number[]).indexOf(id) : null
+    (ids: string[] | number[], id: number | null): number | null =>
+        id ? (ids as number[]).indexOf(id) : null
 );
 
 export const activeVideo = createSelector(
@@ -55,13 +63,15 @@ export const activeVideo = createSelector(
 export const firstVideo = createSelector(
     selectIds,
     selectEntities,
-    (ids: string[] | number[], entities: Dictionary<Video>) => entities[ids[0]] ?? null
+    (ids: string[] | number[], entities: Dictionary<Video>) =>
+        entities[ids[0]] ?? null
 );
 
 export const lastVideo = createSelector(
     selectIds,
     selectEntities,
-    (ids: string[] | number[], entities: Dictionary<Video>) => entities[ids[ids.length - 1]] ?? null
+    (ids: string[] | number[], entities: Dictionary<Video>) =>
+        entities[ids[ids.length - 1]] ?? null
 );
 
 export const activeVideoRating = createSelector(
@@ -88,9 +98,7 @@ export const isActiveVideoFirst = createSelector(
     activeVideo,
     firstVideo,
     (active, first) => {
-        return active != null &&
-            first != null &&
-            active.id === first.id;
+        return active != null && first != null && active.id === first.id;
     }
 );
 
@@ -98,9 +106,7 @@ export const isActiveVideoLast = createSelector(
     activeVideo,
     lastVideo,
     (active, last) => {
-        return active != null &&
-            last != null &&
-            active.id === last.id;
+        return active != null && last != null && active.id === last.id;
     }
 );
 
@@ -108,7 +114,7 @@ export const videosForCategory = createSelector(
     allVideos,
     (videos: Video[], props: { id: number }) => {
         if (videos) {
-            return videos.filter(x => x.categoryId === props.id);
+            return videos.filter((x) => x.categoryId === props.id);
         } else {
             return null;
         }
@@ -148,14 +154,14 @@ export const nextVideoIndex = createSelector(
 export const nextVideoId = createSelector(
     selectIds,
     nextVideoIndex,
-    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+    (ids, idx) => (idx >= 0 ? (ids as number[])[idx] : null)
 );
 
 export const nextVideo = createSelector(
     selectEntities,
     nextVideoId,
     (entities, nextId) => {
-        return nextId ? entities[nextId] as Video : null;
+        return nextId ? (entities[nextId] as Video) : null;
     }
 );
 
@@ -181,37 +187,34 @@ export const previousVideoIndex = createSelector(
 export const previousVideoId = createSelector(
     selectIds,
     previousVideoIndex,
-    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+    (ids, idx) => (idx >= 0 ? (ids as number[])[idx] : null)
 );
 
 export const previousVideo = createSelector(
     selectEntities,
     previousVideoId,
     (entities, previousId) => {
-        return previousId ? entities[previousId] as Video : null;
+        return previousId ? (entities[previousId] as Video) : null;
     }
 );
 
 export const activeVideoGpsDetailSource = createSelector(
     activeVideoGpsDetail,
-    detail => detail?.source ?? null
+    (detail) => detail?.source ?? null
 );
 
 export const activeVideoGpsDetailOverride = createSelector(
     activeVideoGpsDetail,
-    detail => detail?.override ?? null
+    (detail) => detail?.override ?? null
 );
 
-export const activeVideoGoogleLatLng = createSelector(
-    activeVideo,
-    video => {
-        if (!!video && !!video.latitude && video.longitude) {
-            return new google.maps.LatLng(video.latitude, video.longitude);
-        }
-
-        return null;
+export const activeVideoGoogleLatLng = createSelector(activeVideo, (video) => {
+    if (!!video && !!video.latitude && video.longitude) {
+        return new google.maps.LatLng(video.latitude, video.longitude);
     }
-);
+
+    return null;
+});
 
 export const isCommentCardVisible = createSelector(
     SettingsStoreSelectors.videoInfoPanelSettings,
@@ -232,12 +235,17 @@ export const categoryGpsStatus = createSelector(
     VideoCategoryStoreSelectors.activeCategoryId,
     allVideos,
     (categoryId, videos) => {
-        if(!categoryId || !videos) {
+        if (!categoryId || !videos) {
             return null;
         }
 
-        const isMissingGpsData = !!videos.find(video => video.latitude === null || video.longitude === null);
+        const isMissingGpsData = !!videos.find(
+            (video) => video.latitude === null || video.longitude === null
+        );
 
-        return { categoryId: categoryId , isMissingGpsData } as CategoryGpsStatus;
+        return {
+            categoryId: categoryId,
+            isMissingGpsData,
+        } as CategoryGpsStatus;
     }
 );

@@ -8,7 +8,7 @@ import { first, filter, tap } from 'rxjs/operators';
     selector: 'app-login-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
     showLogin = true;
@@ -21,9 +21,9 @@ export class LoginComponent {
         this.activatedRoute.queryParamMap
             .pipe(
                 first(),
-                filter(p => p.has('code')),
-                tap(p => this.showLogin = false),
-                tap(p => this.authService.handleLoginCallback())
+                filter((p) => p.has('code')),
+                tap((p) => (this.showLogin = false)),
+                tap((p) => this.authService.handleLoginCallback())
             )
             .subscribe();
 
@@ -31,9 +31,9 @@ export class LoginComponent {
         this.activatedRoute.queryParamMap
             .pipe(
                 first(),
-                filter(p => !p.has('code')),
-                tap(p => this.showLogin = true),
-                tap(p => this.authService.loginViaPopup())
+                filter((p) => !p.has('code')),
+                tap((p) => (this.showLogin = true)),
+                tap((p) => this.authService.loginViaPopup())
             )
             .subscribe();
     }

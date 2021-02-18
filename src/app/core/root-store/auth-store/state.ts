@@ -5,5 +5,5 @@ export interface State {
 }
 
 export const initialState: State = {
-    auth: DEFAULT_USER_INFO
+    auth: DEFAULT_USER_INFO,
 };

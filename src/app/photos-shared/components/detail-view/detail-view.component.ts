@@ -8,11 +8,13 @@ import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-s
     selector: 'app-photos-detail-view',
     templateUrl: './detail-view.component.html',
     styleUrls: ['./detail-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailViewComponent {
     showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
-    allowCategoryDownload$ = this.store.select(RouterStoreSelectors.isPhotosView);
+    allowCategoryDownload$ = this.store.select(
+        RouterStoreSelectors.isPhotosView
+    );
     category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
@@ -21,7 +23,5 @@ export class DetailViewComponent {
     constructor(
         private store: Store,
         private detailSettings: PhotoDetailSettingsFacade
-    ) {
-
-    }
+    ) {}
 }

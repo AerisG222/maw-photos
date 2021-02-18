@@ -4,7 +4,16 @@ import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 // eslint-disable-next-line max-len
-import { allPhotoViewModes, allMapTypes, MinimapZoom, VideoSize, MapType, toThumbnailSizeDefaulted, allThumbnailSizes, allVideoSizes } from '@models';
+import {
+    allPhotoViewModes,
+    allMapTypes,
+    MinimapZoom,
+    VideoSize,
+    MapType,
+    toThumbnailSizeDefaulted,
+    allThumbnailSizes,
+    allVideoSizes,
+} from '@models';
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
 import { VideoDetailViewSettings } from '@models';
@@ -14,7 +23,7 @@ import { VideoInfoPanelSettings } from '@models';
     selector: 'app-video-settings',
     templateUrl: './video-settings.component.html',
     styleUrls: ['./video-settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoSettingsComponent {
     form: FormGroup;
@@ -43,9 +52,9 @@ export class VideoSettingsComponent {
                     showMetadataEditor: '',
                     showCategoryTeaserChooser: '',
                     minimapType: '',
-                    minimapZoom: ''
-                })
-            })
+                    minimapZoom: '',
+                }),
+            }),
         });
 
         this.resetForm();
@@ -66,52 +75,64 @@ export class VideoSettingsComponent {
     private readDetailForm(): VideoDetailViewSettings {
         return {
             videoSize: this.form.get('detail.videoSize')?.value,
-            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
-            showVideoList: this.form.get('detail.showVideoList')?.value as boolean,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('detail.thumbnailSIze')?.value)
+            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')
+                ?.value as boolean,
+            showVideoList: this.form.get('detail.showVideoList')
+                ?.value as boolean,
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('detail.thumbnailSIze')?.value
+            ),
         };
     }
 
     private readInfoForm(): VideoInfoPanelSettings {
         return {
-            expandedState: this.form.get('detail.infoPanel.expandedState')?.value as boolean,
-            showRatings: this.form.get('detail.infoPanel.showRatings')?.value as boolean,
-            showComments: this.form.get('detail.infoPanel.showComments')?.value as boolean,
-            showMinimap: this.form.get('detail.infoPanel.showMinimap')?.value as boolean,
-            showMetadataEditor: this.form.get('detail.infoPanel.showMetadataEditor')?.value as boolean,
-            showCategoryTeaserChooser: this.form.get('detail.infoPanel.showCategoryTeaserChooser')?.value as boolean,
-            minimapMapType: this.form.get('detail.infoPanel.minimapType')?.value as MapType,
-            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')?.value as number
+            expandedState: this.form.get('detail.infoPanel.expandedState')
+                ?.value as boolean,
+            showRatings: this.form.get('detail.infoPanel.showRatings')
+                ?.value as boolean,
+            showComments: this.form.get('detail.infoPanel.showComments')
+                ?.value as boolean,
+            showMinimap: this.form.get('detail.infoPanel.showMinimap')
+                ?.value as boolean,
+            showMetadataEditor: this.form.get(
+                'detail.infoPanel.showMetadataEditor'
+            )?.value as boolean,
+            showCategoryTeaserChooser: this.form.get(
+                'detail.infoPanel.showCategoryTeaserChooser'
+            )?.value as boolean,
+            minimapMapType: this.form.get('detail.infoPanel.minimapType')
+                ?.value as MapType,
+            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')
+                ?.value as number,
         };
     }
 
     private resetForm() {
-        combineLatest([
-            this.detailFacade.settings$,
-            this.infoFacade.settings$
-        ]).pipe(
-            first()
-        ).subscribe({
-            next: ([detail, info]) => {
-                this.form.patchValue({
-                    detail: {
-                        videoSize: detail.videoSize,
-                        showBreadcrumbs: detail.showBreadcrumbs,
-                        showVideoList: detail.showVideoList,
-                        thumbnailSize: detail.thumbnailSize,
-                        infoPanel: {
-                            expandedState: info.expandedState,
-                            showRatings: info.showRatings,
-                            showComments: info.showComments,
-                            showMinimap: info.showMinimap,
-                            showMetadataEditor: info.showMetadataEditor,
-                            showCategoryTeaserChooser: info.showCategoryTeaserChooser,
-                            minimapType: info.minimapMapType,
-                            minimapZoom: info.minimapZoom
-                        }
-                    }
-                });
-            }
-        });
+        combineLatest([this.detailFacade.settings$, this.infoFacade.settings$])
+            .pipe(first())
+            .subscribe({
+                next: ([detail, info]) => {
+                    this.form.patchValue({
+                        detail: {
+                            videoSize: detail.videoSize,
+                            showBreadcrumbs: detail.showBreadcrumbs,
+                            showVideoList: detail.showVideoList,
+                            thumbnailSize: detail.thumbnailSize,
+                            infoPanel: {
+                                expandedState: info.expandedState,
+                                showRatings: info.showRatings,
+                                showComments: info.showComments,
+                                showMinimap: info.showMinimap,
+                                showMetadataEditor: info.showMetadataEditor,
+                                showCategoryTeaserChooser:
+                                    info.showCategoryTeaserChooser,
+                                minimapType: info.minimapMapType,
+                                minimapZoom: info.minimapZoom,
+                            },
+                        },
+                    });
+                },
+            });
     }
 }

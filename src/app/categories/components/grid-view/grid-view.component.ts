@@ -10,13 +10,18 @@ import { CategoriesStoreSelectors } from '../../store';
     selector: 'app-grid-view',
     templateUrl: './grid-view.component.html',
     styleUrls: ['./grid-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridViewComponent {
     gridSettings$ = this.gridViewFacade.settings$;
-    years$ = this.store.select(CategoriesStoreSelectors.allFilteredCategoryYears);
+    years$ = this.store.select(
+        CategoriesStoreSelectors.allFilteredCategoryYears
+    );
 
-    constructor(private gridViewFacade: CategoryGridSettingsFacade, private store: Store) { }
+    constructor(
+        private gridViewFacade: CategoryGridSettingsFacade,
+        private store: Store
+    ) {}
 
     onToggleThumbnailSize(newSize: ThumbnailSize) {
         this.gridViewFacade.saveThumbnailSize(newSize);
@@ -31,6 +36,9 @@ export class GridViewComponent {
     }
 
     categoriesForYear(year: number): Observable<Category[]> {
-        return this.store.select(CategoriesStoreSelectors.allFilteredCategoriesForYear, { year });
+        return this.store.select(
+            CategoriesStoreSelectors.allFilteredCategoriesForYear,
+            { year }
+        );
     }
 }

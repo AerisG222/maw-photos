@@ -16,7 +16,7 @@ import {
     MetadataEditable,
     MiniMapable,
     CategoryTeaserSelectable,
- } from '@core/facades';
+} from '@core/facades';
 import { VideoStoreFacadeService } from './services/video-store-facade.service';
 
 @NgModule({
@@ -24,21 +24,20 @@ import { VideoStoreFacadeService } from './services/video-store-facade.service';
         SidebarComponent,
         ToolbarComponent,
         VideoCategoryComponent,
-        VideoListComponent
+        VideoListComponent,
     ],
-    imports: [
-        SharedModule,
-        VideosRoutingModule,
-        VideoStoreModule
-    ],
+    imports: [SharedModule, VideosRoutingModule, VideoStoreModule],
     providers: [
         VideoStoreFacadeService,
-        { provide: Navigable,                useExisting: VideoStoreFacadeService },
-        { provide: Commentable,              useExisting: VideoStoreFacadeService },
-        { provide: Ratable,                  useExisting: VideoStoreFacadeService },
-        { provide: MetadataEditable,         useExisting: VideoStoreFacadeService },
-        { provide: MiniMapable,              useExisting: VideoStoreFacadeService },
-        { provide: CategoryTeaserSelectable, useExisting: VideoStoreFacadeService }
-    ]
+        { provide: Navigable, useExisting: VideoStoreFacadeService },
+        { provide: Commentable, useExisting: VideoStoreFacadeService },
+        { provide: Ratable, useExisting: VideoStoreFacadeService },
+        { provide: MetadataEditable, useExisting: VideoStoreFacadeService },
+        { provide: MiniMapable, useExisting: VideoStoreFacadeService },
+        {
+            provide: CategoryTeaserSelectable,
+            useExisting: VideoStoreFacadeService,
+        },
+    ],
 })
-export class VideosModule { }
+export class VideosModule {}

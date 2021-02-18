@@ -11,7 +11,7 @@ import { PhotoStoreRoutingEffects } from './effects-routing';
     declarations: [],
     imports: [
         StoreModule.forFeature(PHOTO_FEATURE_NAME, reducer),
-        EffectsModule.forFeature([ PhotoStoreEffects, PhotoStoreRoutingEffects ])
-    ]
+        EffectsModule.forFeature([PhotoStoreEffects, PhotoStoreRoutingEffects]),
+    ],
 })
-export class PhotoStoreModule { }
+export class PhotoStoreModule {}

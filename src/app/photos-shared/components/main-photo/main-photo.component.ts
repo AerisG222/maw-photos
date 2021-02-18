@@ -10,7 +10,7 @@ import { Photo, PhotoEffects, ThumbnailSize } from '@models';
     selector: 'app-photos-main-photo',
     templateUrl: './main-photo.component.html',
     styleUrls: ['./main-photo.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPhotoComponent {
     @Input() showHeader = false;
@@ -25,7 +25,7 @@ export class MainPhotoComponent {
         private store: Store,
         private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer
-    ) { }
+    ) {}
 
     onSwipeLeft(): void {
         this.store.dispatch(PhotoStoreActions.moveNextRequest());
@@ -66,14 +66,14 @@ export class MainPhotoComponent {
     getMaxHeightClass(): string {
         let clss: string;
 
-        if(this.showHeader) {
+        if (this.showHeader) {
             clss = 'header-';
         } else {
             clss = 'no-header-';
         }
 
-        if(this.showPhotoList) {
-            switch(this.photoListThumbnailSize) {
+        if (this.showPhotoList) {
+            switch (this.photoListThumbnailSize) {
                 case ThumbnailSize.small:
                     clss += 'small-thumb';
                     break;

@@ -12,5 +12,5 @@ export const DEFAULT_SEARCH_GRID_VIEW_SETTINGS: SearchGridViewSettings = {
     showTitles: true,
     showYears: true,
     margin: Margin.dense,
-    thumbnailSize: ThumbnailSize.default
+    thumbnailSize: ThumbnailSize.default,
 };

@@ -1,19 +1,25 @@
-<app-sidebar-card
-    icon="edit"
-    title="Metadata Editor">
-
+<app-sidebar-card icon="edit" title="Metadata Editor">
     <form [formGroup]="form">
         <div class="row-grid">
             <div class="header">Latitude</div>
 
             <mat-form-field>
                 <mat-label>Source</mat-label>
-                <input disabled matInput [value]="(metadataEditable.sourceGps$ | async)?.latitude">
+                <input
+                    disabled
+                    matInput
+                    [value]="(metadataEditable.sourceGps$ | async)?.latitude"
+                />
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Override</mat-label>
-                <input matInput [value]="(metadataEditable.overrideGps$ | async)?.latitude" formControlName="latitudeOverride" (paste)="onPaste($event)">
+                <input
+                    matInput
+                    [value]="(metadataEditable.overrideGps$ | async)?.latitude"
+                    formControlName="latitudeOverride"
+                    (paste)="onPaste($event)"
+                />
             </mat-form-field>
         </div>
         <div class="row-grid">
@@ -21,20 +27,38 @@
 
             <mat-form-field>
                 <mat-label>Source</mat-label>
-                <input disabled matInput [value]="(metadataEditable.sourceGps$ | async)?.longitude">
+                <input
+                    disabled
+                    matInput
+                    [value]="(metadataEditable.sourceGps$ | async)?.longitude"
+                />
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Override</mat-label>
-                <input matInput matInput [value]="(metadataEditable.overrideGps$ | async)?.longitude" formControlName="longitudeOverride" (paste)="onPaste($event)">
+                <input
+                    matInput
+                    matInput
+                    [value]="(metadataEditable.overrideGps$ | async)?.longitude"
+                    formControlName="longitudeOverride"
+                    (paste)="onPaste($event)"
+                />
             </mat-form-field>
         </div>
 
         <div class="buttons">
-            <button mat-button (click)="onCancel()" color="accent">Cancel</button>
+            <button mat-button (click)="onCancel()" color="accent">
+                Cancel
+            </button>
             <button mat-button (click)="onSave()" color="primary">Save</button>
-            <button mat-button (click)="onSaveAndMoveNext()" color="primary" class="right">Save and Move Next</button>
+            <button
+                mat-button
+                (click)="onSaveAndMoveNext()"
+                color="primary"
+                class="right"
+            >
+                Save and Move Next
+            </button>
         </div>
     </form>
-
 </app-sidebar-card>

@@ -2,6 +2,10 @@
     <app-toolbar-view-grid-button></app-toolbar-view-grid-button>
     <app-toolbar-view-detail-button></app-toolbar-view-detail-button>
     <app-toolbar-view-fullscreen-button></app-toolbar-view-fullscreen-button>
-    <app-toolbar-view-map-button *ngIf="enableMapView$ | async"></app-toolbar-view-map-button>
-    <app-toolbar-view-bulk-edit-button *ngIf="enableBulkEdit$ | async"></app-toolbar-view-bulk-edit-button>
+    <app-toolbar-view-map-button
+        *ngIf="enableMapView$ | async"
+    ></app-toolbar-view-map-button>
+    <app-toolbar-view-bulk-edit-button
+        *ngIf="enableBulkEdit$ | async"
+    ></app-toolbar-view-bulk-edit-button>
 </app-toolbar-group>

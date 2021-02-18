@@ -6,7 +6,7 @@ import { Margin } from '@models';
     selector: 'app-shared-content-margin',
     templateUrl: './content-margin.component.html',
     styleUrls: ['./content-margin.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentMarginComponent {
     @Input() margin: Margin | null = null;

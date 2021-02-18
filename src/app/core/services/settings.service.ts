@@ -1,26 +1,56 @@
 import { Injectable } from '@angular/core';
 
 import { AppSettings, DEFAULT_APP_SETTINGS } from '@models';
-import { CategoryFilterSettings, DEFAULT_CATEGORY_FILTER_SETTINGS } from '@models';
-import { CategoryGridViewSettings, DEFAULT_CATEGORY_GRID_VIEW_SETTINGS } from '@models';
-import { CategoryListViewSettings, DEFAULT_CATEGORY_LIST_VIEW_SETTINGS } from '@models';
+import {
+    CategoryFilterSettings,
+    DEFAULT_CATEGORY_FILTER_SETTINGS,
+} from '@models';
+import {
+    CategoryGridViewSettings,
+    DEFAULT_CATEGORY_GRID_VIEW_SETTINGS,
+} from '@models';
+import {
+    CategoryListViewSettings,
+    DEFAULT_CATEGORY_LIST_VIEW_SETTINGS,
+} from '@models';
 import { CategoryPageSettings, DEFAULT_CATEGORY_SETTINGS } from '@models';
-import { DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS, PhotoDetailViewSettings } from '@models';
-import { DEFAULT_PHOTO_GRID_VIEW_SETTINGS, PhotoGridViewSettings } from '@models';
-import { DEFAULT_PHOTO_INFO_PANEL_SETTINGS, PhotoInfoPanelSettings } from '@models';
+import {
+    DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS,
+    PhotoDetailViewSettings,
+} from '@models';
+import {
+    DEFAULT_PHOTO_GRID_VIEW_SETTINGS,
+    PhotoGridViewSettings,
+} from '@models';
+import {
+    DEFAULT_PHOTO_INFO_PANEL_SETTINGS,
+    PhotoInfoPanelSettings,
+} from '@models';
 import { DEFAULT_PHOTO_MAP_VIEW_SETTINGS, PhotoMapViewSettings } from '@models';
 import { DEFAULT_PHOTO_SETTINGS, PhotoPageSettings } from '@models';
 import { DEFAULT_RANDOM_SETTINGS, RandomPageSettings } from '@models';
-import { DEFAULT_SEARCH_GRID_VIEW_SETTINGS, SearchGridViewSettings } from '@models';
-import { DEFAULT_SEARCH_LIST_VIEW_SETTINGS, SearchListViewSettings } from '@models';
+import {
+    DEFAULT_SEARCH_GRID_VIEW_SETTINGS,
+    SearchGridViewSettings,
+} from '@models';
+import {
+    DEFAULT_SEARCH_LIST_VIEW_SETTINGS,
+    SearchListViewSettings,
+} from '@models';
 import { DEFAULT_SEARCH_SETTINGS, SearchPageSettings } from '@models';
 import { Settings } from '@models';
-import { DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS, VideoDetailViewSettings } from '@models';
-import { DEFAULT_VIDEO_INFO_PANEL_SETTINGS, VideoInfoPanelSettings } from '@models';
+import {
+    DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS,
+    VideoDetailViewSettings,
+} from '@models';
+import {
+    DEFAULT_VIDEO_INFO_PANEL_SETTINGS,
+    VideoInfoPanelSettings,
+} from '@models';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SettingsService {
     private static readonly currentSettingsVersion = 1;
@@ -59,86 +89,143 @@ export class SettingsService {
     }
 
     cleanLegacySettings() {
-        if(!this.getVersion()) {
+        if (!this.getVersion()) {
             this.localStorage.clear();
             this.saveVersion();
         }
     }
 
     getAppSettings(): AppSettings {
-        return this.localStorage.get(SettingsService.keyApp) ?? DEFAULT_APP_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyApp) ??
+            DEFAULT_APP_SETTINGS
+        );
     }
 
     getCategoryFilterSettings(): CategoryFilterSettings {
-        return this.localStorage.get(SettingsService.keyCategoryFilter) ?? DEFAULT_CATEGORY_FILTER_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyCategoryFilter) ??
+            DEFAULT_CATEGORY_FILTER_SETTINGS
+        );
     }
 
     getCategoryGridViewSettings(): CategoryGridViewSettings {
-        return this.localStorage.get(SettingsService.keyCategoryGridView) ?? DEFAULT_CATEGORY_GRID_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyCategoryGridView) ??
+            DEFAULT_CATEGORY_GRID_VIEW_SETTINGS
+        );
     }
 
     getCategoryListViewSettings(): CategoryListViewSettings {
-        return this.localStorage.get(SettingsService.keyCategoryListView) ?? DEFAULT_CATEGORY_LIST_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyCategoryListView) ??
+            DEFAULT_CATEGORY_LIST_VIEW_SETTINGS
+        );
     }
 
     getCategoryPageSettings(): CategoryPageSettings {
-        return this.localStorage.get(SettingsService.keyCategoryPage) ?? DEFAULT_CATEGORY_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyCategoryPage) ??
+            DEFAULT_CATEGORY_SETTINGS
+        );
     }
 
     getPhotoDetailViewSettings(): PhotoDetailViewSettings {
-        return this.localStorage.get(SettingsService.keyPhotoDetailView) ?? DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyPhotoDetailView) ??
+            DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS
+        );
     }
 
     getPhotoGridViewSettings(): PhotoGridViewSettings {
-        return this.localStorage.get(SettingsService.keyPhotoGridView) ?? DEFAULT_PHOTO_GRID_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyPhotoGridView) ??
+            DEFAULT_PHOTO_GRID_VIEW_SETTINGS
+        );
     }
 
     getPhotoInfoPanelSettings(): PhotoInfoPanelSettings {
-        return this.localStorage.get(SettingsService.keyPhotoInfoPanel) ?? DEFAULT_PHOTO_INFO_PANEL_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyPhotoInfoPanel) ??
+            DEFAULT_PHOTO_INFO_PANEL_SETTINGS
+        );
     }
 
     getPhotoMapViewSettings(): PhotoMapViewSettings {
-        return this.localStorage.get(SettingsService.keyPhotoMapView) ?? DEFAULT_PHOTO_MAP_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyPhotoMapView) ??
+            DEFAULT_PHOTO_MAP_VIEW_SETTINGS
+        );
     }
 
     getPhotoPageSettings(): PhotoPageSettings {
-        return this.localStorage.get(SettingsService.keyPhotoPage) ?? DEFAULT_PHOTO_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyPhotoPage) ??
+            DEFAULT_PHOTO_SETTINGS
+        );
     }
 
     getRandomDetailViewSettings(): PhotoDetailViewSettings {
-        return this.localStorage.get(SettingsService.keyRandomDetailView) ?? DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyRandomDetailView) ??
+            DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS
+        );
     }
 
     getRandomGridViewSettings(): PhotoGridViewSettings {
-        return this.localStorage.get(SettingsService.keyRandomGridView) ?? DEFAULT_PHOTO_GRID_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyRandomGridView) ??
+            DEFAULT_PHOTO_GRID_VIEW_SETTINGS
+        );
     }
 
     getRandomInfoPanelSettings(): PhotoInfoPanelSettings {
-        return this.localStorage.get(SettingsService.keyRandomInfoPanel) ?? DEFAULT_PHOTO_INFO_PANEL_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyRandomInfoPanel) ??
+            DEFAULT_PHOTO_INFO_PANEL_SETTINGS
+        );
     }
 
     getRandomPageSettings(): RandomPageSettings {
-        return this.localStorage.get(SettingsService.keyRandomPage) ?? DEFAULT_RANDOM_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyRandomPage) ??
+            DEFAULT_RANDOM_SETTINGS
+        );
     }
 
     getSearchGridViewSettings(): SearchGridViewSettings {
-        return this.localStorage.get(SettingsService.keySearchGridView) ?? DEFAULT_SEARCH_GRID_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keySearchGridView) ??
+            DEFAULT_SEARCH_GRID_VIEW_SETTINGS
+        );
     }
 
     getSearchListViewSettings(): SearchListViewSettings {
-        return this.localStorage.get(SettingsService.keySearchListView) ?? DEFAULT_SEARCH_LIST_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keySearchListView) ??
+            DEFAULT_SEARCH_LIST_VIEW_SETTINGS
+        );
     }
 
     getSearchPageSettings(): SearchPageSettings {
-        return this.localStorage.get(SettingsService.keySearchPage) ?? DEFAULT_SEARCH_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keySearchPage) ??
+            DEFAULT_SEARCH_SETTINGS
+        );
     }
 
     getVideoDetailViewSettings(): VideoDetailViewSettings {
-        return this.localStorage.get(SettingsService.keyVideoDetailView) ?? DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyVideoDetailView) ??
+            DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS
+        );
     }
 
     getVideoInfoPanelSettings(): VideoInfoPanelSettings {
-        return this.localStorage.get(SettingsService.keyVideoInfoPanel) ?? DEFAULT_VIDEO_INFO_PANEL_SETTINGS;
+        return (
+            this.localStorage.get(SettingsService.keyVideoInfoPanel) ??
+            DEFAULT_VIDEO_INFO_PANEL_SETTINGS
+        );
     }
 
     getAllSettings(): Settings {
@@ -166,7 +253,7 @@ export class SettingsService {
             searchPage: this.getSearchPageSettings(),
 
             videoDetailView: this.getVideoDetailViewSettings(),
-            videoInfoPanel: this.getVideoInfoPanelSettings()
+            videoInfoPanel: this.getVideoInfoPanelSettings(),
         };
     }
 
@@ -286,7 +373,9 @@ export class SettingsService {
     }
 
     getAuthRedirectUrl(): string {
-        const url = this.localStorage.get<string | null>(SettingsService.keyAuthRedirectUrl);
+        const url = this.localStorage.get<string | null>(
+            SettingsService.keyAuthRedirectUrl
+        );
 
         if (url) {
             return url;
@@ -302,7 +391,10 @@ export class SettingsService {
     }
 
     private saveVersion() {
-        this.localStorage.set(SettingsService.keyVersion, SettingsService.currentSettingsVersion);
+        this.localStorage.set(
+            SettingsService.keyVersion,
+            SettingsService.currentSettingsVersion
+        );
     }
 
     private save<T>(key: string, value: T) {

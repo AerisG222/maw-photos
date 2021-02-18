@@ -11,7 +11,10 @@ import { SearchStoreRoutingEffects } from './effects-routing';
     declarations: [],
     imports: [
         StoreModule.forFeature(SEARCH_FEATURE_NAME, reducer),
-        EffectsModule.forFeature([ SearchStoreEffects, SearchStoreRoutingEffects ])
-    ]
+        EffectsModule.forFeature([
+            SearchStoreEffects,
+            SearchStoreRoutingEffects,
+        ]),
+    ],
 })
-export class SearchStoreModule { }
+export class SearchStoreModule {}

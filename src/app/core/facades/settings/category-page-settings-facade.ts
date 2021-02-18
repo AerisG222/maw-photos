@@ -7,7 +7,7 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { CategoryViewMode } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class CategoryPageSettingsFacade extends BaseSettingsFacade<CategoryPageSettings> {
     settings$ = this.store.select(SettingsStoreSelectors.categoryPageSettings);
@@ -17,14 +17,16 @@ export class CategoryPageSettingsFacade extends BaseSettingsFacade<CategoryPageS
     }
 
     save(settings: CategoryPageSettings): void {
-        this.store.dispatch(SettingsStoreActions.saveCategoryPageSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.saveCategoryPageSettings({ settings })
+        );
     }
 
     selectGridView(): void {
-        this.saveUpdatedField(s => s.viewMode = CategoryViewMode.grid);
+        this.saveUpdatedField((s) => (s.viewMode = CategoryViewMode.grid));
     }
 
     selectListView(): void {
-        this.saveUpdatedField(s => s.viewMode = CategoryViewMode.list);
+        this.saveUpdatedField((s) => (s.viewMode = CategoryViewMode.list));
     }
 }

@@ -14,9 +14,7 @@ export class ExternalAuthService implements AuthService {
         private store: Store,
         private router: Router,
         private oauthService: OAuthService
-    ) {
-
-    }
+    ) {}
 
     async init(): Promise<void> {
         this.oauthService.configure(authConfig);
@@ -25,13 +23,12 @@ export class ExternalAuthService implements AuthService {
 
         this.oauthService.events
             .pipe(
-                filter(e => e.type === 'token_received'),
-                tap(p => this.finishLogin())
+                filter((e) => e.type === 'token_received'),
+                tap((p) => this.finishLogin())
             )
             .subscribe();
 
-        if (this.oauthService.hasValidAccessToken())
-        {
+        if (this.oauthService.hasValidAccessToken()) {
             await this.loadProfile();
         }
 
@@ -39,7 +36,10 @@ export class ExternalAuthService implements AuthService {
     }
 
     handleLoginCallback(): void {
-        if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
+        if (
+            this.oauthService.hasValidAccessToken() &&
+            this.oauthService.hasValidIdToken()
+        ) {
             this.finishLogin();
         } else {
             this.oauthService.tryLoginCodeFlow();
@@ -67,14 +67,13 @@ export class ExternalAuthService implements AuthService {
         this.storeProfile(profile);
     }
 
-    private storeProfile(profile: UserInfo): void
-    {
+    private storeProfile(profile: UserInfo): void {
         if (profile) {
             const userInfo = {
                 username: profile.name as string,
                 firstName: profile.given_name as string,
                 lastName: profile.family_name as string,
-                roles: profile.role as string[]
+                roles: profile.role as string[],
             };
 
             this.store.dispatch(updateUserInfoRequest({ userInfo }));

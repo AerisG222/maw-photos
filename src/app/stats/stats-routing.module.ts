@@ -9,11 +9,11 @@ const routes: Routes = [
     { path: 'combined', component: CombinedStatsComponent },
     { path: 'photos', component: PhotoStatsComponent },
     { path: 'videos', component: VideoStatsComponent },
-    { path: '**', redirectTo: 'photos' }
+    { path: '**', redirectTo: 'photos' },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class StatsRoutingModule { }
+export class StatsRoutingModule {}

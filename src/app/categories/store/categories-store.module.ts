@@ -5,8 +5,6 @@ import { CategoriesStoreEffects } from './effects';
 
 @NgModule({
     declarations: [],
-    imports: [
-        EffectsModule.forFeature([ CategoriesStoreEffects ])
-    ]
+    imports: [EffectsModule.forFeature([CategoriesStoreEffects])],
 })
-export class CategoriesStoreModule { }
+export class CategoriesStoreModule {}

@@ -6,7 +6,7 @@ import { CategoryTeaser, ThumbnailSize } from '@models';
     selector: 'app-shared-category-grid',
     templateUrl: './category-grid.component.html',
     styleUrls: ['./category-grid.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryGridComponent {
     @Input() categories: CategoryTeaser[] | null = null;

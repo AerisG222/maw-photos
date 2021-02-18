@@ -7,7 +7,12 @@ import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-fi
 import { CategoryGridSettingsFacade } from '@core/facades/settings/category-grid-settings-facade';
 import { CategoryListSettingsFacade } from '@core/facades/settings/category-list-settings-facade';
 import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
-import { allMargins, allThumbnailSizes, CategoryGridViewSettings, toThumbnailSizeDefaulted } from '@models';
+import {
+    allMargins,
+    allThumbnailSizes,
+    CategoryGridViewSettings,
+    toThumbnailSizeDefaulted,
+} from '@models';
 import { CategoryListViewSettings } from '@models';
 import { CategoryPageSettings } from '@models';
 import {
@@ -124,14 +129,18 @@ export class CategorySettingsComponent {
         return {
             showTitles: this.form.get('grid.showTitles')?.value as boolean,
             margin: this.form.get('grid.margin')?.value as Margin,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value),
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('grid.thumbnailSize')?.value
+            ),
         };
     }
 
     private readListForm(): CategoryListViewSettings {
         return {
             margin: this.form.get('list.margin')?.value as Margin,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('list.thumbnailSize')?.value),
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('list.thumbnailSize')?.value
+            ),
         };
     }
 }

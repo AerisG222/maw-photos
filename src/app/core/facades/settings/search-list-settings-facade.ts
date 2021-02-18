@@ -6,24 +6,30 @@ import { BaseSettingsFacade } from './base-settings-facade';
 import { nextMargin, nextThumbnailSize, SearchListViewSettings } from '@models';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SearchListSettingsFacade extends BaseSettingsFacade<SearchListViewSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.searchListViewSettings);
+    settings$ = this.store.select(
+        SettingsStoreSelectors.searchListViewSettings
+    );
 
     constructor(private store: Store) {
         super();
     }
 
     save(settings: SearchListViewSettings): void {
-        this.store.dispatch(SettingsStoreActions.saveSearchListViewSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.saveSearchListViewSettings({ settings })
+        );
     }
 
     toggleThumbnailSize(): void {
-        this.saveUpdatedField(x => x.thumbnailSize = nextThumbnailSize(x.thumbnailSize));
+        this.saveUpdatedField(
+            (x) => (x.thumbnailSize = nextThumbnailSize(x.thumbnailSize))
+        );
     }
 
     toggleMargins(): void {
-        this.saveUpdatedField(x => x.margin = nextMargin(x.margin));
+        this.saveUpdatedField((x) => (x.margin = nextMargin(x.margin)));
     }
 }

@@ -1,4 +1,9 @@
- import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnDestroy,
+    ViewChild,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SettingsStoreSelectors, RouterStoreSelectors } from '@core/root-store';
@@ -11,7 +16,7 @@ import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-sett
     selector: 'app-photos-grid-view',
     templateUrl: './grid-view.component.html',
     styleUrls: ['./grid-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridViewComponent implements OnDestroy {
     @ViewChild(ToolbarComponent) layout: ToolbarComponent | null = null;
@@ -30,15 +35,17 @@ export class GridViewComponent implements OnDestroy {
         private store: Store,
         private gridSettings: PhotoGridSettingsFacade
     ) {
-        this.destroySub.add(this.store.select(RouterStoreSelectors.selectRouteDetails)
-            .subscribe({
-                next: details => {
-                    // main grid view does not require a photo id, so when it is not present, move to last scroll position
-                    if(!details.data.requirePhotoId) {
-                        this.returnToScrollPosition();
-                    }
-                }
-            })
+        this.destroySub.add(
+            this.store
+                .select(RouterStoreSelectors.selectRouteDetails)
+                .subscribe({
+                    next: (details) => {
+                        // main grid view does not require a photo id, so when it is not present, move to last scroll position
+                        if (!details.data.requirePhotoId) {
+                            this.returnToScrollPosition();
+                        }
+                    },
+                })
         );
     }
 
@@ -53,7 +60,10 @@ export class GridViewComponent implements OnDestroy {
     }
 
     returnToScrollPosition(): void {
-        if (!!this.layout && this.layout.getCurrentScrollTop() !== this.lastScrollTop) {
+        if (
+            !!this.layout &&
+            this.layout.getCurrentScrollTop() !== this.lastScrollTop
+        ) {
             this.layout.setCurrentScrollTop(this.lastScrollTop);
         }
     }

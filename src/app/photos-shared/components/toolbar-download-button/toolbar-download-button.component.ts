@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
     selector: 'app-photos-toolbar-download-button',
     templateUrl: './toolbar-download-button.component.html',
     styleUrls: ['./toolbar-download-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarDownloadButtonComponent {
     @Input() hideOnMobile = false;

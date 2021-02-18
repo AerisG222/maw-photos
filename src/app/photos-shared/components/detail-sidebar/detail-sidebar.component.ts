@@ -2,7 +2,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Store } from '@ngrx/store';
 
-import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '@shared/animations';
+import {
+    sidebarShow,
+    sidebarHide,
+    sidebarCardShow,
+    sidebarCardHide,
+} from '@shared/animations';
 import { AuthStoreSelectors } from '@core/root-store';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
 
@@ -12,23 +17,15 @@ import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-
     styleUrls: ['./detail-sidebar.component.scss'],
     animations: [
         trigger('sidebarFlyInOut', [
-            transition(':enter', [
-                useAnimation(sidebarShow)
-            ]),
-            transition(':leave', [
-                useAnimation(sidebarHide)
-            ])
+            transition(':enter', [useAnimation(sidebarShow)]),
+            transition(':leave', [useAnimation(sidebarHide)]),
         ]),
         trigger('sidebarCardShowHide', [
-            transition(':enter', [
-                useAnimation(sidebarCardShow)
-            ]),
-            transition(':leave', [
-                useAnimation(sidebarCardHide)
-            ])
-        ])
+            transition(':enter', [useAnimation(sidebarCardShow)]),
+            transition(':leave', [useAnimation(sidebarCardHide)]),
+        ]),
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSidebarComponent {
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
@@ -37,7 +34,7 @@ export class DetailSidebarComponent {
     constructor(
         private store: Store,
         private infoPanelSettings: PhotoInfoPanelSettingsFacade
-    ) { }
+    ) {}
 
     toggleSidebar(): void {
         this.infoPanelSettings.toggleSidebar();

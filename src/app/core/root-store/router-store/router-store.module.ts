@@ -8,7 +8,7 @@ import { RouterStoreEffects } from './effects';
     declarations: [],
     imports: [
         StoreModule.forFeature('router', fromRouter.routerReducer),
-        EffectsModule.forFeature([RouterStoreEffects])
-    ]
+        EffectsModule.forFeature([RouterStoreEffects]),
+    ],
 })
-export class RouterStoreModule { }
+export class RouterStoreModule {}

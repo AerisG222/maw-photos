@@ -6,8 +6,6 @@ import { reducer } from './reducer';
 
 @NgModule({
     declarations: [],
-    imports: [
-        StoreModule.forFeature(AUTH_FEATURE_NAME, reducer)
-    ]
+    imports: [StoreModule.forFeature(AUTH_FEATURE_NAME, reducer)],
 })
-export class AuthStoreModule { }
+export class AuthStoreModule {}

@@ -10,7 +10,7 @@ import { BaseSettingsComponent } from '../base-settings/base-settings.component'
     selector: 'app-app-settings',
     templateUrl: './app-settings.component.html',
     styleUrls: ['./app-settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
     form: FormGroup;
@@ -20,7 +20,7 @@ export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
         super(facade);
 
         this.form = this.fb.group({
-            theme: [DEFAULT_APP_SETTINGS.theme, Validators.required]
+            theme: [DEFAULT_APP_SETTINGS.theme, Validators.required],
         });
 
         this.resetForm();
@@ -28,13 +28,13 @@ export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
 
     protected readForm(): AppSettings {
         return {
-            theme: toThemeDefaulted(this.form.get('theme')?.value as string)
+            theme: toThemeDefaulted(this.form.get('theme')?.value as string),
         };
     }
 
     protected updateForm(settings: AppSettings) {
         this.form.patchValue({
-            theme: settings.theme
+            theme: settings.theme,
         });
     }
 }

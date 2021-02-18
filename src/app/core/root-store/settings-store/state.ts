@@ -5,5 +5,5 @@ export interface State {
 }
 
 export const initialState: State = {
-    settings: DEFAULT_SETTINGS
+    settings: DEFAULT_SETTINGS,
 };

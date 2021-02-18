@@ -7,14 +7,10 @@ import { LayoutStoreSelectors } from '@core/root-store';
     selector: 'app-sidebar-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
     hidePanel$ = this.store.select(LayoutStoreSelectors.isFullscreen);
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 }

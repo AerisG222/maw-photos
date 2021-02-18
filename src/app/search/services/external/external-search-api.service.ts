@@ -10,13 +10,12 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ExternalSearchApiService implements SearchApiService {
-    constructor(
-        private http: HttpClient
-    ) {
+    constructor(private http: HttpClient) {}
 
-    }
-
-    search(query: string, start: number): Observable<SearchResult<MultimediaCategory>> {
+    search(
+        query: string,
+        start: number
+    ): Observable<SearchResult<MultimediaCategory>> {
         const url = this.getAbsoluteApiUrl(`search/multimedia-categories`);
         const params = new HttpParams()
             .set('query', query)
@@ -25,10 +24,14 @@ export class ExternalSearchApiService implements SearchApiService {
         return this.http
             .get<SearchResult<MultimediaCategory>>(url, { params })
             .pipe(
-                map(r => {
-                    r.results.forEach(result => {
-                        result.teaserPhotoPath = `${ this.getAbsoluteWwwUrl(result.teaserPhotoPath) }`;
-                        result.teaserPhotoSqPath = `${ this.getAbsoluteWwwUrl(result.teaserPhotoSqPath) }`;
+                map((r) => {
+                    r.results.forEach((result) => {
+                        result.teaserPhotoPath = `${this.getAbsoluteWwwUrl(
+                            result.teaserPhotoPath
+                        )}`;
+                        result.teaserPhotoSqPath = `${this.getAbsoluteWwwUrl(
+                            result.teaserPhotoSqPath
+                        )}`;
                     });
 
                     return r;

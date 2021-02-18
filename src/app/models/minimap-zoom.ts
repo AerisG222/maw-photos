@@ -21,7 +21,7 @@ export class MinimapZoom {
         new MinimapZoom(19, '19'),
         new MinimapZoom(20, '20 - Buildings'),
         new MinimapZoom(21, '21'),
-        new MinimapZoom(22, '22')
+        new MinimapZoom(22, '22'),
     ];
 
     constructor(public value: number, public name: string) {

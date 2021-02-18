@@ -4,9 +4,7 @@ export class PhotoRotation {
     static readonly class180 = 'rot180';
     static readonly class270 = 'rot270';
 
-    constructor(public klass = PhotoRotation.class0) {
-
-    }
+    constructor(public klass = PhotoRotation.class0) {}
 
     rotateClockwise(): void {
         switch (this.klass) {

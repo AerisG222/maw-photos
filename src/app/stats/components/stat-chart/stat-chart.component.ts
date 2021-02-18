@@ -1,4 +1,13 @@
-import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ViewChild,
+    AfterViewInit,
+    OnChanges,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { colorSets, TreeMapComponent } from '@swimlane/ngx-charts';
 import numbro from 'numbro';
 
@@ -8,7 +17,7 @@ import { StatDetail } from '../../models/stat-detail.model';
     selector: 'app-stats-stat-chart',
     templateUrl: './stat-chart.component.html',
     styleUrls: ['./stat-chart.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatChartComponent implements AfterViewInit, OnChanges {
     @Input() chartData: StatDetail[] | null = null;
@@ -30,7 +39,7 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
     }
 
     formatFunc = this.formatPlainNumber;
-    colorScheme = colorSets.find(s => s.name === 'cool');
+    colorScheme = colorSets.find((s) => s.name === 'cool');
 
     ngAfterViewInit(): void {
         this.updateMargins();
@@ -49,7 +58,12 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
     }
 
     formatFilesize(val: number): string {
-        return numbro(val).format({ output: 'byte', base: 'decimal', mantissa: 2, spaceSeparated: true });
+        return numbro(val).format({
+            output: 'byte',
+            base: 'decimal',
+            mantissa: 2,
+            spaceSeparated: true,
+        });
     }
 
     formatTime(val: number): string {

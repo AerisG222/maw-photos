@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, RouterState, MinimalRouterStateSerializer } from '@ngrx/router-store';
+import {
+    StoreRouterConnectingModule,
+    RouterState,
+    MinimalRouterStateSerializer,
+} from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 
 import { LayoutStoreModule } from './layout-store';
@@ -22,19 +26,22 @@ import { PhotoStoreModule } from './photos-store';
         SettingsStoreModule,
         VideoCategoryStoreModule,
         RouterStoreModule,
-        StoreModule.forRoot({}, {
-            runtimeChecks: {
-                strictActionWithinNgZone: true,
-                strictStateSerializability: false,
-                strictActionSerializability: false
+        StoreModule.forRoot(
+            {},
+            {
+                runtimeChecks: {
+                    strictActionWithinNgZone: true,
+                    strictStateSerializability: false,
+                    strictActionSerializability: false,
+                },
             }
-        }),
+        ),
         StoreRouterConnectingModule.forRoot({
             routerState: RouterState.Minimal,
-            serializer: MinimalRouterStateSerializer
+            serializer: MinimalRouterStateSerializer,
         }),
         EffectsModule.forRoot([]),
-        extModules
-    ]
+        extModules,
+    ],
 })
-export class RootStoreModule { }
+export class RootStoreModule {}

@@ -4,11 +4,11 @@
         [margin]="listSettings.margin"
         [thumbnailSize]="listSettings.thumbnailSize"
         (toggleMargin)="onToggleMargins($event)"
-        (toggleThumbnailSize)="onToggleThumbnailSize($event)">
+        (toggleThumbnailSize)="onToggleThumbnailSize($event)"
+    >
     </app-list-toolbar>
 
     <app-shared-content-margin layout-main [margin]="listSettings.margin">
-
         <app-filter-bar></app-filter-bar>
 
         <div>
@@ -16,11 +16,11 @@
                 <app-categories-year [year]="year">
                     <app-shared-category-list
                         [categories]="categoriesForYear(year) | async"
-                        [thumbnailSize]="listSettings.thumbnailSize">
+                        [thumbnailSize]="listSettings.thumbnailSize"
+                    >
                     </app-shared-category-list>
                 </app-categories-year>
             </div>
         </div>
-
     </app-shared-content-margin>
 </app-layout-toolbar>

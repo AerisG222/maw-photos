@@ -9,10 +9,13 @@ import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/tool
     selector: 'app-toolbar-view-map-button',
     templateUrl: './toolbar-view-map-button.component.html',
     styleUrls: ['./toolbar-view-map-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewMapButtonComponent extends ToolbarViewButtonBaseComponent {
-    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store) {
+    constructor(
+        public viewModeSelectable: PhotoViewModeSelectable,
+        public store: Store
+    ) {
         super(viewModeSelectable, store, PhotoViewMode.map);
     }
 }

@@ -9,10 +9,13 @@ import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/tool
     selector: 'app-toolbar-view-detail-button',
     templateUrl: './toolbar-view-detail-button.component.html',
     styleUrls: ['./toolbar-view-detail-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewDetailButtonComponent extends ToolbarViewButtonBaseComponent {
-    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store) {
+    constructor(
+        public viewModeSelectable: PhotoViewModeSelectable,
+        public store: Store
+    ) {
         super(viewModeSelectable, store, PhotoViewMode.detail);
     }
 }

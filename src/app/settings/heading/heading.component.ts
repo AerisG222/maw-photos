@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
     selector: 'app-heading',
     templateUrl: './heading.component.html',
     styleUrls: ['./heading.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadingComponent {
     @Input() sectionName = '';

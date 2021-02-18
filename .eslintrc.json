@@ -1,8 +1,13 @@
 {
+    // https://dev.to/gsarciotto/migrating-and-configuring-eslint-with-angular-11-3fg1
+    // https://dev.to/dreiv/using-eslint-and-prettier-with-vscode-in-an-angular-project-42ib
     "root": true,
     "ignorePatterns": [
         "projects/**/*"
     ],
+    "env": {
+        "es6": true
+    },
     "overrides": [
         {
             "files": [
@@ -16,11 +21,13 @@
                 "createDefaultProgram": true
             },
             "extends": [
+                "plugin:@angular-eslint/recommended",
                 "eslint:recommended",
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking",
-                "plugin:@angular-eslint/recommended",
-                "plugin:ngrx/recommended"
+                "plugin:ngrx/recommended",
+                "prettier/@typescript-eslint",
+                "plugin:prettier/recommended"
             ],
             "plugins": [
                 "@typescript-eslint",
@@ -71,7 +78,9 @@
                 "*.html"
             ],
             "extends": [
-                "plugin:@angular-eslint/template/recommended"
+                "plugin:@angular-eslint/template/recommended",
+                "prettier/@typescript-eslint",
+                "plugin:prettier/recommended"
             ],
             "rules": {}
         }

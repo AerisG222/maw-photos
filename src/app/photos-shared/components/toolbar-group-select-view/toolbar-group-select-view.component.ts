@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
     selector: 'app-toolbar-group-select-view',
     templateUrl: './toolbar-group-select-view.component.html',
     styleUrls: ['./toolbar-group-select-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarGroupSelectViewComponent {
     // TODO: remove these inputs
@@ -19,9 +19,5 @@ export class ToolbarGroupSelectViewComponent {
     enableMapView$ = this.store.select(RouterStoreSelectors.isPhotosView);
     enableBulkEdit$ = this.store.select(RouterStoreSelectors.isPhotosView);
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 }

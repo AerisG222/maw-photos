@@ -10,9 +10,11 @@ import {
     ApiCollection,
     GpsCoordinate,
     GpsDetail,
- } from '@models';
+} from '@models';
 
-export const photoApiServiceToken = new InjectionToken<PhotoApiService>('PhotoApiService');
+export const photoApiServiceToken = new InjectionToken<PhotoApiService>(
+    'PhotoApiService'
+);
 
 export interface PhotoApiService {
     getCategories(): Observable<ApiCollection<PhotoCategory>>;
@@ -24,8 +26,14 @@ export interface PhotoApiService {
     getExifData(photoId: number): Observable<ExifDetail>;
     getRating(photoId: number): Observable<Rating>;
     ratePhoto(photoId: number, rating: number): Observable<Rating>;
-    addComment(photoId: number, comment: string): Observable<ApiCollection<Comment>>;
+    addComment(
+        photoId: number,
+        comment: string
+    ): Observable<ApiCollection<Comment>>;
     setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory>;
     getGpsDetail(photoId: number): Observable<GpsDetail>;
-    setGpsCoordinateOverride(photoId: number, latLng: GpsCoordinate): Observable<GpsDetail>;
+    setGpsCoordinateOverride(
+        photoId: number,
+        latLng: GpsCoordinate
+    ): Observable<GpsDetail>;
 }

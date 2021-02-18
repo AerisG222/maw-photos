@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    Inject,
+    OnInit,
+    OnDestroy,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -13,7 +19,7 @@ import { HotkeyDialogComponent } from '@shared/components/hotkey-dialog/hotkey-d
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, OnDestroy {
     private destroySub = new Subscription();
@@ -24,18 +30,21 @@ export class AppComponent implements OnInit, OnDestroy {
         private dialog: MatDialog,
         private appSettingsFacade: AppSettingsFacade,
         @Inject(DOCUMENT) private doc: Document
-    ) {
-
-    }
+    ) {}
 
     ngOnInit(): void {
         this.hotkeysService.add(
-            new Hotkey('?', (event: KeyboardEvent) => this.onHotkeyHelp(event), [], 'Show Help')
+            new Hotkey(
+                '?',
+                (event: KeyboardEvent) => this.onHotkeyHelp(event),
+                [],
+                'Show Help'
+            )
         );
 
-        this.destroySub.add(this.appSettingsFacade.settings$
-            .subscribe({
-                next: appSettings => this.applyTheme(appSettings.theme)
+        this.destroySub.add(
+            this.appSettingsFacade.settings$.subscribe({
+                next: (appSettings) => this.applyTheme(appSettings.theme),
             })
         );
     }
@@ -52,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
             classList.add('mat-app-background');
         }
 
-        allThemeDetails.forEach(x => {
+        allThemeDetails.forEach((x) => {
             classList.remove(x.klass);
         });
 
@@ -65,13 +74,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.hotkeyHelper.pauseAll();
 
         const dialogRef = this.dialog.open(HotkeyDialogComponent, {
-            width: '800px'
+            width: '800px',
         });
 
-        this.destroySub.add(dialogRef
-            .afterClosed()
-            .subscribe({
-                next: x => this.hotkeyHelper.unpauseAll()
+        this.destroySub.add(
+            dialogRef.afterClosed().subscribe({
+                next: (x) => this.hotkeyHelper.unpauseAll(),
             })
         );
 

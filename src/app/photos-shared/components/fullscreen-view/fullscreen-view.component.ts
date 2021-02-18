@@ -4,8 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     selector: 'app-photos-fullscreen-view',
     templateUrl: './fullscreen-view.component.html',
     styleUrls: ['./fullscreen-view.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FullscreenViewComponent {
-
-}
+export class FullscreenViewComponent {}

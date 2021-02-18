@@ -28,16 +28,9 @@ import { ListViewComponent } from './components/list-view/list-view.component';
         ListToolbarComponent,
         FilterBarComponent,
         GridViewComponent,
-        ListViewComponent
+        ListViewComponent,
     ],
-    imports: [
-        CategoriesRoutingModule,
-        CategoriesStoreModule,
-        SharedModule
-    ],
-    providers: [
-        CategoriesUrlService,
-        ViewModeGuard
-    ]
+    imports: [CategoriesRoutingModule, CategoriesStoreModule, SharedModule],
+    providers: [CategoriesUrlService, ViewModeGuard],
 })
-export class CategoriesModule { }
+export class CategoriesModule {}

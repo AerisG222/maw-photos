@@ -7,5 +7,5 @@ export { PhotoCategoryStoreModule } from './photo-category-store.module';
 export {
     PhotoCategoryStoreActions,
     PhotoCategoryStoreSelectors,
-    PhotoCategoryStoreState
+    PhotoCategoryStoreState,
 };

@@ -24,10 +24,6 @@ import { VideoStatsComponent } from './components/video-stats/video-stats.compon
         ToolbarComponent,
         VideoStatsComponent,
     ],
-    imports: [
-        NgxChartsModule,
-        SharedModule,
-        StatsRoutingModule
-    ]
+    imports: [NgxChartsModule, SharedModule, StatsRoutingModule],
 })
-export class StatsModule { }
+export class StatsModule {}

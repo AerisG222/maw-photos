@@ -8,15 +8,11 @@ import { RouteHelper } from '@models';
     selector: 'app-primary-nav-categories-link',
     templateUrl: './categories-link.component.html',
     styleUrls: ['./categories-link.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesLinkComponent {
     categoriesLink = RouteHelper.categoriesAbs();
     inCategoryArea$ = this.store.select(RouterStoreSelectors.inCategoryArea);
 
-    constructor(
-        private store: Store
-    ) {
-
-    }
+    constructor(private store: Store) {}
 }

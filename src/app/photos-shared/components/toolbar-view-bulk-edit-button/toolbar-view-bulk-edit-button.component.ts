@@ -9,10 +9,13 @@ import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/tool
     selector: 'app-toolbar-view-bulk-edit-button',
     templateUrl: './toolbar-view-bulk-edit-button.component.html',
     styleUrls: ['./toolbar-view-bulk-edit-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewBulkEditButtonComponent extends ToolbarViewButtonBaseComponent {
-    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store) {
+    constructor(
+        public viewModeSelectable: PhotoViewModeSelectable,
+        public store: Store
+    ) {
         super(viewModeSelectable, store, PhotoViewMode.bulkEdit);
     }
 }

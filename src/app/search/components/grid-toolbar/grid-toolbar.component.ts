@@ -6,12 +6,12 @@ import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-set
     selector: 'app-grid-toolbar',
     templateUrl: './grid-toolbar.component.html',
     styleUrls: ['./grid-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridToolbarComponent {
     gridSettings$ = this.gridSettings.settings$;
 
-    constructor(private gridSettings: SearchGridSettingsFacade) { }
+    constructor(private gridSettings: SearchGridSettingsFacade) {}
 
     onToggleMargins(): void {
         this.gridSettings.toggleMargins();

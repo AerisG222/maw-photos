@@ -1,16 +1,18 @@
-<app-sidebar-card
-    icon="filter_list"
-    title="Filter/Selection Tools">
-
+<app-sidebar-card icon="filter_list" title="Filter/Selection Tools">
     <div class="gps-toggle">
-        <mat-checkbox (change)="onToggleHidePhotosWithGpsData($event)">Hide Photos with GPS Data</mat-checkbox>
+        <mat-checkbox (change)="onToggleHidePhotosWithGpsData($event)"
+            >Hide Photos with GPS Data</mat-checkbox
+        >
     </div>
 
     <app-sidebar-card-divider></app-sidebar-card-divider>
 
     <div class="select-buttons">
-        <button mat-button color="primary" (click)="onToggleSelectAll(true)">Select All</button>
-        <button mat-button color="primary" (click)="onToggleSelectAll(false)">Deselect All</button>
+        <button mat-button color="primary" (click)="onToggleSelectAll(true)">
+            Select All
+        </button>
+        <button mat-button color="primary" (click)="onToggleSelectAll(false)">
+            Deselect All
+        </button>
     </div>
-
 </app-sidebar-card>

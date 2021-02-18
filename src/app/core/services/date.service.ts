@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class DateService {
     private static readonly defaultDate = new Date(1900, 1, 1);
@@ -11,8 +11,8 @@ export class DateService {
             return DateService.defaultDate;
         }
 
-        if (typeof(dt) === 'string') {
-            return this.safeParseDate(dt );
+        if (typeof dt === 'string') {
+            return this.safeParseDate(dt);
         }
 
         return dt;

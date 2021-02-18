@@ -6,11 +6,11 @@ import { VideoCategoryComponent } from './components/video-category/video-catego
 const routes: Routes = [
     { path: ':categoryId', component: VideoCategoryComponent },
     { path: ':categoryId/:videoId', component: VideoCategoryComponent },
-    { path: '**', redirectTo: '/categories' }
+    { path: '**', redirectTo: '/categories' },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class VideosRoutingModule { }
+export class VideosRoutingModule {}

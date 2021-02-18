@@ -9,10 +9,13 @@ import { ToolbarViewButtonBaseComponent } from '../toolbar-view-button-base/tool
     selector: 'app-toolbar-view-grid-button',
     templateUrl: './toolbar-view-grid-button.component.html',
     styleUrls: ['./toolbar-view-grid-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewGridButtonComponent extends ToolbarViewButtonBaseComponent {
-    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store) {
+    constructor(
+        public viewModeSelectable: PhotoViewModeSelectable,
+        public store: Store
+    ) {
         super(viewModeSelectable, store, PhotoViewMode.grid);
     }
 }

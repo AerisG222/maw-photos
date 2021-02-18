@@ -4,8 +4,4 @@ import * as LayoutStoreState from './state';
 
 export { LayoutStoreModule } from './layout-store.module';
 
-export {
-    LayoutStoreActions,
-    LayoutStoreSelectors,
-    LayoutStoreState
-};
+export { LayoutStoreActions, LayoutStoreSelectors, LayoutStoreState };

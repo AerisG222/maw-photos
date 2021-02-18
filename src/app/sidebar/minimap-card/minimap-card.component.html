@@ -1,7 +1,4 @@
-<app-sidebar-card
-    icon="map"
-    title="Mini-Map">
-
+<app-sidebar-card icon="map" title="Mini-Map">
     <google-map
         height="300px"
         width="464px"
@@ -9,8 +6,8 @@
         [center]="center$ | async"
         (maptypeidChanged)="onMapTypeChange()"
         (zoomChanged)="onZoomChange()"
-        #map>
+        #map
+    >
         <map-marker *ngIf="poi$ | async" [position]="poi$ | async"></map-marker>
     </google-map>
-
 </app-sidebar-card>

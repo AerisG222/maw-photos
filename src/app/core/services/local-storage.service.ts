@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class LocalStorageService {
     private readonly prefix = 'maw-photos';
@@ -13,8 +13,7 @@ export class LocalStorageService {
     }
 
     get<T>(key: string): T | null {
-        if(!key)
-        {
+        if (!key) {
             throw Error('key must be specified');
         }
 

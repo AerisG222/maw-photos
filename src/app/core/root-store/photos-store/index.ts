@@ -4,8 +4,4 @@ import * as PhotoStoreState from './state';
 
 export { PhotoStoreModule } from './photo-store.module';
 
-export {
-    PhotoStoreActions,
-    PhotoStoreSelectors,
-    PhotoStoreState
-};
+export { PhotoStoreActions, PhotoStoreSelectors, PhotoStoreState };

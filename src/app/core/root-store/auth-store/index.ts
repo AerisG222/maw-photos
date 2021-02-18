@@ -3,7 +3,4 @@ import * as AuthStoreState from './state';
 
 export { AuthStoreModule } from './auth-store.module';
 
-export {
-    AuthStoreSelectors,
-    AuthStoreState
-};
+export { AuthStoreSelectors, AuthStoreState };

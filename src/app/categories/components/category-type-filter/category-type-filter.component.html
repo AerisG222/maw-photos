@@ -1,6 +1,11 @@
 <mat-form-field appearance="standard">
     <mat-label>Category Type</mat-label>
-    <mat-select [value]="typeFilter" (selectionChange)="onSelectCategoryType($event)">
-        <mat-option *ngFor="let type of categoryTypes" [value]="type.value">{{ type.name }}</mat-option>
+    <mat-select
+        [value]="typeFilter"
+        (selectionChange)="onSelectCategoryType($event)"
+    >
+        <mat-option *ngFor="let type of categoryTypes" [value]="type.value"
+            >{{ type.name }}</mat-option
+        >
     </mat-select>
 </mat-form-field>

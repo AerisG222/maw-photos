@@ -8,5 +8,5 @@ export enum RouteArea {
     search = 'search',
     settings = 'settings',
     stats = 'stats',
-    videos = 'videos'
+    videos = 'videos',
 }

@@ -5,5 +5,5 @@ export interface AppSettings {
 }
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
-    theme: Theme.dark
+    theme: Theme.dark,
 };

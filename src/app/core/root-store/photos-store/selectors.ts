@@ -8,8 +8,8 @@ import {
     Rating,
     ExifContainer,
     GpsDetail,
-    CategoryGpsStatus
- } from '@models';
+    CategoryGpsStatus,
+} from '@models';
 import { PHOTO_FEATURE_NAME } from './feature-name';
 import { photoAdapter, State } from './state';
 import * as PhotoCategoryStoreSelectors from '@core/root-store/photo-category-store/selectors';
@@ -20,7 +20,9 @@ const photoHasGpsData = (photo: Photo) => photo?.latitude !== null;
 
 const photoState = createFeatureSelector<State>(PHOTO_FEATURE_NAME);
 
-const { selectAll, selectEntities, selectIds } = photoAdapter.getSelectors(photoState);
+const { selectAll, selectEntities, selectIds } = photoAdapter.getSelectors(
+    photoState
+);
 
 export const allPhotos = selectAll;
 export const allEntities = selectEntities;
@@ -89,7 +91,8 @@ export const categoryIdForActivePhoto = createSelector(
 export const activePhotoIndex = createSelector(
     selectIds,
     activePhotoId,
-    (ids: string[] | number[], id: number | null): number | null => id ? (ids as number[]).indexOf(id) : null
+    (ids: string[] | number[], id: number | null): number | null =>
+        id ? (ids as number[]).indexOf(id) : null
 );
 
 export const activePhoto = createSelector(
@@ -185,14 +188,14 @@ export const nextPhotoIndex = createSelector(
 export const nextPhotoId = createSelector(
     selectIds,
     nextPhotoIndex,
-    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+    (ids, idx) => (idx >= 0 ? (ids as number[])[idx] : null)
 );
 
 export const nextPhoto = createSelector(
     selectEntities,
     nextPhotoId,
     (entities, nextId) => {
-        return nextId ? entities[nextId] as Photo : null;
+        return nextId ? (entities[nextId] as Photo) : null;
     }
 );
 
@@ -229,14 +232,14 @@ export const previousPhotoIndex = createSelector(
 export const previousPhotoId = createSelector(
     selectIds,
     previousPhotoIndex,
-    (ids, idx) => idx >= 0 ? (ids as number[])[idx] : null
+    (ids, idx) => (idx >= 0 ? (ids as number[])[idx] : null)
 );
 
 export const previousPhoto = createSelector(
     selectEntities,
     previousPhotoId,
     (entities, previousId) => {
-        return previousId ? entities[previousId] as Photo : null;
+        return previousId ? (entities[previousId] as Photo) : null;
     }
 );
 
@@ -244,7 +247,7 @@ export const photosForCategory = createSelector(
     allPhotos,
     (photos: Photo[], props: { id: number }) => {
         if (photos) {
-            return photos.filter(x => x.categoryId === props.id);
+            return photos.filter((x) => x.categoryId === props.id);
         } else {
             return null;
         }
@@ -266,7 +269,9 @@ export const photosWithGpsCoordinates = createSelector(
     allPhotos,
     (photos: Photo[]) => {
         if (photos) {
-            return photos.filter(x => x.latitude !== null && x.longitude !== null);
+            return photos.filter(
+                (x) => x.latitude !== null && x.longitude !== null
+            );
         } else {
             return null;
         }
@@ -275,13 +280,13 @@ export const photosWithGpsCoordinates = createSelector(
 
 export const photosWithGpsCoordinatesAsMapImages = createSelector(
     photosWithGpsCoordinates,
-    photos => {
-        if(photos) {
-            return photos.map(x => ({
+    (photos) => {
+        if (photos) {
+            return photos.map((x) => ({
                 id: x.id,
                 imageUrl: x.imageXsSq.url,
                 latitude: x.latitude as number,
-                longitude: x.longitude as number
+                longitude: x.longitude as number,
             }));
         }
 
@@ -293,24 +298,29 @@ export const categoryGpsStatus = createSelector(
     PhotoCategoryStoreSelectors.activeCategoryId,
     allPhotos,
     (categoryId: number | null, photos: Photo[]) => {
-        if(!categoryId || !photos) {
+        if (!categoryId || !photos) {
             return null;
         }
 
-        const isMissingGpsData = !!photos.find(photo => photo.latitude === null || photo.longitude === null);
+        const isMissingGpsData = !!photos.find(
+            (photo) => photo.latitude === null || photo.longitude === null
+        );
 
-        return { categoryId: categoryId , isMissingGpsData } as CategoryGpsStatus;
+        return {
+            categoryId: categoryId,
+            isMissingGpsData,
+        } as CategoryGpsStatus;
     }
 );
 
 export const activePhotoGpsDetailSource = createSelector(
     activePhotoGpsDetail,
-    detail => detail?.source ?? null
+    (detail) => detail?.source ?? null
 );
 
 export const activePhotoGpsDetailOverride = createSelector(
     activePhotoGpsDetail,
-    detail => detail?.override ?? null
+    (detail) => detail?.override ?? null
 );
 
 export const hasPhotosWithGpsCoordinates = createSelector(
@@ -318,35 +328,32 @@ export const hasPhotosWithGpsCoordinates = createSelector(
     (photos: Photo[] | null): boolean => !!photos && photos.length > 0
 );
 
-export const activePhotoGoogleLatLng = createSelector(
-    activePhoto,
-    photo => {
-        if (!!photo && !!photo.latitude && photo.longitude) {
-            return new google.maps.LatLng(photo.latitude, photo.longitude);
-        }
-
-        return null;
+export const activePhotoGoogleLatLng = createSelector(activePhoto, (photo) => {
+    if (!!photo && !!photo.latitude && photo.longitude) {
+        return new google.maps.LatLng(photo.latitude, photo.longitude);
     }
-);
+
+    return null;
+});
 
 export const activePhotoSmDownloadUrl = createSelector(
     activePhoto,
-    photo => photo?.imageSm.downloadUrl
+    (photo) => photo?.imageSm.downloadUrl
 );
 
 export const activePhotoMdDownloadUrl = createSelector(
     activePhoto,
-    photo => photo?.imageMd.downloadUrl
+    (photo) => photo?.imageMd.downloadUrl
 );
 
 export const activePhotoLgDownloadUrl = createSelector(
     activePhoto,
-    photo => photo?.imageLg.downloadUrl
+    (photo) => photo?.imageLg.downloadUrl
 );
 
 export const activePhotoPrtDownloadUrl = createSelector(
     activePhoto,
-    photo => photo?.imagePrt.downloadUrl
+    (photo) => photo?.imagePrt.downloadUrl
 );
 
 export const enableMapView = createSelector(
@@ -358,25 +365,29 @@ export const enableMapView = createSelector(
 export const isCommentCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelSettings,
-    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showComments
+    (isDetailView, infoPanel) =>
+        isDetailView && infoPanel.expandedState && infoPanel.showComments
 );
 
 export const isRatingCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelSettings,
-    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showRatings
+    (isDetailView, infoPanel) =>
+        isDetailView && infoPanel.expandedState && infoPanel.showRatings
 );
 
 export const isMetadataEditorCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelSettings,
-    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showMetadataEditor
+    (isDetailView, infoPanel) =>
+        isDetailView && infoPanel.expandedState && infoPanel.showMetadataEditor
 );
 
 export const isExifCardVisible = createSelector(
     RouterStoreSelectors.isPhotosDetailView,
     SettingsStoreSelectors.photoInfoPanelSettings,
-    (isDetailView, infoPanel) => isDetailView && infoPanel.expandedState && infoPanel.showExif
+    (isDetailView, infoPanel) =>
+        isDetailView && infoPanel.expandedState && infoPanel.showExif
 );
 
 // hmm - does it seem funny that we reference the photo category selectors here?
@@ -384,7 +395,7 @@ export const categoryForActivePhoto = createSelector(
     categoryIdForActivePhoto,
     PhotoCategoryStoreSelectors.allEntities,
     (categoryId, entities) => {
-        if(categoryId) {
+        if (categoryId) {
             return entities[categoryId];
         } else {
             return null;

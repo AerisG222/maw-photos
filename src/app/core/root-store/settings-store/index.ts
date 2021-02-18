@@ -4,8 +4,4 @@ import * as SettingsStoreState from './state';
 
 export { SettingsStoreModule } from './settings-store.module';
 
-export {
-    SettingsStoreActions,
-    SettingsStoreSelectors,
-    SettingsStoreState
-};
+export { SettingsStoreActions, SettingsStoreSelectors, SettingsStoreState };

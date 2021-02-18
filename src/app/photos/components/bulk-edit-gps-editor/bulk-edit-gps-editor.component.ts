@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    Output,
+    EventEmitter,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -10,7 +15,7 @@ import { GpsCoordinate } from '@models';
     selector: 'app-photos-bulk-edit-gps-editor',
     templateUrl: './bulk-edit-gps-editor.component.html',
     styleUrls: ['./bulk-edit-gps-editor.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BulkEditGpsEditorComponent {
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
@@ -25,7 +30,7 @@ export class BulkEditGpsEditorComponent {
     ) {
         this.gpsForm = this.formBuilder.group({
             latitude: ['', Validators.required],
-            longitude: ['', Validators.required]
+            longitude: ['', Validators.required],
         });
     }
 
@@ -71,7 +76,7 @@ export class BulkEditGpsEditorComponent {
             return null;
         }
 
-        return { latitude, longitude};
+        return { latitude, longitude };
     }
 
     private updateGpsForm(gps: GpsCoordinate | null): void {

@@ -16,9 +16,9 @@ const routes: Routes = [
             {
                 path: ':photoId',
                 component: DetailViewComponent,
-                data: { view: PhotoViewMode.detail, requirePhotoId: true }
-            }
-        ]
+                data: { view: PhotoViewMode.detail, requirePhotoId: true },
+            },
+        ],
     },
     {
         path: 'fullscreen',
@@ -28,9 +28,9 @@ const routes: Routes = [
             {
                 path: ':photoId',
                 component: FullscreenViewComponent,
-                data: { view: PhotoViewMode.fullscreen, requirePhotoId: true }
-            }
-        ]
+                data: { view: PhotoViewMode.fullscreen, requirePhotoId: true },
+            },
+        ],
     },
     {
         path: 'grid',
@@ -40,16 +40,16 @@ const routes: Routes = [
             {
                 path: ':photoId',
                 component: GridPhotoComponent,
-                data: { view: PhotoViewMode.grid, requirePhotoId: true }
-            }
-        ]
+                data: { view: PhotoViewMode.grid, requirePhotoId: true },
+            },
+        ],
     },
     { path: '', redirectTo: 'grid', pathMatch: 'full' },
-    { path: '**', redirectTo: '/random' }
+    { path: '**', redirectTo: '/random' },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class RandomRoutingModule { }
+export class RandomRoutingModule {}

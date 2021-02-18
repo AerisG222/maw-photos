@@ -6,10 +6,10 @@ import { SearchListSettingsFacade } from '@core/facades/settings/search-list-set
     selector: 'app-list-toolbar',
     templateUrl: './list-toolbar.component.html',
     styleUrls: ['./list-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListToolbarComponent {
-    constructor(private listSettings: SearchListSettingsFacade) { }
+    constructor(private listSettings: SearchListSettingsFacade) {}
 
     onToggleThumbnailSize(): void {
         this.listSettings.toggleThumbnailSize();

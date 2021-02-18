@@ -1,17 +1,22 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Inject,
+    Input,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
-import { Photo, } from '@models';
+import { Photo } from '@models';
 import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
 
 @Component({
     selector: 'app-photos-grid-view-toolbar',
     templateUrl: './grid-view-toolbar.component.html',
     styleUrls: ['./grid-view-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridViewToolbarComponent {
     @Input() isRandom = false;
@@ -44,13 +49,12 @@ export class GridViewToolbarComponent {
     }
 
     onShare(): void {
-        this.store.select(PhotoStoreSelectors.activePhoto)
-            .pipe(
-                first()
-            )
+        this.store
+            .select(PhotoStoreSelectors.activePhoto)
+            .pipe(first())
             .subscribe({
-                next: photo => this.sharePhoto(photo),
-                error: err => console.log(`error sharing photo: ${ err }`)
+                next: (photo) => this.sharePhoto(photo),
+                error: (err) => console.log(`error sharing photo: ${err}`),
             });
     }
 

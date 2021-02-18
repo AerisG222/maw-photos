@@ -6,32 +6,42 @@
             layout-header
             title="Video Stats"
             [year]="selectedYear$ | async"
-            (clickYear)="onRemoveYearFilter()">
+            (clickYear)="onRemoveYearFilter()"
+        >
         </app-stats-header>
 
         <div layout-cards>
-            <app-stats-stat-card *ngIf="(selectedYear$ | async)! < 0" [detail]="totalDetails$ | async"></app-stats-stat-card>
-            <app-stats-stat-card *ngIf="(selectedYear$ | async)! > 0" [detail]="yearDetails$ | async"></app-stats-stat-card>
+            <app-stats-stat-card
+                *ngIf="(selectedYear$ | async)! < 0"
+                [detail]="totalDetails$ | async"
+            ></app-stats-stat-card>
+            <app-stats-stat-card
+                *ngIf="(selectedYear$ | async)! > 0"
+                [detail]="yearDetails$ | async"
+            ></app-stats-stat-card>
         </div>
 
         <form layout-form [formGroup]="form">
-            <div>
-                Aggregate By:
-            </div>
+            <div>Aggregate By:</div>
             <div>
                 <mat-radio-group formControlName="aggregateBy">
-                    <mat-radio-button value="count">Video Count</mat-radio-button>
+                    <mat-radio-button value="count"
+                        >Video Count</mat-radio-button
+                    >
                     <mat-radio-button value="size">File Size</mat-radio-button>
-                    <mat-radio-button value="time">Video Duration</mat-radio-button>
+                    <mat-radio-button value="time"
+                        >Video Duration</mat-radio-button
+                    >
                 </mat-radio-group>
             </div>
         </form>
 
         <app-stats-stat-chart
             layout-chart
-            [chartData]="(chartData$ | async)"
+            [chartData]="chartData$ | async"
             [format]="chartValueFormat"
-            (cellSelected)="onSelectYear($event)">
+            (cellSelected)="onSelectYear($event)"
+        >
         </app-stats-stat-chart>
     </app-stats-layout>
 </app-layout-toolbar>

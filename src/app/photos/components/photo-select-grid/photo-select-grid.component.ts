@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { Photo } from '@models';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -7,7 +13,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
     selector: 'app-photos-photo-select-grid',
     templateUrl: './photo-select-grid.component.html',
     styleUrls: ['./photo-select-grid.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoSelectGridComponent {
     @Input() photos: Photo[] | null = null;
@@ -37,7 +43,7 @@ export class PhotoSelectGridComponent {
 
     private getSelectedIndex(photo: Photo): number {
         if (this.selectedPhotos) {
-            return this.selectedPhotos.findIndex(p => p.id === photo.id);
+            return this.selectedPhotos.findIndex((p) => p.id === photo.id);
         }
 
         return -1;

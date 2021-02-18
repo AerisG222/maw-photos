@@ -5,9 +5,13 @@ import { VIDEO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { videoCategoryAdapter, State } from './state';
 import { Category } from '@models';
 
-export const videoCategoryState = createFeatureSelector<State>(VIDEO_CATEGORY_FEATURE_NAME);
+export const videoCategoryState = createFeatureSelector<State>(
+    VIDEO_CATEGORY_FEATURE_NAME
+);
 
-const { selectAll, selectEntities } = videoCategoryAdapter.getSelectors(videoCategoryState);
+const { selectAll, selectEntities } = videoCategoryAdapter.getSelectors(
+    videoCategoryState
+);
 
 export const allCategories = selectAll;
 export const allEntities = selectEntities;
@@ -45,20 +49,21 @@ export const activeCategory = createSelector(
 
 export const activeCategoryTeaserUrl = createSelector(
     activeCategory,
-    cat => cat?.teaserImageSq.url
+    (cat) => cat?.teaserImageSq.url
 );
 
-export const allYears = createSelector(
-    selectAll,
-    (categories: Category[]) => [...new Set(categories.map(x => x.year))].sort()
+export const allYears = createSelector(selectAll, (categories: Category[]) =>
+    [...new Set(categories.map((x) => x.year))].sort()
 );
 
 export const categoriesForYear = createSelector(
     selectAll,
-    (categories: Category[], props: {year: number}) => categories.filter(cat => cat.year === props.year)
+    (categories: Category[], props: { year: number }) =>
+        categories.filter((cat) => cat.year === props.year)
 );
 
 export const categoryById = createSelector(
     selectEntities,
-    (entities: Dictionary<Category>, props: {id: number}) => entities[props.id] ?? null
+    (entities: Dictionary<Category>, props: { id: number }) =>
+        entities[props.id] ?? null
 );

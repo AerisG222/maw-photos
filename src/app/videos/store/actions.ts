@@ -1,12 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import {
-    Video,
-    Rating,
-    Comment,
-    GpsCoordinate,
-    GpsDetail,
- } from '@models';
+import { Video, Rating, Comment, GpsCoordinate, GpsDetail } from '@models';
 
 export const loadRequest = createAction(
     '[Videos] Load Request',
@@ -83,9 +77,7 @@ export const rateVideoSuccess = createAction(
     props<{ rating: Rating }>()
 );
 
-export const moveNextRequest = createAction(
-    '[Videos] Move Next Request'
-);
+export const moveNextRequest = createAction('[Videos] Move Next Request');
 
 export const movePreviousRequest = createAction(
     '[Videos] Move Previous Request'
@@ -136,6 +128,4 @@ export const navigateToVideo = createAction(
     props<{ categoryId: number; videoId: number }>()
 );
 
-export const exitVideoArea = createAction(
-    '[Videos] Exiting Video Area'
-);
+export const exitVideoArea = createAction('[Videos] Exiting Video Area');

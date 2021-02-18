@@ -10,11 +10,9 @@ import {
     GpsCoordinate,
     GpsDetail,
     Category,
- } from '@models';
+} from '@models';
 
-export const clearRequest = createAction(
-    '[Photos] Clear'
-);
+export const clearRequest = createAction('[Photos] Clear');
 
 export const loadRequest = createAction(
     '[Photos] Load Request',
@@ -76,9 +74,7 @@ export const loadMultipleRandomSuccess = createAction(
     props<{ photos: Photo[] }>()
 );
 
-export const loadRandomRequest = createAction(
-    '[Photos] Load Random Request'
-);
+export const loadRandomRequest = createAction('[Photos] Load Random Request');
 
 export const loadRandomFailure = createAction(
     '[Photos] Load Random Failure',
@@ -135,9 +131,7 @@ export const ratePhotoSuccess = createAction(
     props<{ rating: Rating }>()
 );
 
-export const moveNextRequest = createAction(
-    '[Photos] Move Next Request'
-);
+export const moveNextRequest = createAction('[Photos] Move Next Request');
 
 export const movePreviousRequest = createAction(
     '[Photos] Move Previous Request'
@@ -280,21 +274,13 @@ export const navigateToPhoto = createAction(
     props<{ view: string; categoryId: number; photoId?: number }>()
 );
 
-export const enterPhotoArea = createAction(
-    '[Photos] Entering Photo Area'
-);
+export const enterPhotoArea = createAction('[Photos] Entering Photo Area');
 
-export const exitPhotoArea = createAction(
-    '[Photos] Exiting Photo Area'
-);
+export const exitPhotoArea = createAction('[Photos] Exiting Photo Area');
 
-export const enterRandomArea = createAction(
-    '[Photos] Entering Random Area'
-);
+export const enterRandomArea = createAction('[Photos] Entering Random Area');
 
-export const exitRandomArea = createAction(
-    '[Photos] Exiting Random Area'
-);
+export const exitRandomArea = createAction('[Photos] Exiting Random Area');
 
 export const startPeriodicRandomLoad = createAction(
     '[Photos] Start Periodic Random Load'

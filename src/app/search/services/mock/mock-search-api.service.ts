@@ -5,7 +5,12 @@ import { map } from 'rxjs/operators';
 import { SearchApiService } from 'src/app/search/services/search-api.service';
 import { SearchResult } from 'src/app/search/models/search-result.model';
 import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
-import { photoApiServiceToken, PhotoApiService, videoApiServiceToken, VideoApiService } from '@core/services';
+import {
+    photoApiServiceToken,
+    PhotoApiService,
+    videoApiServiceToken,
+    VideoApiService,
+} from '@core/services';
 
 @Injectable()
 export class MockSearchApiService implements SearchApiService {
@@ -14,26 +19,28 @@ export class MockSearchApiService implements SearchApiService {
     constructor(
         @Inject(photoApiServiceToken) private photoApi: PhotoApiService,
         @Inject(videoApiServiceToken) private videoApi: VideoApiService
-    ) {
+    ) {}
 
-    }
-
-    search(query: string, start: number): Observable<SearchResult<MultimediaCategory>> {
+    search(
+        query: string,
+        start: number
+    ): Observable<SearchResult<MultimediaCategory>> {
         let result = null;
 
         if (this.returnNoResults) {
             result = of({
                 totalFound: 0,
                 startIndex: 0,
-                results: []
+                results: [],
             });
         } else {
             result = this.getAll().pipe(
-                map(c => ({
+                map((c) => ({
                     totalFound: 40,
                     startIndex: 0,
-                    results: c
-                })));
+                    results: c,
+                }))
+            );
         }
 
         this.returnNoResults = !this.returnNoResults;
@@ -41,15 +48,14 @@ export class MockSearchApiService implements SearchApiService {
         return result;
     }
 
-
     private getAll(): Observable<MultimediaCategory[]> {
         const photoCategories = this.photoApi.getCategories().pipe(
-            map(cats => {
+            map((cats) => {
                 const list: MultimediaCategory[] = [];
 
-                cats.items.forEach(c =>
-                    list.push(({
-                        solrId: `photo_${ c.id }`,
+                cats.items.forEach((c) =>
+                    list.push({
+                        solrId: `photo_${c.id}`,
                         id: c.id,
                         year: c.year,
                         name: c.name,
@@ -60,20 +66,21 @@ export class MockSearchApiService implements SearchApiService {
                         teaserPhotoSqHeight: c.teaserImageSq.height,
                         teaserPhotoSqWidth: c.teaserImageSq.width,
                         teaserPhotoSqPath: c.teaserImageSq.url,
-                        score: 1
-                    }))
+                        score: 1,
+                    })
                 );
 
                 return list;
-            }));
+            })
+        );
 
         const videoCategories = this.videoApi.getCategories().pipe(
-            map(cats => {
+            map((cats) => {
                 const list: MultimediaCategory[] = [];
 
-                cats.items.forEach(c =>
-                    list.push(({
-                        solrId: `video_${ c.id }`,
+                cats.items.forEach((c) =>
+                    list.push({
+                        solrId: `video_${c.id}`,
                         id: c.id,
                         year: c.year,
                         name: c.name,
@@ -84,18 +91,16 @@ export class MockSearchApiService implements SearchApiService {
                         teaserPhotoSqHeight: c.teaserImageSq.height,
                         teaserPhotoSqWidth: c.teaserImageSq.width,
                         teaserPhotoSqPath: c.teaserImageSq.url,
-                        score: 1
-                    }))
+                        score: 1,
+                    })
                 );
 
                 return list;
-            }));
+            })
+        );
 
-        return forkJoin([
-                photoCategories,
-                videoCategories
-            ]).pipe(
-                map(([photoCats, videoCats]) => [ ...photoCats, ...videoCats ])
-            );
+        return forkJoin([photoCategories, videoCategories]).pipe(
+            map(([photoCats, videoCats]) => [...photoCats, ...videoCats])
+        );
     }
 }

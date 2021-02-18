@@ -1,6 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { photoApiServiceToken, videoApiServiceToken, authGuardToken, authServiceToken, authInitResolverToken } from '@core/services';
+import {
+    photoApiServiceToken,
+    videoApiServiceToken,
+    authGuardToken,
+    authServiceToken,
+    authInitResolverToken,
+} from '@core/services';
 import { ExternalPhotoApiService } from './external-photo-api.service';
 import { ExternalVideoApiService } from './external-video-api.service';
 import { ExternalAuthGuard } from './external-auth.guard';
@@ -14,14 +20,26 @@ export class ExternalServicesModule {
     static forRoot(): ModuleWithProviders<ExternalServicesModule> {
         return {
             providers: [
-                { provide: authInitResolverToken, useClass: ExternalAuthInitResolver },
+                {
+                    provide: authInitResolverToken,
+                    useClass: ExternalAuthInitResolver,
+                },
                 { provide: authGuardToken, useClass: ExternalAuthGuard },
                 { provide: authServiceToken, useClass: ExternalAuthService },
-                { provide: photoApiServiceToken, useClass: ExternalPhotoApiService },
-                { provide: videoApiServiceToken, useClass: ExternalVideoApiService },
-                { provide: searchApiServiceToken, useClass: ExternalSearchApiService }
+                {
+                    provide: photoApiServiceToken,
+                    useClass: ExternalPhotoApiService,
+                },
+                {
+                    provide: videoApiServiceToken,
+                    useClass: ExternalVideoApiService,
+                },
+                {
+                    provide: searchApiServiceToken,
+                    useClass: ExternalSearchApiService,
+                },
             ],
-            ngModule: ExternalServicesModule
+            ngModule: ExternalServicesModule,
         };
     }
 }

@@ -13,7 +13,15 @@ import { MapViewComponent } from './components/map-view/map-view.component';
 import { PhotoSelectGridComponent } from './components/photo-select-grid/photo-select-grid.component';
 import { PhotosSharedModule } from '../photos-shared/photos-shared.module';
 import { PhotoStoreFacadeService } from './services/photo-store-facade.service';
-import { Navigable, Commentable, Ratable, MetadataEditable, MiniMapable, CategoryTeaserSelectable, PhotoLinkable } from '@core/facades';
+import {
+    Navigable,
+    Commentable,
+    Ratable,
+    MetadataEditable,
+    MiniMapable,
+    CategoryTeaserSelectable,
+    PhotoLinkable,
+} from '@core/facades';
 import { ViewModeGuard } from './services/view-mode.guard';
 import { PhotosUrlService } from './services/photos-url.service';
 import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
@@ -27,25 +35,27 @@ import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectabl
         BulkEditToolbarComponent,
         MapToolbarComponent,
         MapViewComponent,
-        PhotoSelectGridComponent
+        PhotoSelectGridComponent,
     ],
-    imports: [
-        PhotosRoutingModule,
-        PhotosSharedModule,
-        PhotoStoreModule
-    ],
+    imports: [PhotosRoutingModule, PhotosSharedModule, PhotoStoreModule],
     providers: [
         PhotoStoreFacadeService,
-        { provide: Navigable,                useExisting: PhotoStoreFacadeService },
-        { provide: Commentable,              useExisting: PhotoStoreFacadeService },
-        { provide: Ratable,                  useExisting: PhotoStoreFacadeService },
-        { provide: MetadataEditable,         useExisting: PhotoStoreFacadeService },
-        { provide: MiniMapable,              useExisting: PhotoStoreFacadeService },
-        { provide: CategoryTeaserSelectable, useExisting: PhotoStoreFacadeService },
-        { provide: PhotoLinkable,            useExisting: PhotoStoreFacadeService },
-        { provide: PhotoViewModeSelectable,  useExisting: PhotoStoreFacadeService },
+        { provide: Navigable, useExisting: PhotoStoreFacadeService },
+        { provide: Commentable, useExisting: PhotoStoreFacadeService },
+        { provide: Ratable, useExisting: PhotoStoreFacadeService },
+        { provide: MetadataEditable, useExisting: PhotoStoreFacadeService },
+        { provide: MiniMapable, useExisting: PhotoStoreFacadeService },
+        {
+            provide: CategoryTeaserSelectable,
+            useExisting: PhotoStoreFacadeService,
+        },
+        { provide: PhotoLinkable, useExisting: PhotoStoreFacadeService },
+        {
+            provide: PhotoViewModeSelectable,
+            useExisting: PhotoStoreFacadeService,
+        },
         PhotosUrlService,
-        ViewModeGuard
-    ]
+        ViewModeGuard,
+    ],
 })
-export class PhotosModule { }
+export class PhotosModule {}

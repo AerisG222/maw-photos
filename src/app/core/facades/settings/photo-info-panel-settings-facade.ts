@@ -6,16 +6,20 @@ import { PhotoInfoPanelSettings } from '@models';
 import { BasePhotoInfoPanelSettingsFacade } from './base-photo-info-panel-facade';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class PhotoInfoPanelSettingsFacade extends BasePhotoInfoPanelSettingsFacade {
-    settings$ = this.store.select(SettingsStoreSelectors.photoInfoPanelSettings);
+    settings$ = this.store.select(
+        SettingsStoreSelectors.photoInfoPanelSettings
+    );
 
     constructor(private store: Store) {
         super();
     }
 
     save(settings: PhotoInfoPanelSettings): void {
-        this.store.dispatch(SettingsStoreActions.savePhotoInfoPanelSettings({ settings }));
+        this.store.dispatch(
+            SettingsStoreActions.savePhotoInfoPanelSettings({ settings })
+        );
     }
 }

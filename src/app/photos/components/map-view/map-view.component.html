@@ -6,7 +6,8 @@
         *ngIf="{
             settings: settings$ | async,
             appTheme: appTheme$ | async
-        } as data">
+        } as data"
+    >
         <app-shared-map-view
             [activePhoto]="activePhoto$ | async"
             [images]="mapImages$ | async"
@@ -15,7 +16,8 @@
             [zoom]="data.settings?.zoom"
             (mapTypeChange)="onMapTypeIdChange($event)"
             (zoomChange)="onZoomChange($event)"
-            (selectPhoto)="onSelectPhoto($event)">
+            (selectPhoto)="onSelectPhoto($event)"
+        >
         </app-shared-map-view>
     </ng-container>
 

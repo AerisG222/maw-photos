@@ -10,20 +10,24 @@ import { SettingsComponent } from './settings/settings.component';
 import { VideoSettingsComponent } from './video-settings/video-settings.component';
 
 const routes: Routes = [
-    { path: '', component: SettingsComponent, children: [
-        { path: 'app', component: AppSettingsComponent },
-        { path: 'categories', component: CategorySettingsComponent },
-        { path: 'photos', component: PhotoSettingsComponent },
-        { path: 'random', component: RandomSettingsComponent },
-        { path: 'search', component: SearchSettingsComponent },
-        { path: 'videos', component: VideoSettingsComponent },
-        { path: '**', redirectTo: 'app' }
-    ]},
-    { path: '**', redirectTo: 'app' }
+    {
+        path: '',
+        component: SettingsComponent,
+        children: [
+            { path: 'app', component: AppSettingsComponent },
+            { path: 'categories', component: CategorySettingsComponent },
+            { path: 'photos', component: PhotoSettingsComponent },
+            { path: 'random', component: RandomSettingsComponent },
+            { path: 'search', component: SearchSettingsComponent },
+            { path: 'videos', component: VideoSettingsComponent },
+            { path: '**', redirectTo: 'app' },
+        ],
+    },
+    { path: '**', redirectTo: 'app' },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class SettingsRoutingModule { }
+export class SettingsRoutingModule {}

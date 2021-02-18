@@ -4,7 +4,16 @@ import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 // eslint-disable-next-line max-len
-import { allPhotoViewModes, allMapTypes, MinimapZoom, MapType, allMargins, toMarginDefaulted, toThumbnailSizeDefaulted, allThumbnailSizes } from '@models';
+import {
+    allPhotoViewModes,
+    allMapTypes,
+    MinimapZoom,
+    MapType,
+    allMargins,
+    toMarginDefaulted,
+    toThumbnailSizeDefaulted,
+    allThumbnailSizes,
+} from '@models';
 import { RandomGridSettingsFacade } from '@core/facades/settings/photo-grid-settings-facade';
 import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail-settings-facade';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
@@ -18,7 +27,7 @@ import { RandomPageSettings } from '@models';
     selector: 'app-random-settings',
     templateUrl: './random-settings.component.html',
     styleUrls: ['./random-settings.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RandomSettingsComponent {
     form: FormGroup;
@@ -39,7 +48,7 @@ export class RandomSettingsComponent {
         this.form = this.fb.group({
             page: this.fb.group({
                 viewMode: '',
-                slideshowDuration: ''
+                slideshowDuration: '',
             }),
             detail: this.fb.group({
                 showBreadcrumbs: '',
@@ -56,21 +65,21 @@ export class RandomSettingsComponent {
                     showMetadataEditor: '',
                     showCategoryTeaserChooser: '',
                     minimapType: '',
-                    minimapZoom: ''
-                })
+                    minimapZoom: '',
+                }),
             }),
             grid: this.fb.group({
                 margin: '',
                 showBreadcrumbs: '',
                 thumbnailSize: '',
-            })
+            }),
         });
 
         this.resetForm();
     }
 
     onSave() {
-        if(!this.form.valid) {
+        if (!this.form.valid) {
             return;
         }
 
@@ -91,40 +100,62 @@ export class RandomSettingsComponent {
 
     private readDetailForm(): PhotoDetailViewSettings {
         return {
-            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')?.value as boolean,
-            showPhotoList: this.form.get('detail.showPhotoList')?.value as boolean,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('detail.thumbnailSIze')?.value)
+            showBreadcrumbs: this.form.get('detail.showBreadcrumbs')
+                ?.value as boolean,
+            showPhotoList: this.form.get('detail.showPhotoList')
+                ?.value as boolean,
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('detail.thumbnailSIze')?.value
+            ),
         };
     }
 
     private readGridForm(): PhotoGridViewSettings {
         return {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
-            showBreadcrumbs: this.form.get('grid.showBreadcrumbs')?.value as boolean,
-            thumbnailSize: toThumbnailSizeDefaulted(this.form.get('grid.thumbnailSize')?.value)
+            showBreadcrumbs: this.form.get('grid.showBreadcrumbs')
+                ?.value as boolean,
+            thumbnailSize: toThumbnailSizeDefaulted(
+                this.form.get('grid.thumbnailSize')?.value
+            ),
         };
     }
 
     private readInfoForm(): PhotoInfoPanelSettings {
         return {
-            expandedState: this.form.get('detail.infoPanel.expandedState')?.value as boolean,
-            showRatings: this.form.get('detail.infoPanel.showRatings')?.value as boolean,
-            showComments: this.form.get('detail.infoPanel.showComments')?.value as boolean,
-            showEffects: this.form.get('detail.infoPanel.showEffects')?.value as boolean,
-            showExif: this.form.get('detail.infoPanel.showExif')?.value as boolean,
-            showHistogram: this.form.get('detail.infoPanel.showHistogram')?.value as boolean,
-            showMinimap: this.form.get('detail.infoPanel.showMinimap')?.value as boolean,
-            showMetadataEditor: this.form.get('detail.infoPanel.showMetadataEditor')?.value as boolean,
-            showCategoryTeaserChooser: this.form.get('detail.infoPanel.showCategoryTeaserChoser')?.value as boolean,
-            minimapMapType: this.form.get('detail.infoPanel.minimapType')?.value as MapType,
-            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')?.value as number
+            expandedState: this.form.get('detail.infoPanel.expandedState')
+                ?.value as boolean,
+            showRatings: this.form.get('detail.infoPanel.showRatings')
+                ?.value as boolean,
+            showComments: this.form.get('detail.infoPanel.showComments')
+                ?.value as boolean,
+            showEffects: this.form.get('detail.infoPanel.showEffects')
+                ?.value as boolean,
+            showExif: this.form.get('detail.infoPanel.showExif')
+                ?.value as boolean,
+            showHistogram: this.form.get('detail.infoPanel.showHistogram')
+                ?.value as boolean,
+            showMinimap: this.form.get('detail.infoPanel.showMinimap')
+                ?.value as boolean,
+            showMetadataEditor: this.form.get(
+                'detail.infoPanel.showMetadataEditor'
+            )?.value as boolean,
+            showCategoryTeaserChooser: this.form.get(
+                'detail.infoPanel.showCategoryTeaserChoser'
+            )?.value as boolean,
+            minimapMapType: this.form.get('detail.infoPanel.minimapType')
+                ?.value as MapType,
+            minimapZoom: this.form.get('detail.infoPanel.minimapZoom')
+                ?.value as number,
         };
     }
 
     private readPageForm(): RandomPageSettings {
         return {
             viewMode: this.form.get('page.viewMode')?.value,
-            slideshowDisplayDurationSeconds: this.form.get('page.slideshowDuration')?.value as number
+            slideshowDisplayDurationSeconds: this.form.get(
+                'page.slideshowDuration'
+            )?.value as number,
         };
     }
 
@@ -133,41 +164,43 @@ export class RandomSettingsComponent {
             this.detailFacade.settings$,
             this.gridFacade.settings$,
             this.infoFacade.settings$,
-            this.pageFacade.settings$
-        ]).pipe(
-            first()
-        ).subscribe({
-            next: ([detail, grid, info, page]) => {
-                this.form.patchValue({
-                    page: {
-                        viewMode: page.viewMode,
-                        slideshowDuration: page.slideshowDisplayDurationSeconds
-                    },
-                    detail: {
-                        showBreadcrumbs: detail.showBreadcrumbs,
-                        showPhotoList: detail.showPhotoList,
-                        thumbnailSize: detail.thumbnailSize,
-                        infoPanel: {
-                            expandedState: info.expandedState,
-                            showRatings: info.showRatings,
-                            showComments: info.showComments,
-                            showExif: info.showExif,
-                            showHistogram: info.showHistogram,
-                            showEffects: info.showEffects,
-                            showMinimap: info.showMinimap,
-                            showMetadataEditor: info.showMetadataEditor,
-                            showCategoryTeaserChooser: info.showCategoryTeaserChooser,
-                            minimapType: info.minimapMapType,
-                            minimapZoom: info.minimapZoom
-                        }
-                    },
-                    grid: {
-                        margin: grid.margin,
-                        showBreadcrumbs: grid.showBreadcrumbs,
-                        thumbnailSize: grid.thumbnailSize,
-                    }
-                });
-            }
-        });
+            this.pageFacade.settings$,
+        ])
+            .pipe(first())
+            .subscribe({
+                next: ([detail, grid, info, page]) => {
+                    this.form.patchValue({
+                        page: {
+                            viewMode: page.viewMode,
+                            slideshowDuration:
+                                page.slideshowDisplayDurationSeconds,
+                        },
+                        detail: {
+                            showBreadcrumbs: detail.showBreadcrumbs,
+                            showPhotoList: detail.showPhotoList,
+                            thumbnailSize: detail.thumbnailSize,
+                            infoPanel: {
+                                expandedState: info.expandedState,
+                                showRatings: info.showRatings,
+                                showComments: info.showComments,
+                                showExif: info.showExif,
+                                showHistogram: info.showHistogram,
+                                showEffects: info.showEffects,
+                                showMinimap: info.showMinimap,
+                                showMetadataEditor: info.showMetadataEditor,
+                                showCategoryTeaserChooser:
+                                    info.showCategoryTeaserChooser,
+                                minimapType: info.minimapMapType,
+                                minimapZoom: info.minimapZoom,
+                            },
+                        },
+                        grid: {
+                            margin: grid.margin,
+                            showBreadcrumbs: grid.showBreadcrumbs,
+                            thumbnailSize: grid.thumbnailSize,
+                        },
+                    });
+                },
+            });
     }
 }

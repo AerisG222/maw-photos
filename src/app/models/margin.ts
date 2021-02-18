@@ -4,19 +4,18 @@ export enum Margin {
     dense = 'dense',
     compact = 'compact',
     comfy = 'comfy',
-    cozy = 'cozy'
+    cozy = 'cozy',
 }
 
 export const allMargins: ValueDescriptor<Margin>[] = [
     { value: Margin.dense, name: 'Dense' },
     { value: Margin.compact, name: 'Compact' },
     { value: Margin.comfy, name: 'Comfy' },
-    { value: Margin.cozy, name: 'Cozy' }
+    { value: Margin.cozy, name: 'Cozy' },
 ];
 
 export const toMargin = (val?: string | null): Margin | undefined => {
-    if(!val)
-    {
+    if (!val) {
         return undefined;
     }
 

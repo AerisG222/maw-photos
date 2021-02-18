@@ -7,19 +7,21 @@ import { AboutComponent } from './about/about.component';
 import { ReleaseNotesComponent } from './release-notes/release-notes.component';
 
 const routes: Routes = [
-    { path: '', component: AboutComponent,
+    {
+        path: '',
+        component: AboutComponent,
         children: [
             { path: 'help', component: HelpComponent },
             { path: 'release-notes', component: ReleaseNotesComponent },
             { path: 'android', component: AndroidComponent },
-            { path: '', redirectTo: 'help', pathMatch: 'full' }
-        ]
+            { path: '', redirectTo: 'help', pathMatch: 'full' },
+        ],
     },
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class AboutRoutingModule { }
+export class AboutRoutingModule {}

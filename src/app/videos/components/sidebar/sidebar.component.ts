@@ -2,7 +2,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { transition, useAnimation, trigger } from '@angular/animations';
 
-import { sidebarShow, sidebarHide, sidebarCardShow, sidebarCardHide } from '@shared/animations';
+import {
+    sidebarShow,
+    sidebarHide,
+    sidebarCardShow,
+    sidebarCardHide,
+} from '@shared/animations';
 import { AuthStoreSelectors } from '@core/root-store';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
 
@@ -13,22 +18,14 @@ import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger('sidebarFlyInOut', [
-            transition(':enter', [
-                useAnimation(sidebarShow)
-            ]),
-            transition(':leave', [
-                useAnimation(sidebarHide)
-            ])
+            transition(':enter', [useAnimation(sidebarShow)]),
+            transition(':leave', [useAnimation(sidebarHide)]),
         ]),
         trigger('sidebarCardShowHide', [
-            transition(':enter', [
-                useAnimation(sidebarCardShow)
-            ]),
-            transition(':leave', [
-                useAnimation(sidebarCardHide)
-            ])
-        ])
-    ]
+            transition(':enter', [useAnimation(sidebarCardShow)]),
+            transition(':leave', [useAnimation(sidebarCardHide)]),
+        ]),
+    ],
 })
 export class SidebarComponent {
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
@@ -37,7 +34,7 @@ export class SidebarComponent {
     constructor(
         private store: Store,
         private infoPanelFacade: VideoInfoPanelSettingsFacade
-    ) { }
+    ) {}
 
     toggleSidebar(): void {
         this.infoPanelFacade.toggleSidebar();

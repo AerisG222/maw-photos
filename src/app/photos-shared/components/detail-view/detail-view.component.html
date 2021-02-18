@@ -1,5 +1,8 @@
 <app-layout-toolbar-sidebar>
-    <app-photos-detail-toolbar layout-toolbar [allowCategoryDownload]="allowCategoryDownload$ | async"></app-photos-detail-toolbar>
+    <app-photos-detail-toolbar
+        layout-toolbar
+        [allowCategoryDownload]="allowCategoryDownload$ | async"
+    ></app-photos-detail-toolbar>
 
     <ng-container
         layout-main
@@ -7,27 +10,35 @@
             photos: photos$ | async,
             settings: settings$ | async,
             activePhoto: activePhoto$ | async
-        } as data">
-        <div *ngIf="data.photos" class="main-photo-grid" style="overflow: hidden;">
+        } as data"
+    >
+        <div
+            *ngIf="data.photos"
+            class="main-photo-grid"
+            style="overflow: hidden"
+        >
             <div class="category-header">
                 <app-shared-category-header
                     *ngIf="data.settings?.showBreadcrumbs"
                     [showCategoryAsLink]="showCategoryAsLink$ | async"
-                    [category]="category$ | async">
+                    [category]="category$ | async"
+                >
                 </app-shared-category-header>
             </div>
 
             <app-photos-main-photo
                 [showHeader]="data.settings?.showBreadcrumbs"
                 [showPhotoList]="data.settings?.showPhotoList"
-                [photoListThumbnailSize]="data.settings?.thumbnailSize">
+                [photoListThumbnailSize]="data.settings?.thumbnailSize"
+            >
             </app-photos-main-photo>
 
             <app-photos-photo-list
                 *ngIf="data.photos && data.settings?.showPhotoList"
                 [photos]="data.photos"
                 [thumbnailSize]="data.settings?.thumbnailSize"
-                [selectedPhoto]="data.activePhoto">
+                [selectedPhoto]="data.activePhoto"
+            >
             </app-photos-photo-list>
         </div>
     </ng-container>

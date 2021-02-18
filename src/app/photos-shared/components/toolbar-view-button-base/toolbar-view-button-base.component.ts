@@ -8,27 +8,40 @@ import { RouterStoreSelectors } from '@core/root-store';
 
 @Component({
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class ToolbarViewButtonBaseComponent {
     url$ = this.store.select(RouterStoreSelectors.selectRouteDetails).pipe(
         // eslint-disable-next-line ngrx/avoid-mapping-selectors
-        map(details => {
-            if(details.area === RouteArea.photos) {
-                return [RouteHelper.photoCategoriesAbs(this.viewMode, details.params?.categoryId, details.params?.photoId)];
+        map((details) => {
+            if (details.area === RouteArea.photos) {
+                return [
+                    RouteHelper.photoCategoriesAbs(
+                        this.viewMode,
+                        details.params?.categoryId,
+                        details.params?.photoId
+                    ),
+                ];
             } else {
-                return [RouteHelper.randomAbs(this.viewMode, details.params?.photoId)];
+                return [
+                    RouteHelper.randomAbs(
+                        this.viewMode,
+                        details.params?.photoId
+                    ),
+                ];
             }
         })
     );
 
     isActive$ = this.viewModeSelectable.activePhotoViewMode$.pipe(
-        map(activeView => activeView === this.viewMode)
+        map((activeView) => activeView === this.viewMode)
     );
 
-    constructor(public viewModeSelectable: PhotoViewModeSelectable, public store: Store, private viewMode: PhotoViewMode) {
-
-    }
+    constructor(
+        public viewModeSelectable: PhotoViewModeSelectable,
+        public store: Store,
+        private viewMode: PhotoViewMode
+    ) {}
 
     onSelectView() {
         this.viewModeSelectable.selectPhotoViewMode(this.viewMode);

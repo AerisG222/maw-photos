@@ -12,11 +12,8 @@ import { AndroidComponent } from './android/android.component';
         AboutComponent,
         HelpComponent,
         ReleaseNotesComponent,
-        AndroidComponent
+        AndroidComponent,
     ],
-    imports: [
-        AboutRoutingModule,
-        SharedModule
-    ]
+    imports: [AboutRoutingModule, SharedModule],
 })
-export class AboutModule { }
+export class AboutModule {}
