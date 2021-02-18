@@ -24,7 +24,6 @@ import {
     helpSaveCategoryTeaser,
     PhotoLinkable,
 } from '@core/facades';
-// eslint-disable-next-line max-len
 import {
     RouterStoreSelectors,
     PhotoStoreActions,

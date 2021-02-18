@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// eslint-disable-next-line max-len
 import {
     SettingsStoreActions,
     PhotoStoreActions,

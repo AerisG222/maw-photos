@@ -144,9 +144,10 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
         details.push({
             name: 'Total Size',
             value: numbro(
-                categories
-                    // eslint-disable-next-line max-len
-                    .reduce((total, cat) => total + cat.actual.totalSize, 0)
+                categories.reduce(
+                    (total, cat) => total + cat.actual.totalSize,
+                    0
+                )
             ).format({
                 output: 'byte',
                 base: 'decimal',
@@ -156,7 +157,6 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
         });
     }
 
-    // eslint-disable-next-line max-len
     private prepareChartData(
         years: number[],
         categories: Category[],

@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, of, timer } from 'rxjs';
-// eslint-disable-next-line max-len
 import {
     switchMap,
     catchError,

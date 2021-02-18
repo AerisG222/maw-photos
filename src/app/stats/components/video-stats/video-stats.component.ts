@@ -152,13 +152,11 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
         details.push({
             name: 'Total Size',
             value: numbro(
-                categories
-                    // eslint-disable-next-line max-len
-                    .reduce(
-                        (total, cat) =>
-                            total + (cat.actual as VideoCategory).totalSize,
-                        0
-                    )
+                categories.reduce(
+                    (total, cat) =>
+                        total + (cat.actual as VideoCategory).totalSize,
+                    0
+                )
             ).format({
                 output: 'byte',
                 base: 'decimal',

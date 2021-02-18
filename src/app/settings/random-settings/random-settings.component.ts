@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-// eslint-disable-next-line max-len
 import {
     allPhotoViewModes,
     allMapTypes,

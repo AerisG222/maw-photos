@@ -29,7 +29,6 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         if (this.shortcutKey) {
-            // eslint-disable-next-line max-len
             this.hotkey = new Hotkey(
                 this.shortcutKey,
                 (event: KeyboardEvent) => this.onHotkeyTriggered(event),
