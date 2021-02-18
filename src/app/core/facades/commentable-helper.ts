@@ -5,7 +5,7 @@ export const helpAddComment = (
     id$: Observable<number | null>,
     comment: string,
     addComment: (id: number, comment: string) => void): void => {
-        if(!!!comment) {
+        if(!comment) {
             return;
         }
 
@@ -19,7 +19,7 @@ export const helpAddComment = (
             first()
         ).subscribe({
             next: id => {
-                if(!!id) {
+                if(id) {
                     addComment(id, comment);
                 }
             },

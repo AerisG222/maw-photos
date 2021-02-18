@@ -241,7 +241,7 @@ export class PhotoStoreEffects {
                 withLatestFrom(this.store.select(PhotoStoreSelectors.activePhotoEffects))
             )),
             map(([action, photoEffects]) => {
-                const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
+                const rotation = photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateClockwise();
 
@@ -257,7 +257,7 @@ export class PhotoStoreEffects {
                 withLatestFrom(this.store.select(PhotoStoreSelectors.activePhotoEffects))
             )),
             map(([action, photoEffects]) => {
-                const rotation = !!photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
+                const rotation = photoEffects?.rotation ? new PhotoRotation(photoEffects.rotation.klass) : new PhotoRotation();
 
                 rotation.rotateCounterClockwise();
 

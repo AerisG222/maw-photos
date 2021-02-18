@@ -20,7 +20,7 @@ export class CategoriesUrlService {
     }
 
     static getValidYearFilter(requestedYearFilter: string | null, preferredYearFilter: string | number, allYears: number[]): string|number {
-        if(!!requestedYearFilter) {
+        if(requestedYearFilter) {
             const result = CategoriesUrlService.isValidYearFilter(requestedYearFilter, allYears);
 
             if(result[0]) {
@@ -28,7 +28,7 @@ export class CategoriesUrlService {
             }
         }
 
-        if(!!preferredYearFilter) {
+        if(preferredYearFilter) {
             const result = CategoriesUrlService.isValidYearFilter(preferredYearFilter, allYears);
 
             if(result[0]) {

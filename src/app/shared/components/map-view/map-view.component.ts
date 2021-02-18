@@ -62,7 +62,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         if (this.map) {
             const zoom = this.map.getZoom();
 
-            if (!!zoom) {
+            if (zoom) {
                 this.zoomChange.emit(zoom);
             }
         }
@@ -73,7 +73,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
             const mapTypeId = this.map.getMapTypeId();
             const mapType = toMapType(mapTypeId);
 
-            if (!!mapType) {
+            if (mapType) {
                 this.mapTypeChange.emit(mapType);
             }
         }
@@ -111,10 +111,10 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
     updateActivePhoto(): void {
         const url = this.activePhoto?.imageXsSq?.url;
 
-        if (!!url) {
+        if (url) {
             const markerInfo = this.markers.get(url);
 
-            if (!!markerInfo) {
+            if (markerInfo) {
                 this.openInfoWindow(markerInfo.marker, markerInfo.image);
             }
         }
@@ -130,18 +130,18 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         this.activeImageUrl = image.imageUrl;
         const pos = marker.getPosition();
 
-        if (!!pos) {
+        if (pos) {
             this.map?.panTo(pos);
         }
 
-        if (!!this.infoWindow) {
+        if (this.infoWindow) {
             this.infoWindow.close();
             this.infoWindow.open(marker);
         }
     }
 
     private updateMapOptions(): void {
-        if (!!this.images) {
+        if (this.images) {
             this.options = {
                 controlSize: 24,
                 center: this.getPosition(this.images[0]) ?? undefined,

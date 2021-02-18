@@ -16,7 +16,7 @@ export class VideoCategoryStoreRoutingEffects {
             ofType(RouterStoreActions.routeAreaChanged),
             filter(change => RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)),
             withLatestFrom(this.store.select(VideoCategoryStoreSelectors.allCategories)),
-            filter(([change, categories]) => !!!categories || categories.length === 0),
+            filter(([change, categories]) => !categories || categories.length === 0),
             map(([change, categories]) => VideoCategoryStoreActions.loadRequest())
         );
     });

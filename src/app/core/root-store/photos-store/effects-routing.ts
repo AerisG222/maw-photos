@@ -41,7 +41,7 @@ export class PhotoStoreRoutingEffects {
             ofType(PhotoStoreActions.navigateUpFromIndividualPhoto),
             withLatestFrom(this.store.select(RouterStoreSelectors.selectUrl)),
             tap(([action, url]) => {
-                if(!!url) {
+                if(url) {
                     this.router.navigateByUrl(url.substring(0, url.lastIndexOf('/')));
                 }
             })
@@ -182,5 +182,5 @@ export class PhotoStoreRoutingEffects {
         const photoId = isNaN(id) ? null : id;
 
         return activeId !== id;
-    };
+    }
 }

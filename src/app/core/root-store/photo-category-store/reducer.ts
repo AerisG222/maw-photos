@@ -51,7 +51,7 @@ export const reducer = createReducer(
     on(PhotoCategoryActions.setIsMissingGpsData, (state, { categoryId, isMissingGpsData }): State => {
         const catToUpdate = state.entities[categoryId];
 
-        if (!!catToUpdate) {
+        if (catToUpdate) {
             const newCat = {
                 ...catToUpdate,
                 actual: { ...catToUpdate.actual }

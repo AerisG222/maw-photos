@@ -15,7 +15,7 @@ export class ToolbarDownloadButtonComponent {
     @Input() tooltip: string | null = null;
 
     onClick(): void {
-        if (!!this.link) {
+        if (this.link) {
             saveAs(this.link);
         }
     }

@@ -51,7 +51,7 @@ export class BulkEditComponent {
             this.photos$.pipe(
                 filter(photos => !!photos),
                 first(),
-                map(photos => photos as Photo[]),
+                map(photos => photos ),
                 tap(photos => this.selectedPhotos.push(...photos))
             ).subscribe();
         }

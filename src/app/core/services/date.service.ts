@@ -7,12 +7,12 @@ export class DateService {
     private static readonly defaultDate = new Date(1900, 1, 1);
 
     safeParse(dt: Date | string): Date {
-        if (!!!dt) {
+        if (!dt) {
             return DateService.defaultDate;
         }
 
         if (typeof(dt) === 'string') {
-            return this.safeParseDate(dt as string);
+            return this.safeParseDate(dt );
         }
 
         return dt;

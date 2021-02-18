@@ -29,7 +29,7 @@ export const query = createSelector(
 
 export const activeResultStartIndex = createSelector(
     searchState,
-    (state: State): number => !!state.activeResult ? state.activeResult.startIndex : -1
+    (state: State): number => state.activeResult ? state.activeResult.startIndex : -1
 );
 
 export const activeResult = createSelector(
@@ -40,7 +40,7 @@ export const activeResult = createSelector(
 export const hasMoreResults = createSelector(
     activeResult,
     (result): boolean => {
-        return !!result ? (result.startIndex + result.results.length) < result.totalFound : false;
+        return result ? (result.startIndex + result.results.length) < result.totalFound : false;
     }
 );
 
@@ -61,17 +61,17 @@ export const allResultsAsCategories = createSelector(
 
 export const shownResults = createSelector(
     activeResult,
-    result => (!!result) ? result.startIndex + result.results.length : 0
+    result => (result) ? result.startIndex + result.results.length : 0
 );
 
 export const showNoResults = createSelector(
     activeResult,
-    result => (!!result) ? result.totalFound === 0 : false
+    result => (result) ? result.totalFound === 0 : false
 );
 
 export const nextResultIndex = createSelector(
     activeResult,
-    result => !!result ? result.startIndex + result.results.length : -1
+    result => result ? result.startIndex + result.results.length : -1
 );
 
 const getUrl = (cat: MultimediaCategory): string => {

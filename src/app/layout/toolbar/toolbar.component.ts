@@ -20,7 +20,7 @@ export class ToolbarComponent {
     @ViewChild('scrollPane') scrollPane: ElementRef | null = null;
 
     getCurrentScrollTop(): number {
-        if (!!this.scrollPane) {
+        if (this.scrollPane) {
             return this.scrollPane.nativeElement.scrollTop;
         }
 
@@ -28,7 +28,7 @@ export class ToolbarComponent {
     }
 
     setCurrentScrollTop(newTop: number): void {
-        if (!!this.scrollPane) {
+        if (this.scrollPane) {
             const div = this.scrollPane.nativeElement as HTMLDivElement;
 
             setTimeout(() => div.scrollTo({ top: newTop, left: 0, behavior: 'smooth' }), 5);

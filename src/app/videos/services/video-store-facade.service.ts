@@ -45,13 +45,13 @@ export class VideoStoreFacadeService implements Navigable, Commentable, Ratable,
 
     addComment(comment: string): void {
         helpAddComment(this.activeId$, comment, (id, commentText) =>  {
-            this.store.dispatch(VideoStoreActions.addCommentRequest({ videoId: id as number, comment: commentText }));
+            this.store.dispatch(VideoStoreActions.addCommentRequest({ videoId: id , comment: commentText }));
         });
     }
 
     rate(rating: number): void {
         helpRate(this.activeId$, rating, (id, userRating) => {
-            this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: id as number, userRating }));
+            this.store.dispatch(VideoStoreActions.rateVideoRequest({ videoId: id , userRating }));
         });
     }
 

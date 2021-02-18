@@ -32,13 +32,13 @@ export class BulkEditGpsEditorComponent {
     onPaste(evt: ClipboardEvent): void {
         const clipboardData = evt.clipboardData; // || window.clipboardData
 
-        if (!!clipboardData) {
+        if (clipboardData) {
             const pastedText = clipboardData.getData('text');
 
-            if (!!pastedText) {
+            if (pastedText) {
                 const latLng = this.gps.parse(pastedText);
 
-                if (!!latLng) {
+                if (latLng) {
                     evt.preventDefault();
 
                     this.updateGpsForm(latLng);

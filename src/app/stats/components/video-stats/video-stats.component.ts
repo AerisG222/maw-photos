@@ -54,7 +54,7 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
                 tap(x => this.chartValueFormat = x[3]),
                 delay(2),
                 filter(x => !!x[0]),
-                map(x => this.prepareChartData(x[0] as number[], x[1], x[2], x[3]))
+                map(x => this.prepareChartData(x[0] , x[1], x[2], x[3]))
             );
 
         this.totalDetails$ = combineLatest([
@@ -63,7 +63,7 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
             ])
             .pipe(
                 filter(x => !!x[0]),
-                map(x => this.prepareTotalDetails(x[0] as number[], x[1]))
+                map(x => this.prepareTotalDetails(x[0] , x[1]))
             );
 
         this.yearDetails$ = combineLatest([

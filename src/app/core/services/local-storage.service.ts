@@ -13,7 +13,7 @@ export class LocalStorageService {
     }
 
     get<T>(key: string): T | null {
-        if(!!!key)
+        if(!key)
         {
             throw Error('key must be specified');
         }
@@ -28,7 +28,7 @@ export class LocalStorageService {
     }
 
     clear(key?: string): void {
-        if (!!key) {
+        if (key) {
             this.strategy.removeItem(this.normalize(key));
         } else {
             this.strategy.clear();

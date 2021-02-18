@@ -36,7 +36,7 @@ export class MainPhotoComponent {
     }
 
     getSourceset(photo: Photo | null): string {
-        if (!!photo) {
+        if (photo) {
             return `${photo.imageMd.url} ${photo.imageMd.width}w, ${photo.imageLg.url} ${photo.imageLg.width}w`;
         }
 
@@ -44,7 +44,7 @@ export class MainPhotoComponent {
     }
 
     getEffectStyles(effects: PhotoEffects | null): SafeStyle {
-        if (!!effects) {
+        if (effects) {
             const style = this.effectStyleBuilder.buildFilter(effects);
 
             return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
@@ -54,7 +54,7 @@ export class MainPhotoComponent {
     }
 
     getTransform(effects: PhotoEffects | null): SafeStyle {
-        if (!!effects) {
+        if (effects) {
             const style = this.effectStyleBuilder.buildTransform(effects);
 
             return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));

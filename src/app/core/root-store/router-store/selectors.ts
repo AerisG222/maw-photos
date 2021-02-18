@@ -105,7 +105,7 @@ export const photoView = createSelector(
 export const inCategoryArea = createSelector(
     selectRouteDetails,
     details => {
-        if(!!details) {
+        if(details) {
             return details.area === RouteArea.categories ||
                 details.area === RouteArea.photos ||
                 details.area === RouteArea.videos;

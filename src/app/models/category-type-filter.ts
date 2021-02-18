@@ -13,7 +13,7 @@ export const allCategoryTypeFilters: ValueDescriptor<CategoryTypeFilter>[] = [
 ];
 
 export const toCategoryTypeFilter = (val?: string|null): CategoryTypeFilter|undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }

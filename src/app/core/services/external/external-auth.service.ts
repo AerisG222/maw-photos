@@ -69,7 +69,7 @@ export class ExternalAuthService implements AuthService {
 
     private storeProfile(profile: UserInfo): void
     {
-        if (!!profile) {
+        if (profile) {
             const userInfo = {
                 username: profile.name as string,
                 firstName: profile.given_name as string,

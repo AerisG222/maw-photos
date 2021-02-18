@@ -36,7 +36,7 @@ export class PhotoSelectGridComponent {
     }
 
     private getSelectedIndex(photo: Photo): number {
-        if (!!this.selectedPhotos) {
+        if (this.selectedPhotos) {
             return this.selectedPhotos.findIndex(p => p.id === photo.id);
         }
 

@@ -8,19 +8,22 @@
             "files": [
                 "*.ts"
             ],
+            "parser": "@typescript-eslint/parser",
             "parserOptions": {
                 "project": [
-                    "tsconfig.json",
-                    "e2e/tsconfig.json"
+                    "tsconfig.app.json"
                 ],
                 "createDefaultProgram": true
             },
             "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "plugin:@angular-eslint/recommended",
-                "plugin:@angular-eslint/template/process-inline-templates",
                 "plugin:ngrx/recommended"
             ],
             "plugins": [
+                "@typescript-eslint",
                 "ngrx"
             ],
             "rules": {
@@ -40,11 +43,26 @@
                         "style": "camelCase"
                     }
                 ],
-                // TODO: remove the items below?
-                "@typescript-eslint/no-explicit-any": "error",
+                // TODO: cleanup code and remove the items below
                 "arrow-body-style": "off",
                 "no-shadow": "off",
-                "@typescript-eslint/no-shadow": ["error"],
+                "no-irregular-whitespace": "off",
+                "@typescript-eslint/no-explicit-any": "error",
+                "@typescript-eslint/no-shadow": "error",
+                "typescript-eslint/no-var-requires": "off",
+                "@typescript-eslint/no-unsafe-member-access": "off",
+                "@typescript-eslint/parser": "off",
+                "@typescript-eslint/no-unused-vars": "off",
+                "@typescript-eslint/no-unsafe-call": "off",
+                "@typescript-eslint/no-misused-promises": "off",
+                "@typescript-eslint/no-floating-promises": "off",
+                "@typescript-eslint/no-unsafe-assignment": "off",
+                "@typescript-eslint/no-var-requires": "off",
+                "@typescript-eslint/unbound-method": "off",
+                "@typescript-eslint/explicit-module-boundary-types": "off",
+                "@typescript-eslint/restrict-template-expressions": "off",
+                "@typescript-eslint/no-unsafe-return": "off",
+                "@typescript-eslint/no-empty-function": "off",
                 "ngrx/select-style": "error"
             }
         },

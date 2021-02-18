@@ -33,17 +33,17 @@ export const activeVideoId = createSelector(
 export const activeVideoIndex = createSelector(
     selectIds,
     activeVideoId,
-    (ids: string[] | number[], id: number | null): number | null => !!id ? (ids as number[]).indexOf(id) : null
+    (ids: string[] | number[], id: number | null): number | null => id ? (ids as number[]).indexOf(id) : null
 );
 
 export const activeVideo = createSelector(
     selectEntities,
     activeVideoId,
     (entities: Dictionary<Video>, id: number | null) => {
-        if (!!id) {
+        if (id) {
             const cat = entities[id];
 
-            if (!!cat) {
+            if (cat) {
                 return cat;
             }
         }
@@ -107,7 +107,7 @@ export const isActiveVideoLast = createSelector(
 export const videosForCategory = createSelector(
     allVideos,
     (videos: Video[], props: { id: number }) => {
-        if (!!videos) {
+        if (videos) {
             return videos.filter(x => x.categoryId === props.id);
         } else {
             return null;
@@ -155,7 +155,7 @@ export const nextVideo = createSelector(
     selectEntities,
     nextVideoId,
     (entities, nextId) => {
-        return !!nextId ? entities[nextId] as Video : null;
+        return nextId ? entities[nextId] as Video : null;
     }
 );
 
@@ -188,7 +188,7 @@ export const previousVideo = createSelector(
     selectEntities,
     previousVideoId,
     (entities, previousId) => {
-        return !!previousId ? entities[previousId] as Video : null;
+        return previousId ? entities[previousId] as Video : null;
     }
 );
 
@@ -232,12 +232,12 @@ export const categoryGpsStatus = createSelector(
     VideoCategoryStoreSelectors.activeCategoryId,
     allVideos,
     (categoryId, videos) => {
-        if(!!!categoryId || !!!videos) {
+        if(!categoryId || !videos) {
             return null;
         }
 
         const isMissingGpsData = !!videos.find(video => video.latitude === null || video.longitude === null);
 
-        return { categoryId: categoryId as number, isMissingGpsData } as CategoryGpsStatus;
+        return { categoryId: categoryId , isMissingGpsData } as CategoryGpsStatus;
     }
 );

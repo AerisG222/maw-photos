@@ -31,10 +31,10 @@ export const activeCategory = createSelector(
     selectEntities,
     activeCategoryId,
     (entities, id) => {
-        if (!!id) {
+        if (id) {
             const cat = entities[id];
 
-            if (!!cat) {
+            if (cat) {
                 return cat;
             }
         }

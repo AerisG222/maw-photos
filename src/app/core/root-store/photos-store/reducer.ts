@@ -187,7 +187,7 @@ export const reducer = createReducer(
             pendingActionCount: state.pendingActionCount - 1,
         });
 
-        if (!!photo) {
+        if (photo) {
             const newPhoto = ({
                 ...photo,
                 latitude: gpsDetail.override.latitude,

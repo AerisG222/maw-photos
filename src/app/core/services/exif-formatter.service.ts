@@ -132,10 +132,10 @@ export class ExifFormatterService {
             .forEach(key => {
                 const val = detail[key] as string | number | boolean;
 
-                if (!!val) {
+                if (val) {
                     const cfg = ExifFormatterService.formatMap.get(key);
 
-                    if (!!cfg) {
+                    if (cfg) {
                         switch (cfg.category) {
                             case ExifCategory.exif:
                                 container.exif.push(this.getExifData(key, val, cfg));
@@ -163,7 +163,7 @@ export class ExifFormatterService {
         exif.category = cfg.category;
         exif.displayName = cfg.displayName;
 
-        if (!!cfg.formatFunc) {
+        if (cfg.formatFunc) {
             exif.displayValue = cfg.formatFunc(value as number);
         }
 

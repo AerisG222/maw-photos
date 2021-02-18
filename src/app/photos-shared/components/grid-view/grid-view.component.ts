@@ -34,7 +34,7 @@ export class GridViewComponent implements OnDestroy {
             .subscribe({
                 next: details => {
                     // main grid view does not require a photo id, so when it is not present, move to last scroll position
-                    if(!!!details.data.requirePhotoId) {
+                    if(!details.data.requirePhotoId) {
                         this.returnToScrollPosition();
                     }
                 }
@@ -47,7 +47,7 @@ export class GridViewComponent implements OnDestroy {
     }
 
     trackScrollPosition(): void {
-        if (!!this.layout) {
+        if (this.layout) {
             this.lastScrollTop = this.layout.getCurrentScrollTop();
         }
     }

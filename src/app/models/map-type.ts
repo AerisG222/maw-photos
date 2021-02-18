@@ -15,7 +15,7 @@ export const allMapTypes: ValueDescriptor<MapType>[] = [
 ];
 
 export const toMapType = (val?: string|null): MapType|undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }

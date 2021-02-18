@@ -89,17 +89,17 @@ export const categoryIdForActivePhoto = createSelector(
 export const activePhotoIndex = createSelector(
     selectIds,
     activePhotoId,
-    (ids: string[] | number[], id: number | null): number | null => !!id ? (ids as number[]).indexOf(id) : null
+    (ids: string[] | number[], id: number | null): number | null => id ? (ids as number[]).indexOf(id) : null
 );
 
 export const activePhoto = createSelector(
     selectEntities,
     activePhotoId,
     (entities: Dictionary<Photo>, id: number | null) => {
-        if (!!id) {
+        if (id) {
             const photo = entities[id];
 
-            if (!!photo) {
+            if (photo) {
                 return photo;
             }
         }
@@ -192,7 +192,7 @@ export const nextPhoto = createSelector(
     selectEntities,
     nextPhotoId,
     (entities, nextId) => {
-        return !!nextId ? entities[nextId] as Photo : null;
+        return nextId ? entities[nextId] as Photo : null;
     }
 );
 
@@ -236,7 +236,7 @@ export const previousPhoto = createSelector(
     selectEntities,
     previousPhotoId,
     (entities, previousId) => {
-        return !!previousId ? entities[previousId] as Photo : null;
+        return previousId ? entities[previousId] as Photo : null;
     }
 );
 
@@ -265,7 +265,7 @@ export const photoById = createSelector(
 export const photosWithGpsCoordinates = createSelector(
     allPhotos,
     (photos: Photo[]) => {
-        if (!!photos) {
+        if (photos) {
             return photos.filter(x => x.latitude !== null && x.longitude !== null);
         } else {
             return null;
@@ -276,7 +276,7 @@ export const photosWithGpsCoordinates = createSelector(
 export const photosWithGpsCoordinatesAsMapImages = createSelector(
     photosWithGpsCoordinates,
     photos => {
-        if(!!photos) {
+        if(photos) {
             return photos.map(x => ({
                 id: x.id,
                 imageUrl: x.imageXsSq.url,
@@ -293,13 +293,13 @@ export const categoryGpsStatus = createSelector(
     PhotoCategoryStoreSelectors.activeCategoryId,
     allPhotos,
     (categoryId: number | null, photos: Photo[]) => {
-        if(!!!categoryId || !!!photos) {
+        if(!categoryId || !photos) {
             return null;
         }
 
         const isMissingGpsData = !!photos.find(photo => photo.latitude === null || photo.longitude === null);
 
-        return { categoryId: categoryId as number, isMissingGpsData } as CategoryGpsStatus;
+        return { categoryId: categoryId , isMissingGpsData } as CategoryGpsStatus;
     }
 );
 
@@ -384,7 +384,7 @@ export const categoryForActivePhoto = createSelector(
     categoryIdForActivePhoto,
     PhotoCategoryStoreSelectors.allEntities,
     (categoryId, entities) => {
-        if(!!categoryId) {
+        if(categoryId) {
             return entities[categoryId];
         } else {
             return null;

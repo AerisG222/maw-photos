@@ -29,10 +29,10 @@ export class MetadataEditorCardComponent {
         const clipboardData = evt.clipboardData; // || window.clipboardData
         const pastedText = clipboardData?.getData('text');
 
-        if (!!pastedText) {
+        if (pastedText) {
             const latLng = this.gps.parse(pastedText);
 
-            if (!!latLng) {
+            if (latLng) {
                 evt.preventDefault();
 
                 this.updateOverrideData(latLng);

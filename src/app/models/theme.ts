@@ -27,7 +27,7 @@ export const allThemeDetails = [
 ];
 
 export const toTheme = (val?: string | null): Theme | undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }
@@ -38,7 +38,7 @@ export const toTheme = (val?: string | null): Theme | undefined => {
 export const toThemeDefaulted = (val?: string | null): Theme => {
     const theme = toTheme(val);
 
-    return !!theme ? theme : Theme.dark;
+    return theme ? theme : Theme.dark;
 };
 
 export const toThemeDetail = (theme: Theme): ThemeDetail => {

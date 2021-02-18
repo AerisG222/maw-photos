@@ -59,7 +59,7 @@ export class PhotoListComponent {
         if (!!this.selectedPhoto && this.selectedPhoto.id === photoId) {
             const parent = elementRef.parentElement;
 
-            if (!!parent) {
+            if (parent) {
                 const parentMiddle = parent.clientWidth / 2;
                 const imgWidth = elementRef.clientWidth / 2;
                 const newLeft = Math.max(0, elementRef.offsetLeft + imgWidth - parentMiddle);

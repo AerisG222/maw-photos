@@ -10,7 +10,7 @@ export const helpSaveCategoryTeaser = (
             first()
         ).subscribe({
             next: photoOrVideo => {
-                if(!!photoOrVideo) {
+                if(photoOrVideo) {
                     setTeaser(photoOrVideo.categoryId, photoOrVideo.id);
                 }
             },

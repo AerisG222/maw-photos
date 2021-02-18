@@ -16,7 +16,7 @@ export class PhotoCategoryStoreRoutingEffects {
             ofType(RouterStoreActions.routeAreaChanged),
             filter(change => RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)),
             withLatestFrom(this.store.select(PhotoCategoryStoreSelectors.allCategories)),
-            filter(([change, categories]) => !!!categories || categories.length === 0),
+            filter(([change, categories]) => !categories || categories.length === 0),
             map(([change, categories]) => PhotoCategoryStoreActions.loadRequest())
         );
     });

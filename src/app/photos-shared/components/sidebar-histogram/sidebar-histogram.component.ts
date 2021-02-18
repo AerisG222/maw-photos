@@ -31,7 +31,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         @Inject(DOCUMENT) private doc: Document
     ) {
-        this.img = doc.createElement('img') as HTMLImageElement;
+        this.img = doc.createElement('img') ;
         this.img.crossOrigin = 'Anonymous';
         this.img.addEventListener('load', (evt) => this.onImageLoad());
 

@@ -15,7 +15,7 @@ export const allThumbnailSizes: ValueDescriptor<ThumbnailSize>[] = [
 ];
 
 export const toThumbnailSize = (val?: string | null): ThumbnailSize | undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }
@@ -26,7 +26,7 @@ export const toThumbnailSize = (val?: string | null): ThumbnailSize | undefined 
 export const toThumbnailSizeDefaulted = (val?: string | null): ThumbnailSize => {
     const size = toThumbnailSize(val);
 
-    return !!size ? size : ThumbnailSize.default;
+    return size ? size : ThumbnailSize.default;
 };
 
 export const nextThumbnailSize = (size: ThumbnailSize): ThumbnailSize => {

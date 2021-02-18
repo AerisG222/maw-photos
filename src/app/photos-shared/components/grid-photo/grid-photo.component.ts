@@ -27,7 +27,7 @@ export class GridPhotoComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (!!this.hotkey) {
+        if (this.hotkey) {
             this.hotkeysService.remove(this.hotkey);
         }
     }

@@ -9,7 +9,7 @@ export const helpRate = (
             first()
         ).subscribe({
             next: id => {
-                if(!!id) {
+                if(id) {
                     rate(id, rating);
                 }
             },

@@ -14,7 +14,7 @@ export class MockAuthService implements AuthService {
 
     }
 
-    init(): void {
+    async init(): Promise<void> {
 
     }
 

@@ -11,7 +11,7 @@ export const allVideoSizes: ValueDescriptor<VideoSize>[] = [
 ];
 
 export const toVideoSize = (val: string | null): VideoSize | undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }
@@ -22,7 +22,7 @@ export const toVideoSize = (val: string | null): VideoSize | undefined => {
 export const toVideoSizeDefaulted = (val: string | null): VideoSize | null => {
     const size = toVideoSize(val);
 
-    return !!size ? size : VideoSize.small;
+    return size ? size : VideoSize.small;
 };
 
 export const nextVideoSize = (size: VideoSize): VideoSize => {

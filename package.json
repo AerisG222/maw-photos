@@ -9,6 +9,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "eslint": "eslint",
     "e2e": "ng e2e",
     "dev_watch": "ng build --vendor-chunk=false --watch",
     "dev_build": "ng build --vendor-chunk=false && ng lint",

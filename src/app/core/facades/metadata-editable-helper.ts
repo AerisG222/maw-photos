@@ -10,7 +10,7 @@ export const helpSaveGpsOverride = (
             first()
         ).subscribe({
             next: id => {
-                if(!!id) {
+                if(id) {
                     saveGpsOverride(id, latLng);
                 }
             },

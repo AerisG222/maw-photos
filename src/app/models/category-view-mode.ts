@@ -11,7 +11,7 @@ export const allCategoryViewModes: ValueDescriptor<CategoryViewMode>[] = [
 ];
 
 export const toCategoryViewMode = (val?: string|null): CategoryViewMode|undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }

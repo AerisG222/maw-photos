@@ -49,7 +49,7 @@ export class VideoCategoryComponent {
 
     private triggerVideoRefresh(): void {
         setTimeout(() => {
-            if (!!this.videoRef) {
+            if (this.videoRef) {
                 this.videoRef.nativeElement.load();
                 this.videoRef.nativeElement.play();
             }

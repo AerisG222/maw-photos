@@ -45,7 +45,7 @@ export const areaMap = [
 export const aboutAbs = (section?: string) => {
     let url = `/${ about }`;
 
-    if(!!section) {
+    if(section) {
         url += `/${section}`;
     }
 
@@ -55,15 +55,15 @@ export const aboutAbs = (section?: string) => {
 export const categoriesAbs = (view?: string, year?: number | string, type?: CategoryTypeFilter) => {
     let url = `/${ categories }`;
 
-    if(!!view) {
+    if(view) {
         url += `/${ view }`;
     }
 
-    if(!!year) {
+    if(year) {
         url += `?year=${ year }`;
     }
 
-    if(!!type) {
+    if(type) {
         url += `?type=${ type }`;
     }
 
@@ -77,19 +77,19 @@ export const loginAbs = () => {
 export const photoCategoriesAbs = (view?: string, categoryId?: number, photoId?: number) => {
     let url = `/${ photoCategories }`;
 
-    if(!!categoryId) {
+    if(categoryId) {
         url += `/${ categoryId }`;
     }
 
-    if(!!photoId && !!!view) {
+    if(!!photoId && !view) {
         view = photoViewDefault;
     }
 
-    if(!!view) {
+    if(view) {
         url += `/${ view }`;
     }
 
-    if(!!photoId) {
+    if(photoId) {
         if(!(view === photoViewBulkEdit || view === photoViewGrid)) {
             url += `/${ photoId }`;
         }
@@ -101,13 +101,13 @@ export const photoCategoriesAbs = (view?: string, categoryId?: number, photoId?:
 export const randomAbs = (view?: string, photoId?: number) => {
     let url = `/${ random }`;
 
-    if(!!!view) {
+    if(!view) {
         view = photoViewDefault;
     }
 
     url += `/${ view }`;
 
-    if(!!photoId) {
+    if(photoId) {
         if(view !== photoViewGrid) {
             url += `/${ photoId }`;
         }
@@ -119,7 +119,7 @@ export const randomAbs = (view?: string, photoId?: number) => {
 export const searchAbs = (view?: string) => {
     const url = `/${ search }`;
 
-    if(!!!view) {
+    if(!view) {
         view = searchViewDefault;
     }
 
@@ -133,7 +133,7 @@ export const settingsAbs = () => {
 export const statsAbs = (section?: string) => {
     let url = `/${ stats }`;
 
-    if(!!section) {
+    if(section) {
         url += `/${ section }`;
     }
 
@@ -143,11 +143,11 @@ export const statsAbs = (section?: string) => {
 export const videoCategoriesAbs = (categoryId?: number, videoId?: number) => {
     let url = `/${ videoCategories }`;
 
-    if(!!categoryId) {
+    if(categoryId) {
         url += `/${ categoryId }`;
     }
 
-    if(!!videoId) {
+    if(videoId) {
         url += `/${ videoId }`;
     }
 
@@ -155,7 +155,7 @@ export const videoCategoriesAbs = (categoryId?: number, videoId?: number) => {
 };
 
 export const getArea = (url: string): RouteArea => {
-    if(!!!url) {
+    if(!url) {
         return RouteArea.unknown;
     }
 
@@ -196,7 +196,7 @@ export const doesRouteAreaNeedCategoryData = (area: RouteArea | undefined): bool
 };
 
 export const getCategoryRoute = (category?: CategoryTeaser) => {
-    if(!!!category) {
+    if(!category) {
         return null;
     }
 

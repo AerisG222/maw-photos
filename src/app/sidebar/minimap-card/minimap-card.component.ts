@@ -37,7 +37,7 @@ export class MinimapCardComponent implements OnDestroy {
         this.destroySub.add(this.miniMapable.mapType$
             .subscribe({
                 next: mapType => {
-                    if (!!mapType) {
+                    if (mapType) {
                         this.options = {
                             ...this.options,
                             mapTypeId: mapType
@@ -50,7 +50,7 @@ export class MinimapCardComponent implements OnDestroy {
         this.destroySub.add(this.miniMapable.zoom$
             .subscribe({
                 next: zoom => {
-                    if(!!zoom) {
+                    if(zoom) {
                         this.options = {
                             ...this.options,
                             zoom
@@ -65,7 +65,7 @@ export class MinimapCardComponent implements OnDestroy {
                 map(s => s.theme)
             ).subscribe({
                 next: theme => {
-                    if(!!theme) {
+                    if(theme) {
                         this.options = {
                             ...this.options,
                             styles: this.getMapThemeForAppTheme(theme)
@@ -82,20 +82,20 @@ export class MinimapCardComponent implements OnDestroy {
     }
 
     onMapTypeChange(): void {
-        if (!!this.map) {
+        if (this.map) {
             const mapType = toMapType(this.map.getMapTypeId());
 
-            if (!!mapType) {
+            if (mapType) {
                 this.miniMapable.onMapTypeChange(mapType);
             }
         }
     }
 
     onZoomChange(): void {
-        if (!!this.map) {
+        if (this.map) {
             const zoom = this.map.getZoom();
 
-            if (!!zoom) {
+            if (zoom) {
                 this.miniMapable.onZoomChange(zoom);
             }
         }

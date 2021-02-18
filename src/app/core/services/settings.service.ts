@@ -59,7 +59,7 @@ export class SettingsService {
     }
 
     cleanLegacySettings() {
-        if(!!!this.getVersion()) {
+        if(!this.getVersion()) {
             this.localStorage.clear();
             this.saveVersion();
         }
@@ -247,7 +247,7 @@ export class SettingsService {
     }
 
     saveAllSettings(settings: Settings): void {
-        if (!!!settings) {
+        if (!settings) {
             return;
         }
 
@@ -288,7 +288,7 @@ export class SettingsService {
     getAuthRedirectUrl(): string {
         const url = this.localStorage.get<string | null>(SettingsService.keyAuthRedirectUrl);
 
-        if (!!url) {
+        if (url) {
             return url;
         }
 

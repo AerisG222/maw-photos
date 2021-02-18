@@ -59,7 +59,7 @@ export class DetailToolbarComponent {
             try {
                 await navigator.share({ url: photo.imageMd.url });
             } catch (error) {
-                console.error('Error sharing: ' + error);
+                console.error(`Error sharing: ${error}`);
             }
         } else {
             console.log('sharing is not enabled on this platform');

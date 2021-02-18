@@ -21,7 +21,7 @@ export const isValidPhotoViewMode = (val?: string|null): boolean => {
 };
 
 export const toPhotoViewMode = (val?: string|null): PhotoViewMode|undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }

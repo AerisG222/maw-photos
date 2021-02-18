@@ -15,7 +15,7 @@ export const allMargins: ValueDescriptor<Margin>[] = [
 ];
 
 export const toMargin = (val?: string | null): Margin | undefined => {
-    if(!!!val)
+    if(!val)
     {
         return undefined;
     }
@@ -26,7 +26,7 @@ export const toMargin = (val?: string | null): Margin | undefined => {
 export const toMarginDefaulted = (val?: string | null): Margin => {
     const margin = toMargin(val);
 
-    return !!margin ? margin : Margin.compact;
+    return margin ? margin : Margin.compact;
 };
 
 export const nextMargin = (margin: Margin): Margin => {

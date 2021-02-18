@@ -25,10 +25,10 @@ export class SearchFormComponent {
     onSearch(): void {
         const control = this.form.get('query');
 
-        if (!!control) {
+        if (control) {
             const searchTerm = control.value;
 
-            if (!!searchTerm) {
+            if (searchTerm) {
                 this.store.dispatch(queryRequest({ query: searchTerm, start: 0 }));
             }
         }

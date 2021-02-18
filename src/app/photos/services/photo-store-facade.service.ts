@@ -73,13 +73,13 @@ export class PhotoStoreFacadeService implements
 
     addComment(comment: string): void {
         helpAddComment(this.activeId$, comment, (id, commentText) => {
-            this.store.dispatch(PhotoStoreActions.addCommentRequest({ photoId: id as number, comment: commentText }));
+            this.store.dispatch(PhotoStoreActions.addCommentRequest({ photoId: id , comment: commentText }));
         });
     }
 
     rate(rating: number): void {
         helpRate(this.activeId$, rating, (id, userRating) => {
-            this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: id as number, userRating }));
+            this.store.dispatch(PhotoStoreActions.ratePhotoRequest({ photoId: id , userRating }));
         });
     }
 

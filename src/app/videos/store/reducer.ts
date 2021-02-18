@@ -123,7 +123,7 @@ export const reducer = createReducer(
             activeVideoGpsDetail: gpsDetail
         });
 
-        if (!!video) {
+        if (video) {
             const newVideo = ({
                 ...video,
                 latitude: gpsDetail.override.latitude,
