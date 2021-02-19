@@ -7,7 +7,6 @@ import {
     allPhotoViewModes,
     allMapTypes,
     MinimapZoom,
-    VideoSize,
     MapType,
     toThumbnailSizeDefaulted,
     allThumbnailSizes,

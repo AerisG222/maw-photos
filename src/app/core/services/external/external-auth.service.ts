@@ -24,7 +24,7 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.events
             .pipe(
                 filter((e) => e.type === 'token_received'),
-                tap((p) => this.finishLogin())
+                tap(() => this.finishLogin())
             )
             .subscribe();
 

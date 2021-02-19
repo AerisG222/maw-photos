@@ -26,7 +26,7 @@ export class VideoCategoryStoreEffects {
             withLatestFrom(
                 this.store.select(videoCategoryStoreSelectors.allCategories)
             ),
-            exhaustMap(([action, categories]) => {
+            exhaustMap(([, categories]) => {
                 if (categories.length !== 0) {
                     return of(
                         VideoCategoryStoreActions.loadRequestedSatisfiedByCache()

@@ -23,7 +23,7 @@ export class GridPhotoComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.hotkey = new Hotkey(
             'esc',
-            (event: KeyboardEvent) => this.closeMainPhoto(event),
+            () => this.closeMainPhoto(),
             [],
             'Close Photo / Return to Grid'
         );
@@ -37,7 +37,7 @@ export class GridPhotoComponent implements OnInit, OnDestroy {
         }
     }
 
-    closeMainPhoto(event: KeyboardEvent) {
+    closeMainPhoto() {
         this.store.dispatch(PhotoStoreActions.navigateUpFromIndividualPhoto());
 
         return false;

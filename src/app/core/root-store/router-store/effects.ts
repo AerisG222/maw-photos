@@ -24,7 +24,7 @@ export class RouterStoreEffects {
     );
 
     routeAreaChanged$ = this.routeChanged$.pipe(
-        map(([action, currentRouteDetails]) => currentRouteDetails),
+        map(([, currentRouteDetails]) => currentRouteDetails),
         scan(
             (acc: RouteDetailsChange, curr) => {
                 return { previous: acc?.current, current: curr };
@@ -36,7 +36,7 @@ export class RouterStoreEffects {
 
     monitorRouteChangedEffect$ = createEffect(() => {
         return this.routeChanged$.pipe(
-            map(([action, routeDetails]) =>
+            map(([, routeDetails]) =>
                 RouterStoreActions.routeChanged({ routeDetails })
             )
         );
@@ -81,7 +81,7 @@ export class RouterStoreEffects {
     // TODO: rework
     monitorFullScreenEffect$ = createEffect(() => {
         return this.routeChanged$.pipe(
-            map(([action, routeDetails]) => {
+            map(([, routeDetails]) => {
                 if (routeDetails.url.indexOf('fullscreen') >= 0) {
                     return LayoutStoreActions.enterFullscreenRequest();
                 } else {

@@ -20,12 +20,8 @@ export class VideoCategoryStoreRoutingEffects {
             withLatestFrom(
                 this.store.select(VideoCategoryStoreSelectors.allCategories)
             ),
-            filter(
-                ([change, categories]) => !categories || categories.length === 0
-            ),
-            map(([change, categories]) =>
-                VideoCategoryStoreActions.loadRequest()
-            )
+            filter(([, categories]) => !categories || categories.length === 0),
+            map(() => VideoCategoryStoreActions.loadRequest())
         );
     });
 
@@ -44,7 +40,7 @@ export class VideoCategoryStoreRoutingEffects {
 
                     return isNaN(catId) || !(catId in entities);
                 }),
-                tap((_) =>
+                tap(() =>
                     this.router.navigateByUrl(RouteHelper.categoriesAbs())
                 )
             );
@@ -68,7 +64,7 @@ export class VideoCategoryStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter((action) => action.leavingArea === RouteArea.videos),
-            map((action) =>
+            map(() =>
                 VideoCategoryStoreActions.setActiveCategoryId({
                     categoryId: null,
                 })

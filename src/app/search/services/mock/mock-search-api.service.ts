@@ -21,10 +21,7 @@ export class MockSearchApiService implements SearchApiService {
         @Inject(videoApiServiceToken) private videoApi: VideoApiService
     ) {}
 
-    search(
-        query: string,
-        start: number
-    ): Observable<SearchResult<MultimediaCategory>> {
+    search(): Observable<SearchResult<MultimediaCategory>> {
         let result = null;
 
         if (this.returnNoResults) {

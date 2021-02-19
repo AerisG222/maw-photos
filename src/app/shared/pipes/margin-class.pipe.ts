@@ -5,7 +5,7 @@ import { Margin } from '@models';
     name: 'marginClass',
 })
 export class MarginClassPipe implements PipeTransform {
-    transform(margin: Margin | null, ...args: unknown[]): string | null {
+    transform(margin: Margin | null): string | null {
         switch (margin) {
             case Margin.compact:
                 return 'category-margin-ten';

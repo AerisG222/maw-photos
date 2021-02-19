@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-    CanActivate,
-    ActivatedRouteSnapshot,
-    RouterStateSnapshot,
-    UrlTree,
-    Router,
-} from '@angular/router';
+import { CanActivate, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -19,10 +13,7 @@ export class ViewModeGuard implements CanActivate {
         private router: Router
     ) {}
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ):
+    canActivate():
         | Observable<boolean | UrlTree>
         | Promise<boolean | UrlTree>
         | boolean

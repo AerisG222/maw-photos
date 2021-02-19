@@ -27,7 +27,7 @@ export class VideoCategoryComponent {
     videos$ = this.store.select(VideoStoreSelectors.allVideos);
     activeVideo$ = this.store
         .select(VideoStoreSelectors.activeVideo)
-        .pipe(tap((x) => this.triggerVideoRefresh()));
+        .pipe(tap(() => this.triggerVideoRefresh()));
 
     constructor(
         private store: Store,

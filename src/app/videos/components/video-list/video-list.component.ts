@@ -1,7 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import {
-    DEFAULT_SETTINGS,
     DEFAULT_VIDEO_DETAIL_VIEW_SETTINGS,
     RouteHelper,
     ThumbnailSize,

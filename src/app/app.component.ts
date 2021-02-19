@@ -34,12 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.hotkeysService.add(
-            new Hotkey(
-                '?',
-                (event: KeyboardEvent) => this.onHotkeyHelp(event),
-                [],
-                'Show Help'
-            )
+            new Hotkey('?', () => this.onHotkeyHelp(), [], 'Show Help')
         );
 
         this.destroySub.add(
@@ -70,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
         classList.add(themeDetail.klass);
     }
 
-    private onHotkeyHelp(evt: KeyboardEvent): boolean {
+    private onHotkeyHelp(): boolean {
         this.hotkeyHelper.pauseAll();
 
         const dialogRef = this.dialog.open(HotkeyDialogComponent, {
@@ -79,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.destroySub.add(
             dialogRef.afterClosed().subscribe({
-                next: (x) => this.hotkeyHelper.unpauseAll(),
+                next: () => this.hotkeyHelper.unpauseAll(),
             })
         );
 

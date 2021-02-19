@@ -53,7 +53,7 @@ export class PhotoStoreEffects {
     loadRandomRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.loadRandomRequest),
-            exhaustMap((action) =>
+            exhaustMap(() =>
                 this.api.getRandomPhoto().pipe(
                     map((photo) => PhotoActions.loadRandomSuccess({ photo })),
                     catchError((error) =>
@@ -88,7 +88,7 @@ export class PhotoStoreEffects {
             this.store.select(PhotoStoreSelectors.isRatingCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
-            map(([photoId, isVisible]) =>
+            map(([photoId]) =>
                 PhotoActions.loadRatingRequest({ photoId: photoId as number })
             )
         );
@@ -128,7 +128,7 @@ export class PhotoStoreEffects {
             this.store.select(PhotoStoreSelectors.isCommentCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
-            map(([photoId, isVisible]) =>
+            map(([photoId]) =>
                 PhotoActions.loadCommentsRequest({ photoId: photoId as number })
             )
         );
@@ -157,7 +157,7 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.addCommentRequest),
             concatMap((action) =>
                 this.api.addComment(action.photoId, action.comment).pipe(
-                    map((result) =>
+                    map(() =>
                         PhotoActions.addCommentSuccess({
                             photoId: action.photoId,
                         })
@@ -189,7 +189,7 @@ export class PhotoStoreEffects {
             this.store.select(PhotoStoreSelectors.isExifCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
-            map(([photoId, isVisible]) =>
+            map(([photoId]) =>
                 PhotoActions.loadExifRequest({ photoId: photoId as number })
             )
         );
@@ -216,7 +216,7 @@ export class PhotoStoreEffects {
             this.store.select(PhotoStoreSelectors.isMetadataEditorCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
-            map(([photoId, isVisible]) =>
+            map(([photoId]) =>
                 PhotoActions.loadGpsDetailRequest({
                     photoId: photoId as number,
                 })
@@ -298,7 +298,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
-            concatMap((action) =>
+            concatMap(() =>
                 this.store.select(PhotoStoreSelectors.categoryGpsStatus).pipe(
                     filter((missingDetails) => !!missingDetails),
                     // eslint-disable-next-line ngrx/avoid-mapping-selectors
@@ -324,7 +324,7 @@ export class PhotoStoreEffects {
                     )
                 )
             ),
-            map(([action, photoEffects]) => {
+            map(([, photoEffects]) => {
                 const rotation = photoEffects?.rotation
                     ? new PhotoRotation(photoEffects.rotation.klass)
                     : new PhotoRotation();
@@ -348,7 +348,7 @@ export class PhotoStoreEffects {
                     )
                 )
             ),
-            map(([action, photoEffects]) => {
+            map(([, photoEffects]) => {
                 const rotation = photoEffects?.rotation
                     ? new PhotoRotation(photoEffects.rotation.klass)
                     : new PhotoRotation();
@@ -367,8 +367,8 @@ export class PhotoStoreEffects {
                 this.store.select(PhotoStoreSelectors.nextPhoto),
                 this.store.select(RouterStoreSelectors.photoView)
             ),
-            filter(([action, photo, view]) => !!photo),
-            map(([action, photo, view]) =>
+            filter(([, photo]) => !!photo),
+            map(([, photo, view]) =>
                 PhotoActions.navigateToPhoto({
                     view,
                     categoryId: photo?.categoryId as number,
@@ -385,8 +385,8 @@ export class PhotoStoreEffects {
                 this.store.select(PhotoStoreSelectors.previousPhoto),
                 this.store.select(RouterStoreSelectors.photoView)
             ),
-            filter(([action, photo, view]) => !!photo),
-            map(([action, photo, view]) =>
+            filter(([, photo]) => !!photo),
+            map(([, photo, view]) =>
                 PhotoActions.navigateToPhoto({
                     view,
                     categoryId: photo?.categoryId as number,
@@ -399,7 +399,7 @@ export class PhotoStoreEffects {
     resetPhotoEffectsForNewPhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.setActivePhotoId),
-            concatMap((action) => {
+            concatMap(() => {
                 return of(PhotoActions.resetEffectsRequest());
             })
         );
@@ -408,7 +408,7 @@ export class PhotoStoreEffects {
     resetPhotoEffectsEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.resetEffectsRequest),
-            concatMap((action) => {
+            concatMap(() => {
                 return of(
                     PhotoActions.updateEffectsRequest({
                         effects: DEFAULT_PHOTO_EFFECTS,
@@ -424,7 +424,7 @@ export class PhotoStoreEffects {
             withLatestFrom(
                 this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
             ),
-            map(([action, isPlaying]) => {
+            map(([, isPlaying]) => {
                 if (isPlaying) {
                     return PhotoActions.stopSlideshowRequest();
                 } else {
@@ -440,7 +440,7 @@ export class PhotoStoreEffects {
             this.store.select(PhotoStoreSelectors.slideshowIsPlaying),
         ]).pipe(
             filter(([isLast, isPlaying]) => isLast && isPlaying),
-            map(([isLast, isPlaying]) => PhotoActions.stopSlideshowRequest())
+            map(() => PhotoActions.stopSlideshowRequest())
         );
     });
 
@@ -488,7 +488,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.setActivePhotoId),
             withLatestFrom(this.store.select(PhotoStoreSelectors.activePhoto)),
-            map(([action, photo]) => {
+            map(([, photo]) => {
                 const categoryId = photo?.categoryId ?? null;
 
                 return PhotoActions.setCategoryIdForActivePhoto({ categoryId });

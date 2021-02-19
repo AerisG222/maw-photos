@@ -9,7 +9,6 @@ import {
     ExifContainer,
     GpsCoordinate,
     GpsDetail,
-    Category,
 } from '@models';
 
 export const clearRequest = createAction('[Photos] Clear');

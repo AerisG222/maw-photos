@@ -17,7 +17,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.loadRequest,
-        (state, { categoryId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -42,7 +42,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.loadCommentsRequest,
-        (state, { photoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -122,7 +122,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.loadRatingRequest,
-        (state, { photoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -161,7 +161,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.ratePhotoRequest,
-        (state, { photoId, userRating }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -189,7 +189,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.addCommentRequest,
-        (state, { photoId, comment }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -197,7 +197,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.addCommentSuccess,
-        (state, { photoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: false,
             error: null,
@@ -213,7 +213,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.loadExifRequest,
-        (state, { photoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -238,7 +238,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.loadGpsDetailRequest,
-        (state, { photoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -263,7 +263,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.setGpsCoordinateOverrideRequest,
-        (state, { photoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -439,7 +439,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoActions.exitPhotoArea,
-        (state): State =>
+        (): State =>
             photoAdapter.removeAll({
                 ...initialState,
             })

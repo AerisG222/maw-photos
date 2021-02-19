@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
 import {
     AuthInitResolver,
@@ -13,10 +12,7 @@ export class ExternalAuthInitResolver implements AuthInitResolver {
 
     constructor(@Inject(authServiceToken) private authService: AuthService) {}
 
-    public async resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): Promise<boolean> {
+    public async resolve(): Promise<boolean> {
         if (this.isInitialized) {
             return Promise.resolve(true);
         }

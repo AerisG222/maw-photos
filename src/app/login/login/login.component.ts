@@ -22,8 +22,8 @@ export class LoginComponent {
             .pipe(
                 first(),
                 filter((p) => p.has('code')),
-                tap((p) => (this.showLogin = false)),
-                tap((p) => this.authService.handleLoginCallback())
+                tap(() => (this.showLogin = false)),
+                tap(() => this.authService.handleLoginCallback())
             )
             .subscribe();
 
@@ -32,8 +32,8 @@ export class LoginComponent {
             .pipe(
                 first(),
                 filter((p) => !p.has('code')),
-                tap((p) => (this.showLogin = true)),
-                tap((p) => this.authService.loginViaPopup())
+                tap(() => (this.showLogin = true)),
+                tap(() => this.authService.loginViaPopup())
             )
             .subscribe();
     }

@@ -53,7 +53,7 @@ export class PhotoStoreRoutingEffects {
                 withLatestFrom(
                     this.store.select(RouterStoreSelectors.selectUrl)
                 ),
-                tap(([action, url]) => {
+                tap(([, url]) => {
                     if (url) {
                         this.router.navigateByUrl(
                             url.substring(0, url.lastIndexOf('/'))
@@ -113,7 +113,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaEntering),
             filter((action) => action.enteringArea === RouteArea.random),
-            map((action) =>
+            map(() =>
                 PhotoStoreActions.loadMultipleRandomRequest({ count: 10 })
             )
         );
@@ -124,7 +124,7 @@ export class PhotoStoreRoutingEffects {
             return this.actions$.pipe(
                 ofType(RouterStoreActions.routeAreaEntering),
                 filter((action) => action.enteringArea === RouteArea.random),
-                map((action) => PhotoStoreActions.startPeriodicRandomLoad())
+                map(() => PhotoStoreActions.startPeriodicRandomLoad())
             );
         }
     );
@@ -133,7 +133,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter((action) => action.leavingArea === RouteArea.random),
-            map((area) => PhotoStoreActions.stopPeriodicRandomLoad())
+            map(() => PhotoStoreActions.stopPeriodicRandomLoad())
         );
     });
 
@@ -157,7 +157,7 @@ export class PhotoStoreRoutingEffects {
                     action.leavingArea === RouteArea.photos ||
                     action.leavingArea === RouteArea.random
             ),
-            map((area) => PhotoStoreActions.exitPhotoArea())
+            map(() => PhotoStoreActions.exitPhotoArea())
         );
     });
 
@@ -177,7 +177,7 @@ export class PhotoStoreRoutingEffects {
     exitFullScreenLayoutWhenLeavingPhotos$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
-            map((action) => LayoutStoreActions.exitFullscreenRequest())
+            map(() => LayoutStoreActions.exitFullscreenRequest())
         );
     });
 
@@ -218,7 +218,6 @@ export class PhotoStoreRoutingEffects {
         routeDetails: RouteDetails
     ): boolean {
         const id = Number(routeDetails?.params?.photoId);
-        const photoId = isNaN(id) ? null : id;
 
         return activeId !== id;
     }

@@ -31,7 +31,7 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
         if (this.shortcutKey) {
             this.hotkey = new Hotkey(
                 this.shortcutKey,
-                (event: KeyboardEvent) => this.onHotkeyTriggered(event),
+                () => this.onHotkeyTriggered(),
                 [],
                 this.shortcutHelp ?? undefined
             );
@@ -46,7 +46,7 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
         }
     }
 
-    private onHotkeyTriggered(event: KeyboardEvent): boolean {
+    private onHotkeyTriggered(): boolean {
         if (!!this.button && !this.button.disabled) {
             this.button.ripple.launch({ centered: true });
             // eslint-disable-next-line no-underscore-dangle

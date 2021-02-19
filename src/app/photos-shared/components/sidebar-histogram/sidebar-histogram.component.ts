@@ -41,7 +41,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     ) {
         this.img = doc.createElement('img');
         this.img.crossOrigin = 'Anonymous';
-        this.img.addEventListener('load', (evt) => this.onImageLoad());
+        this.img.addEventListener('load', () => this.onImageLoad());
 
         this.form = this.formBuilder.group({
             channel: ['rgb'],

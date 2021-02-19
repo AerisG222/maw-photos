@@ -37,7 +37,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
         if (this.shortcutKey) {
             this.hotkey = new Hotkey(
                 this.shortcutKey,
-                (event: KeyboardEvent) => this.onHotkeyTriggered(event),
+                () => this.onHotkeyTriggered(),
                 [],
                 this.shortcutHelp ?? undefined
             );
@@ -52,7 +52,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
         }
     }
 
-    onHotkeyTriggered(event: KeyboardEvent): boolean {
+    onHotkeyTriggered(): boolean {
         this.triggerRipple();
         this.el.nativeElement.click();
 

@@ -64,13 +64,7 @@ export const allFilteredCategoriesForYear = createSelector(
     VideoCategoryStoreSelectors.categoriesForYear,
     categoryEffectiveTypeFilter,
     SettingsStoreSelectors.categoryFilterSettings,
-    (
-        photoCategories,
-        videoCategories,
-        typeFilter,
-        filterSettings,
-        props: { year: number }
-    ) => {
+    (photoCategories, videoCategories, typeFilter, filterSettings) => {
         let categories: Category[] = [];
         switch (typeFilter) {
             case CategoryTypeFilter.all:

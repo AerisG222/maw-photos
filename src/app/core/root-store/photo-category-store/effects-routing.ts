@@ -20,12 +20,8 @@ export class PhotoCategoryStoreRoutingEffects {
             withLatestFrom(
                 this.store.select(PhotoCategoryStoreSelectors.allCategories)
             ),
-            filter(
-                ([change, categories]) => !categories || categories.length === 0
-            ),
-            map(([change, categories]) =>
-                PhotoCategoryStoreActions.loadRequest()
-            )
+            filter(([, categories]) => !categories || categories.length === 0),
+            map(() => PhotoCategoryStoreActions.loadRequest())
         );
     });
 
@@ -44,7 +40,7 @@ export class PhotoCategoryStoreRoutingEffects {
 
                     return isNaN(catId) || !(catId in entities);
                 }),
-                tap((_) =>
+                tap(() =>
                     this.router.navigateByUrl(RouteHelper.categoriesAbs())
                 )
             );
@@ -68,7 +64,7 @@ export class PhotoCategoryStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter((action) => action.leavingArea === RouteArea.photos),
-            map((action) =>
+            map(() =>
                 PhotoCategoryStoreActions.setActiveCategoryId({
                     categoryId: null,
                 })

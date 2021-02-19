@@ -12,7 +12,7 @@ export class SearchStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter((action) => action.leavingArea === RouteArea.search),
-            map((area) => SearchStoreActions.exitSearchArea())
+            map(() => SearchStoreActions.exitSearchArea())
         );
     });
 

@@ -1,16 +1,6 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    ChangeDetectionStrategy,
-} from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { Settings, ThumbnailSize, VideoSize } from '@models';
-import { VideoStoreActions } from 'src/app/videos/store';
-import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
+import { Settings } from '@models';
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 
 @Component({
@@ -19,28 +9,10 @@ import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-s
     styleUrls: ['./toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToolbarComponent implements OnInit, OnDestroy {
+export class ToolbarComponent {
     settings: Settings | null = null;
 
-    private destroySub = new Subscription();
-
-    constructor(
-        private store: Store,
-        private videoFacade: VideoDetailSettingsFacade
-    ) {}
-
-    ngOnInit(): void {
-        this.destroySub.add(
-            this.store
-                .select(SettingsStoreSelectors.settings)
-                .pipe(tap((settings) => (this.settings = settings)))
-                .subscribe()
-        );
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
-    }
+    constructor(private videoFacade: VideoDetailSettingsFacade) {}
 
     onToggleCategoryBreadcrumbs(): void {
         this.videoFacade.toggleBreadcrumbs();

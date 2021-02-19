@@ -59,7 +59,7 @@ export class VideoStoreEffects {
             this.store.select(VideoStoreSelectors.isRatingCardVisible),
         ]).pipe(
             filter(([videoId, isVisible]) => !!videoId && isVisible),
-            map(([videoId, isVisible]) =>
+            map(([videoId]) =>
                 VideoStoreActions.loadRatingRequest({
                     videoId: videoId as number,
                 })
@@ -107,7 +107,7 @@ export class VideoStoreEffects {
             this.store.select(VideoStoreSelectors.isCommentCardVisible),
         ]).pipe(
             filter(([videoId, isVisible]) => !!videoId && isVisible),
-            map(([videoId, isVisible]) =>
+            map(([videoId]) =>
                 VideoStoreActions.loadCommentsRequest({
                     videoId: videoId as number,
                 })
@@ -120,7 +120,7 @@ export class VideoStoreEffects {
             ofType(VideoStoreActions.addCommentRequest),
             concatMap((action) =>
                 this.api.addComment(action.videoId, action.comment).pipe(
-                    map((result) =>
+                    map(() =>
                         VideoStoreActions.addCommentSuccess({
                             videoId: action.videoId,
                         })
@@ -168,7 +168,7 @@ export class VideoStoreEffects {
             this.store.select(VideoStoreSelectors.isMetadataEditorCardVisible),
         ]).pipe(
             filter(([videoId, isVisible]) => !!videoId && isVisible),
-            map(([videoId, isVisible]) =>
+            map(([videoId]) =>
                 VideoStoreActions.loadGpsDetailRequest({
                     videoId: videoId as number,
                 })
@@ -234,7 +234,7 @@ export class VideoStoreEffects {
         return this.actions$.pipe(
             ofType(VideoStoreActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
-            concatMap((action) =>
+            concatMap(() =>
                 this.store.select(VideoStoreSelectors.categoryGpsStatus).pipe(
                     filter((status) => !!status),
                     // eslint-disable-next-line ngrx/avoid-mapping-selectors
@@ -252,8 +252,8 @@ export class VideoStoreEffects {
         return this.actions$.pipe(
             ofType(VideoStoreActions.moveNextRequest),
             withLatestFrom(this.store.select(VideoStoreSelectors.nextVideo)),
-            filter(([action, video]) => !!video),
-            map(([action, video]) =>
+            filter(([, video]) => !!video),
+            map(([, video]) =>
                 VideoStoreActions.navigateToVideo({
                     categoryId: video?.categoryId as number,
                     videoId: video?.id as number,
@@ -268,8 +268,8 @@ export class VideoStoreEffects {
             withLatestFrom(
                 this.store.select(VideoStoreSelectors.previousVideo)
             ),
-            filter(([action, video]) => !!video),
-            map(([action, video]) =>
+            filter(([, video]) => !!video),
+            map(([, video]) =>
                 VideoStoreActions.navigateToVideo({
                     categoryId: video?.categoryId as number,
                     videoId: video?.id as number,

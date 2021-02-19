@@ -8,15 +8,14 @@ import {
     Comment,
     Rating,
     ApiCollection,
-    GpsCoordinate,
     GpsDetail,
 } from '@models';
 import { DateService, PhotoApiService } from '@core/services';
 
 @Injectable()
 export class MockPhotoApiService implements PhotoApiService {
-    private categories: PhotoCategory[];
-    private photos: Photo[];
+    private categories!: PhotoCategory[];
+    private photos!: Photo[];
 
     constructor(private dateSvc: DateService) {
         this.initData();
@@ -63,7 +62,7 @@ export class MockPhotoApiService implements PhotoApiService {
         });
     }
 
-    getExifData(photoId: number): Observable<ExifDetail> {
+    getExifData(): Observable<ExifDetail> {
         return of({
             bitsPerSample: 8,
             compression: 'JPEG (old-style)',
@@ -140,15 +139,15 @@ export class MockPhotoApiService implements PhotoApiService {
         });
     }
 
-    getRating(photoId: number): Observable<Rating> {
+    getRating(): Observable<Rating> {
         return of({ userRating: 2, averageRating: 4 });
     }
 
-    ratePhoto(photoId: number, rating: number): Observable<Rating> {
+    ratePhoto(): Observable<Rating> {
         return of({ userRating: 3, averageRating: 4.5 });
     }
 
-    getComments(photoId: number): Observable<ApiCollection<Comment>> {
+    getComments(): Observable<ApiCollection<Comment>> {
         return of({
             count: 2,
             items: [
@@ -166,28 +165,22 @@ export class MockPhotoApiService implements PhotoApiService {
         });
     }
 
-    addComment(
-        photoId: number,
-        comment: string
-    ): Observable<ApiCollection<Comment>> {
-        return this.getComments(photoId);
+    addComment(): Observable<ApiCollection<Comment>> {
+        return this.getComments();
     }
 
-    getGpsDetail(videoId: number): Observable<GpsDetail> {
+    getGpsDetail(): Observable<GpsDetail> {
         return of({
             source: { latitude: 43.12345, longitude: -72.6789 },
             override: { latitude: 43.11111, longitude: -72.55555 },
         });
     }
 
-    setGpsCoordinateOverride(
-        photoId: number,
-        latLng: GpsCoordinate
-    ): Observable<GpsDetail> {
-        return this.getGpsDetail(photoId);
+    setGpsCoordinateOverride(): Observable<GpsDetail> {
+        return this.getGpsDetail();
     }
 
-    setTeaser(categoryId: number, photoId: number): Observable<PhotoCategory> {
+    setTeaser(): Observable<PhotoCategory> {
         return this.getCategory(1);
     }
 

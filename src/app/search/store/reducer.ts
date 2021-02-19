@@ -16,7 +16,7 @@ export const reducer = createReducer(
     ),
     on(
         SearchActions.queryRequest,
-        (state, { query, start }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -43,7 +43,7 @@ export const reducer = createReducer(
     ),
     on(
         SearchActions.queryMoreRequest,
-        (state, { query, start }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -70,7 +70,7 @@ export const reducer = createReducer(
     ),
     on(
         SearchActions.exitSearchArea,
-        (state): State =>
+        (): State =>
             searchAdapter.removeAll({
                 ...initialState,
             })

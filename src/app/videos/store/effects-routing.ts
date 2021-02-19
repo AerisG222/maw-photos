@@ -86,7 +86,7 @@ export class VideoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter((action) => action.leavingArea === RouteArea.videos),
-            map((area) => VideoStoreActions.exitVideoArea())
+            map(() => VideoStoreActions.exitVideoArea())
         );
     });
 

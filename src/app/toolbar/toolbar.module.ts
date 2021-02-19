@@ -9,7 +9,6 @@ import { LinkComponent } from './link/link.component';
 import { MoveNextButtonComponent } from './move-next-button/move-next-button.component';
 import { MovePreviousButtonComponent } from './move-previous-button/move-previous-button.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ButtonLinkBaseComponent } from './button-link-base/button-link-base.component';
 
 @NgModule({
     declarations: [

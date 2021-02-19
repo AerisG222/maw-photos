@@ -127,7 +127,7 @@ export class CategoriesUrlService {
                     ),
                 });
             }),
-            map((x) => true)
+            map(() => true)
         );
     }
 

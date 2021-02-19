@@ -7,15 +7,14 @@ import {
     Comment,
     Rating,
     ApiCollection,
-    GpsCoordinate,
     GpsDetail,
 } from '@models';
 import { DateService, VideoApiService } from '@core/services';
 
 @Injectable()
 export class MockVideoApiService implements VideoApiService {
-    private categories: VideoCategory[];
-    private videos: Video[];
+    private categories!: VideoCategory[];
+    private videos!: Video[];
 
     constructor(private dateSvc: DateService) {
         this.initData();
@@ -41,7 +40,7 @@ export class MockVideoApiService implements VideoApiService {
         });
     }
 
-    getComments(videoId: number): Observable<ApiCollection<Comment>> {
+    getComments(): Observable<ApiCollection<Comment>> {
         return of({
             count: 2,
             items: [
@@ -59,36 +58,30 @@ export class MockVideoApiService implements VideoApiService {
         });
     }
 
-    getRating(videoId: number): Observable<Rating> {
+    getRating(): Observable<Rating> {
         return of({ userRating: 2, averageRating: 4 });
     }
 
-    rateVideo(videoId: number, rating: number): Observable<Rating> {
+    rateVideo(): Observable<Rating> {
         return of({ userRating: 3, averageRating: 4.5 });
     }
 
-    addComment(
-        videoId: number,
-        comment: string
-    ): Observable<ApiCollection<Comment>> {
-        return this.getComments(videoId);
+    addComment(): Observable<ApiCollection<Comment>> {
+        return this.getComments();
     }
 
-    getGpsDetail(videoId: number): Observable<GpsDetail> {
+    getGpsDetail(): Observable<GpsDetail> {
         return of({
             source: { latitude: 43.12345, longitude: -72.6789 },
             override: { latitude: 43.11111, longitude: -72.55555 },
         });
     }
 
-    setGpsCoordinateOverride(
-        videoId: number,
-        latLng: GpsCoordinate
-    ): Observable<GpsDetail> {
-        return this.getGpsDetail(videoId);
+    setGpsCoordinateOverride(): Observable<GpsDetail> {
+        return this.getGpsDetail();
     }
 
-    setTeaser(categoryId: number, videoId: number): Observable<VideoCategory> {
+    setTeaser(): Observable<VideoCategory> {
         return this.getCategory(1);
     }
 

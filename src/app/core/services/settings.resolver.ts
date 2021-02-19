@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-    Resolve,
-    RouterStateSnapshot,
-    ActivatedRouteSnapshot,
-} from '@angular/router';
+import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { SettingsFacade } from '@core/facades/settings/settings-facades';
@@ -14,10 +10,7 @@ import { SettingsFacade } from '@core/facades/settings/settings-facades';
 export class SettingsResolver implements Resolve<boolean> {
     constructor(private settingsFacade: SettingsFacade) {}
 
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): Observable<boolean> {
+    resolve(): Observable<boolean> {
         this.settingsFacade.load();
 
         return of(true);

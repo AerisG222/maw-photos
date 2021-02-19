@@ -36,7 +36,7 @@ export class CategoriesStoreEffects {
                 switchMap((action) => {
                     return this.store.select(RootStoreSelectors.allYears).pipe(
                         filter((years) => years.length > 0),
-                        switchMap((years) =>
+                        switchMap(() =>
                             this.categoriesUrlService.ensureCompleteUrl(
                                 action.routeDetails
                             )

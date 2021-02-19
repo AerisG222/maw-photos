@@ -8,7 +8,6 @@ import {
     ExifContainer,
     GpsDetail,
     PhotoEffects,
-    Category,
 } from '@models';
 
 export const photoAdapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();

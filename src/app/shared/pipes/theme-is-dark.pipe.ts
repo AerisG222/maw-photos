@@ -6,7 +6,7 @@ import { Theme, toThemeDefaulted, toThemeDetail } from '@models';
     name: 'themeIsDark',
 })
 export class ThemeIsDarkPipe implements PipeTransform {
-    transform(value: Theme | null, ...args: unknown[]): boolean {
+    transform(value: Theme | null): boolean {
         const themeDetail = toThemeDetail(toThemeDefaulted(value));
 
         return themeDetail.isDark;

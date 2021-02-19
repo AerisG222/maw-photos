@@ -17,8 +17,6 @@ import {
     PhotoApiService,
 } from '@core/services/photo-api.service';
 import { PhotoCategory, Category, CategoryType, RouteHelper } from '@models';
-import * as PhotoStoreActions from '../photos-store/actions';
-import * as PhotoStoreSelectors from '../photos-store/selectors';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -28,7 +26,7 @@ export class PhotoCategoryStoreEffects {
             withLatestFrom(
                 this.store.select(PhotoCategorySelectors.allCategories)
             ),
-            exhaustMap(([action, categories]) => {
+            exhaustMap(([, categories]) => {
                 if (categories.length !== 0) {
                     return of(
                         PhotoCategoryActions.loadRequestedSatisfiedByCache()

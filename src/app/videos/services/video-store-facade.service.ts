@@ -120,7 +120,7 @@ export class VideoStoreFacadeService
         this.videoInfoPanelFacade.saveMinimapZoom(zoom);
     }
 
-    setCategoryTeaser() {
+    setCategoryTeaser(): void {
         helpSaveCategoryTeaser(this.activeVideo$, (categoryId, videoId) => {
             this.store.dispatch(
                 VideoCategoryStoreActions.setTeaserRequest({

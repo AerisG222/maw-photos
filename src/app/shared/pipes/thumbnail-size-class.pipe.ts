@@ -8,8 +8,7 @@ import { ThumbnailSize, toThumbnailSizeDefaulted } from '@models';
 export class ThumbnailSizeClassPipe implements PipeTransform {
     transform(
         value: ThumbnailSize | null,
-        forceFullsize: boolean | null = false,
-        ...args: unknown[]
+        forceFullsize: boolean | null = false
     ): string {
         if (forceFullsize) {
             return '';

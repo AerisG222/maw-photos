@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {
-    SettingsStoreActions,
     PhotoStoreActions,
     PhotoStoreSelectors,
     PhotoCategoryStoreActions,

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     CanActivate,
     ActivatedRouteSnapshot,
-    RouterStateSnapshot,
     UrlTree,
     Router,
 } from '@angular/router';
@@ -19,8 +18,7 @@ export class ViewModeGuard implements CanActivate {
     constructor(private urlService: PhotosUrlService, private router: Router) {}
 
     canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
+        route: ActivatedRouteSnapshot
     ):
         | Observable<boolean | UrlTree>
         | Promise<boolean | UrlTree>

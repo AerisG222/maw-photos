@@ -142,7 +142,7 @@ export const reducer = createReducer(
     ),
     on(
         VideoActions.loadGpsDetailRequest,
-        (state, { videoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -167,7 +167,7 @@ export const reducer = createReducer(
     ),
     on(
         VideoActions.setGpsCoordinateOverrideRequest,
-        (state, { videoId }): State => ({
+        (state): State => ({
             ...state,
             isLoading: true,
             error: null,
@@ -207,7 +207,7 @@ export const reducer = createReducer(
     ),
     on(
         VideoActions.exitVideoArea,
-        (state): State =>
+        (): State =>
             videoAdapter.removeAll({
                 ...initialState,
             })

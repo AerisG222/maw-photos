@@ -8,7 +8,6 @@ import {
     ViewChild,
     AfterViewInit,
     OnChanges,
-    SimpleChanges,
     ChangeDetectorRef,
 } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
@@ -46,7 +45,7 @@ export class MapViewComponent implements OnInit, OnChanges, AfterViewInit {
         this.updateMapOptions();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.updateActivePhoto();
     }
 
