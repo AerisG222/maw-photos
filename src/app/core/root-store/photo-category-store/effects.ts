@@ -17,6 +17,7 @@ import {
     PhotoApiService,
 } from '@core/services/photo-api.service';
 import { PhotoCategory, Category, CategoryType, RouteHelper } from '@models';
+import { httpErrorHandler } from 'src/app/models/handle-error';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -40,7 +41,7 @@ export class PhotoCategoryStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoCategoryActions.loadFailure({ error }))
+                        of(PhotoCategoryActions.loadFailure({ error: httpErrorHandler(error) }))
                     )
                 );
             })
@@ -58,7 +59,7 @@ export class PhotoCategoryStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoCategoryActions.setTeaserFailure({ error }))
+                        of(PhotoCategoryActions.setTeaserFailure({ error: httpErrorHandler(error) }))
                     )
                 )
             )

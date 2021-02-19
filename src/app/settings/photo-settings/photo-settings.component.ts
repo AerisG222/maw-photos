@@ -12,6 +12,7 @@ import {
     toMarginDefaulted,
     toThumbnailSizeDefaulted,
     allThumbnailSizes,
+    PhotoViewMode,
 } from '@models';
 import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
@@ -167,7 +168,7 @@ export class PhotoSettingsComponent {
 
     private readPageForm(): PhotoPageSettings {
         return {
-            viewMode: this.form.get('page.viewMode')?.value,
+            viewMode: this.form.get('page.viewMode')?.value as PhotoViewMode,
             slideshowDisplayDurationSeconds: this.form.get(
                 'page.slideshowDuration'
             )?.value as number,

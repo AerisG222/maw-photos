@@ -8,6 +8,7 @@ import {
     allCategoryViewModes,
     allMargins,
     allThumbnailSizes,
+    CategoryViewMode,
     toMarginDefaulted,
     toThumbnailSizeDefaulted,
 } from '@models';
@@ -75,8 +76,8 @@ export class SearchSettingsComponent {
     private readGridForm(): SearchGridViewSettings {
         return {
             margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
-            showTitles: this.form.get('grid.showTitles')?.value,
-            showYears: this.form.get('grid.showYears')?.value,
+            showTitles: this.form.get('grid.showTitles')?.value as boolean,
+            showYears: this.form.get('grid.showYears')?.value as boolean,
             thumbnailSize: toThumbnailSizeDefaulted(
                 this.form.get('grid.thumbnailSize')?.value
             ),
@@ -94,7 +95,7 @@ export class SearchSettingsComponent {
 
     private readPageForm(): SearchPageSettings {
         return {
-            viewMode: this.form.get('page.viewMode')?.value,
+            viewMode: this.form.get('page.viewMode')?.value as CategoryViewMode,
         };
     }
 

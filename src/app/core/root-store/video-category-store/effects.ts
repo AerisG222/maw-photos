@@ -17,6 +17,7 @@ import {
     VideoApiService,
 } from '@core/services/video-api.service';
 import { Category, CategoryType, VideoCategory, RouteHelper } from '@models';
+import { httpErrorHandler } from 'src/app/models/handle-error';
 
 @Injectable()
 export class VideoCategoryStoreEffects {
@@ -40,7 +41,7 @@ export class VideoCategoryStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(VideoCategoryStoreActions.loadFailure({ error }))
+                        of(VideoCategoryStoreActions.loadFailure({ error: httpErrorHandler(error) }))
                     )
                 );
             })
@@ -60,7 +61,7 @@ export class VideoCategoryStoreEffects {
                     catchError((error) =>
                         of(
                             VideoCategoryStoreActions.setTeaserFailure({
-                                error,
+                                error: httpErrorHandler(error),
                             })
                         )
                     )

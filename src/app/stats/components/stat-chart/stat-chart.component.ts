@@ -27,18 +27,18 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
     @Input() set format(value: string) {
         switch (value) {
             case 'count':
-                this.formatFunc = this.formatPlainNumber;
+                this.formatFunc = formatPlainNumber;
                 break;
             case 'size':
-                this.formatFunc = this.formatFilesize;
+                this.formatFunc = formatFilesize;
                 break;
             case 'time':
-                this.formatFunc = this.formatTime;
+                this.formatFunc = formatTime;
                 break;
         }
     }
 
-    formatFunc = this.formatPlainNumber;
+    formatFunc = formatPlainNumber;
     colorScheme = colorSets.find((s) => s.name === 'cool');
 
     ngAfterViewInit(): void {
@@ -53,23 +53,6 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
         this.cellSelected.emit(evt);
     }
 
-    formatPlainNumber(val: number): string {
-        return numbro(val).format({ thousandSeparated: true });
-    }
-
-    formatFilesize(val: number): string {
-        return numbro(val).format({
-            output: 'byte',
-            base: 'decimal',
-            mantissa: 2,
-            spaceSeparated: true,
-        });
-    }
-
-    formatTime(val: number): string {
-        return numbro(val).format({ output: 'time' });
-    }
-
     private updateMargins(): void {
         setTimeout(() => {
             if (this.treeMap) {
@@ -79,3 +62,20 @@ export class StatChartComponent implements AfterViewInit, OnChanges {
         }, 0);
     }
 }
+
+const formatPlainNumber = (val: number): string => {
+    return numbro(val).format({ thousandSeparated: true });
+};
+
+const formatFilesize = (val: number): string => {
+    return numbro(val).format({
+        output: 'byte',
+        base: 'decimal',
+        mantissa: 2,
+        spaceSeparated: true,
+    });
+};
+
+const formatTime = (val: number): string => {
+    return numbro(val).format({ output: 'time' });
+};

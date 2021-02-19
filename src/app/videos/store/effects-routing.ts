@@ -33,7 +33,7 @@ export class VideoStoreRoutingEffects {
                         action.videoId
                     )
                 ),
-                tap((url) => this.router.navigateByUrl(url))
+                tap((url) => void this.router.navigateByUrl(url))
             );
         },
         { dispatch: false }
@@ -76,7 +76,7 @@ export class VideoStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.videos),
             map((action) =>
                 VideoStoreActions.loadRequest({
-                    categoryId: action.enteringRouteDetails?.params?.categoryId,
+                    categoryId: action.enteringRouteDetails?.params?.categoryId as number,
                 })
             )
         );

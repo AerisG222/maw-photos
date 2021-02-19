@@ -23,7 +23,7 @@ export class CommentsCardComponent {
     }
 
     onComment(): void {
-        const comment = this.form.get('comment')?.value;
+        const comment = this.form.get('comment')?.value as string;
 
         this.commentable.addComment(comment);
 

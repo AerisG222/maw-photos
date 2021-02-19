@@ -4,7 +4,6 @@ import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import {
-    allPhotoViewModes,
     allMapTypes,
     MinimapZoom,
     MapType,
@@ -12,6 +11,8 @@ import {
     toMarginDefaulted,
     toThumbnailSizeDefaulted,
     allThumbnailSizes,
+    allRandomViewModes,
+    PhotoViewMode,
 } from '@models';
 import { RandomGridSettingsFacade } from '@core/facades/settings/photo-grid-settings-facade';
 import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail-settings-facade';
@@ -30,7 +31,7 @@ import { RandomPageSettings } from '@models';
 })
 export class RandomSettingsComponent {
     form: FormGroup;
-    viewModes = allPhotoViewModes;
+    viewModes = allRandomViewModes;
     mapTypes = allMapTypes;
     margins = allMargins;
     thumbnailSizes = allThumbnailSizes;
@@ -151,7 +152,7 @@ export class RandomSettingsComponent {
 
     private readPageForm(): RandomPageSettings {
         return {
-            viewMode: this.form.get('page.viewMode')?.value,
+            viewMode: this.form.get('page.viewMode')?.value as PhotoViewMode,
             slideshowDisplayDurationSeconds: this.form.get(
                 'page.slideshowDuration'
             )?.value as number,

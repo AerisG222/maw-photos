@@ -67,7 +67,7 @@ export class VideoCategoryComponent {
             () => {
                 if (this.videoRef) {
                     this.videoRef.nativeElement.load();
-                    this.videoRef.nativeElement.play();
+                    void this.videoRef.nativeElement.play();
                 }
             },
             0,

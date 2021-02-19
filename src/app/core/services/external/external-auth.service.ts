@@ -24,7 +24,7 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.events
             .pipe(
                 filter((e) => e.type === 'token_received'),
-                tap(() => this.finishLogin())
+                tap(() => void this.finishLogin())
             )
             .subscribe();
 
@@ -40,9 +40,9 @@ export class ExternalAuthService implements AuthService {
             this.oauthService.hasValidAccessToken() &&
             this.oauthService.hasValidIdToken()
         ) {
-            this.finishLogin();
+            void this.finishLogin();
         } else {
-            this.oauthService.tryLoginCodeFlow();
+            void this.oauthService.tryLoginCodeFlow();
         }
     }
 
@@ -51,13 +51,13 @@ export class ExternalAuthService implements AuthService {
     }
 
     loginViaPopup(): void {
-        this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
+        void this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
     }
 
     private async finishLogin(): Promise<void> {
         if (this.router.routerState.snapshot.url.startsWith('/login')) {
             await this.loadProfile();
-            this.router.navigate(['/']);
+            void this.router.navigate(['/']);
         }
     }
 

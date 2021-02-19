@@ -16,6 +16,12 @@ export const allPhotoViewModes: ValueDescriptor<PhotoViewMode>[] = [
     { value: PhotoViewMode.map, name: 'Map' },
 ];
 
+export const allRandomViewModes: ValueDescriptor<PhotoViewMode>[] = [
+    { value: PhotoViewMode.detail, name: 'Detail' },
+    { value: PhotoViewMode.fullscreen, name: 'Fullscreen' },
+    { value: PhotoViewMode.grid, name: 'Grid' },
+];
+
 export const isValidPhotoViewMode = (val?: string | null): boolean => {
     return !!toPhotoViewMode(val);
 };

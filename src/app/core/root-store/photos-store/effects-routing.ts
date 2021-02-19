@@ -40,7 +40,7 @@ export class PhotoStoreRoutingEffects {
                     return null;
                 }),
                 filter((url) => !!url),
-                tap((url) => this.router.navigateByUrl(url as string))
+                tap((url) => void this.router.navigateByUrl(url as string))
             );
         },
         { dispatch: false }
@@ -55,7 +55,7 @@ export class PhotoStoreRoutingEffects {
                 ),
                 tap(([, url]) => {
                     if (url) {
-                        this.router.navigateByUrl(
+                        void this.router.navigateByUrl(
                             url.substring(0, url.lastIndexOf('/'))
                         );
                     }
@@ -143,7 +143,7 @@ export class PhotoStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.photos),
             map((action) =>
                 PhotoStoreActions.loadRequest({
-                    categoryId: action.enteringRouteDetails?.params?.categoryId,
+                    categoryId: action.enteringRouteDetails?.params?.categoryId as number,
                 })
             )
         );

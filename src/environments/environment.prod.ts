@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 export const environment = {
     production: true,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    version: require('../../package.json').version,
+    version: require('../../package.json').version as string,
 
     apiUrl: 'https://api.mikeandwan.us',
     authUrl: 'https://auth.mikeandwan.us',

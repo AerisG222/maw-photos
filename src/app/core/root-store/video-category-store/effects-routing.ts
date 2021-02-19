@@ -41,7 +41,7 @@ export class VideoCategoryStoreRoutingEffects {
                     return isNaN(catId) || !(catId in entities);
                 }),
                 tap(() =>
-                    this.router.navigateByUrl(RouteHelper.categoriesAbs())
+                    void this.router.navigateByUrl(RouteHelper.categoriesAbs())
                 )
             );
         },
@@ -54,7 +54,7 @@ export class VideoCategoryStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.videos),
             map((action) =>
                 VideoCategoryStoreActions.setActiveCategoryId({
-                    categoryId: action.enteringRouteDetails?.params.categoryId,
+                    categoryId: action.enteringRouteDetails?.params.categoryId as number,
                 })
             )
         );

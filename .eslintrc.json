@@ -50,13 +50,12 @@
                         "style": "camelCase"
                     }
                 ],
-                // TODO: cleanup code and remove the items below
-                "@typescript-eslint/no-unsafe-call": "off",
-                "@typescript-eslint/no-misused-promises": "off",
-                "@typescript-eslint/no-floating-promises": "off",
-                "@typescript-eslint/no-unsafe-assignment": "off",
-                "@typescript-eslint/no-var-requires": "off",
-                "@typescript-eslint/unbound-method": "off"
+                "@typescript-eslint/unbound-method": [
+                    "error",
+                    {
+                        "ignoreStatic": true
+                    }
+                ]
             }
         },
         {

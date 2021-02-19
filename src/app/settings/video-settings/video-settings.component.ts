@@ -11,6 +11,7 @@ import {
     toThumbnailSizeDefaulted,
     allThumbnailSizes,
     allVideoSizes,
+    VideoSize,
 } from '@models';
 import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-settings-facade';
 import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-panel-settings-facade';
@@ -72,7 +73,7 @@ export class VideoSettingsComponent {
 
     private readDetailForm(): VideoDetailViewSettings {
         return {
-            videoSize: this.form.get('detail.videoSize')?.value,
+            videoSize: this.form.get('detail.videoSize')?.value as VideoSize,
             showBreadcrumbs: this.form.get('detail.showBreadcrumbs')
                 ?.value as boolean,
             showVideoList: this.form.get('detail.showVideoList')

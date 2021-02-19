@@ -137,7 +137,7 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
         details.push({
             name: 'Items',
             value: numbro(
-                categories.reduce((total, cat) => total + this.getCount(cat), 0)
+                categories.reduce((total, cat) => total + getCount(cat), 0)
             ).format({ thousandSeparated: true }),
         });
 
@@ -167,10 +167,10 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
 
         switch (aggregateBy) {
             case 'count':
-                agg = this.getCount;
+                agg = getCount;
                 break;
             case 'size':
-                agg = this.getSize;
+                agg = getSize;
                 break;
         }
 
@@ -190,14 +190,14 @@ export class CombinedStatsComponent implements OnInit, OnDestroy {
                 .reduce((total, cat) => total + agg(cat), 0),
         }));
     }
-
-    private getCount(category: Category): number {
-        return category.type === CategoryType.photo
-            ? (category.actual as PhotoCategory).photoCount
-            : (category.actual as VideoCategory).videoCount;
-    }
-
-    private getSize(category: Category): number {
-        return category.actual.totalSize;
-    }
 }
+
+const getCount = (category: Category): number => {
+    return category.type === CategoryType.photo
+        ? (category.actual as PhotoCategory).photoCount
+        : (category.actual as VideoCategory).videoCount;
+};
+
+const getSize = (category: Category): number => {
+    return category.actual.totalSize;
+};

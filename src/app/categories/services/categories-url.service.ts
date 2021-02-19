@@ -135,7 +135,7 @@ export class CategoriesUrlService {
         type: string;
         year: string | number;
     }) {
-        this.router.navigate([], {
+        void this.router.navigate([], {
             relativeTo: this.router.routerState.root,
             queryParams: filterParams,
             queryParamsHandling: 'merge',

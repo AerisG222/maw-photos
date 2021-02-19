@@ -24,7 +24,7 @@ export class ViewModeGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        const view = route.params?.view;
+        const view = route.params?.view as string;
 
         // this should never happen based on where the guard is configured in the
         // router configuration

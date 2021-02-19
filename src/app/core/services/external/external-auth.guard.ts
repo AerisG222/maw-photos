@@ -12,7 +12,7 @@ export class ExternalAuthGuard implements AuthGuard {
         if (this.oauthService.hasValidAccessToken()) {
             return true;
         } else {
-            this.router.navigate(['/login']);
+            void this.router.navigate(['/login']);
             return false;
         }
     }

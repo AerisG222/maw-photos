@@ -175,9 +175,9 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
         let agg: (category: Category) => number;
 
         if (aggregateBy === 'count') {
-            agg = this.getPhotoCount;
+            agg = getPhotoCount;
         } else {
-            agg = this.getPhotoSize;
+            agg = getPhotoSize;
         }
 
         if (selectedYear !== -1) {
@@ -196,12 +196,12 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
                 .reduce((total, cat) => total + agg(cat), 0),
         }));
     }
-
-    private getPhotoCount(category: Category): number {
-        return (category.actual as PhotoCategory).photoCount;
-    }
-
-    private getPhotoSize(category: Category): number {
-        return (category.actual as PhotoCategory).totalSize;
-    }
 }
+
+const getPhotoCount = (category: Category): number => {
+    return (category.actual as PhotoCategory).photoCount;
+};
+
+const getPhotoSize = (category: Category): number => {
+    return (category.actual as PhotoCategory).totalSize;
+};

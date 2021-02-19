@@ -16,6 +16,7 @@ import {
     searchApiServiceToken,
     SearchApiService,
 } from 'src/app/search/services/search-api.service';
+import { httpErrorHandler } from 'src/app/models/handle-error';
 
 @Injectable()
 export class SearchStoreEffects {
@@ -37,7 +38,7 @@ export class SearchStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(SearchActions.queryFailure({ error }))
+                        of(SearchActions.queryFailure({ error: httpErrorHandler(error) }))
                     )
                 )
             )
@@ -72,7 +73,7 @@ export class SearchStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(SearchActions.queryMoreFailure({ error }))
+                        of(SearchActions.queryMoreFailure({ error: httpErrorHandler(error) }))
                     )
                 )
             )

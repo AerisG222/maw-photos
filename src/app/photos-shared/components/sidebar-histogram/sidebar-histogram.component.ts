@@ -64,7 +64,7 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
         this.destroySub.add(
             this.form.get('channel')?.valueChanges.subscribe({
                 next: (val) => {
-                    this.channel = val;
+                    this.channel = val as string;
                     this.onImageLoad();
                 },
             })

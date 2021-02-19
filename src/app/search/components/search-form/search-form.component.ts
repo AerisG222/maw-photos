@@ -23,7 +23,7 @@ export class SearchFormComponent {
         const control = this.form.get('query');
 
         if (control) {
-            const searchTerm = control.value;
+            const searchTerm = control.value as string;
 
             if (searchTerm) {
                 this.store.dispatch(

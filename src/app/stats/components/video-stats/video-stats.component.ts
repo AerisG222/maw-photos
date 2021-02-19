@@ -187,13 +187,13 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
 
         switch (aggregateBy) {
             case 'count':
-                agg = this.getVideoCount;
+                agg = getVideoCount;
                 break;
             case 'size':
-                agg = this.getVideoSize;
+                agg = getVideoSize;
                 break;
             case 'time':
-                agg = this.getVideoDuration;
+                agg = getVideoDuration;
                 break;
         }
 
@@ -213,16 +213,16 @@ export class VideoStatsComponent implements OnInit, OnDestroy {
                 .reduce((total, cat) => total + agg(cat), 0),
         }));
     }
-
-    private getVideoCount(category: Category): number {
-        return (category.actual as VideoCategory).videoCount;
-    }
-
-    private getVideoSize(category: Category): number {
-        return (category.actual as VideoCategory).totalSize;
-    }
-
-    private getVideoDuration(category: Category): number {
-        return (category.actual as VideoCategory).totalDuration;
-    }
 }
+
+const getVideoCount = (category: Category): number => {
+    return (category.actual as VideoCategory).videoCount;
+};
+
+const getVideoSize = (category: Category): number => {
+    return (category.actual as VideoCategory).totalSize;
+};
+
+const getVideoDuration = (category: Category): number => {
+    return (category.actual as VideoCategory).totalDuration;
+};
