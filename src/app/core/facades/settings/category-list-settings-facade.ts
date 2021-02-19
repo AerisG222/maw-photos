@@ -24,11 +24,11 @@ export class CategoryListSettingsFacade extends BaseSettingsFacade<CategoryListV
         );
     }
 
-    saveMargin(newMargin: Margin) {
+    saveMargin(newMargin: Margin): void {
         this.saveUpdatedField((s) => (s.margin = newMargin));
     }
 
-    saveThumbnailSize(newSize: ThumbnailSize) {
+    saveThumbnailSize(newSize: ThumbnailSize): void {
         this.saveUpdatedField((s) => (s.thumbnailSize = newSize));
     }
 }

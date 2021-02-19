@@ -154,7 +154,7 @@ export class PhotoStoreFacadeService
         this.infoPanelFacade.saveMinimapZoom(zoom);
     }
 
-    setCategoryTeaser() {
+    setCategoryTeaser(): void {
         helpSaveCategoryTeaser(this.activePhoto$, (categoryId, photoId) => {
             this.store.dispatch(
                 PhotoCategoryStoreActions.setTeaserRequest({
@@ -165,7 +165,7 @@ export class PhotoStoreFacadeService
         });
     }
 
-    buildPhotoLink(photo: Photo) {
+    buildPhotoLink(photo: Photo): string {
         return RouteHelper.photoCategoriesAbs(
             this.view,
             photo.categoryId,
@@ -173,7 +173,7 @@ export class PhotoStoreFacadeService
         );
     }
 
-    selectPhotoViewMode(mode: PhotoViewMode) {
+    selectPhotoViewMode(mode: PhotoViewMode): void {
         this.store.dispatch(
             PhotoStoreActions.changeViewRequest({ view: mode })
         );

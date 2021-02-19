@@ -19,7 +19,7 @@ export class CategoryListItemComponent {
 
     categoryTypes = CategoryType;
 
-    buildLink() {
+    buildLink(): string | null {
         return RouteHelper.getCategoryRoute(this.category);
     }
 }

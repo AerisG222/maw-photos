@@ -24,15 +24,15 @@ export class CategoryFilterSettingsFacade extends BaseSettingsFacade<CategoryFil
         );
     }
 
-    saveYearFilter(yearFilter: number | string) {
+    saveYearFilter(yearFilter: number | string): void {
         this.saveUpdatedField((s) => (s.yearFilter = yearFilter));
     }
 
-    saveTypeFilter(typeFilter: CategoryTypeFilter) {
+    saveTypeFilter(typeFilter: CategoryTypeFilter): void {
         this.saveUpdatedField((s) => (s.typeFilter = typeFilter));
     }
 
-    saveMissingGpsFilter(gpsFilter: boolean) {
+    saveMissingGpsFilter(gpsFilter: boolean): void {
         this.saveUpdatedField((s) => (s.missingGpsFilter = gpsFilter));
     }
 }

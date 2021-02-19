@@ -23,7 +23,7 @@ export class GridViewComponent {
         private store: Store
     ) {}
 
-    onToggleThumbnailSize(newSize: ThumbnailSize) {
+    onToggleThumbnailSize(newSize: ThumbnailSize): void {
         this.gridViewFacade.saveThumbnailSize(newSize);
     }
 

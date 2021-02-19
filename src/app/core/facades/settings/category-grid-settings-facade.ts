@@ -24,15 +24,15 @@ export class CategoryGridSettingsFacade extends BaseSettingsFacade<CategoryGridV
         );
     }
 
-    saveMargin(newMargin: Margin) {
+    saveMargin(newMargin: Margin): void {
         this.saveUpdatedField((s) => (s.margin = newMargin));
     }
 
-    saveShowTitles(doShow: boolean) {
+    saveShowTitles(doShow: boolean): void {
         this.saveUpdatedField((s) => (s.showTitles = doShow));
     }
 
-    saveThumbnailSize(newSize: ThumbnailSize) {
+    saveThumbnailSize(newSize: ThumbnailSize): void {
         this.saveUpdatedField((s) => (s.thumbnailSize = newSize));
     }
 }

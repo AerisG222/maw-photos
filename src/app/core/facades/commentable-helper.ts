@@ -22,6 +22,6 @@ export const helpAddComment = (
                 addComment(id, comment);
             }
         },
-        error: (err) => console.log(`error trying to add comment: ${err}`),
+        error: () => console.log('error trying to add comment'),
     });
 };

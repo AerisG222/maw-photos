@@ -154,7 +154,7 @@ export class RandomStoreFacadeService
         this.infoPanelFacade.saveMinimapZoom(zoom);
     }
 
-    setCategoryTeaser() {
+    setCategoryTeaser(): void {
         helpSaveCategoryTeaser(this.activePhoto$, (categoryId, photoId) => {
             this.store.dispatch(
                 PhotoCategoryStoreActions.setTeaserRequest({
@@ -165,11 +165,11 @@ export class RandomStoreFacadeService
         });
     }
 
-    buildPhotoLink(photo: Photo) {
+    buildPhotoLink(photo: Photo): string {
         return RouteHelper.randomAbs(this.view, photo.id);
     }
 
-    selectPhotoViewMode(mode: PhotoViewMode) {
+    selectPhotoViewMode(mode: PhotoViewMode): void {
         this.randomPageFacade.saveViewMode(mode);
     }
 }

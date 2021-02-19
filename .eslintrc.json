@@ -53,7 +53,6 @@
                 // TODO: cleanup code and remove the items below
                 "@typescript-eslint/no-explicit-any": "error",
                 "@typescript-eslint/no-shadow": "error",
-                "typescript-eslint/no-var-requires": "off",
                 "@typescript-eslint/no-unsafe-member-access": "off",
                 "@typescript-eslint/parser": "off",
                 "@typescript-eslint/no-unsafe-call": "off",
@@ -61,12 +60,7 @@
                 "@typescript-eslint/no-floating-promises": "off",
                 "@typescript-eslint/no-unsafe-assignment": "off",
                 "@typescript-eslint/no-var-requires": "off",
-                "@typescript-eslint/unbound-method": "off",
-                "@typescript-eslint/explicit-module-boundary-types": "off",
-                "@typescript-eslint/restrict-template-expressions": "off",
-                "@typescript-eslint/no-unsafe-return": "off",
-                "@typescript-eslint/no-empty-function": "off",
-                "ngrx/select-style": "error"
+                "@typescript-eslint/unbound-method": "off"
             }
         },
         {

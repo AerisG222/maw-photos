@@ -89,7 +89,7 @@ export class CategoriesUrlService {
         return !!validatedFilter;
     }
 
-    updateFilterInUrl(settings: CategoryFilterSettings) {
+    updateFilterInUrl(settings: CategoryFilterSettings): void {
         const filterParams = {
             year: settings.yearFilter,
             type: settings.typeFilter,

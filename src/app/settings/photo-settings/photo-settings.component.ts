@@ -84,7 +84,7 @@ export class PhotoSettingsComponent {
         this.resetForm();
     }
 
-    onSave() {
+    onSave(): void {
         if (!this.form.valid) {
             return;
         }
@@ -102,7 +102,7 @@ export class PhotoSettingsComponent {
         this.pageFacade.save(page);
     }
 
-    onCancel() {
+    onCancel(): void {
         this.resetForm();
     }
 

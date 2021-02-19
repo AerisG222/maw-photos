@@ -21,15 +21,15 @@ export class FilterBarComponent {
         private store: Store
     ) {}
 
-    onChangeTypeFilter(evt: CategoryTypeFilter) {
+    onChangeTypeFilter(evt: CategoryTypeFilter): void {
         this.filterFacade.saveTypeFilter(evt);
     }
 
-    onChangeYearFilter(evt: number | string) {
+    onChangeYearFilter(evt: number | string): void {
         this.filterFacade.saveYearFilter(evt);
     }
 
-    onChangeGpsFilter(evt: boolean) {
+    onChangeGpsFilter(evt: boolean): void {
         this.filterFacade.saveMissingGpsFilter(evt);
     }
 }

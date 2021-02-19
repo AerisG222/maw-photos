@@ -9,7 +9,7 @@ import { SettingsStoreActions } from '@core/root-store';
 export class SettingsFacade {
     constructor(private store: Store) {}
 
-    load() {
+    load(): void {
         this.store.dispatch(SettingsStoreActions.loadRequest());
     }
 }

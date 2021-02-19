@@ -43,7 +43,7 @@ export abstract class ToolbarViewButtonBaseComponent {
         private viewMode: PhotoViewMode
     ) {}
 
-    onSelectView() {
+    onSelectView(): void {
         this.viewModeSelectable.selectPhotoViewMode(this.viewMode);
     }
 }

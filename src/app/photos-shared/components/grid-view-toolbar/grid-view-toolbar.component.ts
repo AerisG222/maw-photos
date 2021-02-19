@@ -54,7 +54,7 @@ export class GridViewToolbarComponent {
             .pipe(first())
             .subscribe({
                 next: (photo) => this.sharePhoto(photo),
-                error: (err) => console.log(`error sharing photo: ${err}`),
+                error: () => console.log('Error sharing photo'),
             });
     }
 
@@ -62,8 +62,8 @@ export class GridViewToolbarComponent {
         if (!!photo && !!this.window?.navigator?.share) {
             try {
                 await navigator.share({ url: photo.imageMd.url });
-            } catch (error) {
-                console.error(`Error sharing: ${error}`);
+            } catch {
+                console.error('Error sharing');
             }
         } else {
             console.log('sharing is not enabled on this platform');

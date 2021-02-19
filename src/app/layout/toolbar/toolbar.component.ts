@@ -20,7 +20,7 @@ import { toolbarShow } from '@shared/animations';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
-    @ViewChild('scrollPane') scrollPane: ElementRef | null = null;
+    @ViewChild('scrollPane') scrollPane: ElementRef<HTMLDivElement> | null = null;
 
     getCurrentScrollTop(): number {
         if (this.scrollPane) {
@@ -32,7 +32,7 @@ export class ToolbarComponent {
 
     setCurrentScrollTop(newTop: number): void {
         if (this.scrollPane) {
-            const div = this.scrollPane.nativeElement as HTMLDivElement;
+            const div = this.scrollPane.nativeElement;
 
             setTimeout(
                 () =>

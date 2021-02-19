@@ -64,7 +64,7 @@ export class CategorySettingsComponent {
         this.resetForm();
     }
 
-    onSave() {
+    onSave(): void {
         const typeFilter = toCategoryTypeFilter(
             this.form.get('page.typeFilter')?.value
         ) as CategoryTypeFilter;
@@ -79,7 +79,7 @@ export class CategorySettingsComponent {
         this.listFacade.save(listSettings);
     }
 
-    onCancel() {
+    onCancel(): void {
         this.resetForm();
     }
 

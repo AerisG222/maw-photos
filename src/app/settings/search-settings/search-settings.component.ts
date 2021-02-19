@@ -54,7 +54,7 @@ export class SearchSettingsComponent {
         this.resetForm();
     }
 
-    onSave() {
+    onSave(): void {
         if (!this.form.valid) {
             return;
         }
@@ -68,7 +68,7 @@ export class SearchSettingsComponent {
         this.pageFacade.save(page);
     }
 
-    onCancel() {
+    onCancel(): void {
         this.resetForm();
     }
 

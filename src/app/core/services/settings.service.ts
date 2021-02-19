@@ -88,7 +88,7 @@ export class SettingsService {
         this.cleanLegacySettings();
     }
 
-    cleanLegacySettings() {
+    cleanLegacySettings(): void {
         if (!this.getVersion()) {
             this.localStorage.clear();
             this.saveVersion();

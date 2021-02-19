@@ -13,17 +13,17 @@ export abstract class BaseSettingsComponent<T> {
 
     constructor(public facade: BaseSettingsFacade<T>) {}
 
-    onSave() {
+    onSave(): void {
         if (this.form.valid) {
             this.facade.save(this.readForm());
         }
     }
 
-    onCancel() {
+    onCancel(): void {
         this.resetForm();
     }
 
-    protected resetForm() {
+    protected resetForm(): void {
         this.facade.settings$.pipe(first()).subscribe({
             next: (settings) => this.updateForm(settings),
         });

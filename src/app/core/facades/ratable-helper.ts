@@ -12,6 +12,6 @@ export const helpRate = (
                 rate(id, rating);
             }
         },
-        error: (err) => console.log(`error trying to set rating: ${err}`),
+        error: () => console.log('error trying to set rating'),
     });
 };

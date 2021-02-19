@@ -58,7 +58,7 @@ export class VideoSettingsComponent {
         this.resetForm();
     }
 
-    onSave() {
+    onSave(): void {
         const detail = this.readDetailForm();
         const info = this.readInfoForm();
 
@@ -66,7 +66,7 @@ export class VideoSettingsComponent {
         this.infoFacade.save(info);
     }
 
-    onCancel() {
+    onCancel(): void {
         this.resetForm();
     }
 

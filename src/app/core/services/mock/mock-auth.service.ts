@@ -9,7 +9,9 @@ import { AuthService } from '@core/services';
 export class MockAuthService implements AuthService {
     constructor(private store: Store, private router: Router) {}
 
-    async init(): Promise<void> {}
+    async init(): Promise<void> {
+        return Promise.resolve();
+    }
 
     handleLoginCallback(): void {
         this.finishLogin();
@@ -19,6 +21,7 @@ export class MockAuthService implements AuthService {
         this.finishLogin();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     loginViaPopup(): void {}
 
     private finishLogin(): void {

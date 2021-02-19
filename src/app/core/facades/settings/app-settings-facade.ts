@@ -15,7 +15,7 @@ export class AppSettingsFacade extends BaseSettingsFacade<AppSettings> {
         super();
     }
 
-    save(settings: AppSettings) {
+    save(settings: AppSettings): void {
         this.store.dispatch(SettingsStoreActions.saveAppSettings({ settings }));
     }
 }

@@ -21,11 +21,11 @@ export class PhotoMapSettingsFacade extends BaseSettingsFacade<PhotoMapViewSetti
         );
     }
 
-    saveMapType(mapType: MapType) {
+    saveMapType(mapType: MapType): void {
         this.saveUpdatedField((x) => (x.mapType = mapType));
     }
 
-    saveZoom(zoom: number) {
+    saveZoom(zoom: number): void {
         this.saveUpdatedField((x) => (x.zoom = zoom));
     }
 }

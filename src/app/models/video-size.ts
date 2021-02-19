@@ -31,7 +31,7 @@ export const nextVideoSize = (size: VideoSize): VideoSize => {
         case VideoSize.large:
             return VideoSize.small;
         default:
-            console.error(`invalid video size requested: ${size}`);
+            console.error('invalid video size requested');
     }
 
     return VideoSize.small;

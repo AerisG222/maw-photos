@@ -39,7 +39,7 @@ export const nextMargin = (margin: Margin): Margin => {
         case Margin.cozy:
             return Margin.dense;
         default:
-            console.error(`invalid margin requested: ${margin}`);
+            console.error('invalid margin requested');
     }
 
     return Margin.compact;

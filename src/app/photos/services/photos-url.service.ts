@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { isValidPhotoViewMode, PhotoViewMode } from '@models';
@@ -8,7 +9,7 @@ import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-setti
 export class PhotosUrlService {
     constructor(private photoPage: PhotoPageSettingsFacade) {}
 
-    getValidView(requestedView: string | null, preferredView: string | null) {
+    getValidView(requestedView: string | null, preferredView: string | null): string {
         if (isValidPhotoViewMode(requestedView)) {
             return requestedView as string;
         }
@@ -20,7 +21,7 @@ export class PhotosUrlService {
         return PhotoViewMode.grid;
     }
 
-    getDefaultView() {
+    getDefaultView(): Observable<string> {
         return this.photoPage.settings$.pipe(
             map((s) => this.getValidView(null, s.viewMode))
         );

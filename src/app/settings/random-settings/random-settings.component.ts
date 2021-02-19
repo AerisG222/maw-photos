@@ -77,7 +77,7 @@ export class RandomSettingsComponent {
         this.resetForm();
     }
 
-    onSave() {
+    onSave(): void {
         if (!this.form.valid) {
             return;
         }
@@ -93,7 +93,7 @@ export class RandomSettingsComponent {
         this.pageFacade.save(page);
     }
 
-    onCancel() {
+    onCancel(): void {
         this.resetForm();
     }
 

@@ -37,7 +37,7 @@ export class GridPhotoComponent implements OnInit, OnDestroy {
         }
     }
 
-    closeMainPhoto() {
+    closeMainPhoto(): boolean {
         this.store.dispatch(PhotoStoreActions.navigateUpFromIndividualPhoto());
 
         return false;

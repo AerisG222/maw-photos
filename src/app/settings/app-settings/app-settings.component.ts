@@ -32,7 +32,7 @@ export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
         };
     }
 
-    protected updateForm(settings: AppSettings) {
+    protected updateForm(settings: AppSettings): void {
         this.form.patchValue({
             theme: settings.theme,
         });

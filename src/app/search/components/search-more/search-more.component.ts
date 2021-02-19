@@ -34,7 +34,7 @@ export class SearchMoreComponent {
                         );
                     }
                 },
-                error: (err) => console.log(`error searching for more: ${err}`),
+                error: () => console.log('error searching for more results'),
             });
     }
 }

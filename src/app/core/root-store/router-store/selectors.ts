@@ -37,9 +37,10 @@ export const selectRouteNestedParams = createSelector(routerState, (router) => {
     return params;
 });
 
-export const selectRouteNestedParam = (param: string) => {
+export const selectRouteNestedParam = (param: string): Params | null => {
     return createSelector(
         selectRouteNestedParams,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         (params) => params && params[param]
     );
 };
