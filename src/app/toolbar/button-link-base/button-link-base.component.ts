@@ -50,7 +50,7 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
         if (!!this.button && !this.button.disabled) {
             this.button.ripple.launch({ centered: true });
             // eslint-disable-next-line no-underscore-dangle
-            this.button._elementRef.nativeElement.click();
+            (this.button._elementRef.nativeElement as HTMLElement).click();
         }
 
         return false;

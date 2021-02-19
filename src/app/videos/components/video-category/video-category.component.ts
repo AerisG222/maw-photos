@@ -19,7 +19,7 @@ import { VideoDetailSettingsFacade } from '@core/facades/settings/video-detail-s
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoCategoryComponent {
-    @ViewChild('videoRef') videoRef: ElementRef | null = null;
+    @ViewChild('videoRef') videoRef: ElementRef<HTMLVideoElement> | null = null;
 
     videoSize = VideoSize;
     settings$ = this.videoFacade.settings$;

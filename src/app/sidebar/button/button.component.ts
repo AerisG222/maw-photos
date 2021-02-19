@@ -30,7 +30,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
 
     constructor(
         private hotkeysService: HotkeysService,
-        private el: ElementRef
+        private el: ElementRef<HTMLButtonElement>
     ) {}
 
     ngOnInit(): void {

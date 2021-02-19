@@ -51,10 +51,6 @@
                     }
                 ],
                 // TODO: cleanup code and remove the items below
-                "@typescript-eslint/no-explicit-any": "error",
-                "@typescript-eslint/no-shadow": "error",
-                "@typescript-eslint/no-unsafe-member-access": "off",
-                "@typescript-eslint/parser": "off",
                 "@typescript-eslint/no-unsafe-call": "off",
                 "@typescript-eslint/no-misused-promises": "off",
                 "@typescript-eslint/no-floating-promises": "off",

@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     version: require('../../package.json').version,
 
     apiUrl: 'https://api.mikeandwan.us',
