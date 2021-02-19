@@ -76,7 +76,8 @@ export class VideoStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.videos),
             map((action) =>
                 VideoStoreActions.loadRequest({
-                    categoryId: action.enteringRouteDetails?.params?.categoryId as number,
+                    categoryId: action.enteringRouteDetails?.params
+                        ?.categoryId as number,
                 })
             )
         );

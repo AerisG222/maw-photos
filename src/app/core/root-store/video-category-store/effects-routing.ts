@@ -40,8 +40,11 @@ export class VideoCategoryStoreRoutingEffects {
 
                     return isNaN(catId) || !(catId in entities);
                 }),
-                tap(() =>
-                    void this.router.navigateByUrl(RouteHelper.categoriesAbs())
+                tap(
+                    () =>
+                        void this.router.navigateByUrl(
+                            RouteHelper.categoriesAbs()
+                        )
                 )
             );
         },
@@ -54,7 +57,8 @@ export class VideoCategoryStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.videos),
             map((action) =>
                 VideoCategoryStoreActions.setActiveCategoryId({
-                    categoryId: action.enteringRouteDetails?.params.categoryId as number,
+                    categoryId: action.enteringRouteDetails?.params
+                        .categoryId as number,
                 })
             )
         );

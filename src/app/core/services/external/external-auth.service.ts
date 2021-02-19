@@ -51,7 +51,10 @@ export class ExternalAuthService implements AuthService {
     }
 
     loginViaPopup(): void {
-        void this.oauthService.initLoginFlowInPopup({ height: 600, width: 600 });
+        void this.oauthService.initLoginFlowInPopup({
+            height: 600,
+            width: 600,
+        });
     }
 
     private async finishLogin(): Promise<void> {

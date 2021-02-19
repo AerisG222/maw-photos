@@ -149,7 +149,10 @@ export const statsAbs = (section?: string): string => {
     return url;
 };
 
-export const videoCategoriesAbs = (categoryId?: number, videoId?: number): string => {
+export const videoCategoriesAbs = (
+    categoryId?: number,
+    videoId?: number
+): string => {
     let url = `/${videoCategories}`;
 
     if (categoryId) {

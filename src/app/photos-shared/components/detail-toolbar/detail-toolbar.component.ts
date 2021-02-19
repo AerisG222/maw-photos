@@ -68,8 +68,7 @@ export class DetailToolbarComponent {
             .pipe(first())
             .subscribe({
                 next: (photo) => this.sharePhoto(photo),
-                error: () =>
-                    console.log('error trying to share photo'),
+                error: () => console.log('error trying to share photo'),
             });
     }
 

@@ -31,7 +31,11 @@ export class VideoStoreEffects {
                         VideoStoreActions.loadSuccess({ videos: videos.items })
                     ),
                     catchError((error) =>
-                        of(VideoStoreActions.loadFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoStoreActions.loadFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -47,7 +51,11 @@ export class VideoStoreEffects {
                         VideoStoreActions.loadRatingSuccess({ rating })
                     ),
                     catchError((error) =>
-                        of(VideoStoreActions.loadRatingFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoStoreActions.loadRatingFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -77,7 +85,11 @@ export class VideoStoreEffects {
                         VideoStoreActions.rateVideoSuccess({ rating })
                     ),
                     catchError((error) =>
-                        of(VideoStoreActions.rateVideoFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoStoreActions.rateVideoFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -95,7 +107,11 @@ export class VideoStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(VideoStoreActions.rateVideoFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoStoreActions.rateVideoFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -127,7 +143,11 @@ export class VideoStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(VideoStoreActions.addCommentFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoStoreActions.addCommentFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -156,7 +176,11 @@ export class VideoStoreEffects {
                         VideoStoreActions.loadGpsDetailSuccess({ gpsDetail })
                     ),
                     catchError((error) =>
-                        of(VideoStoreActions.loadGpsDetailFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoStoreActions.loadGpsDetailFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )

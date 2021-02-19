@@ -44,7 +44,11 @@ export class PhotoStoreEffects {
                         PhotoActions.loadSuccess({ photos: photos.items })
                     ),
                     catchError((error) =>
-                        of(PhotoActions.loadFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.loadFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -58,7 +62,11 @@ export class PhotoStoreEffects {
                 this.api.getRandomPhoto().pipe(
                     map((photo) => PhotoActions.loadRandomSuccess({ photo })),
                     catchError((error) =>
-                        of(PhotoActions.loadRandomFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.loadRandomFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -76,7 +84,11 @@ export class PhotoStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoActions.loadMultipleRandomFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.loadMultipleRandomFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -102,7 +114,11 @@ export class PhotoStoreEffects {
                 this.api.getRating(action.photoId).pipe(
                     map((rating) => PhotoActions.loadRatingSuccess({ rating })),
                     catchError((error) =>
-                        of(PhotoActions.loadRatingFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.loadRatingFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -116,7 +132,11 @@ export class PhotoStoreEffects {
                 this.api.ratePhoto(action.photoId, action.userRating).pipe(
                     map((rating) => PhotoActions.ratePhotoSuccess({ rating })),
                     catchError((error) =>
-                        of(PhotoActions.ratePhotoFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.ratePhotoFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -146,7 +166,11 @@ export class PhotoStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoActions.ratePhotoFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.ratePhotoFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -164,7 +188,11 @@ export class PhotoStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoActions.addCommentFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.addCommentFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -204,7 +232,11 @@ export class PhotoStoreEffects {
                     map((detail) => this.exifFormatterService.format(detail)),
                     map((data) => PhotoActions.loadExifSuccess({ exif: data })),
                     catchError((error) =>
-                        of(PhotoActions.loadExifFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.loadExifFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -234,7 +266,11 @@ export class PhotoStoreEffects {
                         PhotoActions.loadGpsDetailSuccess({ gpsDetail })
                     ),
                     catchError((error) =>
-                        of(PhotoActions.loadGpsDetailFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoActions.loadGpsDetailFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )

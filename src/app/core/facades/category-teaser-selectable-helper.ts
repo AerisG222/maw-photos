@@ -13,7 +13,6 @@ export const helpSaveCategoryTeaser = (
                 setTeaser(photoOrVideo.categoryId, photoOrVideo.id);
             }
         },
-        error: () =>
-            console.log('error trying to set category teaser'),
+        error: () => console.log('error trying to set category teaser'),
     });
 };

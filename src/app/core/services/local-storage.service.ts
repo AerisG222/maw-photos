@@ -19,7 +19,7 @@ export class LocalStorageService {
 
         const val = this.strategy.getItem(this.normalize(key));
 
-        if(val) {
+        if (val) {
             return JSON.parse(val) as T;
         }
 

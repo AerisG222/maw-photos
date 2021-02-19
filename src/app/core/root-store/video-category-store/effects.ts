@@ -41,7 +41,11 @@ export class VideoCategoryStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(VideoCategoryStoreActions.loadFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            VideoCategoryStoreActions.loadFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 );
             })

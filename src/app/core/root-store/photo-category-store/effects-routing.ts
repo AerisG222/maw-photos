@@ -40,8 +40,11 @@ export class PhotoCategoryStoreRoutingEffects {
 
                     return isNaN(catId) || !(catId in entities);
                 }),
-                tap(() =>
-                    void this.router.navigateByUrl(RouteHelper.categoriesAbs())
+                tap(
+                    () =>
+                        void this.router.navigateByUrl(
+                            RouteHelper.categoriesAbs()
+                        )
                 )
             );
         },
@@ -54,7 +57,8 @@ export class PhotoCategoryStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.photos),
             map((action) =>
                 PhotoCategoryStoreActions.setActiveCategoryId({
-                    categoryId: action.enteringRouteDetails?.params.categoryId as number,
+                    categoryId: action.enteringRouteDetails?.params
+                        .categoryId as number,
                 })
             )
         );

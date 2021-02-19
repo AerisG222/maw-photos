@@ -143,7 +143,8 @@ export class PhotoStoreRoutingEffects {
             filter((action) => action.enteringArea === RouteArea.photos),
             map((action) =>
                 PhotoStoreActions.loadRequest({
-                    categoryId: action.enteringRouteDetails?.params?.categoryId as number,
+                    categoryId: action.enteringRouteDetails?.params
+                        ?.categoryId as number,
                 })
             )
         );

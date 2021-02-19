@@ -41,7 +41,11 @@ export class PhotoCategoryStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoCategoryActions.loadFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoCategoryActions.loadFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 );
             })
@@ -59,7 +63,11 @@ export class PhotoCategoryStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(PhotoCategoryActions.setTeaserFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            PhotoCategoryActions.setTeaserFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )

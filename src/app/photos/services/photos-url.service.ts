@@ -9,7 +9,10 @@ import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-setti
 export class PhotosUrlService {
     constructor(private photoPage: PhotoPageSettingsFacade) {}
 
-    getValidView(requestedView: string | null, preferredView: string | null): string {
+    getValidView(
+        requestedView: string | null,
+        preferredView: string | null
+    ): string {
         if (isValidPhotoViewMode(requestedView)) {
             return requestedView as string;
         }

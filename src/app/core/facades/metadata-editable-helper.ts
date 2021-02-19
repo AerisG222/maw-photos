@@ -13,7 +13,6 @@ export const helpSaveGpsOverride = (
                 saveGpsOverride(id, latLng);
             }
         },
-        error: () =>
-            console.log('error trying to save gps override'),
+        error: () => console.log('error trying to save gps override'),
     });
 };

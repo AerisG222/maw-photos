@@ -38,7 +38,11 @@ export class SearchStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(SearchActions.queryFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            SearchActions.queryFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
@@ -73,7 +77,11 @@ export class SearchStoreEffects {
                         })
                     ),
                     catchError((error) =>
-                        of(SearchActions.queryMoreFailure({ error: httpErrorHandler(error) }))
+                        of(
+                            SearchActions.queryMoreFailure({
+                                error: httpErrorHandler(error),
+                            })
+                        )
                     )
                 )
             )
