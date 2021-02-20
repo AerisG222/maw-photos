@@ -132,6 +132,39 @@
                                     "maximumError": "4kb"
                                 }
                             ]
+                        },
+                        "analyzeperf": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/app/core/root-store/environment/modules.ts",
+                                    "with": "src/app/core/root-store/environment/modules.prod.ts"
+                                }
+                            ],
+                            "optimization": {
+                                "scripts": true,
+                                "styles": {
+                                    "minify": true,
+                                    "inlineCritical": true
+                                },
+                                "fonts": true
+                            },
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kb",
+                                    "maximumError": "1.5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "2kb",
+                                    "maximumError": "4kb"
+                                }
+                            ]
                         }
                     }
                 },
@@ -141,6 +174,9 @@
                         "browserTarget": "maw-photos:build"
                     },
                     "configurations": {
+                        "analyzeperf": {
+                            "browserTarget": "maw-photos:build:analyzeperf"
+                        },
                         "production": {
                             "browserTarget": "maw-photos:build:production"
                         }

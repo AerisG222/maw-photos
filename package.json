@@ -16,7 +16,8 @@
     "containerdev_build": "ng build --aot --configuration containerdev",
     "prod_build": "ng build --aot --prod",
     "containerize_dev": "buildah bud -f Containerfile.dev -t maw-photos-dev",
-    "analyze": "source-map-explorer dist/main*.js"
+    "analyze": "source-map-explorer dist/main*.js",
+    "analyzeperf": "NG_BUILD_MINIFY=false ng serve --aot --configuration analyzeperf --public-host photosdev.mikeandwan.us"
   },
   "private": true,
   "dependencies": {
