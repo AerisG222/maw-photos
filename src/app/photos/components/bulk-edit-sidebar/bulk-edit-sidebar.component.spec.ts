@@ -7,8 +7,8 @@ describe('BulkEditSidebarComponent', () => {
     let fixture: ComponentFixture<BulkEditSidebarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [BulkEditSidebarComponent],
             }).compileComponents();
         })

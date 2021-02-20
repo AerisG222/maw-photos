@@ -7,8 +7,8 @@ describe('AboutLinkComponent', () => {
     let fixture: ComponentFixture<AboutLinkComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [AboutLinkComponent],
             }).compileComponents();
         })

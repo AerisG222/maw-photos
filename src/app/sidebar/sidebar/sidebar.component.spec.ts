@@ -7,8 +7,8 @@ describe('SidebarComponent', () => {
     let fixture: ComponentFixture<SidebarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [SidebarComponent],
             }).compileComponents();
         })

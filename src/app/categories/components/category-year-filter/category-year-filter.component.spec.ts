@@ -7,8 +7,8 @@ describe('CategoryYearFilterComponent', () => {
     let fixture: ComponentFixture<CategoryYearFilterComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CategoryYearFilterComponent],
             }).compileComponents();
         })

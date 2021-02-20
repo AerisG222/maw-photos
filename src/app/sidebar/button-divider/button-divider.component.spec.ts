@@ -7,8 +7,8 @@ describe('ButtonDividerComponent', () => {
     let fixture: ComponentFixture<ButtonDividerComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ButtonDividerComponent],
             }).compileComponents();
         })

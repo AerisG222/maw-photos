@@ -7,8 +7,8 @@ describe('ToolbarSlideshowButtonComponent', () => {
     let fixture: ComponentFixture<ToolbarSlideshowButtonComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ToolbarSlideshowButtonComponent],
             }).compileComponents();
         })

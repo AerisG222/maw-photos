@@ -7,8 +7,8 @@ describe('LayoutComponent', () => {
     let fixture: ComponentFixture<LayoutComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [LayoutComponent],
             }).compileComponents();
         })

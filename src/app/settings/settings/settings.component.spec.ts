@@ -7,8 +7,8 @@ describe('SettingsDialogComponent', () => {
     let fixture: ComponentFixture<SettingsComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [SettingsComponent],
             }).compileComponents();
         })

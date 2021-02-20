@@ -7,8 +7,8 @@ describe('BulkEditToolbarComponent', () => {
     let fixture: ComponentFixture<BulkEditToolbarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [BulkEditToolbarComponent],
             }).compileComponents();
         })

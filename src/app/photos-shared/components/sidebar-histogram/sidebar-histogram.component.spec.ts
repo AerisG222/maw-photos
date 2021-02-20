@@ -7,8 +7,8 @@ describe('SidebarHistogramComponent', () => {
     let fixture: ComponentFixture<SidebarHistogramComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [SidebarHistogramComponent],
             }).compileComponents();
         })

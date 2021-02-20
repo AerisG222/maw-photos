@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
         page = new AppPage();
     });
 
-    it('should display welcome message', () => {
-        page.navigateTo();
-        expect(page.getTitleText()).toEqual('Welcome to asdf!');
+    it('should display welcome message', async () => {
+        await page.navigateTo();
+        await expect(page.getTitleText()).toEqual('Welcome to asdf!');
     });
 
     afterEach(async () => {

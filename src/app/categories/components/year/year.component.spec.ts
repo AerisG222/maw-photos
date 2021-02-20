@@ -7,8 +7,8 @@ describe('YearComponent', () => {
     let fixture: ComponentFixture<YearComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [YearComponent],
             }).compileComponents();
         })

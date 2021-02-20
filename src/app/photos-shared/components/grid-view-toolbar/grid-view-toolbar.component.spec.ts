@@ -7,8 +7,8 @@ describe('GridViewToolbarComponent', () => {
     let fixture: ComponentFixture<GridViewToolbarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [GridViewToolbarComponent],
             }).compileComponents();
         })

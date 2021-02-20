@@ -1,10 +1,8 @@
 /.git
 /.github
 /dist
-/e2e
 /etc
 /node_modules
 /tools
 tmp
 out-tsc
-**/*.spec.ts

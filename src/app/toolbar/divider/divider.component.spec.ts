@@ -7,8 +7,8 @@ describe('DividerComponent', () => {
     let fixture: ComponentFixture<DividerComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [DividerComponent],
             }).compileComponents();
         })

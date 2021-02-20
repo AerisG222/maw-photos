@@ -7,8 +7,8 @@ describe('HeaderComponent', () => {
     let fixture: ComponentFixture<HeaderComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [HeaderComponent],
             }).compileComponents();
         })

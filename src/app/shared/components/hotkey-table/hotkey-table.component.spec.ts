@@ -7,8 +7,8 @@ describe('HotkeyTableComponent', () => {
     let fixture: ComponentFixture<HotkeyTableComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [HotkeyTableComponent],
             }).compileComponents();
         })

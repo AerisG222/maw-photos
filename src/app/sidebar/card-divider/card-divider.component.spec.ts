@@ -7,8 +7,8 @@ describe('CardDividerComponent', () => {
     let fixture: ComponentFixture<CardDividerComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CardDividerComponent],
             }).compileComponents();
         })

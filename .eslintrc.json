@@ -6,7 +6,9 @@
         "projects/**/*"
     ],
     "env": {
-        "es6": true
+        "es2020": true,
+        "jasmine": true,
+        "protractor": true
     },
     "overrides": [
         {
@@ -16,7 +18,9 @@
             "parser": "@typescript-eslint/parser",
             "parserOptions": {
                 "project": [
-                    "tsconfig.app.json"
+                    "tsconfig.app.json",
+                    "tsconfig.spec.json",
+                    "e2e/tsconfig.json"
                 ],
                 "createDefaultProgram": true
             },

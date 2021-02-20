@@ -7,8 +7,8 @@ describe('FullscreenToolbarComponent', () => {
     let fixture: ComponentFixture<FullscreenToolbarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [FullscreenToolbarComponent],
             }).compileComponents();
         })

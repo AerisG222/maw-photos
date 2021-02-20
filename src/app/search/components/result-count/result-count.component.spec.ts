@@ -7,8 +7,8 @@ describe('ResultCountComponent', () => {
     let fixture: ComponentFixture<ResultCountComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ResultCountComponent],
             }).compileComponents();
         })

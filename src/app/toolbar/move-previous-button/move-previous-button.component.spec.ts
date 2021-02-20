@@ -7,8 +7,8 @@ describe('MovePreviousButtonComponent', () => {
     let fixture: ComponentFixture<MovePreviousButtonComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [MovePreviousButtonComponent],
             }).compileComponents();
         })

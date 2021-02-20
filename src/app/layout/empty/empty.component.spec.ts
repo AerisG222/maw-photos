@@ -7,8 +7,8 @@ describe('EmptyComponent', () => {
     let fixture: ComponentFixture<EmptyComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [EmptyComponent],
             }).compileComponents();
         })

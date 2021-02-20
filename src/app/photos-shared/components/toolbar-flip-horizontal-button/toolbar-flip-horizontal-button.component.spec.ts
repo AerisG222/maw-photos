@@ -7,8 +7,8 @@ describe('ToolbarFlipHorizontalButtonComponent', () => {
     let fixture: ComponentFixture<ToolbarFlipHorizontalButtonComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ToolbarFlipHorizontalButtonComponent],
             }).compileComponents();
         })

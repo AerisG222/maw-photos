@@ -7,8 +7,8 @@ describe('MapToolbarComponent', () => {
     let fixture: ComponentFixture<MapToolbarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [MapToolbarComponent],
             }).compileComponents();
         })

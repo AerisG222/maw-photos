@@ -7,8 +7,8 @@ describe('CategoryListComponent', () => {
     let fixture: ComponentFixture<CategoryGridComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CategoryGridComponent],
             }).compileComponents();
         })

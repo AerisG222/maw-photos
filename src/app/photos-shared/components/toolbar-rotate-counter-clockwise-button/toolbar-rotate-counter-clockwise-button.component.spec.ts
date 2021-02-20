@@ -7,8 +7,8 @@ describe('ToolbarRotateCounterClockwiseButtonComponent', () => {
     let fixture: ComponentFixture<ToolbarRotateCounterClockwiseButtonComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ToolbarRotateCounterClockwiseButtonComponent],
             }).compileComponents();
         })

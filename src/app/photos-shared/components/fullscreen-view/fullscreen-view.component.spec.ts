@@ -7,8 +7,8 @@ describe('FullscreenViewComponent', () => {
     let fixture: ComponentFixture<FullscreenViewComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [FullscreenViewComponent],
             }).compileComponents();
         })

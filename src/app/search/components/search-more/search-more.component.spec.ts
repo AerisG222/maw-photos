@@ -7,8 +7,8 @@ describe('SearchMoreComponent', () => {
     let fixture: ComponentFixture<SearchMoreComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [SearchMoreComponent],
             }).compileComponents();
         })

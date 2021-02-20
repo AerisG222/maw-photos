@@ -7,8 +7,8 @@ describe('ButtonGroupComponent', () => {
     let fixture: ComponentFixture<ButtonGroupComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ButtonGroupComponent],
             }).compileComponents();
         })

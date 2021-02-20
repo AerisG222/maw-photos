@@ -7,8 +7,8 @@ describe('RandomLinkComponent', () => {
     let fixture: ComponentFixture<RandomLinkComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [RandomLinkComponent],
             }).compileComponents();
         })

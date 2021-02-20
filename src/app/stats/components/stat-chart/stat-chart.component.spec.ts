@@ -7,8 +7,8 @@ describe('StatChartComponent', () => {
     let fixture: ComponentFixture<StatChartComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [StatChartComponent],
             }).compileComponents();
         })

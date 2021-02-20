@@ -7,8 +7,8 @@ describe('CategoryTypeFilterComponent', () => {
     let fixture: ComponentFixture<CategoryTypeFilterComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CategoryTypeFilterComponent],
             }).compileComponents();
         })

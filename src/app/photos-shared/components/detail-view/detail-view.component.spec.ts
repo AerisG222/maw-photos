@@ -7,8 +7,8 @@ describe('DetailViewComponent', () => {
     let fixture: ComponentFixture<DetailViewComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [DetailViewComponent],
             }).compileComponents();
         })

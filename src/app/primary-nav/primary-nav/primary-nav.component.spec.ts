@@ -7,8 +7,8 @@ describe('PrimaryNavComponent', () => {
     let fixture: ComponentFixture<PrimaryNavComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [PrimaryNavComponent],
             }).compileComponents();
         })

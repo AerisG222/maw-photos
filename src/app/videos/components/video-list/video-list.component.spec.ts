@@ -7,8 +7,8 @@ describe('VideoListComponent', () => {
     let fixture: ComponentFixture<VideoListComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [VideoListComponent],
             }).compileComponents();
         })

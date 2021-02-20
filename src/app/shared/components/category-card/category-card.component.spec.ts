@@ -7,8 +7,8 @@ describe('CategoryComponent', () => {
     let fixture: ComponentFixture<CategoryCardComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CategoryCardComponent],
             }).compileComponents();
         })

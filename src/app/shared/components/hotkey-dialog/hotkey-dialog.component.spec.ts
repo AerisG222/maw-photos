@@ -7,8 +7,8 @@ describe('HotkeyDialogComponent', () => {
     let fixture: ComponentFixture<HotkeyDialogComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [HotkeyDialogComponent],
             }).compileComponents();
         })

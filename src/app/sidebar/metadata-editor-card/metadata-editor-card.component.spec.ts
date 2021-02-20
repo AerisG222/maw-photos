@@ -7,8 +7,8 @@ describe('MetadataEditorCardComponent', () => {
     let fixture: ComponentFixture<MetadataEditorCardComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [MetadataEditorCardComponent],
             }).compileComponents();
         })

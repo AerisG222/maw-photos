@@ -7,8 +7,8 @@ describe('GroupComponent', () => {
     let fixture: ComponentFixture<GroupComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [GroupComponent],
             }).compileComponents();
         })

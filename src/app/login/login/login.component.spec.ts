@@ -7,8 +7,8 @@ describe('AccessDeniedComponent', () => {
     let fixture: ComponentFixture<LoginComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [LoginComponent],
             }).compileComponents();
         })

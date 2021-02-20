@@ -7,8 +7,8 @@ describe('CategoryMissingGpsFilterComponent', () => {
     let fixture: ComponentFixture<CategoryMissingGpsFilterComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CategoryMissingGpsFilterComponent],
             }).compileComponents();
         })

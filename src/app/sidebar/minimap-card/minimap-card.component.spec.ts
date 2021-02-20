@@ -7,8 +7,8 @@ describe('MinimapCardComponent', () => {
     let fixture: ComponentFixture<MinimapCardComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [MinimapCardComponent],
             }).compileComponents();
         })

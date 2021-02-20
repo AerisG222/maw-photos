@@ -7,8 +7,8 @@ describe('ToolbarDownloadButtonComponent', () => {
     let fixture: ComponentFixture<ToolbarDownloadButtonComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ToolbarDownloadButtonComponent],
             }).compileComponents();
         })

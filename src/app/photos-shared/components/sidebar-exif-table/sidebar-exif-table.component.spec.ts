@@ -7,8 +7,8 @@ describe('SidebarExifTableComponent', () => {
     let fixture: ComponentFixture<SidebarExifTableComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [SidebarExifTableComponent],
             }).compileComponents();
         })

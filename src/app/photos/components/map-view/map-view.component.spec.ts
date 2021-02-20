@@ -7,8 +7,8 @@ describe('MapViewComponent', () => {
     let fixture: ComponentFixture<MapViewComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [MapViewComponent],
             }).compileComponents();
         })

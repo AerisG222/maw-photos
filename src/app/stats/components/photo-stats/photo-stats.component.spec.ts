@@ -7,8 +7,8 @@ describe('PhotoStatsComponent', () => {
     let fixture: ComponentFixture<PhotoStatsComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [PhotoStatsComponent],
             }).compileComponents();
         })

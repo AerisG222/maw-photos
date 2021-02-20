@@ -7,8 +7,8 @@ describe('ContentMarginComponent', () => {
     let fixture: ComponentFixture<ContentMarginComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ContentMarginComponent],
             }).compileComponents();
         })

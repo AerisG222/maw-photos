@@ -7,8 +7,8 @@ describe('CommentsCardComponent', () => {
     let fixture: ComponentFixture<CommentsCardComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [CommentsCardComponent],
             }).compileComponents();
         })

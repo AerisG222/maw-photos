@@ -7,8 +7,8 @@ describe('BulkEditGpsEditorComponent', () => {
     let fixture: ComponentFixture<BulkEditGpsEditorComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [BulkEditGpsEditorComponent],
             }).compileComponents();
         })

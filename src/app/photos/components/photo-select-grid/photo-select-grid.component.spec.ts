@@ -7,8 +7,8 @@ describe('PhotoSelectGridComponent', () => {
     let fixture: ComponentFixture<PhotoSelectGridComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [PhotoSelectGridComponent],
             }).compileComponents();
         })

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { searchApiServiceToken } from 'src/app/search/services/search-api.service';

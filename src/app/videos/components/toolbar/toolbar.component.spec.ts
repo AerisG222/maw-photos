@@ -7,8 +7,8 @@ describe('ToolbarComponent', () => {
     let fixture: ComponentFixture<ToolbarComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [ToolbarComponent],
             }).compileComponents();
         })

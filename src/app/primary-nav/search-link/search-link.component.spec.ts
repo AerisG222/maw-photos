@@ -7,8 +7,8 @@ describe('SearchLinkComponent', () => {
     let fixture: ComponentFixture<SearchLinkComponent>;
 
     beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
+        waitForAsync(async () => {
+            await TestBed.configureTestingModule({
                 declarations: [SearchLinkComponent],
             }).compileComponents();
         })
