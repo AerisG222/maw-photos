@@ -6,3 +6,6 @@
 /tools
 tmp
 out-tsc
+
+/e2e
+**/*.spec.ts
