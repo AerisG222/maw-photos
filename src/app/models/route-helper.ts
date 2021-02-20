@@ -5,6 +5,7 @@ import { CategoryTypeFilter } from './category-type-filter';
 import { CategoryType } from './category-type';
 import { RouteArea } from './route-area';
 import { RouteDetails } from './route-details';
+import { PhotoViewMode } from './photo-view-mode';
 
 export const about = 'about';
 export const categories = 'categories';
@@ -219,6 +220,10 @@ export const getCategoryRoute = (category?: CategoryTeaser): string | null => {
     return category.type === CategoryType.photo
         ? photoCategoriesAbs(undefined, category.id)
         : videoCategoriesAbs(undefined, category.id);
+};
+
+export const isFullscreenView = (routeDetails: RouteDetails): boolean => {
+    return routeDetails?.data?.view === PhotoViewMode.fullscreen;
 };
 
 const getRouteNestedParams = (state: RouterStateSnapshot) => {

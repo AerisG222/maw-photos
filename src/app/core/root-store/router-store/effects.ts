@@ -6,12 +6,17 @@ import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
-import { RouteDetails, RouteArea } from '@models';
+import { RouteDetails, RouteArea, isFullscreenView } from '@models';
 import { LayoutStoreActions } from '../layout-store';
 
 interface RouteDetailsChange {
     previous: RouteDetails | null;
     current: RouteDetails | null;
+}
+
+interface FullScreenChange {
+    previousWasFullscreen: boolean;
+    currentIsFullscreen: boolean;
 }
 
 @Injectable()
@@ -78,18 +83,28 @@ export class RouterStoreEffects {
         );
     });
 
-    // TODO: rework
     monitorFullScreenEffect$ = createEffect(() => {
         return this.routeChanged$.pipe(
-            map(([, routeDetails]) => {
-                if (routeDetails.url.indexOf('fullscreen') >= 0) {
-                    return LayoutStoreActions.enterFullscreenRequest();
-                } else {
-                    return LayoutStoreActions.exitFullscreenRequest();
-                }
+            map(([, routeDetails]) => isFullscreenView(routeDetails)),
+            scan(
+                (acc: FullScreenChange, curr) => {
+                    return {
+                        previousWasFullscreen: acc.currentIsFullscreen,
+                        currentIsFullscreen: curr,
+                    };
+                },
+                { previousWasFullscreen: false, currentIsFullscreen: false }
+            ),
+            filter(
+                (acc) => acc.currentIsFullscreen !== acc.previousWasFullscreen
+            ),
+            map(({ currentIsFullscreen }) => {
+                return currentIsFullscreen
+                    ? LayoutStoreActions.enterFullscreenRequest()
+                    : LayoutStoreActions.exitFullscreenRequest();
             })
         );
     });
 
-    constructor(private actions$: Actions, private store: Store) {}
+    constructor(private actions$: Actions, private store: Store) { }
 }

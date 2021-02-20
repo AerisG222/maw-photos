@@ -72,6 +72,7 @@ export * from './photo-rotation';
 export * from './photo-view-mode';
 export * from './route-area';
 export * from './route-details';
+export * from './route-helper';
 export * from './theme';
 export * from './thumbnail-size';
 export * from './user-info';
