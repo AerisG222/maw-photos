@@ -21,10 +21,10 @@ import {
     MiniMapable,
     CategoryTeaserSelectable,
     PhotoLinkable,
-} from '@core/facades';
+    PhotoViewModeSelectable
+} from '@models';
 import { ViewModeGuard } from './services/view-mode.guard';
 import { PhotosUrlService } from './services/photos-url.service';
-import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 
 @NgModule({
     declarations: [

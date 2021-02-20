@@ -8,5 +8,6 @@ export * from './mini-mapable';
 export * from './navigable-helpers';
 export * from './navigable';
 export * from './photo-linkable';
+export * from './photo-view-mode-selectable';
 export * from './ratable-helper';
 export * from './ratable';

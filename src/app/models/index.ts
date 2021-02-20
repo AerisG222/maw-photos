@@ -13,6 +13,20 @@ export * from './api/rating';
 export * from './api/video-category';
 export * from './api/video';
 
+export * from './facades/category-teaser-selectable';
+export * from './facades/category-teaser-selectable-helper';
+export * from './facades/commentable';
+export * from './facades/commentable-helper';
+export * from './facades/metadata-editable';
+export * from './facades/metadata-editable-helper';
+export * from './facades/mini-mapable';
+export * from './facades/navigable';
+export * from './facades/navigable-helpers';
+export * from './facades/photo-linkable';
+export * from './facades/photo-view-mode-selectable';
+export * from './facades/ratable';
+export * from './facades/ratable-helper';
+
 export * from './helpers/date';
 export * from './helpers/exif';
 export * from './helpers/gps';

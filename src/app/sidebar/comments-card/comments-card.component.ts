@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Commentable } from '@core/facades';
+import { Commentable } from '@models';
 
 @Component({
     selector: 'app-sidebar-comments-card',

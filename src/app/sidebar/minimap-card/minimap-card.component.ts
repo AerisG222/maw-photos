@@ -5,6 +5,8 @@ import {
     OnDestroy,
 } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
+import { Subscription } from 'rxjs';
+import { filter, map, startWith } from 'rxjs/operators';
 
 import {
     GoogleMapThemes,
@@ -13,10 +15,8 @@ import {
     DEFAULT_APP_SETTINGS,
     DEFAULT_PHOTO_INFO_PANEL_SETTINGS,
     toThemeDetail,
+    MiniMapable,
 } from '@models';
-import { MiniMapable } from '@core/facades';
-import { Subscription } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
 import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
 
 @Component({

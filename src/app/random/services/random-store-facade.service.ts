@@ -16,8 +16,6 @@ import {
     MapType,
     RouteHelper,
     PhotoViewMode,
-} from '@models';
-import {
     Commentable,
     helpAddComment,
     MetadataEditable,
@@ -31,8 +29,8 @@ import {
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
     PhotoLinkable,
-} from '@core/facades';
-import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
+    PhotoViewModeSelectable
+} from '@models';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
 

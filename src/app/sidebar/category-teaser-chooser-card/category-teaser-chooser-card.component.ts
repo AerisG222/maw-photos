@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CategoryTeaserSelectable } from '@core/facades';
+
+import { CategoryTeaserSelectable } from '@models';
 
 @Component({
     selector: 'app-sidebar-category-teaser-chooser-card',

@@ -11,9 +11,9 @@ import {
     MiniMapable,
     CategoryTeaserSelectable,
     PhotoLinkable,
-} from '@core/facades';
+    PhotoViewModeSelectable
+} from '@models';
 import { RandomStoreFacadeService } from './services/random-store-facade.service';
-import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail-settings-facade';
 import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-settings-facade';
 import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';

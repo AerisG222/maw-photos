@@ -9,8 +9,6 @@ import {
     MapType,
     RouteHelper,
     PhotoViewMode,
-} from '@models';
-import {
     Commentable,
     helpAddComment,
     MetadataEditable,
@@ -24,7 +22,8 @@ import {
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
     PhotoLinkable,
-} from '@core/facades';
+    PhotoViewModeSelectable
+} from '@models';
 import {
     RouterStoreSelectors,
     PhotoStoreActions,
@@ -32,7 +31,6 @@ import {
     PhotoCategoryStoreActions,
     PhotoCategoryStoreSelectors,
 } from '@core/root-store';
-import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { GpsCoordinate, MapType } from '@models';
 import {
+    GpsCoordinate,
+    MapType,
     Commentable,
     helpAddComment,
     MetadataEditable,
@@ -16,7 +17,7 @@ import {
     MiniMapable,
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
-} from '@core/facades';
+} from '@models';
 import { VideoStoreActions, VideoStoreSelectors } from '../store';
 import {
     VideoCategoryStoreActions,

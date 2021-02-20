@@ -16,7 +16,7 @@ import {
     MetadataEditable,
     MiniMapable,
     CategoryTeaserSelectable,
-} from '@core/facades';
+} from '@models';
 import { VideoStoreFacadeService } from './services/video-store-facade.service';
 
 @NgModule({

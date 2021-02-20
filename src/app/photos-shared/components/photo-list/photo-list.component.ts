@@ -3,9 +3,9 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import {
     Photo,
     ThumbnailSize,
+    PhotoLinkable,
     DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS,
 } from '@models';
-import { PhotoLinkable } from '@core/facades';
 
 @Component({
     selector: 'app-photos-photo-list',

@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map } from 'rxjs/operators';
-
-import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
-import { PhotoViewMode, RouteArea, RouteHelper } from '@models';
 import { Store } from '@ngrx/store';
+
+import { PhotoViewMode, PhotoViewModeSelectable, RouteArea, RouteHelper } from '@models';
 import { RouterStoreSelectors } from '@core/root-store';
 
 @Component({
