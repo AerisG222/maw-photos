@@ -3,9 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { SearchApiService } from 'src/app/search/services/search-api.service';
-import { SearchResult } from 'src/app/search/models/search-result.model';
-import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { SearchApiService } from '../search-api.service';
+import { MultimediaCategory, SearchResult } from '../../models';
 import { environment } from 'src/environments/environment';
 
 @Injectable()

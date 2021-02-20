@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { SearchResult } from 'src/app/search/models/search-result.model';
-import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { MultimediaCategory, SearchResult } from '../models';
 
 export const clearRequest = createAction('[Search] Clear');
 

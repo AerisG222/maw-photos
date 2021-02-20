@@ -1,4 +1,4 @@
-import { MapType } from 'src/app/models/map-type';
+import { MapType } from '../map-type';
 
 export interface VideoInfoPanelSettings {
     showRatings: boolean;

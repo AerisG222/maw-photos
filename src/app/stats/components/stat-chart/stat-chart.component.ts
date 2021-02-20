@@ -11,7 +11,7 @@ import {
 import { colorSets, TreeMapComponent } from '@swimlane/ngx-charts';
 import numbro from 'numbro';
 
-import { StatDetail } from '../../models/stat-detail.model';
+import { StatDetail } from '../../models';
 
 @Component({
     selector: 'app-stats-stat-chart',

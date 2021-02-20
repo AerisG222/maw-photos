@@ -1,8 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { SearchResult } from 'src/app/search/models/search-result.model';
-import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { MultimediaCategory, SearchResult } from '../models';
 
 export const searchApiServiceToken = new InjectionToken<SearchApiService>(
     'SearchApiService'

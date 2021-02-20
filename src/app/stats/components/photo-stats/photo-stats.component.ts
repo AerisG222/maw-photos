@@ -19,8 +19,7 @@ import numbro from 'numbro';
 
 import { Category, PhotoCategory } from '@models';
 import { PhotoCategoryStoreSelectors } from '@core/root-store';
-import { StatDetail } from 'src/app/stats/models/stat-detail.model';
-import { FormattedStatDetail } from '../../models/formatted-stat-detail.model';
+import { FormattedStatDetail, StatDetail } from '../../models';
 
 @Component({
     selector: 'app-stats-photo-stats',

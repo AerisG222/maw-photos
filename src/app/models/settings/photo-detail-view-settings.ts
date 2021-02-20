@@ -1,4 +1,4 @@
-import { ThumbnailSize } from 'src/app/models/thumbnail-size';
+import { ThumbnailSize } from '../thumbnail-size';
 
 export interface PhotoDetailViewSettings {
     showBreadcrumbs: boolean;

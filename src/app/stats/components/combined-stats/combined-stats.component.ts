@@ -17,8 +17,7 @@ import { tap, map, delay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 
-import { FormattedStatDetail } from 'src/app/stats/models/formatted-stat-detail.model';
-import { StatDetail } from 'src/app/stats/models/stat-detail.model';
+import { FormattedStatDetail, StatDetail } from '../../models';
 import { RootStoreSelectors } from '@core/root-store';
 import { Category, CategoryType, PhotoCategory, VideoCategory } from '@models';
 

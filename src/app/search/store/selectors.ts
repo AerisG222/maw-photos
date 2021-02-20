@@ -2,8 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { State, searchAdapter } from './state';
 import { SEARCH_FEATURE_NAME } from './feature-name';
-import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
-import { SearchResult } from 'src/app/search/models/search-result.model';
+import { MultimediaCategory, SearchResult } from '../models';
 import { CategoryType, CategoryTeaser, RouteHelper } from '@models';
 
 const searchState = createFeatureSelector<State>(SEARCH_FEATURE_NAME);

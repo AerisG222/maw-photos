@@ -2,9 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { SearchApiService } from 'src/app/search/services/search-api.service';
-import { SearchResult } from 'src/app/search/models/search-result.model';
-import { MultimediaCategory } from 'src/app/search/models/multimedia-category.model';
+import { SearchApiService } from '../search-api.service';
+import { MultimediaCategory, SearchResult } from '../../models';
 import {
     photoApiServiceToken,
     PhotoApiService,

@@ -6,8 +6,7 @@ import {
     SettingsStoreSelectors,
 } from '@core/root-store/settings-store';
 import { BaseSettingsFacade } from './base-settings-facade';
-import { PhotoViewMode } from '@models';
-import { RandomPageSettings } from 'src/app/models/settings/random-page-settings';
+import { PhotoViewMode, RandomPageSettings } from '@models';
 
 @Injectable({
     providedIn: 'root',
