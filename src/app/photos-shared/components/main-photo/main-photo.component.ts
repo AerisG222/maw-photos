@@ -3,8 +3,8 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
-import { EffectStyleBuilderService } from '@core/services';
 import { Photo, PhotoEffects, ThumbnailSize } from '@models';
+import { buildEffectFilter, buildEffectTransform } from 'src/app/models/helpers/photo-effects';
 
 @Component({
     selector: 'app-photos-main-photo',
@@ -23,7 +23,6 @@ export class MainPhotoComponent {
 
     constructor(
         private store: Store,
-        private effectStyleBuilder: EffectStyleBuilderService,
         private sanitizer: DomSanitizer
     ) {}
 
@@ -45,7 +44,7 @@ export class MainPhotoComponent {
 
     getEffectStyles(effects: PhotoEffects | null): SafeStyle {
         if (effects) {
-            const style = this.effectStyleBuilder.buildFilter(effects);
+            const style = buildEffectFilter(effects);
 
             return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
         }
@@ -55,7 +54,7 @@ export class MainPhotoComponent {
 
     getTransform(effects: PhotoEffects | null): SafeStyle {
         if (effects) {
-            const style = this.effectStyleBuilder.buildTransform(effects);
+            const style = buildEffectTransform(effects);
 
             return this.sanitizer.bypassSecurityTrustStyle(style.join(' '));
         }

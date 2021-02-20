@@ -14,11 +14,12 @@ import {
     GpsDetail,
 } from '@models';
 import { environment } from 'src/environments/environment';
-import { DateService, PhotoApiService } from '@core/services';
+import { PhotoApiService } from '@core/services';
+import { safeParseDate } from 'src/app/models/helpers/date';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {
-    constructor(private http: HttpClient, private dateSvc: DateService) {}
+    constructor(private http: HttpClient) {}
 
     getRandomPhoto(): Observable<Photo> {
         const url = this.getAbsoluteUrl('photos/random');
@@ -137,7 +138,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
     }
 
     private cleanupPhotoCategory(category: PhotoCategory): PhotoCategory {
-        category.createDate = this.dateSvc.safeParse(category.createDate);
+        category.createDate = safeParseDate(category.createDate);
 
         return category;
     }
@@ -150,7 +151,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
     }
 
     private cleanupPhoto(photo: Photo): Photo {
-        photo.createDate = this.dateSvc.safeParse(photo.createDate);
+        photo.createDate = safeParseDate(photo.createDate);
 
         return photo;
     }
@@ -165,7 +166,7 @@ export class ExternalPhotoApiService implements PhotoApiService {
     }
 
     private cleanupComment(comment: Comment): Comment {
-        comment.entryDate = this.dateSvc.safeParse(comment.entryDate);
+        comment.entryDate = safeParseDate(comment.entryDate);
 
         return comment;
     }

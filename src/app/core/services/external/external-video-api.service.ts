@@ -12,12 +12,13 @@ import {
     GpsCoordinate,
     GpsDetail,
 } from '@models';
-import { DateService, VideoApiService } from '@core/services';
+import { VideoApiService } from '@core/services';
 import { environment } from 'src/environments/environment';
+import { safeParseDate } from 'src/app/models/helpers/date';
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {
-    constructor(private http: HttpClient, private dateSvc: DateService) {}
+    constructor(private http: HttpClient) {}
 
     getCategories(): Observable<ApiCollection<VideoCategory>> {
         const url = this.getAbsoluteUrl(`video-categories`);
@@ -116,7 +117,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private cleanupVideoCategory(category: VideoCategory): VideoCategory {
-        category.createDate = this.dateSvc.safeParse(category.createDate);
+        category.createDate = safeParseDate(category.createDate);
 
         return category;
     }
@@ -129,7 +130,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private cleanupVideo(video: Video): Video {
-        video.createDate = this.dateSvc.safeParse(video.createDate);
+        video.createDate = safeParseDate(video.createDate);
 
         return video;
     }
@@ -144,7 +145,7 @@ export class ExternalVideoApiService implements VideoApiService {
     }
 
     private cleanupComment(comment: Comment): Comment {
-        comment.entryDate = this.dateSvc.safeParse(comment.entryDate);
+        comment.entryDate = safeParseDate(comment.entryDate);
 
         return comment;
     }

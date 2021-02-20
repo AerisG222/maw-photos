@@ -20,7 +20,6 @@ import {
     DEFAULT_PHOTO_EFFECTS,
     PhotoRotation,
 } from '@models';
-import { ExifFormatterService } from '@core/services/exif-formatter.service';
 import {
     photoApiServiceToken,
     PhotoApiService,
@@ -31,7 +30,8 @@ import * as PhotoCategoryStoreActions from '@core/root-store/photo-category-stor
 import { RouterStoreSelectors } from '../router-store';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
-import { httpErrorHandler } from 'src/app/models/handle-error';
+import { httpErrorHandler } from 'src/app/models/helpers/http-error-handler';
+import { formatExif } from 'src/app/models/helpers/exif';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -229,7 +229,7 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.loadExifRequest),
             switchMap((action) =>
                 this.api.getExifData(action.photoId).pipe(
-                    map((detail) => this.exifFormatterService.format(detail)),
+                    map((detail) => formatExif(detail)),
                     map((data) => PhotoActions.loadExifSuccess({ exif: data })),
                     catchError((error) =>
                         of(
@@ -535,7 +535,6 @@ export class PhotoStoreEffects {
 
     constructor(
         private actions$: Actions,
-        private exifFormatterService: ExifFormatterService,
         private store: Store,
         private photoPage: PhotoPageSettingsFacade,
         private randomPage: RandomPageSettingsFacade,

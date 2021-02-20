@@ -2,8 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GpsCoordinate } from '@models';
-import { GpsService } from '@core/services';
 import { MetadataEditable } from '@core/facades';
+import { parseGps } from 'src/app/models/helpers/gps';
 
 @Component({
     selector: 'app-sidebar-metadata-editor-card',
@@ -16,7 +16,6 @@ export class MetadataEditorCardComponent {
 
     constructor(
         private formBuilder: FormBuilder,
-        private gps: GpsService,
         public metadataEditable: MetadataEditable
     ) {
         this.form = this.formBuilder.group({
@@ -30,7 +29,7 @@ export class MetadataEditorCardComponent {
         const pastedText = clipboardData?.getData('text');
 
         if (pastedText) {
-            const latLng = this.gps.parse(pastedText);
+            const latLng = parseGps(pastedText);
 
             if (latLng) {
                 evt.preventDefault();
