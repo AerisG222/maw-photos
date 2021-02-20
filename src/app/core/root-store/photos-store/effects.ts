@@ -19,6 +19,8 @@ import {
     CategoryGpsStatus,
     DEFAULT_PHOTO_EFFECTS,
     PhotoRotation,
+    formatExif,
+    httpErrorHandler,
 } from '@models';
 import {
     photoApiServiceToken,
@@ -30,8 +32,6 @@ import * as PhotoCategoryStoreActions from '@core/root-store/photo-category-stor
 import { RouterStoreSelectors } from '../router-store';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
-import { httpErrorHandler } from 'src/app/models/helpers/http-error-handler';
-import { formatExif } from 'src/app/models/helpers/exif';
 
 @Injectable()
 export class PhotoStoreEffects {

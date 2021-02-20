@@ -16,7 +16,7 @@ import {
     searchApiServiceToken,
     SearchApiService,
 } from 'src/app/search/services/search-api.service';
-import { httpErrorHandler } from 'src/app/models/helpers/http-error-handler';
+import { httpErrorHandler } from '@models';
 
 @Injectable()
 export class SearchStoreEffects {

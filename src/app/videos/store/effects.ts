@@ -17,8 +17,7 @@ import { videoApiServiceToken, VideoApiService } from '@core/services';
 import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 import { VideoCategoryStoreActions } from '@core/root-store';
-import { CategoryGpsStatus } from '@models';
-import { httpErrorHandler } from 'src/app/models/helpers/http-error-handler';
+import { CategoryGpsStatus, httpErrorHandler } from '@models';
 
 @Injectable()
 export class VideoStoreEffects {

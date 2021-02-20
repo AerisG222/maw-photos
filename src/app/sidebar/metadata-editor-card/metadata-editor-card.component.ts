@@ -1,9 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { GpsCoordinate } from '@models';
+import { GpsCoordinate, parseGps } from '@models';
 import { MetadataEditable } from '@core/facades';
-import { parseGps } from 'src/app/models/helpers/gps';
 
 @Component({
     selector: 'app-sidebar-metadata-editor-card',

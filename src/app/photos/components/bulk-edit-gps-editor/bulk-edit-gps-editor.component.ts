@@ -8,8 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors } from '@core/root-store';
-import { GpsCoordinate } from '@models';
-import { parseGps } from 'src/app/models/helpers/gps';
+import { GpsCoordinate, parseGps } from '@models';
 
 @Component({
     selector: 'app-photos-bulk-edit-gps-editor',

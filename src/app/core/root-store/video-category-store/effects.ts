@@ -16,8 +16,7 @@ import {
     videoApiServiceToken,
     VideoApiService,
 } from '@core/services/video-api.service';
-import { Category, CategoryType, VideoCategory, RouteHelper } from '@models';
-import { httpErrorHandler } from 'src/app/models/helpers/http-error-handler';
+import { Category, CategoryType, VideoCategory, RouteHelper, httpErrorHandler } from '@models';
 
 @Injectable()
 export class VideoCategoryStoreEffects {

@@ -1,4 +1,7 @@
-import { ExifCategory, ExifData, ExifDetail, ExifContainer } from '@models';
+import { ExifCategory } from '../exif-category';
+import { ExifContainer } from '../exif-container';
+import { ExifData } from '../exif-data';
+import { ExifDetail } from '../api/exif-detail';
 
 interface FormatInstruction {
     category: ExifCategory;

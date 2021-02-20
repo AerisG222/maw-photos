@@ -13,6 +13,12 @@ export * from './api/rating';
 export * from './api/video-category';
 export * from './api/video';
 
+export * from './helpers/date';
+export * from './helpers/exif';
+export * from './helpers/gps';
+export * from './helpers/http-error-handler';
+export * from './helpers/photo-effects';
+
 export * from './settings/app-settings';
 export * from './settings/category-filter-settings';
 export * from './settings/category-grid-view-settings';

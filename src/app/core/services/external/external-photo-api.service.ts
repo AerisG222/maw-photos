@@ -12,10 +12,10 @@ import {
     ApiCollection,
     GpsCoordinate,
     GpsDetail,
+    safeParseDate,
 } from '@models';
 import { environment } from 'src/environments/environment';
 import { PhotoApiService } from '@core/services';
-import { safeParseDate } from 'src/app/models/helpers/date';
 
 @Injectable()
 export class ExternalPhotoApiService implements PhotoApiService {

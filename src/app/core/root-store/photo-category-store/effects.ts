@@ -16,8 +16,7 @@ import {
     photoApiServiceToken,
     PhotoApiService,
 } from '@core/services/photo-api.service';
-import { PhotoCategory, Category, CategoryType, RouteHelper } from '@models';
-import { httpErrorHandler } from 'src/app/models/helpers/http-error-handler';
+import { PhotoCategory, Category, CategoryType, RouteHelper, httpErrorHandler } from '@models';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {

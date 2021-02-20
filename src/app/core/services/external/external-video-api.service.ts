@@ -11,10 +11,10 @@ import {
     ApiCollection,
     GpsCoordinate,
     GpsDetail,
+    safeParseDate,
 } from '@models';
 import { VideoApiService } from '@core/services';
 import { environment } from 'src/environments/environment';
-import { safeParseDate } from 'src/app/models/helpers/date';
 
 @Injectable()
 export class ExternalVideoApiService implements VideoApiService {

@@ -3,8 +3,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
-import { Photo, PhotoEffects, ThumbnailSize } from '@models';
-import { buildEffectFilter, buildEffectTransform } from 'src/app/models/helpers/photo-effects';
+import { Photo, PhotoEffects, ThumbnailSize, buildEffectFilter, buildEffectTransform } from '@models';
 
 @Component({
     selector: 'app-photos-main-photo',
