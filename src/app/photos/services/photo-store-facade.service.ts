@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import {
     Photo,
@@ -33,7 +34,6 @@ import {
 } from '@core/root-store';
 import { PhotoViewModeSelectable } from '@core/facades/photo-view-mode-selectable';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
-import { map } from 'rxjs/operators';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 
 @Injectable()
