@@ -16,6 +16,14 @@ export const reducer = createReducer(
             })
     ),
     on(
+        PhotoActions.addCommentRequest,
+        PhotoActions.loadCommentsRequest,
+        PhotoActions.loadExifRequest,
+        PhotoActions.loadGpsDetailRequest,
+        PhotoActions.loadMultipleRandomRequest,
+        PhotoActions.ratePhotoRequest,
+        PhotoActions.loadRandomRequest,
+        PhotoActions.loadRatingRequest,
         PhotoActions.loadRequest,
         (state): State => ({
             ...state,
@@ -33,19 +41,19 @@ export const reducer = createReducer(
             })
     ),
     on(
+        PhotoActions.addCommentFailure,
+        PhotoActions.loadCommentsFailure,
+        PhotoActions.loadExifFailure,
         PhotoActions.loadFailure,
+        PhotoActions.loadGpsDetailFailure,
+        PhotoActions.loadMultipleRandomFailure,
+        PhotoActions.ratePhotoFailure,
+        PhotoActions.loadRandomFailure,
+        PhotoActions.loadRatingFailure,
         (state, { error }): State => ({
             ...state,
             isLoading: false,
             error,
-        })
-    ),
-    on(
-        PhotoActions.loadCommentsRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
         })
     ),
     on(
@@ -58,22 +66,6 @@ export const reducer = createReducer(
         })
     ),
     on(
-        PhotoActions.loadCommentsFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        PhotoActions.loadRandomRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         PhotoActions.loadRandomSuccess,
         (state, { photo }): State =>
             photoAdapter.upsertOne(photo, {
@@ -81,22 +73,6 @@ export const reducer = createReducer(
                 isLoading: false,
                 error: null,
             })
-    ),
-    on(
-        PhotoActions.loadRandomFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        PhotoActions.loadMultipleRandomRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
     ),
     on(
         PhotoActions.loadMultipleRandomSuccess,
@@ -113,36 +89,12 @@ export const reducer = createReducer(
         }
     ),
     on(
-        PhotoActions.loadMultipleRandomFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        PhotoActions.loadRatingRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         PhotoActions.loadRatingSuccess,
         (state, { rating }): State => ({
             ...state,
             isLoading: false,
             error: null,
             activePhotoRating: rating,
-        })
-    ),
-    on(
-        PhotoActions.loadRatingFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
         })
     ),
     on(
@@ -160,14 +112,6 @@ export const reducer = createReducer(
         })
     ),
     on(
-        PhotoActions.ratePhotoRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         PhotoActions.ratePhotoSuccess,
         (state, { rating }): State => ({
             ...state,
@@ -180,42 +124,10 @@ export const reducer = createReducer(
         })
     ),
     on(
-        PhotoActions.ratePhotoFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        PhotoActions.addCommentRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         PhotoActions.addCommentSuccess,
         (state): State => ({
             ...state,
             isLoading: false,
-            error: null,
-        })
-    ),
-    on(
-        PhotoActions.addCommentFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        PhotoActions.loadExifRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
             error: null,
         })
     ),
@@ -229,36 +141,12 @@ export const reducer = createReducer(
         })
     ),
     on(
-        PhotoActions.loadExifFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        PhotoActions.loadGpsDetailRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         PhotoActions.loadGpsDetailSuccess,
         (state, { gpsDetail }): State => ({
             ...state,
             isLoading: false,
             error: null,
             activePhotoGpsDetail: gpsDetail,
-        })
-    ),
-    on(
-        PhotoActions.loadGpsDetailFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
         })
     ),
     on(

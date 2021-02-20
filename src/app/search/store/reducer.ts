@@ -16,6 +16,7 @@ export const reducer = createReducer(
     ),
     on(
         SearchActions.queryRequest,
+        SearchActions.queryMoreRequest,
         (state): State => ({
             ...state,
             isLoading: true,
@@ -35,18 +36,11 @@ export const reducer = createReducer(
     ),
     on(
         SearchActions.queryFailure,
+        SearchActions.queryMoreFailure,
         (state, { error }): State => ({
             ...state,
             isLoading: false,
             error,
-        })
-    ),
-    on(
-        SearchActions.queryMoreRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
         })
     ),
     on(
@@ -59,14 +53,6 @@ export const reducer = createReducer(
                 activeResult: result,
                 query,
             })
-    ),
-    on(
-        SearchActions.queryMoreFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
     ),
     on(
         SearchActions.exitSearchArea,

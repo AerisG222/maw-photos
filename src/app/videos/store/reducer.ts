@@ -7,7 +7,13 @@ import * as VideoActions from './actions';
 export const reducer = createReducer(
     initialState,
     on(
+        VideoActions.addCommentRequest,
         VideoActions.loadCommentsRequest,
+        VideoActions.loadGpsDetailRequest,
+        VideoActions.loadRatingRequest,
+        VideoActions.loadRequest,
+        VideoActions.rateVideoRequest,
+        VideoActions.setGpsCoordinateOverrideRequest,
         (state): State => ({
             ...state,
             isLoading: true,
@@ -24,19 +30,17 @@ export const reducer = createReducer(
         })
     ),
     on(
+        VideoActions.addCommentFailure,
         VideoActions.loadCommentsFailure,
+        VideoActions.loadFailure,
+        VideoActions.loadGpsDetailFailure,
+        VideoActions.loadRatingFailure,
+        VideoActions.rateVideoFailure,
+        VideoActions.setGpsCoordinateOverrideFailure,
         (state, { error }): State => ({
             ...state,
             isLoading: false,
             error,
-        })
-    ),
-    on(
-        VideoActions.loadRatingRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
         })
     ),
     on(
@@ -49,22 +53,6 @@ export const reducer = createReducer(
         })
     ),
     on(
-        VideoActions.loadRatingFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        VideoActions.loadRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         VideoActions.loadSuccess,
         (state, { videos }): State =>
             videoAdapter.setAll(videos, {
@@ -74,26 +62,10 @@ export const reducer = createReducer(
             })
     ),
     on(
-        VideoActions.loadFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
         VideoActions.setActiveVideoId,
         (state, { id }): State => ({
             ...state,
             activeVideoId: id,
-        })
-    ),
-    on(
-        VideoActions.rateVideoRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
         })
     ),
     on(
@@ -109,42 +81,10 @@ export const reducer = createReducer(
         })
     ),
     on(
-        VideoActions.rateVideoFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        VideoActions.addCommentRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         VideoActions.addCommentSuccess,
         (state): State => ({
             ...state,
             isLoading: false,
-            error: null,
-        })
-    ),
-    on(
-        VideoActions.addCommentFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        VideoActions.loadGpsDetailRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
             error: null,
         })
     ),
@@ -155,22 +95,6 @@ export const reducer = createReducer(
             isLoading: false,
             error: null,
             activeVideoGpsDetail: gpsDetail,
-        })
-    ),
-    on(
-        VideoActions.loadGpsDetailFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
-    ),
-    on(
-        VideoActions.setGpsCoordinateOverrideRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
         })
     ),
     on(
@@ -196,14 +120,6 @@ export const reducer = createReducer(
                 return updatedState;
             }
         }
-    ),
-    on(
-        VideoActions.setGpsCoordinateOverrideFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
     ),
     on(
         VideoActions.exitVideoArea,

@@ -7,6 +7,7 @@ export const reducer = createReducer(
     initialState,
     on(
         VideoCategoryActions.loadRequest,
+        VideoCategoryActions.setTeaserRequest,
         (state): State => ({
             ...state,
             isLoading: true,
@@ -24,6 +25,7 @@ export const reducer = createReducer(
     ),
     on(
         VideoCategoryActions.loadFailure,
+        VideoCategoryActions.setTeaserFailure,
         (state, { error }): State => ({
             ...state,
             isLoading: false,
@@ -45,14 +47,6 @@ export const reducer = createReducer(
         })
     ),
     on(
-        VideoCategoryActions.setTeaserRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         VideoCategoryActions.setTeaserSuccess,
         (state, { category }): State =>
             videoCategoryAdapter.upsertOne(category, {
@@ -61,14 +55,6 @@ export const reducer = createReducer(
                 isLoading: false,
                 error: null,
             })
-    ),
-    on(
-        VideoCategoryActions.setTeaserFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
     ),
     on(
         VideoCategoryActions.setIsMissingGpsData,

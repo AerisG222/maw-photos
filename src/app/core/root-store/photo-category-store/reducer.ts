@@ -7,6 +7,7 @@ export const reducer = createReducer(
     initialState,
     on(
         PhotoCategoryActions.loadRequest,
+        PhotoCategoryActions.setTeaserRequest,
         (state): State => ({
             ...state,
             isLoading: true,
@@ -24,6 +25,7 @@ export const reducer = createReducer(
     ),
     on(
         PhotoCategoryActions.loadFailure,
+        PhotoCategoryActions.setTeaserFailure,
         (state, { error }): State => ({
             ...state,
             isLoading: false,
@@ -45,14 +47,6 @@ export const reducer = createReducer(
         })
     ),
     on(
-        PhotoCategoryActions.setTeaserRequest,
-        (state): State => ({
-            ...state,
-            isLoading: true,
-            error: null,
-        })
-    ),
-    on(
         PhotoCategoryActions.setTeaserSuccess,
         (state, { category }): State =>
             photoCategoryAdapter.upsertOne(category, {
@@ -61,14 +55,6 @@ export const reducer = createReducer(
                 isLoading: false,
                 error: null,
             })
-    ),
-    on(
-        PhotoCategoryActions.setTeaserFailure,
-        (state, { error }): State => ({
-            ...state,
-            isLoading: false,
-            error,
-        })
     ),
     on(
         PhotoCategoryActions.setIsMissingGpsData,
