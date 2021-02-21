@@ -24,7 +24,7 @@ export class PhotosUrlService {
         return PhotoViewMode.grid;
     }
 
-    getDefaultView(): Observable<string> {
+    getPreferredView(): Observable<string> {
         return this.photoPage.settings$.pipe(
             map((s) => this.getValidView(null, s.viewMode))
         );

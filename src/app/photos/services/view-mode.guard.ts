@@ -33,7 +33,7 @@ export class ViewModeGuard implements CanActivate {
         }
 
         return this.urlService
-            .getDefaultView()
+            .getPreferredView()
             .pipe(
                 map((defaultView) =>
                     this.router.parseUrl(
