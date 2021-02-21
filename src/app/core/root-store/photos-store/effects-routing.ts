@@ -20,8 +20,8 @@ export class PhotoStoreRoutingEffects {
             return this.actions$.pipe(
                 ofType(PhotoStoreActions.navigateToPhoto),
                 withLatestFrom(
-                    this.store.select(RouterStoreSelectors.isPhotosView),
-                    this.store.select(RouterStoreSelectors.isRandomView)
+                    this.store.select(RouterStoreSelectors.inPhotosArea),
+                    this.store.select(RouterStoreSelectors.inRandomArea)
                 ),
                 map(([action, isPhotos, isRandom]) => {
                     if (isPhotos) {

@@ -16,8 +16,8 @@ export class ToolbarGroupSelectViewComponent {
     @Input() isGridViewActive = false;
     @Input() isMapViewActive = false;
 
-    enableMapView$ = this.store.select(RouterStoreSelectors.isPhotosView);
-    enableBulkEdit$ = this.store.select(RouterStoreSelectors.isPhotosView);
+    enableMapView$ = this.store.select(RouterStoreSelectors.inPhotosArea);
+    enableBulkEdit$ = this.store.select(RouterStoreSelectors.inPhotosArea);
 
     constructor(private store: Store) {}
 }

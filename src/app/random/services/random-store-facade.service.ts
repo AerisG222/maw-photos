@@ -66,7 +66,7 @@ export class RandomStoreFacadeService
     currentTeaserUrl$ = this.store.select(
         PhotoCategoryStoreSelectors.activeCategoryTeaserUrl
     );
-    activePhotoViewMode$ = this.store.select(RouterStoreSelectors.photoView);
+    activePhotoViewMode$ = this.store.select(RouterStoreSelectors.currentViewMode);
     preferredPhotoViewMode$ = this.randomPageFacade.settings$.pipe(
         map((x) => x.viewMode)
     );
@@ -81,7 +81,7 @@ export class RandomStoreFacadeService
     ) {
         // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
         this.destroySub.add(
-            this.store.select(RouterStoreSelectors.photoView).subscribe({
+            this.store.select(RouterStoreSelectors.currentViewMode).subscribe({
                 next: (view) => (this.view = view),
             })
         );

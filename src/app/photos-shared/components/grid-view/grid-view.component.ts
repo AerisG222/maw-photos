@@ -27,7 +27,7 @@ export class GridViewComponent implements OnDestroy {
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     gridSettings$ = this.gridSettings.settings$;
-    isRandomView$ = this.store.select(RouterStoreSelectors.isRandomView);
+    isRandomView$ = this.store.select(RouterStoreSelectors.inRandomArea);
 
     private destroySub = new Subscription();
 

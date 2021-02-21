@@ -12,7 +12,7 @@ import { RouteHelper } from '@models';
 })
 export class RandomLinkComponent {
     randomLink = RouteHelper.randomAbs();
-    inRandomArea$ = this.store.select(RouterStoreSelectors.isRandomView);
+    inRandomArea$ = this.store.select(RouterStoreSelectors.inRandomArea);
 
     constructor(private store: Store) {}
 }

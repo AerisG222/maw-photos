@@ -24,7 +24,7 @@ export const isLoading = createSelector(
 
 export const enableBulkEdit = createSelector(
     AuthStoreSelectors.isAdmin,
-    RouterStoreSelectors.isRandomView,
+    RouterStoreSelectors.inRandomArea,
     (isAdmin, isRandomView) => isAdmin && !isRandomView
 );
 

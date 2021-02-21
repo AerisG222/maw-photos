@@ -358,7 +358,7 @@ export const activePhotoPrtDownloadUrl = createSelector(
 
 export const enableMapView = createSelector(
     hasPhotosWithGpsCoordinates,
-    RouterStoreSelectors.isRandomView,
+    RouterStoreSelectors.inRandomArea,
     (hasGps, isRandom) => hasGps && !isRandom
 );
 
@@ -390,7 +390,6 @@ export const isExifCardVisible = createSelector(
         isDetailView && infoPanel.expandedState && infoPanel.showExif
 );
 
-// hmm - does it seem funny that we reference the photo category selectors here?
 export const categoryForActivePhoto = createSelector(
     categoryIdForActivePhoto,
     PhotoCategoryStoreSelectors.allEntities,

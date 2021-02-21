@@ -402,7 +402,7 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.moveNextRequest),
             withLatestFrom(
                 this.store.select(PhotoStoreSelectors.nextPhoto),
-                this.store.select(RouterStoreSelectors.photoView)
+                this.store.select(RouterStoreSelectors.currentViewMode)
             ),
             filter(([, photo]) => !!photo),
             map(([, photo, view]) =>
@@ -420,7 +420,7 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.movePreviousRequest),
             withLatestFrom(
                 this.store.select(PhotoStoreSelectors.previousPhoto),
-                this.store.select(RouterStoreSelectors.photoView)
+                this.store.select(RouterStoreSelectors.currentViewMode)
             ),
             filter(([, photo]) => !!photo),
             map(([, photo, view]) =>

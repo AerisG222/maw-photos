@@ -11,9 +11,9 @@ import { PhotoDetailSettingsFacade } from '@core/facades/settings/photo-detail-s
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailViewComponent {
-    showCategoryAsLink$ = this.store.select(RouterStoreSelectors.isRandomView);
+    showCategoryAsLink$ = this.store.select(RouterStoreSelectors.inRandomArea);
     allowCategoryDownload$ = this.store.select(
-        RouterStoreSelectors.isPhotosView
+        RouterStoreSelectors.inPhotosArea
     );
     category$ = this.store.select(PhotoStoreSelectors.activeCategory);
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
