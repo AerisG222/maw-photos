@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { CategoriesUrlService } from '../services/categories-url.service';
 import {
     RootStoreSelectors,
     RouterStoreActions,
     SettingsStoreActions,
+    SettingsStoreSelectors,
 } from '@core/root-store';
-import { RouteArea } from '@models';
+import { CategoryViewMode, RouteArea } from '@models';
 
 @Injectable()
 export class CategoriesStoreEffects {
@@ -33,12 +34,12 @@ export class CategoriesStoreEffects {
                 filter(
                     (route) => route.routeDetails.area === RouteArea.categories
                 ),
-                switchMap((action) => {
+                switchMap(({ routeDetails }) => {
                     return this.store.select(RootStoreSelectors.allYears).pipe(
                         filter((years) => years.length > 0),
                         switchMap(() =>
                             this.categoriesUrlService.ensureCompleteUrl(
-                                action.routeDetails
+                                routeDetails
                             )
                         )
                     );
@@ -47,6 +48,34 @@ export class CategoriesStoreEffects {
         },
         { dispatch: false }
     );
+
+    monitorViewChangedEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeChanged),
+            withLatestFrom(
+                this.store.select(SettingsStoreSelectors.categoryPageSettings)
+            ),
+            filter(([action, pageSettings]) => {
+                if (action.routeDetails.data.view) {
+                    return (
+                        action.routeDetails.area === RouteArea.categories &&
+                        action.routeDetails.data.view !== pageSettings.viewMode
+                    );
+                }
+                return false;
+            }),
+            map(([action, pageSettings]) => {
+                const newSettings = {
+                    ...pageSettings,
+                    viewMode: action.routeDetails.data.view as CategoryViewMode,
+                };
+
+                return SettingsStoreActions.saveCategoryPageSettings({
+                    settings: newSettings,
+                });
+            })
+        );
+    });
 
     constructor(
         private actions$: Actions,

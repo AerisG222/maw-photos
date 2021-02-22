@@ -6,12 +6,16 @@ import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
-import { RouteArea, RouteDetails, RouteHelper } from '@models';
+import { PhotoViewMode, RouteArea, RouteDetails, RouteHelper } from '@models';
 import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import { RouterStoreSelectors } from '../router-store';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
 import { LayoutStoreActions } from '../layout-store';
+import {
+    SettingsStoreActions,
+    SettingsStoreSelectors,
+} from '../settings-store';
 
 @Injectable()
 export class PhotoStoreRoutingEffects {
@@ -203,6 +207,62 @@ export class PhotoStoreRoutingEffects {
                     view: action.view,
                     categoryId: categoryId as number,
                     photoId: id,
+                });
+            })
+        );
+    });
+
+    monitorPhotosViewChangedEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeChanged),
+            withLatestFrom(
+                this.store.select(SettingsStoreSelectors.photoPageSettings)
+            ),
+            filter(([action, pageSettings]) => {
+                if (action.routeDetails.data.view) {
+                    return (
+                        action.routeDetails.area === RouteArea.photos &&
+                        action.routeDetails.data.view !== pageSettings.viewMode
+                    );
+                }
+                return false;
+            }),
+            map(([action, pageSettings]) => {
+                const newSettings = {
+                    ...pageSettings,
+                    viewMode: action.routeDetails.data.view as PhotoViewMode,
+                };
+
+                return SettingsStoreActions.savePhotoPageSettings({
+                    settings: newSettings,
+                });
+            })
+        );
+    });
+
+    monitorRandomViewChangedEffect$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeChanged),
+            withLatestFrom(
+                this.store.select(SettingsStoreSelectors.randomPageSettings)
+            ),
+            filter(([action, pageSettings]) => {
+                if (action.routeDetails.data.view) {
+                    return (
+                        action.routeDetails.area === RouteArea.random &&
+                        action.routeDetails.data.view !== pageSettings.viewMode
+                    );
+                }
+                return false;
+            }),
+            map(([action, pageSettings]) => {
+                const newSettings = {
+                    ...pageSettings,
+                    viewMode: action.routeDetails.data.view as PhotoViewMode,
+                };
+
+                return SettingsStoreActions.saveRandomPageSettings({
+                    settings: newSettings,
                 });
             })
         );
