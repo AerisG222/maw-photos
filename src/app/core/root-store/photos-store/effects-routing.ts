@@ -7,7 +7,6 @@ import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
 import { PhotoViewMode, RouteArea, RouteDetails, RouteHelper } from '@models';
-import { PhotoCategoryStoreSelectors } from '../photo-category-store';
 import { RouterStoreSelectors } from '../router-store';
 import * as PhotoStoreActions from './actions';
 import * as PhotoStoreSelectors from './selectors';
@@ -162,32 +161,6 @@ export class PhotoStoreRoutingEffects {
                     action.leavingArea === RouteArea.random
             ),
             map(() => PhotoStoreActions.exitPhotoArea())
-        );
-    });
-
-    changeView$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(PhotoStoreActions.changeViewRequest),
-            withLatestFrom(
-                this.store.select(PhotoCategoryStoreSelectors.activeCategoryId),
-                this.store.select(PhotoStoreSelectors.activePhotoId)
-            ),
-            map(([action, categoryId, photoId]) => {
-                let id = photoId ?? undefined;
-
-                if (
-                    action.view === RouteHelper.photoViewBulkEdit ||
-                    action.view === RouteHelper.photoViewGrid
-                ) {
-                    id = undefined;
-                }
-
-                return PhotoStoreActions.navigateToPhoto({
-                    view: action.view,
-                    categoryId: categoryId as number,
-                    photoId: id,
-                });
-            })
         );
     });
 

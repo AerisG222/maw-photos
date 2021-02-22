@@ -263,11 +263,6 @@ export const setGpsCoordinateOverrideAndMoveNextRequest = createAction(
     props<{ photoId: number; latLng: GpsCoordinate }>()
 );
 
-export const changeViewRequest = createAction(
-    '[Photos] Change View Request',
-    props<{ view: string }>()
-);
-
 export const navigateToPhoto = createAction(
     '[Photos] Navigate to Photo',
     props<{ view: string; categoryId: number; photoId?: number }>()

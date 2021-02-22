@@ -8,7 +8,6 @@ import {
     GpsCoordinate,
     MapType,
     RouteHelper,
-    PhotoViewMode,
     Commentable,
     helpAddComment,
     MetadataEditable,
