@@ -170,11 +170,4 @@ export class PhotoStoreFacadeService
             photo.id
         );
     }
-
-    selectPhotoViewMode(mode: PhotoViewMode): void {
-        this.store.dispatch(
-            PhotoStoreActions.changeViewRequest({ view: mode })
-        );
-        this.photoFacade.saveViewMode(mode);
-    }
 }

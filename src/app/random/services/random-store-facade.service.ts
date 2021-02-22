@@ -166,8 +166,4 @@ export class RandomStoreFacadeService
     buildPhotoLink(photo: Photo): string {
         return RouteHelper.randomAbs(this.view, photo.id);
     }
-
-    selectPhotoViewMode(mode: PhotoViewMode): void {
-        this.randomPageFacade.saveViewMode(mode);
-    }
 }
