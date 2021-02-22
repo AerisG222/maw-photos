@@ -111,11 +111,9 @@ export const photoCategoriesAbs = (
 export const randomAbs = (view?: string, photoId?: number): string => {
     let url = `/${random}`;
 
-    if (!view) {
-        view = photoViewDefault;
+    if (view) {
+        url += `/${view}`;
     }
-
-    url += `/${view}`;
 
     if (photoId) {
         if (view !== photoViewGrid) {
@@ -127,13 +125,13 @@ export const randomAbs = (view?: string, photoId?: number): string => {
 };
 
 export const searchAbs = (view?: string): string => {
-    const url = `/${search}`;
+    let url = `/${search}`;
 
-    if (!view) {
-        view = searchViewDefault;
+    if (view) {
+        url += `/${view}`;
     }
 
-    return `${url}/${view}`;
+    return url;
 };
 
 export const settingsAbs = (): string => {

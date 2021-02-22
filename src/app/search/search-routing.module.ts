@@ -17,7 +17,7 @@ const routes: Routes = [
         component: ListViewComponent,
         data: { view: CategoryViewMode.list },
     },
-    { path: '', canActivate: [ViewModeGuard] },
+    { path: '', redirectTo: 'grid', pathMatch: 'full' },
     { path: '**', redirectTo: RouteHelper.searchViewDefault },
 ];
 
