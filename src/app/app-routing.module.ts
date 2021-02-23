@@ -14,19 +14,14 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'categories',
+                redirectTo: RouteHelper.categories
             },
             {
-                path: '',
-                children: [
-                    {
-                        path: RouteHelper.login,
-                        loadChildren: () =>
-                            import('./login/login.module').then(
-                                (m) => m.LoginModule
-                            ),
-                    },
-                ],
+                path: RouteHelper.login,
+                loadChildren: () =>
+                    import('./login/login.module').then(
+                        (m) => m.LoginModule
+                    ),
             },
             {
                 path: '',
@@ -94,15 +89,15 @@ const routes: Routes = [
     },
     {
         path: 'photos/**',
-        redirectTo: 'photo-categories',
+        redirectTo: RouteHelper.photoCategories,
     },
     {
         path: 'videos/**',
-        redirectTo: 'video-categories',
+        redirectTo: RouteHelper.videoCategories,
     },
     {
         path: '**',
-        redirectTo: 'categories',
+        redirectTo: RouteHelper.categories,
     },
 ];
 
