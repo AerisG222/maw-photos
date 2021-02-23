@@ -1,7 +1,7 @@
 <div class="filter-grid" *ngIf="filterSettings$ | async; let filterSettings">
     <app-categories-category-year-filter
         [allYears]="allYears$ | async"
-        [yearFilter]="filterSettings.yearFilter"
+        [yearFilter]="effectiveYearFilter$ | async"
         (filterChange)="onChangeYearFilter($event)"
     >
     </app-categories-category-year-filter>

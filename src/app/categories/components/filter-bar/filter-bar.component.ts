@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { CategoriesStoreSelectors } from '../../store';
 import { CategoryFilterSettingsFacade } from '@core/facades/settings/category-filter-settings-facade';
 import { AuthStoreSelectors, RootStoreSelectors } from '@core/root-store';
 import { CategoryTypeFilter } from '@models';
@@ -13,6 +14,7 @@ import { CategoryTypeFilter } from '@models';
 })
 export class FilterBarComponent {
     filterSettings$ = this.filterFacade.settings$;
+    effectiveYearFilter$ = this.store.select(CategoriesStoreSelectors.categoryEffectiveYearFilter);
     allYears$ = this.store.select(RootStoreSelectors.allYears);
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
 
