@@ -72,3 +72,30 @@ export const categoryById = createSelector(
     (entities: Dictionary<Category>, props: { id: number }) =>
         entities[props.id] ?? null
 );
+
+/*
+export const totalStats = createSelector(
+    allYears,
+    selectAll,
+    (years, categories) => {
+        return {
+            totalStats: calculateStats(years, categories),
+            statsByYear: buildStatsByYear(categories)
+        }
+    }
+);
+
+const calculateStats = (years: number[], categories: Category[]): { yearCount: number; categoryCount: number, photoCount: number, size: number } => {
+    return categories.reduce((acc, cat) => ({
+        yearCount: years.length,
+        categoryCount: acc.categoryCount + 1,
+        photoCount: acc.photoCount + (cat.actual as PhotoCategory).photoCount,
+        size: acc.size + (cat.actual as PhotoCategory).totalSize
+    }), { yearCount: 0, categoryCount: 0, photoCount: 0, size: 0});
+};
+
+
+const buildStatsByYear = (categories: Category[]) => {
+
+}
+*/
