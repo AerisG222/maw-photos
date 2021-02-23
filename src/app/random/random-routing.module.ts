@@ -6,6 +6,7 @@ import { DetailViewComponent } from '../photos-shared/components/detail-view/det
 import { FullscreenViewComponent } from '../photos-shared/components/fullscreen-view/fullscreen-view.component';
 import { GridPhotoComponent } from '../photos-shared/components/grid-photo/grid-photo.component';
 import { GridViewComponent } from '../photos-shared/components/grid-view/grid-view.component';
+import { ViewModeGuard } from './services/view-mode.guard';
 
 const routes: Routes = [
     {
@@ -44,8 +45,7 @@ const routes: Routes = [
             },
         ],
     },
-    { path: '', redirectTo: 'grid', pathMatch: 'full' },
-    { path: '**', redirectTo: '/random' },
+    { path: '**', canActivate: [ViewModeGuard] },
 ];
 
 @NgModule({

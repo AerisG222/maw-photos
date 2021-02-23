@@ -13,6 +13,7 @@ import { ListToolbarComponent } from './components/list-toolbar/list-toolbar.com
 import { GridToolbarComponent } from './components/grid-toolbar/grid-toolbar.component';
 import { ToolbarGroupSelectViewComponent } from './components/toolbar-group-select-view/toolbar-group-select-view.component';
 import { NoResultsFoundComponent } from './components/no-results-found/no-results-found.component';
+import { ViewModeGuard } from './services/view-mode.guard';
 
 @NgModule({
     declarations: [
@@ -27,5 +28,6 @@ import { NoResultsFoundComponent } from './components/no-results-found/no-result
         NoResultsFoundComponent,
     ],
     imports: [SearchRoutingModule, SearchStoreModule, SharedModule],
+    providers: [ ViewModeGuard ]
 })
 export class SearchModule {}

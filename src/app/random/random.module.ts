@@ -22,6 +22,7 @@ import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-setti
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
 import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-panel-settings-facade';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
+import { ViewModeGuard } from './services/view-mode.guard';
 
 @NgModule({
     declarations: [],
@@ -60,6 +61,7 @@ import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-inf
             provide: PhotoPageSettingsFacade,
             useExisting: RandomPageSettingsFacade,
         },
+        ViewModeGuard
     ],
 })
 export class RandomModule {}
