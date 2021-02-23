@@ -23,9 +23,10 @@
             "dom"
         ],
         "paths": {
+            "file-saver-es": [ "node_modules/@types/file-saver" ],
             "@models": [ "src/app/models" ],
             "@core/*": [ "src/app/core/*" ],
-            "@shared/*": [ "src/app/shared/*" ]
+            "@shared/*": [ "src/app/shared/*" ],
         },
     },
     "angularCompilerOptions": {

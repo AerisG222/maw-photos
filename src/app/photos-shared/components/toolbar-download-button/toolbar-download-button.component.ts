@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 
 @Component({
     selector: 'app-photos-toolbar-download-button',
