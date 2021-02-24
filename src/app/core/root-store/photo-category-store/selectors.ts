@@ -4,6 +4,7 @@ import { Dictionary } from '@ngrx/entity';
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 import { Category, PhotoCategory } from '@models';
+import { StatTotalSummary } from 'src/app/models/stat-total-summary';
 
 const photoCategoryState = createFeatureSelector<State>(
     PHOTO_CATEGORY_FEATURE_NAME
@@ -73,29 +74,23 @@ export const categoryById = createSelector(
         entities[props.id] ?? null
 );
 
-/*
 export const totalStats = createSelector(
     allYears,
     selectAll,
-    (years, categories) => {
-        return {
-            totalStats: calculateStats(years, categories),
-            statsByYear: buildStatsByYear(categories)
-        }
-    }
+    (years, categories) => calculateStats(years, categories)
 );
 
-const calculateStats = (years: number[], categories: Category[]): { yearCount: number; categoryCount: number, photoCount: number, size: number } => {
+const calculateStats = (years: number[], categories: Category[]): StatTotalSummary => {
     return categories.reduce((acc, cat) => ({
         yearCount: years.length,
         categoryCount: acc.categoryCount + 1,
-        photoCount: acc.photoCount + (cat.actual as PhotoCategory).photoCount,
-        size: acc.size + (cat.actual as PhotoCategory).totalSize
-    }), { yearCount: 0, categoryCount: 0, photoCount: 0, size: 0});
+        itemCount: acc.photoCount + (cat.actual as PhotoCategory).photoCount,
+        size: acc.size + (cat.actual as PhotoCategory).totalSize,
+        durationSeconds: 0,
+    }), { yearCount: 0, categoryCount: 0, photoCount: 0, size: 0, durationSeconds: 0});
 };
 
 
 const buildStatsByYear = (categories: Category[]) => {
 
 }
-*/
