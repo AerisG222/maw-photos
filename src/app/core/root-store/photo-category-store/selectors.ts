@@ -5,6 +5,8 @@ import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
 import { Category, PhotoCategory } from '@models';
 import { StatTotalSummary } from 'src/app/models/stat-total-summary';
+import { StatYearSummary } from 'src/app/models/stat-year-summary';
+import { StatCategorySummary } from 'src/app/models/stat-category-summary';
 
 const photoCategoryState = createFeatureSelector<State>(
     PHOTO_CATEGORY_FEATURE_NAME
@@ -81,16 +83,62 @@ export const totalStats = createSelector(
 );
 
 const calculateStats = (years: number[], categories: Category[]): StatTotalSummary => {
-    return categories.reduce((acc, cat) => ({
-        yearCount: years.length,
-        categoryCount: acc.categoryCount + 1,
-        itemCount: acc.photoCount + (cat.actual as PhotoCategory).photoCount,
-        size: acc.size + (cat.actual as PhotoCategory).totalSize,
-        durationSeconds: 0,
-    }), { yearCount: 0, categoryCount: 0, photoCount: 0, size: 0, durationSeconds: 0});
+    const result = initTotalSummary(years.length, categories.length);
+
+    for (const cat of categories) {
+        const pc = cat.actual as PhotoCategory;
+
+        result.itemCount += pc.photoCount;
+        result.size += pc.totalSize;
+
+        populateStatYearSummary(pc, result);
+    }
+
+    return result;
 };
 
+const populateStatYearSummary = (pc: PhotoCategory, result: StatTotalSummary): void => {
+    if(!result.statsByYear.has(pc.year)) {
+        result.statsByYear.set(pc.year, initStatYearSummary(pc.year));
+    }
 
-const buildStatsByYear = (categories: Category[]) => {
+    const statYear = result.statsByYear.get(pc.year) as StatYearSummary;
 
+    statYear.categoryCount += 1;
+    statYear.itemCount += pc.photoCount;
+    statYear.size += pc.totalSize;
+    statYear.statsByCategory.push(initCategoryStat(pc));
+};
+
+const initTotalSummary = (yearCount: number, categoryCount: number): StatTotalSummary => {
+    return {
+        yearCount,
+        categoryCount,
+        itemCount: 0,
+        size: 0,
+        durationSeconds: 0,
+        statsByYear: new Map<number, StatYearSummary>()
+    };
+};
+
+const initStatYearSummary = (year: number): StatYearSummary => {
+    return {
+        year,
+        categoryCount: 0,
+        itemCount: 0,
+        size: 0,
+        durationSeconds: 0,
+        statsByCategory: []
+    };
 }
+
+const initCategoryStat = (pc: PhotoCategory): StatCategorySummary => {
+    return {
+        categoryCount: 1,
+        itemCount: pc.photoCount,
+        size: pc.totalSize,
+        durationSeconds: 0,
+        categoryId: pc.id,
+        categoryName: pc.name
+    };
+};

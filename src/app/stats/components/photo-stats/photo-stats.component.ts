@@ -1,7 +1,6 @@
 import {
     Component,
     OnInit,
-    OnDestroy,
     ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -9,7 +8,6 @@ import {
     Observable,
     BehaviorSubject,
     combineLatest,
-    Subscription,
     of,
     concat,
 } from 'rxjs';
@@ -20,6 +18,8 @@ import numbro from 'numbro';
 import { Category, PhotoCategory } from '@models';
 import { PhotoCategoryStoreSelectors } from '@core/root-store';
 import { FormattedStatDetail, StatDetail } from '../../models';
+import { getNumberOfCurrencyDigits } from '@angular/common';
+import { StatYearSummary } from 'src/app/models/stat-year-summary';
 
 @Component({
     selector: 'app-stats-photo-stats',
@@ -27,20 +27,31 @@ import { FormattedStatDetail, StatDetail } from '../../models';
     styleUrls: ['./photo-stats.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PhotoStatsComponent implements OnInit, OnDestroy {
+export class PhotoStatsComponent implements OnInit {
     form: FormGroup;
-    chartData$: Observable<StatDetail[]> | null = null;
     chartValueFormat = 'count';
+    chartData$: Observable<StatDetail[]> | null = null;
     selectedYear$ = new BehaviorSubject<number>(-1);
     totalDetails$: Observable<FormattedStatDetail[]> | null = null;
     yearDetails$: Observable<FormattedStatDetail[]> | null = null;
-
-    private destroySub = new Subscription();
 
     constructor(private formBuilder: FormBuilder, private store: Store) {
         this.form = this.formBuilder.group({
             aggregateBy: ['count'],
         });
+
+        this.chartData$ = combineLatest([
+            this.store.select(PhotoCategoryStoreSelectors.totalStats),
+            this.form.get('aggregateBy')?.valueChanges as Observable<any>
+        ]).pipe(
+            map(([stats, aggregateBy]) => {
+                if(aggregateBy === 'count') {
+                    return getCountStatDetails(stats.statsByYear.values);
+                } else {
+                    return getSizeStatDetails(stats.statsByYear.values);
+                }
+            })
+        )
     }
 
     ngOnInit(): void {
@@ -75,14 +86,6 @@ export class PhotoStatsComponent implements OnInit, OnDestroy {
             categories$,
             this.selectedYear$,
         ]).pipe(map((x) => this.prepareYearDetails(x[0], x[1])));
-
-        this.destroySub.add(aggregateBy$.subscribe());
-        this.destroySub.add(years$.subscribe());
-        this.destroySub.add(categories$.subscribe());
-    }
-
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
     }
 
     onSelectYear(evt: StatDetail): void {
@@ -204,3 +207,23 @@ const getPhotoCount = (category: Category): number => {
 const getPhotoSize = (category: Category): number => {
     return (category.actual as PhotoCategory).totalSize;
 };
+
+const getCountStatDetails = (stats: IterableIterator<StatYearSummary>): StatDetail[] => {
+    return Array.from(
+        stats,
+        (x => ({
+            name: x.year.toString(),
+            value: x.itemCount
+        }))
+    );
+}
+
+const getSizeStatDetails = (stats: IterableIterator<StatYearSummary>): StatDetail[] => {
+    return Array.from(
+        stats,
+        (x => ({
+            name: x.year.toString(),
+            value: x.size
+        }))
+    );
+}
