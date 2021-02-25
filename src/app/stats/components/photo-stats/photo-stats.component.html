@@ -16,17 +16,10 @@
             ></app-stats-stat-card>
         </div>
 
-        <form layout-form [formGroup]="form">
-            <div>Aggregate By:</div>
-            <div>
-                <mat-radio-group formControlName="aggregateBy">
-                    <mat-radio-button value="count"
-                        >Photo Count</mat-radio-button
-                    >
-                    <mat-radio-button value="size">File Size</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        </form>
+        <app-aggregate-by-form
+            layout-form
+            (selectAggregateBy)="onSelectAggregate($event)"
+        ></app-aggregate-by-form>
 
         <app-stats-stat-chart
             layout-chart

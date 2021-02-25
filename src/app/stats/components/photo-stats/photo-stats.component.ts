@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map, startWith, delay, filter } from 'rxjs/operators';
+import { map, delay, filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 
@@ -15,21 +14,12 @@ import { PhotoCategoryStoreSelectors } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoStatsComponent {
-    form: FormGroup;
     selectedYear$ = new BehaviorSubject<number>(-1);
-    aggregateBy$: Observable<string>;
+    aggregateBy$ = new BehaviorSubject<string>('count');
     chartData$: Observable<StatDetail[]>;
     overallDetails$: Observable<FormattedStatDetail[]> | null = null;
 
-    constructor(private formBuilder: FormBuilder, private store: Store) {
-        this.form = this.formBuilder.group({
-            aggregateBy: ['count'],
-        });
-
-        this.aggregateBy$ = this.form
-            .get('aggregateBy')
-            ?.valueChanges.pipe(startWith('count')) as Observable<string>;
-
+    constructor(private store: Store) {
         this.chartData$ = combineLatest([
             this.store.select(PhotoCategoryStoreSelectors.totalStats),
             this.aggregateBy$,
@@ -37,7 +27,6 @@ export class PhotoStatsComponent {
         ]).pipe(
             delay(3), // delay so that the format function is set before sending data
             map(([stats, aggregateBy, year]) => {
-
                 if(year === -1) {
                     if (aggregateBy === 'count') {
                         return getTotalCountStatDetails(stats.statsByYear.values());
@@ -120,6 +109,10 @@ export class PhotoStatsComponent {
                 return overallDetails;
             })
         );
+    }
+
+    onSelectAggregate(evt: string): void {
+        this.aggregateBy$.next(evt);
     }
 
     onSelectYear(evt: StatDetail): void {
