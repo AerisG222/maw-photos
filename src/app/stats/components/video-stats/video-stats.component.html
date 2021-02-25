@@ -12,34 +12,20 @@
 
         <div layout-cards>
             <app-stats-stat-card
-                *ngIf="(selectedYear$ | async)! < 0"
-                [detail]="totalDetails$ | async"
-            ></app-stats-stat-card>
-            <app-stats-stat-card
-                *ngIf="(selectedYear$ | async)! > 0"
-                [detail]="yearDetails$ | async"
+                [detail]="overallDetails$ | async"
             ></app-stats-stat-card>
         </div>
 
-        <form layout-form [formGroup]="form">
-            <div>Aggregate By:</div>
-            <div>
-                <mat-radio-group formControlName="aggregateBy">
-                    <mat-radio-button value="count"
-                        >Video Count</mat-radio-button
-                    >
-                    <mat-radio-button value="size">File Size</mat-radio-button>
-                    <mat-radio-button value="time"
-                        >Video Duration</mat-radio-button
-                    >
-                </mat-radio-group>
-            </div>
-        </form>
+        <app-aggregate-by-form
+            layout-form
+            [includeDuration]="true"
+            (selectAggregateBy)="onSelectAggregate($event)"
+        ></app-aggregate-by-form>
 
         <app-stats-stat-chart
             layout-chart
+            [format]="aggregateBy$ | async"
             [chartData]="chartData$ | async"
-            [format]="chartValueFormat"
             (cellSelected)="onSelectYear($event)"
         >
         </app-stats-stat-chart>

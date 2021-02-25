@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { PhotoCategoryStoreSelectors } from '@core/root-store';
 import { BaseStatsComponent } from '../base-stats/base-stats.component';
+import { StatType } from '@models';
 
 @Component({
     selector: 'app-stats-photo-stats',
@@ -12,6 +13,6 @@ import { BaseStatsComponent } from '../base-stats/base-stats.component';
 })
 export class PhotoStatsComponent extends BaseStatsComponent {
     constructor(public store: Store) {
-        super(store, store.select(PhotoCategoryStoreSelectors.totalStats));
+        super(store, StatType.photos, store.select(PhotoCategoryStoreSelectors.totalStats));
     }
 }

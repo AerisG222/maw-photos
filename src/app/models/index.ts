@@ -55,6 +55,7 @@ export * from './stats/category-stat-summary';
 export * from './stats/formatted-stat-detail';
 export * from './stats/stat-detail';
 export * from './stats/stat-summary';
+export * from './stats/stat-type';
 export * from './stats/total-stat-summary';
 export * from './stats/year-stat-summary';
 

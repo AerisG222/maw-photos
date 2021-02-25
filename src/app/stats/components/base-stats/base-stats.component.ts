@@ -1,16 +1,22 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { PhotoCategoryStoreSelectors } from '@core/root-store';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { delay, map, filter } from 'rxjs/operators';
 
-import { StatDetail, FormattedStatDetail, YearStatSummary, CategoryStatSummary, TotalStatSummary } from '@models';
+import {
+    StatDetail,
+    FormattedStatDetail,
+    YearStatSummary,
+    CategoryStatSummary,
+    TotalStatSummary,
+    StatType,
+} from '@models';
 
 @Component({
     selector: 'app-base-stats',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseStatsComponent {
     selectedYear$ = new BehaviorSubject<number>(-1);
@@ -18,7 +24,11 @@ export class BaseStatsComponent {
     chartData$: Observable<StatDetail[]>;
     overallDetails$: Observable<FormattedStatDetail[]> | null = null;
 
-    constructor(public store: Store, private totalStats$: Observable<TotalStatSummary>) {
+    constructor(
+        public store: Store,
+        private statType: StatType,
+        private totalStats$: Observable<TotalStatSummary>
+    ) {
         this.chartData$ = combineLatest([
             this.totalStats$,
             this.aggregateBy$,
@@ -26,20 +36,34 @@ export class BaseStatsComponent {
         ]).pipe(
             delay(3), // delay so that the format function is set before sending data
             map(([stats, aggregateBy, year]) => {
-                if(year === -1) {
-                    if (aggregateBy === 'count') {
-                        return getTotalCountStatDetails(stats.statsByYear.values());
-                    } else {
-                        return getTotalSizeStatDetails(stats.statsByYear.values());
+                if (year === -1) {
+                    switch (aggregateBy) {
+                        case 'count':
+                            return getTotalCountStatDetails(
+                                stats.statsByYear.values()
+                            );
+                        case 'size':
+                            return getTotalSizeStatDetails(
+                                stats.statsByYear.values()
+                            );
+                        case 'time':
+                            return getTotalDurationStatDetails(
+                                stats.statsByYear.values()
+                            );
                     }
                 } else {
-                    const catStats = stats.statsByYear.get(year)?.statsByCategory.values();
+                    const catStats = stats.statsByYear
+                        .get(year)
+                        ?.statsByCategory.values();
 
-                    if(catStats) {
-                        if (aggregateBy === 'count') {
-                            return getYearCountStatDetails(catStats);
-                        } else {
-                            return getYearSizeStatDetails(catStats);
+                    if (catStats) {
+                        switch (aggregateBy) {
+                            case 'count':
+                                return getYearCountStatDetails(catStats);
+                            case 'size':
+                                return getYearSizeStatDetails(catStats);
+                            case 'time':
+                                return getYearDurationStatDetails(catStats);
                         }
                     }
                 }
@@ -49,18 +73,20 @@ export class BaseStatsComponent {
         );
 
         this.overallDetails$ = combineLatest([
-            this.store.select(PhotoCategoryStoreSelectors.totalStats),
+            this.totalStats$,
             this.selectedYear$,
         ]).pipe(
             filter(
                 ([details, year]) =>
-                    details.yearCount > 0 && (year === -1 || details.statsByYear.has(year))
+                    details.yearCount > 0 &&
+                    (year === -1 || details.statsByYear.has(year))
             ),
             map(([details, year]) => {
                 const overallDetails = [];
                 let categories = 0;
-                let photos = 0;
+                let items = 0;
                 let size = 0;
+                let duration = 0;
 
                 if (year === -1) {
                     overallDetails.push({
@@ -69,15 +95,17 @@ export class BaseStatsComponent {
                     });
 
                     categories = details.categoryCount;
-                    photos = details.itemCount;
+                    items = details.itemCount;
                     size = details.size;
+                    duration = details.durationSeconds;
                 } else {
                     const yearStat = details.statsByYear.get(year);
 
                     if (yearStat) {
                         categories = yearStat.categoryCount;
-                        photos = yearStat.itemCount;
+                        items = yearStat.itemCount;
                         size = yearStat.size;
+                        duration = yearStat.durationSeconds;
                     }
                 }
 
@@ -89,14 +117,14 @@ export class BaseStatsComponent {
                 });
 
                 overallDetails.push({
-                    name: 'Photos',
-                    value: numbro(photos).format({
+                    name: this.getStatTypeName(),
+                    value: numbro(items).format({
                         thousandSeparated: true,
                     }),
                 });
 
                 overallDetails.push({
-                    name: 'Total Size',
+                    name: 'File Size',
                     value: numbro(size).format({
                         output: 'byte',
                         base: 'decimal',
@@ -104,6 +132,15 @@ export class BaseStatsComponent {
                         spaceSeparated: true,
                     }),
                 });
+
+                if (this.statType === StatType.videos) {
+                    overallDetails.push({
+                        name: 'Duration',
+                        value: numbro(duration).format({
+                            output: 'time',
+                        }),
+                    });
+                }
 
                 return overallDetails;
             })
@@ -125,6 +162,17 @@ export class BaseStatsComponent {
     onRemoveYearFilter(): void {
         this.selectedYear$.next(-1);
     }
+
+    private getStatTypeName(): string {
+        switch (this.statType) {
+            case StatType.photos:
+                return 'Photos';
+            case StatType.videos:
+                return 'Videos';
+            case StatType.combined:
+                return 'Combined';
+        }
+    }
 }
 
 const getTotalCountStatDetails = (
@@ -145,6 +193,15 @@ const getTotalSizeStatDetails = (
     }));
 };
 
+const getTotalDurationStatDetails = (
+    stats: IterableIterator<YearStatSummary>
+): StatDetail[] => {
+    return Array.from(stats, (x) => ({
+        name: x.year.toString(),
+        value: x.durationSeconds,
+    }));
+};
+
 const getYearCountStatDetails = (
     stats: IterableIterator<CategoryStatSummary>
 ): StatDetail[] => {
@@ -160,5 +217,14 @@ const getYearSizeStatDetails = (
     return Array.from(stats, (x) => ({
         name: x.categoryName,
         value: x.size,
+    }));
+};
+
+const getYearDurationStatDetails = (
+    stats: IterableIterator<CategoryStatSummary>
+): StatDetail[] => {
+    return Array.from(stats, (x) => ({
+        name: x.categoryName,
+        value: x.durationSeconds,
     }));
 };
