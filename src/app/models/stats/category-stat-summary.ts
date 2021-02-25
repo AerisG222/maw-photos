@@ -1,6 +1,6 @@
 import { StatSummary } from './stat-summary';
 
-export interface StatCategorySummary extends StatSummary {
+export interface CategoryStatSummary extends StatSummary {
     categoryId: number,
     categoryName: string,
 }

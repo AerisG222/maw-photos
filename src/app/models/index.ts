@@ -51,6 +51,13 @@ export * from './settings/settings';
 export * from './settings/video-detail-view-settings';
 export * from './settings/video-info-panel-settings';
 
+export * from './stats/category-stat-summary';
+export * from './stats/formatted-stat-detail';
+export * from './stats/stat-detail';
+export * from './stats/stat-summary';
+export * from './stats/total-stat-summary';
+export * from './stats/year-stat-summary';
+
 export * from './auth-config';
 export * from './category-type-filter';
 export * from './category-gps-status';

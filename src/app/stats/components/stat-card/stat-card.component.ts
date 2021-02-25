@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { colorSets, NumberCardComponent } from '@swimlane/ngx-charts';
 
-import { FormattedStatDetail } from '../../models';
+import { FormattedStatDetail } from '@models';
 
 @Component({
     selector: 'app-stats-stat-card',

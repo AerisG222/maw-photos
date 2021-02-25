@@ -12,12 +12,7 @@
 
         <div layout-cards>
             <app-stats-stat-card
-                *ngIf="(selectedYear$ | async)! < 0"
-                [detail]="totalDetails$ | async"
-            ></app-stats-stat-card>
-            <app-stats-stat-card
-                *ngIf="(selectedYear$ | async)! > 0"
-                [detail]="yearDetails$ | async"
+                [detail]="overallDetails$ | async"
             ></app-stats-stat-card>
         </div>
 
@@ -35,8 +30,8 @@
 
         <app-stats-stat-chart
             layout-chart
+            [format]="aggregateBy$ | async"
             [chartData]="chartData$ | async"
-            [format]="chartValueFormat"
             (cellSelected)="onSelectYear($event)"
         >
         </app-stats-stat-chart>

@@ -17,9 +17,8 @@ import {
 import { tap, map, delay, filter } from 'rxjs/operators';
 import numbro from 'numbro';
 
-import { FormattedStatDetail, StatDetail } from '../../models';
 import { VideoCategoryStoreSelectors } from '@core/root-store';
-import { Category, VideoCategory } from '@models';
+import { Category, VideoCategory, FormattedStatDetail, StatDetail } from '@models';
 
 @Component({
     selector: 'app-stats-video-stats',
