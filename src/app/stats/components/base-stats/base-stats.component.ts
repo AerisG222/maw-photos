@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { delay, map, filter } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 import {
     StatDetail,
@@ -34,7 +34,6 @@ export class BaseStatsComponent {
             this.aggregateBy$,
             this.selectedYear$,
         ]).pipe(
-            delay(3), // delay so that the format function is set before sending data
             map(([stats, aggregateBy, year]) => {
                 if (year === -1) {
                     switch (aggregateBy) {

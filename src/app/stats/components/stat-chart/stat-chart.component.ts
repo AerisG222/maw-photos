@@ -13,6 +13,9 @@ import numbro from 'numbro';
 
 import { StatDetail } from '@models';
 
+// TODO: disabled animations so that valueformatting works as expected, see:
+// https://github.com/swimlane/ngx-charts/issues/1514
+
 @Component({
     selector: 'app-stats-stat-chart',
     templateUrl: './stat-chart.component.html',
