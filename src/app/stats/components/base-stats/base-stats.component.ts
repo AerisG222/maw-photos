@@ -33,7 +33,7 @@ export class BaseStatsComponent {
         this.chartData$ = combineLatest([
             this.totalStats$,
             this.aggregateBy$,
-            this.store.select(StatsStoreSelectors.effectiveYear)
+            this.selectedYear$,
         ]).pipe(
             map(([stats, aggregateBy, year]) => {
                 if (year === -1) {
@@ -74,7 +74,7 @@ export class BaseStatsComponent {
 
         this.overallDetails$ = combineLatest([
             this.totalStats$,
-            this.store.select(StatsStoreSelectors.effectiveYear)
+            this.selectedYear$,
         ]).pipe(
             filter(
                 ([details, year]) =>
@@ -152,7 +152,7 @@ export class BaseStatsComponent {
     }
 
     onSelectYear(evt: StatDetail): void {
-        this.store.select(StatsStoreSelectors.effectiveYear).pipe(
+        this.selectedYear$.pipe(
             first()
         ).subscribe({
             next: year => {
