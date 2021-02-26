@@ -23,7 +23,7 @@ export class BaseStatsComponent {
     selectedYear$ = this.store.select(StatsStoreSelectors.effectiveYear);
     aggregateBy$ = new BehaviorSubject<string>('count');
     chartData$: Observable<StatDetail[]>;
-    overallDetails$: Observable<FormattedStatDetail[]> | null = null;
+    overallDetails$: Observable<FormattedStatDetail[]>;
 
     constructor(
         public store: Store,
