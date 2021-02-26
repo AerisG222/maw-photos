@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-
-import { RootStoreSelectors } from '@core/root-store';
-import { StatType } from '@models';
 import { Store } from '@ngrx/store';
+
+import { StatType } from '@models';
+import { StatsStoreSelectors } from '../../store';
 import { BaseStatsComponent } from '../base-stats/base-stats.component';
 
 @Component({
@@ -13,6 +13,6 @@ import { BaseStatsComponent } from '../base-stats/base-stats.component';
 })
 export class CombinedStatsComponent extends BaseStatsComponent {
     constructor(public store: Store) {
-        super(store, StatType.combined, store.select(RootStoreSelectors.combinedTotalStats));
+        super(store, StatType.combined, store.select(StatsStoreSelectors.combinedStats));
     }
 }

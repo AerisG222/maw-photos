@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, first } from 'rxjs/operators';
 
 import {
     StatDetail,
@@ -12,6 +12,7 @@ import {
     TotalStatSummary,
     StatType,
 } from '@models';
+import { StatsStoreActions, StatsStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-base-stats',
@@ -19,7 +20,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseStatsComponent {
-    selectedYear$ = new BehaviorSubject<number>(-1);
+    selectedYear$ = this.store.select(StatsStoreSelectors.effectiveYear);
     aggregateBy$ = new BehaviorSubject<string>('count');
     chartData$: Observable<StatDetail[]>;
     overallDetails$: Observable<FormattedStatDetail[]> | null = null;
@@ -27,12 +28,12 @@ export class BaseStatsComponent {
     constructor(
         public store: Store,
         private statType: StatType,
-        private totalStats$: Observable<TotalStatSummary>
+        private totalStats$: Observable<TotalStatSummary>,
     ) {
         this.chartData$ = combineLatest([
             this.totalStats$,
             this.aggregateBy$,
-            this.selectedYear$,
+            this.store.select(StatsStoreSelectors.effectiveYear)
         ]).pipe(
             map(([stats, aggregateBy, year]) => {
                 if (year === -1) {
@@ -73,7 +74,7 @@ export class BaseStatsComponent {
 
         this.overallDetails$ = combineLatest([
             this.totalStats$,
-            this.selectedYear$,
+            this.store.select(StatsStoreSelectors.effectiveYear)
         ]).pipe(
             filter(
                 ([details, year]) =>
@@ -151,15 +152,16 @@ export class BaseStatsComponent {
     }
 
     onSelectYear(evt: StatDetail): void {
-        const year = Number(evt.name);
-
-        if (year > 0) {
-            this.selectedYear$.next(year);
-        }
-    }
-
-    onRemoveYearFilter(): void {
-        this.selectedYear$.next(-1);
+        this.store.select(StatsStoreSelectors.effectiveYear).pipe(
+            first()
+        ).subscribe({
+            next: year => {
+                // ignore clicks on categories within year view
+                if(!year || year <= 0) {
+                    this.store.dispatch(StatsStoreActions.selectYear({ year: Number(evt.name) }))
+                }
+            }
+        });
     }
 
     private getStatTypeName(): string {

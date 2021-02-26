@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { PhotoCategoryStoreSelectors } from './photo-category-store';
 import { VideoCategoryStoreSelectors } from './video-category-store';
-import { calculateStats, Category } from '@models';
+import { Category } from '@models';
 import { AuthStoreSelectors } from './auth-store';
 import { RouterStoreSelectors } from './router-store';
 
@@ -54,12 +54,6 @@ export const allYears = createSelector(
 
         return [];
     }
-);
-
-export const combinedTotalStats = createSelector(
-    allYears,
-    allCategories,
-    (years, categories) => calculateStats(years, categories)
 );
 
 const sortNumbersDescending = (first: number, second: number): number => {

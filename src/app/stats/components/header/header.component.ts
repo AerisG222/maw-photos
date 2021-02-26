@@ -1,9 +1,7 @@
 import {
     Component,
     Input,
-    ChangeDetectionStrategy,
-    EventEmitter,
-    Output,
+    ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -15,9 +13,4 @@ import {
 export class HeaderComponent {
     @Input() title: string | null = null;
     @Input() year: number | null = null;
-    @Output() clickYear = new EventEmitter<void>();
-
-    onBack(): void {
-        this.clickYear.emit();
-    }
 }

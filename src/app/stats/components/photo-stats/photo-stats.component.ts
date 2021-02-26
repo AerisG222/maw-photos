@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { PhotoCategoryStoreSelectors } from '@core/root-store';
 import { BaseStatsComponent } from '../base-stats/base-stats.component';
 import { StatType } from '@models';
+import { StatsStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-stats-photo-stats',
@@ -13,6 +13,6 @@ import { StatType } from '@models';
 })
 export class PhotoStatsComponent extends BaseStatsComponent {
     constructor(public store: Store) {
-        super(store, StatType.photos, store.select(PhotoCategoryStoreSelectors.totalStats));
+        super(store, StatType.photos, store.select(StatsStoreSelectors.photoStats));
     }
 }

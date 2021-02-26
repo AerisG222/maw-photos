@@ -3,7 +3,7 @@ import { Dictionary } from '@ngrx/entity';
 
 import { PHOTO_CATEGORY_FEATURE_NAME } from './feature-name';
 import { photoCategoryAdapter, State } from './state';
-import { Category, PhotoCategory, calculateStats } from '@models';
+import { Category, PhotoCategory } from '@models';
 
 const photoCategoryState = createFeatureSelector<State>(
     PHOTO_CATEGORY_FEATURE_NAME
@@ -71,10 +71,4 @@ export const categoryById = createSelector(
     selectEntities,
     (entities: Dictionary<Category>, props: { id: number }) =>
         entities[props.id] ?? null
-);
-
-export const totalStats = createSelector(
-    allYears,
-    selectAll,
-    (years, categories) => calculateStats(years, categories)
 );

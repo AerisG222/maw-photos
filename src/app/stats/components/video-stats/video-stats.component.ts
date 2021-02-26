@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { VideoCategoryStoreSelectors } from '@core/root-store';
 import { BaseStatsComponent } from '../base-stats/base-stats.component';
 import { StatType } from '@models';
+import { StatsStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-stats-video-stats',
@@ -13,6 +13,6 @@ import { StatType } from '@models';
 })
 export class VideoStatsComponent extends BaseStatsComponent {
     constructor(public store: Store) {
-        super(store, StatType.videos, store.select(VideoCategoryStoreSelectors.totalStats));
+        super(store, StatType.videos, store.select(StatsStoreSelectors.videoStats));
     }
 }

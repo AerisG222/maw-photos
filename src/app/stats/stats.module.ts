@@ -13,6 +13,7 @@ import { StatChartComponent } from './components/stat-chart/stat-chart.component
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VideoStatsComponent } from './components/video-stats/video-stats.component';
 import { AggregateByFormComponent } from './components/aggregate-by-form/aggregate-by-form.component';
+import { StatsStoreModule } from './store';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,6 @@ import { AggregateByFormComponent } from './components/aggregate-by-form/aggrega
         VideoStatsComponent,
         AggregateByFormComponent,
     ],
-    imports: [NgxChartsModule, SharedModule, StatsRoutingModule],
+    imports: [NgxChartsModule, SharedModule, StatsRoutingModule, StatsStoreModule],
 })
 export class StatsModule {}
