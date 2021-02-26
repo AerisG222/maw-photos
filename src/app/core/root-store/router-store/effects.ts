@@ -6,7 +6,7 @@ import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
-import { RouteDetails, RouteArea, isFullscreenView } from '@models';
+import { RouteDetails, RouteArea, RouteHelper } from '@models';
 import { LayoutStoreActions } from '../layout-store';
 
 interface RouteDetailsChange {
@@ -85,7 +85,7 @@ export class RouterStoreEffects {
 
     monitorFullScreenEffect$ = createEffect(() => {
         return this.routeChanged$.pipe(
-            map(([, routeDetails]) => isFullscreenView(routeDetails)),
+            map(([, routeDetails]) => RouteHelper.isFullscreenView(routeDetails)),
             scan(
                 (acc: FullScreenChange, curr) => {
                     return {

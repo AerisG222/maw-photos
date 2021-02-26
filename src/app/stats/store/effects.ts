@@ -11,7 +11,7 @@ import {
     SettingsStoreSelectors,
 } from '@core/root-store';
 import * as StatsStoreActions from './actions';
-import { CategoryViewMode, RouteArea, statsAbs } from '@models';
+import { CategoryViewMode, RouteArea, RouteHelper } from '@models';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class StatsStoreEffects {
                 ofType(StatsStoreActions.selectYear),
                 withLatestFrom(this.store.select(RouterStoreSelectors.selectRouteDetails)),
                 switchMap(([action, details]) => {
-                    return this.router.navigateByUrl(statsAbs(details.data.view, action.year));
+                    return this.router.navigateByUrl(RouteHelper.statsAbs(details.data.view, action.year));
                 })
             );
         },

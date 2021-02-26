@@ -1,11 +1,11 @@
 import { RouterStateSnapshot, Params } from '@angular/router';
 
-import { CategoryTeaser } from './category-teaser';
-import { CategoryTypeFilter } from './category-type-filter';
-import { CategoryType } from './category-type';
-import { RouteArea } from './route-area';
-import { RouteDetails } from './route-details';
-import { PhotoViewMode } from './photo-view-mode';
+import { CategoryTeaser } from '../category-teaser';
+import { CategoryTypeFilter } from '../category-type-filter';
+import { CategoryType } from '../category-type';
+import { RouteArea } from '../route-area';
+import { RouteDetails } from '../route-details';
+import { PhotoViewMode } from '../photo-view-mode';
 
 export const about = 'about';
 export const categories = 'categories';

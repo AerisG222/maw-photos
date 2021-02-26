@@ -1,4 +1,4 @@
-import * as RouteHelper from './route-helper';
+import * as RouteHelper from './helpers/router';
 
 export * from './api/api-collection';
 export * from './api/comment';
@@ -80,7 +80,6 @@ export * from './photo-rotation';
 export * from './photo-view-mode';
 export * from './route-area';
 export * from './route-details';
-export * from './route-helper';
 export * from './theme';
 export * from './thumbnail-size';
 export * from './user-info';
