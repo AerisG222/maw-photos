@@ -16,7 +16,13 @@ import {
     videoApiServiceToken,
     VideoApiService,
 } from '@core/services/video-api.service';
-import { Category, CategoryType, VideoCategory, RouteHelper, httpErrorHandler } from '@models';
+import {
+    Category,
+    CategoryType,
+    VideoCategory,
+    RouteHelper,
+    httpErrorHandler,
+} from '@models';
 
 @Injectable()
 export class VideoCategoryStoreEffects {

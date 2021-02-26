@@ -11,7 +11,7 @@ import {
     MiniMapable,
     CategoryTeaserSelectable,
     PhotoLinkable,
-    PhotoViewModeSelectable
+    PhotoViewModeSelectable,
 } from '@models';
 import { RandomStoreFacadeService } from './services/random-store-facade.service';
 import { RandomDetailSettingsFacade } from '@core/facades/settings/random-detail-settings-facade';
@@ -61,7 +61,7 @@ import { ViewModeGuard } from './services/view-mode.guard';
             provide: PhotoPageSettingsFacade,
             useExisting: RandomPageSettingsFacade,
         },
-        ViewModeGuard
+        ViewModeGuard,
     ],
 })
 export class RandomModule {}

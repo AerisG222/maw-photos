@@ -14,7 +14,9 @@ import { CategoryTypeFilter } from '@models';
 })
 export class FilterBarComponent {
     filterSettings$ = this.filterFacade.settings$;
-    effectiveYearFilter$ = this.store.select(CategoriesStoreSelectors.categoryEffectiveYearFilter);
+    effectiveYearFilter$ = this.store.select(
+        CategoriesStoreSelectors.categoryEffectiveYearFilter
+    );
     allYears$ = this.store.select(RootStoreSelectors.allYears);
     isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
 

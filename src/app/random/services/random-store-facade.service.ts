@@ -28,7 +28,7 @@ import {
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
     PhotoLinkable,
-    PhotoViewModeSelectable
+    PhotoViewModeSelectable,
 } from '@models';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
@@ -65,7 +65,9 @@ export class RandomStoreFacadeService
     currentTeaserUrl$ = this.store.select(
         PhotoCategoryStoreSelectors.activeCategoryTeaserUrl
     );
-    activePhotoViewMode$ = this.store.select(RouterStoreSelectors.currentViewMode);
+    activePhotoViewMode$ = this.store.select(
+        RouterStoreSelectors.currentViewMode
+    );
     preferredPhotoViewMode$ = this.randomPageFacade.settings$.pipe(
         map((x) => x.viewMode)
     );

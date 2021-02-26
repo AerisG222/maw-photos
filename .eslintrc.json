@@ -30,7 +30,6 @@
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "plugin:ngrx/recommended"
-                //"prettier/@typescript-eslint",
                 //"plugin:prettier/recommended"
             ],
             "plugins": [
@@ -68,7 +67,6 @@
             ],
             "extends": [
                 "plugin:@angular-eslint/template/recommended"
-                //"prettier/@typescript-eslint",
                 //"plugin:prettier/recommended"
             ],
             "rules": {}

@@ -28,7 +28,7 @@ export class BaseStatsComponent {
     constructor(
         public store: Store,
         private statType: StatType,
-        private totalStats$: Observable<TotalStatSummary>,
+        private totalStats$: Observable<TotalStatSummary>
     ) {
         this.chartData$ = combineLatest([
             this.totalStats$,
@@ -152,15 +152,15 @@ export class BaseStatsComponent {
     }
 
     onSelectYear(evt: StatDetail): void {
-        this.selectedYear$.pipe(
-            first()
-        ).subscribe({
-            next: year => {
+        this.selectedYear$.pipe(first()).subscribe({
+            next: (year) => {
                 // ignore clicks on categories within year view
-                if(!year || year <= 0) {
-                    this.store.dispatch(StatsStoreActions.selectYear({ year: Number(evt.name) }))
+                if (!year || year <= 0) {
+                    this.store.dispatch(
+                        StatsStoreActions.selectYear({ year: Number(evt.name) })
+                    );
                 }
-            }
+            },
         });
     }
 

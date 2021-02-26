@@ -14,9 +14,13 @@ export class StatsStoreEffects {
         () => {
             return this.actions$.pipe(
                 ofType(StatsStoreActions.selectYear),
-                withLatestFrom(this.store.select(RouterStoreSelectors.selectRouteDetails)),
+                withLatestFrom(
+                    this.store.select(RouterStoreSelectors.selectRouteDetails)
+                ),
                 switchMap(([action, details]) => {
-                    return this.router.navigateByUrl(RouteHelper.statsAbs(details.data.view, action.year));
+                    return this.router.navigateByUrl(
+                        RouteHelper.statsAbs(details.data.view, action.year)
+                    );
                 })
             );
         },
@@ -27,7 +31,7 @@ export class StatsStoreEffects {
         () => {
             return this.actions$.pipe(
                 ofType(StatsStoreActions.selectAggregateBy),
-                switchMap(({agg}) => {
+                switchMap(({ agg }) => {
                     return this.router.navigate([], {
                         relativeTo: this.router.routerState.root,
                         queryParams: { agg },
@@ -37,11 +41,11 @@ export class StatsStoreEffects {
             );
         },
         { dispatch: false }
-    )
+    );
 
     constructor(
         private actions$: Actions,
         private store: Store,
-        private router: Router,
+        private router: Router
     ) {}
 }

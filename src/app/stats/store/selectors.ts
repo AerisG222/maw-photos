@@ -28,18 +28,18 @@ export const combinedStats = createSelector(
 
 export const effectiveYear = createSelector(
     RouterStoreSelectors.selectRouteDetails,
-    ({params}) => {
+    ({ params }) => {
         const year = Number(params.year);
 
         return isNaN(year) ? -1 : year;
     }
-)
+);
 
 export const aggregateBy = createSelector(
     RouterStoreSelectors.selectRouteDetails,
-    ({queryParams}) => {
+    ({ queryParams }) => {
         const agg = queryParams?.agg as string;
 
         return !agg ? 'count' : agg;
     }
-)
+);

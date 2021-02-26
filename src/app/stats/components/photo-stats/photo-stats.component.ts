@@ -13,6 +13,10 @@ import { StatsStoreSelectors } from '../../store';
 })
 export class PhotoStatsComponent extends BaseStatsComponent {
     constructor(public store: Store) {
-        super(store, StatType.photos, store.select(StatsStoreSelectors.photoStats));
+        super(
+            store,
+            StatType.photos,
+            store.select(StatsStoreSelectors.photoStats)
+        );
     }
 }

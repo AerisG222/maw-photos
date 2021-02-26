@@ -9,18 +9,24 @@ export interface TotalStatSummary extends StatSummary {
     statsByYear: Map<number, YearStatSummary>;
 }
 
-export const initTotalSummary = (yearCount: number, categoryCount: number): TotalStatSummary => {
+export const initTotalSummary = (
+    yearCount: number,
+    categoryCount: number
+): TotalStatSummary => {
     return {
         yearCount,
         categoryCount,
         itemCount: 0,
         size: 0,
         durationSeconds: 0,
-        statsByYear: new Map<number, YearStatSummary>()
+        statsByYear: new Map<number, YearStatSummary>(),
     };
 };
 
-export const calculateStats = (years: number[], categories: Category[]): TotalStatSummary => {
+export const calculateStats = (
+    years: number[],
+    categories: Category[]
+): TotalStatSummary => {
     const result = initTotalSummary(years.length, categories.length);
 
     for (const cat of categories) {

@@ -21,7 +21,7 @@ import {
     MiniMapable,
     CategoryTeaserSelectable,
     PhotoLinkable,
-    PhotoViewModeSelectable
+    PhotoViewModeSelectable,
 } from '@models';
 import { ViewModeGuard } from './services/view-mode.guard';
 import { PhotosUrlService } from './services/photos-url.service';

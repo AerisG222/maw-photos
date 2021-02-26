@@ -85,7 +85,9 @@ export class RouterStoreEffects {
 
     monitorFullScreenEffect$ = createEffect(() => {
         return this.routeChanged$.pipe(
-            map(([, routeDetails]) => RouteHelper.isFullscreenView(routeDetails)),
+            map(([, routeDetails]) =>
+                RouteHelper.isFullscreenView(routeDetails)
+            ),
             scan(
                 (acc: FullScreenChange, curr) => {
                     return {
@@ -106,5 +108,5 @@ export class RouterStoreEffects {
         );
     });
 
-    constructor(private actions$: Actions, private store: Store) { }
+    constructor(private actions$: Actions, private store: Store) {}
 }

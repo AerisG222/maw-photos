@@ -7,12 +7,36 @@ import { PhotoStatsComponent } from './components/photo-stats/photo-stats.compon
 import { VideoStatsComponent } from './components/video-stats/video-stats.component';
 
 const routes: Routes = [
-    { path: 'combined/:year', component: CombinedStatsComponent, data: { view: StatType.combined } },
-    { path: 'combined', component: CombinedStatsComponent, data: { view: StatType.combined } },
-    { path: 'photos/:year', component: PhotoStatsComponent, data: { view: StatType.photos } },
-    { path: 'photos', component: PhotoStatsComponent, data: { view: StatType.photos } },
-    { path: 'videos', component: VideoStatsComponent, data: { view: StatType.videos } },
-    { path: 'videos/:year', component: VideoStatsComponent, data: { view: StatType.videos } },
+    {
+        path: 'combined/:year',
+        component: CombinedStatsComponent,
+        data: { view: StatType.combined },
+    },
+    {
+        path: 'combined',
+        component: CombinedStatsComponent,
+        data: { view: StatType.combined },
+    },
+    {
+        path: 'photos/:year',
+        component: PhotoStatsComponent,
+        data: { view: StatType.photos },
+    },
+    {
+        path: 'photos',
+        component: PhotoStatsComponent,
+        data: { view: StatType.photos },
+    },
+    {
+        path: 'videos',
+        component: VideoStatsComponent,
+        data: { view: StatType.videos },
+    },
+    {
+        path: 'videos/:year',
+        component: VideoStatsComponent,
+        data: { view: StatType.videos },
+    },
     { path: '**', redirectTo: 'photos' },
 ];
 

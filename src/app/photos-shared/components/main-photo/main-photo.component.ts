@@ -3,7 +3,13 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
-import { Photo, PhotoEffects, ThumbnailSize, buildEffectFilter, buildEffectTransform } from '@models';
+import {
+    Photo,
+    PhotoEffects,
+    ThumbnailSize,
+    buildEffectFilter,
+    buildEffectTransform,
+} from '@models';
 
 @Component({
     selector: 'app-photos-main-photo',
@@ -20,10 +26,7 @@ export class MainPhotoComponent {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);
 
-    constructor(
-        private store: Store,
-        private sanitizer: DomSanitizer
-    ) {}
+    constructor(private store: Store, private sanitizer: DomSanitizer) {}
 
     onSwipeLeft(): void {
         this.store.dispatch(PhotoStoreActions.moveNextRequest());

@@ -16,12 +16,15 @@ export const initStatYearSummary = (year: number): YearStatSummary => {
         itemCount: 0,
         size: 0,
         durationSeconds: 0,
-        statsByCategory: []
+        statsByCategory: [],
     };
 };
 
-export const populateStatYearSummary = (cat: PhotoCategory | VideoCategory, result: TotalStatSummary): void => {
-    if(!result.statsByYear.has(cat.year)) {
+export const populateStatYearSummary = (
+    cat: PhotoCategory | VideoCategory,
+    result: TotalStatSummary
+): void => {
+    if (!result.statsByYear.has(cat.year)) {
         result.statsByYear.set(cat.year, initStatYearSummary(cat.year));
     }
 
@@ -29,7 +32,7 @@ export const populateStatYearSummary = (cat: PhotoCategory | VideoCategory, resu
 
     statYear.categoryCount += 1;
 
-    if(isPhotoCategory(cat)) {
+    if (isPhotoCategory(cat)) {
         statYear.itemCount += cat.photoCount;
         statYear.size += cat.totalSize;
     } else if (isVideoCategory(cat)) {

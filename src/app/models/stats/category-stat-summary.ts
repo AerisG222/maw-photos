@@ -3,18 +3,19 @@ import { isVideoCategory, VideoCategory } from '../api/video-category';
 import { StatSummary } from './stat-summary';
 
 export interface CategoryStatSummary extends StatSummary {
-    categoryId: number,
-    categoryName: string,
+    categoryId: number;
+    categoryName: string;
 }
 
-export const initCategoryStat = (cat: PhotoCategory | VideoCategory): CategoryStatSummary => {
+export const initCategoryStat = (
+    cat: PhotoCategory | VideoCategory
+): CategoryStatSummary => {
     let itemCount = 0;
     let durationSeconds = 0;
 
-    if(isPhotoCategory(cat)) {
+    if (isPhotoCategory(cat)) {
         itemCount = cat.photoCount;
-    }
-    else if(isVideoCategory(cat)) {
+    } else if (isVideoCategory(cat)) {
         itemCount = cat.videoCount;
         durationSeconds = cat.totalDuration;
     }
@@ -25,6 +26,6 @@ export const initCategoryStat = (cat: PhotoCategory | VideoCategory): CategorySt
         size: cat.totalSize,
         durationSeconds,
         categoryId: cat.id,
-        categoryName: cat.name
+        categoryName: cat.name,
     };
 };

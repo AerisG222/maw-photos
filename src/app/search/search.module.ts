@@ -28,6 +28,6 @@ import { ViewModeGuard } from './services/view-mode.guard';
         NoResultsFoundComponent,
     ],
     imports: [SearchRoutingModule, SearchStoreModule, SharedModule],
-    providers: [ ViewModeGuard ]
+    providers: [ViewModeGuard],
 })
 export class SearchModule {}

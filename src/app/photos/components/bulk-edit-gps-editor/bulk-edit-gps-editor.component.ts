@@ -22,10 +22,7 @@ export class BulkEditGpsEditorComponent {
     gpsForm: FormGroup;
     hasPendingEdits$ = this.store.select(PhotoStoreSelectors.hasPendingActions);
 
-    constructor(
-        private store: Store,
-        private formBuilder: FormBuilder
-    ) {
+    constructor(private store: Store, private formBuilder: FormBuilder) {
         this.gpsForm = this.formBuilder.group({
             latitude: ['', Validators.required],
             longitude: ['', Validators.required],

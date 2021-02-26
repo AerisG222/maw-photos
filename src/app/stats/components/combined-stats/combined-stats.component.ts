@@ -13,6 +13,10 @@ import { BaseStatsComponent } from '../base-stats/base-stats.component';
 })
 export class CombinedStatsComponent extends BaseStatsComponent {
     constructor(public store: Store) {
-        super(store, StatType.combined, store.select(StatsStoreSelectors.combinedStats));
+        super(
+            store,
+            StatType.combined,
+            store.select(StatsStoreSelectors.combinedStats)
+        );
     }
 }

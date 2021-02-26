@@ -21,7 +21,7 @@ import {
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
     PhotoLinkable,
-    PhotoViewModeSelectable
+    PhotoViewModeSelectable,
 } from '@models';
 import {
     RouterStoreSelectors,
@@ -65,7 +65,9 @@ export class PhotoStoreFacadeService
     currentTeaserUrl$ = this.store.select(
         PhotoCategoryStoreSelectors.activeCategoryTeaserUrl
     );
-    activePhotoViewMode$ = this.store.select(RouterStoreSelectors.currentViewMode);
+    activePhotoViewMode$ = this.store.select(
+        RouterStoreSelectors.currentViewMode
+    );
     preferredPhotoViewMode$ = this.photoFacade.settings$.pipe(
         map((x) => x.viewMode)
     );

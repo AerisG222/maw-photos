@@ -1,11 +1,17 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    Input,
+    Output,
+    EventEmitter,
+} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-aggregate-by-form',
     templateUrl: './aggregate-by-form.component.html',
     styleUrls: ['./aggregate-by-form.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AggregateByFormComponent {
     @Input() includeDuration = false;
@@ -18,7 +24,7 @@ export class AggregateByFormComponent {
         });
 
         this.form.get('aggregateBy')?.valueChanges.subscribe({
-            next: (val) => this.selectAggregateBy.next(val)
+            next: (val) => this.selectAggregateBy.next(val),
         });
     }
 }

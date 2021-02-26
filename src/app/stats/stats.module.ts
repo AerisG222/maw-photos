@@ -27,6 +27,11 @@ import { StatsStoreModule } from './store';
         VideoStatsComponent,
         AggregateByFormComponent,
     ],
-    imports: [NgxChartsModule, SharedModule, StatsRoutingModule, StatsStoreModule],
+    imports: [
+        NgxChartsModule,
+        SharedModule,
+        StatsRoutingModule,
+        StatsStoreModule,
+    ],
 })
 export class StatsModule {}

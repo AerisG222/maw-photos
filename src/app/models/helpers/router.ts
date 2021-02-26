@@ -138,7 +138,11 @@ export const settingsAbs = (): string => {
     return `/${settings}`;
 };
 
-export const statsAbs = (section?: string, year?: number, agg?: string): string => {
+export const statsAbs = (
+    section?: string,
+    year?: number,
+    agg?: string
+): string => {
     let url = `/${stats}`;
 
     if (section) {
