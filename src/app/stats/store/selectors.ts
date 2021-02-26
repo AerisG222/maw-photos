@@ -34,3 +34,12 @@ export const effectiveYear = createSelector(
         return isNaN(year) ? -1 : year;
     }
 )
+
+export const aggregateBy = createSelector(
+    RouterStoreSelectors.selectRouteDetails,
+    ({queryParams}) => {
+        const agg = queryParams?.agg as string;
+
+        return !agg ? 'count' : agg;
+    }
+)

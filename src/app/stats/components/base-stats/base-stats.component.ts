@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import numbro from 'numbro';
-import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map, filter, first } from 'rxjs/operators';
 
 import {
@@ -21,7 +21,7 @@ import { StatsStoreActions, StatsStoreSelectors } from '../../store';
 })
 export class BaseStatsComponent {
     selectedYear$ = this.store.select(StatsStoreSelectors.effectiveYear);
-    aggregateBy$ = new BehaviorSubject<string>('count');
+    aggregateBy$ = this.store.select(StatsStoreSelectors.aggregateBy);
     chartData$: Observable<StatDetail[]>;
     overallDetails$: Observable<FormattedStatDetail[]>;
 
@@ -148,7 +148,7 @@ export class BaseStatsComponent {
     }
 
     onSelectAggregate(evt: string): void {
-        this.aggregateBy$.next(evt);
+        this.store.dispatch(StatsStoreActions.selectAggregateBy({ agg: evt }));
     }
 
     onSelectYear(evt: StatDetail): void {
