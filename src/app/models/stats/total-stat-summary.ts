@@ -2,7 +2,7 @@ import { isPhotoCategory } from '../api/photo-category';
 import { isVideoCategory } from '../api/video-category';
 import { Category } from '../category';
 import { StatSummary } from './stat-summary';
-import { initStatYearSummary, populateStatYearSummary, YearStatSummary } from './year-stat-summary';
+import { populateStatYearSummary, YearStatSummary } from './year-stat-summary';
 
 export interface TotalStatSummary extends StatSummary {
     yearCount: number;
