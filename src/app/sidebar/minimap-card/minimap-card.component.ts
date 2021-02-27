@@ -5,7 +5,7 @@ import {
     OnDestroy,
 } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 
 import {
@@ -30,7 +30,6 @@ export class MinimapCardComponent implements OnDestroy {
 
     @ViewChild(GoogleMap) map: GoogleMap | null = null;
 
-    // arbitrarily use photo minimap settings by default
     options = this.initOptions();
     center$ = this.miniMapable.position$.pipe(
         startWith(MinimapCardComponent.defaultCenter),
@@ -44,47 +43,25 @@ export class MinimapCardComponent implements OnDestroy {
         public miniMapable: MiniMapable,
         private appSettingsFacade: AppSettingsFacade
     ) {
-        // TODO: simplify/merge into combinelatest
-        this.destroySub.add(
-            this.miniMapable.mapType$.subscribe({
-                next: (mapType) => {
-                    if (mapType) {
-                        this.options = {
-                            ...this.options,
-                            mapTypeId: mapType,
-                        };
-                    }
-                },
-            })
-        );
-
-        this.destroySub.add(
-            this.miniMapable.zoom$.subscribe({
-                next: (zoom) => {
-                    if (zoom) {
-                        this.options = {
-                            ...this.options,
-                            zoom,
-                        };
-                    }
-                },
-            })
-        );
-
-        this.destroySub.add(
+        const opts$ = combineLatest([
+            this.miniMapable.mapType$,
+            this.miniMapable.zoom$,
             this.appSettingsFacade.settings$
-                .pipe(map((s) => s.theme))
-                .subscribe({
-                    next: (theme) => {
-                        if (theme) {
-                            this.options = {
-                                ...this.options,
-                                styles: this.getMapThemeForAppTheme(theme),
-                            };
-                        }
-                    },
-                })
+        ]).pipe(
+            map(([type, zoom, settings]) => {
+                const opts = {...this.options};
+
+                if(type) { opts.mapTypeId = type; }
+                if(zoom) { opts.zoom = zoom; }
+                if(settings) { opts.styles = this.getMapThemeForAppTheme(settings.theme); }
+
+                return opts;
+            })
         );
+
+        this.destroySub.add(opts$.subscribe({
+            next: (opts) => this.options = opts
+        }));
     }
 
     ngOnDestroy(): void {
@@ -119,7 +96,6 @@ export class MinimapCardComponent implements OnDestroy {
             streetViewControl: false,
         } as google.maps.MapOptions;
 
-        // TODO: can we avoid use of default here?
         opts.mapTypeId = DEFAULT_PHOTO_INFO_PANEL_SETTINGS.minimapMapType;
         opts.styles = this.getMapThemeForAppTheme(DEFAULT_APP_SETTINGS.theme);
         opts.zoom = DEFAULT_PHOTO_INFO_PANEL_SETTINGS.minimapZoom;
