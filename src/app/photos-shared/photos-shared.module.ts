@@ -28,6 +28,7 @@ import { MainPhotoComponent } from './components/main-photo/main-photo.component
 import { GridViewComponent } from './components/grid-view/grid-view.component';
 import { GridPhotoComponent } from './components/grid-photo/grid-photo.component';
 import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-view-toolbar.component';
+import { GridCategoryHeaderComponent } from './components/grid-category-header/grid-category-header.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { GridViewToolbarComponent } from './components/grid-view-toolbar/grid-vi
         ToolbarViewMapButtonComponent,
         ToolbarViewDetailButtonComponent,
         MainPhotoComponent,
+        GridCategoryHeaderComponent,
     ],
     imports: [SharedModule],
     exports: [

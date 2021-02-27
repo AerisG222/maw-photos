@@ -7,7 +7,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
-import { PhotoStoreActions } from '@core/root-store';
+import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
 
 @Component({
     selector: 'app-grid-photo',
@@ -17,6 +17,7 @@ import { PhotoStoreActions } from '@core/root-store';
 })
 export class GridPhotoComponent implements OnInit, OnDestroy {
     hotkey: Hotkey | null = null;
+    isRandomView$ = this.store.select(RouterStoreSelectors.inRandomArea);
 
     constructor(private store: Store, private hotkeysService: HotkeysService) {}
 

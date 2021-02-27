@@ -13,14 +13,7 @@
                 display: (activePhoto$ | async) === null ? 'block' : 'none'
             }"
         >
-            <div class="category-header">
-                <app-shared-category-header
-                    *ngIf="gridSettings.showBreadcrumbs"
-                    [showCategoryAsLink]="isRandomView$ | async"
-                    [category]="category$ | async"
-                >
-                </app-shared-category-header>
-            </div>
+            <app-grid-category-header *ngIf="(gridSettings$ | async)?.showBreadcrumbs"></app-grid-category-header>
 
             <div class="photo-grid">
                 <a
