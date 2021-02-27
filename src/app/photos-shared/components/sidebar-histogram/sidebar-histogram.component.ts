@@ -3,17 +3,17 @@ import {
     ViewChild,
     ElementRef,
     Inject,
-    OnInit,
     OnDestroy,
     ChangeDetectionStrategy,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { combineLatest, fromEvent, Subscription } from 'rxjs';
 
 import { Histogram } from './histogram';
 import { PhotoStoreSelectors } from '@core/root-store';
+import { startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'app-photos-sidebar-histogram',
@@ -21,12 +21,11 @@ import { PhotoStoreSelectors } from '@core/root-store';
     styleUrls: ['./sidebar-histogram.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarHistogramComponent implements OnInit, OnDestroy {
+export class SidebarHistogramComponent implements OnDestroy {
     @ViewChild('canvas') canvas: ElementRef | null = null;
 
     form: FormGroup;
     img: HTMLImageElement;
-    channel = 'rgb';
 
     get canvasEl(): HTMLCanvasElement {
         return this.canvas?.nativeElement as HTMLCanvasElement;
@@ -41,14 +40,28 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
     ) {
         this.img = doc.createElement('img');
         this.img.crossOrigin = 'Anonymous';
-        this.img.addEventListener('load', () => this.onImageLoad());
 
         this.form = this.formBuilder.group({
             channel: ['rgb'],
         });
-    }
 
-    ngOnInit(): void {
+        const channelFormControl = this.form.get('channel');
+
+        if(channelFormControl) {
+            this.destroySub.add(
+                combineLatest([
+                    fromEvent(this.img, 'load'),
+                    channelFormControl.valueChanges.pipe(
+                        startWith('rgb')
+                    )
+                ]).subscribe({
+                    next: ([, channel]) => {
+                        this.onImageLoad(channel as string);
+                    }
+                })
+            );
+        }
+
         this.destroySub.add(
             this.store.select(PhotoStoreSelectors.activePhoto).subscribe({
                 next: (photo) => {
@@ -58,25 +71,13 @@ export class SidebarHistogramComponent implements OnInit, OnDestroy {
                 },
             })
         );
-
-        // TODO: leverage rxjs to manage dom load event and form state...
-
-        this.destroySub.add(
-            this.form.get('channel')?.valueChanges.subscribe({
-                next: (val) => {
-                    this.channel = val as string;
-                    this.onImageLoad();
-                },
-            })
-        );
     }
 
     ngOnDestroy(): void {
         this.destroySub.unsubscribe();
     }
 
-    private onImageLoad(): void {
-        const channel = this.channel; // grab this here to make sure remaining tasks use consistent value
+    private onImageLoad(channel: string): void {
         const data = this.getImageData();
         const hist = this.calcHistogram(data);
         const maxCount = this.getMaxCount(channel, hist);
