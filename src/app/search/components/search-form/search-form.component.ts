@@ -1,8 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
 import { queryRequest } from 'src/app/search/store/actions';
+import { SearchStoreSelectors } from '../../store';
 
 @Component({
     selector: 'app-search-search-form',
@@ -16,6 +18,15 @@ export class SearchFormComponent {
     constructor(private store: Store, private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
             query: ['', Validators.required],
+        });
+
+        // TODO: if coming to the page w/ query parameter, execute first query
+        this.store.select(SearchStoreSelectors.query).pipe(
+            first(),
+        ).subscribe({
+            next: (query) => {
+                this.form.patchValue({ query });
+            }
         });
     }
 

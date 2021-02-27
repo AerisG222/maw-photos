@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import {
     RouterStoreActions,
@@ -9,7 +9,9 @@ import {
 } from '@core/root-store';
 import { CategoryViewMode, RouteArea } from '@models';
 import * as SearchStoreActions from './actions';
+import * as SearchStoreSelectors from './selectors';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SearchStoreRoutingEffects {
@@ -20,6 +22,41 @@ export class SearchStoreRoutingEffects {
             map(() => SearchStoreActions.exitSearchArea())
         );
     });
+
+    addQueryToUrlOnSearch$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(SearchStoreActions.queryRequest),
+                switchMap(({query}) => {
+                    return this.router.navigate([], {
+                        relativeTo: this.router.routerState.root,
+                        queryParams: { s: query },
+                        queryParamsHandling: 'merge',
+                    });
+                })
+            )
+        }, { dispatch: false}
+    );
+
+    // TODO: review+correct how we keep query param and ui updated
+    addQueryToUrlOnRouteChange$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(RouterStoreActions.routeChanged),
+                withLatestFrom(
+                    this.store.select(SearchStoreSelectors.query)
+                ),
+                filter(([action, query]) => action.routeDetails.queryParams?.s !== query),
+                switchMap(([, query]) => {
+                    return this.router.navigate([], {
+                        relativeTo: this.router.routerState.root,
+                        queryParams: { s: query },
+                        queryParamsHandling: 'merge',
+                    });
+                })
+            )
+        }, { dispatch: false }
+    );
 
     monitorViewChangedEffect$ = createEffect(() => {
         return this.actions$.pipe(
@@ -49,5 +86,9 @@ export class SearchStoreRoutingEffects {
         );
     });
 
-    constructor(private actions$: Actions, private store: Store) {}
+    constructor(
+        private actions$: Actions,
+        private store: Store,
+        private router: Router,
+    ) {}
 }
