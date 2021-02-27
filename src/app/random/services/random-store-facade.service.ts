@@ -1,6 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {
@@ -33,7 +32,6 @@ import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-set
 @Injectable()
 export class RandomStoreFacadeService
     implements
-        OnDestroy,
         Navigable,
         Commentable,
         Ratable,
@@ -68,24 +66,12 @@ export class RandomStoreFacadeService
         map((x) => x.viewMode)
     );
 
-    private destroySub = new Subscription();
-    private view = 'grid';
-
     constructor(
         private store: Store,
         private infoPanelFacade: RandomInfoPanelSettingsFacade,
         private randomPageFacade: RandomPageSettingsFacade
     ) {
-        // TODO: we do this so that we can keep the url builder method below, perhaps there is a better way...
-        this.destroySub.add(
-            this.store.select(RouterStoreSelectors.currentViewMode).subscribe({
-                next: (view) => (this.view = view),
-            })
-        );
-    }
 
-    ngOnDestroy(): void {
-        this.destroySub.unsubscribe();
     }
 
     addComment(comment: string): void {
