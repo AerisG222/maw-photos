@@ -20,7 +20,6 @@ export class SearchFormComponent {
             query: ['', Validators.required],
         });
 
-        // TODO: if coming to the page w/ query parameter, execute first query
         this.store.select(SearchStoreSelectors.query).pipe(
             first(),
         ).subscribe({
