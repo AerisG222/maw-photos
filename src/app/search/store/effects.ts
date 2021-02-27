@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { of, combineLatest } from 'rxjs';
+import { of } from 'rxjs';
 import {
     switchMap,
     catchError,
@@ -24,16 +24,12 @@ export class SearchStoreEffects {
         return this.actions$.pipe(
             ofType(SearchActions.queryRequest),
             withLatestFrom(this.store.select(searchSelectors.query)),
-            map((x) => ({
-                action: x[0],
-                activeQueryTerm: x[1],
-            })),
-            filter((ctx) => ctx.activeQueryTerm !== ctx.action.query),
-            switchMap((ctx) =>
-                this.api.search(ctx.action.query, ctx.action.start).pipe(
+            filter(([action, activeQueryTerm]) => activeQueryTerm !== action.query),
+            switchMap(([action,]) =>
+                this.api.search(action.query, action.start).pipe(
                     map((result) =>
                         SearchActions.querySuccess({
-                            query: ctx.action.query,
+                            query: action.query,
                             result,
                         })
                     ),
@@ -50,29 +46,22 @@ export class SearchStoreEffects {
     });
 
     queryMoreEffect$ = createEffect(() => {
-        const currentQueryInfo = combineLatest([
-            this.store.select(searchSelectors.query),
-            this.store.select(searchSelectors.activeResultStartIndex),
-        ]);
-
         return this.actions$.pipe(
             ofType(SearchActions.queryRequest),
-            withLatestFrom(currentQueryInfo),
-            map((x) => ({
-                action: x[0],
-                activeQueryTerm: x[1][0],
-                activeQueryStart: x[1][1],
-            })),
-            filter(
-                (ctx) =>
-                    ctx.activeQueryTerm === ctx.action.query &&
-                    ctx.activeQueryStart !== ctx.action.start
+            withLatestFrom(
+                this.store.select(searchSelectors.query),
+                this.store.select(searchSelectors.activeResultStartIndex),
             ),
-            switchMap((ctx) =>
-                this.api.search(ctx.action.query, ctx.action.start).pipe(
+            filter(
+                ([action, activeQueryTerm, activeQueryStart]) =>
+                    activeQueryTerm === action.query &&
+                    activeQueryStart !== action.start
+            ),
+            switchMap(([action,,]) =>
+                this.api.search(action.query, action.start).pipe(
                     map((result) =>
                         SearchActions.queryMoreSuccess({
-                            query: ctx.action.query,
+                            query: action.query,
                             result,
                         })
                     ),
