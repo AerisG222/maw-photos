@@ -27,6 +27,7 @@ export * from './facades/photo-view-mode-selectable';
 export * from './facades/ratable';
 export * from './facades/ratable-helper';
 
+export * from './helpers/bool';
 export * from './helpers/date';
 export * from './helpers/exif';
 export * from './helpers/gps';

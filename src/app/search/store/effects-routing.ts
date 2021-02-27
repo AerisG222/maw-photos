@@ -23,38 +23,20 @@ export class SearchStoreRoutingEffects {
         );
     });
 
-    addQueryToUrlOnSearch$ = createEffect(
+    updateUrlOnQueryRequestEffect$ = createEffect(
         () => {
             return this.actions$.pipe(
                 ofType(SearchStoreActions.queryRequest),
-                switchMap(({query}) => {
+                withLatestFrom(this.store.select(SearchStoreSelectors.query)),
+                filter(([action, activeQueryTerm]) => activeQueryTerm !== action.query),
+                switchMap(([action,]) => {
                     return this.router.navigate([], {
                         relativeTo: this.router.routerState.root,
-                        queryParams: { s: query },
+                        queryParams: { s: action.query },
                         queryParamsHandling: 'merge',
                     });
                 })
-            )
-        }, { dispatch: false}
-    );
-
-    // TODO: review+correct how we keep query param and ui updated
-    addQueryToUrlOnRouteChange$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(RouterStoreActions.routeChanged),
-                withLatestFrom(
-                    this.store.select(SearchStoreSelectors.query)
-                ),
-                filter(([action, query]) => action.routeDetails.queryParams?.s !== query),
-                switchMap(([, query]) => {
-                    return this.router.navigate([], {
-                        relativeTo: this.router.routerState.root,
-                        queryParams: { s: query },
-                        queryParamsHandling: 'merge',
-                    });
-                })
-            )
+            );
         }, { dispatch: false }
     );
 

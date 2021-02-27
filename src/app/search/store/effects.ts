@@ -10,47 +10,50 @@ import {
     filter,
 } from 'rxjs/operators';
 
-import * as SearchActions from './actions';
-import * as searchSelectors from './selectors';
+import * as SearchStoreActions from './actions';
+import * as SearchStoreSelectors from './selectors';
 import {
     searchApiServiceToken,
     SearchApiService,
 } from 'src/app/search/services/search-api.service';
-import { httpErrorHandler } from '@models';
+import { httpErrorHandler, isTruthy } from '@models';
+import { RouterStoreActions } from '@core/root-store';
 
 @Injectable()
 export class SearchStoreEffects {
-    queryRequestEffect$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(SearchActions.queryRequest),
-            withLatestFrom(this.store.select(searchSelectors.query)),
-            filter(([action, activeQueryTerm]) => activeQueryTerm !== action.query),
-            switchMap(([action,]) =>
-                this.api.search(action.query, action.start).pipe(
-                    map((result) =>
-                        SearchActions.querySuccess({
-                            query: action.query,
-                            result,
-                        })
-                    ),
-                    catchError((error) =>
-                        of(
-                            SearchActions.queryFailure({
-                                error: httpErrorHandler(error),
+    queryOnRouteChange$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(RouterStoreActions.routeChanged),
+                map(({routeDetails}) => routeDetails.queryParams?.s as string),
+                filter(query => isTruthy(query)),
+                switchMap((query) => {
+                    return this.api.search(query, 0).pipe(
+                        map((result) =>
+                            SearchStoreActions.querySuccess({
+                                query,
+                                result,
                             })
+                        ),
+                        catchError((error) =>
+                            of(
+                                SearchStoreActions.queryFailure({
+                                    error: httpErrorHandler(error),
+                                })
+                            )
                         )
-                    )
-                )
-            )
-        );
-    });
+                    );
+                })
+            );
+        }
+    );
 
     queryMoreEffect$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(SearchActions.queryRequest),
+            ofType(SearchStoreActions.queryRequest),
             withLatestFrom(
-                this.store.select(searchSelectors.query),
-                this.store.select(searchSelectors.activeResultStartIndex),
+                this.store.select(SearchStoreSelectors.query),
+                this.store.select(SearchStoreSelectors.activeResultStartIndex),
             ),
             filter(
                 ([action, activeQueryTerm, activeQueryStart]) =>
@@ -60,14 +63,14 @@ export class SearchStoreEffects {
             switchMap(([action,,]) =>
                 this.api.search(action.query, action.start).pipe(
                     map((result) =>
-                        SearchActions.queryMoreSuccess({
+                        SearchStoreActions.queryMoreSuccess({
                             query: action.query,
                             result,
                         })
                     ),
                     catchError((error) =>
                         of(
-                            SearchActions.queryMoreFailure({
+                            SearchStoreActions.queryMoreFailure({
                                 error: httpErrorHandler(error),
                             })
                         )
