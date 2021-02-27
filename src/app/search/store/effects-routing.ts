@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class SearchStoreRoutingEffects {
-    monitorWhenLeavingRandomArea$ = createEffect(() => {
+    monitorWhenLeavingSearchArea$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeAreaLeaving),
             filter((action) => action.leavingArea === RouteArea.search),
