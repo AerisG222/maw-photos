@@ -10,7 +10,6 @@ import {
     MetadataEditable,
     MiniMapable,
     CategoryTeaserSelectable,
-    PhotoLinkable,
     PhotoViewModeSelectable,
 } from '@models';
 import { RandomStoreFacadeService } from './services/random-store-facade.service';
@@ -38,7 +37,6 @@ import { ViewModeGuard } from './services/view-mode.guard';
             provide: CategoryTeaserSelectable,
             useExisting: RandomStoreFacadeService,
         },
-        { provide: PhotoLinkable, useExisting: RandomStoreFacadeService },
         {
             provide: PhotoViewModeSelectable,
             useExisting: RandomStoreFacadeService,

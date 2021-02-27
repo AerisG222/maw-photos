@@ -20,7 +20,6 @@ import {
     MetadataEditable,
     MiniMapable,
     CategoryTeaserSelectable,
-    PhotoLinkable,
     PhotoViewModeSelectable,
 } from '@models';
 import { ViewModeGuard } from './services/view-mode.guard';
@@ -49,7 +48,6 @@ import { PhotosUrlService } from './services/photos-url.service';
             provide: CategoryTeaserSelectable,
             useExisting: PhotoStoreFacadeService,
         },
-        { provide: PhotoLinkable, useExisting: PhotoStoreFacadeService },
         {
             provide: PhotoViewModeSelectable,
             useExisting: PhotoStoreFacadeService,

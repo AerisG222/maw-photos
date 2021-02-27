@@ -3,7 +3,6 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import {
     Photo,
     ThumbnailSize,
-    PhotoLinkable,
     DEFAULT_PHOTO_DETAIL_VIEW_SETTINGS,
 } from '@models';
 
@@ -55,8 +54,6 @@ export class PhotoListComponent {
                 break;
         }
     }
-
-    constructor(public photoLinkable: PhotoLinkable) {}
 
     scrollIntoView(photoId: number, elementRef: HTMLElement): string {
         if (!!this.selectedPhoto && this.selectedPhoto.id === photoId) {

@@ -2,7 +2,7 @@
     *ngFor="let photo of photos; trackBy: trackByPhoto"
     [class.selected]="selectedPhoto?.id === photo.id"
     [class.scrolled]="scrollIntoView(photo.id, itemRef)"
-    [routerLink]="photoLinkable.buildPhotoLink(photo)"
+    [routerLink]="photo.id.toString()"
     #itemRef
 >
     <img

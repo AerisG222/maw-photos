@@ -11,10 +11,8 @@ import {
     RouterStoreSelectors,
 } from '@core/root-store';
 import {
-    Photo,
     GpsCoordinate,
     MapType,
-    RouteHelper,
     Commentable,
     helpAddComment,
     MetadataEditable,
@@ -27,7 +25,6 @@ import {
     helpRate,
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
-    PhotoLinkable,
     PhotoViewModeSelectable,
 } from '@models';
 import { RandomInfoPanelSettingsFacade } from '@core/facades/settings/random-info-panel-settings-facade';
@@ -43,7 +40,6 @@ export class RandomStoreFacadeService
         MetadataEditable,
         MiniMapable,
         CategoryTeaserSelectable,
-        PhotoLinkable,
         PhotoViewModeSelectable {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
@@ -162,9 +158,5 @@ export class RandomStoreFacadeService
                 })
             );
         });
-    }
-
-    buildPhotoLink(photo: Photo): string {
-        return RouteHelper.randomAbs(this.view, photo.id);
     }
 }

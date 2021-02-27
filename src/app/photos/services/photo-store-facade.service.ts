@@ -4,10 +4,8 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {
-    Photo,
     GpsCoordinate,
     MapType,
-    RouteHelper,
     Commentable,
     helpAddComment,
     MetadataEditable,
@@ -20,7 +18,6 @@ import {
     helpRate,
     CategoryTeaserSelectable,
     helpSaveCategoryTeaser,
-    PhotoLinkable,
     PhotoViewModeSelectable,
 } from '@models';
 import {
@@ -43,7 +40,6 @@ export class PhotoStoreFacadeService
         MetadataEditable,
         MiniMapable,
         CategoryTeaserSelectable,
-        PhotoLinkable,
         PhotoViewModeSelectable {
     activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
     activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
@@ -162,13 +158,5 @@ export class PhotoStoreFacadeService
                 })
             );
         });
-    }
-
-    buildPhotoLink(photo: Photo): string {
-        return RouteHelper.photoCategoriesAbs(
-            this.view,
-            photo.categoryId,
-            photo.id
-        );
     }
 }

@@ -22,7 +22,6 @@ export * from './facades/metadata-editable-helper';
 export * from './facades/mini-mapable';
 export * from './facades/navigable';
 export * from './facades/navigable-helpers';
-export * from './facades/photo-linkable';
 export * from './facades/photo-view-mode-selectable';
 export * from './facades/ratable';
 export * from './facades/ratable-helper';
