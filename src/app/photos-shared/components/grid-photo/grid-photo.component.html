@@ -1,8 +1,8 @@
 <div class="full-image">
-    <app-grid-category-header *ngIf="isRandomView$ | async"></app-grid-category-header>
+    <app-grid-category-header *ngIf="showHeader$ | async"></app-grid-category-header>
 
     <a [routerLink]="['..']">
-        <app-photos-main-photo [showHeader]="false" [showPhotoList]="false">
+        <app-photos-main-photo [showHeader]="showHeader$ | async" [showPhotoList]="false">
         </app-photos-main-photo>
     </a>
 </div>

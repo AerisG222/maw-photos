@@ -54,6 +54,16 @@
     ></app-toolbar-divider>
 
     <app-toolbar-group *ngIf="(activePhotoId$ | async) != null">
+        <app-toolbar-button
+            *ngIf="isRandom"
+            icon="title"
+            shortcutKey="t"
+            shortcutHelp="Show/Hide Category Breadcrumbs"
+            tooltip="Show/Hide Category Breadcrumbs (T)"
+            (click)="onToggleCategoryBreadcrumbs()"
+        >
+        </app-toolbar-button>
+
         <app-photos-toolbar-rotate-counter-clockwise-button></app-photos-toolbar-rotate-counter-clockwise-button>
         <app-photos-toolbar-rotate-clockwise-button></app-photos-toolbar-rotate-clockwise-button>
         <app-photos-toolbar-flip-horizontal-button></app-photos-toolbar-flip-horizontal-button>

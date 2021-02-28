@@ -23,6 +23,7 @@ export class GridViewToolbarComponent {
 
     enableShare = false;
     activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
+    gridSettings$ = this.gridSettings.settings$;
 
     constructor(
         private store: Store,

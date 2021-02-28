@@ -8,6 +8,9 @@ import { Store } from '@ngrx/store';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
+import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-settings-facade';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-grid-photo',
@@ -17,9 +20,16 @@ import { PhotoStoreActions, RouterStoreSelectors } from '@core/root-store';
 })
 export class GridPhotoComponent implements OnInit, OnDestroy {
     hotkey: Hotkey | null = null;
-    isRandomView$ = this.store.select(RouterStoreSelectors.inRandomArea);
+    showHeader$ = combineLatest([
+        this.store.select(RouterStoreSelectors.inRandomArea),
+        this.gridSettings.settings$
+    ]).pipe(
+        map(([inRandom, settings]) => {
+            return inRandom && settings.showBreadcrumbs;
+        })
+    );
 
-    constructor(private store: Store, private hotkeysService: HotkeysService) {}
+    constructor(private store: Store, private hotkeysService: HotkeysService, private gridSettings: PhotoGridSettingsFacade) {}
 
     ngOnInit(): void {
         this.hotkey = new Hotkey(
