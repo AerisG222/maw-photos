@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import { RouterStoreActions, RouterStoreSelectors } from '@core/root-store';
 import { RouteArea, RouteHelper } from '@models';
@@ -40,20 +39,22 @@ export class VideoStoreRoutingEffects {
     );
 
     setActiveVideoFromRoute = createEffect(() => {
-        return combineLatest([
-            this.store.select(RouterStoreSelectors.selectRouteDetails),
-            this.store.select(VideoStoreSelectors.allEntities),
-            this.store.select(VideoStoreSelectors.allIds),
-        ]).pipe(
-            filter(([routeDetails, entities, ids]) => {
-                return (
-                    routeDetails.area === RouteArea.videos &&
+        return this.actions$.pipe(
+            ofType(
+                RouterStoreActions.routeChanged,
+                VideoStoreActions.loadSuccess
+            ),
+            withLatestFrom(
+                this.store.select(RouterStoreSelectors.selectRouteDetails),
+                this.store.select(VideoStoreSelectors.allEntities),
+                this.store.select(VideoStoreSelectors.allIds),
+            ),
+            filter(([, routeDetails, entities, ids]) => {
+                return routeDetails.area === RouteArea.videos &&
                     !!entities &&
-                    !!ids &&
-                    ids.length > 0
-                );
+                    !!ids?.length
             }),
-            map(([routeDetails, entities, ids]) => {
+            map(([, routeDetails, entities, ids]) => {
                 const categoryId = Number(routeDetails.params.categoryId);
                 const videoId = Number(routeDetails.params.videoId);
 

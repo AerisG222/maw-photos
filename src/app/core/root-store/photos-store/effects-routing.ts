@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
@@ -68,22 +67,26 @@ export class PhotoStoreRoutingEffects {
     );
 
     setActivePhotoFromRoute$ = createEffect(() => {
-        return combineLatest([
-            this.store.select(RouterStoreSelectors.selectRouteDetails),
-            this.store.select(PhotoStoreSelectors.allEntities),
-            this.store.select(PhotoStoreSelectors.allIds),
-            this.store.select(PhotoStoreSelectors.activePhotoId),
-        ]).pipe(
-            filter(([routeDetails, entities, ids, activeId]) => {
+        return this.actions$.pipe(
+            ofType(
+                RouterStoreActions.routeChanged,
+                PhotoStoreActions.loadSuccess,
+                PhotoStoreActions.loadMultipleRandomSuccess,
+            ),
+            withLatestFrom(
+                this.store.select(RouterStoreSelectors.selectRouteDetails),
+                this.store.select(PhotoStoreSelectors.allEntities),
+                this.store.select(PhotoStoreSelectors.allIds),
+                this.store.select(PhotoStoreSelectors.activePhotoId),
+            ),
+            filter(([, routeDetails, entities, ids, activeId]) => {
                 return (
-                    (routeDetails.area === RouteArea.photos ||
-                        routeDetails.area === RouteArea.random) &&
-                    !!entities &&
-                    !!ids?.length &&
+                    (routeDetails.area === RouteArea.photos || routeDetails.area === RouteArea.random) &&
+                    !!entities && !!ids?.length &&
                     this.isActiveIdDifferentFromRoute(activeId, routeDetails)
                 );
             }),
-            map(([routeDetails, entities, ids]) => {
+            map(([, routeDetails, entities, ids]) => {
                 const categoryId = Number(routeDetails.params.categoryId);
                 const photoId = Number(routeDetails.params.photoId);
                 const requiresPhotoId =
