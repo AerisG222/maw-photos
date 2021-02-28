@@ -100,9 +100,7 @@ export const photoCategoriesAbs = (
     }
 
     if (photoId) {
-        if (!(view === photoViewBulkEdit || view === photoViewGrid)) {
-            url += `/${photoId}`;
-        }
+        url += `/${photoId}`;
     }
 
     return url;
@@ -116,9 +114,7 @@ export const randomAbs = (view?: string, photoId?: number): string => {
     }
 
     if (photoId) {
-        if (view !== photoViewGrid) {
-            url += `/${photoId}`;
-        }
+        url += `/${photoId}`;
     }
 
     return url;

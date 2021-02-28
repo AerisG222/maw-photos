@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
 import { PhotoViewMode, RouteArea, RouteDetails, RouteHelper } from '@models';
@@ -41,7 +41,7 @@ export class PhotoStoreRoutingEffects {
                     return null;
                 }),
                 filter((url) => !!url),
-                tap((url) => void this.router.navigateByUrl(url as string))
+                switchMap((url) => this.router.navigateByUrl(url as string))
             );
         },
         { dispatch: false }
@@ -54,12 +54,11 @@ export class PhotoStoreRoutingEffects {
                 withLatestFrom(
                     this.store.select(RouterStoreSelectors.selectUrl)
                 ),
-                tap(([, url]) => {
-                    if (url) {
-                        void this.router.navigateByUrl(
-                            url.substring(0, url.lastIndexOf('/'))
-                        );
-                    }
+                filter(([, url]) => !!url),
+                switchMap(([, url]) => {
+                    return this.router.navigateByUrl(
+                        url.substring(0, url.lastIndexOf('/'))
+                    );
                 })
             );
         },
@@ -164,6 +163,28 @@ export class PhotoStoreRoutingEffects {
                     action.leavingArea === RouteArea.random
             ),
             map(() => PhotoStoreActions.exitPhotoArea())
+        );
+    });
+
+    // TODO: still not working properly
+    deselectActivePhotoDependingOnViewChange$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(RouterStoreActions.routeChanged),
+            withLatestFrom(
+                this.store.select(SettingsStoreSelectors.photoPageSettings)
+            ),
+            filter(([action, pageSettings]) => {
+                if (action.routeDetails.data.view) {
+                    return (
+                        action.routeDetails.area === RouteArea.photos &&
+                        action.routeDetails.data.view !== pageSettings.viewMode &&
+                        !action.routeDetails.data.requirePhotoId &&
+                        !!action.routeDetails.params.photoId
+                    );
+                }
+                return false;
+            }),
+            map(() => PhotoStoreActions.navigateUpFromIndividualPhoto())
         );
     });
 
