@@ -15,6 +15,6 @@ export class ToolbarViewFullscreenButtonComponent extends ToolbarViewButtonBaseC
         public viewModeSelectable: PhotoViewModeSelectable,
         public store: Store
     ) {
-        super(viewModeSelectable, store, PhotoViewMode.fullscreen);
+        super(viewModeSelectable, store, PhotoViewMode.fullscreen, true);
     }
 }

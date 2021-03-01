@@ -15,6 +15,6 @@ export class ToolbarViewGridButtonComponent extends ToolbarViewButtonBaseCompone
         public viewModeSelectable: PhotoViewModeSelectable,
         public store: Store
     ) {
-        super(viewModeSelectable, store, PhotoViewMode.grid);
+        super(viewModeSelectable, store, PhotoViewMode.grid, false);
     }
 }

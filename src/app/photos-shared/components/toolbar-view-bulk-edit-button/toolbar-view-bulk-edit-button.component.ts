@@ -15,6 +15,6 @@ export class ToolbarViewBulkEditButtonComponent extends ToolbarViewButtonBaseCom
         public viewModeSelectable: PhotoViewModeSelectable,
         public store: Store
     ) {
-        super(viewModeSelectable, store, PhotoViewMode.bulkEdit);
+        super(viewModeSelectable, store, PhotoViewMode.bulkEdit, false);
     }
 }

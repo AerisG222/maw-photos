@@ -1,4 +1,3 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -9,28 +8,27 @@ import {
     RouteHelper,
 } from '@models';
 import { RouterStoreSelectors } from '@core/root-store';
+import { getNumber } from 'src/app/models/helpers/number';
 
-@Component({
-    template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-})
 export abstract class ToolbarViewButtonBaseComponent {
     url$ = this.store.select(RouterStoreSelectors.selectRouteDetails).pipe(
         // eslint-disable-next-line ngrx/avoid-mapping-selectors
         map((details) => {
+            const photoId = this.includePhotoIdInUrl ? getNumber(details.params?.photoId) : undefined;
+
             if (details.area === RouteArea.photos) {
                 return [
                     RouteHelper.photoCategoriesAbs(
                         this.viewMode,
                         details.params?.categoryId,
-                        details.params?.photoId
+                        photoId
                     ),
                 ];
             } else {
                 return [
                     RouteHelper.randomAbs(
                         this.viewMode,
-                        details.params?.photoId
+                        photoId
                     ),
                 ];
             }
@@ -44,6 +42,7 @@ export abstract class ToolbarViewButtonBaseComponent {
     constructor(
         public viewModeSelectable: PhotoViewModeSelectable,
         public store: Store,
-        private viewMode: PhotoViewMode
+        private viewMode: PhotoViewMode,
+        private includePhotoIdInUrl: boolean
     ) {}
 }

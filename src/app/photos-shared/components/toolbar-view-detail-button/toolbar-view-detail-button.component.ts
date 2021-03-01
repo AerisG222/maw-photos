@@ -15,6 +15,6 @@ export class ToolbarViewDetailButtonComponent extends ToolbarViewButtonBaseCompo
         public viewModeSelectable: PhotoViewModeSelectable,
         public store: Store
     ) {
-        super(viewModeSelectable, store, PhotoViewMode.detail);
+        super(viewModeSelectable, store, PhotoViewMode.detail, true);
     }
 }

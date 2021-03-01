@@ -15,6 +15,6 @@ export class ToolbarViewMapButtonComponent extends ToolbarViewButtonBaseComponen
         public viewModeSelectable: PhotoViewModeSelectable,
         public store: Store
     ) {
-        super(viewModeSelectable, store, PhotoViewMode.map);
+        super(viewModeSelectable, store, PhotoViewMode.map, false);
     }
 }
