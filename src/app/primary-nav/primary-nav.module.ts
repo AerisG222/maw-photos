@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-
-import { BaseModule } from 'src/app/base/base.module';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { CategoriesLinkComponent } from './categories-link/categories-link.component';
 import { AboutLinkComponent } from './about-link/about-link.component';
@@ -22,7 +24,12 @@ import { StatsLinkComponent } from './stats-link/stats-link.component';
         SettingsLinkComponent,
         StatsLinkComponent,
     ],
-    imports: [BaseModule],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatIconModule,
+        MatTooltipModule,
+    ],
     exports: [PrimaryNavComponent],
 })
 export class PrimaryNavModule {}

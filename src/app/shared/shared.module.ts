@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { BaseModule } from 'src/app/base/base.module';
 import { LayoutModule } from '../layout/layout.module';
-import { PrimaryNavModule } from '../primary-nav/primary-nav.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { ToolbarModule } from '../toolbar/toolbar.module';
 
@@ -40,7 +39,6 @@ import { ThumbnailSizeClassPipe } from './pipes/thumbnail-size-class.pipe';
     exports: [
         BaseModule,
         LayoutModule,
-        PrimaryNavModule,
         SidebarModule,
         ToolbarModule,
 
