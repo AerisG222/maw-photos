@@ -20,6 +20,7 @@ export class LinkComponent
     extends ButtonLinkBaseComponent
     implements OnInit, OnDestroy {
     @Input() link: string[] | null = null;
+    @Input() query = {};
 
     @ViewChild('linkElement') button: MatButton | null = null;
 

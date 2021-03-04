@@ -1,6 +1,7 @@
 <app-toolbar-group>
     <app-toolbar-link
         [link]="['/categories/grid']"
+        [query]="queryParams$ | async"
         icon="apps"
         shortcutKey="g"
         shortcutHelp="Grid View"
@@ -10,6 +11,7 @@
 
     <app-toolbar-link
         [link]="['/categories/list']"
+        [query]="queryParams$ | async"
         icon="list"
         shortcutKey="l"
         shortcutHelp="List View"
