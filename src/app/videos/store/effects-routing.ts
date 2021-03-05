@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { RouterStoreActions, RouterStoreSelectors } from '@core/root-store';
 import { RouteArea, RouteHelper } from '@models';
@@ -32,7 +32,7 @@ export class VideoStoreRoutingEffects {
                         action.videoId
                     )
                 ),
-                tap((url) => void this.router.navigateByUrl(url))
+                switchMap((url) => this.router.navigateByUrl(url))
             );
         },
         { dispatch: false }

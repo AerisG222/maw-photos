@@ -13,20 +13,22 @@ export class MockAuthService implements AuthService {
         return Promise.resolve();
     }
 
-    handleLoginCallback(): void {
-        this.finishLogin();
+    handleLoginCallback(): Promise<void> {
+        return this.finishLogin();
     }
 
     redirectAndLogin(): void {
-        this.finishLogin();
+        // do nothing
     }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    loginViaPopup(): void {}
+    loginViaPopup(): Promise<unknown> {
+        return Promise.resolve();
+    }
 
-    private finishLogin(): void {
+    private async finishLogin(): Promise<void> {
         this.storeProfile();
-        void this.router.navigate(['/']);
+        await this.router.navigate(['/']);
     }
 
     private storeProfile(): void {
