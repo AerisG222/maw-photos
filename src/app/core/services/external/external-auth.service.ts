@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
-import { filter, tap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { authConfig } from '@models';
 import { updateUserInfoRequest } from '@core/root-store/auth-store/actions';
-import { AuthService } from '@core/services';
+import { AuthService, SettingsService } from '@core/services';
 
 @Injectable()
 export class ExternalAuthService implements AuthService {
     constructor(
         private store: Store,
         private router: Router,
-        private oauthService: OAuthService
+        private oauthService: OAuthService,
+        private settingsService: SettingsService,
     ) {}
 
     async init(): Promise<void> {
@@ -24,7 +25,7 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.events
             .pipe(
                 filter((e) => e.type === 'token_received'),
-                tap(() => void this.finishLogin())
+                switchMap(() => this.finishLogin())
             )
             .subscribe();
 
@@ -35,14 +36,14 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.setupAutomaticSilentRefresh({}, 'access_token');
     }
 
-    handleLoginCallback(): void {
+    handleLoginCallback(): Promise<void> {
         if (
             this.oauthService.hasValidAccessToken() &&
             this.oauthService.hasValidIdToken()
         ) {
-            void this.finishLogin();
+            return this.finishLogin();
         } else {
-            void this.oauthService.tryLoginCodeFlow();
+            return this.oauthService.tryLoginCodeFlow();
         }
     }
 
@@ -50,8 +51,8 @@ export class ExternalAuthService implements AuthService {
         this.oauthService.initCodeFlow();
     }
 
-    loginViaPopup(): void {
-        void this.oauthService.initLoginFlowInPopup({
+    loginViaPopup(): Promise<unknown> {
+        return this.oauthService.initLoginFlowInPopup({
             height: 600,
             width: 600,
         });
@@ -60,7 +61,15 @@ export class ExternalAuthService implements AuthService {
     private async finishLogin(): Promise<void> {
         if (this.router.routerState.snapshot.url.startsWith('/login')) {
             await this.loadProfile();
-            void this.router.navigate(['/']);
+
+            const redirectUrl = this.settingsService.getAuthRedirectUrl();
+
+            if(redirectUrl) {
+                this.settingsService.clearAuthRedirectUrl();
+                await this.router.navigateByUrl(redirectUrl);
+            } else {
+                await this.router.navigate(['/']);
+            }
         }
     }
 

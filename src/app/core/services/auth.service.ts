@@ -4,7 +4,7 @@ export const authServiceToken = new InjectionToken<AuthService>('AuthService');
 
 export interface AuthService {
     init(): Promise<void>;
-    handleLoginCallback(): void;
+    handleLoginCallback(): Promise<void>;
     redirectAndLogin(): void;
-    loginViaPopup(): void;
+    loginViaPopup(): Promise<unknown>;
 }

@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 import { AuthGuard } from '@core/services';
+import { SettingsService } from '../settings.service';
 
 @Injectable()
 export class ExternalAuthGuard implements AuthGuard {
-    constructor(private router: Router, private oauthService: OAuthService) {}
+    constructor(
+        private router: Router,
+        private oauthService: OAuthService,
+        private settingsService: SettingsService
+    ) {}
 
-    public canActivate(): boolean {
+    public canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): boolean | Promise<boolean> {
         if (this.oauthService.hasValidAccessToken()) {
             return true;
         } else {
-            void this.router.navigate(['/login']);
-            return false;
+            this.settingsService.setAuthRedirectUrl(state.url);
+            return this.router.navigate(['/login']);
         }
     }
 }

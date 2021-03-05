@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom, filter, tap } from 'rxjs/operators';
+import { map, withLatestFrom, filter, tap, switchMap } from 'rxjs/operators';
 
 import { RouteArea, RouteHelper } from '@models';
 import { RouterStoreActions } from '../router-store';
@@ -33,18 +33,24 @@ export class PhotoCategoryStoreRoutingEffects {
                     (action) => action.routeDetails.area === RouteArea.photos
                 ),
                 withLatestFrom(
-                    this.store.select(PhotoCategoryStoreSelectors.allEntities)
+                    this.store.select(PhotoCategoryStoreSelectors.allEntities),
+                    this.store.select(PhotoCategoryStoreSelectors.allCategories)
                 ),
+                // TODO: the following makes sure we have categories which might not be loaded yet,
+                // in particular when redirecting to a deep link after login.  but how should we verify
+                // the category once it does load (as the route event already passed)
+                filter(([, , categories]) => !!categories && categories.length > 0),
                 filter(([action, entities]) => {
                     const catId = Number(action.routeDetails.params.categoryId);
 
                     return isNaN(catId) || !(catId in entities);
                 }),
-                tap(
-                    () =>
-                        void this.router.navigateByUrl(
+                switchMap(
+                    () => {
+                        return this.router.navigateByUrl(
                             RouteHelper.categoriesAbs()
                         )
+                    }
                 )
             );
         },
