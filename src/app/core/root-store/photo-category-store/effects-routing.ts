@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, withLatestFrom, filter, tap, switchMap } from 'rxjs/operators';
 
 import { RouteArea, RouteHelper } from '@models';
-import { RouterStoreActions } from '../router-store';
+import { RouterStoreActions, RouterStoreSelectors } from '../router-store';
 import * as PhotoCategoryStoreActions from './actions';
 import * as PhotoCategoryStoreSelectors from './selectors';
 
@@ -28,20 +28,22 @@ export class PhotoCategoryStoreRoutingEffects {
     verifyActiveCategoryOnRouteChange$ = createEffect(
         () => {
             return this.actions$.pipe(
-                ofType(RouterStoreActions.routeChanged),
-                filter(
-                    (action) => action.routeDetails.area === RouteArea.photos
+                ofType(
+                    RouterStoreActions.routeChanged,
+                    PhotoCategoryStoreActions.loadSuccess
                 ),
                 withLatestFrom(
+                    this.store.select(RouterStoreSelectors.selectRouteDetails),
                     this.store.select(PhotoCategoryStoreSelectors.allEntities),
                     this.store.select(PhotoCategoryStoreSelectors.allCategories)
                 ),
-                // TODO: the following makes sure we have categories which might not be loaded yet,
-                // in particular when redirecting to a deep link after login.  but how should we verify
-                // the category once it does load (as the route event already passed)
-                filter(([, , categories]) => !!categories && categories.length > 0),
-                filter(([action, entities]) => {
-                    const catId = Number(action.routeDetails.params.categoryId);
+                filter(([, routeDetails, , categories]) => {
+                    return routeDetails.area === RouteArea.photos &&
+                        !!categories &&
+                        categories.length > 0;
+                }),
+                filter(([, routeDetails, entities]) => {
+                    const catId = Number(routeDetails.params.categoryId);
 
                     return isNaN(catId) || !(catId in entities);
                 }),
