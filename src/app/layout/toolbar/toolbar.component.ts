@@ -34,12 +34,7 @@ export class ToolbarComponent {
     setCurrentScrollTop(newTop: number): void {
         if (this.scrollPane) {
             const div = this.scrollPane.nativeElement;
-
-            setTimeout(
-                () =>
-                    div.scrollTo({ top: newTop, left: 0, behavior: 'smooth' }),
-                5
-            );
+            setTimeout(() => div.scrollTop = newTop);
         }
     }
 }
