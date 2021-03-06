@@ -5,13 +5,12 @@
     ></app-photos-grid-view-toolbar>
 
     <div layout-main>
-        <router-outlet></router-outlet>
+        <div *ngIf="(activePhoto$ | async) !== null" style="width: 100%; height: 100%; position:absolute; top:0; left:0; z-index:200; background-color: #000;">
+            <router-outlet></router-outlet>
+        </div>
 
         <app-shared-content-margin
             [margin]="gridSettings.margin"
-            [ngStyle]="{
-                display: (activePhoto$ | async) === null ? 'block' : 'none'
-            }"
         >
             <app-grid-category-header *ngIf="(gridSettings$ | async)?.showBreadcrumbs"></app-grid-category-header>
 
