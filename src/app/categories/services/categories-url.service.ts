@@ -54,16 +54,10 @@ export class CategoriesUrlService {
     static getValidTypeFilter(
         requestedTypeFilter: string | null,
         preferredTypeFilter: string | null
-    ): string {
-        if (CategoriesUrlService.isValidTypeFilter(requestedTypeFilter)) {
-            return requestedTypeFilter as string;
-        }
-
-        if (CategoriesUrlService.isValidTypeFilter(preferredTypeFilter)) {
-            return preferredTypeFilter as string;
-        }
-
-        return CategoryTypeFilter.all;
+    ): CategoryTypeFilter {
+        return toCategoryTypeFilter(requestedTypeFilter) ??
+            toCategoryTypeFilter(preferredTypeFilter) ??
+            CategoryTypeFilter.all;
     }
 
     private static isValidYearFilter(
@@ -81,12 +75,6 @@ export class CategoriesUrlService {
         } else {
             return [false, null];
         }
-    }
-
-    private static isValidTypeFilter(typeFilter: string | null) {
-        const validatedFilter = toCategoryTypeFilter(typeFilter);
-
-        return !!validatedFilter;
     }
 
     updateFilterInUrl(settings: CategoryFilterSettings): void {

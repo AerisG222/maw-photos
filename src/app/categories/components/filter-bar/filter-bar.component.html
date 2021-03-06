@@ -6,7 +6,7 @@
     >
     </app-categories-category-year-filter>
     <app-categories-category-type-filter
-        [typeFilter]="filterSettings.typeFilter"
+        [typeFilter]="effectiveTypeFilter$ | async"
         (filterChange)="onChangeTypeFilter($event)"
     >
     </app-categories-category-type-filter>

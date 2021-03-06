@@ -14,6 +14,9 @@ import { CategoryTypeFilter } from '@models';
 })
 export class FilterBarComponent {
     filterSettings$ = this.filterFacade.settings$;
+    effectiveTypeFilter$ = this.store.select(
+        CategoriesStoreSelectors.categoryEffectiveTypeFilter
+    );
     effectiveYearFilter$ = this.store.select(
         CategoriesStoreSelectors.categoryEffectiveYearFilter
     );
