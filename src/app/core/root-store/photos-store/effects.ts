@@ -487,7 +487,7 @@ export class PhotoStoreEffects {
             withLatestFrom(this.photoPage.settings$),
             switchMap(([, settings]) => {
                 return timer(
-                    settings.slideshowDisplayDurationSeconds * 1000,
+                    0,
                     settings.slideshowDisplayDurationSeconds * 1000
                 ).pipe(
                     takeUntil(
