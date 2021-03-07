@@ -166,28 +166,6 @@ export class PhotoStoreRoutingEffects {
         );
     });
 
-    // TODO: still not working properly
-    deselectActivePhotoDependingOnViewChange$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(RouterStoreActions.routeChanged),
-            withLatestFrom(
-                this.store.select(SettingsStoreSelectors.photoPageSettings)
-            ),
-            filter(([action, pageSettings]) => {
-                if (action.routeDetails.data.view) {
-                    return (
-                        action.routeDetails.area === RouteArea.photos &&
-                        action.routeDetails.data.view !== pageSettings.viewMode &&
-                        !action.routeDetails.data.requirePhotoId &&
-                        !!action.routeDetails.params.photoId
-                    );
-                }
-                return false;
-            }),
-            map(() => PhotoStoreActions.navigateUpFromIndividualPhoto())
-        );
-    });
-
     monitorPhotosViewChangedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
