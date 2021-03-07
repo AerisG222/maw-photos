@@ -24,7 +24,6 @@ $custom-typography: mat-typography-config(
 @import 'app/about/about/about.component.theme';
 
 @import 'app/photos-shared/components/photo-list/photo-list.component.theme';
-@import 'app/photos-shared/components/detail-view/detail-view.component.theme';
 @import 'app/photos-shared/components/sidebar-exif-table/sidebar-exif-table.component.theme';
 @import 'app/photos-shared/components/toolbar-download-button/toolbar-download-button.component.theme';
 @import 'app/photos-shared/components/grid-view/grid-view.component.theme';
@@ -61,7 +60,6 @@ $custom-typography: mat-typography-config(
     @include app-about-component-theme($theme);
 
     @include app-photos-bulk-edit-component-theme($theme);
-    @include app-photos-detail-view-component-theme($theme);
     @include app-photos-photo-list-component-theme($theme);
     @include app-photos-photo-select-grid-component-theme($theme);
     @include app-photos-sidebar-exif-table-component-theme($theme);
