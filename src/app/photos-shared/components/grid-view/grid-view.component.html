@@ -4,8 +4,11 @@
         layout-toolbar
     ></app-photos-grid-view-toolbar>
 
-    <div layout-main>
-        <div *ngIf="(activePhoto$ | async) !== null" style="width: 100%; height: 100%; position:absolute; top:0; left:0; z-index:200; background-color: #000;">
+    <div layout-main #main>
+        <div
+            *ngIf="(activePhoto$ | async) !== null"
+            class="photo-overlay"
+        >
             <router-outlet></router-outlet>
         </div>
 
@@ -18,7 +21,6 @@
                 <a
                     *ngFor="let photo of photos$ | async"
                     [routerLink]="[photo.id]"
-                    (click)="trackScrollPosition()"
                 >
                     <img
                         [ngClass]="

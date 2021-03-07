@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 .photo-grid {
     display: flex;
     flex-flow: row wrap;
@@ -39,5 +41,23 @@
             width: 40px;
             height: 30px;
         }
+    }
+}
+
+.photo-overlay {
+    width: calc(100vw - 64px - 50px);
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 64px + 50px;
+    z-index: 200;
+}
+
+@media (max-width: $mobileBreakpoint) {
+    .photo-overlay {
+        height: calc(100vh - 36px - 29.25px);
+        width: 100vw;
+        top: calc(36px + 29.25px);
+        left: 0;
     }
 }

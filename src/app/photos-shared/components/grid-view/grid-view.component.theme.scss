@@ -2,12 +2,17 @@
 
 @mixin app-photos-grid-view-component-theme($theme) {
     $accent: map-get($theme, accent);
+    $background: map-get($theme, background);
 
     app-photos-grid-view {
         & .photo-grid a {
             &:hover {
                 border: 1px solid mat-color($accent, 300);
             }
+        }
+
+        & .photo-overlay {
+            background-color: mat-color($background, 900);
         }
     }
 }
