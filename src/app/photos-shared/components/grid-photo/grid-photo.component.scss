@@ -7,6 +7,7 @@ a {
 .full-image {
     display: grid;
     text-align: center;
+    grid-template-rows: max-content;
     height: 100vh;
 }
 
