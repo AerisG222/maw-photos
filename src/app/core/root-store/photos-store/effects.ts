@@ -481,6 +481,19 @@ export class PhotoStoreEffects {
         );
     });
 
+    stopSlideshowWhenDeselectingActivePhoto$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(PhotoActions.setActivePhotoId),
+                withLatestFrom(
+                    this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
+                ),
+                filter(([action, isSlideshowPlaying]) => !!isSlideshowPlaying && !action.id ),
+                map(() => PhotoActions.stopSlideshowRequest())
+            );
+        }
+    );
+
     runSlideshowEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.startSlideshowRequest),
