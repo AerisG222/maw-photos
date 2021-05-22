@@ -1,4 +1,6 @@
 @use '~@angular/material' as mat;
+@import '_vars';
+
 /* For use in src/lib/core/theming/_palette.scss */
 /* https://www.uplabs.com/posts/android-fluent-design */
 $md-mulled-wine: (
@@ -210,7 +212,7 @@ $mat-mulled-wine-theme-background: (
   dialog:     map_get($md-mulled-wine, 800),
   disabled-button: rgba(#9f7f8e, 0.12),
   raised-button: map-get($md-mulled-wine, 800),
-//  focused-button: $light-focused,
+  focused-button: $light-focused,
   selected-button: map_get($md-mulled-wine, 900),
   selected-disabled-button: map_get($md-mulled-wine, 800),
   disabled-button-toggle: black,
@@ -221,14 +223,14 @@ $mat-mulled-wine-theme-background: (
 
 $mat-mulled-wine-theme-foreground: (
   base:              map-get($md-venus, 500),
-//  divider:           $light-dividers,
-//  dividers:          $light-dividers,
-//  disabled:          $light-disabled-text,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
   disabled-button:   rgba(white, 0.3),
-//  disabled-text:     $light-disabled-text,
+  disabled-text:     $light-disabled-text,
   elevation:         black,
-//  hint-text:         $light-disabled-text,
-//  secondary-text:    $light-secondary-text,
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-secondary-text,
   icon:              map-get($md-venus, 300),
   icons:             map-get($md-venus, 300),
   text:              map-get($md-venus, 300),
