@@ -1,8 +1,8 @@
 <a [routerLink]="buildLink()" class="listitem">
-    <mat-icon *ngIf="category?.type == categoryTypes.photo"
+    <mat-icon *ngIf="category?.type === categoryTypes.photo"
         >camera_alt</mat-icon
     >
-    <mat-icon *ngIf="category?.type == categoryTypes.video"
+    <mat-icon *ngIf="category?.type === categoryTypes.video"
         >videocam</mat-icon
     >
 

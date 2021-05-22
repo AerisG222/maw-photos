@@ -8,7 +8,7 @@
         <mat-card-header *ngIf="showYear">
             {{ category.year }}
         </mat-card-header>
-        <mat-icon inline="true" *ngIf="category.type == categoryTypes.video"
+        <mat-icon inline="true" *ngIf="category.type === categoryTypes.video"
             >videocam</mat-icon
         >
         <img

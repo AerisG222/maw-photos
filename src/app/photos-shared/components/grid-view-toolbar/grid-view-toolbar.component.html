@@ -8,10 +8,10 @@
             (toggleSlideshow)="onToggleSlideshow()"
         ></app-photos-toolbar-slideshow-button>
         <app-toolbar-move-previous-button
-            *ngIf="(activePhotoId$ | async) != null"
+            *ngIf="(activePhotoId$ | async) !== null"
         ></app-toolbar-move-previous-button>
         <app-toolbar-move-next-button
-            *ngIf="(activePhotoId$ | async) != null"
+            *ngIf="(activePhotoId$ | async) !== null"
         ></app-toolbar-move-next-button>
     </app-toolbar-group>
 
@@ -50,10 +50,10 @@
     </app-toolbar-group>
 
     <app-toolbar-divider
-        *ngIf="(activePhotoId$ | async) != null"
+        *ngIf="(activePhotoId$ | async) !== null"
     ></app-toolbar-divider>
 
-    <app-toolbar-group *ngIf="(activePhotoId$ | async) != null">
+    <app-toolbar-group *ngIf="(activePhotoId$ | async) !== null">
         <app-toolbar-button
             *ngIf="isRandom"
             icon="title"
