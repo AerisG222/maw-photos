@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin app-primary-nav-link-component-theme($theme) {
     $accent: map-get($theme, accent);
@@ -6,7 +6,7 @@
     app-primary-nav-link a.active,
     app-primary-nav-link a.forceactive,
     app-primary-nav-link a:enabled:hover {
-        background-color: rgba(mat-color($accent, 700), .62);
-        color: mat-color($accent, 100);
+        background-color: rgba(mat.get-color-from-palette($accent, 700), .62);
+        color: mat.get-color-from-palette($accent, 100);
     }
 }

@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin app-stats-header-component-theme($theme) {
     $accent: map-get($theme, accent);
@@ -6,7 +6,7 @@
     app-stats-header {
         a {
 
-            color: mat-color($accent, A200);
+            color: mat.get-color-from-palette($accent, A200);
         }
 
         a:hover {

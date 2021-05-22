@@ -1,11 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { CategoriesStoreSelectors } from '../../store';
-import { CategoryTypeFilter, RouteHelper } from '@models';
 
 @Component({
     selector: 'app-toolbar-group-select-view',
@@ -20,7 +19,7 @@ export class ToolbarGroupSelectViewComponent {
     ]).pipe(
         map(([type, year]) => {
             return {
-                type: type as CategoryTypeFilter,
+                type,
                 year
             };
         })

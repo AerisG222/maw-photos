@@ -1,9 +1,9 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin app-sidebar-card-group-component-theme($theme) {
     $accent: map-get($theme, accent);
 
     app-sidebar-card-group {
-        background-color: rgba(mat-color($accent, 700), .1);
+        background-color: rgba(mat.get-color-from-palette($accent, 700), .1);
     }
 }

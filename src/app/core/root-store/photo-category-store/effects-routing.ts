@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom, filter, tap, switchMap } from 'rxjs/operators';
+import { map, withLatestFrom, filter, switchMap } from 'rxjs/operators';
 
 import { RouteArea, RouteHelper } from '@models';
 import { RouterStoreActions, RouterStoreSelectors } from '../router-store';

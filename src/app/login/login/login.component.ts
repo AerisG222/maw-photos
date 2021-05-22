@@ -2,7 +2,7 @@ import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthService, authServiceToken } from '@core/services';
 import { ActivatedRoute } from '@angular/router';
-import { first, filter, tap } from 'rxjs/operators';
+import { first, filter, tap, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login-login',
@@ -23,7 +23,7 @@ export class LoginComponent {
                 first(),
                 filter((p) => p.has('code')),
                 tap(() => (this.showLogin = false)),
-                tap(() => this.authService.handleLoginCallback())
+                switchMap(() => this.authService.handleLoginCallback())
             )
             .subscribe();
 
@@ -33,7 +33,7 @@ export class LoginComponent {
                 first(),
                 filter((p) => !p.has('code')),
                 tap(() => (this.showLogin = true)),
-                tap(() => this.authService.loginViaPopup())
+                switchMap(() => this.authService.loginViaPopup())
             )
             .subscribe();
     }

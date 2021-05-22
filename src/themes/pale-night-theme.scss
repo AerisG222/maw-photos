@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 /* For use in src/lib/core/theming/_palette.scss */
 $md-pale-night: (
     50 : #e5e6e8,
@@ -74,25 +75,25 @@ $mat-pale-night-theme-background: (
   dialog:     map_get($md-pale-night, 600),
   disabled-button: rgba(#9f7f8e, 0.12),
   raised-button: map-get($md-pale-night, 600),
-  focused-button: $light-focused,
+//  focused-button: $light-focused,
   selected-button: map_get($md-pale-night, 700),
   selected-disabled-button: map_get($md-pale-night, 600),
   disabled-button-toggle: black,
   unselected-chip: map_get($md-pale-night, 500),
   disabled-list-option: black,
-  tooltip: map_get($mat-orange, 700),
+  tooltip: map_get(mat.$orange-palette, 700),
 );
 
 $mat-pale-night-theme-foreground: (
   base:              map-get($md-pale-night-foreground, 400),
-  divider:           $light-dividers,
-  dividers:          $light-dividers,
-  disabled:          $light-disabled-text,
+//  divider:           $light-dividers,
+//  dividers:          $light-dividers,
+//  disabled:          $light-disabled-text,
   disabled-button:   rgba(white, 0.3),
-  disabled-text:     $light-disabled-text,
+//  disabled-text:     $light-disabled-text,
   elevation:         black,
-  hint-text:         $light-disabled-text,
-  secondary-text:    $light-secondary-text,
+//  hint-text:         $light-disabled-text,
+//  secondary-text:    $light-secondary-text,
   icon:              map-get($md-pale-night-foreground, 200),
   icons:             map-get($md-pale-night-foreground, 200),
   text:              map-get($md-pale-night-foreground, 200),
@@ -101,9 +102,9 @@ $mat-pale-night-theme-foreground: (
   slider-off-active: rgba(white, 0.3),
 );
 
-$maw-pale-night-primary: mat-palette($mat-orange, A200, A100, A400);
-$maw-pale-night-accent:  mat-palette($mat-orange, A200, A100, A400);
-$maw-pale-night-warn:    mat-palette($mat-red);
+$maw-pale-night-primary: mat.define-palette(mat.$orange-palette, A200, A100, A400);
+$maw-pale-night-accent:  mat.define-palette(mat.$orange-palette, A200, A100, A400);
+$maw-pale-night-warn:    mat.define-palette(mat.$red-palette);
 
 $maw-pale-night-theme: (
     color: (
