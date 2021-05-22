@@ -14,7 +14,7 @@
     "dev_watch": "ng build --vendor-chunk=false --watch",
     "dev_build": "ng build --vendor-chunk=false && ng lint",
     "containerdev_build": "ng build --aot --configuration containerdev",
-    "prod_build": "ng build --aot --prod",
+    "prod_build": "ng build --aot --configuration production",
     "containerize_dev": "buildah bud -f Containerfile.dev -t maw-photos-dev",
     "analyze": "source-map-explorer dist/main*.js",
     "analyzeperf": "NG_BUILD_MINIFY=false ng serve --aot --configuration analyzeperf --public-host photosdev.mikeandwan.us"
