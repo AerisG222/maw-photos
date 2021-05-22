@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import * as RouterStoreActions from '@core/root-store/router-store/actions';
 import { PhotoViewMode, RouteArea, RouteDetails, RouteHelper } from '@models';
@@ -20,10 +20,10 @@ export class PhotoStoreRoutingEffects {
         () => {
             return this.actions$.pipe(
                 ofType(PhotoStoreActions.navigateToPhoto),
-                withLatestFrom(
+                concatLatestFrom(() => [
                     this.store.select(RouterStoreSelectors.inPhotosArea),
                     this.store.select(RouterStoreSelectors.inRandomArea)
-                ),
+                ]),
                 map(([action, isPhotos, isRandom]) => {
                     if (isPhotos) {
                         return RouteHelper.photoCategoriesAbs(
@@ -51,7 +51,7 @@ export class PhotoStoreRoutingEffects {
         () => {
             return this.actions$.pipe(
                 ofType(PhotoStoreActions.navigateUpFromIndividualPhoto),
-                withLatestFrom(
+                concatLatestFrom(() =>
                     this.store.select(RouterStoreSelectors.selectUrl)
                 ),
                 filter(([, url]) => !!url),
@@ -72,12 +72,12 @@ export class PhotoStoreRoutingEffects {
                 PhotoStoreActions.loadSuccess,
                 PhotoStoreActions.loadMultipleRandomSuccess,
             ),
-            withLatestFrom(
+            concatLatestFrom(() => [
                 this.store.select(RouterStoreSelectors.selectRouteDetails),
                 this.store.select(PhotoStoreSelectors.allEntities),
                 this.store.select(PhotoStoreSelectors.allIds),
                 this.store.select(PhotoStoreSelectors.activePhotoId),
-            ),
+            ]),
             filter(([, routeDetails, entities, ids, activeId]) => {
                 return (
                     (routeDetails.area === RouteArea.photos || routeDetails.area === RouteArea.random) &&
@@ -169,7 +169,7 @@ export class PhotoStoreRoutingEffects {
     monitorPhotosViewChangedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(SettingsStoreSelectors.photoPageSettings)
             ),
             filter(([action, pageSettings]) => {
@@ -197,7 +197,7 @@ export class PhotoStoreRoutingEffects {
     monitorRandomViewChangedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(SettingsStoreSelectors.randomPageSettings)
             ),
             filter(([action, pageSettings]) => {

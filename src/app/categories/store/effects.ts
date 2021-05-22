@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { CategoriesUrlService } from '../services/categories-url.service';
 import {
@@ -52,7 +52,7 @@ export class CategoriesStoreEffects {
     monitorViewChangedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(SettingsStoreSelectors.categoryPageSettings)
             ),
             filter(([action, pageSettings]) => {

@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
     catchError,
     map,
-    withLatestFrom,
     concatMap,
     exhaustMap,
 } from 'rxjs/operators';
@@ -29,7 +28,7 @@ export class VideoCategoryStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoCategoryStoreActions.loadRequest),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(videoCategoryStoreSelectors.allCategories)
             ),
             exhaustMap(([, categories]) => {

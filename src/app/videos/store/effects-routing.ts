@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import { RouterStoreActions, RouterStoreSelectors } from '@core/root-store';
 import { RouteArea, RouteHelper } from '@models';
@@ -44,11 +44,11 @@ export class VideoStoreRoutingEffects {
                 RouterStoreActions.routeChanged,
                 VideoStoreActions.loadSuccess
             ),
-            withLatestFrom(
+            concatLatestFrom(() => [
                 this.store.select(RouterStoreSelectors.selectRouteDetails),
                 this.store.select(VideoStoreSelectors.allEntities),
                 this.store.select(VideoStoreSelectors.allIds),
-            ),
+            ]),
             filter(([, routeDetails, entities, ids]) => {
                 return routeDetails.area === RouteArea.videos &&
                     !!entities &&

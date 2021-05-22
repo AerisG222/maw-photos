@@ -1,18 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, of, timer } from 'rxjs';
 import {
     switchMap,
     catchError,
     map,
-    withLatestFrom,
     concatMap,
     mergeMap,
     debounceTime,
     filter,
     exhaustMap,
     takeUntil,
+    withLatestFrom,
 } from 'rxjs/operators';
 
 import {
@@ -354,10 +354,8 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.rotateClockwiseRequest),
             concatMap((action) =>
                 of(action).pipe(
-                    withLatestFrom(
-                        this.store.select(
-                            PhotoStoreSelectors.activePhotoEffects
-                        )
+                    concatLatestFrom(() =>
+                        this.store.select(PhotoStoreSelectors.activePhotoEffects)
                     )
                 )
             ),
@@ -378,10 +376,8 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.rotateCounterClockwiseRequest),
             concatMap((action) =>
                 of(action).pipe(
-                    withLatestFrom(
-                        this.store.select(
-                            PhotoStoreSelectors.activePhotoEffects
-                        )
+                    concatLatestFrom(() =>
+                        this.store.select(PhotoStoreSelectors.activePhotoEffects)
                     )
                 )
             ),
@@ -400,10 +396,10 @@ export class PhotoStoreEffects {
     moveNextEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.moveNextRequest),
-            withLatestFrom(
+            concatLatestFrom(() => [
                 this.store.select(PhotoStoreSelectors.nextPhoto),
                 this.store.select(RouterStoreSelectors.currentViewMode)
-            ),
+            ]),
             filter(([, photo]) => !!photo),
             map(([, photo, view]) =>
                 PhotoActions.navigateToPhoto({
@@ -418,10 +414,10 @@ export class PhotoStoreEffects {
     movePreviousEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.movePreviousRequest),
-            withLatestFrom(
+            concatLatestFrom(() => [
                 this.store.select(PhotoStoreSelectors.previousPhoto),
                 this.store.select(RouterStoreSelectors.currentViewMode)
-            ),
+            ]),
             filter(([, photo]) => !!photo),
             map(([, photo, view]) =>
                 PhotoActions.navigateToPhoto({
@@ -458,7 +454,7 @@ export class PhotoStoreEffects {
     toggleSlideshowEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.toggleSlideshowRequest),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
             ),
             map(([, isPlaying]) => {
@@ -485,7 +481,7 @@ export class PhotoStoreEffects {
         () => {
             return this.actions$.pipe(
                 ofType(PhotoActions.setActivePhotoId),
-                withLatestFrom(
+                concatLatestFrom(() =>
                     this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
                 ),
                 filter(([action, isSlideshowPlaying]) => !!isSlideshowPlaying && !action.id ),
@@ -537,7 +533,7 @@ export class PhotoStoreEffects {
     setCategoryIdForActivePhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.setActivePhotoId),
-            withLatestFrom(this.store.select(PhotoStoreSelectors.activePhoto)),
+            concatLatestFrom(() => this.store.select(PhotoStoreSelectors.activePhoto)),
             map(([, photo]) => {
                 const categoryId = photo?.categoryId ?? null;
 

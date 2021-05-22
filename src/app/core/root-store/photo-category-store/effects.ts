@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
     catchError,
     map,
-    withLatestFrom,
     concatMap,
     exhaustMap,
 } from 'rxjs/operators';
@@ -29,7 +28,7 @@ export class PhotoCategoryStoreEffects {
     loadRequestEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoCategoryActions.loadRequest),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(PhotoCategorySelectors.allCategories)
             ),
             exhaustMap(([, categories]) => {

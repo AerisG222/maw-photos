@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom, filter, switchMap } from 'rxjs/operators';
+import { map, filter, switchMap } from 'rxjs/operators';
 
 import { RouteArea, RouteHelper } from '@models';
 import { RouterStoreActions, RouterStoreSelectors } from '../router-store';
@@ -17,7 +17,7 @@ export class PhotoCategoryStoreRoutingEffects {
             filter((change) =>
                 RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)
             ),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(PhotoCategoryStoreSelectors.allCategories)
             ),
             filter(([, categories]) => !categories || categories.length === 0),
@@ -32,11 +32,11 @@ export class PhotoCategoryStoreRoutingEffects {
                     RouterStoreActions.routeChanged,
                     PhotoCategoryStoreActions.loadSuccess
                 ),
-                withLatestFrom(
+                concatLatestFrom(() => [
                     this.store.select(RouterStoreSelectors.selectRouteDetails),
                     this.store.select(PhotoCategoryStoreSelectors.allEntities),
                     this.store.select(PhotoCategoryStoreSelectors.allCategories)
-                ),
+                ]),
                 filter(([, routeDetails, , categories]) => {
                     return routeDetails.area === RouteArea.photos &&
                         !!categories &&

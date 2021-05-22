@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
 import {
@@ -10,7 +10,6 @@ import {
     debounceTime,
     filter,
     mergeMap,
-    withLatestFrom,
 } from 'rxjs/operators';
 
 import { videoApiServiceToken, VideoApiService } from '@core/services';
@@ -275,7 +274,7 @@ export class VideoStoreEffects {
     moveNextEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoStoreActions.moveNextRequest),
-            withLatestFrom(this.store.select(VideoStoreSelectors.nextVideo)),
+            concatLatestFrom(() => this.store.select(VideoStoreSelectors.nextVideo)),
             filter(([, video]) => !!video),
             map(([, video]) =>
                 VideoStoreActions.navigateToVideo({
@@ -289,7 +288,7 @@ export class VideoStoreEffects {
     movePreviousEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoStoreActions.movePreviousRequest),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(VideoStoreSelectors.previousVideo)
             ),
             filter(([, video]) => !!video),

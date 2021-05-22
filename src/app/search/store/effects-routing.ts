@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import {
     RouterStoreActions,
@@ -27,7 +27,7 @@ export class SearchStoreRoutingEffects {
         () => {
             return this.actions$.pipe(
                 ofType(SearchStoreActions.queryRequest),
-                withLatestFrom(this.store.select(SearchStoreSelectors.query)),
+                concatLatestFrom(() => this.store.select(SearchStoreSelectors.query)),
                 filter(([action, activeQueryTerm]) => activeQueryTerm !== action.query),
                 switchMap(([action,]) => {
                     return this.router.navigate([], {
@@ -43,7 +43,7 @@ export class SearchStoreRoutingEffects {
     monitorViewChangedEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(SettingsStoreSelectors.searchPageSettings)
             ),
             filter(([action, pageSettings]) => {

@@ -1,12 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
     switchMap,
     catchError,
     map,
-    withLatestFrom,
     filter,
 } from 'rxjs/operators';
 
@@ -51,10 +50,10 @@ export class SearchStoreEffects {
     queryMoreEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(SearchStoreActions.queryRequest),
-            withLatestFrom(
+            concatLatestFrom(() => [
                 this.store.select(SearchStoreSelectors.query),
                 this.store.select(SearchStoreSelectors.activeResultStartIndex),
-            ),
+            ]),
             filter(
                 ([action, activeQueryTerm, activeQueryStart]) =>
                     activeQueryTerm === action.query &&

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ROUTER_NAVIGATED } from '@ngrx/router-store';
-import { filter, map, scan, withLatestFrom } from 'rxjs/operators';
+import { filter, map, scan } from 'rxjs/operators';
 
 import * as RouterStoreActions from './actions';
 import * as RouterStoreSelectors from './selectors';
@@ -23,7 +23,7 @@ interface FullScreenChange {
 export class RouterStoreEffects {
     routeChanged$ = this.actions$.pipe(
         ofType(ROUTER_NAVIGATED),
-        withLatestFrom(
+        concatLatestFrom(() =>
             this.store.select(RouterStoreSelectors.selectRouteDetails)
         )
     );

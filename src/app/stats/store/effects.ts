@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { switchMap } from 'rxjs/operators';
 
 import { RouterStoreSelectors } from '@core/root-store';
 import * as StatsStoreActions from './actions';
@@ -14,7 +14,7 @@ export class StatsStoreEffects {
         () => {
             return this.actions$.pipe(
                 ofType(StatsStoreActions.selectYear),
-                withLatestFrom(
+                concatLatestFrom(() =>
                     this.store.select(RouterStoreSelectors.selectRouteDetails)
                 ),
                 switchMap(([action, details]) => {

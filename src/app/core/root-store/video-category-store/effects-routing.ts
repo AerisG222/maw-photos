@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { createEffect, ofType, Actions } from '@ngrx/effects';
+import { createEffect, ofType, Actions, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import { RouteArea, RouteHelper } from '@models';
 import { RouterStoreActions, RouterStoreSelectors } from '../router-store';
@@ -17,7 +17,7 @@ export class VideoCategoryStoreRoutingEffects {
             filter((change) =>
                 RouteHelper.doesRouteAreaNeedCategoryData(change.enteringArea)
             ),
-            withLatestFrom(
+            concatLatestFrom(() =>
                 this.store.select(VideoCategoryStoreSelectors.allCategories)
             ),
             filter(([, categories]) => !categories || categories.length === 0),
@@ -32,11 +32,11 @@ export class VideoCategoryStoreRoutingEffects {
                     RouterStoreActions.routeChanged,
                     VideoCategoryStoreActions.loadSuccess
                 ),
-                withLatestFrom(
+                concatLatestFrom(() => [
                     this.store.select(RouterStoreSelectors.selectRouteDetails),
                     this.store.select(VideoCategoryStoreSelectors.allEntities),
                     this.store.select(VideoCategoryStoreSelectors.allCategories)
-                ),
+                ]),
                 filter(([, routeDetails, , categories]) => {
                     return routeDetails.area === RouteArea.videos &&
                         !!categories &&
