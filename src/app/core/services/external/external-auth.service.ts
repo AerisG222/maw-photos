@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { filter, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { authConfig } from '@models';
+import { authConfig, UserInfo } from '@models';
 import { updateUserInfoRequest } from '@core/root-store/auth-store/actions';
 import { AuthService, SettingsService } from '@core/services';
 
@@ -76,19 +76,31 @@ export class ExternalAuthService implements AuthService {
     private async loadProfile(): Promise<void> {
         const profile = await this.oauthService.loadUserProfile();
 
-        this.storeProfile(profile);
-    }
-
-    private storeProfile(profile: UserInfo): void {
-        if (profile) {
-            const userInfo = {
-                username: profile.name as string,
-                firstName: profile.given_name as string,
-                lastName: profile.family_name as string,
-                roles: profile.role as string[],
-            };
-
-            this.store.dispatch(updateUserInfoRequest({ userInfo }));
+        if(profile) {
+            const userInfo = this.buildUserInfo(profile);
+            this.storeProfile(userInfo);
         }
+    }
+    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private buildUserInfo(profile: any): UserInfo {
+        if('info' in profile &&
+            'given_name' in profile.info &&
+            'family_name' in profile.info &&
+            'role' in profile.info) {
+            return {
+                username: profile.info.name as string,
+                firstName: profile.info.given_name as string,
+                lastName: profile.info.family_name as string,
+                roles: profile.info.role as string[]
+            };
+        }
+
+        throw Error('Invalid profile!');
+    }
+    /* eslint-enable @typescript-eslint/no-unsafe-member-access */
+
+    private storeProfile(userInfo: UserInfo): void {
+        this.store.dispatch(updateUserInfoRequest({ userInfo }));
     }
 }
