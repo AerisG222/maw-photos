@@ -20,7 +20,7 @@ export abstract class ToolbarViewButtonBaseComponent {
                 return [
                     RouteHelper.photoCategoriesAbs(
                         this.viewMode,
-                        details.params?.categoryId,
+                        details.params?.categoryId as number | undefined,
                         photoId
                     ),
                 ];

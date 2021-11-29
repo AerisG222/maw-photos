@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { RouteHelper } from '@models';
+import { CategoryTypeFilter, RouteHelper } from '@models';
 import { CategoryPageSettingsFacade } from '@core/facades/settings/category-page-settings-facade';
 
 @Injectable()
@@ -30,8 +30,8 @@ export class ViewModeGuard implements CanActivate {
                 this.router.parseUrl(
                     RouteHelper.categoriesAbs(
                         viewMode,
-                        route.queryParams.year,
-                        route.queryParams.type
+                        route.queryParams.year as string | number | undefined,
+                        route.queryParams.type as CategoryTypeFilter | undefined
                     )
                 )
             )

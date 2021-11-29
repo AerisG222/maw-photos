@@ -19,6 +19,6 @@ export class CategoryYearFilterComponent {
     @Output() filterChange = new EventEmitter<number | string>();
 
     onSelectYear(change: MatSelectChange): void {
-        this.filterChange.next(change.value);
+        this.filterChange.next(change.value as string | number | undefined);
     }
 }

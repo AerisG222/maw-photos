@@ -39,8 +39,8 @@ export class ViewModeGuard implements CanActivate {
                     this.router.parseUrl(
                         RouteHelper.photoCategoriesAbs(
                             defaultView,
-                            route.params.categoryId,
-                            route.params.photoId
+                            route.params.categoryId as number | undefined,
+                            route.params.photoId as number | undefined
                         )
                     )
                 )

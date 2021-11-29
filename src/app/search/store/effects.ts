@@ -17,6 +17,7 @@ import {
 } from 'src/app/search/services/search-api.service';
 import { httpErrorHandler, isTruthy } from '@models';
 import { RouterStoreActions } from '@core/root-store';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class SearchStoreEffects {
@@ -37,7 +38,7 @@ export class SearchStoreEffects {
                         catchError((error) =>
                             of(
                                 SearchStoreActions.queryFailure({
-                                    error: httpErrorHandler(error),
+                                    error: httpErrorHandler(error as HttpErrorResponse),
                                 })
                             )
                         )
@@ -70,7 +71,7 @@ export class SearchStoreEffects {
                     catchError((error) =>
                         of(
                             SearchStoreActions.queryMoreFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )

@@ -66,7 +66,7 @@ export class CategorySettingsComponent {
 
     onSave(): void {
         const typeFilter = toCategoryTypeFilter(
-            this.form.get('page.typeFilter')?.value
+            this.form.get('page.typeFilter')?.value as string
         ) as CategoryTypeFilter;
 
         const pageSettings = this.readPageForm();
@@ -120,7 +120,7 @@ export class CategorySettingsComponent {
     private readPageForm(): CategoryPageSettings {
         return {
             viewMode: toCategoryViewMode(
-                this.form.get('page.viewMode')?.value
+                this.form.get('page.viewMode')?.value as string
             ) as CategoryViewMode,
         };
     }
@@ -130,7 +130,7 @@ export class CategorySettingsComponent {
             showTitles: this.form.get('grid.showTitles')?.value as boolean,
             margin: this.form.get('grid.margin')?.value as Margin,
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('grid.thumbnailSize')?.value
+                this.form.get('grid.thumbnailSize')?.value as string
             ),
         };
     }
@@ -139,7 +139,7 @@ export class CategorySettingsComponent {
         return {
             margin: this.form.get('list.margin')?.value as Margin,
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('list.thumbnailSize')?.value
+                this.form.get('list.thumbnailSize')?.value as string
             ),
         };
     }

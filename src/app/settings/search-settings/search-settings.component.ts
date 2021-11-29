@@ -75,20 +75,20 @@ export class SearchSettingsComponent {
 
     private readGridForm(): SearchGridViewSettings {
         return {
-            margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
+            margin: toMarginDefaulted(this.form.get('grid.margin')?.value as string),
             showTitles: this.form.get('grid.showTitles')?.value as boolean,
             showYears: this.form.get('grid.showYears')?.value as boolean,
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('grid.thumbnailSize')?.value
+                this.form.get('grid.thumbnailSize')?.value as string
             ),
         };
     }
 
     private readListForm(): SearchListViewSettings {
         return {
-            margin: toMarginDefaulted(this.form.get('list.margin')?.value),
+            margin: toMarginDefaulted(this.form.get('list.margin')?.value as string),
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('list.thumbnailSize')?.value
+                this.form.get('list.thumbnailSize')?.value as string
             ),
         };
     }

@@ -22,6 +22,7 @@ import {
     RouteHelper,
     httpErrorHandler,
 } from '@models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class PhotoCategoryStoreEffects {
@@ -47,7 +48,7 @@ export class PhotoCategoryStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoCategoryActions.loadFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -69,7 +70,7 @@ export class PhotoCategoryStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoCategoryActions.setTeaserFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )

@@ -23,7 +23,7 @@ export abstract class ButtonLinkBaseComponent implements OnInit, OnDestroy {
 
     private hotkey: Hotkey | null = null;
 
-    abstract button: MatButton | null = null;
+    abstract button: MatButton | null;
 
     constructor(public hotkeysService: HotkeysService) {}
 

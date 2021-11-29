@@ -79,7 +79,7 @@ export class VideoSettingsComponent {
             showVideoList: this.form.get('detail.showVideoList')
                 ?.value as boolean,
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('detail.thumbnailSIze')?.value
+                this.form.get('detail.thumbnailSIze')?.value as string
             ),
         };
     }

@@ -17,11 +17,13 @@
             ],
             "parser": "@typescript-eslint/parser",
             "parserOptions": {
+                "ecmaVersion": 2019,
                 "project": [
                     "tsconfig.app.json"
                     //"tsconfig.spec.json",
                     //"e2e/tsconfig.json"
                 ],
+                "sourceType": "module",
                 "createDefaultProgram": true
             },
             "extends": [

@@ -105,12 +105,12 @@ export class CategoriesUrlService {
 
                 this.addFilterToUrl({
                     year: CategoriesUrlService.getValidYearFilter(
-                        routeDetails.queryParams?.year,
+                        routeDetails.queryParams?.year as string | null,
                         filter.yearFilter,
                         allYears
                     ),
                     type: CategoriesUrlService.getValidTypeFilter(
-                        routeDetails.queryParams?.type,
+                        routeDetails.queryParams?.type as string | null,
                         filter.typeFilter
                     ),
                 });

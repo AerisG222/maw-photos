@@ -17,6 +17,7 @@ import * as VideoStoreActions from './actions';
 import * as VideoStoreSelectors from './selectors';
 import { VideoCategoryStoreActions } from '@core/root-store';
 import { CategoryGpsStatus, httpErrorHandler } from '@models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class VideoStoreEffects {
@@ -31,7 +32,7 @@ export class VideoStoreEffects {
                     catchError((error) =>
                         of(
                             VideoStoreActions.loadFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -51,7 +52,7 @@ export class VideoStoreEffects {
                     catchError((error) =>
                         of(
                             VideoStoreActions.loadRatingFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -85,7 +86,7 @@ export class VideoStoreEffects {
                     catchError((error) =>
                         of(
                             VideoStoreActions.rateVideoFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -107,7 +108,7 @@ export class VideoStoreEffects {
                     catchError((error) =>
                         of(
                             VideoStoreActions.rateVideoFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -143,7 +144,7 @@ export class VideoStoreEffects {
                     catchError((error) =>
                         of(
                             VideoStoreActions.addCommentFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -176,7 +177,7 @@ export class VideoStoreEffects {
                     catchError((error) =>
                         of(
                             VideoStoreActions.loadGpsDetailFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -215,7 +216,7 @@ export class VideoStoreEffects {
                         catchError((error) =>
                             of(
                                 VideoStoreActions.setGpsCoordinateOverrideFailure(
-                                    { error: httpErrorHandler(error) }
+                                    { error: httpErrorHandler(error as HttpErrorResponse) }
                                 )
                             )
                         )
@@ -244,7 +245,7 @@ export class VideoStoreEffects {
                         catchError((error) =>
                             of(
                                 VideoStoreActions.setGpsCoordinateOverrideFailure(
-                                    { error: httpErrorHandler(error) }
+                                    { error: httpErrorHandler(error as HttpErrorResponse) }
                                 )
                             )
                         )

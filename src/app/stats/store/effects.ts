@@ -19,7 +19,7 @@ export class StatsStoreEffects {
                 ),
                 switchMap(([action, details]) => {
                     return this.router.navigateByUrl(
-                        RouteHelper.statsAbs(details.data.view, action.year)
+                        RouteHelper.statsAbs(details.data.view as string | undefined, action.year)
                     );
                 })
             );

@@ -32,6 +32,7 @@ import * as PhotoCategoryStoreActions from '@core/root-store/photo-category-stor
 import { RouterStoreSelectors } from '../router-store';
 import { PhotoPageSettingsFacade } from '@core/facades/settings/photo-page-settings-facade';
 import { RandomPageSettingsFacade } from '@core/facades/settings/random-page-settings-facade';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class PhotoStoreEffects {
@@ -46,7 +47,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.loadFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -64,7 +65,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.loadRandomFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -86,7 +87,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.loadMultipleRandomFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -116,7 +117,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.loadRatingFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -134,7 +135,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.ratePhotoFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -168,7 +169,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.ratePhotoFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -190,7 +191,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.addCommentFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -234,7 +235,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.loadExifFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -268,7 +269,7 @@ export class PhotoStoreEffects {
                     catchError((error) =>
                         of(
                             PhotoActions.loadGpsDetailFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -294,7 +295,7 @@ export class PhotoStoreEffects {
                             catchError((error) =>
                                 of(
                                     PhotoActions.setGpsCoordinateOverrideFailure(
-                                        { error: httpErrorHandler(error) }
+                                        { error: httpErrorHandler(error as HttpErrorResponse) }
                                     )
                                 )
                             )
@@ -322,7 +323,7 @@ export class PhotoStoreEffects {
                         catchError((error) =>
                             of(
                                 PhotoActions.setGpsCoordinateOverrideFailure({
-                                    error: httpErrorHandler(error),
+                                    error: httpErrorHandler(error as HttpErrorResponse),
                                 })
                             )
                         )

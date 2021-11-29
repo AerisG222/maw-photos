@@ -26,7 +26,7 @@ export class CategoryTypeFilterComponent {
     categoryTypes = allCategoryTypeFilters;
 
     onSelectCategoryType(change: MatSelectChange): void {
-        const filter = toCategoryTypeFilter(change.value) as CategoryTypeFilter;
+        const filter = toCategoryTypeFilter(change.value as string | null | undefined) as CategoryTypeFilter;
 
         this.filterChange.next(filter);
     }

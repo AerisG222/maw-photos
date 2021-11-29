@@ -105,18 +105,18 @@ export class RandomSettingsComponent {
             showPhotoList: this.form.get('detail.showPhotoList')
                 ?.value as boolean,
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('detail.thumbnailSIze')?.value
+                this.form.get('detail.thumbnailSIze')?.value as string
             ),
         };
     }
 
     private readGridForm(): PhotoGridViewSettings {
         return {
-            margin: toMarginDefaulted(this.form.get('grid.margin')?.value),
+            margin: toMarginDefaulted(this.form.get('grid.margin')?.value as string),
             showBreadcrumbs: this.form.get('grid.showBreadcrumbs')
                 ?.value as boolean,
             thumbnailSize: toThumbnailSizeDefaulted(
-                this.form.get('grid.thumbnailSize')?.value
+                this.form.get('grid.thumbnailSize')?.value as string
             ),
         };
     }

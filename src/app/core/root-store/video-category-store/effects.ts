@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -47,7 +48,7 @@ export class VideoCategoryStoreEffects {
                     catchError((error) =>
                         of(
                             VideoCategoryStoreActions.loadFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )
@@ -69,7 +70,7 @@ export class VideoCategoryStoreEffects {
                     catchError((error) =>
                         of(
                             VideoCategoryStoreActions.setTeaserFailure({
-                                error: httpErrorHandler(error),
+                                error: httpErrorHandler(error as HttpErrorResponse),
                             })
                         )
                     )

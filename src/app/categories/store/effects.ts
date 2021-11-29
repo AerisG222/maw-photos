@@ -16,7 +16,6 @@ import { CategoryViewMode, RouteArea } from '@models';
 export class CategoriesStoreEffects {
     categoryFilterUpdated$ = createEffect(
         () => {
-            // eslint-disable-next-line rxjs/no-cyclic-action
             return this.actions$.pipe(
                 ofType(SettingsStoreActions.saveCategoryFilterSettingsSuccess),
                 tap(({ settings }) =>
