@@ -13,7 +13,17 @@ export const lastName = createSelector(userInfo, (u) => u?.lastName);
 
 export const username = createSelector(userInfo, (u) => u?.username);
 
-export const roles = createSelector(userInfo, (u) => u?.roles);
+export const roles = createSelector(userInfo, (u) => {
+    if(u === null || u === undefined) {
+        return [];
+    }
+
+    if(Array.isArray(u.roles)) {
+        return u.roles;
+    }
+
+    return [u.roles];
+});
 
 export const isAdmin = createSelector(
     roles,
