@@ -32,13 +32,9 @@ export const allCategories = createSelector(
     PhotoCategoryStoreSelectors.allCategories,
     VideoCategoryStoreSelectors.allCategories,
     (photoCategories: Category[], videoCategories: Category[]) => {
-        if (photoCategories.length > 0 && videoCategories.length > 0) {
-            return [...photoCategories, ...videoCategories].sort(
-                categoriesDescending
-            );
-        }
-
-        return [];
+        return [...photoCategories, ...videoCategories].sort(
+            categoriesDescending
+        );
     }
 );
 
@@ -46,13 +42,9 @@ export const allYears = createSelector(
     PhotoCategoryStoreSelectors.allYears,
     VideoCategoryStoreSelectors.allYears,
     (photoYears: number[], videoYears: number[]) => {
-        if (photoYears.length > 0 && videoYears.length > 0) {
-            return Array.from(
-                new Set([...(photoYears ?? []), ...(videoYears ?? [])])
-            ).sort(sortNumbersDescending);
-        }
-
-        return [];
+        return Array.from(
+            new Set([...(photoYears ?? []), ...(videoYears ?? [])])
+        ).sort(sortNumbersDescending);
     }
 );
 
