@@ -8,10 +8,10 @@ export const environment = {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     version: require('../../package.json').version as string,
 
-    apiUrl: 'https://apidev.mikeandwan.us:5011',
-    authUrl: 'https://authdev.mikeandwan.us:5001',
-    photosUrl: 'http://photosdev.mikeandwan.us:4200',
-    wwwUrl: 'https://wwwdev.mikeandwan.us:5021',
+    apiUrl: 'https://local.api.mikeandwan.us:5011',
+    authUrl: 'https://local.auth.mikeandwan.us:5001',
+    photosUrl: 'http://local.photos.mikeandwan.us:4200',
+    wwwUrl: 'https://local.www.mikeandwan.us:5021',
 };
 
 /*

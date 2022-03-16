@@ -7,8 +7,8 @@ export const environment = {
     production: false,
     version: require('../../package.json').version as string,
 
-    apiUrl: 'https://apidev.mikeandwan.us',
-    authUrl: 'https://authdev.mikeandwan.us',
-    photosUrl: 'http://photosdev.mikeandwan.us',
-    wwwUrl: 'https://wwwdev.mikeandwan.us',
+    apiUrl: 'https://dev.api.mikeandwan.us',
+    authUrl: 'https://dev.auth.mikeandwan.us',
+    photosUrl: 'http://dev.photos.mikeandwan.us',
+    wwwUrl: 'https://dev.www.mikeandwan.us',
 };
