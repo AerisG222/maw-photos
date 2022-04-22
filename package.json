@@ -5,7 +5,7 @@
     "ng": "ng",
     "report-unused-vars": "eslint --rule 'no-unused-vars: 0' --rule '@typescript-eslint/no-unused-vars: 2' . --ext .ts",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "start": "ng serve --public-host local.photos.mikeandwan.us",
+    "start": "ng serve --public-host dev.photos.mikeandwan.us",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -15,9 +15,8 @@
     "dev_build": "ng build --vendor-chunk=false && ng lint",
     "test_build": "ng build --aot --configuration test",
     "prod_build": "ng build --aot --configuration production",
-    "containerize_dev": "buildah bud -f Containerfile.dev -t maw-photos-dev",
     "analyze": "source-map-explorer dist/main*.js",
-    "analyzeperf": "NG_BUILD_MINIFY=false ng serve --aot --configuration analyzeperf --public-host local.photos.mikeandwan.us"
+    "analyzeperf": "NG_BUILD_MINIFY=false ng serve --aot --configuration analyzeperf --public-host dev.photos.mikeandwan.us"
   },
   "private": true,
   "dependencies": {
