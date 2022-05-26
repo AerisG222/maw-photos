@@ -5,7 +5,7 @@ import {
     Input,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { first, concatMap } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
 import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
@@ -52,9 +52,11 @@ export class GridViewToolbarComponent {
     onShare(): void {
         this.store
             .select(PhotoStoreSelectors.activePhoto)
-            .pipe(first())
+            .pipe(
+                first(),
+                concatMap(photo => this.sharePhoto(photo))
+            )
             .subscribe({
-                next: (photo) => this.sharePhoto(photo),
                 error: () => console.log('Error sharing photo'),
             });
     }

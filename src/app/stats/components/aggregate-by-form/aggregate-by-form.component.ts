@@ -24,7 +24,7 @@ export class AggregateByFormComponent {
         });
 
         this.form.get('aggregateBy')?.valueChanges.subscribe({
-            next: (val) => this.selectAggregateBy.next(val as string | undefined),
+            next: (val) => this.selectAggregateBy.next(val as string),
         });
     }
 }

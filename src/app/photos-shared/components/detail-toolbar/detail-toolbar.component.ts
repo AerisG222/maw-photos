@@ -5,7 +5,7 @@ import {
     Inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { first, concatMap } from 'rxjs/operators';
 import { WINDOW } from 'ngx-window-token';
 
 import { Photo } from '@models';
@@ -65,9 +65,11 @@ export class DetailToolbarComponent {
     onShare(): void {
         this.store
             .select(PhotoStoreSelectors.activePhoto)
-            .pipe(first())
+            .pipe(
+                first(),
+                concatMap(photo => this.sharePhoto(photo))
+            )
             .subscribe({
-                next: (photo) => this.sharePhoto(photo),
                 error: () => console.log('error trying to share photo'),
             });
     }

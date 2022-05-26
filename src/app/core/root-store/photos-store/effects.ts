@@ -494,7 +494,7 @@ export class PhotoStoreEffects {
     runSlideshowEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.startSlideshowRequest),
-            withLatestFrom(this.photoPage.settings$),
+            concatLatestFrom(() => this.photoPage.settings$),
             switchMap(([, settings]) => {
                 return timer(
                     0,
@@ -514,7 +514,7 @@ export class PhotoStoreEffects {
     periodicLoadOfRandomPhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.startPeriodicRandomLoad),
-            withLatestFrom(this.randomPage.settings$),
+            concatLatestFrom(() => this.randomPage.settings$),
             switchMap(([, settings]) => {
                 return timer(
                     settings.slideshowDisplayDurationSeconds * 1000,

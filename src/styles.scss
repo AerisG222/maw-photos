@@ -51,7 +51,7 @@ $custom-typography: mat.define-typography-config(
 
 @import 'app/videos/components/video-list/video-list.component.theme';
 
-@import '~ngx-bar-rating/themes/br-default-theme';
+@import 'node_modules/ngx-bar-rating/themes/br-default-theme';
 
 
 // you only have to add additional components here (instead of in every theme class)
