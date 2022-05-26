@@ -14,7 +14,7 @@ export const error = createSelector(
     }
 );
 
-export const isLoading = createSelector(
+export const areCategoriesLoading = createSelector(
     PhotoCategoryStoreSelectors.isLoading,
     VideoCategoryStoreSelectors.videoCategoryIsLoading,
     (photoCategoryIsLoading: boolean, videoCategoryIsLoading: boolean) => {
@@ -39,12 +39,15 @@ export const allCategories = createSelector(
 );
 
 export const allYears = createSelector(
+    areCategoriesLoading,
     PhotoCategoryStoreSelectors.allYears,
     VideoCategoryStoreSelectors.allYears,
-    (photoYears: number[], videoYears: number[]) => {
-        return Array.from(
-            new Set([...(photoYears ?? []), ...(videoYears ?? [])])
-        ).sort(sortNumbersDescending);
+    (areCategoriesLoading: boolean, photoYears: number[], videoYears: number[]) => {
+        return areCategoriesLoading ?
+            [] :
+            Array.from(
+                new Set([...(photoYears ?? []), ...(videoYears ?? [])])
+            ).sort(sortNumbersDescending);
     }
 );
 
