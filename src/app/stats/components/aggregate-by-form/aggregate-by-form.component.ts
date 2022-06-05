@@ -5,7 +5,7 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-aggregate-by-form',
@@ -16,9 +16,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class AggregateByFormComponent {
     @Input() includeDuration = false;
     @Output() selectAggregateBy = new EventEmitter<string>();
-    form: FormGroup;
+    form: UntypedFormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: UntypedFormBuilder) {
         this.form = this.formBuilder.group({
             aggregateBy: ['count'],
         });

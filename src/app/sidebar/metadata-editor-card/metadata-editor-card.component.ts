@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { GpsCoordinate, parseGps, MetadataEditable } from '@models';
 
@@ -10,10 +10,10 @@ import { GpsCoordinate, parseGps, MetadataEditable } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MetadataEditorCardComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         public metadataEditable: MetadataEditable
     ) {
         this.form = this.formBuilder.group({

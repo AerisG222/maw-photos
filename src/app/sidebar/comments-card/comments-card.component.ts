@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Commentable } from '@models';
 
@@ -10,11 +10,11 @@ import { Commentable } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentsCardComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
     columnsToDisplay = ['entryDate', 'username', 'commentText'];
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         public commentable: Commentable
     ) {
         this.form = this.formBuilder.group({

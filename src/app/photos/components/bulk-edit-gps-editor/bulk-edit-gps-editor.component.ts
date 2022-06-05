@@ -4,7 +4,7 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors } from '@core/root-store';
@@ -19,10 +19,10 @@ import { GpsCoordinate, parseGps } from '@models';
 export class BulkEditGpsEditorComponent {
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
-    gpsForm: FormGroup;
+    gpsForm: UntypedFormGroup;
     hasPendingEdits$ = this.store.select(PhotoStoreSelectors.hasPendingActions);
 
-    constructor(private store: Store, private formBuilder: FormBuilder) {
+    constructor(private store: Store, private formBuilder: UntypedFormBuilder) {
         this.gpsForm = this.formBuilder.group({
             latitude: ['', Validators.required],
             longitude: ['', Validators.required],

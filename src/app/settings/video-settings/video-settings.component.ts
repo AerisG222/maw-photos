@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -25,7 +25,7 @@ import { VideoInfoPanelSettings } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoSettingsComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
     thumbnailSizes = allThumbnailSizes;
@@ -33,7 +33,7 @@ export class VideoSettingsComponent {
     videoSizes = allVideoSizes;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private detailFacade: VideoDetailSettingsFacade,
         private infoFacade: VideoInfoPanelSettingsFacade
     ) {

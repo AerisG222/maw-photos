@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -32,7 +32,7 @@ import { PhotoPageSettings } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoSettingsComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
     viewModes = allPhotoViewModes;
     mapTypes = allMapTypes;
     margins = allMargins;
@@ -41,7 +41,7 @@ export class PhotoSettingsComponent {
     slideshowDurations = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60];
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private detailFacade: PhotoDetailSettingsFacade,
         private gridFacade: PhotoGridSettingsFacade,
         private infoFacade: PhotoInfoPanelSettingsFacade,

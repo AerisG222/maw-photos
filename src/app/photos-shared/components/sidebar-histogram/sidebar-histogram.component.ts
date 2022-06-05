@@ -7,7 +7,7 @@ import {
     ChangeDetectionStrategy,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest, fromEvent, Subscription } from 'rxjs';
 
@@ -24,7 +24,7 @@ import { startWith } from 'rxjs/operators';
 export class SidebarHistogramComponent implements OnDestroy {
     @ViewChild('canvas') canvas: ElementRef | null = null;
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     img: HTMLImageElement;
 
     get canvasEl(): HTMLCanvasElement {
@@ -35,7 +35,7 @@ export class SidebarHistogramComponent implements OnDestroy {
 
     constructor(
         private store: Store,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         @Inject(DOCUMENT) private doc: Document
     ) {
         this.img = doc.createElement('img');

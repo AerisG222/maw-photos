@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 
@@ -13,9 +13,9 @@ import { SearchStoreSelectors } from '../../store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFormComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
 
-    constructor(private store: Store, private formBuilder: FormBuilder) {
+    constructor(private store: Store, private formBuilder: UntypedFormBuilder) {
         this.form = this.formBuilder.group({
             query: ['', Validators.required],
         });

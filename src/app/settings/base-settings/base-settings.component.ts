@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { BaseSettingsFacade } from '@core/facades/settings/base-settings-facade';
@@ -9,7 +9,7 @@ import { BaseSettingsFacade } from '@core/facades/settings/base-settings-facade'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export abstract class BaseSettingsComponent<T> {
-    abstract form: FormGroup;
+    abstract form: UntypedFormGroup;
 
     constructor(public facade: BaseSettingsFacade<T>) {}
 

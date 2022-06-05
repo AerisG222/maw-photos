@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { first } from 'rxjs/operators';
 
@@ -32,14 +32,14 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategorySettingsComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
     typeFilters = allCategoryTypeFilters;
     margins = allMargins;
     thumbnailSizes = allThumbnailSizes;
     viewModes = allCategoryViewModes;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private filterFacade: CategoryFilterSettingsFacade,
         private pageFacade: CategoryPageSettingsFacade,
         private gridFacade: CategoryGridSettingsFacade,

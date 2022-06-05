@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { SearchGridSettingsFacade } from '@core/facades/settings/search-grid-settings-facade';
 import { SearchListSettingsFacade } from '@core/facades/settings/search-list-settings-facade';
 import { SearchPageSettingsFacade } from '@core/facades/settings/search-page-settings-facade';
@@ -25,13 +25,13 @@ import { SearchPageSettings } from '@models';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchSettingsComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
     margins = allMargins;
     viewModes = allCategoryViewModes;
     thumbnailSizes = allThumbnailSizes;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private gridFacade: SearchGridSettingsFacade,
         private listFacade: SearchListSettingsFacade,
         private pageFacade: SearchPageSettingsFacade

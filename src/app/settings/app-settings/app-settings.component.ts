@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AppSettingsFacade } from '@core/facades/settings/app-settings-facade';
 import { allThemeDetails, toThemeDefaulted } from '@models';
@@ -13,10 +13,10 @@ import { BaseSettingsComponent } from '../base-settings/base-settings.component'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSettingsComponent extends BaseSettingsComponent<AppSettings> {
-    form: FormGroup;
+    form: UntypedFormGroup;
     themes = allThemeDetails;
 
-    constructor(private fb: FormBuilder, public facade: AppSettingsFacade) {
+    constructor(private fb: UntypedFormBuilder, public facade: AppSettingsFacade) {
         super(facade);
 
         this.form = this.fb.group({
