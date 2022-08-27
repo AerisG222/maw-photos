@@ -17,7 +17,7 @@ const routes: Routes = [
         component: ListViewComponent,
         data: { view: CategoryViewMode.list },
     },
-    { path: '', canActivate: [ViewModeGuard] },
+    { path: '', canActivate: [ViewModeGuard], children: [] },
     { path: '**', redirectTo: '' },
 ];
 

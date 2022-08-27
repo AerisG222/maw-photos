@@ -76,7 +76,7 @@ const routes: Routes = [
                     },
                 ],
             },
-            { path: '', canActivate: [ViewModeGuard] },
+            { path: '', canActivate: [ViewModeGuard], children: [] },
         ],
     },
     { path: '**', redirectTo: '/categories' },

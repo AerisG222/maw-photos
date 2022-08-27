@@ -45,7 +45,7 @@ const routes: Routes = [
             },
         ],
     },
-    { path: '**', canActivate: [ViewModeGuard] },
+    { path: '**', canActivate: [ViewModeGuard], children: [] },
 ];
 
 @NgModule({
