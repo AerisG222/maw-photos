@@ -4,7 +4,7 @@ import {
     ChangeDetectionStrategy,
     Output,
 } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
 
 @Component({
     selector: 'app-photos-bulk-edit-filter',

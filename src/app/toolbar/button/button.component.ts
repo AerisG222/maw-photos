@@ -6,7 +6,7 @@ import {
     ChangeDetectionStrategy,
     ViewChild,
 } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatLegacyButton as MatButton } from '@angular/material/legacy-button';
 import { HotkeysService } from 'angular2-hotkeys';
 import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.component';
 

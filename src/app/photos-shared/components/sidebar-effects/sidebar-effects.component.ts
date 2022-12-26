@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatSliderChange } from '@angular/material/slider';
+import { MatLegacySliderChange as MatSliderChange } from '@angular/material/legacy-slider';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
