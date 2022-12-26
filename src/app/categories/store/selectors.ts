@@ -10,9 +10,9 @@ import {
 import { Category, CategoryTypeFilter } from '@models';
 import { CategoriesUrlService } from '../services/categories-url.service';
 
-export const categoryEffectiveYearFilter = createSelector(
-    RootStoreSelectors.allYears,
-    SettingsStoreSelectors.categoryFilterSettings,
+export const selectCategoryEffectiveYearFilter = createSelector(
+    RootStoreSelectors.selectAllYears,
+    SettingsStoreSelectors.selectCategoryFilterSettings,
     RouterStoreSelectors.selectRouteDetails,
     (years, filterSettings, routeDetails) => {
         return CategoriesUrlService.getValidYearFilter(
@@ -23,8 +23,8 @@ export const categoryEffectiveYearFilter = createSelector(
     }
 );
 
-export const categoryEffectiveTypeFilter = createSelector(
-    SettingsStoreSelectors.categoryFilterSettings,
+export const selectCategoryEffectiveTypeFilter = createSelector(
+    SettingsStoreSelectors.selectCategoryFilterSettings,
     RouterStoreSelectors.selectRouteDetails,
     (filterSettings, routeDetails) => {
         return CategoriesUrlService.getValidTypeFilter(
@@ -34,12 +34,12 @@ export const categoryEffectiveTypeFilter = createSelector(
     }
 );
 
-export const allFilteredCategoryYears = createSelector(
-    RootStoreSelectors.allYears,
-    PhotoCategoryStoreSelectors.allYears,
-    VideoCategoryStoreSelectors.allYears,
-    categoryEffectiveYearFilter,
-    categoryEffectiveTypeFilter,
+export const selectAllFilteredCategoryYears = createSelector(
+    RootStoreSelectors.selectAllYears,
+    PhotoCategoryStoreSelectors.selectAllYears,
+    VideoCategoryStoreSelectors.selectAllYears,
+    selectCategoryEffectiveYearFilter,
+    selectCategoryEffectiveTypeFilter,
     (years, photoYears, videoYears, yearFilter, typeFilter) => {
         if (yearFilter === 'all') {
             switch (typeFilter) {
@@ -59,11 +59,11 @@ export const allFilteredCategoryYears = createSelector(
     }
 );
 
-export const allFilteredCategoriesForYear = createSelector(
-    PhotoCategoryStoreSelectors.categoriesForYear,
-    VideoCategoryStoreSelectors.categoriesForYear,
-    categoryEffectiveTypeFilter,
-    SettingsStoreSelectors.categoryFilterSettings,
+export const selectAllFilteredCategoriesForYear = createSelector(
+    PhotoCategoryStoreSelectors.selectCategoriesForYear,
+    VideoCategoryStoreSelectors.selectCategoriesForYear,
+    selectCategoryEffectiveTypeFilter,
+    SettingsStoreSelectors.selectCategoryFilterSettings,
     (photoCategories, videoCategories, typeFilter, filterSettings) => {
         let categories: Category[] = [];
         switch (typeFilter) {

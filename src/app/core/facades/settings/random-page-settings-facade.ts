@@ -12,7 +12,7 @@ import { PhotoViewMode, RandomPageSettings } from '@models';
     providedIn: 'root',
 })
 export class RandomPageSettingsFacade extends BaseSettingsFacade<RandomPageSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.randomPageSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectRandomPageSettings);
 
     constructor(private store: Store) {
         super();

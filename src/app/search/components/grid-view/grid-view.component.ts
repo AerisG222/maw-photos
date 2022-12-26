@@ -12,15 +12,15 @@ import { SearchStoreSelectors } from '../../store';
 })
 export class GridViewComponent {
     categories$ = this.store.select(
-        SearchStoreSelectors.allResultsAsCategories
+        SearchStoreSelectors.selectAllResultsAsCategories
     );
-    shownResults$ = this.store.select(SearchStoreSelectors.shownResults);
-    showNoResults$ = this.store.select(SearchStoreSelectors.showNoResults);
+    shownResults$ = this.store.select(SearchStoreSelectors.selectShownResults);
+    showNoResults$ = this.store.select(SearchStoreSelectors.selectShowNoResults);
     showTotalResults$ = this.store.select(
-        SearchStoreSelectors.showTotalResults
+        SearchStoreSelectors.selectShowTotalResults
     );
-    totalResults$ = this.store.select(SearchStoreSelectors.totalResults);
-    hasMoreResults$ = this.store.select(SearchStoreSelectors.hasMoreResults);
+    totalResults$ = this.store.select(SearchStoreSelectors.selectTotalResults);
+    hasMoreResults$ = this.store.select(SearchStoreSelectors.selectHasMoreResults);
     gridSettings$ = this.gridSettings.settings$;
 
     constructor(

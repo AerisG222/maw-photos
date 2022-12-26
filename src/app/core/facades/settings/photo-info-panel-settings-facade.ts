@@ -10,7 +10,7 @@ import { BasePhotoInfoPanelSettingsFacade } from './base-photo-info-panel-facade
 })
 export class PhotoInfoPanelSettingsFacade extends BasePhotoInfoPanelSettingsFacade {
     settings$ = this.store.select(
-        SettingsStoreSelectors.photoInfoPanelSettings
+        SettingsStoreSelectors.selectPhotoInfoPanelSettings
     );
 
     constructor(private store: Store) {

@@ -15,7 +15,7 @@ import { CategoriesStoreSelectors } from '../../store';
 export class ListViewComponent {
     listSettings$ = this.listViewFacade.settings$;
     years$ = this.store.select(
-        CategoriesStoreSelectors.allFilteredCategoryYears
+        CategoriesStoreSelectors.selectAllFilteredCategoryYears
     );
 
     constructor(
@@ -33,7 +33,7 @@ export class ListViewComponent {
 
     categoriesForYear(year: number): Observable<Category[]> {
         return this.store.select(
-            CategoriesStoreSelectors.allFilteredCategoriesForYear,
+            CategoriesStoreSelectors.selectAllFilteredCategoriesForYear,
             { year }
         );
     }

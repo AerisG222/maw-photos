@@ -28,7 +28,7 @@ import { VideoInfoPanelSettingsFacade } from '@core/facades/settings/video-info-
     ],
 })
 export class SidebarComponent {
-    isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+    isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
     settings$ = this.infoPanelFacade.settings$;
 
     constructor(

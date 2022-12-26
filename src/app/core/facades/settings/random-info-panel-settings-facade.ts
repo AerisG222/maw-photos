@@ -10,7 +10,7 @@ import { BasePhotoInfoPanelSettingsFacade } from './base-photo-info-panel-facade
 })
 export class RandomInfoPanelSettingsFacade extends BasePhotoInfoPanelSettingsFacade {
     settings$ = this.store.select(
-        SettingsStoreSelectors.randomInfoPanelSettings
+        SettingsStoreSelectors.selectRandomInfoPanelSettings
     );
 
     constructor(private store: Store) {

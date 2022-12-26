@@ -9,7 +9,7 @@ import { SearchPageSettings } from '@models';
     providedIn: 'root',
 })
 export class SearchPageSettingsFacade extends BaseSettingsFacade<SearchPageSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.searchPageSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectSearchPageSettings);
 
     constructor(private store: Store) {
         super();

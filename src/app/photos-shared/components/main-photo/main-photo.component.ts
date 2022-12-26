@@ -23,8 +23,8 @@ export class MainPhotoComponent {
     @Input() hasOneToolbarInMobile = false;
     @Input() photoListThumbnailSize = ThumbnailSize.default;
 
-    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
-    effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);
+    activePhoto$ = this.store.select(PhotoStoreSelectors.selectActivePhoto);
+    effects$ = this.store.select(PhotoStoreSelectors.selectActivePhotoEffects);
 
     constructor(private store: Store, private sanitizer: DomSanitizer) {}
 

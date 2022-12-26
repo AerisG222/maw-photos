@@ -15,13 +15,13 @@ import { CategoryTypeFilter } from '@models';
 export class FilterBarComponent {
     filterSettings$ = this.filterFacade.settings$;
     effectiveTypeFilter$ = this.store.select(
-        CategoriesStoreSelectors.categoryEffectiveTypeFilter
+        CategoriesStoreSelectors.selectCategoryEffectiveTypeFilter
     );
     effectiveYearFilter$ = this.store.select(
-        CategoriesStoreSelectors.categoryEffectiveYearFilter
+        CategoriesStoreSelectors.selectCategoryEffectiveYearFilter
     );
-    allYears$ = this.store.select(RootStoreSelectors.allYears);
-    isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+    allYears$ = this.store.select(RootStoreSelectors.selectAllYears);
+    isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
 
     constructor(
         private filterFacade: CategoryFilterSettingsFacade,

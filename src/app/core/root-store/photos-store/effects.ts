@@ -97,8 +97,8 @@ export class PhotoStoreEffects {
 
     loadRatingsForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(PhotoStoreSelectors.activePhotoId),
-            this.store.select(PhotoStoreSelectors.isRatingCardVisible),
+            this.store.select(PhotoStoreSelectors.selectActivePhotoId),
+            this.store.select(PhotoStoreSelectors.selectIsRatingCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
             map(([photoId]) =>
@@ -145,8 +145,8 @@ export class PhotoStoreEffects {
 
     loadCommentsForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(PhotoStoreSelectors.activePhotoId),
-            this.store.select(PhotoStoreSelectors.isCommentCardVisible),
+            this.store.select(PhotoStoreSelectors.selectActivePhotoId),
+            this.store.select(PhotoStoreSelectors.selectIsCommentCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
             map(([photoId]) =>
@@ -214,8 +214,8 @@ export class PhotoStoreEffects {
 
     loadExifDataForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(PhotoStoreSelectors.activePhotoId),
-            this.store.select(PhotoStoreSelectors.isExifCardVisible),
+            this.store.select(PhotoStoreSelectors.selectActivePhotoId),
+            this.store.select(PhotoStoreSelectors.selectIsExifCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
             map(([photoId]) =>
@@ -245,8 +245,8 @@ export class PhotoStoreEffects {
 
     loadGpsDetailForPhotoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(PhotoStoreSelectors.activePhotoId),
-            this.store.select(PhotoStoreSelectors.isMetadataEditorCardVisible),
+            this.store.select(PhotoStoreSelectors.selectActivePhotoId),
+            this.store.select(PhotoStoreSelectors.selectIsMetadataEditorCardVisible),
         ]).pipe(
             filter(([photoId, isVisible]) => !!photoId && isVisible),
             map(([photoId]) =>
@@ -336,7 +336,7 @@ export class PhotoStoreEffects {
             ofType(PhotoActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(() =>
-                this.store.select(PhotoStoreSelectors.categoryGpsStatus).pipe(
+                this.store.select(PhotoStoreSelectors.selectCategoryGpsStatus).pipe(
                     filter((missingDetails) => !!missingDetails),
                     // eslint-disable-next-line ngrx/avoid-mapping-selectors
                     map((missingDetails) => {
@@ -355,7 +355,7 @@ export class PhotoStoreEffects {
             concatMap((action) =>
                 of(action).pipe(
                     concatLatestFrom(() =>
-                        this.store.select(PhotoStoreSelectors.activePhotoEffects)
+                        this.store.select(PhotoStoreSelectors.selectActivePhotoEffects)
                     )
                 )
             ),
@@ -377,7 +377,7 @@ export class PhotoStoreEffects {
             concatMap((action) =>
                 of(action).pipe(
                     concatLatestFrom(() =>
-                        this.store.select(PhotoStoreSelectors.activePhotoEffects)
+                        this.store.select(PhotoStoreSelectors.selectActivePhotoEffects)
                     )
                 )
             ),
@@ -397,8 +397,8 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.moveNextRequest),
             concatLatestFrom(() => [
-                this.store.select(PhotoStoreSelectors.nextPhoto),
-                this.store.select(RouterStoreSelectors.currentViewMode)
+                this.store.select(PhotoStoreSelectors.selectNextPhoto),
+                this.store.select(RouterStoreSelectors.selectCurrentViewMode)
             ]),
             filter(([, photo]) => !!photo),
             map(([, photo, view]) =>
@@ -415,8 +415,8 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.movePreviousRequest),
             concatLatestFrom(() => [
-                this.store.select(PhotoStoreSelectors.previousPhoto),
-                this.store.select(RouterStoreSelectors.currentViewMode)
+                this.store.select(PhotoStoreSelectors.selectPreviousPhoto),
+                this.store.select(RouterStoreSelectors.selectCurrentViewMode)
             ]),
             filter(([, photo]) => !!photo),
             map(([, photo, view]) =>
@@ -455,7 +455,7 @@ export class PhotoStoreEffects {
         return this.actions$.pipe(
             ofType(PhotoActions.toggleSlideshowRequest),
             concatLatestFrom(() =>
-                this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
+                this.store.select(PhotoStoreSelectors.selectSlideshowIsPlaying)
             ),
             map(([, isPlaying]) => {
                 if (isPlaying) {
@@ -469,8 +469,8 @@ export class PhotoStoreEffects {
 
     stopSlideshowAtEndOfListEffect$ = createEffect(() => {
         return combineLatest([
-            this.store.select(PhotoStoreSelectors.isActivePhotoLast),
-            this.store.select(PhotoStoreSelectors.slideshowIsPlaying),
+            this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast),
+            this.store.select(PhotoStoreSelectors.selectSlideshowIsPlaying),
         ]).pipe(
             filter(([isLast, isPlaying]) => isLast && isPlaying),
             map(() => PhotoActions.stopSlideshowRequest())
@@ -482,7 +482,7 @@ export class PhotoStoreEffects {
             return this.actions$.pipe(
                 ofType(PhotoActions.setActivePhotoId),
                 concatLatestFrom(() =>
-                    this.store.select(PhotoStoreSelectors.slideshowIsPlaying)
+                    this.store.select(PhotoStoreSelectors.selectSlideshowIsPlaying)
                 ),
                 filter(([action, isSlideshowPlaying]) => !!isSlideshowPlaying && !action.id ),
                 map(() => PhotoActions.stopSlideshowRequest())
@@ -533,7 +533,7 @@ export class PhotoStoreEffects {
     setCategoryIdForActivePhotoEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(PhotoActions.setActivePhotoId),
-            concatLatestFrom(() => this.store.select(PhotoStoreSelectors.activePhoto)),
+            concatLatestFrom(() => this.store.select(PhotoStoreSelectors.selectActivePhoto)),
             map(([, photo]) => {
                 const categoryId = photo?.categoryId ?? null;
 

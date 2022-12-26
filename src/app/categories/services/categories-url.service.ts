@@ -88,7 +88,7 @@ export class CategoriesUrlService {
 
     ensureCompleteUrl(routeDetails: RouteDetails): Observable<boolean> {
         return combineLatest([
-            this.store.select(RootStoreSelectors.allYears),
+            this.store.select(RootStoreSelectors.selectAllYears),
             this.categoryFilterFacade.settings$,
         ]).pipe(
             tap(([allYears, filter]) => {

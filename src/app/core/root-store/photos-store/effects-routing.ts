@@ -21,8 +21,8 @@ export class PhotoStoreRoutingEffects {
             return this.actions$.pipe(
                 ofType(PhotoStoreActions.navigateToPhoto),
                 concatLatestFrom(() => [
-                    this.store.select(RouterStoreSelectors.inPhotosArea),
-                    this.store.select(RouterStoreSelectors.inRandomArea)
+                    this.store.select(RouterStoreSelectors.selectInPhotosArea),
+                    this.store.select(RouterStoreSelectors.selectInRandomArea)
                 ]),
                 map(([action, isPhotos, isRandom]) => {
                     if (isPhotos) {
@@ -76,7 +76,7 @@ export class PhotoStoreRoutingEffects {
                 this.store.select(RouterStoreSelectors.selectRouteDetails),
                 this.store.select(PhotoStoreSelectors.allEntities),
                 this.store.select(PhotoStoreSelectors.allIds),
-                this.store.select(PhotoStoreSelectors.activePhotoId),
+                this.store.select(PhotoStoreSelectors.selectActivePhotoId),
             ]),
             filter(([, routeDetails, entities, ids, activeId]) => {
                 return (
@@ -170,7 +170,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
             concatLatestFrom(() =>
-                this.store.select(SettingsStoreSelectors.photoPageSettings)
+                this.store.select(SettingsStoreSelectors.selectPhotoPageSettings)
             ),
             filter(([action, pageSettings]) => {
                 if (action.routeDetails.data.view) {
@@ -198,7 +198,7 @@ export class PhotoStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
             concatLatestFrom(() =>
-                this.store.select(SettingsStoreSelectors.randomPageSettings)
+                this.store.select(SettingsStoreSelectors.selectRandomPageSettings)
             ),
             filter(([action, pageSettings]) => {
                 if (action.routeDetails.data.view) {

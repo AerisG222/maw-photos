@@ -11,7 +11,7 @@ import { Margin, ThumbnailSize } from '@models';
 })
 export class CategoryGridSettingsFacade extends BaseSettingsFacade<CategoryGridViewSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.categoryGridViewSettings
+        SettingsStoreSelectors.selectCategoryGridViewSettings
     );
 
     constructor(private store: Store) {

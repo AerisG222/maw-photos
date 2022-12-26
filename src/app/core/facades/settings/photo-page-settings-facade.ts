@@ -12,7 +12,7 @@ import { BaseSettingsFacade } from './base-settings-facade';
     providedIn: 'root',
 })
 export class PhotoPageSettingsFacade extends BaseSettingsFacade<PhotoPageSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.photoPageSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectPhotoPageSettings);
 
     constructor(private store: Store) {
         super();

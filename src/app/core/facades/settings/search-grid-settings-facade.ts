@@ -10,7 +10,7 @@ import { nextMargin, nextThumbnailSize, SearchGridViewSettings } from '@models';
 })
 export class SearchGridSettingsFacade extends BaseSettingsFacade<SearchGridViewSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.searchGridViewSettings
+        SettingsStoreSelectors.selectSearchGridViewSettings
     );
 
     constructor(private store: Store) {

@@ -34,7 +34,7 @@ export class CategoriesStoreEffects {
                     (route) => route.routeDetails.area === RouteArea.categories
                 ),
                 switchMap(({ routeDetails }) => {
-                    return this.store.select(RootStoreSelectors.allYears).pipe(
+                    return this.store.select(RootStoreSelectors.selectAllYears).pipe(
                         filter((years) => years.length > 0),
                         switchMap(() =>
                             this.categoriesUrlService.ensureCompleteUrl(
@@ -52,7 +52,7 @@ export class CategoriesStoreEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
             concatLatestFrom(() =>
-                this.store.select(SettingsStoreSelectors.categoryPageSettings)
+                this.store.select(SettingsStoreSelectors.selectCategoryPageSettings)
             ),
             filter(([action, pageSettings]) => {
                 if (action.routeDetails.data.view) {

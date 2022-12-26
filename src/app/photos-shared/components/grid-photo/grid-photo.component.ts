@@ -21,7 +21,7 @@ import { map } from 'rxjs/operators';
 export class GridPhotoComponent implements OnInit, OnDestroy {
     hotkey: Hotkey | null = null;
     showHeader$ = combineLatest([
-        this.store.select(RouterStoreSelectors.inRandomArea),
+        this.store.select(RouterStoreSelectors.selectInRandomArea),
         this.gridSettings.settings$
     ]).pipe(
         map(([inRandom, settings]) => {

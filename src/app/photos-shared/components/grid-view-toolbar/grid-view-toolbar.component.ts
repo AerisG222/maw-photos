@@ -22,7 +22,7 @@ export class GridViewToolbarComponent {
     @Input() isRandom = false;
 
     enableShare = false;
-    activePhotoId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
+    activePhotoId$ = this.store.select(PhotoStoreSelectors.selectActivePhotoId);
     gridSettings$ = this.gridSettings.settings$;
 
     constructor(
@@ -51,7 +51,7 @@ export class GridViewToolbarComponent {
 
     onShare(): void {
         this.store
-            .select(PhotoStoreSelectors.activePhoto)
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
                 first(),
                 concatMap(photo => this.sharePhoto(photo))

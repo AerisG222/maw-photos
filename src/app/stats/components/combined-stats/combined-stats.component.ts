@@ -16,7 +16,7 @@ export class CombinedStatsComponent extends BaseStatsComponent {
         super(
             store,
             StatType.combined,
-            store.select(StatsStoreSelectors.combinedStats)
+            store.select(StatsStoreSelectors.selectCombinedStats)
         );
     }
 }

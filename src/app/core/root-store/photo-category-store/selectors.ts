@@ -16,24 +16,24 @@ const { selectAll, selectEntities } = photoCategoryAdapter.getSelectors(
 export const allCategories = selectAll;
 export const allEntities = selectEntities;
 
-export const error = createSelector(
+export const selectError = createSelector(
     photoCategoryState,
     (state: State): string | null => state.error
 );
 
-export const isLoading = createSelector(
+export const selectIsLoading = createSelector(
     photoCategoryState,
     (state: State): boolean => state.isLoading
 );
 
-export const activeCategoryId = createSelector(
+export const selectActiveCategoryId = createSelector(
     photoCategoryState,
     (state: State): number | null => state.activeCategoryId
 );
 
-export const activeCategory = createSelector(
+export const selectActiveCategory = createSelector(
     selectEntities,
-    activeCategoryId,
+    selectActiveCategoryId,
     (entities, id) => {
         if (id) {
             const cat = entities[id];
@@ -47,27 +47,27 @@ export const activeCategory = createSelector(
     }
 );
 
-export const activeCategoryTeaserUrl = createSelector(
-    activeCategory,
+export const selectActiveCategoryTeaserUrl = createSelector(
+    selectActiveCategory,
     (cat) => cat?.teaserImageSq.url
 );
 
-export const activePhotoCategory = createSelector(
-    activeCategory,
+export const selectActivePhotoCategory = createSelector(
+    selectActiveCategory,
     (cat) => cat?.actual as PhotoCategory
 );
 
-export const allYears = createSelector(selectAll, (categories: Category[]) =>
+export const selectAllYears = createSelector(selectAll, (categories: Category[]) =>
     [...new Set(categories.map((x) => x.year))].sort()
 );
 
-export const categoriesForYear = createSelector(
+export const selectCategoriesForYear = createSelector(
     selectAll,
     (categories: Category[], props: { year: number }) =>
         categories.filter((cat) => cat.year === props.year)
 );
 
-export const categoryById = createSelector(
+export const selectCategoryById = createSelector(
     selectEntities,
     (entities: Dictionary<Category>, props: { id: number }) =>
         entities[props.id] ?? null

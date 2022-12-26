@@ -10,7 +10,7 @@ import { MapType, VideoInfoPanelSettings } from '@models';
 })
 export class VideoInfoPanelSettingsFacade extends BaseSettingsFacade<VideoInfoPanelSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.videoInfoPanelSettings
+        SettingsStoreSelectors.selectVideoInfoPanelSettings
     );
 
     constructor(private store: Store) {

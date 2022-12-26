@@ -10,7 +10,7 @@ import { nextMargin, nextThumbnailSize, SearchListViewSettings } from '@models';
 })
 export class SearchListSettingsFacade extends BaseSettingsFacade<SearchListViewSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.searchListViewSettings
+        SettingsStoreSelectors.selectSearchListViewSettings
     );
 
     constructor(private store: Store) {

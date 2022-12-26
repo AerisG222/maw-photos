@@ -14,9 +14,9 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapViewComponent {
-    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
+    activePhoto$ = this.store.select(PhotoStoreSelectors.selectActivePhoto);
     mapImages$ = this.store.select(
-        PhotoStoreSelectors.photosWithGpsCoordinatesAsMapImages
+        PhotoStoreSelectors.selectPhotosWithGpsCoordinatesAsMapImages
     );
     settings$ = this.mapSettings.settings$;
     appTheme$ = this.appSettings.settings$.pipe(map((x) => x.theme));

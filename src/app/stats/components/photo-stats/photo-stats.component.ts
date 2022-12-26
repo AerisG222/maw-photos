@@ -16,7 +16,7 @@ export class PhotoStatsComponent extends BaseStatsComponent {
         super(
             store,
             StatType.photos,
-            store.select(StatsStoreSelectors.photoStats)
+            store.select(StatsStoreSelectors.selectPhotoStats)
         );
     }
 }

@@ -9,7 +9,7 @@ import { BasePhotoGridSettingsFacade } from './base-photo-grid-settings-facade';
     providedIn: 'root',
 })
 export class PhotoGridSettingsFacade extends BasePhotoGridSettingsFacade {
-    settings$ = this.store.select(SettingsStoreSelectors.photoGridViewSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectPhotoGridViewSettings);
 
     constructor(private store: Store) {
         super();

@@ -20,7 +20,7 @@ export class BulkEditGpsEditorComponent {
     @Output() saveGps = new EventEmitter<GpsCoordinate>();
 
     gpsForm: UntypedFormGroup;
-    hasPendingEdits$ = this.store.select(PhotoStoreSelectors.hasPendingActions);
+    hasPendingEdits$ = this.store.select(PhotoStoreSelectors.selectHasPendingActions);
 
     constructor(private store: Store, private formBuilder: UntypedFormBuilder) {
         this.gpsForm = this.formBuilder.group({

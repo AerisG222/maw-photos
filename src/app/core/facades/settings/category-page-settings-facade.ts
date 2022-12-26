@@ -10,7 +10,7 @@ import { CategoryViewMode } from '@models';
     providedIn: 'root',
 })
 export class CategoryPageSettingsFacade extends BaseSettingsFacade<CategoryPageSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.categoryPageSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectCategoryPageSettings);
 
     constructor(private store: Store) {
         super();

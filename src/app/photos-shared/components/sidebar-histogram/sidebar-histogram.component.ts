@@ -63,7 +63,7 @@ export class SidebarHistogramComponent implements OnDestroy {
         }
 
         this.destroySub.add(
-            this.store.select(PhotoStoreSelectors.activePhoto).subscribe({
+            this.store.select(PhotoStoreSelectors.selectActivePhoto).subscribe({
                 next: (photo) => {
                     if (this.img && !!photo?.imageMd) {
                         this.img.src = photo.imageMd.url;

@@ -28,7 +28,7 @@ import { PhotoInfoPanelSettingsFacade } from '@core/facades/settings/photo-info-
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailSidebarComponent {
-    isAdmin$ = this.store.select(AuthStoreSelectors.isAdmin);
+    isAdmin$ = this.store.select(AuthStoreSelectors.selectIsAdmin);
     settings$ = this.infoPanelSettings.settings$;
 
     constructor(

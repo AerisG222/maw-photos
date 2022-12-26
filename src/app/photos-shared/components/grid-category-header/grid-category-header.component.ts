@@ -10,8 +10,8 @@ import { PhotoStoreSelectors, RouterStoreSelectors } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridCategoryHeaderComponent {
-    category$ = this.store.select(PhotoStoreSelectors.activeCategory);
-    isRandomView$ = this.store.select(RouterStoreSelectors.inRandomArea);
+    category$ = this.store.select(PhotoStoreSelectors.selectActiveCategory);
+    isRandomView$ = this.store.select(RouterStoreSelectors.selectInRandomArea);
 
     constructor(private store: Store) {}
 }

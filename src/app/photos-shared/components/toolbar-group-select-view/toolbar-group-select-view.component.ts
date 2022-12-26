@@ -9,8 +9,8 @@ import { Store } from '@ngrx/store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarGroupSelectViewComponent {
-    enableMapView$ = this.store.select(RouterStoreSelectors.inPhotosArea);
-    enableBulkEdit$ = this.store.select(RouterStoreSelectors.inPhotosArea);
+    enableMapView$ = this.store.select(RouterStoreSelectors.selectInPhotosArea);
+    enableBulkEdit$ = this.store.select(RouterStoreSelectors.selectInPhotosArea);
 
     constructor(private store: Store) {}
 }

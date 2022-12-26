@@ -5,7 +5,7 @@ import { LAYOUT_FEATURE_NAME } from './feature-name';
 
 const layoutState = createFeatureSelector<State>(LAYOUT_FEATURE_NAME);
 
-export const isFullscreen = createSelector(
+export const selectIsFullscreen = createSelector(
     layoutState,
     (state: State): boolean => state.layout.isFullscreen
 );

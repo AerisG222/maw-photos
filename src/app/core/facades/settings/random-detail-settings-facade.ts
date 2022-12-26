@@ -10,7 +10,7 @@ import { BasePhotoDetailSettingsFacade } from './base-photo-detail-settings-faca
 })
 export class RandomDetailSettingsFacade extends BasePhotoDetailSettingsFacade {
     settings$ = this.store.select(
-        SettingsStoreSelectors.randomDetailViewSettings
+        SettingsStoreSelectors.selectRandomDetailViewSettings
     );
 
     constructor(private store: Store) {

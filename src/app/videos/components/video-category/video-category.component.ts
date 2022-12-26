@@ -23,10 +23,10 @@ export class VideoCategoryComponent {
 
     videoSize = VideoSize;
     settings$ = this.videoFacade.settings$;
-    category$ = this.store.select(VideoCategoryStoreSelectors.activeCategory);
+    category$ = this.store.select(VideoCategoryStoreSelectors.selectActiveCategory);
     videos$ = this.store.select(VideoStoreSelectors.allVideos);
     activeVideo$ = this.store
-        .select(VideoStoreSelectors.activeVideo)
+        .select(VideoStoreSelectors.selectActiveVideo)
         .pipe(tap(() => this.triggerVideoRefresh()));
 
     constructor(

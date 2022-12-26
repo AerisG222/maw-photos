@@ -34,25 +34,25 @@ export class VideoStoreFacadeService
         MetadataEditable,
         MiniMapable,
         CategoryTeaserSelectable {
-    activeVideo$ = this.store.select(VideoStoreSelectors.activeVideo);
-    activeId$ = this.store.select(VideoStoreSelectors.activeVideoId);
-    comments$ = this.store.select(VideoStoreSelectors.activeVideoComments);
-    rating$ = this.store.select(VideoStoreSelectors.activeVideoRating);
-    isFirst$ = this.store.select(VideoStoreSelectors.isActiveVideoFirst);
-    isLast$ = this.store.select(VideoStoreSelectors.isActiveVideoLast);
+    activeVideo$ = this.store.select(VideoStoreSelectors.selectActiveVideo);
+    activeId$ = this.store.select(VideoStoreSelectors.selectActiveVideoId);
+    comments$ = this.store.select(VideoStoreSelectors.selectActiveVideoComments);
+    rating$ = this.store.select(VideoStoreSelectors.selectActiveVideoRating);
+    isFirst$ = this.store.select(VideoStoreSelectors.selectIsActiveVideoFirst);
+    isLast$ = this.store.select(VideoStoreSelectors.selectIsActiveVideoLast);
     overrideGps$ = this.store.select(
-        VideoStoreSelectors.activeVideoGpsDetailOverride
+        VideoStoreSelectors.selectActiveVideoGpsDetailOverride
     );
     sourceGps$ = this.store.select(
-        VideoStoreSelectors.activeVideoGpsDetailSource
+        VideoStoreSelectors.selectActiveVideoGpsDetailSource
     );
     mapType$ = this.videoInfoPanelFacade.settings$.pipe(
         map((x) => x.minimapMapType)
     );
     zoom$ = this.videoInfoPanelFacade.settings$.pipe(map((x) => x.minimapZoom));
-    position$ = this.store.select(VideoStoreSelectors.activeVideoGoogleLatLng);
+    position$ = this.store.select(VideoStoreSelectors.selectActiveVideoGoogleLatLng);
     currentTeaserUrl$ = this.store.select(
-        VideoCategoryStoreSelectors.activeCategoryTeaserUrl
+        VideoCategoryStoreSelectors.selectActiveCategoryTeaserUrl
     );
 
     constructor(

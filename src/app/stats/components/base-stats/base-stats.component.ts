@@ -20,8 +20,8 @@ import { StatsStoreActions, StatsStoreSelectors } from '../../store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseStatsComponent {
-    selectedYear$ = this.store.select(StatsStoreSelectors.effectiveYear);
-    aggregateBy$ = this.store.select(StatsStoreSelectors.aggregateBy);
+    selectedYear$ = this.store.select(StatsStoreSelectors.selectEffectiveYear);
+    aggregateBy$ = this.store.select(StatsStoreSelectors.selectAggregateBy);
     chartData$: Observable<StatDetail[]>;
     overallDetails$: Observable<FormattedStatDetail[]>;
 

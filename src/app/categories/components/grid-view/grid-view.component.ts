@@ -15,7 +15,7 @@ import { CategoriesStoreSelectors } from '../../store';
 export class GridViewComponent {
     gridSettings$ = this.gridViewFacade.settings$;
     years$ = this.store.select(
-        CategoriesStoreSelectors.allFilteredCategoryYears
+        CategoriesStoreSelectors.selectAllFilteredCategoryYears
     );
 
     constructor(
@@ -37,7 +37,7 @@ export class GridViewComponent {
 
     categoriesForYear(year: number): Observable<Category[]> {
         return this.store.select(
-            CategoriesStoreSelectors.allFilteredCategoriesForYear,
+            CategoriesStoreSelectors.selectAllFilteredCategoriesForYear,
             { year }
         );
     }

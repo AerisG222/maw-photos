@@ -11,35 +11,35 @@ const { selectAll } = searchAdapter.getSelectors(searchState);
 
 export const allResults = selectAll;
 
-export const error = createSelector(
+export const selectError = createSelector(
     searchState,
     (state: State): string | null => state.error
 );
 
-export const isLoading = createSelector(
+export const selectIsLoading = createSelector(
     searchState,
     (state: State): boolean => state.isLoading
 );
 
-export const query = createSelector(
+export const selectQuery = createSelector(
     searchState,
     (state: State): string | null => state.query
 );
 
-export const activeResultStartIndex = createSelector(
+export const selectActiveResultStartIndex = createSelector(
     searchState,
     (state: State): number =>
         state.activeResult ? state.activeResult.startIndex : -1
 );
 
-export const activeResult = createSelector(
+export const selectActiveResult = createSelector(
     searchState,
     (state: State): SearchResult<MultimediaCategory> | null =>
         state.activeResult
 );
 
-export const hasMoreResults = createSelector(
-    activeResult,
+export const selectHasMoreResults = createSelector(
+    selectActiveResult,
     (result): boolean => {
         return result
             ? result.startIndex + result.results.length < result.totalFound
@@ -47,29 +47,29 @@ export const hasMoreResults = createSelector(
     }
 );
 
-export const totalResults = createSelector(
-    activeResult,
+export const selectTotalResults = createSelector(
+    selectActiveResult,
     (result) => result?.totalFound ?? 0
 );
 
-export const showTotalResults = createSelector(
-    totalResults,
+export const selectShowTotalResults = createSelector(
+    selectTotalResults,
     (total) => total > 0
 );
 
-export const allResultsAsCategories = createSelector(allResults, (cats) =>
+export const selectAllResultsAsCategories = createSelector(allResults, (cats) =>
     cats.map(adaptSearchResultToCategory)
 );
 
-export const shownResults = createSelector(activeResult, (result) =>
+export const selectShownResults = createSelector(selectActiveResult, (result) =>
     result ? result.startIndex + result.results.length : 0
 );
 
-export const showNoResults = createSelector(activeResult, (result) =>
+export const selectShowNoResults = createSelector(selectActiveResult, (result) =>
     result ? result.totalFound === 0 : false
 );
 
-export const nextResultIndex = createSelector(activeResult, (result) =>
+export const selectNextResultIndex = createSelector(selectActiveResult, (result) =>
     result ? result.startIndex + result.results.length : -1
 );
 

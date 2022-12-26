@@ -52,8 +52,8 @@ export class SearchStoreEffects {
         return this.actions$.pipe(
             ofType(SearchStoreActions.queryRequest),
             concatLatestFrom(() => [
-                this.store.select(SearchStoreSelectors.query),
-                this.store.select(SearchStoreSelectors.activeResultStartIndex),
+                this.store.select(SearchStoreSelectors.selectQuery),
+                this.store.select(SearchStoreSelectors.selectActiveResultStartIndex),
             ]),
             filter(
                 ([action, activeQueryTerm, activeQueryStart]) =>

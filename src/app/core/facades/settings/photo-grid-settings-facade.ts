@@ -10,7 +10,7 @@ import { BasePhotoGridSettingsFacade } from './base-photo-grid-settings-facade';
 })
 export class RandomGridSettingsFacade extends BasePhotoGridSettingsFacade {
     settings$ = this.store.select(
-        SettingsStoreSelectors.randomGridViewSettings
+        SettingsStoreSelectors.selectRandomGridViewSettings
     );
 
     constructor(private store: Store) {

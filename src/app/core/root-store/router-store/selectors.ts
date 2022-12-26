@@ -62,7 +62,7 @@ export const selectRouteDetails = createSelector(
     }
 );
 
-export const inCategoryArea = createSelector(selectRouteDetails, (details) => {
+export const selectInCategoryArea = createSelector(selectRouteDetails, (details) => {
     if (details) {
         return (
             details.area === RouteArea.categories ||
@@ -74,29 +74,29 @@ export const inCategoryArea = createSelector(selectRouteDetails, (details) => {
     return false;
 });
 
-export const inPhotosArea = createSelector(
+export const selectInPhotosArea = createSelector(
     selectRouteDetails,
     (details) => details.area === RouteArea.photos
 );
 
-export const inRandomArea = createSelector(
+export const selectInRandomArea = createSelector(
     selectRouteDetails,
     (details) => details.area === RouteArea.random
 );
 
-export const isPhotosDetailView = createSelector(
-    inPhotosArea,
+export const selectIsPhotosDetailView = createSelector(
+    selectInPhotosArea,
     selectRouteData,
     (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewDetail
 );
 
-export const isPhotosMapView = createSelector(
-    inPhotosArea,
+export const selectIsPhotosMapView = createSelector(
+    selectInPhotosArea,
     selectRouteData,
     (isPhotos, data) => isPhotos && data?.view === RouteHelper.photoViewMap
 );
 
-export const currentViewMode = createSelector(
+export const selectCurrentViewMode = createSelector(
     selectRouteData,
     (data) => (data?.view as PhotoViewMode) ?? RouteHelper.photoViewDefault
 );

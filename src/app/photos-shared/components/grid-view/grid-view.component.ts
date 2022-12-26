@@ -12,11 +12,11 @@ import { PhotoGridSettingsFacade } from '@core/facades/settings/random-grid-sett
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridViewComponent {
-    settings$ = this.store.select(SettingsStoreSelectors.settings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectSettings);
     photos$ = this.store.select(PhotoStoreSelectors.allPhotos);
-    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
+    activePhoto$ = this.store.select(PhotoStoreSelectors.selectActivePhoto);
     gridSettings$ = this.gridSettings.settings$;
-    isRandomView$ = this.store.select(RouterStoreSelectors.inRandomArea);
+    isRandomView$ = this.store.select(RouterStoreSelectors.selectInRandomArea);
 
     constructor(
         private store: Store,

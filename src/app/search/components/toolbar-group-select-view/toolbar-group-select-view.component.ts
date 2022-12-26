@@ -11,7 +11,7 @@ import { SearchStoreSelectors } from '../../store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarGroupSelectViewComponent {
-    queryParams$ = this.store.select(SearchStoreSelectors.query)
+    queryParams$ = this.store.select(SearchStoreSelectors.selectQuery)
         .pipe(
             // eslint-disable-next-line ngrx/avoid-mapping-selectors
             map((s) => ({ s }))

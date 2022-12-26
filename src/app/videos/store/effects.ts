@@ -63,8 +63,8 @@ export class VideoStoreEffects {
 
     loadRatingsForVideoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(VideoStoreSelectors.activeVideoId),
-            this.store.select(VideoStoreSelectors.isRatingCardVisible),
+            this.store.select(VideoStoreSelectors.selectActiveVideoId),
+            this.store.select(VideoStoreSelectors.selectIsRatingCardVisible),
         ]).pipe(
             filter(([videoId, isVisible]) => !!videoId && isVisible),
             map(([videoId]) =>
@@ -119,8 +119,8 @@ export class VideoStoreEffects {
 
     loadCommentsForVideoWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(VideoStoreSelectors.activeVideoId),
-            this.store.select(VideoStoreSelectors.isCommentCardVisible),
+            this.store.select(VideoStoreSelectors.selectActiveVideoId),
+            this.store.select(VideoStoreSelectors.selectIsCommentCardVisible),
         ]).pipe(
             filter(([videoId, isVisible]) => !!videoId && isVisible),
             map(([videoId]) =>
@@ -188,8 +188,8 @@ export class VideoStoreEffects {
 
     loadGpsDetailForVideoMetadataEditorWhenVisible$ = createEffect(() => {
         return combineLatest([
-            this.store.select(VideoStoreSelectors.activeVideoId),
-            this.store.select(VideoStoreSelectors.isMetadataEditorCardVisible),
+            this.store.select(VideoStoreSelectors.selectActiveVideoId),
+            this.store.select(VideoStoreSelectors.selectIsMetadataEditorCardVisible),
         ]).pipe(
             filter(([videoId, isVisible]) => !!videoId && isVisible),
             map(([videoId]) =>
@@ -259,7 +259,7 @@ export class VideoStoreEffects {
             ofType(VideoStoreActions.setGpsCoordinateOverrideSuccess),
             debounceTime(200),
             concatMap(() =>
-                this.store.select(VideoStoreSelectors.categoryGpsStatus).pipe(
+                this.store.select(VideoStoreSelectors.selectCategoryGpsStatus).pipe(
                     filter((status) => !!status),
                     // eslint-disable-next-line ngrx/avoid-mapping-selectors
                     map((status) =>
@@ -275,7 +275,7 @@ export class VideoStoreEffects {
     moveNextEffect$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(VideoStoreActions.moveNextRequest),
-            concatLatestFrom(() => this.store.select(VideoStoreSelectors.nextVideo)),
+            concatLatestFrom(() => this.store.select(VideoStoreSelectors.selectNextVideo)),
             filter(([, video]) => !!video),
             map(([, video]) =>
                 VideoStoreActions.navigateToVideo({
@@ -290,7 +290,7 @@ export class VideoStoreEffects {
         return this.actions$.pipe(
             ofType(VideoStoreActions.movePreviousRequest),
             concatLatestFrom(() =>
-                this.store.select(VideoStoreSelectors.previousVideo)
+                this.store.select(VideoStoreSelectors.selectPreviousVideo)
             ),
             filter(([, video]) => !!video),
             map(([, video]) =>

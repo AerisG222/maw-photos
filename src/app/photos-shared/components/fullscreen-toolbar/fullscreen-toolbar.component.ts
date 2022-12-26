@@ -10,8 +10,8 @@ import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullscreenToolbarComponent {
-    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
+    isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
+    isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
 
     constructor(private store: Store) {}
 

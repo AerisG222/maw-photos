@@ -39,28 +39,28 @@ export class PhotoStoreFacadeService
         MiniMapable,
         CategoryTeaserSelectable,
         PhotoViewModeSelectable {
-    activePhoto$ = this.store.select(PhotoStoreSelectors.activePhoto);
-    activeId$ = this.store.select(PhotoStoreSelectors.activePhotoId);
-    comments$ = this.store.select(PhotoStoreSelectors.activePhotoComments);
-    rating$ = this.store.select(PhotoStoreSelectors.activePhotoRating);
-    isFirst$ = this.store.select(PhotoStoreSelectors.isActivePhotoFirst);
-    isLast$ = this.store.select(PhotoStoreSelectors.isActivePhotoLast);
+    activePhoto$ = this.store.select(PhotoStoreSelectors.selectActivePhoto);
+    activeId$ = this.store.select(PhotoStoreSelectors.selectActivePhotoId);
+    comments$ = this.store.select(PhotoStoreSelectors.selectActivePhotoComments);
+    rating$ = this.store.select(PhotoStoreSelectors.selectActivePhotoRating);
+    isFirst$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoFirst);
+    isLast$ = this.store.select(PhotoStoreSelectors.selectIsActivePhotoLast);
     overrideGps$ = this.store.select(
-        PhotoStoreSelectors.activePhotoGpsDetailOverride
+        PhotoStoreSelectors.selectActivePhotoGpsDetailOverride
     );
     sourceGps$ = this.store.select(
-        PhotoStoreSelectors.activePhotoGpsDetailSource
+        PhotoStoreSelectors.selectActivePhotoGpsDetailSource
     );
-    position$ = this.store.select(PhotoStoreSelectors.activePhotoGoogleLatLng);
+    position$ = this.store.select(PhotoStoreSelectors.selectActivePhotoGoogleLatLng);
     mapType$ = this.infoPanelFacade.settings$.pipe(
         map((x) => x.minimapMapType)
     );
     zoom$ = this.infoPanelFacade.settings$.pipe(map((x) => x.minimapZoom));
     currentTeaserUrl$ = this.store.select(
-        PhotoCategoryStoreSelectors.activeCategoryTeaserUrl
+        PhotoCategoryStoreSelectors.selectActiveCategoryTeaserUrl
     );
     activePhotoViewMode$ = this.store.select(
-        RouterStoreSelectors.currentViewMode
+        RouterStoreSelectors.selectCurrentViewMode
     );
     preferredPhotoViewMode$ = this.photoFacade.settings$.pipe(
         map((x) => x.viewMode)

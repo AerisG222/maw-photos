@@ -11,7 +11,7 @@ import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarEffectsComponent {
-    effects$ = this.store.select(PhotoStoreSelectors.activePhotoEffects);
+    effects$ = this.store.select(PhotoStoreSelectors.selectActivePhotoEffects);
 
     constructor(private store: Store) {}
 

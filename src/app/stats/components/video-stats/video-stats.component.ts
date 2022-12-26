@@ -16,7 +16,7 @@ export class VideoStatsComponent extends BaseStatsComponent {
         super(
             store,
             StatType.videos,
-            store.select(StatsStoreSelectors.videoStats)
+            store.select(StatsStoreSelectors.selectVideoStats)
         );
     }
 }

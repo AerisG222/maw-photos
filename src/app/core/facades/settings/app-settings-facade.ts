@@ -9,7 +9,7 @@ import { SettingsStoreActions, SettingsStoreSelectors } from '@core/root-store';
     providedIn: 'root',
 })
 export class AppSettingsFacade extends BaseSettingsFacade<AppSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.appSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectAppSettings);
 
     constructor(private store: Store) {
         super();

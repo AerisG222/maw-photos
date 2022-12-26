@@ -6,29 +6,29 @@ import { Category } from '@models';
 import { AuthStoreSelectors } from './auth-store';
 import { RouterStoreSelectors } from './router-store';
 
-export const error = createSelector(
-    PhotoCategoryStoreSelectors.error,
-    VideoCategoryStoreSelectors.videoCategoryError,
+export const selectError = createSelector(
+    PhotoCategoryStoreSelectors.selectError,
+    VideoCategoryStoreSelectors.selectVideoCategoryError,
     (photoCategoryError: string | null, videoCategoryError: string | null) => {
         return photoCategoryError || videoCategoryError;
     }
 );
 
-export const areCategoriesLoading = createSelector(
-    PhotoCategoryStoreSelectors.isLoading,
-    VideoCategoryStoreSelectors.videoCategoryIsLoading,
+export const selectAreCategoriesLoading = createSelector(
+    PhotoCategoryStoreSelectors.selectIsLoading,
+    VideoCategoryStoreSelectors.selectVideoCategoryIsLoading,
     (photoCategoryIsLoading: boolean, videoCategoryIsLoading: boolean) => {
         return photoCategoryIsLoading || videoCategoryIsLoading;
     }
 );
 
-export const enableBulkEdit = createSelector(
-    AuthStoreSelectors.isAdmin,
-    RouterStoreSelectors.inRandomArea,
+export const selectEnableBulkEdit = createSelector(
+    AuthStoreSelectors.selectIsAdmin,
+    RouterStoreSelectors.selectInRandomArea,
     (isAdmin, isRandomView) => isAdmin && !isRandomView
 );
 
-export const allCategories = createSelector(
+export const selectAllCategories = createSelector(
     PhotoCategoryStoreSelectors.allCategories,
     VideoCategoryStoreSelectors.allCategories,
     (photoCategories: Category[], videoCategories: Category[]) => {
@@ -38,10 +38,10 @@ export const allCategories = createSelector(
     }
 );
 
-export const allYears = createSelector(
-    areCategoriesLoading,
-    PhotoCategoryStoreSelectors.allYears,
-    VideoCategoryStoreSelectors.allYears,
+export const selectAllYears = createSelector(
+    selectAreCategoriesLoading,
+    PhotoCategoryStoreSelectors.selectAllYears,
+    VideoCategoryStoreSelectors.selectAllYears,
     (areCategoriesLoading: boolean, photoYears: number[], videoYears: number[]) => {
         return areCategoriesLoading ?
             [] :

@@ -14,7 +14,7 @@ import {
 })
 export class VideoDetailSettingsFacade extends BaseSettingsFacade<VideoDetailViewSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.videoDetailViewSettings
+        SettingsStoreSelectors.selectVideoDetailViewSettings
     );
 
     constructor(private store: Store) {

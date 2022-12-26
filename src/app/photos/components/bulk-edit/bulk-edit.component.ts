@@ -15,7 +15,7 @@ import { GpsCoordinate, Photo } from '@models';
 export class BulkEditComponent {
     selectedPhotos: Photo[] = [];
     showPhotosWithGpsData$ = new BehaviorSubject<boolean>(true);
-    category$ = this.store.select(PhotoStoreSelectors.activeCategory);
+    category$ = this.store.select(PhotoStoreSelectors.selectActiveCategory);
     photos$ = combineLatest([
         this.store.select(PhotoStoreSelectors.allPhotos),
         this.showPhotosWithGpsData$,

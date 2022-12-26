@@ -11,7 +11,7 @@ import { BaseSettingsFacade } from './base-settings-facade';
 })
 export class CategoryFilterSettingsFacade extends BaseSettingsFacade<CategoryFilterSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.categoryFilterSettings
+        SettingsStoreSelectors.selectCategoryFilterSettings
     );
 
     constructor(private store: Store) {

@@ -12,7 +12,7 @@ import { RouteHelper } from '@models';
 })
 export class CategoriesLinkComponent {
     categoriesLink = RouteHelper.categoriesAbs();
-    inCategoryArea$ = this.store.select(RouterStoreSelectors.inCategoryArea);
+    inCategoryArea$ = this.store.select(RouterStoreSelectors.selectInCategoryArea);
 
     constructor(private store: Store) {}
 }

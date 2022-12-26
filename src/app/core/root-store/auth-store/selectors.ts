@@ -5,15 +5,15 @@ import { AUTH_FEATURE_NAME } from './feature-name';
 
 const authState = createFeatureSelector<State>(AUTH_FEATURE_NAME);
 
-export const userInfo = createSelector(authState, (state) => state.auth);
+export const selectUserInfo = createSelector(authState, (state) => state.auth);
 
-export const firstName = createSelector(userInfo, (u) => u?.firstName);
+export const selectFirstName = createSelector(selectUserInfo, (u) => u?.firstName);
 
-export const lastName = createSelector(userInfo, (u) => u?.lastName);
+export const selectLastName = createSelector(selectUserInfo, (u) => u?.lastName);
 
-export const username = createSelector(userInfo, (u) => u?.username);
+export const selectUsername = createSelector(selectUserInfo, (u) => u?.username);
 
-export const roles = createSelector(userInfo, (u) => {
+export const selectRoles = createSelector(selectUserInfo, (u) => {
     if(u === null || u === undefined) {
         return [];
     }
@@ -25,7 +25,7 @@ export const roles = createSelector(userInfo, (u) => {
     return [u.roles];
 });
 
-export const isAdmin = createSelector(
-    roles,
+export const selectIsAdmin = createSelector(
+    selectRoles,
     (userRoles) => !!userRoles.find((r) => r === 'admin')
 );

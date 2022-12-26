@@ -27,19 +27,19 @@ export class DetailToolbarComponent {
     enableShare: boolean;
 
     smDownloadUrl$ = this.store.select(
-        PhotoStoreSelectors.activePhotoSmDownloadUrl
+        PhotoStoreSelectors.selectActivePhotoSmDownloadUrl
     );
     mdDownloadUrl$ = this.store.select(
-        PhotoStoreSelectors.activePhotoMdDownloadUrl
+        PhotoStoreSelectors.selectActivePhotoMdDownloadUrl
     );
     lgDownloadUrl$ = this.store.select(
-        PhotoStoreSelectors.activePhotoLgDownloadUrl
+        PhotoStoreSelectors.selectActivePhotoLgDownloadUrl
     );
     prtDownloadUrl$ = this.store.select(
-        PhotoStoreSelectors.activePhotoPrtDownloadUrl
+        PhotoStoreSelectors.selectActivePhotoPrtDownloadUrl
     );
     category$ = this.store.select(
-        PhotoCategoryStoreSelectors.activePhotoCategory
+        PhotoCategoryStoreSelectors.selectActivePhotoCategory
     );
 
     constructor(
@@ -64,7 +64,7 @@ export class DetailToolbarComponent {
 
     onShare(): void {
         this.store
-            .select(PhotoStoreSelectors.activePhoto)
+            .select(PhotoStoreSelectors.selectActivePhoto)
             .pipe(
                 first(),
                 concatMap(photo => this.sharePhoto(photo))

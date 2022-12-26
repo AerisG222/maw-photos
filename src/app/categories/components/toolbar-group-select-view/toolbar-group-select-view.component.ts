@@ -14,8 +14,8 @@ import { CategoriesStoreSelectors } from '../../store';
 })
 export class ToolbarGroupSelectViewComponent {
     queryParams$ = combineLatest([
-        this.store.select(CategoriesStoreSelectors.categoryEffectiveTypeFilter),
-        this.store.select(CategoriesStoreSelectors.categoryEffectiveYearFilter)
+        this.store.select(CategoriesStoreSelectors.selectCategoryEffectiveTypeFilter),
+        this.store.select(CategoriesStoreSelectors.selectCategoryEffectiveYearFilter)
     ]).pipe(
         map(([type, year]) => {
             return {

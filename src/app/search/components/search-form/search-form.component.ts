@@ -20,7 +20,7 @@ export class SearchFormComponent {
             query: ['', Validators.required],
         });
 
-        this.store.select(SearchStoreSelectors.query).pipe(
+        this.store.select(SearchStoreSelectors.selectQuery).pipe(
             first(),
         ).subscribe({
             next: (query) => {

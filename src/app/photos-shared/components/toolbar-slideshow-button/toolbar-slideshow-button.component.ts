@@ -11,7 +11,7 @@ import { PhotoStoreActions, PhotoStoreSelectors } from '@core/root-store';
 })
 export class ToolbarSlideshowButtonComponent {
     slideshowPlaying$ = this.store.select(
-        PhotoStoreSelectors.slideshowIsPlaying
+        PhotoStoreSelectors.selectSlideshowIsPlaying
     );
 
     constructor(private store: Store) {}

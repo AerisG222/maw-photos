@@ -8,25 +8,25 @@ import {
 } from '@core/root-store';
 import { calculateStats } from '@models';
 
-export const photoStats = createSelector(
-    PhotoCategoryStoreSelectors.allYears,
+export const selectPhotoStats = createSelector(
+    PhotoCategoryStoreSelectors.selectAllYears,
     PhotoCategoryStoreSelectors.allCategories,
     (years, categories) => calculateStats(years, categories)
 );
 
-export const videoStats = createSelector(
-    VideoCategoryStoreSelectors.allYears,
+export const selectVideoStats = createSelector(
+    VideoCategoryStoreSelectors.selectAllYears,
     VideoCategoryStoreSelectors.allCategories,
     (years, categories) => calculateStats(years, categories)
 );
 
-export const combinedStats = createSelector(
-    RootStoreSelectors.allYears,
-    RootStoreSelectors.allCategories,
+export const selectCombinedStats = createSelector(
+    RootStoreSelectors.selectAllYears,
+    RootStoreSelectors.selectAllCategories,
     (years, categories) => calculateStats(years, categories)
 );
 
-export const effectiveYear = createSelector(
+export const selectEffectiveYear = createSelector(
     RouterStoreSelectors.selectRouteDetails,
     ({ params }) => {
         const year = Number(params.year);
@@ -35,7 +35,7 @@ export const effectiveYear = createSelector(
     }
 );
 
-export const aggregateBy = createSelector(
+export const selectAggregateBy = createSelector(
     RouterStoreSelectors.selectRouteDetails,
     ({ queryParams }) => {
         const agg = queryParams?.agg as string;

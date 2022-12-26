@@ -10,7 +10,7 @@ import { PhotoStoreSelectors } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarExifComponent {
-    exifContainer$ = this.store.select(PhotoStoreSelectors.activePhotoExifData);
+    exifContainer$ = this.store.select(PhotoStoreSelectors.selectActivePhotoExifData);
 
     constructor(private store: Store) {}
 }

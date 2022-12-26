@@ -11,7 +11,7 @@ import { Margin, ThumbnailSize } from '@models';
 })
 export class CategoryListSettingsFacade extends BaseSettingsFacade<CategoryListViewSettings> {
     settings$ = this.store.select(
-        SettingsStoreSelectors.categoryListViewSettings
+        SettingsStoreSelectors.selectCategoryListViewSettings
     );
 
     constructor(private store: Store) {

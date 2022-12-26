@@ -9,7 +9,7 @@ import { BaseSettingsFacade } from './base-settings-facade';
     providedIn: 'root',
 })
 export class PhotoMapSettingsFacade extends BaseSettingsFacade<PhotoMapViewSettings> {
-    settings$ = this.store.select(SettingsStoreSelectors.photoMapViewSettings);
+    settings$ = this.store.select(SettingsStoreSelectors.selectPhotoMapViewSettings);
 
     constructor(private store: Store) {
         super();

@@ -10,7 +10,7 @@ import { LayoutStoreSelectors } from '@core/root-store';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-    hidePanel$ = this.store.select(LayoutStoreSelectors.isFullscreen);
+    hidePanel$ = this.store.select(LayoutStoreSelectors.selectIsFullscreen);
 
     constructor(private store: Store) {}
 }

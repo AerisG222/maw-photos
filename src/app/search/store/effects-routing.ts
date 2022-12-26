@@ -27,7 +27,7 @@ export class SearchStoreRoutingEffects {
         () => {
             return this.actions$.pipe(
                 ofType(SearchStoreActions.queryRequest),
-                concatLatestFrom(() => this.store.select(SearchStoreSelectors.query)),
+                concatLatestFrom(() => this.store.select(SearchStoreSelectors.selectQuery)),
                 filter(([action, activeQueryTerm]) => activeQueryTerm !== action.query),
                 switchMap(([action,]) => {
                     return this.router.navigate([], {
@@ -44,7 +44,7 @@ export class SearchStoreRoutingEffects {
         return this.actions$.pipe(
             ofType(RouterStoreActions.routeChanged),
             concatLatestFrom(() =>
-                this.store.select(SettingsStoreSelectors.searchPageSettings)
+                this.store.select(SettingsStoreSelectors.selectSearchPageSettings)
             ),
             filter(([action, pageSettings]) => {
                 if (action.routeDetails.data.view) {

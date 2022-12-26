@@ -16,10 +16,10 @@ export class SearchMoreComponent {
 
     onSearchMore(): void {
         this.store
-            .select(SearchStoreSelectors.query)
+            .select(SearchStoreSelectors.selectQuery)
             .pipe(
                 withLatestFrom(
-                    this.store.select(SearchStoreSelectors.nextResultIndex)
+                    this.store.select(SearchStoreSelectors.selectNextResultIndex)
                 ),
                 first()
             )

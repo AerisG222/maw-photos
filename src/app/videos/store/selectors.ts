@@ -10,43 +10,43 @@ import {
 } from '@core/root-store';
 import { CategoryGpsStatus } from '@models';
 
-export const selectVideoState = createFeatureSelector<State>(
+export const videoState = createFeatureSelector<State>(
     VIDEO_FEATURE_NAME
 );
 
 const { selectAll, selectEntities, selectIds } = videoAdapter.getSelectors(
-    selectVideoState
+    videoState
 );
 
 export const allVideos = selectAll;
 export const allEntities = selectEntities;
 export const allIds = selectIds;
 
-export const error = createSelector(
-    selectVideoState,
+export const selectError = createSelector(
+    videoState,
     (state: State): string | null => state.error
 );
 
-export const isLoading = createSelector(
-    selectVideoState,
+export const selectIsLoading = createSelector(
+    videoState,
     (state: State): boolean => state.isLoading
 );
 
-export const activeVideoId = createSelector(
-    selectVideoState,
+export const selectActiveVideoId = createSelector(
+    videoState,
     (state: State): number | null => state.activeVideoId
 );
 
-export const activeVideoIndex = createSelector(
+export const selectActiveVideoIndex = createSelector(
     selectIds,
-    activeVideoId,
+    selectActiveVideoId,
     (ids: string[] | number[], id: number | null): number | null =>
         id ? (ids as number[]).indexOf(id) : null
 );
 
-export const activeVideo = createSelector(
+export const selectActiveVideo = createSelector(
     selectEntities,
-    activeVideoId,
+    selectActiveVideoId,
     (entities: Dictionary<Video>, id: number | null) => {
         if (id) {
             const cat = entities[id];
@@ -60,57 +60,57 @@ export const activeVideo = createSelector(
     }
 );
 
-export const firstVideo = createSelector(
+export const selectFirstVideo = createSelector(
     selectIds,
     selectEntities,
     (ids: string[] | number[], entities: Dictionary<Video>) =>
         entities[ids[0]] ?? null
 );
 
-export const lastVideo = createSelector(
+export const selectLastVideo = createSelector(
     selectIds,
     selectEntities,
     (ids: string[] | number[], entities: Dictionary<Video>) =>
         entities[ids[ids.length - 1]] ?? null
 );
 
-export const activeVideoRating = createSelector(
-    selectVideoState,
+export const selectActiveVideoRating = createSelector(
+    videoState,
     (state: State): Rating => state.activeVideoRating
 );
 
-export const activeVideoComments = createSelector(
-    selectVideoState,
+export const selectActiveVideoComments = createSelector(
+    videoState,
     (state: State): Comment[] => state.activeVideoComments
 );
 
-export const activeVideoGpsDetail = createSelector(
-    selectVideoState,
+export const selectActiveVideoGpsDetail = createSelector(
+    videoState,
     (state: State): GpsDetail | null => state.activeVideoGpsDetail
 );
 
-export const isFullscreenView = createSelector(
-    selectVideoState,
+export const selectIsFullscreenView = createSelector(
+    videoState,
     (state: State): boolean => state.isFullscreenView
 );
 
-export const isActiveVideoFirst = createSelector(
-    activeVideo,
-    firstVideo,
+export const selectIsActiveVideoFirst = createSelector(
+    selectActiveVideo,
+    selectFirstVideo,
     (active, first) => {
         return active != null && first != null && active.id === first.id;
     }
 );
 
-export const isActiveVideoLast = createSelector(
-    activeVideo,
-    lastVideo,
+export const selectIsActiveVideoLast = createSelector(
+    selectActiveVideo,
+    selectLastVideo,
     (active, last) => {
         return active != null && last != null && active.id === last.id;
     }
 );
 
-export const videosForCategory = createSelector(
+export const selectVideosForCategory = createSelector(
     allVideos,
     (videos: Video[], props: { id: number }) => {
         if (videos) {
@@ -121,7 +121,7 @@ export const videosForCategory = createSelector(
     }
 );
 
-export const videoById = createSelector(
+export const selectVideoById = createSelector(
     selectEntities,
     (videos: Dictionary<Video>, props: { id: number }) => {
         if (!!videos && !!props.id) {
@@ -132,10 +132,10 @@ export const videoById = createSelector(
     }
 );
 
-export const nextVideoIndex = createSelector(
+export const selectNextVideoIndex = createSelector(
     selectAll,
-    activeVideoIndex,
-    isActiveVideoLast,
+    selectActiveVideoIndex,
+    selectIsActiveVideoLast,
     (videos, activeIndex, isLast) => {
         if (isLast) {
             return activeIndex as number;
@@ -151,24 +151,24 @@ export const nextVideoIndex = createSelector(
     }
 );
 
-export const nextVideoId = createSelector(
+export const selectNextVideoId = createSelector(
     selectIds,
-    nextVideoIndex,
+    selectNextVideoIndex,
     (ids, idx) => (idx >= 0 ? (ids as number[])[idx] : null)
 );
 
-export const nextVideo = createSelector(
+export const selectNextVideo = createSelector(
     selectEntities,
-    nextVideoId,
+    selectNextVideoId,
     (entities, nextId) => {
         return nextId ? (entities[nextId] as Video) : null;
     }
 );
 
-export const previousVideoIndex = createSelector(
+export const selectPreviousVideoIndex = createSelector(
     selectAll,
-    activeVideoIndex,
-    isActiveVideoFirst,
+    selectActiveVideoIndex,
+    selectIsActiveVideoFirst,
     (videos, activeIndex, isFirst) => {
         if (isFirst) {
             return activeIndex as number;
@@ -184,31 +184,31 @@ export const previousVideoIndex = createSelector(
     }
 );
 
-export const previousVideoId = createSelector(
+export const selectPreviousVideoId = createSelector(
     selectIds,
-    previousVideoIndex,
+    selectPreviousVideoIndex,
     (ids, idx) => (idx >= 0 ? (ids as number[])[idx] : null)
 );
 
-export const previousVideo = createSelector(
+export const selectPreviousVideo = createSelector(
     selectEntities,
-    previousVideoId,
+    selectPreviousVideoId,
     (entities, previousId) => {
         return previousId ? (entities[previousId] as Video) : null;
     }
 );
 
-export const activeVideoGpsDetailSource = createSelector(
-    activeVideoGpsDetail,
+export const selectActiveVideoGpsDetailSource = createSelector(
+    selectActiveVideoGpsDetail,
     (detail) => detail?.source ?? null
 );
 
-export const activeVideoGpsDetailOverride = createSelector(
-    activeVideoGpsDetail,
+export const selectActiveVideoGpsDetailOverride = createSelector(
+    selectActiveVideoGpsDetail,
     (detail) => detail?.override ?? null
 );
 
-export const activeVideoGoogleLatLng = createSelector(activeVideo, (video) => {
+export const selectActiveVideoGoogleLatLng = createSelector(selectActiveVideo, (video) => {
     if (!!video && !!video.latitude && video.longitude) {
         return new google.maps.LatLng(video.latitude, video.longitude);
     }
@@ -216,23 +216,23 @@ export const activeVideoGoogleLatLng = createSelector(activeVideo, (video) => {
     return null;
 });
 
-export const isCommentCardVisible = createSelector(
-    SettingsStoreSelectors.videoInfoPanelSettings,
+export const selectIsCommentCardVisible = createSelector(
+    SettingsStoreSelectors.selectVideoInfoPanelSettings,
     (infoPanel) => infoPanel.expandedState && infoPanel.showComments
 );
 
-export const isRatingCardVisible = createSelector(
-    SettingsStoreSelectors.videoInfoPanelSettings,
+export const selectIsRatingCardVisible = createSelector(
+    SettingsStoreSelectors.selectVideoInfoPanelSettings,
     (infoPanel) => infoPanel.expandedState && infoPanel.showRatings
 );
 
-export const isMetadataEditorCardVisible = createSelector(
-    SettingsStoreSelectors.videoInfoPanelSettings,
+export const selectIsMetadataEditorCardVisible = createSelector(
+    SettingsStoreSelectors.selectVideoInfoPanelSettings,
     (infoPanel) => infoPanel.expandedState && infoPanel.showMetadataEditor
 );
 
-export const categoryGpsStatus = createSelector(
-    VideoCategoryStoreSelectors.activeCategoryId,
+export const selectCategoryGpsStatus = createSelector(
+    VideoCategoryStoreSelectors.selectActiveCategoryId,
     allVideos,
     (categoryId, videos) => {
         if (!categoryId || !videos) {
