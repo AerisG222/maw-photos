@@ -11,7 +11,7 @@ import {
     CategoryTypeFilter,
     toCategoryTypeFilter,
 } from '@models';
-import { MatLegacySelectChange as MatSelectChange } from '@angular/material/legacy-select';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-categories-category-type-filter',

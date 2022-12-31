@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { Photo } from '@models';
-import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
     selector: 'app-photos-photo-select-grid',

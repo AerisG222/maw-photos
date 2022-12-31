@@ -5,7 +5,7 @@
         <mat-card formGroupName="page">
             <mat-card-title>Random Page</mat-card-title>
             <mat-card-content>
-                <h3>View Mode</h3>
+                <mat-card-subtitle>View Mode</mat-card-subtitle>
                 <mat-radio-group formControlName="viewMode">
                     <mat-radio-button
                         *ngFor="let mode of viewModes"
@@ -14,8 +14,8 @@
                     >
                 </mat-radio-group>
 
-                <h3>Slideshow Display Duration</h3>
-                <mat-form-field appearance="standard">
+                <mat-card-subtitle>Slideshow Display Duration</mat-card-subtitle>
+                <mat-form-field>
                     <mat-label>Duration (seconds)</mat-label>
                     <mat-select formControlName="slideshowDuration">
                         <mat-option
@@ -31,17 +31,17 @@
         <mat-card formGroupName="detail">
             <mat-card-title>Detail View</mat-card-title>
             <mat-card-content>
-                <h3>Show Breadcrumbs</h3>
+                <mat-card-subtitle>Show Breadcrumbs</mat-card-subtitle>
                 <mat-slide-toggle
                     formControlName="showBreadcrumbs"
                 ></mat-slide-toggle>
 
-                <h3>Show Photo List</h3>
+                <mat-card-subtitle>Show Photo List</mat-card-subtitle>
                 <mat-slide-toggle
                     formControlName="showPhotoList"
                 ></mat-slide-toggle>
 
-                <h3>Thumbnail Size</h3>
+                <mat-card-subtitle>Thumbnail Size</mat-card-subtitle>
                 <mat-radio-group formControlName="thumbnailSize">
                     <mat-radio-button
                         *ngFor="let size of thumbnailSizes"
@@ -51,7 +51,7 @@
                 </mat-radio-group>
 
                 <div formGroupName="infoPanel">
-                    <h3>Info Panel</h3>
+                    <mat-card-subtitle>Info Panel</mat-card-subtitle>
                     <mat-checkbox formControlName="expandedState"
                         >Show Info Panel</mat-checkbox
                     >
@@ -88,7 +88,7 @@
                         >Show Category Teaser Chooser Panel</mat-checkbox
                     >
 
-                    <h3>Map Type</h3>
+                    <mat-card-subtitle>Map Type</mat-card-subtitle>
                     <mat-radio-group formControlName="minimapType">
                         <mat-radio-button
                             *ngFor="let type of mapTypes"
@@ -97,8 +97,8 @@
                         >
                     </mat-radio-group>
 
-                    <h3>Map Zoom Level</h3>
-                    <mat-form-field appearance="standard">
+                    <mat-card-subtitle>Map Zoom Level</mat-card-subtitle>
+                    <mat-form-field>
                         <mat-label>Zoom</mat-label>
                         <mat-select formControlName="minimapZoom">
                             <mat-option
@@ -115,12 +115,12 @@
         <mat-card formGroupName="grid">
             <mat-card-title>Grid View</mat-card-title>
             <mat-card-content>
-                <h3>Show Breadcrumbs</h3>
+                <mat-card-subtitle>Show Breadcrumbs</mat-card-subtitle>
                 <mat-slide-toggle
                     formControlName="showBreadcrumbs"
                 ></mat-slide-toggle>
 
-                <h3>Margin</h3>
+                <mat-card-subtitle>Margin</mat-card-subtitle>
                 <mat-radio-group formControlName="margin">
                     <mat-radio-button
                         *ngFor="let margin of margins"
@@ -129,7 +129,7 @@
                     >
                 </mat-radio-group>
 
-                <h3>Thumbnail Size</h3>
+                <mat-card-subtitle>Thumbnail Size</mat-card-subtitle>
                 <mat-radio-group formControlName="thumbnailSize">
                     <mat-radio-button
                         *ngFor="let size of thumbnailSizes"

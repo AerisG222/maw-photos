@@ -6,7 +6,7 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { MatLegacyButton as MatButton } from '@angular/material/legacy-button';
+import { MatButton } from '@angular/material/button';
 import { HotkeysService } from 'angular2-hotkeys';
 import { ButtonLinkBaseComponent } from '../button-link-base/button-link-base.component';
 

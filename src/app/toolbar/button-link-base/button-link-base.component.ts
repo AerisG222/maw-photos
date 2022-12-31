@@ -5,7 +5,7 @@ import {
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import { MatLegacyButton as MatButton } from '@angular/material/legacy-button';
+import { MatButton } from '@angular/material/button';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
 
 @Component({

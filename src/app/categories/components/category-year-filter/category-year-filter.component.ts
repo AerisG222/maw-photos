@@ -5,7 +5,7 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { MatLegacySelectChange as MatSelectChange } from '@angular/material/legacy-select';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
     selector: 'app-categories-category-year-filter',

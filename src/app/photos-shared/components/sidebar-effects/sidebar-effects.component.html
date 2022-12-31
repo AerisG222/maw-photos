@@ -15,24 +15,14 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="100"
-                        step="1"
-                        [value]="effects?.grayscale ? effects.grayscale : 0"
-                        (input)="onGrayscaleChange($event)"
-                        #grayscale
-                    ></mat-slider>
+                    <mat-slider min="0" max="100" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.grayscale ? effects.grayscale : 0" (input)="onGrayscaleChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #grayscale />
+                    </mat-slider>
                 </td>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="100"
-                        step="1"
-                        [value]="effects?.sepia ? effects.sepia : 0"
-                        (input)="onSepiaChange($event)"
-                        #sepia
-                    ></mat-slider>
+                    <mat-slider min="0" max="100" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.sepia ? effects.sepia : 0" (input)="onSepiaChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #sepia />
+                    </mat-slider>
                 </td>
             </tr>
             <tr>
@@ -41,24 +31,14 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="1000"
-                        step="1"
-                        [value]="effects?.brightness ? effects.brightness : 100"
-                        (input)="onBrightnessChange($event)"
-                        #brightness
-                    ></mat-slider>
+                    <mat-slider min="0" max="1000" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.brightness ? effects.brightness : 100" (input)="onBrightnessChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #brightness />
+                    </mat-slider>
                 </td>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="1000"
-                        step="1"
-                        [value]="effects?.saturation ? effects.saturation : 100"
-                        (input)="onSaturationChange($event)"
-                        #saturate
-                    ></mat-slider>
+                    <mat-slider min="0" max="1000" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.saturation ? effects.saturation : 100" (input)="onSaturationChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #saturate />
+                    </mat-slider>
                 </td>
             </tr>
             <tr>
@@ -67,24 +47,14 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="1000"
-                        step="1"
-                        [value]="effects?.contrast ? effects.contrast : 100"
-                        (input)="onContrastChange($event)"
-                        #contrast
-                    ></mat-slider>
+                    <mat-slider min="0" max="1000" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.contrast ? effects.contrast : 100" (input)="onContrastChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #contrast />
+                    </mat-slider>
                 </td>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="100"
-                        step="1"
-                        [value]="effects?.invert ? effects.invert : 0"
-                        (input)="onInvertChange($event)"
-                        #invert
-                    ></mat-slider>
+                    <mat-slider min="0" max="100" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.invert ? effects.invert : 0" (input)="onInvertChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #invert />
+                    </mat-slider>
                 </td>
             </tr>
             <tr>
@@ -93,24 +63,14 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="10"
-                        step="0.1"
-                        [value]="effects?.blur ? effects.blur : 0"
-                        (input)="onBlurChange($event)"
-                        #blur
-                    ></mat-slider>
+                    <mat-slider min="0" max="10" step="0.1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.blur ? effects.blur : 0" (input)="onBlurChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #blur />
+                    </mat-slider>
                 </td>
                 <td>
-                    <mat-slider
-                        min="0"
-                        max="360"
-                        step="1"
-                        [value]="effects?.hueRotate ? effects.hueRotate : 0"
-                        (input)="onHueRotateChange($event)"
-                        #huerotate
-                    ></mat-slider>
+                    <mat-slider min="0" max="360" step="1" #ngSlider>
+                        <input matSliderThumb [value]="effects?.hueRotate ? effects.hueRotate : 0" (input)="onHueRotateChange({source: ngSliderThumb, parent: ngSlider, value: ngSliderThumb.value})" #ngSliderThumb="matSliderThumb" #huerotate />
+                    </mat-slider>
                 </td>
             </tr>
         </table>

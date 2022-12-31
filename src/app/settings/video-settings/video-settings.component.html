@@ -5,7 +5,7 @@
         <mat-card formGroupName="detail">
             <mat-card-title>Video Page</mat-card-title>
             <mat-card-content>
-                <h3>Video Size</h3>
+                <mat-card-subtitle>Video Size</mat-card-subtitle>
                 <mat-radio-group formControlName="videoSize">
                     <mat-radio-button
                         *ngFor="let size of videoSizes"
@@ -14,17 +14,17 @@
                     >
                 </mat-radio-group>
 
-                <h3>Show Breadcrumbs</h3>
+                <mat-card-subtitle>Show Breadcrumbs</mat-card-subtitle>
                 <mat-slide-toggle
                     formControlName="showBreadcrumbs"
                 ></mat-slide-toggle>
 
-                <h3>Show Video List</h3>
+                <mat-card-subtitle>Show Video List</mat-card-subtitle>
                 <mat-slide-toggle
                     formControlName="showVideoList"
                 ></mat-slide-toggle>
 
-                <h3>Thumbnail Size</h3>
+                <mat-card-subtitle>Thumbnail Size</mat-card-subtitle>
                 <mat-radio-group formControlName="thumbnailSize">
                     <mat-radio-button
                         *ngFor="let size of thumbnailSizes"
@@ -34,7 +34,7 @@
                 </mat-radio-group>
 
                 <div formGroupName="infoPanel">
-                    <h3>Info Panel</h3>
+                    <mat-card-subtitle>Info Panel</mat-card-subtitle>
                     <mat-checkbox formControlName="expandedState"
                         >Show Info Panel</mat-checkbox
                     >
@@ -59,7 +59,7 @@
                         >Show Category Teaser Chooser Panel</mat-checkbox
                     >
 
-                    <h3>Minimap Type</h3>
+                    <mat-card-subtitle>Minimap Type</mat-card-subtitle>
                     <mat-radio-group formControlName="minimapType">
                         <mat-radio-button
                             *ngFor="let type of mapTypes"
@@ -68,8 +68,8 @@
                         >
                     </mat-radio-group>
 
-                    <h3>Minimap Zoom Level</h3>
-                    <mat-form-field appearance="standard">
+                    <mat-card-subtitle>Minimap Zoom Level</mat-card-subtitle>
+                    <mat-form-field>
                         <mat-label>Zoom</mat-label>
                         <mat-select formControlName="minimapZoom">
                             <mat-option

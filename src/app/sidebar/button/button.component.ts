@@ -8,7 +8,7 @@ import {
     ElementRef,
 } from '@angular/core';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import { MatLegacyButton as MatButton } from '@angular/material/legacy-button';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-sidebar-button',
