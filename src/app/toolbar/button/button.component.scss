@@ -25,6 +25,6 @@ button {
     }
 }
 
-.rotate-90 {
-    transform: rotate(90deg);
+.flip-vertical {
+    transform: rotate(90deg) translateX(-3px) translateY(4px);
 }
