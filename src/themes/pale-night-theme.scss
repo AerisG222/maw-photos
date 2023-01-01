@@ -126,3 +126,9 @@ $maw-pale-night-theme: (
     typography: mat.define-typography-config(),
     density: -1
 );
+
+.maw-pale-night-theme {
+    mat-card {
+        color: map-get($maw-pale-night-accent, 50);
+    }
+}

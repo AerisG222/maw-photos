@@ -128,3 +128,9 @@ $maw-mulled-wine-theme: (
     typography: mat.define-typography-config(),
     density: -1
 );
+
+.maw-mulled-wine-theme {
+    mat-card {
+        color: map-get($maw-mulled-wine-accent, 300);
+    }
+}

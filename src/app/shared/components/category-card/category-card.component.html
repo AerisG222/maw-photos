@@ -8,17 +8,13 @@
         <mat-card-header *ngIf="showYear">
             {{ category.year }}
         </mat-card-header>
-        <mat-icon inline="true" *ngIf="category.type === categoryTypes.video"
-            >videocam</mat-icon
-        >
+        <mat-icon inline="true" *ngIf="category.type === categoryTypes.video">videocam</mat-icon>
         <img
             [src]="category.teaserImageSq.url"
             [alt]="category.name"
             [class.show_title]="showTitle"
             [class.show_year]="showYear"
-            [ngClass]="
-                thumbnailSize | thumbnailSizeClass: showTitle || showYear
-            "
+            [ngClass]="thumbnailSize | thumbnailSizeClass: showTitle || showYear"
             width="160"
             height="120"
             loading="lazy"

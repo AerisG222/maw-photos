@@ -14,3 +14,9 @@ $maw-light-theme: mat.define-light-theme((
     typography: mat.define-typography-config(),
     density: -1
 ));
+
+.maw-light-theme {
+    mat-card {
+        color: rgba(0, 0, 0, 0.87);
+    }
+}

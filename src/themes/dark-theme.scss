@@ -14,3 +14,9 @@ $maw-dark-theme: mat.define-dark-theme((
     typography: mat.define-typography-config(),
     density: 0
 ));
+
+.maw-dark-theme {
+    mat-card {
+        color: #fff;
+    }
+}

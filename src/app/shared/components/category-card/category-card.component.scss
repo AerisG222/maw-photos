@@ -49,11 +49,15 @@ mat-card {
         font-size: 20px;
     }
 
+    & mat-card-content {
+        margin-top: 5px;
+    }
+
     & mat-card-content,
     & mat-card-header {
         display: block;
         text-align: center;
-        padding: 4px 4px 4px;
+        padding: 4px 2px 0 2px !important;
         max-width: 152px;
     }
 
