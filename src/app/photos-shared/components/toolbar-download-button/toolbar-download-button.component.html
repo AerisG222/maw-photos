@@ -1,10 +1,12 @@
-<button
+<app-toolbar-button
     *ngIf="!!link"
     mat-button
     [class.hide-on-mobile]="hideOnMobile"
     [matTooltip]="tooltip"
+    [iconClass]="iconClass"
+    [icon]="icon"
     matTooltipPosition="after"
     (click)="onClick()"
 >
     <mat-icon [inline]="true" [ngClass]="iconClass">{{ icon }}</mat-icon>
-</button>
+</app-toolbar-button>
