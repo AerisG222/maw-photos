@@ -119,6 +119,15 @@ mat-radio-button {
     margin: 0 !important;
 }
 
+mat-card mat-card-subtitle:nth-child(n+2) {
+    margin-top: 16px;
+}
+
+// ugliness to avoid additional classes in settings cards
+mat-card div mat-card-subtitle {
+    margin-top: 16px !important;
+}
+
 @media (max-width: $mobileBreakpoint) {
     .hide-on-mobile {
         display: none !important;
