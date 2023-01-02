@@ -115,6 +115,10 @@ html, body {
     overflow: hidden;
 }
 
+mat-radio-button {
+    margin: 0 !important;
+}
+
 @media (max-width: $mobileBreakpoint) {
     .hide-on-mobile {
         display: none !important;
