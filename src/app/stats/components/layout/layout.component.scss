@@ -7,14 +7,19 @@
 }
 
 :host ::ng-deep form {
-    margin-top: 8px;
+    //margin-top: 8px;
     display: grid;
     grid-template-columns: repeat(2, max-content);
     grid-template-rows: 100%;
     grid-column-gap: 8px;
 
     & mat-radio-button {
-        margin-right: 8px;
+        margin-right: 4px;
+    }
+
+    & label {
+        margin-right: 16px;
+        padding-left: 0;
     }
 }
 
