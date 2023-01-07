@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatSliderChange } from '@angular/material/slider';
 import { Store } from '@ngrx/store';
 
 import { PhotoStoreSelectors, PhotoStoreActions } from '@core/root-store';
@@ -15,62 +14,66 @@ export class SidebarEffectsComponent {
 
     constructor(private store: Store) {}
 
-    onGrayscaleChange(evt: MatSliderChange): void {
+    onGrayscaleChange(evt: Event): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectGrayscale({
-                grayscale: evt.value as number,
+                grayscale: evt.target.value as number
             })
         );
     }
 
-    onSepiaChange(evt: MatSliderChange): void {
+    onSepiaChange(newValue: number): void {
         this.store.dispatch(
-            PhotoStoreActions.updateEffectSepia({ sepia: evt.value as number })
+            PhotoStoreActions.updateEffectSepia({
+                sepia: newValue
+            })
         );
     }
 
-    onBrightnessChange(evt: MatSliderChange): void {
+    onBrightnessChange(newValue: number): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectBrightness({
-                brightness: evt.value as number,
+                brightness: newValue
             })
         );
     }
 
-    onSaturationChange(evt: MatSliderChange): void {
+    onSaturationChange(newValue: number): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectSaturation({
-                saturation: evt.value as number,
+                saturation: newValue
             })
         );
     }
 
-    onContrastChange(evt: MatSliderChange): void {
+    onContrastChange(newValue: number): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectContrast({
-                contrast: evt.value as number,
+                contrast: newValue
             })
         );
     }
 
-    onInvertChange(evt: MatSliderChange): void {
+    onInvertChange(newValue: number): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectInvert({
-                invert: evt.value as number,
+                invert: newValue
             })
         );
     }
 
-    onBlurChange(evt: MatSliderChange): void {
+    onBlurChange(newValue: number): void {
         this.store.dispatch(
-            PhotoStoreActions.updateEffectBlur({ blur: evt.value as number })
+            PhotoStoreActions.updateEffectBlur({
+                blur: newValue
+            })
         );
     }
 
-    onHueRotateChange(evt: MatSliderChange): void {
+    onHueRotateChange(newValue: number): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectHueRotate({
-                hueRotate: evt.value as number,
+                hueRotate: newValue
             })
         );
     }
