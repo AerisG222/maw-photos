@@ -14,10 +14,10 @@ export class SidebarEffectsComponent {
 
     constructor(private store: Store) {}
 
-    onGrayscaleChange(evt: Event): void {
+    onGrayscaleChange(newValue: number): void {
         this.store.dispatch(
             PhotoStoreActions.updateEffectGrayscale({
-                grayscale: evt.target.value as number
+                grayscale: newValue
             })
         );
     }

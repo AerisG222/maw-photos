@@ -15,13 +15,13 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="100" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.grayscale ? effects.grayscale : 0" (input)="onGrayscaleChange($event)" #ngSliderThumb="matSliderThumb" #grayscale />
+                    <mat-slider min="0" max="100" step="1">
+                        <input matSliderThumb [value]="effects?.grayscale ? effects.grayscale : 0" (input)="onGrayscaleChange(+grayscale.value)" #grayscale />
                     </mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="100" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.sepia ? effects.sepia : 0" (input)="onSepiaChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #sepia />
+                    <mat-slider min="0" max="100" step="1">
+                        <input matSliderThumb [value]="effects?.sepia ? effects.sepia : 0" (input)="onSepiaChange(+sepia.value)" #sepia />
                     </mat-slider>
                 </td>
             </tr>
@@ -31,13 +31,13 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="1000" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.brightness ? effects.brightness : 100" (input)="onBrightnessChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #brightness />
+                    <mat-slider min="0" max="1000" step="1">
+                        <input matSliderThumb [value]="effects?.brightness ? effects.brightness : 100" (input)="onBrightnessChange(+brightness.value)" #brightness />
                     </mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="1000" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.saturation ? effects.saturation : 100" (input)="onSaturationChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #saturate />
+                    <mat-slider min="0" max="1000" step="1">
+                        <input matSliderThumb [value]="effects?.saturation ? effects.saturation : 100" (input)="onSaturationChange(+saturate.value)" #saturate />
                     </mat-slider>
                 </td>
             </tr>
@@ -47,13 +47,13 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="1000" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.contrast ? effects.contrast : 100" (input)="onContrastChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #contrast />
+                    <mat-slider min="0" max="1000" step="1">
+                        <input matSliderThumb [value]="effects?.contrast ? effects.contrast : 100" (input)="onContrastChange(+contrast.value)" #contrast />
                     </mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="100" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.invert ? effects.invert : 0" (input)="onInvertChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #invert />
+                    <mat-slider min="0" max="100" step="1">
+                        <input matSliderThumb [value]="effects?.invert ? effects.invert : 0" (input)="onInvertChange(+invert.value)" #invert />
                     </mat-slider>
                 </td>
             </tr>
@@ -63,13 +63,13 @@
             </tr>
             <tr>
                 <td>
-                    <mat-slider min="0" max="10" step="0.1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.blur ? effects.blur : 0" (input)="onBlurChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #blur />
+                    <mat-slider min="0" max="10" step="0.1">
+                        <input matSliderThumb [value]="effects?.blur ? effects.blur : 0" (input)="onBlurChange(+blur.value)" #blur />
                     </mat-slider>
                 </td>
                 <td>
-                    <mat-slider min="0" max="360" step="1" #ngSlider>
-                        <input matSliderThumb [value]="effects?.hueRotate ? effects.hueRotate : 0" (input)="onHueRotateChange(ngSliderThumb.value)" #ngSliderThumb="matSliderThumb" #huerotate />
+                    <mat-slider min="0" max="360" step="1">
+                        <input matSliderThumb [value]="effects?.hueRotate ? effects.hueRotate : 0" (input)="onHueRotateChange(+huerotate.value)" #huerotate />
                     </mat-slider>
                 </td>
             </tr>
