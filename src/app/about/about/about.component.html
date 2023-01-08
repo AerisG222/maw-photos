@@ -12,7 +12,7 @@
         </div>
 
         <div class="tab-container">
-            <nav mat-tab-nav-bar>
+            <nav mat-tab-nav-bar [tabPanel]="tabPanel">
                 <a
                     mat-tab-link
                     routerLink="./help"
@@ -38,6 +38,7 @@
                     >Android</a
                 >
             </nav>
+            <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 
             <div class="tab-content">
                 <router-outlet></router-outlet>
