@@ -3,7 +3,6 @@
     margin-bottom: 8px;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
-mat-radio-button {
-    margin-left: 16px;
+mat-radio-button:nth-of-type(n+2) {
+    margin-left: 16px !important;
 }
